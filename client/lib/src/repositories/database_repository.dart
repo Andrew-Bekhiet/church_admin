@@ -220,47 +220,30 @@ class CADatabaseRepository implements DatabaseRepository {
     List<T> result,
   ) {
     if (lastSearch == search && updateEvent == UpdateQueryEvent.forward) {
+      final sublist = result.sublist(0, min(instance.limit, result.length));
+
       return DelegatingStreamResult(
-        result: setWrapper(instance.currentValueOrNull ?? <T>[])
-          ..removeAll(
-            result.sublist(
-              0,
-              min(instance.limit, result.length),
-            ),
-          )
-          ..addAll(
-            result.sublist(
-              0,
-              min(instance.limit, result.length),
-            ),
-          ),
+        result: (instance.currentSetOrNull ?? <T>{})
+          ..removeAll(sublist)
+          ..addAll(sublist),
         canPaginateForward: result.length >= instance.limit,
       );
     } else if (lastSearch == search &&
         updateEvent == UpdateQueryEvent.backward) {
+      final sublist = result.sublist(
+        result.length - min(instance.limit, result.length),
+        result.length,
+      );
+
       return DelegatingStreamResult(
-        result: setWrapper(result.sublist(
-          result.length - min(instance.limit, result.length),
-          result.length,
-        ))
-          ..addAll(
-            setWrapper(instance.currentValueOrNull ?? <T>[])
-              ..removeAll(
-                result.sublist(
-                  result.length - min(instance.limit, result.length),
-                  result.length,
-                ),
-              ),
-          ),
+        result: setWrapper(sublist)
+          ..addAll((instance.currentSetOrNull ?? <T>{})..removeAll(sublist)),
         canPaginateBackward: result.length >= instance.limit,
       );
     } else {
       return DelegatingStreamResult(
         result: setWrapper(
-          result.sublist(
-            0,
-            min(instance.limit, result.length),
-          ),
+          result.sublist(0, min(instance.limit, result.length)),
         ),
         canPaginateBackward: result.length >= instance.limit,
         canPaginateForward: result.length >= instance.limit,
