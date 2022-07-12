@@ -1,0 +1,69 @@
+import { auth, storage } from "firebase-admin";
+import { BlockingFunction, https, region } from "firebase-functions";
+import { get } from "https";
+import { getHasuraUID, insertUser } from "./hasura_interface";
+
+export let beforeUserSignIn: BlockingFunction | undefined = undefined;
+if (process.env.FUNCTIONS_EMULATOR)
+  beforeUserSignIn = region("europe-west6")
+    .auth.user()
+    .beforeSignIn(async (user) => {
+      console.dir(user, { depth: 4 });
+    });
+
+export const beforeUserSignUp = region("europe-west6")
+  .auth.user()
+  .beforeCreate(async (user) => {
+    console.dir(user, { depth: 4 });
+    try {
+      const hasura_uid = await insertUser({
+        email: user.email!,
+        uid: user.uid!,
+      });
+
+      if (hasura_uid == null) {
+        throw new https.HttpsError("unknown", "");
+      }
+
+      await get(user.photoURL!, (response) => {
+        const file = storage()
+          .bucket("church-data-admin.appspot.com")
+          .file("users/" + hasura_uid)
+          .createWriteStream({
+            contentType: "image/jpeg",
+            gzip: true,
+          });
+        response.pipe(file).on("end", file.end).on("error", file.destroy);
+      });
+
+      const sessionClaims = {
+        customClaims: {
+          "x-hasura-user-id": hasura_uid,
+          "x-hasura-default-role": "user",
+          "x-hasura-allowed-roles": ["user"],
+        },
+      };
+      return sessionClaims;
+    } catch (e) {
+      console.error(e);
+      console.dir(e, { depth: 4 });
+      throw e;
+    }
+  });
+
+export const onUserSignUp = region("europe-west6")
+  .auth.user()
+  .onCreate(async (user) => {
+    console.dir(user, { depth: 4 });
+    try {
+      await auth().setCustomUserClaims(user.uid, {
+        "x-hasura-user-id": getHasuraUID(user.uid),
+        "x-hasura-default-role": "user",
+        "x-hasura-allowed-roles": ["user"],
+      });
+    } catch (e) {
+      console.error(e);
+      console.dir(e, { depth: 4 });
+      throw e;
+    }
+  });

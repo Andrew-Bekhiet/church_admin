@@ -1,0 +1,165 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:churchdata_core/churchdata_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
+import 'church_admin_app_test.mocks.dart';
+
+@GenerateMocks([LoggingService, CAAuthRepository, LocalAuthService])
+void main() {
+  group(
+    'Church Admin App widget tests: ',
+    () {
+      final FirstScreenVariant firstScreenVariant = FirstScreenVariant();
+
+      setUp(
+        () async {
+          final mockLoggingService = MockLoggingService();
+          when(mockLoggingService.navigatorObserver)
+              .thenReturn(NavigatorObserver());
+
+          GetIt.I.registerSingleton<LoggingService>(mockLoggingService);
+          GetIt.I.registerSingleton<GoRouterRefreshStream>(
+            GoRouterRefreshStream(
+              const Stream.empty(),
+            ),
+            dispose: (g) => g.dispose(),
+          );
+
+          GetIt.I.registerSingleton<ThemingService>(
+            ThemingService.withInitialThemeata(
+              ThemeData.light(),
+            ),
+            dispose: (t) => t.dispose(),
+          );
+        },
+      );
+
+      tearDown(GetIt.I.reset);
+
+      testWidgets(
+        'First Screen',
+        (tester) async {
+          await tester.pumpWidget(const ChurchAdminApp());
+
+          verify(GetIt.I<LoggingService>().navigatorObserver);
+
+          expect(
+            tester
+                .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
+                .goRouter
+                .location,
+            firstScreenVariant.currentValue == FirstScreenVariantEnum.login
+                ? '/login'
+                : firstScreenVariant.currentValue ==
+                        FirstScreenVariantEnum.updateUserData
+                    ? '/updateUserData?forced=true'
+                    : firstScreenVariant.currentValue ==
+                            FirstScreenVariantEnum.authenticate
+                        ? '/authenticate?next=%2F'
+                        : '/',
+          );
+        },
+        variant: firstScreenVariant,
+      );
+
+      testWidgets(
+        'Observes ThemingService',
+        (tester) async {
+          final mock = MockCAAuthRepository();
+          when(mock.isSignedIn).thenReturn(false);
+          GetIt.I.registerSingleton<CAAuthRepository>(mock);
+
+          await tester.pumpWidget(const ChurchAdminApp());
+
+          expect(
+            tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+            GetIt.I<ThemingService>().theme,
+          );
+
+          GetIt.I<ThemingService>().theme = ThemeData.dark();
+          await tester.pumpAndSettle();
+
+          expect(
+            tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+            GetIt.I<ThemingService>().theme,
+          );
+        },
+        variant: ValueVariant({FirstScreenVariantEnum.login}),
+      );
+    },
+  );
+}
+
+class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
+  FirstScreenVariant() : super(FirstScreenVariantEnum.values.toSet());
+
+  @override
+  Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
+    await super.setUp(value);
+
+    final mock = MockCAAuthRepository();
+    when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
+    when(mock.currentUser).thenReturn(
+      User(
+        password: '',
+        uid: 'uid',
+        permissions: CAPermissionsSet.fromSet(const {}),
+        email: 'email',
+        firebaseAuthUID: 'firebaseAuthUID',
+      ),
+    );
+    when(mock.currentUserData).thenReturn(
+      Person(
+        id: 'id',
+        name: 'name',
+        otherPhones: const {},
+        gender: true,
+        isShammas: false,
+        isStudent: false,
+        isServant: false,
+        lastKodas: value == FirstScreenVariantEnum.updateUserData
+            ? null
+            : DateTime.now(),
+        lastConfession: value == FirstScreenVariantEnum.updateUserData
+            ? null
+            : DateTime.now(),
+      ),
+    );
+
+    GetIt.I.registerSingleton<CAAuthRepository>(mock);
+
+    if (value != FirstScreenVariantEnum.login) {
+      final mockLocalAuthService = MockLocalAuthService();
+
+      when(mockLocalAuthService.shouldAuthenticate)
+          .thenReturn(value == FirstScreenVariantEnum.authenticate);
+      when(mockLocalAuthService.canCheckBiometrics())
+          .thenAnswer((_) async => false);
+
+      GetIt.I.registerSingleton<LocalAuthService>(
+        mockLocalAuthService,
+      );
+    }
+
+    return value;
+  }
+
+  @override
+  Future<void> tearDown(
+      FirstScreenVariantEnum value, FirstScreenVariantEnum memento) async {
+    await super.tearDown(value, memento);
+
+    await GetIt.I.unregister<CAAuthRepository>();
+
+    if (GetIt.I.isRegistered<LocalAuthService>()) {
+      await GetIt.I.unregister<LocalAuthService>();
+    }
+  }
+}
+
+enum FirstScreenVariantEnum { login, updateUserData, authenticate, home }

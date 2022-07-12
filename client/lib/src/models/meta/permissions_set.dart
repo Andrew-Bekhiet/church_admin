@@ -1,0 +1,50 @@
+import 'package:churchdata_core/churchdata_core.dart';
+import 'package:collection/collection.dart';
+
+class CAPermissionsSet extends PermissionsSet {
+  CAPermissionsSet.fromSet(Set<String> permissions)
+      : super.fromSet(
+          EqualitySet<String>.from(const PermissionEquality(), permissions),
+        );
+
+  bool get approved => permissions.contains('approved');
+
+  bool get manageAllUsers => permissions.contains('manageAllUsers');
+  bool get readAllData => permissions.contains('readAllData');
+  bool get writeAllData => permissions.contains('writeAllData');
+
+  bool get recordHistory => permissions.contains('recordHistory');
+  bool get changeOldHistory => permissions.contains('changeOldHistory');
+  bool get recoverDeleted => permissions.contains('recoverDeleted');
+  bool get exportData => permissions.contains('exportData');
+
+  bool get birthdayNotify => permissions.contains('birthdayNotify');
+  bool get confessionsNotify => permissions.contains('confessionsNotify');
+  bool get kodasNotify => permissions.contains('kodasNotify');
+  bool get meetingNotify => permissions.contains('meetingNotify');
+  bool get visitNotify => permissions.contains('visitNotify');
+}
+
+class PermissionEquality implements Equality<String> {
+  const PermissionEquality();
+
+  @override
+  bool equals(String string1, String string2) => equalsIgnoreAsciiCase(
+        string1.removeQuotes(),
+        string2.removeQuotes(),
+      );
+
+  @override
+  int hash(String string) => hashIgnoreAsciiCase(string.removeQuotes());
+
+  @override
+  bool isValidKey(Object? object) => object is String;
+}
+
+extension RemoveQuotes on String {
+  String removeQuotes() => replaceAll('"', '').replaceAll("'", '');
+}
+
+Set<String> permissionsSetToJson(CAPermissionsSet data) => data.permissions;
+CAPermissionsSet permissionsSetFromJson(dynamic data) =>
+    CAPermissionsSet.fromSet((data as List).toSet().cast());

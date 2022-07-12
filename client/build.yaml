@@ -1,0 +1,49 @@
+targets:
+  $default:
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - custom_parser_import: "package:church_admin/graphql/scalars.dart"
+              schema: lib/graphql/schema/schema.graphql
+              queries_glob: lib/graphql/queries/queries.graphql
+              output: lib/graphql/queries.dart
+          scalar_mapping:
+            - graphql_type: _text
+              dart_type: List<String>
+
+            - graphql_type: uuid
+              dart_type: UuidValue
+              custom_parser_import: package:church_admin/graphql/scalars.dart
+              use_custom_parser: true
+
+            - graphql_type: geography
+              dart_type: Map<String, dynamic>
+
+            - graphql_type: geometry
+              dart_type: Map<String, dynamic>
+
+            - graphql_type: jsonb
+              dart_type: Map<String, dynamic>
+
+            - graphql_type: smallint
+              dart_type: int
+
+            - graphql_type: bigint
+              dart_type: BigInt
+
+            - graphql_type: timestamptz
+              dart_type: DateTime
+              use_custom_parser: true
+
+            - graphql_type: timestamp
+              dart_type: DateTime
+              use_custom_parser: true
+
+            - graphql_type: date
+              dart_type: DateTime
+              use_custom_parser: true
+
+            - graphql_type: daterange
+              dart_type: String
+              use_custom_parser: true

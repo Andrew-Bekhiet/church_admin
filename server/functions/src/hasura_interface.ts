@@ -1,0 +1,217 @@
+import { default as post } from "axios";
+import { https } from "firebase-functions/v1";
+
+export async function checkUserApproved(uid: string): Promise<boolean> {
+  try {
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            query checkApproved($uid: uuid!) {
+                users(where: {uid: {_eq: $uid}}, limit: 1) {
+                    permissions
+                }
+            }
+          `,
+        variables: { uid },
+        operationName: "checkApproved",
+      }),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    });
+    const permissions: string[] =
+      hasura_request.data?.["data"]?.["users"]?.[0]?.["permissions"];
+
+    return (
+      permissions.find((o) => o.toLowerCase().replace("'", "") == "approved") !=
+      null
+    );
+  } catch (e) {
+    console.error(e);
+  }
+
+  return false;
+}
+
+export async function getHasuraUID(
+  firebase_auth_uid: string
+): Promise<string | null> {
+  try {
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            query getUserByFirebaseUID($firebase_auth_uid: String) {
+              users(where: {firebase_auth_uid: {_eq: $firebase_auth_uid}}, limit: 1) {
+                uid
+              }
+            }
+          `,
+        variables: { firebase_auth_uid },
+        operationName: "getUserByFirebaseUID",
+      }),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    });
+    const hasura_uid: string =
+      hasura_request.data?.["data"]?.["users"]?.[0]?.["uid"] ?? null;
+
+    return hasura_uid;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function checkUserAccess(
+  table: PhotoTable,
+  id: string,
+  hasura_uid: string,
+  permission: "read" | "write"
+): Promise<boolean> {
+  try {
+    if (permission == "write" && table == "users") return false;
+
+    const field =
+      "isUserAllowedTo" +
+      permission.at(0)!.toUpperCase() +
+      permission.substring(1);
+
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            query checkPermissions($id: uuid!) {
+                ${table}(where: {${
+          table == "users" ? "uid" : "id"
+        }: {_eq: $id}}, limit: 1) {
+                    ${field}
+                }
+            }
+          `,
+        variables: { id },
+        operationName: "checkPermissions",
+      }),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-user-id": hasura_uid,
+        "x-hasura-role": "admin",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+      },
+    });
+
+    return hasura_request.data?.["data"]?.[table]?.[0]?.[field] === true;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return false;
+}
+
+export async function insertUser(user: {
+  email: string;
+  uid: string;
+}): Promise<string | null> {
+  try {
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            mutation addUser($email: String, $firebase_auth_uid: String, $permissions: _text = "{}") {
+              insert_users(objects: {email: $email, firebase_auth_uid: $firebase_auth_uid, permissions: $permissions}) {
+                returning {
+                  uid
+                }
+              }
+            }
+          `,
+        variables: {
+          email: user.email,
+          firebase_auth_uid: user.uid,
+          permissions: "{}",
+        },
+        operationName: "addUser",
+      }),
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    });
+
+    return (
+      hasura_request.data?.["data"]?.["insert_users"]?.["returning"]?.[0]?.[
+        "uid"
+      ] ?? null
+    );
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function updatePhotoTime(
+  table: PhotoTable,
+  id: string,
+  time: Date | null
+): Promise<void> {
+  try {
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            mutation updatePhotoTime($id: uuid!, $photo_updated_at: timestamptz) {
+              update_${table}_by_pk(pk_columns: {${
+          table == "users" ? "uid" : "id"
+        }: $id}, _set: {photo_updated_at: $photo_updated_at}) {
+                ${table == "users" ? "uid" : "id"}
+              }
+            }
+          `,
+        variables: {
+          id,
+          photo_updated_at: time?.toISOString(),
+        },
+        operationName: "updatePhotoTime",
+      }),
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    });
+
+    if (
+      hasura_request.data?.["data"]?.[`update_${table}_by_pk`]?.[
+        table == "users" ? "uid" : "id"
+      ] ??
+      null != id
+    )
+      throw new https.HttpsError(
+        "not-found",
+        `Object ${id} was not found in ${table}`,
+        hasura_request.data?.["errors"]
+      );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+export const photoTables = [
+  "areas",
+  "families",
+  "groups",
+  "persons",
+  "services",
+  "stores",
+  "streets",
+  "users",
+] as const;
+export type PhotoTable = typeof photoTables[number];

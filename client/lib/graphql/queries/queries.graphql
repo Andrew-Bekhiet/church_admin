@@ -1,0 +1,106 @@
+subscription getPersonsStream(
+  $addWhere: [persons_bool_exp!] = {}
+  $limit: Int = 199
+) {
+  persons(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+  }
+}
+
+subscription searchPersons(
+  $searchQuery: String!
+  $addWhere: [persons_bool_exp!] = {}
+  $limit: Int = 199
+) {
+  persons(
+    where: { name: { _ilike: $searchQuery }, _and: $addWhere }
+    order_by: { name: asc }
+    limit: $limit
+  ) {
+    id
+    name
+  }
+}
+
+subscription getUserInfoStream($uid: uuid!) {
+  users_by_pk(uid: $uid) {
+    uid
+    firebase_auth_uid
+    email
+    permissions
+    person {
+      id
+      name
+      address
+      geolocation
+      mainPhone
+      otherPhones
+      birthdate
+      gender
+      isShammas
+      shammasLevel
+      schoolID
+      collegeID
+      churchID
+      fatherID
+      isStudent
+      jobID
+      jobDescription
+      qualificationID
+      personTypeID
+      stateID
+      isServant
+      notes
+      familyID
+      storeID
+      studyYearID
+      color
+      photo_updated_at
+      lastKodas
+      lastConfession
+    }
+  }
+}
+
+query getPersonsAttendanceWarning($dateFilter: date!) {
+  persons(
+    where: { attendance_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsKodasWarning($dateFilter: date!) {
+  persons(
+    where: { kodas_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsConfessionWarning($dateFilter: date!) {
+  persons(
+    where: { confession_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsVisitWarning($dateFilter: timestamptz!) {
+  persons(
+    where: { visit_history: { _not: { time: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsBirthday($dateFilter: String!) {
+  persons(where: { birthday: { _eq: $dateFilter } }, limit: 25) {
+    name
+  }
+}
