@@ -56,6 +56,9 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
   @override
   List<T>? get currentValueOrNull => _subject.valueOrNull?.toList();
 
+  Set<T> get currentSet => _subject.value;
+  Set<T>? get currentSetOrNull => _subject.valueOrNull;
+
   @override
   Future<void> loadNextPage() async {
     if (canPaginateForward) {
