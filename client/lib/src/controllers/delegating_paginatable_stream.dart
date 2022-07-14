@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:rxdart/rxdart.dart';
@@ -7,26 +8,27 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
     extends PaginatableStreamBase<T> {
   DelegatingPaginatableStream({
     required OnQuery<T> onQuery,
-    super.limit = 19,
+    super.limit = 199,
   })  : _query = onQuery,
         super.private() {
-    _querySubscription = _controller
-        .switchMap(
-          (v) => _query(this, v).map(
-            (r) {
-              _canPaginateBackward =
-                  r.canPaginateBackward ?? _canPaginateBackward;
-              _canPaginateForward = r.canPaginateForward ?? _canPaginateForward;
-              _isLoading = false;
+    _querySubscription = _offset.switchMap(
+      (o) {
+        log('Listening to offset ' + o.toString());
+        return _query(this, o).map(
+          (r) {
+            _canPaginateBackward =
+                r.canPaginateBackward ?? _canPaginateBackward;
+            _canPaginateForward = r.canPaginateForward ?? _canPaginateForward;
+            _isLoading = false;
 
-              return r.result;
-            },
-          ),
-        )
-        .listen(_subject.add, onError: _subject.addError);
+            return r.result;
+          },
+        );
+      },
+    ).listen(_subject.add, onError: _subject.addError);
   }
 
-  late final StreamSubscription<Set<T>> _querySubscription;
+  late final StreamSubscription<List<T>> _querySubscription;
 
   final OnQuery<T> _query;
 
@@ -42,9 +44,11 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
   @override
   bool get canPaginateForward => _canPaginateForward;
 
-  final BehaviorSubject<Set<T>> _subject = BehaviorSubject();
-  final BehaviorSubject<UpdateQueryEvent> _controller =
-      BehaviorSubject.seeded(UpdateQueryEvent.newQuery);
+  final BehaviorSubject<List<T>> _subject = BehaviorSubject();
+  final BehaviorSubject<int> _offset = BehaviorSubject.seeded(0);
+
+  @override
+  int get currentOffset => _offset.value;
 
   @override
   ValueStream<List<T>> get stream =>
@@ -56,15 +60,24 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
   @override
   List<T>? get currentValueOrNull => _subject.valueOrNull?.toList();
 
-  Set<T> get currentSet => _subject.value;
-  Set<T>? get currentSetOrNull => _subject.valueOrNull;
+  List<T> get currentList => _subject.value;
+  List<T>? get currentSetOrNull => _subject.valueOrNull;
+
+  @override
+  Future<void> loadPage(int offset) async {
+    _canPaginateForward = false;
+    _canPaginateBackward = false;
+    _isLoading = true;
+
+    _offset.add(offset);
+  }
 
   @override
   Future<void> loadNextPage() async {
     if (canPaginateForward) {
       _canPaginateForward = false;
       _isLoading = true;
-      _controller.add(UpdateQueryEvent.forward);
+      _offset.add((currentValue.length / limit).ceil());
     } else {
       throw StateError('Cannot paginate forward');
     }
@@ -75,7 +88,7 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
     if (canPaginateBackward) {
       _canPaginateBackward = false;
       _isLoading = true;
-      _controller.add(UpdateQueryEvent.backward);
+      _offset.add(_offset.value - 1);
     } else {
       throw StateError('Cannot paginate backward');
     }
@@ -85,18 +98,18 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
   Future<void> dispose() async {
     await _subject.close();
     await _querySubscription.cancel();
-    await _controller.close();
+    await _offset.close();
   }
 }
 
 typedef OnQuery<TParsed extends ViewableWithID>
     = Stream<DelegatingStreamResult<TParsed>> Function(
   DelegatingPaginatableStream<TParsed> instance,
-  UpdateQueryEvent updateEvent,
+  int offset,
 );
 
 class DelegatingStreamResult<T> {
-  final Set<T> result;
+  final List<T> result;
   final bool? canPaginateBackward;
   final bool? canPaginateForward;
 

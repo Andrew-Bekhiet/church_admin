@@ -124,30 +124,35 @@ class CADatabaseRepository implements DatabaseRepository {
         .then(_exceptionsMiddleware);
   }
 
-  DelegatingPaginatableStream<Person> getPersonsStream$(
-      {Stream<String?>? searchQuery}) {
+  DelegatingPaginatableStream<Person> getPersonsStream$({
+    Stream<String?>? searchQuery,
+  }) {
     String? lastSearch;
 
     return DelegatingPaginatableStream<Person>(
-      onQuery: (instance, updateEvent) {
+      onQuery: (instance, offset) {
         return (searchQuery ?? Stream.value(null)).switchMap(
           (search) {
+            if (search != null &&
+                search.isNotEmpty &&
+                lastSearch != search &&
+                offset != 0) {
+              instance.loadPage(0);
+              return Stream.value(DelegatingStreamResult(result: []));
+            }
+
             final Stream<QueryResult<Iterable<Person>>> subscriptionStream;
 
             final addWhere = [
-              if (lastSearch == search)
-                if (updateEvent == UpdateQueryEvent.forward)
-                  PersonsBoolExp(
-                    name: StringComparisonExp(
-                      $gt: instance.currentValue.last.name,
-                    ),
-                  )
-                else if (updateEvent == UpdateQueryEvent.backward)
-                  PersonsBoolExp(
-                    name: StringComparisonExp(
-                      $lt: instance.currentValue.first.name,
-                    ),
+              if (lastSearch == search && offset > 0)
+                PersonsBoolExp(
+                  name: StringComparisonExp(
+                    $gt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .name,
                   ),
+                ),
             ];
 
             if (search != null && search.isNotEmpty) {
@@ -197,7 +202,7 @@ class CADatabaseRepository implements DatabaseRepository {
                   (event) => _clampResults(
                     lastSearch,
                     search,
-                    updateEvent,
+                    offset,
                     instance,
                     event.parsedData!.toList(),
                   ),
@@ -215,36 +220,28 @@ class CADatabaseRepository implements DatabaseRepository {
   DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(
     String? lastSearch,
     String? search,
-    UpdateQueryEvent updateEvent,
+    int updateEvent,
     DelegatingPaginatableStream<T> instance,
     List<T> result,
   ) {
-    if (lastSearch == search && updateEvent == UpdateQueryEvent.forward) {
-      final sublist = result.sublist(0, min(instance.limit, result.length));
+    final List<T> sublist;
+    final current = instance.currentValueOrNull ?? <T>[];
+    final start = instance.currentOffset * instance.limit;
+    final end = start + instance.limit - 1;
+
+    if (lastSearch == search) {
+      sublist = result.sublist(0, min(instance.limit, result.length));
 
       return DelegatingStreamResult(
-        result: (instance.currentSetOrNull ?? <T>{})
-          ..removeAll(sublist)
-          ..addAll(sublist),
+        result: current.length >= end
+            ? (current..replaceRange(start, end, sublist))
+            : (current..addAll(sublist)),
         canPaginateForward: result.length >= instance.limit,
-      );
-    } else if (lastSearch == search &&
-        updateEvent == UpdateQueryEvent.backward) {
-      final sublist = result.sublist(
-        result.length - min(instance.limit, result.length),
-        result.length,
-      );
-
-      return DelegatingStreamResult(
-        result: setWrapper(sublist)
-          ..addAll((instance.currentSetOrNull ?? <T>{})..removeAll(sublist)),
         canPaginateBackward: result.length >= instance.limit,
       );
     } else {
       return DelegatingStreamResult(
-        result: setWrapper(
-          result.sublist(0, min(instance.limit, result.length)),
-        ),
+        result: result.sublist(0, min(instance.limit, result.length)),
         canPaginateBackward: result.length >= instance.limit,
         canPaginateForward: result.length >= instance.limit,
       );
