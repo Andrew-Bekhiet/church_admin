@@ -96,84 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: DataObjectListViewBase(
         controller: ListControllerBase(
           objectsPaginatableStream: CADatabaseRepository.I.getPersonsStream$(
-            searchQuery: _search
-                .debounceTime(const Duration(milliseconds: 400))
-                .distinct(
-                  (p, n) =>
-                      p == n ||
-                      (n == '' && p == null) ||
-                      (p == '' && n == null),
-                ),
+            searchQuery: _search,
           ),
         ),
         autoDisposeController: true,
-      ) /* StreamBuilder<List<Person>>(
-        stream: _search
-            .debounceTime(const Duration(milliseconds: 400))
-            .distinct(
-              (p, n) =>
-                  p == n || (n == '' && p == null) || (p == '' && n == null),
-            )
-            .switchMap(
-              (searchQuery) => searchQuery == null || searchQuery.isEmpty
-                  ? CADatabaseRepository.I.getPersonsStream$().map(
-                        (event) => event.parsedData!.persons
-                            .map((p) => Person.fromJson(p.toJson()))
-                            .toList(),
-                      )
-                  : CADatabaseRepository.I
-                      .searchPersons(searchQuery: searchQuery)
-                      .map(
-                        (event) => event.parsedData!.persons
-                            .map((p) => Person.fromJson(p.toJson()))
-                            .toList(),
-                      ),
-            ),
-        builder: (context, data) {
-          if (data.hasError) {
-            return ErrorWidget.builder(
-              FlutterErrorDetails(exception: data.error!),
-            );
-          } else if (!data.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final dataList = data.requireData;
-
-          if (dataList.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'لا يوجد عناصر',
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return ListView.builder(
-            prototypeItem: Card(
-              key: ValueKey(dataList[0].id),
-              child: ListTile(
-                title: Text(dataList[0].name),
-              ),
-            ),
-            itemCount: dataList.length,
-            itemBuilder: (context, i) => Card(
-              key: ValueKey(dataList[i].id),
-              child: ListTile(
-                title: Text(dataList[i].name),
-              ),
-            ),
-          );
-        },
-      ) */
-      ,
+      ),
     );
   }
 }

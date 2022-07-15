@@ -131,7 +131,13 @@ class CADatabaseRepository implements DatabaseRepository {
 
     return DelegatingPaginatableStream<Person>(
       onQuery: (instance, offset) {
-        return (searchQuery ?? Stream.value(null)).switchMap(
+        return (searchQuery ?? Stream.value(null))
+            .debounceTime(const Duration(milliseconds: 400))
+            .distinct(
+              (p, n) =>
+                  p == n || (n == '' && p == null) || (p == '' && n == null),
+            )
+            .switchMap(
           (search) {
             if (search != null &&
                 search.isNotEmpty &&
