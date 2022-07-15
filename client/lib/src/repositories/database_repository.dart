@@ -227,7 +227,7 @@ class CADatabaseRepository implements DatabaseRepository {
     final List<T> sublist;
     final current = instance.currentValueOrNull ?? <T>[];
     final start = instance.currentOffset * instance.limit;
-    final end = start + instance.limit - 1;
+    final end = start + instance.limit;
 
     if (lastSearch == search) {
       sublist = result.sublist(0, min(instance.limit, result.length));
