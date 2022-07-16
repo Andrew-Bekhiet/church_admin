@@ -12,7 +12,7 @@ class ChurchAdminLink extends Link {
     return CAAuthRepository.I.idTokenStream.distinct().switchMap(
           (t) => request.isSubscription
               ? WebSocketLink(
-                  url,
+                  url.replaceAll('http', 'ws'),
                   config: SocketClientConfig(
                     initialPayload: () => {
                       'headers': {

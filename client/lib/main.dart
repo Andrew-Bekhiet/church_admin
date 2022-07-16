@@ -148,7 +148,7 @@ Future<void> registerGraphQLClient() async {
         ),
       ),
       link: ChurchAdminLink(
-        url: dotenv.env['HASURA_SERVER']!.replaceAll('http', 'ws'),
+        url: dotenv.env['HASURA_SERVER']!,
       ),
     ),
   );
@@ -169,8 +169,8 @@ Future<void> initializeFirebase() async {
     kEmulatorsHost = devBox.get('kEmulatorsHost');
 
     if (kEmulatorsHost != null) {
-      await FirebaseAuth.instance.useAuthEmulator(kEmulatorsHost, 9099);
-      FirebaseDatabase.instance.useDatabaseEmulator(kEmulatorsHost, 9000);
+      // await FirebaseAuth.instance.useAuthEmulator(kEmulatorsHost, 9099);
+      // FirebaseDatabase.instance.useDatabaseEmulator(kEmulatorsHost, 9000);
       FirebaseFunctions.instanceFor(region: 'europe-west6')
           .useFunctionsEmulator(kEmulatorsHost, 5001);
       FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
