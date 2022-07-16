@@ -78,7 +78,7 @@ class CANotificationsService extends NotificationsService {
 
     if (CAAuthRepository.I.currentUser == null) return;
 
-    final persons = await CADatabaseRepository.I.getPersonsKodasWarning(
+    final persons = await CADatabaseRepository.I.persons.getPersonsKodasWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -134,7 +134,8 @@ class CANotificationsService extends NotificationsService {
 
     if (CAAuthRepository.I.currentUser == null) return;
 
-    final persons = await CADatabaseRepository.I.getPersonsMeetingWarning(
+    final persons =
+        await CADatabaseRepository.I.persons.getPersonsMeetingWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -190,7 +191,7 @@ class CANotificationsService extends NotificationsService {
 
     if (CAAuthRepository.I.currentUser == null) return;
 
-    final persons = await CADatabaseRepository.I.getPersonsVisitWarning(
+    final persons = await CADatabaseRepository.I.persons.getPersonsVisitWarning(
       date: DateTime.now().subtract(const Duration(days: 20)),
     );
 
@@ -246,7 +247,8 @@ class CANotificationsService extends NotificationsService {
 
     if (CAAuthRepository.I.currentUser == null) return;
 
-    final persons = await CADatabaseRepository.I.getPersonsConfessionWarning(
+    final persons =
+        await CADatabaseRepository.I.persons.getPersonsConfessionWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -302,8 +304,8 @@ class CANotificationsService extends NotificationsService {
 
     if (CAAuthRepository.I.currentUser == null) return;
 
-    final persons =
-        await CADatabaseRepository.I.getBirthdayPersons(date: DateTime.now());
+    final persons = await CADatabaseRepository.I.persons
+        .getBirthdayPersons(date: DateTime.now());
 
     if (persons.parsedData!.persons.isNotEmpty || !kReleaseMode) {
       final notification = Notification(

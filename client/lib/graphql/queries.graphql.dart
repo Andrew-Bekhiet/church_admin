@@ -9,13 +9,13 @@ import 'package:church_admin/graphql/scalars.dart';
 part 'queries.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class GetPersonsStream$SubscriptionRoot$Persons extends JsonSerializable
+class GetAreasStream$SubscriptionRoot$Areas extends JsonSerializable
     with EquatableMixin {
-  GetPersonsStream$SubscriptionRoot$Persons();
+  GetAreasStream$SubscriptionRoot$Areas();
 
-  factory GetPersonsStream$SubscriptionRoot$Persons.fromJson(
+  factory GetAreasStream$SubscriptionRoot$Areas.fromJson(
           Map<String, dynamic> json) =>
-      _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(json);
+      _$GetAreasStream$SubscriptionRoot$AreasFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -24,406 +24,32 @@ class GetPersonsStream$SubscriptionRoot$Persons extends JsonSerializable
 
   late String name;
 
+  int? color;
+
+  Map<String, dynamic>? bounds;
+
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, color, bounds];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetPersonsStream$SubscriptionRoot$PersonsToJson(this);
+      _$GetAreasStream$SubscriptionRoot$AreasToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetPersonsStream$SubscriptionRoot extends JsonSerializable
+class GetAreasStream$SubscriptionRoot extends JsonSerializable
     with EquatableMixin {
-  GetPersonsStream$SubscriptionRoot();
+  GetAreasStream$SubscriptionRoot();
 
-  factory GetPersonsStream$SubscriptionRoot.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetPersonsStream$SubscriptionRootFromJson(json);
+  factory GetAreasStream$SubscriptionRoot.fromJson(Map<String, dynamic> json) =>
+      _$GetAreasStream$SubscriptionRootFromJson(json);
 
-  late List<GetPersonsStream$SubscriptionRoot$Persons> persons;
+  late List<GetAreasStream$SubscriptionRoot$Areas> areas;
 
   @override
-  List<Object?> get props => [persons];
+  List<Object?> get props => [areas];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetPersonsStream$SubscriptionRootToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class PersonsBoolExp extends JsonSerializable with EquatableMixin {
-  PersonsBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.address,
-      this.areas,
-      this.attendanceHistory,
-      this.birthdate,
-      this.birthday,
-      this.callHistory,
-      this.church,
-      this.churchID,
-      this.college,
-      this.collegeID,
-      this.color,
-      this.confessionHistory,
-      this.family,
-      this.familyID,
-      this.father,
-      this.fatherID,
-      this.firestoreId,
-      this.gender,
-      this.geolocation,
-      this.groups,
-      this.id,
-      this.isServant,
-      this.isShammas,
-      this.isStudent,
-      this.isUserAllowedToRead,
-      this.isUserAllowedToWrite,
-      this.job,
-      this.jobDescription,
-      this.jobID,
-      this.kodasHistory,
-      this.lastCall,
-      this.lastConfession,
-      this.lastEdit,
-      this.lastKodas,
-      this.lastVisit,
-      this.mainPhone,
-      this.name,
-      this.notes,
-      this.otherPhones,
-      this.personType,
-      this.personTypeID,
-      this.photoUpdatedAt,
-      this.qualification,
-      this.qualificationID,
-      this.school,
-      this.schoolID,
-      this.services,
-      this.shammasLevel,
-      this.state,
-      this.stateID,
-      this.storeID,
-      this.streets,
-      this.studyYear,
-      this.studyYearID,
-      this.tags,
-      this.uid,
-      this.user,
-      this.visitHistory});
-
-  factory PersonsBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$PersonsBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<PersonsBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  PersonsBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<PersonsBoolExp>? $or;
-
-  StringComparisonExp? address;
-
-  AreasBoolExp? areas;
-
-  @JsonKey(name: 'attendance_history')
-  HistoryAttendanceHistoryBoolExp? attendanceHistory;
-
-  DateComparisonExp? birthdate;
-
-  StringComparisonExp? birthday;
-
-  @JsonKey(name: 'call_history')
-  HistoryCallHistoryBoolExp? callHistory;
-
-  ChurchesBoolExp? church;
-
-  UuidComparisonExp? churchID;
-
-  CollegesBoolExp? college;
-
-  UuidComparisonExp? collegeID;
-
-  IntComparisonExp? color;
-
-  @JsonKey(name: 'confession_history')
-  HistoryConfessionHistoryBoolExp? confessionHistory;
-
-  FamiliesBoolExp? family;
-
-  UuidComparisonExp? familyID;
-
-  FathersBoolExp? father;
-
-  UuidComparisonExp? fatherID;
-
-  @JsonKey(name: 'firestore_id')
-  StringComparisonExp? firestoreId;
-
-  BooleanComparisonExp? gender;
-
-  GeographyComparisonExp? geolocation;
-
-  PersonsGroupsBoolExp? groups;
-
-  UuidComparisonExp? id;
-
-  BooleanComparisonExp? isServant;
-
-  BooleanComparisonExp? isShammas;
-
-  BooleanComparisonExp? isStudent;
-
-  BooleanComparisonExp? isUserAllowedToRead;
-
-  BooleanComparisonExp? isUserAllowedToWrite;
-
-  JobsBoolExp? job;
-
-  StringComparisonExp? jobDescription;
-
-  UuidComparisonExp? jobID;
-
-  @JsonKey(name: 'kodas_history')
-  HistoryKodasHistoryBoolExp? kodasHistory;
-
-  JsonbComparisonExp? lastCall;
-
-  JsonbComparisonExp? lastConfession;
-
-  JsonbComparisonExp? lastEdit;
-
-  JsonbComparisonExp? lastKodas;
-
-  JsonbComparisonExp? lastVisit;
-
-  StringComparisonExp? mainPhone;
-
-  StringComparisonExp? name;
-
-  StringComparisonExp? notes;
-
-  JsonbComparisonExp? otherPhones;
-
-  PersonTypesBoolExp? personType;
-
-  UuidComparisonExp? personTypeID;
-
-  @JsonKey(name: 'photo_updated_at')
-  TimestamptzComparisonExp? photoUpdatedAt;
-
-  QualificationsBoolExp? qualification;
-
-  UuidComparisonExp? qualificationID;
-
-  SchoolsBoolExp? school;
-
-  UuidComparisonExp? schoolID;
-
-  PersonsServicesBoolExp? services;
-
-  UuidComparisonExp? shammasLevel;
-
-  StatesBoolExp? state;
-
-  UuidComparisonExp? stateID;
-
-  UuidComparisonExp? storeID;
-
-  StreetsBoolExp? streets;
-
-  StudyYearsBoolExp? studyYear;
-
-  SmallintComparisonExp? studyYearID;
-
-  PersonsTagsBoolExp? tags;
-
-  UuidComparisonExp? uid;
-
-  UsersBoolExp? user;
-
-  @JsonKey(name: 'visit_history')
-  HistoryVisitHistoryBoolExp? visitHistory;
-
-  @override
-  List<Object?> get props => [
-        $and,
-        $not,
-        $or,
-        address,
-        areas,
-        attendanceHistory,
-        birthdate,
-        birthday,
-        callHistory,
-        church,
-        churchID,
-        college,
-        collegeID,
-        color,
-        confessionHistory,
-        family,
-        familyID,
-        father,
-        fatherID,
-        firestoreId,
-        gender,
-        geolocation,
-        groups,
-        id,
-        isServant,
-        isShammas,
-        isStudent,
-        isUserAllowedToRead,
-        isUserAllowedToWrite,
-        job,
-        jobDescription,
-        jobID,
-        kodasHistory,
-        lastCall,
-        lastConfession,
-        lastEdit,
-        lastKodas,
-        lastVisit,
-        mainPhone,
-        name,
-        notes,
-        otherPhones,
-        personType,
-        personTypeID,
-        photoUpdatedAt,
-        qualification,
-        qualificationID,
-        school,
-        schoolID,
-        services,
-        shammasLevel,
-        state,
-        stateID,
-        storeID,
-        streets,
-        studyYear,
-        studyYearID,
-        tags,
-        uid,
-        user,
-        visitHistory
-      ];
-  @override
-  Map<String, dynamic> toJson() => _$PersonsBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class StringComparisonExp extends JsonSerializable with EquatableMixin {
-  StringComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$ilike,
-      this.$in,
-      this.$iregex,
-      this.$isNull,
-      this.$like,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nilike,
-      this.$nin,
-      this.$niregex,
-      this.$nlike,
-      this.$nregex,
-      this.$nsimilar,
-      this.$regex,
-      this.$similar});
-
-  factory StringComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$StringComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  String? $eq;
-
-  @JsonKey(name: '_gt')
-  String? $gt;
-
-  @JsonKey(name: '_gte')
-  String? $gte;
-
-  @JsonKey(name: '_ilike')
-  String? $ilike;
-
-  @JsonKey(name: '_in')
-  List<String>? $in;
-
-  @JsonKey(name: '_iregex')
-  String? $iregex;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_like')
-  String? $like;
-
-  @JsonKey(name: '_lt')
-  String? $lt;
-
-  @JsonKey(name: '_lte')
-  String? $lte;
-
-  @JsonKey(name: '_neq')
-  String? $neq;
-
-  @JsonKey(name: '_nilike')
-  String? $nilike;
-
-  @JsonKey(name: '_nin')
-  List<String>? $nin;
-
-  @JsonKey(name: '_niregex')
-  String? $niregex;
-
-  @JsonKey(name: '_nlike')
-  String? $nlike;
-
-  @JsonKey(name: '_nregex')
-  String? $nregex;
-
-  @JsonKey(name: '_nsimilar')
-  String? $nsimilar;
-
-  @JsonKey(name: '_regex')
-  String? $regex;
-
-  @JsonKey(name: '_similar')
-  String? $similar;
-
-  @override
-  List<Object?> get props => [
-        $eq,
-        $gt,
-        $gte,
-        $ilike,
-        $in,
-        $iregex,
-        $isNull,
-        $like,
-        $lt,
-        $lte,
-        $neq,
-        $nilike,
-        $nin,
-        $niregex,
-        $nlike,
-        $nregex,
-        $nsimilar,
-        $regex,
-        $similar
-      ];
-  @override
-  Map<String, dynamic> toJson() => _$StringComparisonExpToJson(this);
+      _$GetAreasStream$SubscriptionRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1082,234 +708,424 @@ class DateComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class UsersBoolExp extends JsonSerializable with EquatableMixin {
-  UsersBoolExp(
+class PersonsBoolExp extends JsonSerializable with EquatableMixin {
+  PersonsBoolExp(
       {this.$and,
       this.$not,
       this.$or,
-      this.adminOn,
-      this.email,
-      this.firebaseAuthUid,
+      this.address,
+      this.areas,
+      this.attendanceHistory,
+      this.birthdate,
+      this.birthday,
+      this.callHistory,
+      this.church,
+      this.churchID,
+      this.college,
+      this.collegeID,
+      this.color,
+      this.confessionHistory,
+      this.family,
+      this.familyID,
+      this.father,
+      this.fatherID,
       this.firestoreId,
-      this.isUserAllowedToChange,
+      this.gender,
+      this.geolocation,
+      this.groups,
+      this.id,
+      this.isServant,
+      this.isShammas,
+      this.isStudent,
       this.isUserAllowedToRead,
+      this.isUserAllowedToWrite,
+      this.job,
+      this.jobDescription,
+      this.jobID,
+      this.kodasHistory,
+      this.lastCall,
+      this.lastConfession,
       this.lastEdit,
-      this.permissions,
-      this.person,
+      this.lastKodas,
+      this.lastVisit,
+      this.mainPhone,
+      this.name,
+      this.notes,
+      this.otherPhones,
+      this.personType,
+      this.personTypeID,
       this.photoUpdatedAt,
-      this.uid});
+      this.qualification,
+      this.qualificationID,
+      this.school,
+      this.schoolID,
+      this.services,
+      this.shammasLevel,
+      this.state,
+      this.stateID,
+      this.storeID,
+      this.streets,
+      this.studyYear,
+      this.studyYearID,
+      this.tags,
+      this.uid,
+      this.user,
+      this.visitHistory});
 
-  factory UsersBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$UsersBoolExpFromJson(json);
+  factory PersonsBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$PersonsBoolExpFromJson(json);
 
   @JsonKey(name: '_and')
-  List<UsersBoolExp>? $and;
+  List<PersonsBoolExp>? $and;
 
   @JsonKey(name: '_not')
-  UsersBoolExp? $not;
+  PersonsBoolExp? $not;
 
   @JsonKey(name: '_or')
-  List<UsersBoolExp>? $or;
+  List<PersonsBoolExp>? $or;
 
-  UsersPermissionsBoolExp? adminOn;
+  StringComparisonExp? address;
 
-  StringComparisonExp? email;
+  AreasBoolExp? areas;
 
-  @JsonKey(name: 'firebase_auth_uid')
-  StringComparisonExp? firebaseAuthUid;
+  @JsonKey(name: 'attendance_history')
+  HistoryAttendanceHistoryBoolExp? attendanceHistory;
+
+  DateComparisonExp? birthdate;
+
+  StringComparisonExp? birthday;
+
+  @JsonKey(name: 'call_history')
+  HistoryCallHistoryBoolExp? callHistory;
+
+  ChurchesBoolExp? church;
+
+  UuidComparisonExp? churchID;
+
+  CollegesBoolExp? college;
+
+  UuidComparisonExp? collegeID;
+
+  IntComparisonExp? color;
+
+  @JsonKey(name: 'confession_history')
+  HistoryConfessionHistoryBoolExp? confessionHistory;
+
+  FamiliesBoolExp? family;
+
+  UuidComparisonExp? familyID;
+
+  FathersBoolExp? father;
+
+  UuidComparisonExp? fatherID;
 
   @JsonKey(name: 'firestore_id')
   StringComparisonExp? firestoreId;
 
-  BooleanComparisonExp? isUserAllowedToChange;
+  BooleanComparisonExp? gender;
+
+  GeographyComparisonExp? geolocation;
+
+  PersonsGroupsBoolExp? groups;
+
+  UuidComparisonExp? id;
+
+  BooleanComparisonExp? isServant;
+
+  BooleanComparisonExp? isShammas;
+
+  BooleanComparisonExp? isStudent;
 
   BooleanComparisonExp? isUserAllowedToRead;
 
+  BooleanComparisonExp? isUserAllowedToWrite;
+
+  JobsBoolExp? job;
+
+  StringComparisonExp? jobDescription;
+
+  UuidComparisonExp? jobID;
+
+  @JsonKey(name: 'kodas_history')
+  HistoryKodasHistoryBoolExp? kodasHistory;
+
+  JsonbComparisonExp? lastCall;
+
+  JsonbComparisonExp? lastConfession;
+
   JsonbComparisonExp? lastEdit;
 
-  $textComparisonExp? permissions;
+  JsonbComparisonExp? lastKodas;
 
-  PersonsBoolExp? person;
+  JsonbComparisonExp? lastVisit;
+
+  StringComparisonExp? mainPhone;
+
+  StringComparisonExp? name;
+
+  StringComparisonExp? notes;
+
+  JsonbComparisonExp? otherPhones;
+
+  PersonTypesBoolExp? personType;
+
+  UuidComparisonExp? personTypeID;
 
   @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
+  QualificationsBoolExp? qualification;
+
+  UuidComparisonExp? qualificationID;
+
+  SchoolsBoolExp? school;
+
+  UuidComparisonExp? schoolID;
+
+  PersonsServicesBoolExp? services;
+
+  UuidComparisonExp? shammasLevel;
+
+  StatesBoolExp? state;
+
+  UuidComparisonExp? stateID;
+
+  UuidComparisonExp? storeID;
+
+  StreetsBoolExp? streets;
+
+  StudyYearsBoolExp? studyYear;
+
+  SmallintComparisonExp? studyYearID;
+
+  PersonsTagsBoolExp? tags;
+
   UuidComparisonExp? uid;
+
+  UsersBoolExp? user;
+
+  @JsonKey(name: 'visit_history')
+  HistoryVisitHistoryBoolExp? visitHistory;
 
   @override
   List<Object?> get props => [
         $and,
         $not,
         $or,
-        adminOn,
-        email,
-        firebaseAuthUid,
+        address,
+        areas,
+        attendanceHistory,
+        birthdate,
+        birthday,
+        callHistory,
+        church,
+        churchID,
+        college,
+        collegeID,
+        color,
+        confessionHistory,
+        family,
+        familyID,
+        father,
+        fatherID,
         firestoreId,
-        isUserAllowedToChange,
+        gender,
+        geolocation,
+        groups,
+        id,
+        isServant,
+        isShammas,
+        isStudent,
         isUserAllowedToRead,
+        isUserAllowedToWrite,
+        job,
+        jobDescription,
+        jobID,
+        kodasHistory,
+        lastCall,
+        lastConfession,
         lastEdit,
-        permissions,
-        person,
+        lastKodas,
+        lastVisit,
+        mainPhone,
+        name,
+        notes,
+        otherPhones,
+        personType,
+        personTypeID,
         photoUpdatedAt,
-        uid
+        qualification,
+        qualificationID,
+        school,
+        schoolID,
+        services,
+        shammasLevel,
+        state,
+        stateID,
+        storeID,
+        streets,
+        studyYear,
+        studyYearID,
+        tags,
+        uid,
+        user,
+        visitHistory
       ];
   @override
-  Map<String, dynamic> toJson() => _$UsersBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$PersonsBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class JsonbComparisonExp extends JsonSerializable with EquatableMixin {
-  JsonbComparisonExp(
-      {this.$cast,
-      this.$containedIn,
-      this.$contains,
-      this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$hasKey,
-      this.$hasKeysAll,
-      this.$hasKeysAny,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory JsonbComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$JsonbComparisonExpFromJson(json);
-
-  @JsonKey(name: '_cast')
-  JsonbCastExp? $cast;
-
-  @JsonKey(name: '_contained_in')
-  Map<String, dynamic>? $containedIn;
-
-  @JsonKey(name: '_contains')
-  Map<String, dynamic>? $contains;
-
-  @JsonKey(name: '_eq')
-  Map<String, dynamic>? $eq;
-
-  @JsonKey(name: '_gt')
-  Map<String, dynamic>? $gt;
-
-  @JsonKey(name: '_gte')
-  Map<String, dynamic>? $gte;
-
-  @JsonKey(name: '_has_key')
-  String? $hasKey;
-
-  @JsonKey(name: '_has_keys_all')
-  List<String>? $hasKeysAll;
-
-  @JsonKey(name: '_has_keys_any')
-  List<String>? $hasKeysAny;
-
-  @JsonKey(name: '_in')
-  List<Map<String, dynamic>>? $in;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  Map<String, dynamic>? $lt;
-
-  @JsonKey(name: '_lte')
-  Map<String, dynamic>? $lte;
-
-  @JsonKey(name: '_neq')
-  Map<String, dynamic>? $neq;
-
-  @JsonKey(name: '_nin')
-  List<Map<String, dynamic>>? $nin;
-
-  @override
-  List<Object?> get props => [
-        $cast,
-        $containedIn,
-        $contains,
-        $eq,
-        $gt,
-        $gte,
-        $hasKey,
-        $hasKeysAll,
-        $hasKeysAny,
-        $in,
-        $isNull,
-        $lt,
-        $lte,
-        $neq,
-        $nin
-      ];
-  @override
-  Map<String, dynamic> toJson() => _$JsonbComparisonExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class JsonbCastExp extends JsonSerializable with EquatableMixin {
-  JsonbCastExp({this.string});
-
-  factory JsonbCastExp.fromJson(Map<String, dynamic> json) =>
-      _$JsonbCastExpFromJson(json);
-
-  @JsonKey(name: 'String')
-  StringComparisonExp? string;
-
-  @override
-  List<Object?> get props => [string];
-  @override
-  Map<String, dynamic> toJson() => _$JsonbCastExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class $textComparisonExp extends JsonSerializable with EquatableMixin {
-  $textComparisonExp(
+class StringComparisonExp extends JsonSerializable with EquatableMixin {
+  StringComparisonExp(
       {this.$eq,
       this.$gt,
       this.$gte,
+      this.$ilike,
       this.$in,
+      this.$iregex,
       this.$isNull,
+      this.$like,
       this.$lt,
       this.$lte,
       this.$neq,
-      this.$nin});
+      this.$nilike,
+      this.$nin,
+      this.$niregex,
+      this.$nlike,
+      this.$nregex,
+      this.$nsimilar,
+      this.$regex,
+      this.$similar});
 
-  factory $textComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$$textComparisonExpFromJson(json);
+  factory StringComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$StringComparisonExpFromJson(json);
 
   @JsonKey(name: '_eq')
-  List<String>? $eq;
+  String? $eq;
 
   @JsonKey(name: '_gt')
-  List<String>? $gt;
+  String? $gt;
 
   @JsonKey(name: '_gte')
-  List<String>? $gte;
+  String? $gte;
+
+  @JsonKey(name: '_ilike')
+  String? $ilike;
 
   @JsonKey(name: '_in')
-  List<List<String>>? $in;
+  List<String>? $in;
+
+  @JsonKey(name: '_iregex')
+  String? $iregex;
 
   @JsonKey(name: '_is_null')
   bool? $isNull;
 
+  @JsonKey(name: '_like')
+  String? $like;
+
   @JsonKey(name: '_lt')
-  List<String>? $lt;
+  String? $lt;
 
   @JsonKey(name: '_lte')
-  List<String>? $lte;
+  String? $lte;
 
   @JsonKey(name: '_neq')
-  List<String>? $neq;
+  String? $neq;
+
+  @JsonKey(name: '_nilike')
+  String? $nilike;
 
   @JsonKey(name: '_nin')
-  List<List<String>>? $nin;
+  List<String>? $nin;
+
+  @JsonKey(name: '_niregex')
+  String? $niregex;
+
+  @JsonKey(name: '_nlike')
+  String? $nlike;
+
+  @JsonKey(name: '_nregex')
+  String? $nregex;
+
+  @JsonKey(name: '_nsimilar')
+  String? $nsimilar;
+
+  @JsonKey(name: '_regex')
+  String? $regex;
+
+  @JsonKey(name: '_similar')
+  String? $similar;
+
+  @override
+  List<Object?> get props => [
+        $eq,
+        $gt,
+        $gte,
+        $ilike,
+        $in,
+        $iregex,
+        $isNull,
+        $like,
+        $lt,
+        $lte,
+        $neq,
+        $nilike,
+        $nin,
+        $niregex,
+        $nlike,
+        $nregex,
+        $nsimilar,
+        $regex,
+        $similar
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$StringComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class HistoryCallHistoryBoolExp extends JsonSerializable with EquatableMixin {
+  HistoryCallHistoryBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.person,
+      this.personId,
+      this.time,
+      this.userRole,
+      this.userUid});
+
+  factory HistoryCallHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$HistoryCallHistoryBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<HistoryCallHistoryBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  HistoryCallHistoryBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<HistoryCallHistoryBoolExp>? $or;
+
+  PersonsBoolExp? person;
+
+  @JsonKey(name: 'person_id')
+  UuidComparisonExp? personId;
+
+  TimestamptzComparisonExp? time;
+
+  @JsonKey(name: 'user_role')
+  StringComparisonExp? userRole;
+
+  @JsonKey(name: 'user_uid')
+  UuidComparisonExp? userUid;
 
   @override
   List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+      [$and, $not, $or, person, personId, time, userRole, userUid];
   @override
-  Map<String, dynamic> toJson() => _$$textComparisonExpToJson(this);
+  Map<String, dynamic> toJson() => _$HistoryCallHistoryBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1363,181 +1179,151 @@ class TimestamptzComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
-    with EquatableMixin {
-  HistoryAttendanceDaysConstraintsBoolExp(
+class ChurchesBoolExp extends JsonSerializable with EquatableMixin {
+  ChurchesBoolExp(
       {this.$and,
       this.$not,
       this.$or,
-      this.day,
-      this.dayID,
-      this.group,
-      this.groupID,
+      this.fathers,
       this.id,
-      this.isUserAllowedToRead,
-      this.isUserAllowedToWrite,
-      this.service,
-      this.serviceID,
-      this.serviceGender,
-      this.serviceStudyYear,
-      this.studyYear});
-
-  factory HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-          Map<String, dynamic> json) =>
-      _$HistoryAttendanceDaysConstraintsBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<HistoryAttendanceDaysConstraintsBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  HistoryAttendanceDaysConstraintsBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<HistoryAttendanceDaysConstraintsBoolExp>? $or;
-
-  HistoryAttendanceDaysBoolExp? day;
-
-  DateComparisonExp? dayID;
-
-  GroupsBoolExp? group;
-
-  UuidComparisonExp? groupID;
-
-  UuidComparisonExp? id;
-
-  BooleanComparisonExp? isUserAllowedToRead;
-
-  BooleanComparisonExp? isUserAllowedToWrite;
-
-  ServicesBoolExp? service;
-
-  UuidComparisonExp? serviceID;
-
-  @JsonKey(name: 'service_gender')
-  BooleanComparisonExp? serviceGender;
-
-  @JsonKey(name: 'service_studyYear')
-  IntComparisonExp? serviceStudyYear;
-
-  StudyYearsBoolExp? studyYear;
-
-  @override
-  List<Object?> get props => [
-        $and,
-        $not,
-        $or,
-        day,
-        dayID,
-        group,
-        groupID,
-        id,
-        isUserAllowedToRead,
-        isUserAllowedToWrite,
-        service,
-        serviceID,
-        serviceGender,
-        serviceStudyYear,
-        studyYear
-      ];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$HistoryAttendanceDaysConstraintsBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class ServicesBoolExp extends JsonSerializable with EquatableMixin {
-  ServicesBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.attendanceHistory,
-      this.color,
-      this.firestoreId,
-      this.fromStudyYear,
-      this.groups,
-      this.id,
-      this.isUserAllowedToRead,
-      this.isUserAllowedToWrite,
-      this.lastEdit,
       this.name,
-      this.persons,
-      this.photoUpdatedAt,
-      this.studyYearFrom,
-      this.studyYearTo,
-      this.toStudyYear,
-      this.users});
+      this.persons});
 
-  factory ServicesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$ServicesBoolExpFromJson(json);
+  factory ChurchesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$ChurchesBoolExpFromJson(json);
 
   @JsonKey(name: '_and')
-  List<ServicesBoolExp>? $and;
+  List<ChurchesBoolExp>? $and;
 
   @JsonKey(name: '_not')
-  ServicesBoolExp? $not;
+  ChurchesBoolExp? $not;
 
   @JsonKey(name: '_or')
-  List<ServicesBoolExp>? $or;
+  List<ChurchesBoolExp>? $or;
 
-  @JsonKey(name: 'attendance_history')
-  HistoryAttendanceHistoryBoolExp? attendanceHistory;
-
-  IntComparisonExp? color;
-
-  @JsonKey(name: 'firestore_id')
-  StringComparisonExp? firestoreId;
-
-  StudyYearsBoolExp? fromStudyYear;
-
-  GroupsBoolExp? groups;
+  FathersBoolExp? fathers;
 
   UuidComparisonExp? id;
-
-  BooleanComparisonExp? isUserAllowedToRead;
-
-  BooleanComparisonExp? isUserAllowedToWrite;
-
-  JsonbComparisonExp? lastEdit;
 
   StringComparisonExp? name;
 
-  PersonsServicesBoolExp? persons;
-
-  @JsonKey(name: 'photo_updated_at')
-  TimestamptzComparisonExp? photoUpdatedAt;
-
-  SmallintComparisonExp? studyYearFrom;
-
-  SmallintComparisonExp? studyYearTo;
-
-  StudyYearsBoolExp? toStudyYear;
-
-  UsersPermissionsBoolExp? users;
+  PersonsBoolExp? persons;
 
   @override
-  List<Object?> get props => [
-        $and,
-        $not,
-        $or,
-        attendanceHistory,
-        color,
-        firestoreId,
-        fromStudyYear,
-        groups,
-        id,
-        isUserAllowedToRead,
-        isUserAllowedToWrite,
-        lastEdit,
-        name,
-        persons,
-        photoUpdatedAt,
-        studyYearFrom,
-        studyYearTo,
-        toStudyYear,
-        users
-      ];
+  List<Object?> get props => [$and, $not, $or, fathers, id, name, persons];
   @override
-  Map<String, dynamic> toJson() => _$ServicesBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$ChurchesBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class FathersBoolExp extends JsonSerializable with EquatableMixin {
+  FathersBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.church,
+      this.churchID,
+      this.id,
+      this.name,
+      this.persons});
+
+  factory FathersBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$FathersBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<FathersBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  FathersBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<FathersBoolExp>? $or;
+
+  ChurchesBoolExp? church;
+
+  UuidComparisonExp? churchID;
+
+  UuidComparisonExp? id;
+
+  StringComparisonExp? name;
+
+  PersonsBoolExp? persons;
+
+  @override
+  List<Object?> get props =>
+      [$and, $not, $or, church, churchID, id, name, persons];
+  @override
+  Map<String, dynamic> toJson() => _$FathersBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CollegesBoolExp extends JsonSerializable with EquatableMixin {
+  CollegesBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.id,
+      this.name,
+      this.persons,
+      this.university,
+      this.universityID});
+
+  factory CollegesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$CollegesBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<CollegesBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  CollegesBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<CollegesBoolExp>? $or;
+
+  UuidComparisonExp? id;
+
+  StringComparisonExp? name;
+
+  PersonsBoolExp? persons;
+
+  UniversitiesBoolExp? university;
+
+  UuidComparisonExp? universityID;
+
+  @override
+  List<Object?> get props =>
+      [$and, $not, $or, id, name, persons, university, universityID];
+  @override
+  Map<String, dynamic> toJson() => _$CollegesBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UniversitiesBoolExp extends JsonSerializable with EquatableMixin {
+  UniversitiesBoolExp(
+      {this.$and, this.$not, this.$or, this.colleges, this.id, this.name});
+
+  factory UniversitiesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$UniversitiesBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<UniversitiesBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  UniversitiesBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<UniversitiesBoolExp>? $or;
+
+  CollegesBoolExp? colleges;
+
+  UuidComparisonExp? id;
+
+  StringComparisonExp? name;
+
+  @override
+  List<Object?> get props => [$and, $not, $or, colleges, id, name];
+  @override
+  Map<String, dynamic> toJson() => _$UniversitiesBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1591,313 +1377,135 @@ class IntComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class StudyYearsBoolExp extends JsonSerializable with EquatableMixin {
-  StudyYearsBoolExp(
-      {this.$and, this.$not, this.$or, this.name, this.order, this.persons});
-
-  factory StudyYearsBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$StudyYearsBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<StudyYearsBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  StudyYearsBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<StudyYearsBoolExp>? $or;
-
-  StringComparisonExp? name;
-
-  SmallintComparisonExp? order;
-
-  PersonsBoolExp? persons;
-
-  @override
-  List<Object?> get props => [$and, $not, $or, name, order, persons];
-  @override
-  Map<String, dynamic> toJson() => _$StudyYearsBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SmallintComparisonExp extends JsonSerializable with EquatableMixin {
-  SmallintComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory SmallintComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$SmallintComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  int? $eq;
-
-  @JsonKey(name: '_gt')
-  int? $gt;
-
-  @JsonKey(name: '_gte')
-  int? $gte;
-
-  @JsonKey(name: '_in')
-  List<int>? $in;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  int? $lt;
-
-  @JsonKey(name: '_lte')
-  int? $lte;
-
-  @JsonKey(name: '_neq')
-  int? $neq;
-
-  @JsonKey(name: '_nin')
-  List<int>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$SmallintComparisonExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class PersonsServicesBoolExp extends JsonSerializable with EquatableMixin {
-  PersonsServicesBoolExp(
+class FamiliesBoolExp extends JsonSerializable with EquatableMixin {
+  FamiliesBoolExp(
       {this.$and,
       this.$not,
       this.$or,
-      this.person,
-      this.personID,
-      this.relId,
-      this.service,
-      this.serviceID});
-
-  factory PersonsServicesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$PersonsServicesBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<PersonsServicesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  PersonsServicesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<PersonsServicesBoolExp>? $or;
-
-  PersonsBoolExp? person;
-
-  UuidComparisonExp? personID;
-
-  @JsonKey(name: 'rel_id')
-  UuidComparisonExp? relId;
-
-  ServicesBoolExp? service;
-
-  UuidComparisonExp? serviceID;
-
-  @override
-  List<Object?> get props =>
-      [$and, $not, $or, person, personID, relId, service, serviceID];
-  @override
-  Map<String, dynamic> toJson() => _$PersonsServicesBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class HistoryKodasHistoryBoolExp extends JsonSerializable with EquatableMixin {
-  HistoryKodasHistoryBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.day,
-      this.dayID,
+      this.address,
+      this.areas,
+      this.color,
+      this.families,
+      this.family,
+      this.geolocation,
       this.id,
-      this.person,
-      this.personID,
-      this.recordedBy,
-      this.user});
+      this.isUserAllowedToRead,
+      this.isUserAllowedToWrite,
+      this.lastEdit,
+      this.name,
+      this.notes,
+      this.persons,
+      this.photoUpdatedAt,
+      this.stores,
+      this.streets});
 
-  factory HistoryKodasHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$HistoryKodasHistoryBoolExpFromJson(json);
+  factory FamiliesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$FamiliesBoolExpFromJson(json);
 
   @JsonKey(name: '_and')
-  List<HistoryKodasHistoryBoolExp>? $and;
+  List<FamiliesBoolExp>? $and;
 
   @JsonKey(name: '_not')
-  HistoryKodasHistoryBoolExp? $not;
+  FamiliesBoolExp? $not;
 
   @JsonKey(name: '_or')
-  List<HistoryKodasHistoryBoolExp>? $or;
+  List<FamiliesBoolExp>? $or;
 
-  HistoryAttendanceDaysBoolExp? day;
+  StringComparisonExp? address;
 
-  DateComparisonExp? dayID;
+  AreasBoolExp? areas;
+
+  IntComparisonExp? color;
+
+  FamiliesFamiliesBoolExp? families;
+
+  FamiliesFamiliesBoolExp? family;
+
+  GeographyComparisonExp? geolocation;
 
   UuidComparisonExp? id;
 
-  PersonsBoolExp? person;
+  BooleanComparisonExp? isUserAllowedToRead;
 
-  UuidComparisonExp? personID;
+  BooleanComparisonExp? isUserAllowedToWrite;
 
-  UuidComparisonExp? recordedBy;
+  JsonbComparisonExp? lastEdit;
 
-  UsersBoolExp? user;
+  StringComparisonExp? name;
+
+  StringComparisonExp? notes;
+
+  PersonsBoolExp? persons;
+
+  @JsonKey(name: 'photo_updated_at')
+  TimestamptzComparisonExp? photoUpdatedAt;
+
+  StoresBoolExp? stores;
+
+  StreetsBoolExp? streets;
 
   @override
-  List<Object?> get props =>
-      [$and, $not, $or, day, dayID, id, person, personID, recordedBy, user];
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        address,
+        areas,
+        color,
+        families,
+        family,
+        geolocation,
+        id,
+        isUserAllowedToRead,
+        isUserAllowedToWrite,
+        lastEdit,
+        name,
+        notes,
+        persons,
+        photoUpdatedAt,
+        stores,
+        streets
+      ];
   @override
-  Map<String, dynamic> toJson() => _$HistoryKodasHistoryBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$FamiliesBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class TimestampComparisonExp extends JsonSerializable with EquatableMixin {
-  TimestampComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory TimestampComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$TimestampComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  DateTime? $eq;
-
-  @JsonKey(name: '_gt')
-  DateTime? $gt;
-
-  @JsonKey(name: '_gte')
-  DateTime? $gte;
-
-  @JsonKey(name: '_in')
-  List<DateTime>? $in;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  DateTime? $lt;
-
-  @JsonKey(name: '_lte')
-  DateTime? $lte;
-
-  @JsonKey(name: '_neq')
-  DateTime? $neq;
-
-  @JsonKey(name: '_nin')
-  List<DateTime>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$TimestampComparisonExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class PersonsGroupsBoolExp extends JsonSerializable with EquatableMixin {
-  PersonsGroupsBoolExp(
+class FamiliesFamiliesBoolExp extends JsonSerializable with EquatableMixin {
+  FamiliesFamiliesBoolExp(
       {this.$and,
       this.$not,
       this.$or,
-      this.group,
-      this.groupID,
-      this.person,
-      this.personID,
-      this.relId});
+      this.innerFamily,
+      this.innerFamilyID,
+      this.outerFamily,
+      this.outerFamilyID});
 
-  factory PersonsGroupsBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$PersonsGroupsBoolExpFromJson(json);
+  factory FamiliesFamiliesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$FamiliesFamiliesBoolExpFromJson(json);
 
   @JsonKey(name: '_and')
-  List<PersonsGroupsBoolExp>? $and;
+  List<FamiliesFamiliesBoolExp>? $and;
 
   @JsonKey(name: '_not')
-  PersonsGroupsBoolExp? $not;
+  FamiliesFamiliesBoolExp? $not;
 
   @JsonKey(name: '_or')
-  List<PersonsGroupsBoolExp>? $or;
+  List<FamiliesFamiliesBoolExp>? $or;
 
-  GroupsBoolExp? group;
+  FamiliesBoolExp? innerFamily;
 
-  UuidComparisonExp? groupID;
+  UuidComparisonExp? innerFamilyID;
 
-  PersonsBoolExp? person;
+  FamiliesBoolExp? outerFamily;
 
-  UuidComparisonExp? personID;
-
-  @JsonKey(name: 'rel_id')
-  UuidComparisonExp? relId;
+  UuidComparisonExp? outerFamilyID;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, group, groupID, person, personID, relId];
+      [$and, $not, $or, innerFamily, innerFamilyID, outerFamily, outerFamilyID];
   @override
-  Map<String, dynamic> toJson() => _$PersonsGroupsBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class DaterangeComparisonExp extends JsonSerializable with EquatableMixin {
-  DaterangeComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory DaterangeComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$DaterangeComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  String? $eq;
-
-  @JsonKey(name: '_gt')
-  String? $gt;
-
-  @JsonKey(name: '_gte')
-  String? $gte;
-
-  @JsonKey(name: '_in')
-  List<String>? $in;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  String? $lt;
-
-  @JsonKey(name: '_lte')
-  String? $lte;
-
-  @JsonKey(name: '_neq')
-  String? $neq;
-
-  @JsonKey(name: '_nin')
-  List<String>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$DaterangeComparisonExpToJson(this);
+  Map<String, dynamic> toJson() => _$FamiliesFamiliesBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2157,11 +1765,17 @@ class StDWithinGeographyInput extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class BigintComparisonExp extends JsonSerializable with EquatableMixin {
-  BigintComparisonExp(
-      {this.$eq,
+class JsonbComparisonExp extends JsonSerializable with EquatableMixin {
+  JsonbComparisonExp(
+      {this.$cast,
+      this.$containedIn,
+      this.$contains,
+      this.$eq,
       this.$gt,
       this.$gte,
+      this.$hasKey,
+      this.$hasKeysAll,
+      this.$hasKeysAny,
       this.$in,
       this.$isNull,
       this.$lt,
@@ -2169,173 +1783,90 @@ class BigintComparisonExp extends JsonSerializable with EquatableMixin {
       this.$neq,
       this.$nin});
 
-  factory BigintComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$BigintComparisonExpFromJson(json);
+  factory JsonbComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$JsonbComparisonExpFromJson(json);
+
+  @JsonKey(name: '_cast')
+  JsonbCastExp? $cast;
+
+  @JsonKey(name: '_contained_in')
+  Map<String, dynamic>? $containedIn;
+
+  @JsonKey(name: '_contains')
+  Map<String, dynamic>? $contains;
 
   @JsonKey(name: '_eq')
-  BigInt? $eq;
+  Map<String, dynamic>? $eq;
 
   @JsonKey(name: '_gt')
-  BigInt? $gt;
+  Map<String, dynamic>? $gt;
 
   @JsonKey(name: '_gte')
-  BigInt? $gte;
+  Map<String, dynamic>? $gte;
+
+  @JsonKey(name: '_has_key')
+  String? $hasKey;
+
+  @JsonKey(name: '_has_keys_all')
+  List<String>? $hasKeysAll;
+
+  @JsonKey(name: '_has_keys_any')
+  List<String>? $hasKeysAny;
 
   @JsonKey(name: '_in')
-  List<BigInt>? $in;
+  List<Map<String, dynamic>>? $in;
 
   @JsonKey(name: '_is_null')
   bool? $isNull;
 
   @JsonKey(name: '_lt')
-  BigInt? $lt;
+  Map<String, dynamic>? $lt;
 
   @JsonKey(name: '_lte')
-  BigInt? $lte;
+  Map<String, dynamic>? $lte;
 
   @JsonKey(name: '_neq')
-  BigInt? $neq;
+  Map<String, dynamic>? $neq;
 
   @JsonKey(name: '_nin')
-  List<BigInt>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$BigintComparisonExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class FamiliesBoolExp extends JsonSerializable with EquatableMixin {
-  FamiliesBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.address,
-      this.areas,
-      this.color,
-      this.families,
-      this.family,
-      this.geolocation,
-      this.id,
-      this.isUserAllowedToRead,
-      this.isUserAllowedToWrite,
-      this.lastEdit,
-      this.name,
-      this.notes,
-      this.persons,
-      this.photoUpdatedAt,
-      this.stores,
-      this.streets});
-
-  factory FamiliesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$FamiliesBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<FamiliesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  FamiliesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<FamiliesBoolExp>? $or;
-
-  StringComparisonExp? address;
-
-  AreasBoolExp? areas;
-
-  IntComparisonExp? color;
-
-  FamiliesFamiliesBoolExp? families;
-
-  FamiliesFamiliesBoolExp? family;
-
-  GeographyComparisonExp? geolocation;
-
-  UuidComparisonExp? id;
-
-  BooleanComparisonExp? isUserAllowedToRead;
-
-  BooleanComparisonExp? isUserAllowedToWrite;
-
-  JsonbComparisonExp? lastEdit;
-
-  StringComparisonExp? name;
-
-  StringComparisonExp? notes;
-
-  PersonsBoolExp? persons;
-
-  @JsonKey(name: 'photo_updated_at')
-  TimestamptzComparisonExp? photoUpdatedAt;
-
-  StoresBoolExp? stores;
-
-  StreetsBoolExp? streets;
+  List<Map<String, dynamic>>? $nin;
 
   @override
   List<Object?> get props => [
-        $and,
-        $not,
-        $or,
-        address,
-        areas,
-        color,
-        families,
-        family,
-        geolocation,
-        id,
-        isUserAllowedToRead,
-        isUserAllowedToWrite,
-        lastEdit,
-        name,
-        notes,
-        persons,
-        photoUpdatedAt,
-        stores,
-        streets
+        $cast,
+        $containedIn,
+        $contains,
+        $eq,
+        $gt,
+        $gte,
+        $hasKey,
+        $hasKeysAll,
+        $hasKeysAny,
+        $in,
+        $isNull,
+        $lt,
+        $lte,
+        $neq,
+        $nin
       ];
   @override
-  Map<String, dynamic> toJson() => _$FamiliesBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$JsonbComparisonExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class FamiliesFamiliesBoolExp extends JsonSerializable with EquatableMixin {
-  FamiliesFamiliesBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.innerFamily,
-      this.innerFamilyID,
-      this.outerFamily,
-      this.outerFamilyID});
+class JsonbCastExp extends JsonSerializable with EquatableMixin {
+  JsonbCastExp({this.string});
 
-  factory FamiliesFamiliesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$FamiliesFamiliesBoolExpFromJson(json);
+  factory JsonbCastExp.fromJson(Map<String, dynamic> json) =>
+      _$JsonbCastExpFromJson(json);
 
-  @JsonKey(name: '_and')
-  List<FamiliesFamiliesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  FamiliesFamiliesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<FamiliesFamiliesBoolExp>? $or;
-
-  FamiliesBoolExp? innerFamily;
-
-  UuidComparisonExp? innerFamilyID;
-
-  FamiliesBoolExp? outerFamily;
-
-  UuidComparisonExp? outerFamilyID;
+  @JsonKey(name: 'String')
+  StringComparisonExp? string;
 
   @override
-  List<Object?> get props =>
-      [$and, $not, $or, innerFamily, innerFamilyID, outerFamily, outerFamilyID];
+  List<Object?> get props => [string];
   @override
-  Map<String, dynamic> toJson() => _$FamiliesFamiliesBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$JsonbCastExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2495,195 +2026,45 @@ class StreetsBoolExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class HistoryCallHistoryBoolExp extends JsonSerializable with EquatableMixin {
-  HistoryCallHistoryBoolExp(
+class PersonsGroupsBoolExp extends JsonSerializable with EquatableMixin {
+  PersonsGroupsBoolExp(
       {this.$and,
       this.$not,
       this.$or,
+      this.group,
+      this.groupID,
       this.person,
-      this.personId,
-      this.time,
-      this.userRole,
-      this.userUid});
+      this.personID,
+      this.relId});
 
-  factory HistoryCallHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$HistoryCallHistoryBoolExpFromJson(json);
+  factory PersonsGroupsBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$PersonsGroupsBoolExpFromJson(json);
 
   @JsonKey(name: '_and')
-  List<HistoryCallHistoryBoolExp>? $and;
+  List<PersonsGroupsBoolExp>? $and;
 
   @JsonKey(name: '_not')
-  HistoryCallHistoryBoolExp? $not;
+  PersonsGroupsBoolExp? $not;
 
   @JsonKey(name: '_or')
-  List<HistoryCallHistoryBoolExp>? $or;
+  List<PersonsGroupsBoolExp>? $or;
+
+  GroupsBoolExp? group;
+
+  UuidComparisonExp? groupID;
 
   PersonsBoolExp? person;
 
-  @JsonKey(name: 'person_id')
-  UuidComparisonExp? personId;
+  UuidComparisonExp? personID;
 
-  TimestamptzComparisonExp? time;
-
-  @JsonKey(name: 'user_role')
-  StringComparisonExp? userRole;
-
-  @JsonKey(name: 'user_uid')
-  UuidComparisonExp? userUid;
+  @JsonKey(name: 'rel_id')
+  UuidComparisonExp? relId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, person, personId, time, userRole, userUid];
+      [$and, $not, $or, group, groupID, person, personID, relId];
   @override
-  Map<String, dynamic> toJson() => _$HistoryCallHistoryBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class ChurchesBoolExp extends JsonSerializable with EquatableMixin {
-  ChurchesBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.fathers,
-      this.id,
-      this.name,
-      this.persons});
-
-  factory ChurchesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$ChurchesBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<ChurchesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  ChurchesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<ChurchesBoolExp>? $or;
-
-  FathersBoolExp? fathers;
-
-  UuidComparisonExp? id;
-
-  StringComparisonExp? name;
-
-  PersonsBoolExp? persons;
-
-  @override
-  List<Object?> get props => [$and, $not, $or, fathers, id, name, persons];
-  @override
-  Map<String, dynamic> toJson() => _$ChurchesBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class FathersBoolExp extends JsonSerializable with EquatableMixin {
-  FathersBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.church,
-      this.churchID,
-      this.id,
-      this.name,
-      this.persons});
-
-  factory FathersBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$FathersBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<FathersBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  FathersBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<FathersBoolExp>? $or;
-
-  ChurchesBoolExp? church;
-
-  UuidComparisonExp? churchID;
-
-  UuidComparisonExp? id;
-
-  StringComparisonExp? name;
-
-  PersonsBoolExp? persons;
-
-  @override
-  List<Object?> get props =>
-      [$and, $not, $or, church, churchID, id, name, persons];
-  @override
-  Map<String, dynamic> toJson() => _$FathersBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CollegesBoolExp extends JsonSerializable with EquatableMixin {
-  CollegesBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.id,
-      this.name,
-      this.persons,
-      this.university,
-      this.universityID});
-
-  factory CollegesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$CollegesBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<CollegesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  CollegesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<CollegesBoolExp>? $or;
-
-  UuidComparisonExp? id;
-
-  StringComparisonExp? name;
-
-  PersonsBoolExp? persons;
-
-  UniversitiesBoolExp? university;
-
-  UuidComparisonExp? universityID;
-
-  @override
-  List<Object?> get props =>
-      [$and, $not, $or, id, name, persons, university, universityID];
-  @override
-  Map<String, dynamic> toJson() => _$CollegesBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class UniversitiesBoolExp extends JsonSerializable with EquatableMixin {
-  UniversitiesBoolExp(
-      {this.$and, this.$not, this.$or, this.colleges, this.id, this.name});
-
-  factory UniversitiesBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$UniversitiesBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<UniversitiesBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  UniversitiesBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<UniversitiesBoolExp>? $or;
-
-  CollegesBoolExp? colleges;
-
-  UuidComparisonExp? id;
-
-  StringComparisonExp? name;
-
-  @override
-  List<Object?> get props => [$and, $not, $or, colleges, id, name];
-  @override
-  Map<String, dynamic> toJson() => _$UniversitiesBoolExpToJson(this);
+  Map<String, dynamic> toJson() => _$PersonsGroupsBoolExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2713,6 +2094,179 @@ class JobsBoolExp extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [$and, $not, $or, id, name, persons];
   @override
   Map<String, dynamic> toJson() => _$JobsBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class HistoryKodasHistoryBoolExp extends JsonSerializable with EquatableMixin {
+  HistoryKodasHistoryBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.day,
+      this.dayID,
+      this.id,
+      this.person,
+      this.personID,
+      this.recordedBy,
+      this.user});
+
+  factory HistoryKodasHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$HistoryKodasHistoryBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<HistoryKodasHistoryBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  HistoryKodasHistoryBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<HistoryKodasHistoryBoolExp>? $or;
+
+  HistoryAttendanceDaysBoolExp? day;
+
+  DateComparisonExp? dayID;
+
+  UuidComparisonExp? id;
+
+  PersonsBoolExp? person;
+
+  UuidComparisonExp? personID;
+
+  UuidComparisonExp? recordedBy;
+
+  UsersBoolExp? user;
+
+  @override
+  List<Object?> get props =>
+      [$and, $not, $or, day, dayID, id, person, personID, recordedBy, user];
+  @override
+  Map<String, dynamic> toJson() => _$HistoryKodasHistoryBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UsersBoolExp extends JsonSerializable with EquatableMixin {
+  UsersBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.adminOn,
+      this.email,
+      this.firebaseAuthUid,
+      this.firestoreId,
+      this.isUserAllowedToChange,
+      this.isUserAllowedToRead,
+      this.lastEdit,
+      this.permissions,
+      this.person,
+      this.photoUpdatedAt,
+      this.uid});
+
+  factory UsersBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$UsersBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<UsersBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  UsersBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<UsersBoolExp>? $or;
+
+  UsersPermissionsBoolExp? adminOn;
+
+  StringComparisonExp? email;
+
+  @JsonKey(name: 'firebase_auth_uid')
+  StringComparisonExp? firebaseAuthUid;
+
+  @JsonKey(name: 'firestore_id')
+  StringComparisonExp? firestoreId;
+
+  BooleanComparisonExp? isUserAllowedToChange;
+
+  BooleanComparisonExp? isUserAllowedToRead;
+
+  JsonbComparisonExp? lastEdit;
+
+  $textComparisonExp? permissions;
+
+  PersonsBoolExp? person;
+
+  @JsonKey(name: 'photo_updated_at')
+  TimestamptzComparisonExp? photoUpdatedAt;
+
+  UuidComparisonExp? uid;
+
+  @override
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        adminOn,
+        email,
+        firebaseAuthUid,
+        firestoreId,
+        isUserAllowedToChange,
+        isUserAllowedToRead,
+        lastEdit,
+        permissions,
+        person,
+        photoUpdatedAt,
+        uid
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$UsersBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class $textComparisonExp extends JsonSerializable with EquatableMixin {
+  $textComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory $textComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$$textComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  List<String>? $eq;
+
+  @JsonKey(name: '_gt')
+  List<String>? $gt;
+
+  @JsonKey(name: '_gte')
+  List<String>? $gte;
+
+  @JsonKey(name: '_in')
+  List<List<String>>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  List<String>? $lt;
+
+  @JsonKey(name: '_lte')
+  List<String>? $lte;
+
+  @JsonKey(name: '_neq')
+  List<String>? $neq;
+
+  @JsonKey(name: '_nin')
+  List<List<String>>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$$textComparisonExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2808,6 +2362,223 @@ class SchoolsBoolExp extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [$and, $not, $or, id, name, persons];
   @override
   Map<String, dynamic> toJson() => _$SchoolsBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsServicesBoolExp extends JsonSerializable with EquatableMixin {
+  PersonsServicesBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.person,
+      this.personID,
+      this.relId,
+      this.service,
+      this.serviceID});
+
+  factory PersonsServicesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$PersonsServicesBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<PersonsServicesBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  PersonsServicesBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<PersonsServicesBoolExp>? $or;
+
+  PersonsBoolExp? person;
+
+  UuidComparisonExp? personID;
+
+  @JsonKey(name: 'rel_id')
+  UuidComparisonExp? relId;
+
+  ServicesBoolExp? service;
+
+  UuidComparisonExp? serviceID;
+
+  @override
+  List<Object?> get props =>
+      [$and, $not, $or, person, personID, relId, service, serviceID];
+  @override
+  Map<String, dynamic> toJson() => _$PersonsServicesBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ServicesBoolExp extends JsonSerializable with EquatableMixin {
+  ServicesBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.attendanceHistory,
+      this.color,
+      this.firestoreId,
+      this.fromStudyYear,
+      this.groups,
+      this.id,
+      this.isUserAllowedToRead,
+      this.isUserAllowedToWrite,
+      this.lastEdit,
+      this.name,
+      this.persons,
+      this.photoUpdatedAt,
+      this.studyYearFrom,
+      this.studyYearTo,
+      this.toStudyYear,
+      this.users});
+
+  factory ServicesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$ServicesBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<ServicesBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  ServicesBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<ServicesBoolExp>? $or;
+
+  @JsonKey(name: 'attendance_history')
+  HistoryAttendanceHistoryBoolExp? attendanceHistory;
+
+  IntComparisonExp? color;
+
+  @JsonKey(name: 'firestore_id')
+  StringComparisonExp? firestoreId;
+
+  StudyYearsBoolExp? fromStudyYear;
+
+  GroupsBoolExp? groups;
+
+  UuidComparisonExp? id;
+
+  BooleanComparisonExp? isUserAllowedToRead;
+
+  BooleanComparisonExp? isUserAllowedToWrite;
+
+  JsonbComparisonExp? lastEdit;
+
+  StringComparisonExp? name;
+
+  PersonsServicesBoolExp? persons;
+
+  @JsonKey(name: 'photo_updated_at')
+  TimestamptzComparisonExp? photoUpdatedAt;
+
+  SmallintComparisonExp? studyYearFrom;
+
+  SmallintComparisonExp? studyYearTo;
+
+  StudyYearsBoolExp? toStudyYear;
+
+  UsersPermissionsBoolExp? users;
+
+  @override
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        attendanceHistory,
+        color,
+        firestoreId,
+        fromStudyYear,
+        groups,
+        id,
+        isUserAllowedToRead,
+        isUserAllowedToWrite,
+        lastEdit,
+        name,
+        persons,
+        photoUpdatedAt,
+        studyYearFrom,
+        studyYearTo,
+        toStudyYear,
+        users
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$ServicesBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class StudyYearsBoolExp extends JsonSerializable with EquatableMixin {
+  StudyYearsBoolExp(
+      {this.$and, this.$not, this.$or, this.name, this.order, this.persons});
+
+  factory StudyYearsBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$StudyYearsBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<StudyYearsBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  StudyYearsBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<StudyYearsBoolExp>? $or;
+
+  StringComparisonExp? name;
+
+  SmallintComparisonExp? order;
+
+  PersonsBoolExp? persons;
+
+  @override
+  List<Object?> get props => [$and, $not, $or, name, order, persons];
+  @override
+  Map<String, dynamic> toJson() => _$StudyYearsBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SmallintComparisonExp extends JsonSerializable with EquatableMixin {
+  SmallintComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory SmallintComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$SmallintComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  int? $eq;
+
+  @JsonKey(name: '_gt')
+  int? $gt;
+
+  @JsonKey(name: '_gte')
+  int? $gte;
+
+  @JsonKey(name: '_in')
+  List<int>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  int? $lt;
+
+  @JsonKey(name: '_lte')
+  int? $lte;
+
+  @JsonKey(name: '_neq')
+  int? $neq;
+
+  @JsonKey(name: '_nin')
+  List<int>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$SmallintComparisonExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2971,13 +2742,265 @@ class HistoryVisitHistoryBoolExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SearchPersons$SubscriptionRoot$Persons extends JsonSerializable
+class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
     with EquatableMixin {
-  SearchPersons$SubscriptionRoot$Persons();
+  HistoryAttendanceDaysConstraintsBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.day,
+      this.dayID,
+      this.group,
+      this.groupID,
+      this.id,
+      this.isUserAllowedToRead,
+      this.isUserAllowedToWrite,
+      this.service,
+      this.serviceID,
+      this.serviceGender,
+      this.serviceStudyYear,
+      this.studyYear});
 
-  factory SearchPersons$SubscriptionRoot$Persons.fromJson(
+  factory HistoryAttendanceDaysConstraintsBoolExp.fromJson(
           Map<String, dynamic> json) =>
-      _$SearchPersons$SubscriptionRoot$PersonsFromJson(json);
+      _$HistoryAttendanceDaysConstraintsBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<HistoryAttendanceDaysConstraintsBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  HistoryAttendanceDaysConstraintsBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<HistoryAttendanceDaysConstraintsBoolExp>? $or;
+
+  HistoryAttendanceDaysBoolExp? day;
+
+  DateComparisonExp? dayID;
+
+  GroupsBoolExp? group;
+
+  UuidComparisonExp? groupID;
+
+  UuidComparisonExp? id;
+
+  BooleanComparisonExp? isUserAllowedToRead;
+
+  BooleanComparisonExp? isUserAllowedToWrite;
+
+  ServicesBoolExp? service;
+
+  UuidComparisonExp? serviceID;
+
+  @JsonKey(name: 'service_gender')
+  BooleanComparisonExp? serviceGender;
+
+  @JsonKey(name: 'service_studyYear')
+  IntComparisonExp? serviceStudyYear;
+
+  StudyYearsBoolExp? studyYear;
+
+  @override
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        day,
+        dayID,
+        group,
+        groupID,
+        id,
+        isUserAllowedToRead,
+        isUserAllowedToWrite,
+        service,
+        serviceID,
+        serviceGender,
+        serviceStudyYear,
+        studyYear
+      ];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$HistoryAttendanceDaysConstraintsBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class TimestampComparisonExp extends JsonSerializable with EquatableMixin {
+  TimestampComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory TimestampComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$TimestampComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  DateTime? $eq;
+
+  @JsonKey(name: '_gt')
+  DateTime? $gt;
+
+  @JsonKey(name: '_gte')
+  DateTime? $gte;
+
+  @JsonKey(name: '_in')
+  List<DateTime>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  DateTime? $lt;
+
+  @JsonKey(name: '_lte')
+  DateTime? $lte;
+
+  @JsonKey(name: '_neq')
+  DateTime? $neq;
+
+  @JsonKey(name: '_nin')
+  List<DateTime>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$TimestampComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DaterangeComparisonExp extends JsonSerializable with EquatableMixin {
+  DaterangeComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory DaterangeComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$DaterangeComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  String? $eq;
+
+  @JsonKey(name: '_gt')
+  String? $gt;
+
+  @JsonKey(name: '_gte')
+  String? $gte;
+
+  @JsonKey(name: '_in')
+  List<String>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  String? $lt;
+
+  @JsonKey(name: '_lte')
+  String? $lte;
+
+  @JsonKey(name: '_neq')
+  String? $neq;
+
+  @JsonKey(name: '_nin')
+  List<String>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$DaterangeComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class BigintComparisonExp extends JsonSerializable with EquatableMixin {
+  BigintComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory BigintComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$BigintComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  int? $eq;
+
+  @JsonKey(name: '_gt')
+  int? $gt;
+
+  @JsonKey(name: '_gte')
+  int? $gte;
+
+  @JsonKey(name: '_in')
+  List<int>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  int? $lt;
+
+  @JsonKey(name: '_lte')
+  int? $lte;
+
+  @JsonKey(name: '_neq')
+  int? $neq;
+
+  @JsonKey(name: '_nin')
+  List<int>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$BigintComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetServicesStream$SubscriptionRoot$Services$StudyYears
+    extends JsonSerializable with EquatableMixin {
+  GetServicesStream$SubscriptionRoot$Services$StudyYears();
+
+  factory GetServicesStream$SubscriptionRoot$Services$StudyYears.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRoot$Services$StudyYearsFromJson(json);
+
+  late String name;
+
+  late int order;
+
+  @override
+  List<Object?> get props => [name, order];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetServicesStream$SubscriptionRoot$Services$StudyYearsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetServicesStream$SubscriptionRoot$Services$Groups
+    extends JsonSerializable with EquatableMixin {
+  GetServicesStream$SubscriptionRoot$Services$Groups();
+
+  factory GetServicesStream$SubscriptionRoot$Services$Groups.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRoot$Services$GroupsFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -2986,27 +3009,145 @@ class SearchPersons$SubscriptionRoot$Persons extends JsonSerializable
 
   late String name;
 
+  int? color;
+
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, color];
   @override
   Map<String, dynamic> toJson() =>
-      _$SearchPersons$SubscriptionRoot$PersonsToJson(this);
+      _$GetServicesStream$SubscriptionRoot$Services$GroupsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class SearchPersons$SubscriptionRoot extends JsonSerializable
+class GetServicesStream$SubscriptionRoot$Services extends JsonSerializable
     with EquatableMixin {
-  SearchPersons$SubscriptionRoot();
+  GetServicesStream$SubscriptionRoot$Services();
 
-  factory SearchPersons$SubscriptionRoot.fromJson(Map<String, dynamic> json) =>
-      _$SearchPersons$SubscriptionRootFromJson(json);
+  factory GetServicesStream$SubscriptionRoot$Services.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRoot$ServicesFromJson(json);
 
-  late List<SearchPersons$SubscriptionRoot$Persons> persons;
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  GetServicesStream$SubscriptionRoot$Services$StudyYears? fromStudyYear;
+
+  GetServicesStream$SubscriptionRoot$Services$StudyYears? toStudyYear;
+
+  late List<GetServicesStream$SubscriptionRoot$Services$Groups> groups;
+
+  @override
+  List<Object?> get props =>
+      [id, name, color, fromStudyYear, toStudyYear, groups];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetServicesStream$SubscriptionRoot$ServicesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetServicesStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetServicesStream$SubscriptionRoot();
+
+  factory GetServicesStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRootFromJson(json);
+
+  late List<GetServicesStream$SubscriptionRoot$Services> services;
+
+  @override
+  List<Object?> get props => [services];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetServicesStream$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStudyYearName$QueryRoot$StudyYears extends JsonSerializable
+    with EquatableMixin {
+  GetStudyYearName$QueryRoot$StudyYears();
+
+  factory GetStudyYearName$QueryRoot$StudyYears.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetStudyYearName$QueryRoot$StudyYearsFromJson(json);
+
+  late int order;
+
+  late String name;
+
+  @override
+  List<Object?> get props => [order, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetStudyYearName$QueryRoot$StudyYearsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStudyYearName$QueryRoot extends JsonSerializable with EquatableMixin {
+  GetStudyYearName$QueryRoot();
+
+  factory GetStudyYearName$QueryRoot.fromJson(Map<String, dynamic> json) =>
+      _$GetStudyYearName$QueryRootFromJson(json);
+
+  @JsonKey(name: 'studyYears_by_pk')
+  GetStudyYearName$QueryRoot$StudyYears? studyYearsByPk;
+
+  @override
+  List<Object?> get props => [studyYearsByPk];
+  @override
+  Map<String, dynamic> toJson() => _$GetStudyYearName$QueryRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPersonsStream$SubscriptionRoot$Persons extends JsonSerializable
+    with EquatableMixin {
+  GetPersonsStream$SubscriptionRoot$Persons();
+
+  factory GetPersonsStream$SubscriptionRoot$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  @JsonKey(name: 'photo_updated_at')
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetPersonsStream$SubscriptionRoot$PersonsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPersonsStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetPersonsStream$SubscriptionRoot();
+
+  factory GetPersonsStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPersonsStream$SubscriptionRootFromJson(json);
+
+  late List<GetPersonsStream$SubscriptionRoot$Persons> persons;
 
   @override
   List<Object?> get props => [persons];
   @override
-  Map<String, dynamic> toJson() => _$SearchPersons$SubscriptionRootToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$GetPersonsStream$SubscriptionRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -3378,6 +3519,389 @@ class GetPersonsBirthday$QueryRoot extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetAreasStreamArguments extends JsonSerializable with EquatableMixin {
+  GetAreasStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetAreasStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetAreasStreamArgumentsFromJson(json);
+
+  final List<AreasBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetAreasStreamArgumentsToJson(this);
+}
+
+final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'getAreasStream';
+final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getAreasStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'areas_bool_exp'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'areas'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'bounds'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetAreasStreamSubscription extends GraphQLQuery<
+    GetAreasStream$SubscriptionRoot, GetAreasStreamArguments> {
+  GetAreasStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetAreasStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetAreasStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetAreasStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
+  GetServicesStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetServicesStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetServicesStreamArgumentsFromJson(json);
+
+  final List<ServicesBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetServicesStreamArgumentsToJson(this);
+}
+
+final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'getServicesStream';
+final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getServicesStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'services_bool_exp'),
+                    isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'services'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'studyYearFrom'),
+                        value: EnumValueNode(name: NameNode(value: 'asc'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'studyYearTo'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'fromStudyYear'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'order'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'toStudyYear'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'order'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'groups'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'order_by'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'service'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'studyYearFrom'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'asc'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'studyYearTo'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'asc')))
+                              ]))
+                        ]))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ]))
+      ]))
+]);
+
+class GetServicesStreamSubscription extends GraphQLQuery<
+    GetServicesStream$SubscriptionRoot, GetServicesStreamArguments> {
+  GetServicesStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetServicesStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetServicesStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetServicesStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStudyYearNameArguments extends JsonSerializable with EquatableMixin {
+  GetStudyYearNameArguments({required this.order});
+
+  @override
+  factory GetStudyYearNameArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetStudyYearNameArgumentsFromJson(json);
+
+  late int order;
+
+  @override
+  List<Object?> get props => [order];
+  @override
+  Map<String, dynamic> toJson() => _$GetStudyYearNameArgumentsToJson(this);
+}
+
+final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT_OPERATION_NAME = 'getStudyYearName';
+final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'getStudyYearName'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'order')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'smallint'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'studyYears_by_pk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'order'),
+                  value: VariableNode(name: NameNode(value: 'order')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'order'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetStudyYearNameQuery extends GraphQLQuery<GetStudyYearName$QueryRoot,
+    GetStudyYearNameArguments> {
+  GetStudyYearNameQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_STUDY_YEAR_NAME_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_STUDY_YEAR_NAME_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetStudyYearNameArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetStudyYearName$QueryRoot parse(Map<String, dynamic> json) =>
+      GetStudyYearName$QueryRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetPersonsStreamArguments extends JsonSerializable with EquatableMixin {
   GetPersonsStreamArguments({this.addWhere, this.limit});
 
@@ -3413,7 +3937,7 @@ final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'limit')),
             type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '199')),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
             directives: [])
       ],
       directives: [],
@@ -3450,6 +3974,18 @@ final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                   selectionSet: null),
               FieldNode(
                   name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'photo_updated_at'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -3477,124 +4013,6 @@ class GetPersonsStreamSubscription extends GraphQLQuery<
   @override
   GetPersonsStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
       GetPersonsStream$SubscriptionRoot.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SearchPersonsArguments extends JsonSerializable with EquatableMixin {
-  SearchPersonsArguments(
-      {required this.searchQuery, this.addWhere, this.limit});
-
-  @override
-  factory SearchPersonsArguments.fromJson(Map<String, dynamic> json) =>
-      _$SearchPersonsArgumentsFromJson(json);
-
-  late String searchQuery;
-
-  final List<PersonsBoolExp>? addWhere;
-
-  final int? limit;
-
-  @override
-  List<Object?> get props => [searchQuery, addWhere, limit];
-  @override
-  Map<String, dynamic> toJson() => _$SearchPersonsArgumentsToJson(this);
-}
-
-final SEARCH_PERSONS_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'searchPersons';
-final SEARCH_PERSONS_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'searchPersons'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'searchQuery')),
-            type:
-                NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'persons_bool_exp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '199')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_ilike'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'searchQuery')))
-                        ])),
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'order_by'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'asc')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
-]);
-
-class SearchPersonsSubscription extends GraphQLQuery<
-    SearchPersons$SubscriptionRoot, SearchPersonsArguments> {
-  SearchPersonsSubscription({required this.variables});
-
-  @override
-  final DocumentNode document = SEARCH_PERSONS_SUBSCRIPTION_DOCUMENT;
-
-  @override
-  final String operationName =
-      SEARCH_PERSONS_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final SearchPersonsArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  SearchPersons$SubscriptionRoot parse(Map<String, dynamic> json) =>
-      SearchPersons$SubscriptionRoot.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)

@@ -7,370 +7,36 @@ part of 'queries.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetPersonsStream$SubscriptionRoot$Persons
-    _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
+GetAreasStream$SubscriptionRoot$Areas
+    _$GetAreasStream$SubscriptionRoot$AreasFromJson(
             Map<String, dynamic> json) =>
-        GetPersonsStream$SubscriptionRoot$Persons()
+        GetAreasStream$SubscriptionRoot$Areas()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String;
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..bounds = json['bounds'] as Map<String, dynamic>?;
 
-Map<String, dynamic> _$GetPersonsStream$SubscriptionRoot$PersonsToJson(
-        GetPersonsStream$SubscriptionRoot$Persons instance) =>
+Map<String, dynamic> _$GetAreasStream$SubscriptionRoot$AreasToJson(
+        GetAreasStream$SubscriptionRoot$Areas instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
+      'color': instance.color,
+      'bounds': instance.bounds,
     };
 
-GetPersonsStream$SubscriptionRoot _$GetPersonsStream$SubscriptionRootFromJson(
+GetAreasStream$SubscriptionRoot _$GetAreasStream$SubscriptionRootFromJson(
         Map<String, dynamic> json) =>
-    GetPersonsStream$SubscriptionRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => GetPersonsStream$SubscriptionRoot$Persons.fromJson(
+    GetAreasStream$SubscriptionRoot()
+      ..areas = (json['areas'] as List<dynamic>)
+          .map((e) => GetAreasStream$SubscriptionRoot$Areas.fromJson(
               e as Map<String, dynamic>))
           .toList();
 
-Map<String, dynamic> _$GetPersonsStream$SubscriptionRootToJson(
-        GetPersonsStream$SubscriptionRoot instance) =>
+Map<String, dynamic> _$GetAreasStream$SubscriptionRootToJson(
+        GetAreasStream$SubscriptionRoot instance) =>
     <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
-PersonsBoolExp _$PersonsBoolExpFromJson(Map<String, dynamic> json) =>
-    PersonsBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      address: json['address'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['address'] as Map<String, dynamic>),
-      areas: json['areas'] == null
-          ? null
-          : AreasBoolExp.fromJson(json['areas'] as Map<String, dynamic>),
-      attendanceHistory: json['attendance_history'] == null
-          ? null
-          : HistoryAttendanceHistoryBoolExp.fromJson(
-              json['attendance_history'] as Map<String, dynamic>),
-      birthdate: json['birthdate'] == null
-          ? null
-          : DateComparisonExp.fromJson(
-              json['birthdate'] as Map<String, dynamic>),
-      birthday: json['birthday'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['birthday'] as Map<String, dynamic>),
-      callHistory: json['call_history'] == null
-          ? null
-          : HistoryCallHistoryBoolExp.fromJson(
-              json['call_history'] as Map<String, dynamic>),
-      church: json['church'] == null
-          ? null
-          : ChurchesBoolExp.fromJson(json['church'] as Map<String, dynamic>),
-      churchID: json['churchID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['churchID'] as Map<String, dynamic>),
-      college: json['college'] == null
-          ? null
-          : CollegesBoolExp.fromJson(json['college'] as Map<String, dynamic>),
-      collegeID: json['collegeID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['collegeID'] as Map<String, dynamic>),
-      color: json['color'] == null
-          ? null
-          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
-      confessionHistory: json['confession_history'] == null
-          ? null
-          : HistoryConfessionHistoryBoolExp.fromJson(
-              json['confession_history'] as Map<String, dynamic>),
-      family: json['family'] == null
-          ? null
-          : FamiliesBoolExp.fromJson(json['family'] as Map<String, dynamic>),
-      familyID: json['familyID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['familyID'] as Map<String, dynamic>),
-      father: json['father'] == null
-          ? null
-          : FathersBoolExp.fromJson(json['father'] as Map<String, dynamic>),
-      fatherID: json['fatherID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['fatherID'] as Map<String, dynamic>),
-      firestoreId: json['firestore_id'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['firestore_id'] as Map<String, dynamic>),
-      gender: json['gender'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['gender'] as Map<String, dynamic>),
-      geolocation: json['geolocation'] == null
-          ? null
-          : GeographyComparisonExp.fromJson(
-              json['geolocation'] as Map<String, dynamic>),
-      groups: json['groups'] == null
-          ? null
-          : PersonsGroupsBoolExp.fromJson(
-              json['groups'] as Map<String, dynamic>),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      isServant: json['isServant'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isServant'] as Map<String, dynamic>),
-      isShammas: json['isShammas'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isShammas'] as Map<String, dynamic>),
-      isStudent: json['isStudent'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isStudent'] as Map<String, dynamic>),
-      isUserAllowedToRead: json['isUserAllowedToRead'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToRead'] as Map<String, dynamic>),
-      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToWrite'] as Map<String, dynamic>),
-      job: json['job'] == null
-          ? null
-          : JobsBoolExp.fromJson(json['job'] as Map<String, dynamic>),
-      jobDescription: json['jobDescription'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['jobDescription'] as Map<String, dynamic>),
-      jobID: json['jobID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['jobID'] as Map<String, dynamic>),
-      kodasHistory: json['kodas_history'] == null
-          ? null
-          : HistoryKodasHistoryBoolExp.fromJson(
-              json['kodas_history'] as Map<String, dynamic>),
-      lastCall: json['lastCall'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastCall'] as Map<String, dynamic>),
-      lastConfession: json['lastConfession'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastConfession'] as Map<String, dynamic>),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastEdit'] as Map<String, dynamic>),
-      lastKodas: json['lastKodas'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastKodas'] as Map<String, dynamic>),
-      lastVisit: json['lastVisit'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastVisit'] as Map<String, dynamic>),
-      mainPhone: json['mainPhone'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['mainPhone'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      notes: json['notes'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['notes'] as Map<String, dynamic>),
-      otherPhones: json['otherPhones'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['otherPhones'] as Map<String, dynamic>),
-      personType: json['personType'] == null
-          ? null
-          : PersonTypesBoolExp.fromJson(
-              json['personType'] as Map<String, dynamic>),
-      personTypeID: json['personTypeID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['personTypeID'] as Map<String, dynamic>),
-      photoUpdatedAt: json['photo_updated_at'] == null
-          ? null
-          : TimestamptzComparisonExp.fromJson(
-              json['photo_updated_at'] as Map<String, dynamic>),
-      qualification: json['qualification'] == null
-          ? null
-          : QualificationsBoolExp.fromJson(
-              json['qualification'] as Map<String, dynamic>),
-      qualificationID: json['qualificationID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['qualificationID'] as Map<String, dynamic>),
-      school: json['school'] == null
-          ? null
-          : SchoolsBoolExp.fromJson(json['school'] as Map<String, dynamic>),
-      schoolID: json['schoolID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['schoolID'] as Map<String, dynamic>),
-      services: json['services'] == null
-          ? null
-          : PersonsServicesBoolExp.fromJson(
-              json['services'] as Map<String, dynamic>),
-      shammasLevel: json['shammasLevel'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['shammasLevel'] as Map<String, dynamic>),
-      state: json['state'] == null
-          ? null
-          : StatesBoolExp.fromJson(json['state'] as Map<String, dynamic>),
-      stateID: json['stateID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['stateID'] as Map<String, dynamic>),
-      storeID: json['storeID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['storeID'] as Map<String, dynamic>),
-      streets: json['streets'] == null
-          ? null
-          : StreetsBoolExp.fromJson(json['streets'] as Map<String, dynamic>),
-      studyYear: json['studyYear'] == null
-          ? null
-          : StudyYearsBoolExp.fromJson(
-              json['studyYear'] as Map<String, dynamic>),
-      studyYearID: json['studyYearID'] == null
-          ? null
-          : SmallintComparisonExp.fromJson(
-              json['studyYearID'] as Map<String, dynamic>),
-      tags: json['tags'] == null
-          ? null
-          : PersonsTagsBoolExp.fromJson(json['tags'] as Map<String, dynamic>),
-      uid: json['uid'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['uid'] as Map<String, dynamic>),
-      user: json['user'] == null
-          ? null
-          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
-      visitHistory: json['visit_history'] == null
-          ? null
-          : HistoryVisitHistoryBoolExp.fromJson(
-              json['visit_history'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$PersonsBoolExpToJson(PersonsBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'address': instance.address?.toJson(),
-      'areas': instance.areas?.toJson(),
-      'attendance_history': instance.attendanceHistory?.toJson(),
-      'birthdate': instance.birthdate?.toJson(),
-      'birthday': instance.birthday?.toJson(),
-      'call_history': instance.callHistory?.toJson(),
-      'church': instance.church?.toJson(),
-      'churchID': instance.churchID?.toJson(),
-      'college': instance.college?.toJson(),
-      'collegeID': instance.collegeID?.toJson(),
-      'color': instance.color?.toJson(),
-      'confession_history': instance.confessionHistory?.toJson(),
-      'family': instance.family?.toJson(),
-      'familyID': instance.familyID?.toJson(),
-      'father': instance.father?.toJson(),
-      'fatherID': instance.fatherID?.toJson(),
-      'firestore_id': instance.firestoreId?.toJson(),
-      'gender': instance.gender?.toJson(),
-      'geolocation': instance.geolocation?.toJson(),
-      'groups': instance.groups?.toJson(),
-      'id': instance.id?.toJson(),
-      'isServant': instance.isServant?.toJson(),
-      'isShammas': instance.isShammas?.toJson(),
-      'isStudent': instance.isStudent?.toJson(),
-      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
-      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
-      'job': instance.job?.toJson(),
-      'jobDescription': instance.jobDescription?.toJson(),
-      'jobID': instance.jobID?.toJson(),
-      'kodas_history': instance.kodasHistory?.toJson(),
-      'lastCall': instance.lastCall?.toJson(),
-      'lastConfession': instance.lastConfession?.toJson(),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'lastKodas': instance.lastKodas?.toJson(),
-      'lastVisit': instance.lastVisit?.toJson(),
-      'mainPhone': instance.mainPhone?.toJson(),
-      'name': instance.name?.toJson(),
-      'notes': instance.notes?.toJson(),
-      'otherPhones': instance.otherPhones?.toJson(),
-      'personType': instance.personType?.toJson(),
-      'personTypeID': instance.personTypeID?.toJson(),
-      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
-      'qualification': instance.qualification?.toJson(),
-      'qualificationID': instance.qualificationID?.toJson(),
-      'school': instance.school?.toJson(),
-      'schoolID': instance.schoolID?.toJson(),
-      'services': instance.services?.toJson(),
-      'shammasLevel': instance.shammasLevel?.toJson(),
-      'state': instance.state?.toJson(),
-      'stateID': instance.stateID?.toJson(),
-      'storeID': instance.storeID?.toJson(),
-      'streets': instance.streets?.toJson(),
-      'studyYear': instance.studyYear?.toJson(),
-      'studyYearID': instance.studyYearID?.toJson(),
-      'tags': instance.tags?.toJson(),
-      'uid': instance.uid?.toJson(),
-      'user': instance.user?.toJson(),
-      'visit_history': instance.visitHistory?.toJson(),
-    };
-
-StringComparisonExp _$StringComparisonExpFromJson(Map<String, dynamic> json) =>
-    StringComparisonExp(
-      $eq: json['_eq'] as String?,
-      $gt: json['_gt'] as String?,
-      $gte: json['_gte'] as String?,
-      $ilike: json['_ilike'] as String?,
-      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $iregex: json['_iregex'] as String?,
-      $isNull: json['_is_null'] as bool?,
-      $like: json['_like'] as String?,
-      $lt: json['_lt'] as String?,
-      $lte: json['_lte'] as String?,
-      $neq: json['_neq'] as String?,
-      $nilike: json['_nilike'] as String?,
-      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $niregex: json['_niregex'] as String?,
-      $nlike: json['_nlike'] as String?,
-      $nregex: json['_nregex'] as String?,
-      $nsimilar: json['_nsimilar'] as String?,
-      $regex: json['_regex'] as String?,
-      $similar: json['_similar'] as String?,
-    );
-
-Map<String, dynamic> _$StringComparisonExpToJson(
-        StringComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_ilike': instance.$ilike,
-      '_in': instance.$in,
-      '_iregex': instance.$iregex,
-      '_is_null': instance.$isNull,
-      '_like': instance.$like,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nilike': instance.$nilike,
-      '_nin': instance.$nin,
-      '_niregex': instance.$niregex,
-      '_nlike': instance.$nlike,
-      '_nregex': instance.$nregex,
-      '_nsimilar': instance.$nsimilar,
-      '_regex': instance.$regex,
-      '_similar': instance.$similar,
+      'areas': instance.areas.map((e) => e.toJson()).toList(),
     };
 
 AreasBoolExp _$AreasBoolExpFromJson(Map<String, dynamic> json) => AreasBoolExp(
@@ -944,165 +610,391 @@ Map<String, dynamic> _$DateComparisonExpToJson(DateComparisonExp instance) =>
       '_nin': instance.$nin?.map((e) => e.toIso8601String()).toList(),
     };
 
-UsersBoolExp _$UsersBoolExpFromJson(Map<String, dynamic> json) => UsersBoolExp(
+PersonsBoolExp _$PersonsBoolExpFromJson(Map<String, dynamic> json) =>
+    PersonsBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => UsersBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : UsersBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+          : PersonsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => UsersBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
-      adminOn: json['adminOn'] == null
-          ? null
-          : UsersPermissionsBoolExp.fromJson(
-              json['adminOn'] as Map<String, dynamic>),
-      email: json['email'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['email'] as Map<String, dynamic>),
-      firebaseAuthUid: json['firebase_auth_uid'] == null
+      address: json['address'] == null
           ? null
           : StringComparisonExp.fromJson(
-              json['firebase_auth_uid'] as Map<String, dynamic>),
+              json['address'] as Map<String, dynamic>),
+      areas: json['areas'] == null
+          ? null
+          : AreasBoolExp.fromJson(json['areas'] as Map<String, dynamic>),
+      attendanceHistory: json['attendance_history'] == null
+          ? null
+          : HistoryAttendanceHistoryBoolExp.fromJson(
+              json['attendance_history'] as Map<String, dynamic>),
+      birthdate: json['birthdate'] == null
+          ? null
+          : DateComparisonExp.fromJson(
+              json['birthdate'] as Map<String, dynamic>),
+      birthday: json['birthday'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['birthday'] as Map<String, dynamic>),
+      callHistory: json['call_history'] == null
+          ? null
+          : HistoryCallHistoryBoolExp.fromJson(
+              json['call_history'] as Map<String, dynamic>),
+      church: json['church'] == null
+          ? null
+          : ChurchesBoolExp.fromJson(json['church'] as Map<String, dynamic>),
+      churchID: json['churchID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['churchID'] as Map<String, dynamic>),
+      college: json['college'] == null
+          ? null
+          : CollegesBoolExp.fromJson(json['college'] as Map<String, dynamic>),
+      collegeID: json['collegeID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['collegeID'] as Map<String, dynamic>),
+      color: json['color'] == null
+          ? null
+          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
+      confessionHistory: json['confession_history'] == null
+          ? null
+          : HistoryConfessionHistoryBoolExp.fromJson(
+              json['confession_history'] as Map<String, dynamic>),
+      family: json['family'] == null
+          ? null
+          : FamiliesBoolExp.fromJson(json['family'] as Map<String, dynamic>),
+      familyID: json['familyID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['familyID'] as Map<String, dynamic>),
+      father: json['father'] == null
+          ? null
+          : FathersBoolExp.fromJson(json['father'] as Map<String, dynamic>),
+      fatherID: json['fatherID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['fatherID'] as Map<String, dynamic>),
       firestoreId: json['firestore_id'] == null
           ? null
           : StringComparisonExp.fromJson(
               json['firestore_id'] as Map<String, dynamic>),
-      isUserAllowedToChange: json['isUserAllowedToChange'] == null
+      gender: json['gender'] == null
           ? null
           : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToChange'] as Map<String, dynamic>),
+              json['gender'] as Map<String, dynamic>),
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeographyComparisonExp.fromJson(
+              json['geolocation'] as Map<String, dynamic>),
+      groups: json['groups'] == null
+          ? null
+          : PersonsGroupsBoolExp.fromJson(
+              json['groups'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      isServant: json['isServant'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isServant'] as Map<String, dynamic>),
+      isShammas: json['isShammas'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isShammas'] as Map<String, dynamic>),
+      isStudent: json['isStudent'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isStudent'] as Map<String, dynamic>),
       isUserAllowedToRead: json['isUserAllowedToRead'] == null
           ? null
           : BooleanComparisonExp.fromJson(
               json['isUserAllowedToRead'] as Map<String, dynamic>),
+      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToWrite'] as Map<String, dynamic>),
+      job: json['job'] == null
+          ? null
+          : JobsBoolExp.fromJson(json['job'] as Map<String, dynamic>),
+      jobDescription: json['jobDescription'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['jobDescription'] as Map<String, dynamic>),
+      jobID: json['jobID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['jobID'] as Map<String, dynamic>),
+      kodasHistory: json['kodas_history'] == null
+          ? null
+          : HistoryKodasHistoryBoolExp.fromJson(
+              json['kodas_history'] as Map<String, dynamic>),
+      lastCall: json['lastCall'] == null
+          ? null
+          : JsonbComparisonExp.fromJson(
+              json['lastCall'] as Map<String, dynamic>),
+      lastConfession: json['lastConfession'] == null
+          ? null
+          : JsonbComparisonExp.fromJson(
+              json['lastConfession'] as Map<String, dynamic>),
       lastEdit: json['lastEdit'] == null
           ? null
           : JsonbComparisonExp.fromJson(
               json['lastEdit'] as Map<String, dynamic>),
-      permissions: json['permissions'] == null
+      lastKodas: json['lastKodas'] == null
           ? null
-          : $textComparisonExp
-              .fromJson(json['permissions'] as Map<String, dynamic>),
-      person: json['person'] == null
+          : JsonbComparisonExp.fromJson(
+              json['lastKodas'] as Map<String, dynamic>),
+      lastVisit: json['lastVisit'] == null
           ? null
-          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
+          : JsonbComparisonExp.fromJson(
+              json['lastVisit'] as Map<String, dynamic>),
+      mainPhone: json['mainPhone'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['mainPhone'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      notes: json['notes'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['notes'] as Map<String, dynamic>),
+      otherPhones: json['otherPhones'] == null
+          ? null
+          : JsonbComparisonExp.fromJson(
+              json['otherPhones'] as Map<String, dynamic>),
+      personType: json['personType'] == null
+          ? null
+          : PersonTypesBoolExp.fromJson(
+              json['personType'] as Map<String, dynamic>),
+      personTypeID: json['personTypeID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['personTypeID'] as Map<String, dynamic>),
       photoUpdatedAt: json['photo_updated_at'] == null
           ? null
           : TimestamptzComparisonExp.fromJson(
               json['photo_updated_at'] as Map<String, dynamic>),
+      qualification: json['qualification'] == null
+          ? null
+          : QualificationsBoolExp.fromJson(
+              json['qualification'] as Map<String, dynamic>),
+      qualificationID: json['qualificationID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['qualificationID'] as Map<String, dynamic>),
+      school: json['school'] == null
+          ? null
+          : SchoolsBoolExp.fromJson(json['school'] as Map<String, dynamic>),
+      schoolID: json['schoolID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['schoolID'] as Map<String, dynamic>),
+      services: json['services'] == null
+          ? null
+          : PersonsServicesBoolExp.fromJson(
+              json['services'] as Map<String, dynamic>),
+      shammasLevel: json['shammasLevel'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['shammasLevel'] as Map<String, dynamic>),
+      state: json['state'] == null
+          ? null
+          : StatesBoolExp.fromJson(json['state'] as Map<String, dynamic>),
+      stateID: json['stateID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['stateID'] as Map<String, dynamic>),
+      storeID: json['storeID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['storeID'] as Map<String, dynamic>),
+      streets: json['streets'] == null
+          ? null
+          : StreetsBoolExp.fromJson(json['streets'] as Map<String, dynamic>),
+      studyYear: json['studyYear'] == null
+          ? null
+          : StudyYearsBoolExp.fromJson(
+              json['studyYear'] as Map<String, dynamic>),
+      studyYearID: json['studyYearID'] == null
+          ? null
+          : SmallintComparisonExp.fromJson(
+              json['studyYearID'] as Map<String, dynamic>),
+      tags: json['tags'] == null
+          ? null
+          : PersonsTagsBoolExp.fromJson(json['tags'] as Map<String, dynamic>),
       uid: json['uid'] == null
           ? null
           : UuidComparisonExp.fromJson(json['uid'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
+      visitHistory: json['visit_history'] == null
+          ? null
+          : HistoryVisitHistoryBoolExp.fromJson(
+              json['visit_history'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$UsersBoolExpToJson(UsersBoolExp instance) =>
+Map<String, dynamic> _$PersonsBoolExpToJson(PersonsBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
       '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'adminOn': instance.adminOn?.toJson(),
-      'email': instance.email?.toJson(),
-      'firebase_auth_uid': instance.firebaseAuthUid?.toJson(),
+      'address': instance.address?.toJson(),
+      'areas': instance.areas?.toJson(),
+      'attendance_history': instance.attendanceHistory?.toJson(),
+      'birthdate': instance.birthdate?.toJson(),
+      'birthday': instance.birthday?.toJson(),
+      'call_history': instance.callHistory?.toJson(),
+      'church': instance.church?.toJson(),
+      'churchID': instance.churchID?.toJson(),
+      'college': instance.college?.toJson(),
+      'collegeID': instance.collegeID?.toJson(),
+      'color': instance.color?.toJson(),
+      'confession_history': instance.confessionHistory?.toJson(),
+      'family': instance.family?.toJson(),
+      'familyID': instance.familyID?.toJson(),
+      'father': instance.father?.toJson(),
+      'fatherID': instance.fatherID?.toJson(),
       'firestore_id': instance.firestoreId?.toJson(),
-      'isUserAllowedToChange': instance.isUserAllowedToChange?.toJson(),
+      'gender': instance.gender?.toJson(),
+      'geolocation': instance.geolocation?.toJson(),
+      'groups': instance.groups?.toJson(),
+      'id': instance.id?.toJson(),
+      'isServant': instance.isServant?.toJson(),
+      'isShammas': instance.isShammas?.toJson(),
+      'isStudent': instance.isStudent?.toJson(),
       'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
+      'job': instance.job?.toJson(),
+      'jobDescription': instance.jobDescription?.toJson(),
+      'jobID': instance.jobID?.toJson(),
+      'kodas_history': instance.kodasHistory?.toJson(),
+      'lastCall': instance.lastCall?.toJson(),
+      'lastConfession': instance.lastConfession?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
-      'permissions': instance.permissions?.toJson(),
-      'person': instance.person?.toJson(),
+      'lastKodas': instance.lastKodas?.toJson(),
+      'lastVisit': instance.lastVisit?.toJson(),
+      'mainPhone': instance.mainPhone?.toJson(),
+      'name': instance.name?.toJson(),
+      'notes': instance.notes?.toJson(),
+      'otherPhones': instance.otherPhones?.toJson(),
+      'personType': instance.personType?.toJson(),
+      'personTypeID': instance.personTypeID?.toJson(),
       'photo_updated_at': instance.photoUpdatedAt?.toJson(),
+      'qualification': instance.qualification?.toJson(),
+      'qualificationID': instance.qualificationID?.toJson(),
+      'school': instance.school?.toJson(),
+      'schoolID': instance.schoolID?.toJson(),
+      'services': instance.services?.toJson(),
+      'shammasLevel': instance.shammasLevel?.toJson(),
+      'state': instance.state?.toJson(),
+      'stateID': instance.stateID?.toJson(),
+      'storeID': instance.storeID?.toJson(),
+      'streets': instance.streets?.toJson(),
+      'studyYear': instance.studyYear?.toJson(),
+      'studyYearID': instance.studyYearID?.toJson(),
+      'tags': instance.tags?.toJson(),
       'uid': instance.uid?.toJson(),
+      'user': instance.user?.toJson(),
+      'visit_history': instance.visitHistory?.toJson(),
     };
 
-JsonbComparisonExp _$JsonbComparisonExpFromJson(Map<String, dynamic> json) =>
-    JsonbComparisonExp(
-      $cast: json['_cast'] == null
-          ? null
-          : JsonbCastExp.fromJson(json['_cast'] as Map<String, dynamic>),
-      $containedIn: json['_contained_in'] as Map<String, dynamic>?,
-      $contains: json['_contains'] as Map<String, dynamic>?,
-      $eq: json['_eq'] as Map<String, dynamic>?,
-      $gt: json['_gt'] as Map<String, dynamic>?,
-      $gte: json['_gte'] as Map<String, dynamic>?,
-      $hasKey: json['_has_key'] as String?,
-      $hasKeysAll: (json['_has_keys_all'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      $hasKeysAny: (json['_has_keys_any'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+StringComparisonExp _$StringComparisonExpFromJson(Map<String, dynamic> json) =>
+    StringComparisonExp(
+      $eq: json['_eq'] as String?,
+      $gt: json['_gt'] as String?,
+      $gte: json['_gte'] as String?,
+      $ilike: json['_ilike'] as String?,
+      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $iregex: json['_iregex'] as String?,
       $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as Map<String, dynamic>?,
-      $lte: json['_lte'] as Map<String, dynamic>?,
-      $neq: json['_neq'] as Map<String, dynamic>?,
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $like: json['_like'] as String?,
+      $lt: json['_lt'] as String?,
+      $lte: json['_lte'] as String?,
+      $neq: json['_neq'] as String?,
+      $nilike: json['_nilike'] as String?,
+      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $niregex: json['_niregex'] as String?,
+      $nlike: json['_nlike'] as String?,
+      $nregex: json['_nregex'] as String?,
+      $nsimilar: json['_nsimilar'] as String?,
+      $regex: json['_regex'] as String?,
+      $similar: json['_similar'] as String?,
     );
 
-Map<String, dynamic> _$JsonbComparisonExpToJson(JsonbComparisonExp instance) =>
+Map<String, dynamic> _$StringComparisonExpToJson(
+        StringComparisonExp instance) =>
     <String, dynamic>{
-      '_cast': instance.$cast?.toJson(),
-      '_contained_in': instance.$containedIn,
-      '_contains': instance.$contains,
       '_eq': instance.$eq,
       '_gt': instance.$gt,
       '_gte': instance.$gte,
-      '_has_key': instance.$hasKey,
-      '_has_keys_all': instance.$hasKeysAll,
-      '_has_keys_any': instance.$hasKeysAny,
+      '_ilike': instance.$ilike,
       '_in': instance.$in,
+      '_iregex': instance.$iregex,
       '_is_null': instance.$isNull,
+      '_like': instance.$like,
       '_lt': instance.$lt,
       '_lte': instance.$lte,
       '_neq': instance.$neq,
+      '_nilike': instance.$nilike,
       '_nin': instance.$nin,
+      '_niregex': instance.$niregex,
+      '_nlike': instance.$nlike,
+      '_nregex': instance.$nregex,
+      '_nsimilar': instance.$nsimilar,
+      '_regex': instance.$regex,
+      '_similar': instance.$similar,
     };
 
-JsonbCastExp _$JsonbCastExpFromJson(Map<String, dynamic> json) => JsonbCastExp(
-      string: json['String'] == null
+HistoryCallHistoryBoolExp _$HistoryCallHistoryBoolExpFromJson(
+        Map<String, dynamic> json) =>
+    HistoryCallHistoryBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryCallHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : HistoryCallHistoryBoolExp.fromJson(
+              json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryCallHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      person: json['person'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
+      personId: json['person_id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['person_id'] as Map<String, dynamic>),
+      time: json['time'] == null
+          ? null
+          : TimestamptzComparisonExp.fromJson(
+              json['time'] as Map<String, dynamic>),
+      userRole: json['user_role'] == null
           ? null
           : StringComparisonExp.fromJson(
-              json['String'] as Map<String, dynamic>),
+              json['user_role'] as Map<String, dynamic>),
+      userUid: json['user_uid'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['user_uid'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$JsonbCastExpToJson(JsonbCastExp instance) =>
+Map<String, dynamic> _$HistoryCallHistoryBoolExpToJson(
+        HistoryCallHistoryBoolExp instance) =>
     <String, dynamic>{
-      'String': instance.string?.toJson(),
-    };
-
-$textComparisonExp _$$textComparisonExpFromJson(Map<String, dynamic> json) =>
-    $textComparisonExp(
-      $eq: (json['_eq'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $gt: (json['_gt'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $gte: (json['_gte'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
-          .toList(),
-      $isNull: json['_is_null'] as bool?,
-      $lt: (json['_lt'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $lte: (json['_lte'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $neq: (json['_neq'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
-          .toList(),
-    );
-
-Map<String, dynamic> _$$textComparisonExpToJson($textComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
-      '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'person': instance.person?.toJson(),
+      'person_id': instance.personId?.toJson(),
+      'time': instance.time?.toJson(),
+      'user_role': instance.userRole?.toJson(),
+      'user_uid': instance.userUid?.toJson(),
     };
 
 TimestamptzComparisonExp _$TimestamptzComparisonExpFromJson(
@@ -1140,184 +1032,156 @@ Map<String, dynamic> _$TimestamptzComparisonExpToJson(
       '_nin': instance.$nin?.map((e) => e.toIso8601String()).toList(),
     };
 
-HistoryAttendanceDaysConstraintsBoolExp
-    _$HistoryAttendanceDaysConstraintsBoolExpFromJson(
-            Map<String, dynamic> json) =>
-        HistoryAttendanceDaysConstraintsBoolExp(
-          $and: (json['_and'] as List<dynamic>?)
-              ?.map((e) => HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
-          $not: json['_not'] == null
-              ? null
-              : HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-                  json['_not'] as Map<String, dynamic>),
-          $or: (json['_or'] as List<dynamic>?)
-              ?.map((e) => HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
-          day: json['day'] == null
-              ? null
-              : HistoryAttendanceDaysBoolExp.fromJson(
-                  json['day'] as Map<String, dynamic>),
-          dayID: json['dayID'] == null
-              ? null
-              : DateComparisonExp.fromJson(
-                  json['dayID'] as Map<String, dynamic>),
-          group: json['group'] == null
-              ? null
-              : GroupsBoolExp.fromJson(json['group'] as Map<String, dynamic>),
-          groupID: json['groupID'] == null
-              ? null
-              : UuidComparisonExp.fromJson(
-                  json['groupID'] as Map<String, dynamic>),
-          id: json['id'] == null
-              ? null
-              : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-          isUserAllowedToRead: json['isUserAllowedToRead'] == null
-              ? null
-              : BooleanComparisonExp.fromJson(
-                  json['isUserAllowedToRead'] as Map<String, dynamic>),
-          isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
-              ? null
-              : BooleanComparisonExp.fromJson(
-                  json['isUserAllowedToWrite'] as Map<String, dynamic>),
-          service: json['service'] == null
-              ? null
-              : ServicesBoolExp.fromJson(
-                  json['service'] as Map<String, dynamic>),
-          serviceID: json['serviceID'] == null
-              ? null
-              : UuidComparisonExp.fromJson(
-                  json['serviceID'] as Map<String, dynamic>),
-          serviceGender: json['service_gender'] == null
-              ? null
-              : BooleanComparisonExp.fromJson(
-                  json['service_gender'] as Map<String, dynamic>),
-          serviceStudyYear: json['service_studyYear'] == null
-              ? null
-              : IntComparisonExp.fromJson(
-                  json['service_studyYear'] as Map<String, dynamic>),
-          studyYear: json['studyYear'] == null
-              ? null
-              : StudyYearsBoolExp.fromJson(
-                  json['studyYear'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$HistoryAttendanceDaysConstraintsBoolExpToJson(
-        HistoryAttendanceDaysConstraintsBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'day': instance.day?.toJson(),
-      'dayID': instance.dayID?.toJson(),
-      'group': instance.group?.toJson(),
-      'groupID': instance.groupID?.toJson(),
-      'id': instance.id?.toJson(),
-      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
-      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
-      'service': instance.service?.toJson(),
-      'serviceID': instance.serviceID?.toJson(),
-      'service_gender': instance.serviceGender?.toJson(),
-      'service_studyYear': instance.serviceStudyYear?.toJson(),
-      'studyYear': instance.studyYear?.toJson(),
-    };
-
-ServicesBoolExp _$ServicesBoolExpFromJson(Map<String, dynamic> json) =>
-    ServicesBoolExp(
+ChurchesBoolExp _$ChurchesBoolExpFromJson(Map<String, dynamic> json) =>
+    ChurchesBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ChurchesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : ServicesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+          : ChurchesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ChurchesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
-      attendanceHistory: json['attendance_history'] == null
+      fathers: json['fathers'] == null
           ? null
-          : HistoryAttendanceHistoryBoolExp.fromJson(
-              json['attendance_history'] as Map<String, dynamic>),
-      color: json['color'] == null
-          ? null
-          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
-      firestoreId: json['firestore_id'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['firestore_id'] as Map<String, dynamic>),
-      fromStudyYear: json['fromStudyYear'] == null
-          ? null
-          : StudyYearsBoolExp.fromJson(
-              json['fromStudyYear'] as Map<String, dynamic>),
-      groups: json['groups'] == null
-          ? null
-          : GroupsBoolExp.fromJson(json['groups'] as Map<String, dynamic>),
+          : FathersBoolExp.fromJson(json['fathers'] as Map<String, dynamic>),
       id: json['id'] == null
           ? null
           : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      isUserAllowedToRead: json['isUserAllowedToRead'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToRead'] as Map<String, dynamic>),
-      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToWrite'] as Map<String, dynamic>),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastEdit'] as Map<String, dynamic>),
       name: json['name'] == null
           ? null
           : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
       persons: json['persons'] == null
           ? null
-          : PersonsServicesBoolExp.fromJson(
-              json['persons'] as Map<String, dynamic>),
-      photoUpdatedAt: json['photo_updated_at'] == null
-          ? null
-          : TimestamptzComparisonExp.fromJson(
-              json['photo_updated_at'] as Map<String, dynamic>),
-      studyYearFrom: json['studyYearFrom'] == null
-          ? null
-          : SmallintComparisonExp.fromJson(
-              json['studyYearFrom'] as Map<String, dynamic>),
-      studyYearTo: json['studyYearTo'] == null
-          ? null
-          : SmallintComparisonExp.fromJson(
-              json['studyYearTo'] as Map<String, dynamic>),
-      toStudyYear: json['toStudyYear'] == null
-          ? null
-          : StudyYearsBoolExp.fromJson(
-              json['toStudyYear'] as Map<String, dynamic>),
-      users: json['users'] == null
-          ? null
-          : UsersPermissionsBoolExp.fromJson(
-              json['users'] as Map<String, dynamic>),
+          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ServicesBoolExpToJson(ServicesBoolExp instance) =>
+Map<String, dynamic> _$ChurchesBoolExpToJson(ChurchesBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
       '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'attendance_history': instance.attendanceHistory?.toJson(),
-      'color': instance.color?.toJson(),
-      'firestore_id': instance.firestoreId?.toJson(),
-      'fromStudyYear': instance.fromStudyYear?.toJson(),
-      'groups': instance.groups?.toJson(),
+      'fathers': instance.fathers?.toJson(),
       'id': instance.id?.toJson(),
-      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
-      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
-      'lastEdit': instance.lastEdit?.toJson(),
       'name': instance.name?.toJson(),
       'persons': instance.persons?.toJson(),
-      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
-      'studyYearFrom': instance.studyYearFrom?.toJson(),
-      'studyYearTo': instance.studyYearTo?.toJson(),
-      'toStudyYear': instance.toStudyYear?.toJson(),
-      'users': instance.users?.toJson(),
+    };
+
+FathersBoolExp _$FathersBoolExpFromJson(Map<String, dynamic> json) =>
+    FathersBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => FathersBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : FathersBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => FathersBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      church: json['church'] == null
+          ? null
+          : ChurchesBoolExp.fromJson(json['church'] as Map<String, dynamic>),
+      churchID: json['churchID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['churchID'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      persons: json['persons'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FathersBoolExpToJson(FathersBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'church': instance.church?.toJson(),
+      'churchID': instance.churchID?.toJson(),
+      'id': instance.id?.toJson(),
+      'name': instance.name?.toJson(),
+      'persons': instance.persons?.toJson(),
+    };
+
+CollegesBoolExp _$CollegesBoolExpFromJson(Map<String, dynamic> json) =>
+    CollegesBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => CollegesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : CollegesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => CollegesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      persons: json['persons'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
+      university: json['university'] == null
+          ? null
+          : UniversitiesBoolExp.fromJson(
+              json['university'] as Map<String, dynamic>),
+      universityID: json['universityID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['universityID'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CollegesBoolExpToJson(CollegesBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'id': instance.id?.toJson(),
+      'name': instance.name?.toJson(),
+      'persons': instance.persons?.toJson(),
+      'university': instance.university?.toJson(),
+      'universityID': instance.universityID?.toJson(),
+    };
+
+UniversitiesBoolExp _$UniversitiesBoolExpFromJson(Map<String, dynamic> json) =>
+    UniversitiesBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => UniversitiesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : UniversitiesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => UniversitiesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      colleges: json['colleges'] == null
+          ? null
+          : CollegesBoolExp.fromJson(json['colleges'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UniversitiesBoolExpToJson(
+        UniversitiesBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'colleges': instance.colleges?.toJson(),
+      'id': instance.id?.toJson(),
+      'name': instance.name?.toJson(),
     };
 
 IntComparisonExp _$IntComparisonExpFromJson(Map<String, dynamic> json) =>
@@ -1346,274 +1210,141 @@ Map<String, dynamic> _$IntComparisonExpToJson(IntComparisonExp instance) =>
       '_nin': instance.$nin,
     };
 
-StudyYearsBoolExp _$StudyYearsBoolExpFromJson(Map<String, dynamic> json) =>
-    StudyYearsBoolExp(
+FamiliesBoolExp _$FamiliesBoolExpFromJson(Map<String, dynamic> json) =>
+    FamiliesBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => StudyYearsBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => FamiliesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : StudyYearsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+          : FamiliesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => StudyYearsBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => FamiliesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
-      name: json['name'] == null
+      address: json['address'] == null
           ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      order: json['order'] == null
+          : StringComparisonExp.fromJson(
+              json['address'] as Map<String, dynamic>),
+      areas: json['areas'] == null
           ? null
-          : SmallintComparisonExp.fromJson(
-              json['order'] as Map<String, dynamic>),
-      persons: json['persons'] == null
+          : AreasBoolExp.fromJson(json['areas'] as Map<String, dynamic>),
+      color: json['color'] == null
           ? null
-          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$StudyYearsBoolExpToJson(StudyYearsBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'name': instance.name?.toJson(),
-      'order': instance.order?.toJson(),
-      'persons': instance.persons?.toJson(),
-    };
-
-SmallintComparisonExp _$SmallintComparisonExpFromJson(
-        Map<String, dynamic> json) =>
-    SmallintComparisonExp(
-      $eq: json['_eq'] as int?,
-      $gt: json['_gt'] as int?,
-      $gte: json['_gte'] as int?,
-      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as int?,
-      $lte: json['_lte'] as int?,
-      $neq: json['_neq'] as int?,
-      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as int).toList(),
-    );
-
-Map<String, dynamic> _$SmallintComparisonExpToJson(
-        SmallintComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
-      '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
-    };
-
-PersonsServicesBoolExp _$PersonsServicesBoolExpFromJson(
-        Map<String, dynamic> json) =>
-    PersonsServicesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map(
-              (e) => PersonsServicesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
+          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
+      families: json['families'] == null
           ? null
-          : PersonsServicesBoolExp.fromJson(
-              json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map(
-              (e) => PersonsServicesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      person: json['person'] == null
+          : FamiliesFamiliesBoolExp.fromJson(
+              json['families'] as Map<String, dynamic>),
+      family: json['family'] == null
           ? null
-          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
-      personID: json['personID'] == null
+          : FamiliesFamiliesBoolExp.fromJson(
+              json['family'] as Map<String, dynamic>),
+      geolocation: json['geolocation'] == null
           ? null
-          : UuidComparisonExp.fromJson(
-              json['personID'] as Map<String, dynamic>),
-      relId: json['rel_id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['rel_id'] as Map<String, dynamic>),
-      service: json['service'] == null
-          ? null
-          : ServicesBoolExp.fromJson(json['service'] as Map<String, dynamic>),
-      serviceID: json['serviceID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['serviceID'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$PersonsServicesBoolExpToJson(
-        PersonsServicesBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'person': instance.person?.toJson(),
-      'personID': instance.personID?.toJson(),
-      'rel_id': instance.relId?.toJson(),
-      'service': instance.service?.toJson(),
-      'serviceID': instance.serviceID?.toJson(),
-    };
-
-HistoryKodasHistoryBoolExp _$HistoryKodasHistoryBoolExpFromJson(
-        Map<String, dynamic> json) =>
-    HistoryKodasHistoryBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryKodasHistoryBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : HistoryKodasHistoryBoolExp.fromJson(
-              json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryKodasHistoryBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      day: json['day'] == null
-          ? null
-          : HistoryAttendanceDaysBoolExp.fromJson(
-              json['day'] as Map<String, dynamic>),
-      dayID: json['dayID'] == null
-          ? null
-          : DateComparisonExp.fromJson(json['dayID'] as Map<String, dynamic>),
+          : GeographyComparisonExp.fromJson(
+              json['geolocation'] as Map<String, dynamic>),
       id: json['id'] == null
           ? null
           : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      person: json['person'] == null
+      isUserAllowedToRead: json['isUserAllowedToRead'] == null
           ? null
-          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
-      personID: json['personID'] == null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToRead'] as Map<String, dynamic>),
+      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
           ? null
-          : UuidComparisonExp.fromJson(
-              json['personID'] as Map<String, dynamic>),
-      recordedBy: json['recordedBy'] == null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToWrite'] as Map<String, dynamic>),
+      lastEdit: json['lastEdit'] == null
           ? null
-          : UuidComparisonExp.fromJson(
-              json['recordedBy'] as Map<String, dynamic>),
-      user: json['user'] == null
+          : JsonbComparisonExp.fromJson(
+              json['lastEdit'] as Map<String, dynamic>),
+      name: json['name'] == null
           ? null
-          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      notes: json['notes'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['notes'] as Map<String, dynamic>),
+      persons: json['persons'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photo_updated_at'] == null
+          ? null
+          : TimestamptzComparisonExp.fromJson(
+              json['photo_updated_at'] as Map<String, dynamic>),
+      stores: json['stores'] == null
+          ? null
+          : StoresBoolExp.fromJson(json['stores'] as Map<String, dynamic>),
+      streets: json['streets'] == null
+          ? null
+          : StreetsBoolExp.fromJson(json['streets'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$HistoryKodasHistoryBoolExpToJson(
-        HistoryKodasHistoryBoolExp instance) =>
+Map<String, dynamic> _$FamiliesBoolExpToJson(FamiliesBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
       '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'day': instance.day?.toJson(),
-      'dayID': instance.dayID?.toJson(),
+      'address': instance.address?.toJson(),
+      'areas': instance.areas?.toJson(),
+      'color': instance.color?.toJson(),
+      'families': instance.families?.toJson(),
+      'family': instance.family?.toJson(),
+      'geolocation': instance.geolocation?.toJson(),
       'id': instance.id?.toJson(),
-      'person': instance.person?.toJson(),
-      'personID': instance.personID?.toJson(),
-      'recordedBy': instance.recordedBy?.toJson(),
-      'user': instance.user?.toJson(),
+      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'name': instance.name?.toJson(),
+      'notes': instance.notes?.toJson(),
+      'persons': instance.persons?.toJson(),
+      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
+      'stores': instance.stores?.toJson(),
+      'streets': instance.streets?.toJson(),
     };
 
-TimestampComparisonExp _$TimestampComparisonExpFromJson(
+FamiliesFamiliesBoolExp _$FamiliesFamiliesBoolExpFromJson(
         Map<String, dynamic> json) =>
-    TimestampComparisonExp(
-      $eq: json['_eq'] == null ? null : DateTime.parse(json['_eq'] as String),
-      $gt: json['_gt'] == null ? null : DateTime.parse(json['_gt'] as String),
-      $gte:
-          json['_gte'] == null ? null : DateTime.parse(json['_gte'] as String),
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => DateTime.parse(e as String))
-          .toList(),
-      $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] == null ? null : DateTime.parse(json['_lt'] as String),
-      $lte:
-          json['_lte'] == null ? null : DateTime.parse(json['_lte'] as String),
-      $neq:
-          json['_neq'] == null ? null : DateTime.parse(json['_neq'] as String),
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => DateTime.parse(e as String))
-          .toList(),
-    );
-
-Map<String, dynamic> _$TimestampComparisonExpToJson(
-        TimestampComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq?.toIso8601String(),
-      '_gt': instance.$gt?.toIso8601String(),
-      '_gte': instance.$gte?.toIso8601String(),
-      '_in': instance.$in?.map((e) => e.toIso8601String()).toList(),
-      '_is_null': instance.$isNull,
-      '_lt': instance.$lt?.toIso8601String(),
-      '_lte': instance.$lte?.toIso8601String(),
-      '_neq': instance.$neq?.toIso8601String(),
-      '_nin': instance.$nin?.map((e) => e.toIso8601String()).toList(),
-    };
-
-PersonsGroupsBoolExp _$PersonsGroupsBoolExpFromJson(
-        Map<String, dynamic> json) =>
-    PersonsGroupsBoolExp(
+    FamiliesFamiliesBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => PersonsGroupsBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              FamiliesFamiliesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : PersonsGroupsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+          : FamiliesFamiliesBoolExp.fromJson(
+              json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => PersonsGroupsBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              FamiliesFamiliesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
-      group: json['group'] == null
+      innerFamily: json['innerFamily'] == null
           ? null
-          : GroupsBoolExp.fromJson(json['group'] as Map<String, dynamic>),
-      groupID: json['groupID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['groupID'] as Map<String, dynamic>),
-      person: json['person'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
-      personID: json['personID'] == null
+          : FamiliesBoolExp.fromJson(
+              json['innerFamily'] as Map<String, dynamic>),
+      innerFamilyID: json['innerFamilyID'] == null
           ? null
           : UuidComparisonExp.fromJson(
-              json['personID'] as Map<String, dynamic>),
-      relId: json['rel_id'] == null
+              json['innerFamilyID'] as Map<String, dynamic>),
+      outerFamily: json['outerFamily'] == null
           ? null
-          : UuidComparisonExp.fromJson(json['rel_id'] as Map<String, dynamic>),
+          : FamiliesBoolExp.fromJson(
+              json['outerFamily'] as Map<String, dynamic>),
+      outerFamilyID: json['outerFamilyID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['outerFamilyID'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$PersonsGroupsBoolExpToJson(
-        PersonsGroupsBoolExp instance) =>
+Map<String, dynamic> _$FamiliesFamiliesBoolExpToJson(
+        FamiliesFamiliesBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
       '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'group': instance.group?.toJson(),
-      'groupID': instance.groupID?.toJson(),
-      'person': instance.person?.toJson(),
-      'personID': instance.personID?.toJson(),
-      'rel_id': instance.relId?.toJson(),
-    };
-
-DaterangeComparisonExp _$DaterangeComparisonExpFromJson(
-        Map<String, dynamic> json) =>
-    DaterangeComparisonExp(
-      $eq: json['_eq'] as String?,
-      $gt: json['_gt'] as String?,
-      $gte: json['_gte'] as String?,
-      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as String?,
-      $lte: json['_lte'] as String?,
-      $neq: json['_neq'] as String?,
-      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    );
-
-Map<String, dynamic> _$DaterangeComparisonExpToJson(
-        DaterangeComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
-      '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
+      'innerFamily': instance.innerFamily?.toJson(),
+      'innerFamilyID': instance.innerFamilyID?.toJson(),
+      'outerFamily': instance.outerFamily?.toJson(),
+      'outerFamilyID': instance.outerFamilyID?.toJson(),
     };
 
 GeographyComparisonExp _$GeographyComparisonExpFromJson(
@@ -1775,172 +1506,64 @@ Map<String, dynamic> _$StDWithinGeographyInputToJson(
       'use_spheroid': instance.useSpheroid,
     };
 
-BigintComparisonExp _$BigintComparisonExpFromJson(Map<String, dynamic> json) =>
-    BigintComparisonExp(
-      $eq: json['_eq'] == null ? null : BigInt.parse(json['_eq'] as String),
-      $gt: json['_gt'] == null ? null : BigInt.parse(json['_gt'] as String),
-      $gte: json['_gte'] == null ? null : BigInt.parse(json['_gte'] as String),
+JsonbComparisonExp _$JsonbComparisonExpFromJson(Map<String, dynamic> json) =>
+    JsonbComparisonExp(
+      $cast: json['_cast'] == null
+          ? null
+          : JsonbCastExp.fromJson(json['_cast'] as Map<String, dynamic>),
+      $containedIn: json['_contained_in'] as Map<String, dynamic>?,
+      $contains: json['_contains'] as Map<String, dynamic>?,
+      $eq: json['_eq'] as Map<String, dynamic>?,
+      $gt: json['_gt'] as Map<String, dynamic>?,
+      $gte: json['_gte'] as Map<String, dynamic>?,
+      $hasKey: json['_has_key'] as String?,
+      $hasKeysAll: (json['_has_keys_all'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      $hasKeysAny: (json['_has_keys_any'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => BigInt.parse(e as String))
+          ?.map((e) => e as Map<String, dynamic>)
           .toList(),
       $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] == null ? null : BigInt.parse(json['_lt'] as String),
-      $lte: json['_lte'] == null ? null : BigInt.parse(json['_lte'] as String),
-      $neq: json['_neq'] == null ? null : BigInt.parse(json['_neq'] as String),
+      $lt: json['_lt'] as Map<String, dynamic>?,
+      $lte: json['_lte'] as Map<String, dynamic>?,
+      $neq: json['_neq'] as Map<String, dynamic>?,
       $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => BigInt.parse(e as String))
+          ?.map((e) => e as Map<String, dynamic>)
           .toList(),
     );
 
-Map<String, dynamic> _$BigintComparisonExpToJson(
-        BigintComparisonExp instance) =>
+Map<String, dynamic> _$JsonbComparisonExpToJson(JsonbComparisonExp instance) =>
     <String, dynamic>{
-      '_eq': instance.$eq?.toString(),
-      '_gt': instance.$gt?.toString(),
-      '_gte': instance.$gte?.toString(),
-      '_in': instance.$in?.map((e) => e.toString()).toList(),
+      '_cast': instance.$cast?.toJson(),
+      '_contained_in': instance.$containedIn,
+      '_contains': instance.$contains,
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_has_key': instance.$hasKey,
+      '_has_keys_all': instance.$hasKeysAll,
+      '_has_keys_any': instance.$hasKeysAny,
+      '_in': instance.$in,
       '_is_null': instance.$isNull,
-      '_lt': instance.$lt?.toString(),
-      '_lte': instance.$lte?.toString(),
-      '_neq': instance.$neq?.toString(),
-      '_nin': instance.$nin?.map((e) => e.toString()).toList(),
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
     };
 
-FamiliesBoolExp _$FamiliesBoolExpFromJson(Map<String, dynamic> json) =>
-    FamiliesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => FamiliesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : FamiliesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => FamiliesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      address: json['address'] == null
+JsonbCastExp _$JsonbCastExpFromJson(Map<String, dynamic> json) => JsonbCastExp(
+      string: json['String'] == null
           ? null
           : StringComparisonExp.fromJson(
-              json['address'] as Map<String, dynamic>),
-      areas: json['areas'] == null
-          ? null
-          : AreasBoolExp.fromJson(json['areas'] as Map<String, dynamic>),
-      color: json['color'] == null
-          ? null
-          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
-      families: json['families'] == null
-          ? null
-          : FamiliesFamiliesBoolExp.fromJson(
-              json['families'] as Map<String, dynamic>),
-      family: json['family'] == null
-          ? null
-          : FamiliesFamiliesBoolExp.fromJson(
-              json['family'] as Map<String, dynamic>),
-      geolocation: json['geolocation'] == null
-          ? null
-          : GeographyComparisonExp.fromJson(
-              json['geolocation'] as Map<String, dynamic>),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      isUserAllowedToRead: json['isUserAllowedToRead'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToRead'] as Map<String, dynamic>),
-      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToWrite'] as Map<String, dynamic>),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : JsonbComparisonExp.fromJson(
-              json['lastEdit'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      notes: json['notes'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['notes'] as Map<String, dynamic>),
-      persons: json['persons'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
-      photoUpdatedAt: json['photo_updated_at'] == null
-          ? null
-          : TimestamptzComparisonExp.fromJson(
-              json['photo_updated_at'] as Map<String, dynamic>),
-      stores: json['stores'] == null
-          ? null
-          : StoresBoolExp.fromJson(json['stores'] as Map<String, dynamic>),
-      streets: json['streets'] == null
-          ? null
-          : StreetsBoolExp.fromJson(json['streets'] as Map<String, dynamic>),
+              json['String'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$FamiliesBoolExpToJson(FamiliesBoolExp instance) =>
+Map<String, dynamic> _$JsonbCastExpToJson(JsonbCastExp instance) =>
     <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'address': instance.address?.toJson(),
-      'areas': instance.areas?.toJson(),
-      'color': instance.color?.toJson(),
-      'families': instance.families?.toJson(),
-      'family': instance.family?.toJson(),
-      'geolocation': instance.geolocation?.toJson(),
-      'id': instance.id?.toJson(),
-      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
-      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'name': instance.name?.toJson(),
-      'notes': instance.notes?.toJson(),
-      'persons': instance.persons?.toJson(),
-      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
-      'stores': instance.stores?.toJson(),
-      'streets': instance.streets?.toJson(),
-    };
-
-FamiliesFamiliesBoolExp _$FamiliesFamiliesBoolExpFromJson(
-        Map<String, dynamic> json) =>
-    FamiliesFamiliesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) =>
-              FamiliesFamiliesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : FamiliesFamiliesBoolExp.fromJson(
-              json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) =>
-              FamiliesFamiliesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      innerFamily: json['innerFamily'] == null
-          ? null
-          : FamiliesBoolExp.fromJson(
-              json['innerFamily'] as Map<String, dynamic>),
-      innerFamilyID: json['innerFamilyID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['innerFamilyID'] as Map<String, dynamic>),
-      outerFamily: json['outerFamily'] == null
-          ? null
-          : FamiliesBoolExp.fromJson(
-              json['outerFamily'] as Map<String, dynamic>),
-      outerFamilyID: json['outerFamilyID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['outerFamilyID'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$FamiliesFamiliesBoolExpToJson(
-        FamiliesFamiliesBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'innerFamily': instance.innerFamily?.toJson(),
-      'innerFamilyID': instance.innerFamilyID?.toJson(),
-      'outerFamily': instance.outerFamily?.toJson(),
-      'outerFamilyID': instance.outerFamilyID?.toJson(),
+      'String': instance.string?.toJson(),
     };
 
 StoresBoolExp _$StoresBoolExpFromJson(Map<String, dynamic> json) =>
@@ -2090,205 +1713,47 @@ Map<String, dynamic> _$StreetsBoolExpToJson(StreetsBoolExp instance) =>
       'stores': instance.stores?.toJson(),
     };
 
-HistoryCallHistoryBoolExp _$HistoryCallHistoryBoolExpFromJson(
+PersonsGroupsBoolExp _$PersonsGroupsBoolExpFromJson(
         Map<String, dynamic> json) =>
-    HistoryCallHistoryBoolExp(
+    PersonsGroupsBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryCallHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonsGroupsBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : HistoryCallHistoryBoolExp.fromJson(
-              json['_not'] as Map<String, dynamic>),
+          : PersonsGroupsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryCallHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonsGroupsBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
+      group: json['group'] == null
+          ? null
+          : GroupsBoolExp.fromJson(json['group'] as Map<String, dynamic>),
+      groupID: json['groupID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['groupID'] as Map<String, dynamic>),
       person: json['person'] == null
           ? null
           : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
-      personId: json['person_id'] == null
+      personID: json['personID'] == null
           ? null
           : UuidComparisonExp.fromJson(
-              json['person_id'] as Map<String, dynamic>),
-      time: json['time'] == null
+              json['personID'] as Map<String, dynamic>),
+      relId: json['rel_id'] == null
           ? null
-          : TimestamptzComparisonExp.fromJson(
-              json['time'] as Map<String, dynamic>),
-      userRole: json['user_role'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['user_role'] as Map<String, dynamic>),
-      userUid: json['user_uid'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['user_uid'] as Map<String, dynamic>),
+          : UuidComparisonExp.fromJson(json['rel_id'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$HistoryCallHistoryBoolExpToJson(
-        HistoryCallHistoryBoolExp instance) =>
+Map<String, dynamic> _$PersonsGroupsBoolExpToJson(
+        PersonsGroupsBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
       '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'group': instance.group?.toJson(),
+      'groupID': instance.groupID?.toJson(),
       'person': instance.person?.toJson(),
-      'person_id': instance.personId?.toJson(),
-      'time': instance.time?.toJson(),
-      'user_role': instance.userRole?.toJson(),
-      'user_uid': instance.userUid?.toJson(),
-    };
-
-ChurchesBoolExp _$ChurchesBoolExpFromJson(Map<String, dynamic> json) =>
-    ChurchesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => ChurchesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : ChurchesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => ChurchesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      fathers: json['fathers'] == null
-          ? null
-          : FathersBoolExp.fromJson(json['fathers'] as Map<String, dynamic>),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      persons: json['persons'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$ChurchesBoolExpToJson(ChurchesBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'fathers': instance.fathers?.toJson(),
-      'id': instance.id?.toJson(),
-      'name': instance.name?.toJson(),
-      'persons': instance.persons?.toJson(),
-    };
-
-FathersBoolExp _$FathersBoolExpFromJson(Map<String, dynamic> json) =>
-    FathersBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => FathersBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : FathersBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => FathersBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      church: json['church'] == null
-          ? null
-          : ChurchesBoolExp.fromJson(json['church'] as Map<String, dynamic>),
-      churchID: json['churchID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['churchID'] as Map<String, dynamic>),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      persons: json['persons'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$FathersBoolExpToJson(FathersBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'church': instance.church?.toJson(),
-      'churchID': instance.churchID?.toJson(),
-      'id': instance.id?.toJson(),
-      'name': instance.name?.toJson(),
-      'persons': instance.persons?.toJson(),
-    };
-
-CollegesBoolExp _$CollegesBoolExpFromJson(Map<String, dynamic> json) =>
-    CollegesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => CollegesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : CollegesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => CollegesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-      persons: json['persons'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
-      university: json['university'] == null
-          ? null
-          : UniversitiesBoolExp.fromJson(
-              json['university'] as Map<String, dynamic>),
-      universityID: json['universityID'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['universityID'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$CollegesBoolExpToJson(CollegesBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'id': instance.id?.toJson(),
-      'name': instance.name?.toJson(),
-      'persons': instance.persons?.toJson(),
-      'university': instance.university?.toJson(),
-      'universityID': instance.universityID?.toJson(),
-    };
-
-UniversitiesBoolExp _$UniversitiesBoolExpFromJson(Map<String, dynamic> json) =>
-    UniversitiesBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => UniversitiesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : UniversitiesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => UniversitiesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      colleges: json['colleges'] == null
-          ? null
-          : CollegesBoolExp.fromJson(json['colleges'] as Map<String, dynamic>),
-      id: json['id'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
-      name: json['name'] == null
-          ? null
-          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$UniversitiesBoolExpToJson(
-        UniversitiesBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'colleges': instance.colleges?.toJson(),
-      'id': instance.id?.toJson(),
-      'name': instance.name?.toJson(),
+      'personID': instance.personID?.toJson(),
+      'rel_id': instance.relId?.toJson(),
     };
 
 JobsBoolExp _$JobsBoolExpFromJson(Map<String, dynamic> json) => JobsBoolExp(
@@ -2320,6 +1785,163 @@ Map<String, dynamic> _$JobsBoolExpToJson(JobsBoolExp instance) =>
       'id': instance.id?.toJson(),
       'name': instance.name?.toJson(),
       'persons': instance.persons?.toJson(),
+    };
+
+HistoryKodasHistoryBoolExp _$HistoryKodasHistoryBoolExpFromJson(
+        Map<String, dynamic> json) =>
+    HistoryKodasHistoryBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryKodasHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : HistoryKodasHistoryBoolExp.fromJson(
+              json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryKodasHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      day: json['day'] == null
+          ? null
+          : HistoryAttendanceDaysBoolExp.fromJson(
+              json['day'] as Map<String, dynamic>),
+      dayID: json['dayID'] == null
+          ? null
+          : DateComparisonExp.fromJson(json['dayID'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      person: json['person'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
+      personID: json['personID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['personID'] as Map<String, dynamic>),
+      recordedBy: json['recordedBy'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['recordedBy'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryKodasHistoryBoolExpToJson(
+        HistoryKodasHistoryBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'day': instance.day?.toJson(),
+      'dayID': instance.dayID?.toJson(),
+      'id': instance.id?.toJson(),
+      'person': instance.person?.toJson(),
+      'personID': instance.personID?.toJson(),
+      'recordedBy': instance.recordedBy?.toJson(),
+      'user': instance.user?.toJson(),
+    };
+
+UsersBoolExp _$UsersBoolExpFromJson(Map<String, dynamic> json) => UsersBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => UsersBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : UsersBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => UsersBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      adminOn: json['adminOn'] == null
+          ? null
+          : UsersPermissionsBoolExp.fromJson(
+              json['adminOn'] as Map<String, dynamic>),
+      email: json['email'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['email'] as Map<String, dynamic>),
+      firebaseAuthUid: json['firebase_auth_uid'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['firebase_auth_uid'] as Map<String, dynamic>),
+      firestoreId: json['firestore_id'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['firestore_id'] as Map<String, dynamic>),
+      isUserAllowedToChange: json['isUserAllowedToChange'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToChange'] as Map<String, dynamic>),
+      isUserAllowedToRead: json['isUserAllowedToRead'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToRead'] as Map<String, dynamic>),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : JsonbComparisonExp.fromJson(
+              json['lastEdit'] as Map<String, dynamic>),
+      permissions: json['permissions'] == null
+          ? null
+          : $textComparisonExp
+              .fromJson(json['permissions'] as Map<String, dynamic>),
+      person: json['person'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photo_updated_at'] == null
+          ? null
+          : TimestamptzComparisonExp.fromJson(
+              json['photo_updated_at'] as Map<String, dynamic>),
+      uid: json['uid'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['uid'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersBoolExpToJson(UsersBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'adminOn': instance.adminOn?.toJson(),
+      'email': instance.email?.toJson(),
+      'firebase_auth_uid': instance.firebaseAuthUid?.toJson(),
+      'firestore_id': instance.firestoreId?.toJson(),
+      'isUserAllowedToChange': instance.isUserAllowedToChange?.toJson(),
+      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'permissions': instance.permissions?.toJson(),
+      'person': instance.person?.toJson(),
+      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
+      'uid': instance.uid?.toJson(),
+    };
+
+$textComparisonExp _$$textComparisonExpFromJson(Map<String, dynamic> json) =>
+    $textComparisonExp(
+      $eq: (json['_eq'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $gt: (json['_gt'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $gte: (json['_gte'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $in: (json['_in'] as List<dynamic>?)
+          ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
+          .toList(),
+      $isNull: json['_is_null'] as bool?,
+      $lt: (json['_lt'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $lte: (json['_lte'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $neq: (json['_neq'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $nin: (json['_nin'] as List<dynamic>?)
+          ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
+          .toList(),
+    );
+
+Map<String, dynamic> _$$textComparisonExpToJson($textComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_in': instance.$in,
+      '_is_null': instance.$isNull,
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
     };
 
 PersonTypesBoolExp _$PersonTypesBoolExpFromJson(Map<String, dynamic> json) =>
@@ -2425,6 +2047,210 @@ Map<String, dynamic> _$SchoolsBoolExpToJson(SchoolsBoolExp instance) =>
       'id': instance.id?.toJson(),
       'name': instance.name?.toJson(),
       'persons': instance.persons?.toJson(),
+    };
+
+PersonsServicesBoolExp _$PersonsServicesBoolExpFromJson(
+        Map<String, dynamic> json) =>
+    PersonsServicesBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map(
+              (e) => PersonsServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : PersonsServicesBoolExp.fromJson(
+              json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map(
+              (e) => PersonsServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      person: json['person'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['person'] as Map<String, dynamic>),
+      personID: json['personID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['personID'] as Map<String, dynamic>),
+      relId: json['rel_id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['rel_id'] as Map<String, dynamic>),
+      service: json['service'] == null
+          ? null
+          : ServicesBoolExp.fromJson(json['service'] as Map<String, dynamic>),
+      serviceID: json['serviceID'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['serviceID'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsServicesBoolExpToJson(
+        PersonsServicesBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'person': instance.person?.toJson(),
+      'personID': instance.personID?.toJson(),
+      'rel_id': instance.relId?.toJson(),
+      'service': instance.service?.toJson(),
+      'serviceID': instance.serviceID?.toJson(),
+    };
+
+ServicesBoolExp _$ServicesBoolExpFromJson(Map<String, dynamic> json) =>
+    ServicesBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : ServicesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      attendanceHistory: json['attendance_history'] == null
+          ? null
+          : HistoryAttendanceHistoryBoolExp.fromJson(
+              json['attendance_history'] as Map<String, dynamic>),
+      color: json['color'] == null
+          ? null
+          : IntComparisonExp.fromJson(json['color'] as Map<String, dynamic>),
+      firestoreId: json['firestore_id'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['firestore_id'] as Map<String, dynamic>),
+      fromStudyYear: json['fromStudyYear'] == null
+          ? null
+          : StudyYearsBoolExp.fromJson(
+              json['fromStudyYear'] as Map<String, dynamic>),
+      groups: json['groups'] == null
+          ? null
+          : GroupsBoolExp.fromJson(json['groups'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+      isUserAllowedToRead: json['isUserAllowedToRead'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToRead'] as Map<String, dynamic>),
+      isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToWrite'] as Map<String, dynamic>),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : JsonbComparisonExp.fromJson(
+              json['lastEdit'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      persons: json['persons'] == null
+          ? null
+          : PersonsServicesBoolExp.fromJson(
+              json['persons'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photo_updated_at'] == null
+          ? null
+          : TimestamptzComparisonExp.fromJson(
+              json['photo_updated_at'] as Map<String, dynamic>),
+      studyYearFrom: json['studyYearFrom'] == null
+          ? null
+          : SmallintComparisonExp.fromJson(
+              json['studyYearFrom'] as Map<String, dynamic>),
+      studyYearTo: json['studyYearTo'] == null
+          ? null
+          : SmallintComparisonExp.fromJson(
+              json['studyYearTo'] as Map<String, dynamic>),
+      toStudyYear: json['toStudyYear'] == null
+          ? null
+          : StudyYearsBoolExp.fromJson(
+              json['toStudyYear'] as Map<String, dynamic>),
+      users: json['users'] == null
+          ? null
+          : UsersPermissionsBoolExp.fromJson(
+              json['users'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ServicesBoolExpToJson(ServicesBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'attendance_history': instance.attendanceHistory?.toJson(),
+      'color': instance.color?.toJson(),
+      'firestore_id': instance.firestoreId?.toJson(),
+      'fromStudyYear': instance.fromStudyYear?.toJson(),
+      'groups': instance.groups?.toJson(),
+      'id': instance.id?.toJson(),
+      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'name': instance.name?.toJson(),
+      'persons': instance.persons?.toJson(),
+      'photo_updated_at': instance.photoUpdatedAt?.toJson(),
+      'studyYearFrom': instance.studyYearFrom?.toJson(),
+      'studyYearTo': instance.studyYearTo?.toJson(),
+      'toStudyYear': instance.toStudyYear?.toJson(),
+      'users': instance.users?.toJson(),
+    };
+
+StudyYearsBoolExp _$StudyYearsBoolExpFromJson(Map<String, dynamic> json) =>
+    StudyYearsBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) => StudyYearsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : StudyYearsBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) => StudyYearsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      name: json['name'] == null
+          ? null
+          : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      order: json['order'] == null
+          ? null
+          : SmallintComparisonExp.fromJson(
+              json['order'] as Map<String, dynamic>),
+      persons: json['persons'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudyYearsBoolExpToJson(StudyYearsBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'name': instance.name?.toJson(),
+      'order': instance.order?.toJson(),
+      'persons': instance.persons?.toJson(),
+    };
+
+SmallintComparisonExp _$SmallintComparisonExpFromJson(
+        Map<String, dynamic> json) =>
+    SmallintComparisonExp(
+      $eq: json['_eq'] as int?,
+      $gt: json['_gt'] as int?,
+      $gte: json['_gte'] as int?,
+      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      $isNull: json['_is_null'] as bool?,
+      $lt: json['_lt'] as int?,
+      $lte: json['_lte'] as int?,
+      $neq: json['_neq'] as int?,
+      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as int).toList(),
+    );
+
+Map<String, dynamic> _$SmallintComparisonExpToJson(
+        SmallintComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_in': instance.$in,
+      '_is_null': instance.$isNull,
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
     };
 
 StatesBoolExp _$StatesBoolExpFromJson(Map<String, dynamic> json) =>
@@ -2589,30 +2415,315 @@ Map<String, dynamic> _$HistoryVisitHistoryBoolExpToJson(
       'user_uid': instance.userUid?.toJson(),
     };
 
-SearchPersons$SubscriptionRoot$Persons
-    _$SearchPersons$SubscriptionRoot$PersonsFromJson(
+HistoryAttendanceDaysConstraintsBoolExp
+    _$HistoryAttendanceDaysConstraintsBoolExpFromJson(
             Map<String, dynamic> json) =>
-        SearchPersons$SubscriptionRoot$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String;
+        HistoryAttendanceDaysConstraintsBoolExp(
+          $and: (json['_and'] as List<dynamic>?)
+              ?.map((e) => HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          $not: json['_not'] == null
+              ? null
+              : HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+                  json['_not'] as Map<String, dynamic>),
+          $or: (json['_or'] as List<dynamic>?)
+              ?.map((e) => HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          day: json['day'] == null
+              ? null
+              : HistoryAttendanceDaysBoolExp.fromJson(
+                  json['day'] as Map<String, dynamic>),
+          dayID: json['dayID'] == null
+              ? null
+              : DateComparisonExp.fromJson(
+                  json['dayID'] as Map<String, dynamic>),
+          group: json['group'] == null
+              ? null
+              : GroupsBoolExp.fromJson(json['group'] as Map<String, dynamic>),
+          groupID: json['groupID'] == null
+              ? null
+              : UuidComparisonExp.fromJson(
+                  json['groupID'] as Map<String, dynamic>),
+          id: json['id'] == null
+              ? null
+              : UuidComparisonExp.fromJson(json['id'] as Map<String, dynamic>),
+          isUserAllowedToRead: json['isUserAllowedToRead'] == null
+              ? null
+              : BooleanComparisonExp.fromJson(
+                  json['isUserAllowedToRead'] as Map<String, dynamic>),
+          isUserAllowedToWrite: json['isUserAllowedToWrite'] == null
+              ? null
+              : BooleanComparisonExp.fromJson(
+                  json['isUserAllowedToWrite'] as Map<String, dynamic>),
+          service: json['service'] == null
+              ? null
+              : ServicesBoolExp.fromJson(
+                  json['service'] as Map<String, dynamic>),
+          serviceID: json['serviceID'] == null
+              ? null
+              : UuidComparisonExp.fromJson(
+                  json['serviceID'] as Map<String, dynamic>),
+          serviceGender: json['service_gender'] == null
+              ? null
+              : BooleanComparisonExp.fromJson(
+                  json['service_gender'] as Map<String, dynamic>),
+          serviceStudyYear: json['service_studyYear'] == null
+              ? null
+              : IntComparisonExp.fromJson(
+                  json['service_studyYear'] as Map<String, dynamic>),
+          studyYear: json['studyYear'] == null
+              ? null
+              : StudyYearsBoolExp.fromJson(
+                  json['studyYear'] as Map<String, dynamic>),
+        );
 
-Map<String, dynamic> _$SearchPersons$SubscriptionRoot$PersonsToJson(
-        SearchPersons$SubscriptionRoot$Persons instance) =>
+Map<String, dynamic> _$HistoryAttendanceDaysConstraintsBoolExpToJson(
+        HistoryAttendanceDaysConstraintsBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'day': instance.day?.toJson(),
+      'dayID': instance.dayID?.toJson(),
+      'group': instance.group?.toJson(),
+      'groupID': instance.groupID?.toJson(),
+      'id': instance.id?.toJson(),
+      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
+      'service': instance.service?.toJson(),
+      'serviceID': instance.serviceID?.toJson(),
+      'service_gender': instance.serviceGender?.toJson(),
+      'service_studyYear': instance.serviceStudyYear?.toJson(),
+      'studyYear': instance.studyYear?.toJson(),
+    };
+
+TimestampComparisonExp _$TimestampComparisonExpFromJson(
+        Map<String, dynamic> json) =>
+    TimestampComparisonExp(
+      $eq: json['_eq'] == null ? null : DateTime.parse(json['_eq'] as String),
+      $gt: json['_gt'] == null ? null : DateTime.parse(json['_gt'] as String),
+      $gte:
+          json['_gte'] == null ? null : DateTime.parse(json['_gte'] as String),
+      $in: (json['_in'] as List<dynamic>?)
+          ?.map((e) => DateTime.parse(e as String))
+          .toList(),
+      $isNull: json['_is_null'] as bool?,
+      $lt: json['_lt'] == null ? null : DateTime.parse(json['_lt'] as String),
+      $lte:
+          json['_lte'] == null ? null : DateTime.parse(json['_lte'] as String),
+      $neq:
+          json['_neq'] == null ? null : DateTime.parse(json['_neq'] as String),
+      $nin: (json['_nin'] as List<dynamic>?)
+          ?.map((e) => DateTime.parse(e as String))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TimestampComparisonExpToJson(
+        TimestampComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq?.toIso8601String(),
+      '_gt': instance.$gt?.toIso8601String(),
+      '_gte': instance.$gte?.toIso8601String(),
+      '_in': instance.$in?.map((e) => e.toIso8601String()).toList(),
+      '_is_null': instance.$isNull,
+      '_lt': instance.$lt?.toIso8601String(),
+      '_lte': instance.$lte?.toIso8601String(),
+      '_neq': instance.$neq?.toIso8601String(),
+      '_nin': instance.$nin?.map((e) => e.toIso8601String()).toList(),
+    };
+
+DaterangeComparisonExp _$DaterangeComparisonExpFromJson(
+        Map<String, dynamic> json) =>
+    DaterangeComparisonExp(
+      $eq: json['_eq'] as String?,
+      $gt: json['_gt'] as String?,
+      $gte: json['_gte'] as String?,
+      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $isNull: json['_is_null'] as bool?,
+      $lt: json['_lt'] as String?,
+      $lte: json['_lte'] as String?,
+      $neq: json['_neq'] as String?,
+      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$DaterangeComparisonExpToJson(
+        DaterangeComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_in': instance.$in,
+      '_is_null': instance.$isNull,
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
+    };
+
+BigintComparisonExp _$BigintComparisonExpFromJson(Map<String, dynamic> json) =>
+    BigintComparisonExp(
+      $eq: json['_eq'] as int?,
+      $gt: json['_gt'] as int?,
+      $gte: json['_gte'] as int?,
+      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      $isNull: json['_is_null'] as bool?,
+      $lt: json['_lt'] as int?,
+      $lte: json['_lte'] as int?,
+      $neq: json['_neq'] as int?,
+      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as int).toList(),
+    );
+
+Map<String, dynamic> _$BigintComparisonExpToJson(
+        BigintComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_in': instance.$in,
+      '_is_null': instance.$isNull,
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
+    };
+
+GetServicesStream$SubscriptionRoot$Services$StudyYears
+    _$GetServicesStream$SubscriptionRoot$Services$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetServicesStream$SubscriptionRoot$Services$StudyYears()
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic>
+    _$GetServicesStream$SubscriptionRoot$Services$StudyYearsToJson(
+            GetServicesStream$SubscriptionRoot$Services$StudyYears instance) =>
+        <String, dynamic>{
+          'name': instance.name,
+          'order': instance.order,
+        };
+
+GetServicesStream$SubscriptionRoot$Services$Groups
+    _$GetServicesStream$SubscriptionRoot$Services$GroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetServicesStream$SubscriptionRoot$Services$Groups()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?;
+
+Map<String, dynamic> _$GetServicesStream$SubscriptionRoot$Services$GroupsToJson(
+        GetServicesStream$SubscriptionRoot$Services$Groups instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
+      'color': instance.color,
     };
 
-SearchPersons$SubscriptionRoot _$SearchPersons$SubscriptionRootFromJson(
+GetServicesStream$SubscriptionRoot$Services
+    _$GetServicesStream$SubscriptionRoot$ServicesFromJson(
+            Map<String, dynamic> json) =>
+        GetServicesStream$SubscriptionRoot$Services()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..fromStudyYear = json['fromStudyYear'] == null
+              ? null
+              : GetServicesStream$SubscriptionRoot$Services$StudyYears.fromJson(
+                  json['fromStudyYear'] as Map<String, dynamic>)
+          ..toStudyYear = json['toStudyYear'] == null
+              ? null
+              : GetServicesStream$SubscriptionRoot$Services$StudyYears.fromJson(
+                  json['toStudyYear'] as Map<String, dynamic>)
+          ..groups = (json['groups'] as List<dynamic>)
+              .map((e) =>
+                  GetServicesStream$SubscriptionRoot$Services$Groups.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetServicesStream$SubscriptionRoot$ServicesToJson(
+        GetServicesStream$SubscriptionRoot$Services instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'fromStudyYear': instance.fromStudyYear?.toJson(),
+      'toStudyYear': instance.toStudyYear?.toJson(),
+      'groups': instance.groups.map((e) => e.toJson()).toList(),
+    };
+
+GetServicesStream$SubscriptionRoot _$GetServicesStream$SubscriptionRootFromJson(
         Map<String, dynamic> json) =>
-    SearchPersons$SubscriptionRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => SearchPersons$SubscriptionRoot$Persons.fromJson(
+    GetServicesStream$SubscriptionRoot()
+      ..services = (json['services'] as List<dynamic>)
+          .map((e) => GetServicesStream$SubscriptionRoot$Services.fromJson(
               e as Map<String, dynamic>))
           .toList();
 
-Map<String, dynamic> _$SearchPersons$SubscriptionRootToJson(
-        SearchPersons$SubscriptionRoot instance) =>
+Map<String, dynamic> _$GetServicesStream$SubscriptionRootToJson(
+        GetServicesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'services': instance.services.map((e) => e.toJson()).toList(),
+    };
+
+GetStudyYearName$QueryRoot$StudyYears
+    _$GetStudyYearName$QueryRoot$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetStudyYearName$QueryRoot$StudyYears()
+          ..order = json['order'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetStudyYearName$QueryRoot$StudyYearsToJson(
+        GetStudyYearName$QueryRoot$StudyYears instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+      'name': instance.name,
+    };
+
+GetStudyYearName$QueryRoot _$GetStudyYearName$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearName$QueryRoot()
+      ..studyYearsByPk = json['studyYears_by_pk'] == null
+          ? null
+          : GetStudyYearName$QueryRoot$StudyYears.fromJson(
+              json['studyYears_by_pk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetStudyYearName$QueryRootToJson(
+        GetStudyYearName$QueryRoot instance) =>
+    <String, dynamic>{
+      'studyYears_by_pk': instance.studyYearsByPk?.toJson(),
+    };
+
+GetPersonsStream$SubscriptionRoot$Persons
+    _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsStream$SubscriptionRoot$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photo_updated_at'] == null
+              ? null
+              : DateTime.parse(json['photo_updated_at'] as String);
+
+Map<String, dynamic> _$GetPersonsStream$SubscriptionRoot$PersonsToJson(
+        GetPersonsStream$SubscriptionRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photo_updated_at': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetPersonsStream$SubscriptionRoot _$GetPersonsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsStream$SubscriptionRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => GetPersonsStream$SubscriptionRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetPersonsStream$SubscriptionRootToJson(
+        GetPersonsStream$SubscriptionRoot instance) =>
     <String, dynamic>{
       'persons': instance.persons.map((e) => e.toJson()).toList(),
     };
@@ -2881,6 +2992,50 @@ Map<String, dynamic> _$GetPersonsBirthday$QueryRootToJson(
       'persons': instance.persons.map((e) => e.toJson()).toList(),
     };
 
+GetAreasStreamArguments _$GetAreasStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetAreasStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => AreasBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetAreasStreamArgumentsToJson(
+        GetAreasStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetServicesStreamArguments _$GetServicesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetServicesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetServicesStreamArgumentsToJson(
+        GetServicesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetStudyYearNameArguments _$GetStudyYearNameArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearNameArguments(
+      order: json['order'] as int,
+    );
+
+Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
+        GetStudyYearNameArguments instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+    };
+
 GetPersonsStreamArguments _$GetPersonsStreamArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetPersonsStreamArguments(
@@ -2893,24 +3048,6 @@ GetPersonsStreamArguments _$GetPersonsStreamArgumentsFromJson(
 Map<String, dynamic> _$GetPersonsStreamArgumentsToJson(
         GetPersonsStreamArguments instance) =>
     <String, dynamic>{
-      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
-      'limit': instance.limit,
-    };
-
-SearchPersonsArguments _$SearchPersonsArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    SearchPersonsArguments(
-      searchQuery: json['searchQuery'] as String,
-      addWhere: (json['addWhere'] as List<dynamic>?)
-          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      limit: json['limit'] as int?,
-    );
-
-Map<String, dynamic> _$SearchPersonsArgumentsToJson(
-        SearchPersonsArguments instance) =>
-    <String, dynamic>{
-      'searchQuery': instance.searchQuery,
       'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
       'limit': instance.limit,
     };

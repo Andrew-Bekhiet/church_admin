@@ -110,7 +110,7 @@ class CAAuthRepository extends AuthRepository<User, Person> {
       ),
     );
 
-    personListener ??= CADatabaseRepository.I
+    personListener ??= CADatabaseRepository.I.users
         .getUserInfoStream(uid: idTokenClaims['x-hasura-user-id'])
         .map((userData) {
           userSubject.add(User(
@@ -119,7 +119,8 @@ class CAAuthRepository extends AuthRepository<User, Person> {
             email: firebaseUser?.email ?? email!,
             password: idTokenClaims['password'],
             permissions: CAPermissionsSet.fromSet(
-                userData.parsedData!.permissions.toSet()),
+              userData.parsedData!.permissions.toSet(),
+            ),
           ));
           return userData.parsedData!.person != null
               ? Person.fromJson(userData.parsedData!.person!.toJson())

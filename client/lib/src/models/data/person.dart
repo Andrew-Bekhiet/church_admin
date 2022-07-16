@@ -1,17 +1,17 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
-import 'dart:ui';
-
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/scalars.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide Json;
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../postgis.dart';
+import 'package:get_it/get_it.dart';
 
 part 'person.freezed.dart';
 part 'person.g.dart';
 
 @freezed
-class Person extends ViewableWithID with _$Person {
+class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   factory Person({
     required String id,
     required String name,
@@ -47,7 +47,23 @@ class Person extends ViewableWithID with _$Person {
   Person._() : super();
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
-}
 
-Color? colorFromInt(dynamic data) => data is int ? Color(data) : null;
-int? colorToInt(Color? data) => data?.value;
+  @override
+  IconData get defaultIcon => Icons.person;
+
+  @override
+  bool get hasPhoto => photoUpdatedAt != null;
+
+  @override
+  CAStorageReference? get photoRef => hasPhoto
+      ? CAStorageReference(
+          photoUpdatedAt: photoUpdatedAt!,
+          downloadUrl:
+              GetIt.I<CAFunctionsService>().getDownloadUrl('persons', id),
+          fullPath: 'persons/$id.jpg',
+        )
+      : null;
+
+  @override
+  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
+}

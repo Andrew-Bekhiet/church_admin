@@ -25,3 +25,7 @@ class Polygon {
     };
   }
 }
+
+Json? polygonToJson(Polygon? data) => data?.asPostGISPolygon();
+Polygon? polygonFromJson(dynamic data) =>
+    data == null ? null : Polygon.fromJson(data);

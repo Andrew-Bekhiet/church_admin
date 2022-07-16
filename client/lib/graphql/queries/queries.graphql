@@ -1,25 +1,58 @@
-subscription getPersonsStream(
-  $addWhere: [persons_bool_exp!] = {}
-  $limit: Int = 199
+subscription getAreasStream(
+  $addWhere: [areas_bool_exp!] = {}
+  $limit: Int = 200
 ) {
-  persons(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+  areas(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
     id
     name
+    color
+    bounds
   }
 }
-
-subscription searchPersons(
-  $searchQuery: String!
-  $addWhere: [persons_bool_exp!] = {}
-  $limit: Int = 199
+subscription getServicesStream(
+  $addWhere: [services_bool_exp!] = {}
+  $limit: Int = 200
 ) {
-  persons(
-    where: { name: { _ilike: $searchQuery }, _and: $addWhere }
-    order_by: { name: asc }
+  services(
+    where: { _and: $addWhere }
+    order_by: { studyYearFrom: asc, studyYearTo: asc }
     limit: $limit
   ) {
     id
     name
+    color
+    fromStudyYear {
+      name
+      order
+    }
+    toStudyYear {
+      name
+      order
+    }
+    groups(order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }) {
+      id
+      name
+      color
+    }
+  }
+}
+
+query getStudyYearName($order: smallint!) {
+  studyYears_by_pk(order: $order) {
+    order
+    name
+  }
+}
+
+subscription getPersonsStream(
+  $addWhere: [persons_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  persons(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    color
+    photo_updated_at
   }
 }
 

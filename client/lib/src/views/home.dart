@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
@@ -50,6 +50,33 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _search = BehaviorSubject<String?>.seeded(null);
+  final _bottomNavBar = BehaviorSubject<int>.seeded(1);
+
+  late final _controllers = [
+    ListControllerBase<void, Person>(
+      objectsPaginatableStream:
+          CADatabaseRepository.I.persons.getPersonsStream$(
+        searchQuery: _search,
+      ),
+    ),
+    ListControllerBase<void, Service>(
+      objectsPaginatableStream:
+          CADatabaseRepository.I.services.getServicesStream(),
+    ),
+    ListControllerBase<void, Area>(
+      objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(),
+    ),
+  ];
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+
+    await _search.close();
+    await _bottomNavBar.close();
+
+    await Future.wait(_controllers.map((c) => c.dispose()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,14 +120,139 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      body: DataObjectListViewBase(
-        controller: ListControllerBase(
-          objectsPaginatableStream: CADatabaseRepository.I.getPersonsStream$(
-            searchQuery: _search,
-          ),
-        ),
-        autoDisposeController: true,
+      body: StreamBuilder<int>(
+        initialData: _bottomNavBar.value,
+        stream: _bottomNavBar.distinct(),
+        builder: (context, indexData) {
+          if (indexData.requireData == 1) {
+            return DataObjectListViewBase<void, Service>(
+              key: PageStorageKey(_controllers[indexData.requireData]),
+              controller: _controllers[indexData.requireData]
+                  as ListControllerBase<void, Service>,
+              autoDisposeController: false,
+              itemBuilder: _buildServiceTile,
+            );
+          } else if (indexData.requireData == 0) {
+            return DataObjectListViewBase<void, Person>(
+              key: PageStorageKey(_controllers[indexData.requireData]),
+              controller: _controllers[indexData.requireData]
+                  as ListControllerBase<void, Person>,
+              autoDisposeController: false,
+              itemBuilder: _buildPersonTile,
+            );
+          }
+
+          return DataObjectListViewBase<void, ViewableWithID>(
+            key: PageStorageKey(_controllers[indexData.requireData]),
+            controller: _controllers[indexData.requireData],
+            autoDisposeController: false,
+          );
+        },
       ),
+      bottomNavigationBar: StreamBuilder<int>(
+        initialData: _bottomNavBar.value,
+        stream: _bottomNavBar.distinct(),
+        builder: (context, indexData) {
+          return BottomNavigationBar(
+            onTap: _bottomNavBar.add,
+            currentIndex: indexData.requireData,
+            items: const [
+              BottomNavigationBarItem(
+                label: 'المخدومين',
+                icon: Icon(Icons.person),
+              ),
+              BottomNavigationBarItem(
+                label: 'الخدمات',
+                icon: Icon(Icons.miscellaneous_services),
+              ),
+              BottomNavigationBarItem(
+                label: 'المناطق',
+                icon: Icon(Icons.pin_drop),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildServiceTile(
+    Service s, {
+    void Function(Service)? onLongPress,
+    void Function(Service)? onTap,
+    Widget? trailing,
+    Widget? subtitle,
+  }) {
+    return ExpansionTile(
+      key: PageStorageKey(s),
+      //TODO: photos
+      /* leading: PhotoObjectWidget(s), */
+      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      maintainState: true,
+      title: GestureDetector(
+        onTap: onTap != null ? () => onTap(s) : null,
+        onLongPress: onLongPress != null ? () => onLongPress(s) : null,
+        child: Text(s.name),
+      ),
+      children: [
+        if (s.fromStudyYear != null && s.toStudyYear != null)
+          for (int i = s.fromStudyYear!.order; i <= s.toStudyYear!.order; i++)
+            Padding(
+              padding: const EdgeInsets.only(right: 6),
+              child: FutureBuilder<StudyYear?>(
+                initialData: i == s.fromStudyYear!.order
+                    ? s.fromStudyYear!
+                    : i == s.toStudyYear!.order
+                        ? s.toStudyYear!
+                        : null,
+                future: CADatabaseRepository.I.studyYears.getStudyYearName(i),
+                builder: (context, studyYearData) {
+                  if (studyYearData.hasError) {
+                    return ErrorWidget(studyYearData.error!);
+                  }
+
+                  if (!studyYearData.hasData) {
+                    return const LinearProgressIndicator();
+                  }
+
+                  return ViewableObjectWidget(
+                    studyYearData.requireData ??
+                        StudyYear(name: 'غير معروفة', order: 0),
+                    showSubtitle: false,
+                  );
+                },
+              ),
+            ),
+        if (s.fromStudyYear != null &&
+            s.toStudyYear != null &&
+            s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&
+            (s.groups?.isNotEmpty ?? false))
+          const Divider(),
+        for (final g in s.groups ?? <Group>[])
+          Padding(
+            padding: const EdgeInsets.only(right: 6),
+            child: ViewableObjectWidget(
+              g,
+              showSubtitle: false,
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildPersonTile(
+    Person p, {
+    void Function(Person)? onLongPress,
+    void Function(Person)? onTap,
+    Widget? trailing,
+    Widget? subtitle,
+  }) {
+    return ViewableObjectWidget(
+      p,
+      onLongPress: onLongPress != null ? () => onLongPress(p) : null,
+      onTap: onTap != null ? () => onTap(p) : null,
+      photo: PhotoObjectWidget(p),
+      subtitle: subtitle,
     );
   }
 }

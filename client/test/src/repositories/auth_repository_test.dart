@@ -203,7 +203,7 @@ void main() {
           verify(
             child2.onValue,
           );
-          verify(CADatabaseRepository.I.getUserInfoStream(uid: 'uid'));
+          verify(CADatabaseRepository.I.users.getUserInfoStream(uid: 'uid'));
 
           expect(
             unit.userStream,

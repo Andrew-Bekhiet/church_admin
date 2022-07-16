@@ -9,10 +9,10 @@ import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:churchdata_core/churchdata_core.dart' as _i5;
 import 'package:firebase_auth/firebase_auth.dart' as _i9;
 import 'package:firebase_database/firebase_database.dart' as _i8;
-import 'package:flutter/foundation.dart' as _i7;
 import 'package:flutter/material.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i3;
+import 'package:sentry_flutter/sentry_flutter.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -51,6 +51,13 @@ class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
       (super.noSuchMethod(Invocation.getter(#navigatorObserver),
           returnValue: _FakeNavigatorObserver_0()) as _i2.NavigatorObserver);
   @override
+  _i6.FutureOr<void> Function(_i6.FutureOr<void> Function(_i7.Scope))
+      get configureScope =>
+          (super.noSuchMethod(Invocation.getter(#configureScope),
+              returnValue: (_i6.FutureOr<void> Function(_i7.Scope) __p0) =>
+                  Future<void>.value()) as _i6.FutureOr<void> Function(
+              _i6.FutureOr<void> Function(_i7.Scope)));
+  @override
   _i6.Future<void> log(String? msg) =>
       (super.noSuchMethod(Invocation.method(#log, [msg]),
           returnValue: Future<void>.value(),
@@ -66,7 +73,7 @@ class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> reportFlutterError(_i7.FlutterErrorDetails? flutterError,
+  _i6.Future<void> reportFlutterError(_i2.FlutterErrorDetails? flutterError,
           {Map<String, dynamic>? data, Map<String, dynamic>? extras}) =>
       (super.noSuchMethod(
           Invocation.method(#reportFlutterError, [flutterError],

@@ -35,7 +35,7 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       familyID: json['familyID'] as String?,
       storeID: json['storeID'] as String?,
       studyYearID: json['studyYearID'] as int?,
-      color: colorFromInt(json['color']),
+      color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photo_updated_at'] == null
           ? null
           : DateTime.parse(json['photo_updated_at'] as String),
