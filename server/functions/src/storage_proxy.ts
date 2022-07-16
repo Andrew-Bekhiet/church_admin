@@ -34,7 +34,7 @@ async function _getSignedUrl(
     if (
       !context.app ||
       !context.auth ||
-      !(await checkUserApproved(context.auth.uid))
+      !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
     )
       throw new https.HttpsError("unauthenticated", "");
 
