@@ -1,2 +1,2 @@
-String fromDartBigIntToGraphQLbigint(BigInt data) => data.toString();
-BigInt fromGraphQLbigintToDartBigInt(dynamic data) => BigInt.parse(data);
+int fromDartBigIntToGraphQLbigint(BigInt data) => data.toInt();
+BigInt fromGraphQLbigintToDartBigInt(int data) => BigInt.from(data);

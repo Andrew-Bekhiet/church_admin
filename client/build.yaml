@@ -30,7 +30,7 @@ targets:
               dart_type: int
 
             - graphql_type: bigint
-              dart_type: BigInt
+              dart_type: int
 
             - graphql_type: timestamptz
               dart_type: DateTime
