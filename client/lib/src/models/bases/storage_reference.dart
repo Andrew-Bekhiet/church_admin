@@ -50,4 +50,9 @@ class CAStorageReference extends StorageReference {
       return cache ?? '';
     }
   }
+
+  @override
+  Never child(String child) {
+    throw UnsupportedError('child is not supported');
+  }
 }
