@@ -24,7 +24,8 @@ import 'auth_repository_test.mocks.dart';
   DatabaseReference,
   OnDisconnect,
   CADatabaseRepository,
-  NotificationsService
+  NotificationsService,
+  UsersQueries
 ])
 void main() {
   group(
@@ -57,13 +58,15 @@ void main() {
 
           GetIt.I.registerSingleton<FirebaseDatabase>(database);
 
-          final mockCADatabaseRepository = MockCADatabaseRepository();
-          when(mockCADatabaseRepository.getUserInfoStream(uid: 'uid'))
-              .thenAnswer(
+          final usersQueries = MockUsersQueries();
+          when(usersQueries.getUserInfoStream(uid: 'uid')).thenAnswer(
             (_) => Stream.value(
               FakeQueryResult(),
             ),
           );
+
+          final mockCADatabaseRepository = MockCADatabaseRepository();
+          when(mockCADatabaseRepository.users).thenReturn(usersQueries);
 
           GetIt.I.registerSingleton<CADatabaseRepository>(
               mockCADatabaseRepository);

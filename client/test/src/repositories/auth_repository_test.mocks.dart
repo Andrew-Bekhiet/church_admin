@@ -13,6 +13,7 @@ import 'package:firebase_database_platform_interface/firebase_database_platform_
     as _i6;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i10;
 import 'package:flutter/widgets.dart' as _i7;
+import 'package:graphql_flutter/graphql_flutter.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -525,4 +526,22 @@ class MockNotificationsService extends _i1.Mock
       (super.noSuchMethod(
           Invocation.method(#registerFCMToken, [], {#cachedToken: cachedToken}),
           returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+}
+
+/// A class which mocks [UsersQueries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
+  MockUsersQueries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Stream<_i11.QueryResult<_i4.GetUserInfoStream$SubscriptionRoot$Users>>
+      getUserInfoStream({String? uid}) => (super.noSuchMethod(
+          Invocation.method(#getUserInfoStream, [], {#uid: uid}),
+          returnValue: Stream<
+              _i11.QueryResult<
+                  _i4.GetUserInfoStream$SubscriptionRoot$Users>>.empty()) as _i5
+          .Stream<_i11.QueryResult<_i4.GetUserInfoStream$SubscriptionRoot$Users>>);
 }
