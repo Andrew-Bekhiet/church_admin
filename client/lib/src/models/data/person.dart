@@ -58,7 +58,7 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   CAStorageReference? get photoRef => hasPhoto
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl:
+          downloadUrl: () =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('persons', id),
           fullPath: 'persons/$id.jpg',
         )

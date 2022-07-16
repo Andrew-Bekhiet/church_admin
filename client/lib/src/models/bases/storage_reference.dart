@@ -17,10 +17,6 @@ class CAStorageReference extends StorageReference {
     void Function(String oldUrl, String? newUrl)? onCacheChanged,
     void Function(Exception e, String? cache)? onError,
   }) async {
-    final downloadUrl = getDownloadURL();
-
-    if (downloadUrl is String) return downloadUrl;
-
     final String? cache = GetIt.I<CacheRepository>()
         .box<String?>('PhotosURLsCache')
         .get(fullPath);
@@ -29,6 +25,10 @@ class CAStorageReference extends StorageReference {
       if (cache == null ||
           cache.split('|')[0] !=
               photoUpdatedAt.millisecondsSinceEpoch.toString()) {
+        final downloadUrl = getDownloadURL();
+
+        if (downloadUrl is String) return downloadUrl;
+
         final String url = await downloadUrl;
 
         await GetIt.I<CacheRepository>()
