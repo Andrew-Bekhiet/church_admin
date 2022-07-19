@@ -114,14 +114,12 @@ DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(
   DelegatingPaginatableStream<T> instance,
   List<T> result,
 ) {
-  final List<T> sublist;
+  final List<T> sublist = result.sublist(0, min(instance.limit, result.length));
   final current = instance.currentValueOrNull ?? <T>[];
   final start = instance.currentOffset * instance.limit;
-  final int end = start + min(instance.limit, result.length);
+  final int end = start + instance.limit;
 
   if (lastSearch == search) {
-    sublist = result.sublist(0, min(instance.limit, result.length));
-
     return DelegatingStreamResult(
       result: current.length >= end
           ? (current..replaceRange(start, end, sublist))
@@ -130,7 +128,9 @@ DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(
     );
   } else {
     return DelegatingStreamResult(
-      result: result.sublist(0, min(instance.limit, result.length)),
+      result: current.length >= end
+          ? (current..replaceRange(start, end, sublist))
+          : sublist,
       canPaginateForward: result.length >= instance.limit,
     );
   }
