@@ -157,7 +157,8 @@ Future<void> registerGraphQLClient() async {
 Future<void> initializeFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await FirebaseAppCheck.instance.activate();
+  await FirebaseAppCheck.instance
+      .activate(webRecaptchaSiteKey: webRecaptchaSiteKey);
   await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
   String? kEmulatorsHost;
