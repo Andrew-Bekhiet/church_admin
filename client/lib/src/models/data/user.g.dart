@@ -10,16 +10,16 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       uid: json['uid'] as String,
       permissions: permissionsSetFromJson(json['permissions']),
       email: json['email'] as String,
-      firebaseAuthUID: json['firebase_auth_uid'] as String,
-      photoUpdatedAt: json['photo_updated_at'] == null
+      firebaseAuthUID: json['firebaseAuthUID'] as String,
+      photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
-          : DateTime.parse(json['photo_updated_at'] as String),
+          : DateTime.parse(json['photoUpdatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'uid': instance.uid,
       'permissions': permissionsSetToJson(instance.permissions),
       'email': instance.email,
-      'firebase_auth_uid': instance.firebaseAuthUID,
-      'photo_updated_at': instance.photoUpdatedAt?.toIso8601String(),
+      'firebaseAuthUID': instance.firebaseAuthUID,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
     };

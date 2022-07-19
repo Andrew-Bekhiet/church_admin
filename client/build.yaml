@@ -44,6 +44,10 @@ targets:
               dart_type: DateTime
               use_custom_parser: true
 
+            - graphql_type: time
+              dart_type: DateTime
+              use_custom_parser: true
+
             - graphql_type: daterange
               dart_type: String
               use_custom_parser: true

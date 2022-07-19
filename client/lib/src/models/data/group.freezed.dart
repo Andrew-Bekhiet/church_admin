@@ -24,7 +24,6 @@ mixin _$Group {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +39,7 @@ abstract class $GroupCopyWith<$Res> {
       {String id,
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -88,7 +87,7 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       {String id,
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -135,7 +134,7 @@ class _$_Group extends _Group {
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      @JsonKey(name: 'photo_updated_at') this.photoUpdatedAt})
+      this.photoUpdatedAt})
       : super._();
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
@@ -149,7 +148,6 @@ class _$_Group extends _Group {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -185,7 +183,9 @@ class _$_Group extends _Group {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GroupToJson(this);
+    return _$$_GroupToJson(
+      this,
+    );
   }
 }
 
@@ -193,10 +193,8 @@ abstract class _Group extends Group {
   factory _Group(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
-      @JsonKey(name: 'photo_updated_at')
-          final DateTime? photoUpdatedAt}) = _$_Group;
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
+      final DateTime? photoUpdatedAt}) = _$_Group;
   _Group._() : super._();
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
@@ -209,7 +207,6 @@ abstract class _Group extends Group {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt;
   @override
   @JsonKey(ignore: true)

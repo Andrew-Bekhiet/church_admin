@@ -5,12 +5,16 @@ subscription getAreasStream(
   areas(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
     id
     name
-    color
     bounds
+    color
+    photoUpdatedAt
   }
 }
+
 subscription getServicesStream(
   $addWhere: [services_bool_exp!] = {}
+  $groupsAddWhere: [groups_bool_exp!] = {}
+  $classesAddWhere: [classes_bool_exp!] = {}
   $limit: Int = 200
 ) {
   services(
@@ -21,6 +25,7 @@ subscription getServicesStream(
     id
     name
     color
+    photoUpdatedAt
     fromStudyYear {
       name
       order
@@ -29,16 +34,29 @@ subscription getServicesStream(
       name
       order
     }
-    groups(order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }) {
+    classes(
+      where: { _and: $classesAddWhere }
+      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+    ) {
       id
       name
       color
+      photoUpdatedAt
+    }
+    groups(
+      where: { _and: $groupsAddWhere }
+      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+    ) {
+      id
+      name
+      color
+      photoUpdatedAt
     }
   }
 }
 
 query getStudyYearName($order: smallint!) {
-  studyYears_by_pk(order: $order) {
+  study_years_by_pk(order: $order) {
     order
     name
   }
@@ -52,14 +70,14 @@ subscription getPersonsStream(
     id
     name
     color
-    photo_updated_at
+    photoUpdatedAt
   }
 }
 
 subscription getUserInfoStream($uid: uuid!) {
   users_by_pk(uid: $uid) {
     uid
-    firebase_auth_uid
+    firebaseAuthUid
     email
     permissions
     person {
@@ -73,23 +91,23 @@ subscription getUserInfoStream($uid: uuid!) {
       gender
       isShammas
       shammasLevel
-      schoolID
-      collegeID
-      churchID
-      fatherID
+      schoolId
+      collegeId
+      churchId
+      fatherId
       isStudent
-      jobID
+      jobId
       jobDescription
-      qualificationID
-      personTypeID
-      stateID
+      qualificationId
+      personTypeId
+      stateId
       isServant
       notes
-      familyID
-      storeID
-      studyYearID
+      familyId
+      storeId
+      studyYearId
       color
-      photo_updated_at
+      photoUpdatedAt
       lastKodas
       lastConfession
     }
@@ -98,7 +116,7 @@ subscription getUserInfoStream($uid: uuid!) {
 
 query getPersonsAttendanceWarning($dateFilter: date!) {
   persons(
-    where: { attendance_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    where: { attendanceHistory: { _not: { dayId: { _gte: $dateFilter } } } }
     limit: 25
   ) {
     name
@@ -107,7 +125,7 @@ query getPersonsAttendanceWarning($dateFilter: date!) {
 
 query getPersonsKodasWarning($dateFilter: date!) {
   persons(
-    where: { kodas_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    where: { kodasHistory: { _not: { dayId: { _gte: $dateFilter } } } }
     limit: 25
   ) {
     name
@@ -116,7 +134,7 @@ query getPersonsKodasWarning($dateFilter: date!) {
 
 query getPersonsConfessionWarning($dateFilter: date!) {
   persons(
-    where: { confession_history: { _not: { dayID: { _gte: $dateFilter } } } }
+    where: { confessionHistory: { _not: { dayId: { _gte: $dateFilter } } } }
     limit: 25
   ) {
     name
@@ -125,7 +143,7 @@ query getPersonsConfessionWarning($dateFilter: date!) {
 
 query getPersonsVisitWarning($dateFilter: timestamptz!) {
   persons(
-    where: { visit_history: { _not: { time: { _gte: $dateFilter } } } }
+    where: { visitHistory: { _not: { time: { _gte: $dateFilter } } } }
     limit: 25
   ) {
     name

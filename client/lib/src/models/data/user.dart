@@ -17,12 +17,10 @@ class User extends UID with _$User {
     )
         required CAPermissionsSet permissions,
     required String email,
-    @JsonKey(name: 'firebase_auth_uid')
-        required String firebaseAuthUID,
+    required String firebaseAuthUID,
     @JsonKey(ignore: true)
         String? password,
-    @JsonKey(name: 'photo_updated_at')
-        DateTime? photoUpdatedAt,
+    DateTime? photoUpdatedAt,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

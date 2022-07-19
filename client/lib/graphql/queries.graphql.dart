@@ -24,12 +24,14 @@ class GetAreasStream$SubscriptionRoot$Areas extends JsonSerializable
 
   late String name;
 
-  int? color;
-
   Map<String, dynamic>? bounds;
 
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
   @override
-  List<Object?> get props => [id, name, color, bounds];
+  List<Object?> get props => [id, name, bounds, color, photoUpdatedAt];
   @override
   Map<String, dynamic> toJson() =>
       _$GetAreasStream$SubscriptionRoot$AreasToJson(this);
@@ -93,7 +95,6 @@ class AreasBoolExp extends JsonSerializable with EquatableMixin {
 
   FamiliesBoolExp? families;
 
-  @JsonKey(name: 'firestore_id')
   StringComparisonExp? firestoreId;
 
   UuidComparisonExp? id;
@@ -108,7 +109,6 @@ class AreasBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? persons;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   StoresBoolExp? stores;
@@ -154,8 +154,8 @@ class UsersPermissionsBoolExp extends JsonSerializable with EquatableMixin {
       this.group,
       this.groupAdminOnUsers,
       this.groupAllowEdit,
-      this.isUserAllowedToChange,
       this.isUserAllowedToRead,
+      this.isUserAllowedToChange,
       this.permissionId,
       this.service,
       this.serviceAdminOnUsers,
@@ -185,39 +185,31 @@ class UsersPermissionsBoolExp extends JsonSerializable with EquatableMixin {
 
   AreasBoolExp? area;
 
-  @JsonKey(name: 'area_adminOnUsers')
   BooleanComparisonExp? areaAdminOnUsers;
 
-  @JsonKey(name: 'area_allowEdit')
   BooleanComparisonExp? areaAllowEdit;
 
   GroupsBoolExp? group;
 
-  @JsonKey(name: 'group_adminOnUsers')
   BooleanComparisonExp? groupAdminOnUsers;
 
-  @JsonKey(name: 'group_allowEdit')
   BooleanComparisonExp? groupAllowEdit;
-
-  BooleanComparisonExp? isUserAllowedToChange;
 
   BooleanComparisonExp? isUserAllowedToRead;
 
-  @JsonKey(name: 'permission_id')
+  @JsonKey(name: 'is_user_allowed_to_change')
+  BooleanComparisonExp? isUserAllowedToChange;
+
   UuidComparisonExp? permissionId;
 
   ServicesBoolExp? service;
 
-  @JsonKey(name: 'service_adminOnUsers')
   BooleanComparisonExp? serviceAdminOnUsers;
 
-  @JsonKey(name: 'service_allowEdit')
   BooleanComparisonExp? serviceAllowEdit;
 
-  @JsonKey(name: 'service_gender')
   BooleanComparisonExp? serviceGender;
 
-  @JsonKey(name: 'service_studyYear')
   SmallintComparisonExp? serviceStudyYear;
 
   UuidComparisonExp? uid;
@@ -238,8 +230,8 @@ class UsersPermissionsBoolExp extends JsonSerializable with EquatableMixin {
         group,
         groupAdminOnUsers,
         groupAllowEdit,
-        isUserAllowedToChange,
         isUserAllowedToRead,
+        isUserAllowedToChange,
         permissionId,
         service,
         serviceAdminOnUsers,
@@ -394,7 +386,7 @@ class GroupsBoolExp extends JsonSerializable with EquatableMixin {
       this.persons,
       this.photoUpdatedAt,
       this.service,
-      this.serviceID,
+      this.serviceId,
       this.validity});
 
   factory GroupsBoolExp.fromJson(Map<String, dynamic> json) =>
@@ -411,7 +403,6 @@ class GroupsBoolExp extends JsonSerializable with EquatableMixin {
 
   UsersPermissionsBoolExp? adminUsers;
 
-  @JsonKey(name: 'attendance_history')
   HistoryAttendanceHistoryBoolExp? attendanceHistory;
 
   IntComparisonExp? color;
@@ -428,12 +419,11 @@ class GroupsBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsGroupsBoolExp? persons;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   ServicesBoolExp? service;
 
-  UuidComparisonExp? serviceID;
+  UuidComparisonExp? serviceId;
 
   DaterangeComparisonExp? validity;
 
@@ -453,7 +443,7 @@ class GroupsBoolExp extends JsonSerializable with EquatableMixin {
         persons,
         photoUpdatedAt,
         service,
-        serviceID,
+        serviceId,
         validity
       ];
   @override
@@ -468,17 +458,17 @@ class HistoryAttendanceHistoryBoolExp extends JsonSerializable
       this.$not,
       this.$or,
       this.day,
-      this.dayID,
+      this.dayId,
       this.group,
-      this.groupID,
+      this.groupId,
       this.id,
       this.isUserAllowedToRead,
       this.isUserAllowedToWrite,
       this.person,
-      this.personID,
+      this.personId,
       this.recordedBy,
       this.service,
-      this.serviceID,
+      this.serviceId,
       this.time,
       this.user});
 
@@ -496,11 +486,11 @@ class HistoryAttendanceHistoryBoolExp extends JsonSerializable
 
   HistoryAttendanceDaysBoolExp? day;
 
-  DateComparisonExp? dayID;
+  DateComparisonExp? dayId;
 
   GroupsBoolExp? group;
 
-  UuidComparisonExp? groupID;
+  UuidComparisonExp? groupId;
 
   UuidComparisonExp? id;
 
@@ -510,13 +500,13 @@ class HistoryAttendanceHistoryBoolExp extends JsonSerializable
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
   UuidComparisonExp? recordedBy;
 
   ServicesBoolExp? service;
 
-  UuidComparisonExp? serviceID;
+  UuidComparisonExp? serviceId;
 
   TimestampComparisonExp? time;
 
@@ -528,17 +518,17 @@ class HistoryAttendanceHistoryBoolExp extends JsonSerializable
         $not,
         $or,
         day,
-        dayID,
+        dayId,
         group,
-        groupID,
+        groupId,
         id,
         isUserAllowedToRead,
         isUserAllowedToWrite,
         person,
-        personID,
+        personId,
         recordedBy,
         service,
-        serviceID,
+        serviceId,
         time,
         user
       ];
@@ -574,10 +564,8 @@ class HistoryAttendanceDaysBoolExp extends JsonSerializable
   @JsonKey(name: '_or')
   List<HistoryAttendanceDaysBoolExp>? $or;
 
-  @JsonKey(name: 'attendance_history')
   HistoryAttendanceHistoryBoolExp? attendanceHistory;
 
-  @JsonKey(name: 'confession_history')
   HistoryConfessionHistoryBoolExp? confessionHistory;
 
   HistoryAttendanceDaysConstraintsBoolExp? constraints;
@@ -586,7 +574,6 @@ class HistoryAttendanceDaysBoolExp extends JsonSerializable
 
   BooleanComparisonExp? isUserAllowedToWrite;
 
-  @JsonKey(name: 'kodas_history')
   HistoryKodasHistoryBoolExp? kodasHistory;
 
   StringComparisonExp? notes;
@@ -616,10 +603,10 @@ class HistoryConfessionHistoryBoolExp extends JsonSerializable
       this.$not,
       this.$or,
       this.day,
-      this.dayID,
+      this.dayId,
       this.id,
       this.person,
-      this.personID,
+      this.personId,
       this.recordedBy,
       this.user});
 
@@ -637,13 +624,13 @@ class HistoryConfessionHistoryBoolExp extends JsonSerializable
 
   HistoryAttendanceDaysBoolExp? day;
 
-  DateComparisonExp? dayID;
+  DateComparisonExp? dayId;
 
   UuidComparisonExp? id;
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
   UuidComparisonExp? recordedBy;
 
@@ -651,7 +638,7 @@ class HistoryConfessionHistoryBoolExp extends JsonSerializable
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, day, dayID, id, person, personID, recordedBy, user];
+      [$and, $not, $or, day, dayId, id, person, personId, recordedBy, user];
   @override
   Map<String, dynamic> toJson() =>
       _$HistoryConfessionHistoryBoolExpToJson(this);
@@ -720,15 +707,15 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
       this.birthday,
       this.callHistory,
       this.church,
-      this.churchID,
+      this.churchId,
       this.college,
-      this.collegeID,
+      this.collegeId,
       this.color,
       this.confessionHistory,
       this.family,
-      this.familyID,
+      this.familyId,
       this.father,
-      this.fatherID,
+      this.fatherId,
       this.firestoreId,
       this.gender,
       this.geolocation,
@@ -741,7 +728,7 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
       this.isUserAllowedToWrite,
       this.job,
       this.jobDescription,
-      this.jobID,
+      this.jobId,
       this.kodasHistory,
       this.lastCall,
       this.lastConfession,
@@ -753,20 +740,20 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
       this.notes,
       this.otherPhones,
       this.personType,
-      this.personTypeID,
+      this.personTypeId,
       this.photoUpdatedAt,
       this.qualification,
-      this.qualificationID,
+      this.qualificationId,
       this.school,
-      this.schoolID,
+      this.schoolId,
       this.services,
       this.shammasLevel,
       this.state,
-      this.stateID,
-      this.storeID,
+      this.stateId,
+      this.storeId,
       this.streets,
       this.studyYear,
-      this.studyYearID,
+      this.studyYearId,
       this.tags,
       this.uid,
       this.user,
@@ -788,38 +775,34 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
 
   AreasBoolExp? areas;
 
-  @JsonKey(name: 'attendance_history')
   HistoryAttendanceHistoryBoolExp? attendanceHistory;
 
   DateComparisonExp? birthdate;
 
   StringComparisonExp? birthday;
 
-  @JsonKey(name: 'call_history')
   HistoryCallHistoryBoolExp? callHistory;
 
   ChurchesBoolExp? church;
 
-  UuidComparisonExp? churchID;
+  UuidComparisonExp? churchId;
 
   CollegesBoolExp? college;
 
-  UuidComparisonExp? collegeID;
+  UuidComparisonExp? collegeId;
 
   IntComparisonExp? color;
 
-  @JsonKey(name: 'confession_history')
   HistoryConfessionHistoryBoolExp? confessionHistory;
 
   FamiliesBoolExp? family;
 
-  UuidComparisonExp? familyID;
+  UuidComparisonExp? familyId;
 
   FathersBoolExp? father;
 
-  UuidComparisonExp? fatherID;
+  UuidComparisonExp? fatherId;
 
-  @JsonKey(name: 'firestore_id')
   StringComparisonExp? firestoreId;
 
   BooleanComparisonExp? gender;
@@ -844,9 +827,8 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
 
   StringComparisonExp? jobDescription;
 
-  UuidComparisonExp? jobID;
+  UuidComparisonExp? jobId;
 
-  @JsonKey(name: 'kodas_history')
   HistoryKodasHistoryBoolExp? kodasHistory;
 
   JsonbComparisonExp? lastCall;
@@ -869,18 +851,17 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonTypesBoolExp? personType;
 
-  UuidComparisonExp? personTypeID;
+  UuidComparisonExp? personTypeId;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   QualificationsBoolExp? qualification;
 
-  UuidComparisonExp? qualificationID;
+  UuidComparisonExp? qualificationId;
 
   SchoolsBoolExp? school;
 
-  UuidComparisonExp? schoolID;
+  UuidComparisonExp? schoolId;
 
   PersonsServicesBoolExp? services;
 
@@ -888,15 +869,15 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
 
   StatesBoolExp? state;
 
-  UuidComparisonExp? stateID;
+  UuidComparisonExp? stateId;
 
-  UuidComparisonExp? storeID;
+  UuidComparisonExp? storeId;
 
   StreetsBoolExp? streets;
 
   StudyYearsBoolExp? studyYear;
 
-  SmallintComparisonExp? studyYearID;
+  SmallintComparisonExp? studyYearId;
 
   PersonsTagsBoolExp? tags;
 
@@ -904,7 +885,6 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
 
   UsersBoolExp? user;
 
-  @JsonKey(name: 'visit_history')
   HistoryVisitHistoryBoolExp? visitHistory;
 
   @override
@@ -919,15 +899,15 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
         birthday,
         callHistory,
         church,
-        churchID,
+        churchId,
         college,
-        collegeID,
+        collegeId,
         color,
         confessionHistory,
         family,
-        familyID,
+        familyId,
         father,
-        fatherID,
+        fatherId,
         firestoreId,
         gender,
         geolocation,
@@ -940,7 +920,7 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
         isUserAllowedToWrite,
         job,
         jobDescription,
-        jobID,
+        jobId,
         kodasHistory,
         lastCall,
         lastConfession,
@@ -952,20 +932,20 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
         notes,
         otherPhones,
         personType,
-        personTypeID,
+        personTypeId,
         photoUpdatedAt,
         qualification,
-        qualificationID,
+        qualificationId,
         school,
-        schoolID,
+        schoolId,
         services,
         shammasLevel,
         state,
-        stateID,
-        storeID,
+        stateId,
+        storeId,
         streets,
         studyYear,
-        studyYearID,
+        studyYearId,
         tags,
         uid,
         user,
@@ -1110,15 +1090,12 @@ class HistoryCallHistoryBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? person;
 
-  @JsonKey(name: 'person_id')
   UuidComparisonExp? personId;
 
   TimestamptzComparisonExp? time;
 
-  @JsonKey(name: 'user_role')
   StringComparisonExp? userRole;
 
-  @JsonKey(name: 'user_uid')
   UuidComparisonExp? userUid;
 
   @override
@@ -1222,7 +1199,7 @@ class FathersBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.church,
-      this.churchID,
+      this.churchId,
       this.id,
       this.name,
       this.persons});
@@ -1241,7 +1218,7 @@ class FathersBoolExp extends JsonSerializable with EquatableMixin {
 
   ChurchesBoolExp? church;
 
-  UuidComparisonExp? churchID;
+  UuidComparisonExp? churchId;
 
   UuidComparisonExp? id;
 
@@ -1251,7 +1228,7 @@ class FathersBoolExp extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, church, churchID, id, name, persons];
+      [$and, $not, $or, church, churchId, id, name, persons];
   @override
   Map<String, dynamic> toJson() => _$FathersBoolExpToJson(this);
 }
@@ -1266,7 +1243,7 @@ class CollegesBoolExp extends JsonSerializable with EquatableMixin {
       this.name,
       this.persons,
       this.university,
-      this.universityID});
+      this.universityId});
 
   factory CollegesBoolExp.fromJson(Map<String, dynamic> json) =>
       _$CollegesBoolExpFromJson(json);
@@ -1288,11 +1265,11 @@ class CollegesBoolExp extends JsonSerializable with EquatableMixin {
 
   UniversitiesBoolExp? university;
 
-  UuidComparisonExp? universityID;
+  UuidComparisonExp? universityId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, id, name, persons, university, universityID];
+      [$and, $not, $or, id, name, persons, university, universityId];
   @override
   Map<String, dynamic> toJson() => _$CollegesBoolExpToJson(this);
 }
@@ -1437,7 +1414,6 @@ class FamiliesBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? persons;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   StoresBoolExp? stores;
@@ -1477,9 +1453,9 @@ class FamiliesFamiliesBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.innerFamily,
-      this.innerFamilyID,
+      this.innerFamilyId,
       this.outerFamily,
-      this.outerFamilyID});
+      this.outerFamilyId});
 
   factory FamiliesFamiliesBoolExp.fromJson(Map<String, dynamic> json) =>
       _$FamiliesFamiliesBoolExpFromJson(json);
@@ -1495,15 +1471,15 @@ class FamiliesFamiliesBoolExp extends JsonSerializable with EquatableMixin {
 
   FamiliesBoolExp? innerFamily;
 
-  UuidComparisonExp? innerFamilyID;
+  UuidComparisonExp? innerFamilyId;
 
   FamiliesBoolExp? outerFamily;
 
-  UuidComparisonExp? outerFamilyID;
+  UuidComparisonExp? outerFamilyId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, innerFamily, innerFamilyID, outerFamily, outerFamilyID];
+      [$and, $not, $or, innerFamily, innerFamilyId, outerFamily, outerFamilyId];
   @override
   Map<String, dynamic> toJson() => _$FamiliesFamiliesBoolExpToJson(this);
 }
@@ -1920,7 +1896,6 @@ class StoresBoolExp extends JsonSerializable with EquatableMixin {
 
   StringComparisonExp? name;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   StreetsBoolExp? streets;
@@ -1998,7 +1973,6 @@ class StreetsBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? persons;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   StoresBoolExp? stores;
@@ -2032,9 +2006,9 @@ class PersonsGroupsBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.group,
-      this.groupID,
+      this.groupId,
       this.person,
-      this.personID,
+      this.personId,
       this.relId});
 
   factory PersonsGroupsBoolExp.fromJson(Map<String, dynamic> json) =>
@@ -2051,18 +2025,17 @@ class PersonsGroupsBoolExp extends JsonSerializable with EquatableMixin {
 
   GroupsBoolExp? group;
 
-  UuidComparisonExp? groupID;
+  UuidComparisonExp? groupId;
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
-  @JsonKey(name: 'rel_id')
   UuidComparisonExp? relId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, group, groupID, person, personID, relId];
+      [$and, $not, $or, group, groupId, person, personId, relId];
   @override
   Map<String, dynamic> toJson() => _$PersonsGroupsBoolExpToJson(this);
 }
@@ -2103,10 +2076,10 @@ class HistoryKodasHistoryBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.day,
-      this.dayID,
+      this.dayId,
       this.id,
       this.person,
-      this.personID,
+      this.personId,
       this.recordedBy,
       this.user});
 
@@ -2124,13 +2097,13 @@ class HistoryKodasHistoryBoolExp extends JsonSerializable with EquatableMixin {
 
   HistoryAttendanceDaysBoolExp? day;
 
-  DateComparisonExp? dayID;
+  DateComparisonExp? dayId;
 
   UuidComparisonExp? id;
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
   UuidComparisonExp? recordedBy;
 
@@ -2138,7 +2111,7 @@ class HistoryKodasHistoryBoolExp extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, day, dayID, id, person, personID, recordedBy, user];
+      [$and, $not, $or, day, dayId, id, person, personId, recordedBy, user];
   @override
   Map<String, dynamic> toJson() => _$HistoryKodasHistoryBoolExpToJson(this);
 }
@@ -2153,8 +2126,8 @@ class UsersBoolExp extends JsonSerializable with EquatableMixin {
       this.email,
       this.firebaseAuthUid,
       this.firestoreId,
-      this.isUserAllowedToChange,
       this.isUserAllowedToRead,
+      this.isUserAllowedToChange,
       this.lastEdit,
       this.permissions,
       this.person,
@@ -2177,15 +2150,14 @@ class UsersBoolExp extends JsonSerializable with EquatableMixin {
 
   StringComparisonExp? email;
 
-  @JsonKey(name: 'firebase_auth_uid')
   StringComparisonExp? firebaseAuthUid;
 
-  @JsonKey(name: 'firestore_id')
   StringComparisonExp? firestoreId;
 
-  BooleanComparisonExp? isUserAllowedToChange;
-
   BooleanComparisonExp? isUserAllowedToRead;
+
+  @JsonKey(name: 'is_user_allowed_to_change')
+  BooleanComparisonExp? isUserAllowedToChange;
 
   JsonbComparisonExp? lastEdit;
 
@@ -2193,7 +2165,6 @@ class UsersBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? person;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   UuidComparisonExp? uid;
@@ -2207,8 +2178,8 @@ class UsersBoolExp extends JsonSerializable with EquatableMixin {
         email,
         firebaseAuthUid,
         firestoreId,
-        isUserAllowedToChange,
         isUserAllowedToRead,
+        isUserAllowedToChange,
         lastEdit,
         permissions,
         person,
@@ -2371,10 +2342,10 @@ class PersonsServicesBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.person,
-      this.personID,
+      this.personId,
       this.relId,
       this.service,
-      this.serviceID});
+      this.serviceId});
 
   factory PersonsServicesBoolExp.fromJson(Map<String, dynamic> json) =>
       _$PersonsServicesBoolExpFromJson(json);
@@ -2390,18 +2361,17 @@ class PersonsServicesBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
-  @JsonKey(name: 'rel_id')
   UuidComparisonExp? relId;
 
   ServicesBoolExp? service;
 
-  UuidComparisonExp? serviceID;
+  UuidComparisonExp? serviceId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, person, personID, relId, service, serviceID];
+      [$and, $not, $or, person, personId, relId, service, serviceId];
   @override
   Map<String, dynamic> toJson() => _$PersonsServicesBoolExpToJson(this);
 }
@@ -2413,6 +2383,7 @@ class ServicesBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.attendanceHistory,
+      this.classes,
       this.color,
       this.firestoreId,
       this.fromStudyYear,
@@ -2441,12 +2412,12 @@ class ServicesBoolExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_or')
   List<ServicesBoolExp>? $or;
 
-  @JsonKey(name: 'attendance_history')
   HistoryAttendanceHistoryBoolExp? attendanceHistory;
+
+  ClassesBoolExp? classes;
 
   IntComparisonExp? color;
 
-  @JsonKey(name: 'firestore_id')
   StringComparisonExp? firestoreId;
 
   StudyYearsBoolExp? fromStudyYear;
@@ -2465,7 +2436,6 @@ class ServicesBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsServicesBoolExp? persons;
 
-  @JsonKey(name: 'photo_updated_at')
   TimestamptzComparisonExp? photoUpdatedAt;
 
   SmallintComparisonExp? studyYearFrom;
@@ -2482,6 +2452,7 @@ class ServicesBoolExp extends JsonSerializable with EquatableMixin {
         $not,
         $or,
         attendanceHistory,
+        classes,
         color,
         firestoreId,
         fromStudyYear,
@@ -2503,9 +2474,188 @@ class ServicesBoolExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ClassesBoolExp extends JsonSerializable with EquatableMixin {
+  ClassesBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.color,
+      this.id,
+      this.isUserAllowedToRead,
+      this.isUserAllowedToWrite,
+      this.name,
+      this.photoUpdatedAt,
+      this.service,
+      this.serviceGender,
+      this.serviceId,
+      this.serviceStudyYear,
+      this.studyYear});
+
+  factory ClassesBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$ClassesBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<ClassesBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  ClassesBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<ClassesBoolExp>? $or;
+
+  BigintComparisonExp? color;
+
+  UuidComparisonExp? id;
+
+  BooleanComparisonExp? isUserAllowedToRead;
+
+  BooleanComparisonExp? isUserAllowedToWrite;
+
+  StringComparisonExp? name;
+
+  TimeComparisonExp? photoUpdatedAt;
+
+  ServicesBoolExp? service;
+
+  BooleanComparisonExp? serviceGender;
+
+  UuidComparisonExp? serviceId;
+
+  IntComparisonExp? serviceStudyYear;
+
+  StudyYearsBoolExp? studyYear;
+
+  @override
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        color,
+        id,
+        isUserAllowedToRead,
+        isUserAllowedToWrite,
+        name,
+        photoUpdatedAt,
+        service,
+        serviceGender,
+        serviceId,
+        serviceStudyYear,
+        studyYear
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$ClassesBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class BigintComparisonExp extends JsonSerializable with EquatableMixin {
+  BigintComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory BigintComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$BigintComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  int? $eq;
+
+  @JsonKey(name: '_gt')
+  int? $gt;
+
+  @JsonKey(name: '_gte')
+  int? $gte;
+
+  @JsonKey(name: '_in')
+  List<int>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  int? $lt;
+
+  @JsonKey(name: '_lte')
+  int? $lte;
+
+  @JsonKey(name: '_neq')
+  int? $neq;
+
+  @JsonKey(name: '_nin')
+  List<int>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$BigintComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class TimeComparisonExp extends JsonSerializable with EquatableMixin {
+  TimeComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory TimeComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$TimeComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  DateTime? $eq;
+
+  @JsonKey(name: '_gt')
+  DateTime? $gt;
+
+  @JsonKey(name: '_gte')
+  DateTime? $gte;
+
+  @JsonKey(name: '_in')
+  List<DateTime>? $in;
+
+  @JsonKey(name: '_is_null')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  DateTime? $lt;
+
+  @JsonKey(name: '_lte')
+  DateTime? $lte;
+
+  @JsonKey(name: '_neq')
+  DateTime? $neq;
+
+  @JsonKey(name: '_nin')
+  List<DateTime>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$TimeComparisonExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class StudyYearsBoolExp extends JsonSerializable with EquatableMixin {
   StudyYearsBoolExp(
-      {this.$and, this.$not, this.$or, this.name, this.order, this.persons});
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.classes,
+      this.name,
+      this.order,
+      this.persons});
 
   factory StudyYearsBoolExp.fromJson(Map<String, dynamic> json) =>
       _$StudyYearsBoolExpFromJson(json);
@@ -2519,6 +2669,8 @@ class StudyYearsBoolExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_or')
   List<StudyYearsBoolExp>? $or;
 
+  ClassesBoolExp? classes;
+
   StringComparisonExp? name;
 
   SmallintComparisonExp? order;
@@ -2526,7 +2678,7 @@ class StudyYearsBoolExp extends JsonSerializable with EquatableMixin {
   PersonsBoolExp? persons;
 
   @override
-  List<Object?> get props => [$and, $not, $or, name, order, persons];
+  List<Object?> get props => [$and, $not, $or, classes, name, order, persons];
   @override
   Map<String, dynamic> toJson() => _$StudyYearsBoolExpToJson(this);
 }
@@ -2625,10 +2777,10 @@ class PersonsTagsBoolExp extends JsonSerializable with EquatableMixin {
       this.$not,
       this.$or,
       this.person,
-      this.personID,
+      this.personId,
       this.relId,
       this.tag,
-      this.tagID});
+      this.tagId});
 
   factory PersonsTagsBoolExp.fromJson(Map<String, dynamic> json) =>
       _$PersonsTagsBoolExpFromJson(json);
@@ -2644,18 +2796,17 @@ class PersonsTagsBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? person;
 
-  UuidComparisonExp? personID;
+  UuidComparisonExp? personId;
 
-  @JsonKey(name: 'rel_id')
   UuidComparisonExp? relId;
 
   TagsBoolExp? tag;
 
-  UuidComparisonExp? tagID;
+  UuidComparisonExp? tagId;
 
   @override
   List<Object?> get props =>
-      [$and, $not, $or, person, personID, relId, tag, tagID];
+      [$and, $not, $or, person, personId, relId, tag, tagId];
   @override
   Map<String, dynamic> toJson() => _$PersonsTagsBoolExpToJson(this);
 }
@@ -2723,15 +2874,12 @@ class HistoryVisitHistoryBoolExp extends JsonSerializable with EquatableMixin {
 
   PersonsBoolExp? person;
 
-  @JsonKey(name: 'person_id')
   UuidComparisonExp? personId;
 
   TimestamptzComparisonExp? time;
 
-  @JsonKey(name: 'user_role')
   StringComparisonExp? userRole;
 
-  @JsonKey(name: 'user_uid')
   UuidComparisonExp? userUid;
 
   @override
@@ -2749,15 +2897,15 @@ class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
       this.$not,
       this.$or,
       this.day,
-      this.dayID,
+      this.dayId,
       this.group,
-      this.groupID,
+      this.groupId,
       this.id,
       this.isUserAllowedToRead,
       this.isUserAllowedToWrite,
       this.service,
-      this.serviceID,
       this.serviceGender,
+      this.serviceId,
       this.serviceStudyYear,
       this.studyYear});
 
@@ -2776,11 +2924,11 @@ class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
 
   HistoryAttendanceDaysBoolExp? day;
 
-  DateComparisonExp? dayID;
+  DateComparisonExp? dayId;
 
   GroupsBoolExp? group;
 
-  UuidComparisonExp? groupID;
+  UuidComparisonExp? groupId;
 
   UuidComparisonExp? id;
 
@@ -2790,12 +2938,10 @@ class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
 
   ServicesBoolExp? service;
 
-  UuidComparisonExp? serviceID;
-
-  @JsonKey(name: 'service_gender')
   BooleanComparisonExp? serviceGender;
 
-  @JsonKey(name: 'service_studyYear')
+  UuidComparisonExp? serviceId;
+
   IntComparisonExp? serviceStudyYear;
 
   StudyYearsBoolExp? studyYear;
@@ -2806,15 +2952,15 @@ class HistoryAttendanceDaysConstraintsBoolExp extends JsonSerializable
         $not,
         $or,
         day,
-        dayID,
+        dayId,
         group,
-        groupID,
+        groupId,
         id,
         isUserAllowedToRead,
         isUserAllowedToWrite,
         service,
-        serviceID,
         serviceGender,
+        serviceId,
         serviceStudyYear,
         studyYear
       ];
@@ -2924,56 +3070,6 @@ class DaterangeComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class BigintComparisonExp extends JsonSerializable with EquatableMixin {
-  BigintComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory BigintComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$BigintComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  int? $eq;
-
-  @JsonKey(name: '_gt')
-  int? $gt;
-
-  @JsonKey(name: '_gte')
-  int? $gte;
-
-  @JsonKey(name: '_in')
-  List<int>? $in;
-
-  @JsonKey(name: '_is_null')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  int? $lt;
-
-  @JsonKey(name: '_lte')
-  int? $lte;
-
-  @JsonKey(name: '_neq')
-  int? $neq;
-
-  @JsonKey(name: '_nin')
-  List<int>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$BigintComparisonExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetServicesStream$SubscriptionRoot$Services$StudyYears
     extends JsonSerializable with EquatableMixin {
   GetServicesStream$SubscriptionRoot$Services$StudyYears();
@@ -2994,6 +3090,33 @@ class GetServicesStream$SubscriptionRoot$Services$StudyYears
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetServicesStream$SubscriptionRoot$Services$Classes
+    extends JsonSerializable with EquatableMixin {
+  GetServicesStream$SubscriptionRoot$Services$Classes();
+
+  factory GetServicesStream$SubscriptionRoot$Services$Classes.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRoot$Services$ClassesFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetServicesStream$SubscriptionRoot$Services$ClassesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetServicesStream$SubscriptionRoot$Services$Groups
     extends JsonSerializable with EquatableMixin {
   GetServicesStream$SubscriptionRoot$Services$Groups();
@@ -3011,8 +3134,10 @@ class GetServicesStream$SubscriptionRoot$Services$Groups
 
   int? color;
 
+  DateTime? photoUpdatedAt;
+
   @override
-  List<Object?> get props => [id, name, color];
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
   @override
   Map<String, dynamic> toJson() =>
       _$GetServicesStream$SubscriptionRoot$Services$GroupsToJson(this);
@@ -3036,15 +3161,27 @@ class GetServicesStream$SubscriptionRoot$Services extends JsonSerializable
 
   int? color;
 
+  DateTime? photoUpdatedAt;
+
   GetServicesStream$SubscriptionRoot$Services$StudyYears? fromStudyYear;
 
   GetServicesStream$SubscriptionRoot$Services$StudyYears? toStudyYear;
 
+  late List<GetServicesStream$SubscriptionRoot$Services$Classes> classes;
+
   late List<GetServicesStream$SubscriptionRoot$Services$Groups> groups;
 
   @override
-  List<Object?> get props =>
-      [id, name, color, fromStudyYear, toStudyYear, groups];
+  List<Object?> get props => [
+        id,
+        name,
+        color,
+        photoUpdatedAt,
+        fromStudyYear,
+        toStudyYear,
+        classes,
+        groups
+      ];
   @override
   Map<String, dynamic> toJson() =>
       _$GetServicesStream$SubscriptionRoot$ServicesToJson(this);
@@ -3095,7 +3232,7 @@ class GetStudyYearName$QueryRoot extends JsonSerializable with EquatableMixin {
   factory GetStudyYearName$QueryRoot.fromJson(Map<String, dynamic> json) =>
       _$GetStudyYearName$QueryRootFromJson(json);
 
-  @JsonKey(name: 'studyYears_by_pk')
+  @JsonKey(name: 'study_years_by_pk')
   GetStudyYearName$QueryRoot$StudyYears? studyYearsByPk;
 
   @override
@@ -3122,7 +3259,6 @@ class GetPersonsStream$SubscriptionRoot$Persons extends JsonSerializable
 
   int? color;
 
-  @JsonKey(name: 'photo_updated_at')
   DateTime? photoUpdatedAt;
 
   @override
@@ -3188,46 +3324,46 @@ class GetUserInfoStream$SubscriptionRoot$Users$Persons extends JsonSerializable
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? schoolID;
+  UuidValue? schoolId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? collegeID;
+  UuidValue? collegeId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? churchID;
+  UuidValue? churchId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? fatherID;
+  UuidValue? fatherId;
 
   late bool isStudent;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? jobID;
+  UuidValue? jobId;
 
   String? jobDescription;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? qualificationID;
+  UuidValue? qualificationId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? personTypeID;
+  UuidValue? personTypeId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? stateID;
+  UuidValue? stateId;
 
   late bool isServant;
 
@@ -3236,18 +3372,17 @@ class GetUserInfoStream$SubscriptionRoot$Users$Persons extends JsonSerializable
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? familyID;
+  UuidValue? familyId;
 
   @JsonKey(
       fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
       toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? storeID;
+  UuidValue? storeId;
 
-  int? studyYearID;
+  int? studyYearId;
 
   int? color;
 
-  @JsonKey(name: 'photo_updated_at')
   DateTime? photoUpdatedAt;
 
   Map<String, dynamic>? lastKodas;
@@ -3266,21 +3401,21 @@ class GetUserInfoStream$SubscriptionRoot$Users$Persons extends JsonSerializable
         gender,
         isShammas,
         shammasLevel,
-        schoolID,
-        collegeID,
-        churchID,
-        fatherID,
+        schoolId,
+        collegeId,
+        churchId,
+        fatherId,
         isStudent,
-        jobID,
+        jobId,
         jobDescription,
-        qualificationID,
-        personTypeID,
-        stateID,
+        qualificationId,
+        personTypeId,
+        stateId,
         isServant,
         notes,
-        familyID,
-        storeID,
-        studyYearID,
+        familyId,
+        storeId,
+        studyYearId,
         color,
         photoUpdatedAt,
         lastKodas,
@@ -3305,7 +3440,6 @@ class GetUserInfoStream$SubscriptionRoot$Users extends JsonSerializable
       toJson: fromDartUuidValueToGraphQLUuid)
   late UuidValue uid;
 
-  @JsonKey(name: 'firebase_auth_uid')
   String? firebaseAuthUid;
 
   late String email;
@@ -3595,13 +3729,19 @@ final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
+                  name: NameNode(value: 'bounds'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
                   name: NameNode(value: 'color'),
                   alias: null,
                   arguments: [],
                   directives: [],
                   selectionSet: null),
               FieldNode(
-                  name: NameNode(value: 'bounds'),
+                  name: NameNode(value: 'photoUpdatedAt'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -3633,7 +3773,8 @@ class GetAreasStreamSubscription extends GraphQLQuery<
 
 @JsonSerializable(explicitToJson: true)
 class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
-  GetServicesStreamArguments({this.addWhere, this.limit});
+  GetServicesStreamArguments(
+      {this.addWhere, this.groupsAddWhere, this.classesAddWhere, this.limit});
 
   @override
   factory GetServicesStreamArguments.fromJson(Map<String, dynamic> json) =>
@@ -3641,10 +3782,14 @@ class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
 
   final List<ServicesBoolExp>? addWhere;
 
+  final List<GroupsBoolExp>? groupsAddWhere;
+
+  final List<ClassesBoolExp>? classesAddWhere;
+
   final int? limit;
 
   @override
-  List<Object?> get props => [addWhere, limit];
+  List<Object?> get props => [addWhere, groupsAddWhere, classesAddWhere, limit];
   @override
   Map<String, dynamic> toJson() => _$GetServicesStreamArgumentsToJson(this);
 }
@@ -3662,6 +3807,22 @@ final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                 type: NamedTypeNode(
                     name: NameNode(value: 'services_bool_exp'),
                     isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'groupsAddWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'groups_bool_exp'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'classesAddWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'classes_bool_exp'), isNonNull: true),
                 isNonNull: false),
             defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
             directives: []),
@@ -3719,6 +3880,12 @@ final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
                   name: NameNode(value: 'fromStudyYear'),
                   alias: null,
                   arguments: [],
@@ -3757,9 +3924,17 @@ final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         selectionSet: null)
                   ])),
               FieldNode(
-                  name: NameNode(value: 'groups'),
+                  name: NameNode(value: 'classes'),
                   alias: null,
                   arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'classesAddWhere')))
+                        ])),
                     ArgumentNode(
                         name: NameNode(value: 'order_by'),
                         value: ObjectValueNode(fields: [
@@ -3793,6 +3968,68 @@ final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         selectionSet: null),
                     FieldNode(
                         name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'groups'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'groupsAddWhere')))
+                        ])),
+                    ArgumentNode(
+                        name: NameNode(value: 'order_by'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'service'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'studyYearFrom'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'asc'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'studyYearTo'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'asc')))
+                              ]))
+                        ]))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -3855,7 +4092,7 @@ final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(definitions: [
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
-            name: NameNode(value: 'studyYears_by_pk'),
+            name: NameNode(value: 'study_years_by_pk'),
             alias: null,
             arguments: [
               ArgumentNode(
@@ -3985,7 +4222,7 @@ final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
-                  name: NameNode(value: 'photo_updated_at'),
+                  name: NameNode(value: 'photoUpdatedAt'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -4066,7 +4303,7 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
-                  name: NameNode(value: 'firebase_auth_uid'),
+                  name: NameNode(value: 'firebaseAuthUid'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -4150,25 +4387,25 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'schoolID'),
+                        name: NameNode(value: 'schoolId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'collegeID'),
+                        name: NameNode(value: 'collegeId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'churchID'),
+                        name: NameNode(value: 'churchId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'fatherID'),
+                        name: NameNode(value: 'fatherId'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4180,7 +4417,7 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'jobID'),
+                        name: NameNode(value: 'jobId'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4192,19 +4429,19 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'qualificationID'),
+                        name: NameNode(value: 'qualificationId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'personTypeID'),
+                        name: NameNode(value: 'personTypeId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'stateID'),
+                        name: NameNode(value: 'stateId'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4222,19 +4459,19 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'familyID'),
+                        name: NameNode(value: 'familyId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'storeID'),
+                        name: NameNode(value: 'storeId'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'studyYearID'),
+                        name: NameNode(value: 'studyYearId'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4246,7 +4483,7 @@ final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'photo_updated_at'),
+                        name: NameNode(value: 'photoUpdatedAt'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4332,13 +4569,13 @@ final GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT =
                   name: NameNode(value: 'where'),
                   value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                        name: NameNode(value: 'attendance_history'),
+                        name: NameNode(value: 'attendanceHistory'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_not'),
                               value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                    name: NameNode(value: 'dayID'),
+                                    name: NameNode(value: 'dayId'),
                                     value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
@@ -4428,13 +4665,13 @@ final GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
                   name: NameNode(value: 'where'),
                   value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                        name: NameNode(value: 'kodas_history'),
+                        name: NameNode(value: 'kodasHistory'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_not'),
                               value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                    name: NameNode(value: 'dayID'),
+                                    name: NameNode(value: 'dayId'),
                                     value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
@@ -4525,13 +4762,13 @@ final GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT =
                   name: NameNode(value: 'where'),
                   value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                        name: NameNode(value: 'confession_history'),
+                        name: NameNode(value: 'confessionHistory'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_not'),
                               value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                    name: NameNode(value: 'dayID'),
+                                    name: NameNode(value: 'dayId'),
                                     value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
@@ -4622,7 +4859,7 @@ final GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
                   name: NameNode(value: 'where'),
                   value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                        name: NameNode(value: 'visit_history'),
+                        name: NameNode(value: 'visitHistory'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_not'),

@@ -26,7 +26,6 @@ mixin _$Area {
   Polygon? get bounds => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,8 +44,7 @@ abstract class $AreaCopyWith<$Res> {
           Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
-      @JsonKey(name: 'photo_updated_at')
-          DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -102,8 +100,7 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
           Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
-      @JsonKey(name: 'photo_updated_at')
-          DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -156,7 +153,7 @@ class _$_Area extends _Area {
       required this.name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) this.bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      @JsonKey(name: 'photo_updated_at') this.photoUpdatedAt})
+      this.photoUpdatedAt})
       : super._();
 
   factory _$_Area.fromJson(Map<String, dynamic> json) => _$$_AreaFromJson(json);
@@ -172,7 +169,6 @@ class _$_Area extends _Area {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -210,7 +206,9 @@ class _$_Area extends _Area {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AreaToJson(this);
+    return _$$_AreaToJson(
+      this,
+    );
   }
 }
 
@@ -222,8 +220,7 @@ abstract class _Area extends Area {
           final Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
-      @JsonKey(name: 'photo_updated_at')
-          final DateTime? photoUpdatedAt}) = _$_Area;
+      final DateTime? photoUpdatedAt}) = _$_Area;
   _Area._() : super._();
 
   factory _Area.fromJson(Map<String, dynamic> json) = _$_Area.fromJson;
@@ -239,7 +236,6 @@ abstract class _Area extends Area {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt;
   @override
   @JsonKey(ignore: true)

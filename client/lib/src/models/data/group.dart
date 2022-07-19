@@ -16,7 +16,7 @@ class Group extends ViewableWithID with _$Group {
     required String id,
     required String name,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt,
+    DateTime? photoUpdatedAt,
   }) = _Group;
   Group._() : super();
 

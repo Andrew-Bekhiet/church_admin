@@ -196,6 +196,10 @@ type areas {
   ): users_permissions_aggregate!
   bounds: geography
   color: bigint
+
+  """
+  A computed field, executes function "area_families"
+  """
   families(
     """
     distinct select on columns
@@ -222,10 +226,22 @@ type areas {
     """
     where: families_bool_exp
   ): [families!]
-  firestore_id: String
+  firestoreId: String
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_area"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_area"
+  """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_area_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -233,6 +249,10 @@ type areas {
     path: String
   ): jsonb
   name: String!
+
+  """
+  A computed field, executes function "area_persons"
+  """
   persons(
     """
     distinct select on columns
@@ -259,7 +279,11 @@ type areas {
     """
     where: persons_bool_exp
   ): [persons!]
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
+
+  """
+  A computed field, executes function "area_stores"
+  """
   stores(
     """
     distinct select on columns
@@ -286,6 +310,10 @@ type areas {
     """
     where: stores_bool_exp
   ): [stores!]
+
+  """
+  A computed field, executes function "area_streets"
+  """
   streets(
     """
     distinct select on columns
@@ -381,14 +409,14 @@ input areas_bool_exp {
   bounds: geography_comparison_exp
   color: bigint_comparison_exp
   families: families_bool_exp
-  firestore_id: String_comparison_exp
+  firestoreId: String_comparison_exp
   id: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
   isUserAllowedToWrite: Boolean_comparison_exp
   lastEdit: jsonb_comparison_exp
   name: String_comparison_exp
   persons: persons_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   stores: stores_bool_exp
   streets: streets_bool_exp
 }
@@ -422,10 +450,10 @@ input areas_insert_input {
   adminUsers: users_permissions_arr_rel_insert_input
   bounds: geography
   color: bigint
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -433,10 +461,10 @@ aggregate max on columns
 """
 type areas_max_fields {
   color: bigint
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -444,10 +472,10 @@ order by max() on columns of table "areas"
 """
 input areas_max_order_by {
   color: order_by
-  firestore_id: order_by
+  firestoreId: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -455,10 +483,10 @@ aggregate min on columns
 """
 type areas_min_fields {
   color: bigint
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -466,10 +494,10 @@ order by min() on columns of table "areas"
 """
 input areas_min_order_by {
   color: order_by
-  firestore_id: order_by
+  firestoreId: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -516,14 +544,14 @@ input areas_order_by {
   bounds: order_by
   color: order_by
   families_aggregate: families_aggregate_order_by
-  firestore_id: order_by
+  firestoreId: order_by
   id: order_by
   isUserAllowedToRead: order_by
   isUserAllowedToWrite: order_by
   lastEdit: order_by
   name: order_by
   persons_aggregate: persons_aggregate_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   stores_aggregate: stores_aggregate_order_by
   streets_aggregate: streets_aggregate_order_by
 }
@@ -552,7 +580,7 @@ enum areas_select_column {
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -567,7 +595,7 @@ enum areas_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -576,10 +604,10 @@ input type for updating data in table "areas"
 input areas_set_input {
   bounds: geography
   color: bigint
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -655,7 +683,7 @@ enum areas_update_column {
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -670,7 +698,7 @@ enum areas_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -1022,6 +1050,459 @@ enum churches_update_column {
 }
 
 """
+columns and relationships of "classes"
+"""
+type classes {
+  color: bigint
+  id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_class"
+  """
+  isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_class"
+  """
+  isUserAllowedToWrite: Boolean
+  name: String!
+  photoUpdatedAt: time
+
+  """
+  An object relationship
+  """
+  service: services!
+  serviceGender: Boolean!
+  serviceId: uuid!
+  serviceStudyYear: Int!
+
+  """
+  An object relationship
+  """
+  studyYear: study_years!
+}
+
+"""
+aggregated selection of "classes"
+"""
+type classes_aggregate {
+  aggregate: classes_aggregate_fields
+  nodes: [classes!]!
+}
+
+"""
+aggregate fields of "classes"
+"""
+type classes_aggregate_fields {
+  avg: classes_avg_fields
+  count(columns: [classes_select_column!], distinct: Boolean): Int!
+  max: classes_max_fields
+  min: classes_min_fields
+  stddev: classes_stddev_fields
+  stddev_pop: classes_stddev_pop_fields
+  stddev_samp: classes_stddev_samp_fields
+  sum: classes_sum_fields
+  var_pop: classes_var_pop_fields
+  var_samp: classes_var_samp_fields
+  variance: classes_variance_fields
+}
+
+"""
+order by aggregate values of table "classes"
+"""
+input classes_aggregate_order_by {
+  avg: classes_avg_order_by
+  count: order_by
+  max: classes_max_order_by
+  min: classes_min_order_by
+  stddev: classes_stddev_order_by
+  stddev_pop: classes_stddev_pop_order_by
+  stddev_samp: classes_stddev_samp_order_by
+  sum: classes_sum_order_by
+  var_pop: classes_var_pop_order_by
+  var_samp: classes_var_samp_order_by
+  variance: classes_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "classes"
+"""
+input classes_arr_rel_insert_input {
+  data: [classes_insert_input!]!
+
+  """
+  upsert condition
+  """
+  on_conflict: classes_on_conflict
+}
+
+"""
+aggregate avg on columns
+"""
+type classes_avg_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by avg() on columns of table "classes"
+"""
+input classes_avg_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "classes". All fields are combined with a logical 'AND'.
+"""
+input classes_bool_exp {
+  _and: [classes_bool_exp!]
+  _not: classes_bool_exp
+  _or: [classes_bool_exp!]
+  color: bigint_comparison_exp
+  id: uuid_comparison_exp
+  isUserAllowedToRead: Boolean_comparison_exp
+  isUserAllowedToWrite: Boolean_comparison_exp
+  name: String_comparison_exp
+  photoUpdatedAt: time_comparison_exp
+  service: services_bool_exp
+  serviceGender: Boolean_comparison_exp
+  serviceId: uuid_comparison_exp
+  serviceStudyYear: Int_comparison_exp
+  studyYear: study_years_bool_exp
+}
+
+"""
+unique or primary key constraints on table "classes"
+"""
+enum classes_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  classes_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "classes"
+"""
+input classes_inc_input {
+  color: bigint
+  serviceStudyYear: Int
+}
+
+"""
+input type for inserting data into table "classes"
+"""
+input classes_insert_input {
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: time
+  service: services_obj_rel_insert_input
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+  studyYear: study_years_obj_rel_insert_input
+}
+
+"""
+aggregate max on columns
+"""
+type classes_max_fields {
+  color: bigint
+  id: uuid
+  name: String
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+"""
+order by max() on columns of table "classes"
+"""
+input classes_max_order_by {
+  color: order_by
+  id: order_by
+  name: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate min on columns
+"""
+type classes_min_fields {
+  color: bigint
+  id: uuid
+  name: String
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+"""
+order by min() on columns of table "classes"
+"""
+input classes_min_order_by {
+  color: order_by
+  id: order_by
+  name: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+response of any mutation on the table "classes"
+"""
+type classes_mutation_response {
+  """
+  number of rows affected by the mutation
+  """
+  affected_rows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [classes!]!
+}
+
+"""
+on_conflict condition type for table "classes"
+"""
+input classes_on_conflict {
+  constraint: classes_constraint!
+  update_columns: [classes_update_column!]! = []
+  where: classes_bool_exp
+}
+
+"""
+Ordering options when selecting data from "classes".
+"""
+input classes_order_by {
+  color: order_by
+  id: order_by
+  isUserAllowedToRead: order_by
+  isUserAllowedToWrite: order_by
+  name: order_by
+  photoUpdatedAt: order_by
+  service: services_order_by
+  serviceGender: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
+  studyYear: study_years_order_by
+}
+
+"""
+primary key columns input for table: classes
+"""
+input classes_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "classes"
+"""
+enum classes_select_column {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  name
+
+  """
+  column name
+  """
+  photoUpdatedAt
+
+  """
+  column name
+  """
+  serviceGender
+
+  """
+  column name
+  """
+  serviceId
+
+  """
+  column name
+  """
+  serviceStudyYear
+}
+
+"""
+input type for updating data in table "classes"
+"""
+input classes_set_input {
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: time
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+"""
+aggregate stddev on columns
+"""
+type classes_stddev_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by stddev() on columns of table "classes"
+"""
+input classes_stddev_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate stddev_pop on columns
+"""
+type classes_stddev_pop_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by stddev_pop() on columns of table "classes"
+"""
+input classes_stddev_pop_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate stddev_samp on columns
+"""
+type classes_stddev_samp_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by stddev_samp() on columns of table "classes"
+"""
+input classes_stddev_samp_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate sum on columns
+"""
+type classes_sum_fields {
+  color: bigint
+  serviceStudyYear: Int
+}
+
+"""
+order by sum() on columns of table "classes"
+"""
+input classes_sum_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+update columns of table "classes"
+"""
+enum classes_update_column {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  name
+
+  """
+  column name
+  """
+  photoUpdatedAt
+
+  """
+  column name
+  """
+  serviceGender
+
+  """
+  column name
+  """
+  serviceId
+
+  """
+  column name
+  """
+  serviceStudyYear
+}
+
+"""
+aggregate var_pop on columns
+"""
+type classes_var_pop_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by var_pop() on columns of table "classes"
+"""
+input classes_var_pop_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate var_samp on columns
+"""
+type classes_var_samp_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by var_samp() on columns of table "classes"
+"""
+input classes_var_samp_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
+aggregate variance on columns
+"""
+type classes_variance_fields {
+  color: Float
+  serviceStudyYear: Float
+}
+
+"""
+order by variance() on columns of table "classes"
+"""
+input classes_variance_order_by {
+  color: order_by
+  serviceStudyYear: order_by
+}
+
+"""
 columns and relationships of "colleges"
 """
 type colleges {
@@ -1092,7 +1573,7 @@ type colleges {
   An object relationship
   """
   university: universities!
-  universityID: uuid!
+  universityId: uuid!
 }
 
 """
@@ -1144,7 +1625,7 @@ input colleges_bool_exp {
   name: String_comparison_exp
   persons: persons_bool_exp
   university: universities_bool_exp
-  universityID: uuid_comparison_exp
+  universityId: uuid_comparison_exp
 }
 
 """
@@ -1170,7 +1651,7 @@ input colleges_insert_input {
   name: String
   persons: persons_arr_rel_insert_input
   university: universities_obj_rel_insert_input
-  universityID: uuid
+  universityId: uuid
 }
 
 """
@@ -1179,7 +1660,7 @@ aggregate max on columns
 type colleges_max_fields {
   id: uuid
   name: String
-  universityID: uuid
+  universityId: uuid
 }
 
 """
@@ -1188,7 +1669,7 @@ order by max() on columns of table "colleges"
 input colleges_max_order_by {
   id: order_by
   name: order_by
-  universityID: order_by
+  universityId: order_by
 }
 
 """
@@ -1197,7 +1678,7 @@ aggregate min on columns
 type colleges_min_fields {
   id: uuid
   name: String
-  universityID: uuid
+  universityId: uuid
 }
 
 """
@@ -1206,7 +1687,7 @@ order by min() on columns of table "colleges"
 input colleges_min_order_by {
   id: order_by
   name: order_by
-  universityID: order_by
+  universityId: order_by
 }
 
 """
@@ -1253,7 +1734,7 @@ input colleges_order_by {
   name: order_by
   persons_aggregate: persons_aggregate_order_by
   university: universities_order_by
-  universityID: order_by
+  universityId: order_by
 }
 
 """
@@ -1280,7 +1761,7 @@ enum colleges_select_column {
   """
   column name
   """
-  universityID
+  universityId
 }
 
 """
@@ -1289,7 +1770,7 @@ input type for updating data in table "colleges"
 input colleges_set_input {
   id: uuid
   name: String
-  universityID: uuid
+  universityId: uuid
 }
 
 """
@@ -1309,7 +1790,7 @@ enum colleges_update_column {
   """
   column name
   """
-  universityID
+  universityId
 }
 
 scalar date
@@ -1449,12 +1930,20 @@ type families {
   family: families_families
   geolocation: geography
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_family"
+  """
   isUserAllowedToRead: Boolean
 
   """
-  A computed field, executes function "userAllowedToWriteFamily"
+  A computed field, executes function "user_allowed_to_write_family"
   """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_family_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -1523,7 +2012,7 @@ type families {
     """
     where: persons_bool_exp
   ): persons_aggregate!
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 
   """
   An array relationship
@@ -1692,7 +2181,7 @@ input families_bool_exp {
   name: String_comparison_exp
   notes: String_comparison_exp
   persons: persons_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   stores: stores_bool_exp
   streets: streets_bool_exp
 }
@@ -1715,13 +2204,13 @@ type families_families {
   An object relationship
   """
   innerFamily: families!
-  innerFamilyID: uuid!
+  innerFamilyId: uuid!
 
   """
   An object relationship
   """
   outerFamily: families!
-  outerFamilyID: uuid!
+  outerFamilyId: uuid!
 }
 
 """
@@ -1770,9 +2259,9 @@ input families_families_bool_exp {
   _not: families_families_bool_exp
   _or: [families_families_bool_exp!]
   innerFamily: families_bool_exp
-  innerFamilyID: uuid_comparison_exp
+  innerFamilyId: uuid_comparison_exp
   outerFamily: families_bool_exp
-  outerFamilyID: uuid_comparison_exp
+  outerFamilyId: uuid_comparison_exp
 }
 
 """
@@ -1780,12 +2269,12 @@ unique or primary key constraints on table "families_families"
 """
 enum families_families_constraint {
   """
-  unique or primary key constraint on columns "innerFamilyID", "outerFamilyID"
+  unique or primary key constraint on columns "outer_family_id", "inner_family_id"
   """
   families_families_outerFamilyID_innerFamilyID_key
 
   """
-  unique or primary key constraint on columns "innerFamilyID"
+  unique or primary key constraint on columns "inner_family_id"
   """
   families_families_pkey
 }
@@ -1795,41 +2284,41 @@ input type for inserting data into table "families_families"
 """
 input families_families_insert_input {
   innerFamily: families_obj_rel_insert_input
-  innerFamilyID: uuid
+  innerFamilyId: uuid
   outerFamily: families_obj_rel_insert_input
-  outerFamilyID: uuid
+  outerFamilyId: uuid
 }
 
 """
 aggregate max on columns
 """
 type families_families_max_fields {
-  innerFamilyID: uuid
-  outerFamilyID: uuid
+  innerFamilyId: uuid
+  outerFamilyId: uuid
 }
 
 """
 order by max() on columns of table "families_families"
 """
 input families_families_max_order_by {
-  innerFamilyID: order_by
-  outerFamilyID: order_by
+  innerFamilyId: order_by
+  outerFamilyId: order_by
 }
 
 """
 aggregate min on columns
 """
 type families_families_min_fields {
-  innerFamilyID: uuid
-  outerFamilyID: uuid
+  innerFamilyId: uuid
+  outerFamilyId: uuid
 }
 
 """
 order by min() on columns of table "families_families"
 """
 input families_families_min_order_by {
-  innerFamilyID: order_by
-  outerFamilyID: order_by
+  innerFamilyId: order_by
+  outerFamilyId: order_by
 }
 
 """
@@ -1873,16 +2362,16 @@ Ordering options when selecting data from "families_families".
 """
 input families_families_order_by {
   innerFamily: families_order_by
-  innerFamilyID: order_by
+  innerFamilyId: order_by
   outerFamily: families_order_by
-  outerFamilyID: order_by
+  outerFamilyId: order_by
 }
 
 """
 primary key columns input for table: families_families
 """
 input families_families_pk_columns_input {
-  innerFamilyID: uuid!
+  innerFamilyId: uuid!
 }
 
 """
@@ -1892,20 +2381,20 @@ enum families_families_select_column {
   """
   column name
   """
-  innerFamilyID
+  innerFamilyId
 
   """
   column name
   """
-  outerFamilyID
+  outerFamilyId
 }
 
 """
 input type for updating data in table "families_families"
 """
 input families_families_set_input {
-  innerFamilyID: uuid
-  outerFamilyID: uuid
+  innerFamilyId: uuid
+  outerFamilyId: uuid
 }
 
 """
@@ -1915,12 +2404,12 @@ enum families_families_update_column {
   """
   column name
   """
-  innerFamilyID
+  innerFamilyId
 
   """
   column name
   """
-  outerFamilyID
+  outerFamilyId
 }
 
 """
@@ -1943,7 +2432,7 @@ input families_insert_input {
   name: String
   notes: String
   persons: persons_arr_rel_insert_input
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   stores: stores_arr_rel_insert_input
 }
 
@@ -1956,7 +2445,7 @@ type families_max_fields {
   id: uuid
   name: String
   notes: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -1968,7 +2457,7 @@ input families_max_order_by {
   id: order_by
   name: order_by
   notes: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -1980,7 +2469,7 @@ type families_min_fields {
   id: uuid
   name: String
   notes: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -1992,7 +2481,7 @@ input families_min_order_by {
   id: order_by
   name: order_by
   notes: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -2048,7 +2537,7 @@ input families_order_by {
   name: order_by
   notes: order_by
   persons_aggregate: persons_aggregate_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   stores_aggregate: stores_aggregate_order_by
   streets_aggregate: streets_aggregate_order_by
 }
@@ -2097,7 +2586,7 @@ enum families_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -2110,7 +2599,7 @@ input families_set_input {
   id: uuid
   name: String
   notes: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -2206,7 +2695,7 @@ enum families_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -2259,7 +2748,7 @@ type fathers {
   An object relationship
   """
   church: churches
-  churchID: uuid
+  churchId: uuid
   id: uuid!
   name: String!
 
@@ -2370,7 +2859,7 @@ input fathers_bool_exp {
   _not: fathers_bool_exp
   _or: [fathers_bool_exp!]
   church: churches_bool_exp
-  churchID: uuid_comparison_exp
+  churchId: uuid_comparison_exp
   id: uuid_comparison_exp
   name: String_comparison_exp
   persons: persons_bool_exp
@@ -2396,7 +2885,7 @@ input type for inserting data into table "fathers"
 """
 input fathers_insert_input {
   church: churches_obj_rel_insert_input
-  churchID: uuid
+  churchId: uuid
   id: uuid
   name: String
   persons: persons_arr_rel_insert_input
@@ -2406,7 +2895,7 @@ input fathers_insert_input {
 aggregate max on columns
 """
 type fathers_max_fields {
-  churchID: uuid
+  churchId: uuid
   id: uuid
   name: String
 }
@@ -2415,7 +2904,7 @@ type fathers_max_fields {
 order by max() on columns of table "fathers"
 """
 input fathers_max_order_by {
-  churchID: order_by
+  churchId: order_by
   id: order_by
   name: order_by
 }
@@ -2424,7 +2913,7 @@ input fathers_max_order_by {
 aggregate min on columns
 """
 type fathers_min_fields {
-  churchID: uuid
+  churchId: uuid
   id: uuid
   name: String
 }
@@ -2433,7 +2922,7 @@ type fathers_min_fields {
 order by min() on columns of table "fathers"
 """
 input fathers_min_order_by {
-  churchID: order_by
+  churchId: order_by
   id: order_by
   name: order_by
 }
@@ -2479,7 +2968,7 @@ Ordering options when selecting data from "fathers".
 """
 input fathers_order_by {
   church: churches_order_by
-  churchID: order_by
+  churchId: order_by
   id: order_by
   name: order_by
   persons_aggregate: persons_aggregate_order_by
@@ -2499,7 +2988,7 @@ enum fathers_select_column {
   """
   column name
   """
-  churchID
+  churchId
 
   """
   column name
@@ -2516,7 +3005,7 @@ enum fathers_select_column {
 input type for updating data in table "fathers"
 """
 input fathers_set_input {
-  churchID: uuid
+  churchId: uuid
   id: uuid
   name: String
 }
@@ -2528,7 +3017,7 @@ enum fathers_update_column {
   """
   column name
   """
-  churchID
+  churchId
 
   """
   column name
@@ -2712,7 +3201,7 @@ type groups {
   """
   An array relationship
   """
-  attendance_history(
+  attendanceHistory(
     """
     distinct select on columns
     """
@@ -2742,7 +3231,7 @@ type groups {
   """
   An aggregate relationship
   """
-  attendance_history_aggregate(
+  attendanceHistory_aggregate(
     """
     distinct select on columns
     """
@@ -2770,8 +3259,20 @@ type groups {
   ): history_attendance_history_aggregate!
   color: Int
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_group"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_group"
+  """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_group_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -2839,13 +3340,13 @@ type groups {
     """
     where: persons_groups_bool_exp
   ): persons_groups_aggregate!
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 
   """
   An object relationship
   """
   service: services!
-  serviceID: uuid!
+  serviceId: uuid!
   validity: daterange
 }
 
@@ -2925,7 +3426,7 @@ input groups_bool_exp {
   _not: groups_bool_exp
   _or: [groups_bool_exp!]
   adminUsers: users_permissions_bool_exp
-  attendance_history: history_attendance_history_bool_exp
+  attendanceHistory: history_attendance_history_bool_exp
   color: Int_comparison_exp
   id: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
@@ -2933,9 +3434,9 @@ input groups_bool_exp {
   lastEdit: jsonb_comparison_exp
   name: String_comparison_exp
   persons: persons_groups_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   service: services_bool_exp
-  serviceID: uuid_comparison_exp
+  serviceId: uuid_comparison_exp
   validity: daterange_comparison_exp
 }
 
@@ -2961,14 +3462,14 @@ input type for inserting data into table "groups"
 """
 input groups_insert_input {
   adminUsers: users_permissions_arr_rel_insert_input
-  attendance_history: history_attendance_history_arr_rel_insert_input
+  attendanceHistory: history_attendance_history_arr_rel_insert_input
   color: Int
   id: uuid
   name: String
   persons: persons_groups_arr_rel_insert_input
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   service: services_obj_rel_insert_input
-  serviceID: uuid
+  serviceId: uuid
   validity: daterange
 }
 
@@ -2979,8 +3480,8 @@ type groups_max_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
-  serviceID: uuid
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
 }
 
 """
@@ -2990,8 +3491,8 @@ input groups_max_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
-  serviceID: order_by
+  photoUpdatedAt: order_by
+  serviceId: order_by
 }
 
 """
@@ -3001,8 +3502,8 @@ type groups_min_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
-  serviceID: uuid
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
 }
 
 """
@@ -3012,8 +3513,8 @@ input groups_min_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
-  serviceID: order_by
+  photoUpdatedAt: order_by
+  serviceId: order_by
 }
 
 """
@@ -3057,7 +3558,7 @@ Ordering options when selecting data from "groups".
 """
 input groups_order_by {
   adminUsers_aggregate: users_permissions_aggregate_order_by
-  attendance_history_aggregate: history_attendance_history_aggregate_order_by
+  attendanceHistory_aggregate: history_attendance_history_aggregate_order_by
   color: order_by
   id: order_by
   isUserAllowedToRead: order_by
@@ -3065,9 +3566,9 @@ input groups_order_by {
   lastEdit: order_by
   name: order_by
   persons_aggregate: persons_groups_aggregate_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   service: services_order_by
-  serviceID: order_by
+  serviceId: order_by
   validity: order_by
 }
 
@@ -3100,12 +3601,12 @@ enum groups_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
   """
-  serviceID
+  serviceId
 
   """
   column name
@@ -3120,8 +3621,8 @@ input groups_set_input {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
-  serviceID: uuid
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
   validity: daterange
 }
 
@@ -3203,12 +3704,12 @@ enum groups_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
   """
-  serviceID
+  serviceId
 
   """
   column name
@@ -3265,7 +3766,7 @@ type history_attendance_days {
   """
   An array relationship
   """
-  attendance_history(
+  attendanceHistory(
     """
     distinct select on columns
     """
@@ -3295,7 +3796,7 @@ type history_attendance_days {
   """
   An aggregate relationship
   """
-  attendance_history_aggregate(
+  attendanceHistory_aggregate(
     """
     distinct select on columns
     """
@@ -3325,7 +3826,7 @@ type history_attendance_days {
   """
   An array relationship
   """
-  confession_history(
+  confessionHistory(
     """
     distinct select on columns
     """
@@ -3355,7 +3856,7 @@ type history_attendance_days {
   """
   An aggregate relationship
   """
-  confession_history_aggregate(
+  confessionHistory_aggregate(
     """
     distinct select on columns
     """
@@ -3444,14 +3945,14 @@ type history_attendance_days {
   day: date!
 
   """
-  A computed field, executes function "history.userAllowedToWriteDay"
+  A computed field, executes function "history.user_allowed_to_write_day"
   """
   isUserAllowedToWrite: Boolean
 
   """
   An array relationship
   """
-  kodas_history(
+  kodasHistory(
     """
     distinct select on columns
     """
@@ -3481,7 +3982,7 @@ type history_attendance_days {
   """
   An aggregate relationship
   """
-  kodas_history_aggregate(
+  kodasHistory_aggregate(
     """
     distinct select on columns
     """
@@ -3537,12 +4038,12 @@ input history_attendance_days_bool_exp {
   _and: [history_attendance_days_bool_exp!]
   _not: history_attendance_days_bool_exp
   _or: [history_attendance_days_bool_exp!]
-  attendance_history: history_attendance_history_bool_exp
-  confession_history: history_confession_history_bool_exp
+  attendanceHistory: history_attendance_history_bool_exp
+  confessionHistory: history_confession_history_bool_exp
   constraints: history_attendance_days_constraints_bool_exp
   day: date_comparison_exp
   isUserAllowedToWrite: Boolean_comparison_exp
-  kodas_history: history_kodas_history_bool_exp
+  kodasHistory: history_kodas_history_bool_exp
   notes: String_comparison_exp
 }
 
@@ -3564,22 +4065,22 @@ type history_attendance_days_constraints {
   An object relationship
   """
   day: history_attendance_days!
-  dayID: date!
+  dayId: date!
 
   """
   An object relationship
   """
   group: groups
-  groupID: uuid
+  groupId: uuid
   id: uuid!
 
   """
-  A computed field, executes function "history.userAllowedToReadDayConstraint"
+  A computed field, executes function "history.user_allowed_to_read_day_constraint"
   """
   isUserAllowedToRead: Boolean
 
   """
-  A computed field, executes function "history.userAllowedToWriteDayConstraint"
+  A computed field, executes function "history.user_allowed_to_write_day_constraint"
   """
   isUserAllowedToWrite: Boolean
 
@@ -3587,14 +4088,14 @@ type history_attendance_days_constraints {
   An object relationship
   """
   service: services
-  serviceID: uuid
-  service_gender: Boolean
-  service_studyYear: Int
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
 
   """
   An object relationship
   """
-  studyYear: studyYears
+  studyYear: study_years
 }
 
 """
@@ -3658,14 +4159,14 @@ input history_attendance_days_constraints_arr_rel_insert_input {
 aggregate avg on columns
 """
 type history_attendance_days_constraints_avg_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by avg() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_avg_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -3676,17 +4177,17 @@ input history_attendance_days_constraints_bool_exp {
   _not: history_attendance_days_constraints_bool_exp
   _or: [history_attendance_days_constraints_bool_exp!]
   day: history_attendance_days_bool_exp
-  dayID: date_comparison_exp
+  dayId: date_comparison_exp
   group: groups_bool_exp
-  groupID: uuid_comparison_exp
+  groupId: uuid_comparison_exp
   id: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
   isUserAllowedToWrite: Boolean_comparison_exp
   service: services_bool_exp
-  serviceID: uuid_comparison_exp
-  service_gender: Boolean_comparison_exp
-  service_studyYear: Int_comparison_exp
-  studyYear: studyYears_bool_exp
+  serviceGender: Boolean_comparison_exp
+  serviceId: uuid_comparison_exp
+  serviceStudyYear: Int_comparison_exp
+  studyYear: study_years_bool_exp
 }
 
 """
@@ -3694,7 +4195,7 @@ unique or primary key constraints on table "history.attendance_days_constraints"
 """
 enum history_attendance_days_constraints_constraint {
   """
-  unique or primary key constraint on columns "service_studyYear", "dayID", "groupID", "service_gender", "serviceID"
+  unique or primary key constraint on columns "service_study_year", "day_id", "service_id", "service_gender", "group_id"
   """
   attendance_days_constraints_day_service_service_studyYear_s_key
 
@@ -3708,7 +4209,7 @@ enum history_attendance_days_constraints_constraint {
 input type for incrementing numeric columns in table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_inc_input {
-  service_studyYear: Int
+  serviceStudyYear: Int
 }
 
 """
@@ -3716,59 +4217,59 @@ input type for inserting data into table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_insert_input {
   day: history_attendance_days_obj_rel_insert_input
-  dayID: date
+  dayId: date
   group: groups_obj_rel_insert_input
-  groupID: uuid
+  groupId: uuid
   id: uuid
   service: services_obj_rel_insert_input
-  serviceID: uuid
-  service_gender: Boolean
-  service_studyYear: Int
-  studyYear: studyYears_obj_rel_insert_input
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+  studyYear: study_years_obj_rel_insert_input
 }
 
 """
 aggregate max on columns
 """
 type history_attendance_days_constraints_max_fields {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  serviceID: uuid
-  service_studyYear: Int
+  serviceId: uuid
+  serviceStudyYear: Int
 }
 
 """
 order by max() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_max_order_by {
-  dayID: order_by
-  groupID: order_by
+  dayId: order_by
+  groupId: order_by
   id: order_by
-  serviceID: order_by
-  service_studyYear: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate min on columns
 """
 type history_attendance_days_constraints_min_fields {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  serviceID: uuid
-  service_studyYear: Int
+  serviceId: uuid
+  serviceStudyYear: Int
 }
 
 """
 order by min() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_min_order_by {
-  dayID: order_by
-  groupID: order_by
+  dayId: order_by
+  groupId: order_by
   id: order_by
-  serviceID: order_by
-  service_studyYear: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -3800,17 +4301,17 @@ Ordering options when selecting data from "history.attendance_days_constraints".
 """
 input history_attendance_days_constraints_order_by {
   day: history_attendance_days_order_by
-  dayID: order_by
+  dayId: order_by
   group: groups_order_by
-  groupID: order_by
+  groupId: order_by
   id: order_by
   isUserAllowedToRead: order_by
   isUserAllowedToWrite: order_by
   service: services_order_by
-  serviceID: order_by
-  service_gender: order_by
-  service_studyYear: order_by
-  studyYear: studyYears_order_by
+  serviceGender: order_by
+  serviceId: order_by
+  serviceStudyYear: order_by
+  studyYear: study_years_order_by
 }
 
 """
@@ -3827,12 +4328,12 @@ enum history_attendance_days_constraints_select_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
@@ -3842,85 +4343,85 @@ enum history_attendance_days_constraints_select_column {
   """
   column name
   """
-  serviceID
+  serviceGender
 
   """
   column name
   """
-  service_gender
+  serviceId
 
   """
   column name
   """
-  service_studyYear
+  serviceStudyYear
 }
 
 """
 input type for updating data in table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_set_input {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  serviceID: uuid
-  service_gender: Boolean
-  service_studyYear: Int
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
 }
 
 """
 aggregate stddev on columns
 """
 type history_attendance_days_constraints_stddev_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_stddev_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate stddev_pop on columns
 """
 type history_attendance_days_constraints_stddev_pop_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev_pop() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_stddev_pop_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate stddev_samp on columns
 """
 type history_attendance_days_constraints_stddev_samp_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev_samp() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_stddev_samp_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate sum on columns
 """
 type history_attendance_days_constraints_sum_fields {
-  service_studyYear: Int
+  serviceStudyYear: Int
 }
 
 """
 order by sum() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_sum_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -3930,12 +4431,12 @@ enum history_attendance_days_constraints_update_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
@@ -3945,70 +4446,70 @@ enum history_attendance_days_constraints_update_column {
   """
   column name
   """
-  serviceID
+  serviceGender
 
   """
   column name
   """
-  service_gender
+  serviceId
 
   """
   column name
   """
-  service_studyYear
+  serviceStudyYear
 }
 
 """
 aggregate var_pop on columns
 """
 type history_attendance_days_constraints_var_pop_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by var_pop() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_var_pop_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate var_samp on columns
 """
 type history_attendance_days_constraints_var_samp_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by var_samp() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_var_samp_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate variance on columns
 """
 type history_attendance_days_constraints_variance_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by variance() on columns of table "history.attendance_days_constraints"
 """
 input history_attendance_days_constraints_variance_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 input type for inserting data into table "history.attendance_days"
 """
 input history_attendance_days_insert_input {
-  attendance_history: history_attendance_history_arr_rel_insert_input
-  confession_history: history_confession_history_arr_rel_insert_input
+  attendanceHistory: history_attendance_history_arr_rel_insert_input
+  confessionHistory: history_confession_history_arr_rel_insert_input
   constraints: history_attendance_days_constraints_arr_rel_insert_input
   day: date
-  kodas_history: history_kodas_history_arr_rel_insert_input
+  kodasHistory: history_kodas_history_arr_rel_insert_input
   notes: String
 }
 
@@ -4068,12 +4569,12 @@ input history_attendance_days_on_conflict {
 Ordering options when selecting data from "history.attendance_days".
 """
 input history_attendance_days_order_by {
-  attendance_history_aggregate: history_attendance_history_aggregate_order_by
-  confession_history_aggregate: history_confession_history_aggregate_order_by
+  attendanceHistory_aggregate: history_attendance_history_aggregate_order_by
+  confessionHistory_aggregate: history_confession_history_aggregate_order_by
   constraints_aggregate: history_attendance_days_constraints_aggregate_order_by
   day: order_by
   isUserAllowedToWrite: order_by
-  kodas_history_aggregate: history_kodas_history_aggregate_order_by
+  kodasHistory_aggregate: history_kodas_history_aggregate_order_by
   notes: order_by
 }
 
@@ -4130,22 +4631,22 @@ type history_attendance_history {
   An object relationship
   """
   day: history_attendance_days!
-  dayID: date!
+  dayId: date!
 
   """
   An object relationship
   """
   group: groups
-  groupID: uuid
+  groupId: uuid
   id: uuid!
 
   """
-  A computed field, executes function "history.userAllowedToReadAttendanceRecord"
+  A computed field, executes function "history.user_allowed_to_read_attendance_record"
   """
   isUserAllowedToRead: Boolean
 
   """
-  A computed field, executes function "history.userAllowedToWriteAttendanceRecord"
+  A computed field, executes function "history.user_allowed_to_write_attendance_record"
   """
   isUserAllowedToWrite: Boolean
 
@@ -4153,14 +4654,14 @@ type history_attendance_history {
   An object relationship
   """
   person: persons!
-  personID: uuid!
+  personId: uuid!
   recordedBy: uuid!
 
   """
   An object relationship
   """
   service: services!
-  serviceID: uuid!
+  serviceId: uuid!
   time: timestamp!
 
   """
@@ -4218,17 +4719,17 @@ input history_attendance_history_bool_exp {
   _not: history_attendance_history_bool_exp
   _or: [history_attendance_history_bool_exp!]
   day: history_attendance_days_bool_exp
-  dayID: date_comparison_exp
+  dayId: date_comparison_exp
   group: groups_bool_exp
-  groupID: uuid_comparison_exp
+  groupId: uuid_comparison_exp
   id: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
   isUserAllowedToWrite: Boolean_comparison_exp
   person: persons_bool_exp
-  personID: uuid_comparison_exp
+  personId: uuid_comparison_exp
   recordedBy: uuid_comparison_exp
   service: services_bool_exp
-  serviceID: uuid_comparison_exp
+  serviceId: uuid_comparison_exp
   time: timestamp_comparison_exp
   user: users_bool_exp
 }
@@ -4238,7 +4739,7 @@ unique or primary key constraints on table "history.attendance_history"
 """
 enum history_attendance_history_constraint {
   """
-  unique or primary key constraint on columns "dayID", "groupID", "personID", "serviceID"
+  unique or primary key constraint on columns "day_id", "person_id", "service_id", "group_id"
   """
   attendance_history_dayID_serviceID_groupID_personID_key
 
@@ -4253,15 +4754,15 @@ input type for inserting data into table "history.attendance_history"
 """
 input history_attendance_history_insert_input {
   day: history_attendance_days_obj_rel_insert_input
-  dayID: date
+  dayId: date
   group: groups_obj_rel_insert_input
-  groupID: uuid
+  groupId: uuid
   id: uuid
   person: persons_obj_rel_insert_input
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
   service: services_obj_rel_insert_input
-  serviceID: uuid
+  serviceId: uuid
   time: timestamp
   user: users_obj_rel_insert_input
 }
@@ -4270,12 +4771,12 @@ input history_attendance_history_insert_input {
 aggregate max on columns
 """
 type history_attendance_history_max_fields {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
-  serviceID: uuid
+  serviceId: uuid
   time: timestamp
 }
 
@@ -4283,12 +4784,12 @@ type history_attendance_history_max_fields {
 order by max() on columns of table "history.attendance_history"
 """
 input history_attendance_history_max_order_by {
-  dayID: order_by
-  groupID: order_by
+  dayId: order_by
+  groupId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
-  serviceID: order_by
+  serviceId: order_by
   time: order_by
 }
 
@@ -4296,12 +4797,12 @@ input history_attendance_history_max_order_by {
 aggregate min on columns
 """
 type history_attendance_history_min_fields {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
-  serviceID: uuid
+  serviceId: uuid
   time: timestamp
 }
 
@@ -4309,12 +4810,12 @@ type history_attendance_history_min_fields {
 order by min() on columns of table "history.attendance_history"
 """
 input history_attendance_history_min_order_by {
-  dayID: order_by
-  groupID: order_by
+  dayId: order_by
+  groupId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
-  serviceID: order_by
+  serviceId: order_by
   time: order_by
 }
 
@@ -4347,17 +4848,17 @@ Ordering options when selecting data from "history.attendance_history".
 """
 input history_attendance_history_order_by {
   day: history_attendance_days_order_by
-  dayID: order_by
+  dayId: order_by
   group: groups_order_by
-  groupID: order_by
+  groupId: order_by
   id: order_by
   isUserAllowedToRead: order_by
   isUserAllowedToWrite: order_by
   person: persons_order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
   service: services_order_by
-  serviceID: order_by
+  serviceId: order_by
   time: order_by
   user: users_order_by
 }
@@ -4376,12 +4877,12 @@ enum history_attendance_history_select_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
@@ -4391,7 +4892,7 @@ enum history_attendance_history_select_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -4401,7 +4902,7 @@ enum history_attendance_history_select_column {
   """
   column name
   """
-  serviceID
+  serviceId
 
   """
   column name
@@ -4413,12 +4914,12 @@ enum history_attendance_history_select_column {
 input type for updating data in table "history.attendance_history"
 """
 input history_attendance_history_set_input {
-  dayID: date
-  groupID: uuid
+  dayId: date
+  groupId: uuid
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
-  serviceID: uuid
+  serviceId: uuid
   time: timestamp
 }
 
@@ -4429,12 +4930,12 @@ enum history_attendance_history_update_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
@@ -4444,7 +4945,7 @@ enum history_attendance_history_update_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -4454,7 +4955,7 @@ enum history_attendance_history_update_column {
   """
   column name
   """
-  serviceID
+  serviceId
 
   """
   column name
@@ -4470,10 +4971,10 @@ type history_call_history {
   An object relationship
   """
   person: persons!
-  person_id: uuid!
+  personId: uuid!
   time: timestamptz!
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -4522,10 +5023,10 @@ input history_call_history_bool_exp {
   _not: history_call_history_bool_exp
   _or: [history_call_history_bool_exp!]
   person: persons_bool_exp
-  person_id: uuid_comparison_exp
+  personId: uuid_comparison_exp
   time: timestamptz_comparison_exp
-  user_role: String_comparison_exp
-  user_uid: uuid_comparison_exp
+  userRole: String_comparison_exp
+  userUid: uuid_comparison_exp
 }
 
 """
@@ -4543,50 +5044,50 @@ input type for inserting data into table "history.call_history"
 """
 input history_call_history_insert_input {
   person: persons_obj_rel_insert_input
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 aggregate max on columns
 """
 type history_call_history_max_fields {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 order by max() on columns of table "history.call_history"
 """
 input history_call_history_max_order_by {
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
 aggregate min on columns
 """
 type history_call_history_min_fields {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 order by min() on columns of table "history.call_history"
 """
 input history_call_history_min_order_by {
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
@@ -4618,10 +5119,10 @@ Ordering options when selecting data from "history.call_history".
 """
 input history_call_history_order_by {
   person: persons_order_by
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
@@ -4638,7 +5139,7 @@ enum history_call_history_select_column {
   """
   column name
   """
-  person_id
+  personId
 
   """
   column name
@@ -4648,22 +5149,22 @@ enum history_call_history_select_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
 input type for updating data in table "history.call_history"
 """
 input history_call_history_set_input {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -4673,7 +5174,7 @@ enum history_call_history_update_column {
   """
   column name
   """
-  person_id
+  personId
 
   """
   column name
@@ -4683,12 +5184,12 @@ enum history_call_history_update_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
@@ -4699,14 +5200,14 @@ type history_confession_history {
   An object relationship
   """
   day: history_attendance_days!
-  dayID: date!
+  dayId: date!
   id: uuid!
 
   """
   An object relationship
   """
   person: persons!
-  personID: uuid!
+  personId: uuid!
   recordedBy: uuid!
 
   """
@@ -4764,10 +5265,10 @@ input history_confession_history_bool_exp {
   _not: history_confession_history_bool_exp
   _or: [history_confession_history_bool_exp!]
   day: history_attendance_days_bool_exp
-  dayID: date_comparison_exp
+  dayId: date_comparison_exp
   id: uuid_comparison_exp
   person: persons_bool_exp
-  personID: uuid_comparison_exp
+  personId: uuid_comparison_exp
   recordedBy: uuid_comparison_exp
   user: users_bool_exp
 }
@@ -4777,7 +5278,7 @@ unique or primary key constraints on table "history.confession_history"
 """
 enum history_confession_history_constraint {
   """
-  unique or primary key constraint on columns "dayID", "personID"
+  unique or primary key constraint on columns "day_id", "person_id"
   """
   confession_history_dayID_personID_key
 
@@ -4792,10 +5293,10 @@ input type for inserting data into table "history.confession_history"
 """
 input history_confession_history_insert_input {
   day: history_attendance_days_obj_rel_insert_input
-  dayID: date
+  dayId: date
   id: uuid
   person: persons_obj_rel_insert_input
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
   user: users_obj_rel_insert_input
 }
@@ -4804,9 +5305,9 @@ input history_confession_history_insert_input {
 aggregate max on columns
 """
 type history_confession_history_max_fields {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -4814,9 +5315,9 @@ type history_confession_history_max_fields {
 order by max() on columns of table "history.confession_history"
 """
 input history_confession_history_max_order_by {
-  dayID: order_by
+  dayId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
 }
 
@@ -4824,9 +5325,9 @@ input history_confession_history_max_order_by {
 aggregate min on columns
 """
 type history_confession_history_min_fields {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -4834,9 +5335,9 @@ type history_confession_history_min_fields {
 order by min() on columns of table "history.confession_history"
 """
 input history_confession_history_min_order_by {
-  dayID: order_by
+  dayId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
 }
 
@@ -4869,10 +5370,10 @@ Ordering options when selecting data from "history.confession_history".
 """
 input history_confession_history_order_by {
   day: history_attendance_days_order_by
-  dayID: order_by
+  dayId: order_by
   id: order_by
   person: persons_order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
   user: users_order_by
 }
@@ -4891,7 +5392,7 @@ enum history_confession_history_select_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
@@ -4901,7 +5402,7 @@ enum history_confession_history_select_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -4913,9 +5414,9 @@ enum history_confession_history_select_column {
 input type for updating data in table "history.confession_history"
 """
 input history_confession_history_set_input {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -4926,7 +5427,7 @@ enum history_confession_history_update_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
@@ -4936,7 +5437,7 @@ enum history_confession_history_update_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -4948,13 +5449,17 @@ enum history_confession_history_update_column {
 columns and relationships of "history.edit_history"
 """
 type history_edit_history {
-  audit_id: uuid!
+  auditId: uuid!
+
+  """
+  A computed field, executes function "history.user_allowed_to_read_audit"
+  """
   isUserAllowedToRead: Boolean
-  record_id: uuid!
+  recordId: uuid!
   table: name!
   time: timestamptz!
-  user_role: String!
-  user_uid: uuid
+  userRole: String!
+  userUid: uuid
 }
 
 """
@@ -4981,13 +5486,13 @@ input history_edit_history_bool_exp {
   _and: [history_edit_history_bool_exp!]
   _not: history_edit_history_bool_exp
   _or: [history_edit_history_bool_exp!]
-  audit_id: uuid_comparison_exp
+  auditId: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
-  record_id: uuid_comparison_exp
+  recordId: uuid_comparison_exp
   table: name_comparison_exp
   time: timestamptz_comparison_exp
-  user_role: String_comparison_exp
-  user_uid: uuid_comparison_exp
+  userRole: String_comparison_exp
+  userUid: uuid_comparison_exp
 }
 
 """
@@ -5004,34 +5509,34 @@ enum history_edit_history_constraint {
 input type for inserting data into table "history.edit_history"
 """
 input history_edit_history_insert_input {
-  audit_id: uuid
-  record_id: uuid
+  auditId: uuid
+  recordId: uuid
   table: name
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 aggregate max on columns
 """
 type history_edit_history_max_fields {
-  audit_id: uuid
-  record_id: uuid
+  auditId: uuid
+  recordId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 aggregate min on columns
 """
 type history_edit_history_min_fields {
-  audit_id: uuid
-  record_id: uuid
+  auditId: uuid
+  recordId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -5062,20 +5567,20 @@ input history_edit_history_on_conflict {
 Ordering options when selecting data from "history.edit_history".
 """
 input history_edit_history_order_by {
-  audit_id: order_by
+  auditId: order_by
   isUserAllowedToRead: order_by
-  record_id: order_by
+  recordId: order_by
   table: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
 primary key columns input for table: history_edit_history
 """
 input history_edit_history_pk_columns_input {
-  audit_id: uuid!
+  auditId: uuid!
 }
 
 """
@@ -5085,12 +5590,12 @@ enum history_edit_history_select_column {
   """
   column name
   """
-  audit_id
+  auditId
 
   """
   column name
   """
-  record_id
+  recordId
 
   """
   column name
@@ -5105,24 +5610,24 @@ enum history_edit_history_select_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
 input type for updating data in table "history.edit_history"
 """
 input history_edit_history_set_input {
-  audit_id: uuid
-  record_id: uuid
+  auditId: uuid
+  recordId: uuid
   table: name
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -5132,12 +5637,12 @@ enum history_edit_history_update_column {
   """
   column name
   """
-  audit_id
+  auditId
 
   """
   column name
   """
-  record_id
+  recordId
 
   """
   column name
@@ -5152,12 +5657,12 @@ enum history_edit_history_update_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
@@ -5168,14 +5673,14 @@ type history_kodas_history {
   An object relationship
   """
   day: history_attendance_days!
-  dayID: date!
+  dayId: date!
   id: uuid!
 
   """
   An object relationship
   """
   person: persons!
-  personID: uuid!
+  personId: uuid!
   recordedBy: uuid!
 
   """
@@ -5233,10 +5738,10 @@ input history_kodas_history_bool_exp {
   _not: history_kodas_history_bool_exp
   _or: [history_kodas_history_bool_exp!]
   day: history_attendance_days_bool_exp
-  dayID: date_comparison_exp
+  dayId: date_comparison_exp
   id: uuid_comparison_exp
   person: persons_bool_exp
-  personID: uuid_comparison_exp
+  personId: uuid_comparison_exp
   recordedBy: uuid_comparison_exp
   user: users_bool_exp
 }
@@ -5246,7 +5751,7 @@ unique or primary key constraints on table "history.kodas_history"
 """
 enum history_kodas_history_constraint {
   """
-  unique or primary key constraint on columns "dayID", "personID"
+  unique or primary key constraint on columns "day_id", "person_id"
   """
   kodas_history_dayID_personID_key
 
@@ -5261,10 +5766,10 @@ input type for inserting data into table "history.kodas_history"
 """
 input history_kodas_history_insert_input {
   day: history_attendance_days_obj_rel_insert_input
-  dayID: date
+  dayId: date
   id: uuid
   person: persons_obj_rel_insert_input
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
   user: users_obj_rel_insert_input
 }
@@ -5273,9 +5778,9 @@ input history_kodas_history_insert_input {
 aggregate max on columns
 """
 type history_kodas_history_max_fields {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -5283,9 +5788,9 @@ type history_kodas_history_max_fields {
 order by max() on columns of table "history.kodas_history"
 """
 input history_kodas_history_max_order_by {
-  dayID: order_by
+  dayId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
 }
 
@@ -5293,9 +5798,9 @@ input history_kodas_history_max_order_by {
 aggregate min on columns
 """
 type history_kodas_history_min_fields {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -5303,9 +5808,9 @@ type history_kodas_history_min_fields {
 order by min() on columns of table "history.kodas_history"
 """
 input history_kodas_history_min_order_by {
-  dayID: order_by
+  dayId: order_by
   id: order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
 }
 
@@ -5338,10 +5843,10 @@ Ordering options when selecting data from "history.kodas_history".
 """
 input history_kodas_history_order_by {
   day: history_attendance_days_order_by
-  dayID: order_by
+  dayId: order_by
   id: order_by
   person: persons_order_by
-  personID: order_by
+  personId: order_by
   recordedBy: order_by
   user: users_order_by
 }
@@ -5360,7 +5865,7 @@ enum history_kodas_history_select_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
@@ -5370,7 +5875,7 @@ enum history_kodas_history_select_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -5382,9 +5887,9 @@ enum history_kodas_history_select_column {
 input type for updating data in table "history.kodas_history"
 """
 input history_kodas_history_set_input {
-  dayID: date
+  dayId: date
   id: uuid
-  personID: uuid
+  personId: uuid
   recordedBy: uuid
 }
 
@@ -5395,7 +5900,7 @@ enum history_kodas_history_update_column {
   """
   column name
   """
-  dayID
+  dayId
 
   """
   column name
@@ -5405,7 +5910,7 @@ enum history_kodas_history_update_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
@@ -5421,10 +5926,10 @@ type history_visit_history {
   An object relationship
   """
   person: persons!
-  person_id: uuid!
+  personId: uuid!
   time: timestamptz!
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -5476,10 +5981,10 @@ input history_visit_history_bool_exp {
   _not: history_visit_history_bool_exp
   _or: [history_visit_history_bool_exp!]
   person: persons_bool_exp
-  person_id: uuid_comparison_exp
+  personId: uuid_comparison_exp
   time: timestamptz_comparison_exp
-  user_role: String_comparison_exp
-  user_uid: uuid_comparison_exp
+  userRole: String_comparison_exp
+  userUid: uuid_comparison_exp
 }
 
 """
@@ -5497,50 +6002,50 @@ input type for inserting data into table "history.visit_history"
 """
 input history_visit_history_insert_input {
   person: persons_obj_rel_insert_input
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 aggregate max on columns
 """
 type history_visit_history_max_fields {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 order by max() on columns of table "history.visit_history"
 """
 input history_visit_history_max_order_by {
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
 aggregate min on columns
 """
 type history_visit_history_min_fields {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
 order by min() on columns of table "history.visit_history"
 """
 input history_visit_history_min_order_by {
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
@@ -5572,10 +6077,10 @@ Ordering options when selecting data from "history.visit_history".
 """
 input history_visit_history_order_by {
   person: persons_order_by
-  person_id: order_by
+  personId: order_by
   time: order_by
-  user_role: order_by
-  user_uid: order_by
+  userRole: order_by
+  userUid: order_by
 }
 
 """
@@ -5592,7 +6097,7 @@ enum history_visit_history_select_column {
   """
   column name
   """
-  person_id
+  personId
 
   """
   column name
@@ -5602,22 +6107,22 @@ enum history_visit_history_select_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
 input type for updating data in table "history.visit_history"
 """
 input history_visit_history_set_input {
-  person_id: uuid
+  personId: uuid
   time: timestamptz
-  user_role: String
-  user_uid: uuid
+  userRole: String
+  userUid: uuid
 }
 
 """
@@ -5627,7 +6132,7 @@ enum history_visit_history_update_column {
   """
   column name
   """
-  person_id
+  personId
 
   """
   column name
@@ -5637,12 +6142,12 @@ enum history_visit_history_update_column {
   """
   column name
   """
-  user_role
+  userRole
 
   """
   column name
   """
-  user_uid
+  userUid
 }
 
 """
@@ -5920,8 +6425,8 @@ input jsonb_comparison_exp {
 }
 
 input lastAttendance_persons_args {
-  groupID: uuid
-  serviceID: uuid
+  group_id: uuid
+  service_id: uuid
 }
 
 """
@@ -5957,6 +6462,21 @@ type mutation_root {
   delete single row from the table: "churches"
   """
   delete_churches_by_pk(id: uuid!): churches
+
+  """
+  delete data from the table: "classes"
+  """
+  delete_classes(
+    """
+    filter the rows which have to be deleted
+    """
+    where: classes_bool_exp!
+  ): classes_mutation_response
+
+  """
+  delete single row from the table: "classes"
+  """
+  delete_classes_by_pk(id: uuid!): classes
 
   """
   delete data from the table: "colleges"
@@ -6001,7 +6521,7 @@ type mutation_root {
   """
   delete single row from the table: "families_families"
   """
-  delete_families_families_by_pk(innerFamilyID: uuid!): families_families
+  delete_families_families_by_pk(innerFamilyId: uuid!): families_families
 
   """
   delete data from the table: "fathers"
@@ -6123,7 +6643,7 @@ type mutation_root {
   """
   delete single row from the table: "history.edit_history"
   """
-  delete_history_edit_history_by_pk(audit_id: uuid!): history_edit_history
+  delete_history_edit_history_by_pk(auditId: uuid!): history_edit_history
 
   """
   delete data from the table: "history.kodas_history"
@@ -6171,19 +6691,19 @@ type mutation_root {
   delete_jobs_by_pk(id: uuid!): jobs
 
   """
-  delete data from the table: "personTypes"
+  delete data from the table: "person_types"
   """
-  delete_personTypes(
+  delete_person_types(
     """
     filter the rows which have to be deleted
     """
-    where: personTypes_bool_exp!
-  ): personTypes_mutation_response
+    where: person_types_bool_exp!
+  ): person_types_mutation_response
 
   """
-  delete single row from the table: "personTypes"
+  delete single row from the table: "person_types"
   """
-  delete_personTypes_by_pk(id: uuid!): personTypes
+  delete_person_types_by_pk(id: uuid!): person_types
 
   """
   delete data from the table: "persons"
@@ -6213,7 +6733,7 @@ type mutation_root {
   """
   delete single row from the table: "persons_groups"
   """
-  delete_persons_groups_by_pk(rel_id: uuid!): persons_groups
+  delete_persons_groups_by_pk(relId: uuid!): persons_groups
 
   """
   delete data from the table: "persons_services"
@@ -6228,7 +6748,7 @@ type mutation_root {
   """
   delete single row from the table: "persons_services"
   """
-  delete_persons_services_by_pk(rel_id: uuid!): persons_services
+  delete_persons_services_by_pk(relId: uuid!): persons_services
 
   """
   delete data from the table: "persons_tags"
@@ -6243,7 +6763,7 @@ type mutation_root {
   """
   delete single row from the table: "persons_tags"
   """
-  delete_persons_tags_by_pk(rel_id: uuid!): persons_tags
+  delete_persons_tags_by_pk(relId: uuid!): persons_tags
 
   """
   delete data from the table: "qualifications"
@@ -6336,19 +6856,19 @@ type mutation_root {
   delete_streets_by_pk(id: uuid!): streets
 
   """
-  delete data from the table: "studyYears"
+  delete data from the table: "study_years"
   """
-  delete_studyYears(
+  delete_study_years(
     """
     filter the rows which have to be deleted
     """
-    where: studyYears_bool_exp!
-  ): studyYears_mutation_response
+    where: study_years_bool_exp!
+  ): study_years_mutation_response
 
   """
-  delete single row from the table: "studyYears"
+  delete single row from the table: "study_years"
   """
-  delete_studyYears_by_pk(order: smallint!): studyYears
+  delete_study_years_by_pk(order: smallint!): study_years
 
   """
   delete data from the table: "tags"
@@ -6408,7 +6928,7 @@ type mutation_root {
   """
   delete single row from the table: "users_permissions"
   """
-  delete_users_permissions_by_pk(permission_id: uuid!): users_permissions
+  delete_users_permissions_by_pk(permissionId: uuid!): users_permissions
 
   """
   insert data into the table: "areas"
@@ -6469,6 +6989,36 @@ type mutation_root {
     """
     on_conflict: churches_on_conflict
   ): churches
+
+  """
+  insert data into the table: "classes"
+  """
+  insert_classes(
+    """
+    the rows to be inserted
+    """
+    objects: [classes_insert_input!]!
+
+    """
+    upsert condition
+    """
+    on_conflict: classes_on_conflict
+  ): classes_mutation_response
+
+  """
+  insert a single row into the table: "classes"
+  """
+  insert_classes_one(
+    """
+    the row to be inserted
+    """
+    object: classes_insert_input!
+
+    """
+    upsert condition
+    """
+    on_conflict: classes_on_conflict
+  ): classes
 
   """
   insert data into the table: "colleges"
@@ -6891,34 +7441,34 @@ type mutation_root {
   ): jobs
 
   """
-  insert data into the table: "personTypes"
+  insert data into the table: "person_types"
   """
-  insert_personTypes(
+  insert_person_types(
     """
     the rows to be inserted
     """
-    objects: [personTypes_insert_input!]!
+    objects: [person_types_insert_input!]!
 
     """
     upsert condition
     """
-    on_conflict: personTypes_on_conflict
-  ): personTypes_mutation_response
+    on_conflict: person_types_on_conflict
+  ): person_types_mutation_response
 
   """
-  insert a single row into the table: "personTypes"
+  insert a single row into the table: "person_types"
   """
-  insert_personTypes_one(
+  insert_person_types_one(
     """
     the row to be inserted
     """
-    object: personTypes_insert_input!
+    object: person_types_insert_input!
 
     """
     upsert condition
     """
-    on_conflict: personTypes_on_conflict
-  ): personTypes
+    on_conflict: person_types_on_conflict
+  ): person_types
 
   """
   insert data into the table: "persons"
@@ -7221,34 +7771,34 @@ type mutation_root {
   ): streets
 
   """
-  insert data into the table: "studyYears"
+  insert data into the table: "study_years"
   """
-  insert_studyYears(
+  insert_study_years(
     """
     the rows to be inserted
     """
-    objects: [studyYears_insert_input!]!
+    objects: [study_years_insert_input!]!
 
     """
     upsert condition
     """
-    on_conflict: studyYears_on_conflict
-  ): studyYears_mutation_response
+    on_conflict: study_years_on_conflict
+  ): study_years_mutation_response
 
   """
-  insert a single row into the table: "studyYears"
+  insert a single row into the table: "study_years"
   """
-  insert_studyYears_one(
+  insert_study_years_one(
     """
     the row to be inserted
     """
-    object: studyYears_insert_input!
+    object: study_years_insert_input!
 
     """
     upsert condition
     """
-    on_conflict: studyYears_on_conflict
-  ): studyYears
+    on_conflict: study_years_on_conflict
+  ): study_years
 
   """
   insert data into the table: "tags"
@@ -7431,6 +7981,42 @@ type mutation_root {
     _set: churches_set_input
     pk_columns: churches_pk_columns_input!
   ): churches
+
+  """
+  update data of the table: "classes"
+  """
+  update_classes(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: classes_inc_input
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: classes_set_input
+
+    """
+    filter the rows which have to be updated
+    """
+    where: classes_bool_exp!
+  ): classes_mutation_response
+
+  """
+  update single row of the table: "classes"
+  """
+  update_classes_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: classes_inc_input
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: classes_set_input
+    pk_columns: classes_pk_columns_input!
+  ): classes
 
   """
   update data of the table: "colleges"
@@ -7827,40 +8413,40 @@ type mutation_root {
   ): jobs
 
   """
-  update data of the table: "personTypes"
+  update data of the table: "person_types"
   """
-  update_personTypes(
+  update_person_types(
     """
     increments the numeric columns with given value of the filtered values
     """
-    _inc: personTypes_inc_input
+    _inc: person_types_inc_input
 
     """
     sets the columns of the filtered rows to the given values
     """
-    _set: personTypes_set_input
+    _set: person_types_set_input
 
     """
     filter the rows which have to be updated
     """
-    where: personTypes_bool_exp!
-  ): personTypes_mutation_response
+    where: person_types_bool_exp!
+  ): person_types_mutation_response
 
   """
-  update single row of the table: "personTypes"
+  update single row of the table: "person_types"
   """
-  update_personTypes_by_pk(
+  update_person_types_by_pk(
     """
     increments the numeric columns with given value of the filtered values
     """
-    _inc: personTypes_inc_input
+    _inc: person_types_inc_input
 
     """
     sets the columns of the filtered rows to the given values
     """
-    _set: personTypes_set_input
-    pk_columns: personTypes_pk_columns_input!
-  ): personTypes
+    _set: person_types_set_input
+    pk_columns: person_types_pk_columns_input!
+  ): person_types
 
   """
   update data of the table: "persons"
@@ -8223,40 +8809,40 @@ type mutation_root {
   ): streets
 
   """
-  update data of the table: "studyYears"
+  update data of the table: "study_years"
   """
-  update_studyYears(
+  update_study_years(
     """
     increments the numeric columns with given value of the filtered values
     """
-    _inc: studyYears_inc_input
+    _inc: study_years_inc_input
 
     """
     sets the columns of the filtered rows to the given values
     """
-    _set: studyYears_set_input
+    _set: study_years_set_input
 
     """
     filter the rows which have to be updated
     """
-    where: studyYears_bool_exp!
-  ): studyYears_mutation_response
+    where: study_years_bool_exp!
+  ): study_years_mutation_response
 
   """
-  update single row of the table: "studyYears"
+  update single row of the table: "study_years"
   """
-  update_studyYears_by_pk(
+  update_study_years_by_pk(
     """
     increments the numeric columns with given value of the filtered values
     """
-    _inc: studyYears_inc_input
+    _inc: study_years_inc_input
 
     """
     sets the columns of the filtered rows to the given values
     """
-    _set: studyYears_set_input
-    pk_columns: studyYears_pk_columns_input!
-  ): studyYears
+    _set: study_years_set_input
+    pk_columns: study_years_pk_columns_input!
+  ): study_years
 
   """
   update data of the table: "tags"
@@ -8436,9 +9022,9 @@ enum order_by {
 }
 
 """
-columns and relationships of "personTypes"
+columns and relationships of "person_types"
 """
-type personTypes {
+type person_types {
   id: uuid!
   name: String!
   order: Int!
@@ -8505,44 +9091,44 @@ type personTypes {
 }
 
 """
-aggregated selection of "personTypes"
+aggregated selection of "person_types"
 """
-type personTypes_aggregate {
-  aggregate: personTypes_aggregate_fields
-  nodes: [personTypes!]!
+type person_types_aggregate {
+  aggregate: person_types_aggregate_fields
+  nodes: [person_types!]!
 }
 
 """
-aggregate fields of "personTypes"
+aggregate fields of "person_types"
 """
-type personTypes_aggregate_fields {
-  avg: personTypes_avg_fields
-  count(columns: [personTypes_select_column!], distinct: Boolean): Int!
-  max: personTypes_max_fields
-  min: personTypes_min_fields
-  stddev: personTypes_stddev_fields
-  stddev_pop: personTypes_stddev_pop_fields
-  stddev_samp: personTypes_stddev_samp_fields
-  sum: personTypes_sum_fields
-  var_pop: personTypes_var_pop_fields
-  var_samp: personTypes_var_samp_fields
-  variance: personTypes_variance_fields
+type person_types_aggregate_fields {
+  avg: person_types_avg_fields
+  count(columns: [person_types_select_column!], distinct: Boolean): Int!
+  max: person_types_max_fields
+  min: person_types_min_fields
+  stddev: person_types_stddev_fields
+  stddev_pop: person_types_stddev_pop_fields
+  stddev_samp: person_types_stddev_samp_fields
+  sum: person_types_sum_fields
+  var_pop: person_types_var_pop_fields
+  var_samp: person_types_var_samp_fields
+  variance: person_types_variance_fields
 }
 
 """
 aggregate avg on columns
 """
-type personTypes_avg_fields {
+type person_types_avg_fields {
   order: Float
 }
 
 """
-Boolean expression to filter rows from the table "personTypes". All fields are combined with a logical 'AND'.
+Boolean expression to filter rows from the table "person_types". All fields are combined with a logical 'AND'.
 """
-input personTypes_bool_exp {
-  _and: [personTypes_bool_exp!]
-  _not: personTypes_bool_exp
-  _or: [personTypes_bool_exp!]
+input person_types_bool_exp {
+  _and: [person_types_bool_exp!]
+  _not: person_types_bool_exp
+  _or: [person_types_bool_exp!]
   id: uuid_comparison_exp
   name: String_comparison_exp
   order: Int_comparison_exp
@@ -8550,9 +9136,9 @@ input personTypes_bool_exp {
 }
 
 """
-unique or primary key constraints on table "personTypes"
+unique or primary key constraints on table "person_types"
 """
-enum personTypes_constraint {
+enum person_types_constraint {
   """
   unique or primary key constraint on columns "name"
   """
@@ -8570,16 +9156,16 @@ enum personTypes_constraint {
 }
 
 """
-input type for incrementing numeric columns in table "personTypes"
+input type for incrementing numeric columns in table "person_types"
 """
-input personTypes_inc_input {
+input person_types_inc_input {
   order: Int
 }
 
 """
-input type for inserting data into table "personTypes"
+input type for inserting data into table "person_types"
 """
-input personTypes_insert_input {
+input person_types_insert_input {
   id: uuid
   name: String
   order: Int
@@ -8589,7 +9175,7 @@ input personTypes_insert_input {
 """
 aggregate max on columns
 """
-type personTypes_max_fields {
+type person_types_max_fields {
   id: uuid
   name: String
   order: Int
@@ -8598,16 +9184,16 @@ type personTypes_max_fields {
 """
 aggregate min on columns
 """
-type personTypes_min_fields {
+type person_types_min_fields {
   id: uuid
   name: String
   order: Int
 }
 
 """
-response of any mutation on the table "personTypes"
+response of any mutation on the table "person_types"
 """
-type personTypes_mutation_response {
+type person_types_mutation_response {
   """
   number of rows affected by the mutation
   """
@@ -8616,34 +9202,34 @@ type personTypes_mutation_response {
   """
   data from the rows affected by the mutation
   """
-  returning: [personTypes!]!
+  returning: [person_types!]!
 }
 
 """
-input type for inserting object relation for remote table "personTypes"
+input type for inserting object relation for remote table "person_types"
 """
-input personTypes_obj_rel_insert_input {
-  data: personTypes_insert_input!
+input person_types_obj_rel_insert_input {
+  data: person_types_insert_input!
 
   """
   upsert condition
   """
-  on_conflict: personTypes_on_conflict
+  on_conflict: person_types_on_conflict
 }
 
 """
-on_conflict condition type for table "personTypes"
+on_conflict condition type for table "person_types"
 """
-input personTypes_on_conflict {
-  constraint: personTypes_constraint!
-  update_columns: [personTypes_update_column!]! = []
-  where: personTypes_bool_exp
+input person_types_on_conflict {
+  constraint: person_types_constraint!
+  update_columns: [person_types_update_column!]! = []
+  where: person_types_bool_exp
 }
 
 """
-Ordering options when selecting data from "personTypes".
+Ordering options when selecting data from "person_types".
 """
-input personTypes_order_by {
+input person_types_order_by {
   id: order_by
   name: order_by
   order: order_by
@@ -8651,16 +9237,16 @@ input personTypes_order_by {
 }
 
 """
-primary key columns input for table: personTypes
+primary key columns input for table: person_types
 """
-input personTypes_pk_columns_input {
+input person_types_pk_columns_input {
   id: uuid!
 }
 
 """
-select columns of table "personTypes"
+select columns of table "person_types"
 """
-enum personTypes_select_column {
+enum person_types_select_column {
   """
   column name
   """
@@ -8678,9 +9264,9 @@ enum personTypes_select_column {
 }
 
 """
-input type for updating data in table "personTypes"
+input type for updating data in table "person_types"
 """
-input personTypes_set_input {
+input person_types_set_input {
   id: uuid
   name: String
   order: Int
@@ -8689,35 +9275,35 @@ input personTypes_set_input {
 """
 aggregate stddev on columns
 """
-type personTypes_stddev_fields {
+type person_types_stddev_fields {
   order: Float
 }
 
 """
 aggregate stddev_pop on columns
 """
-type personTypes_stddev_pop_fields {
+type person_types_stddev_pop_fields {
   order: Float
 }
 
 """
 aggregate stddev_samp on columns
 """
-type personTypes_stddev_samp_fields {
+type person_types_stddev_samp_fields {
   order: Float
 }
 
 """
 aggregate sum on columns
 """
-type personTypes_sum_fields {
+type person_types_sum_fields {
   order: Int
 }
 
 """
-update columns of table "personTypes"
+update columns of table "person_types"
 """
-enum personTypes_update_column {
+enum person_types_update_column {
   """
   column name
   """
@@ -8737,21 +9323,21 @@ enum personTypes_update_column {
 """
 aggregate var_pop on columns
 """
-type personTypes_var_pop_fields {
+type person_types_var_pop_fields {
   order: Float
 }
 
 """
 aggregate var_samp on columns
 """
-type personTypes_var_samp_fields {
+type person_types_var_samp_fields {
   order: Float
 }
 
 """
 aggregate variance on columns
 """
-type personTypes_variance_fields {
+type person_types_variance_fields {
   order: Float
 }
 
@@ -8760,6 +9346,10 @@ columns and relationships of "persons"
 """
 type persons {
   address: String
+
+  """
+  A computed field, executes function "person_areas"
+  """
   areas(
     """
     distinct select on columns
@@ -8790,7 +9380,7 @@ type persons {
   """
   An array relationship
   """
-  attendance_history(
+  attendanceHistory(
     """
     distinct select on columns
     """
@@ -8820,7 +9410,7 @@ type persons {
   """
   An aggregate relationship
   """
-  attendance_history_aggregate(
+  attendanceHistory_aggregate(
     """
     distinct select on columns
     """
@@ -8847,12 +9437,16 @@ type persons {
     where: history_attendance_history_bool_exp
   ): history_attendance_history_aggregate!
   birthdate: date
+
+  """
+  A computed field, executes function "get_person_birthday"
+  """
   birthday: String
 
   """
   An array relationship
   """
-  call_history(
+  callHistory(
     """
     distinct select on columns
     """
@@ -8882,7 +9476,7 @@ type persons {
   """
   An aggregate relationship
   """
-  call_history_aggregate(
+  callHistory_aggregate(
     """
     distinct select on columns
     """
@@ -8913,19 +9507,19 @@ type persons {
   An object relationship
   """
   church: churches
-  churchID: uuid
+  churchId: uuid
 
   """
   An object relationship
   """
   college: colleges
-  collegeID: uuid
+  collegeId: uuid
   color: Int
 
   """
   An array relationship
   """
-  confession_history(
+  confessionHistory(
     """
     distinct select on columns
     """
@@ -8955,7 +9549,7 @@ type persons {
   """
   An aggregate relationship
   """
-  confession_history_aggregate(
+  confessionHistory_aggregate(
     """
     distinct select on columns
     """
@@ -8986,14 +9580,14 @@ type persons {
   An object relationship
   """
   family: families
-  familyID: uuid
+  familyId: uuid
 
   """
   An object relationship
   """
   father: fathers
-  fatherID: uuid
-  firestore_id: String
+  fatherId: uuid
+  firestoreId: String
   gender: Boolean!
   geolocation: geography
 
@@ -9060,7 +9654,15 @@ type persons {
   isServant: Boolean!
   isShammas: Boolean!
   isStudent: Boolean!
+
+  """
+  A computed field, executes function "user_allowed_to_read_person"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_person"
+  """
   isUserAllowedToWrite: Boolean
 
   """
@@ -9068,12 +9670,12 @@ type persons {
   """
   job: jobs
   jobDescription: String
-  jobID: uuid
+  jobId: uuid
 
   """
   An array relationship
   """
-  kodas_history(
+  kodasHistory(
     """
     distinct select on columns
     """
@@ -9103,7 +9705,7 @@ type persons {
   """
   An aggregate relationship
   """
-  kodas_history_aggregate(
+  kodasHistory_aggregate(
     """
     distinct select on columns
     """
@@ -9129,6 +9731,10 @@ type persons {
     """
     where: history_kodas_history_bool_exp
   ): history_kodas_history_aggregate!
+
+  """
+  A computed field, executes function "history.get_person_last_attendance"
+  """
   lastAttendance(
     """
     input parameters for computed field "lastAttendance" defined on table "persons"
@@ -9140,30 +9746,50 @@ type persons {
     """
     path: String
   ): jsonb
+
+  """
+  A computed field, executes function "history.get_person_last_call"
+  """
   lastCall(
     """
     JSON select path
     """
     path: String
   ): jsonb
+
+  """
+  A computed field, executes function "history.get_person_last_confession"
+  """
   lastConfession(
     """
     JSON select path
     """
     path: String
   ): jsonb
+
+  """
+  A computed field, executes function "history.get_person_last_edit"
+  """
   lastEdit(
     """
     JSON select path
     """
     path: String
   ): jsonb
+
+  """
+  A computed field, executes function "history.get_person_last_kodas"
+  """
   lastKodas(
     """
     JSON select path
     """
     path: String
   ): jsonb
+
+  """
+  A computed field, executes function "history.get_person_last_visit"
+  """
   lastVisit(
     """
     JSON select path
@@ -9183,21 +9809,21 @@ type persons {
   """
   An object relationship
   """
-  personType: personTypes
-  personTypeID: uuid
-  photo_updated_at: timestamptz
+  personType: person_types
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
 
   """
   An object relationship
   """
   qualification: qualifications
-  qualificationID: uuid
+  qualificationId: uuid
 
   """
   An object relationship
   """
   school: schools
-  schoolID: uuid
+  schoolId: uuid
 
   """
   An array relationship
@@ -9264,8 +9890,12 @@ type persons {
   An object relationship
   """
   state: states
-  stateID: uuid
-  storeID: uuid
+  stateId: uuid
+  storeId: uuid
+
+  """
+  A computed field, executes function "person_streets"
+  """
   streets(
     """
     distinct select on columns
@@ -9296,8 +9926,8 @@ type persons {
   """
   An object relationship
   """
-  studyYear: studyYears
-  studyYearID: smallint
+  studyYear: study_years
+  studyYearId: smallint
 
   """
   An array relationship
@@ -9368,7 +9998,7 @@ type persons {
   """
   An array relationship
   """
-  visit_history(
+  visitHistory(
     """
     distinct select on columns
     """
@@ -9398,7 +10028,7 @@ type persons {
   """
   An aggregate relationship
   """
-  visit_history_aggregate(
+  visitHistory_aggregate(
     """
     distinct select on columns
     """
@@ -9492,7 +10122,7 @@ aggregate avg on columns
 """
 type persons_avg_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -9500,7 +10130,7 @@ order by avg() on columns of table "persons"
 """
 input persons_avg_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -9512,21 +10142,21 @@ input persons_bool_exp {
   _or: [persons_bool_exp!]
   address: String_comparison_exp
   areas: areas_bool_exp
-  attendance_history: history_attendance_history_bool_exp
+  attendanceHistory: history_attendance_history_bool_exp
   birthdate: date_comparison_exp
   birthday: String_comparison_exp
-  call_history: history_call_history_bool_exp
+  callHistory: history_call_history_bool_exp
   church: churches_bool_exp
-  churchID: uuid_comparison_exp
+  churchId: uuid_comparison_exp
   college: colleges_bool_exp
-  collegeID: uuid_comparison_exp
+  collegeId: uuid_comparison_exp
   color: Int_comparison_exp
-  confession_history: history_confession_history_bool_exp
+  confessionHistory: history_confession_history_bool_exp
   family: families_bool_exp
-  familyID: uuid_comparison_exp
+  familyId: uuid_comparison_exp
   father: fathers_bool_exp
-  fatherID: uuid_comparison_exp
-  firestore_id: String_comparison_exp
+  fatherId: uuid_comparison_exp
+  firestoreId: String_comparison_exp
   gender: Boolean_comparison_exp
   geolocation: geography_comparison_exp
   groups: persons_groups_bool_exp
@@ -9538,8 +10168,8 @@ input persons_bool_exp {
   isUserAllowedToWrite: Boolean_comparison_exp
   job: jobs_bool_exp
   jobDescription: String_comparison_exp
-  jobID: uuid_comparison_exp
-  kodas_history: history_kodas_history_bool_exp
+  jobId: uuid_comparison_exp
+  kodasHistory: history_kodas_history_bool_exp
   lastCall: jsonb_comparison_exp
   lastConfession: jsonb_comparison_exp
   lastEdit: jsonb_comparison_exp
@@ -9549,25 +10179,25 @@ input persons_bool_exp {
   name: String_comparison_exp
   notes: String_comparison_exp
   otherPhones: jsonb_comparison_exp
-  personType: personTypes_bool_exp
-  personTypeID: uuid_comparison_exp
-  photo_updated_at: timestamptz_comparison_exp
+  personType: person_types_bool_exp
+  personTypeId: uuid_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   qualification: qualifications_bool_exp
-  qualificationID: uuid_comparison_exp
+  qualificationId: uuid_comparison_exp
   school: schools_bool_exp
-  schoolID: uuid_comparison_exp
+  schoolId: uuid_comparison_exp
   services: persons_services_bool_exp
   shammasLevel: uuid_comparison_exp
   state: states_bool_exp
-  stateID: uuid_comparison_exp
-  storeID: uuid_comparison_exp
+  stateId: uuid_comparison_exp
+  storeId: uuid_comparison_exp
   streets: streets_bool_exp
-  studyYear: studyYears_bool_exp
-  studyYearID: smallint_comparison_exp
+  studyYear: study_years_bool_exp
+  studyYearId: smallint_comparison_exp
   tags: persons_tags_bool_exp
   uid: uuid_comparison_exp
   user: users_bool_exp
-  visit_history: history_visit_history_bool_exp
+  visitHistory: history_visit_history_bool_exp
 }
 
 """
@@ -9580,7 +10210,7 @@ enum persons_constraint {
   persons_firestore_id_key
 
   """
-  unique or primary key constraint on columns "mainPhone", "birthdate"
+  unique or primary key constraint on columns "main_phone", "birthdate"
   """
   persons_mainPhone_birthdate_key
 
@@ -9624,14 +10254,14 @@ type persons_groups {
   An object relationship
   """
   group: groups!
-  groupID: uuid!
+  groupId: uuid!
 
   """
   An object relationship
   """
   person: persons!
-  personID: uuid!
-  rel_id: uuid!
+  personId: uuid!
+  relId: uuid!
 }
 
 """
@@ -9680,10 +10310,10 @@ input persons_groups_bool_exp {
   _not: persons_groups_bool_exp
   _or: [persons_groups_bool_exp!]
   group: groups_bool_exp
-  groupID: uuid_comparison_exp
+  groupId: uuid_comparison_exp
   person: persons_bool_exp
-  personID: uuid_comparison_exp
-  rel_id: uuid_comparison_exp
+  personId: uuid_comparison_exp
+  relId: uuid_comparison_exp
 }
 
 """
@@ -9691,7 +10321,7 @@ unique or primary key constraints on table "persons_groups"
 """
 enum persons_groups_constraint {
   """
-  unique or primary key constraint on columns "groupID", "personID"
+  unique or primary key constraint on columns "person_id", "group_id"
   """
   persons_groups_personID_groupID_key
 
@@ -9706,46 +10336,46 @@ input type for inserting data into table "persons_groups"
 """
 input persons_groups_insert_input {
   group: groups_obj_rel_insert_input
-  groupID: uuid
+  groupId: uuid
   person: persons_obj_rel_insert_input
-  personID: uuid
-  rel_id: uuid
+  personId: uuid
+  relId: uuid
 }
 
 """
 aggregate max on columns
 """
 type persons_groups_max_fields {
-  groupID: uuid
-  personID: uuid
-  rel_id: uuid
+  groupId: uuid
+  personId: uuid
+  relId: uuid
 }
 
 """
 order by max() on columns of table "persons_groups"
 """
 input persons_groups_max_order_by {
-  groupID: order_by
-  personID: order_by
-  rel_id: order_by
+  groupId: order_by
+  personId: order_by
+  relId: order_by
 }
 
 """
 aggregate min on columns
 """
 type persons_groups_min_fields {
-  groupID: uuid
-  personID: uuid
-  rel_id: uuid
+  groupId: uuid
+  personId: uuid
+  relId: uuid
 }
 
 """
 order by min() on columns of table "persons_groups"
 """
 input persons_groups_min_order_by {
-  groupID: order_by
-  personID: order_by
-  rel_id: order_by
+  groupId: order_by
+  personId: order_by
+  relId: order_by
 }
 
 """
@@ -9777,17 +10407,17 @@ Ordering options when selecting data from "persons_groups".
 """
 input persons_groups_order_by {
   group: groups_order_by
-  groupID: order_by
+  groupId: order_by
   person: persons_order_by
-  personID: order_by
-  rel_id: order_by
+  personId: order_by
+  relId: order_by
 }
 
 """
 primary key columns input for table: persons_groups
 """
 input persons_groups_pk_columns_input {
-  rel_id: uuid!
+  relId: uuid!
 }
 
 """
@@ -9797,26 +10427,26 @@ enum persons_groups_select_column {
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 }
 
 """
 input type for updating data in table "persons_groups"
 """
 input persons_groups_set_input {
-  groupID: uuid
-  personID: uuid
-  rel_id: uuid
+  groupId: uuid
+  personId: uuid
+  relId: uuid
 }
 
 """
@@ -9826,17 +10456,17 @@ enum persons_groups_update_column {
   """
   column name
   """
-  groupID
+  groupId
 
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 }
 
 """
@@ -9844,7 +10474,7 @@ input type for incrementing numeric columns in table "persons"
 """
 input persons_inc_input {
   color: Int
-  studyYearID: smallint
+  studyYearId: smallint
 }
 
 """
@@ -9852,20 +10482,20 @@ input type for inserting data into table "persons"
 """
 input persons_insert_input {
   address: String
-  attendance_history: history_attendance_history_arr_rel_insert_input
+  attendanceHistory: history_attendance_history_arr_rel_insert_input
   birthdate: date
-  call_history: history_call_history_arr_rel_insert_input
+  callHistory: history_call_history_arr_rel_insert_input
   church: churches_obj_rel_insert_input
-  churchID: uuid
+  churchId: uuid
   college: colleges_obj_rel_insert_input
-  collegeID: uuid
+  collegeId: uuid
   color: Int
-  confession_history: history_confession_history_arr_rel_insert_input
+  confessionHistory: history_confession_history_arr_rel_insert_input
   family: families_obj_rel_insert_input
-  familyID: uuid
+  familyId: uuid
   father: fathers_obj_rel_insert_input
-  fatherID: uuid
-  firestore_id: String
+  fatherId: uuid
+  firestoreId: String
   gender: Boolean
   geolocation: geography
   groups: persons_groups_arr_rel_insert_input
@@ -9875,30 +10505,30 @@ input persons_insert_input {
   isStudent: Boolean
   job: jobs_obj_rel_insert_input
   jobDescription: String
-  jobID: uuid
-  kodas_history: history_kodas_history_arr_rel_insert_input
+  jobId: uuid
+  kodasHistory: history_kodas_history_arr_rel_insert_input
   mainPhone: String
   name: String
   notes: String
   otherPhones: jsonb
-  personType: personTypes_obj_rel_insert_input
-  personTypeID: uuid
-  photo_updated_at: timestamptz
+  personType: person_types_obj_rel_insert_input
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
   qualification: qualifications_obj_rel_insert_input
-  qualificationID: uuid
+  qualificationId: uuid
   school: schools_obj_rel_insert_input
-  schoolID: uuid
+  schoolId: uuid
   services: persons_services_arr_rel_insert_input
   shammasLevel: uuid
   state: states_obj_rel_insert_input
-  stateID: uuid
-  storeID: uuid
-  studyYear: studyYears_obj_rel_insert_input
-  studyYearID: smallint
+  stateId: uuid
+  storeId: uuid
+  studyYear: study_years_obj_rel_insert_input
+  studyYearId: smallint
   tags: persons_tags_arr_rel_insert_input
   uid: uuid
   user: users_obj_rel_insert_input
-  visit_history: history_visit_history_arr_rel_insert_input
+  visitHistory: history_visit_history_arr_rel_insert_input
 }
 
 """
@@ -9907,26 +10537,26 @@ aggregate max on columns
 type persons_max_fields {
   address: String
   birthdate: date
-  churchID: uuid
-  collegeID: uuid
+  churchId: uuid
+  collegeId: uuid
   color: Int
-  familyID: uuid
-  fatherID: uuid
-  firestore_id: String
+  familyId: uuid
+  fatherId: uuid
+  firestoreId: String
   id: uuid
   jobDescription: String
-  jobID: uuid
+  jobId: uuid
   mainPhone: String
   name: String
   notes: String
-  personTypeID: uuid
-  photo_updated_at: timestamptz
-  qualificationID: uuid
-  schoolID: uuid
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
   shammasLevel: uuid
-  stateID: uuid
-  storeID: uuid
-  studyYearID: smallint
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
   uid: uuid
 }
 
@@ -9936,26 +10566,26 @@ order by max() on columns of table "persons"
 input persons_max_order_by {
   address: order_by
   birthdate: order_by
-  churchID: order_by
-  collegeID: order_by
+  churchId: order_by
+  collegeId: order_by
   color: order_by
-  familyID: order_by
-  fatherID: order_by
-  firestore_id: order_by
+  familyId: order_by
+  fatherId: order_by
+  firestoreId: order_by
   id: order_by
   jobDescription: order_by
-  jobID: order_by
+  jobId: order_by
   mainPhone: order_by
   name: order_by
   notes: order_by
-  personTypeID: order_by
-  photo_updated_at: order_by
-  qualificationID: order_by
-  schoolID: order_by
+  personTypeId: order_by
+  photoUpdatedAt: order_by
+  qualificationId: order_by
+  schoolId: order_by
   shammasLevel: order_by
-  stateID: order_by
-  storeID: order_by
-  studyYearID: order_by
+  stateId: order_by
+  storeId: order_by
+  studyYearId: order_by
   uid: order_by
 }
 
@@ -9965,26 +10595,26 @@ aggregate min on columns
 type persons_min_fields {
   address: String
   birthdate: date
-  churchID: uuid
-  collegeID: uuid
+  churchId: uuid
+  collegeId: uuid
   color: Int
-  familyID: uuid
-  fatherID: uuid
-  firestore_id: String
+  familyId: uuid
+  fatherId: uuid
+  firestoreId: String
   id: uuid
   jobDescription: String
-  jobID: uuid
+  jobId: uuid
   mainPhone: String
   name: String
   notes: String
-  personTypeID: uuid
-  photo_updated_at: timestamptz
-  qualificationID: uuid
-  schoolID: uuid
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
   shammasLevel: uuid
-  stateID: uuid
-  storeID: uuid
-  studyYearID: smallint
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
   uid: uuid
 }
 
@@ -9994,26 +10624,26 @@ order by min() on columns of table "persons"
 input persons_min_order_by {
   address: order_by
   birthdate: order_by
-  churchID: order_by
-  collegeID: order_by
+  churchId: order_by
+  collegeId: order_by
   color: order_by
-  familyID: order_by
-  fatherID: order_by
-  firestore_id: order_by
+  familyId: order_by
+  fatherId: order_by
+  firestoreId: order_by
   id: order_by
   jobDescription: order_by
-  jobID: order_by
+  jobId: order_by
   mainPhone: order_by
   name: order_by
   notes: order_by
-  personTypeID: order_by
-  photo_updated_at: order_by
-  qualificationID: order_by
-  schoolID: order_by
+  personTypeId: order_by
+  photoUpdatedAt: order_by
+  qualificationId: order_by
+  schoolId: order_by
   shammasLevel: order_by
-  stateID: order_by
-  storeID: order_by
-  studyYearID: order_by
+  stateId: order_by
+  storeId: order_by
+  studyYearId: order_by
   uid: order_by
 }
 
@@ -10059,21 +10689,21 @@ Ordering options when selecting data from "persons".
 input persons_order_by {
   address: order_by
   areas_aggregate: areas_aggregate_order_by
-  attendance_history_aggregate: history_attendance_history_aggregate_order_by
+  attendanceHistory_aggregate: history_attendance_history_aggregate_order_by
   birthdate: order_by
   birthday: order_by
-  call_history_aggregate: history_call_history_aggregate_order_by
+  callHistory_aggregate: history_call_history_aggregate_order_by
   church: churches_order_by
-  churchID: order_by
+  churchId: order_by
   college: colleges_order_by
-  collegeID: order_by
+  collegeId: order_by
   color: order_by
-  confession_history_aggregate: history_confession_history_aggregate_order_by
+  confessionHistory_aggregate: history_confession_history_aggregate_order_by
   family: families_order_by
-  familyID: order_by
+  familyId: order_by
   father: fathers_order_by
-  fatherID: order_by
-  firestore_id: order_by
+  fatherId: order_by
+  firestoreId: order_by
   gender: order_by
   geolocation: order_by
   groups_aggregate: persons_groups_aggregate_order_by
@@ -10085,8 +10715,8 @@ input persons_order_by {
   isUserAllowedToWrite: order_by
   job: jobs_order_by
   jobDescription: order_by
-  jobID: order_by
-  kodas_history_aggregate: history_kodas_history_aggregate_order_by
+  jobId: order_by
+  kodasHistory_aggregate: history_kodas_history_aggregate_order_by
   lastCall: order_by
   lastConfession: order_by
   lastEdit: order_by
@@ -10096,25 +10726,25 @@ input persons_order_by {
   name: order_by
   notes: order_by
   otherPhones: order_by
-  personType: personTypes_order_by
-  personTypeID: order_by
-  photo_updated_at: order_by
+  personType: person_types_order_by
+  personTypeId: order_by
+  photoUpdatedAt: order_by
   qualification: qualifications_order_by
-  qualificationID: order_by
+  qualificationId: order_by
   school: schools_order_by
-  schoolID: order_by
+  schoolId: order_by
   services_aggregate: persons_services_aggregate_order_by
   shammasLevel: order_by
   state: states_order_by
-  stateID: order_by
-  storeID: order_by
+  stateId: order_by
+  storeId: order_by
   streets_aggregate: streets_aggregate_order_by
-  studyYear: studyYears_order_by
-  studyYearID: order_by
+  studyYear: study_years_order_by
+  studyYearId: order_by
   tags_aggregate: persons_tags_aggregate_order_by
   uid: order_by
   user: users_order_by
-  visit_history_aggregate: history_visit_history_aggregate_order_by
+  visitHistory_aggregate: history_visit_history_aggregate_order_by
 }
 
 """
@@ -10148,12 +10778,12 @@ enum persons_select_column {
   """
   column name
   """
-  churchID
+  churchId
 
   """
   column name
   """
-  collegeID
+  collegeId
 
   """
   column name
@@ -10163,17 +10793,17 @@ enum persons_select_column {
   """
   column name
   """
-  familyID
+  familyId
 
   """
   column name
   """
-  fatherID
+  fatherId
 
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -10213,7 +10843,7 @@ enum persons_select_column {
   """
   column name
   """
-  jobID
+  jobId
 
   """
   column name
@@ -10238,22 +10868,22 @@ enum persons_select_column {
   """
   column name
   """
-  personTypeID
+  personTypeId
 
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
   """
-  qualificationID
+  qualificationId
 
   """
   column name
   """
-  schoolID
+  schoolId
 
   """
   column name
@@ -10263,17 +10893,17 @@ enum persons_select_column {
   """
   column name
   """
-  stateID
+  stateId
 
   """
   column name
   """
-  storeID
+  storeId
 
   """
   column name
   """
-  studyYearID
+  studyYearId
 
   """
   column name
@@ -10289,14 +10919,14 @@ type persons_services {
   An object relationship
   """
   person: persons!
-  personID: uuid!
-  rel_id: uuid!
+  personId: uuid!
+  relId: uuid!
 
   """
   An object relationship
   """
   service: services!
-  serviceID: uuid!
+  serviceId: uuid!
 }
 
 """
@@ -10345,10 +10975,10 @@ input persons_services_bool_exp {
   _not: persons_services_bool_exp
   _or: [persons_services_bool_exp!]
   person: persons_bool_exp
-  personID: uuid_comparison_exp
-  rel_id: uuid_comparison_exp
+  personId: uuid_comparison_exp
+  relId: uuid_comparison_exp
   service: services_bool_exp
-  serviceID: uuid_comparison_exp
+  serviceId: uuid_comparison_exp
 }
 
 """
@@ -10356,7 +10986,7 @@ unique or primary key constraints on table "persons_services"
 """
 enum persons_services_constraint {
   """
-  unique or primary key constraint on columns "personID", "serviceID"
+  unique or primary key constraint on columns "person_id", "service_id"
   """
   persons_services_personID_serviceID_key
 
@@ -10371,46 +11001,46 @@ input type for inserting data into table "persons_services"
 """
 input persons_services_insert_input {
   person: persons_obj_rel_insert_input
-  personID: uuid
-  rel_id: uuid
+  personId: uuid
+  relId: uuid
   service: services_obj_rel_insert_input
-  serviceID: uuid
+  serviceId: uuid
 }
 
 """
 aggregate max on columns
 """
 type persons_services_max_fields {
-  personID: uuid
-  rel_id: uuid
-  serviceID: uuid
+  personId: uuid
+  relId: uuid
+  serviceId: uuid
 }
 
 """
 order by max() on columns of table "persons_services"
 """
 input persons_services_max_order_by {
-  personID: order_by
-  rel_id: order_by
-  serviceID: order_by
+  personId: order_by
+  relId: order_by
+  serviceId: order_by
 }
 
 """
 aggregate min on columns
 """
 type persons_services_min_fields {
-  personID: uuid
-  rel_id: uuid
-  serviceID: uuid
+  personId: uuid
+  relId: uuid
+  serviceId: uuid
 }
 
 """
 order by min() on columns of table "persons_services"
 """
 input persons_services_min_order_by {
-  personID: order_by
-  rel_id: order_by
-  serviceID: order_by
+  personId: order_by
+  relId: order_by
+  serviceId: order_by
 }
 
 """
@@ -10442,17 +11072,17 @@ Ordering options when selecting data from "persons_services".
 """
 input persons_services_order_by {
   person: persons_order_by
-  personID: order_by
-  rel_id: order_by
+  personId: order_by
+  relId: order_by
   service: services_order_by
-  serviceID: order_by
+  serviceId: order_by
 }
 
 """
 primary key columns input for table: persons_services
 """
 input persons_services_pk_columns_input {
-  rel_id: uuid!
+  relId: uuid!
 }
 
 """
@@ -10462,26 +11092,26 @@ enum persons_services_select_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 
   """
   column name
   """
-  serviceID
+  serviceId
 }
 
 """
 input type for updating data in table "persons_services"
 """
 input persons_services_set_input {
-  personID: uuid
-  rel_id: uuid
-  serviceID: uuid
+  personId: uuid
+  relId: uuid
+  serviceId: uuid
 }
 
 """
@@ -10491,17 +11121,17 @@ enum persons_services_update_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 
   """
   column name
   """
-  serviceID
+  serviceId
 }
 
 """
@@ -10510,12 +11140,12 @@ input type for updating data in table "persons"
 input persons_set_input {
   address: String
   birthdate: date
-  churchID: uuid
-  collegeID: uuid
+  churchId: uuid
+  collegeId: uuid
   color: Int
-  familyID: uuid
-  fatherID: uuid
-  firestore_id: String
+  familyId: uuid
+  fatherId: uuid
+  firestoreId: String
   gender: Boolean
   geolocation: geography
   id: uuid
@@ -10523,19 +11153,19 @@ input persons_set_input {
   isShammas: Boolean
   isStudent: Boolean
   jobDescription: String
-  jobID: uuid
+  jobId: uuid
   mainPhone: String
   name: String
   notes: String
   otherPhones: jsonb
-  personTypeID: uuid
-  photo_updated_at: timestamptz
-  qualificationID: uuid
-  schoolID: uuid
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
   shammasLevel: uuid
-  stateID: uuid
-  storeID: uuid
-  studyYearID: smallint
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
   uid: uuid
 }
 
@@ -10544,7 +11174,7 @@ aggregate stddev on columns
 """
 type persons_stddev_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -10552,7 +11182,7 @@ order by stddev() on columns of table "persons"
 """
 input persons_stddev_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -10560,7 +11190,7 @@ aggregate stddev_pop on columns
 """
 type persons_stddev_pop_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -10568,7 +11198,7 @@ order by stddev_pop() on columns of table "persons"
 """
 input persons_stddev_pop_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -10576,7 +11206,7 @@ aggregate stddev_samp on columns
 """
 type persons_stddev_samp_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -10584,7 +11214,7 @@ order by stddev_samp() on columns of table "persons"
 """
 input persons_stddev_samp_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -10592,7 +11222,7 @@ aggregate sum on columns
 """
 type persons_sum_fields {
   color: Int
-  studyYearID: smallint
+  studyYearId: smallint
 }
 
 """
@@ -10600,7 +11230,7 @@ order by sum() on columns of table "persons"
 """
 input persons_sum_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -10611,14 +11241,14 @@ type persons_tags {
   An object relationship
   """
   person: persons!
-  personID: uuid!
-  rel_id: uuid!
+  personId: uuid!
+  relId: uuid!
 
   """
   An object relationship
   """
   tag: tags!
-  tagID: uuid!
+  tagId: uuid!
 }
 
 """
@@ -10667,10 +11297,10 @@ input persons_tags_bool_exp {
   _not: persons_tags_bool_exp
   _or: [persons_tags_bool_exp!]
   person: persons_bool_exp
-  personID: uuid_comparison_exp
-  rel_id: uuid_comparison_exp
+  personId: uuid_comparison_exp
+  relId: uuid_comparison_exp
   tag: tags_bool_exp
-  tagID: uuid_comparison_exp
+  tagId: uuid_comparison_exp
 }
 
 """
@@ -10688,46 +11318,46 @@ input type for inserting data into table "persons_tags"
 """
 input persons_tags_insert_input {
   person: persons_obj_rel_insert_input
-  personID: uuid
-  rel_id: uuid
+  personId: uuid
+  relId: uuid
   tag: tags_obj_rel_insert_input
-  tagID: uuid
+  tagId: uuid
 }
 
 """
 aggregate max on columns
 """
 type persons_tags_max_fields {
-  personID: uuid
-  rel_id: uuid
-  tagID: uuid
+  personId: uuid
+  relId: uuid
+  tagId: uuid
 }
 
 """
 order by max() on columns of table "persons_tags"
 """
 input persons_tags_max_order_by {
-  personID: order_by
-  rel_id: order_by
-  tagID: order_by
+  personId: order_by
+  relId: order_by
+  tagId: order_by
 }
 
 """
 aggregate min on columns
 """
 type persons_tags_min_fields {
-  personID: uuid
-  rel_id: uuid
-  tagID: uuid
+  personId: uuid
+  relId: uuid
+  tagId: uuid
 }
 
 """
 order by min() on columns of table "persons_tags"
 """
 input persons_tags_min_order_by {
-  personID: order_by
-  rel_id: order_by
-  tagID: order_by
+  personId: order_by
+  relId: order_by
+  tagId: order_by
 }
 
 """
@@ -10759,17 +11389,17 @@ Ordering options when selecting data from "persons_tags".
 """
 input persons_tags_order_by {
   person: persons_order_by
-  personID: order_by
-  rel_id: order_by
+  personId: order_by
+  relId: order_by
   tag: tags_order_by
-  tagID: order_by
+  tagId: order_by
 }
 
 """
 primary key columns input for table: persons_tags
 """
 input persons_tags_pk_columns_input {
-  rel_id: uuid!
+  relId: uuid!
 }
 
 """
@@ -10779,26 +11409,26 @@ enum persons_tags_select_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 
   """
   column name
   """
-  tagID
+  tagId
 }
 
 """
 input type for updating data in table "persons_tags"
 """
 input persons_tags_set_input {
-  personID: uuid
-  rel_id: uuid
-  tagID: uuid
+  personId: uuid
+  relId: uuid
+  tagId: uuid
 }
 
 """
@@ -10808,17 +11438,17 @@ enum persons_tags_update_column {
   """
   column name
   """
-  personID
+  personId
 
   """
   column name
   """
-  rel_id
+  relId
 
   """
   column name
   """
-  tagID
+  tagId
 }
 
 """
@@ -10838,12 +11468,12 @@ enum persons_update_column {
   """
   column name
   """
-  churchID
+  churchId
 
   """
   column name
   """
-  collegeID
+  collegeId
 
   """
   column name
@@ -10853,17 +11483,17 @@ enum persons_update_column {
   """
   column name
   """
-  familyID
+  familyId
 
   """
   column name
   """
-  fatherID
+  fatherId
 
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -10903,7 +11533,7 @@ enum persons_update_column {
   """
   column name
   """
-  jobID
+  jobId
 
   """
   column name
@@ -10928,22 +11558,22 @@ enum persons_update_column {
   """
   column name
   """
-  personTypeID
+  personTypeId
 
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
   """
-  qualificationID
+  qualificationId
 
   """
   column name
   """
-  schoolID
+  schoolId
 
   """
   column name
@@ -10953,17 +11583,17 @@ enum persons_update_column {
   """
   column name
   """
-  stateID
+  stateId
 
   """
   column name
   """
-  storeID
+  storeId
 
   """
   column name
   """
-  studyYearID
+  studyYearId
 
   """
   column name
@@ -10976,7 +11606,7 @@ aggregate var_pop on columns
 """
 type persons_var_pop_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -10984,7 +11614,7 @@ order by var_pop() on columns of table "persons"
 """
 input persons_var_pop_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -10992,7 +11622,7 @@ aggregate var_samp on columns
 """
 type persons_var_samp_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -11000,7 +11630,7 @@ order by var_samp() on columns of table "persons"
 """
 input persons_var_samp_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -11008,7 +11638,7 @@ aggregate variance on columns
 """
 type persons_variance_fields {
   color: Float
-  studyYearID: Float
+  studyYearId: Float
 }
 
 """
@@ -11016,7 +11646,7 @@ order by variance() on columns of table "persons"
 """
 input persons_variance_order_by {
   color: order_by
-  studyYearID: order_by
+  studyYearId: order_by
 }
 
 """
@@ -11380,6 +12010,71 @@ type query_root {
   """
   An array relationship
   """
+  classes(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): [classes!]!
+
+  """
+  An aggregate relationship
+  """
+  classes_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): classes_aggregate!
+
+  """
+  fetch data from the table: "classes" using primary key columns
+  """
+  classes_by_pk(id: uuid!): classes
+
+  """
+  An array relationship
+  """
   colleges(
     """
     distinct select on columns
@@ -11570,7 +12265,7 @@ type query_root {
   """
   fetch data from the table: "families_families" using primary key columns
   """
-  families_families_by_pk(innerFamilyID: uuid!): families_families
+  families_families_by_pk(innerFamilyId: uuid!): families_families
 
   """
   An array relationship
@@ -12092,7 +12787,7 @@ type query_root {
   """
   fetch data from the table: "history.edit_history" using primary key columns
   """
-  history_edit_history_by_pk(audit_id: uuid!): history_edit_history
+  history_edit_history_by_pk(auditId: uuid!): history_edit_history
 
   """
   fetch data from the table: "history.kodas_history"
@@ -12290,13 +12985,13 @@ type query_root {
   jobs_by_pk(id: uuid!): jobs
 
   """
-  fetch data from the table: "personTypes"
+  fetch data from the table: "person_types"
   """
-  personTypes(
+  person_types(
     """
     distinct select on columns
     """
-    distinct_on: [personTypes_select_column!]
+    distinct_on: [person_types_select_column!]
 
     """
     limit the number of rows returned
@@ -12311,22 +13006,22 @@ type query_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [personTypes_order_by!]
+    order_by: [person_types_order_by!]
 
     """
     filter the rows returned
     """
-    where: personTypes_bool_exp
-  ): [personTypes!]!
+    where: person_types_bool_exp
+  ): [person_types!]!
 
   """
-  fetch aggregated fields from the table: "personTypes"
+  fetch aggregated fields from the table: "person_types"
   """
-  personTypes_aggregate(
+  person_types_aggregate(
     """
     distinct select on columns
     """
-    distinct_on: [personTypes_select_column!]
+    distinct_on: [person_types_select_column!]
 
     """
     limit the number of rows returned
@@ -12341,18 +13036,18 @@ type query_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [personTypes_order_by!]
+    order_by: [person_types_order_by!]
 
     """
     filter the rows returned
     """
-    where: personTypes_bool_exp
-  ): personTypes_aggregate!
+    where: person_types_bool_exp
+  ): person_types_aggregate!
 
   """
-  fetch data from the table: "personTypes" using primary key columns
+  fetch data from the table: "person_types" using primary key columns
   """
-  personTypes_by_pk(id: uuid!): personTypes
+  person_types_by_pk(id: uuid!): person_types
 
   """
   An array relationship
@@ -12482,7 +13177,7 @@ type query_root {
   """
   fetch data from the table: "persons_groups" using primary key columns
   """
-  persons_groups_by_pk(rel_id: uuid!): persons_groups
+  persons_groups_by_pk(relId: uuid!): persons_groups
 
   """
   fetch data from the table: "persons_services"
@@ -12547,7 +13242,7 @@ type query_root {
   """
   fetch data from the table: "persons_services" using primary key columns
   """
-  persons_services_by_pk(rel_id: uuid!): persons_services
+  persons_services_by_pk(relId: uuid!): persons_services
 
   """
   fetch data from the table: "persons_tags"
@@ -12612,7 +13307,7 @@ type query_root {
   """
   fetch data from the table: "persons_tags" using primary key columns
   """
-  persons_tags_by_pk(rel_id: uuid!): persons_tags
+  persons_tags_by_pk(relId: uuid!): persons_tags
 
   """
   fetch data from the table: "qualifications"
@@ -13005,13 +13700,13 @@ type query_root {
   streets_by_pk(id: uuid!): streets
 
   """
-  fetch data from the table: "studyYears"
+  fetch data from the table: "study_years"
   """
-  studyYears(
+  study_years(
     """
     distinct select on columns
     """
-    distinct_on: [studyYears_select_column!]
+    distinct_on: [study_years_select_column!]
 
     """
     limit the number of rows returned
@@ -13026,22 +13721,22 @@ type query_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [studyYears_order_by!]
+    order_by: [study_years_order_by!]
 
     """
     filter the rows returned
     """
-    where: studyYears_bool_exp
-  ): [studyYears!]!
+    where: study_years_bool_exp
+  ): [study_years!]!
 
   """
-  fetch aggregated fields from the table: "studyYears"
+  fetch aggregated fields from the table: "study_years"
   """
-  studyYears_aggregate(
+  study_years_aggregate(
     """
     distinct select on columns
     """
-    distinct_on: [studyYears_select_column!]
+    distinct_on: [study_years_select_column!]
 
     """
     limit the number of rows returned
@@ -13056,18 +13751,18 @@ type query_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [studyYears_order_by!]
+    order_by: [study_years_order_by!]
 
     """
     filter the rows returned
     """
-    where: studyYears_bool_exp
-  ): studyYears_aggregate!
+    where: study_years_bool_exp
+  ): study_years_aggregate!
 
   """
-  fetch data from the table: "studyYears" using primary key columns
+  fetch data from the table: "study_years" using primary key columns
   """
-  studyYears_by_pk(order: smallint!): studyYears
+  study_years_by_pk(order: smallint!): study_years
 
   """
   fetch data from the table: "tags"
@@ -13327,7 +14022,7 @@ type query_root {
   """
   fetch data from the table: "users_permissions" using primary key columns
   """
-  users_permissions_by_pk(permission_id: uuid!): users_permissions
+  users_permissions_by_pk(permissionId: uuid!): users_permissions
 }
 
 """
@@ -13564,7 +14259,7 @@ type services {
   """
   An array relationship
   """
-  attendance_history(
+  attendanceHistory(
     """
     distinct select on columns
     """
@@ -13594,7 +14289,7 @@ type services {
   """
   An aggregate relationship
   """
-  attendance_history_aggregate(
+  attendanceHistory_aggregate(
     """
     distinct select on columns
     """
@@ -13620,13 +14315,73 @@ type services {
     """
     where: history_attendance_history_bool_exp
   ): history_attendance_history_aggregate!
+
+  """
+  An array relationship
+  """
+  classes(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): [classes!]!
+
+  """
+  An aggregate relationship
+  """
+  classes_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): classes_aggregate!
   color: Int
-  firestore_id: String
+  firestoreId: String
 
   """
   An object relationship
   """
-  fromStudyYear: studyYears
+  fromStudyYear: study_years
 
   """
   An array relationship
@@ -13688,8 +14443,20 @@ type services {
     where: groups_bool_exp
   ): groups_aggregate!
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_service"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_service"
+  """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_service_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -13757,14 +14524,14 @@ type services {
     """
     where: persons_services_bool_exp
   ): persons_services_aggregate!
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
 
   """
   An object relationship
   """
-  toStudyYear: studyYears
+  toStudyYear: study_years
 
   """
   An array relationship
@@ -13868,10 +14635,11 @@ input services_bool_exp {
   _and: [services_bool_exp!]
   _not: services_bool_exp
   _or: [services_bool_exp!]
-  attendance_history: history_attendance_history_bool_exp
+  attendanceHistory: history_attendance_history_bool_exp
+  classes: classes_bool_exp
   color: Int_comparison_exp
-  firestore_id: String_comparison_exp
-  fromStudyYear: studyYears_bool_exp
+  firestoreId: String_comparison_exp
+  fromStudyYear: study_years_bool_exp
   groups: groups_bool_exp
   id: uuid_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
@@ -13879,10 +14647,10 @@ input services_bool_exp {
   lastEdit: jsonb_comparison_exp
   name: String_comparison_exp
   persons: persons_services_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   studyYearFrom: smallint_comparison_exp
   studyYearTo: smallint_comparison_exp
-  toStudyYear: studyYears_bool_exp
+  toStudyYear: study_years_bool_exp
   users: users_permissions_bool_exp
 }
 
@@ -13919,18 +14687,19 @@ input services_inc_input {
 input type for inserting data into table "services"
 """
 input services_insert_input {
-  attendance_history: history_attendance_history_arr_rel_insert_input
+  attendanceHistory: history_attendance_history_arr_rel_insert_input
+  classes: classes_arr_rel_insert_input
   color: Int
-  firestore_id: String
-  fromStudyYear: studyYears_obj_rel_insert_input
+  firestoreId: String
+  fromStudyYear: study_years_obj_rel_insert_input
   groups: groups_arr_rel_insert_input
   id: uuid
   name: String
   persons: persons_services_arr_rel_insert_input
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
-  toStudyYear: studyYears_obj_rel_insert_input
+  toStudyYear: study_years_obj_rel_insert_input
   users: users_permissions_arr_rel_insert_input
 }
 
@@ -13939,10 +14708,10 @@ aggregate max on columns
 """
 type services_max_fields {
   color: Int
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
 }
@@ -13952,10 +14721,10 @@ aggregate min on columns
 """
 type services_min_fields {
   color: Int
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
 }
@@ -14000,10 +14769,11 @@ input services_on_conflict {
 Ordering options when selecting data from "services".
 """
 input services_order_by {
-  attendance_history_aggregate: history_attendance_history_aggregate_order_by
+  attendanceHistory_aggregate: history_attendance_history_aggregate_order_by
+  classes_aggregate: classes_aggregate_order_by
   color: order_by
-  firestore_id: order_by
-  fromStudyYear: studyYears_order_by
+  firestoreId: order_by
+  fromStudyYear: study_years_order_by
   groups_aggregate: groups_aggregate_order_by
   id: order_by
   isUserAllowedToRead: order_by
@@ -14011,10 +14781,10 @@ input services_order_by {
   lastEdit: order_by
   name: order_by
   persons_aggregate: persons_services_aggregate_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   studyYearFrom: order_by
   studyYearTo: order_by
-  toStudyYear: studyYears_order_by
+  toStudyYear: study_years_order_by
   users_aggregate: users_permissions_aggregate_order_by
 }
 
@@ -14037,7 +14807,7 @@ enum services_select_column {
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -14052,7 +14822,7 @@ enum services_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
@@ -14070,10 +14840,10 @@ input type for updating data in table "services"
 """
 input services_set_input {
   color: Int
-  firestore_id: String
+  firestoreId: String
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
 }
@@ -14126,7 +14896,7 @@ enum services_update_column {
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -14141,7 +14911,7 @@ enum services_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
@@ -14572,12 +15342,20 @@ type stores {
   family: families
   geolocation: geography
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_store"
+  """
   isUserAllowedToRead: Boolean
 
   """
-  A computed field, executes function "userAllowedToWriteStore"
+  A computed field, executes function "user_allowed_to_write_store"
   """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_store_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -14585,7 +15363,7 @@ type stores {
     path: String
   ): jsonb
   name: String!
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 
   """
   A computed field, executes function "store_streets"
@@ -14703,7 +15481,7 @@ input stores_bool_exp {
   isUserAllowedToWrite: Boolean_comparison_exp
   lastEdit: jsonb_comparison_exp
   name: String_comparison_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   streets: streets_bool_exp
 }
 
@@ -14734,7 +15512,7 @@ input stores_insert_input {
   geolocation: geography
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -14745,7 +15523,7 @@ type stores_max_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -14756,7 +15534,7 @@ input stores_max_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -14767,7 +15545,7 @@ type stores_min_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -14778,7 +15556,7 @@ input stores_min_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -14819,7 +15597,7 @@ input stores_order_by {
   isUserAllowedToWrite: order_by
   lastEdit: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   streets_aggregate: streets_aggregate_order_by
 }
 
@@ -14862,7 +15640,7 @@ enum stores_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -14874,7 +15652,7 @@ input stores_set_input {
   geolocation: geography
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -14965,7 +15743,7 @@ enum stores_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -15044,6 +15822,10 @@ type streets {
     where: areas_bool_exp
   ): [areas!]
   color: Int
+
+  """
+  A computed field, executes function "street_families"
+  """
   families(
     """
     distinct select on columns
@@ -15071,8 +15853,20 @@ type streets {
     where: families_bool_exp
   ): [families!]
   id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_read_street"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_write_street"
+  """
   isUserAllowedToWrite: Boolean
+
+  """
+  A computed field, executes function "history.get_street_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -15081,6 +15875,10 @@ type streets {
   ): jsonb
   line: geography
   name: String!
+
+  """
+  A computed field, executes function "street_persons"
+  """
   persons(
     """
     distinct select on columns
@@ -15107,7 +15905,11 @@ type streets {
     """
     where: persons_bool_exp
   ): [persons!]
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
+
+  """
+  A computed field, executes function "street_stores"
+  """
   stores(
     """
     distinct select on columns
@@ -15209,7 +16011,7 @@ input streets_bool_exp {
   line: geography_comparison_exp
   name: String_comparison_exp
   persons: persons_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   stores: stores_bool_exp
 }
 
@@ -15238,7 +16040,7 @@ input streets_insert_input {
   id: uuid
   line: geography
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -15248,7 +16050,7 @@ type streets_max_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -15258,7 +16060,7 @@ input streets_max_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -15268,7 +16070,7 @@ type streets_min_fields {
   color: Int
   id: uuid
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -15278,7 +16080,7 @@ input streets_min_order_by {
   color: order_by
   id: order_by
   name: order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
 }
 
 """
@@ -15319,7 +16121,7 @@ input streets_order_by {
   line: order_by
   name: order_by
   persons_aggregate: persons_aggregate_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   stores_aggregate: stores_aggregate_order_by
 }
 
@@ -15357,7 +16159,7 @@ enum streets_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -15368,7 +16170,7 @@ input streets_set_input {
   id: uuid
   line: geography
   name: String
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -15454,7 +16256,7 @@ enum streets_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 }
 
 """
@@ -15500,9 +16302,68 @@ input streets_variance_order_by {
 }
 
 """
-columns and relationships of "studyYears"
+columns and relationships of "study_years"
 """
-type studyYears {
+type study_years {
+  """
+  An array relationship
+  """
+  classes(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): [classes!]!
+
+  """
+  An aggregate relationship
+  """
+  classes_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): classes_aggregate!
   name: String!
   order: smallint!
 
@@ -15568,53 +16429,54 @@ type studyYears {
 }
 
 """
-aggregated selection of "studyYears"
+aggregated selection of "study_years"
 """
-type studyYears_aggregate {
-  aggregate: studyYears_aggregate_fields
-  nodes: [studyYears!]!
+type study_years_aggregate {
+  aggregate: study_years_aggregate_fields
+  nodes: [study_years!]!
 }
 
 """
-aggregate fields of "studyYears"
+aggregate fields of "study_years"
 """
-type studyYears_aggregate_fields {
-  avg: studyYears_avg_fields
-  count(columns: [studyYears_select_column!], distinct: Boolean): Int!
-  max: studyYears_max_fields
-  min: studyYears_min_fields
-  stddev: studyYears_stddev_fields
-  stddev_pop: studyYears_stddev_pop_fields
-  stddev_samp: studyYears_stddev_samp_fields
-  sum: studyYears_sum_fields
-  var_pop: studyYears_var_pop_fields
-  var_samp: studyYears_var_samp_fields
-  variance: studyYears_variance_fields
+type study_years_aggregate_fields {
+  avg: study_years_avg_fields
+  count(columns: [study_years_select_column!], distinct: Boolean): Int!
+  max: study_years_max_fields
+  min: study_years_min_fields
+  stddev: study_years_stddev_fields
+  stddev_pop: study_years_stddev_pop_fields
+  stddev_samp: study_years_stddev_samp_fields
+  sum: study_years_sum_fields
+  var_pop: study_years_var_pop_fields
+  var_samp: study_years_var_samp_fields
+  variance: study_years_variance_fields
 }
 
 """
 aggregate avg on columns
 """
-type studyYears_avg_fields {
+type study_years_avg_fields {
   order: Float
 }
 
 """
-Boolean expression to filter rows from the table "studyYears". All fields are combined with a logical 'AND'.
+Boolean expression to filter rows from the table "study_years". All fields are combined with a logical 'AND'.
 """
-input studyYears_bool_exp {
-  _and: [studyYears_bool_exp!]
-  _not: studyYears_bool_exp
-  _or: [studyYears_bool_exp!]
+input study_years_bool_exp {
+  _and: [study_years_bool_exp!]
+  _not: study_years_bool_exp
+  _or: [study_years_bool_exp!]
+  classes: classes_bool_exp
   name: String_comparison_exp
   order: smallint_comparison_exp
   persons: persons_bool_exp
 }
 
 """
-unique or primary key constraints on table "studyYears"
+unique or primary key constraints on table "study_years"
 """
-enum studyYears_constraint {
+enum study_years_constraint {
   """
   unique or primary key constraint on columns "name"
   """
@@ -15632,16 +16494,17 @@ enum studyYears_constraint {
 }
 
 """
-input type for incrementing numeric columns in table "studyYears"
+input type for incrementing numeric columns in table "study_years"
 """
-input studyYears_inc_input {
+input study_years_inc_input {
   order: smallint
 }
 
 """
-input type for inserting data into table "studyYears"
+input type for inserting data into table "study_years"
 """
-input studyYears_insert_input {
+input study_years_insert_input {
+  classes: classes_arr_rel_insert_input
   name: String
   order: smallint
   persons: persons_arr_rel_insert_input
@@ -15650,7 +16513,7 @@ input studyYears_insert_input {
 """
 aggregate max on columns
 """
-type studyYears_max_fields {
+type study_years_max_fields {
   name: String
   order: smallint
 }
@@ -15658,15 +16521,15 @@ type studyYears_max_fields {
 """
 aggregate min on columns
 """
-type studyYears_min_fields {
+type study_years_min_fields {
   name: String
   order: smallint
 }
 
 """
-response of any mutation on the table "studyYears"
+response of any mutation on the table "study_years"
 """
-type studyYears_mutation_response {
+type study_years_mutation_response {
   """
   number of rows affected by the mutation
   """
@@ -15675,50 +16538,51 @@ type studyYears_mutation_response {
   """
   data from the rows affected by the mutation
   """
-  returning: [studyYears!]!
+  returning: [study_years!]!
 }
 
 """
-input type for inserting object relation for remote table "studyYears"
+input type for inserting object relation for remote table "study_years"
 """
-input studyYears_obj_rel_insert_input {
-  data: studyYears_insert_input!
+input study_years_obj_rel_insert_input {
+  data: study_years_insert_input!
 
   """
   upsert condition
   """
-  on_conflict: studyYears_on_conflict
+  on_conflict: study_years_on_conflict
 }
 
 """
-on_conflict condition type for table "studyYears"
+on_conflict condition type for table "study_years"
 """
-input studyYears_on_conflict {
-  constraint: studyYears_constraint!
-  update_columns: [studyYears_update_column!]! = []
-  where: studyYears_bool_exp
+input study_years_on_conflict {
+  constraint: study_years_constraint!
+  update_columns: [study_years_update_column!]! = []
+  where: study_years_bool_exp
 }
 
 """
-Ordering options when selecting data from "studyYears".
+Ordering options when selecting data from "study_years".
 """
-input studyYears_order_by {
+input study_years_order_by {
+  classes_aggregate: classes_aggregate_order_by
   name: order_by
   order: order_by
   persons_aggregate: persons_aggregate_order_by
 }
 
 """
-primary key columns input for table: studyYears
+primary key columns input for table: study_years
 """
-input studyYears_pk_columns_input {
+input study_years_pk_columns_input {
   order: smallint!
 }
 
 """
-select columns of table "studyYears"
+select columns of table "study_years"
 """
-enum studyYears_select_column {
+enum study_years_select_column {
   """
   column name
   """
@@ -15731,9 +16595,9 @@ enum studyYears_select_column {
 }
 
 """
-input type for updating data in table "studyYears"
+input type for updating data in table "study_years"
 """
-input studyYears_set_input {
+input study_years_set_input {
   name: String
   order: smallint
 }
@@ -15741,35 +16605,35 @@ input studyYears_set_input {
 """
 aggregate stddev on columns
 """
-type studyYears_stddev_fields {
+type study_years_stddev_fields {
   order: Float
 }
 
 """
 aggregate stddev_pop on columns
 """
-type studyYears_stddev_pop_fields {
+type study_years_stddev_pop_fields {
   order: Float
 }
 
 """
 aggregate stddev_samp on columns
 """
-type studyYears_stddev_samp_fields {
+type study_years_stddev_samp_fields {
   order: Float
 }
 
 """
 aggregate sum on columns
 """
-type studyYears_sum_fields {
+type study_years_sum_fields {
   order: smallint
 }
 
 """
-update columns of table "studyYears"
+update columns of table "study_years"
 """
-enum studyYears_update_column {
+enum study_years_update_column {
   """
   column name
   """
@@ -15784,21 +16648,21 @@ enum studyYears_update_column {
 """
 aggregate var_pop on columns
 """
-type studyYears_var_pop_fields {
+type study_years_var_pop_fields {
   order: Float
 }
 
 """
 aggregate var_samp on columns
 """
-type studyYears_var_samp_fields {
+type study_years_var_samp_fields {
   order: Float
 }
 
 """
 aggregate variance on columns
 """
-type studyYears_variance_fields {
+type study_years_variance_fields {
   order: Float
 }
 
@@ -15932,6 +16796,71 @@ type subscription_root {
   fetch data from the table: "churches" using primary key columns
   """
   churches_by_pk(id: uuid!): churches
+
+  """
+  An array relationship
+  """
+  classes(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): [classes!]!
+
+  """
+  An aggregate relationship
+  """
+  classes_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [classes_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [classes_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: classes_bool_exp
+  ): classes_aggregate!
+
+  """
+  fetch data from the table: "classes" using primary key columns
+  """
+  classes_by_pk(id: uuid!): classes
 
   """
   An array relationship
@@ -16126,7 +17055,7 @@ type subscription_root {
   """
   fetch data from the table: "families_families" using primary key columns
   """
-  families_families_by_pk(innerFamilyID: uuid!): families_families
+  families_families_by_pk(innerFamilyId: uuid!): families_families
 
   """
   An array relationship
@@ -16648,7 +17577,7 @@ type subscription_root {
   """
   fetch data from the table: "history.edit_history" using primary key columns
   """
-  history_edit_history_by_pk(audit_id: uuid!): history_edit_history
+  history_edit_history_by_pk(auditId: uuid!): history_edit_history
 
   """
   fetch data from the table: "history.kodas_history"
@@ -16846,13 +17775,13 @@ type subscription_root {
   jobs_by_pk(id: uuid!): jobs
 
   """
-  fetch data from the table: "personTypes"
+  fetch data from the table: "person_types"
   """
-  personTypes(
+  person_types(
     """
     distinct select on columns
     """
-    distinct_on: [personTypes_select_column!]
+    distinct_on: [person_types_select_column!]
 
     """
     limit the number of rows returned
@@ -16867,22 +17796,22 @@ type subscription_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [personTypes_order_by!]
+    order_by: [person_types_order_by!]
 
     """
     filter the rows returned
     """
-    where: personTypes_bool_exp
-  ): [personTypes!]!
+    where: person_types_bool_exp
+  ): [person_types!]!
 
   """
-  fetch aggregated fields from the table: "personTypes"
+  fetch aggregated fields from the table: "person_types"
   """
-  personTypes_aggregate(
+  person_types_aggregate(
     """
     distinct select on columns
     """
-    distinct_on: [personTypes_select_column!]
+    distinct_on: [person_types_select_column!]
 
     """
     limit the number of rows returned
@@ -16897,18 +17826,18 @@ type subscription_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [personTypes_order_by!]
+    order_by: [person_types_order_by!]
 
     """
     filter the rows returned
     """
-    where: personTypes_bool_exp
-  ): personTypes_aggregate!
+    where: person_types_bool_exp
+  ): person_types_aggregate!
 
   """
-  fetch data from the table: "personTypes" using primary key columns
+  fetch data from the table: "person_types" using primary key columns
   """
-  personTypes_by_pk(id: uuid!): personTypes
+  person_types_by_pk(id: uuid!): person_types
 
   """
   An array relationship
@@ -17038,7 +17967,7 @@ type subscription_root {
   """
   fetch data from the table: "persons_groups" using primary key columns
   """
-  persons_groups_by_pk(rel_id: uuid!): persons_groups
+  persons_groups_by_pk(relId: uuid!): persons_groups
 
   """
   fetch data from the table: "persons_services"
@@ -17103,7 +18032,7 @@ type subscription_root {
   """
   fetch data from the table: "persons_services" using primary key columns
   """
-  persons_services_by_pk(rel_id: uuid!): persons_services
+  persons_services_by_pk(relId: uuid!): persons_services
 
   """
   fetch data from the table: "persons_tags"
@@ -17168,7 +18097,7 @@ type subscription_root {
   """
   fetch data from the table: "persons_tags" using primary key columns
   """
-  persons_tags_by_pk(rel_id: uuid!): persons_tags
+  persons_tags_by_pk(relId: uuid!): persons_tags
 
   """
   fetch data from the table: "qualifications"
@@ -17561,13 +18490,13 @@ type subscription_root {
   streets_by_pk(id: uuid!): streets
 
   """
-  fetch data from the table: "studyYears"
+  fetch data from the table: "study_years"
   """
-  studyYears(
+  study_years(
     """
     distinct select on columns
     """
-    distinct_on: [studyYears_select_column!]
+    distinct_on: [study_years_select_column!]
 
     """
     limit the number of rows returned
@@ -17582,22 +18511,22 @@ type subscription_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [studyYears_order_by!]
+    order_by: [study_years_order_by!]
 
     """
     filter the rows returned
     """
-    where: studyYears_bool_exp
-  ): [studyYears!]!
+    where: study_years_bool_exp
+  ): [study_years!]!
 
   """
-  fetch aggregated fields from the table: "studyYears"
+  fetch aggregated fields from the table: "study_years"
   """
-  studyYears_aggregate(
+  study_years_aggregate(
     """
     distinct select on columns
     """
-    distinct_on: [studyYears_select_column!]
+    distinct_on: [study_years_select_column!]
 
     """
     limit the number of rows returned
@@ -17612,18 +18541,18 @@ type subscription_root {
     """
     sort the rows by one or more columns
     """
-    order_by: [studyYears_order_by!]
+    order_by: [study_years_order_by!]
 
     """
     filter the rows returned
     """
-    where: studyYears_bool_exp
-  ): studyYears_aggregate!
+    where: study_years_bool_exp
+  ): study_years_aggregate!
 
   """
-  fetch data from the table: "studyYears" using primary key columns
+  fetch data from the table: "study_years" using primary key columns
   """
-  studyYears_by_pk(order: smallint!): studyYears
+  study_years_by_pk(order: smallint!): study_years
 
   """
   fetch data from the table: "tags"
@@ -17883,7 +18812,7 @@ type subscription_root {
   """
   fetch data from the table: "users_permissions" using primary key columns
   """
-  users_permissions_by_pk(permission_id: uuid!): users_permissions
+  users_permissions_by_pk(permissionId: uuid!): users_permissions
 }
 
 """
@@ -18199,6 +19128,23 @@ aggregate variance on columns
 """
 type tags_variance_fields {
   color: Float
+}
+
+scalar time
+
+"""
+Boolean expression to compare columns of type "time". All fields are combined with logical 'AND'.
+"""
+input time_comparison_exp {
+  _eq: time
+  _gt: time
+  _gte: time
+  _in: [time!]
+  _is_null: Boolean
+  _lt: time
+  _lte: time
+  _neq: time
+  _nin: [time!]
 }
 
 scalar timestamp
@@ -18525,10 +19471,22 @@ type users {
     where: users_permissions_bool_exp
   ): users_permissions_aggregate!
   email: String!
-  firebase_auth_uid: String
-  firestore_id: String
-  isUserAllowedToChange: Boolean
+  firebaseAuthUid: String
+  firestoreId: String
+
+  """
+  A computed field, executes function "user_allowed_to_read_user"
+  """
   isUserAllowedToRead: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_change_user"
+  """
+  is_user_allowed_to_change: Boolean
+
+  """
+  A computed field, executes function "history.get_user_last_edit"
+  """
   lastEdit(
     """
     JSON select path
@@ -18541,7 +19499,7 @@ type users {
   An object relationship
   """
   person: persons
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   uid: uuid!
 }
 
@@ -18571,14 +19529,14 @@ input users_bool_exp {
   _or: [users_bool_exp!]
   adminOn: users_permissions_bool_exp
   email: String_comparison_exp
-  firebase_auth_uid: String_comparison_exp
-  firestore_id: String_comparison_exp
-  isUserAllowedToChange: Boolean_comparison_exp
+  firebaseAuthUid: String_comparison_exp
+  firestoreId: String_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
+  is_user_allowed_to_change: Boolean_comparison_exp
   lastEdit: jsonb_comparison_exp
   permissions: _text_comparison_exp
   person: persons_bool_exp
-  photo_updated_at: timestamptz_comparison_exp
+  photoUpdatedAt: timestamptz_comparison_exp
   uid: uuid_comparison_exp
 }
 
@@ -18613,11 +19571,11 @@ input type for inserting data into table "users"
 input users_insert_input {
   adminOn: users_permissions_arr_rel_insert_input
   email: String
-  firebase_auth_uid: String
-  firestore_id: String
+  firebaseAuthUid: String
+  firestoreId: String
   permissions: _text
   person: persons_obj_rel_insert_input
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   uid: uuid
 }
 
@@ -18626,9 +19584,9 @@ aggregate max on columns
 """
 type users_max_fields {
   email: String
-  firebase_auth_uid: String
-  firestore_id: String
-  photo_updated_at: timestamptz
+  firebaseAuthUid: String
+  firestoreId: String
+  photoUpdatedAt: timestamptz
   uid: uuid
 }
 
@@ -18637,9 +19595,9 @@ aggregate min on columns
 """
 type users_min_fields {
   email: String
-  firebase_auth_uid: String
-  firestore_id: String
-  photo_updated_at: timestamptz
+  firebaseAuthUid: String
+  firestoreId: String
+  photoUpdatedAt: timestamptz
   uid: uuid
 }
 
@@ -18685,14 +19643,14 @@ Ordering options when selecting data from "users".
 input users_order_by {
   adminOn_aggregate: users_permissions_aggregate_order_by
   email: order_by
-  firebase_auth_uid: order_by
-  firestore_id: order_by
-  isUserAllowedToChange: order_by
+  firebaseAuthUid: order_by
+  firestoreId: order_by
   isUserAllowedToRead: order_by
+  is_user_allowed_to_change: order_by
   lastEdit: order_by
   permissions: order_by
   person: persons_order_by
-  photo_updated_at: order_by
+  photoUpdatedAt: order_by
   uid: order_by
 }
 
@@ -18708,27 +19666,35 @@ type users_permissions {
   An object relationship
   """
   area: areas
-  area_adminOnUsers: Boolean
-  area_allowEdit: Boolean
+  areaAdminOnUsers: Boolean
+  areaAllowEdit: Boolean
 
   """
   An object relationship
   """
   group: groups
-  group_adminOnUsers: Boolean
-  group_allowEdit: Boolean
-  isUserAllowedToChange: Boolean
+  groupAdminOnUsers: Boolean
+  groupAllowEdit: Boolean
+
+  """
+  A computed field, executes function "user_allowed_to_read_user_permissions"
+  """
   isUserAllowedToRead: Boolean
-  permission_id: uuid!
+
+  """
+  A computed field, executes function "user_allowed_to_change_user_permissions"
+  """
+  is_user_allowed_to_change: Boolean
+  permissionId: uuid!
 
   """
   An object relationship
   """
   service: services
-  service_adminOnUsers: Boolean
-  service_allowEdit: Boolean
-  service_gender: Boolean
-  service_studyYear: smallint
+  serviceAdminOnUsers: Boolean
+  serviceAllowEdit: Boolean
+  serviceGender: Boolean
+  serviceStudyYear: smallint
   uid: uuid!
 
   """
@@ -18795,14 +19761,14 @@ input users_permissions_arr_rel_insert_input {
 aggregate avg on columns
 """
 type users_permissions_avg_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by avg() on columns of table "users_permissions"
 """
 input users_permissions_avg_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -18816,19 +19782,19 @@ input users_permissions_bool_exp {
   adminOnGroup: uuid_comparison_exp
   adminOnService: uuid_comparison_exp
   area: areas_bool_exp
-  area_adminOnUsers: Boolean_comparison_exp
-  area_allowEdit: Boolean_comparison_exp
+  areaAdminOnUsers: Boolean_comparison_exp
+  areaAllowEdit: Boolean_comparison_exp
   group: groups_bool_exp
-  group_adminOnUsers: Boolean_comparison_exp
-  group_allowEdit: Boolean_comparison_exp
-  isUserAllowedToChange: Boolean_comparison_exp
+  groupAdminOnUsers: Boolean_comparison_exp
+  groupAllowEdit: Boolean_comparison_exp
   isUserAllowedToRead: Boolean_comparison_exp
-  permission_id: uuid_comparison_exp
+  is_user_allowed_to_change: Boolean_comparison_exp
+  permissionId: uuid_comparison_exp
   service: services_bool_exp
-  service_adminOnUsers: Boolean_comparison_exp
-  service_allowEdit: Boolean_comparison_exp
-  service_gender: Boolean_comparison_exp
-  service_studyYear: smallint_comparison_exp
+  serviceAdminOnUsers: Boolean_comparison_exp
+  serviceAllowEdit: Boolean_comparison_exp
+  serviceGender: Boolean_comparison_exp
+  serviceStudyYear: smallint_comparison_exp
   uid: uuid_comparison_exp
   user: users_bool_exp
 }
@@ -18848,7 +19814,7 @@ enum users_permissions_constraint {
   users_permissions_pkey
 
   """
-  unique or primary key constraint on columns "uid", "adminOnService", "adminOnGroup", "adminOnArea"
+  unique or primary key constraint on columns "uid", "admin_on_service", "admin_on_area", "admin_on_group"
   """
   users_permissions_uid_adminOnService_adminOnGroup_adminOnAr_key
 }
@@ -18857,7 +19823,7 @@ enum users_permissions_constraint {
 input type for incrementing numeric columns in table "users_permissions"
 """
 input users_permissions_inc_input {
-  service_studyYear: smallint
+  serviceStudyYear: smallint
 }
 
 """
@@ -18868,17 +19834,17 @@ input users_permissions_insert_input {
   adminOnGroup: uuid
   adminOnService: uuid
   area: areas_obj_rel_insert_input
-  area_adminOnUsers: Boolean
-  area_allowEdit: Boolean
+  areaAdminOnUsers: Boolean
+  areaAllowEdit: Boolean
   group: groups_obj_rel_insert_input
-  group_adminOnUsers: Boolean
-  group_allowEdit: Boolean
-  permission_id: uuid
+  groupAdminOnUsers: Boolean
+  groupAllowEdit: Boolean
+  permissionId: uuid
   service: services_obj_rel_insert_input
-  service_adminOnUsers: Boolean
-  service_allowEdit: Boolean
-  service_gender: Boolean
-  service_studyYear: smallint
+  serviceAdminOnUsers: Boolean
+  serviceAllowEdit: Boolean
+  serviceGender: Boolean
+  serviceStudyYear: smallint
   uid: uuid
   user: users_obj_rel_insert_input
 }
@@ -18890,8 +19856,8 @@ type users_permissions_max_fields {
   adminOnArea: uuid
   adminOnGroup: uuid
   adminOnService: uuid
-  permission_id: uuid
-  service_studyYear: smallint
+  permissionId: uuid
+  serviceStudyYear: smallint
   uid: uuid
 }
 
@@ -18902,8 +19868,8 @@ input users_permissions_max_order_by {
   adminOnArea: order_by
   adminOnGroup: order_by
   adminOnService: order_by
-  permission_id: order_by
-  service_studyYear: order_by
+  permissionId: order_by
+  serviceStudyYear: order_by
   uid: order_by
 }
 
@@ -18914,8 +19880,8 @@ type users_permissions_min_fields {
   adminOnArea: uuid
   adminOnGroup: uuid
   adminOnService: uuid
-  permission_id: uuid
-  service_studyYear: smallint
+  permissionId: uuid
+  serviceStudyYear: smallint
   uid: uuid
 }
 
@@ -18926,8 +19892,8 @@ input users_permissions_min_order_by {
   adminOnArea: order_by
   adminOnGroup: order_by
   adminOnService: order_by
-  permission_id: order_by
-  service_studyYear: order_by
+  permissionId: order_by
+  serviceStudyYear: order_by
   uid: order_by
 }
 
@@ -18963,19 +19929,19 @@ input users_permissions_order_by {
   adminOnGroup: order_by
   adminOnService: order_by
   area: areas_order_by
-  area_adminOnUsers: order_by
-  area_allowEdit: order_by
+  areaAdminOnUsers: order_by
+  areaAllowEdit: order_by
   group: groups_order_by
-  group_adminOnUsers: order_by
-  group_allowEdit: order_by
-  isUserAllowedToChange: order_by
+  groupAdminOnUsers: order_by
+  groupAllowEdit: order_by
   isUserAllowedToRead: order_by
-  permission_id: order_by
+  is_user_allowed_to_change: order_by
+  permissionId: order_by
   service: services_order_by
-  service_adminOnUsers: order_by
-  service_allowEdit: order_by
-  service_gender: order_by
-  service_studyYear: order_by
+  serviceAdminOnUsers: order_by
+  serviceAllowEdit: order_by
+  serviceGender: order_by
+  serviceStudyYear: order_by
   uid: order_by
   user: users_order_by
 }
@@ -18984,7 +19950,7 @@ input users_permissions_order_by {
 primary key columns input for table: users_permissions
 """
 input users_permissions_pk_columns_input {
-  permission_id: uuid!
+  permissionId: uuid!
 }
 
 """
@@ -19009,47 +19975,47 @@ enum users_permissions_select_column {
   """
   column name
   """
-  area_adminOnUsers
+  areaAdminOnUsers
 
   """
   column name
   """
-  area_allowEdit
+  areaAllowEdit
 
   """
   column name
   """
-  group_adminOnUsers
+  groupAdminOnUsers
 
   """
   column name
   """
-  group_allowEdit
+  groupAllowEdit
 
   """
   column name
   """
-  permission_id
+  permissionId
 
   """
   column name
   """
-  service_adminOnUsers
+  serviceAdminOnUsers
 
   """
   column name
   """
-  service_allowEdit
+  serviceAllowEdit
 
   """
   column name
   """
-  service_gender
+  serviceGender
 
   """
   column name
   """
-  service_studyYear
+  serviceStudyYear
 
   """
   column name
@@ -19064,15 +20030,15 @@ input users_permissions_set_input {
   adminOnArea: uuid
   adminOnGroup: uuid
   adminOnService: uuid
-  area_adminOnUsers: Boolean
-  area_allowEdit: Boolean
-  group_adminOnUsers: Boolean
-  group_allowEdit: Boolean
-  permission_id: uuid
-  service_adminOnUsers: Boolean
-  service_allowEdit: Boolean
-  service_gender: Boolean
-  service_studyYear: smallint
+  areaAdminOnUsers: Boolean
+  areaAllowEdit: Boolean
+  groupAdminOnUsers: Boolean
+  groupAllowEdit: Boolean
+  permissionId: uuid
+  serviceAdminOnUsers: Boolean
+  serviceAllowEdit: Boolean
+  serviceGender: Boolean
+  serviceStudyYear: smallint
   uid: uuid
 }
 
@@ -19080,56 +20046,56 @@ input users_permissions_set_input {
 aggregate stddev on columns
 """
 type users_permissions_stddev_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev() on columns of table "users_permissions"
 """
 input users_permissions_stddev_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate stddev_pop on columns
 """
 type users_permissions_stddev_pop_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev_pop() on columns of table "users_permissions"
 """
 input users_permissions_stddev_pop_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate stddev_samp on columns
 """
 type users_permissions_stddev_samp_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by stddev_samp() on columns of table "users_permissions"
 """
 input users_permissions_stddev_samp_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate sum on columns
 """
 type users_permissions_sum_fields {
-  service_studyYear: smallint
+  serviceStudyYear: smallint
 }
 
 """
 order by sum() on columns of table "users_permissions"
 """
 input users_permissions_sum_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -19154,47 +20120,47 @@ enum users_permissions_update_column {
   """
   column name
   """
-  area_adminOnUsers
+  areaAdminOnUsers
 
   """
   column name
   """
-  area_allowEdit
+  areaAllowEdit
 
   """
   column name
   """
-  group_adminOnUsers
+  groupAdminOnUsers
 
   """
   column name
   """
-  group_allowEdit
+  groupAllowEdit
 
   """
   column name
   """
-  permission_id
+  permissionId
 
   """
   column name
   """
-  service_adminOnUsers
+  serviceAdminOnUsers
 
   """
   column name
   """
-  service_allowEdit
+  serviceAllowEdit
 
   """
   column name
   """
-  service_gender
+  serviceGender
 
   """
   column name
   """
-  service_studyYear
+  serviceStudyYear
 
   """
   column name
@@ -19206,42 +20172,42 @@ enum users_permissions_update_column {
 aggregate var_pop on columns
 """
 type users_permissions_var_pop_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by var_pop() on columns of table "users_permissions"
 """
 input users_permissions_var_pop_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate var_samp on columns
 """
 type users_permissions_var_samp_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by var_samp() on columns of table "users_permissions"
 """
 input users_permissions_var_samp_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
 aggregate variance on columns
 """
 type users_permissions_variance_fields {
-  service_studyYear: Float
+  serviceStudyYear: Float
 }
 
 """
 order by variance() on columns of table "users_permissions"
 """
 input users_permissions_variance_order_by {
-  service_studyYear: order_by
+  serviceStudyYear: order_by
 }
 
 """
@@ -19263,12 +20229,12 @@ enum users_select_column {
   """
   column name
   """
-  firebase_auth_uid
+  firebaseAuthUid
 
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -19278,7 +20244,7 @@ enum users_select_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name
@@ -19291,10 +20257,10 @@ input type for updating data in table "users"
 """
 input users_set_input {
   email: String
-  firebase_auth_uid: String
-  firestore_id: String
+  firebaseAuthUid: String
+  firestoreId: String
   permissions: _text
-  photo_updated_at: timestamptz
+  photoUpdatedAt: timestamptz
   uid: uuid
 }
 
@@ -19310,12 +20276,12 @@ enum users_update_column {
   """
   column name
   """
-  firebase_auth_uid
+  firebaseAuthUid
 
   """
   column name
   """
-  firestore_id
+  firestoreId
 
   """
   column name
@@ -19325,7 +20291,7 @@ enum users_update_column {
   """
   column name
   """
-  photo_updated_at
+  photoUpdatedAt
 
   """
   column name

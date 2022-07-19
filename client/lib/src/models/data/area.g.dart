@@ -11,9 +11,9 @@ _$_Area _$$_AreaFromJson(Map<String, dynamic> json) => _$_Area(
       name: json['name'] as String,
       bounds: polygonFromJson(json['bounds']),
       color: colorFromInt(json['color'] as int?),
-      photoUpdatedAt: json['photo_updated_at'] == null
+      photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
-          : DateTime.parse(json['photo_updated_at'] as String),
+          : DateTime.parse(json['photoUpdatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
@@ -21,5 +21,5 @@ Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
       'name': instance.name,
       'bounds': polygonToJson(instance.bounds),
       'color': colorToInt(instance.color),
-      'photo_updated_at': instance.photoUpdatedAt?.toIso8601String(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
     };

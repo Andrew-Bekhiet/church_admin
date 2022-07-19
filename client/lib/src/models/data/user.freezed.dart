@@ -24,11 +24,9 @@ mixin _$User {
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
   CAPermissionsSet get permissions => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  @JsonKey(name: 'firebase_auth_uid')
   String get firebaseAuthUID => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   String? get password => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,12 +43,10 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
           CAPermissionsSet permissions,
       String email,
-      @JsonKey(name: 'firebase_auth_uid')
-          String firebaseAuthUID,
+      String firebaseAuthUID,
       @JsonKey(ignore: true)
           String? password,
-      @JsonKey(name: 'photo_updated_at')
-          DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -109,12 +105,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
           CAPermissionsSet permissions,
       String email,
-      @JsonKey(name: 'firebase_auth_uid')
-          String firebaseAuthUID,
+      String firebaseAuthUID,
       @JsonKey(ignore: true)
           String? password,
-      @JsonKey(name: 'photo_updated_at')
-          DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt});
 }
 
 /// @nodoc
@@ -172,12 +166,10 @@ class _$_User implements _User {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
           required this.permissions,
       required this.email,
-      @JsonKey(name: 'firebase_auth_uid')
-          required this.firebaseAuthUID,
+      required this.firebaseAuthUID,
       @JsonKey(ignore: true)
           this.password,
-      @JsonKey(name: 'photo_updated_at')
-          this.photoUpdatedAt});
+      this.photoUpdatedAt});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -189,13 +181,11 @@ class _$_User implements _User {
   @override
   final String email;
   @override
-  @JsonKey(name: 'firebase_auth_uid')
   final String firebaseAuthUID;
   @override
   @JsonKey(ignore: true)
   final String? password;
   @override
-  @JsonKey(name: 'photo_updated_at')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -237,7 +227,9 @@ class _$_User implements _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserToJson(
+      this,
+    );
   }
 }
 
@@ -247,12 +239,10 @@ abstract class _User implements User {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
           required final CAPermissionsSet permissions,
       required final String email,
-      @JsonKey(name: 'firebase_auth_uid')
-          required final String firebaseAuthUID,
+      required final String firebaseAuthUID,
       @JsonKey(ignore: true)
           final String? password,
-      @JsonKey(name: 'photo_updated_at')
-          final DateTime? photoUpdatedAt}) = _$_User;
+      final DateTime? photoUpdatedAt}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -264,13 +254,11 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  @JsonKey(name: 'firebase_auth_uid')
   String get firebaseAuthUID;
   @override
   @JsonKey(ignore: true)
   String? get password;
   @override
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt;
   @override
   @JsonKey(ignore: true)

@@ -40,7 +40,7 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     String? storeID,
     int? studyYearID,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt,
+    DateTime? photoUpdatedAt,
     DateTime? lastConfession,
     DateTime? lastKodas,
   }) = _Person;

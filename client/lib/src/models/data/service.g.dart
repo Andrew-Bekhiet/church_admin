@@ -12,9 +12,9 @@ _$_Service _$$_ServiceFromJson(Map<String, dynamic> json) => _$_Service(
       fromStudyYear: studyYearFromJson(json['fromStudyYear']),
       toStudyYear: studyYearFromJson(json['toStudyYear']),
       color: colorFromInt(json['color'] as int?),
-      photoUpdatedAt: json['photo_updated_at'] == null
+      photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
-          : DateTime.parse(json['photo_updated_at'] as String),
+          : DateTime.parse(json['photoUpdatedAt'] as String),
       groups: groupsFromJson(json['groups']),
     );
 
@@ -25,6 +25,6 @@ Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
       'fromStudyYear': studyYearToJson(instance.fromStudyYear),
       'toStudyYear': studyYearToJson(instance.toStudyYear),
       'color': colorToInt(instance.color),
-      'photo_updated_at': instance.photoUpdatedAt?.toIso8601String(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'groups': groupsToJson(instance.groups),
     };

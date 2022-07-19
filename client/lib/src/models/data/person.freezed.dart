@@ -49,7 +49,6 @@ mixin _$Person {
   int? get studyYearID => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   DateTime? get lastConfession => throw _privateConstructorUsedError;
   DateTime? get lastKodas => throw _privateConstructorUsedError;
@@ -91,7 +90,7 @@ abstract class $PersonCopyWith<$Res> {
       String? storeID,
       int? studyYearID,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt,
+      DateTime? photoUpdatedAt,
       DateTime? lastConfession,
       DateTime? lastKodas});
 }
@@ -295,7 +294,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? storeID,
       int? studyYearID,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      @JsonKey(name: 'photo_updated_at') DateTime? photoUpdatedAt,
+      DateTime? photoUpdatedAt,
       DateTime? lastConfession,
       DateTime? lastKodas});
 }
@@ -498,7 +497,7 @@ class _$_Person extends _Person {
       this.storeID,
       this.studyYearID,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      @JsonKey(name: 'photo_updated_at') this.photoUpdatedAt,
+      this.photoUpdatedAt,
       this.lastConfession,
       this.lastKodas})
       : _otherPhones = otherPhones,
@@ -574,7 +573,6 @@ class _$_Person extends _Person {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   final DateTime? photoUpdatedAt;
   @override
   final DateTime? lastConfession;
@@ -675,7 +673,9 @@ class _$_Person extends _Person {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonToJson(this);
+    return _$$_PersonToJson(
+      this,
+    );
   }
 }
 
@@ -710,8 +710,7 @@ abstract class _Person extends Person {
       final int? studyYearID,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
-      @JsonKey(name: 'photo_updated_at')
-          final DateTime? photoUpdatedAt,
+      final DateTime? photoUpdatedAt,
       final DateTime? lastConfession,
       final DateTime? lastKodas}) = _$_Person;
   _Person._() : super._();
@@ -775,7 +774,6 @@ abstract class _Person extends Person {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
   @override
-  @JsonKey(name: 'photo_updated_at')
   DateTime? get photoUpdatedAt;
   @override
   DateTime? get lastConfession;
