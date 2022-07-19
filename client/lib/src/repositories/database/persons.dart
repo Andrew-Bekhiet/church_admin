@@ -28,25 +28,26 @@ class PersonsQueries {
 
             final Stream<QueryResult<Iterable<Person>>> subscriptionStream;
 
-            final addWhere = [
-              if (search != null && search.isNotEmpty)
-                PersonsBoolExp(name: StringComparisonExp($ilike: '%$search%')),
-              if (lastSearch == search && offset > 0)
-                PersonsBoolExp(
-                  name: StringComparisonExp(
-                    $gt: instance
-                        .currentValue[
-                            (offset - 1) * instance.limit + instance.limit - 1]
-                        .name,
-                  ),
-                ),
-            ];
-
             final GetPersonsStreamSubscription subscription =
                 GetPersonsStreamSubscription(
               variables: GetPersonsStreamArguments(
                 limit: instance.limit,
-                addWhere: addWhere,
+                addWhere: [
+                  if (search != null && search.isNotEmpty)
+                    PersonsBoolExp(
+                      name: StringComparisonExp($ilike: '%$search%'),
+                    ),
+                  if (lastSearch == search && offset > 0)
+                    PersonsBoolExp(
+                      name: StringComparisonExp(
+                        $gt: instance
+                            .currentValue[(offset - 1) * instance.limit +
+                                instance.limit -
+                                1]
+                            .name,
+                      ),
+                    ),
+                ],
               ),
             );
 

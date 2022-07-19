@@ -61,10 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     ListControllerBase<void, Service>(
       objectsPaginatableStream:
-          CADatabaseRepository.I.services.getServicesStream(),
+          CADatabaseRepository.I.services.getServicesStream(
+        searchQuery: _search,
+      ),
     ),
     ListControllerBase<void, Area>(
-      objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(),
+      objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(
+        searchQuery: _search,
+      ),
     ),
   ];
 
@@ -185,8 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }) {
     return ExpansionTile(
       key: PageStorageKey(s),
-      //TODO: photos
-      /* leading: PhotoObjectWidget(s), */
+      leading: PhotoObjectWidget(
+        s,
+        circleCrop: false,
+      ),
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       maintainState: true,
       title: GestureDetector(
