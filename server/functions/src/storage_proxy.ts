@@ -32,7 +32,7 @@ async function _getSignedUrl(
 ): Promise<string> {
   try {
     if (
-      !context.app ||
+      (!context.app && !process.env.FUNCTIONS_EMULATOR) ||
       !context.auth ||
       !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
     )
