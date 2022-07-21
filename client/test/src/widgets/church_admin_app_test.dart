@@ -9,7 +9,16 @@ import 'package:mockito/mockito.dart';
 
 import 'church_admin_app_test.mocks.dart';
 
-@GenerateMocks([LoggingService, CAAuthRepository, LocalAuthService])
+@GenerateMocks([
+  LoggingService,
+  CAAuthRepository,
+  CADatabaseRepository,
+  UsersQueries,
+  PersonsQueries,
+  AreasQueries,
+  ServicesQueries,
+  LocalAuthService
+])
 void main() {
   group(
     'Church Admin App widget tests: ',
@@ -36,6 +45,43 @@ void main() {
             ),
             dispose: (t) => t.dispose(),
           );
+
+          final usersQueries = MockUsersQueries();
+          final areasQueries = MockAreasQueries();
+          final personsQueries = MockPersonsQueries();
+          final servicesQueries = MockServicesQueries();
+
+          when(usersQueries.getUserInfoStream()).thenAnswer((_) async* {});
+          when(areasQueries.getAreasStream(
+                  searchQuery: anyNamed('searchQuery')))
+              .thenReturn(
+            DelegatingPaginatableStream(
+              onQuery: (_, __) async* {},
+            ),
+          );
+          when(personsQueries.getPersonsStream$(
+                  searchQuery: anyNamed('searchQuery')))
+              .thenReturn(
+            DelegatingPaginatableStream(
+              onQuery: (_, __) async* {},
+            ),
+          );
+          when(servicesQueries.getServicesStream(
+                  searchQuery: anyNamed('searchQuery')))
+              .thenReturn(
+            DelegatingPaginatableStream(
+              onQuery: (_, __) async* {},
+            ),
+          );
+
+          final mockCADatabaseRepository = MockCADatabaseRepository();
+          when(mockCADatabaseRepository.users).thenReturn(usersQueries);
+          when(mockCADatabaseRepository.areas).thenReturn(areasQueries);
+          when(mockCADatabaseRepository.persons).thenReturn(personsQueries);
+          when(mockCADatabaseRepository.services).thenReturn(servicesQueries);
+
+          GetIt.I.registerSingleton<CADatabaseRepository>(
+              mockCADatabaseRepository);
         },
       );
 

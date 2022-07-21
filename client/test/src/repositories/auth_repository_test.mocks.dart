@@ -13,6 +13,9 @@ import 'package:firebase_database_platform_interface/firebase_database_platform_
     as _i6;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i10;
 import 'package:flutter/widgets.dart' as _i7;
+import 'package:google_sign_in/google_sign_in.dart' as _i12;
+import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart'
+    as _i13;
 import 'package:graphql_flutter/graphql_flutter.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -544,4 +547,60 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
               _i11.QueryResult<
                   _i4.GetUserInfoStream$SubscriptionRoot$Users>>.empty()) as _i5
           .Stream<_i11.QueryResult<_i4.GetUserInfoStream$SubscriptionRoot$Users>>);
+}
+
+/// A class which mocks [GoogleSignIn].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGoogleSignIn extends _i1.Mock implements _i12.GoogleSignIn {
+  MockGoogleSignIn() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i13.SignInOption get signInOption =>
+      (super.noSuchMethod(Invocation.getter(#signInOption),
+          returnValue: _i13.SignInOption.standard) as _i13.SignInOption);
+  @override
+  List<String> get scopes =>
+      (super.noSuchMethod(Invocation.getter(#scopes), returnValue: <String>[])
+          as List<String>);
+  @override
+  _i5.Stream<_i12.GoogleSignInAccount?> get onCurrentUserChanged =>
+      (super.noSuchMethod(Invocation.getter(#onCurrentUserChanged),
+              returnValue: Stream<_i12.GoogleSignInAccount?>.empty())
+          as _i5.Stream<_i12.GoogleSignInAccount?>);
+  @override
+  _i5.Future<_i12.GoogleSignInAccount?> signInSilently(
+          {bool? suppressErrors = true, bool? reAuthenticate = false}) =>
+      (super.noSuchMethod(
+              Invocation.method(#signInSilently, [], {
+                #suppressErrors: suppressErrors,
+                #reAuthenticate: reAuthenticate
+              }),
+              returnValue: Future<_i12.GoogleSignInAccount?>.value())
+          as _i5.Future<_i12.GoogleSignInAccount?>);
+  @override
+  _i5.Future<bool> isSignedIn() =>
+      (super.noSuchMethod(Invocation.method(#isSignedIn, []),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+  @override
+  _i5.Future<_i12.GoogleSignInAccount?> signIn() =>
+      (super.noSuchMethod(Invocation.method(#signIn, []),
+              returnValue: Future<_i12.GoogleSignInAccount?>.value())
+          as _i5.Future<_i12.GoogleSignInAccount?>);
+  @override
+  _i5.Future<_i12.GoogleSignInAccount?> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+              returnValue: Future<_i12.GoogleSignInAccount?>.value())
+          as _i5.Future<_i12.GoogleSignInAccount?>);
+  @override
+  _i5.Future<_i12.GoogleSignInAccount?> disconnect() =>
+      (super.noSuchMethod(Invocation.method(#disconnect, []),
+              returnValue: Future<_i12.GoogleSignInAccount?>.value())
+          as _i5.Future<_i12.GoogleSignInAccount?>);
+  @override
+  _i5.Future<bool> requestScopes(List<String>? scopes) =>
+      (super.noSuchMethod(Invocation.method(#requestScopes, [scopes]),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }

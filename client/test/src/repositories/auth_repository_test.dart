@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -25,7 +28,8 @@ import 'auth_repository_test.mocks.dart';
   OnDisconnect,
   CADatabaseRepository,
   NotificationsService,
-  UsersQueries
+  UsersQueries,
+  GoogleSignIn,
 ])
 void main() {
   group(
@@ -65,6 +69,13 @@ void main() {
             ),
           );
 
+          final mockGoogleSignIn = MockGoogleSignIn();
+          when(mockGoogleSignIn.signOut()).thenAnswer((_) async {
+            return null;
+          });
+
+          GetIt.I.registerSingleton<GoogleSignIn>(mockGoogleSignIn);
+
           final mockCADatabaseRepository = MockCADatabaseRepository();
           when(mockCADatabaseRepository.users).thenReturn(usersQueries);
 
@@ -93,7 +104,32 @@ void main() {
           when(myMockUser.getIdTokenResult()).thenAnswer(
             (_) async => IdTokenResult(
               {
-                'claims': {'x-hasura-user-id': 'uid'}
+                'claims': {
+                  'x-hasura-user-id': 'uid',
+                },
+                'token': '.' +
+                    base64.encode(utf8.encode(json.encode({
+                      'exp': (DateTime.now()
+                              .add(const Duration(minutes: 3))
+                              .millisecondsSinceEpoch) ~/
+                          1000
+                    })))
+              },
+            ),
+          );
+          when(myMockUser.getIdTokenResult(true)).thenAnswer(
+            (_) async => IdTokenResult(
+              {
+                'claims': {
+                  'x-hasura-user-id': 'uid',
+                },
+                'token': '.' +
+                    base64.encode(utf8.encode(json.encode({
+                      'exp': (DateTime.now()
+                              .add(const Duration(minutes: 3))
+                              .millisecondsSinceEpoch) ~/
+                          1000
+                    })))
               },
             ),
           );
@@ -154,6 +190,9 @@ void main() {
               expect(find.text('لا يوجد اتصال بالانترنت!'), findsOneWidget);
             }
           }
+
+          await GetIt.I<FirebaseAuth>().signOut();
+          await tester.pump(const Duration(minutes: 2));
         },
         variant: connectionChangedVariant,
       );
@@ -161,16 +200,27 @@ void main() {
       test(
         'Refresh Id Token',
         () async {
+          final exp = (DateTime.now().millisecondsSinceEpoch + 600000) ~/ 1000;
+          final idTokenResult = {
+            'token': 'header.' +
+                base64.encode(utf8.encode(json.encode({'exp': exp}))) +
+                '.signature',
+            'claims': {'x-hasura-user-id': 'uid'}
+          };
+          final expectedIdTokenResult = {
+            '_idToken': 'header.' +
+                base64.encode(utf8.encode(json.encode({'exp': exp}))) +
+                '.signature',
+            'x-hasura-user-id': 'uid'
+          };
+
           final myMockUser = MyMockUser(
             uid: 'uid',
             email: 'email',
           );
           when(myMockUser.getIdTokenResult()).thenAnswer(
             (_) async => IdTokenResult(
-              {
-                'token': 'header.token.signature',
-                'claims': {'x-hasura-user-id': 'uid'}
-              },
+              idTokenResult,
             ),
           );
 
@@ -188,7 +238,7 @@ void main() {
           expect(
             const DeepCollectionEquality.unordered().equals(
               GetIt.I<CacheRepository>().box('User').toMap(),
-              {'x-hasura-user-id': 'uid', '_idToken': 'header.token.signature'},
+              expectedIdTokenResult,
             ),
             isTrue,
           );
@@ -199,14 +249,15 @@ void main() {
             child.set(false),
           );
 
-          expect(unit.idTokenStream, emits('header.token.signature'));
+          expect(unit.idTokenStream, emits(expectedIdTokenResult['_idToken']));
 
           final child2 =
               GetIt.I<FirebaseDatabase>().ref().child('.info/connected');
           verify(
             child2.onValue,
           );
-          verify(CADatabaseRepository.I.users.getUserInfoStream(uid: 'uid'));
+          final users = CADatabaseRepository.I.users;
+          verify(users.getUserInfoStream(uid: 'uid'));
 
           expect(
             unit.userStream,
