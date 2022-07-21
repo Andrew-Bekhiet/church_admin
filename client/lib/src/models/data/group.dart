@@ -1,17 +1,19 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
-import 'dart:ui';
-
+import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart' show ViewableWithID;
+import 'package:churchdata_core/churchdata_core.dart'
+    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
 
 part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-class Group extends ViewableWithID with _$Group {
+class Group extends ViewableWithID with _$Group implements PhotoObjectBase {
   factory Group({
     required String id,
     required String name,
@@ -21,6 +23,25 @@ class Group extends ViewableWithID with _$Group {
   Group._() : super();
 
   factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);
+
+  @override
+  IconData get defaultIcon => Icons.groups;
+
+  @override
+  bool get hasPhoto => photoUpdatedAt != null;
+
+  @override
+  CAStorageReference? get photoRef => hasPhoto
+      ? CAStorageReference(
+          photoUpdatedAt: photoUpdatedAt!,
+          downloadUrl: () =>
+              GetIt.I<CAFunctionsService>().getDownloadUrl('areas', id),
+          fullPath: 'areas/$id.jpg',
+        )
+      : null;
+
+  @override
+  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 }
 
 Group? groupFromJson(dynamic data) =>
@@ -29,4 +50,5 @@ Json? groupToJson(Group? group) => group?.toJson();
 
 List<Group>? groupsFromJson(dynamic data) =>
     data is List ? data.map(groupFromJson).whereNotNull().toList() : null;
-List<Json>? groupsToJson(List<Group>? groups) => groups?.map(groupToJson).whereNotNull().toList();
+List<Json>? groupsToJson(List<Group>? groups) =>
+    groups?.map(groupToJson).whereNotNull().toList();

@@ -29,6 +29,8 @@ mixin _$Service {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+  List<Class>? get classes => throw _privateConstructorUsedError;
   @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
   List<Group>? get groups => throw _privateConstructorUsedError;
 
@@ -51,6 +53,8 @@ abstract class $ServiceCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
       DateTime? photoUpdatedAt,
+      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+          List<Class>? classes,
       @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
           List<Group>? groups});
 
@@ -74,6 +78,7 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? toStudyYear = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? classes = freezed,
     Object? groups = freezed,
   }) {
     return _then(_value.copyWith(
@@ -101,6 +106,10 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      classes: classes == freezed
+          ? _value.classes
+          : classes // ignore: cast_nullable_to_non_nullable
+              as List<Class>?,
       groups: groups == freezed
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
@@ -147,6 +156,8 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
       DateTime? photoUpdatedAt,
+      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+          List<Class>? classes,
       @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
           List<Group>? groups});
 
@@ -173,6 +184,7 @@ class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
     Object? toStudyYear = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? classes = freezed,
     Object? groups = freezed,
   }) {
     return _then(_$_Service(
@@ -200,6 +212,10 @@ class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      classes: classes == freezed
+          ? _value._classes
+          : classes // ignore: cast_nullable_to_non_nullable
+              as List<Class>?,
       groups: groups == freezed
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
@@ -221,9 +237,12 @@ class _$_Service extends _Service {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           this.color,
       this.photoUpdatedAt,
+      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+          final List<Class>? classes,
       @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
           final List<Group>? groups})
-      : _groups = groups,
+      : _classes = classes,
+        _groups = groups,
         super._();
 
   factory _$_Service.fromJson(Map<String, dynamic> json) =>
@@ -244,6 +263,16 @@ class _$_Service extends _Service {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  final List<Class>? _classes;
+  @override
+  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+  List<Class>? get classes {
+    final value = _classes;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<Group>? _groups;
   @override
   @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
@@ -256,7 +285,7 @@ class _$_Service extends _Service {
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, color: $color, photoUpdatedAt: $photoUpdatedAt, groups: $groups)';
+    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups)';
   }
 
   @override
@@ -273,6 +302,7 @@ class _$_Service extends _Service {
             const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality()
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
+            const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups));
   }
 
@@ -286,6 +316,7 @@ class _$_Service extends _Service {
       const DeepCollectionEquality().hash(toStudyYear),
       const DeepCollectionEquality().hash(color),
       const DeepCollectionEquality().hash(photoUpdatedAt),
+      const DeepCollectionEquality().hash(_classes),
       const DeepCollectionEquality().hash(_groups));
 
   @JsonKey(ignore: true)
@@ -312,6 +343,8 @@ abstract class _Service extends Service {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
       final DateTime? photoUpdatedAt,
+      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+          final List<Class>? classes,
       @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
           final List<Group>? groups}) = _$_Service;
   _Service._() : super._();
@@ -333,6 +366,9 @@ abstract class _Service extends Service {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+  List<Class>? get classes;
   @override
   @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
   List<Group>? get groups;

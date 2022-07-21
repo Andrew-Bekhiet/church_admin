@@ -31,22 +31,22 @@ mixin _$Person {
   bool get gender => throw _privateConstructorUsedError;
   bool get isShammas => throw _privateConstructorUsedError;
   String? get shammasLevel => throw _privateConstructorUsedError;
-  String? get schoolID => throw _privateConstructorUsedError;
-  String? get collegeID => throw _privateConstructorUsedError;
-  String? get churchID => throw _privateConstructorUsedError;
-  String? get fatherID => throw _privateConstructorUsedError;
+  String? get schoolId => throw _privateConstructorUsedError;
+  String? get collegeId => throw _privateConstructorUsedError;
+  String? get churchId => throw _privateConstructorUsedError;
+  String? get fatherId => throw _privateConstructorUsedError;
   bool get isStudent => throw _privateConstructorUsedError;
-  String? get jobID => throw _privateConstructorUsedError;
+  String? get jobId => throw _privateConstructorUsedError;
   String? get jobDescription => throw _privateConstructorUsedError;
-  String? get qualificationID => throw _privateConstructorUsedError;
-  String? get personTypeID => throw _privateConstructorUsedError;
-  String? get stateID => throw _privateConstructorUsedError;
+  String? get qualificationId => throw _privateConstructorUsedError;
+  String? get personTypeId => throw _privateConstructorUsedError;
+  String? get stateId => throw _privateConstructorUsedError;
   bool get isServant => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   String? get uid => throw _privateConstructorUsedError;
-  String? get familyID => throw _privateConstructorUsedError;
-  String? get storeID => throw _privateConstructorUsedError;
-  int? get studyYearID => throw _privateConstructorUsedError;
+  String? get familyId => throw _privateConstructorUsedError;
+  String? get storeId => throw _privateConstructorUsedError;
+  int? get studyYearId => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
@@ -73,22 +73,22 @@ abstract class $PersonCopyWith<$Res> {
       bool gender,
       bool isShammas,
       String? shammasLevel,
-      String? schoolID,
-      String? collegeID,
-      String? churchID,
-      String? fatherID,
+      String? schoolId,
+      String? collegeId,
+      String? churchId,
+      String? fatherId,
       bool isStudent,
-      String? jobID,
+      String? jobId,
       String? jobDescription,
-      String? qualificationID,
-      String? personTypeID,
-      String? stateID,
+      String? qualificationId,
+      String? personTypeId,
+      String? stateId,
       bool isServant,
       String? notes,
       String? uid,
-      String? familyID,
-      String? storeID,
-      int? studyYearID,
+      String? familyId,
+      String? storeId,
+      int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       DateTime? lastConfession,
@@ -115,22 +115,22 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? gender = freezed,
     Object? isShammas = freezed,
     Object? shammasLevel = freezed,
-    Object? schoolID = freezed,
-    Object? collegeID = freezed,
-    Object? churchID = freezed,
-    Object? fatherID = freezed,
+    Object? schoolId = freezed,
+    Object? collegeId = freezed,
+    Object? churchId = freezed,
+    Object? fatherId = freezed,
     Object? isStudent = freezed,
-    Object? jobID = freezed,
+    Object? jobId = freezed,
     Object? jobDescription = freezed,
-    Object? qualificationID = freezed,
-    Object? personTypeID = freezed,
-    Object? stateID = freezed,
+    Object? qualificationId = freezed,
+    Object? personTypeId = freezed,
+    Object? stateId = freezed,
     Object? isServant = freezed,
     Object? notes = freezed,
     Object? uid = freezed,
-    Object? familyID = freezed,
-    Object? storeID = freezed,
-    Object? studyYearID = freezed,
+    Object? familyId = freezed,
+    Object? storeId = freezed,
+    Object? studyYearId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? lastConfession = freezed,
@@ -177,45 +177,45 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _value.shammasLevel
           : shammasLevel // ignore: cast_nullable_to_non_nullable
               as String?,
-      schoolID: schoolID == freezed
-          ? _value.schoolID
-          : schoolID // ignore: cast_nullable_to_non_nullable
+      schoolId: schoolId == freezed
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
               as String?,
-      collegeID: collegeID == freezed
-          ? _value.collegeID
-          : collegeID // ignore: cast_nullable_to_non_nullable
+      collegeId: collegeId == freezed
+          ? _value.collegeId
+          : collegeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      churchID: churchID == freezed
-          ? _value.churchID
-          : churchID // ignore: cast_nullable_to_non_nullable
+      churchId: churchId == freezed
+          ? _value.churchId
+          : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fatherID: fatherID == freezed
-          ? _value.fatherID
-          : fatherID // ignore: cast_nullable_to_non_nullable
+      fatherId: fatherId == freezed
+          ? _value.fatherId
+          : fatherId // ignore: cast_nullable_to_non_nullable
               as String?,
       isStudent: isStudent == freezed
           ? _value.isStudent
           : isStudent // ignore: cast_nullable_to_non_nullable
               as bool,
-      jobID: jobID == freezed
-          ? _value.jobID
-          : jobID // ignore: cast_nullable_to_non_nullable
+      jobId: jobId == freezed
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
               as String?,
       jobDescription: jobDescription == freezed
           ? _value.jobDescription
           : jobDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      qualificationID: qualificationID == freezed
-          ? _value.qualificationID
-          : qualificationID // ignore: cast_nullable_to_non_nullable
+      qualificationId: qualificationId == freezed
+          ? _value.qualificationId
+          : qualificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      personTypeID: personTypeID == freezed
-          ? _value.personTypeID
-          : personTypeID // ignore: cast_nullable_to_non_nullable
+      personTypeId: personTypeId == freezed
+          ? _value.personTypeId
+          : personTypeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      stateID: stateID == freezed
-          ? _value.stateID
-          : stateID // ignore: cast_nullable_to_non_nullable
+      stateId: stateId == freezed
+          ? _value.stateId
+          : stateId // ignore: cast_nullable_to_non_nullable
               as String?,
       isServant: isServant == freezed
           ? _value.isServant
@@ -229,17 +229,17 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
-      familyID: familyID == freezed
-          ? _value.familyID
-          : familyID // ignore: cast_nullable_to_non_nullable
+      familyId: familyId == freezed
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeID: storeID == freezed
-          ? _value.storeID
-          : storeID // ignore: cast_nullable_to_non_nullable
+      storeId: storeId == freezed
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      studyYearID: studyYearID == freezed
-          ? _value.studyYearID
-          : studyYearID // ignore: cast_nullable_to_non_nullable
+      studyYearId: studyYearId == freezed
+          ? _value.studyYearId
+          : studyYearId // ignore: cast_nullable_to_non_nullable
               as int?,
       color: color == freezed
           ? _value.color
@@ -277,22 +277,22 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       bool gender,
       bool isShammas,
       String? shammasLevel,
-      String? schoolID,
-      String? collegeID,
-      String? churchID,
-      String? fatherID,
+      String? schoolId,
+      String? collegeId,
+      String? churchId,
+      String? fatherId,
       bool isStudent,
-      String? jobID,
+      String? jobId,
       String? jobDescription,
-      String? qualificationID,
-      String? personTypeID,
-      String? stateID,
+      String? qualificationId,
+      String? personTypeId,
+      String? stateId,
       bool isServant,
       String? notes,
       String? uid,
-      String? familyID,
-      String? storeID,
-      int? studyYearID,
+      String? familyId,
+      String? storeId,
+      int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       DateTime? lastConfession,
@@ -320,22 +320,22 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? isShammas = freezed,
     Object? shammasLevel = freezed,
-    Object? schoolID = freezed,
-    Object? collegeID = freezed,
-    Object? churchID = freezed,
-    Object? fatherID = freezed,
+    Object? schoolId = freezed,
+    Object? collegeId = freezed,
+    Object? churchId = freezed,
+    Object? fatherId = freezed,
     Object? isStudent = freezed,
-    Object? jobID = freezed,
+    Object? jobId = freezed,
     Object? jobDescription = freezed,
-    Object? qualificationID = freezed,
-    Object? personTypeID = freezed,
-    Object? stateID = freezed,
+    Object? qualificationId = freezed,
+    Object? personTypeId = freezed,
+    Object? stateId = freezed,
     Object? isServant = freezed,
     Object? notes = freezed,
     Object? uid = freezed,
-    Object? familyID = freezed,
-    Object? storeID = freezed,
-    Object? studyYearID = freezed,
+    Object? familyId = freezed,
+    Object? storeId = freezed,
+    Object? studyYearId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? lastConfession = freezed,
@@ -382,45 +382,45 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
           ? _value.shammasLevel
           : shammasLevel // ignore: cast_nullable_to_non_nullable
               as String?,
-      schoolID: schoolID == freezed
-          ? _value.schoolID
-          : schoolID // ignore: cast_nullable_to_non_nullable
+      schoolId: schoolId == freezed
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
               as String?,
-      collegeID: collegeID == freezed
-          ? _value.collegeID
-          : collegeID // ignore: cast_nullable_to_non_nullable
+      collegeId: collegeId == freezed
+          ? _value.collegeId
+          : collegeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      churchID: churchID == freezed
-          ? _value.churchID
-          : churchID // ignore: cast_nullable_to_non_nullable
+      churchId: churchId == freezed
+          ? _value.churchId
+          : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fatherID: fatherID == freezed
-          ? _value.fatherID
-          : fatherID // ignore: cast_nullable_to_non_nullable
+      fatherId: fatherId == freezed
+          ? _value.fatherId
+          : fatherId // ignore: cast_nullable_to_non_nullable
               as String?,
       isStudent: isStudent == freezed
           ? _value.isStudent
           : isStudent // ignore: cast_nullable_to_non_nullable
               as bool,
-      jobID: jobID == freezed
-          ? _value.jobID
-          : jobID // ignore: cast_nullable_to_non_nullable
+      jobId: jobId == freezed
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
               as String?,
       jobDescription: jobDescription == freezed
           ? _value.jobDescription
           : jobDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      qualificationID: qualificationID == freezed
-          ? _value.qualificationID
-          : qualificationID // ignore: cast_nullable_to_non_nullable
+      qualificationId: qualificationId == freezed
+          ? _value.qualificationId
+          : qualificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      personTypeID: personTypeID == freezed
-          ? _value.personTypeID
-          : personTypeID // ignore: cast_nullable_to_non_nullable
+      personTypeId: personTypeId == freezed
+          ? _value.personTypeId
+          : personTypeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      stateID: stateID == freezed
-          ? _value.stateID
-          : stateID // ignore: cast_nullable_to_non_nullable
+      stateId: stateId == freezed
+          ? _value.stateId
+          : stateId // ignore: cast_nullable_to_non_nullable
               as String?,
       isServant: isServant == freezed
           ? _value.isServant
@@ -434,17 +434,17 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
-      familyID: familyID == freezed
-          ? _value.familyID
-          : familyID // ignore: cast_nullable_to_non_nullable
+      familyId: familyId == freezed
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeID: storeID == freezed
-          ? _value.storeID
-          : storeID // ignore: cast_nullable_to_non_nullable
+      storeId: storeId == freezed
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      studyYearID: studyYearID == freezed
-          ? _value.studyYearID
-          : studyYearID // ignore: cast_nullable_to_non_nullable
+      studyYearId: studyYearId == freezed
+          ? _value.studyYearId
+          : studyYearId // ignore: cast_nullable_to_non_nullable
               as int?,
       color: color == freezed
           ? _value.color
@@ -480,22 +480,22 @@ class _$_Person extends _Person {
       this.gender = true,
       this.isShammas = false,
       this.shammasLevel,
-      this.schoolID,
-      this.collegeID,
-      this.churchID,
-      this.fatherID,
+      this.schoolId,
+      this.collegeId,
+      this.churchId,
+      this.fatherId,
       this.isStudent = false,
-      this.jobID,
+      this.jobId,
       this.jobDescription,
-      this.qualificationID,
-      this.personTypeID,
-      this.stateID,
+      this.qualificationId,
+      this.personTypeId,
+      this.stateId,
       this.isServant = false,
       this.notes,
       this.uid,
-      this.familyID,
-      this.storeID,
-      this.studyYearID,
+      this.familyId,
+      this.storeId,
+      this.studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.lastConfession,
@@ -536,26 +536,26 @@ class _$_Person extends _Person {
   @override
   final String? shammasLevel;
   @override
-  final String? schoolID;
+  final String? schoolId;
   @override
-  final String? collegeID;
+  final String? collegeId;
   @override
-  final String? churchID;
+  final String? churchId;
   @override
-  final String? fatherID;
+  final String? fatherId;
   @override
   @JsonKey()
   final bool isStudent;
   @override
-  final String? jobID;
+  final String? jobId;
   @override
   final String? jobDescription;
   @override
-  final String? qualificationID;
+  final String? qualificationId;
   @override
-  final String? personTypeID;
+  final String? personTypeId;
   @override
-  final String? stateID;
+  final String? stateId;
   @override
   @JsonKey()
   final bool isServant;
@@ -564,11 +564,11 @@ class _$_Person extends _Person {
   @override
   final String? uid;
   @override
-  final String? familyID;
+  final String? familyId;
   @override
-  final String? storeID;
+  final String? storeId;
   @override
-  final int? studyYearID;
+  final int? studyYearId;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
@@ -581,7 +581,7 @@ class _$_Person extends _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevel: $shammasLevel, schoolID: $schoolID, collegeID: $collegeID, churchID: $churchID, fatherID: $fatherID, isStudent: $isStudent, jobID: $jobID, jobDescription: $jobDescription, qualificationID: $qualificationID, personTypeID: $personTypeID, stateID: $stateID, isServant: $isServant, notes: $notes, uid: $uid, familyID: $familyID, storeID: $storeID, studyYearID: $studyYearID, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevel: $shammasLevel, schoolId: $schoolId, collegeId: $collegeId, churchId: $churchId, fatherId: $fatherId, isStudent: $isStudent, jobId: $jobId, jobDescription: $jobDescription, qualificationId: $qualificationId, personTypeId: $personTypeId, stateId: $stateId, isServant: $isServant, notes: $notes, uid: $uid, familyId: $familyId, storeId: $storeId, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas)';
   }
 
   @override
@@ -602,26 +602,26 @@ class _$_Person extends _Person {
             const DeepCollectionEquality().equals(other.isShammas, isShammas) &&
             const DeepCollectionEquality()
                 .equals(other.shammasLevel, shammasLevel) &&
-            const DeepCollectionEquality().equals(other.schoolID, schoolID) &&
-            const DeepCollectionEquality().equals(other.collegeID, collegeID) &&
-            const DeepCollectionEquality().equals(other.churchID, churchID) &&
-            const DeepCollectionEquality().equals(other.fatherID, fatherID) &&
+            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
+            const DeepCollectionEquality().equals(other.collegeId, collegeId) &&
+            const DeepCollectionEquality().equals(other.churchId, churchId) &&
+            const DeepCollectionEquality().equals(other.fatherId, fatherId) &&
             const DeepCollectionEquality().equals(other.isStudent, isStudent) &&
-            const DeepCollectionEquality().equals(other.jobID, jobID) &&
+            const DeepCollectionEquality().equals(other.jobId, jobId) &&
             const DeepCollectionEquality()
                 .equals(other.jobDescription, jobDescription) &&
             const DeepCollectionEquality()
-                .equals(other.qualificationID, qualificationID) &&
+                .equals(other.qualificationId, qualificationId) &&
             const DeepCollectionEquality()
-                .equals(other.personTypeID, personTypeID) &&
-            const DeepCollectionEquality().equals(other.stateID, stateID) &&
+                .equals(other.personTypeId, personTypeId) &&
+            const DeepCollectionEquality().equals(other.stateId, stateId) &&
             const DeepCollectionEquality().equals(other.isServant, isServant) &&
             const DeepCollectionEquality().equals(other.notes, notes) &&
             const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality().equals(other.familyID, familyID) &&
-            const DeepCollectionEquality().equals(other.storeID, storeID) &&
+            const DeepCollectionEquality().equals(other.familyId, familyId) &&
+            const DeepCollectionEquality().equals(other.storeId, storeId) &&
             const DeepCollectionEquality()
-                .equals(other.studyYearID, studyYearID) &&
+                .equals(other.studyYearId, studyYearId) &&
             const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality()
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
@@ -644,22 +644,22 @@ class _$_Person extends _Person {
         const DeepCollectionEquality().hash(gender),
         const DeepCollectionEquality().hash(isShammas),
         const DeepCollectionEquality().hash(shammasLevel),
-        const DeepCollectionEquality().hash(schoolID),
-        const DeepCollectionEquality().hash(collegeID),
-        const DeepCollectionEquality().hash(churchID),
-        const DeepCollectionEquality().hash(fatherID),
+        const DeepCollectionEquality().hash(schoolId),
+        const DeepCollectionEquality().hash(collegeId),
+        const DeepCollectionEquality().hash(churchId),
+        const DeepCollectionEquality().hash(fatherId),
         const DeepCollectionEquality().hash(isStudent),
-        const DeepCollectionEquality().hash(jobID),
+        const DeepCollectionEquality().hash(jobId),
         const DeepCollectionEquality().hash(jobDescription),
-        const DeepCollectionEquality().hash(qualificationID),
-        const DeepCollectionEquality().hash(personTypeID),
-        const DeepCollectionEquality().hash(stateID),
+        const DeepCollectionEquality().hash(qualificationId),
+        const DeepCollectionEquality().hash(personTypeId),
+        const DeepCollectionEquality().hash(stateId),
         const DeepCollectionEquality().hash(isServant),
         const DeepCollectionEquality().hash(notes),
         const DeepCollectionEquality().hash(uid),
-        const DeepCollectionEquality().hash(familyID),
-        const DeepCollectionEquality().hash(storeID),
-        const DeepCollectionEquality().hash(studyYearID),
+        const DeepCollectionEquality().hash(familyId),
+        const DeepCollectionEquality().hash(storeId),
+        const DeepCollectionEquality().hash(studyYearId),
         const DeepCollectionEquality().hash(color),
         const DeepCollectionEquality().hash(photoUpdatedAt),
         const DeepCollectionEquality().hash(lastConfession),
@@ -692,22 +692,22 @@ abstract class _Person extends Person {
       final bool gender,
       final bool isShammas,
       final String? shammasLevel,
-      final String? schoolID,
-      final String? collegeID,
-      final String? churchID,
-      final String? fatherID,
+      final String? schoolId,
+      final String? collegeId,
+      final String? churchId,
+      final String? fatherId,
       final bool isStudent,
-      final String? jobID,
+      final String? jobId,
       final String? jobDescription,
-      final String? qualificationID,
-      final String? personTypeID,
-      final String? stateID,
+      final String? qualificationId,
+      final String? personTypeId,
+      final String? stateId,
       final bool isServant,
       final String? notes,
       final String? uid,
-      final String? familyID,
-      final String? storeID,
-      final int? studyYearID,
+      final String? familyId,
+      final String? storeId,
+      final int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
       final DateTime? photoUpdatedAt,
@@ -739,25 +739,25 @@ abstract class _Person extends Person {
   @override
   String? get shammasLevel;
   @override
-  String? get schoolID;
+  String? get schoolId;
   @override
-  String? get collegeID;
+  String? get collegeId;
   @override
-  String? get churchID;
+  String? get churchId;
   @override
-  String? get fatherID;
+  String? get fatherId;
   @override
   bool get isStudent;
   @override
-  String? get jobID;
+  String? get jobId;
   @override
   String? get jobDescription;
   @override
-  String? get qualificationID;
+  String? get qualificationId;
   @override
-  String? get personTypeID;
+  String? get personTypeId;
   @override
-  String? get stateID;
+  String? get stateId;
   @override
   bool get isServant;
   @override
@@ -765,11 +765,11 @@ abstract class _Person extends Person {
   @override
   String? get uid;
   @override
-  String? get familyID;
+  String? get familyId;
   @override
-  String? get storeID;
+  String? get storeId;
   @override
-  int? get studyYearID;
+  int? get studyYearId;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;

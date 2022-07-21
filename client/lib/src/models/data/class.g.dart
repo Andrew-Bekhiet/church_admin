@@ -1,32 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'service.dart';
+part of 'class.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Service _$$_ServiceFromJson(Map<String, dynamic> json) => _$_Service(
+_$_Class _$$_ClassFromJson(Map<String, dynamic> json) => _$_Class(
       id: json['id'] as String,
       name: json['name'] as String,
-      fromStudyYear: studyYearFromJson(json['fromStudyYear']),
-      toStudyYear: studyYearFromJson(json['toStudyYear']),
       color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
-      classes: classesFromJson(json['classes']),
-      groups: groupsFromJson(json['groups']),
     );
 
-Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'fromStudyYear': studyYearToJson(instance.fromStudyYear),
-      'toStudyYear': studyYearToJson(instance.toStudyYear),
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'classes': classesToJson(instance.classes),
-      'groups': groupsToJson(instance.groups),
     };

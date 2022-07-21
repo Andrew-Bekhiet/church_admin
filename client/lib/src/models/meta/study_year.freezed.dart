@@ -140,7 +140,9 @@ class _$_StudyYear extends _StudyYear {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StudyYearToJson(this);
+    return _$$_StudyYearToJson(
+      this,
+    );
   }
 }
 

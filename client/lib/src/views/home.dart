@@ -201,34 +201,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Text(s.name),
       ),
       children: [
-        if (s.fromStudyYear != null && s.toStudyYear != null)
-          for (int i = s.fromStudyYear!.order; i <= s.toStudyYear!.order; i++)
-            Padding(
-              padding: const EdgeInsets.only(right: 6),
-              child: FutureBuilder<StudyYear?>(
-                initialData: i == s.fromStudyYear!.order
-                    ? s.fromStudyYear!
-                    : i == s.toStudyYear!.order
-                        ? s.toStudyYear!
-                        : null,
-                future: CADatabaseRepository.I.studyYears.getStudyYearName(i),
-                builder: (context, studyYearData) {
-                  if (studyYearData.hasError) {
-                    return ErrorWidget(studyYearData.error!);
-                  }
-
-                  if (!studyYearData.hasData) {
-                    return const LinearProgressIndicator();
-                  }
-
-                  return ViewableObjectWidget(
-                    studyYearData.requireData ??
-                        StudyYear(name: 'غير معروفة', order: 0),
-                    showSubtitle: false,
-                  );
-                },
-              ),
+        for (final c in s.classes ?? <Class>[])
+          Padding(
+            padding: const EdgeInsets.only(right: 6),
+            child: ViewableObjectWidget(
+              c,
+              showSubtitle: false,
             ),
+          ),
         if (s.fromStudyYear != null &&
             s.toStudyYear != null &&
             s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&

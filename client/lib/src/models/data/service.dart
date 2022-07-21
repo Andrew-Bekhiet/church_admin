@@ -2,7 +2,8 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
+import 'package:churchdata_core/churchdata_core.dart'
+    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,8 @@ class Service extends ViewableWithID with _$Service implements PhotoObjectBase {
         StudyYear? toStudyYear,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
+        List<Class>? classes,
     @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
         List<Group>? groups,
   }) = _Service;

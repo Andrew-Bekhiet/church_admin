@@ -1,4 +1,5 @@
 export 'data/area.dart';
+export 'data/class.dart';
 export 'data/group.dart';
 export 'data/person.dart';
 export 'data/service.dart';
