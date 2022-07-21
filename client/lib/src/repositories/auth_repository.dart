@@ -103,10 +103,12 @@ class CAAuthRepository extends AuthRepository<User, Person> {
         _jwtExpiry(idTokenClaims['_idToken'])
             .subtract(const Duration(minutes: 1))
             .difference(DateTime.now()),
-        () => refreshIdToken(
-          GetIt.I<auth.FirebaseAuth>().currentUser!,
-          true,
-        ),
+        () => GetIt.I<auth.FirebaseAuth>().currentUser != null
+            ? refreshIdToken(
+                GetIt.I<auth.FirebaseAuth>().currentUser!,
+                true,
+              )
+            : null,
       ),
     );
 
