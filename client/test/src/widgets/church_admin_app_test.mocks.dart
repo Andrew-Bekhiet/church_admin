@@ -3,13 +3,12 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i6;
-import 'dart:ui' as _i11;
+import 'dart:ui' as _i10;
 
 import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:churchdata_core/churchdata_core.dart' as _i5;
-import 'package:firebase_auth/firebase_auth.dart' as _i10;
-import 'package:firebase_database/firebase_database.dart' as _i9;
-import 'package:flutter/foundation.dart' as _i8;
+import 'package:firebase_auth/firebase_auth.dart' as _i9;
+import 'package:firebase_database/firebase_database.dart' as _i8;
 import 'package:flutter/material.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i3;
@@ -74,7 +73,7 @@ class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> reportFlutterError(_i8.FlutterErrorDetails? flutterError,
+  _i6.Future<void> reportFlutterError(_i2.FlutterErrorDetails? flutterError,
           {Map<String, dynamic>? data, Map<String, dynamic>? extras}) =>
       (super.noSuchMethod(
           Invocation.method(#reportFlutterError, [flutterError],
@@ -107,13 +106,13 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
           as _i3.BehaviorSubject<_i4.Person?>);
   @override
   set userTokenListener(
-          _i6.StreamSubscription<_i9.DatabaseEvent>? _userTokenListener) =>
+          _i6.StreamSubscription<_i8.DatabaseEvent>? _userTokenListener) =>
       super.noSuchMethod(
           Invocation.setter(#userTokenListener, _userTokenListener),
           returnValueForMissingStub: null);
   @override
   set connectionListener(
-          _i6.StreamSubscription<_i9.DatabaseEvent>? _connectionListener) =>
+          _i6.StreamSubscription<_i8.DatabaseEvent>? _connectionListener) =>
       super.noSuchMethod(
           Invocation.setter(#connectionListener, _connectionListener),
           returnValueForMissingStub: null);
@@ -122,7 +121,7 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
       super.noSuchMethod(Invocation.setter(#personListener, _personListener),
           returnValueForMissingStub: null);
   @override
-  set authListener(_i6.StreamSubscription<_i10.User?>? _authListener) =>
+  set authListener(_i6.StreamSubscription<_i9.User?>? _authListener) =>
       super.noSuchMethod(Invocation.setter(#authListener, _authListener),
           returnValueForMissingStub: null);
   @override
@@ -140,11 +139,11 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
               returnValue: _FakeValueStream_1<_i4.Person?>())
           as _i3.ValueStream<_i4.Person?>);
   @override
-  bool connectionChanged(_i9.DatabaseEvent? snapshot) =>
+  bool connectionChanged(_i8.DatabaseEvent? snapshot) =>
       (super.noSuchMethod(Invocation.method(#connectionChanged, [snapshot]),
           returnValue: false) as bool);
   @override
-  _i6.Future<_i4.User> refreshIdToken(_i10.User? firebaseUser,
+  _i6.Future<_i4.User> refreshIdToken(_i9.User? firebaseUser,
           [bool? force = false]) =>
       (super.noSuchMethod(
               Invocation.method(#refreshIdToken, [firebaseUser, force]),
@@ -152,7 +151,7 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
           as _i6.Future<_i4.User>);
   @override
   _i6.FutureOr<_i4.User> refreshFromIdToken(Map<String, dynamic>? idTokenClaims,
-          {_i10.User? firebaseUser,
+          {_i9.User? firebaseUser,
           String? uid,
           String? name,
           String? phone,
@@ -179,7 +178,7 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
       super.noSuchMethod(Invocation.method(#initListeners, []),
           returnValueForMissingStub: null);
   @override
-  void onUserChanged(_i10.User? user) =>
+  void onUserChanged(_i9.User? user) =>
       super.noSuchMethod(Invocation.method(#onUserChanged, [user]),
           returnValueForMissingStub: null);
   @override
@@ -238,7 +237,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
       (super.noSuchMethod(Invocation.getter(#refreshUIStream),
           returnValue: Stream<void>.empty()) as _i6.Stream<void>);
   @override
-  void didChangeAppLifecycleState(_i11.AppLifecycleState? state) => super
+  void didChangeAppLifecycleState(_i10.AppLifecycleState? state) => super
       .noSuchMethod(Invocation.method(#didChangeAppLifecycleState, [state]),
           returnValueForMissingStub: null);
   @override
@@ -289,7 +288,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
       super.noSuchMethod(Invocation.method(#didChangePlatformBrightness, []),
           returnValueForMissingStub: null);
   @override
-  void didChangeLocales(List<_i11.Locale>? locales) =>
+  void didChangeLocales(List<_i10.Locale>? locales) =>
       super.noSuchMethod(Invocation.method(#didChangeLocales, [locales]),
           returnValueForMissingStub: null);
   @override
