@@ -48,38 +48,66 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final _search = BehaviorSubject<String?>.seeded(null);
-  final _bottomNavBar = BehaviorSubject<int>.seeded(1);
+  final _bottomNavBar = BehaviorSubject<Type>.seeded(Service);
 
-  late final _controllers = [
+  late final _listsControllers = [
     ListControllerBase<void, Person>(
       objectsPaginatableStream:
           CADatabaseRepository.I.persons.getPersonsStream$(
-        searchQuery: _search,
+        searchQuery: _getSearchStreamFor<Person>(),
       ),
     ),
     ListControllerBase<void, Service>(
       objectsPaginatableStream:
           CADatabaseRepository.I.services.getServicesStream(
-        searchQuery: _search,
+        searchQuery: _getSearchStreamFor<Service>(),
       ),
     ),
     ListControllerBase<void, Area>(
       objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(
-        searchQuery: _search,
+        searchQuery: _getSearchStreamFor<Area>(),
       ),
     ),
   ];
 
+  late final TabController _tabController = TabController(
+    length: 3,
+    vsync: this,
+    initialIndex: 1,
+  );
+
+  final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
+
+  Stream<String?> _getSearchStreamFor<T>() {
+    return Rx.combineLatest2<String?, Type, String?>(
+      _search,
+      _bottomNavBar,
+      (s, t) => t == T ? s : null,
+    ).debounceTime(const Duration(seconds: 1));
+  }
+
+  @override
+  void initState() {
+    _tabController.addListener(
+      () => _bottomNavBar.add(
+        _typeToIndex.keys.elementAt(_tabController.index),
+      ),
+    );
+    super.initState();
+  }
+
   @override
   Future<void> dispose() async {
-    super.dispose();
-
+    _tabController.dispose();
     await _search.close();
     await _bottomNavBar.close();
 
-    await Future.wait(_controllers.map((c) => c.dispose()));
+    await Future.wait(_listsControllers.map((c) => c.dispose()));
+
+    super.dispose();
   }
 
   @override
@@ -90,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: _search,
           builder: (context, searchData) {
             if (searchData.hasData) {
+              //TODO: data filters
               return TextFormField(
                 autofocus: true,
                 onChanged: _search.add,
@@ -124,42 +153,41 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      body: StreamBuilder<int>(
-        initialData: _bottomNavBar.value,
-        stream: _bottomNavBar.distinct(),
-        builder: (context, indexData) {
-          if (indexData.requireData == 1) {
-            return DataObjectListViewBase<void, Service>(
-              key: PageStorageKey(_controllers[indexData.requireData]),
-              controller: _controllers[indexData.requireData]
-                  as ListControllerBase<void, Service>,
-              autoDisposeController: false,
-              itemBuilder: _buildServiceTile,
-            );
-          } else if (indexData.requireData == 0) {
-            return DataObjectListViewBase<void, Person>(
-              key: PageStorageKey(_controllers[indexData.requireData]),
-              controller: _controllers[indexData.requireData]
-                  as ListControllerBase<void, Person>,
-              autoDisposeController: false,
-              itemBuilder: _buildPersonTile,
-            );
-          }
-
-          return DataObjectListViewBase<void, ViewableWithID>(
-            key: PageStorageKey(_controllers[indexData.requireData]),
-            controller: _controllers[indexData.requireData],
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          DataObjectListViewBase<void, Person>(
+            key: PageStorageKey(_listsControllers[_typeToIndex[Person]!]),
+            controller: _listsControllers[_typeToIndex[Person]!]
+                as ListControllerBase<void, Person>,
             autoDisposeController: false,
-          );
-        },
+            itemBuilder: _buildPersonTile,
+          ),
+          DataObjectListViewBase<void, Service>(
+            key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
+            controller: _listsControllers[_typeToIndex[Service]!]
+                as ListControllerBase<void, Service>,
+            autoDisposeController: false,
+            itemBuilder: _buildServiceTile,
+          ),
+          DataObjectListViewBase<void, Area>(
+            key: PageStorageKey(_listsControllers[_typeToIndex[Area]!]),
+            controller: _listsControllers[_typeToIndex[Area]!]
+                as ListControllerBase<void, Area>,
+            autoDisposeController: false,
+          ),
+        ],
       ),
-      bottomNavigationBar: StreamBuilder<int>(
-        initialData: _bottomNavBar.value,
-        stream: _bottomNavBar.distinct(),
-        builder: (context, indexData) {
+      bottomNavigationBar: AnimatedBuilder(
+        animation: _tabController,
+        builder: (context, child) {
           return BottomNavigationBar(
-            onTap: _bottomNavBar.add,
-            currentIndex: indexData.requireData,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Theme.of(context).colorScheme.background,
+            type: BottomNavigationBarType.shifting,
+            onTap: (v) => _tabController.index = v,
+            currentIndex: _tabController.index,
             items: const [
               BottomNavigationBarItem(
                 label: 'المخدومين',
