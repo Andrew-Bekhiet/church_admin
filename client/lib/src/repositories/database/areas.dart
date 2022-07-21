@@ -30,7 +30,7 @@ class AreasQueries {
             final GetAreasStreamSubscription subscription =
                 GetAreasStreamSubscription(
               variables: GetAreasStreamArguments(
-                limit: instance.limit,
+                limit: instance.limit + 1,
                 addWhere: [
                   if (search != null && search.isNotEmpty)
                     AreasBoolExp(
@@ -65,8 +65,8 @@ class AreasQueries {
                 .map(_exceptionsMiddleware)
                 .map(
                   (event) => _clampResults(
-                    null,
-                    null,
+                    lastSearch,
+                    search,
                     offset,
                     instance,
                     event.parsedData!.toList(),

@@ -26,16 +26,34 @@ class ServicesQueries {
               return Stream.value(DelegatingStreamResult(result: []));
             }
 
+            final bool nameSearch = search != null && search.isNotEmpty;
+            final nameSearchExp = StringComparisonExp($ilike: '%$search%');
+
             final Stream<QueryResult<Iterable<Service>>> subscriptionStream;
 
             final GetServicesStreamSubscription subscription =
                 GetServicesStreamSubscription(
               variables: GetServicesStreamArguments(
-                limit: instance.limit,
+                limit: instance.limit + 1,
                 addWhere: [
-                  if (search != null && search.isNotEmpty)
+                  if (nameSearch)
                     ServicesBoolExp(
-                        name: StringComparisonExp($ilike: '%$search%')),
+                      $or: [
+                        ServicesBoolExp(
+                          name: nameSearchExp,
+                        ),
+                        ServicesBoolExp(
+                          classes: ClassesBoolExp(
+                            name: nameSearchExp,
+                          ),
+                        ),
+                        ServicesBoolExp(
+                          groups: GroupsBoolExp(
+                            name: nameSearchExp,
+                          ),
+                        ),
+                      ],
+                    ),
                   if (lastSearch == search && offset > 0)
                     ServicesBoolExp(
                       name: StringComparisonExp(
@@ -47,10 +65,16 @@ class ServicesQueries {
                       ),
                     ),
                 ],
+                classesAddWhere: [
+                  if (nameSearch)
+                    ClassesBoolExp(
+                      name: nameSearchExp,
+                    )
+                ],
                 groupsAddWhere: [
-                  if (search != null && search.isNotEmpty)
+                  if (nameSearch)
                     GroupsBoolExp(
-                      name: StringComparisonExp($ilike: '%$search%'),
+                      name: nameSearchExp,
                     ),
                 ],
               ),
@@ -71,8 +95,8 @@ class ServicesQueries {
                 .map(_exceptionsMiddleware)
                 .map(
                   (event) => _clampResults(
-                    null,
-                    null,
+                    lastSearch,
+                    search,
                     offset,
                     instance,
                     event.parsedData!.toList(),

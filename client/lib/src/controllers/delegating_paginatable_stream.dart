@@ -8,7 +8,7 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
     extends PaginatableStreamBase<T> {
   DelegatingPaginatableStream({
     required OnQuery<T> onQuery,
-    super.limit = 199,
+    super.limit = 100,
   })  : _query = onQuery,
         super.private() {
     _querySubscription = _offset.switchMap(

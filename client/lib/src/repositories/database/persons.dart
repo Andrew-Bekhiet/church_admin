@@ -31,7 +31,7 @@ class PersonsQueries {
             final GetPersonsStreamSubscription subscription =
                 GetPersonsStreamSubscription(
               variables: GetPersonsStreamArguments(
-                limit: instance.limit,
+                limit: instance.limit + 1,
                 addWhere: [
                   if (search != null && search.isNotEmpty)
                     PersonsBoolExp(
@@ -94,8 +94,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (m) =>
-                GetPersonsKodasWarning$QueryRoot.fromJson(m.values.single),
+            parserFn: GetPersonsKodasWarning$QueryRoot.fromJson,
           ),
         )
         .then(_exceptionsMiddleware);
@@ -112,8 +111,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (m) =>
-                GetPersonsAttendanceWarning$QueryRoot.fromJson(m.values.single),
+            parserFn: GetPersonsAttendanceWarning$QueryRoot.fromJson,
           ),
         )
         .then(_exceptionsMiddleware);
@@ -130,8 +128,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (m) =>
-                GetPersonsVisitWarning$QueryRoot.fromJson(m.values.single),
+            parserFn: GetPersonsVisitWarning$QueryRoot.fromJson,
           ),
         )
         .then(_exceptionsMiddleware);
@@ -148,8 +145,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (m) =>
-                GetPersonsConfessionWarning$QueryRoot.fromJson(m.values.single),
+            parserFn: GetPersonsConfessionWarning$QueryRoot.fromJson,
           ),
         )
         .then(_exceptionsMiddleware);
@@ -169,8 +165,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (m) =>
-                GetPersonsBirthday$QueryRoot.fromJson(m.values.single),
+            parserFn: GetPersonsBirthday$QueryRoot.fromJson,
           ),
         )
         .then(_exceptionsMiddleware);
