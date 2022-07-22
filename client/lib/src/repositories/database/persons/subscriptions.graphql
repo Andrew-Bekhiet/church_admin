@@ -1,0 +1,11 @@
+subscription getPersonsStream(
+  $addWhere: [persons_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  persons(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}

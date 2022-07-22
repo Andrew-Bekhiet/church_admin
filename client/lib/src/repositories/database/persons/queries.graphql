@@ -1,0 +1,41 @@
+query getPersonsAttendanceWarning($dateFilter: date!) {
+  persons(
+    where: { attendanceHistory: { _not: { dayId: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsKodasWarning($dateFilter: date!) {
+  persons(
+    where: { kodasHistory: { _not: { dayId: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsConfessionWarning($dateFilter: date!) {
+  persons(
+    where: { confessionHistory: { _not: { dayId: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsVisitWarning($dateFilter: timestamptz!) {
+  persons(
+    where: { visitHistory: { _not: { time: { _gte: $dateFilter } } } }
+    limit: 25
+  ) {
+    name
+  }
+}
+
+query getPersonsBirthday($dateFilter: String!) {
+  persons(where: { birthday: { _eq: $dateFilter } }, limit: 25) {
+    name
+  }
+}

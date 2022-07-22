@@ -1,0 +1,6 @@
+query getStudyYearName($order: smallint!) {
+  study_years_by_pk(order: $order) {
+    order
+    name
+  }
+}

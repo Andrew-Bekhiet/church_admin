@@ -1,0 +1,39 @@
+subscription getUserInfoStream($uid: uuid!) {
+  users_by_pk(uid: $uid) {
+    uid
+    firebaseAuthUid
+    email
+    permissions
+    person {
+      id
+      name
+      address
+      geolocation
+      mainPhone
+      otherPhones
+      birthdate
+      gender
+      isShammas
+      shammasLevel
+      schoolId
+      collegeId
+      churchId
+      fatherId
+      isStudent
+      jobId
+      jobDescription
+      qualificationId
+      personTypeId
+      stateId
+      isServant
+      notes
+      familyId
+      storeId
+      studyYearId
+      color
+      photoUpdatedAt
+      lastKodas
+      lastConfession
+    }
+  }
+}

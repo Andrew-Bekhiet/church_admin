@@ -55,8 +55,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   late final _listsControllers = [
     ListControllerBase<void, Person>(
-      objectsPaginatableStream:
-          CADatabaseRepository.I.persons.getPersonsStream$(
+      objectsPaginatableStream: CADatabaseRepository.I.persons.getPersonsStream(
         searchQuery: _getSearchStreamFor<Person>(),
       ),
     ),

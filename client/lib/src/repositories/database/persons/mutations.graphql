@@ -1,0 +1,8 @@
+mutation updatePerson($id: uuid!, $newData: persons_set_input!) {
+  update_persons_by_pk(pk_columns: { id: $id }, _set: $newData) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}

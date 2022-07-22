@@ -357,23 +357,27 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
   @override
   _i10.Future<void> verifyPhoneNumber(
           {String? phoneNumber,
+          _i4.PhoneMultiFactorInfo? multiFactorInfo,
           _i4.PhoneVerificationCompleted? verificationCompleted,
           _i4.PhoneVerificationFailed? verificationFailed,
           _i4.PhoneCodeSent? codeSent,
           _i4.PhoneCodeAutoRetrievalTimeout? codeAutoRetrievalTimeout,
           String? autoRetrievedSmsCodeForTesting,
           Duration? timeout = const Duration(seconds: 30),
-          int? forceResendingToken}) =>
+          int? forceResendingToken,
+          _i4.MultiFactorSession? multiFactorSession}) =>
       (super.noSuchMethod(
               Invocation.method(#verifyPhoneNumber, [], {
                 #phoneNumber: phoneNumber,
+                #multiFactorInfo: multiFactorInfo,
                 #verificationCompleted: verificationCompleted,
                 #verificationFailed: verificationFailed,
                 #codeSent: codeSent,
                 #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
                 #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
                 #timeout: timeout,
-                #forceResendingToken: forceResendingToken
+                #forceResendingToken: forceResendingToken,
+                #multiFactorSession: multiFactorSession
               }),
               returnValue: Future<void>.value(),
               returnValueForMissingStub: Future<void>.value())

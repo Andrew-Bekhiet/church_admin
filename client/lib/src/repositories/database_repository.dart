@@ -9,6 +9,8 @@ import 'package:graphql_flutter/graphql_flutter.dart' hide JsonSerializable;
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
+import 'database/graphql.graphql.dart';
+
 part 'database/areas.dart';
 part 'database/persons.dart';
 part 'database/services.dart';
@@ -68,19 +70,19 @@ Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
   return result;
 }
 
-T stripNullValuesFrom<T>(T json) => json is Json
+T stripNullValuesFrom<T>(T json, [Set<String> keep = const {}]) => json is Json
     ? {
         for (final kv in json.entries)
           if (kv.value is Json || kv.value is List)
-            kv.key: stripNullValuesFrom(kv.value)
-          else if (kv.value != null)
+            kv.key: stripNullValuesFrom(kv.value, keep)
+          else if (kv.value != null || keep.contains(kv.key))
             kv.key: kv.value,
       } as T
     : json is List
         ? [
             for (final e in json)
               if (e is Json || e is List)
-                stripNullValuesFrom(e)
+                stripNullValuesFrom(e, keep)
               else if (e != null)
                 e,
           ] as T
@@ -100,11 +102,17 @@ Set<S> setWrapper<S>(Iterable<S> old) => isSubtype<ViewableWithID?, S>()
     : old.toSet();
 
 extension JsonX on Json {
-  Json stripNullValues() => stripNullValuesFrom(this);
+  Json stripNullValues([Set<String> keep = const {}]) => stripNullValuesFrom(
+        this,
+        keep,
+      );
 }
 
 extension ListX on List {
-  List stripNullValues() => stripNullValuesFrom(this);
+  List stripNullValues([Set<String> keep = const {}]) => stripNullValuesFrom(
+        this,
+        keep,
+      );
 }
 
 DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(

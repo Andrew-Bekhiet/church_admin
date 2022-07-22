@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/repositories/database/graphql.graphql.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart';
 import 'package:churchdata_core_mocks/fakes/fake_firebase_auth.dart';

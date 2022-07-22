@@ -59,7 +59,7 @@ void main() {
               onQuery: (_, __) async* {},
             ),
           );
-          when(personsQueries.getPersonsStream$(
+          when(personsQueries.getPersonsStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
             DelegatingPaginatableStream(

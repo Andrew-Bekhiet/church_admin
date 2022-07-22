@@ -1,0 +1,43 @@
+subscription getServicesStream(
+  $addWhere: [services_bool_exp!] = {}
+  $groupsAddWhere: [groups_bool_exp!] = {}
+  $classesAddWhere: [classes_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  services(
+    where: { _and: $addWhere }
+    order_by: { studyYearFrom: asc, studyYearTo: asc }
+    limit: $limit
+  ) {
+    id
+    name
+    color
+    photoUpdatedAt
+    fromStudyYear {
+      name
+      order
+    }
+    toStudyYear {
+      name
+      order
+    }
+    classes(
+      where: { _and: $classesAddWhere }
+      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+    ) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    groups(
+      where: { _and: $groupsAddWhere }
+      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+    ) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}

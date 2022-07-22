@@ -3,11 +3,13 @@ targets:
     builders:
       artemis:
         options:
+          ignore_for_file:
+            - constant_identifier_names
+            - overridden_fields
           schema_mapping:
-            - custom_parser_import: "package:church_admin/graphql/scalars.dart"
-              schema: lib/graphql/schema/schema.graphql
-              queries_glob: lib/graphql/queries/queries.graphql
-              output: lib/graphql/queries.dart
+            - schema: lib/graphql/schema.graphql
+              queries_glob: lib/src/repositories/database/**/{subscriptions.graphql,queries.graphql,mutations.graphql}
+              output: lib/src/repositories/database/graphql.graphql.dart
           scalar_mapping:
             - graphql_type: _text
               dart_type: List<String>

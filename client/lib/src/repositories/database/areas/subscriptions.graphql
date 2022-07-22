@@ -1,0 +1,12 @@
+subscription getAreasStream(
+  $addWhere: [areas_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  areas(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    bounds
+    color
+    photoUpdatedAt
+  }
+}

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // @dart=2.12
 
-part of 'queries.graphql.dart';
+part of 'graphql.graphql.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -2703,6 +2703,293 @@ Map<String, dynamic> _$DaterangeComparisonExpToJson(
       '_nin': instance.$nin,
     };
 
+UpdatePerson$MutationRoot$Persons _$UpdatePerson$MutationRoot$PersonsFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePerson$MutationRoot$Persons()
+      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+      ..name = json['name'] as String
+      ..color = json['color'] as int?
+      ..photoUpdatedAt = json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$PersonsToJson(
+        UpdatePerson$MutationRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+UpdatePerson$MutationRoot _$UpdatePerson$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePerson$MutationRoot()
+      ..updatePersonsByPk = json['update_persons_by_pk'] == null
+          ? null
+          : UpdatePerson$MutationRoot$Persons.fromJson(
+              json['update_persons_by_pk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRootToJson(
+        UpdatePerson$MutationRoot instance) =>
+    <String, dynamic>{
+      'update_persons_by_pk': instance.updatePersonsByPk?.toJson(),
+    };
+
+PersonsSetInput _$PersonsSetInputFromJson(Map<String, dynamic> json) =>
+    PersonsSetInput(
+      address: json['address'] as String?,
+      birthdate: json['birthdate'] == null
+          ? null
+          : DateTime.parse(json['birthdate'] as String),
+      churchId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId']),
+      collegeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId']),
+      color: json['color'] as int?,
+      familyId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId']),
+      fatherId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId']),
+      firestoreId: json['firestoreId'] as String?,
+      gender: json['gender'] as bool?,
+      geolocation: json['geolocation'] as Map<String, dynamic>?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      isServant: json['isServant'] as bool?,
+      isShammas: json['isShammas'] as bool?,
+      isStudent: json['isStudent'] as bool?,
+      jobDescription: json['jobDescription'] as String?,
+      jobId: fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId']),
+      mainPhone: json['mainPhone'] as String?,
+      name: json['name'] as String?,
+      notes: json['notes'] as String?,
+      otherPhones: json['otherPhones'] as Map<String, dynamic>?,
+      personTypeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personTypeId']),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      qualificationId: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['qualificationId']),
+      schoolId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId']),
+      shammasLevel:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['shammasLevel']),
+      stateId: fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId']),
+      storeId: fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId']),
+      studyYearId: json['studyYearId'] as int?,
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+    );
+
+Map<String, dynamic> _$PersonsSetInputToJson(PersonsSetInput instance) =>
+    <String, dynamic>{
+      'address': instance.address,
+      'birthdate': instance.birthdate?.toIso8601String(),
+      'churchId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
+      'collegeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
+      'color': instance.color,
+      'familyId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
+      'fatherId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
+      'firestoreId': instance.firestoreId,
+      'gender': instance.gender,
+      'geolocation': instance.geolocation,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'isServant': instance.isServant,
+      'isShammas': instance.isShammas,
+      'isStudent': instance.isStudent,
+      'jobDescription': instance.jobDescription,
+      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
+      'mainPhone': instance.mainPhone,
+      'name': instance.name,
+      'notes': instance.notes,
+      'otherPhones': instance.otherPhones,
+      'personTypeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.qualificationId),
+      'schoolId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
+      'shammasLevel':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.shammasLevel),
+      'stateId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
+      'storeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
+      'studyYearId': instance.studyYearId,
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+    };
+
+GetPersonsAttendanceWarning$QueryRoot$Persons
+    _$GetPersonsAttendanceWarning$QueryRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsAttendanceWarning$QueryRoot$Persons()
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonsAttendanceWarning$QueryRoot$PersonsToJson(
+        GetPersonsAttendanceWarning$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+GetPersonsAttendanceWarning$QueryRoot
+    _$GetPersonsAttendanceWarning$QueryRootFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsAttendanceWarning$QueryRoot()
+          ..persons = (json['persons'] as List<dynamic>)
+              .map((e) =>
+                  GetPersonsAttendanceWarning$QueryRoot$Persons.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetPersonsAttendanceWarning$QueryRootToJson(
+        GetPersonsAttendanceWarning$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonsKodasWarning$QueryRoot$Persons
+    _$GetPersonsKodasWarning$QueryRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsKodasWarning$QueryRoot$Persons()
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonsKodasWarning$QueryRoot$PersonsToJson(
+        GetPersonsKodasWarning$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+GetPersonsKodasWarning$QueryRoot _$GetPersonsKodasWarning$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsKodasWarning$QueryRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => GetPersonsKodasWarning$QueryRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetPersonsKodasWarning$QueryRootToJson(
+        GetPersonsKodasWarning$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonsConfessionWarning$QueryRoot$Persons
+    _$GetPersonsConfessionWarning$QueryRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsConfessionWarning$QueryRoot$Persons()
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonsConfessionWarning$QueryRoot$PersonsToJson(
+        GetPersonsConfessionWarning$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+GetPersonsConfessionWarning$QueryRoot
+    _$GetPersonsConfessionWarning$QueryRootFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsConfessionWarning$QueryRoot()
+          ..persons = (json['persons'] as List<dynamic>)
+              .map((e) =>
+                  GetPersonsConfessionWarning$QueryRoot$Persons.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetPersonsConfessionWarning$QueryRootToJson(
+        GetPersonsConfessionWarning$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonsVisitWarning$QueryRoot$Persons
+    _$GetPersonsVisitWarning$QueryRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsVisitWarning$QueryRoot$Persons()
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonsVisitWarning$QueryRoot$PersonsToJson(
+        GetPersonsVisitWarning$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+GetPersonsVisitWarning$QueryRoot _$GetPersonsVisitWarning$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsVisitWarning$QueryRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => GetPersonsVisitWarning$QueryRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetPersonsVisitWarning$QueryRootToJson(
+        GetPersonsVisitWarning$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonsBirthday$QueryRoot$Persons
+    _$GetPersonsBirthday$QueryRoot$PersonsFromJson(Map<String, dynamic> json) =>
+        GetPersonsBirthday$QueryRoot$Persons()..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonsBirthday$QueryRoot$PersonsToJson(
+        GetPersonsBirthday$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+GetPersonsBirthday$QueryRoot _$GetPersonsBirthday$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsBirthday$QueryRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => GetPersonsBirthday$QueryRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetPersonsBirthday$QueryRootToJson(
+        GetPersonsBirthday$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonsStream$SubscriptionRoot$Persons
+    _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonsStream$SubscriptionRoot$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetPersonsStream$SubscriptionRoot$PersonsToJson(
+        GetPersonsStream$SubscriptionRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetPersonsStream$SubscriptionRoot _$GetPersonsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsStream$SubscriptionRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => GetPersonsStream$SubscriptionRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetPersonsStream$SubscriptionRootToJson(
+        GetPersonsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
 GetServicesStream$SubscriptionRoot$Services$StudyYears
     _$GetServicesStream$SubscriptionRoot$Services$StudyYearsFromJson(
             Map<String, dynamic> json) =>
@@ -2843,40 +3130,6 @@ Map<String, dynamic> _$GetStudyYearName$QueryRootToJson(
       'study_years_by_pk': instance.studyYearsByPk?.toJson(),
     };
 
-GetPersonsStream$SubscriptionRoot$Persons
-    _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsStream$SubscriptionRoot$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String, dynamic> _$GetPersonsStream$SubscriptionRoot$PersonsToJson(
-        GetPersonsStream$SubscriptionRoot$Persons instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-GetPersonsStream$SubscriptionRoot _$GetPersonsStream$SubscriptionRootFromJson(
-        Map<String, dynamic> json) =>
-    GetPersonsStream$SubscriptionRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => GetPersonsStream$SubscriptionRoot$Persons.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetPersonsStream$SubscriptionRootToJson(
-        GetPersonsStream$SubscriptionRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
 GetUserInfoStream$SubscriptionRoot$Users$Persons
     _$GetUserInfoStream$SubscriptionRoot$Users$PersonsFromJson(
             Map<String, dynamic> json) =>
@@ -3009,138 +3262,6 @@ Map<String, dynamic> _$GetUserInfoStream$SubscriptionRootToJson(
       'users_by_pk': instance.usersByPk?.toJson(),
     };
 
-GetPersonsAttendanceWarning$QueryRoot$Persons
-    _$GetPersonsAttendanceWarning$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsAttendanceWarning$QueryRoot$Persons()
-          ..name = json['name'] as String;
-
-Map<String, dynamic> _$GetPersonsAttendanceWarning$QueryRoot$PersonsToJson(
-        GetPersonsAttendanceWarning$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
-
-GetPersonsAttendanceWarning$QueryRoot
-    _$GetPersonsAttendanceWarning$QueryRootFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsAttendanceWarning$QueryRoot()
-          ..persons = (json['persons'] as List<dynamic>)
-              .map((e) =>
-                  GetPersonsAttendanceWarning$QueryRoot$Persons.fromJson(
-                      e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetPersonsAttendanceWarning$QueryRootToJson(
-        GetPersonsAttendanceWarning$QueryRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
-GetPersonsKodasWarning$QueryRoot$Persons
-    _$GetPersonsKodasWarning$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsKodasWarning$QueryRoot$Persons()
-          ..name = json['name'] as String;
-
-Map<String, dynamic> _$GetPersonsKodasWarning$QueryRoot$PersonsToJson(
-        GetPersonsKodasWarning$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
-
-GetPersonsKodasWarning$QueryRoot _$GetPersonsKodasWarning$QueryRootFromJson(
-        Map<String, dynamic> json) =>
-    GetPersonsKodasWarning$QueryRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => GetPersonsKodasWarning$QueryRoot$Persons.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetPersonsKodasWarning$QueryRootToJson(
-        GetPersonsKodasWarning$QueryRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
-GetPersonsConfessionWarning$QueryRoot$Persons
-    _$GetPersonsConfessionWarning$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsConfessionWarning$QueryRoot$Persons()
-          ..name = json['name'] as String;
-
-Map<String, dynamic> _$GetPersonsConfessionWarning$QueryRoot$PersonsToJson(
-        GetPersonsConfessionWarning$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
-
-GetPersonsConfessionWarning$QueryRoot
-    _$GetPersonsConfessionWarning$QueryRootFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsConfessionWarning$QueryRoot()
-          ..persons = (json['persons'] as List<dynamic>)
-              .map((e) =>
-                  GetPersonsConfessionWarning$QueryRoot$Persons.fromJson(
-                      e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetPersonsConfessionWarning$QueryRootToJson(
-        GetPersonsConfessionWarning$QueryRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
-GetPersonsVisitWarning$QueryRoot$Persons
-    _$GetPersonsVisitWarning$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetPersonsVisitWarning$QueryRoot$Persons()
-          ..name = json['name'] as String;
-
-Map<String, dynamic> _$GetPersonsVisitWarning$QueryRoot$PersonsToJson(
-        GetPersonsVisitWarning$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
-
-GetPersonsVisitWarning$QueryRoot _$GetPersonsVisitWarning$QueryRootFromJson(
-        Map<String, dynamic> json) =>
-    GetPersonsVisitWarning$QueryRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => GetPersonsVisitWarning$QueryRoot$Persons.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetPersonsVisitWarning$QueryRootToJson(
-        GetPersonsVisitWarning$QueryRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
-GetPersonsBirthday$QueryRoot$Persons
-    _$GetPersonsBirthday$QueryRoot$PersonsFromJson(Map<String, dynamic> json) =>
-        GetPersonsBirthday$QueryRoot$Persons()..name = json['name'] as String;
-
-Map<String, dynamic> _$GetPersonsBirthday$QueryRoot$PersonsToJson(
-        GetPersonsBirthday$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
-
-GetPersonsBirthday$QueryRoot _$GetPersonsBirthday$QueryRootFromJson(
-        Map<String, dynamic> json) =>
-    GetPersonsBirthday$QueryRoot()
-      ..persons = (json['persons'] as List<dynamic>)
-          .map((e) => GetPersonsBirthday$QueryRoot$Persons.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetPersonsBirthday$QueryRootToJson(
-        GetPersonsBirthday$QueryRoot instance) =>
-    <String, dynamic>{
-      'persons': instance.persons.map((e) => e.toJson()).toList(),
-    };
-
 GetAreasStreamArguments _$GetAreasStreamArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetAreasStreamArguments(
@@ -3157,70 +3278,19 @@ Map<String, dynamic> _$GetAreasStreamArgumentsToJson(
       'limit': instance.limit,
     };
 
-GetServicesStreamArguments _$GetServicesStreamArgumentsFromJson(
+UpdatePersonArguments _$UpdatePersonArgumentsFromJson(
         Map<String, dynamic> json) =>
-    GetServicesStreamArguments(
-      addWhere: (json['addWhere'] as List<dynamic>?)
-          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      groupsAddWhere: (json['groupsAddWhere'] as List<dynamic>?)
-          ?.map((e) => GroupsBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      classesAddWhere: (json['classesAddWhere'] as List<dynamic>?)
-          ?.map((e) => ClassesBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      limit: json['limit'] as int?,
+    UpdatePersonArguments(
+      id: fromGraphQLUuidToDartUuidValue(json['id']),
+      newData:
+          PersonsSetInput.fromJson(json['newData'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$GetServicesStreamArgumentsToJson(
-        GetServicesStreamArguments instance) =>
+Map<String, dynamic> _$UpdatePersonArgumentsToJson(
+        UpdatePersonArguments instance) =>
     <String, dynamic>{
-      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
-      'groupsAddWhere':
-          instance.groupsAddWhere?.map((e) => e.toJson()).toList(),
-      'classesAddWhere':
-          instance.classesAddWhere?.map((e) => e.toJson()).toList(),
-      'limit': instance.limit,
-    };
-
-GetStudyYearNameArguments _$GetStudyYearNameArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetStudyYearNameArguments(
-      order: json['order'] as int,
-    );
-
-Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
-        GetStudyYearNameArguments instance) =>
-    <String, dynamic>{
-      'order': instance.order,
-    };
-
-GetPersonsStreamArguments _$GetPersonsStreamArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetPersonsStreamArguments(
-      addWhere: (json['addWhere'] as List<dynamic>?)
-          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      limit: json['limit'] as int?,
-    );
-
-Map<String, dynamic> _$GetPersonsStreamArgumentsToJson(
-        GetPersonsStreamArguments instance) =>
-    <String, dynamic>{
-      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
-      'limit': instance.limit,
-    };
-
-GetUserInfoStreamArguments _$GetUserInfoStreamArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetUserInfoStreamArguments(
-      uid: fromGraphQLUuidToDartUuidValue(json['uid']),
-    );
-
-Map<String, dynamic> _$GetUserInfoStreamArgumentsToJson(
-        GetUserInfoStreamArguments instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'newData': instance.newData.toJson(),
     };
 
 GetPersonsAttendanceWarningArguments
@@ -3281,4 +3351,70 @@ Map<String, dynamic> _$GetPersonsBirthdayArgumentsToJson(
         GetPersonsBirthdayArguments instance) =>
     <String, dynamic>{
       'dateFilter': instance.dateFilter,
+    };
+
+GetPersonsStreamArguments _$GetPersonsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetPersonsStreamArgumentsToJson(
+        GetPersonsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetServicesStreamArguments _$GetServicesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetServicesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => ServicesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      groupsAddWhere: (json['groupsAddWhere'] as List<dynamic>?)
+          ?.map((e) => GroupsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      classesAddWhere: (json['classesAddWhere'] as List<dynamic>?)
+          ?.map((e) => ClassesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetServicesStreamArgumentsToJson(
+        GetServicesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'groupsAddWhere':
+          instance.groupsAddWhere?.map((e) => e.toJson()).toList(),
+      'classesAddWhere':
+          instance.classesAddWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetStudyYearNameArguments _$GetStudyYearNameArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearNameArguments(
+      order: json['order'] as int,
+    );
+
+Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
+        GetStudyYearNameArguments instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+    };
+
+GetUserInfoStreamArguments _$GetUserInfoStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetUserInfoStreamArguments(
+      uid: fromGraphQLUuidToDartUuidValue(json['uid']),
+    );
+
+Map<String, dynamic> _$GetUserInfoStreamArgumentsToJson(
+        GetUserInfoStreamArguments instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
     };

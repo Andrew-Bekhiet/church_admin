@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
@@ -90,14 +91,18 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
       AuthenticateScreen.route,
     ],
     errorBuilder: (context, state) {
-      GetIt.I<LoggingService>().reportError(
-        state.error!,
-        extras: {'location': state.location},
-      );
+      if (kReleaseMode) {
+        GetIt.I<LoggingService>().reportError(
+          state.error!,
+          extras: {'location': state.location},
+        );
+      }
+
       return Scaffold(
         appBar: AppBar(
           title: const Text('حدث خطأ'),
-          backgroundColor: const Color(0xffc96e00),
+          backgroundColor:
+              Theme.of(context).errorColor, //TODO: colorScheme.error ?
         ),
         body: ErrorWidget.builder(
           FlutterErrorDetails(exception: state.error!),

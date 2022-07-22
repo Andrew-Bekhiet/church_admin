@@ -1,4 +1,3 @@
-export './graphql/queries.dart';
 export 'src/controllers.dart';
 export 'src/models.dart';
 export 'src/repositories.dart';

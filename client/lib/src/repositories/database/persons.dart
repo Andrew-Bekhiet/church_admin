@@ -3,7 +3,44 @@ part of '../database_repository.dart';
 class PersonsQueries {
   PersonsQueries._();
 
-  DelegatingPaginatableStream<Person> getPersonsStream$({
+  Future<Person> updatePerson({
+    required Person old,
+    required Person $new,
+  }) async {
+    final newJson = $new.toJson();
+    final personInput = {
+      for (final e in old.toJson().entries)
+        if (newJson[e.key] != e.value) e.key: e.value
+    };
+
+    final UpdatePersonMutation subscription = UpdatePersonMutation(
+      variables: UpdatePersonArguments(
+        id: UuidValue(old.id),
+        newData: PersonsSetInput.fromJson(personInput),
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(
+                  personInput.entries
+                      .where((e) => e.value == null)
+                      .map((e) => e.key)
+                      .toSet(),
+                ),
+            parserFn: (d) => Person.fromJson(
+              UpdatePerson$MutationRoot.fromJson(d).updatePersonsByPk!.toJson(),
+            ),
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData!);
+  }
+
+  DelegatingPaginatableStream<Person> getPersonsStream({
     Stream<String?>? searchQuery,
   }) {
     String? lastSearch;
