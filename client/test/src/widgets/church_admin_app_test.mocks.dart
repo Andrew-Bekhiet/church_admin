@@ -52,15 +52,13 @@ class _FakeStudyYearsQueries_8 extends _i1.Fake
 
 class _FakeUsersQueries_9 extends _i1.Fake implements _i4.UsersQueries {}
 
-class _FakePerson_10 extends _i1.Fake implements _i4.Person {}
-
-class _FakeDelegatingPaginatableStream_11<T extends _i5.ViewableWithID>
+class _FakeDelegatingPaginatableStream_10<T extends _i5.ViewableWithID>
     extends _i1.Fake implements _i4.DelegatingPaginatableStream<T> {}
 
-class _FakeQueryResult_12<TParsed extends Object?> extends _i1.Fake
+class _FakeQueryResult_11<TParsed extends Object?> extends _i1.Fake
     implements _i6.QueryResult<TParsed> {}
 
-class _FakeDuration_13 extends _i1.Fake implements Duration {}
+class _FakeDuration_12 extends _i1.Fake implements Duration {}
 
 /// A class which mocks [LoggingService].
 ///
@@ -352,18 +350,22 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
   }
 
   @override
-  _i7.Future<_i4.Person> updatePerson({_i4.Person? old, _i4.Person? $new}) =>
+  _i7.Future<_i4.Person?> updatePersonSpiritData(
+          {String? personId, DateTime? lastConfession, DateTime? lastKodas}) =>
       (super.noSuchMethod(
-              Invocation.method(#updatePerson, [], {#old: old, #$new: $new}),
-              returnValue: Future<_i4.Person>.value(_FakePerson_10()))
-          as _i7.Future<_i4.Person>);
+          Invocation.method(#updatePersonSpiritData, [], {
+            #personId: personId,
+            #lastConfession: lastConfession,
+            #lastKodas: lastKodas
+          }),
+          returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
   @override
   _i4.DelegatingPaginatableStream<_i4.Person> getPersonsStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
           Invocation.method(#getPersonsStream, [], {#searchQuery: searchQuery}),
           returnValue:
-              _FakeDelegatingPaginatableStream_11<_i4.Person>()) as _i4
+              _FakeDelegatingPaginatableStream_10<_i4.Person>()) as _i4
           .DelegatingPaginatableStream<_i4.Person>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>
@@ -371,7 +373,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsKodasWarning, [], {#date: date}),
           returnValue: Future<
                   _i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>.value(
-              _FakeQueryResult_12<_i13.GetPersonsKodasWarning$QueryRoot>())) as _i7
+              _FakeQueryResult_11<_i13.GetPersonsKodasWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>
@@ -379,7 +381,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsMeetingWarning, [], {#date: date}),
           returnValue:
               Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>.value(
-                  _FakeQueryResult_12<
+                  _FakeQueryResult_11<
                       _i13.GetPersonsAttendanceWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>);
   @override
@@ -388,7 +390,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsVisitWarning, [], {#date: date}),
           returnValue: Future<
                   _i6.QueryResult<_i13.GetPersonsVisitWarning$QueryRoot>>.value(
-              _FakeQueryResult_12<_i13.GetPersonsVisitWarning$QueryRoot>())) as _i7
+              _FakeQueryResult_11<_i13.GetPersonsVisitWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsVisitWarning$QueryRoot>>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>
@@ -396,7 +398,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsConfessionWarning, [], {#date: date}),
           returnValue:
               Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>.value(
-                  _FakeQueryResult_12<
+                  _FakeQueryResult_11<
                       _i13.GetPersonsConfessionWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>);
   @override
@@ -405,7 +407,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               Invocation.method(#getBirthdayPersons, [], {#date: date}),
               returnValue: Future<
                       _i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>.value(
-                  _FakeQueryResult_12<_i13.GetPersonsBirthday$QueryRoot>()))
+                  _FakeQueryResult_11<_i13.GetPersonsBirthday$QueryRoot>()))
           as _i7.Future<_i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>);
 }
 
@@ -423,7 +425,7 @@ class MockAreasQueries extends _i1.Mock implements _i4.AreasQueries {
       (super.noSuchMethod(
           Invocation.method(#getAreasStream, [], {#searchQuery: searchQuery}),
           returnValue:
-              _FakeDelegatingPaginatableStream_11<_i4.Area>()) as _i4
+              _FakeDelegatingPaginatableStream_10<_i4.Area>()) as _i4
           .DelegatingPaginatableStream<_i4.Area>);
 }
 
@@ -441,7 +443,7 @@ class MockServicesQueries extends _i1.Mock implements _i4.ServicesQueries {
       (super.noSuchMethod(
               Invocation.method(
                   #getServicesStream, [], {#searchQuery: searchQuery}),
-              returnValue: _FakeDelegatingPaginatableStream_11<_i4.Service>())
+              returnValue: _FakeDelegatingPaginatableStream_10<_i4.Service>())
           as _i4.DelegatingPaginatableStream<_i4.Service>);
 }
 
@@ -464,7 +466,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth =>
       (super.noSuchMethod(Invocation.getter(#timeToReauth),
-          returnValue: _FakeDuration_13()) as Duration);
+          returnValue: _FakeDuration_12()) as Duration);
   @override
   _i7.Stream<void> get refreshUIStream =>
       (super.noSuchMethod(Invocation.getter(#refreshUIStream),

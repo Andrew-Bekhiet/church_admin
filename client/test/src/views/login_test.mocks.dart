@@ -12,7 +12,7 @@ import 'package:firebase_auth_platform_interface/firebase_auth_platform_interfac
     as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i3;
 import 'package:flutter/foundation.dart' as _i2;
-import 'package:go_router/src/go_router_state.dart' as _i8;
+import 'package:go_router/src/configuration.dart' as _i8;
 import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart'
     as _i9;

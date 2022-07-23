@@ -170,10 +170,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
         isServant: false,
         lastKodas: value == FirstScreenVariantEnum.updateUserData
             ? null
-            : DateTime.now(),
+            : LastEditInfo(time: DateTime.now(), userUID: 'uid'),
         lastConfession: value == FirstScreenVariantEnum.updateUserData
             ? null
-            : DateTime.now(),
+            : LastEditInfo(time: DateTime.now(), userUID: 'uid'),
       ),
     );
 
