@@ -2703,125 +2703,322 @@ Map<String, dynamic> _$DaterangeComparisonExpToJson(
       '_nin': instance.$nin,
     };
 
-UpdatePerson$MutationRoot$Persons _$UpdatePerson$MutationRoot$PersonsFromJson(
-        Map<String, dynamic> json) =>
-    UpdatePerson$MutationRoot$Persons()
-      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-      ..name = json['name'] as String
-      ..color = json['color'] as int?
-      ..photoUpdatedAt = json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String);
+InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
+    _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
 
-Map<String, dynamic> _$UpdatePerson$MutationRoot$PersonsToJson(
-        UpdatePerson$MutationRoot$Persons instance) =>
+Map<String, dynamic>
+    _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$PersonsToJson(
+            InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory
+    _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistoryFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory()
+          ..person =
+              InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistoryToJson(
+            InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory
+                instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+InsertPersonLastConfession$MutationRoot
+    _$InsertPersonLastConfession$MutationRootFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastConfession$MutationRoot()
+          ..insertHistoryConfessionHistoryOne = json[
+                      'insert_history_confession_history_one'] ==
+                  null
+              ? null
+              : InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory
+                  .fromJson(json['insert_history_confession_history_one']
+                      as Map<String, dynamic>);
+
+Map<String, dynamic> _$InsertPersonLastConfession$MutationRootToJson(
+        InsertPersonLastConfession$MutationRoot instance) =>
     <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'insert_history_confession_history_one':
+          instance.insertHistoryConfessionHistoryOne?.toJson(),
     };
 
-UpdatePerson$MutationRoot _$UpdatePerson$MutationRootFromJson(
-        Map<String, dynamic> json) =>
-    UpdatePerson$MutationRoot()
-      ..updatePersonsByPk = json['update_persons_by_pk'] == null
-          ? null
-          : UpdatePerson$MutationRoot$Persons.fromJson(
-              json['update_persons_by_pk'] as Map<String, dynamic>);
+InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons
+    _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
 
-Map<String, dynamic> _$UpdatePerson$MutationRootToJson(
-        UpdatePerson$MutationRoot instance) =>
+Map<String, dynamic>
+    _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$PersonsToJson(
+            InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+InsertPersonLastKodas$MutationRoot$HistoryKodasHistory
+    _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistoryFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastKodas$MutationRoot$HistoryKodasHistory()
+          ..person =
+              InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistoryToJson(
+            InsertPersonLastKodas$MutationRoot$HistoryKodasHistory instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+InsertPersonLastKodas$MutationRoot _$InsertPersonLastKodas$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonLastKodas$MutationRoot()
+      ..insertHistoryKodasHistoryOne =
+          json['insert_history_kodas_history_one'] == null
+              ? null
+              : InsertPersonLastKodas$MutationRoot$HistoryKodasHistory.fromJson(
+                  json['insert_history_kodas_history_one']
+                      as Map<String, dynamic>);
+
+Map<String, dynamic> _$InsertPersonLastKodas$MutationRootToJson(
+        InsertPersonLastKodas$MutationRoot instance) =>
     <String, dynamic>{
-      'update_persons_by_pk': instance.updatePersonsByPk?.toJson(),
+      'insert_history_kodas_history_one':
+          instance.insertHistoryKodasHistoryOne?.toJson(),
     };
 
-PersonsSetInput _$PersonsSetInputFromJson(Map<String, dynamic> json) =>
-    PersonsSetInput(
-      address: json['address'] as String?,
-      birthdate: json['birthdate'] == null
-          ? null
-          : DateTime.parse(json['birthdate'] as String),
-      churchId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId']),
-      collegeId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId']),
-      color: json['color'] as int?,
-      familyId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId']),
-      fatherId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId']),
-      firestoreId: json['firestoreId'] as String?,
-      gender: json['gender'] as bool?,
-      geolocation: json['geolocation'] as Map<String, dynamic>?,
-      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
-      isServant: json['isServant'] as bool?,
-      isShammas: json['isShammas'] as bool?,
-      isStudent: json['isStudent'] as bool?,
-      jobDescription: json['jobDescription'] as String?,
-      jobId: fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId']),
-      mainPhone: json['mainPhone'] as String?,
-      name: json['name'] as String?,
-      notes: json['notes'] as String?,
-      otherPhones: json['otherPhones'] as Map<String, dynamic>?,
-      personTypeId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['personTypeId']),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      qualificationId: fromGraphQLUuidNullableToDartUuidValueNullable(
-          json['qualificationId']),
-      schoolId:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId']),
-      shammasLevel:
-          fromGraphQLUuidNullableToDartUuidValueNullable(json['shammasLevel']),
-      stateId: fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId']),
-      storeId: fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId']),
-      studyYearId: json['studyYearId'] as int?,
-      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
-    );
+InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons
+    _$InsertPersonLastCall$MutationRoot$HistoryCallHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
 
-Map<String, dynamic> _$PersonsSetInputToJson(PersonsSetInput instance) =>
+Map<String, dynamic>
+    _$InsertPersonLastCall$MutationRoot$HistoryCallHistory$PersonsToJson(
+            InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+InsertPersonLastCall$MutationRoot$HistoryCallHistory
+    _$InsertPersonLastCall$MutationRoot$HistoryCallHistoryFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastCall$MutationRoot$HistoryCallHistory()
+          ..person =
+              InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$InsertPersonLastCall$MutationRoot$HistoryCallHistoryToJson(
+            InsertPersonLastCall$MutationRoot$HistoryCallHistory instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+InsertPersonLastCall$MutationRoot _$InsertPersonLastCall$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonLastCall$MutationRoot()
+      ..insertHistoryCallHistoryOne = json['insert_history_call_history_one'] ==
+              null
+          ? null
+          : InsertPersonLastCall$MutationRoot$HistoryCallHistory.fromJson(
+              json['insert_history_call_history_one'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$InsertPersonLastCall$MutationRootToJson(
+        InsertPersonLastCall$MutationRoot instance) =>
     <String, dynamic>{
-      'address': instance.address,
-      'birthdate': instance.birthdate?.toIso8601String(),
-      'churchId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
-      'collegeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
-      'color': instance.color,
-      'familyId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
-      'fatherId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
-      'firestoreId': instance.firestoreId,
-      'gender': instance.gender,
-      'geolocation': instance.geolocation,
-      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
-      'isServant': instance.isServant,
-      'isShammas': instance.isShammas,
-      'isStudent': instance.isStudent,
-      'jobDescription': instance.jobDescription,
-      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
-      'mainPhone': instance.mainPhone,
-      'name': instance.name,
-      'notes': instance.notes,
-      'otherPhones': instance.otherPhones,
-      'personTypeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
-          instance.qualificationId),
-      'schoolId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
-      'shammasLevel':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.shammasLevel),
-      'stateId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
-      'storeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
-      'studyYearId': instance.studyYearId,
-      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+      'insert_history_call_history_one':
+          instance.insertHistoryCallHistoryOne?.toJson(),
+    };
+
+InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons
+    _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic>
+    _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$PersonsToJson(
+            InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+InsertPersonLastVisit$MutationRoot$HistoryVisitHistory
+    _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistoryFromJson(
+            Map<String, dynamic> json) =>
+        InsertPersonLastVisit$MutationRoot$HistoryVisitHistory()
+          ..person =
+              InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistoryToJson(
+            InsertPersonLastVisit$MutationRoot$HistoryVisitHistory instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+InsertPersonLastVisit$MutationRoot _$InsertPersonLastVisit$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonLastVisit$MutationRoot()
+      ..insertHistoryVisitHistoryOne =
+          json['insert_history_visit_history_one'] == null
+              ? null
+              : InsertPersonLastVisit$MutationRoot$HistoryVisitHistory.fromJson(
+                  json['insert_history_visit_history_one']
+                      as Map<String, dynamic>);
+
+Map<String, dynamic> _$InsertPersonLastVisit$MutationRootToJson(
+        InsertPersonLastVisit$MutationRoot instance) =>
+    <String, dynamic>{
+      'insert_history_visit_history_one':
+          instance.insertHistoryVisitHistoryOne?.toJson(),
+    };
+
+UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons
+    _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic>
+    _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$PersonsToJson(
+            UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory
+    _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory()
+          ..person =
+              UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistoryToJson(
+            UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory
+                instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons
+    _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic>
+    _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$PersonsToJson(
+            UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory
+    _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory()
+          ..person =
+              UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons
+                  .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistoryToJson(
+            UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory instance) =>
+        <String, dynamic>{
+          'person': instance.person.toJson(),
+        };
+
+UpdatePersonSpiritData$MutationRoot
+    _$UpdatePersonSpiritData$MutationRootFromJson(Map<String, dynamic> json) =>
+        UpdatePersonSpiritData$MutationRoot()
+          ..insertHistoryConfessionHistoryOne =
+              json['insert_history_confession_history_one'] == null
+                  ? null
+                  : UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory
+                      .fromJson(json['insert_history_confession_history_one']
+                          as Map<String, dynamic>)
+          ..insertHistoryKodasHistoryOne =
+              json['insert_history_kodas_history_one'] == null
+                  ? null
+                  : UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory
+                      .fromJson(json['insert_history_kodas_history_one']
+                          as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePersonSpiritData$MutationRootToJson(
+        UpdatePersonSpiritData$MutationRoot instance) =>
+    <String, dynamic>{
+      'insert_history_confession_history_one':
+          instance.insertHistoryConfessionHistoryOne?.toJson(),
+      'insert_history_kodas_history_one':
+          instance.insertHistoryKodasHistoryOne?.toJson(),
     };
 
 GetPersonsAttendanceWarning$QueryRoot$Persons
@@ -3278,19 +3475,76 @@ Map<String, dynamic> _$GetAreasStreamArgumentsToJson(
       'limit': instance.limit,
     };
 
-UpdatePersonArguments _$UpdatePersonArgumentsFromJson(
+InsertPersonLastConfessionArguments
+    _$InsertPersonLastConfessionArgumentsFromJson(Map<String, dynamic> json) =>
+        InsertPersonLastConfessionArguments(
+          personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+          lastConfession: DateTime.parse(json['lastConfession'] as String),
+        );
+
+Map<String, dynamic> _$InsertPersonLastConfessionArgumentsToJson(
+        InsertPersonLastConfessionArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'lastConfession': instance.lastConfession.toIso8601String(),
+    };
+
+InsertPersonLastKodasArguments _$InsertPersonLastKodasArgumentsFromJson(
         Map<String, dynamic> json) =>
-    UpdatePersonArguments(
-      id: fromGraphQLUuidToDartUuidValue(json['id']),
-      newData:
-          PersonsSetInput.fromJson(json['newData'] as Map<String, dynamic>),
+    InsertPersonLastKodasArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      lastKodas: DateTime.parse(json['lastKodas'] as String),
     );
 
-Map<String, dynamic> _$UpdatePersonArgumentsToJson(
-        UpdatePersonArguments instance) =>
+Map<String, dynamic> _$InsertPersonLastKodasArgumentsToJson(
+        InsertPersonLastKodasArguments instance) =>
     <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'newData': instance.newData.toJson(),
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'lastKodas': instance.lastKodas.toIso8601String(),
+    };
+
+InsertPersonLastCallArguments _$InsertPersonLastCallArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonLastCallArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      lastCall: DateTime.parse(json['lastCall'] as String),
+    );
+
+Map<String, dynamic> _$InsertPersonLastCallArgumentsToJson(
+        InsertPersonLastCallArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'lastCall': instance.lastCall.toIso8601String(),
+    };
+
+InsertPersonLastVisitArguments _$InsertPersonLastVisitArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonLastVisitArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      lastVisit: DateTime.parse(json['lastVisit'] as String),
+    );
+
+Map<String, dynamic> _$InsertPersonLastVisitArgumentsToJson(
+        InsertPersonLastVisitArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'lastVisit': instance.lastVisit.toIso8601String(),
+    };
+
+UpdatePersonSpiritDataArguments _$UpdatePersonSpiritDataArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePersonSpiritDataArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      lastConfession: DateTime.parse(json['lastConfession'] as String),
+      lastKodas: DateTime.parse(json['lastKodas'] as String),
+    );
+
+Map<String, dynamic> _$UpdatePersonSpiritDataArgumentsToJson(
+        UpdatePersonSpiritDataArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'lastConfession': instance.lastConfession.toIso8601String(),
+      'lastKodas': instance.lastKodas.toIso8601String(),
     };
 
 GetPersonsAttendanceWarningArguments

@@ -39,12 +39,8 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
-      lastConfession: json['lastConfession'] == null
-          ? null
-          : DateTime.parse(json['lastConfession'] as String),
-      lastKodas: json['lastKodas'] == null
-          ? null
-          : DateTime.parse(json['lastKodas'] as String),
+      lastConfession: lastEditFromJson(json['lastConfession']),
+      lastKodas: lastEditFromJson(json['lastKodas']),
     );
 
 Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
@@ -76,6 +72,6 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'studyYearId': instance.studyYearId,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'lastConfession': instance.lastConfession?.toIso8601String(),
-      'lastKodas': instance.lastKodas?.toIso8601String(),
+      'lastConfession': lastEditToJson(instance.lastConfession),
+      'lastKodas': lastEditToJson(instance.lastKodas),
     };

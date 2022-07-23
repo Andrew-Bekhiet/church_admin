@@ -50,8 +50,10 @@ mixin _$Person {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  DateTime? get lastConfession => throw _privateConstructorUsedError;
-  DateTime? get lastKodas => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  LastEditInfo? get lastConfession => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  LastEditInfo? get lastKodas => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +68,8 @@ abstract class $PersonCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          Point? geolocation,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -89,10 +92,16 @@ abstract class $PersonCopyWith<$Res> {
       String? familyId,
       String? storeId,
       int? studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
-      DateTime? lastConfession,
-      DateTime? lastKodas});
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          LastEditInfo? lastConfession,
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          LastEditInfo? lastKodas});
+
+  $LastEditInfoCopyWith<$Res>? get lastConfession;
+  $LastEditInfoCopyWith<$Res>? get lastKodas;
 }
 
 /// @nodoc
@@ -252,12 +261,34 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
       lastConfession: lastConfession == freezed
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as LastEditInfo?,
       lastKodas: lastKodas == freezed
           ? _value.lastKodas
           : lastKodas // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as LastEditInfo?,
     ));
+  }
+
+  @override
+  $LastEditInfoCopyWith<$Res>? get lastConfession {
+    if (_value.lastConfession == null) {
+      return null;
+    }
+
+    return $LastEditInfoCopyWith<$Res>(_value.lastConfession!, (value) {
+      return _then(_value.copyWith(lastConfession: value));
+    });
+  }
+
+  @override
+  $LastEditInfoCopyWith<$Res>? get lastKodas {
+    if (_value.lastKodas == null) {
+      return null;
+    }
+
+    return $LastEditInfoCopyWith<$Res>(_value.lastKodas!, (value) {
+      return _then(_value.copyWith(lastKodas: value));
+    });
   }
 }
 
@@ -270,7 +301,8 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          Point? geolocation,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -293,10 +325,18 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? familyId,
       String? storeId,
       int? studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
-      DateTime? lastConfession,
-      DateTime? lastKodas});
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          LastEditInfo? lastConfession,
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          LastEditInfo? lastKodas});
+
+  @override
+  $LastEditInfoCopyWith<$Res>? get lastConfession;
+  @override
+  $LastEditInfoCopyWith<$Res>? get lastKodas;
 }
 
 /// @nodoc
@@ -457,11 +497,11 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
       lastConfession: lastConfession == freezed
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as LastEditInfo?,
       lastKodas: lastKodas == freezed
           ? _value.lastKodas
           : lastKodas // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as LastEditInfo?,
     ));
   }
 }
@@ -473,7 +513,8 @@ class _$_Person extends _Person {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          this.geolocation,
       this.mainPhone,
       final Map<String, dynamic> otherPhones = const {},
       this.birthdate,
@@ -496,10 +537,13 @@ class _$_Person extends _Person {
       this.familyId,
       this.storeId,
       this.studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          this.color,
       this.photoUpdatedAt,
-      this.lastConfession,
-      this.lastKodas})
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          this.lastConfession,
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          this.lastKodas})
       : _otherPhones = otherPhones,
         super._();
 
@@ -575,9 +619,11 @@ class _$_Person extends _Person {
   @override
   final DateTime? photoUpdatedAt;
   @override
-  final DateTime? lastConfession;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  final LastEditInfo? lastConfession;
   @override
-  final DateTime? lastKodas;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  final LastEditInfo? lastKodas;
 
   @override
   String toString() {
@@ -711,8 +757,10 @@ abstract class _Person extends Person {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
       final DateTime? photoUpdatedAt,
-      final DateTime? lastConfession,
-      final DateTime? lastKodas}) = _$_Person;
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          final LastEditInfo? lastConfession,
+      @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+          final LastEditInfo? lastKodas}) = _$_Person;
   _Person._() : super._();
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
@@ -776,9 +824,11 @@ abstract class _Person extends Person {
   @override
   DateTime? get photoUpdatedAt;
   @override
-  DateTime? get lastConfession;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  LastEditInfo? get lastConfession;
   @override
-  DateTime? get lastKodas;
+  @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+  LastEditInfo? get lastKodas;
   @override
   @JsonKey(ignore: true)
   _$$_PersonCopyWith<_$_Person> get copyWith =>

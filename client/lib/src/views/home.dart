@@ -14,20 +14,7 @@ class HomeScreen extends StatefulWidget {
         return state.namedLocation('login');
       } else if (CAAuthRepository.I.currentUserData == null) {
         return state.namedLocation('register_user_data');
-      }
-      return null;
-      //TODO: return to normal after testing
-      // ignore: dead_code
-      final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
-
-      if (CAAuthRepository.I.currentUserData?.lastKodas == null ||
-          CAAuthRepository.I.currentUserData!.lastConfession == null ||
-          CAAuthRepository.I.currentUserData!.lastKodas!.isBefore(
-            thirtyDaysAgo,
-          ) ||
-          CAAuthRepository.I.currentUserData!.lastConfession!.isBefore(
-            thirtyDaysAgo,
-          )) {
+      } else if (!CAAuthRepository.I.currentUserData!.spiritDataUpToDate()) {
         return state.namedLocation(
           'update_user_data',
           queryParams: {'forced': 'true'},
@@ -100,13 +87,13 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Future<void> dispose() async {
+    super.dispose();
+
     _tabController.dispose();
     await _search.close();
     await _bottomNavBar.close();
 
     await Future.wait(_listsControllers.map((c) => c.dispose()));
-
-    super.dispose();
   }
 
   @override

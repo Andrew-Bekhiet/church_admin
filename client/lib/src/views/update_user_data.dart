@@ -8,6 +8,25 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class UpdateUserData extends StatefulWidget {
+  static final route = GoRoute(
+    name: 'update_user_data',
+    path: '/updateUserData',
+    builder: (context, state) => const UpdateUserData(),
+    redirect: (state) {
+      if (!CAAuthRepository.I.isSignedIn) {
+        return state.namedLocation('login');
+      } else if (CAAuthRepository.I.currentUserData!.spiritDataUpToDate()) {
+        return '/';
+      } else if (LocalAuthService.I.shouldAuthenticate) {
+        return state.namedLocation(
+          'authenticate',
+          queryParams: {'next': state.location},
+        );
+      }
+      return null;
+    },
+  );
+
   final Person? userData;
   const UpdateUserData({this.userData, super.key});
 
@@ -33,11 +52,12 @@ class _UpdateUserDataState extends State<UpdateUserData> {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
-              const Text(
+              Text(
                 'الخادم مثال حى للنفس التائبة - يمارس التوبة فى حياته الخاصة'
-                ' وفى أصوامـه وصلواته ، وحب المسـيح المصلوب\n'
+                ' وفى أصوامه وصلواته ، وحب المسيح المصلوب\n'
                 'أبونا بيشوي كامل\n'
                 'يرجي مراجعة حياتك الروحية والاهتمام بها',
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 40),
               TappableFormField<DateTime?>(
@@ -49,7 +69,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       ? const Icon(Icons.done, color: Colors.green)
                       : const Icon(Icons.close, color: Colors.red),
                 ),
-                initialValue: _userData.lastKodas,
+                initialValue: _userData.lastKodas?.time,
                 onTap: (state) async {
                   final _picked = await _selectDate(
                     'تاريخ أخر تناول',
@@ -66,7 +86,12 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       ? Text(DateFormat('yyyy/M/d').format(state.value!))
                       : null;
                 },
-                onSaved: (v) => _userData = _userData.copyWith(lastKodas: v),
+                onSaved: (v) => _userData = _userData.copyWith(
+                  lastKodas: LastEditInfo(
+                    time: v!,
+                    userUID: CAAuthRepository.I.currentUser!.uid,
+                  ),
+                ),
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر تناول'
                     : value.isBefore(
@@ -84,7 +109,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       ? const Icon(Icons.done, color: Colors.green)
                       : const Icon(Icons.close, color: Colors.red),
                 ),
-                initialValue: _userData.lastConfession,
+                initialValue: _userData.lastConfession?.time,
                 onTap: (state) async {
                   final _picked = await _selectDate(
                     'تاريخ أخر اعتراف',
@@ -101,8 +126,12 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       ? Text(DateFormat('yyyy/M/d').format(state.value!))
                       : null;
                 },
-                onSaved: (v) =>
-                    _userData = _userData.copyWith(lastConfession: v),
+                onSaved: (v) => _userData = _userData.copyWith(
+                  lastConfession: LastEditInfo(
+                    time: v!,
+                    userUID: CAAuthRepository.I.currentUser!.uid,
+                  ),
+                ),
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر اعتراف'
                     : value.isBefore(
@@ -137,15 +166,24 @@ class _UpdateUserDataState extends State<UpdateUserData> {
         ),
       );
 
-      await GetIt.I<CADatabaseRepository>().persons.updatePerson(
-            old: widget.userData ?? CAAuthRepository.I.currentUserData!,
-            $new: _userData,
+      await GetIt.I<CADatabaseRepository>().persons.updatePersonSpiritData(
+            personId: _userData.id,
+            lastConfession: _userData.lastConfession!.time,
+            lastKodas: _userData.lastKodas!.time,
           );
 
       if (mounted) {
-        context.pop();
+        scaffoldMessenger
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text('تم بنجاح'),
+            ),
+          );
       }
     } on Exception catch (err, stack) {
+      scaffoldMessenger.hideCurrentSnackBar();
+
       unawaited(
         showDialog(
           context: context,
@@ -158,6 +196,8 @@ class _UpdateUserDataState extends State<UpdateUserData> {
         stackTrace: stack,
         data: _userData.toJson(),
       );
+    } finally {
+      _isSaving = false;
     }
   }
 

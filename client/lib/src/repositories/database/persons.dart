@@ -3,20 +3,17 @@ part of '../database_repository.dart';
 class PersonsQueries {
   PersonsQueries._();
 
-  Future<Person> updatePerson({
-    required Person old,
-    required Person $new,
+  Future<Person?> updatePersonSpiritData({
+    required String personId,
+    required DateTime lastConfession,
+    required DateTime lastKodas,
   }) async {
-    final newJson = $new.toJson();
-    final personInput = {
-      for (final e in old.toJson().entries)
-        if (newJson[e.key] != e.value) e.key: e.value
-    };
-
-    final UpdatePersonMutation subscription = UpdatePersonMutation(
-      variables: UpdatePersonArguments(
-        id: UuidValue(old.id),
-        newData: PersonsSetInput.fromJson(personInput),
+    final UpdatePersonSpiritDataMutation subscription =
+        UpdatePersonSpiritDataMutation(
+      variables: UpdatePersonSpiritDataArguments(
+        personId: UuidValue(personId),
+        lastKodas: lastKodas,
+        lastConfession: lastConfession,
       ),
     );
 
@@ -25,19 +22,23 @@ class PersonsQueries {
           MutationOptions(
             document: subscription.document,
             operationName: subscription.operationName,
-            variables: subscription.variables.toJson().stripNullValues(
-                  personInput.entries
-                      .where((e) => e.value == null)
-                      .map((e) => e.key)
-                      .toSet(),
-                ),
-            parserFn: (d) => Person.fromJson(
-              UpdatePerson$MutationRoot.fromJson(d).updatePersonsByPk!.toJson(),
-            ),
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final rslt = UpdatePersonSpiritData$MutationRoot.fromJson(d);
+
+              if ((rslt.insertHistoryConfessionHistoryOne ??
+                      rslt.insertHistoryKodasHistoryOne) ==
+                  null) return null;
+
+              return Person.fromJson(
+                rslt.insertHistoryConfessionHistoryOne?.person.toJson() ??
+                    rslt.insertHistoryKodasHistoryOne!.person.toJson(),
+              );
+            },
           ),
         )
         .then(_exceptionsMiddleware)
-        .then((value) => value.parsedData!);
+        .then((value) => value.parsedData);
   }
 
   DelegatingPaginatableStream<Person> getPersonsStream({

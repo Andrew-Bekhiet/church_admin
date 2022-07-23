@@ -7,14 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ChurchAdminApp extends StatefulWidget {
-  const ChurchAdminApp({super.key});
-
-  @override
-  State<ChurchAdminApp> createState() => _ChurchAdminAppState();
-}
-
-class _ChurchAdminAppState extends State<ChurchAdminApp> {
-  final GoRouter router = GoRouter(
+  static final GoRouter router = GoRouter(
     observers: [
       GetIt.I<LoggingService>().navigatorObserver,
     ],
@@ -23,40 +16,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     routes: [
       HomeScreen.route,
       LoginScreen.route,
-      GoRoute(
-        name: 'update_user_data',
-        path: '/updateUserData',
-        builder: (context, state) => Scaffold(
-          body: Column(
-            children: [
-              ElevatedButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              OutlinedButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              TextButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              const Text('data'),
-            ],
-          ),
-        ) /* UpdateUserDataScreen() */,
-        redirect: (state) {
-          if (!CAAuthRepository.I.isSignedIn) {
-            return state.namedLocation('login');
-          } else if (LocalAuthService.I.shouldAuthenticate) {
-            return state.namedLocation(
-              'authenticate',
-              queryParams: {'next': state.location},
-            );
-          }
-          return null;
-        },
-      ),
+      UpdateUserData.route,
       GoRoute(
         name: 'register_user_data',
         path: '/registerUserData',
@@ -82,7 +42,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
         redirect: (state) {
           if (!CAAuthRepository.I.isSignedIn) {
             return state.namedLocation('login');
-          } else if (CAAuthRepository.I.currentUserData != null) {
+          } else if (CAAuthRepository.I.currentUser?.password != null &&
+              CAAuthRepository.I.currentUserData != null) {
             return '/';
           }
           return null;
@@ -100,9 +61,13 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text('حدث خطأ'),
-          backgroundColor:
-              Theme.of(context).errorColor, //TODO: colorScheme.error ?
+          title: Text(
+            'حدث خطأ',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onErrorContainer,
+            ),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.errorContainer,
         ),
         body: ErrorWidget.builder(
           FlutterErrorDetails(exception: state.error!),
@@ -111,6 +76,13 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     },
   );
 
+  const ChurchAdminApp({super.key});
+
+  @override
+  State<ChurchAdminApp> createState() => _ChurchAdminAppState();
+}
+
+class _ChurchAdminAppState extends State<ChurchAdminApp> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ThemeData>(
@@ -120,9 +92,10 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
         return MaterialApp.router(
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          routeInformationParser: router.routeInformationParser,
-          routeInformationProvider: router.routeInformationProvider,
-          routerDelegate: router.routerDelegate,
+          routeInformationParser: ChurchAdminApp.router.routeInformationParser,
+          routeInformationProvider:
+              ChurchAdminApp.router.routeInformationProvider,
+          routerDelegate: ChurchAdminApp.router.routerDelegate,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

@@ -59,6 +59,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
               const SizedBox(height: 10),
               PasswordFormField(
+                onFieldSubmitted: _submit,
                 controller: _passwordText,
                 validator: (p) =>
                     p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,

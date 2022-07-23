@@ -3072,13 +3072,14 @@ class DaterangeComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class UpdatePerson$MutationRoot$Persons extends JsonSerializable
-    with EquatableMixin {
-  UpdatePerson$MutationRoot$Persons();
+class InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons();
 
-  factory UpdatePerson$MutationRoot$Persons.fromJson(
+  factory InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons.fromJson(
           Map<String, dynamic> json) =>
-      _$UpdatePerson$MutationRoot$PersonsFromJson(json);
+      _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
+          json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -3095,192 +3096,372 @@ class UpdatePerson$MutationRoot$Persons extends JsonSerializable
   List<Object?> get props => [id, name, color, photoUpdatedAt];
   @override
   Map<String, dynamic> toJson() =>
-      _$UpdatePerson$MutationRoot$PersonsToJson(this);
+      _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$PersonsToJson(
+          this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class UpdatePerson$MutationRoot extends JsonSerializable with EquatableMixin {
-  UpdatePerson$MutationRoot();
+class InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory();
 
-  factory UpdatePerson$MutationRoot.fromJson(Map<String, dynamic> json) =>
-      _$UpdatePerson$MutationRootFromJson(json);
+  factory InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistoryFromJson(
+          json);
 
-  @JsonKey(name: 'update_persons_by_pk')
-  UpdatePerson$MutationRoot$Persons? updatePersonsByPk;
+  late InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
+      person;
 
   @override
-  List<Object?> get props => [updatePersonsByPk];
+  List<Object?> get props => [person];
   @override
-  Map<String, dynamic> toJson() => _$UpdatePerson$MutationRootToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistoryToJson(
+          this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class PersonsSetInput extends JsonSerializable with EquatableMixin {
-  PersonsSetInput(
-      {this.address,
-      this.birthdate,
-      this.churchId,
-      this.collegeId,
-      this.color,
-      this.familyId,
-      this.fatherId,
-      this.firestoreId,
-      this.gender,
-      this.geolocation,
-      this.id,
-      this.isServant,
-      this.isShammas,
-      this.isStudent,
-      this.jobDescription,
-      this.jobId,
-      this.mainPhone,
-      this.name,
-      this.notes,
-      this.otherPhones,
-      this.personTypeId,
-      this.photoUpdatedAt,
-      this.qualificationId,
-      this.schoolId,
-      this.shammasLevel,
-      this.stateId,
-      this.storeId,
-      this.studyYearId,
-      this.uid});
+class InsertPersonLastConfession$MutationRoot extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastConfession$MutationRoot();
 
-  factory PersonsSetInput.fromJson(Map<String, dynamic> json) =>
-      _$PersonsSetInputFromJson(json);
+  factory InsertPersonLastConfession$MutationRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastConfession$MutationRootFromJson(json);
 
-  String? address;
+  @JsonKey(name: 'insert_history_confession_history_one')
+  InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory?
+      insertHistoryConfessionHistoryOne;
 
-  DateTime? birthdate;
+  @override
+  List<Object?> get props => [insertHistoryConfessionHistoryOne];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastConfession$MutationRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons();
+
+  factory InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$PersonsFromJson(
+          json);
 
   @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? churchId;
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? collegeId;
+  late String name;
 
   int? color;
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? familyId;
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$PersonsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastKodas$MutationRoot$HistoryKodasHistory
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastKodas$MutationRoot$HistoryKodasHistory();
+
+  factory InsertPersonLastKodas$MutationRoot$HistoryKodasHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistoryFromJson(json);
+
+  late InsertPersonLastKodas$MutationRoot$HistoryKodasHistory$Persons person;
+
+  @override
+  List<Object?> get props => [person];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastKodas$MutationRoot$HistoryKodasHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastKodas$MutationRoot extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastKodas$MutationRoot();
+
+  factory InsertPersonLastKodas$MutationRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastKodas$MutationRootFromJson(json);
+
+  @JsonKey(name: 'insert_history_kodas_history_one')
+  InsertPersonLastKodas$MutationRoot$HistoryKodasHistory?
+      insertHistoryKodasHistoryOne;
+
+  @override
+  List<Object?> get props => [insertHistoryKodasHistoryOne];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastKodas$MutationRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons();
+
+  factory InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastCall$MutationRoot$HistoryCallHistory$PersonsFromJson(
+          json);
 
   @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? fatherId;
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
 
-  String? firestoreId;
+  late String name;
 
-  bool? gender;
-
-  Map<String, dynamic>? geolocation;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? id;
-
-  bool? isServant;
-
-  bool? isShammas;
-
-  bool? isStudent;
-
-  String? jobDescription;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? jobId;
-
-  String? mainPhone;
-
-  String? name;
-
-  String? notes;
-
-  Map<String, dynamic>? otherPhones;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? personTypeId;
+  int? color;
 
   DateTime? photoUpdatedAt;
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? qualificationId;
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastCall$MutationRoot$HistoryCallHistory$PersonsToJson(
+          this);
+}
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? schoolId;
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastCall$MutationRoot$HistoryCallHistory
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastCall$MutationRoot$HistoryCallHistory();
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? shammasLevel;
+  factory InsertPersonLastCall$MutationRoot$HistoryCallHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastCall$MutationRoot$HistoryCallHistoryFromJson(json);
 
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? stateId;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? storeId;
-
-  int? studyYearId;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidNullableToDartUuidValueNullable,
-      toJson: fromDartUuidValueNullableToGraphQLUuidNullable)
-  UuidValue? uid;
+  late InsertPersonLastCall$MutationRoot$HistoryCallHistory$Persons person;
 
   @override
-  List<Object?> get props => [
-        address,
-        birthdate,
-        churchId,
-        collegeId,
-        color,
-        familyId,
-        fatherId,
-        firestoreId,
-        gender,
-        geolocation,
-        id,
-        isServant,
-        isShammas,
-        isStudent,
-        jobDescription,
-        jobId,
-        mainPhone,
-        name,
-        notes,
-        otherPhones,
-        personTypeId,
-        photoUpdatedAt,
-        qualificationId,
-        schoolId,
-        shammasLevel,
-        stateId,
-        storeId,
-        studyYearId,
-        uid
-      ];
+  List<Object?> get props => [person];
   @override
-  Map<String, dynamic> toJson() => _$PersonsSetInputToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastCall$MutationRoot$HistoryCallHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastCall$MutationRoot extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastCall$MutationRoot();
+
+  factory InsertPersonLastCall$MutationRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastCall$MutationRootFromJson(json);
+
+  @JsonKey(name: 'insert_history_call_history_one')
+  InsertPersonLastCall$MutationRoot$HistoryCallHistory?
+      insertHistoryCallHistoryOne;
+
+  @override
+  List<Object?> get props => [insertHistoryCallHistoryOne];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastCall$MutationRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons();
+
+  factory InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$PersonsFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$PersonsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastVisit$MutationRoot$HistoryVisitHistory
+    extends JsonSerializable with EquatableMixin {
+  InsertPersonLastVisit$MutationRoot$HistoryVisitHistory();
+
+  factory InsertPersonLastVisit$MutationRoot$HistoryVisitHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistoryFromJson(json);
+
+  late InsertPersonLastVisit$MutationRoot$HistoryVisitHistory$Persons person;
+
+  @override
+  List<Object?> get props => [person];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastVisit$MutationRoot$HistoryVisitHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastVisit$MutationRoot extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastVisit$MutationRoot();
+
+  factory InsertPersonLastVisit$MutationRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastVisit$MutationRootFromJson(json);
+
+  @JsonKey(name: 'insert_history_visit_history_one')
+  InsertPersonLastVisit$MutationRoot$HistoryVisitHistory?
+      insertHistoryVisitHistoryOne;
+
+  @override
+  List<Object?> get props => [insertHistoryVisitHistoryOne];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastVisit$MutationRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons();
+
+  factory UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$PersonsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory
+    extends JsonSerializable with EquatableMixin {
+  UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory();
+
+  factory UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistoryFromJson(
+          json);
+
+  late UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory$Persons
+      person;
+
+  @override
+  List<Object?> get props => [person];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons
+    extends JsonSerializable with EquatableMixin {
+  UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons();
+
+  factory UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$PersonsFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$PersonsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory
+    extends JsonSerializable with EquatableMixin {
+  UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory();
+
+  factory UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistoryFromJson(json);
+
+  late UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory$Persons person;
+
+  @override
+  List<Object?> get props => [person];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritData$MutationRoot$HistoryKodasHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritData$MutationRoot extends JsonSerializable
+    with EquatableMixin {
+  UpdatePersonSpiritData$MutationRoot();
+
+  factory UpdatePersonSpiritData$MutationRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritData$MutationRootFromJson(json);
+
+  @JsonKey(name: 'insert_history_confession_history_one')
+  UpdatePersonSpiritData$MutationRoot$HistoryConfessionHistory?
+      insertHistoryConfessionHistoryOne;
+
+  @JsonKey(name: 'insert_history_kodas_history_one')
+  UpdatePersonSpiritData$MutationRoot$HistoryKodasHistory?
+      insertHistoryKodasHistoryOne;
+
+  @override
+  List<Object?> get props =>
+      [insertHistoryConfessionHistoryOne, insertHistoryKodasHistoryOne];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritData$MutationRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -3885,9 +4066,8 @@ class GetAreasStreamArguments extends JsonSerializable with EquatableMixin {
 }
 
 const GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'getAreasStream';
-const GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.subscription,
       name: NameNode(value: 'getAreasStream'),
       variableDefinitions: [
@@ -3897,56 +4077,58 @@ const GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
                 type: NamedTypeNode(
                     name: NameNode(value: 'areas_bool_exp'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode())),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'limit')),
             type: NamedTypeNode(name: NameNode(value: 'Int')),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'areas'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: '_and'),
                         value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
-                name: NameNode(value: 'order_by'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: 'name'),
                         value: EnumValueNode(name: NameNode(value: 'asc')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: VariableNode(name: NameNode(value: 'limit')))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'id')),
-                FieldNode(name: NameNode(value: 'name')),
-                FieldNode(name: NameNode(value: 'bounds')),
-                FieldNode(name: NameNode(value: 'color')),
-                FieldNode(name: NameNode(value: 'photoUpdatedAt'))
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'bounds'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  arguments: [],
+                  directives: [])
+            ]))
+      ]))
+]);
 
 class GetAreasStreamSubscription extends GraphQLQuery<
     GetAreasStream$SubscriptionRoot, GetAreasStreamArguments> {
@@ -3970,95 +4152,720 @@ class GetAreasStreamSubscription extends GraphQLQuery<
 }
 
 @JsonSerializable(explicitToJson: true)
-class UpdatePersonArguments extends JsonSerializable with EquatableMixin {
-  UpdatePersonArguments({required this.id, required this.newData});
+class InsertPersonLastConfessionArguments extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastConfessionArguments(
+      {required this.personId, required this.lastConfession});
 
   @override
-  factory UpdatePersonArguments.fromJson(Map<String, dynamic> json) =>
-      _$UpdatePersonArgumentsFromJson(json);
+  factory InsertPersonLastConfessionArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$InsertPersonLastConfessionArgumentsFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
       toJson: fromDartUuidValueToGraphQLUuid)
-  late UuidValue id;
+  late UuidValue personId;
 
-  late PersonsSetInput newData;
+  late DateTime lastConfession;
 
   @override
-  List<Object?> get props => [id, newData];
+  List<Object?> get props => [personId, lastConfession];
   @override
-  Map<String, dynamic> toJson() => _$UpdatePersonArgumentsToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$InsertPersonLastConfessionArgumentsToJson(this);
 }
 
-const UPDATE_PERSON_MUTATION_DOCUMENT_OPERATION_NAME = 'updatePerson';
-const UPDATE_PERSON_MUTATION_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+const INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'insertPersonLastConfession';
+final INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.mutation,
-      name: NameNode(value: 'updatePerson'),
+      name: NameNode(value: 'insertPersonLastConfession'),
       variableDefinitions: [
         VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'id')),
+            variable: VariableNode(name: NameNode(value: 'personId')),
             type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null)),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
         VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'newData')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'persons_set_input'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            variable: VariableNode(name: NameNode(value: 'lastConfession')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
-            name: NameNode(value: 'update_persons_by_pk'),
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'insert_history_confession_history_one'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'pk_columns'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                        name: NameNode(value: 'id'),
-                        value: VariableNode(name: NameNode(value: 'id')))
-                  ],
-                ),
-              ),
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'day'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'data'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'day'),
+                                    value: VariableNode(
+                                        name:
+                                            NameNode(value: 'lastConfession')))
+                              ])),
+                          ObjectFieldNode(
+                              name: NameNode(value: 'on_conflict'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'constraint'),
+                                    value: EnumValueNode(
+                                        name: NameNode(
+                                            value: 'attendance_days_pkey'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'update_columns'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'day')))
+                              ]))
+                        ]))
+                  ])),
               ArgumentNode(
-                  name: NameNode(value: '_set'),
-                  value: VariableNode(name: NameNode(value: 'newData')))
+                  name: NameNode(value: 'on_conflict'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'constraint'),
+                        value: EnumValueNode(
+                            name: NameNode(
+                                value:
+                                    'confession_history_dayID_personID_key')))
+                  ]))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'id')),
-                FieldNode(name: NameNode(value: 'name')),
-                FieldNode(name: NameNode(value: 'color')),
-                FieldNode(name: NameNode(value: 'photoUpdatedAt'))
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
 
-class UpdatePersonMutation
-    extends GraphQLQuery<UpdatePerson$MutationRoot, UpdatePersonArguments> {
-  UpdatePersonMutation({required this.variables});
+class InsertPersonLastConfessionMutation extends GraphQLQuery<
+    InsertPersonLastConfession$MutationRoot,
+    InsertPersonLastConfessionArguments> {
+  InsertPersonLastConfessionMutation({required this.variables});
 
   @override
-  final DocumentNode document = UPDATE_PERSON_MUTATION_DOCUMENT;
+  final DocumentNode document = INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = UPDATE_PERSON_MUTATION_DOCUMENT_OPERATION_NAME;
+  final String operationName =
+      INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
-  final UpdatePersonArguments variables;
+  final InsertPersonLastConfessionArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  UpdatePerson$MutationRoot parse(Map<String, dynamic> json) =>
-      UpdatePerson$MutationRoot.fromJson(json);
+  InsertPersonLastConfession$MutationRoot parse(Map<String, dynamic> json) =>
+      InsertPersonLastConfession$MutationRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastKodasArguments extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastKodasArguments(
+      {required this.personId, required this.lastKodas});
+
+  @override
+  factory InsertPersonLastKodasArguments.fromJson(Map<String, dynamic> json) =>
+      _$InsertPersonLastKodasArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  late DateTime lastKodas;
+
+  @override
+  List<Object?> get props => [personId, lastKodas];
+  @override
+  Map<String, dynamic> toJson() => _$InsertPersonLastKodasArgumentsToJson(this);
+}
+
+const INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT_OPERATION_NAME =
+    'insertPersonLastKodas';
+final INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertPersonLastKodas'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lastKodas')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'insert_history_kodas_history_one'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'day'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'data'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'day'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'lastKodas')))
+                              ])),
+                          ObjectFieldNode(
+                              name: NameNode(value: 'on_conflict'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'constraint'),
+                                    value: EnumValueNode(
+                                        name: NameNode(
+                                            value: 'attendance_days_pkey'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'update_columns'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'day')))
+                              ]))
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'on_conflict'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'constraint'),
+                        value: EnumValueNode(
+                            name: NameNode(
+                                value: 'kodas_history_dayID_personID_key')))
+                  ]))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
+
+class InsertPersonLastKodasMutation extends GraphQLQuery<
+    InsertPersonLastKodas$MutationRoot, InsertPersonLastKodasArguments> {
+  InsertPersonLastKodasMutation({required this.variables});
+
+  @override
+  final DocumentNode document = INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final InsertPersonLastKodasArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  InsertPersonLastKodas$MutationRoot parse(Map<String, dynamic> json) =>
+      InsertPersonLastKodas$MutationRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastCallArguments extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastCallArguments(
+      {required this.personId, required this.lastCall});
+
+  @override
+  factory InsertPersonLastCallArguments.fromJson(Map<String, dynamic> json) =>
+      _$InsertPersonLastCallArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  late DateTime lastCall;
+
+  @override
+  List<Object?> get props => [personId, lastCall];
+  @override
+  Map<String, dynamic> toJson() => _$InsertPersonLastCallArgumentsToJson(this);
+}
+
+const INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT_OPERATION_NAME =
+    'insertPersonLastCall';
+final INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertPersonLastCall'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lastCall')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'timestamptz'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'insert_history_call_history_one'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'time'),
+                        value: VariableNode(name: NameNode(value: 'lastCall')))
+                  ]))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
+
+class InsertPersonLastCallMutation extends GraphQLQuery<
+    InsertPersonLastCall$MutationRoot, InsertPersonLastCallArguments> {
+  InsertPersonLastCallMutation({required this.variables});
+
+  @override
+  final DocumentNode document = INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final InsertPersonLastCallArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  InsertPersonLastCall$MutationRoot parse(Map<String, dynamic> json) =>
+      InsertPersonLastCall$MutationRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class InsertPersonLastVisitArguments extends JsonSerializable
+    with EquatableMixin {
+  InsertPersonLastVisitArguments(
+      {required this.personId, required this.lastVisit});
+
+  @override
+  factory InsertPersonLastVisitArguments.fromJson(Map<String, dynamic> json) =>
+      _$InsertPersonLastVisitArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  late DateTime lastVisit;
+
+  @override
+  List<Object?> get props => [personId, lastVisit];
+  @override
+  Map<String, dynamic> toJson() => _$InsertPersonLastVisitArgumentsToJson(this);
+}
+
+const INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT_OPERATION_NAME =
+    'insertPersonLastVisit';
+final INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertPersonLastVisit'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lastVisit')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'timestamptz'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'insert_history_visit_history_one'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'time'),
+                        value: VariableNode(name: NameNode(value: 'lastVisit')))
+                  ]))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
+
+class InsertPersonLastVisitMutation extends GraphQLQuery<
+    InsertPersonLastVisit$MutationRoot, InsertPersonLastVisitArguments> {
+  InsertPersonLastVisitMutation({required this.variables});
+
+  @override
+  final DocumentNode document = INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final InsertPersonLastVisitArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  InsertPersonLastVisit$MutationRoot parse(Map<String, dynamic> json) =>
+      InsertPersonLastVisit$MutationRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdatePersonSpiritDataArguments extends JsonSerializable
+    with EquatableMixin {
+  UpdatePersonSpiritDataArguments(
+      {required this.personId,
+      required this.lastConfession,
+      required this.lastKodas});
+
+  @override
+  factory UpdatePersonSpiritDataArguments.fromJson(Map<String, dynamic> json) =>
+      _$UpdatePersonSpiritDataArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  late DateTime lastConfession;
+
+  late DateTime lastKodas;
+
+  @override
+  List<Object?> get props => [personId, lastConfession, lastKodas];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$UpdatePersonSpiritDataArgumentsToJson(this);
+}
+
+const UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT_OPERATION_NAME =
+    'updatePersonSpiritData';
+final UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updatePersonSpiritData'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lastConfession')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lastKodas')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'insert_history_confession_history_one'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'day'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'data'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'day'),
+                                    value: VariableNode(
+                                        name:
+                                            NameNode(value: 'lastConfession')))
+                              ])),
+                          ObjectFieldNode(
+                              name: NameNode(value: 'on_conflict'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'constraint'),
+                                    value: EnumValueNode(
+                                        name: NameNode(
+                                            value: 'attendance_days_pkey'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'update_columns'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'day')))
+                              ]))
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'on_conflict'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'constraint'),
+                        value: EnumValueNode(
+                            name: NameNode(
+                                value:
+                                    'confession_history_dayID_personID_key')))
+                  ]))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ])),
+        FieldNode(
+            name: NameNode(value: 'insert_history_kodas_history_one'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'object'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'personId'),
+                        value: VariableNode(name: NameNode(value: 'personId'))),
+                    ObjectFieldNode(
+                        name: NameNode(value: 'day'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'data'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'day'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'lastKodas')))
+                              ])),
+                          ObjectFieldNode(
+                              name: NameNode(value: 'on_conflict'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'constraint'),
+                                    value: EnumValueNode(
+                                        name: NameNode(
+                                            value: 'attendance_days_pkey'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'update_columns'),
+                                    value: EnumValueNode(
+                                        name: NameNode(value: 'day')))
+                              ]))
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'on_conflict'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'constraint'),
+                        value: EnumValueNode(
+                            name: NameNode(
+                                value: 'kodas_history_dayID_personID_key')))
+                  ]))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'person'),
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
+
+class UpdatePersonSpiritDataMutation extends GraphQLQuery<
+    UpdatePersonSpiritData$MutationRoot, UpdatePersonSpiritDataArguments> {
+  UpdatePersonSpiritDataMutation({required this.variables});
+
+  @override
+  final DocumentNode document = UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final UpdatePersonSpiritDataArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  UpdatePersonSpiritData$MutationRoot parse(Map<String, dynamic> json) =>
+      UpdatePersonSpiritData$MutationRoot.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4082,68 +4889,55 @@ class GetPersonsAttendanceWarningArguments extends JsonSerializable
 
 const GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsAttendanceWarning';
-const GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getPersonsAttendanceWarning'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'dateFilter')),
             type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'attendanceHistory'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'attendanceHistory'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_not'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: '_not'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                  name: NameNode(value: 'dayId'),
-                                  value: ObjectValueNode(
-                                    fields: [
+                                    name: NameNode(value: 'dayId'),
+                                    value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
                                           value: VariableNode(
                                               name: NameNode(
                                                   value: 'dateFilter')))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: IntValueNode(value: '25'))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [FieldNode(name: NameNode(value: 'name'))],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsAttendanceWarningQuery extends GraphQLQuery<
     GetPersonsAttendanceWarning$QueryRoot,
@@ -4187,68 +4981,55 @@ class GetPersonsKodasWarningArguments extends JsonSerializable
 
 const GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsKodasWarning';
-const GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getPersonsKodasWarning'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'dateFilter')),
             type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'kodasHistory'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'kodasHistory'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_not'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: '_not'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                  name: NameNode(value: 'dayId'),
-                                  value: ObjectValueNode(
-                                    fields: [
+                                    name: NameNode(value: 'dayId'),
+                                    value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
                                           value: VariableNode(
                                               name: NameNode(
                                                   value: 'dateFilter')))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: IntValueNode(value: '25'))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [FieldNode(name: NameNode(value: 'name'))],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsKodasWarningQuery extends GraphQLQuery<
     GetPersonsKodasWarning$QueryRoot, GetPersonsKodasWarningArguments> {
@@ -4292,68 +5073,55 @@ class GetPersonsConfessionWarningArguments extends JsonSerializable
 
 const GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsConfessionWarning';
-const GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getPersonsConfessionWarning'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'dateFilter')),
             type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'confessionHistory'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'confessionHistory'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_not'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: '_not'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                  name: NameNode(value: 'dayId'),
-                                  value: ObjectValueNode(
-                                    fields: [
+                                    name: NameNode(value: 'dayId'),
+                                    value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
                                           value: VariableNode(
                                               name: NameNode(
                                                   value: 'dateFilter')))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: IntValueNode(value: '25'))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [FieldNode(name: NameNode(value: 'name'))],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsConfessionWarningQuery extends GraphQLQuery<
     GetPersonsConfessionWarning$QueryRoot,
@@ -4397,9 +5165,9 @@ class GetPersonsVisitWarningArguments extends JsonSerializable
 
 const GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsVisitWarning';
-const GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getPersonsVisitWarning'),
       variableDefinitions: [
@@ -4407,59 +5175,46 @@ const GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT = DocumentNode(
             variable: VariableNode(name: NameNode(value: 'dateFilter')),
             type: NamedTypeNode(
                 name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'visitHistory'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'visitHistory'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_not'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: '_not'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
-                                  name: NameNode(value: 'time'),
-                                  value: ObjectValueNode(
-                                    fields: [
+                                    name: NameNode(value: 'time'),
+                                    value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_gte'),
                                           value: VariableNode(
                                               name: NameNode(
                                                   value: 'dateFilter')))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: IntValueNode(value: '25'))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [FieldNode(name: NameNode(value: 'name'))],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsVisitWarningQuery extends GraphQLQuery<
     GetPersonsVisitWarning$QueryRoot, GetPersonsVisitWarningArguments> {
@@ -4499,9 +5254,8 @@ class GetPersonsBirthdayArguments extends JsonSerializable with EquatableMixin {
 }
 
 const GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT_OPERATION_NAME = 'getPersonsBirthday';
-const GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT = const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getPersonsBirthday'),
       variableDefinitions: [
@@ -4509,44 +5263,37 @@ const GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT = DocumentNode(
             variable: VariableNode(name: NameNode(value: 'dateFilter')),
             type:
                 NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'birthday'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'birthday'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_eq'),
                               value: VariableNode(
                                   name: NameNode(value: 'dateFilter')))
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                        ]))
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: IntValueNode(value: '25'))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [FieldNode(name: NameNode(value: 'name'))],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsBirthdayQuery extends GraphQLQuery<GetPersonsBirthday$QueryRoot,
     GetPersonsBirthdayArguments> {
@@ -4589,9 +5336,9 @@ class GetPersonsStreamArguments extends JsonSerializable with EquatableMixin {
 
 const GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getPersonsStream';
-const GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.subscription,
       name: NameNode(value: 'getPersonsStream'),
       variableDefinitions: [
@@ -4601,55 +5348,54 @@ const GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
                 type: NamedTypeNode(
                     name: NameNode(value: 'persons_bool_exp'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode())),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'limit')),
             type: NamedTypeNode(name: NameNode(value: 'Int')),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'persons'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: '_and'),
                         value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
-                name: NameNode(value: 'order_by'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: 'name'),
                         value: EnumValueNode(name: NameNode(value: 'asc')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: VariableNode(name: NameNode(value: 'limit')))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'id')),
-                FieldNode(name: NameNode(value: 'name')),
-                FieldNode(name: NameNode(value: 'color')),
-                FieldNode(name: NameNode(value: 'photoUpdatedAt'))
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  arguments: [],
+                  directives: [])
+            ]))
+      ]))
+]);
 
 class GetPersonsStreamSubscription extends GraphQLQuery<
     GetPersonsStream$SubscriptionRoot, GetPersonsStreamArguments> {
@@ -4697,9 +5443,9 @@ class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
 
 const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getServicesStream';
-const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.subscription,
       name: NameNode(value: 'getServicesStream'),
       variableDefinitions: [
@@ -4710,104 +5456,115 @@ const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
                     name: NameNode(value: 'services_bool_exp'),
                     isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode())),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'groupsAddWhere')),
             type: ListTypeNode(
                 type: NamedTypeNode(
                     name: NameNode(value: 'groups_bool_exp'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode())),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'classesAddWhere')),
             type: ListTypeNode(
                 type: NamedTypeNode(
                     name: NameNode(value: 'classes_bool_exp'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode())),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'limit')),
             type: NamedTypeNode(name: NameNode(value: 'Int')),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'services'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'where'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: '_and'),
                         value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
-                name: NameNode(value: 'order_by'),
-                value: ObjectValueNode(
-                  fields: [
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: 'studyYearFrom'),
                         value: EnumValueNode(name: NameNode(value: 'asc'))),
                     ObjectFieldNode(
                         name: NameNode(value: 'studyYearTo'),
                         value: EnumValueNode(name: NameNode(value: 'asc')))
-                  ],
-                ),
-              ),
+                  ])),
               ArgumentNode(
                   name: NameNode(value: 'limit'),
                   value: VariableNode(name: NameNode(value: 'limit')))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'id')),
-                FieldNode(name: NameNode(value: 'name')),
-                FieldNode(name: NameNode(value: 'color')),
-                FieldNode(name: NameNode(value: 'photoUpdatedAt')),
-                FieldNode(
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
                   name: NameNode(value: 'fromStudyYear'),
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(name: NameNode(value: 'name')),
-                      FieldNode(name: NameNode(value: 'order'))
-                    ],
-                  ),
-                ),
-                FieldNode(
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'order'),
+                        arguments: [],
+                        directives: [])
+                  ])),
+              FieldNode(
                   name: NameNode(value: 'toStudyYear'),
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(name: NameNode(value: 'name')),
-                      FieldNode(name: NameNode(value: 'order'))
-                    ],
-                  ),
-                ),
-                FieldNode(
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'order'),
+                        arguments: [],
+                        directives: [])
+                  ])),
+              FieldNode(
                   name: NameNode(value: 'classes'),
                   arguments: [
                     ArgumentNode(
-                      name: NameNode(value: 'where'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_and'),
                               value: VariableNode(
                                   name: NameNode(value: 'classesAddWhere')))
-                        ],
-                      ),
-                    ),
+                        ])),
                     ArgumentNode(
-                      name: NameNode(value: 'order_by'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'order_by'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: 'service'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: 'service'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
                                     name: NameNode(value: 'studyYearFrom'),
                                     value: EnumValueNode(
@@ -4816,44 +5573,45 @@ const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
                                     name: NameNode(value: 'studyYearTo'),
                                     value: EnumValueNode(
                                         name: NameNode(value: 'asc')))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                              ]))
+                        ]))
                   ],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(name: NameNode(value: 'id')),
-                      FieldNode(name: NameNode(value: 'name')),
-                      FieldNode(name: NameNode(value: 'color')),
-                      FieldNode(name: NameNode(value: 'photoUpdatedAt'))
-                    ],
-                  ),
-                ),
-                FieldNode(
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ])),
+              FieldNode(
                   name: NameNode(value: 'groups'),
                   arguments: [
                     ArgumentNode(
-                      name: NameNode(value: 'where'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
                               name: NameNode(value: '_and'),
                               value: VariableNode(
                                   name: NameNode(value: 'groupsAddWhere')))
-                        ],
-                      ),
-                    ),
+                        ])),
                     ArgumentNode(
-                      name: NameNode(value: 'order_by'),
-                      value: ObjectValueNode(
-                        fields: [
+                        name: NameNode(value: 'order_by'),
+                        value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: 'service'),
-                            value: ObjectValueNode(
-                              fields: [
+                              name: NameNode(value: 'service'),
+                              value: ObjectValueNode(fields: [
                                 ObjectFieldNode(
                                     name: NameNode(value: 'studyYearFrom'),
                                     value: EnumValueNode(
@@ -4862,30 +5620,31 @@ const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
                                     name: NameNode(value: 'studyYearTo'),
                                     value: EnumValueNode(
                                         name: NameNode(value: 'asc')))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                              ]))
+                        ]))
                   ],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(name: NameNode(value: 'id')),
-                      FieldNode(name: NameNode(value: 'name')),
-                      FieldNode(name: NameNode(value: 'color')),
-                      FieldNode(name: NameNode(value: 'photoUpdatedAt'))
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
 
 class GetServicesStreamSubscription extends GraphQLQuery<
     GetServicesStream$SubscriptionRoot, GetServicesStreamArguments> {
@@ -4925,9 +5684,8 @@ class GetStudyYearNameArguments extends JsonSerializable with EquatableMixin {
 }
 
 const GET_STUDY_YEAR_NAME_QUERY_DOCUMENT_OPERATION_NAME = 'getStudyYearName';
-const GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'getStudyYearName'),
       variableDefinitions: [
@@ -4935,29 +5693,29 @@ const GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(
             variable: VariableNode(name: NameNode(value: 'order')),
             type: NamedTypeNode(
                 name: NameNode(value: 'smallint'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'study_years_by_pk'),
             arguments: [
               ArgumentNode(
                   name: NameNode(value: 'order'),
                   value: VariableNode(name: NameNode(value: 'order')))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'order')),
-                FieldNode(name: NameNode(value: 'name'))
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'order'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'name'), arguments: [], directives: [])
+            ]))
+      ]))
+]);
 
 class GetStudyYearNameQuery extends GraphQLQuery<GetStudyYearName$QueryRoot,
     GetStudyYearNameArguments> {
@@ -5001,76 +5759,168 @@ class GetUserInfoStreamArguments extends JsonSerializable with EquatableMixin {
 
 const GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getUserInfoStream';
-const GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(
-  definitions: [
-    OperationDefinitionNode(
+final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT =
+    const DocumentNode(definitions: [
+  OperationDefinitionNode(
       type: OperationType.subscription,
       name: NameNode(value: 'getUserInfoStream'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'uid')),
             type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null))
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
       ],
-      selectionSet: SelectionSetNode(
-        selections: [
-          FieldNode(
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
             name: NameNode(value: 'users_by_pk'),
             arguments: [
               ArgumentNode(
                   name: NameNode(value: 'uid'),
                   value: VariableNode(name: NameNode(value: 'uid')))
             ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(name: NameNode(value: 'uid')),
-                FieldNode(name: NameNode(value: 'firebaseAuthUid')),
-                FieldNode(name: NameNode(value: 'email')),
-                FieldNode(name: NameNode(value: 'permissions')),
-                FieldNode(
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'uid'), arguments: [], directives: []),
+              FieldNode(
+                  name: NameNode(value: 'firebaseAuthUid'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'email'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
+                  name: NameNode(value: 'permissions'),
+                  arguments: [],
+                  directives: []),
+              FieldNode(
                   name: NameNode(value: 'person'),
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(name: NameNode(value: 'id')),
-                      FieldNode(name: NameNode(value: 'name')),
-                      FieldNode(name: NameNode(value: 'address')),
-                      FieldNode(name: NameNode(value: 'geolocation')),
-                      FieldNode(name: NameNode(value: 'mainPhone')),
-                      FieldNode(name: NameNode(value: 'otherPhones')),
-                      FieldNode(name: NameNode(value: 'birthdate')),
-                      FieldNode(name: NameNode(value: 'gender')),
-                      FieldNode(name: NameNode(value: 'isShammas')),
-                      FieldNode(name: NameNode(value: 'shammasLevel')),
-                      FieldNode(name: NameNode(value: 'schoolId')),
-                      FieldNode(name: NameNode(value: 'collegeId')),
-                      FieldNode(name: NameNode(value: 'churchId')),
-                      FieldNode(name: NameNode(value: 'fatherId')),
-                      FieldNode(name: NameNode(value: 'isStudent')),
-                      FieldNode(name: NameNode(value: 'jobId')),
-                      FieldNode(name: NameNode(value: 'jobDescription')),
-                      FieldNode(name: NameNode(value: 'qualificationId')),
-                      FieldNode(name: NameNode(value: 'personTypeId')),
-                      FieldNode(name: NameNode(value: 'stateId')),
-                      FieldNode(name: NameNode(value: 'isServant')),
-                      FieldNode(name: NameNode(value: 'notes')),
-                      FieldNode(name: NameNode(value: 'familyId')),
-                      FieldNode(name: NameNode(value: 'storeId')),
-                      FieldNode(name: NameNode(value: 'studyYearId')),
-                      FieldNode(name: NameNode(value: 'color')),
-                      FieldNode(name: NameNode(value: 'photoUpdatedAt')),
-                      FieldNode(name: NameNode(value: 'lastKodas')),
-                      FieldNode(name: NameNode(value: 'lastConfession'))
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    )
-  ],
-);
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'address'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'geolocation'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'mainPhone'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'otherPhones'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'birthdate'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'gender'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'isShammas'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'shammasLevel'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'schoolId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'collegeId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'churchId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'fatherId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'isStudent'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'jobId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'jobDescription'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'qualificationId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'personTypeId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'stateId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'isServant'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'notes'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'familyId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'storeId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'studyYearId'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'photoUpdatedAt'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'lastKodas'),
+                        arguments: [],
+                        directives: []),
+                    FieldNode(
+                        name: NameNode(value: 'lastConfession'),
+                        arguments: [],
+                        directives: [])
+                  ]))
+            ]))
+      ]))
+]);
 
 class GetUserInfoStreamSubscription extends GraphQLQuery<
     GetUserInfoStream$SubscriptionRoot, GetUserInfoStreamArguments> {

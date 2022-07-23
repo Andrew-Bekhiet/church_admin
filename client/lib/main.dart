@@ -117,16 +117,24 @@ Future<void> initializeChurchAdmin() async {
 
   GetIt.I.registerSingleton<GoRouterRefreshStream>(
     GoRouterRefreshStream(
-      Rx.combineLatest3<User?, Person?, void, void>(
+      Rx.combineLatest3(
         CAAuthRepository.I.userStream,
         CAAuthRepository.I.userDataStream,
-        LocalAuthService.I.refreshUIStream,
+        LocalAuthService.I.refreshUIStream.startWith(null),
         //Just notify when any stream emits
         (a, b, c) => [a, b, c],
       ),
     ),
     dispose: (g) => g.dispose(),
   );
+
+  GetIt.I.registerSingleton<DefaultViewableObjectTapHandler>(
+    CATapHandler(
+      ChurchAdminApp.router,
+    ),
+  );
+
+  return _initialization.complete();
 }
 
 Future<void> registerGraphQLClient() async {
@@ -179,8 +187,6 @@ Future<void> initializeFirebase() async {
   }
 
   registerFirebaseDependencies();
-
-  return _initialization.complete();
 }
 
 void registerFirebaseDependencies() {

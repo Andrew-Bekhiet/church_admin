@@ -41,8 +41,10 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     int? studyYearId,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
-    DateTime? lastConfession,
-    DateTime? lastKodas,
+    @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+        LastEditInfo? lastConfession,
+    @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
+        LastEditInfo? lastKodas,
   }) = _Person;
   Person._() : super();
 
@@ -66,4 +68,17 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
 
   @override
   final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
+
+  bool spiritDataUpToDate() {
+    final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
+
+    return CAAuthRepository.I.currentUserData?.lastKodas != null &&
+        CAAuthRepository.I.currentUserData!.lastConfession != null &&
+        !CAAuthRepository.I.currentUserData!.lastKodas!.time.isBefore(
+          thirtyDaysAgo,
+        ) &&
+        !CAAuthRepository.I.currentUserData!.lastConfession!.time.isBefore(
+          thirtyDaysAgo,
+        );
+  }
 }
