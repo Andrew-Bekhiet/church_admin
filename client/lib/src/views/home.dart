@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen>
       _search,
       _bottomNavBar,
       (s, t) => t == T ? s : null,
-    ).debounceTime(const Duration(seconds: 1));
+    ).debounceTime(const Duration(seconds: 1)).shareValue();
   }
 
   @override
