@@ -9,6 +9,65 @@ class HomeScreen extends StatefulWidget {
     name: 'home',
     path: '/',
     builder: (context, state) => const HomeScreen(),
+    routes: [
+      ViewPerson.route,
+      GoRoute(
+        name: 'service_info',
+        path: 'viewService',
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Text(state.location),
+                Text(state.extra.toString()),
+              ],
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
+        name: 'area_info',
+        path: 'viewArea',
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Text(state.location),
+                Text(state.extra.toString()),
+              ],
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
+        name: 'group_info',
+        path: 'viewGroup',
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Text(state.location),
+                Text(state.extra.toString()),
+              ],
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
+        name: 'class_info',
+        path: 'viewClass',
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Text(state.location),
+                Text(state.extra.toString()),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ],
     redirect: (state) {
       if (!CAAuthRepository.I.isSignedIn) {
         return state.namedLocation('login');

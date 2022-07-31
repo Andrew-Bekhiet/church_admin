@@ -31,7 +31,7 @@ function _checkIsValidObject(
   );
   const match = object.id.match(
     regexp
-    //Expexted output: ^church-data-admin\.appspot\.com\/(?<table>((areas)|(families)|(groups)|(persons)|(services)|(stores)|(streets)|(users)))\/(?<file>([0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})\/(?<time>(\d)+)$
+    //Expexted output: ^church-data-admin\.appspot\.com\/(?<table>((areas)|(families)|(groups)|(persons)|(services)|(stores)|(streets)))\/(?<file>([0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})\/(?<time>(\d)+)$
   );
   if (!match) {
     console.log(

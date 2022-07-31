@@ -1,9 +1,13 @@
 subscription getUserInfoStream($uid: uuid!) {
   users_by_pk(uid: $uid) {
     uid
-    firebaseAuthUid
-    email
-    permissions
+    name
+    photoUpdatedAt
+    user_data {
+      firebaseAuthUid
+      email
+      permissions
+    }
     person {
       id
       name
@@ -14,7 +18,11 @@ subscription getUserInfoStream($uid: uuid!) {
       birthdate
       gender
       isShammas
-      shammasLevel
+      shammasLevel {
+        id
+        name
+        order
+      }
       schoolId
       collegeId
       churchId

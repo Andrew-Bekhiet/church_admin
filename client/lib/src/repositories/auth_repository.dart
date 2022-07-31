@@ -114,18 +114,23 @@ class CAAuthRepository extends AuthRepository<User, Person> {
 
     personListener ??= CADatabaseRepository.I.users
         .getUserInfoStream(uid: idTokenClaims['x-hasura-user-id'])
-        .map((userData) {
+        .map((user) {
           userSubject.add(User(
-            uid: userData.parsedData!.uid.uuid,
-            firebaseAuthUID: firebaseUser?.uid ?? uid!,
-            email: firebaseUser?.email ?? email!,
-            password: idTokenClaims['password'],
-            permissions: CAPermissionsSet.fromSet(
-              userData.parsedData!.permissions.toSet(),
+            uid: user.parsedData!.uid.uuid,
+            name: user.parsedData!.name,
+            photoUpdatedAt: user.parsedData!.photoUpdatedAt,
+            userData: UserData(
+              uid: user.parsedData!.uid.uuid,
+              firebaseAuthUid: firebaseUser?.uid ?? uid!,
+              email: firebaseUser?.email ?? email!,
+              password: idTokenClaims['password'],
+              permissions: CAPermissionsSet.fromSet(
+                user.parsedData!.userData?.permissions.toSet() ?? {},
+              ),
             ),
           ));
-          return userData.parsedData!.person != null
-              ? Person.fromJson(userData.parsedData!.person!.toJson())
+          return user.parsedData!.person != null
+              ? Person.fromJson(user.parsedData!.person!.toJson())
               : null;
         })
         .whereType<Person>()
@@ -140,11 +145,16 @@ class CAAuthRepository extends AuthRepository<User, Person> {
 
     return User(
       uid: idTokenClaims['x-hasura-user-id']!,
-      firebaseAuthUID: firebaseUser?.uid ?? uid!,
-      email: firebaseUser?.email ?? email!,
-      password: idTokenClaims['password'],
-      permissions:
-          currentUser?.permissions ?? CAPermissionsSet.fromSet(const {}),
+      name: currentUser?.name,
+      photoUpdatedAt: currentUser?.photoUpdatedAt,
+      userData: UserData(
+        uid: idTokenClaims['x-hasura-user-id']!,
+        firebaseAuthUid: firebaseUser?.uid ?? uid!,
+        email: firebaseUser?.email ?? email!,
+        password: idTokenClaims['password'],
+        permissions: currentUser?.userData?.permissions ??
+            CAPermissionsSet.fromSet(const {}),
+      ),
     );
   }
 

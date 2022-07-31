@@ -1,3 +1,13 @@
-export 'meta/last_edit_info.dart';
+export 'meta/church.dart';
+export 'meta/college.dart';
+export 'meta/father.dart';
+export 'meta/job.dart';
+export 'meta/last_recorded_by_info.dart';
 export 'meta/permissions_set.dart';
+export 'meta/person_state.dart';
+export 'meta/person_type.dart';
+export 'meta/qualification.dart';
+export 'meta/school.dart';
+export 'meta/shammas_level.dart';
 export 'meta/study_year.dart';
+export 'meta/tag.dart';

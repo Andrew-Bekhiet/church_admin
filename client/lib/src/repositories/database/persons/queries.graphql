@@ -39,3 +39,50 @@ query getPersonsBirthday($dateFilter: String!) {
     name
   }
 }
+
+query getMorePersonData(
+  $id: uuid!
+  $areasAfter: String = ""
+  $classesAfter: String = ""
+  $groupsAfter: String = ""
+  $servicesAfter: String = ""
+) {
+  persons_by_pk(id: $id) {
+    id
+    name
+    areas(order_by: { name: asc }, where: { name: { _gt: $areasAfter } }) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    classes(order_by: { name: asc }, where: { name: { _gt: $classesAfter } }) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    groups(
+      order_by: { group: { name: asc } }
+      where: { group: { name: { _gt: $groupsAfter } } }
+    ) {
+      group {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+    }
+    services(
+      order_by: { service: { name: asc } }
+      where: { service: { name: { _gt: $servicesAfter } } }
+    ) {
+      service {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+    }
+  }
+}

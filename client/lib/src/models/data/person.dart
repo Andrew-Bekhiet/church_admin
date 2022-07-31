@@ -2,7 +2,8 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide Json;
+import 'package:churchdata_core/churchdata_core.dart'
+    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -22,29 +23,50 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     DateTime? birthdate,
     @Default(true) bool gender,
     @Default(false) bool isShammas,
-    String? shammasLevel,
+    String? shammasLevelId,
+    ShammasLevel? shammasLevel,
+    School? school,
     String? schoolId,
+    College? college,
     String? collegeId,
+    Church? church,
     String? churchId,
+    Father? father,
     String? fatherId,
     @Default(false) bool isStudent,
+    Job? job,
     String? jobId,
     String? jobDescription,
+    Qualification? qualification,
     String? qualificationId,
+    PersonType? personType,
     String? personTypeId,
+    PersonState? state,
     String? stateId,
     @Default(false) bool isServant,
     String? notes,
-    String? uid,
+    Family? family,
     String? familyId,
     String? storeId,
+    StudyYear? studyYear,
     int? studyYearId,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
-    @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
-        LastEditInfo? lastConfession,
-    @JsonKey(fromJson: lastEditFromJson, toJson: lastEditToJson)
-        LastEditInfo? lastKodas,
+    LastRecordedByInfo? lastConfession,
+    LastRecordedByInfo? lastKodas,
+    LastRecordedByInfo? lastCall,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastEdit,
+    List<Class>? classes,
+    @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
+        List<Group>? groups,
+    @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
+        List<Service>? services,
+    List<Area>? areas,
+    List<Street>? streets,
+    @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
+        List<Tag>? tags,
+    String? uid,
   }) = _Person;
   Person._() : super();
 
@@ -82,3 +104,18 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
         );
   }
 }
+
+List<Group>? personsGroupsFromJson(List? data) =>
+    data?.map((e) => Group.fromJson(e['group'])).toList();
+List<Json>? personsGroupsToJson(List<Group>? groups) =>
+    groups?.map((e) => {'group': e.toJson()}).toList();
+
+List<Service>? personsServicesFromJson(List? data) =>
+    data?.map((e) => Service.fromJson(e['service'])).toList();
+List<Json>? personsServicesToJson(List<Service>? services) =>
+    services?.map((e) => {'service': e.toJson()}).toList();
+
+List<Tag>? personsTagsFromJson(List? data) =>
+    data?.map((e) => Tag.fromJson(e['tag'])).toList();
+List<Json>? personsTagsToJson(List<Tag>? tags) =>
+    tags?.map((e) => {'tag': e.toJson()}).toList();

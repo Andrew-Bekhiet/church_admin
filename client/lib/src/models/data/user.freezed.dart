@@ -21,13 +21,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get uid => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get firebaseAuthUID => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  String? get password => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  UserData? get userData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,14 +35,9 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String uid,
-      @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
-      String email,
-      String firebaseAuthUID,
-      @JsonKey(ignore: true)
-          String? password,
-      DateTime? photoUpdatedAt});
+      {String uid, String? name, DateTime? photoUpdatedAt, UserData? userData});
+
+  $UserDataCopyWith<$Res>? get userData;
 }
 
 /// @nodoc
@@ -60,38 +51,39 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? uid = freezed,
-    Object? permissions = freezed,
-    Object? email = freezed,
-    Object? firebaseAuthUID = freezed,
-    Object? password = freezed,
+    Object? name = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      permissions: permissions == freezed
-          ? _value.permissions
-          : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      firebaseAuthUID: firebaseAuthUID == freezed
-          ? _value.firebaseAuthUID
-          : firebaseAuthUID // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       photoUpdatedAt: photoUpdatedAt == freezed
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      userData: userData == freezed
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserData?,
     ));
+  }
+
+  @override
+  $UserDataCopyWith<$Res>? get userData {
+    if (_value.userData == null) {
+      return null;
+    }
+
+    return $UserDataCopyWith<$Res>(_value.userData!, (value) {
+      return _then(_value.copyWith(userData: value));
+    });
   }
 }
 
@@ -101,14 +93,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String uid,
-      @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
-      String email,
-      String firebaseAuthUID,
-      @JsonKey(ignore: true)
-          String? password,
-      DateTime? photoUpdatedAt});
+      {String uid, String? name, DateTime? photoUpdatedAt, UserData? userData});
+
+  @override
+  $UserDataCopyWith<$Res>? get userData;
 }
 
 /// @nodoc
@@ -123,37 +111,27 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = freezed,
-    Object? permissions = freezed,
-    Object? email = freezed,
-    Object? firebaseAuthUID = freezed,
-    Object? password = freezed,
+    Object? name = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_$_User(
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      permissions: permissions == freezed
-          ? _value.permissions
-          : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      firebaseAuthUID: firebaseAuthUID == freezed
-          ? _value.firebaseAuthUID
-          : firebaseAuthUID // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       photoUpdatedAt: photoUpdatedAt == freezed
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      userData: userData == freezed
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserData?,
     ));
   }
 }
@@ -162,35 +140,22 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User implements _User {
   const _$_User(
-      {required this.uid,
-      @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          required this.permissions,
-      required this.email,
-      required this.firebaseAuthUID,
-      @JsonKey(ignore: true)
-          this.password,
-      this.photoUpdatedAt});
+      {required this.uid, this.name, this.photoUpdatedAt, this.userData});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
   final String uid;
   @override
-  @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  final CAPermissionsSet permissions;
-  @override
-  final String email;
-  @override
-  final String firebaseAuthUID;
-  @override
-  @JsonKey(ignore: true)
-  final String? password;
+  final String? name;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final UserData? userData;
 
   @override
   String toString() {
-    return 'User(uid: $uid, permissions: $permissions, email: $email, firebaseAuthUID: $firebaseAuthUID, password: $password, photoUpdatedAt: $photoUpdatedAt)';
+    return 'User(uid: $uid, name: $name, photoUpdatedAt: $photoUpdatedAt, userData: $userData)';
   }
 
   @override
@@ -199,14 +164,10 @@ class _$_User implements _User {
         (other.runtimeType == runtimeType &&
             other is _$_User &&
             const DeepCollectionEquality().equals(other.uid, uid) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other.permissions, permissions) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality()
-                .equals(other.firebaseAuthUID, firebaseAuthUID) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt));
+                .equals(other.photoUpdatedAt, photoUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.userData, userData));
   }
 
   @JsonKey(ignore: true)
@@ -214,11 +175,9 @@ class _$_User implements _User {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(uid),
-      const DeepCollectionEquality().hash(permissions),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(firebaseAuthUID),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(photoUpdatedAt));
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(photoUpdatedAt),
+      const DeepCollectionEquality().hash(userData));
 
   @JsonKey(ignore: true)
   @override
@@ -236,30 +195,20 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String uid,
-      @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          required final CAPermissionsSet permissions,
-      required final String email,
-      required final String firebaseAuthUID,
-      @JsonKey(ignore: true)
-          final String? password,
-      final DateTime? photoUpdatedAt}) = _$_User;
+      final String? name,
+      final DateTime? photoUpdatedAt,
+      final UserData? userData}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get uid;
   @override
-  @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions;
-  @override
-  String get email;
-  @override
-  String get firebaseAuthUID;
-  @override
-  @JsonKey(ignore: true)
-  String? get password;
+  String? get name;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  UserData? get userData;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

@@ -265,10 +265,10 @@ void main() {
             emits(
               predicate<User>(
                 (u) {
-                  return u.firebaseAuthUID == 'uid' &&
-                      u.email == 'email' &&
-                      u.password == null &&
-                      u.permissions.permissions.isEmpty;
+                  return u.userData?.firebaseAuthUid == 'uid' &&
+                      u.userData?.email == 'email' &&
+                      u.userData?.password == null &&
+                      (u.userData?.permissions.permissions.isEmpty ?? false);
                 },
               ),
             ),
@@ -361,7 +361,8 @@ class FakeQueryResult
   GetUserInfoStream$SubscriptionRoot$Users? get parsedData =>
       GetUserInfoStream$SubscriptionRoot$Users()
         ..uid = const Uuid().v4obj()
-        ..firebaseAuthUid = 'uid'
-        ..email = 'email'
-        ..permissions = [];
+        ..userData = (GetUserInfoStream$SubscriptionRoot$Users$UsersData()
+          ..firebaseAuthUid = 'uid'
+          ..email = 'email'
+          ..permissions = []);
 }

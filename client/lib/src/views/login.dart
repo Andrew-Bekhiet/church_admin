@@ -203,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final notificationsSettings = await GetIt.I<CacheRepository>()
           .openBox<NotificationSetting>('NotificationsSettings');
 
-      if (user.permissions.birthdayNotify) {
+      if (user.userData!.permissions.birthdayNotify) {
         await notificationsSettings.put(
           'BirthDayTime',
           const NotificationSetting(11, 0, 1),
@@ -222,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
 
-      if (user.permissions.kodasNotify) {
+      if (user.userData!.permissions.kodasNotify) {
         await notificationsSettings.put(
           'KodasTime',
           const NotificationSetting(11, 0, 7),
@@ -239,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
           rescheduleOnReboot: true,
         );
       }
-      if (user.permissions.meetingNotify) {
+      if (user.userData!.permissions.meetingNotify) {
         await notificationsSettings.put(
           'MeetingTime',
           const NotificationSetting(11, 0, 7),
@@ -256,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
           rescheduleOnReboot: true,
         );
       }
-      if (user.permissions.confessionsNotify) {
+      if (user.userData!.permissions.confessionsNotify) {
         await notificationsSettings.put(
           'ConfessionTime',
           const NotificationSetting(11, 0, 7),

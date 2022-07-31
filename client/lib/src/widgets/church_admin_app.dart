@@ -42,7 +42,8 @@ class ChurchAdminApp extends StatefulWidget {
         redirect: (state) {
           if (!CAAuthRepository.I.isSignedIn) {
             return state.namedLocation('login');
-          } else if (CAAuthRepository.I.currentUser?.password != null &&
+          } else if (CAAuthRepository.I.currentUser?.userData?.password !=
+                  null &&
               CAAuthRepository.I.currentUserData != null) {
             return '/';
           }
@@ -90,6 +91,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
       initialData: GetIt.I<ThemingService>().theme,
       builder: (context, themeData) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
           routeInformationParser: ChurchAdminApp.router.routeInformationParser,

@@ -58,7 +58,9 @@ class _FakeDelegatingPaginatableStream_10<T extends _i5.ViewableWithID>
 class _FakeQueryResult_11<TParsed extends Object?> extends _i1.Fake
     implements _i6.QueryResult<TParsed> {}
 
-class _FakeDuration_12 extends _i1.Fake implements Duration {}
+class _FakePerson_12 extends _i1.Fake implements _i4.Person {}
+
+class _FakeDuration_13 extends _i1.Fake implements Duration {}
 
 /// A class which mocks [LoggingService].
 ///
@@ -360,6 +362,13 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           }),
           returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
   @override
+  _i7.Future<_i4.Person?> updatePersonLastCall(
+          {String? personId, DateTime? lastCall}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updatePersonLastCall, [],
+              {#personId: personId, #lastCall: lastCall}),
+          returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
+  @override
   _i4.DelegatingPaginatableStream<_i4.Person> getPersonsStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
@@ -409,6 +418,67 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                       _i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>.value(
                   _FakeQueryResult_11<_i13.GetPersonsBirthday$QueryRoot>()))
           as _i7.Future<_i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>);
+  @override
+  _i7.Stream<_i4.Person?> watchPerson({String? personId}) => (super
+      .noSuchMethod(Invocation.method(#watchPerson, [], {#personId: personId}),
+          returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personCallHistory(
+          {String? personId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personCallHistory, [], {#personId: personId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personVisitHistory(
+          {String? personId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personVisitHistory, [], {#personId: personId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>
+      personConfessionHistory({String? personId}) => (super.noSuchMethod(
+              Invocation.method(
+                  #personConfessionHistory, [], {#personId: personId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personKodasHistory(
+          {String? personId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personKodasHistory, [], {#personId: personId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personEditHistory(
+          {String? personId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personEditHistory, [], {#personId: personId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i7.Future<_i4.Person> getMorePersonData(
+          {String? personId,
+          String? areasAfter,
+          String? classesAfter,
+          String? groupsAfter,
+          String? servicesAfter}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getMorePersonData, [], {
+                #personId: personId,
+                #areasAfter: areasAfter,
+                #classesAfter: classesAfter,
+                #groupsAfter: groupsAfter,
+                #servicesAfter: servicesAfter
+              }),
+              returnValue: Future<_i4.Person>.value(_FakePerson_12()))
+          as _i7.Future<_i4.Person>);
 }
 
 /// A class which mocks [AreasQueries].
@@ -466,7 +536,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth =>
       (super.noSuchMethod(Invocation.getter(#timeToReauth),
-          returnValue: _FakeDuration_12()) as Duration);
+          returnValue: _FakeDuration_13()) as Duration);
   @override
   _i7.Stream<void> get refreshUIStream =>
       (super.noSuchMethod(Invocation.getter(#refreshUIStream),

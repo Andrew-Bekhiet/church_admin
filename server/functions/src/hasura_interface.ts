@@ -7,7 +7,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
       data: JSON.stringify({
         query: `
             query checkApproved($uid: uuid!) {
-                users(where: {uid: {_eq: $uid}}, limit: 1) {
+                users_data(where: {uid: {_eq: $uid}}, limit: 1) {
                     permissions
                 }
             }
@@ -23,7 +23,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
       },
     });
     const permissions: string[] =
-      hasura_request.data?.["data"]?.["users"]?.[0]?.["permissions"];
+      hasura_request.data?.["data"]?.["users_data"]?.[0]?.["permissions"];
 
     return (
       permissions.find((o) => o.toLowerCase().replace("'", "") == "approved") !=
@@ -44,7 +44,7 @@ export async function getHasuraUID(
       data: JSON.stringify({
         query: `
             query getUserByFirebaseUID($firebase_auth_uid: String) {
-              users(where: {firebase_auth_uid: {_eq: $firebase_auth_uid}}, limit: 1) {
+              users_data(where: {firebase_auth_uid: {_eq: $firebase_auth_uid}}, limit: 1) {
                 uid
               }
             }
@@ -60,7 +60,43 @@ export async function getHasuraUID(
       },
     });
     const hasura_uid: string =
-      hasura_request.data?.["data"]?.["users"]?.[0]?.["uid"] ?? null;
+      hasura_request.data?.["data"]?.["users_data"]?.[0]?.["uid"] ?? null;
+
+    return hasura_uid;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function getPersonIdFromUser(
+  hasuraUID: string
+): Promise<string | null> {
+  try {
+    const hasura_request = await post(process.env["HASURA_SERVER"]!, {
+      data: JSON.stringify({
+        query: `
+            query getPersonIdFromUser($hasuraUID: uuid = "") {
+              users(where: {uid: {_eq: $hasuraUID}}) {
+                person {
+                  id
+                }
+              }
+            }
+          `,
+        variables: { hasuraUID },
+        operationName: "getPersonIdFromUser",
+      }),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    });
+    const hasura_uid: string =
+      hasura_request.data?.["data"]?.["users"]?.[0]?.["person"]?.["id"] ?? null;
 
     return hasura_uid;
   } catch (e) {
@@ -117,21 +153,25 @@ export async function checkUserAccess(
 
 export async function insertUser(user: {
   email: string;
+  name: string;
   uid: string;
 }): Promise<string | null> {
   try {
     const hasura_request = await post(process.env["HASURA_SERVER"]!, {
       data: JSON.stringify({
         query: `
-            mutation addUser($email: String, $firebase_auth_uid: String, $permissions: _text = "{}") {
-              insert_users(objects: {email: $email, firebase_auth_uid: $firebase_auth_uid, permissions: $permissions}) {
+            mutation addUser($email: String, $name: String , $firebase_auth_uid: String, $permissions: _text = "{}") {
+              insert_users_data(objects: {email: $email, firebaseAuthUid: $firebase_auth_uid, permissions: $permissions, user: {data: {name: $name, person: {data: {name: $name, isStudent:false, isServant:true}}}}}) {
                 returning {
-                  uid
+                  user {
+                    uid
+                  }
                 }
               }
             }
           `,
         variables: {
+          name: user.name,
           email: user.email,
           firebase_auth_uid: user.uid,
           permissions: "{}",
@@ -146,9 +186,9 @@ export async function insertUser(user: {
     });
 
     return (
-      hasura_request.data?.["data"]?.["insert_users"]?.["returning"]?.[0]?.[
-        "uid"
-      ] ?? null
+      hasura_request.data?.["data"]?.["insert_users_data"]?.[
+        "returning"
+      ]?.[0]?.["user"]?.["uid"] ?? null
     );
   } catch (e) {
     console.error(e);
@@ -167,10 +207,8 @@ export async function updatePhotoTime(
       data: JSON.stringify({
         query: `
             mutation updatePhotoTime($id: uuid!, $photo_updated_at: timestamptz) {
-              update_${table}_by_pk(pk_columns: {${
-          table == "users" ? "uid" : "id"
-        }: $id}, _set: {photo_updated_at: $photo_updated_at}) {
-                ${table == "users" ? "uid" : "id"}
+              update_${table}_by_pk(pk_columns: {id: $id}, _set: {photo_updated_at: $photo_updated_at}) {
+                id
               }
             }
           `,
@@ -188,9 +226,7 @@ export async function updatePhotoTime(
     });
 
     if (
-      hasura_request.data?.["data"]?.[`update_${table}_by_pk`]?.[
-        table == "users" ? "uid" : "id"
-      ] ??
+      hasura_request.data?.["data"]?.[`update_${table}_by_pk`]?.["id"] ??
       null != id
     )
       throw new https.HttpsError(

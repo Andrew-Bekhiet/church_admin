@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
+// ignore_for_file: invalid_annotation_target
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';

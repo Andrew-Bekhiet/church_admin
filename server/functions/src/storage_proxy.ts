@@ -4,6 +4,7 @@ import {
   checkUserAccess,
   checkUserApproved,
   getHasuraUID,
+  getPersonIdFromUser,
   PhotoTable,
   photoTables,
 } from "./hasura_interface";
@@ -71,23 +72,22 @@ async function _getSignedUrl(
       _contentType: contentType,
     } = { _table, _id, _contentType };
 
-    if (
-      !(await checkUserAccess(
-        table as PhotoTable,
-        id,
-        (await getHasuraUID(currentUser.uid))!,
-        action
-      ))
-    )
+    const hasuraUID = (await getHasuraUID(currentUser.uid))!;
+    if (!(await checkUserAccess(table as PhotoTable, id, hasuraUID, action)))
       throw new https.HttpsError(
         "not-found",
         `Object with id ${id} in table ${table} was not found`
       );
 
+    const path =
+      table == "users"
+        ? "persons/" + (await getPersonIdFromUser(hasuraUID))!
+        : table + "/" + id;
+
     return (
       await storage()
         .bucket("church-data-admin.appspot.com")
-        .file(table + "/" + id)
+        .file(path)
         .getSignedUrl({
           expires: Date.now() + 1000 * 60,
           version: "v4",

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -43,12 +42,3 @@ class Group extends ViewableWithID with _$Group implements PhotoObjectBase {
   @override
   final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 }
-
-Group? groupFromJson(dynamic data) =>
-    data == null ? null : Group.fromJson(data);
-Json? groupToJson(Group? group) => group?.toJson();
-
-List<Group>? groupsFromJson(dynamic data) =>
-    data is List ? data.map(groupFromJson).whereNotNull().toList() : null;
-List<Json>? groupsToJson(List<Group>? groups) =>
-    groups?.map(groupToJson).whereNotNull().toList();

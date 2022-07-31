@@ -23,7 +23,7 @@ subscription getServicesStream(
     }
     classes(
       where: { _and: $classesAddWhere }
-      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+      order_by: { studyYear: { order: asc }, serviceGender: desc_nulls_last }
     ) {
       id
       name

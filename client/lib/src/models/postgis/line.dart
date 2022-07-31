@@ -21,3 +21,6 @@ class Line {
     };
   }
 }
+
+Json? lineToJson(Line? data) => data?.asPostGISLineString();
+Line? lineFromJson(dynamic data) => data == null ? null : Line.fromJson(data);

@@ -13,7 +13,7 @@ class AuthenticateScreen extends StatefulWidget {
     redirect: (state) {
       if (!CAAuthRepository.I.isSignedIn) {
         return state.namedLocation('login');
-      } else if (CAAuthRepository.I.currentUser?.password == null) {
+      } else if (CAAuthRepository.I.currentUser?.userData?.password == null) {
         return state.namedLocation('register_user_data');
       } else if (LocalAuthService.I.shouldAuthenticate) {
         return null;
@@ -54,7 +54,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
         child: Form(
           key: _form,
           child: ListView(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12),
             children: <Widget>[
               Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
               const SizedBox(height: 10),
@@ -127,7 +127,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     String? encryptedPassword =
         await EncryptionService.encryptPassword(password);
 
-    if (CAAuthRepository.I.currentUser!.password == encryptedPassword) {
+    if (CAAuthRepository.I.currentUser!.userData?.password ==
+        encryptedPassword) {
       encryptedPassword = null;
       LocalAuthService.I.resetAuthState();
     } else {

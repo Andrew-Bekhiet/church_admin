@@ -87,9 +87,9 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       : null;
                 },
                 onSaved: (v) => _userData = _userData.copyWith(
-                  lastKodas: LastEditInfo(
+                  lastKodas: LastRecordedByInfo(
                     time: v!,
-                    userUID: CAAuthRepository.I.currentUser!.uid,
+                    recordedBy: CAAuthRepository.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
@@ -127,9 +127,9 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                       : null;
                 },
                 onSaved: (v) => _userData = _userData.copyWith(
-                  lastConfession: LastEditInfo(
+                  lastConfession: LastRecordedByInfo(
                     time: v!,
-                    userUID: CAAuthRepository.I.currentUser!.uid,
+                    recordedBy: CAAuthRepository.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null

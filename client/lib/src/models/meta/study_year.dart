@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
-import 'package:churchdata_core/churchdata_core.dart' show Json, ViewableWithID;
+import 'package:churchdata_core/churchdata_core.dart' show ViewableWithID;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'study_year.freezed.dart';
@@ -20,7 +20,3 @@ class StudyYear extends ViewableWithID with _$StudyYear {
   factory StudyYear.fromJson(Map<String, Object?> json) =>
       _$StudyYearFromJson(json);
 }
-
-StudyYear? studyYearFromJson(dynamic data) =>
-    data == null ? null : StudyYear.fromJson(data);
-Json? studyYearToJson(StudyYear? data) => data?.toJson();

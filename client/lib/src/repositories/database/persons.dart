@@ -41,6 +41,138 @@ class PersonsQueries {
         .then((value) => value.parsedData);
   }
 
+  Future<Person?> updatePersonLastCall({
+    required String personId,
+    required DateTime lastCall,
+  }) async {
+    final InsertPersonLastCallMutation subscription =
+        InsertPersonLastCallMutation(
+      variables: InsertPersonLastCallArguments(
+        personId: UuidValue(personId),
+        lastCall: lastCall,
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final rslt = InsertPersonLastCall$MutationRoot.fromJson(d);
+
+              if (rslt.insertHistoryCallHistoryOne == null) return null;
+
+              return Person.fromJson(
+                rslt.insertHistoryCallHistoryOne!.person.toJson(),
+              );
+            },
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData);
+  }
+
+  Future<Person?> updatePersonLastKodas({
+    required String personId,
+    required DateTime lastKodas,
+  }) async {
+    final InsertPersonLastKodasMutation subscription =
+        InsertPersonLastKodasMutation(
+      variables: InsertPersonLastKodasArguments(
+        personId: UuidValue(personId),
+        lastKodas: lastKodas,
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final rslt = InsertPersonLastKodas$MutationRoot.fromJson(d);
+
+              if (rslt.insertHistoryKodasHistoryOne == null) return null;
+
+              return Person.fromJson(
+                rslt.insertHistoryKodasHistoryOne!.person.toJson(),
+              );
+            },
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData);
+  }
+
+  Future<Person?> updatePersonLastConfession({
+    required String personId,
+    required DateTime lastConfession,
+  }) async {
+    final InsertPersonLastConfessionMutation subscription =
+        InsertPersonLastConfessionMutation(
+      variables: InsertPersonLastConfessionArguments(
+        personId: UuidValue(personId),
+        lastConfession: lastConfession,
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final rslt = InsertPersonLastConfession$MutationRoot.fromJson(d);
+
+              if (rslt.insertHistoryConfessionHistoryOne == null) return null;
+
+              return Person.fromJson(
+                rslt.insertHistoryConfessionHistoryOne!.person.toJson(),
+              );
+            },
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData);
+  }
+
+  Future<Person?> updatePersonLastVisit({
+    required String personId,
+    required DateTime lastVisit,
+  }) async {
+    final InsertPersonLastVisitMutation subscription =
+        InsertPersonLastVisitMutation(
+      variables: InsertPersonLastVisitArguments(
+        personId: UuidValue(personId),
+        lastVisit: lastVisit,
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final rslt = InsertPersonLastVisit$MutationRoot.fromJson(d);
+
+              if (rslt.insertHistoryVisitHistoryOne == null) return null;
+
+              return Person.fromJson(
+                rslt.insertHistoryVisitHistoryOne!.person.toJson(),
+              );
+            },
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData);
+  }
+
   DelegatingPaginatableStream<Person> getPersonsStream({
     Stream<String?>? searchQuery,
   }) {
@@ -205,5 +337,305 @@ class PersonsQueries {
           ),
         )
         .then(_exceptionsMiddleware);
+  }
+
+  Stream<Person?> watchPerson({
+    required String personId,
+  }) {
+    final WatchPersonSubscription subscription = WatchPersonSubscription(
+      variables: WatchPersonArguments(id: UuidValue(personId)),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .subscribe(
+          SubscriptionOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) {
+              final result =
+                  WatchPerson$SubscriptionRoot.fromJson(d).personsByPk;
+
+              if (result == null) return null;
+
+              return Person.fromJson(result.toJson());
+            },
+          ),
+        )
+        .map(_exceptionsMiddleware)
+        .map((p) => p.parsedData);
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personCallHistory({
+    required String personId,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final CallHistorySubscription subscription = CallHistorySubscription(
+          variables: CallHistoryArguments(
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryCallHistoryBoolExp(
+                  time: TimestamptzComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) => CallHistory$SubscriptionRoot.fromJson(d)
+                    .historyCallHistory
+                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personVisitHistory({
+    required String personId,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final VisitHistorySubscription subscription = VisitHistorySubscription(
+          variables: VisitHistoryArguments(
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryVisitHistoryBoolExp(
+                  time: TimestamptzComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) => VisitHistory$SubscriptionRoot.fromJson(d)
+                    .historyVisitHistory
+                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personConfessionHistory({
+    required String personId,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final ConfessionHistorySubscription subscription =
+            ConfessionHistorySubscription(
+          variables: ConfessionHistoryArguments(
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryConfessionHistoryBoolExp(
+                  dayId: DateComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) => ConfessionHistory$SubscriptionRoot.fromJson(d)
+                    .historyConfessionHistory
+                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personKodasHistory({
+    required String personId,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final KodasHistorySubscription subscription = KodasHistorySubscription(
+          variables: KodasHistoryArguments(
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryKodasHistoryBoolExp(
+                  dayId: DateComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) => KodasHistory$SubscriptionRoot.fromJson(d)
+                    .historyKodasHistory
+                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personEditHistory({
+    required String personId,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final EditHistorySubscription subscription = EditHistorySubscription(
+          variables: EditHistoryArguments(
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryEditHistoryBoolExp(
+                  time: TimestamptzComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) => EditHistory$SubscriptionRoot.fromJson(d)
+                    .historyEditHistory
+                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  Future<Person> getMorePersonData({
+    required String personId,
+    String? areasAfter,
+    String? classesAfter,
+    String? groupsAfter,
+    String? servicesAfter,
+  }) {
+    final GetMorePersonDataQuery query = GetMorePersonDataQuery(
+      variables: GetMorePersonDataArguments(
+        id: UuidValue(personId),
+        areasAfter: areasAfter,
+        classesAfter: classesAfter,
+        groupsAfter: groupsAfter,
+        servicesAfter: servicesAfter,
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .query(
+          QueryOptions(
+            document: query.document,
+            operationName: query.operationName,
+            variables: query.variables.toJson().stripNullValues(),
+            parserFn: (d) => Person.fromJson(
+              GetMorePersonData$QueryRoot.fromJson(d).personsByPk!.toJson(),
+            ),
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData!);
   }
 }

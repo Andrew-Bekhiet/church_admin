@@ -1,6 +1,9 @@
 targets:
   $default:
     builders:
+      json_serializable:
+        options:
+          explicit_to_json: true
       artemis:
         options:
           ignore_for_file:
@@ -11,6 +14,9 @@ targets:
               queries_glob: lib/src/repositories/database/**/{subscriptions.graphql,queries.graphql,mutations.graphql}
               output: lib/src/repositories/database/graphql.graphql.dart
           scalar_mapping:
+            - graphql_type: name
+              dart_type: String
+
             - graphql_type: _text
               dart_type: List<String>
 
@@ -20,13 +26,13 @@ targets:
               use_custom_parser: true
 
             - graphql_type: geography
-              dart_type: Map<String, dynamic>
+              dart_type: Json
 
             - graphql_type: geometry
-              dart_type: Map<String, dynamic>
+              dart_type: Json
 
             - graphql_type: jsonb
-              dart_type: Map<String, dynamic>
+              dart_type: Json
 
             - graphql_type: smallint
               dart_type: int

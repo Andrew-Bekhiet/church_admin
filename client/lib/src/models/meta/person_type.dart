@@ -1,0 +1,23 @@
+// ignore_for_file: invalid_annotation_target
+
+import 'dart:ui';
+
+import 'package:church_admin/graphql/scalars.dart';
+import 'package:churchdata_core/churchdata_core.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'person_type.freezed.dart';
+part 'person_type.g.dart';
+
+@freezed
+class PersonType extends ViewableWithID with _$PersonType {
+  factory PersonType({
+    required String id,
+    required String name,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+  }) = _PersonType;
+  PersonType._() : super();
+
+  factory PersonType.fromJson(Map<String, Object?> json) =>
+      _$PersonTypeFromJson(json);
+}

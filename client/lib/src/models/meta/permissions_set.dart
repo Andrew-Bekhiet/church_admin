@@ -2,6 +2,8 @@ import 'package:churchdata_core/churchdata_core.dart';
 import 'package:collection/collection.dart';
 
 class CAPermissionsSet extends PermissionsSet {
+  const CAPermissionsSet.empty():super.fromSet(const {});
+
   CAPermissionsSet.fromSet(Set<String> permissions)
       : super.fromSet(
           EqualitySet<String>.from(const PermissionEquality(), permissions),
@@ -47,4 +49,4 @@ extension RemoveQuotes on String {
 
 Set<String> permissionsSetToJson(CAPermissionsSet data) => data.permissions;
 CAPermissionsSet permissionsSetFromJson(dynamic data) =>
-    CAPermissionsSet.fromSet((data as List).toSet().cast());
+    CAPermissionsSet.fromSet((data as List?)?.toSet().cast()??{});

@@ -89,9 +89,13 @@ void main() {
           final authRepo = MockCAAuthRepository();
           final user = User(
             uid: 'uid',
-            permissions: CAPermissionsSet.fromSet(const {}),
-            email: 'email',
-            firebaseAuthUID: 'firebaseAuthUID',
+            userData: UserData(
+              uid: 'uid',
+              permissions: CAPermissionsSet.fromSet(const {}),
+              email: 'email',
+              firebaseAuthUid: 'firebaseAuthUID',
+              password: '',
+            ),
           );
           when(authRepo.userStream).thenAnswer(
             (_) => BehaviorSubject.seeded(

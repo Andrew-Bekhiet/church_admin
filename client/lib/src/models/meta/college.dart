@@ -1,0 +1,19 @@
+// ignore_for_file: invalid_annotation_target
+
+import 'package:churchdata_core/churchdata_core.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'college.freezed.dart';
+part 'college.g.dart';
+
+@freezed
+class College extends ID with _$College {
+  const factory College({
+    required String id,
+    required String name,
+    String? universityId,
+  }) = _College;
+
+  factory College.fromJson(Map<String, Object?> json) =>
+      _$CollegeFromJson(json);
+}

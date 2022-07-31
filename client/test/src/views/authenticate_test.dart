@@ -187,9 +187,13 @@ void main() {
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
                   uid: 'uid',
-                  permissions: CAPermissionsSet.fromSet(const {}),
-                  email: 'email',
-                  firebaseAuthUID: 'firebaseAuthUID',
+                  userData: UserData(
+                    permissions: CAPermissionsSet.fromSet(const {}),
+                    email: 'email',
+                    firebaseAuthUid: 'firebaseAuthUID',
+                    password: '',
+                    uid: 'uid',
+                  ),
                 ),
               );
 
@@ -217,11 +221,14 @@ void main() {
               when(mockCAAuthRepository.isSignedIn).thenReturn(true);
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
-                  password: '',
                   uid: 'uid',
-                  permissions: CAPermissionsSet.fromSet(const {}),
-                  email: 'email',
-                  firebaseAuthUID: 'firebaseAuthUID',
+                  userData: UserData(
+                    password: '',
+                    uid: 'uid',
+                    permissions: CAPermissionsSet.fromSet(const {}),
+                    email: 'email',
+                    firebaseAuthUid: 'firebaseAuthUID',
+                  ),
                 ),
               );
 
@@ -248,11 +255,14 @@ void main() {
               when(mockCAAuthRepository.isSignedIn).thenReturn(true);
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
-                  password: '',
                   uid: 'uid',
-                  permissions: CAPermissionsSet.fromSet(const {}),
-                  email: 'email',
-                  firebaseAuthUID: 'firebaseAuthUID',
+                  userData: UserData(
+                    uid: 'uid',
+                    password: '',
+                    permissions: CAPermissionsSet.fromSet(const {}),
+                    email: 'email',
+                    firebaseAuthUid: 'firebaseAuthUID',
+                  ),
                 ),
               );
 
@@ -301,10 +311,13 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     when(mock.currentUser).thenReturn(
       User(
         uid: 'uid',
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        firebaseAuthUID: 'firebaseAuthUID',
-        password: '',
+        userData: UserData(
+          uid: 'uid',
+          password: '',
+          permissions: CAPermissionsSet.fromSet(const {}),
+          email: 'email',
+          firebaseAuthUid: 'firebaseAuthUID',
+        ),
       ),
     );
 
@@ -313,10 +326,13 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     when(mock.currentUser).thenReturn(
       User(
         uid: 'uid',
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        firebaseAuthUID: 'firebaseAuthUID',
-        password: await EncryptionService.encryptPassword(r'password\1234'),
+        userData: UserData(
+          uid: 'uid',
+          password: await EncryptionService.encryptPassword(r'password\1234'),
+          permissions: CAPermissionsSet.fromSet(const {}),
+          email: 'email',
+          firebaseAuthUid: 'firebaseAuthUID',
+        ),
       ),
     );
 

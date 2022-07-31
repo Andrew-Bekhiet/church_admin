@@ -22,16 +22,12 @@ Service _$ServiceFromJson(Map<String, dynamic> json) {
 mixin _$Service {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   StudyYear? get fromStudyYear => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   StudyYear? get toStudyYear => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
   List<Class>? get classes => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
   List<Group>? get groups => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,17 +42,12 @@ abstract class $ServiceCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          StudyYear? fromStudyYear,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      StudyYear? fromStudyYear,
+      StudyYear? toStudyYear,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
-      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
-          List<Class>? classes,
-      @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
-          List<Group>? groups});
+      List<Class>? classes,
+      List<Group>? groups});
 
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   $StudyYearCopyWith<$Res>? get toStudyYear;
@@ -149,17 +140,12 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          StudyYear? fromStudyYear,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      StudyYear? fromStudyYear,
+      StudyYear? toStudyYear,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
-      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
-          List<Class>? classes,
-      @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
-          List<Group>? groups});
+      List<Class>? classes,
+      List<Group>? groups});
 
   @override
   $StudyYearCopyWith<$Res>? get fromStudyYear;
@@ -230,17 +216,12 @@ class _$_Service extends _Service {
   _$_Service(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          this.fromStudyYear,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          this.toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      this.fromStudyYear,
+      this.toStudyYear,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
-      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
-          final List<Class>? classes,
-      @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
-          final List<Group>? groups})
+      final List<Class>? classes,
+      final List<Group>? groups})
       : _classes = classes,
         _groups = groups,
         super._();
@@ -253,10 +234,8 @@ class _$_Service extends _Service {
   @override
   final String name;
   @override
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   final StudyYear? fromStudyYear;
   @override
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   final StudyYear? toStudyYear;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -265,7 +244,6 @@ class _$_Service extends _Service {
   final DateTime? photoUpdatedAt;
   final List<Class>? _classes;
   @override
-  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
   List<Class>? get classes {
     final value = _classes;
     if (value == null) return null;
@@ -275,7 +253,6 @@ class _$_Service extends _Service {
 
   final List<Group>? _groups;
   @override
-  @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
   List<Group>? get groups {
     final value = _groups;
     if (value == null) return null;
@@ -336,17 +313,12 @@ abstract class _Service extends Service {
   factory _Service(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          final StudyYear? fromStudyYear,
-      @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
-          final StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      final StudyYear? fromStudyYear,
+      final StudyYear? toStudyYear,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
-      @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
-          final List<Class>? classes,
-      @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
-          final List<Group>? groups}) = _$_Service;
+      final List<Class>? classes,
+      final List<Group>? groups}) = _$_Service;
   _Service._() : super._();
 
   factory _Service.fromJson(Map<String, dynamic> json) = _$_Service.fromJson;
@@ -356,10 +328,8 @@ abstract class _Service extends Service {
   @override
   String get name;
   @override
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   StudyYear? get fromStudyYear;
   @override
-  @JsonKey(fromJson: studyYearFromJson, toJson: studyYearToJson)
   StudyYear? get toStudyYear;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -367,10 +337,8 @@ abstract class _Service extends Service {
   @override
   DateTime? get photoUpdatedAt;
   @override
-  @JsonKey(fromJson: classesFromJson, toJson: classesToJson)
   List<Class>? get classes;
   @override
-  @JsonKey(fromJson: groupsFromJson, toJson: groupsToJson)
   List<Group>? get groups;
   @override
   @JsonKey(ignore: true)

@@ -11,16 +11,9 @@ part 'user.g.dart';
 class User extends UID with _$User {
   const factory User({
     required String uid,
-    @JsonKey(
-      fromJson: permissionsSetFromJson,
-      toJson: permissionsSetToJson,
-    )
-        required CAPermissionsSet permissions,
-    required String email,
-    required String firebaseAuthUID,
-    @JsonKey(ignore: true)
-        String? password,
+    String? name,
     DateTime? photoUpdatedAt,
+    UserData? userData,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

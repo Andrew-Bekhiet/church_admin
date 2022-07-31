@@ -17,6 +17,7 @@ export const beforeUserSignUp = region("europe-west6")
     console.dir(user, { depth: 4 });
     try {
       const hasura_uid = await insertUser({
+        name: user.displayName ?? user.email!,
         email: user.email!,
         uid: user.uid!,
       });

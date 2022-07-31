@@ -152,11 +152,14 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
     when(mock.currentUser).thenReturn(
       User(
-        password: '',
+        userData: UserData(
+          password: '',
+          uid: 'uid',
+          permissions: CAPermissionsSet.fromSet(const {}),
+          email: 'email',
+          firebaseAuthUid: 'firebaseAuthUID',
+        ),
         uid: 'uid',
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        firebaseAuthUID: 'firebaseAuthUID',
       ),
     );
     when(mock.currentUserData).thenReturn(
@@ -170,10 +173,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
         isServant: false,
         lastKodas: value == FirstScreenVariantEnum.updateUserData
             ? null
-            : LastEditInfo(time: DateTime.now(), userUID: 'uid'),
+            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
         lastConfession: value == FirstScreenVariantEnum.updateUserData
             ? null
-            : LastEditInfo(time: DateTime.now(), userUID: 'uid'),
+            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
       ),
     );
 

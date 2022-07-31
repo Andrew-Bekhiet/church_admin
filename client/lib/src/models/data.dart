@@ -1,6 +1,9 @@
 export 'data/area.dart';
 export 'data/class.dart';
+export 'data/family.dart';
 export 'data/group.dart';
 export 'data/person.dart';
 export 'data/service.dart';
+export 'data/street.dart';
 export 'data/user.dart';
+export 'data/user_data.dart';

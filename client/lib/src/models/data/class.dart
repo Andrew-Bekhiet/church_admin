@@ -3,7 +3,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide Json;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -42,12 +41,3 @@ class Class extends ViewableWithID with _$Class implements PhotoObjectBase {
   @override
   final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 }
-
-Class? classFromJson(dynamic data) =>
-    data == null ? null : Class.fromJson(data);
-Json? classToJson(Class? _class) => _class?.toJson();
-
-List<Class>? classesFromJson(dynamic data) =>
-    data is List ? data.map(classFromJson).whereNotNull().toList() : null;
-List<Json>? classesToJson(List<Class>? classes) =>
-    classes?.map(classToJson).whereNotNull().toList();
