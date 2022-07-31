@@ -20,6 +20,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:timeago/timeago.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,8 @@ Future<void> initializeChurchAdmin() async {
   _initializing = true;
 
   await dotenv.load();
+
+  await Hive.initFlutter();
 
   await initializeFirebase();
 
@@ -134,6 +137,8 @@ Future<void> initializeChurchAdmin() async {
     ),
   );
 
+  setLocaleMessages('ar', ArMessages());
+
   return _initialization.complete();
 }
 
@@ -154,6 +159,12 @@ Future<void> registerGraphQLClient() async {
         query: Policies(
           fetch: FetchPolicy.cacheAndNetwork,
         ),
+        watchQuery: Policies(
+          fetch: FetchPolicy.cacheAndNetwork,
+        ),
+        subscribe: Policies(
+          fetch: FetchPolicy.cacheAndNetwork,
+        ),
       ),
       link: ChurchAdminLink(
         url: dotenv.env['HASURA_SERVER']!,
@@ -172,8 +183,6 @@ Future<void> initializeFirebase() async {
   String? kEmulatorsHost;
 
   if (kDebugMode) {
-    await Hive.initFlutter();
-
     final devBox = await Hive.openBox('Dev');
     kEmulatorsHost = devBox.get('kEmulatorsHost');
 
