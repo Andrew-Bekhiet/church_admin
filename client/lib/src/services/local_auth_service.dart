@@ -89,7 +89,9 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   Future<bool> canCheckBiometrics() async {
-    return !kIsWeb && await LocalAuthentication().canCheckBiometrics;
+    return !kIsWeb &&
+        await LocalAuthentication().canCheckBiometrics &&
+        await LocalAuthentication().isDeviceSupported();
   }
 
   Future<bool> authenticate() async {
