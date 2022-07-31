@@ -69,6 +69,14 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
           borderSide: BorderSide(color: primary),
         ),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: primary),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+      ),
     );
     //TODO: tune theming
     /* .copyWith(
