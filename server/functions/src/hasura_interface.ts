@@ -44,7 +44,7 @@ export async function getHasuraUID(
       data: JSON.stringify({
         query: `
             query getUserByFirebaseUID($firebase_auth_uid: String) {
-              users_data(where: {firebase_auth_uid: {_eq: $firebase_auth_uid}}, limit: 1) {
+              users_data(where: {firebaseAuthUid: {_eq: $firebase_auth_uid}}, limit: 1) {
                 uid
               }
             }
@@ -207,7 +207,7 @@ export async function updatePhotoTime(
       data: JSON.stringify({
         query: `
             mutation updatePhotoTime($id: uuid!, $photo_updated_at: timestamptz) {
-              update_${table}_by_pk(pk_columns: {id: $id}, _set: {photo_updated_at: $photo_updated_at}) {
+              update_${table}_by_pk(pk_columns: {id: $id}, _set: {photoUpdatedAt: $photo_updated_at}) {
                 id
               }
             }
