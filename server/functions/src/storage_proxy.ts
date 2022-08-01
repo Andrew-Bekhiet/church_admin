@@ -72,7 +72,11 @@ async function _getSignedUrl(
       _contentType: contentType,
     } = { _table, _id, _contentType };
 
+    console.log({ "currentUser.uid": currentUser.uid });
+
     const hasuraUID = (await getHasuraUID(currentUser.uid))!;
+
+    console.log({ hasuraUID, table, id, action });
     if (!(await checkUserAccess(table as PhotoTable, id, hasuraUID, action)))
       throw new https.HttpsError(
         "not-found",
@@ -89,7 +93,7 @@ async function _getSignedUrl(
         .bucket("church-data-admin.appspot.com")
         .file(path)
         .getSignedUrl({
-          expires: Date.now() + 1000 * 60,
+          expires: Date.now() + 1000 * 60 * 5,
           version: "v4",
           action,
           contentType,
