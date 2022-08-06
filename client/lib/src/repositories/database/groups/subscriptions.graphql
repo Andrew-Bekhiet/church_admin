@@ -1,0 +1,10 @@
+subscription getGroupsStream(
+  $addWhere: [groups_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  groups(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    photoUpdatedAt
+  }
+}

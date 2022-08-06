@@ -13,7 +13,8 @@ GetAreasStream$SubscriptionRoot$Areas
         GetAreasStream$SubscriptionRoot$Areas()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
-          ..bounds = json['bounds'] as Map<String, dynamic>?
+          ..bounds =
+              fromGraphQLGeographyNullableToDartJsonNullable(json['bounds'])
           ..color = json['color'] as int?
           ..photoUpdatedAt = json['photoUpdatedAt'] == null
               ? null
@@ -24,7 +25,7 @@ Map<String, dynamic> _$GetAreasStream$SubscriptionRoot$AreasToJson(
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
-      'bounds': instance.bounds,
+      'bounds': fromDartJsonNullableToGraphQLGeographyNullable(instance.bounds),
       'color': instance.color,
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
     };
@@ -1171,11 +1172,12 @@ JsonbComparisonExp _$JsonbComparisonExpFromJson(Map<String, dynamic> json) =>
       $cast: json['_cast'] == null
           ? null
           : JsonbCastExp.fromJson(json['_cast'] as Map<String, dynamic>),
-      $containedIn: json['_contained_in'] as Map<String, dynamic>?,
-      $contains: json['_contains'] as Map<String, dynamic>?,
-      $eq: json['_eq'] as Map<String, dynamic>?,
-      $gt: json['_gt'] as Map<String, dynamic>?,
-      $gte: json['_gte'] as Map<String, dynamic>?,
+      $containedIn:
+          fromGraphQLJsonbNullableToDartJsonNullable(json['_contained_in']),
+      $contains: fromGraphQLJsonbNullableToDartJsonNullable(json['_contains']),
+      $eq: fromGraphQLJsonbNullableToDartJsonNullable(json['_eq']),
+      $gt: fromGraphQLJsonbNullableToDartJsonNullable(json['_gt']),
+      $gte: fromGraphQLJsonbNullableToDartJsonNullable(json['_gte']),
       $hasKey: json['_has_key'] as String?,
       $hasKeysAll: (json['_has_keys_all'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -1183,35 +1185,35 @@ JsonbComparisonExp _$JsonbComparisonExpFromJson(Map<String, dynamic> json) =>
       $hasKeysAny: (json['_has_keys_any'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $in: fromGraphQLListNullableJsonbToDartListNullableJson(
+          json['_in'] as List<Map<dynamic, dynamic>>?),
       $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as Map<String, dynamic>?,
-      $lte: json['_lte'] as Map<String, dynamic>?,
-      $neq: json['_neq'] as Map<String, dynamic>?,
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $lt: fromGraphQLJsonbNullableToDartJsonNullable(json['_lt']),
+      $lte: fromGraphQLJsonbNullableToDartJsonNullable(json['_lte']),
+      $neq: fromGraphQLJsonbNullableToDartJsonNullable(json['_neq']),
+      $nin: fromGraphQLListNullableJsonbToDartListNullableJson(
+          json['_nin'] as List<Map<dynamic, dynamic>>?),
     );
 
 Map<String, dynamic> _$JsonbComparisonExpToJson(JsonbComparisonExp instance) =>
     <String, dynamic>{
       '_cast': instance.$cast?.toJson(),
-      '_contained_in': instance.$containedIn,
-      '_contains': instance.$contains,
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
+      '_contained_in':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.$containedIn),
+      '_contains':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.$contains),
+      '_eq': fromDartJsonNullableToGraphQLJsonbNullable(instance.$eq),
+      '_gt': fromDartJsonNullableToGraphQLJsonbNullable(instance.$gt),
+      '_gte': fromDartJsonNullableToGraphQLJsonbNullable(instance.$gte),
       '_has_key': instance.$hasKey,
       '_has_keys_all': instance.$hasKeysAll,
       '_has_keys_any': instance.$hasKeysAny,
-      '_in': instance.$in,
+      '_in': fromDartListNullableJsonToGraphQLListNullableJsonb(instance.$in),
       '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
+      '_lt': fromDartJsonNullableToGraphQLJsonbNullable(instance.$lt),
+      '_lte': fromDartJsonNullableToGraphQLJsonbNullable(instance.$lte),
+      '_neq': fromDartJsonNullableToGraphQLJsonbNullable(instance.$neq),
+      '_nin': fromDartListNullableJsonToGraphQLListNullableJsonb(instance.$nin),
     };
 
 JsonbCastExp _$JsonbCastExpFromJson(Map<String, dynamic> json) => JsonbCastExp(
@@ -1920,41 +1922,43 @@ GeographyComparisonExp _$GeographyComparisonExpFromJson(
       $cast: json['_cast'] == null
           ? null
           : GeographyCastExp.fromJson(json['_cast'] as Map<String, dynamic>),
-      $eq: json['_eq'] as Map<String, dynamic>?,
-      $gt: json['_gt'] as Map<String, dynamic>?,
-      $gte: json['_gte'] as Map<String, dynamic>?,
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $eq: fromGraphQLGeographyNullableToDartJsonNullable(json['_eq']),
+      $gt: fromGraphQLGeographyNullableToDartJsonNullable(json['_gt']),
+      $gte: fromGraphQLGeographyNullableToDartJsonNullable(json['_gte']),
+      $in: fromGraphQLListNullableGeographyToDartListNullableJson(
+          json['_in'] as List<Map<dynamic, dynamic>>?),
       $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as Map<String, dynamic>?,
-      $lte: json['_lte'] as Map<String, dynamic>?,
-      $neq: json['_neq'] as Map<String, dynamic>?,
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $lt: fromGraphQLGeographyNullableToDartJsonNullable(json['_lt']),
+      $lte: fromGraphQLGeographyNullableToDartJsonNullable(json['_lte']),
+      $neq: fromGraphQLGeographyNullableToDartJsonNullable(json['_neq']),
+      $nin: fromGraphQLListNullableGeographyToDartListNullableJson(
+          json['_nin'] as List<Map<dynamic, dynamic>>?),
       $stDWithin: json['_st_d_within'] == null
           ? null
           : StDWithinGeographyInput.fromJson(
               json['_st_d_within'] as Map<String, dynamic>),
-      $stIntersects: json['_st_intersects'] as Map<String, dynamic>?,
+      $stIntersects: fromGraphQLGeographyNullableToDartJsonNullable(
+          json['_st_intersects']),
     );
 
 Map<String, dynamic> _$GeographyComparisonExpToJson(
         GeographyComparisonExp instance) =>
     <String, dynamic>{
       '_cast': instance.$cast?.toJson(),
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
+      '_eq': fromDartJsonNullableToGraphQLGeographyNullable(instance.$eq),
+      '_gt': fromDartJsonNullableToGraphQLGeographyNullable(instance.$gt),
+      '_gte': fromDartJsonNullableToGraphQLGeographyNullable(instance.$gte),
+      '_in':
+          fromDartListNullableJsonToGraphQLListNullableGeography(instance.$in),
       '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
+      '_lt': fromDartJsonNullableToGraphQLGeographyNullable(instance.$lt),
+      '_lte': fromDartJsonNullableToGraphQLGeographyNullable(instance.$lte),
+      '_neq': fromDartJsonNullableToGraphQLGeographyNullable(instance.$neq),
+      '_nin':
+          fromDartListNullableJsonToGraphQLListNullableGeography(instance.$nin),
       '_st_d_within': instance.$stDWithin?.toJson(),
-      '_st_intersects': instance.$stIntersects,
+      '_st_intersects': fromDartJsonNullableToGraphQLGeographyNullable(
+          instance.$stIntersects),
     };
 
 GeographyCastExp _$GeographyCastExpFromJson(Map<String, dynamic> json) =>
@@ -1976,60 +1980,76 @@ GeometryComparisonExp _$GeometryComparisonExpFromJson(
       $cast: json['_cast'] == null
           ? null
           : GeometryCastExp.fromJson(json['_cast'] as Map<String, dynamic>),
-      $eq: json['_eq'] as Map<String, dynamic>?,
-      $gt: json['_gt'] as Map<String, dynamic>?,
-      $gte: json['_gte'] as Map<String, dynamic>?,
-      $in: (json['_in'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $eq: fromGraphQLGeometryNullableToDartJsonNullable(json['_eq']),
+      $gt: fromGraphQLGeometryNullableToDartJsonNullable(json['_gt']),
+      $gte: fromGraphQLGeometryNullableToDartJsonNullable(json['_gte']),
+      $in: fromGraphQLListNullableGeometryToDartListNullableJson(
+          json['_in'] as List<Map<dynamic, dynamic>>?),
       $isNull: json['_is_null'] as bool?,
-      $lt: json['_lt'] as Map<String, dynamic>?,
-      $lte: json['_lte'] as Map<String, dynamic>?,
-      $neq: json['_neq'] as Map<String, dynamic>?,
-      $nin: (json['_nin'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
+      $lt: fromGraphQLGeometryNullableToDartJsonNullable(json['_lt']),
+      $lte: fromGraphQLGeometryNullableToDartJsonNullable(json['_lte']),
+      $neq: fromGraphQLGeometryNullableToDartJsonNullable(json['_neq']),
+      $nin: fromGraphQLListNullableGeometryToDartListNullableJson(
+          json['_nin'] as List<Map<dynamic, dynamic>>?),
       $st3dDWithin: json['_st_3d_d_within'] == null
           ? null
           : StDWithinInput.fromJson(
               json['_st_3d_d_within'] as Map<String, dynamic>),
-      $st3dIntersects: json['_st_3d_intersects'] as Map<String, dynamic>?,
-      $stContains: json['_st_contains'] as Map<String, dynamic>?,
-      $stCrosses: json['_st_crosses'] as Map<String, dynamic>?,
+      $st3dIntersects: fromGraphQLGeometryNullableToDartJsonNullable(
+          json['_st_3d_intersects']),
+      $stContains:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_contains']),
+      $stCrosses:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_crosses']),
       $stDWithin: json['_st_d_within'] == null
           ? null
           : StDWithinInput.fromJson(
               json['_st_d_within'] as Map<String, dynamic>),
-      $stEquals: json['_st_equals'] as Map<String, dynamic>?,
-      $stIntersects: json['_st_intersects'] as Map<String, dynamic>?,
-      $stOverlaps: json['_st_overlaps'] as Map<String, dynamic>?,
-      $stTouches: json['_st_touches'] as Map<String, dynamic>?,
-      $stWithin: json['_st_within'] as Map<String, dynamic>?,
+      $stEquals:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_equals']),
+      $stIntersects:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_intersects']),
+      $stOverlaps:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_overlaps']),
+      $stTouches:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_touches']),
+      $stWithin:
+          fromGraphQLGeometryNullableToDartJsonNullable(json['_st_within']),
     );
 
 Map<String, dynamic> _$GeometryComparisonExpToJson(
         GeometryComparisonExp instance) =>
     <String, dynamic>{
       '_cast': instance.$cast?.toJson(),
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
+      '_eq': fromDartJsonNullableToGraphQLGeometryNullable(instance.$eq),
+      '_gt': fromDartJsonNullableToGraphQLGeometryNullable(instance.$gt),
+      '_gte': fromDartJsonNullableToGraphQLGeometryNullable(instance.$gte),
+      '_in':
+          fromDartListNullableJsonToGraphQLListNullableGeometry(instance.$in),
       '_is_null': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
+      '_lt': fromDartJsonNullableToGraphQLGeometryNullable(instance.$lt),
+      '_lte': fromDartJsonNullableToGraphQLGeometryNullable(instance.$lte),
+      '_neq': fromDartJsonNullableToGraphQLGeometryNullable(instance.$neq),
+      '_nin':
+          fromDartListNullableJsonToGraphQLListNullableGeometry(instance.$nin),
       '_st_3d_d_within': instance.$st3dDWithin?.toJson(),
-      '_st_3d_intersects': instance.$st3dIntersects,
-      '_st_contains': instance.$stContains,
-      '_st_crosses': instance.$stCrosses,
+      '_st_3d_intersects': fromDartJsonNullableToGraphQLGeometryNullable(
+          instance.$st3dIntersects),
+      '_st_contains':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stContains),
+      '_st_crosses':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stCrosses),
       '_st_d_within': instance.$stDWithin?.toJson(),
-      '_st_equals': instance.$stEquals,
-      '_st_intersects': instance.$stIntersects,
-      '_st_overlaps': instance.$stOverlaps,
-      '_st_touches': instance.$stTouches,
-      '_st_within': instance.$stWithin,
+      '_st_equals':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stEquals),
+      '_st_intersects':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stIntersects),
+      '_st_overlaps':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stOverlaps),
+      '_st_touches':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stTouches),
+      '_st_within':
+          fromDartJsonNullableToGraphQLGeometryNullable(instance.$stWithin),
     };
 
 GeometryCastExp _$GeometryCastExpFromJson(Map<String, dynamic> json) =>
@@ -2048,20 +2068,20 @@ Map<String, dynamic> _$GeometryCastExpToJson(GeometryCastExp instance) =>
 StDWithinInput _$StDWithinInputFromJson(Map<String, dynamic> json) =>
     StDWithinInput(
       distance: (json['distance'] as num).toDouble(),
-      from: json['from'] as Map<String, dynamic>,
+      from: fromGraphQLGeometryToDartJson(json['from']),
     );
 
 Map<String, dynamic> _$StDWithinInputToJson(StDWithinInput instance) =>
     <String, dynamic>{
       'distance': instance.distance,
-      'from': instance.from,
+      'from': fromDartJsonToGraphQLGeometry(instance.from),
     };
 
 StDWithinGeographyInput _$StDWithinGeographyInputFromJson(
         Map<String, dynamic> json) =>
     StDWithinGeographyInput(
       distance: (json['distance'] as num).toDouble(),
-      from: json['from'] as Map<String, dynamic>,
+      from: fromGraphQLGeographyToDartJson(json['from']),
       useSpheroid: json['use_spheroid'] as bool?,
     );
 
@@ -2069,7 +2089,7 @@ Map<String, dynamic> _$StDWithinGeographyInputToJson(
         StDWithinGeographyInput instance) =>
     <String, dynamic>{
       'distance': instance.distance,
-      'from': instance.from,
+      'from': fromDartJsonToGraphQLGeography(instance.from),
       'use_spheroid': instance.useSpheroid,
     };
 
@@ -3417,6 +3437,111 @@ Map<String, dynamic> _$GetMorePersonData$QueryRootToJson(
       'persons_by_pk': instance.personsByPk?.toJson(),
     };
 
+PersonsGeolocations$QueryRoot$Persons$Areas
+    _$PersonsGeolocations$QueryRoot$Persons$AreasFromJson(
+            Map<String, dynamic> json) =>
+        PersonsGeolocations$QueryRoot$Persons$Areas()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..bounds =
+              fromGraphQLGeographyNullableToDartJsonNullable(json['bounds']);
+
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$AreasToJson(
+        PersonsGeolocations$QueryRoot$Persons$Areas instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'bounds': fromDartJsonNullableToGraphQLGeographyNullable(instance.bounds),
+    };
+
+PersonsGeolocations$QueryRoot$Persons$Streets
+    _$PersonsGeolocations$QueryRoot$Persons$StreetsFromJson(
+            Map<String, dynamic> json) =>
+        PersonsGeolocations$QueryRoot$Persons$Streets()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..line = fromGraphQLGeographyNullableToDartJsonNullable(json['line']);
+
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$StreetsToJson(
+        PersonsGeolocations$QueryRoot$Persons$Streets instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'line': fromDartJsonNullableToGraphQLGeographyNullable(instance.line),
+    };
+
+PersonsGeolocations$QueryRoot$Persons$Families
+    _$PersonsGeolocations$QueryRoot$Persons$FamiliesFromJson(
+            Map<String, dynamic> json) =>
+        PersonsGeolocations$QueryRoot$Persons$Families()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation']);
+
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$FamiliesToJson(
+        PersonsGeolocations$QueryRoot$Persons$Families instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+    };
+
+PersonsGeolocations$QueryRoot$Persons
+    _$PersonsGeolocations$QueryRoot$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        PersonsGeolocations$QueryRoot$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation'])
+          ..areas = (json['areas'] as List<dynamic>?)
+              ?.map((e) => PersonsGeolocations$QueryRoot$Persons$Areas.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..streets = (json['streets'] as List<dynamic>?)
+              ?.map((e) =>
+                  PersonsGeolocations$QueryRoot$Persons$Streets.fromJson(
+                      e as Map<String, dynamic>))
+              .toList()
+          ..family = json['family'] == null
+              ? null
+              : PersonsGeolocations$QueryRoot$Persons$Families.fromJson(
+                  json['family'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$PersonsToJson(
+        PersonsGeolocations$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'areas': instance.areas?.map((e) => e.toJson()).toList(),
+      'streets': instance.streets?.map((e) => e.toJson()).toList(),
+      'family': instance.family?.toJson(),
+    };
+
+PersonsGeolocations$QueryRoot _$PersonsGeolocations$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    PersonsGeolocations$QueryRoot()
+      ..persons = (json['persons'] as List<dynamic>)
+          .map((e) => PersonsGeolocations$QueryRoot$Persons.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$PersonsGeolocations$QueryRootToJson(
+        PersonsGeolocations$QueryRoot instance) =>
+    <String, dynamic>{
+      'persons': instance.persons.map((e) => e.toJson()).toList(),
+    };
+
 GetPersonsStream$SubscriptionRoot$Persons
     _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
             Map<String, dynamic> json) =>
@@ -3837,7 +3962,8 @@ WatchPerson$SubscriptionRoot$Persons
               : WatchPerson$SubscriptionRoot$Persons$Fathers.fromJson(
                   json['father'] as Map<String, dynamic>)
           ..gender = json['gender'] as bool
-          ..geolocation = json['geolocation'] as Map<String, dynamic>?
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation'])
           ..groups = (json['groups'] as List<dynamic>)
               .map((e) =>
                   WatchPerson$SubscriptionRoot$Persons$PersonsGroups.fromJson(
@@ -3851,14 +3977,19 @@ WatchPerson$SubscriptionRoot$Persons
               : WatchPerson$SubscriptionRoot$Persons$Jobs.fromJson(
                   json['job'] as Map<String, dynamic>)
           ..jobDescription = json['jobDescription'] as String?
-          ..lastCall = json['lastCall'] as Map<String, dynamic>?
-          ..lastConfession = json['lastConfession'] as Map<String, dynamic>?
-          ..lastEdit = json['lastEdit'] as Map<String, dynamic>?
-          ..lastKodas = json['lastKodas'] as Map<String, dynamic>?
-          ..lastVisit = json['lastVisit'] as Map<String, dynamic>?
+          ..lastCall =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastCall'])
+          ..lastConfession =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastConfession'])
+          ..lastEdit =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastEdit'])
+          ..lastKodas =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastKodas'])
+          ..lastVisit =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastVisit'])
           ..mainPhone = json['mainPhone'] as String?
           ..notes = json['notes'] as String?
-          ..otherPhones = json['otherPhones'] as Map<String, dynamic>
+          ..otherPhones = fromGraphQLJsonbToDartJson(json['otherPhones'])
           ..personType = json['personType'] == null
               ? null
               : WatchPerson$SubscriptionRoot$Persons$PersonTypes.fromJson(
@@ -3916,21 +4047,25 @@ Map<String, dynamic> _$WatchPerson$SubscriptionRoot$PersonsToJson(
       'family': instance.family?.toJson(),
       'father': instance.father?.toJson(),
       'gender': instance.gender,
-      'geolocation': instance.geolocation,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
       'groups': instance.groups.map((e) => e.toJson()).toList(),
       'isServant': instance.isServant,
       'isShammas': instance.isShammas,
       'isStudent': instance.isStudent,
       'job': instance.job?.toJson(),
       'jobDescription': instance.jobDescription,
-      'lastCall': instance.lastCall,
-      'lastConfession': instance.lastConfession,
-      'lastEdit': instance.lastEdit,
-      'lastKodas': instance.lastKodas,
-      'lastVisit': instance.lastVisit,
+      'lastCall': fromDartJsonNullableToGraphQLJsonbNullable(instance.lastCall),
+      'lastConfession':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastConfession),
+      'lastEdit': fromDartJsonNullableToGraphQLJsonbNullable(instance.lastEdit),
+      'lastKodas':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastKodas),
+      'lastVisit':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastVisit),
       'mainPhone': instance.mainPhone,
       'notes': instance.notes,
-      'otherPhones': instance.otherPhones,
+      'otherPhones': fromDartJsonToGraphQLJsonb(instance.otherPhones),
       'personType': instance.personType?.toJson(),
       'qualification': instance.qualification?.toJson(),
       'school': instance.school?.toJson(),
@@ -4492,9 +4627,10 @@ GetUserInfoStream$SubscriptionRoot$Users$Persons
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..address = json['address'] as String?
-          ..geolocation = json['geolocation'] as Map<String, dynamic>?
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation'])
           ..mainPhone = json['mainPhone'] as String?
-          ..otherPhones = json['otherPhones'] as Map<String, dynamic>
+          ..otherPhones = fromGraphQLJsonbToDartJson(json['otherPhones'])
           ..birthdate = json['birthdate'] == null
               ? null
               : DateTime.parse(json['birthdate'] as String)
@@ -4533,8 +4669,10 @@ GetUserInfoStream$SubscriptionRoot$Users$Persons
           ..photoUpdatedAt = json['photoUpdatedAt'] == null
               ? null
               : DateTime.parse(json['photoUpdatedAt'] as String)
-          ..lastKodas = json['lastKodas'] as Map<String, dynamic>?
-          ..lastConfession = json['lastConfession'] as Map<String, dynamic>?;
+          ..lastKodas =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastKodas'])
+          ..lastConfession = fromGraphQLJsonbNullableToDartJsonNullable(
+              json['lastConfession']);
 
 Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$PersonsToJson(
         GetUserInfoStream$SubscriptionRoot$Users$Persons instance) =>
@@ -4542,9 +4680,10 @@ Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$PersonsToJson(
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
       'address': instance.address,
-      'geolocation': instance.geolocation,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
       'mainPhone': instance.mainPhone,
-      'otherPhones': instance.otherPhones,
+      'otherPhones': fromDartJsonToGraphQLJsonb(instance.otherPhones),
       'birthdate': instance.birthdate?.toIso8601String(),
       'gender': instance.gender,
       'isShammas': instance.isShammas,
@@ -4575,8 +4714,10 @@ Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$PersonsToJson(
       'studyYearId': instance.studyYearId,
       'color': instance.color,
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'lastKodas': instance.lastKodas,
-      'lastConfession': instance.lastConfession,
+      'lastKodas':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastKodas),
+      'lastConfession':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastConfession),
     };
 
 GetUserInfoStream$SubscriptionRoot$Users
@@ -4619,6 +4760,142 @@ Map<String, dynamic> _$GetUserInfoStream$SubscriptionRootToJson(
         GetUserInfoStream$SubscriptionRoot instance) =>
     <String, dynamic>{
       'users_by_pk': instance.usersByPk?.toJson(),
+    };
+
+GetClassesStream$SubscriptionRoot$Classes
+    _$GetClassesStream$SubscriptionRoot$ClassesFromJson(
+            Map<String, dynamic> json) =>
+        GetClassesStream$SubscriptionRoot$Classes()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetClassesStream$SubscriptionRoot$ClassesToJson(
+        GetClassesStream$SubscriptionRoot$Classes instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetClassesStream$SubscriptionRoot _$GetClassesStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetClassesStream$SubscriptionRoot()
+      ..classes = (json['classes'] as List<dynamic>)
+          .map((e) => GetClassesStream$SubscriptionRoot$Classes.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetClassesStream$SubscriptionRootToJson(
+        GetClassesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'classes': instance.classes.map((e) => e.toJson()).toList(),
+    };
+
+GetFamiliesStream$SubscriptionRoot$Families
+    _$GetFamiliesStream$SubscriptionRoot$FamiliesFromJson(
+            Map<String, dynamic> json) =>
+        GetFamiliesStream$SubscriptionRoot$Families()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetFamiliesStream$SubscriptionRoot$FamiliesToJson(
+        GetFamiliesStream$SubscriptionRoot$Families instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetFamiliesStream$SubscriptionRoot _$GetFamiliesStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetFamiliesStream$SubscriptionRoot()
+      ..families = (json['families'] as List<dynamic>)
+          .map((e) => GetFamiliesStream$SubscriptionRoot$Families.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetFamiliesStream$SubscriptionRootToJson(
+        GetFamiliesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'families': instance.families.map((e) => e.toJson()).toList(),
+    };
+
+GetGroupsStream$SubscriptionRoot$Groups
+    _$GetGroupsStream$SubscriptionRoot$GroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetGroupsStream$SubscriptionRoot$Groups()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetGroupsStream$SubscriptionRoot$GroupsToJson(
+        GetGroupsStream$SubscriptionRoot$Groups instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetGroupsStream$SubscriptionRoot _$GetGroupsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetGroupsStream$SubscriptionRoot()
+      ..groups = (json['groups'] as List<dynamic>)
+          .map((e) => GetGroupsStream$SubscriptionRoot$Groups.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetGroupsStream$SubscriptionRootToJson(
+        GetGroupsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'groups': instance.groups.map((e) => e.toJson()).toList(),
+    };
+
+GetStreetsStream$SubscriptionRoot$Streets
+    _$GetStreetsStream$SubscriptionRoot$StreetsFromJson(
+            Map<String, dynamic> json) =>
+        GetStreetsStream$SubscriptionRoot$Streets()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..line = fromGraphQLGeographyNullableToDartJsonNullable(json['line'])
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetStreetsStream$SubscriptionRoot$StreetsToJson(
+        GetStreetsStream$SubscriptionRoot$Streets instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'line': fromDartJsonNullableToGraphQLGeographyNullable(instance.line),
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetStreetsStream$SubscriptionRoot _$GetStreetsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetStreetsStream$SubscriptionRoot()
+      ..streets = (json['streets'] as List<dynamic>)
+          .map((e) => GetStreetsStream$SubscriptionRoot$Streets.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetStreetsStream$SubscriptionRootToJson(
+        GetStreetsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'streets': instance.streets.map((e) => e.toJson()).toList(),
     };
 
 GetAreasStreamArguments _$GetAreasStreamArgumentsFromJson(
@@ -4787,6 +5064,20 @@ Map<String, dynamic> _$GetMorePersonDataArgumentsToJson(
       'classesAfter': instance.classesAfter,
       'groupsAfter': instance.groupsAfter,
       'servicesAfter': instance.servicesAfter,
+    };
+
+PersonsGeolocationsArguments _$PersonsGeolocationsArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    PersonsGeolocationsArguments(
+      conditions: json['conditions'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['conditions'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsGeolocationsArgumentsToJson(
+        PersonsGeolocationsArguments instance) =>
+    <String, dynamic>{
+      'conditions': instance.conditions?.toJson(),
     };
 
 GetPersonsStreamArguments _$GetPersonsStreamArgumentsFromJson(
@@ -4960,4 +5251,68 @@ Map<String, dynamic> _$GetUserInfoStreamArgumentsToJson(
         GetUserInfoStreamArguments instance) =>
     <String, dynamic>{
       'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+    };
+
+GetClassesStreamArguments _$GetClassesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetClassesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => ClassesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetClassesStreamArgumentsToJson(
+        GetClassesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetFamiliesStreamArguments _$GetFamiliesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFamiliesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => FamiliesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetFamiliesStreamArgumentsToJson(
+        GetFamiliesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetGroupsStreamArguments _$GetGroupsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetGroupsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => GroupsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetGroupsStreamArgumentsToJson(
+        GetGroupsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetStreetsStreamArguments _$GetStreetsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetStreetsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => StreetsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetStreetsStreamArgumentsToJson(
+        GetStreetsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
     };

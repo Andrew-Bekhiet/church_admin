@@ -12,8 +12,12 @@ import 'package:uuid/uuid.dart';
 import 'database/graphql.graphql.dart';
 
 part 'database/areas.dart';
+part 'database/classes.dart';
+part 'database/families.dart';
+part 'database/groups.dart';
 part 'database/persons.dart';
 part 'database/services.dart';
+part 'database/streets.dart';
 part 'database/study_years.dart';
 part 'database/users.dart';
 
@@ -22,9 +26,17 @@ class CADatabaseRepository implements DatabaseRepository {
   static CADatabaseRepository get I => instance;
 
   final areas = AreasQueries._();
+  final streets = StreetsQueries._();
+  final families = FamiliesQueries._();
+
   final persons = PersonsQueries._();
+
   final services = ServicesQueries._();
+  final classes = ClassesQueries._();
+  final groups = GroupsQueries._();
+
   final studyYears = StudyYearsQueries._();
+
   final users = UsersQueries._();
 
   @override

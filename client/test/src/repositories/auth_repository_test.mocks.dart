@@ -49,14 +49,22 @@ class _FakeQuery_6 extends _i1.Fake implements _i3.Query {}
 
 class _FakeAreasQueries_7 extends _i1.Fake implements _i4.AreasQueries {}
 
-class _FakePersonsQueries_8 extends _i1.Fake implements _i4.PersonsQueries {}
+class _FakeStreetsQueries_8 extends _i1.Fake implements _i4.StreetsQueries {}
 
-class _FakeServicesQueries_9 extends _i1.Fake implements _i4.ServicesQueries {}
+class _FakeFamiliesQueries_9 extends _i1.Fake implements _i4.FamiliesQueries {}
 
-class _FakeStudyYearsQueries_10 extends _i1.Fake
+class _FakePersonsQueries_10 extends _i1.Fake implements _i4.PersonsQueries {}
+
+class _FakeServicesQueries_11 extends _i1.Fake implements _i4.ServicesQueries {}
+
+class _FakeClassesQueries_12 extends _i1.Fake implements _i4.ClassesQueries {}
+
+class _FakeGroupsQueries_13 extends _i1.Fake implements _i4.GroupsQueries {}
+
+class _FakeStudyYearsQueries_14 extends _i1.Fake
     implements _i4.StudyYearsQueries {}
 
-class _FakeUsersQueries_11 extends _i1.Fake implements _i4.UsersQueries {}
+class _FakeUsersQueries_15 extends _i1.Fake implements _i4.UsersQueries {}
 
 /// A class which mocks [FirebaseDatabase].
 ///
@@ -374,20 +382,36 @@ class MockCADatabaseRepository extends _i1.Mock
   _i4.AreasQueries get areas => (super.noSuchMethod(Invocation.getter(#areas),
       returnValue: _FakeAreasQueries_7()) as _i4.AreasQueries);
   @override
+  _i4.StreetsQueries get streets =>
+      (super.noSuchMethod(Invocation.getter(#streets),
+          returnValue: _FakeStreetsQueries_8()) as _i4.StreetsQueries);
+  @override
+  _i4.FamiliesQueries get families =>
+      (super.noSuchMethod(Invocation.getter(#families),
+          returnValue: _FakeFamiliesQueries_9()) as _i4.FamiliesQueries);
+  @override
   _i4.PersonsQueries get persons =>
       (super.noSuchMethod(Invocation.getter(#persons),
-          returnValue: _FakePersonsQueries_8()) as _i4.PersonsQueries);
+          returnValue: _FakePersonsQueries_10()) as _i4.PersonsQueries);
   @override
   _i4.ServicesQueries get services =>
       (super.noSuchMethod(Invocation.getter(#services),
-          returnValue: _FakeServicesQueries_9()) as _i4.ServicesQueries);
+          returnValue: _FakeServicesQueries_11()) as _i4.ServicesQueries);
+  @override
+  _i4.ClassesQueries get classes =>
+      (super.noSuchMethod(Invocation.getter(#classes),
+          returnValue: _FakeClassesQueries_12()) as _i4.ClassesQueries);
+  @override
+  _i4.GroupsQueries get groups =>
+      (super.noSuchMethod(Invocation.getter(#groups),
+          returnValue: _FakeGroupsQueries_13()) as _i4.GroupsQueries);
   @override
   _i4.StudyYearsQueries get studyYears =>
       (super.noSuchMethod(Invocation.getter(#studyYears),
-          returnValue: _FakeStudyYearsQueries_10()) as _i4.StudyYearsQueries);
+          returnValue: _FakeStudyYearsQueries_14()) as _i4.StudyYearsQueries);
   @override
   _i4.UsersQueries get users => (super.noSuchMethod(Invocation.getter(#users),
-      returnValue: _FakeUsersQueries_11()) as _i4.UsersQueries);
+      returnValue: _FakeUsersQueries_15()) as _i4.UsersQueries);
   @override
   Never get runTransaction =>
       (super.noSuchMethod(Invocation.getter(#runTransaction), returnValue: null)

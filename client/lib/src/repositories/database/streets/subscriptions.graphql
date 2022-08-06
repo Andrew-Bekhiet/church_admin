@@ -1,0 +1,12 @@
+subscription getStreetsStream(
+  $addWhere: [streets_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  streets(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    line
+    color
+    photoUpdatedAt
+  }
+}

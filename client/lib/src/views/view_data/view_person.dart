@@ -155,16 +155,14 @@ class ViewPerson extends StatelessWidget {
                       'العنوان',
                       person.address,
                       additionalOptions: [
-                        if (person.geolocation !=
-                            null) // && !person.ref.path.startsWith('Deleted')
+                        if (person.geolocation != null)
                           IconButton(
                             icon: const Icon(Icons.map),
                             onPressed: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => Container()
-                                  //TODO: Google Maps
-                                  /* LocationMapView(person: person), */
-                                  ),
+                                builder: (context) =>
+                                    DataGeomap(initialPerson: person),
+                              ),
                             ),
                             tooltip: 'إظهار على الخريطة',
                           ),

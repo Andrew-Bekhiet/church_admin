@@ -3,9 +3,10 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i7;
-import 'dart:ui' as _i14;
+import 'dart:ui' as _i15;
 
 import 'package:church_admin/church_admin.dart' as _i4;
+import 'package:church_admin/graphql/scalars.dart' as _i14;
 import 'package:church_admin/src/repositories/database/graphql.graphql.dart'
     as _i13;
 import 'package:churchdata_core/churchdata_core.dart' as _i5;
@@ -43,24 +44,32 @@ class _FakePermissionsSet_4 extends _i1.Fake implements _i5.PermissionsSet {}
 
 class _FakeAreasQueries_5 extends _i1.Fake implements _i4.AreasQueries {}
 
-class _FakePersonsQueries_6 extends _i1.Fake implements _i4.PersonsQueries {}
+class _FakeStreetsQueries_6 extends _i1.Fake implements _i4.StreetsQueries {}
 
-class _FakeServicesQueries_7 extends _i1.Fake implements _i4.ServicesQueries {}
+class _FakeFamiliesQueries_7 extends _i1.Fake implements _i4.FamiliesQueries {}
 
-class _FakeStudyYearsQueries_8 extends _i1.Fake
+class _FakePersonsQueries_8 extends _i1.Fake implements _i4.PersonsQueries {}
+
+class _FakeServicesQueries_9 extends _i1.Fake implements _i4.ServicesQueries {}
+
+class _FakeClassesQueries_10 extends _i1.Fake implements _i4.ClassesQueries {}
+
+class _FakeGroupsQueries_11 extends _i1.Fake implements _i4.GroupsQueries {}
+
+class _FakeStudyYearsQueries_12 extends _i1.Fake
     implements _i4.StudyYearsQueries {}
 
-class _FakeUsersQueries_9 extends _i1.Fake implements _i4.UsersQueries {}
+class _FakeUsersQueries_13 extends _i1.Fake implements _i4.UsersQueries {}
 
-class _FakeDelegatingPaginatableStream_10<T extends _i5.ViewableWithID>
+class _FakeDelegatingPaginatableStream_14<T extends _i5.ViewableWithID>
     extends _i1.Fake implements _i4.DelegatingPaginatableStream<T> {}
 
-class _FakeQueryResult_11<TParsed extends Object?> extends _i1.Fake
+class _FakeQueryResult_15<TParsed extends Object?> extends _i1.Fake
     implements _i6.QueryResult<TParsed> {}
 
-class _FakePerson_12 extends _i1.Fake implements _i4.Person {}
+class _FakePerson_16 extends _i1.Fake implements _i4.Person {}
 
-class _FakeDuration_13 extends _i1.Fake implements Duration {}
+class _FakeDuration_17 extends _i1.Fake implements Duration {}
 
 /// A class which mocks [LoggingService].
 ///
@@ -249,20 +258,36 @@ class MockCADatabaseRepository extends _i1.Mock
   _i4.AreasQueries get areas => (super.noSuchMethod(Invocation.getter(#areas),
       returnValue: _FakeAreasQueries_5()) as _i4.AreasQueries);
   @override
+  _i4.StreetsQueries get streets =>
+      (super.noSuchMethod(Invocation.getter(#streets),
+          returnValue: _FakeStreetsQueries_6()) as _i4.StreetsQueries);
+  @override
+  _i4.FamiliesQueries get families =>
+      (super.noSuchMethod(Invocation.getter(#families),
+          returnValue: _FakeFamiliesQueries_7()) as _i4.FamiliesQueries);
+  @override
   _i4.PersonsQueries get persons =>
       (super.noSuchMethod(Invocation.getter(#persons),
-          returnValue: _FakePersonsQueries_6()) as _i4.PersonsQueries);
+          returnValue: _FakePersonsQueries_8()) as _i4.PersonsQueries);
   @override
   _i4.ServicesQueries get services =>
       (super.noSuchMethod(Invocation.getter(#services),
-          returnValue: _FakeServicesQueries_7()) as _i4.ServicesQueries);
+          returnValue: _FakeServicesQueries_9()) as _i4.ServicesQueries);
+  @override
+  _i4.ClassesQueries get classes =>
+      (super.noSuchMethod(Invocation.getter(#classes),
+          returnValue: _FakeClassesQueries_10()) as _i4.ClassesQueries);
+  @override
+  _i4.GroupsQueries get groups =>
+      (super.noSuchMethod(Invocation.getter(#groups),
+          returnValue: _FakeGroupsQueries_11()) as _i4.GroupsQueries);
   @override
   _i4.StudyYearsQueries get studyYears =>
       (super.noSuchMethod(Invocation.getter(#studyYears),
-          returnValue: _FakeStudyYearsQueries_8()) as _i4.StudyYearsQueries);
+          returnValue: _FakeStudyYearsQueries_12()) as _i4.StudyYearsQueries);
   @override
   _i4.UsersQueries get users => (super.noSuchMethod(Invocation.getter(#users),
-      returnValue: _FakeUsersQueries_9()) as _i4.UsersQueries);
+      returnValue: _FakeUsersQueries_13()) as _i4.UsersQueries);
   @override
   Never get runTransaction =>
       (super.noSuchMethod(Invocation.getter(#runTransaction), returnValue: null)
@@ -369,12 +394,33 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               {#personId: personId, #lastCall: lastCall}),
           returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
   @override
+  _i7.Future<_i4.Person?> updatePersonLastKodas(
+          {String? personId, DateTime? lastKodas}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updatePersonLastKodas, [],
+              {#personId: personId, #lastKodas: lastKodas}),
+          returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
+  @override
+  _i7.Future<_i4.Person?> updatePersonLastConfession(
+          {String? personId, DateTime? lastConfession}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updatePersonLastConfession, [],
+              {#personId: personId, #lastConfession: lastConfession}),
+          returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
+  @override
+  _i7.Future<_i4.Person?> updatePersonLastVisit(
+          {String? personId, DateTime? lastVisit}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updatePersonLastVisit, [],
+              {#personId: personId, #lastVisit: lastVisit}),
+          returnValue: Future<_i4.Person?>.value()) as _i7.Future<_i4.Person?>);
+  @override
   _i4.DelegatingPaginatableStream<_i4.Person> getPersonsStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
           Invocation.method(#getPersonsStream, [], {#searchQuery: searchQuery}),
           returnValue:
-              _FakeDelegatingPaginatableStream_10<_i4.Person>()) as _i4
+              _FakeDelegatingPaginatableStream_14<_i4.Person>()) as _i4
           .DelegatingPaginatableStream<_i4.Person>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>
@@ -382,7 +428,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsKodasWarning, [], {#date: date}),
           returnValue: Future<
                   _i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>.value(
-              _FakeQueryResult_11<_i13.GetPersonsKodasWarning$QueryRoot>())) as _i7
+              _FakeQueryResult_15<_i13.GetPersonsKodasWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>
@@ -390,7 +436,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsMeetingWarning, [], {#date: date}),
           returnValue:
               Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>.value(
-                  _FakeQueryResult_11<
+                  _FakeQueryResult_15<
                       _i13.GetPersonsAttendanceWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsAttendanceWarning$QueryRoot>>);
   @override
@@ -399,7 +445,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsVisitWarning, [], {#date: date}),
           returnValue: Future<
                   _i6.QueryResult<_i13.GetPersonsVisitWarning$QueryRoot>>.value(
-              _FakeQueryResult_11<_i13.GetPersonsVisitWarning$QueryRoot>())) as _i7
+              _FakeQueryResult_15<_i13.GetPersonsVisitWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsVisitWarning$QueryRoot>>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>
@@ -407,7 +453,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(#getPersonsConfessionWarning, [], {#date: date}),
           returnValue:
               Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>.value(
-                  _FakeQueryResult_11<
+                  _FakeQueryResult_15<
                       _i13.GetPersonsConfessionWarning$QueryRoot>())) as _i7
           .Future<_i6.QueryResult<_i13.GetPersonsConfessionWarning$QueryRoot>>);
   @override
@@ -416,7 +462,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               Invocation.method(#getBirthdayPersons, [], {#date: date}),
               returnValue: Future<
                       _i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>.value(
-                  _FakeQueryResult_11<_i13.GetPersonsBirthday$QueryRoot>()))
+                  _FakeQueryResult_15<_i13.GetPersonsBirthday$QueryRoot>()))
           as _i7.Future<_i6.QueryResult<_i13.GetPersonsBirthday$QueryRoot>>);
   @override
   _i7.Stream<_i4.Person?> watchPerson({String? personId}) => (super
@@ -428,7 +474,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
       (super.noSuchMethod(
               Invocation.method(#personCallHistory, [], {#personId: personId}),
               returnValue:
-                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personVisitHistory(
@@ -436,7 +482,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
       (super.noSuchMethod(
               Invocation.method(#personVisitHistory, [], {#personId: personId}),
               returnValue:
-                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>
@@ -444,7 +490,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               Invocation.method(
                   #personConfessionHistory, [], {#personId: personId}),
               returnValue:
-                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personKodasHistory(
@@ -452,7 +498,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
       (super.noSuchMethod(
               Invocation.method(#personKodasHistory, [], {#personId: personId}),
               returnValue:
-                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personEditHistory(
@@ -460,7 +506,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
       (super.noSuchMethod(
               Invocation.method(#personEditHistory, [], {#personId: personId}),
               returnValue:
-                  _FakeDelegatingPaginatableStream_10<_i4.LastRecordedByInfo>())
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i7.Future<_i4.Person> getMorePersonData(
@@ -477,8 +523,29 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                 #groupsAfter: groupsAfter,
                 #servicesAfter: servicesAfter
               }),
-              returnValue: Future<_i4.Person>.value(_FakePerson_12()))
+              returnValue: Future<_i4.Person>.value(_FakePerson_16()))
           as _i7.Future<_i4.Person>);
+  @override
+  _i7.Future<List<_i4.Person>> personsGeolocations(
+          {String? personId,
+          List<_i14.UuidValue>? areasIds = const [],
+          List<_i14.UuidValue>? streetsIds = const [],
+          List<_i14.UuidValue>? servicesIds = const [],
+          List<_i14.UuidValue>? classesIds = const [],
+          List<_i14.UuidValue>? groupsIds = const [],
+          List<_i14.UuidValue>? familiesIds = const []}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personsGeolocations, [], {
+                #personId: personId,
+                #areasIds: areasIds,
+                #streetsIds: streetsIds,
+                #servicesIds: servicesIds,
+                #classesIds: classesIds,
+                #groupsIds: groupsIds,
+                #familiesIds: familiesIds
+              }),
+              returnValue: Future<List<_i4.Person>>.value(<_i4.Person>[]))
+          as _i7.Future<List<_i4.Person>>);
 }
 
 /// A class which mocks [AreasQueries].
@@ -495,7 +562,7 @@ class MockAreasQueries extends _i1.Mock implements _i4.AreasQueries {
       (super.noSuchMethod(
           Invocation.method(#getAreasStream, [], {#searchQuery: searchQuery}),
           returnValue:
-              _FakeDelegatingPaginatableStream_10<_i4.Area>()) as _i4
+              _FakeDelegatingPaginatableStream_14<_i4.Area>()) as _i4
           .DelegatingPaginatableStream<_i4.Area>);
 }
 
@@ -513,7 +580,7 @@ class MockServicesQueries extends _i1.Mock implements _i4.ServicesQueries {
       (super.noSuchMethod(
               Invocation.method(
                   #getServicesStream, [], {#searchQuery: searchQuery}),
-              returnValue: _FakeDelegatingPaginatableStream_10<_i4.Service>())
+              returnValue: _FakeDelegatingPaginatableStream_14<_i4.Service>())
           as _i4.DelegatingPaginatableStream<_i4.Service>);
 }
 
@@ -536,13 +603,13 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth =>
       (super.noSuchMethod(Invocation.getter(#timeToReauth),
-          returnValue: _FakeDuration_13()) as Duration);
+          returnValue: _FakeDuration_17()) as Duration);
   @override
   _i7.Stream<void> get refreshUIStream =>
       (super.noSuchMethod(Invocation.getter(#refreshUIStream),
           returnValue: Stream<void>.empty()) as _i7.Stream<void>);
   @override
-  void didChangeAppLifecycleState(_i14.AppLifecycleState? state) => super
+  void didChangeAppLifecycleState(_i15.AppLifecycleState? state) => super
       .noSuchMethod(Invocation.method(#didChangeAppLifecycleState, [state]),
           returnValueForMissingStub: null);
   @override
@@ -593,7 +660,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
       super.noSuchMethod(Invocation.method(#didChangePlatformBrightness, []),
           returnValueForMissingStub: null);
   @override
-  void didChangeLocales(List<_i14.Locale>? locales) =>
+  void didChangeLocales(List<_i15.Locale>? locales) =>
       super.noSuchMethod(Invocation.method(#didChangeLocales, [locales]),
           returnValueForMissingStub: null);
   @override

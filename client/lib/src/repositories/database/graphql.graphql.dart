@@ -25,6 +25,9 @@ class GetAreasStream$SubscriptionRoot$Areas extends JsonSerializable
 
   late String name;
 
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? bounds;
 
   int? color;
@@ -1331,19 +1334,34 @@ class JsonbComparisonExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_cast')
   JsonbCastExp? $cast;
 
-  @JsonKey(name: '_contained_in')
+  @JsonKey(
+      name: '_contained_in',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $containedIn;
 
-  @JsonKey(name: '_contains')
+  @JsonKey(
+      name: '_contains',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $contains;
 
-  @JsonKey(name: '_eq')
+  @JsonKey(
+      name: '_eq',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $eq;
 
-  @JsonKey(name: '_gt')
+  @JsonKey(
+      name: '_gt',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $gt;
 
-  @JsonKey(name: '_gte')
+  @JsonKey(
+      name: '_gte',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $gte;
 
   @JsonKey(name: '_has_key')
@@ -1355,22 +1373,37 @@ class JsonbComparisonExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_has_keys_any')
   List<String>? $hasKeysAny;
 
-  @JsonKey(name: '_in')
+  @JsonKey(
+      name: '_in',
+      fromJson: fromGraphQLListNullableJsonbToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableJsonb)
   List<Json>? $in;
 
   @JsonKey(name: '_is_null')
   bool? $isNull;
 
-  @JsonKey(name: '_lt')
+  @JsonKey(
+      name: '_lt',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $lt;
 
-  @JsonKey(name: '_lte')
+  @JsonKey(
+      name: '_lte',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $lte;
 
-  @JsonKey(name: '_neq')
+  @JsonKey(
+      name: '_neq',
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? $neq;
 
-  @JsonKey(name: '_nin')
+  @JsonKey(
+      name: '_nin',
+      fromJson: fromGraphQLListNullableJsonbToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableJsonb)
   List<Json>? $nin;
 
   @override
@@ -2210,37 +2243,64 @@ class GeographyComparisonExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_cast')
   GeographyCastExp? $cast;
 
-  @JsonKey(name: '_eq')
+  @JsonKey(
+      name: '_eq',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $eq;
 
-  @JsonKey(name: '_gt')
+  @JsonKey(
+      name: '_gt',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $gt;
 
-  @JsonKey(name: '_gte')
+  @JsonKey(
+      name: '_gte',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $gte;
 
-  @JsonKey(name: '_in')
+  @JsonKey(
+      name: '_in',
+      fromJson: fromGraphQLListNullableGeographyToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableGeography)
   List<Json>? $in;
 
   @JsonKey(name: '_is_null')
   bool? $isNull;
 
-  @JsonKey(name: '_lt')
+  @JsonKey(
+      name: '_lt',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $lt;
 
-  @JsonKey(name: '_lte')
+  @JsonKey(
+      name: '_lte',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $lte;
 
-  @JsonKey(name: '_neq')
+  @JsonKey(
+      name: '_neq',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $neq;
 
-  @JsonKey(name: '_nin')
+  @JsonKey(
+      name: '_nin',
+      fromJson: fromGraphQLListNullableGeographyToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableGeography)
   List<Json>? $nin;
 
   @JsonKey(name: '_st_d_within')
   StDWithinGeographyInput? $stDWithin;
 
-  @JsonKey(name: '_st_intersects')
+  @JsonKey(
+      name: '_st_intersects',
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? $stIntersects;
 
   @override
@@ -2307,61 +2367,109 @@ class GeometryComparisonExp extends JsonSerializable with EquatableMixin {
   @JsonKey(name: '_cast')
   GeometryCastExp? $cast;
 
-  @JsonKey(name: '_eq')
+  @JsonKey(
+      name: '_eq',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $eq;
 
-  @JsonKey(name: '_gt')
+  @JsonKey(
+      name: '_gt',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $gt;
 
-  @JsonKey(name: '_gte')
+  @JsonKey(
+      name: '_gte',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $gte;
 
-  @JsonKey(name: '_in')
+  @JsonKey(
+      name: '_in',
+      fromJson: fromGraphQLListNullableGeometryToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableGeometry)
   List<Json>? $in;
 
   @JsonKey(name: '_is_null')
   bool? $isNull;
 
-  @JsonKey(name: '_lt')
+  @JsonKey(
+      name: '_lt',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $lt;
 
-  @JsonKey(name: '_lte')
+  @JsonKey(
+      name: '_lte',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $lte;
 
-  @JsonKey(name: '_neq')
+  @JsonKey(
+      name: '_neq',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $neq;
 
-  @JsonKey(name: '_nin')
+  @JsonKey(
+      name: '_nin',
+      fromJson: fromGraphQLListNullableGeometryToDartListNullableJson,
+      toJson: fromDartListNullableJsonToGraphQLListNullableGeometry)
   List<Json>? $nin;
 
   @JsonKey(name: '_st_3d_d_within')
   StDWithinInput? $st3dDWithin;
 
-  @JsonKey(name: '_st_3d_intersects')
+  @JsonKey(
+      name: '_st_3d_intersects',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $st3dIntersects;
 
-  @JsonKey(name: '_st_contains')
+  @JsonKey(
+      name: '_st_contains',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stContains;
 
-  @JsonKey(name: '_st_crosses')
+  @JsonKey(
+      name: '_st_crosses',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stCrosses;
 
   @JsonKey(name: '_st_d_within')
   StDWithinInput? $stDWithin;
 
-  @JsonKey(name: '_st_equals')
+  @JsonKey(
+      name: '_st_equals',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stEquals;
 
-  @JsonKey(name: '_st_intersects')
+  @JsonKey(
+      name: '_st_intersects',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stIntersects;
 
-  @JsonKey(name: '_st_overlaps')
+  @JsonKey(
+      name: '_st_overlaps',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stOverlaps;
 
-  @JsonKey(name: '_st_touches')
+  @JsonKey(
+      name: '_st_touches',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stTouches;
 
-  @JsonKey(name: '_st_within')
+  @JsonKey(
+      name: '_st_within',
+      fromJson: fromGraphQLGeometryNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeometryNullable)
   Json? $stWithin;
 
   @override
@@ -2415,6 +2523,9 @@ class StDWithinInput extends JsonSerializable with EquatableMixin {
 
   late double distance;
 
+  @JsonKey(
+      fromJson: fromGraphQLGeometryToDartJson,
+      toJson: fromDartJsonToGraphQLGeometry)
   late Json from;
 
   @override
@@ -2433,6 +2544,9 @@ class StDWithinGeographyInput extends JsonSerializable with EquatableMixin {
 
   late double distance;
 
+  @JsonKey(
+      fromJson: fromGraphQLGeographyToDartJson,
+      toJson: fromDartJsonToGraphQLGeography)
   late Json from;
 
   @JsonKey(name: 'use_spheroid')
@@ -3957,6 +4071,146 @@ class GetMorePersonData$QueryRoot extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class PersonsGeolocations$QueryRoot$Persons$Areas extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocations$QueryRoot$Persons$Areas();
+
+  factory PersonsGeolocations$QueryRoot$Persons$Areas.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonsGeolocations$QueryRoot$Persons$AreasFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
+  Json? bounds;
+
+  @override
+  List<Object?> get props => [id, name, color, bounds];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonsGeolocations$QueryRoot$Persons$AreasToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsGeolocations$QueryRoot$Persons$Streets extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocations$QueryRoot$Persons$Streets();
+
+  factory PersonsGeolocations$QueryRoot$Persons$Streets.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonsGeolocations$QueryRoot$Persons$StreetsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
+  Json? line;
+
+  @override
+  List<Object?> get props => [id, name, color, line];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonsGeolocations$QueryRoot$Persons$StreetsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsGeolocations$QueryRoot$Persons$Families extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocations$QueryRoot$Persons$Families();
+
+  factory PersonsGeolocations$QueryRoot$Persons$Families.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonsGeolocations$QueryRoot$Persons$FamiliesFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
+  Json? geolocation;
+
+  @override
+  List<Object?> get props => [id, name, color, geolocation];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonsGeolocations$QueryRoot$Persons$FamiliesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsGeolocations$QueryRoot$Persons extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocations$QueryRoot$Persons();
+
+  factory PersonsGeolocations$QueryRoot$Persons.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonsGeolocations$QueryRoot$PersonsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
+  Json? geolocation;
+
+  List<PersonsGeolocations$QueryRoot$Persons$Areas>? areas;
+
+  List<PersonsGeolocations$QueryRoot$Persons$Streets>? streets;
+
+  PersonsGeolocations$QueryRoot$Persons$Families? family;
+
+  @override
+  List<Object?> get props => [id, name, geolocation, areas, streets, family];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonsGeolocations$QueryRoot$PersonsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsGeolocations$QueryRoot extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocations$QueryRoot();
+
+  factory PersonsGeolocations$QueryRoot.fromJson(Map<String, dynamic> json) =>
+      _$PersonsGeolocations$QueryRootFromJson(json);
+
+  late List<PersonsGeolocations$QueryRoot$Persons> persons;
+
+  @override
+  List<Object?> get props => [persons];
+  @override
+  Map<String, dynamic> toJson() => _$PersonsGeolocations$QueryRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetPersonsStream$SubscriptionRoot$Persons extends JsonSerializable
     with EquatableMixin {
   GetPersonsStream$SubscriptionRoot$Persons();
@@ -4538,6 +4792,9 @@ class WatchPerson$SubscriptionRoot$Persons extends JsonSerializable
 
   late bool gender;
 
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? geolocation;
 
   late List<WatchPerson$SubscriptionRoot$Persons$PersonsGroups> groups;
@@ -4552,20 +4809,37 @@ class WatchPerson$SubscriptionRoot$Persons extends JsonSerializable
 
   String? jobDescription;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastCall;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastConfession;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastEdit;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastKodas;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastVisit;
 
   String? mainPhone;
 
   String? notes;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbToDartJson, toJson: fromDartJsonToGraphQLJsonb)
   late Json otherPhones;
 
   WatchPerson$SubscriptionRoot$Persons$PersonTypes? personType;
@@ -5322,10 +5596,15 @@ class GetUserInfoStream$SubscriptionRoot$Users$Persons extends JsonSerializable
 
   String? address;
 
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
   Json? geolocation;
 
   String? mainPhone;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbToDartJson, toJson: fromDartJsonToGraphQLJsonb)
   late Json otherPhones;
 
   DateTime? birthdate;
@@ -5400,8 +5679,14 @@ class GetUserInfoStream$SubscriptionRoot$Users$Persons extends JsonSerializable
 
   DateTime? photoUpdatedAt;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastKodas;
 
+  @JsonKey(
+      fromJson: fromGraphQLJsonbNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLJsonbNullable)
   Json? lastConfession;
 
   @override
@@ -5488,6 +5773,189 @@ class GetUserInfoStream$SubscriptionRoot extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$GetUserInfoStream$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetClassesStream$SubscriptionRoot$Classes extends JsonSerializable
+    with EquatableMixin {
+  GetClassesStream$SubscriptionRoot$Classes();
+
+  factory GetClassesStream$SubscriptionRoot$Classes.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetClassesStream$SubscriptionRoot$ClassesFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetClassesStream$SubscriptionRoot$ClassesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetClassesStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetClassesStream$SubscriptionRoot();
+
+  factory GetClassesStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetClassesStream$SubscriptionRootFromJson(json);
+
+  late List<GetClassesStream$SubscriptionRoot$Classes> classes;
+
+  @override
+  List<Object?> get props => [classes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetClassesStream$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFamiliesStream$SubscriptionRoot$Families extends JsonSerializable
+    with EquatableMixin {
+  GetFamiliesStream$SubscriptionRoot$Families();
+
+  factory GetFamiliesStream$SubscriptionRoot$Families.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetFamiliesStream$SubscriptionRoot$FamiliesFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetFamiliesStream$SubscriptionRoot$FamiliesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFamiliesStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetFamiliesStream$SubscriptionRoot();
+
+  factory GetFamiliesStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetFamiliesStream$SubscriptionRootFromJson(json);
+
+  late List<GetFamiliesStream$SubscriptionRoot$Families> families;
+
+  @override
+  List<Object?> get props => [families];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetFamiliesStream$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetGroupsStream$SubscriptionRoot$Groups extends JsonSerializable
+    with EquatableMixin {
+  GetGroupsStream$SubscriptionRoot$Groups();
+
+  factory GetGroupsStream$SubscriptionRoot$Groups.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetGroupsStream$SubscriptionRoot$GroupsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetGroupsStream$SubscriptionRoot$GroupsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetGroupsStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetGroupsStream$SubscriptionRoot();
+
+  factory GetGroupsStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetGroupsStream$SubscriptionRootFromJson(json);
+
+  late List<GetGroupsStream$SubscriptionRoot$Groups> groups;
+
+  @override
+  List<Object?> get props => [groups];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetGroupsStream$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStreetsStream$SubscriptionRoot$Streets extends JsonSerializable
+    with EquatableMixin {
+  GetStreetsStream$SubscriptionRoot$Streets();
+
+  factory GetStreetsStream$SubscriptionRoot$Streets.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetStreetsStream$SubscriptionRoot$StreetsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  @JsonKey(
+      fromJson: fromGraphQLGeographyNullableToDartJsonNullable,
+      toJson: fromDartJsonNullableToGraphQLGeographyNullable)
+  Json? line;
+
+  int? color;
+
+  DateTime? photoUpdatedAt;
+
+  @override
+  List<Object?> get props => [id, name, line, color, photoUpdatedAt];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetStreetsStream$SubscriptionRoot$StreetsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStreetsStream$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  GetStreetsStream$SubscriptionRoot();
+
+  factory GetStreetsStream$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetStreetsStream$SubscriptionRootFromJson(json);
+
+  late List<GetStreetsStream$SubscriptionRoot$Streets> streets;
+
+  @override
+  List<Object?> get props => [streets];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetStreetsStream$SubscriptionRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -7213,6 +7681,185 @@ class GetMorePersonDataQuery extends GraphQLQuery<GetMorePersonData$QueryRoot,
   @override
   GetMorePersonData$QueryRoot parse(Map<String, dynamic> json) =>
       GetMorePersonData$QueryRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonsGeolocationsArguments extends JsonSerializable
+    with EquatableMixin {
+  PersonsGeolocationsArguments({this.conditions});
+
+  @override
+  factory PersonsGeolocationsArguments.fromJson(Map<String, dynamic> json) =>
+      _$PersonsGeolocationsArgumentsFromJson(json);
+
+  final PersonsBoolExp? conditions;
+
+  @override
+  List<Object?> get props => [conditions];
+  @override
+  Map<String, dynamic> toJson() => _$PersonsGeolocationsArgumentsToJson(this);
+}
+
+final PERSONS_GEOLOCATIONS_QUERY_DOCUMENT_OPERATION_NAME =
+    'personsGeolocations';
+final PERSONS_GEOLOCATIONS_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'personsGeolocations'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'conditions')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'persons_bool_exp'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'persons'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: VariableNode(name: NameNode(value: 'conditions')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'geolocation'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'areas'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'bounds'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'streets'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'line'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'family'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'color'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'geolocation'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ]))
+      ]))
+]);
+
+class PersonsGeolocationsQuery extends GraphQLQuery<
+    PersonsGeolocations$QueryRoot, PersonsGeolocationsArguments> {
+  PersonsGeolocationsQuery({required this.variables});
+
+  @override
+  final DocumentNode document = PERSONS_GEOLOCATIONS_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      PERSONS_GEOLOCATIONS_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final PersonsGeolocationsArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  PersonsGeolocations$QueryRoot parse(Map<String, dynamic> json) =>
+      PersonsGeolocations$QueryRoot.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -9475,4 +10122,461 @@ class GetUserInfoStreamSubscription extends GraphQLQuery<
   @override
   GetUserInfoStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
       GetUserInfoStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetClassesStreamArguments extends JsonSerializable with EquatableMixin {
+  GetClassesStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetClassesStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetClassesStreamArgumentsFromJson(json);
+
+  final List<ClassesBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetClassesStreamArgumentsToJson(this);
+}
+
+final GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'getClassesStream';
+final GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getClassesStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'classes_bool_exp'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'classes'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetClassesStreamSubscription extends GraphQLQuery<
+    GetClassesStream$SubscriptionRoot, GetClassesStreamArguments> {
+  GetClassesStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetClassesStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetClassesStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetClassesStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFamiliesStreamArguments extends JsonSerializable with EquatableMixin {
+  GetFamiliesStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetFamiliesStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetFamiliesStreamArgumentsFromJson(json);
+
+  final List<FamiliesBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetFamiliesStreamArgumentsToJson(this);
+}
+
+final GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'getFamiliesStream';
+final GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getFamiliesStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'families_bool_exp'),
+                    isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'families'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetFamiliesStreamSubscription extends GraphQLQuery<
+    GetFamiliesStream$SubscriptionRoot, GetFamiliesStreamArguments> {
+  GetFamiliesStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetFamiliesStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetFamiliesStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetFamiliesStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetGroupsStreamArguments extends JsonSerializable with EquatableMixin {
+  GetGroupsStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetGroupsStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetGroupsStreamArgumentsFromJson(json);
+
+  final List<GroupsBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetGroupsStreamArgumentsToJson(this);
+}
+
+final GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'getGroupsStream';
+final GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getGroupsStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'groups_bool_exp'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'groups'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetGroupsStreamSubscription extends GraphQLQuery<
+    GetGroupsStream$SubscriptionRoot, GetGroupsStreamArguments> {
+  GetGroupsStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetGroupsStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetGroupsStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetGroupsStream$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetStreetsStreamArguments extends JsonSerializable with EquatableMixin {
+  GetStreetsStreamArguments({this.addWhere, this.limit});
+
+  @override
+  factory GetStreetsStreamArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetStreetsStreamArgumentsFromJson(json);
+
+  final List<StreetsBoolExp>? addWhere;
+
+  final int? limit;
+
+  @override
+  List<Object?> get props => [addWhere, limit];
+  @override
+  Map<String, dynamic> toJson() => _$GetStreetsStreamArgumentsToJson(this);
+}
+
+final GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'getStreetsStream';
+final GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'getStreetsStream'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'streets_bool_exp'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'streets'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: VariableNode(name: NameNode(value: 'addWhere')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'order_by'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'asc')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'line'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class GetStreetsStreamSubscription extends GraphQLQuery<
+    GetStreetsStream$SubscriptionRoot, GetStreetsStreamArguments> {
+  GetStreetsStreamSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetStreetsStreamArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetStreetsStream$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      GetStreetsStream$SubscriptionRoot.fromJson(json);
 }

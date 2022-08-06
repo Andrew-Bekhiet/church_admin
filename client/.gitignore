@@ -57,3 +57,4 @@ android/app/google-services.json
 lib/src/services/encryption_service.dart
 lib/main.dart.backup
 theme.zip
+android/app/src/main/res/values/strings.xml

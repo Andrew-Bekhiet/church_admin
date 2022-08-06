@@ -23,8 +23,8 @@ mixin _$Family {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-  Polygon? get geolocation => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+  Point? get geolocation => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
@@ -43,11 +43,9 @@ abstract class $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          Polygon? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt});
 }
 
@@ -85,7 +83,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
       geolocation: geolocation == freezed
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
-              as Polygon?,
+              as Point?,
       notes: notes == freezed
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -111,11 +109,9 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          Polygon? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt});
 }
 
@@ -154,7 +150,7 @@ class __$$_FamilyCopyWithImpl<$Res> extends _$FamilyCopyWithImpl<$Res>
       geolocation: geolocation == freezed
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
-              as Polygon?,
+              as Point?,
       notes: notes == freezed
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -178,11 +174,9 @@ class _$_Family extends _Family {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          this.geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       this.notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt})
       : super._();
 
@@ -196,8 +190,8 @@ class _$_Family extends _Family {
   @override
   final String? address;
   @override
-  @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-  final Polygon? geolocation;
+  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+  final Point? geolocation;
   @override
   final String? notes;
   @override
@@ -257,8 +251,8 @@ abstract class _Family extends Family {
       {required final String id,
       required final String name,
       final String? address,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          final Polygon? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          final Point? geolocation,
       final String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
@@ -274,8 +268,8 @@ abstract class _Family extends Family {
   @override
   String? get address;
   @override
-  @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-  Polygon? get geolocation;
+  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+  Point? get geolocation;
   @override
   String? get notes;
   @override

@@ -16,8 +16,7 @@ class Family extends ViewableWithID with _$Family implements PhotoObjectBase {
     required String id,
     required String name,
     String? address,
-    @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-        Polygon? geolocation,
+    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     String? notes,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,

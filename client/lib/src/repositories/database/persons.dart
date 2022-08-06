@@ -638,4 +638,117 @@ class PersonsQueries {
         .then(_exceptionsMiddleware)
         .then((value) => value.parsedData!);
   }
+
+  Future<List<Person>> personsGeolocations({
+    String? personId,
+    List<UuidValue> areasIds = const [],
+    List<UuidValue> streetsIds = const [],
+    List<UuidValue> servicesIds = const [],
+    List<UuidValue> classesIds = const [],
+    List<UuidValue> groupsIds = const [],
+    List<UuidValue> familiesIds = const [],
+  }) {
+    assert(
+      personId != null ||
+          areasIds.isNotEmpty ||
+          streetsIds.isNotEmpty ||
+          servicesIds.isNotEmpty ||
+          classesIds.isNotEmpty ||
+          groupsIds.isNotEmpty ||
+          familiesIds.isNotEmpty,
+      'At least one condition should be given',
+    );
+
+    final PersonsGeolocationsQuery query = PersonsGeolocationsQuery(
+      variables: PersonsGeolocationsArguments(
+        conditions: PersonsBoolExp(
+          $and: [
+            if (personId != null)
+              PersonsBoolExp(
+                id: UuidComparisonExp(
+                  $eq: UuidValue(personId),
+                ),
+              ),
+            if (areasIds.isNotEmpty ||
+                streetsIds.isNotEmpty ||
+                servicesIds.isNotEmpty ||
+                classesIds.isNotEmpty ||
+                groupsIds.isNotEmpty ||
+                familiesIds.isNotEmpty)
+              PersonsBoolExp(
+                $or: [
+                  if (areasIds.isNotEmpty)
+                    PersonsBoolExp(
+                      areas: AreasBoolExp(
+                        id: UuidComparisonExp(
+                          $in: areasIds,
+                        ),
+                      ),
+                    ),
+                  if (streetsIds.isNotEmpty)
+                    PersonsBoolExp(
+                      streets: StreetsBoolExp(
+                        id: UuidComparisonExp(
+                          $in: streetsIds,
+                        ),
+                      ),
+                    ),
+                  if (familiesIds.isNotEmpty)
+                    PersonsBoolExp(
+                      family: FamiliesBoolExp(
+                        id: UuidComparisonExp(
+                          $in: familiesIds,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            if (servicesIds.isNotEmpty)
+              PersonsBoolExp(
+                services: PersonsServicesBoolExp(
+                  serviceId: UuidComparisonExp(
+                    $in: servicesIds,
+                  ),
+                ),
+              ),
+            if (classesIds.isNotEmpty)
+              PersonsBoolExp(
+                classes: ClassesBoolExp(
+                  id: UuidComparisonExp(
+                    $in: classesIds,
+                  ),
+                ),
+              ),
+            if (groupsIds.isNotEmpty)
+              PersonsBoolExp(
+                groups: PersonsGroupsBoolExp(
+                  groupId: UuidComparisonExp(
+                    $in: groupsIds,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .query(
+          QueryOptions(
+            document: query.document,
+            operationName: query.operationName,
+            variables: query.variables.toJson().stripNullValues(),
+            parserFn: (d) => PersonsGeolocations$QueryRoot.fromJson(d)
+                .persons
+                .map(
+                  (p) => Person.fromJson(
+                    p.toJson(),
+                  ),
+                )
+                .toList(),
+          ),
+        )
+        .then(_exceptionsMiddleware)
+        .then((value) => value.parsedData!);
+  }
 }

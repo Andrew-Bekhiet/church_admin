@@ -86,3 +86,33 @@ query getMorePersonData(
     }
   }
 }
+
+query personsGeolocations($conditions: persons_bool_exp) {
+  persons(where: $conditions) {
+    id
+    name
+
+    geolocation
+    areas {
+      id
+      name
+      color
+
+      bounds
+    }
+    streets {
+      id
+      name
+      color
+
+      line
+    }
+    family {
+      id
+      name
+      color
+
+      geolocation
+    }
+  }
+}

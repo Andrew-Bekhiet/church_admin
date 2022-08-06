@@ -27,12 +27,18 @@ targets:
 
             - graphql_type: geography
               dart_type: Json
+              custom_parser_import: package:church_admin/graphql/scalars.dart
+              use_custom_parser: true
 
             - graphql_type: geometry
               dart_type: Json
+              custom_parser_import: package:church_admin/graphql/scalars.dart
+              use_custom_parser: true
 
             - graphql_type: jsonb
               dart_type: Json
+              custom_parser_import: package:church_admin/graphql/scalars.dart
+              use_custom_parser: true
 
             - graphql_type: smallint
               dart_type: int

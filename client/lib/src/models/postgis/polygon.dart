@@ -27,5 +27,6 @@ class Polygon {
 }
 
 Json? polygonToJson(Polygon? data) => data?.asPostGISPolygon();
-Polygon? polygonFromJson(dynamic data) =>
-    data == null ? null : Polygon.fromJson(data);
+Polygon? polygonFromJson(dynamic data) => data == null
+    ? null
+    : Polygon.fromJson(data is Json ? data : data.cast<String, dynamic>());

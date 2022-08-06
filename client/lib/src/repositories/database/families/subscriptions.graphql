@@ -1,0 +1,11 @@
+subscription getFamiliesStream(
+  $addWhere: [families_bool_exp!] = {}
+  $limit: Int = 200
+) {
+  families(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}

@@ -17,5 +17,6 @@ class Point {
 }
 
 Json? pointToJson(Point? data) => data?.toPostGISJson();
-Point? pointFromJson(dynamic data) =>
-    data == null ? null : Point.fromJson(data);
+Point? pointFromJson(dynamic data) => data == null
+    ? null
+    : Point.fromJson(data is Json ? data : data.cast<String, dynamic>());

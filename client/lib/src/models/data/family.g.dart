@@ -10,7 +10,7 @@ _$_Family _$$_FamilyFromJson(Map<String, dynamic> json) => _$_Family(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String?,
-      geolocation: polygonFromJson(json['geolocation']),
+      geolocation: pointFromJson(json['geolocation']),
       notes: json['notes'] as String?,
       color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -22,7 +22,7 @@ Map<String, dynamic> _$$_FamilyToJson(_$_Family instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,
-      'geolocation': polygonToJson(instance.geolocation),
+      'geolocation': pointToJson(instance.geolocation),
       'notes': instance.notes,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
