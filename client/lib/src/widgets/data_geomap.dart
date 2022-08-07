@@ -79,6 +79,13 @@ class _DataGeomapState extends State<DataGeomap> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => setState(() {}),
+            icon: const Icon(Icons.refresh),
+            tooltip: 'تحديث البيانات',
+          ),
+        ],
         title: const Text('خريطة الافتقاد'),
       ),
       body: SnappingSheet(
