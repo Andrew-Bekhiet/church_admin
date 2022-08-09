@@ -17,12 +17,16 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     required String id,
     required String name,
     String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+        Point? geolocation,
     String? mainPhone,
-    @Default({}) Json otherPhones,
+    @Default({})
+        Json otherPhones,
     DateTime? birthdate,
-    @Default(true) bool gender,
-    @Default(false) bool isShammas,
+    @Default(true)
+        bool gender,
+    @Default(false)
+        bool isShammas,
     String? shammasLevelId,
     ShammasLevel? shammasLevel,
     School? school,
@@ -33,7 +37,8 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     String? churchId,
     Father? father,
     String? fatherId,
-    @Default(false) bool isStudent,
+    @Default(false)
+        bool isStudent,
     Job? job,
     String? jobId,
     String? jobDescription,
@@ -43,14 +48,16 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     String? personTypeId,
     PersonState? state,
     String? stateId,
-    @Default(false) bool isServant,
+    @Default(false)
+        bool isServant,
     String? notes,
     Family? family,
     String? familyId,
     String? storeId,
     StudyYear? studyYear,
     int? studyYearId,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+        Color? color,
     DateTime? photoUpdatedAt,
     LastRecordedByInfo? lastConfession,
     LastRecordedByInfo? lastKodas,
@@ -67,6 +74,30 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
         List<Tag>? tags,
     String? uid,
+    @JsonKey(
+      name: 'kodasHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? kodasHistoryAggregate,
+    @JsonKey(
+      name: 'confessionHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? confessionHistoryAggregate,
+    @JsonKey(
+      name: 'callHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? callHistoryAggregate,
+    @JsonKey(
+      name: 'visitHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? visitHistoryAggregate,
   }) = _Person;
   Person._() : super();
 

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
 import 'package:collection/collection.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' hide JsonSerializable;
@@ -24,6 +25,18 @@ part 'database/users.dart';
 class CADatabaseRepository implements DatabaseRepository {
   static CADatabaseRepository get instance => GetIt.I<CADatabaseRepository>();
   static CADatabaseRepository get I => instance;
+
+  static Future<bool> isConnectedToInternet() async {
+    try {
+      final data = await GetIt.I<FirebaseDatabase>()
+          .ref()
+          .child('.info/connected')
+          .once();
+      return data.snapshot.value == true;
+    } on Exception {
+      return false;
+    }
+  }
 
   final areas = AreasQueries._();
   final streets = StreetsQueries._();

@@ -1,11 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' hide Group;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewPerson extends StatelessWidget {
   static final route = GoRoute(
@@ -18,9 +20,14 @@ class ViewPerson extends StatelessWidget {
 
       return ViewPerson(
         personId: state.queryParams['id']!,
-        person: state.extra as Person?,
+        person: state.extra is Person?
+            ? state.extra as Person?
+            : (state.extra as Map?)?['person'] as Person?,
       );
     },
+    routes: [
+      AttendanceAnalysis.route,
+    ],
   );
 
   final Person? person;
@@ -353,7 +360,11 @@ class ViewPerson extends StatelessWidget {
                         ],
                       ),
                     ),
-                    CopiablePropertyWidget('ملاحظات', person.notes),
+                    CopiablePropertyWidget(
+                      'ملاحظات',
+                      person.notes,
+                      showErrorIfEmpty: false,
+                    ),
                     const Divider(thickness: 1),
                     ListTile(
                       title: const Text('المناطق التي يظهر بها'),
@@ -399,13 +410,13 @@ class ViewPerson extends StatelessWidget {
                         ),
                       ), */
                     const Divider(thickness: 1),
-                    //TODO: Attendance Analysis
-                    /* if (!person.ref.path.startsWith('Deleted'))
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.analytics),
+                    ListTile(
+                      title: ElevatedButton.icon(
+                        icon: const Icon(Icons.query_stats),
                         label: const Text('احصائيات الحضور'),
-                        onPressed: () => _showAnalytics(context, person),
-                      ), */
+                        onPressed: () => _attendanceAnalysis(context, person),
+                      ),
+                    ),
                     HistoryProperty(
                       name: 'أخر تناول',
                       value: person.lastKodas?.time,
@@ -494,6 +505,14 @@ class ViewPerson extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Future<void> _attendanceAnalysis(BuildContext context, Person person) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => _SelectAttendanceOptions(person: person),
+      ),
     );
   }
 
@@ -609,12 +628,47 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
     required this.person,
     required this.getField,
     required this.getMore,
+    this.showTime = true,
     super.key,
   });
 
   final Person person;
   final List<T>? Function(Person) getField;
-  final Future<Person> Function(Person, T) getMore;
+  final Stream<Person> Function(Person, T) getMore;
+  final bool showTime;
+
+  DateFormat get dateFormat =>
+      DateFormat('yyyy/M/d' + (showTime ? '   h:m a' : ''), 'ar-EG');
+
+  Widget? _getSubtitle(BuildContext context, T o) => _hasSubtitle(o)
+      ? Row(
+          children: <Widget>[
+            Expanded(
+              child: Text(
+                (o as AttendanceAnalyzable)
+                    .attendanceHistoryAggregate!
+                    .aggregate
+                    .max!
+                    .toDurationString(),
+              ),
+            ),
+            Text(
+              dateFormat.format(
+                (o as AttendanceAnalyzable)
+                    .attendanceHistoryAggregate!
+                    .aggregate
+                    .max!,
+              ),
+              style: Theme.of(context).textTheme.overline,
+            ),
+          ],
+        )
+      : null;
+
+  bool _hasSubtitle(T o) =>
+      o is AttendanceAnalyzable &&
+      (o as AttendanceAnalyzable).attendanceHistoryAggregate?.aggregate.max !=
+          null;
 
   @override
   Widget build(BuildContext context) {
@@ -628,12 +682,13 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                 ViewableObjectWidget(
                   o,
                   isDense: true,
-                  showSubtitle: false,
+                  showSubtitle: _hasSubtitle(o),
+                  subtitle: _getSubtitle(context, o),
                 ),
-                FutureBuilder<List<T>>(
+                StreamBuilder<List<T>>(
                   initialData: const [],
-                  future:
-                      getMore(person, o).then((value) => getField(value) ?? []),
+                  stream:
+                      getMore(person, o).map((value) => getField(value) ?? []),
                   builder: (context, snapshot) => Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -641,7 +696,8 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                         ViewableObjectWidget(
                           o,
                           isDense: true,
-                          showSubtitle: false,
+                          showSubtitle: _hasSubtitle(o),
+                          subtitle: _getSubtitle(context, o),
                         ),
                     ],
                   ),
@@ -652,8 +708,243 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
             ViewableObjectWidget(
               o,
               isDense: true,
-              showSubtitle: false,
+              showSubtitle: _hasSubtitle(o),
+              subtitle: _getSubtitle(context, o),
             ),
+      ],
+    );
+  }
+}
+
+class _SelectAttendanceOptions extends StatefulWidget {
+  const _SelectAttendanceOptions({required this.person});
+
+  final Person person;
+
+  @override
+  State<_SelectAttendanceOptions> createState() =>
+      _SelectAttendanceOptionsState();
+}
+
+class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
+  final selected = BehaviorSubject<Set<ViewableWithID>>.seeded({});
+
+  DateTimeRange dateRange = DateTimeRange(
+    start: DateTime.now().subtract(const Duration(days: 30)),
+    end: DateTime.now(),
+  );
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('تحليل الحضور في'),
+      ),
+      body: StreamBuilder<Map<Service, List<ViewableWithID>>>(
+        initialData: <ViewableWithID>[
+          ...widget.person.classes ?? [],
+          ...widget.person.groups ?? []
+        ].groupListsBy(
+          (o) =>
+              (o is Class ? o.service : (o as Group).service) ??
+              Service(
+                id: 'id',
+                name: 'جار التحميل',
+              ),
+        ),
+        stream: CADatabaseRepository.I.persons
+            .getPersonClassesAndGroups(personId: widget.person.id)
+            .map(
+              (p) => <ViewableWithID>[...p.classes ?? [], ...p.groups ?? []]
+                  .groupListsBy(
+                (o) => o is Class ? o.service! : (o as Group).service!,
+              ),
+            ),
+        builder: (context, snapshot) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(8),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TappableFormField<DateTime>(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: (context, state) => InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'من',
+                          ),
+                          initialValue: dateRange.start,
+                          onTap: (state) async {
+                            final _picked = await showDatePicker(
+                              context: context,
+                              initialDate: state.value ?? dateRange.start,
+                              firstDate: DateTime(2010),
+                              lastDate: DateTime.now().add(
+                                const Duration(days: 1),
+                              ),
+                              helpText: 'من',
+                            );
+                            if (_picked != null) {
+                              state.didChange(_picked);
+                            }
+                          },
+                          builder: (context, state) {
+                            return state.value != null
+                                ? Text(
+                                    DateFormat('yyyy/M/d').format(state.value!))
+                                : null;
+                          },
+                          onSaved: (v) => dateRange = DateTimeRange(
+                            start: v!,
+                            end: dateRange.end,
+                          ),
+                          validator: (value) =>
+                              value == null || value.isAfter(dateRange.end)
+                                  ? 'بداية التاريخ قبل النهاية'
+                                  : null,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: TappableFormField<DateTime>(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: (context, state) => InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'الى',
+                          ),
+                          initialValue: dateRange.end,
+                          onTap: (state) async {
+                            final _picked = await showDatePicker(
+                              context: context,
+                              initialDate: state.value ?? dateRange.end,
+                              firstDate: DateTime(2010),
+                              lastDate: DateTime.now().add(
+                                const Duration(days: 1),
+                              ),
+                              helpText: 'من',
+                            );
+                            if (_picked != null) {
+                              state.didChange(_picked);
+                            }
+                          },
+                          builder: (context, state) {
+                            return state.value != null
+                                ? Text(
+                                    DateFormat('yyyy/M/d').format(state.value!))
+                                : null;
+                          },
+                          onSaved: (v) => dateRange = DateTimeRange(
+                            end: v!,
+                            start: dateRange.start,
+                          ),
+                          validator: (value) =>
+                              value == null || value.isBefore(dateRange.start)
+                                  ? 'نهاية التاريخ قبل البداية'
+                                  : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                  for (final entry in snapshot.requireData.entries) ...[
+                    StreamBuilder<bool>(
+                      initialData: false,
+                      stream: selected.map((s) => s.contains(entry.key)),
+                      builder: (context, entryChecked) => CheckboxListTile(
+                        onChanged: (c) {
+                          if (c ?? false) {
+                            selected.add({...selected.value, entry.key});
+                          } else {
+                            selected.add(
+                              selected.value.difference(
+                                {entry.key},
+                              ),
+                            );
+                          }
+                        },
+                        value: entryChecked.requireData,
+                        secondary: PhotoObjectWidget(entry.key),
+                        title: Text(entry.key.name),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 26),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          for (final o in entry.value)
+                            StreamBuilder<bool>(
+                              initialData: false,
+                              stream: selected.map((s) => s.contains(o)),
+                              builder: (context, checked) => CheckboxListTile(
+                                onChanged: (c) {
+                                  if (c ?? false) {
+                                    selected.add({...selected.value, o});
+                                  } else {
+                                    selected.add(
+                                      selected.value.difference(
+                                        {o},
+                                      ),
+                                    );
+                                  }
+                                },
+                                value: checked.requireData,
+                                secondary: PhotoObjectWidget(
+                                  o as PhotoObjectBase,
+                                ),
+                                title: Text(o.name),
+                              ),
+                            ),
+                        ],
+                      ),
+                    )
+                  ]
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+      persistentFooterButtons: [
+        TextButton(
+          onPressed: () async {
+            if (_formKey.currentState!.validate()) {
+              _formKey.currentState!.save();
+
+              Navigator.of(context).pop();
+              context.goNamed(
+                'attendance_analysis',
+                queryParams: {
+                  'id': widget.person.id,
+                },
+                extra: {
+                  'person': widget.person,
+                  'dateRange': dateRange,
+                  'classesIds': selected.value
+                      .whereType<Class>()
+                      .map((o) => o.id)
+                      .toList(),
+                  'groupsIds': selected.value
+                      .whereType<Group>()
+                      .map((o) => o.id)
+                      .toList(),
+                  'servicesIds': selected.value
+                      .whereType<Service>()
+                      .map((o) => o.id)
+                      .toList(),
+                },
+              );
+
+              await selected.close();
+            }
+          },
+          child: const Text('تحليل الحضور'),
+        ),
       ],
     );
   }

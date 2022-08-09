@@ -67,9 +67,7 @@ class _FakeDelegatingPaginatableStream_14<T extends _i5.ViewableWithID>
 class _FakeQueryResult_15<TParsed extends Object?> extends _i1.Fake
     implements _i6.QueryResult<TParsed> {}
 
-class _FakePerson_16 extends _i1.Fake implements _i4.Person {}
-
-class _FakeDuration_17 extends _i1.Fake implements Duration {}
+class _FakeDuration_16 extends _i1.Fake implements Duration {}
 
 /// A class which mocks [LoggingService].
 ///
@@ -509,24 +507,23 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                   _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i7.Future<_i4.Person> getMorePersonData(
+  _i7.Stream<_i4.Person> getMorePersonData(
           {String? personId,
           String? areasAfter,
           String? classesAfter,
           String? groupsAfter,
           String? servicesAfter}) =>
       (super.noSuchMethod(
-              Invocation.method(#getMorePersonData, [], {
-                #personId: personId,
-                #areasAfter: areasAfter,
-                #classesAfter: classesAfter,
-                #groupsAfter: groupsAfter,
-                #servicesAfter: servicesAfter
-              }),
-              returnValue: Future<_i4.Person>.value(_FakePerson_16()))
-          as _i7.Future<_i4.Person>);
+          Invocation.method(#getMorePersonData, [], {
+            #personId: personId,
+            #areasAfter: areasAfter,
+            #classesAfter: classesAfter,
+            #groupsAfter: groupsAfter,
+            #servicesAfter: servicesAfter
+          }),
+          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
   @override
-  _i7.Future<List<_i4.Person>> personsGeolocations(
+  _i7.Stream<List<_i4.Person>> personsGeolocations(
           {String? personId,
           List<_i14.UuidValue>? areasIds = const [],
           List<_i14.UuidValue>? streetsIds = const [],
@@ -544,8 +541,48 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                 #groupsIds: groupsIds,
                 #familiesIds: familiesIds
               }),
-              returnValue: Future<List<_i4.Person>>.value(<_i4.Person>[]))
-          as _i7.Future<List<_i4.Person>>);
+              returnValue: Stream<List<_i4.Person>>.empty())
+          as _i7.Stream<List<_i4.Person>>);
+  @override
+  _i7.Stream<_i4.Person> analyzePersonAttendance(
+          {String? personId,
+          DateTime? dateFrom,
+          DateTime? dateTo,
+          List<_i14.UuidValue>? groupsIds,
+          List<_i14.UuidValue>? classesIds,
+          List<_i14.UuidValue>? servicesIds}) =>
+      (super.noSuchMethod(
+          Invocation.method(#analyzePersonAttendance, [], {
+            #personId: personId,
+            #dateFrom: dateFrom,
+            #dateTo: dateTo,
+            #groupsIds: groupsIds,
+            #classesIds: classesIds,
+            #servicesIds: servicesIds
+          }),
+          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+  @override
+  _i7.Stream<_i4.Person> analyzePersonServicing(
+          {String? personId,
+          DateTime? timeFrom,
+          DateTime? timeTo,
+          List<_i14.UuidValue>? groupsIds,
+          List<_i14.UuidValue>? classesIds}) =>
+      (super.noSuchMethod(
+          Invocation.method(#analyzePersonServicing, [], {
+            #personId: personId,
+            #timeFrom: timeFrom,
+            #timeTo: timeTo,
+            #groupsIds: groupsIds,
+            #classesIds: classesIds
+          }),
+          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+  @override
+  _i7.Stream<_i4.Person> getPersonClassesAndGroups({String? personId}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #getPersonClassesAndGroups, [], {#personId: personId}),
+          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
 }
 
 /// A class which mocks [AreasQueries].
@@ -603,7 +640,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth =>
       (super.noSuchMethod(Invocation.getter(#timeToReauth),
-          returnValue: _FakeDuration_17()) as Duration);
+          returnValue: _FakeDuration_16()) as Duration);
   @override
   _i7.Stream<void> get refreshUIStream =>
       (super.noSuchMethod(Invocation.getter(#refreshUIStream),

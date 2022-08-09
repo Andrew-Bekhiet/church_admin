@@ -29,6 +29,18 @@ mixin _$Service {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   List<Class>? get classes => throw _privateConstructorUsedError;
   List<Group>? get groups => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,13 +56,20 @@ abstract class $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
-      List<Group>? groups});
+      List<Group>? groups,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   $StudyYearCopyWith<$Res>? get toStudyYear;
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
@@ -71,6 +90,8 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? photoUpdatedAt = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -105,6 +126,15 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
+      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+          ? _value.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
+              freezed
+          ? _value.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
   }
 
@@ -129,6 +159,31 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
       return _then(_value.copyWith(toStudyYear: value));
     });
   }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate {
+    if (_value.attendanceHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(
+        _value.attendanceHistoryAggregate!, (value) {
+      return _then(_value.copyWith(attendanceHistoryAggregate: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>?
+      get attendanceDaysConstraintsAggregate {
+    if (_value.attendanceDaysConstraintsAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(
+        _value.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_value.copyWith(attendanceDaysConstraintsAggregate: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -142,15 +197,24 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
-      List<Group>? groups});
+      List<Group>? groups,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   @override
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   @override
   $StudyYearCopyWith<$Res>? get toStudyYear;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
@@ -172,6 +236,8 @@ class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
     Object? photoUpdatedAt = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_$_Service(
       id: id == freezed
@@ -206,6 +272,15 @@ class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
+      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+          ? _value.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
+              freezed
+          ? _value.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
   }
 }
@@ -218,10 +293,15 @@ class _$_Service extends _Service {
       required this.name,
       this.fromStudyYear,
       this.toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          this.color,
       this.photoUpdatedAt,
       final List<Class>? classes,
-      final List<Group>? groups})
+      final List<Group>? groups,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.attendanceDaysConstraintsAggregate})
       : _classes = classes,
         _groups = groups,
         super._();
@@ -261,8 +341,21 @@ class _$_Service extends _Service {
   }
 
   @override
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? attendanceHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate;
+
+  @override
   String toString() {
-    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups)';
+    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -280,7 +373,12 @@ class _$_Service extends _Service {
             const DeepCollectionEquality()
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
-            const DeepCollectionEquality().equals(other._groups, _groups));
+            const DeepCollectionEquality().equals(other._groups, _groups) &&
+            const DeepCollectionEquality().equals(
+                other.attendanceHistoryAggregate, attendanceHistoryAggregate) &&
+            const DeepCollectionEquality().equals(
+                other.attendanceDaysConstraintsAggregate,
+                attendanceDaysConstraintsAggregate));
   }
 
   @JsonKey(ignore: true)
@@ -294,7 +392,9 @@ class _$_Service extends _Service {
       const DeepCollectionEquality().hash(color),
       const DeepCollectionEquality().hash(photoUpdatedAt),
       const DeepCollectionEquality().hash(_classes),
-      const DeepCollectionEquality().hash(_groups));
+      const DeepCollectionEquality().hash(_groups),
+      const DeepCollectionEquality().hash(attendanceHistoryAggregate),
+      const DeepCollectionEquality().hash(attendanceDaysConstraintsAggregate));
 
   @JsonKey(ignore: true)
   @override
@@ -315,10 +415,15 @@ abstract class _Service extends Service {
       required final String name,
       final StudyYear? fromStudyYear,
       final StudyYear? toStudyYear,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          final Color? color,
       final DateTime? photoUpdatedAt,
       final List<Class>? classes,
-      final List<Group>? groups}) = _$_Service;
+      final List<Group>? groups,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate}) = _$_Service;
   _Service._() : super._();
 
   factory _Service.fromJson(Map<String, dynamic> json) = _$_Service.fromJson;
@@ -340,6 +445,18 @@ abstract class _Service extends Service {
   List<Class>? get classes;
   @override
   List<Group>? get groups;
+  @override
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate;
   @override
   @JsonKey(ignore: true)
   _$$_ServiceCopyWith<_$_Service> get copyWith =>

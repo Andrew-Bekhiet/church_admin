@@ -46,7 +46,7 @@ class DataGeomap extends StatefulWidget {
 class _DataGeomapState extends State<DataGeomap> {
   final _sheetScrollController = ScrollController();
 
-  final _location = AsyncMemoizer<LocationData?>();
+  final _locationMemoizer = AsyncMemoizer<LocationData?>();
 
   late GeoMapOptions _mapOptions = GeoMapOptions(
     layers: {
@@ -132,58 +132,63 @@ class _DataGeomapState extends State<DataGeomap> {
             apply: (o) => setState(() => _mapOptions = o),
           ),
         ),
-        child: FutureBuilder<Tuple2<LocationData?, List<Person>>>(
+        child: StreamBuilder<Tuple2<LocationData?, List<Person>>>(
           initialData: Tuple2(
             null,
             [
               if (widget.initialPerson != null) widget.initialPerson!,
             ],
           ),
-          future: _location.runOnce(() async {
-            final location =
-                await Location.instance.requestPermission().then((perm) async {
-              if (perm == PermissionStatus.granted ||
-                  perm == PermissionStatus.grantedLimited) {
-                return Location.instance.getLocation();
-              }
-              return null;
-            });
-            return location;
-          }).then(
-            (location) async {
-              final persons =
-                  await CADatabaseRepository.I.persons.personsGeolocations(
-                personId: _mapOptions.selectedAreas.isEmpty &&
-                        _mapOptions.selectedStreets.isEmpty &&
-                        _mapOptions.selectedFamilies.isEmpty &&
-                        _mapOptions.selectedClasses.isEmpty &&
-                        _mapOptions.selectedGroups.isEmpty &&
-                        _mapOptions.selectedServices.isEmpty
-                    ? widget.initialPerson?.id
-                    : null,
-                areasIds: _mapOptions.selectedAreas
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-                streetsIds: _mapOptions.selectedStreets
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-                familiesIds: _mapOptions.selectedFamilies
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-                classesIds: _mapOptions.selectedClasses
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-                servicesIds: _mapOptions.selectedServices
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-                groupsIds: _mapOptions.selectedGroups
-                    .map((e) => UuidValue(e.id))
-                    .toList(),
-              );
-
-              return Tuple2(location, persons);
-            },
-          ),
+          //Requests location permission, converts result to stream,
+          //then fetches geolocations stream and combine the two results
+          stream: _locationMemoizer
+              .runOnce(
+                () async {
+                  final location = await Location.instance
+                      .requestPermission()
+                      .then((perm) async {
+                    if (perm == PermissionStatus.granted ||
+                        perm == PermissionStatus.grantedLimited) {
+                      return Location.instance.getLocation();
+                    }
+                    return null;
+                  });
+                  return location;
+                },
+              )
+              .asStream()
+              .switchMap(
+                (location) => CADatabaseRepository.I.persons
+                    .personsGeolocations(
+                      personId: _mapOptions.selectedAreas.isEmpty &&
+                              _mapOptions.selectedStreets.isEmpty &&
+                              _mapOptions.selectedFamilies.isEmpty &&
+                              _mapOptions.selectedClasses.isEmpty &&
+                              _mapOptions.selectedGroups.isEmpty &&
+                              _mapOptions.selectedServices.isEmpty
+                          ? widget.initialPerson?.id
+                          : null,
+                      areasIds: _mapOptions.selectedAreas
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                      streetsIds: _mapOptions.selectedStreets
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                      familiesIds: _mapOptions.selectedFamilies
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                      classesIds: _mapOptions.selectedClasses
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                      servicesIds: _mapOptions.selectedServices
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                      groupsIds: _mapOptions.selectedGroups
+                          .map((e) => UuidValue(e.id))
+                          .toList(),
+                    )
+                    .map((persons) => Tuple2(location, persons)),
+              ),
           builder: (context, data) {
             if (data.requireData.item2.isNotEmpty &&
                 data.connectionState == ConnectionState.waiting) {

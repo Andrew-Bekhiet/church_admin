@@ -252,13 +252,16 @@ class PersonsQueries {
   }
 
   Future<QueryResult<GetPersonsKodasWarning$QueryRoot>> getPersonsKodasWarning(
-      {required DateTime date}) {
+      {required DateTime date}) async {
     final subscription = GetPersonsKodasWarningQuery(
       variables: GetPersonsKodasWarningArguments(dateFilter: date),
     );
     return GetIt.I<GraphQLClient>()
         .query(
           QueryOptions(
+            fetchPolicy: await CADatabaseRepository.isConnectedToInternet()
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheAndNetwork,
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
@@ -269,13 +272,16 @@ class PersonsQueries {
   }
 
   Future<QueryResult<GetPersonsAttendanceWarning$QueryRoot>>
-      getPersonsMeetingWarning({required DateTime date}) {
+      getPersonsMeetingWarning({required DateTime date}) async {
     final subscription = GetPersonsAttendanceWarningQuery(
       variables: GetPersonsAttendanceWarningArguments(dateFilter: date),
     );
     return GetIt.I<GraphQLClient>()
         .query(
           QueryOptions(
+            fetchPolicy: await CADatabaseRepository.isConnectedToInternet()
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheAndNetwork,
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
@@ -286,13 +292,16 @@ class PersonsQueries {
   }
 
   Future<QueryResult<GetPersonsVisitWarning$QueryRoot>> getPersonsVisitWarning(
-      {required DateTime date}) {
+      {required DateTime date}) async {
     final subscription = GetPersonsVisitWarningQuery(
       variables: GetPersonsVisitWarningArguments(dateFilter: date),
     );
     return GetIt.I<GraphQLClient>()
         .query(
           QueryOptions(
+            fetchPolicy: await CADatabaseRepository.isConnectedToInternet()
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheAndNetwork,
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
@@ -303,13 +312,16 @@ class PersonsQueries {
   }
 
   Future<QueryResult<GetPersonsConfessionWarning$QueryRoot>>
-      getPersonsConfessionWarning({required DateTime date}) {
+      getPersonsConfessionWarning({required DateTime date}) async {
     final subscription = GetPersonsConfessionWarningQuery(
       variables: GetPersonsConfessionWarningArguments(dateFilter: date),
     );
     return GetIt.I<GraphQLClient>()
         .query(
           QueryOptions(
+            fetchPolicy: await CADatabaseRepository.isConnectedToInternet()
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheAndNetwork,
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
@@ -320,7 +332,7 @@ class PersonsQueries {
   }
 
   Future<QueryResult<GetPersonsBirthday$QueryRoot>> getBirthdayPersons(
-      {required DateTime date}) {
+      {required DateTime date}) async {
     final subscription = GetPersonsBirthdayQuery(
       variables: GetPersonsBirthdayArguments(
         //2022-06-25T12:30:00.440Z => 06-25
@@ -330,6 +342,9 @@ class PersonsQueries {
     return GetIt.I<GraphQLClient>()
         .query(
           QueryOptions(
+            fetchPolicy: await CADatabaseRepository.isConnectedToInternet()
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheAndNetwork,
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
@@ -607,7 +622,7 @@ class PersonsQueries {
     );
   }
 
-  Future<Person> getMorePersonData({
+  Stream<Person> getMorePersonData({
     required String personId,
     String? areasAfter,
     String? classesAfter,
@@ -624,22 +639,30 @@ class PersonsQueries {
       ),
     );
 
-    return GetIt.I<GraphQLClient>()
-        .query(
-          QueryOptions(
-            document: query.document,
-            operationName: query.operationName,
-            variables: query.variables.toJson().stripNullValues(),
-            parserFn: (d) => Person.fromJson(
-              GetMorePersonData$QueryRoot.fromJson(d).personsByPk!.toJson(),
-            ),
-          ),
-        )
-        .then(_exceptionsMiddleware)
-        .then((value) => value.parsedData!);
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        eagerlyFetchResults: false,
+        fetchResults: true,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => Person.fromJson(
+          GetMorePersonData$QueryRoot.fromJson(d).personsByPk!.toJson(),
+        ),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData!);
   }
 
-  Future<List<Person>> personsGeolocations({
+  Stream<List<Person>> personsGeolocations({
     String? personId,
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
@@ -732,23 +755,143 @@ class PersonsQueries {
       ),
     );
 
-    return GetIt.I<GraphQLClient>()
-        .query(
-          QueryOptions(
-            document: query.document,
-            operationName: query.operationName,
-            variables: query.variables.toJson().stripNullValues(),
-            parserFn: (d) => PersonsGeolocations$QueryRoot.fromJson(d)
-                .persons
-                .map(
-                  (p) => Person.fromJson(
-                    p.toJson(),
-                  ),
-                )
-                .toList(),
-          ),
-        )
-        .then(_exceptionsMiddleware)
-        .then((value) => value.parsedData!);
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        fetchResults: true,
+        eagerlyFetchResults: false,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => PersonsGeolocations$QueryRoot.fromJson(d)
+            .persons
+            .map(
+              (p) => Person.fromJson(
+                p.toJson(),
+              ),
+            )
+            .toList(),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData!);
+  }
+
+  Stream<Person> analyzePersonAttendance({
+    required String personId,
+    required DateTime dateFrom,
+    required DateTime dateTo,
+    required List<UuidValue> groupsIds,
+    required List<UuidValue> classesIds,
+    required List<UuidValue> servicesIds,
+  }) {
+    final AnalyzePersonAttendanceQuery query = AnalyzePersonAttendanceQuery(
+      variables: AnalyzePersonAttendanceArguments(
+        personId: UuidValue(personId),
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        classesIds: classesIds,
+        groupsIds: groupsIds,
+        servicesIds: servicesIds,
+      ),
+    );
+
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        fetchResults: true,
+        eagerlyFetchResults: false,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => Person.fromJson(
+          AnalyzePersonAttendance$QueryRoot.fromJson(d).personsByPk!.toJson(),
+        ),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData!);
+  }
+
+  Stream<Person> analyzePersonServicing({
+    required String personId,
+    required DateTime timeFrom,
+    required DateTime timeTo,
+    required List<UuidValue> groupsIds,
+    required List<UuidValue> classesIds,
+  }) {
+    final AnalyzePersonServicingQuery query = AnalyzePersonServicingQuery(
+      variables: AnalyzePersonServicingArguments(
+        personId: UuidValue(personId),
+        timeFrom: timeFrom,
+        timeTo: timeTo,
+      ),
+    );
+
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        fetchResults: true,
+        eagerlyFetchResults: false,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => Person.fromJson(
+          AnalyzePersonServicing$QueryRoot.fromJson(d).personsByPk!.toJson(),
+        ),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData!);
+  }
+
+  Stream<Person> getPersonClassesAndGroups({
+    required String personId,
+  }) {
+    final GetPersonClassesAndGroupsQuery query = GetPersonClassesAndGroupsQuery(
+      variables: GetPersonClassesAndGroupsArguments(
+        id: UuidValue(personId),
+      ),
+    );
+
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        eagerlyFetchResults: false,
+        fetchResults: true,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => Person.fromJson(
+          GetPersonClassesAndGroups$QueryRoot.fromJson(d).personsByPk!.toJson(),
+        ),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData!);
   }
 }

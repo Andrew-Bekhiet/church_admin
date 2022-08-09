@@ -75,6 +75,30 @@ mixin _$Person {
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   List<Tag>? get tags => throw _privateConstructorUsedError;
   String? get uid => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'kodasHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get kodasHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'confessionHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get confessionHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'callHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get callHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'visitHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get visitHistoryAggregate =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -140,7 +164,15 @@ abstract class $PersonCopyWith<$Res> {
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           List<Tag>? tags,
-      String? uid});
+      String? uid,
+      @JsonKey(name: 'kodasHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? kodasHistoryAggregate,
+      @JsonKey(name: 'confessionHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? confessionHistoryAggregate,
+      @JsonKey(name: 'callHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? callHistoryAggregate,
+      @JsonKey(name: 'visitHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? visitHistoryAggregate});
 
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
   $SchoolCopyWith<$Res>? get school;
@@ -158,6 +190,10 @@ abstract class $PersonCopyWith<$Res> {
   $LastRecordedByInfoCopyWith<$Res>? get lastCall;
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate;
+  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate;
+  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate;
+  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate;
 }
 
 /// @nodoc
@@ -220,6 +256,10 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? streets = freezed,
     Object? tags = freezed,
     Object? uid = freezed,
+    Object? kodasHistoryAggregate = freezed,
+    Object? confessionHistoryAggregate = freezed,
+    Object? callHistoryAggregate = freezed,
+    Object? visitHistoryAggregate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -422,6 +462,22 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
+      kodasHistoryAggregate: kodasHistoryAggregate == freezed
+          ? _value.kodasHistoryAggregate
+          : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      confessionHistoryAggregate: confessionHistoryAggregate == freezed
+          ? _value.confessionHistoryAggregate
+          : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      callHistoryAggregate: callHistoryAggregate == freezed
+          ? _value.callHistoryAggregate
+          : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      visitHistoryAggregate: visitHistoryAggregate == freezed
+          ? _value.visitHistoryAggregate
+          : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
   }
 
@@ -600,6 +656,54 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
       return _then(_value.copyWith(lastEdit: value));
     });
   }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate {
+    if (_value.kodasHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(_value.kodasHistoryAggregate!,
+        (value) {
+      return _then(_value.copyWith(kodasHistoryAggregate: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate {
+    if (_value.confessionHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(
+        _value.confessionHistoryAggregate!, (value) {
+      return _then(_value.copyWith(confessionHistoryAggregate: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate {
+    if (_value.callHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(_value.callHistoryAggregate!,
+        (value) {
+      return _then(_value.copyWith(callHistoryAggregate: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate {
+    if (_value.visitHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(_value.visitHistoryAggregate!,
+        (value) {
+      return _then(_value.copyWith(visitHistoryAggregate: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -662,7 +766,15 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           List<Tag>? tags,
-      String? uid});
+      String? uid,
+      @JsonKey(name: 'kodasHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? kodasHistoryAggregate,
+      @JsonKey(name: 'confessionHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? confessionHistoryAggregate,
+      @JsonKey(name: 'callHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? callHistoryAggregate,
+      @JsonKey(name: 'visitHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? visitHistoryAggregate});
 
   @override
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
@@ -696,6 +808,14 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate;
 }
 
 /// @nodoc
@@ -759,6 +879,10 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? streets = freezed,
     Object? tags = freezed,
     Object? uid = freezed,
+    Object? kodasHistoryAggregate = freezed,
+    Object? confessionHistoryAggregate = freezed,
+    Object? callHistoryAggregate = freezed,
+    Object? visitHistoryAggregate = freezed,
   }) {
     return _then(_$_Person(
       id: id == freezed
@@ -961,6 +1085,22 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
+      kodasHistoryAggregate: kodasHistoryAggregate == freezed
+          ? _value.kodasHistoryAggregate
+          : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      confessionHistoryAggregate: confessionHistoryAggregate == freezed
+          ? _value.confessionHistoryAggregate
+          : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      callHistoryAggregate: callHistoryAggregate == freezed
+          ? _value.callHistoryAggregate
+          : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      visitHistoryAggregate: visitHistoryAggregate == freezed
+          ? _value.visitHistoryAggregate
+          : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
   }
 }
@@ -1023,7 +1163,15 @@ class _$_Person extends _Person {
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           final List<Tag>? tags,
-      this.uid})
+      this.uid,
+      @JsonKey(name: 'kodasHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.kodasHistoryAggregate,
+      @JsonKey(name: 'confessionHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.confessionHistoryAggregate,
+      @JsonKey(name: 'callHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.callHistoryAggregate,
+      @JsonKey(name: 'visitHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.visitHistoryAggregate})
       : _otherPhones = otherPhones,
         _classes = classes,
         _groups = groups,
@@ -1193,10 +1341,34 @@ class _$_Person extends _Person {
 
   @override
   final String? uid;
+  @override
+  @JsonKey(
+      name: 'kodasHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? kodasHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'confessionHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? confessionHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'callHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? callHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'visitHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? visitHistoryAggregate;
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, uid: $uid)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, uid: $uid, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate)';
   }
 
   @override
@@ -1265,7 +1437,15 @@ class _$_Person extends _Person {
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(other.uid, uid));
+            const DeepCollectionEquality().equals(other.uid, uid) &&
+            const DeepCollectionEquality()
+                .equals(other.kodasHistoryAggregate, kodasHistoryAggregate) &&
+            const DeepCollectionEquality().equals(
+                other.confessionHistoryAggregate, confessionHistoryAggregate) &&
+            const DeepCollectionEquality()
+                .equals(other.callHistoryAggregate, callHistoryAggregate) &&
+            const DeepCollectionEquality()
+                .equals(other.visitHistoryAggregate, visitHistoryAggregate));
   }
 
   @JsonKey(ignore: true)
@@ -1321,7 +1501,11 @@ class _$_Person extends _Person {
         const DeepCollectionEquality().hash(_areas),
         const DeepCollectionEquality().hash(_streets),
         const DeepCollectionEquality().hash(_tags),
-        const DeepCollectionEquality().hash(uid)
+        const DeepCollectionEquality().hash(uid),
+        const DeepCollectionEquality().hash(kodasHistoryAggregate),
+        const DeepCollectionEquality().hash(confessionHistoryAggregate),
+        const DeepCollectionEquality().hash(callHistoryAggregate),
+        const DeepCollectionEquality().hash(visitHistoryAggregate)
       ]);
 
   @JsonKey(ignore: true)
@@ -1393,7 +1577,15 @@ abstract class _Person extends Person {
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           final List<Tag>? tags,
-      final String? uid}) = _$_Person;
+      final String? uid,
+      @JsonKey(name: 'kodasHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? kodasHistoryAggregate,
+      @JsonKey(name: 'confessionHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? confessionHistoryAggregate,
+      @JsonKey(name: 'callHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? callHistoryAggregate,
+      @JsonKey(name: 'visitHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? visitHistoryAggregate}) = _$_Person;
   _Person._() : super._();
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
@@ -1503,6 +1695,30 @@ abstract class _Person extends Person {
   List<Tag>? get tags;
   @override
   String? get uid;
+  @override
+  @JsonKey(
+      name: 'kodasHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get kodasHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'confessionHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get confessionHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'callHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get callHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'visitHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get visitHistoryAggregate;
   @override
   @JsonKey(ignore: true)
   _$$_PersonCopyWith<_$_Person> get copyWith =>

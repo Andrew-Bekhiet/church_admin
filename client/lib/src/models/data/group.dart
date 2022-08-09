@@ -12,12 +12,28 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-class Group extends ViewableWithID with _$Group implements PhotoObjectBase {
+class Group extends ViewableWithID
+    with _$Group, AttendanceAnalyzable
+    implements PhotoObjectBase {
   factory Group({
     required String id,
     required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+        Color? color,
     DateTime? photoUpdatedAt,
+    Service? service,
+    @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? attendanceHistoryAggregate,
+    @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
   }) = _Group;
   Group._() : super();
 

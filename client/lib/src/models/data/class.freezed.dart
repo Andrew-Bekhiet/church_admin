@@ -25,6 +25,19 @@ mixin _$Class {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  Service? get service => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,8 +51,18 @@ abstract class $ClassCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt});
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
+      DateTime? photoUpdatedAt,
+      Service? service,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+
+  $ServiceCopyWith<$Res>? get service;
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
@@ -56,6 +79,9 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? name = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? service = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -74,7 +100,56 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      service: service == freezed
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+          ? _value.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
+              freezed
+          ? _value.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
+  }
+
+  @override
+  $ServiceCopyWith<$Res>? get service {
+    if (_value.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_value.service!, (value) {
+      return _then(_value.copyWith(service: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate {
+    if (_value.attendanceHistoryAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(
+        _value.attendanceHistoryAggregate!, (value) {
+      return _then(_value.copyWith(attendanceHistoryAggregate: value));
+    });
+  }
+
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>?
+      get attendanceDaysConstraintsAggregate {
+    if (_value.attendanceDaysConstraintsAggregate == null) {
+      return null;
+    }
+
+    return $AnalysisDataCopyWith<DateTime, $Res>(
+        _value.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_value.copyWith(attendanceDaysConstraintsAggregate: value));
+    });
   }
 }
 
@@ -86,8 +161,21 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt});
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
+      DateTime? photoUpdatedAt,
+      Service? service,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+
+  @override
+  $ServiceCopyWith<$Res>? get service;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
+  @override
+  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
@@ -105,6 +193,9 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res>
     Object? name = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? service = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_$_Class(
       id: id == freezed
@@ -123,6 +214,19 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      service: service == freezed
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+          ? _value.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
+      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
+              freezed
+          ? _value.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as AnalysisData<DateTime>?,
     ));
   }
 }
@@ -133,8 +237,14 @@ class _$_Class extends _Class {
   _$_Class(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      this.photoUpdatedAt})
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          this.color,
+      this.photoUpdatedAt,
+      this.service,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          this.attendanceDaysConstraintsAggregate})
       : super._();
 
   factory _$_Class.fromJson(Map<String, dynamic> json) =>
@@ -149,10 +259,24 @@ class _$_Class extends _Class {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final Service? service;
+  @override
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? attendanceHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate;
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -164,7 +288,13 @@ class _$_Class extends _Class {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt));
+                .equals(other.photoUpdatedAt, photoUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.service, service) &&
+            const DeepCollectionEquality().equals(
+                other.attendanceHistoryAggregate, attendanceHistoryAggregate) &&
+            const DeepCollectionEquality().equals(
+                other.attendanceDaysConstraintsAggregate,
+                attendanceDaysConstraintsAggregate));
   }
 
   @JsonKey(ignore: true)
@@ -174,7 +304,10 @@ class _$_Class extends _Class {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(photoUpdatedAt));
+      const DeepCollectionEquality().hash(photoUpdatedAt),
+      const DeepCollectionEquality().hash(service),
+      const DeepCollectionEquality().hash(attendanceHistoryAggregate),
+      const DeepCollectionEquality().hash(attendanceDaysConstraintsAggregate));
 
   @JsonKey(ignore: true)
   @override
@@ -193,8 +326,14 @@ abstract class _Class extends Class {
   factory _Class(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt}) = _$_Class;
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          final Color? color,
+      final DateTime? photoUpdatedAt,
+      final Service? service,
+      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? attendanceHistoryAggregate,
+      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate}) = _$_Class;
   _Class._() : super._();
 
   factory _Class.fromJson(Map<String, dynamic> json) = _$_Class.fromJson;
@@ -208,6 +347,20 @@ abstract class _Class extends Class {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  Service? get service;
+  @override
+  @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceHistoryAggregate;
+  @override
+  @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson)
+  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate;
   @override
   @JsonKey(ignore: true)
   _$$_ClassCopyWith<_$_Class> get copyWith =>

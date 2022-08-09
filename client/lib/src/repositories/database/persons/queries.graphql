@@ -61,6 +61,14 @@ query getMorePersonData(
       name
       color
       photoUpdatedAt
+
+      attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+        aggregate {
+          max {
+            dayId
+          }
+        }
+      }
     }
     groups(
       order_by: { group: { name: asc } }
@@ -71,6 +79,14 @@ query getMorePersonData(
         name
         color
         photoUpdatedAt
+
+        attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+          aggregate {
+            max {
+              dayId
+            }
+          }
+        }
       }
     }
     services(
@@ -82,6 +98,14 @@ query getMorePersonData(
         name
         color
         photoUpdatedAt
+
+        attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+          aggregate {
+            max {
+              dayId
+            }
+          }
+        }
       }
     }
   }
@@ -113,6 +137,211 @@ query personsGeolocations($conditions: persons_bool_exp) {
       color
 
       geolocation
+    }
+  }
+}
+
+query analyzePersonAttendance(
+  $dateFrom: date!
+  $dateTo: date!
+  $personId: uuid!
+  $groupsIds: [uuid!]
+  $classesIds: [uuid!]
+  $servicesIds: [uuid!]
+) {
+  persons_by_pk(id: $personId) {
+    id
+    name
+    kodasHistory_aggregate(
+      where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+    ) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    confessionHistory_aggregate(
+      where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+    ) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    services(where: { serviceId: { _in: $servicesIds } }) {
+      service {
+        id
+        name
+        color
+        attendanceHistory_aggregate(
+          where: {
+            dayId: { _gte: $dateFrom, _lte: $dateTo }
+            personId: { _eq: $personId }
+          }
+        ) {
+          aggregate {
+            count
+            max {
+              dayId
+            }
+          }
+          nodes {
+            dayId
+          }
+        }
+        attendanceDaysConstraints_aggregate(
+          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+        ) {
+          aggregate {
+            count
+          }
+          nodes {
+            dayId
+          }
+        }
+      }
+    }
+    classes(where: { id: { _in: $classesIds } }) {
+      id
+      name
+      color
+      attendanceHistory_aggregate(
+        where: {
+          dayId: { _gte: $dateFrom, _lte: $dateTo }
+          personId: { _eq: $personId }
+        }
+      ) {
+        aggregate {
+          count
+          max {
+            dayId
+          }
+        }
+        nodes {
+          dayId
+        }
+      }
+      attendanceDaysConstraints_aggregate(
+        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          dayId
+        }
+      }
+    }
+    groups(where: { groupId: { _in: $groupsIds } }) {
+      group {
+        id
+        name
+        color
+        attendanceHistory_aggregate(
+          where: {
+            dayId: { _gte: $dateFrom, _lte: $dateTo }
+            personId: { _eq: $personId }
+          }
+        ) {
+          aggregate {
+            count
+            max {
+              dayId
+            }
+          }
+          nodes {
+            dayId
+          }
+        }
+        attendanceDaysConstraints_aggregate(
+          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+        ) {
+          aggregate {
+            count
+          }
+          nodes {
+            dayId
+          }
+        }
+      }
+    }
+  }
+}
+
+query analyzePersonServicing(
+  $timeFrom: timestamptz!
+  $timeTo: timestamptz!
+  $personId: uuid!
+) {
+  persons_by_pk(id: $personId) {
+    id
+    name
+    callHistory_aggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    visitHistory_aggregate(
+      where: { time: { _gte: $timeFrom, _lte: $timeTo } }
+    ) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+  }
+}
+
+query getPersonClassesAndGroups($id: uuid!) {
+  persons_by_pk(id: $id) {
+    id
+    name
+    classes(order_by: { name: asc }) {
+      id
+      name
+      color
+      photoUpdatedAt
+      service {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+    }
+    groups(order_by: { group: { name: asc } }) {
+      group {
+        id
+        name
+        color
+        photoUpdatedAt
+        service {
+          id
+          name
+          color
+          photoUpdatedAt
+        }
+      }
     }
   }
 }

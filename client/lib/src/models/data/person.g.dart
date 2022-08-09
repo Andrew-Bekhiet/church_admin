@@ -105,6 +105,14 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
           .toList(),
       tags: personsTagsFromJson(json['tags'] as List?),
       uid: json['uid'] as String?,
+      kodasHistoryAggregate: analysisDataFromJson(
+          json['kodasHistory_aggregate'] as Map<String, dynamic>?),
+      confessionHistoryAggregate: analysisDataFromJson(
+          json['confessionHistory_aggregate'] as Map<String, dynamic>?),
+      callHistoryAggregate: analysisDataFromJson(
+          json['callHistory_aggregate'] as Map<String, dynamic>?),
+      visitHistoryAggregate: analysisDataFromJson(
+          json['visitHistory_aggregate'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
@@ -158,4 +166,12 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'tags': personsTagsToJson(instance.tags),
       'uid': instance.uid,
+      'kodasHistory_aggregate':
+          analysisDataToJson(instance.kodasHistoryAggregate),
+      'confessionHistory_aggregate':
+          analysisDataToJson(instance.confessionHistoryAggregate),
+      'callHistory_aggregate':
+          analysisDataToJson(instance.callHistoryAggregate),
+      'visitHistory_aggregate':
+          analysisDataToJson(instance.visitHistoryAggregate),
     };

@@ -12,16 +12,31 @@ part 'service.freezed.dart';
 part 'service.g.dart';
 
 @freezed
-class Service extends ViewableWithID with _$Service implements PhotoObjectBase {
+class Service extends ViewableWithID
+    with _$Service, AttendanceAnalyzable
+    implements PhotoObjectBase {
   factory Service({
     required String id,
     required String name,
     StudyYear? fromStudyYear,
     StudyYear? toStudyYear,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+        Color? color,
     DateTime? photoUpdatedAt,
     List<Class>? classes,
     List<Group>? groups,
+    @JsonKey(
+      name: 'attendanceHistory_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? attendanceHistoryAggregate,
+    @JsonKey(
+      name: 'attendanceDaysConstraints_aggregate',
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
   }) = _Service;
   Service._() : super();
 

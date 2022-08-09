@@ -29,6 +29,14 @@ subscription watchPerson($id: uuid!) {
       name
       color
       photoUpdatedAt
+
+      attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+        aggregate {
+          max {
+            time
+          }
+        }
+      }
     }
     church {
       id
@@ -60,6 +68,14 @@ subscription watchPerson($id: uuid!) {
         name
         color
         photoUpdatedAt
+
+        attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
       }
     }
     isServant
@@ -96,6 +112,14 @@ subscription watchPerson($id: uuid!) {
         name
         color
         photoUpdatedAt
+
+        attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
       }
     }
     shammasLevel {
