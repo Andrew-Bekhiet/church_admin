@@ -26,6 +26,7 @@ mixin _$Class {
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
+  StudyYear? get studyYear => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'attendanceHistory_aggregate',
       fromJson: analysisDataFromJson,
@@ -55,12 +56,14 @@ abstract class $ClassCopyWith<$Res> {
           Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
+      StudyYear? studyYear,
       @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
+  $StudyYearCopyWith<$Res>? get studyYear;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
@@ -80,6 +83,7 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
+    Object? studyYear = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -104,6 +108,10 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
+      studyYear: studyYear == freezed
+          ? _value.studyYear
+          : studyYear // ignore: cast_nullable_to_non_nullable
+              as StudyYear?,
       attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -124,6 +132,17 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
 
     return $ServiceCopyWith<$Res>(_value.service!, (value) {
       return _then(_value.copyWith(service: value));
+    });
+  }
+
+  @override
+  $StudyYearCopyWith<$Res>? get studyYear {
+    if (_value.studyYear == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_value.studyYear!, (value) {
+      return _then(_value.copyWith(studyYear: value));
     });
   }
 
@@ -165,6 +184,7 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
           Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
+      StudyYear? studyYear,
       @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -172,6 +192,8 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
 
   @override
   $ServiceCopyWith<$Res>? get service;
+  @override
+  $StudyYearCopyWith<$Res>? get studyYear;
   @override
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   @override
@@ -194,6 +216,7 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
+    Object? studyYear = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -218,6 +241,10 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res>
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
+      studyYear: studyYear == freezed
+          ? _value.studyYear
+          : studyYear // ignore: cast_nullable_to_non_nullable
+              as StudyYear?,
       attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -241,6 +268,7 @@ class _$_Class extends _Class {
           this.color,
       this.photoUpdatedAt,
       this.service,
+      this.studyYear,
       @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceHistoryAggregate,
       @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -262,6 +290,8 @@ class _$_Class extends _Class {
   @override
   final Service? service;
   @override
+  final StudyYear? studyYear;
+  @override
   @JsonKey(
       name: 'attendanceHistory_aggregate',
       fromJson: analysisDataFromJson,
@@ -276,7 +306,7 @@ class _$_Class extends _Class {
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, studyYear: $studyYear, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -290,6 +320,7 @@ class _$_Class extends _Class {
             const DeepCollectionEquality()
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other.service, service) &&
+            const DeepCollectionEquality().equals(other.studyYear, studyYear) &&
             const DeepCollectionEquality().equals(
                 other.attendanceHistoryAggregate, attendanceHistoryAggregate) &&
             const DeepCollectionEquality().equals(
@@ -306,6 +337,7 @@ class _$_Class extends _Class {
       const DeepCollectionEquality().hash(color),
       const DeepCollectionEquality().hash(photoUpdatedAt),
       const DeepCollectionEquality().hash(service),
+      const DeepCollectionEquality().hash(studyYear),
       const DeepCollectionEquality().hash(attendanceHistoryAggregate),
       const DeepCollectionEquality().hash(attendanceDaysConstraintsAggregate));
 
@@ -330,6 +362,7 @@ abstract class _Class extends Class {
           final Color? color,
       final DateTime? photoUpdatedAt,
       final Service? service,
+      final StudyYear? studyYear,
       @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -349,6 +382,8 @@ abstract class _Class extends Class {
   DateTime? get photoUpdatedAt;
   @override
   Service? get service;
+  @override
+  StudyYear? get studyYear;
   @override
   @JsonKey(
       name: 'attendanceHistory_aggregate',

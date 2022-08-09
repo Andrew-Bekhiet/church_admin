@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
@@ -94,8 +97,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _search = BehaviorSubject<String?>.seeded(null);
   final _bottomNavBar = BehaviorSubject<Type>.seeded(Service);
 
@@ -126,6 +128,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
 
+  final List<AnimationController> _animationControllers = [];
+
   Stream<String?> _getSearchStreamFor<T>() {
     return Rx.combineLatest2<String?, Type, String?>(
       _search,
@@ -153,6 +157,9 @@ class _HomeScreenState extends State<HomeScreen>
     await _bottomNavBar.close();
 
     await Future.wait(_listsControllers.map((c) => c.dispose()));
+    for (final c in _animationControllers) {
+      c.dispose();
+    }
   }
 
   @override
@@ -260,42 +267,104 @@ class _HomeScreenState extends State<HomeScreen>
     Widget? trailing,
     Widget? subtitle,
   }) {
-    return ExpansionTile(
-      key: PageStorageKey(s),
-      leading: PhotoObjectWidget(
-        s,
-        circleCrop: false,
+    final _topController = AnimationController(
+      duration: const Duration(milliseconds: 225),
+      vsync: this,
+    );
+
+    _animationControllers.add(_topController);
+
+    return AnimatedBuilder(
+      animation: _topController.drive(
+        Tween(begin: 0, end: 1).chain(
+          CurveTween(curve: Curves.easeIn),
+        ),
       ),
-      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-      maintainState: true,
-      title: GestureDetector(
-        onTap: onTap != null ? () => onTap(s) : null,
-        onLongPress: onLongPress != null ? () => onLongPress(s) : null,
-        child: Text(s.name),
+      builder: (contex, child) => Card(
+        elevation: _topController.value * 3,
+        child: ExpansionTile(
+          key: PageStorageKey(s),
+          leading: PhotoObjectWidget(
+            s,
+            circleCrop: false,
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Transform.rotate(
+                angle: _topController.value * pi,
+                child: const Icon(Icons.expand_more),
+              ),
+              IconButton(
+                onPressed: onTap != null ? () => onTap(s) : null,
+                icon: const Icon(Icons.info),
+              ),
+            ],
+          ),
+          onExpansionChanged: (e) =>
+              e ? _topController.forward() : _topController.animateBack(0),
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          maintainState: true,
+          title: GestureDetector(
+            onLongPress: onLongPress != null ? () => onLongPress(s) : null,
+            child: Text(s.name),
+          ),
+          children: [
+            for (final sc
+                in s.classes?.groupListsBy((c) => c.studyYear!).entries ??
+                    <StudyYear, List<Class>>{}.entries)
+              if (sc.value.length > 1)
+                Padding(
+                  padding: EdgeInsets.only(right: _topController.value * 20),
+                  child: Card(
+                    elevation: 0,
+                    child: ExpansionTile(
+                      key: PageStorageKey(sc.key),
+                      title: Text(sc.key.name),
+                      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+                      maintainState: true,
+                      children: [
+                        for (final c in sc.value)
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: _topController.value * 20),
+                            child: ViewableObjectWidget(
+                              c,
+                              showSubtitle: false,
+                              wrapInCard: false,
+                              isDense: true,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                )
+              else
+                Padding(
+                  padding: EdgeInsets.only(right: _topController.value * 20),
+                  child: ViewableObjectWidget(
+                    sc.value.single,
+                    showSubtitle: false,
+                    wrapInCard: false,
+                  ),
+                ),
+            if (s.fromStudyYear != null &&
+                s.toStudyYear != null &&
+                s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&
+                (s.groups?.isNotEmpty ?? false))
+              const Divider(),
+            for (final g in s.groups ?? <Group>[])
+              Padding(
+                padding: EdgeInsets.only(right: _topController.value * 20),
+                child: ViewableObjectWidget(
+                  g,
+                  showSubtitle: false,
+                  wrapInCard: false,
+                ),
+              ),
+          ],
+        ),
       ),
-      children: [
-        for (final c in s.classes ?? <Class>[])
-          Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: ViewableObjectWidget(
-              c,
-              showSubtitle: false,
-            ),
-          ),
-        if (s.fromStudyYear != null &&
-            s.toStudyYear != null &&
-            s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&
-            (s.groups?.isNotEmpty ?? false))
-          const Divider(),
-        for (final g in s.groups ?? <Group>[])
-          Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: ViewableObjectWidget(
-              g,
-              showSubtitle: false,
-            ),
-          ),
-      ],
     );
   }
 

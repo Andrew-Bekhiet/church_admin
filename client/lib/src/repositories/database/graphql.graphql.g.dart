@@ -5963,6 +5963,22 @@ Map<String, dynamic>
           'order': instance.order,
         };
 
+GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears
+    _$GetServicesStream$SubscriptionRoot$Services$Classes$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears()
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic>
+    _$GetServicesStream$SubscriptionRoot$Services$Classes$StudyYearsToJson(
+            GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears
+                instance) =>
+        <String, dynamic>{
+          'name': instance.name,
+          'order': instance.order,
+        };
+
 GetServicesStream$SubscriptionRoot$Services$Classes
     _$GetServicesStream$SubscriptionRoot$Services$ClassesFromJson(
             Map<String, dynamic> json) =>
@@ -5972,7 +5988,10 @@ GetServicesStream$SubscriptionRoot$Services$Classes
           ..color = json['color'] as int?
           ..photoUpdatedAt = json['photoUpdatedAt'] == null
               ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..studyYear =
+              GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears
+                  .fromJson(json['studyYear'] as Map<String, dynamic>);
 
 Map<String, dynamic>
     _$GetServicesStream$SubscriptionRoot$Services$ClassesToJson(
@@ -5982,6 +6001,7 @@ Map<String, dynamic>
           'name': instance.name,
           'color': instance.color,
           'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+          'studyYear': instance.studyYear.toJson(),
         };
 
 GetServicesStream$SubscriptionRoot$Services$Groups

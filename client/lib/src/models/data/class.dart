@@ -2,7 +2,8 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide Json;
+import 'package:churchdata_core/churchdata_core.dart'
+    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,7 @@ class Class extends ViewableWithID
         Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
+    StudyYear? studyYear,
     @JsonKey(
       name: 'attendanceHistory_aggregate',
       fromJson: analysisDataFromJson,

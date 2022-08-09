@@ -7225,6 +7225,28 @@ class GetServicesStream$SubscriptionRoot$Services$StudyYears
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears
+    extends JsonSerializable with EquatableMixin {
+  GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears();
+
+  factory GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetServicesStream$SubscriptionRoot$Services$Classes$StudyYearsFromJson(
+          json);
+
+  late String name;
+
+  late int order;
+
+  @override
+  List<Object?> get props => [name, order];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetServicesStream$SubscriptionRoot$Services$Classes$StudyYearsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetServicesStream$SubscriptionRoot$Services$Classes
     extends JsonSerializable with EquatableMixin {
   GetServicesStream$SubscriptionRoot$Services$Classes();
@@ -7244,8 +7266,10 @@ class GetServicesStream$SubscriptionRoot$Services$Classes
 
   DateTime? photoUpdatedAt;
 
+  late GetServicesStream$SubscriptionRoot$Services$Classes$StudyYears studyYear;
+
   @override
-  List<Object?> get props => [id, name, color, photoUpdatedAt];
+  List<Object?> get props => [id, name, color, photoUpdatedAt, studyYear];
   @override
   Map<String, dynamic> toJson() =>
       _$GetServicesStream$SubscriptionRoot$Services$ClassesToJson(this);
@@ -13199,7 +13223,26 @@ final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: null)
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'studyYear'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'name'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'order'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ]))
                   ])),
               FieldNode(
                   name: NameNode(value: 'groups'),

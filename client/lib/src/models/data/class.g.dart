@@ -16,6 +16,9 @@ _$_Class _$$_ClassFromJson(Map<String, dynamic> json) => _$_Class(
       service: json['service'] == null
           ? null
           : Service.fromJson(json['service'] as Map<String, dynamic>),
+      studyYear: json['studyYear'] == null
+          ? null
+          : StudyYear.fromJson(json['studyYear'] as Map<String, dynamic>),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistory_aggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(
@@ -28,6 +31,7 @@ Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'service': instance.service?.toJson(),
+      'studyYear': instance.studyYear?.toJson(),
       'attendanceHistory_aggregate':
           analysisDataToJson(instance.attendanceHistoryAggregate),
       'attendanceDaysConstraints_aggregate':

@@ -29,6 +29,11 @@ subscription getServicesStream(
       name
       color
       photoUpdatedAt
+
+      studyYear{
+        name
+        order
+      }
     }
     groups(
       where: { _and: $groupsAddWhere }
