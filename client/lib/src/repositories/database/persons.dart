@@ -694,9 +694,6 @@ class PersonsQueries {
               ),
             if (areasIds.isNotEmpty ||
                 streetsIds.isNotEmpty ||
-                servicesIds.isNotEmpty ||
-                classesIds.isNotEmpty ||
-                groupsIds.isNotEmpty ||
                 familiesIds.isNotEmpty)
               PersonsBoolExp(
                 $or: [
@@ -726,29 +723,36 @@ class PersonsQueries {
                     ),
                 ],
               ),
-            if (servicesIds.isNotEmpty)
+            if (servicesIds.isNotEmpty ||
+                classesIds.isNotEmpty ||
+                groupsIds.isNotEmpty)
               PersonsBoolExp(
-                services: PersonsServicesBoolExp(
-                  serviceId: UuidComparisonExp(
-                    $in: servicesIds,
-                  ),
-                ),
-              ),
-            if (classesIds.isNotEmpty)
-              PersonsBoolExp(
-                classes: ClassesBoolExp(
-                  id: UuidComparisonExp(
-                    $in: classesIds,
-                  ),
-                ),
-              ),
-            if (groupsIds.isNotEmpty)
-              PersonsBoolExp(
-                groups: PersonsGroupsBoolExp(
-                  groupId: UuidComparisonExp(
-                    $in: groupsIds,
-                  ),
-                ),
+                $or: [
+                  if (servicesIds.isNotEmpty)
+                    PersonsBoolExp(
+                      services: PersonsServicesBoolExp(
+                        serviceId: UuidComparisonExp(
+                          $in: servicesIds,
+                        ),
+                      ),
+                    ),
+                  if (classesIds.isNotEmpty)
+                    PersonsBoolExp(
+                      classes: ClassesBoolExp(
+                        id: UuidComparisonExp(
+                          $in: classesIds,
+                        ),
+                      ),
+                    ),
+                  if (groupsIds.isNotEmpty)
+                    PersonsBoolExp(
+                      groups: PersonsGroupsBoolExp(
+                        groupId: UuidComparisonExp(
+                          $in: groupsIds,
+                        ),
+                      ),
+                    ),
+                ],
               ),
           ],
         ),
