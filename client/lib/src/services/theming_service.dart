@@ -53,16 +53,20 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
       isDark = false;
     }
 
-    return ThemeData(
+    final themeData = ThemeData(
       brightness: isDark ? Brightness.dark : Brightness.light,
       primarySwatch: primary,
       colorScheme: ColorScheme.fromSwatch(
         brightness: isDark ? Brightness.dark : Brightness.light,
         primarySwatch: primary,
         accentColor: secondary,
+      ).copyWith(
+        outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
       ),
       useMaterial3: true,
-    ).copyWith(
+    );
+
+    return themeData.copyWith(
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -71,10 +75,18 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: primary),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
+        ).copyWith(
+          side: MaterialStateBorderSide.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return BorderSide(color: themeData.disabledColor);
+            }
+            return BorderSide(
+              color: themeData.colorScheme.outline,
+            );
+          }),
         ),
       ),
     );
