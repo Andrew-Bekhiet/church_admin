@@ -132,7 +132,7 @@ class _DataGeomapState extends State<DataGeomap> {
             apply: (o) => setState(() => _mapOptions = o),
           ),
         ),
-        child: StreamBuilder<Tuple2<LocationData?, List<Person>>>(
+        child: StreamBuilder<Tuple2<LocationData?, List<Person>?>>(
           initialData: Tuple2(
             null,
             [
@@ -190,13 +190,12 @@ class _DataGeomapState extends State<DataGeomap> {
                     .map((persons) => Tuple2(location, persons)),
               ),
           builder: (context, data) {
-            if (data.requireData.item2.isNotEmpty &&
-                data.connectionState == ConnectionState.waiting) {
+            if (data.requireData.item2 == null) {
               return const Center(child: CircularProgressIndicator());
             }
 
             final location = data.requireData.item1;
-            final persons = data.requireData.item2;
+            final persons = data.requireData.item2!;
 
             return GoogleMap(
               myLocationEnabled: true,

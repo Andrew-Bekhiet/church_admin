@@ -70,7 +70,7 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
       ),
       body: ListView(
         children: [
-          StreamBuilder<Person>(
+          StreamBuilder<Person?>(
             initialData: widget.person,
             stream: CADatabaseRepository.I.persons.analyzePersonAttendance(
               personId: widget.person.id,
@@ -87,10 +87,16 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
                 );
               }
 
+              if (snapshot.data == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final data = snapshot.requireData!;
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (final s in snapshot.requireData.services ?? <Service>[])
+                  for (final s in data.services ?? <Service>[])
                     if (s.attendanceHistoryAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
@@ -105,11 +111,11 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
                             totalAnalysisData:
                                 s.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => throw UnimplementedError(),
-                            color: s.color ?? snapshot.requireData.color,
+                            color: s.color ?? data.color,
                           ),
                         ),
                       ),
-                  for (final c in snapshot.requireData.classes ?? <Class>[])
+                  for (final c in data.classes ?? <Class>[])
                     if (c.attendanceHistoryAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
@@ -124,11 +130,11 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
                             totalAnalysisData:
                                 c.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => throw UnimplementedError(),
-                            color: c.color ?? snapshot.requireData.color,
+                            color: c.color ?? data.color,
                           ),
                         ),
                       ),
-                  for (final g in snapshot.requireData.groups ?? <Group>[])
+                  for (final g in data.groups ?? <Group>[])
                     if (g.attendanceHistoryAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
@@ -143,7 +149,7 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
                             totalAnalysisData:
                                 g.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => throw UnimplementedError(),
-                            color: g.color ?? snapshot.requireData.color,
+                            color: g.color ?? data.color,
                           ),
                         ),
                       ),

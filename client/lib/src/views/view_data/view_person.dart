@@ -201,7 +201,7 @@ class ViewPerson extends StatelessWidget {
                       title: const Text('الخدمات المشارك بها'),
                       subtitle: _ShowMore<Service>(
                         person: person,
-                        getField: (p) => p.services,
+                        getField: (p) => p?.services,
                         getMore: (p, s) =>
                             CADatabaseRepository.I.persons.getMorePersonData(
                           personId: person.id,
@@ -213,7 +213,7 @@ class ViewPerson extends StatelessWidget {
                       title: const Text('الفصول التي يظهر بها'),
                       subtitle: _ShowMore<Class>(
                         person: person,
-                        getField: (p) => p.classes,
+                        getField: (p) => p?.classes,
                         getMore: (p, c) =>
                             CADatabaseRepository.I.persons.getMorePersonData(
                           personId: person.id,
@@ -225,7 +225,7 @@ class ViewPerson extends StatelessWidget {
                       title: const Text('المجموعات المشارك بها'),
                       subtitle: _ShowMore<Group>(
                         person: person,
-                        getField: (p) => p.groups,
+                        getField: (p) => p?.groups,
                         getMore: (p, g) =>
                             CADatabaseRepository.I.persons.getMorePersonData(
                           personId: person.id,
@@ -370,7 +370,7 @@ class ViewPerson extends StatelessWidget {
                       title: const Text('المناطق التي يظهر بها'),
                       subtitle: _ShowMore<Area>(
                         person: person,
-                        getField: (p) => p.areas,
+                        getField: (p) => p?.areas,
                         getMore: (p, a) =>
                             CADatabaseRepository.I.persons.getMorePersonData(
                           personId: person.id,
@@ -633,8 +633,8 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   });
 
   final Person person;
-  final List<T>? Function(Person) getField;
-  final Stream<Person> Function(Person, T) getMore;
+  final List<T>? Function(Person?) getField;
+  final Stream<Person?> Function(Person, T) getMore;
   final bool showTime;
 
   DateFormat get dateFormat =>
@@ -689,18 +689,20 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                   initialData: const [],
                   stream:
                       getMore(person, o).map((value) => getField(value) ?? []),
-                  builder: (context, snapshot) => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      for (final o in snapshot.data ?? <T>[])
-                        ViewableObjectWidget(
-                          o,
-                          isDense: true,
-                          showSubtitle: _hasSubtitle(o),
-                          subtitle: _getSubtitle(context, o),
+                  builder: (context, snapshot) => snapshot.data == null
+                      ? const Center(child: CircularProgressIndicator())
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final o in snapshot.requireData)
+                              ViewableObjectWidget(
+                                o,
+                                isDense: true,
+                                showSubtitle: _hasSubtitle(o),
+                                subtitle: _getSubtitle(context, o),
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
                 ),
               ],
             )
@@ -757,7 +759,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         stream: CADatabaseRepository.I.persons
             .getPersonClassesAndGroups(personId: widget.person.id)
             .map(
-              (p) => <ViewableWithID>[...p.classes ?? [], ...p.groups ?? []]
+              (p) => <ViewableWithID>[...p?.classes ?? [], ...p?.groups ?? []]
                   .groupListsBy(
                 (o) => o is Class ? o.service! : (o as Group).service!,
               ),

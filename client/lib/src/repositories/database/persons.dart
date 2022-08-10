@@ -622,7 +622,7 @@ class PersonsQueries {
     );
   }
 
-  Stream<Person> getMorePersonData({
+  Stream<Person?> getMorePersonData({
     required String personId,
     String? areasAfter,
     String? classesAfter,
@@ -659,10 +659,10 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData!);
+        .map((value) => value.parsedData);
   }
 
-  Stream<List<Person>> personsGeolocations({
+  Stream<List<Person>?> personsGeolocations({
     String? personId,
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
@@ -784,10 +784,10 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData!);
+        .map((value) => value.parsedData);
   }
 
-  Stream<Person> analyzePersonAttendance({
+  Stream<Person?> analyzePersonAttendance({
     required String personId,
     required DateTime dateFrom,
     required DateTime dateTo,
@@ -826,10 +826,10 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData!);
+        .map((value) => value.parsedData);
   }
 
-  Stream<Person> analyzePersonServicing({
+  Stream<Person?> analyzePersonServicing({
     required String personId,
     required DateTime timeFrom,
     required DateTime timeTo,
@@ -864,10 +864,10 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData!);
+        .map((value) => value.parsedData);
   }
 
-  Stream<Person> getPersonClassesAndGroups({
+  Stream<Person?> getPersonClassesAndGroups({
     required String personId,
   }) {
     final GetPersonClassesAndGroupsQuery query = GetPersonClassesAndGroupsQuery(
@@ -896,6 +896,6 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData!);
+        .map((value) => value.parsedData);
   }
 }
