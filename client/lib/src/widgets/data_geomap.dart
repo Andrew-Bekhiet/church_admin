@@ -378,76 +378,76 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
       searchStream: _search.map((s) => s ?? ''),
     )..selectAll(selected);
 
-    if (await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => Scaffold(
-              appBar: AppBar(
-                title: StreamBuilder<String?>(
-                  stream: _search,
-                  builder: (context, searchData) {
-                    if (searchData.hasData) {
-                      return TextFormField(
-                        autofocus: true,
-                        onChanged: _search.add,
-                        textInputAction: TextInputAction.search,
-                        style: DefaultTextStyle.of(context).style,
-                        decoration: InputDecoration(
-                          hintText: 'بحث ...',
-                          hintStyle:
-                              DefaultTextStyle.of(context).style.copyWith(
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                          contentPadding: const EdgeInsets.all(10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
+    final rslt = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: StreamBuilder<String?>(
+              stream: _search,
+              builder: (context, searchData) {
+                if (searchData.hasData) {
+                  return TextFormField(
+                    autofocus: true,
+                    onChanged: _search.add,
+                    textInputAction: TextInputAction.search,
+                    style: DefaultTextStyle.of(context).style,
+                    decoration: InputDecoration(
+                      hintText: 'بحث ...',
+                      hintStyle: DefaultTextStyle.of(context).style.copyWith(
+                            color: Theme.of(context).hintColor,
                           ),
-                          suffixIcon: IconButton(
-                            onPressed: () => _search.add(null),
-                            icon: const Icon(Icons.clear),
-                          ),
-                        ),
-                      );
-                    }
+                      contentPadding: const EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () => _search.add(null),
+                        icon: const Icon(Icons.clear),
+                      ),
+                    ),
+                  );
+                }
 
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: Text(title),
-                        ),
-                        IconButton(
-                          onPressed: () => _search.add(''),
-                          icon: const Icon(Icons.search),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.select_all),
-                    onPressed: _controller.selectAll,
-                    tooltip: 'تحديد الكل',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.check_box_outline_blank),
-                    onPressed: _controller.deselectAll,
-                    tooltip: 'تحديد لا شئ',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.done),
-                    onPressed: () => Navigator.of(context).pop(true),
-                    tooltip: 'تم',
-                  ),
-                ],
-              ),
-              body: DataObjectListViewBase(
-                controller: _controller,
-                autoDisposeController: false,
-              ),
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Text(title),
+                    ),
+                    IconButton(
+                      onPressed: () => _search.add(''),
+                      icon: const Icon(Icons.search),
+                    ),
+                  ],
+                );
+              },
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.select_all),
+                onPressed: _controller.selectAll,
+                tooltip: 'تحديد الكل',
+              ),
+              IconButton(
+                icon: const Icon(Icons.check_box_outline_blank),
+                onPressed: _controller.deselectAll,
+                tooltip: 'تحديد لا شئ',
+              ),
+              IconButton(
+                icon: const Icon(Icons.done),
+                onPressed: () => Navigator.of(context).pop(true),
+                tooltip: 'تم',
+              ),
+            ],
           ),
-        ) ==
-        true) {
+          body: DataObjectListViewBase(
+            controller: _controller,
+            autoDisposeController: false,
+          ),
+        ),
+      ),
+    );
+
+    if (rslt == true) {
       unawaited(_controller.dispose().then((_) async {
         if (!_search.isClosed) await _search.close();
       }));
@@ -477,7 +477,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-              TextButton.icon(
+              OutlinedButton.icon(
                 onPressed: stagingMapOptions != widget.mapOptions
                     ? () => widget.apply(stagingMapOptions)
                     : null,
