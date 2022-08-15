@@ -145,7 +145,7 @@ class CAAuthRepository extends AuthRepository<User, Person> {
 
     return User(
       uid: idTokenClaims['x-hasura-user-id']!,
-      name: currentUser?.name,
+      name: currentUser?.name ?? firebaseUser?.email ?? email!,
       photoUpdatedAt: currentUser?.photoUpdatedAt,
       userData: UserData(
         uid: idTokenClaims['x-hasura-user-id']!,

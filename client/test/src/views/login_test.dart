@@ -89,6 +89,7 @@ void main() {
           final authRepo = MockCAAuthRepository();
           final user = User(
             uid: 'uid',
+            name: '',
             userData: UserData(
               uid: 'uid',
               permissions: CAPermissionsSet.fromSet(const {}),

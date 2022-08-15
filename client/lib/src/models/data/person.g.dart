@@ -104,15 +104,17 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
           ?.map((e) => Street.fromJson(e as Map<String, dynamic>))
           .toList(),
       tags: personsTagsFromJson(json['tags'] as List?),
-      uid: json['uid'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       kodasHistoryAggregate: analysisDataFromJson(
-          json['kodasHistory_aggregate'] as Map<String, dynamic>?),
+          json['kodasHistoryAggregate'] as Map<String, dynamic>?),
       confessionHistoryAggregate: analysisDataFromJson(
-          json['confessionHistory_aggregate'] as Map<String, dynamic>?),
+          json['confessionHistoryAggregate'] as Map<String, dynamic>?),
       callHistoryAggregate: analysisDataFromJson(
-          json['callHistory_aggregate'] as Map<String, dynamic>?),
+          json['callHistoryAggregate'] as Map<String, dynamic>?),
       visitHistoryAggregate: analysisDataFromJson(
-          json['visitHistory_aggregate'] as Map<String, dynamic>?),
+          json['visitHistoryAggregate'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
@@ -165,13 +167,12 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'tags': personsTagsToJson(instance.tags),
-      'uid': instance.uid,
-      'kodasHistory_aggregate':
+      'user': instance.user?.toJson(),
+      'kodasHistoryAggregate':
           analysisDataToJson(instance.kodasHistoryAggregate),
-      'confessionHistory_aggregate':
+      'confessionHistoryAggregate':
           analysisDataToJson(instance.confessionHistoryAggregate),
-      'callHistory_aggregate':
-          analysisDataToJson(instance.callHistoryAggregate),
-      'visitHistory_aggregate':
+      'callHistoryAggregate': analysisDataToJson(instance.callHistoryAggregate),
+      'visitHistoryAggregate':
           analysisDataToJson(instance.visitHistoryAggregate),
     };

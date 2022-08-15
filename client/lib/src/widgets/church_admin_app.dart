@@ -115,9 +115,10 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
   @override
   Future<void> dispose() async {
-    super.dispose();
     if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.detached) {
       await GetIt.I.reset();
     }
+
+    super.dispose();
   }
 }

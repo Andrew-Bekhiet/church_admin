@@ -27,6 +27,7 @@ mixin _$UserData {
   String? get firebaseAuthUid => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   String? get password => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,10 @@ abstract class $UserDataCopyWith<$Res> {
       String email,
       String? firebaseAuthUid,
       @JsonKey(ignore: true)
-          String? password});
+          String? password,
+      LastRecordedByInfo? lastEdit});
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -63,6 +67,7 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
     Object? email = freezed,
     Object? firebaseAuthUid = freezed,
     Object? password = freezed,
+    Object? lastEdit = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
@@ -85,7 +90,22 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastEdit: lastEdit == freezed
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ));
+  }
+
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value));
+    });
   }
 }
 
@@ -102,7 +122,11 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
       String email,
       String? firebaseAuthUid,
       @JsonKey(ignore: true)
-          String? password});
+          String? password,
+      LastRecordedByInfo? lastEdit});
+
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -122,6 +146,7 @@ class __$$_UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
     Object? email = freezed,
     Object? firebaseAuthUid = freezed,
     Object? password = freezed,
+    Object? lastEdit = freezed,
   }) {
     return _then(_$_UserData(
       uid: uid == freezed
@@ -144,6 +169,10 @@ class __$$_UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastEdit: lastEdit == freezed
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ));
   }
 }
@@ -158,7 +187,8 @@ class _$_UserData implements _UserData {
       required this.email,
       required this.firebaseAuthUid,
       @JsonKey(ignore: true)
-          this.password});
+          this.password,
+      this.lastEdit});
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
@@ -175,10 +205,12 @@ class _$_UserData implements _UserData {
   @override
   @JsonKey(ignore: true)
   final String? password;
+  @override
+  final LastRecordedByInfo? lastEdit;
 
   @override
   String toString() {
-    return 'UserData(uid: $uid, permissions: $permissions, email: $email, firebaseAuthUid: $firebaseAuthUid, password: $password)';
+    return 'UserData(uid: $uid, permissions: $permissions, email: $email, firebaseAuthUid: $firebaseAuthUid, password: $password, lastEdit: $lastEdit)';
   }
 
   @override
@@ -192,7 +224,8 @@ class _$_UserData implements _UserData {
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality()
                 .equals(other.firebaseAuthUid, firebaseAuthUid) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.lastEdit, lastEdit));
   }
 
   @JsonKey(ignore: true)
@@ -203,7 +236,8 @@ class _$_UserData implements _UserData {
       const DeepCollectionEquality().hash(permissions),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(firebaseAuthUid),
-      const DeepCollectionEquality().hash(password));
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(lastEdit));
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +260,8 @@ abstract class _UserData implements UserData {
       required final String email,
       required final String? firebaseAuthUid,
       @JsonKey(ignore: true)
-          final String? password}) = _$_UserData;
+          final String? password,
+      final LastRecordedByInfo? lastEdit}) = _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
@@ -242,6 +277,8 @@ abstract class _UserData implements UserData {
   @override
   @JsonKey(ignore: true)
   String? get password;
+  @override
+  LastRecordedByInfo? get lastEdit;
   @override
   @JsonKey(ignore: true)
   _$$_UserDataCopyWith<_$_UserData> get copyWith =>

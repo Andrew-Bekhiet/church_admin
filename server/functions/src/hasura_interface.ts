@@ -7,7 +7,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
       data: JSON.stringify({
         query: `
             query checkApproved($uid: uuid!) {
-                users_data(where: {uid: {_eq: $uid}}, limit: 1) {
+                usersData(where: {uid: {_eq: $uid}}, limit: 1) {
                     permissions
                 }
             }
@@ -23,7 +23,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
       },
     });
     const permissions: string[] =
-      hasura_request.data?.["data"]?.["users_data"]?.[0]?.["permissions"];
+      hasura_request.data?.["data"]?.["usersData"]?.[0]?.["permissions"];
 
     return (
       permissions.find((o) => o.toLowerCase().replace("'", "") == "approved") !=
@@ -44,7 +44,7 @@ export async function getHasuraUID(
       data: JSON.stringify({
         query: `
             query getUserByFirebaseUID($firebase_auth_uid: String) {
-              users_data(where: {firebaseAuthUid: {_eq: $firebase_auth_uid}}, limit: 1) {
+              usersData(where: {firebaseAuthUid: {_eq: $firebase_auth_uid}}, limit: 1) {
                 uid
               }
             }
@@ -60,7 +60,7 @@ export async function getHasuraUID(
       },
     });
     const hasura_uid: string =
-      hasura_request.data?.["data"]?.["users_data"]?.[0]?.["uid"] ?? null;
+      hasura_request.data?.["data"]?.["usersData"]?.[0]?.["uid"] ?? null;
 
     return hasura_uid;
   } catch (e) {
@@ -124,7 +124,7 @@ export async function checkUserAccess(
       data: JSON.stringify({
         query: `
             query checkPermissions($id: uuid!) {
-                ${table}(where: {${
+                ${table == "users" ? "usersData" : table}(where: {${
           table == "users" ? "uid" : "id"
         }: {_eq: $id}}, limit: 1) {
                     ${field}
@@ -143,7 +143,11 @@ export async function checkUserAccess(
       },
     });
 
-    return hasura_request.data?.["data"]?.[table]?.[0]?.[field] === true;
+    return (
+      hasura_request.data?.["data"]?.[
+        table == "users" ? "usersData" : table
+      ]?.[0]?.[field] === true
+    );
   } catch (e) {
     console.error(e);
   }
@@ -161,7 +165,7 @@ export async function insertUser(user: {
       data: JSON.stringify({
         query: `
             mutation addUser($email: String, $name: String , $firebase_auth_uid: String, $permissions: _text = "{}") {
-              insert_users_data(objects: {email: $email, firebaseAuthUid: $firebase_auth_uid, permissions: $permissions, user: {data: {name: $name, person: {data: {name: $name, isStudent:false, isServant:true}}}}}) {
+              insertUsersData(objects: {email: $email, firebaseAuthUid: $firebase_auth_uid, permissions: $permissions, user: {data: {name: $name, person: {data: {name: $name, isStudent:false, isServant:true}}}}}) {
                 returning {
                   user {
                     uid
@@ -186,9 +190,9 @@ export async function insertUser(user: {
     });
 
     return (
-      hasura_request.data?.["data"]?.["insert_users_data"]?.[
-        "returning"
-      ]?.[0]?.["user"]?.["uid"] ?? null
+      hasura_request.data?.["data"]?.["insertUsersData"]?.["returning"]?.[0]?.[
+        "user"
+      ]?.["uid"] ?? null
     );
   } catch (e) {
     console.error(e);
@@ -207,7 +211,9 @@ export async function updatePhotoTime(
       data: JSON.stringify({
         query: `
             mutation updatePhotoTime($id: uuid!, $photo_updated_at: timestamptz) {
-              update_${table}_by_pk(pk_columns: {id: $id}, _set: {photoUpdatedAt: $photo_updated_at}) {
+              update${table.replace(RegExp("^[a-z]"), (s) =>
+                s.toUpperCase()
+              )}ByPk(pk_columns: {id: $id}, _set: {photoUpdatedAt: $photo_updated_at}) {
                 id
               }
             }

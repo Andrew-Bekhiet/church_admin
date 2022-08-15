@@ -152,6 +152,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
     when(mock.currentUser).thenReturn(
       User(
+        name: '',
         userData: UserData(
           password: '',
           uid: 'uid',

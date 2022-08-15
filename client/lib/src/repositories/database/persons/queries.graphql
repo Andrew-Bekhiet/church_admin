@@ -47,22 +47,22 @@ query getMorePersonData(
   $groupsAfter: String = ""
   $servicesAfter: String = ""
 ) {
-  persons_by_pk(id: $id) {
+  personsByPk(id: $id) {
     id
     name
-    areas(order_by: { name: asc }, where: { name: { _gt: $areasAfter } }) {
+    areas(orderBy: { name: ASC }, where: { name: { _gt: $areasAfter } }) {
       id
       name
       color
       photoUpdatedAt
     }
-    classes(order_by: { name: asc }, where: { name: { _gt: $classesAfter } }) {
+    classes(orderBy: { name: ASC }, where: { name: { _gt: $classesAfter } }) {
       id
       name
       color
       photoUpdatedAt
 
-      attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+      attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
         aggregate {
           max {
             dayId
@@ -71,7 +71,7 @@ query getMorePersonData(
       }
     }
     groups(
-      order_by: { group: { name: asc } }
+      orderBy: { group: { name: ASC } }
       where: { group: { name: { _gt: $groupsAfter } } }
     ) {
       group {
@@ -80,7 +80,7 @@ query getMorePersonData(
         color
         photoUpdatedAt
 
-        attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
           aggregate {
             max {
               dayId
@@ -90,7 +90,7 @@ query getMorePersonData(
       }
     }
     services(
-      order_by: { service: { name: asc } }
+      orderBy: { service: { name: ASC } }
       where: { service: { name: { _gt: $servicesAfter } } }
     ) {
       service {
@@ -99,7 +99,7 @@ query getMorePersonData(
         color
         photoUpdatedAt
 
-        attendanceHistory_aggregate(where: { personId: { _eq: $personId } }) {
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
           aggregate {
             max {
               dayId
@@ -111,7 +111,7 @@ query getMorePersonData(
   }
 }
 
-query personsGeolocations($conditions: persons_bool_exp) {
+query personsGeolocations($conditions: PersonsBoolExp) {
   persons(where: $conditions) {
     id
     name
@@ -148,11 +148,12 @@ query analyzePersonAttendance(
   $groupsIds: [uuid!]
   $classesIds: [uuid!]
   $servicesIds: [uuid!]
+  $asAdmin: Boolean! = false
 ) {
-  persons_by_pk(id: $personId) {
+  personsByPk(id: $personId) {
     id
     name
-    kodasHistory_aggregate(
+    kodasHistoryAggregate(
       where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
     ) {
       aggregate {
@@ -165,7 +166,7 @@ query analyzePersonAttendance(
         time
       }
     }
-    confessionHistory_aggregate(
+    confessionHistoryAggregate(
       where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
     ) {
       aggregate {
@@ -183,10 +184,11 @@ query analyzePersonAttendance(
         id
         name
         color
-        attendanceHistory_aggregate(
+        attendanceHistoryAggregate(
           where: {
             dayId: { _gte: $dateFrom, _lte: $dateTo }
             personId: { _eq: $personId }
+            asAdmin: { _eq: $asAdmin }
           }
         ) {
           aggregate {
@@ -199,7 +201,7 @@ query analyzePersonAttendance(
             dayId
           }
         }
-        attendanceDaysConstraints_aggregate(
+        attendanceDaysConstraintsAggregate(
           where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
         ) {
           aggregate {
@@ -215,10 +217,11 @@ query analyzePersonAttendance(
       id
       name
       color
-      attendanceHistory_aggregate(
+      attendanceHistoryAggregate(
         where: {
           dayId: { _gte: $dateFrom, _lte: $dateTo }
           personId: { _eq: $personId }
+          asAdmin: { _eq: $asAdmin }
         }
       ) {
         aggregate {
@@ -231,7 +234,7 @@ query analyzePersonAttendance(
           dayId
         }
       }
-      attendanceDaysConstraints_aggregate(
+      attendanceDaysConstraintsAggregate(
         where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
       ) {
         aggregate {
@@ -247,10 +250,11 @@ query analyzePersonAttendance(
         id
         name
         color
-        attendanceHistory_aggregate(
+        attendanceHistoryAggregate(
           where: {
             dayId: { _gte: $dateFrom, _lte: $dateTo }
             personId: { _eq: $personId }
+            asAdmin: { _eq: $asAdmin }
           }
         ) {
           aggregate {
@@ -263,7 +267,7 @@ query analyzePersonAttendance(
             dayId
           }
         }
-        attendanceDaysConstraints_aggregate(
+        attendanceDaysConstraintsAggregate(
           where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
         ) {
           aggregate {
@@ -283,10 +287,10 @@ query analyzePersonServicing(
   $timeTo: timestamptz!
   $personId: uuid!
 ) {
-  persons_by_pk(id: $personId) {
+  personsByPk(id: $personId) {
     id
     name
-    callHistory_aggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
+    callHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
       aggregate {
         count
         max {
@@ -297,9 +301,7 @@ query analyzePersonServicing(
         time
       }
     }
-    visitHistory_aggregate(
-      where: { time: { _gte: $timeFrom, _lte: $timeTo } }
-    ) {
+    visitHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
       aggregate {
         count
         max {
@@ -314,10 +316,10 @@ query analyzePersonServicing(
 }
 
 query getPersonClassesAndGroups($id: uuid!) {
-  persons_by_pk(id: $id) {
+  personsByPk(id: $id) {
     id
     name
-    classes(order_by: { name: asc }) {
+    classes(orderBy: { name: ASC }) {
       id
       name
       color
@@ -329,7 +331,7 @@ query getPersonClassesAndGroups($id: uuid!) {
         photoUpdatedAt
       }
     }
-    groups(order_by: { group: { name: asc } }) {
+    groups(orderBy: { group: { name: ASC } }) {
       group {
         id
         name

@@ -27,16 +27,10 @@ mixin _$Class {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
   StudyYear? get studyYear => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'attendanceHistory_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate =>
       throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'attendanceDaysConstraints_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate =>
       throw _privateConstructorUsedError;
 
@@ -57,9 +51,9 @@ abstract class $ClassCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       Service? service,
       StudyYear? studyYear,
-      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
@@ -185,9 +179,9 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       Service? service,
       StudyYear? studyYear,
-      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   @override
@@ -269,9 +263,9 @@ class _$_Class extends _Class {
       this.photoUpdatedAt,
       this.service,
       this.studyYear,
-      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceHistoryAggregate,
-      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceDaysConstraintsAggregate})
       : super._();
 
@@ -292,16 +286,10 @@ class _$_Class extends _Class {
   @override
   final StudyYear? studyYear;
   @override
-  @JsonKey(
-      name: 'attendanceHistory_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   final AnalysisData<DateTime>? attendanceHistoryAggregate;
   @override
-  @JsonKey(
-      name: 'attendanceDaysConstraints_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate;
 
   @override
@@ -363,10 +351,11 @@ abstract class _Class extends Class {
       final DateTime? photoUpdatedAt,
       final Service? service,
       final StudyYear? studyYear,
-      @JsonKey(name: 'attendanceHistory_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           final AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(name: 'attendanceDaysConstraints_aggregate', fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate}) = _$_Class;
+      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+          final AnalysisData<DateTime>?
+              attendanceDaysConstraintsAggregate}) = _$_Class;
   _Class._() : super._();
 
   factory _Class.fromJson(Map<String, dynamic> json) = _$_Class.fromJson;
@@ -385,16 +374,10 @@ abstract class _Class extends Class {
   @override
   StudyYear? get studyYear;
   @override
-  @JsonKey(
-      name: 'attendanceHistory_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate;
   @override
-  @JsonKey(
-      name: 'attendanceDaysConstraints_aggregate',
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson)
+  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate;
   @override
   @JsonKey(ignore: true)

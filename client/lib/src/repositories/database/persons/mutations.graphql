@@ -1,13 +1,13 @@
 mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
-  insert_history_confession_history_one(
+  insertHistoryConfessionHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        on_conflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
       }
     }
-    on_conflict: { constraint: confession_history_dayID_personID_key }
+    onConflict: { constraint: confession_history_dayID_personID_key }
   ) {
     person {
       id
@@ -19,15 +19,15 @@ mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
 }
 
 mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
-  insert_history_kodas_history_one(
+  insertHistoryKodasHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        on_conflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
       }
     }
-    on_conflict: { constraint: kodas_history_dayID_personID_key }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
   ) {
     person {
       id
@@ -39,7 +39,7 @@ mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
 }
 
 mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
-  insert_history_call_history_one(
+  insertHistoryCallHistoryOne(
     object: { personId: $personId, time: $lastCall }
   ) {
     person {
@@ -52,7 +52,7 @@ mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
 }
 
 mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
-  insert_history_visit_history_one(
+  insertHistoryVisitHistoryOne(
     object: { personId: $personId, time: $lastVisit }
   ) {
     person {
@@ -69,15 +69,15 @@ mutation updatePersonSpiritData(
   $lastConfession: date!
   $lastKodas: date!
 ) {
-  insert_history_confession_history_one(
+  insertHistoryConfessionHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        on_conflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
       }
     }
-    on_conflict: { constraint: confession_history_dayID_personID_key }
+    onConflict: { constraint: confession_history_dayID_personID_key }
   ) {
     person {
       id
@@ -86,15 +86,15 @@ mutation updatePersonSpiritData(
       photoUpdatedAt
     }
   }
-  insert_history_kodas_history_one(
+  insertHistoryKodasHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        on_conflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
       }
     }
-    on_conflict: { constraint: kodas_history_dayID_personID_key }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
   ) {
     person {
       id

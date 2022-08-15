@@ -2,19 +2,19 @@
 // in church_admin/test/src/repositories/auth_repository_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:church_admin/src/repositories/database/graphql.graphql.dart'
     as _i12;
-import 'package:churchdata_core/churchdata_core.dart' as _i9;
-import 'package:cloud_firestore/cloud_firestore.dart' as _i8;
+import 'package:churchdata_core/churchdata_core.dart' as _i5;
+import 'package:cloud_firestore/cloud_firestore.dart' as _i9;
 import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:firebase_database/firebase_database.dart' as _i3;
 import 'package:firebase_database_platform_interface/firebase_database_platform_interface.dart'
-    as _i6;
+    as _i7;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i10;
-import 'package:flutter/widgets.dart' as _i7;
+import 'package:flutter/widgets.dart' as _i8;
 import 'package:google_sign_in/google_sign_in.dart' as _i13;
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart'
     as _i14;
@@ -65,6 +65,9 @@ class _FakeStudyYearsQueries_14 extends _i1.Fake
     implements _i4.StudyYearsQueries {}
 
 class _FakeUsersQueries_15 extends _i1.Fake implements _i4.UsersQueries {}
+
+class _FakeDelegatingPaginatableStream_16<T extends _i5.ViewableWithID>
+    extends _i1.Fake implements _i4.DelegatingPaginatableStream<T> {}
 
 /// A class which mocks [FirebaseDatabase].
 ///
@@ -118,20 +121,20 @@ class MockFirebaseDatabase extends _i1.Mock implements _i3.FirebaseDatabase {
       super.noSuchMethod(Invocation.method(#setLoggingEnabled, [enabled]),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<void> goOnline() =>
+  _i6.Future<void> goOnline() =>
       (super.noSuchMethod(Invocation.method(#goOnline, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> goOffline() =>
+  _i6.Future<void> goOffline() =>
       (super.noSuchMethod(Invocation.method(#goOffline, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> purgeOutstandingWrites() =>
+  _i6.Future<void> purgeOutstandingWrites() =>
       (super.noSuchMethod(Invocation.method(#purgeOutstandingWrites, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
 
 /// A class which mocks [DatabaseEvent].
@@ -143,9 +146,9 @@ class MockDatabaseEvent extends _i1.Mock implements _i3.DatabaseEvent {
   }
 
   @override
-  _i6.DatabaseEventType get type => (super.noSuchMethod(
+  _i7.DatabaseEventType get type => (super.noSuchMethod(
       Invocation.getter(#type),
-      returnValue: _i6.DatabaseEventType.childAdded) as _i6.DatabaseEventType);
+      returnValue: _i7.DatabaseEventType.childAdded) as _i7.DatabaseEventType);
   @override
   _i3.DataSnapshot get snapshot =>
       (super.noSuchMethod(Invocation.getter(#snapshot),
@@ -200,30 +203,30 @@ class MockDatabaseReference extends _i1.Mock implements _i3.DatabaseReference {
   String get path =>
       (super.noSuchMethod(Invocation.getter(#path), returnValue: '') as String);
   @override
-  _i5.Stream<_i3.DatabaseEvent> get onChildAdded =>
+  _i6.Stream<_i3.DatabaseEvent> get onChildAdded =>
       (super.noSuchMethod(Invocation.getter(#onChildAdded),
               returnValue: Stream<_i3.DatabaseEvent>.empty())
-          as _i5.Stream<_i3.DatabaseEvent>);
+          as _i6.Stream<_i3.DatabaseEvent>);
   @override
-  _i5.Stream<_i3.DatabaseEvent> get onChildRemoved =>
+  _i6.Stream<_i3.DatabaseEvent> get onChildRemoved =>
       (super.noSuchMethod(Invocation.getter(#onChildRemoved),
               returnValue: Stream<_i3.DatabaseEvent>.empty())
-          as _i5.Stream<_i3.DatabaseEvent>);
+          as _i6.Stream<_i3.DatabaseEvent>);
   @override
-  _i5.Stream<_i3.DatabaseEvent> get onChildChanged =>
+  _i6.Stream<_i3.DatabaseEvent> get onChildChanged =>
       (super.noSuchMethod(Invocation.getter(#onChildChanged),
               returnValue: Stream<_i3.DatabaseEvent>.empty())
-          as _i5.Stream<_i3.DatabaseEvent>);
+          as _i6.Stream<_i3.DatabaseEvent>);
   @override
-  _i5.Stream<_i3.DatabaseEvent> get onChildMoved =>
+  _i6.Stream<_i3.DatabaseEvent> get onChildMoved =>
       (super.noSuchMethod(Invocation.getter(#onChildMoved),
               returnValue: Stream<_i3.DatabaseEvent>.empty())
-          as _i5.Stream<_i3.DatabaseEvent>);
+          as _i6.Stream<_i3.DatabaseEvent>);
   @override
-  _i5.Stream<_i3.DatabaseEvent> get onValue =>
+  _i6.Stream<_i3.DatabaseEvent> get onValue =>
       (super.noSuchMethod(Invocation.getter(#onValue),
               returnValue: Stream<_i3.DatabaseEvent>.empty())
-          as _i5.Stream<_i3.DatabaseEvent>);
+          as _i6.Stream<_i3.DatabaseEvent>);
   @override
   _i3.DatabaseReference child(String? path) =>
       (super.noSuchMethod(Invocation.method(#child, [path]),
@@ -233,56 +236,56 @@ class MockDatabaseReference extends _i1.Mock implements _i3.DatabaseReference {
       (super.noSuchMethod(Invocation.method(#push, []),
           returnValue: _FakeDatabaseReference_1()) as _i3.DatabaseReference);
   @override
-  _i5.Future<void> set(Object? value) =>
+  _i6.Future<void> set(Object? value) =>
       (super.noSuchMethod(Invocation.method(#set, [value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> setWithPriority(Object? value, Object? priority) => (super
+  _i6.Future<void> setWithPriority(Object? value, Object? priority) => (super
       .noSuchMethod(Invocation.method(#setWithPriority, [value, priority]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> update(Map<String, Object?>? value) =>
+  _i6.Future<void> update(Map<String, Object?>? value) =>
       (super.noSuchMethod(Invocation.method(#update, [value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> setPriority(Object? priority) =>
+  _i6.Future<void> setPriority(Object? priority) =>
       (super.noSuchMethod(Invocation.method(#setPriority, [priority]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> remove() =>
+  _i6.Future<void> remove() =>
       (super.noSuchMethod(Invocation.method(#remove, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<_i3.TransactionResult> runTransaction(
-          _i6.TransactionHandler? transactionHandler,
+  _i6.Future<_i3.TransactionResult> runTransaction(
+          _i7.TransactionHandler? transactionHandler,
           {bool? applyLocally = true}) =>
       (super.noSuchMethod(
               Invocation.method(#runTransaction, [transactionHandler],
                   {#applyLocally: applyLocally}),
               returnValue: Future<_i3.TransactionResult>.value(
                   _FakeTransactionResult_3()))
-          as _i5.Future<_i3.TransactionResult>);
+          as _i6.Future<_i3.TransactionResult>);
   @override
   _i3.OnDisconnect onDisconnect() =>
       (super.noSuchMethod(Invocation.method(#onDisconnect, []),
           returnValue: _FakeOnDisconnect_4()) as _i3.OnDisconnect);
   @override
-  _i5.Future<_i3.DataSnapshot> get() => (super.noSuchMethod(
+  _i6.Future<_i3.DataSnapshot> get() => (super.noSuchMethod(
           Invocation.method(#get, []),
           returnValue: Future<_i3.DataSnapshot>.value(_FakeDataSnapshot_2()))
-      as _i5.Future<_i3.DataSnapshot>);
+      as _i6.Future<_i3.DataSnapshot>);
   @override
-  _i5.Future<_i3.DatabaseEvent> once(
-          [_i6.DatabaseEventType? eventType = _i6.DatabaseEventType.value]) =>
+  _i6.Future<_i3.DatabaseEvent> once(
+          [_i7.DatabaseEventType? eventType = _i7.DatabaseEventType.value]) =>
       (super.noSuchMethod(Invocation.method(#once, [eventType]),
               returnValue:
                   Future<_i3.DatabaseEvent>.value(_FakeDatabaseEvent_5()))
-          as _i5.Future<_i3.DatabaseEvent>);
+          as _i6.Future<_i3.DatabaseEvent>);
   @override
   _i3.Query startAt(Object? value, {String? key}) =>
       (super.noSuchMethod(Invocation.method(#startAt, [value], {#key: key}),
@@ -328,10 +331,10 @@ class MockDatabaseReference extends _i1.Mock implements _i3.DatabaseReference {
       (super.noSuchMethod(Invocation.method(#orderByPriority, []),
           returnValue: _FakeQuery_6()) as _i3.Query);
   @override
-  _i5.Future<void> keepSynced(bool? value) =>
+  _i6.Future<void> keepSynced(bool? value) =>
       (super.noSuchMethod(Invocation.method(#keepSynced, [value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
 
 /// A class which mocks [OnDisconnect].
@@ -343,30 +346,30 @@ class MockOnDisconnect extends _i1.Mock implements _i3.OnDisconnect {
   }
 
   @override
-  _i5.Future<void> set(Object? value) =>
+  _i6.Future<void> set(Object? value) =>
       (super.noSuchMethod(Invocation.method(#set, [value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> setWithPriority(Object? value, Object? priority) => (super
+  _i6.Future<void> setWithPriority(Object? value, Object? priority) => (super
       .noSuchMethod(Invocation.method(#setWithPriority, [value, priority]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> remove() =>
+  _i6.Future<void> remove() =>
       (super.noSuchMethod(Invocation.method(#remove, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> cancel() =>
+  _i6.Future<void> cancel() =>
       (super.noSuchMethod(Invocation.method(#cancel, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> update(Map<String, Object?>? value) =>
+  _i6.Future<void> update(Map<String, Object?>? value) =>
       (super.noSuchMethod(Invocation.method(#update, [value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
 
 /// A class which mocks [CADatabaseRepository].
@@ -453,8 +456,8 @@ class MockCADatabaseRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getUserData, [uid]),
           returnValue: null) as Never);
   @override
-  Never recoverDocument(_i7.BuildContext? context,
-          _i8.DocumentReference<Map<String, dynamic>>? documentRef,
+  Never recoverDocument(_i8.BuildContext? context,
+          _i9.DocumentReference<Map<String, dynamic>>? documentRef,
           {bool? nested = true, bool? keepBackup = true}) =>
       (super.noSuchMethod(
           Invocation.method(#recoverDocument, [context, documentRef],
@@ -464,7 +467,7 @@ class MockCADatabaseRepository extends _i1.Mock
   Never getPersonsStream(
           {String? orderBy = r'Name',
           bool? descending = false,
-          _i9.QueryCompleter? queryCompleter = _i9.kDefaultQueryCompleter}) =>
+          _i5.QueryCompleter? queryCompleter = _i5.kDefaultQueryCompleter}) =>
       (super.noSuchMethod(
           Invocation.method(#getPersonsStream, [], {
             #orderBy: orderBy,
@@ -478,21 +481,21 @@ class MockCADatabaseRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationsService extends _i1.Mock
-    implements _i9.NotificationsService {
+    implements _i5.NotificationsService {
   MockNotificationsService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   set onForegroundMessageSubscription(
-          _i5.StreamSubscription<_i10.RemoteMessage>?
+          _i6.StreamSubscription<_i10.RemoteMessage>?
               _onForegroundMessageSubscription) =>
       super.noSuchMethod(
           Invocation.setter(#onForegroundMessageSubscription,
               _onForegroundMessageSubscription),
           returnValueForMissingStub: null);
   @override
-  set onFCMTokenRefresh(_i5.StreamSubscription<String?>? _onFCMTokenRefresh) =>
+  set onFCMTokenRefresh(_i6.StreamSubscription<String?>? _onFCMTokenRefresh) =>
       super.noSuchMethod(
           Invocation.setter(#onFCMTokenRefresh, _onFCMTokenRefresh),
           returnValueForMissingStub: null);
@@ -501,17 +504,17 @@ class MockNotificationsService extends _i1.Mock
       super.noSuchMethod(Invocation.method(#listenToFirebaseMessaging, []),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<void> dispose() =>
+  _i6.Future<void> dispose() =>
       (super.noSuchMethod(Invocation.method(#dispose, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> initPlugins() =>
+  _i6.Future<void> initPlugins() =>
       (super.noSuchMethod(Invocation.method(#initPlugins, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<bool> schedulePeriodic(
+  _i6.Future<bool> schedulePeriodic(
           Duration? duration, int? id, Function? callback,
           {DateTime? startAt,
           bool? allowWhileIdle = false,
@@ -530,31 +533,31 @@ class MockNotificationsService extends _i1.Mock
             #wakeup: wakeup,
             #rescheduleOnReboot: rescheduleOnReboot
           }),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
   @override
-  _i5.Future<void> showNotificationContents(
-          _i7.BuildContext? context, _i9.Notification? notification,
-          {List<_i7.Widget>? actions}) =>
+  _i6.Future<void> showNotificationContents(
+          _i8.BuildContext? context, _i5.Notification? notification,
+          {List<_i8.Widget>? actions}) =>
       (super.noSuchMethod(
           Invocation.method(#showNotificationContents, [context, notification],
               {#actions: actions}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<_i9.Notification?> getInitialNotification() =>
+  _i6.Future<_i5.Notification?> getInitialNotification() =>
       (super.noSuchMethod(Invocation.method(#getInitialNotification, []),
-              returnValue: Future<_i9.Notification?>.value())
-          as _i5.Future<_i9.Notification?>);
+              returnValue: Future<_i5.Notification?>.value())
+          as _i6.Future<_i5.Notification?>);
   @override
-  _i5.Future<void> showInitialNotification(_i7.BuildContext? context) => (super
+  _i6.Future<void> showInitialNotification(_i8.BuildContext? context) => (super
       .noSuchMethod(Invocation.method(#showInitialNotification, [context]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<bool> registerFCMToken({String? cachedToken}) =>
+  _i6.Future<bool> registerFCMToken({String? cachedToken}) =>
       (super.noSuchMethod(
           Invocation.method(#registerFCMToken, [], {#cachedToken: cachedToken}),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
 }
 
 /// A class which mocks [UsersQueries].
@@ -566,13 +569,25 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
   }
 
   @override
-  _i5.Stream<_i11.QueryResult<_i12.GetUserInfoStream$SubscriptionRoot$Users>>
+  _i6.Stream<_i11.QueryResult<_i12.GetUserInfoStream$SubscriptionRoot$Users>>
       getUserInfoStream({String? uid}) => (super.noSuchMethod(
           Invocation.method(#getUserInfoStream, [], {#uid: uid}),
           returnValue: Stream<
               _i11.QueryResult<
-                  _i12.GetUserInfoStream$SubscriptionRoot$Users>>.empty()) as _i5
+                  _i12.GetUserInfoStream$SubscriptionRoot$Users>>.empty()) as _i6
           .Stream<_i11.QueryResult<_i12.GetUserInfoStream$SubscriptionRoot$Users>>);
+  @override
+  _i6.Stream<_i4.User?> watchUser({String? userId}) =>
+      (super.noSuchMethod(Invocation.method(#watchUser, [], {#userId: userId}),
+          returnValue: Stream<_i4.User?>.empty()) as _i6.Stream<_i4.User?>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
+          {String? userId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#userEditHistory, [], {#userId: userId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_16<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
 }
 
 /// A class which mocks [GoogleSignIn].
@@ -592,12 +607,12 @@ class MockGoogleSignIn extends _i1.Mock implements _i13.GoogleSignIn {
       (super.noSuchMethod(Invocation.getter(#scopes), returnValue: <String>[])
           as List<String>);
   @override
-  _i5.Stream<_i13.GoogleSignInAccount?> get onCurrentUserChanged =>
+  _i6.Stream<_i13.GoogleSignInAccount?> get onCurrentUserChanged =>
       (super.noSuchMethod(Invocation.getter(#onCurrentUserChanged),
               returnValue: Stream<_i13.GoogleSignInAccount?>.empty())
-          as _i5.Stream<_i13.GoogleSignInAccount?>);
+          as _i6.Stream<_i13.GoogleSignInAccount?>);
   @override
-  _i5.Future<_i13.GoogleSignInAccount?> signInSilently(
+  _i6.Future<_i13.GoogleSignInAccount?> signInSilently(
           {bool? suppressErrors = true, bool? reAuthenticate = false}) =>
       (super.noSuchMethod(
               Invocation.method(#signInSilently, [], {
@@ -605,28 +620,28 @@ class MockGoogleSignIn extends _i1.Mock implements _i13.GoogleSignIn {
                 #reAuthenticate: reAuthenticate
               }),
               returnValue: Future<_i13.GoogleSignInAccount?>.value())
-          as _i5.Future<_i13.GoogleSignInAccount?>);
+          as _i6.Future<_i13.GoogleSignInAccount?>);
   @override
-  _i5.Future<bool> isSignedIn() =>
+  _i6.Future<bool> isSignedIn() =>
       (super.noSuchMethod(Invocation.method(#isSignedIn, []),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
   @override
-  _i5.Future<_i13.GoogleSignInAccount?> signIn() =>
+  _i6.Future<_i13.GoogleSignInAccount?> signIn() =>
       (super.noSuchMethod(Invocation.method(#signIn, []),
               returnValue: Future<_i13.GoogleSignInAccount?>.value())
-          as _i5.Future<_i13.GoogleSignInAccount?>);
+          as _i6.Future<_i13.GoogleSignInAccount?>);
   @override
-  _i5.Future<_i13.GoogleSignInAccount?> signOut() =>
+  _i6.Future<_i13.GoogleSignInAccount?> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
               returnValue: Future<_i13.GoogleSignInAccount?>.value())
-          as _i5.Future<_i13.GoogleSignInAccount?>);
+          as _i6.Future<_i13.GoogleSignInAccount?>);
   @override
-  _i5.Future<_i13.GoogleSignInAccount?> disconnect() =>
+  _i6.Future<_i13.GoogleSignInAccount?> disconnect() =>
       (super.noSuchMethod(Invocation.method(#disconnect, []),
               returnValue: Future<_i13.GoogleSignInAccount?>.value())
-          as _i5.Future<_i13.GoogleSignInAccount?>);
+          as _i6.Future<_i13.GoogleSignInAccount?>);
   @override
-  _i5.Future<bool> requestScopes(List<String>? scopes) =>
+  _i6.Future<bool> requestScopes(List<String>? scopes) =>
       (super.noSuchMethod(Invocation.method(#requestScopes, [scopes]),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
 }

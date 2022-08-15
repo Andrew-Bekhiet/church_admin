@@ -26,7 +26,8 @@ class ViewPerson extends StatelessWidget {
       );
     },
     routes: [
-      AttendanceAnalysis.route,
+      PersonAttendanceAnalysis.personRoute,
+      ViewUser.route,
     ],
   );
 
@@ -294,11 +295,22 @@ class ViewPerson extends StatelessWidget {
                     ListTile(
                       title: const Text('خادم؟'),
                       subtitle: Text(person.isServant ? 'نعم' : 'لا'),
-                      trailing: person.isServant && person.uid != null
+                      trailing: person.isServant &&
+                              person.user?.userData?.email != null
                           ? IconButton(
-                              onPressed: () {},
+                              onPressed: () => context.goNamed(
+                                'view_user',
+                                queryParams: {
+                                  'id': person.id,
+                                  'uid': person.user!.uid,
+                                },
+                                extra: {
+                                  'user': person.user,
+                                  'person': person,
+                                },
+                              ),
                               icon: const Icon(Icons.manage_accounts),
-                              tooltip: 'عرض صلاحيات المستخدم',
+                              tooltip: 'عرض بيانات الخادم',
                             )
                           : null,
                     ),
@@ -739,6 +751,13 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    selected.close();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -920,7 +939,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
 
               Navigator.of(context).pop();
               context.goNamed(
-                'attendance_analysis',
+                'person_attendance_analysis',
                 queryParams: {
                   'id': widget.person.id,
                 },

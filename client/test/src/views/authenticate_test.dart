@@ -187,6 +187,7 @@ void main() {
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
                   uid: 'uid',
+                  name: '',
                   userData: UserData(
                     permissions: CAPermissionsSet.fromSet(const {}),
                     email: 'email',
@@ -222,6 +223,7 @@ void main() {
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
                   uid: 'uid',
+                  name: '',
                   userData: UserData(
                     password: '',
                     uid: 'uid',
@@ -256,6 +258,7 @@ void main() {
               when(mockCAAuthRepository.currentUser).thenReturn(
                 User(
                   uid: 'uid',
+                  name: '',
                   userData: UserData(
                     uid: 'uid',
                     password: '',
@@ -311,6 +314,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     when(mock.currentUser).thenReturn(
       User(
         uid: 'uid',
+        name: '',
         userData: UserData(
           uid: 'uid',
           password: '',
@@ -326,6 +330,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     when(mock.currentUser).thenReturn(
       User(
         uid: 'uid',
+        name: '',
         userData: UserData(
           uid: 'uid',
           password: await EncryptionService.encryptPassword(r'password\1234'),

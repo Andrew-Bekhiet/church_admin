@@ -198,81 +198,73 @@ class _LoginScreenState extends State<LoginScreen> {
       await settings.setFamilySecondLine('lastVisit');
       await settings.setPersonSecondLine('birthdate');
 
-      final user = CAAuthRepository.I.currentUser!;
-
       final notificationsSettings = await GetIt.I<CacheRepository>()
           .openBox<NotificationSetting>('NotificationsSettings');
 
-      if (user.userData!.permissions.birthdayNotify) {
-        await notificationsSettings.put(
-          'BirthDayTime',
-          const NotificationSetting(11, 0, 1),
-        );
+      await notificationsSettings.put(
+        'BirthDayTime',
+        const NotificationSetting(11, 0, 1),
+      );
 
-        await GetIt.I<CANotificationsService>().schedulePeriodic(
-          const Duration(days: 1),
-          'BirthDay'.hashCode,
-          CANotificationsService.showBirthDayNotification,
-          exact: true,
-          startAt: DateTime.now().replaceTimeOfDay(
-            const TimeOfDay(hour: 11, minute: 0),
-          ),
-          wakeup: true,
-          rescheduleOnReboot: true,
-        );
-      }
+      await GetIt.I<CANotificationsService>().schedulePeriodic(
+        const Duration(days: 1),
+        'BirthDay'.hashCode,
+        CANotificationsService.showBirthDayNotification,
+        exact: true,
+        startAt: DateTime.now().replaceTimeOfDay(
+          const TimeOfDay(hour: 11, minute: 0),
+        ),
+        wakeup: true,
+        rescheduleOnReboot: true,
+      );
 
-      if (user.userData!.permissions.kodasNotify) {
-        await notificationsSettings.put(
-          'KodasTime',
-          const NotificationSetting(11, 0, 7),
-        );
+      await notificationsSettings.put(
+        'KodasTime',
+        const NotificationSetting(11, 0, 7),
+      );
 
-        await GetIt.I<CANotificationsService>().schedulePeriodic(
-          const Duration(days: 7),
-          'Kodas'.hashCode,
-          CANotificationsService.showKodasNotification,
-          exact: true,
-          startAt: DateTime.now().replaceTimeOfDay(
-            const TimeOfDay(hour: 11, minute: 0),
-          ),
-          rescheduleOnReboot: true,
-        );
-      }
-      if (user.userData!.permissions.meetingNotify) {
-        await notificationsSettings.put(
-          'MeetingTime',
-          const NotificationSetting(11, 0, 7),
-        );
+      await GetIt.I<CANotificationsService>().schedulePeriodic(
+        const Duration(days: 7),
+        'Kodas'.hashCode,
+        CANotificationsService.showKodasNotification,
+        exact: true,
+        startAt: DateTime.now().replaceTimeOfDay(
+          const TimeOfDay(hour: 11, minute: 0),
+        ),
+        rescheduleOnReboot: true,
+      );
 
-        await GetIt.I<CANotificationsService>().schedulePeriodic(
-          const Duration(days: 7),
-          'Meeting'.hashCode,
-          CANotificationsService.showMeetingNotification,
-          exact: true,
-          startAt: DateTime.now().replaceTimeOfDay(
-            const TimeOfDay(hour: 11, minute: 0),
-          ),
-          rescheduleOnReboot: true,
-        );
-      }
-      if (user.userData!.permissions.confessionsNotify) {
-        await notificationsSettings.put(
-          'ConfessionTime',
-          const NotificationSetting(11, 0, 7),
-        );
+      await notificationsSettings.put(
+        'MeetingTime',
+        const NotificationSetting(11, 0, 7),
+      );
 
-        await GetIt.I<CANotificationsService>().schedulePeriodic(
-          const Duration(days: 7),
-          'Confessions'.hashCode,
-          CANotificationsService.showConfessionNotification,
-          exact: true,
-          startAt: DateTime.now().replaceTimeOfDay(
-            const TimeOfDay(hour: 11, minute: 0),
-          ),
-          rescheduleOnReboot: true,
-        );
-      }
+      await GetIt.I<CANotificationsService>().schedulePeriodic(
+        const Duration(days: 7),
+        'Meeting'.hashCode,
+        CANotificationsService.showMeetingNotification,
+        exact: true,
+        startAt: DateTime.now().replaceTimeOfDay(
+          const TimeOfDay(hour: 11, minute: 0),
+        ),
+        rescheduleOnReboot: true,
+      );
+
+      await notificationsSettings.put(
+        'ConfessionTime',
+        const NotificationSetting(11, 0, 7),
+      );
+
+      await GetIt.I<CANotificationsService>().schedulePeriodic(
+        const Duration(days: 7),
+        'Confessions'.hashCode,
+        CANotificationsService.showConfessionNotification,
+        exact: true,
+        startAt: DateTime.now().replaceTimeOfDay(
+          const TimeOfDay(hour: 11, minute: 0),
+        ),
+        rescheduleOnReboot: true,
+      );
     } catch (err, stack) {
       await GetIt.I<LoggingService>().reportError(
         err as Exception,

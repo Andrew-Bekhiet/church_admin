@@ -20,9 +20,9 @@ _$_Class _$$_ClassFromJson(Map<String, dynamic> json) => _$_Class(
           ? null
           : StudyYear.fromJson(json['studyYear'] as Map<String, dynamic>),
       attendanceHistoryAggregate: analysisDataFromJson(
-          json['attendanceHistory_aggregate'] as Map<String, dynamic>?),
+          json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(
-          json['attendanceDaysConstraints_aggregate'] as Map<String, dynamic>?),
+          json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
@@ -32,8 +32,8 @@ Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'service': instance.service?.toJson(),
       'studyYear': instance.studyYear?.toJson(),
-      'attendanceHistory_aggregate':
+      'attendanceHistoryAggregate':
           analysisDataToJson(instance.attendanceHistoryAggregate),
-      'attendanceDaysConstraints_aggregate':
+      'attendanceDaysConstraintsAggregate':
           analysisDataToJson(instance.attendanceDaysConstraintsAggregate),
     };

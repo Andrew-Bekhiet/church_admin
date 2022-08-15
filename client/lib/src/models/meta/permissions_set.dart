@@ -2,7 +2,7 @@ import 'package:churchdata_core/churchdata_core.dart';
 import 'package:collection/collection.dart';
 
 class CAPermissionsSet extends PermissionsSet {
-  const CAPermissionsSet.empty():super.fromSet(const {});
+  const CAPermissionsSet.empty() : super.fromSet(const {});
 
   CAPermissionsSet.fromSet(Set<String> permissions)
       : super.fromSet(
@@ -19,12 +19,6 @@ class CAPermissionsSet extends PermissionsSet {
   bool get changeOldHistory => permissions.contains('changeOldHistory');
   bool get recoverDeleted => permissions.contains('recoverDeleted');
   bool get exportData => permissions.contains('exportData');
-
-  bool get birthdayNotify => permissions.contains('birthdayNotify');
-  bool get confessionsNotify => permissions.contains('confessionsNotify');
-  bool get kodasNotify => permissions.contains('kodasNotify');
-  bool get meetingNotify => permissions.contains('meetingNotify');
-  bool get visitNotify => permissions.contains('visitNotify');
 }
 
 class PermissionEquality implements Equality<String> {
@@ -49,4 +43,4 @@ extension RemoveQuotes on String {
 
 Set<String> permissionsSetToJson(CAPermissionsSet data) => data.permissions;
 CAPermissionsSet permissionsSetFromJson(dynamic data) =>
-    CAPermissionsSet.fromSet((data as List?)?.toSet().cast()??{});
+    CAPermissionsSet.fromSet((data as List?)?.toSet().cast() ?? {});

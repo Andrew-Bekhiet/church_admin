@@ -73,27 +73,23 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
     List<Street>? streets,
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
         List<Tag>? tags,
-    String? uid,
+    User? user,
     @JsonKey(
-      name: 'kodasHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? kodasHistoryAggregate,
     @JsonKey(
-      name: 'confessionHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? confessionHistoryAggregate,
     @JsonKey(
-      name: 'callHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? callHistoryAggregate,
     @JsonKey(
-      name: 'visitHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )

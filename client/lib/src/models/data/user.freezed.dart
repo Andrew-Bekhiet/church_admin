@@ -21,9 +21,11 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get uid => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  List<AdminOnData>? get adminOn => throw _privateConstructorUsedError;
   UserData? get userData => throw _privateConstructorUsedError;
+  Person? get person => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +37,15 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String uid, String? name, DateTime? photoUpdatedAt, UserData? userData});
+      {String uid,
+      String name,
+      DateTime? photoUpdatedAt,
+      List<AdminOnData>? adminOn,
+      UserData? userData,
+      Person? person});
 
   $UserDataCopyWith<$Res>? get userData;
+  $PersonCopyWith<$Res>? get person;
 }
 
 /// @nodoc
@@ -53,7 +61,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? uid = freezed,
     Object? name = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? adminOn = freezed,
     Object? userData = freezed,
+    Object? person = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
@@ -63,15 +73,23 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photoUpdatedAt: photoUpdatedAt == freezed
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      adminOn: adminOn == freezed
+          ? _value.adminOn
+          : adminOn // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
       userData: userData == freezed
           ? _value.userData
           : userData // ignore: cast_nullable_to_non_nullable
               as UserData?,
+      person: person == freezed
+          ? _value.person
+          : person // ignore: cast_nullable_to_non_nullable
+              as Person?,
     ));
   }
 
@@ -85,6 +103,17 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       return _then(_value.copyWith(userData: value));
     });
   }
+
+  @override
+  $PersonCopyWith<$Res>? get person {
+    if (_value.person == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_value.person!, (value) {
+      return _then(_value.copyWith(person: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -93,10 +122,17 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String uid, String? name, DateTime? photoUpdatedAt, UserData? userData});
+      {String uid,
+      String name,
+      DateTime? photoUpdatedAt,
+      List<AdminOnData>? adminOn,
+      UserData? userData,
+      Person? person});
 
   @override
   $UserDataCopyWith<$Res>? get userData;
+  @override
+  $PersonCopyWith<$Res>? get person;
 }
 
 /// @nodoc
@@ -113,7 +149,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? name = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? adminOn = freezed,
     Object? userData = freezed,
+    Object? person = freezed,
   }) {
     return _then(_$_User(
       uid: uid == freezed
@@ -123,39 +161,65 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photoUpdatedAt: photoUpdatedAt == freezed
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      adminOn: adminOn == freezed
+          ? _value._adminOn
+          : adminOn // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
       userData: userData == freezed
           ? _value.userData
           : userData // ignore: cast_nullable_to_non_nullable
               as UserData?,
+      person: person == freezed
+          ? _value.person
+          : person // ignore: cast_nullable_to_non_nullable
+              as Person?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_User implements _User {
-  const _$_User(
-      {required this.uid, this.name, this.photoUpdatedAt, this.userData});
+class _$_User extends _User {
+  _$_User(
+      {required this.uid,
+      required this.name,
+      this.photoUpdatedAt,
+      final List<AdminOnData>? adminOn,
+      this.userData,
+      this.person})
+      : _adminOn = adminOn,
+        super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
   final String uid;
   @override
-  final String? name;
+  final String name;
   @override
   final DateTime? photoUpdatedAt;
+  final List<AdminOnData>? _adminOn;
+  @override
+  List<AdminOnData>? get adminOn {
+    final value = _adminOn;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final UserData? userData;
+  @override
+  final Person? person;
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, photoUpdatedAt: $photoUpdatedAt, userData: $userData)';
+    return 'User(uid: $uid, name: $name, photoUpdatedAt: $photoUpdatedAt, adminOn: $adminOn, userData: $userData, person: $person)';
   }
 
   @override
@@ -167,7 +231,9 @@ class _$_User implements _User {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
-            const DeepCollectionEquality().equals(other.userData, userData));
+            const DeepCollectionEquality().equals(other._adminOn, _adminOn) &&
+            const DeepCollectionEquality().equals(other.userData, userData) &&
+            const DeepCollectionEquality().equals(other.person, person));
   }
 
   @JsonKey(ignore: true)
@@ -177,7 +243,9 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(photoUpdatedAt),
-      const DeepCollectionEquality().hash(userData));
+      const DeepCollectionEquality().hash(_adminOn),
+      const DeepCollectionEquality().hash(userData),
+      const DeepCollectionEquality().hash(person));
 
   @JsonKey(ignore: true)
   @override
@@ -192,23 +260,30 @@ class _$_User implements _User {
   }
 }
 
-abstract class _User implements User {
-  const factory _User(
+abstract class _User extends User {
+  factory _User(
       {required final String uid,
-      final String? name,
+      required final String name,
       final DateTime? photoUpdatedAt,
-      final UserData? userData}) = _$_User;
+      final List<AdminOnData>? adminOn,
+      final UserData? userData,
+      final Person? person}) = _$_User;
+  _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get uid;
   @override
-  String? get name;
+  String get name;
   @override
   DateTime? get photoUpdatedAt;
   @override
+  List<AdminOnData>? get adminOn;
+  @override
   UserData? get userData;
+  @override
+  Person? get person;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

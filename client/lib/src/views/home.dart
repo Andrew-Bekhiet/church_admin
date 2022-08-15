@@ -150,8 +150,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     _tabController.dispose();
     await _search.close();
     await _bottomNavBar.close();
@@ -160,6 +158,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     for (final c in _animationControllers) {
       c.dispose();
     }
+
+    super.dispose();
   }
 
   @override

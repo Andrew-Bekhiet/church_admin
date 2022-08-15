@@ -24,13 +24,11 @@ class Class extends ViewableWithID
     Service? service,
     StudyYear? studyYear,
     @JsonKey(
-      name: 'attendanceHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? attendanceHistoryAggregate,
     @JsonKey(
-      name: 'attendanceDaysConstraints_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )

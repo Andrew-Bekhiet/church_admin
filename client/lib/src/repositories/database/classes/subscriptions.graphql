@@ -1,8 +1,8 @@
 subscription getClassesStream(
-  $addWhere: [classes_bool_exp!] = {}
+  $addWhere: [ClassesBoolExp!] = {}
   $limit: Int = 200
 ) {
-  classes(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+  classes(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
     id
     name
     color

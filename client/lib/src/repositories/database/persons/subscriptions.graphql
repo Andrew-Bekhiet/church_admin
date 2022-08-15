@@ -1,8 +1,8 @@
 subscription getPersonsStream(
-  $addWhere: [persons_bool_exp!] = {}
+  $addWhere: [PersonsBoolExp!] = {}
   $limit: Int = 200
 ) {
-  persons(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+  persons(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
     id
     name
     color
@@ -11,26 +11,26 @@ subscription getPersonsStream(
 }
 
 subscription watchPerson($id: uuid!) {
-  persons_by_pk(id: $id) {
+  personsByPk(id: $id) {
     id
     name
     color
     photoUpdatedAt
     address
     birthdate
-    areas(limit: 6, order_by: { name: asc }) {
+    areas(limit: 6, orderBy: { name: ASC }) {
       id
       name
       color
       photoUpdatedAt
     }
-    classes(limit: 6, order_by: { name: asc }) {
+    classes(limit: 6, orderBy: { name: ASC }) {
       id
       name
       color
       photoUpdatedAt
 
-      attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+      attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
         aggregate {
           max {
             time
@@ -62,14 +62,14 @@ subscription watchPerson($id: uuid!) {
     }
     gender
     geolocation
-    groups(limit: 6, order_by: { group: { name: asc } }) {
+    groups(limit: 6, orderBy: { group: { name: ASC } }) {
       group {
         id
         name
         color
         photoUpdatedAt
 
-        attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
           aggregate {
             max {
               time
@@ -106,14 +106,14 @@ subscription watchPerson($id: uuid!) {
       id
       name
     }
-    services(limit: 6, order_by: { service: { name: asc } }) {
+    services(limit: 6, orderBy: { service: { name: ASC } }) {
       service {
         id
         name
         color
         photoUpdatedAt
 
-        attendanceHistory_aggregate(where: { personId: { _eq: $id } }) {
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
           aggregate {
             max {
               time
@@ -142,7 +142,7 @@ subscription watchPerson($id: uuid!) {
       name
       order
     }
-    tags(order_by: { tag: { name: asc } }) {
+    tags(orderBy: { tag: { name: ASC } }) {
       tag {
         id
         name
@@ -150,18 +150,26 @@ subscription watchPerson($id: uuid!) {
       }
     }
     uid
+    user {
+      uid
+      name
+      userData {
+        uid
+        email
+      }
+    }
   }
 }
 
 subscription callHistory(
   $personId: uuid!
-  $addWhere: [history_call_history_bool_exp!] = {}
+  $addWhere: [HistoryCallHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
-  history_call_history(
+  historyCallHistory(
     where: { _and: [{ personId: { _eq: $personId } }, { _and: $addWhere }] }
     limit: $limit
-    order_by: { time: desc }
+    orderBy: { time: DESC }
   ) {
     time
     user {
@@ -174,13 +182,13 @@ subscription callHistory(
 
 subscription visitHistory(
   $personId: uuid!
-  $addWhere: [history_visit_history_bool_exp!] = {}
+  $addWhere: [HistoryVisitHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
-  history_visit_history(
+  historyVisitHistory(
     where: { _and: [{ personId: { _eq: $personId } }, { _and: $addWhere }] }
     limit: $limit
-    order_by: { time: desc }
+    orderBy: { time: DESC }
   ) {
     time
     user {
@@ -193,13 +201,13 @@ subscription visitHistory(
 
 subscription confessionHistory(
   $personId: uuid!
-  $addWhere: [history_confession_history_bool_exp!] = {}
+  $addWhere: [HistoryConfessionHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
-  history_confession_history(
+  historyConfessionHistory(
     where: { _and: [{ personId: { _eq: $personId } }, { _and: $addWhere }] }
     limit: $limit
-    order_by: { time: desc }
+    orderBy: { time: DESC }
   ) {
     time
     user {
@@ -212,13 +220,13 @@ subscription confessionHistory(
 
 subscription kodasHistory(
   $personId: uuid!
-  $addWhere: [history_kodas_history_bool_exp!] = {}
+  $addWhere: [HistoryKodasHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
-  history_kodas_history(
+  historyKodasHistory(
     where: { _and: [{ personId: { _eq: $personId } }, { _and: $addWhere }] }
     limit: $limit
-    order_by: { time: desc }
+    orderBy: { time: DESC }
   ) {
     time
     user {
@@ -229,12 +237,12 @@ subscription kodasHistory(
   }
 }
 
-subscription editHistory(
+subscription personEditHistory(
   $personId: uuid!
-  $addWhere: [history_edit_history_bool_exp!] = {}
+  $addWhere: [HistoryEditHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
-  history_edit_history(
+  historyEditHistory(
     where: {
       _and: [
         { table: { _eq: "persons" } }
@@ -243,7 +251,7 @@ subscription editHistory(
       ]
     }
     limit: $limit
-    order_by: { time: desc }
+    orderBy: { time: DESC }
   ) {
     time
     user {

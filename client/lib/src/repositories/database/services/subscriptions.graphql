@@ -1,12 +1,12 @@
 subscription getServicesStream(
-  $addWhere: [services_bool_exp!] = {}
-  $groupsAddWhere: [groups_bool_exp!] = {}
-  $classesAddWhere: [classes_bool_exp!] = {}
+  $addWhere: [ServicesBoolExp!] = {}
+  $groupsAddWhere: [GroupsBoolExp!] = {}
+  $classesAddWhere: [ClassesBoolExp!] = {}
   $limit: Int = 200
 ) {
   services(
     where: { _and: $addWhere }
-    order_by: { studyYearFrom: asc, studyYearTo: asc }
+    orderBy: { studyYearFrom: ASC, studyYearTo: ASC }
     limit: $limit
   ) {
     id
@@ -23,21 +23,21 @@ subscription getServicesStream(
     }
     classes(
       where: { _and: $classesAddWhere }
-      order_by: { studyYear: { order: asc }, serviceGender: desc_nulls_last }
+      orderBy: { studyYear: { order: ASC }, serviceGender: DESC_NULLS_LAST }
     ) {
       id
       name
       color
       photoUpdatedAt
 
-      studyYear{
+      studyYear {
         name
         order
       }
     }
     groups(
       where: { _and: $groupsAddWhere }
-      order_by: { service: { studyYearFrom: asc, studyYearTo: asc } }
+      orderBy: { service: { studyYearFrom: ASC, studyYearTo: ASC } }
     ) {
       id
       name

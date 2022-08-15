@@ -3,53 +3,65 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
-class AttendanceAnalysis extends StatefulWidget {
-  static final route = GoRoute(
-    name: 'attendance_analysis',
-    path: 'attendanceAnalysis',
-    builder: (context, state) {
-      if (state.extra == null) {
-        throw ArgumentError.notNull('state.extra');
-      } else if (state.extra is! Map<String, dynamic>) {
-        throw ArgumentError.value(
-          state.extra,
-          'state.extra',
-          'expected a Map but got ' + state.extra.runtimeType.toString(),
-        );
-      }
-
-      final extra = state.extra! as Map<String, dynamic>;
-
-      return AttendanceAnalysis(
-        person: extra['person'],
-        classesIds: extra['classesIds'],
-        groupsIds: extra['groupsIds'],
-        servicesIds: extra['servicesIds'],
-        dateRange: extra['dateRange'],
-      );
-    },
+class PersonAttendanceAnalysis extends StatefulWidget {
+  static final personRoute = GoRoute(
+    name: 'person_attendance_analysis',
+    path: 'personAttendanceAnalysis',
+    builder: _routeBuilder,
   );
 
+  static final userRoute = GoRoute(
+    name: 'user_attendance_analysis',
+    path: 'userAttendanceAnalysis',
+    builder: _routeBuilder,
+  );
+
+  static Widget _routeBuilder(context, state) {
+    if (state.extra == null) {
+      throw ArgumentError.notNull('state.extra');
+    } else if (state.extra is! Map<String, dynamic>) {
+      throw ArgumentError.value(
+        state.extra,
+        'state.extra',
+        'expected a Map but got ' + state.extra.runtimeType.toString(),
+      );
+    }
+
+    final extra = state.extra! as Map<String, dynamic>;
+
+    return PersonAttendanceAnalysis(
+      person: extra['person'],
+      classesIds: extra['classesIds'],
+      groupsIds: extra['groupsIds'],
+      servicesIds: extra['servicesIds'],
+      dateRange: extra['dateRange'],
+      asAdmin: extra['asAdmin'] ?? false,
+    );
+  }
+
   final Person person;
+  final bool asAdmin;
   final List<String> groupsIds;
   final List<String> classesIds;
   final List<String> servicesIds;
   final DateTimeRange dateRange;
 
-  const AttendanceAnalysis({
+  const PersonAttendanceAnalysis({
     required this.person,
     required this.dateRange,
     this.groupsIds = const [],
     this.classesIds = const [],
     this.servicesIds = const [],
+    this.asAdmin = false,
     super.key,
   });
 
   @override
-  State<AttendanceAnalysis> createState() => _AttendanceAnalysisState();
+  State<PersonAttendanceAnalysis> createState() =>
+      _PersonAttendanceAnalysisState();
 }
 
-class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
+class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
   late List<String> groupsIds = widget.groupsIds;
   late List<String> classesIds = widget.classesIds;
   late List<String> servicesIds = widget.servicesIds;
@@ -79,6 +91,7 @@ class _AttendanceAnalysisState extends State<AttendanceAnalysis> {
               groupsIds: groupsIds.map(UuidValue.new).toList(),
               classesIds: classesIds.map(UuidValue.new).toList(),
               servicesIds: servicesIds.map(UuidValue.new).toList(),
+              asAdmin: widget.asAdmin,
             ),
             builder: (context, snapshot) {
               if (snapshot.hasError) {

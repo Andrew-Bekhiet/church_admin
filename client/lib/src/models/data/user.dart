@@ -2,19 +2,46 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User extends UID with _$User {
-  const factory User({
+class User extends ViewableWithID with _$User, UID implements PhotoObjectBase {
+  factory User({
     required String uid,
-    String? name,
+    required String name,
     DateTime? photoUpdatedAt,
+    List<AdminOnData>? adminOn,
     UserData? userData,
+    Person? person,
   }) = _User;
+  User._() : super();
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+
+  @override
+  IconData get defaultIcon => Icons.account_circle;
+
+  @override
+  bool get hasPhoto => photoUpdatedAt != null;
+
+  @override
+  CAStorageReference? get photoRef => hasPhoto
+      ? CAStorageReference(
+          photoUpdatedAt: photoUpdatedAt!,
+          downloadUrl: () =>
+              GetIt.I<CAFunctionsService>().getDownloadUrl('users', id),
+          fullPath: 'users/$id.jpg',
+        )
+      : null;
+
+  @override
+  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
+
+  @override
+  String get id => uid;
 }

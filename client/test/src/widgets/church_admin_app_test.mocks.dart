@@ -364,6 +364,18 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
               _i6.QueryResult<
                   _i13.GetUserInfoStream$SubscriptionRoot$Users>>.empty()) as _i7
           .Stream<_i6.QueryResult<_i13.GetUserInfoStream$SubscriptionRoot$Users>>);
+  @override
+  _i7.Stream<_i4.User?> watchUser({String? userId}) =>
+      (super.noSuchMethod(Invocation.method(#watchUser, [], {#userId: userId}),
+          returnValue: Stream<_i4.User?>.empty()) as _i7.Stream<_i4.User?>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
+          {String? userId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#userEditHistory, [], {#userId: userId}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
 }
 
 /// A class which mocks [PersonsQueries].
@@ -507,7 +519,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                   _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i7.Stream<_i4.Person> getMorePersonData(
+  _i7.Stream<_i4.Person?> getMorePersonData(
           {String? personId,
           String? areasAfter,
           String? classesAfter,
@@ -521,9 +533,9 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
             #groupsAfter: groupsAfter,
             #servicesAfter: servicesAfter
           }),
-          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+          returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
   @override
-  _i7.Stream<List<_i4.Person>> personsGeolocations(
+  _i7.Stream<List<_i4.Person>?> personsGeolocations(
           {String? personId,
           List<_i14.UuidValue>? areasIds = const [],
           List<_i14.UuidValue>? streetsIds = const [],
@@ -541,16 +553,17 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                 #groupsIds: groupsIds,
                 #familiesIds: familiesIds
               }),
-              returnValue: Stream<List<_i4.Person>>.empty())
-          as _i7.Stream<List<_i4.Person>>);
+              returnValue: Stream<List<_i4.Person>?>.empty())
+          as _i7.Stream<List<_i4.Person>?>);
   @override
-  _i7.Stream<_i4.Person> analyzePersonAttendance(
+  _i7.Stream<_i4.Person?> analyzePersonAttendance(
           {String? personId,
           DateTime? dateFrom,
           DateTime? dateTo,
           List<_i14.UuidValue>? groupsIds,
           List<_i14.UuidValue>? classesIds,
-          List<_i14.UuidValue>? servicesIds}) =>
+          List<_i14.UuidValue>? servicesIds,
+          bool? asAdmin = false}) =>
       (super.noSuchMethod(
           Invocation.method(#analyzePersonAttendance, [], {
             #personId: personId,
@@ -558,11 +571,12 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
             #dateTo: dateTo,
             #groupsIds: groupsIds,
             #classesIds: classesIds,
-            #servicesIds: servicesIds
+            #servicesIds: servicesIds,
+            #asAdmin: asAdmin
           }),
-          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+          returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
   @override
-  _i7.Stream<_i4.Person> analyzePersonServicing(
+  _i7.Stream<_i4.Person?> analyzePersonServicing(
           {String? personId,
           DateTime? timeFrom,
           DateTime? timeTo,
@@ -576,13 +590,13 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
             #groupsIds: groupsIds,
             #classesIds: classesIds
           }),
-          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+          returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
   @override
-  _i7.Stream<_i4.Person> getPersonClassesAndGroups({String? personId}) =>
+  _i7.Stream<_i4.Person?> getPersonClassesAndGroups({String? personId}) =>
       (super.noSuchMethod(
           Invocation.method(
               #getPersonClassesAndGroups, [], {#personId: personId}),
-          returnValue: Stream<_i4.Person>.empty()) as _i7.Stream<_i4.Person>);
+          returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
 }
 
 /// A class which mocks [AreasQueries].

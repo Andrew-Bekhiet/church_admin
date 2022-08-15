@@ -26,9 +26,9 @@ _$_Service _$$_ServiceFromJson(Map<String, dynamic> json) => _$_Service(
           ?.map((e) => Group.fromJson(e as Map<String, dynamic>))
           .toList(),
       attendanceHistoryAggregate: analysisDataFromJson(
-          json['attendanceHistory_aggregate'] as Map<String, dynamic>?),
+          json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(
-          json['attendanceDaysConstraints_aggregate'] as Map<String, dynamic>?),
+          json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
@@ -41,8 +41,8 @@ Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'classes': instance.classes?.map((e) => e.toJson()).toList(),
       'groups': instance.groups?.map((e) => e.toJson()).toList(),
-      'attendanceHistory_aggregate':
+      'attendanceHistoryAggregate':
           analysisDataToJson(instance.attendanceHistoryAggregate),
-      'attendanceDaysConstraints_aggregate':
+      'attendanceDaysConstraintsAggregate':
           analysisDataToJson(instance.attendanceDaysConstraintsAggregate),
     };

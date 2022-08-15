@@ -20,6 +20,7 @@ class UserData extends UID with _$UserData {
     required String? firebaseAuthUid,
     @JsonKey(ignore: true)
         String? password,
+    LastRecordedByInfo? lastEdit,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, Object?> json) =>

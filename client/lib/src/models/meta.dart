@@ -1,3 +1,4 @@
+export 'meta/admin_on_data.dart';
 export 'meta/church.dart';
 export 'meta/college.dart';
 export 'meta/father.dart';

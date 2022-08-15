@@ -1,8 +1,8 @@
 subscription getStreetsStream(
-  $addWhere: [streets_bool_exp!] = {}
+  $addWhere: [StreetsBoolExp!] = {}
   $limit: Int = 200
 ) {
-  streets(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+  streets(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
     id
     name
     line

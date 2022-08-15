@@ -1,8 +1,8 @@
 subscription getAreasStream(
-  $addWhere: [areas_bool_exp!] = {}
+  $addWhere: [AreasBoolExp!] = {}
   $limit: Int = 200
 ) {
-  areas(where: { _and: $addWhere }, order_by: { name: asc }, limit: $limit) {
+  areas(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
     id
     name
     bounds

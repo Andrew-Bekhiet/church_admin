@@ -23,13 +23,11 @@ class Group extends ViewableWithID
     DateTime? photoUpdatedAt,
     Service? service,
     @JsonKey(
-      name: 'attendanceHistory_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? attendanceHistoryAggregate,
     @JsonKey(
-      name: 'attendanceDaysConstraints_aggregate',
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )

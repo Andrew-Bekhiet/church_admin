@@ -1,9 +1,10 @@
 subscription getUserInfoStream($uid: uuid!) {
-  users_by_pk(uid: $uid) {
+  usersByPk(uid: $uid) {
     uid
     name
     photoUpdatedAt
-    user_data {
+    userData {
+      uid
       firebaseAuthUid
       email
       permissions
@@ -42,6 +43,98 @@ subscription getUserInfoStream($uid: uuid!) {
       photoUpdatedAt
       lastKodas
       lastConfession
+    }
+  }
+}
+
+subscription watchUser($uid: uuid!) {
+  usersByPk(uid: $uid) {
+    uid
+    name
+    photoUpdatedAt
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    adminOn(
+      orderBy: [
+        { area: { name: ASC_NULLS_LAST } }
+        { service: { studyYearFrom: ASC, studyYearTo: ASC } }
+        { serviceStudyYear: ASC }
+        { serviceGender: DESC_NULLS_FIRST }
+        { service: { name: ASC_NULLS_LAST } }
+        { group: { name: ASC_NULLS_LAST } }
+      ]
+    ) {
+      permissionId
+      area {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+      areaAllowEdit
+      areaAdminOnUsers
+      service {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+      serviceStudyYearData {
+        name
+        order
+      }
+      serviceGender
+      serviceAllowEdit
+      serviceAdminOnUsers
+      classes(orderBy: { name: ASC }) {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+      group {
+        id
+        name
+        color
+        photoUpdatedAt
+      }
+      groupAllowEdit
+      groupAdminOnUsers
+    }
+    userData {
+      uid
+      email
+      lastEdit
+      permissions
+    }
+  }
+}
+
+subscription userEditHistory(
+  $userId: uuid!
+  $addWhere: [HistoryEditHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyEditHistory(
+    where: {
+      _and: [
+        { table: { _eq: "users" } }
+        { recordId: { _eq: $userId } }
+        { _and: $addWhere }
+      ]
+    }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
     }
   }
 }

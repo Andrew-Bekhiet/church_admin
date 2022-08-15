@@ -579,8 +579,9 @@ class PersonsQueries {
   }) {
     return DelegatingPaginatableStream<LastRecordedByInfo>(
       onQuery: (instance, offset) {
-        final EditHistorySubscription subscription = EditHistorySubscription(
-          variables: EditHistoryArguments(
+        final PersonEditHistorySubscription subscription =
+            PersonEditHistorySubscription(
+          variables: PersonEditHistoryArguments(
             personId: UuidValue(personId),
             limit: instance.limit + 1,
             addWhere: [
@@ -603,7 +604,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => EditHistory$SubscriptionRoot.fromJson(d)
+                parserFn: (d) => PersonEditHistory$SubscriptionRoot.fromJson(d)
                     .historyEditHistory
                     .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
               ),
@@ -794,6 +795,7 @@ class PersonsQueries {
     required List<UuidValue> groupsIds,
     required List<UuidValue> classesIds,
     required List<UuidValue> servicesIds,
+    bool asAdmin = false,
   }) {
     final AnalyzePersonAttendanceQuery query = AnalyzePersonAttendanceQuery(
       variables: AnalyzePersonAttendanceArguments(
@@ -803,6 +805,7 @@ class PersonsQueries {
         classesIds: classesIds,
         groupsIds: groupsIds,
         servicesIds: servicesIds,
+        asAdmin: asAdmin,
       ),
     );
 

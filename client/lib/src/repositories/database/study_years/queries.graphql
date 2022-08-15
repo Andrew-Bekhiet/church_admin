@@ -1,5 +1,5 @@
 query getStudyYearName($order: smallint!) {
-  study_years_by_pk(order: $order) {
+  studyYearsByPk(order: $order) {
     order
     name
   }
