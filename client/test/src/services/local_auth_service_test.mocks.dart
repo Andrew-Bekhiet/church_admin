@@ -2,6 +2,7 @@
 // in church_admin/test/src/services/local_auth_service_test.dart.
 // Do not manually edit this file.
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
 import 'package:church_admin/church_admin.dart' as _i3;

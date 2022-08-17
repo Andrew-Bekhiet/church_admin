@@ -21,6 +21,15 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       person: json['person'] == null
           ? null
           : Person.fromJson(json['person'] as Map<String, dynamic>),
+      servicesHistory: (json['servicesHistory'] as List<dynamic>?)
+          ?.map((e) => AdminOnData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      classesHistory: (json['classesHistory'] as List<dynamic>?)
+          ?.map((e) => AdminOnData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      groupsHistory: (json['groupsHistory'] as List<dynamic>?)
+          ?.map((e) => AdminOnData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -30,4 +39,9 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
       'userData': instance.userData?.toJson(),
       'person': instance.person?.toJson(),
+      'servicesHistory':
+          instance.servicesHistory?.map((e) => e.toJson()).toList(),
+      'classesHistory':
+          instance.classesHistory?.map((e) => e.toJson()).toList(),
+      'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
     };

@@ -2,6 +2,7 @@
 // in church_admin/test/src/widgets/church_admin_app_test.dart.
 // Do not manually edit this file.
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i7;
 import 'dart:ui' as _i15;
 
@@ -376,6 +377,26 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
               returnValue:
                   _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
           as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i7.Stream<_i4.User?> analyzeUserAttendance(
+          {String? personId,
+          String? userId,
+          DateTime? dateFrom,
+          DateTime? dateTo,
+          List<_i14.UuidValue>? groupsIds,
+          List<_i14.UuidValue>? classesIds,
+          List<_i14.UuidValue>? servicesIds}) =>
+      (super.noSuchMethod(
+          Invocation.method(#analyzeUserAttendance, [], {
+            #personId: personId,
+            #userId: userId,
+            #dateFrom: dateFrom,
+            #dateTo: dateTo,
+            #groupsIds: groupsIds,
+            #classesIds: classesIds,
+            #servicesIds: servicesIds
+          }),
+          returnValue: Stream<_i4.User?>.empty()) as _i7.Stream<_i4.User?>);
 }
 
 /// A class which mocks [PersonsQueries].
@@ -562,8 +583,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           DateTime? dateTo,
           List<_i14.UuidValue>? groupsIds,
           List<_i14.UuidValue>? classesIds,
-          List<_i14.UuidValue>? servicesIds,
-          bool? asAdmin = false}) =>
+          List<_i14.UuidValue>? servicesIds}) =>
       (super.noSuchMethod(
           Invocation.method(#analyzePersonAttendance, [], {
             #personId: personId,
@@ -571,8 +591,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
             #dateTo: dateTo,
             #groupsIds: groupsIds,
             #classesIds: classesIds,
-            #servicesIds: servicesIds,
-            #asAdmin: asAdmin
+            #servicesIds: servicesIds
           }),
           returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
   @override
@@ -597,6 +616,37 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
           Invocation.method(
               #getPersonClassesAndGroups, [], {#personId: personId}),
           returnValue: Stream<_i4.Person?>.empty()) as _i7.Stream<_i4.Person?>);
+  @override
+  _i4.DelegatingPaginatableStream<
+      _i4.LastRecordedByInfo> personServiceAttendance(
+          {String? personId, String? serviceId, bool? asAdmin = false}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personServiceAttendance, [], {
+                #personId: personId,
+                #serviceId: serviceId,
+                #asAdmin: asAdmin
+              }),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personClassAttendance(
+          {String? personId, String? classId, bool? asAdmin = false}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personClassAttendance, [],
+                  {#personId: personId, #classId: classId, #asAdmin: asAdmin}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personGroupAttendance(
+          {String? personId, String? groupId, bool? asAdmin = false}) =>
+      (super.noSuchMethod(
+              Invocation.method(#personGroupAttendance, [],
+                  {#personId: personId, #groupId: groupId, #asAdmin: asAdmin}),
+              returnValue:
+                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>())
+          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
 }
 
 /// A class which mocks [AreasQueries].

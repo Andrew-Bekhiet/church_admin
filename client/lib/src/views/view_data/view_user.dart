@@ -235,10 +235,12 @@ class ViewUser extends StatelessWidget {
                                   [])
                               .groupListsBy((a) => a.service!)
                               .entries)
-                            Card(
-                              elevation: 2.5,
-                              child: _AdminOnServiceWidget(
-                                serviceData: s,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Card(
+                                child: _AdminOnServiceWidget(
+                                  serviceData: s,
+                                ),
                               ),
                             ),
                         ],
@@ -252,18 +254,21 @@ class ViewUser extends StatelessWidget {
                           for (final adminData
                               in user.adminOn?.where((a) => a.group != null) ??
                                   <AdminOnData>[])
-                            ViewableObjectWidget(
-                              adminData.group!,
-                              showSubtitle: false,
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (adminData.groupAdminOnUsers ?? false)
-                                    const Icon(Icons.manage_accounts),
-                                  if (adminData.groupAllowEdit ?? false)
-                                    const Icon(Icons.edit),
-                                  const Icon(Icons.visibility),
-                                ],
+                            Card(
+                              child: ViewableObjectWidget(
+                                adminData.group!,
+                                showSubtitle: false,
+                                wrapInCard: false,
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (adminData.groupAdminOnUsers ?? false)
+                                      const Icon(Icons.manage_accounts),
+                                    if (adminData.groupAllowEdit ?? false)
+                                      const Icon(Icons.edit),
+                                    const Icon(Icons.visibility),
+                                  ],
+                                ),
                               ),
                             ),
                         ],
@@ -296,10 +301,24 @@ class ViewUser extends StatelessWidget {
   }
 
   Future<void> _attendanceAnalysis(BuildContext context, User user) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => _SelectAttendanceOptions(user: user),
-      ),
+    context.goNamed(
+      'user_attendance_analysis',
+      queryParams: {
+        'id': user.person!.id,
+        'uid': user.id,
+      },
+      extra: {
+        'user': user,
+        'person': user.person,
+        'asAdmin': true,
+        'onEditOptions':
+            (context, options, void Function(AttendanceOptions) onComplete) =>
+                _SelectAttendanceOptions(
+                  user: user,
+                  onComplete: onComplete,
+                  options: options,
+                ),
+      },
     );
   }
 }
@@ -327,39 +346,49 @@ class _AdminOnServiceWidget extends StatelessWidget {
           onTap: onTap != null ? () => onTap!(serviceData.key) : null,
           trailing: trailingBuilder?.call(context, serviceData.key),
         ),
-        const Divider(thickness: 2),
+        if (serviceData.value.any(
+          (p) =>
+              (p.classes.isEmpty && trailingBuilder == null) ||
+              p.classes.isNotEmpty,
+        ))
+          const Divider(thickness: 2),
         for (final p in serviceData.value)
           if (p.classes.isEmpty && trailingBuilder == null)
             Padding(
               padding: const EdgeInsets.only(right: 26),
-              child: ListTile(
-                title: p.serviceGender == null && p.serviceStudyYearData == null
-                    ? const Text('(جميع البيانات داخل الخدمة)')
-                    : p.serviceGender != null && p.serviceStudyYearData == null
-                        ? Text(p.serviceGender!
-                            ? '(جميع البنين في الخدمة)'
-                            : '(جميع البنات داخل الخدمة)')
-                        : p.serviceGender != null
-                            ? Text(
-                                '(' +
-                                    p.serviceStudyYearData!.name +
-                                    (p.serviceGender! ? ' بنين' : ' بنات') +
-                                    ')',
-                              )
-                            : Text(
-                                '(جميع بيانات ' +
-                                    p.serviceStudyYearData!.name +
-                                    ')',
-                              ),
-                dense: true,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (p.serviceAdminOnUsers ?? false)
-                      const Icon(Icons.manage_accounts),
-                    if (p.serviceAllowEdit ?? false) const Icon(Icons.edit),
-                    const Icon(Icons.visibility),
-                  ],
+              child: Card(
+                elevation: 0,
+                child: ListTile(
+                  title: p.serviceGender == null &&
+                          p.serviceStudyYearData == null
+                      ? const Text('(جميع البيانات داخل الخدمة)')
+                      : p.serviceGender != null &&
+                              p.serviceStudyYearData == null
+                          ? Text(p.serviceGender!
+                              ? '(جميع البنين في الخدمة)'
+                              : '(جميع البنات داخل الخدمة)')
+                          : p.serviceGender != null
+                              ? Text(
+                                  '(' +
+                                      p.serviceStudyYearData!.name +
+                                      (p.serviceGender! ? ' بنين' : ' بنات') +
+                                      ')',
+                                )
+                              : Text(
+                                  '(جميع بيانات ' +
+                                      p.serviceStudyYearData!.name +
+                                      ')',
+                                ),
+                  dense: true,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (p.serviceAdminOnUsers ?? false)
+                        const Icon(Icons.manage_accounts),
+                      if (p.serviceAllowEdit ?? false) const Icon(Icons.edit),
+                      const Icon(Icons.visibility),
+                    ],
+                  ),
                 ),
               ),
             )
@@ -367,24 +396,27 @@ class _AdminOnServiceWidget extends StatelessWidget {
             for (final c in p.classes)
               Padding(
                 padding: const EdgeInsets.only(right: 26),
-                child: ViewableObjectWidget(
-                  c,
-                  isDense: true,
-                  showSubtitle: false,
-                  wrapInCard: false,
-                  onTap: onTap != null ? () => onTap!(c) : null,
-                  trailing: trailingBuilder == null
-                      ? Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (p.serviceAdminOnUsers ?? false)
-                              const Icon(Icons.manage_accounts),
-                            if (p.serviceAllowEdit ?? false)
-                              const Icon(Icons.edit),
-                            const Icon(Icons.visibility),
-                          ],
-                        )
-                      : trailingBuilder!(context, c),
+                child: Card(
+                  elevation: 0,
+                  child: ViewableObjectWidget(
+                    c,
+                    isDense: true,
+                    showSubtitle: false,
+                    wrapInCard: false,
+                    onTap: onTap != null ? () => onTap!(c) : null,
+                    trailing: trailingBuilder == null
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (p.serviceAdminOnUsers ?? false)
+                                const Icon(Icons.manage_accounts),
+                              if (p.serviceAllowEdit ?? false)
+                                const Icon(Icons.edit),
+                              const Icon(Icons.visibility),
+                            ],
+                          )
+                        : trailingBuilder!(context, c),
+                  ),
                 ),
               )
       ],
@@ -393,9 +425,15 @@ class _AdminOnServiceWidget extends StatelessWidget {
 }
 
 class _SelectAttendanceOptions extends StatefulWidget {
-  const _SelectAttendanceOptions({required this.user});
+  const _SelectAttendanceOptions({
+    required this.user,
+    required this.onComplete,
+    this.options,
+  });
 
   final User user;
+  final AttendanceOptions? options;
+  final void Function(AttendanceOptions) onComplete;
 
   @override
   State<_SelectAttendanceOptions> createState() =>
@@ -403,12 +441,21 @@ class _SelectAttendanceOptions extends StatefulWidget {
 }
 
 class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
-  final selected = BehaviorSubject<Set<ViewableWithID>>.seeded({});
-
-  DateTimeRange dateRange = DateTimeRange(
-    start: DateTime.now().subtract(const Duration(days: 30)),
-    end: DateTime.now(),
+  late final selected = BehaviorSubject<Set<ViewableWithID>>.seeded(
+    widget.options == null
+        ? {}
+        : {
+            ...widget.options!.services,
+            ...widget.options!.classes,
+            ...widget.options!.groups,
+          },
   );
+
+  late DateTimeRange dateRange = widget.options?.dateRange ??
+      DateTimeRange(
+        start: DateTime.now().subtract(const Duration(days: 30)),
+        end: DateTime.now(),
+      );
 
   final _formKey = GlobalKey<FormState>();
 
@@ -521,31 +568,37 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                             [])
                         .groupListsBy((a) => a.service!)
                         .entries)
-                      _AdminOnServiceWidget(
-                        serviceData: s,
-                        onTap: (s) => selected.value.contains(s)
-                            ? selected.add(
-                                selected.value.difference(
-                                  {s},
-                                ),
-                              )
-                            : selected.add({...selected.value, s}),
-                        trailingBuilder: (context, s) => StreamBuilder<bool>(
-                          initialData: false,
-                          stream: selected.map((o) => o.contains(s)),
-                          builder: (context, entryChecked) => Checkbox(
-                            onChanged: (c) {
-                              if (c ?? false) {
-                                selected.add({...selected.value, s});
-                              } else {
-                                selected.add(
-                                  selected.value.difference(
-                                    {s},
-                                  ),
-                                );
-                              }
-                            },
-                            value: entryChecked.requireData,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Card(
+                          child: _AdminOnServiceWidget(
+                            serviceData: s,
+                            onTap: (s) => selected.value.contains(s)
+                                ? selected.add(
+                                    selected.value.difference(
+                                      {s},
+                                    ),
+                                  )
+                                : selected.add({...selected.value, s}),
+                            trailingBuilder: (context, s) =>
+                                StreamBuilder<bool>(
+                              initialData: false,
+                              stream: selected.map((o) => o.contains(s)),
+                              builder: (context, entryChecked) => Checkbox(
+                                onChanged: (c) {
+                                  if (c ?? false) {
+                                    selected.add({...selected.value, s});
+                                  } else {
+                                    selected.add(
+                                      selected.value.difference(
+                                        {s},
+                                      ),
+                                    );
+                                  }
+                                },
+                                value: entryChecked.requireData,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -560,27 +613,29 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                     for (final adminData
                         in widget.user.adminOn?.where((a) => a.group != null) ??
                             <AdminOnData>[])
-                      StreamBuilder<bool>(
-                        initialData: false,
-                        stream:
-                            selected.map((o) => o.contains(adminData.group)),
-                        builder: (context, entryChecked) => CheckboxListTile(
-                          onChanged: (c) {
-                            if (c ?? false) {
-                              selected
-                                  .add({...selected.value, adminData.group!});
-                            } else {
-                              selected.add(
-                                selected.value.difference(
-                                  {adminData.group},
-                                ),
-                              );
-                            }
-                          },
-                          value: entryChecked.requireData,
-                          secondary: PhotoObjectWidget(adminData.group!),
-                          title: Text(adminData.group!.name),
-                          dense: true,
+                      Card(
+                        child: StreamBuilder<bool>(
+                          initialData: false,
+                          stream:
+                              selected.map((o) => o.contains(adminData.group)),
+                          builder: (context, entryChecked) => CheckboxListTile(
+                            onChanged: (c) {
+                              if (c ?? false) {
+                                selected
+                                    .add({...selected.value, adminData.group!});
+                              } else {
+                                selected.add(
+                                  selected.value.difference(
+                                    {adminData.group},
+                                  ),
+                                );
+                              }
+                            },
+                            value: entryChecked.requireData,
+                            secondary: PhotoObjectWidget(adminData.group!),
+                            title: Text(adminData.group!.name),
+                            dense: true,
+                          ),
                         ),
                       ),
                   ],
@@ -596,31 +651,13 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
 
-              Navigator.of(context).pop();
-              context.goNamed(
-                'user_attendance_analysis',
-                queryParams: {
-                  'id': widget.user.person!.id,
-                  'uid': widget.user.id,
-                },
-                extra: {
-                  'user': widget.user,
-                  'person': widget.user.person,
-                  'asAdmin': true,
-                  'dateRange': dateRange,
-                  'classesIds': selected.value
-                      .whereType<Class>()
-                      .map((o) => o.id)
-                      .toList(),
-                  'groupsIds': selected.value
-                      .whereType<Group>()
-                      .map((o) => o.id)
-                      .toList(),
-                  'servicesIds': selected.value
-                      .whereType<Service>()
-                      .map((o) => o.id)
-                      .toList(),
-                },
+              widget.onComplete(
+                AttendanceOptions(
+                  dateRange: dateRange,
+                  classes: selected.value.whereType<Class>().toList(),
+                  groups: selected.value.whereType<Group>().toList(),
+                  services: selected.value.whereType<Service>().toList(),
+                ),
               );
 
               await selected.close();

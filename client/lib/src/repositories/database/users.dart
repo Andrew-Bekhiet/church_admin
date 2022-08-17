@@ -96,4 +96,48 @@ class UsersQueries {
       },
     );
   }
+
+  Stream<User?> analyzeUserAttendance({
+    required String personId,
+    required String userId,
+    required DateTime dateFrom,
+    required DateTime dateTo,
+    required List<UuidValue> groupsIds,
+    required List<UuidValue> classesIds,
+    required List<UuidValue> servicesIds,
+  }) {
+    final AnalyzeUserAttendanceQuery query = AnalyzeUserAttendanceQuery(
+      variables: AnalyzeUserAttendanceArguments(
+        userId: UuidValue(userId),
+        personId: UuidValue(personId),
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        classesIds: classesIds,
+        groupsIds: groupsIds,
+        servicesIds: servicesIds,
+      ),
+    );
+
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        fetchResults: true,
+        eagerlyFetchResults: false,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => User.fromJson(
+          AnalyzeUserAttendance$QueryRoot.fromJson(d).usersByPk!.toJson(),
+        ),
+      ),
+    );
+    watchQuery.onData([
+      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
+          ? watchQuery.refetch()
+          : null
+    ]);
+
+    return watchQuery.stream
+        .map(_exceptionsMiddleware)
+        .map((value) => value.parsedData);
+  }
 }

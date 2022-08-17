@@ -18,6 +18,9 @@ class User extends ViewableWithID with _$User, UID implements PhotoObjectBase {
     List<AdminOnData>? adminOn,
     UserData? userData,
     Person? person,
+    List<AdminOnData>? servicesHistory,
+    List<AdminOnData>? classesHistory,
+    List<AdminOnData>? groupsHistory,
   }) = _User;
   User._() : super();
 

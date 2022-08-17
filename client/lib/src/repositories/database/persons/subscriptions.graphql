@@ -261,3 +261,75 @@ subscription personEditHistory(
     }
   }
 }
+
+subscription personServiceAttendance(
+  $personId: uuid!
+  $serviceId: uuid!
+  $asAdmin: Boolean! = false
+  $limit: Int! = 200
+  $addWhere: [HistoryAttendanceHistoryBoolExp!] = {}
+) {
+  historyAttendanceHistory(
+    where: {
+      _and: [
+        { personId: { _eq: $personId } }
+        { serviceId: { _eq: $serviceId } }
+        { asAdmin: { _eq: $asAdmin } }
+        { _and: $addWhere }
+      ]
+    }
+    orderBy: { time: DESC }
+    limit: $limit
+  ) {
+    recordedBy
+    time
+  }
+}
+
+subscription personClassAttendance(
+  $personId: uuid!
+  $classId: uuid!
+  $asAdmin: Boolean! = false
+  $limit: Int! = 200
+  $addWhere: [HistoryAttendanceHistoryBoolExp!] = {}
+) {
+  historyAttendanceHistory(
+    where: {
+      _and: [
+        { personId: { _eq: $personId } }
+        { class: { id: { _eq: $classId } } }
+        { asAdmin: { _eq: $asAdmin } }
+        { _and: $addWhere }
+      ]
+    }
+    orderBy: { time: DESC }
+    limit: $limit
+  ) {
+    recordedBy
+    time
+  }
+}
+
+subscription personGroupAttendance(
+  $personId: uuid!
+  $groupId: uuid!
+  $asAdmin: Boolean! = false
+  $limit: Int! = 200
+  $addWhere: [HistoryAttendanceHistoryBoolExp!] = {}
+) {
+  historyAttendanceHistory(
+    where: {
+      _and: [
+        { personId: { _eq: $personId } }
+        { groupId: { _eq: $groupId } }
+        { asAdmin: { _eq: $asAdmin } }
+        { _and: $addWhere }
+      ]
+    }
+    orderBy: { time: DESC }
+    limit: $limit
+  ) {
+    recordedBy
+    time
+  }
+}

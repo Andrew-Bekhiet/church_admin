@@ -7239,6 +7239,138 @@ class NameComparisonExp extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistory();
+
+  factory PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistoryFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue recordedBy;
+
+  late DateTime time;
+
+  @override
+  List<Object?> get props => [recordedBy, time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonServiceAttendance$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  PersonServiceAttendance$SubscriptionRoot();
+
+  factory PersonServiceAttendance$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonServiceAttendance$SubscriptionRootFromJson(json);
+
+  late List<PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistory>
+      historyAttendanceHistory;
+
+  @override
+  List<Object?> get props => [historyAttendanceHistory];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonServiceAttendance$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistory();
+
+  factory PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistoryFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue recordedBy;
+
+  late DateTime time;
+
+  @override
+  List<Object?> get props => [recordedBy, time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonClassAttendance$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  PersonClassAttendance$SubscriptionRoot();
+
+  factory PersonClassAttendance$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonClassAttendance$SubscriptionRootFromJson(json);
+
+  late List<PersonClassAttendance$SubscriptionRoot$HistoryAttendanceHistory>
+      historyAttendanceHistory;
+
+  @override
+  List<Object?> get props => [historyAttendanceHistory];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonClassAttendance$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistory();
+
+  factory PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistoryFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue recordedBy;
+
+  late DateTime time;
+
+  @override
+  List<Object?> get props => [recordedBy, time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonGroupAttendance$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  PersonGroupAttendance$SubscriptionRoot();
+
+  factory PersonGroupAttendance$SubscriptionRoot.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonGroupAttendance$SubscriptionRootFromJson(json);
+
+  late List<PersonGroupAttendance$SubscriptionRoot$HistoryAttendanceHistory>
+      historyAttendanceHistory;
+
+  @override
+  List<Object?> get props => [historyAttendanceHistory];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonGroupAttendance$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetServicesStream$SubscriptionRoot$Services$StudyYears
     extends JsonSerializable with EquatableMixin {
   GetServicesStream$SubscriptionRoot$Services$StudyYears();
@@ -8089,6 +8221,700 @@ class UserEditHistory$SubscriptionRoot extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$UserEditHistory$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+          json);
+
+  DateTime? dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  @override
+  List<Object?> get props => [count];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$ServicesFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate
+      attendanceHistoryAggregate;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        color,
+        attendanceHistoryAggregate,
+        attendanceDaysConstraintsAggregate
+      ];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$ServicesToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistoryFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue permissionId;
+
+  AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services? service;
+
+  @override
+  List<Object?> get props => [permissionId, service];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+          json);
+
+  DateTime? dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  @override
+  List<Object?> get props => [count];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$ClassesFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceHistoryAggregate
+      attendanceHistoryAggregate;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes$HistoryAttendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        color,
+        attendanceHistoryAggregate,
+        attendanceDaysConstraintsAggregate
+      ];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$ClassesToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistoryFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue permissionId;
+
+  late List<AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory$Classes>
+      classes;
+
+  @override
+  List<Object?> get props => [permissionId, classes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$ClassesHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+          json);
+
+  DateTime? dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  @override
+  List<Object?> get props => [count];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+          json);
+
+  late DateTime dayId;
+
+  @override
+  List<Object?> get props => [dayId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregateFromJson(
+          json);
+
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$GroupsFromJson(
+          json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue id;
+
+  late String name;
+
+  int? color;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceHistoryAggregate
+      attendanceHistoryAggregate;
+
+  late AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups$HistoryAttendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        color,
+        attendanceHistoryAggregate,
+        attendanceDaysConstraintsAggregate
+      ];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$GroupsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistoryFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue permissionId;
+
+  AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory$Groups? group;
+
+  @override
+  List<Object?> get props => [permissionId, group];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$Users$GroupsHistoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot$Users extends JsonSerializable
+    with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot$Users();
+
+  factory AnalyzeUserAttendance$QueryRoot$Users.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRoot$UsersFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue uid;
+
+  late String name;
+
+  late List<AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory>
+      servicesHistory;
+
+  late List<AnalyzeUserAttendance$QueryRoot$Users$ClassesHistory>
+      classesHistory;
+
+  late List<AnalyzeUserAttendance$QueryRoot$Users$GroupsHistory> groupsHistory;
+
+  @override
+  List<Object?> get props =>
+      [uid, name, servicesHistory, classesHistory, groupsHistory];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRoot$UsersToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendance$QueryRoot extends JsonSerializable
+    with EquatableMixin {
+  AnalyzeUserAttendance$QueryRoot();
+
+  factory AnalyzeUserAttendance$QueryRoot.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendance$QueryRootFromJson(json);
+
+  AnalyzeUserAttendance$QueryRoot$Users? usersByPk;
+
+  @override
+  List<Object?> get props => [usersByPk];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzeUserAttendance$QueryRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -10466,8 +11292,7 @@ class AnalyzePersonAttendanceArguments extends JsonSerializable
       required this.personId,
       this.groupsIds,
       this.classesIds,
-      this.servicesIds,
-      required this.asAdmin});
+      this.servicesIds});
 
   @override
   factory AnalyzePersonAttendanceArguments.fromJson(
@@ -10498,11 +11323,9 @@ class AnalyzePersonAttendanceArguments extends JsonSerializable
       toJson: fromDartListNullableUuidValueToGraphQLListNullableUuid)
   final List<UuidValue>? servicesIds;
 
-  late bool asAdmin;
-
   @override
   List<Object?> get props =>
-      [dateFrom, dateTo, personId, groupsIds, classesIds, servicesIds, asAdmin];
+      [dateFrom, dateTo, personId, groupsIds, classesIds, servicesIds];
   @override
   Map<String, dynamic> toJson() =>
       _$AnalyzePersonAttendanceArgumentsToJson(this);
@@ -10553,13 +11376,6 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                     name: NameNode(value: 'uuid'), isNonNull: true),
                 isNonNull: false),
             defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'asAdmin')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
             directives: [])
       ],
       directives: [],
@@ -10791,9 +11607,8 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                                           value: ObjectValueNode(fields: [
                                             ObjectFieldNode(
                                                 name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'asAdmin')))
+                                                value: BooleanValueNode(
+                                                    value: false))
                                           ]))
                                     ]))
                               ],
@@ -10966,8 +11781,7 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                                     value: ObjectValueNode(fields: [
                                       ObjectFieldNode(
                                           name: NameNode(value: '_eq'),
-                                          value: VariableNode(
-                                              name: NameNode(value: 'asAdmin')))
+                                          value: BooleanValueNode(value: false))
                                     ]))
                               ]))
                         ],
@@ -11145,9 +11959,8 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                                           value: ObjectValueNode(fields: [
                                             ObjectFieldNode(
                                                 name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'asAdmin')))
+                                                value: BooleanValueNode(
+                                                    value: false))
                                           ]))
                                     ]))
                               ],
@@ -13486,6 +14299,542 @@ class PersonEditHistorySubscription extends GraphQLQuery<
 }
 
 @JsonSerializable(explicitToJson: true)
+class PersonServiceAttendanceArguments extends JsonSerializable
+    with EquatableMixin {
+  PersonServiceAttendanceArguments(
+      {required this.personId,
+      required this.serviceId,
+      required this.asAdmin,
+      required this.limit,
+      this.addWhere});
+
+  @override
+  factory PersonServiceAttendanceArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$PersonServiceAttendanceArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue serviceId;
+
+  late bool asAdmin;
+
+  late int limit;
+
+  final List<HistoryAttendanceHistoryBoolExp>? addWhere;
+
+  @override
+  List<Object?> get props => [personId, serviceId, asAdmin, limit, addWhere];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PersonServiceAttendanceArgumentsToJson(this);
+}
+
+final PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'personServiceAttendance';
+final PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personServiceAttendance'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'serviceId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'asAdmin')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                    isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'historyAttendanceHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: ListValueNode(values: [
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'personId')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'serviceId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'serviceId')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'asAdmin'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'asAdmin')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'addWhere')))
+                          ])
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'orderBy'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'time'),
+                        value: EnumValueNode(name: NameNode(value: 'DESC')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'recordedBy'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'time'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class PersonServiceAttendanceSubscription extends GraphQLQuery<
+    PersonServiceAttendance$SubscriptionRoot,
+    PersonServiceAttendanceArguments> {
+  PersonServiceAttendanceSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final PersonServiceAttendanceArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  PersonServiceAttendance$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      PersonServiceAttendance$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonClassAttendanceArguments extends JsonSerializable
+    with EquatableMixin {
+  PersonClassAttendanceArguments(
+      {required this.personId,
+      required this.classId,
+      required this.asAdmin,
+      required this.limit,
+      this.addWhere});
+
+  @override
+  factory PersonClassAttendanceArguments.fromJson(Map<String, dynamic> json) =>
+      _$PersonClassAttendanceArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue classId;
+
+  late bool asAdmin;
+
+  late int limit;
+
+  final List<HistoryAttendanceHistoryBoolExp>? addWhere;
+
+  @override
+  List<Object?> get props => [personId, classId, asAdmin, limit, addWhere];
+  @override
+  Map<String, dynamic> toJson() => _$PersonClassAttendanceArgumentsToJson(this);
+}
+
+final PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'personClassAttendance';
+final PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personClassAttendance'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'classId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'asAdmin')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                    isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'historyAttendanceHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: ListValueNode(values: [
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'personId')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'class'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: 'id'),
+                                      value: ObjectValueNode(fields: [
+                                        ObjectFieldNode(
+                                            name: NameNode(value: '_eq'),
+                                            value: VariableNode(
+                                                name:
+                                                    NameNode(value: 'classId')))
+                                      ]))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'asAdmin'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'asAdmin')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'addWhere')))
+                          ])
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'orderBy'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'time'),
+                        value: EnumValueNode(name: NameNode(value: 'DESC')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'recordedBy'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'time'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class PersonClassAttendanceSubscription extends GraphQLQuery<
+    PersonClassAttendance$SubscriptionRoot, PersonClassAttendanceArguments> {
+  PersonClassAttendanceSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final PersonClassAttendanceArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  PersonClassAttendance$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      PersonClassAttendance$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonGroupAttendanceArguments extends JsonSerializable
+    with EquatableMixin {
+  PersonGroupAttendanceArguments(
+      {required this.personId,
+      required this.groupId,
+      required this.asAdmin,
+      required this.limit,
+      this.addWhere});
+
+  @override
+  factory PersonGroupAttendanceArguments.fromJson(Map<String, dynamic> json) =>
+      _$PersonGroupAttendanceArgumentsFromJson(json);
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue groupId;
+
+  late bool asAdmin;
+
+  late int limit;
+
+  final List<HistoryAttendanceHistoryBoolExp>? addWhere;
+
+  @override
+  List<Object?> get props => [personId, groupId, asAdmin, limit, addWhere];
+  @override
+  Map<String, dynamic> toJson() => _$PersonGroupAttendanceArgumentsToJson(this);
+}
+
+final PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'personGroupAttendance';
+final PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personGroupAttendance'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'groupId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'asAdmin')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'limit')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'addWhere')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                    isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'historyAttendanceHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'where'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: '_and'),
+                        value: ListValueNode(values: [
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'personId')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'groupId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'groupId')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: 'asAdmin'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'asAdmin')))
+                                ]))
+                          ]),
+                          ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'addWhere')))
+                          ])
+                        ]))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'orderBy'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'time'),
+                        value: EnumValueNode(name: NameNode(value: 'DESC')))
+                  ])),
+              ArgumentNode(
+                  name: NameNode(value: 'limit'),
+                  value: VariableNode(name: NameNode(value: 'limit')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'recordedBy'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'time'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
+class PersonGroupAttendanceSubscription extends GraphQLQuery<
+    PersonGroupAttendance$SubscriptionRoot, PersonGroupAttendanceArguments> {
+  PersonGroupAttendanceSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final PersonGroupAttendanceArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  PersonGroupAttendance$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      PersonGroupAttendance$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
   GetServicesStreamArguments(
       {this.addWhere, this.groupsAddWhere, this.classesAddWhere, this.limit});
@@ -14883,4 +16232,765 @@ class UserEditHistorySubscription extends GraphQLQuery<
   @override
   UserEditHistory$SubscriptionRoot parse(Map<String, dynamic> json) =>
       UserEditHistory$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzeUserAttendanceArguments extends JsonSerializable
+    with EquatableMixin {
+  AnalyzeUserAttendanceArguments(
+      {required this.dateFrom,
+      required this.dateTo,
+      required this.personId,
+      required this.userId,
+      this.groupsIds,
+      this.classesIds,
+      this.servicesIds});
+
+  @override
+  factory AnalyzeUserAttendanceArguments.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzeUserAttendanceArgumentsFromJson(json);
+
+  late DateTime dateFrom;
+
+  late DateTime dateTo;
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue personId;
+
+  @JsonKey(
+      fromJson: fromGraphQLUuidToDartUuidValue,
+      toJson: fromDartUuidValueToGraphQLUuid)
+  late UuidValue userId;
+
+  @JsonKey(
+      fromJson: fromGraphQLListNullableUuidToDartListNullableUuidValue,
+      toJson: fromDartListNullableUuidValueToGraphQLListNullableUuid)
+  final List<UuidValue>? groupsIds;
+
+  @JsonKey(
+      fromJson: fromGraphQLListNullableUuidToDartListNullableUuidValue,
+      toJson: fromDartListNullableUuidValueToGraphQLListNullableUuid)
+  final List<UuidValue>? classesIds;
+
+  @JsonKey(
+      fromJson: fromGraphQLListNullableUuidToDartListNullableUuidValue,
+      toJson: fromDartListNullableUuidValueToGraphQLListNullableUuid)
+  final List<UuidValue>? servicesIds;
+
+  @override
+  List<Object?> get props =>
+      [dateFrom, dateTo, personId, userId, groupsIds, classesIds, servicesIds];
+  @override
+  Map<String, dynamic> toJson() => _$AnalyzeUserAttendanceArgumentsToJson(this);
+}
+
+final ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME =
+    'analyzeUserAttendance';
+final ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'analyzeUserAttendance'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'dateFrom')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'dateTo')),
+            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'personId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'userId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'groupsIds')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'uuid'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'classesIds')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'uuid'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'servicesIds')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'uuid'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'usersByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'uid'),
+                  value: VariableNode(name: NameNode(value: 'userId')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'uid'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'adminOn'),
+                  alias: NameNode(value: 'servicesHistory'),
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'service'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'id'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: '_in'),
+                                          value: VariableNode(
+                                              name: NameNode(
+                                                  value: 'servicesIds')))
+                                    ]))
+                              ]))
+                        ])),
+                    ArgumentNode(
+                        name: NameNode(value: 'distinctOn'),
+                        value: EnumValueNode(
+                            name: NameNode(value: 'adminOnService')))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'permissionId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'service'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'name'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'color'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name:
+                                  NameNode(value: 'attendanceHistoryAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'personId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'personId')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'asAdmin'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: BooleanValueNode(
+                                                    value: true))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'max'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet:
+                                              SelectionSetNode(selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'),
+                                                alias: null,
+                                                arguments: [],
+                                                directives: [],
+                                                selectionSet: null)
+                                          ]))
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ])),
+                          FieldNode(
+                              name: NameNode(
+                                  value: 'attendanceDaysConstraintsAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'adminOn'),
+                  alias: NameNode(value: 'classesHistory'),
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'classes'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'id'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: '_in'),
+                                          value: VariableNode(
+                                              name: NameNode(
+                                                  value: 'classesIds')))
+                                    ]))
+                              ]))
+                        ])),
+                    ArgumentNode(
+                        name: NameNode(value: 'distinctOn'),
+                        value: EnumValueNode(
+                            name: NameNode(value: 'adminOnService')))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'permissionId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'classes'),
+                        alias: null,
+                        arguments: [
+                          ArgumentNode(
+                              name: NameNode(value: 'where'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'id'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: '_in'),
+                                          value: VariableNode(
+                                              name: NameNode(
+                                                  value: 'classesIds')))
+                                    ]))
+                              ])),
+                          ArgumentNode(
+                              name: NameNode(value: 'distinctOn'),
+                              value: EnumValueNode(name: NameNode(value: 'id')))
+                        ],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'name'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'color'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name:
+                                  NameNode(value: 'attendanceHistoryAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'personId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'personId')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'asAdmin'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: BooleanValueNode(
+                                                    value: true))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'max'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet:
+                                              SelectionSetNode(selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'),
+                                                alias: null,
+                                                arguments: [],
+                                                directives: [],
+                                                selectionSet: null)
+                                          ]))
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ])),
+                          FieldNode(
+                              name: NameNode(
+                                  value: 'attendanceDaysConstraintsAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ]))
+                        ]))
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'adminOn'),
+                  alias: NameNode(value: 'groupsHistory'),
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'group'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'id'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: '_in'),
+                                          value: VariableNode(
+                                              name:
+                                                  NameNode(value: 'groupsIds')))
+                                    ]))
+                              ]))
+                        ])),
+                    ArgumentNode(
+                        name: NameNode(value: 'distinctOn'),
+                        value: EnumValueNode(
+                            name: NameNode(value: 'adminOnGroup')))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'permissionId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'group'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'name'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'color'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name:
+                                  NameNode(value: 'attendanceHistoryAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'personId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'personId')))
+                                          ])),
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'asAdmin'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_eq'),
+                                                value: BooleanValueNode(
+                                                    value: true))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'max'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet:
+                                              SelectionSetNode(selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'),
+                                                alias: null,
+                                                arguments: [],
+                                                directives: [],
+                                                selectionSet: null)
+                                          ]))
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ])),
+                          FieldNode(
+                              name: NameNode(
+                                  value: 'attendanceDaysConstraintsAggregate'),
+                              alias: null,
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'where'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          value: ObjectValueNode(fields: [
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_gte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateFrom'))),
+                                            ObjectFieldNode(
+                                                name: NameNode(value: '_lte'),
+                                                value: VariableNode(
+                                                    name: NameNode(
+                                                        value: 'dateTo')))
+                                          ]))
+                                    ]))
+                              ],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'aggregate'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'count'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'nodes'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'dayId'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
+                              ]))
+                        ]))
+                  ]))
+            ]))
+      ]))
+]);
+
+class AnalyzeUserAttendanceQuery extends GraphQLQuery<
+    AnalyzeUserAttendance$QueryRoot, AnalyzeUserAttendanceArguments> {
+  AnalyzeUserAttendanceQuery({required this.variables});
+
+  @override
+  final DocumentNode document = ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final AnalyzeUserAttendanceArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  AnalyzeUserAttendance$QueryRoot parse(Map<String, dynamic> json) =>
+      AnalyzeUserAttendance$QueryRoot.fromJson(json);
 }

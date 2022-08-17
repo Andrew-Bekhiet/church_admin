@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
@@ -16,7 +17,7 @@ class PersonAttendanceAnalysis extends StatefulWidget {
     builder: _routeBuilder,
   );
 
-  static Widget _routeBuilder(context, state) {
+  static Widget _routeBuilder(BuildContext context, GoRouterState state) {
     if (state.extra == null) {
       throw ArgumentError.notNull('state.extra');
     } else if (state.extra is! Map<String, dynamic>) {
@@ -31,30 +32,28 @@ class PersonAttendanceAnalysis extends StatefulWidget {
 
     return PersonAttendanceAnalysis(
       person: extra['person'],
-      classesIds: extra['classesIds'],
-      groupsIds: extra['groupsIds'],
-      servicesIds: extra['servicesIds'],
-      dateRange: extra['dateRange'],
-      asAdmin: extra['asAdmin'] ?? false,
+      user: extra['user'],
+      onEditOptions: extra['onEditOptions'],
+      options: extra['options'],
     );
   }
 
-  final Person person;
-  final bool asAdmin;
-  final List<String> groupsIds;
-  final List<String> classesIds;
-  final List<String> servicesIds;
-  final DateTimeRange dateRange;
+  final Person? person;
+  final User? user;
+  final AttendanceOptions? options;
+  final Widget Function(
+    BuildContext,
+    AttendanceOptions?,
+    void Function(AttendanceOptions),
+  ) onEditOptions;
 
   const PersonAttendanceAnalysis({
-    required this.person,
-    required this.dateRange,
-    this.groupsIds = const [],
-    this.classesIds = const [],
-    this.servicesIds = const [],
-    this.asAdmin = false,
+    required this.onEditOptions,
+    this.person,
+    this.user,
+    this.options,
     super.key,
-  });
+  }) : assert(user != null || person != null);
 
   @override
   State<PersonAttendanceAnalysis> createState() =>
@@ -62,37 +61,79 @@ class PersonAttendanceAnalysis extends StatefulWidget {
 }
 
 class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
-  late List<String> groupsIds = widget.groupsIds;
-  late List<String> classesIds = widget.classesIds;
-  late List<String> servicesIds = widget.servicesIds;
-  late DateTimeRange dateRange = widget.dateRange;
+  late AttendanceOptions? options = widget.options;
+
+  List<String> get groupsIds => options!.groups.map((e) => e.id).toList();
+  List<String> get classesIds => options!.classes.map((e) => e.id).toList();
+  List<String> get servicesIds => options!.services.map((e) => e.id).toList();
+  DateTimeRange get dateRange => options!.dateRange;
 
   @override
   Widget build(BuildContext context) {
+    if (options == null) {
+      return widget.onEditOptions(
+        context,
+        options,
+        (o) => setState(
+          () => options = o,
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => setState(() {}),
-            icon: const Icon(Icons.refresh),
-            tooltip: 'تحديث البيانات',
+            onPressed: () async {
+              final staged = await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => widget.onEditOptions(
+                    context,
+                    options,
+                    (o) => Navigator.of(context).pop(o),
+                  ),
+                ),
+              );
+
+              if (staged != null && staged != options) {
+                setState(() => options = staged);
+              }
+            },
+            icon: const Icon(Icons.edit),
+            tooltip: 'تعديل البحث',
           ),
+          if (options != null)
+            IconButton(
+              onPressed: () => setState(() {}),
+              icon: const Icon(Icons.refresh),
+              tooltip: 'تحديث البيانات',
+            ),
         ],
-        title: Text('تحليل الحضور ل' + widget.person.name),
+        title:
+            Text('تحليل الحضور ل' + (widget.user?.name ?? widget.person!.name)),
       ),
       body: ListView(
         children: [
-          StreamBuilder<Person?>(
+          StreamBuilder<ViewableWithID?>(
             initialData: widget.person,
-            stream: CADatabaseRepository.I.persons.analyzePersonAttendance(
-              personId: widget.person.id,
-              dateFrom: dateRange.start,
-              dateTo: dateRange.end,
-              groupsIds: groupsIds.map(UuidValue.new).toList(),
-              classesIds: classesIds.map(UuidValue.new).toList(),
-              servicesIds: servicesIds.map(UuidValue.new).toList(),
-              asAdmin: widget.asAdmin,
-            ),
+            stream: widget.user != null
+                ? CADatabaseRepository.I.users.analyzeUserAttendance(
+                    userId: widget.user!.id,
+                    personId: widget.user!.person?.id ?? widget.person!.id,
+                    dateFrom: dateRange.start,
+                    dateTo: dateRange.end,
+                    groupsIds: groupsIds.map(UuidValue.new).toList(),
+                    classesIds: classesIds.map(UuidValue.new).toList(),
+                    servicesIds: servicesIds.map(UuidValue.new).toList(),
+                  )
+                : CADatabaseRepository.I.persons.analyzePersonAttendance(
+                    personId: widget.person!.id,
+                    dateFrom: dateRange.start,
+                    dateTo: dateRange.end,
+                    groupsIds: groupsIds.map(UuidValue.new).toList(),
+                    classesIds: classesIds.map(UuidValue.new).toList(),
+                    servicesIds: servicesIds.map(UuidValue.new).toList(),
+                  ),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return ErrorWidget.builder(
@@ -104,13 +145,22 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final data = snapshot.requireData!;
+              final user = snapshot.requireData! is User
+                  ? snapshot.requireData! as User
+                  : null;
+              final person = snapshot.requireData! is Person
+                  ? snapshot.requireData! as Person
+                  : null;
 
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (final s in data.services ?? <Service>[])
-                    if (s.attendanceHistoryAggregate == null)
+                  for (final s
+                      in user?.servicesHistory?.map((e) => e.service!) ??
+                          person?.services ??
+                          <Service>[])
+                    if (s.attendanceHistoryAggregate == null ||
+                        s.attendanceDaysConstraintsAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
                       Padding(
@@ -123,13 +173,25 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                             analysisData: s.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 s.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => throw UnimplementedError(),
-                            color: s.color ?? data.color,
+                            getHistoryStream: () => CADatabaseRepository
+                                .I.persons
+                                .personServiceAttendance(
+                              personId:
+                                  widget.user?.person?.id ?? widget.person!.id,
+                              asAdmin: widget.user != null,
+                              serviceId: s.id,
+                            ),
+                            color: s.color ?? (user ?? person)?.color,
                           ),
                         ),
                       ),
-                  for (final c in data.classes ?? <Class>[])
-                    if (c.attendanceHistoryAggregate == null)
+                  for (final c in user?.classesHistory
+                          ?.map((e) => e.classes)
+                          .expand((e) => e) ??
+                      person?.classes ??
+                      <Class>[])
+                    if (c.attendanceHistoryAggregate == null ||
+                        c.attendanceDaysConstraintsAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
                       Padding(
@@ -142,13 +204,23 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                             analysisData: c.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 c.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => throw UnimplementedError(),
-                            color: c.color ?? data.color,
+                            getHistoryStream: () => CADatabaseRepository
+                                .I.persons
+                                .personClassAttendance(
+                              personId:
+                                  widget.user?.person?.id ?? widget.person!.id,
+                              asAdmin: widget.user != null,
+                              classId: c.id,
+                            ),
+                            color: c.color ?? (user ?? person)?.color,
                           ),
                         ),
                       ),
-                  for (final g in data.groups ?? <Group>[])
-                    if (g.attendanceHistoryAggregate == null)
+                  for (final g in user?.groupsHistory?.map((e) => e.group!) ??
+                      person?.groups ??
+                      <Group>[])
+                    if (g.attendanceHistoryAggregate == null ||
+                        g.attendanceDaysConstraintsAggregate == null)
                       const Center(child: CircularProgressIndicator())
                     else
                       Padding(
@@ -161,8 +233,15 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                             analysisData: g.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 g.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => throw UnimplementedError(),
-                            color: g.color ?? data.color,
+                            getHistoryStream: () => CADatabaseRepository
+                                .I.persons
+                                .personGroupAttendance(
+                              personId:
+                                  widget.user?.person?.id ?? widget.person!.id,
+                              asAdmin: widget.user != null,
+                              groupId: g.id,
+                            ),
+                            color: g.color ?? (user ?? person)?.color,
                           ),
                         ),
                       ),

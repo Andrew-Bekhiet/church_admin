@@ -67,6 +67,11 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     );
 
     return themeData.copyWith(
+      cardTheme: themeData.cardTheme.copyWith(
+        clipBehavior: Clip.antiAlias,
+        elevation: 3,
+        shadowColor: Colors.grey.withOpacity(0.5),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

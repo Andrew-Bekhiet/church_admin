@@ -521,10 +521,21 @@ class ViewPerson extends StatelessWidget {
   }
 
   Future<void> _attendanceAnalysis(BuildContext context, Person person) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => _SelectAttendanceOptions(person: person),
-      ),
+    context.goNamed(
+      'person_attendance_analysis',
+      queryParams: {
+        'id': person.id,
+      },
+      extra: {
+        'person': person,
+        'onEditOptions':
+            (context, options, void Function(AttendanceOptions) onComplete) =>
+                _SelectAttendanceOptions(
+                  person: person,
+                  onComplete: onComplete,
+                  options: options,
+                ),
+      },
     );
   }
 
@@ -731,9 +742,15 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
 }
 
 class _SelectAttendanceOptions extends StatefulWidget {
-  const _SelectAttendanceOptions({required this.person});
+  const _SelectAttendanceOptions({
+    required this.person,
+    required this.onComplete,
+    this.options,
+  });
 
   final Person person;
+  final AttendanceOptions? options;
+  final void Function(AttendanceOptions) onComplete;
 
   @override
   State<_SelectAttendanceOptions> createState() =>
@@ -741,12 +758,21 @@ class _SelectAttendanceOptions extends StatefulWidget {
 }
 
 class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
-  final selected = BehaviorSubject<Set<ViewableWithID>>.seeded({});
-
-  DateTimeRange dateRange = DateTimeRange(
-    start: DateTime.now().subtract(const Duration(days: 30)),
-    end: DateTime.now(),
+  late final selected = BehaviorSubject<Set<ViewableWithID>>.seeded(
+    widget.options == null
+        ? {}
+        : {
+            ...widget.options!.services,
+            ...widget.options!.classes,
+            ...widget.options!.groups,
+          },
   );
+
+  late DateTimeRange dateRange = widget.options?.dateRange ??
+      DateTimeRange(
+        start: DateTime.now().subtract(const Duration(days: 30)),
+        end: DateTime.now(),
+      );
 
   final _formKey = GlobalKey<FormState>();
 
@@ -937,28 +963,13 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
 
-              Navigator.of(context).pop();
-              context.goNamed(
-                'person_attendance_analysis',
-                queryParams: {
-                  'id': widget.person.id,
-                },
-                extra: {
-                  'person': widget.person,
-                  'dateRange': dateRange,
-                  'classesIds': selected.value
-                      .whereType<Class>()
-                      .map((o) => o.id)
-                      .toList(),
-                  'groupsIds': selected.value
-                      .whereType<Group>()
-                      .map((o) => o.id)
-                      .toList(),
-                  'servicesIds': selected.value
-                      .whereType<Service>()
-                      .map((o) => o.id)
-                      .toList(),
-                },
+              widget.onComplete(
+                AttendanceOptions(
+                  dateRange: dateRange,
+                  classes: selected.value.whereType<Class>().toList(),
+                  groups: selected.value.whereType<Group>().toList(),
+                  services: selected.value.whereType<Service>().toList(),
+                ),
               );
 
               await selected.close();

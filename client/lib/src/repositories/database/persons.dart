@@ -795,7 +795,6 @@ class PersonsQueries {
     required List<UuidValue> groupsIds,
     required List<UuidValue> classesIds,
     required List<UuidValue> servicesIds,
-    bool asAdmin = false,
   }) {
     final AnalyzePersonAttendanceQuery query = AnalyzePersonAttendanceQuery(
       variables: AnalyzePersonAttendanceArguments(
@@ -805,7 +804,6 @@ class PersonsQueries {
         classesIds: classesIds,
         groupsIds: groupsIds,
         servicesIds: servicesIds,
-        asAdmin: asAdmin,
       ),
     );
 
@@ -900,5 +898,167 @@ class PersonsQueries {
     return watchQuery.stream
         .map(_exceptionsMiddleware)
         .map((value) => value.parsedData);
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personServiceAttendance({
+    required String personId,
+    required String serviceId,
+    bool asAdmin = false,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final PersonServiceAttendanceSubscription subscription =
+            PersonServiceAttendanceSubscription(
+          variables: PersonServiceAttendanceArguments(
+            asAdmin: asAdmin,
+            serviceId: UuidValue(serviceId),
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryAttendanceHistoryBoolExp(
+                  time: TimestampComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) =>
+                    PersonServiceAttendance$SubscriptionRoot.fromJson(d)
+                        .historyAttendanceHistory
+                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personClassAttendance({
+    required String personId,
+    required String classId,
+    bool asAdmin = false,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final PersonClassAttendanceSubscription subscription =
+            PersonClassAttendanceSubscription(
+          variables: PersonClassAttendanceArguments(
+            asAdmin: asAdmin,
+            classId: UuidValue(classId),
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryAttendanceHistoryBoolExp(
+                  time: TimestampComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) =>
+                    PersonClassAttendance$SubscriptionRoot.fromJson(d)
+                        .historyAttendanceHistory
+                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
+  }
+
+  DelegatingPaginatableStream<LastRecordedByInfo> personGroupAttendance({
+    required String personId,
+    required String groupId,
+    bool asAdmin = false,
+  }) {
+    return DelegatingPaginatableStream<LastRecordedByInfo>(
+      onQuery: (instance, offset) {
+        final PersonGroupAttendanceSubscription subscription =
+            PersonGroupAttendanceSubscription(
+          variables: PersonGroupAttendanceArguments(
+            asAdmin: asAdmin,
+            groupId: UuidValue(groupId),
+            personId: UuidValue(personId),
+            limit: instance.limit + 1,
+            addWhere: [
+              if (offset > 0)
+                HistoryAttendanceHistoryBoolExp(
+                  time: TimestampComparisonExp(
+                    $lt: instance
+                        .currentValue[
+                            (offset - 1) * instance.limit + instance.limit - 1]
+                        .time,
+                  ),
+                ),
+            ],
+          ),
+        );
+
+        return GetIt.I<GraphQLClient>()
+            .subscribe(
+              SubscriptionOptions(
+                document: subscription.document,
+                operationName: subscription.operationName,
+                variables: subscription.variables.toJson().stripNullValues(),
+                parserFn: (d) =>
+                    PersonGroupAttendance$SubscriptionRoot.fromJson(d)
+                        .historyAttendanceHistory
+                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+              ),
+            )
+            .map(_exceptionsMiddleware)
+            .map(
+              (event) => _clampResults(
+                null,
+                null,
+                offset,
+                instance,
+                event.parsedData!.toList(),
+              ),
+            );
+      },
+    );
   }
 }

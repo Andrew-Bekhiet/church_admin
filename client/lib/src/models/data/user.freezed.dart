@@ -26,6 +26,9 @@ mixin _$User {
   List<AdminOnData>? get adminOn => throw _privateConstructorUsedError;
   UserData? get userData => throw _privateConstructorUsedError;
   Person? get person => throw _privateConstructorUsedError;
+  List<AdminOnData>? get servicesHistory => throw _privateConstructorUsedError;
+  List<AdminOnData>? get classesHistory => throw _privateConstructorUsedError;
+  List<AdminOnData>? get groupsHistory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +45,10 @@ abstract class $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       UserData? userData,
-      Person? person});
+      Person? person,
+      List<AdminOnData>? servicesHistory,
+      List<AdminOnData>? classesHistory,
+      List<AdminOnData>? groupsHistory});
 
   $UserDataCopyWith<$Res>? get userData;
   $PersonCopyWith<$Res>? get person;
@@ -64,6 +70,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? adminOn = freezed,
     Object? userData = freezed,
     Object? person = freezed,
+    Object? servicesHistory = freezed,
+    Object? classesHistory = freezed,
+    Object? groupsHistory = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
@@ -90,6 +99,18 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person?,
+      servicesHistory: servicesHistory == freezed
+          ? _value.servicesHistory
+          : servicesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      classesHistory: classesHistory == freezed
+          ? _value.classesHistory
+          : classesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      groupsHistory: groupsHistory == freezed
+          ? _value.groupsHistory
+          : groupsHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
     ));
   }
 
@@ -127,7 +148,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       UserData? userData,
-      Person? person});
+      Person? person,
+      List<AdminOnData>? servicesHistory,
+      List<AdminOnData>? classesHistory,
+      List<AdminOnData>? groupsHistory});
 
   @override
   $UserDataCopyWith<$Res>? get userData;
@@ -152,6 +176,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? adminOn = freezed,
     Object? userData = freezed,
     Object? person = freezed,
+    Object? servicesHistory = freezed,
+    Object? classesHistory = freezed,
+    Object? groupsHistory = freezed,
   }) {
     return _then(_$_User(
       uid: uid == freezed
@@ -178,6 +205,18 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person?,
+      servicesHistory: servicesHistory == freezed
+          ? _value._servicesHistory
+          : servicesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      classesHistory: classesHistory == freezed
+          ? _value._classesHistory
+          : classesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      groupsHistory: groupsHistory == freezed
+          ? _value._groupsHistory
+          : groupsHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
     ));
   }
 }
@@ -191,8 +230,14 @@ class _$_User extends _User {
       this.photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       this.userData,
-      this.person})
+      this.person,
+      final List<AdminOnData>? servicesHistory,
+      final List<AdminOnData>? classesHistory,
+      final List<AdminOnData>? groupsHistory})
       : _adminOn = adminOn,
+        _servicesHistory = servicesHistory,
+        _classesHistory = classesHistory,
+        _groupsHistory = groupsHistory,
         super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -216,10 +261,36 @@ class _$_User extends _User {
   final UserData? userData;
   @override
   final Person? person;
+  final List<AdminOnData>? _servicesHistory;
+  @override
+  List<AdminOnData>? get servicesHistory {
+    final value = _servicesHistory;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AdminOnData>? _classesHistory;
+  @override
+  List<AdminOnData>? get classesHistory {
+    final value = _classesHistory;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AdminOnData>? _groupsHistory;
+  @override
+  List<AdminOnData>? get groupsHistory {
+    final value = _groupsHistory;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, photoUpdatedAt: $photoUpdatedAt, adminOn: $adminOn, userData: $userData, person: $person)';
+    return 'User(uid: $uid, name: $name, photoUpdatedAt: $photoUpdatedAt, adminOn: $adminOn, userData: $userData, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
   }
 
   @override
@@ -233,7 +304,13 @@ class _$_User extends _User {
                 .equals(other.photoUpdatedAt, photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._adminOn, _adminOn) &&
             const DeepCollectionEquality().equals(other.userData, userData) &&
-            const DeepCollectionEquality().equals(other.person, person));
+            const DeepCollectionEquality().equals(other.person, person) &&
+            const DeepCollectionEquality()
+                .equals(other._servicesHistory, _servicesHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._classesHistory, _classesHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._groupsHistory, _groupsHistory));
   }
 
   @JsonKey(ignore: true)
@@ -245,7 +322,10 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(photoUpdatedAt),
       const DeepCollectionEquality().hash(_adminOn),
       const DeepCollectionEquality().hash(userData),
-      const DeepCollectionEquality().hash(person));
+      const DeepCollectionEquality().hash(person),
+      const DeepCollectionEquality().hash(_servicesHistory),
+      const DeepCollectionEquality().hash(_classesHistory),
+      const DeepCollectionEquality().hash(_groupsHistory));
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +347,10 @@ abstract class _User extends User {
       final DateTime? photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       final UserData? userData,
-      final Person? person}) = _$_User;
+      final Person? person,
+      final List<AdminOnData>? servicesHistory,
+      final List<AdminOnData>? classesHistory,
+      final List<AdminOnData>? groupsHistory}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -284,6 +367,12 @@ abstract class _User extends User {
   UserData? get userData;
   @override
   Person? get person;
+  @override
+  List<AdminOnData>? get servicesHistory;
+  @override
+  List<AdminOnData>? get classesHistory;
+  @override
+  List<AdminOnData>? get groupsHistory;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
