@@ -110,13 +110,13 @@ void main() {
           GetIt.I.registerSingleton<CAAuthRepository>(authRepo);
 
           final userSettings = MockUserSettings();
-          when(userSettings.setAreaSecondLine(captureAny))
+          when(userSettings.setSecondLineFor(Area, captureAny))
               .thenAnswer((_) async {});
-          when(userSettings.setStreetSecondLine(captureAny))
+          when(userSettings.setSecondLineFor(Street, captureAny))
               .thenAnswer((_) async {});
-          when(userSettings.setFamilySecondLine(captureAny))
+          when(userSettings.setSecondLineFor(Family, captureAny))
               .thenAnswer((_) async {});
-          when(userSettings.setPersonSecondLine(captureAny))
+          when(userSettings.setSecondLineFor(Person, captureAny))
               .thenAnswer((_) async {});
 
           GetIt.I.registerSingleton<UserSettings>(userSettings);

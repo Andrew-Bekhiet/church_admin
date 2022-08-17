@@ -193,10 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final settings = GetIt.I<UserSettings>();
 
-      await settings.setAreaSecondLine('lastVisit');
-      await settings.setStreetSecondLine('lastVisit');
-      await settings.setFamilySecondLine('lastVisit');
-      await settings.setPersonSecondLine('birthdate');
+      await settings.setSecondLineFor(Area, 'lastVisit');
+      await settings.setSecondLineFor(Street, 'lastVisit');
+      await settings.setSecondLineFor(Family, 'lastVisit');
+      await settings.setSecondLineFor(Person, 'birthdate');
 
       final notificationsSettings = await GetIt.I<CacheRepository>()
           .openBox<NotificationSetting>('NotificationsSettings');

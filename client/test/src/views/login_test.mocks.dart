@@ -2,6 +2,7 @@
 // in church_admin/test/src/views/login_test.dart.
 // Do not manually edit this file.
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i10;
 import 'dart:typed_data' as _i13;
 
@@ -468,35 +469,15 @@ class MockUserSettings extends _i1.Mock implements _i11.UserSettings {
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
   @override
-  _i10.Future<void> setAreaSecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setAreaSecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
+  String? getSecondLineFor(Type? t) =>
+      (super.noSuchMethod(Invocation.method(#getSecondLineFor, [t]))
+          as String?);
   @override
-  _i10.Future<void> setGroupSecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setGroupSecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
-  @override
-  _i10.Future<void> setServiceSecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setServiceSecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
-  @override
-  _i10.Future<void> setStreetSecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setStreetSecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
-  @override
-  _i10.Future<void> setFamilySecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setFamilySecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
-  @override
-  _i10.Future<void> setPersonSecondLine(String? value) => (super.noSuchMethod(
-      Invocation.method(#setPersonSecondLine, [value]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
+  _i10.Future<void> setSecondLineFor(Type? t, String? value) =>
+      (super.noSuchMethod(Invocation.method(#setSecondLineFor, [t, value]),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i10.Future<void>);
 }
 
 /// A class which mocks [CacheRepository].

@@ -266,7 +266,8 @@ class _DataGeomapState extends State<DataGeomap> {
                                 action: SnackBarAction(
                                   label: 'فتح',
                                   onPressed: () =>
-                                      GetIt.I<CATapHandler>().onTap(p),
+                                      GetIt.I<CAViewableObjectService>()
+                                          .onTap(p),
                                 ),
                               ),
                             );
@@ -296,7 +297,7 @@ class _DataGeomapState extends State<DataGeomap> {
                               action: SnackBarAction(
                                 label: 'فتح',
                                 onPressed: () =>
-                                    GetIt.I<CATapHandler>().onTap(p),
+                                    GetIt.I<CAViewableObjectService>().onTap(p),
                               ),
                             ),
                           );

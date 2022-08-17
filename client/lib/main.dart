@@ -131,8 +131,8 @@ Future<void> initializeChurchAdmin() async {
     dispose: (g) => g.dispose(),
   );
 
-  GetIt.I.registerSingleton<DefaultViewableObjectTapHandler>(
-    CATapHandler(
+  GetIt.I.registerSingleton<DefaultViewableObjectService>(
+    CAViewableObjectService(
       ChurchAdminApp.router,
     ),
   );

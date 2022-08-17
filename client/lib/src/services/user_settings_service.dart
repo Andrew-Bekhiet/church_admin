@@ -25,27 +25,8 @@ class UserSettings {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
-  String? get areaSecondLine => box.get('areaSecondLine');
-  Future<void> setAreaSecondLine(String? value) =>
-      box.put('areaSecondLine', value);
-
-  String? get groupSecondLine => box.get('groupSecondLine');
-  Future<void> setGroupSecondLine(String? value) =>
-      box.put('groupSecondLine', value);
-
-  String? get serviceSecondLine => box.get('serviceSecondLine');
-  Future<void> setServiceSecondLine(String? value) =>
-      box.put('serviceSecondLine', value);
-
-  String? get streetSecondLine => box.get('streetSecondLine');
-  Future<void> setStreetSecondLine(String? value) =>
-      box.put('streetSecondLine', value);
-
-  String? get familySecondLine => box.get('familySecondLine');
-  Future<void> setFamilySecondLine(String? value) =>
-      box.put('familySecondLine', value);
-
-  String? get personSecondLine => box.get('personSecondLine');
-  Future<void> setPersonSecondLine(String? value) =>
-      box.put('personSecondLine', value);
+  String? getSecondLineFor(Type t) =>
+      box.get((t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine');
+  Future<void> setSecondLineFor(Type t, String? value) => box.put(
+      (t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine', value);
 }
