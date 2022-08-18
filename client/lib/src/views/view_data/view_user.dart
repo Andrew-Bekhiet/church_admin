@@ -8,23 +8,24 @@ import 'package:rxdart/rxdart.dart';
 
 class ViewUser extends StatelessWidget {
   static final route = GoRoute(
-      name: 'view_user',
-      path: 'viewUser',
-      builder: (context, state) {
-        if (state.queryParams['uid'] == null) {
-          throw ArgumentError.notNull('uid');
-        }
+    name: 'view_user',
+    path: 'viewUser',
+    builder: (context, state) {
+      if (state.queryParams['uid'] == null) {
+        throw ArgumentError.notNull('uid');
+      }
 
-        return ViewUser(
-          userId: state.queryParams['uid']!,
-          user: state.extra is User?
-              ? state.extra as User?
-              : (state.extra as Map?)?['user'] as User?,
-        );
-      },
-      routes: [
-        PersonAttendanceAnalysis.userRoute,
-      ]);
+      return ViewUser(
+        userId: state.queryParams['uid']!,
+        user: state.extra is User?
+            ? state.extra as User?
+            : (state.extra as Map?)?['user'] as User?,
+      );
+    },
+    routes: [
+      PersonAttendanceAnalysis.userRoute,
+    ],
+  );
 
   final User? user;
   final String userId;
