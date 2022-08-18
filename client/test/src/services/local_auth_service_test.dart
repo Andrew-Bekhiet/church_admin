@@ -1,10 +1,13 @@
 // ignore_for_file: close_sinks
 
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
@@ -12,7 +15,7 @@ import 'package:rxdart/rxdart.dart';
 import '../widgets/church_admin_app_test.mocks.dart';
 import 'local_auth_service_test.mocks.dart';
 
-@GenerateMocks([CANotificationsService])
+@GenerateMocks([LocalAuthPlatform, CANotificationsService])
 void main() {
   group(
     'Local Auth Service tests:',
@@ -128,6 +131,111 @@ void main() {
                 .isPaused,
             isTrue,
           );
+
+          await unit.dispose();
+        },
+      );
+
+      testWidgets(
+        'caCheckBiometrics',
+        (tester) async {
+          final unit = LocalAuthService.noInitialAuth();
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
+              .thenAnswer((_) async => true);
+          when(LocalAuthPlatform.instance.isDeviceSupported())
+              .thenAnswer((_) async => true);
+
+          expect(await unit.canCheckBiometrics(), isTrue);
+
+          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
+              .thenAnswer((_) async => true);
+          when(LocalAuthPlatform.instance.isDeviceSupported())
+              .thenAnswer((_) async => false);
+
+          expect(await unit.canCheckBiometrics(), isFalse);
+
+          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
+              .thenAnswer((_) async => false);
+          when(LocalAuthPlatform.instance.isDeviceSupported())
+              .thenAnswer((_) async => true);
+
+          expect(await unit.canCheckBiometrics(), isFalse);
+
+          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
+              .thenAnswer((_) async => false);
+          when(LocalAuthPlatform.instance.isDeviceSupported())
+              .thenAnswer((_) async => false);
+
+          expect(await unit.canCheckBiometrics(), isFalse);
+
+          await unit.dispose();
+        },
+      );
+
+      testWidgets(
+        'Authentication 1',
+        (tester) async {
+          final _authCompleter = Completer<bool>();
+
+          final unit = LocalAuthService.noInitialAuth();
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          when((LocalAuthPlatform.instance as MockLocalAuthPlatform)
+              .authenticate(
+            authMessages: anyNamed('authMessages'),
+            localizedReason: 'برجاء التحقق للمتابعة',
+            options: anyNamed('options'),
+          )).thenAnswer((_) async => _authCompleter.future);
+
+          final future1 = unit.authenticate();
+          final future2 = unit.authenticate();
+          final future3 = unit.authenticate();
+
+          _authCompleter.complete(true);
+
+          final result1 = await future1;
+          final result2 = await future2;
+          final result3 = await future3;
+
+          expect(result1, isTrue);
+          expect(result1 && result2 && result3, isTrue);
+
+          await unit.dispose();
+        },
+      );
+
+      testWidgets(
+        'Authentication 2',
+        (tester) async {
+          final _authCompleter = Completer<bool>();
+
+          final unit = LocalAuthService.noInitialAuth();
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          when((LocalAuthPlatform.instance as MockLocalAuthPlatform)
+              .authenticate(
+            authMessages: anyNamed('authMessages'),
+            localizedReason: 'برجاء التحقق للمتابعة',
+            options: anyNamed('options'),
+          )).thenAnswer((_) async => _authCompleter.future);
+
+          final future1 = unit.authenticate();
+          final future2 = unit.authenticate();
+          final future3 = unit.authenticate();
+
+          _authCompleter.complete(false);
+
+          final result1 = await future1;
+          final result2 = await future2;
+          final result3 = await future3;
+
+          expect(result1, isFalse);
+          expect(result1 || result2 || result3, isFalse);
 
           await unit.dispose();
         },

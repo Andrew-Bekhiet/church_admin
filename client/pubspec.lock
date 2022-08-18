@@ -1090,7 +1090,7 @@ packages:
     source: hosted
     version: "1.0.9"
   local_auth_platform_interface:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: local_auth_platform_interface
       url: "https://pub.dartlang.org"

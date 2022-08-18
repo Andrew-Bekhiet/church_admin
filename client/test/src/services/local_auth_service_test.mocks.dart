@@ -5,11 +5,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
-import 'package:church_admin/church_admin.dart' as _i3;
-import 'package:churchdata_core/churchdata_core.dart' as _i6;
-import 'package:firebase_messaging/firebase_messaging.dart' as _i4;
-import 'package:flutter/material.dart' as _i5;
+import 'package:church_admin/church_admin.dart' as _i5;
+import 'package:churchdata_core/churchdata_core.dart' as _i8;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i6;
+import 'package:flutter/material.dart' as _i7;
+import 'package:local_auth_platform_interface/local_auth_platform_interface.dart'
+    as _i3;
+import 'package:local_auth_platform_interface/types/types.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,24 +28,67 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeStreamSubscription_0<T> extends _i1.Fake
     implements _i2.StreamSubscription<T> {}
 
+/// A class which mocks [LocalAuthPlatform].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalAuthPlatform extends _i1.Mock
+    with MockPlatformInterfaceMixin
+    implements _i3.LocalAuthPlatform {
+  MockLocalAuthPlatform() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Future<bool> authenticate(
+          {String? localizedReason,
+          Iterable<_i4.AuthMessages>? authMessages,
+          _i4.AuthenticationOptions? options =
+              const _i4.AuthenticationOptions()}) =>
+      (super.noSuchMethod(
+          Invocation.method(#authenticate, [], {
+            #localizedReason: localizedReason,
+            #authMessages: authMessages,
+            #options: options
+          }),
+          returnValue: Future<bool>.value(false)) as _i2.Future<bool>);
+  @override
+  _i2.Future<bool> deviceSupportsBiometrics() =>
+      (super.noSuchMethod(Invocation.method(#deviceSupportsBiometrics, []),
+          returnValue: Future<bool>.value(false)) as _i2.Future<bool>);
+  @override
+  _i2.Future<List<_i4.BiometricType>> getEnrolledBiometrics() =>
+      (super.noSuchMethod(Invocation.method(#getEnrolledBiometrics, []),
+              returnValue:
+                  Future<List<_i4.BiometricType>>.value(<_i4.BiometricType>[]))
+          as _i2.Future<List<_i4.BiometricType>>);
+  @override
+  _i2.Future<bool> isDeviceSupported() =>
+      (super.noSuchMethod(Invocation.method(#isDeviceSupported, []),
+          returnValue: Future<bool>.value(false)) as _i2.Future<bool>);
+  @override
+  _i2.Future<bool> stopAuthentication() =>
+      (super.noSuchMethod(Invocation.method(#stopAuthentication, []),
+          returnValue: Future<bool>.value(false)) as _i2.Future<bool>);
+}
+
 /// A class which mocks [CANotificationsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCANotificationsService extends _i1.Mock
-    implements _i3.CANotificationsService {
+    implements _i5.CANotificationsService {
   MockCANotificationsService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.StreamSubscription<_i4.RemoteMessage>
+  _i2.StreamSubscription<_i6.RemoteMessage>
       get onMessageOpenedAppSubscription => (super.noSuchMethod(
               Invocation.getter(#onMessageOpenedAppSubscription),
-              returnValue: _FakeStreamSubscription_0<_i4.RemoteMessage>())
-          as _i2.StreamSubscription<_i4.RemoteMessage>);
+              returnValue: _FakeStreamSubscription_0<_i6.RemoteMessage>())
+          as _i2.StreamSubscription<_i6.RemoteMessage>);
   @override
   set onMessageOpenedAppSubscription(
-          _i2.StreamSubscription<_i4.RemoteMessage>?
+          _i2.StreamSubscription<_i6.RemoteMessage>?
               _onMessageOpenedAppSubscription) =>
       super.noSuchMethod(
           Invocation.setter(
@@ -49,7 +96,7 @@ class MockCANotificationsService extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   set onForegroundMessageSubscription(
-          _i2.StreamSubscription<_i4.RemoteMessage>?
+          _i2.StreamSubscription<_i6.RemoteMessage>?
               _onForegroundMessageSubscription) =>
       super.noSuchMethod(
           Invocation.setter(#onForegroundMessageSubscription,
@@ -70,7 +117,7 @@ class MockCANotificationsService extends _i1.Mock
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  _i2.Future<void> onForegroundMessage(_i4.RemoteMessage? message) =>
+  _i2.Future<void> onForegroundMessage(_i6.RemoteMessage? message) =>
       (super.noSuchMethod(Invocation.method(#onForegroundMessage, [message]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
@@ -102,20 +149,20 @@ class MockCANotificationsService extends _i1.Mock
           returnValue: Future<bool>.value(false)) as _i2.Future<bool>);
   @override
   _i2.Future<void> showNotificationContents(
-          _i5.BuildContext? context, _i6.Notification? notification,
-          {List<_i5.Widget>? actions}) =>
+          _i7.BuildContext? context, _i8.Notification? notification,
+          {List<_i7.Widget>? actions}) =>
       (super.noSuchMethod(
           Invocation.method(#showNotificationContents, [context, notification],
               {#actions: actions}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  _i2.Future<_i6.Notification?> getInitialNotification() =>
+  _i2.Future<_i8.Notification?> getInitialNotification() =>
       (super.noSuchMethod(Invocation.method(#getInitialNotification, []),
-              returnValue: Future<_i6.Notification?>.value())
-          as _i2.Future<_i6.Notification?>);
+              returnValue: Future<_i8.Notification?>.value())
+          as _i2.Future<_i8.Notification?>);
   @override
-  _i2.Future<void> showInitialNotification(_i5.BuildContext? context) => (super
+  _i2.Future<void> showInitialNotification(_i7.BuildContext? context) => (super
       .noSuchMethod(Invocation.method(#showInitialNotification, [context]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
