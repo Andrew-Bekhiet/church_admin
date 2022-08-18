@@ -6298,480 +6298,6 @@ Map<String, dynamic> _$GetStudyYearName$QueryRootToJson(
       'studyYearsByPk': instance.studyYearsByPk?.toJson(),
     };
 
-GetUserInfoStream$SubscriptionRoot$Users$UsersData
-    _$GetUserInfoStream$SubscriptionRoot$Users$UsersDataFromJson(
-            Map<String, dynamic> json) =>
-        GetUserInfoStream$SubscriptionRoot$Users$UsersData()
-          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
-          ..firebaseAuthUid = json['firebaseAuthUid'] as String
-          ..email = json['email'] as String
-          ..permissions = (json['permissions'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList();
-
-Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$UsersDataToJson(
-        GetUserInfoStream$SubscriptionRoot$Users$UsersData instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
-      'firebaseAuthUid': instance.firebaseAuthUid,
-      'email': instance.email,
-      'permissions': instance.permissions,
-    };
-
-GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
-    _$GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevelsFromJson(
-            Map<String, dynamic> json) =>
-        GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..order = json['order'] as int;
-
-Map<String, dynamic>
-    _$GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevelsToJson(
-            GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
-                instance) =>
-        <String, dynamic>{
-          'id': fromDartUuidValueToGraphQLUuid(instance.id),
-          'name': instance.name,
-          'order': instance.order,
-        };
-
-GetUserInfoStream$SubscriptionRoot$Users$Persons
-    _$GetUserInfoStream$SubscriptionRoot$Users$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        GetUserInfoStream$SubscriptionRoot$Users$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..address = json['address'] as String?
-          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
-              json['geolocation'])
-          ..mainPhone = json['mainPhone'] as String?
-          ..otherPhones = fromGraphQLJsonbToDartJson(json['otherPhones'])
-          ..birthdate = json['birthdate'] == null
-              ? null
-              : DateTime.parse(json['birthdate'] as String)
-          ..gender = json['gender'] as bool
-          ..isShammas = json['isShammas'] as bool
-          ..shammasLevel = json['shammasLevel'] == null
-              ? null
-              : GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
-                  .fromJson(json['shammasLevel'] as Map<String, dynamic>)
-          ..schoolId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId'])
-          ..collegeId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId'])
-          ..churchId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId'])
-          ..fatherId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId'])
-          ..isStudent = json['isStudent'] as bool
-          ..jobId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId'])
-          ..jobDescription = json['jobDescription'] as String?
-          ..qualificationId = fromGraphQLUuidNullableToDartUuidValueNullable(
-              json['qualificationId'])
-          ..personTypeId = fromGraphQLUuidNullableToDartUuidValueNullable(
-              json['personTypeId'])
-          ..stateId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId'])
-          ..isServant = json['isServant'] as bool
-          ..notes = json['notes'] as String?
-          ..familyId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId'])
-          ..storeId =
-              fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId'])
-          ..studyYearId = json['studyYearId'] as int?
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String)
-          ..lastKodas =
-              fromGraphQLJsonbNullableToDartJsonNullable(json['lastKodas'])
-          ..lastConfession = fromGraphQLJsonbNullableToDartJsonNullable(
-              json['lastConfession']);
-
-Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$PersonsToJson(
-        GetUserInfoStream$SubscriptionRoot$Users$Persons instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'address': instance.address,
-      'geolocation':
-          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
-      'mainPhone': instance.mainPhone,
-      'otherPhones': fromDartJsonToGraphQLJsonb(instance.otherPhones),
-      'birthdate': instance.birthdate?.toIso8601String(),
-      'gender': instance.gender,
-      'isShammas': instance.isShammas,
-      'shammasLevel': instance.shammasLevel?.toJson(),
-      'schoolId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
-      'collegeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
-      'churchId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
-      'fatherId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
-      'isStudent': instance.isStudent,
-      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
-      'jobDescription': instance.jobDescription,
-      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
-          instance.qualificationId),
-      'personTypeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
-      'stateId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
-      'isServant': instance.isServant,
-      'notes': instance.notes,
-      'familyId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
-      'storeId':
-          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
-      'studyYearId': instance.studyYearId,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'lastKodas':
-          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastKodas),
-      'lastConfession':
-          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastConfession),
-    };
-
-GetUserInfoStream$SubscriptionRoot$Users
-    _$GetUserInfoStream$SubscriptionRoot$UsersFromJson(
-            Map<String, dynamic> json) =>
-        GetUserInfoStream$SubscriptionRoot$Users()
-          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
-          ..name = json['name'] as String
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String)
-          ..userData = json['userData'] == null
-              ? null
-              : GetUserInfoStream$SubscriptionRoot$Users$UsersData.fromJson(
-                  json['userData'] as Map<String, dynamic>)
-          ..person = json['person'] == null
-              ? null
-              : GetUserInfoStream$SubscriptionRoot$Users$Persons.fromJson(
-                  json['person'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$UsersToJson(
-        GetUserInfoStream$SubscriptionRoot$Users instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
-      'name': instance.name,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'userData': instance.userData?.toJson(),
-      'person': instance.person?.toJson(),
-    };
-
-GetUserInfoStream$SubscriptionRoot _$GetUserInfoStream$SubscriptionRootFromJson(
-        Map<String, dynamic> json) =>
-    GetUserInfoStream$SubscriptionRoot()
-      ..usersByPk = json['usersByPk'] == null
-          ? null
-          : GetUserInfoStream$SubscriptionRoot$Users.fromJson(
-              json['usersByPk'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetUserInfoStream$SubscriptionRootToJson(
-        GetUserInfoStream$SubscriptionRoot instance) =>
-    <String, dynamic>{
-      'usersByPk': instance.usersByPk?.toJson(),
-    };
-
-WatchUser$SubscriptionRoot$Users$Persons
-    _$WatchUser$SubscriptionRoot$Users$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$PersonsToJson(
-        WatchUser$SubscriptionRoot$Users$Persons instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$AreasFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String, dynamic>
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$AreasToJson(
-            WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas instance) =>
-        <String, dynamic>{
-          'id': fromDartUuidValueToGraphQLUuid(instance.id),
-          'name': instance.name,
-          'color': instance.color,
-          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-        };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions$Services
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ServicesFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Services()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String,
-    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ServicesToJson(
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Services instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYearsFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears()
-          ..name = json['name'] as String
-          ..order = json['order'] as int;
-
-Map<String, dynamic>
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYearsToJson(
-            WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
-                instance) =>
-        <String, dynamic>{
-          'name': instance.name,
-          'order': instance.order,
-        };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ClassesFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String,
-    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ClassesToJson(
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$GroupsFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String,
-    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$GroupsToJson(
-        WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'color': instance.color,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-WatchUser$SubscriptionRoot$Users$UsersPermissions
-    _$WatchUser$SubscriptionRoot$Users$UsersPermissionsFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersPermissions()
-          ..permissionId = fromGraphQLUuidToDartUuidValue(json['permissionId'])
-          ..area = json['area'] == null
-              ? null
-              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas
-                  .fromJson(json['area'] as Map<String, dynamic>)
-          ..areaAllowEdit = json['areaAllowEdit'] as bool?
-          ..areaAdminOnUsers = json['areaAdminOnUsers'] as bool?
-          ..service = json['service'] == null
-              ? null
-              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Services
-                  .fromJson(json['service'] as Map<String, dynamic>)
-          ..serviceStudyYearData = json['serviceStudyYearData'] == null
-              ? null
-              : WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
-                  .fromJson(
-                      json['serviceStudyYearData'] as Map<String, dynamic>)
-          ..serviceGender = json['serviceGender'] as bool?
-          ..serviceAllowEdit = json['serviceAllowEdit'] as bool?
-          ..serviceAdminOnUsers = json['serviceAdminOnUsers'] as bool?
-          ..classes = (json['classes'] as List<dynamic>)
-              .map((e) =>
-                  WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes
-                      .fromJson(e as Map<String, dynamic>))
-              .toList()
-          ..group = json['group'] == null
-              ? null
-              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups
-                  .fromJson(json['group'] as Map<String, dynamic>)
-          ..groupAllowEdit = json['groupAllowEdit'] as bool?
-          ..groupAdminOnUsers = json['groupAdminOnUsers'] as bool?;
-
-Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissionsToJson(
-        WatchUser$SubscriptionRoot$Users$UsersPermissions instance) =>
-    <String, dynamic>{
-      'permissionId': fromDartUuidValueToGraphQLUuid(instance.permissionId),
-      'area': instance.area?.toJson(),
-      'areaAllowEdit': instance.areaAllowEdit,
-      'areaAdminOnUsers': instance.areaAdminOnUsers,
-      'service': instance.service?.toJson(),
-      'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
-      'serviceGender': instance.serviceGender,
-      'serviceAllowEdit': instance.serviceAllowEdit,
-      'serviceAdminOnUsers': instance.serviceAdminOnUsers,
-      'classes': instance.classes.map((e) => e.toJson()).toList(),
-      'group': instance.group?.toJson(),
-      'groupAllowEdit': instance.groupAllowEdit,
-      'groupAdminOnUsers': instance.groupAdminOnUsers,
-    };
-
-WatchUser$SubscriptionRoot$Users$UsersData
-    _$WatchUser$SubscriptionRoot$Users$UsersDataFromJson(
-            Map<String, dynamic> json) =>
-        WatchUser$SubscriptionRoot$Users$UsersData()
-          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
-          ..email = json['email'] as String
-          ..lastEdit =
-              fromGraphQLJsonbNullableToDartJsonNullable(json['lastEdit'])
-          ..permissions = (json['permissions'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList();
-
-Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$UsersDataToJson(
-        WatchUser$SubscriptionRoot$Users$UsersData instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
-      'email': instance.email,
-      'lastEdit': fromDartJsonNullableToGraphQLJsonbNullable(instance.lastEdit),
-      'permissions': instance.permissions,
-    };
-
-WatchUser$SubscriptionRoot$Users _$WatchUser$SubscriptionRoot$UsersFromJson(
-        Map<String, dynamic> json) =>
-    WatchUser$SubscriptionRoot$Users()
-      ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
-      ..name = json['name'] as String
-      ..photoUpdatedAt = json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String)
-      ..person = json['person'] == null
-          ? null
-          : WatchUser$SubscriptionRoot$Users$Persons.fromJson(
-              json['person'] as Map<String, dynamic>)
-      ..adminOn = (json['adminOn'] as List<dynamic>)
-          .map((e) =>
-              WatchUser$SubscriptionRoot$Users$UsersPermissions.fromJson(
-                  e as Map<String, dynamic>))
-          .toList()
-      ..userData = json['userData'] == null
-          ? null
-          : WatchUser$SubscriptionRoot$Users$UsersData.fromJson(
-              json['userData'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$WatchUser$SubscriptionRoot$UsersToJson(
-        WatchUser$SubscriptionRoot$Users instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
-      'name': instance.name,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'person': instance.person?.toJson(),
-      'adminOn': instance.adminOn.map((e) => e.toJson()).toList(),
-      'userData': instance.userData?.toJson(),
-    };
-
-WatchUser$SubscriptionRoot _$WatchUser$SubscriptionRootFromJson(
-        Map<String, dynamic> json) =>
-    WatchUser$SubscriptionRoot()
-      ..usersByPk = json['usersByPk'] == null
-          ? null
-          : WatchUser$SubscriptionRoot$Users.fromJson(
-              json['usersByPk'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$WatchUser$SubscriptionRootToJson(
-        WatchUser$SubscriptionRoot instance) =>
-    <String, dynamic>{
-      'usersByPk': instance.usersByPk?.toJson(),
-    };
-
-UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users
-    _$UserEditHistory$SubscriptionRoot$HistoryEditHistory$UsersFromJson(
-            Map<String, dynamic> json) =>
-        UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users()
-          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
-          ..name = json['name'] as String
-          ..photoUpdatedAt = json['photoUpdatedAt'] == null
-              ? null
-              : DateTime.parse(json['photoUpdatedAt'] as String);
-
-Map<String,
-    dynamic> _$UserEditHistory$SubscriptionRoot$HistoryEditHistory$UsersToJson(
-        UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users instance) =>
-    <String, dynamic>{
-      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
-      'name': instance.name,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    };
-
-UserEditHistory$SubscriptionRoot$HistoryEditHistory
-    _$UserEditHistory$SubscriptionRoot$HistoryEditHistoryFromJson(
-            Map<String, dynamic> json) =>
-        UserEditHistory$SubscriptionRoot$HistoryEditHistory()
-          ..time = DateTime.parse(json['time'] as String)
-          ..user = json['user'] == null
-              ? null
-              : UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users
-                  .fromJson(json['user'] as Map<String, dynamic>);
-
-Map<String, dynamic>
-    _$UserEditHistory$SubscriptionRoot$HistoryEditHistoryToJson(
-            UserEditHistory$SubscriptionRoot$HistoryEditHistory instance) =>
-        <String, dynamic>{
-          'time': instance.time.toIso8601String(),
-          'user': instance.user?.toJson(),
-        };
-
-UserEditHistory$SubscriptionRoot _$UserEditHistory$SubscriptionRootFromJson(
-        Map<String, dynamic> json) =>
-    UserEditHistory$SubscriptionRoot()
-      ..historyEditHistory = (json['historyEditHistory'] as List<dynamic>)
-          .map((e) =>
-              UserEditHistory$SubscriptionRoot$HistoryEditHistory.fromJson(
-                  e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$UserEditHistory$SubscriptionRootToJson(
-        UserEditHistory$SubscriptionRoot instance) =>
-    <String, dynamic>{
-      'historyEditHistory':
-          instance.historyEditHistory.map((e) => e.toJson()).toList(),
-    };
-
 AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
     _$AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
             Map<String, dynamic> json) =>
@@ -7331,6 +6857,480 @@ Map<String, dynamic> _$AnalyzeUserAttendance$QueryRootToJson(
       'usersByPk': instance.usersByPk?.toJson(),
     };
 
+GetUserInfoStream$SubscriptionRoot$Users$UsersData
+    _$GetUserInfoStream$SubscriptionRoot$Users$UsersDataFromJson(
+            Map<String, dynamic> json) =>
+        GetUserInfoStream$SubscriptionRoot$Users$UsersData()
+          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
+          ..firebaseAuthUid = json['firebaseAuthUid'] as String
+          ..email = json['email'] as String
+          ..permissions = (json['permissions'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$UsersDataToJson(
+        GetUserInfoStream$SubscriptionRoot$Users$UsersData instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'firebaseAuthUid': instance.firebaseAuthUid,
+      'email': instance.email,
+      'permissions': instance.permissions,
+    };
+
+GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
+    _$GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevelsFromJson(
+            Map<String, dynamic> json) =>
+        GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic>
+    _$GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevelsToJson(
+            GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'order': instance.order,
+        };
+
+GetUserInfoStream$SubscriptionRoot$Users$Persons
+    _$GetUserInfoStream$SubscriptionRoot$Users$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        GetUserInfoStream$SubscriptionRoot$Users$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..address = json['address'] as String?
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation'])
+          ..mainPhone = json['mainPhone'] as String?
+          ..otherPhones = fromGraphQLJsonbToDartJson(json['otherPhones'])
+          ..birthdate = json['birthdate'] == null
+              ? null
+              : DateTime.parse(json['birthdate'] as String)
+          ..gender = json['gender'] as bool
+          ..isShammas = json['isShammas'] as bool
+          ..shammasLevel = json['shammasLevel'] == null
+              ? null
+              : GetUserInfoStream$SubscriptionRoot$Users$Persons$ShammasLevels
+                  .fromJson(json['shammasLevel'] as Map<String, dynamic>)
+          ..schoolId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId'])
+          ..collegeId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId'])
+          ..churchId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId'])
+          ..fatherId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId'])
+          ..isStudent = json['isStudent'] as bool
+          ..jobId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId'])
+          ..jobDescription = json['jobDescription'] as String?
+          ..qualificationId = fromGraphQLUuidNullableToDartUuidValueNullable(
+              json['qualificationId'])
+          ..personTypeId = fromGraphQLUuidNullableToDartUuidValueNullable(
+              json['personTypeId'])
+          ..stateId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId'])
+          ..isServant = json['isServant'] as bool
+          ..notes = json['notes'] as String?
+          ..familyId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId'])
+          ..storeId =
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId'])
+          ..studyYearId = json['studyYearId'] as int?
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..lastKodas =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastKodas'])
+          ..lastConfession = fromGraphQLJsonbNullableToDartJsonNullable(
+              json['lastConfession']);
+
+Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$Users$PersonsToJson(
+        GetUserInfoStream$SubscriptionRoot$Users$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'address': instance.address,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'mainPhone': instance.mainPhone,
+      'otherPhones': fromDartJsonToGraphQLJsonb(instance.otherPhones),
+      'birthdate': instance.birthdate?.toIso8601String(),
+      'gender': instance.gender,
+      'isShammas': instance.isShammas,
+      'shammasLevel': instance.shammasLevel?.toJson(),
+      'schoolId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
+      'collegeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
+      'churchId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
+      'fatherId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
+      'isStudent': instance.isStudent,
+      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
+      'jobDescription': instance.jobDescription,
+      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.qualificationId),
+      'personTypeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
+      'stateId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
+      'isServant': instance.isServant,
+      'notes': instance.notes,
+      'familyId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
+      'storeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
+      'studyYearId': instance.studyYearId,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'lastKodas':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastKodas),
+      'lastConfession':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.lastConfession),
+    };
+
+GetUserInfoStream$SubscriptionRoot$Users
+    _$GetUserInfoStream$SubscriptionRoot$UsersFromJson(
+            Map<String, dynamic> json) =>
+        GetUserInfoStream$SubscriptionRoot$Users()
+          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
+          ..name = json['name'] as String
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..userData = json['userData'] == null
+              ? null
+              : GetUserInfoStream$SubscriptionRoot$Users$UsersData.fromJson(
+                  json['userData'] as Map<String, dynamic>)
+          ..person = json['person'] == null
+              ? null
+              : GetUserInfoStream$SubscriptionRoot$Users$Persons.fromJson(
+                  json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetUserInfoStream$SubscriptionRoot$UsersToJson(
+        GetUserInfoStream$SubscriptionRoot$Users instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'userData': instance.userData?.toJson(),
+      'person': instance.person?.toJson(),
+    };
+
+GetUserInfoStream$SubscriptionRoot _$GetUserInfoStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetUserInfoStream$SubscriptionRoot()
+      ..usersByPk = json['usersByPk'] == null
+          ? null
+          : GetUserInfoStream$SubscriptionRoot$Users.fromJson(
+              json['usersByPk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetUserInfoStream$SubscriptionRootToJson(
+        GetUserInfoStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'usersByPk': instance.usersByPk?.toJson(),
+    };
+
+WatchUser$SubscriptionRoot$Users$Persons
+    _$WatchUser$SubscriptionRoot$Users$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$PersonsToJson(
+        WatchUser$SubscriptionRoot$Users$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$AreasFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic>
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$AreasToJson(
+            WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions$Services
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ServicesFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Services()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String,
+    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ServicesToJson(
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Services instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears()
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic>
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYearsToJson(
+            WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
+                instance) =>
+        <String, dynamic>{
+          'name': instance.name,
+          'order': instance.order,
+        };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ClassesFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String,
+    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$ClassesToJson(
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissions$GroupsFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String,
+    dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissions$GroupsToJson(
+        WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+WatchUser$SubscriptionRoot$Users$UsersPermissions
+    _$WatchUser$SubscriptionRoot$Users$UsersPermissionsFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersPermissions()
+          ..permissionId = fromGraphQLUuidToDartUuidValue(json['permissionId'])
+          ..area = json['area'] == null
+              ? null
+              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Areas
+                  .fromJson(json['area'] as Map<String, dynamic>)
+          ..areaAllowEdit = json['areaAllowEdit'] as bool?
+          ..areaAdminOnUsers = json['areaAdminOnUsers'] as bool?
+          ..service = json['service'] == null
+              ? null
+              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Services
+                  .fromJson(json['service'] as Map<String, dynamic>)
+          ..serviceStudyYearData = json['serviceStudyYearData'] == null
+              ? null
+              : WatchUser$SubscriptionRoot$Users$UsersPermissions$StudyYears
+                  .fromJson(
+                      json['serviceStudyYearData'] as Map<String, dynamic>)
+          ..serviceGender = json['serviceGender'] as bool?
+          ..serviceAllowEdit = json['serviceAllowEdit'] as bool?
+          ..serviceAdminOnUsers = json['serviceAdminOnUsers'] as bool?
+          ..classes = (json['classes'] as List<dynamic>)
+              .map((e) =>
+                  WatchUser$SubscriptionRoot$Users$UsersPermissions$Classes
+                      .fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..group = json['group'] == null
+              ? null
+              : WatchUser$SubscriptionRoot$Users$UsersPermissions$Groups
+                  .fromJson(json['group'] as Map<String, dynamic>)
+          ..groupAllowEdit = json['groupAllowEdit'] as bool?
+          ..groupAdminOnUsers = json['groupAdminOnUsers'] as bool?;
+
+Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$UsersPermissionsToJson(
+        WatchUser$SubscriptionRoot$Users$UsersPermissions instance) =>
+    <String, dynamic>{
+      'permissionId': fromDartUuidValueToGraphQLUuid(instance.permissionId),
+      'area': instance.area?.toJson(),
+      'areaAllowEdit': instance.areaAllowEdit,
+      'areaAdminOnUsers': instance.areaAdminOnUsers,
+      'service': instance.service?.toJson(),
+      'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
+      'serviceGender': instance.serviceGender,
+      'serviceAllowEdit': instance.serviceAllowEdit,
+      'serviceAdminOnUsers': instance.serviceAdminOnUsers,
+      'classes': instance.classes.map((e) => e.toJson()).toList(),
+      'group': instance.group?.toJson(),
+      'groupAllowEdit': instance.groupAllowEdit,
+      'groupAdminOnUsers': instance.groupAdminOnUsers,
+    };
+
+WatchUser$SubscriptionRoot$Users$UsersData
+    _$WatchUser$SubscriptionRoot$Users$UsersDataFromJson(
+            Map<String, dynamic> json) =>
+        WatchUser$SubscriptionRoot$Users$UsersData()
+          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
+          ..email = json['email'] as String
+          ..lastEdit =
+              fromGraphQLJsonbNullableToDartJsonNullable(json['lastEdit'])
+          ..permissions = (json['permissions'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$WatchUser$SubscriptionRoot$Users$UsersDataToJson(
+        WatchUser$SubscriptionRoot$Users$UsersData instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'email': instance.email,
+      'lastEdit': fromDartJsonNullableToGraphQLJsonbNullable(instance.lastEdit),
+      'permissions': instance.permissions,
+    };
+
+WatchUser$SubscriptionRoot$Users _$WatchUser$SubscriptionRoot$UsersFromJson(
+        Map<String, dynamic> json) =>
+    WatchUser$SubscriptionRoot$Users()
+      ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
+      ..name = json['name'] as String
+      ..photoUpdatedAt = json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String)
+      ..person = json['person'] == null
+          ? null
+          : WatchUser$SubscriptionRoot$Users$Persons.fromJson(
+              json['person'] as Map<String, dynamic>)
+      ..adminOn = (json['adminOn'] as List<dynamic>)
+          .map((e) =>
+              WatchUser$SubscriptionRoot$Users$UsersPermissions.fromJson(
+                  e as Map<String, dynamic>))
+          .toList()
+      ..userData = json['userData'] == null
+          ? null
+          : WatchUser$SubscriptionRoot$Users$UsersData.fromJson(
+              json['userData'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$WatchUser$SubscriptionRoot$UsersToJson(
+        WatchUser$SubscriptionRoot$Users instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'person': instance.person?.toJson(),
+      'adminOn': instance.adminOn.map((e) => e.toJson()).toList(),
+      'userData': instance.userData?.toJson(),
+    };
+
+WatchUser$SubscriptionRoot _$WatchUser$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    WatchUser$SubscriptionRoot()
+      ..usersByPk = json['usersByPk'] == null
+          ? null
+          : WatchUser$SubscriptionRoot$Users.fromJson(
+              json['usersByPk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$WatchUser$SubscriptionRootToJson(
+        WatchUser$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'usersByPk': instance.usersByPk?.toJson(),
+    };
+
+UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users
+    _$UserEditHistory$SubscriptionRoot$HistoryEditHistory$UsersFromJson(
+            Map<String, dynamic> json) =>
+        UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users()
+          ..uid = fromGraphQLUuidToDartUuidValue(json['uid'])
+          ..name = json['name'] as String
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String,
+    dynamic> _$UserEditHistory$SubscriptionRoot$HistoryEditHistory$UsersToJson(
+        UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users instance) =>
+    <String, dynamic>{
+      'uid': fromDartUuidValueToGraphQLUuid(instance.uid),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+UserEditHistory$SubscriptionRoot$HistoryEditHistory
+    _$UserEditHistory$SubscriptionRoot$HistoryEditHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UserEditHistory$SubscriptionRoot$HistoryEditHistory()
+          ..time = DateTime.parse(json['time'] as String)
+          ..user = json['user'] == null
+              ? null
+              : UserEditHistory$SubscriptionRoot$HistoryEditHistory$Users
+                  .fromJson(json['user'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$UserEditHistory$SubscriptionRoot$HistoryEditHistoryToJson(
+            UserEditHistory$SubscriptionRoot$HistoryEditHistory instance) =>
+        <String, dynamic>{
+          'time': instance.time.toIso8601String(),
+          'user': instance.user?.toJson(),
+        };
+
+UserEditHistory$SubscriptionRoot _$UserEditHistory$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    UserEditHistory$SubscriptionRoot()
+      ..historyEditHistory = (json['historyEditHistory'] as List<dynamic>)
+          .map((e) =>
+              UserEditHistory$SubscriptionRoot$HistoryEditHistory.fromJson(
+                  e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$UserEditHistory$SubscriptionRootToJson(
+        UserEditHistory$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'historyEditHistory':
+          instance.historyEditHistory.map((e) => e.toJson()).toList(),
+    };
+
 GetAreasStreamArguments _$GetAreasStreamArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetAreasStreamArguments(
@@ -7863,6 +7863,36 @@ Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
       'order': instance.order,
     };
 
+AnalyzeUserAttendanceArguments _$AnalyzeUserAttendanceArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    AnalyzeUserAttendanceArguments(
+      dateFrom: DateTime.parse(json['dateFrom'] as String),
+      dateTo: DateTime.parse(json['dateTo'] as String),
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      userId: fromGraphQLUuidToDartUuidValue(json['userId']),
+      groupsIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['groupsIds'] as List?),
+      classesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['classesIds'] as List?),
+      servicesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['servicesIds'] as List?),
+    );
+
+Map<String, dynamic> _$AnalyzeUserAttendanceArgumentsToJson(
+        AnalyzeUserAttendanceArguments instance) =>
+    <String, dynamic>{
+      'dateFrom': instance.dateFrom.toIso8601String(),
+      'dateTo': instance.dateTo.toIso8601String(),
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'userId': fromDartUuidValueToGraphQLUuid(instance.userId),
+      'groupsIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.groupsIds),
+      'classesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.classesIds),
+      'servicesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.servicesIds),
+    };
+
 GetUserInfoStreamArguments _$GetUserInfoStreamArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetUserInfoStreamArguments(
@@ -7902,34 +7932,4 @@ Map<String, dynamic> _$UserEditHistoryArgumentsToJson(
       'userId': fromDartUuidValueToGraphQLUuid(instance.userId),
       'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
       'limit': instance.limit,
-    };
-
-AnalyzeUserAttendanceArguments _$AnalyzeUserAttendanceArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    AnalyzeUserAttendanceArguments(
-      dateFrom: DateTime.parse(json['dateFrom'] as String),
-      dateTo: DateTime.parse(json['dateTo'] as String),
-      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
-      userId: fromGraphQLUuidToDartUuidValue(json['userId']),
-      groupsIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
-          json['groupsIds'] as List?),
-      classesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
-          json['classesIds'] as List?),
-      servicesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
-          json['servicesIds'] as List?),
-    );
-
-Map<String, dynamic> _$AnalyzeUserAttendanceArgumentsToJson(
-        AnalyzeUserAttendanceArguments instance) =>
-    <String, dynamic>{
-      'dateFrom': instance.dateFrom.toIso8601String(),
-      'dateTo': instance.dateTo.toIso8601String(),
-      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
-      'userId': fromDartUuidValueToGraphQLUuid(instance.userId),
-      'groupsIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
-          instance.groupsIds),
-      'classesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
-          instance.classesIds),
-      'servicesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
-          instance.servicesIds),
     };

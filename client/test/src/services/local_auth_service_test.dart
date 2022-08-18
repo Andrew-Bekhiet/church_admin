@@ -10,10 +10,12 @@ import 'package:get_it/get_it.dart';
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../widgets/church_admin_app_test.mocks.dart';
 import 'local_auth_service_test.mocks.dart';
+import 'local_auth_service_test.mocks.dart' as m;
 
 @GenerateMocks([LocalAuthPlatform, CANotificationsService])
 void main() {
@@ -290,3 +292,6 @@ void main() {
     },
   );
 }
+
+class MockLocalAuthPlatform extends m.MockLocalAuthPlatform
+    with MockPlatformInterfaceMixin {}
