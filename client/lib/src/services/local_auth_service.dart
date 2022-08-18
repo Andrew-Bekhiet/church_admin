@@ -9,6 +9,8 @@ import 'package:local_auth/local_auth.dart';
 class LocalAuthService with WidgetsBindingObserver {
   static LocalAuthService get I => GetIt.I<LocalAuthService>();
 
+  final LocalAuthentication _localAuthPlugin = LocalAuthentication();
+
   bool shouldAuthenticate = false;
 
   Timer? _timer;
@@ -90,14 +92,14 @@ class LocalAuthService with WidgetsBindingObserver {
 
   Future<bool> canCheckBiometrics() async {
     return !kIsWeb &&
-        await LocalAuthentication().canCheckBiometrics &&
-        await LocalAuthentication().isDeviceSupported();
+        await _localAuthPlugin.canCheckBiometrics &&
+        await _localAuthPlugin.isDeviceSupported();
   }
 
   Future<bool> authenticate() async {
     if (_localAuthCompleter != null) return _localAuthCompleter!.future;
 
-    final localAuthentication = LocalAuthentication();
+    final localAuthentication = _localAuthPlugin;
     _localAuthCompleter = Completer<bool>();
 
     _localAuthCompleter!.complete(
