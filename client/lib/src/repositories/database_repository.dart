@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
-import 'package:collection/collection.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
@@ -112,19 +111,6 @@ T stripNullValuesFrom<T>(T json, [Set<String> keep = const {}]) => json is Json
                 e,
           ] as T
         : json;
-
-Set<S> getEmptySet<S>() => isSubtype<ViewableWithID?, S>()
-    ? EqualitySet<S>(
-        EqualityBy<S, String?>((o) => (o as ViewableWithID?)?.id),
-      )
-    : <S>{};
-
-Set<S> setWrapper<S>(Iterable<S> old) => isSubtype<ViewableWithID?, S>()
-    ? EqualitySet<S>.from(
-        EqualityBy<S, String?>((o) => (o as ViewableWithID?)?.id),
-        old,
-      )
-    : old.toSet();
 
 extension JsonX on Json {
   Json stripNullValues([Set<String> keep = const {}]) => stripNullValuesFrom(
