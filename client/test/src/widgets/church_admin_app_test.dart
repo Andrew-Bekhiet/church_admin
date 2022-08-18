@@ -92,7 +92,10 @@ void main() {
         (tester) async {
           await tester.pumpWidget(const ChurchAdminApp());
 
-          verify(GetIt.I<LoggingService>().navigatorObserver);
+          if (firstScreenVariant.currentValue ==
+              FirstScreenVariantEnum.values.first) {
+            verify(GetIt.I<LoggingService>().navigatorObserver);
+          }
 
           expect(
             tester

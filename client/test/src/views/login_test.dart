@@ -25,6 +25,7 @@ import 'login_test.mocks.dart';
   UserCredential,
   UserSettings,
   CacheRepository,
+  CANotificationsService
 ])
 void main() {
   group(
@@ -67,6 +68,21 @@ void main() {
       testWidgets(
         'Can login with Google',
         (tester) async {
+          final notifications = MockCANotificationsService();
+          when(
+            notifications.schedulePeriodic(
+              any,
+              any,
+              any,
+              startAt: anyNamed('startAt'),
+              allowWhileIdle: anyNamed('allowWhileIdle'),
+              exact: anyNamed('exact'),
+              rescheduleOnReboot: anyNamed('rescheduleOnReboot'),
+              wakeup: anyNamed('wakeup'),
+            ),
+          ).thenAnswer((_) async => true);
+          GetIt.I.registerSingleton<CANotificationsService>(notifications);
+
           final auth = MockGoogleSignInAuthentication();
           when(auth.idToken).thenReturn('testId_ token');
           when(auth.accessToken).thenReturn('test_Access Token');

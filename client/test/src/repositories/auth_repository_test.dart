@@ -64,7 +64,8 @@ void main() {
           GetIt.I.registerSingleton<FirebaseDatabase>(database);
 
           final usersQueries = MockUsersQueries();
-          when(usersQueries.getUserInfoStream(uid: 'uid')).thenAnswer(
+          when(usersQueries.getUserInfoStream(uid: captureAnyNamed('uid')))
+              .thenAnswer(
             (_) => Stream.value(
               FakeQueryResult(),
             ),
@@ -361,7 +362,9 @@ class FakeQueryResult
   GetUserInfoStream$SubscriptionRoot$Users? get parsedData =>
       GetUserInfoStream$SubscriptionRoot$Users()
         ..uid = const Uuid().v4obj()
+        ..name = 'name'
         ..userData = (GetUserInfoStream$SubscriptionRoot$Users$UsersData()
+          ..uid = const Uuid().v4obj()
           ..firebaseAuthUid = 'uid'
           ..email = 'email'
           ..permissions = []);
