@@ -15,9 +15,13 @@ import 'package:rxdart/rxdart.dart';
 
 import '../widgets/church_admin_app_test.mocks.dart';
 import 'local_auth_service_test.mocks.dart';
-import 'local_auth_service_test.mocks.dart' as m;
 
-@GenerateMocks([LocalAuthPlatform, CANotificationsService])
+@GenerateMocks(
+  [CANotificationsService],
+  customMocks: [
+    MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
+  ],
+)
 void main() {
   group(
     'Local Auth Service tests:',
@@ -293,5 +297,5 @@ void main() {
   );
 }
 
-class MockLocalAuthPlatform extends m.MockLocalAuthPlatform
+class MockLocalAuthPlatform extends LocalAuthPlatformMock
     with MockPlatformInterfaceMixin {}
