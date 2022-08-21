@@ -56,13 +56,11 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                     itemBuilder: (o,
                             {onLongPress, onTap, subtitle, trailing}) =>
                         ViewableObjectWidget(
-                      Person.fromJson(
-                        {
-                          'id': '',
-                          'name': '',
-                          ...o.user?.toJson() ?? {},
-                        },
-                      ),
+                      o.user ??
+                          User(
+                            name: o.name,
+                            uid: o.recordedBy ?? '',
+                          ),
                       title: Text(dateFormat.format(o.time)),
                       subtitle: Text(o.user?.name ?? ''),
                       onLongPress: () => onLongPress?.call(o),
