@@ -705,39 +705,11 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Stream<List<_i4.Person>?>.empty())
           as _i7.Stream<List<_i4.Person>?>);
   @override
-  _i7.Stream<_i4.Person?> analyzePersonAttendance(
-          {String? personId,
-          DateTime? dateFrom,
-          DateTime? dateTo,
-          List<_i14.UuidValue>? groupsIds,
-          List<_i14.UuidValue>? classesIds,
-          List<_i14.UuidValue>? servicesIds}) =>
+  _i7.Stream<_i4.Person?> analyzePerson(
+          {String? personId, _i4.PersonAnalysisOptions? options}) =>
       (super.noSuchMethod(
-              Invocation.method(#analyzePersonAttendance, [], {
-                #personId: personId,
-                #dateFrom: dateFrom,
-                #dateTo: dateTo,
-                #groupsIds: groupsIds,
-                #classesIds: classesIds,
-                #servicesIds: servicesIds
-              }),
-              returnValue: _i7.Stream<_i4.Person?>.empty())
-          as _i7.Stream<_i4.Person?>);
-  @override
-  _i7.Stream<_i4.Person?> analyzePersonServicing(
-          {String? personId,
-          DateTime? timeFrom,
-          DateTime? timeTo,
-          List<_i14.UuidValue>? groupsIds,
-          List<_i14.UuidValue>? classesIds}) =>
-      (super.noSuchMethod(
-              Invocation.method(#analyzePersonServicing, [], {
-                #personId: personId,
-                #timeFrom: timeFrom,
-                #timeTo: timeTo,
-                #groupsIds: groupsIds,
-                #classesIds: classesIds
-              }),
+              Invocation.method(
+                  #analyzePerson, [], {#personId: personId, #options: options}),
               returnValue: _i7.Stream<_i4.Person?>.empty())
           as _i7.Stream<_i4.Person?>);
   @override

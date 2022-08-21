@@ -115,6 +115,8 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
           json['callHistoryAggregate'] as Map<String, dynamic>?),
       visitHistoryAggregate: analysisDataFromJson(
           json['visitHistoryAggregate'] as Map<String, dynamic>?),
+      editHistoryAggregate: analysisDataFromJson(
+          json['editHistoryAggregate'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
@@ -175,4 +177,5 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'callHistoryAggregate': analysisDataToJson(instance.callHistoryAggregate),
       'visitHistoryAggregate':
           analysisDataToJson(instance.visitHistoryAggregate),
+      'editHistoryAggregate': analysisDataToJson(instance.editHistoryAggregate),
     };

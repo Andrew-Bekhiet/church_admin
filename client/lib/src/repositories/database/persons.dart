@@ -647,9 +647,7 @@ class PersonsQueries {
         document: query.document,
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => Person.fromJson(
-          GetMorePersonData$QueryRoot.fromJson(d).personsByPk!.toJson(),
-        ),
+        parserFn: (d) => Person.fromJson(d.values.single),
       ),
     );
     watchQuery.onData([
@@ -788,35 +786,37 @@ class PersonsQueries {
         .map((value) => value.parsedData);
   }
 
-  Stream<Person?> analyzePersonAttendance({
+  Stream<Person?> analyzePerson({
     required String personId,
-    required DateTime dateFrom,
-    required DateTime dateTo,
-    required List<UuidValue> groupsIds,
-    required List<UuidValue> classesIds,
-    required List<UuidValue> servicesIds,
+    required PersonAnalysisOptions options,
   }) {
-    final AnalyzePersonAttendanceQuery query = AnalyzePersonAttendanceQuery(
-      variables: AnalyzePersonAttendanceArguments(
+    final AnalyzePersonQuery query = AnalyzePersonQuery(
+      variables: AnalyzePersonArguments(
         personId: UuidValue(personId),
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-        classesIds: classesIds,
-        groupsIds: groupsIds,
-        servicesIds: servicesIds,
+        dateFrom: options.dateRange.start,
+        dateTo: options.dateRange.end,
+        timeFrom: options.dateRange.start,
+        timeTo: options.dateRange.end,
+        classesIds: options.classes.map((e) => UuidValue(e.id)).toList(),
+        groupsIds: options.groups.map((e) => UuidValue(e.id)).toList(),
+        servicesIds: options.services.map((e) => UuidValue(e.id)).toList(),
+        confessionHistory: options.confessionAnalysis,
+        kodasHistory: options.kodasAnalysis,
+        callHistory: options.callHistoryAnalysis,
+        visitHistory: options.visitHistoryAnalysis,
+        editHistory: options.editHistoryAnalysis,
       ),
     );
 
     final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
       WatchQueryOptions(
         fetchResults: true,
+        errorPolicy: ErrorPolicy.all,
         eagerlyFetchResults: false,
         document: query.document,
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => Person.fromJson(
-          AnalyzePersonAttendance$QueryRoot.fromJson(d).personsByPk!.toJson(),
-        ),
+        parserFn: (d) => Person.fromJson(d.values.single),
       ),
     );
     watchQuery.onData([
@@ -825,47 +825,11 @@ class PersonsQueries {
           : null
     ]);
 
-    return watchQuery.stream
-        .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData);
-  }
+    return watchQuery.stream.map((e) {
+      if (e.data == null && e.hasException) throw e.exception!;
 
-  Stream<Person?> analyzePersonServicing({
-    required String personId,
-    required DateTime timeFrom,
-    required DateTime timeTo,
-    required List<UuidValue> groupsIds,
-    required List<UuidValue> classesIds,
-  }) {
-    final AnalyzePersonServicingQuery query = AnalyzePersonServicingQuery(
-      variables: AnalyzePersonServicingArguments(
-        personId: UuidValue(personId),
-        timeFrom: timeFrom,
-        timeTo: timeTo,
-      ),
-    );
-
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
-      WatchQueryOptions(
-        fetchResults: true,
-        eagerlyFetchResults: false,
-        document: query.document,
-        operationName: query.operationName,
-        variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => Person.fromJson(
-          AnalyzePersonServicing$QueryRoot.fromJson(d).personsByPk!.toJson(),
-        ),
-      ),
-    );
-    watchQuery.onData([
-      (r) => r?.source == QueryResultSource.cache && watchQuery.isRefetchSafe
-          ? watchQuery.refetch()
-          : null
-    ]);
-
-    return watchQuery.stream
-        .map(_exceptionsMiddleware)
-        .map((value) => value.parsedData);
+      return e;
+    }).map((value) => value.parsedData);
   }
 
   Stream<Person?> getPersonClassesAndGroups({
@@ -884,9 +848,7 @@ class PersonsQueries {
         document: query.document,
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => Person.fromJson(
-          GetPersonClassesAndGroups$QueryRoot.fromJson(d).personsByPk!.toJson(),
-        ),
+        parserFn: (d) => Person.fromJson(d.values.single),
       ),
     );
     watchQuery.onData([

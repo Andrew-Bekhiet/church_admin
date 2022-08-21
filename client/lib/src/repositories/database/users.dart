@@ -126,7 +126,7 @@ class UsersQueries {
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
         parserFn: (d) => User.fromJson(
-          AnalyzeUserAttendance$QueryRoot.fromJson(d).usersByPk!.toJson(),
+          d.values.single,
         ),
       ),
     );

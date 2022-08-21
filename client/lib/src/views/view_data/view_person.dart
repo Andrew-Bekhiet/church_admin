@@ -26,7 +26,7 @@ class ViewPerson extends StatelessWidget {
       );
     },
     routes: [
-      PersonAttendanceAnalysis.personRoute,
+      PersonAnalysis.personRoute,
       ViewUser.route,
     ],
   );
@@ -425,10 +425,11 @@ class ViewPerson extends StatelessWidget {
                     ListTile(
                       title: ElevatedButton.icon(
                         icon: const Icon(Icons.query_stats),
-                        label: const Text('احصائيات الحضور'),
-                        onPressed: () => _attendanceAnalysis(context, person),
+                        label: const Text('احصائيات'),
+                        onPressed: () => _analysis(context, person),
                       ),
                     ),
+                    const Divider(thickness: 1),
                     HistoryProperty(
                       name: 'أخر تناول',
                       value: person.lastKodas?.time,
@@ -520,21 +521,21 @@ class ViewPerson extends StatelessWidget {
     );
   }
 
-  Future<void> _attendanceAnalysis(BuildContext context, Person person) async {
+  Future<void> _analysis(BuildContext context, Person person) async {
     context.goNamed(
-      'person_attendance_analysis',
+      'person_analysis',
       queryParams: {
         'id': person.id,
       },
       extra: {
         'person': person,
-        'onEditOptions':
-            (context, options, void Function(AttendanceOptions) onComplete) =>
-                _SelectAttendanceOptions(
-                  person: person,
-                  onComplete: onComplete,
-                  options: options,
-                ),
+        'onEditOptions': (context, options,
+                void Function(PersonAnalysisOptions) onComplete) =>
+            _SelectAttendanceOptions(
+              person: person,
+              onComplete: onComplete,
+              options: options,
+            ),
       },
     );
   }
@@ -749,8 +750,8 @@ class _SelectAttendanceOptions extends StatefulWidget {
   });
 
   final Person person;
-  final AttendanceOptions? options;
-  final void Function(AttendanceOptions) onComplete;
+  final PersonAnalysisOptions? options;
+  final void Function(PersonAnalysisOptions) onComplete;
 
   @override
   State<_SelectAttendanceOptions> createState() =>
@@ -767,6 +768,14 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
             ...widget.options!.groups,
           },
   );
+
+  late bool confessionAnalysis = widget.options?.confessionAnalysis ?? true;
+  late bool kodasAnalysis = widget.options?.kodasAnalysis ?? true;
+
+  late bool callHistoryAnalysis = widget.options?.callHistoryAnalysis ?? false;
+  late bool visitHistoryAnalysis =
+      widget.options?.visitHistoryAnalysis ?? false;
+  late bool editHistoryAnalysis = widget.options?.editHistoryAnalysis ?? false;
 
   late DateTimeRange dateRange = widget.options?.dateRange ??
       DateTimeRange(
@@ -950,7 +959,34 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                         ],
                       ),
                     )
-                  ]
+                  ],
+                  const Divider(thickness: 2, height: 5),
+                  CheckboxListTile(
+                    value: confessionAnalysis,
+                    title: const Text('الاعتراف'),
+                    onChanged: (v) => setState(() => confessionAnalysis = v!),
+                  ),
+                  CheckboxListTile(
+                    value: kodasAnalysis,
+                    title: const Text('حضور القداس'),
+                    onChanged: (v) => setState(() => kodasAnalysis = v!),
+                  ),
+                  const Divider(thickness: 1),
+                  CheckboxListTile(
+                    value: callHistoryAnalysis,
+                    title: const Text('خدمة المكالمات'),
+                    onChanged: (v) => setState(() => callHistoryAnalysis = v!),
+                  ),
+                  CheckboxListTile(
+                    value: visitHistoryAnalysis,
+                    title: const Text('الافتقاد'),
+                    onChanged: (v) => setState(() => visitHistoryAnalysis = v!),
+                  ),
+                  CheckboxListTile(
+                    value: editHistoryAnalysis,
+                    title: const Text('تحديث البيانات'),
+                    onChanged: (v) => setState(() => editHistoryAnalysis = v!),
+                  ),
                 ],
               ),
             ),
@@ -964,7 +1000,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
               _formKey.currentState!.save();
 
               widget.onComplete(
-                AttendanceOptions(
+                PersonAnalysisOptions(
+                  callHistoryAnalysis: callHistoryAnalysis,
+                  confessionAnalysis: confessionAnalysis,
+                  editHistoryAnalysis: editHistoryAnalysis,
+                  kodasAnalysis: kodasAnalysis,
+                  visitHistoryAnalysis: visitHistoryAnalysis,
                   dateRange: dateRange,
                   classes: selected.value.whereType<Class>().toList(),
                   groups: selected.value.whereType<Group>().toList(),

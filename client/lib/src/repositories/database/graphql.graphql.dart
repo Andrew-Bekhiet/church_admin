@@ -1197,6 +1197,7 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
       this.collegeId,
       this.color,
       this.confessionHistory,
+      this.editHistory,
       this.family,
       this.familyId,
       this.father,
@@ -1282,6 +1283,8 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
   BigintComparisonExp? color;
 
   HistoryConfessionHistoryBoolExp? confessionHistory;
+
+  HistoryEditHistoryBoolExp? editHistory;
 
   FamiliesBoolExp? family;
 
@@ -1395,6 +1398,7 @@ class PersonsBoolExp extends JsonSerializable with EquatableMixin {
         collegeId,
         color,
         confessionHistory,
+        editHistory,
         family,
         familyId,
         father,
@@ -1974,6 +1978,117 @@ class HistoryConfessionHistoryBoolExp extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$HistoryConfessionHistoryBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class HistoryEditHistoryBoolExp extends JsonSerializable with EquatableMixin {
+  HistoryEditHistoryBoolExp(
+      {this.$and,
+      this.$not,
+      this.$or,
+      this.auditId,
+      this.isUserAllowedToRead,
+      this.recordId,
+      this.recordedBy,
+      this.table,
+      this.time,
+      this.user,
+      this.userRole});
+
+  factory HistoryEditHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
+      _$HistoryEditHistoryBoolExpFromJson(json);
+
+  @JsonKey(name: '_and')
+  List<HistoryEditHistoryBoolExp>? $and;
+
+  @JsonKey(name: '_not')
+  HistoryEditHistoryBoolExp? $not;
+
+  @JsonKey(name: '_or')
+  List<HistoryEditHistoryBoolExp>? $or;
+
+  UuidComparisonExp? auditId;
+
+  BooleanComparisonExp? isUserAllowedToRead;
+
+  UuidComparisonExp? recordId;
+
+  UuidComparisonExp? recordedBy;
+
+  NameComparisonExp? table;
+
+  TimestamptzComparisonExp? time;
+
+  UsersBoolExp? user;
+
+  StringComparisonExp? userRole;
+
+  @override
+  List<Object?> get props => [
+        $and,
+        $not,
+        $or,
+        auditId,
+        isUserAllowedToRead,
+        recordId,
+        recordedBy,
+        table,
+        time,
+        user,
+        userRole
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$HistoryEditHistoryBoolExpToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NameComparisonExp extends JsonSerializable with EquatableMixin {
+  NameComparisonExp(
+      {this.$eq,
+      this.$gt,
+      this.$gte,
+      this.$in,
+      this.$isNull,
+      this.$lt,
+      this.$lte,
+      this.$neq,
+      this.$nin});
+
+  factory NameComparisonExp.fromJson(Map<String, dynamic> json) =>
+      _$NameComparisonExpFromJson(json);
+
+  @JsonKey(name: '_eq')
+  String? $eq;
+
+  @JsonKey(name: '_gt')
+  String? $gt;
+
+  @JsonKey(name: '_gte')
+  String? $gte;
+
+  @JsonKey(name: '_in')
+  List<String>? $in;
+
+  @JsonKey(name: '_isNull')
+  bool? $isNull;
+
+  @JsonKey(name: '_lt')
+  String? $lt;
+
+  @JsonKey(name: '_lte')
+  String? $lte;
+
+  @JsonKey(name: '_neq')
+  String? $neq;
+
+  @JsonKey(name: '_nin')
+  List<String>? $nin;
+
+  @override
+  List<Object?> get props =>
+      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
+  @override
+  Map<String, dynamic> toJson() => _$NameComparisonExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4591,13 +4706,13 @@ class PersonsGeolocations$QueryRoot extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+class AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields();
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsFromJson(
           json);
 
   DateTime? time;
@@ -4606,86 +4721,85 @@ class AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$His
   List<Object?> get props => [time];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+class AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsFromJson(
           json);
 
   late int count;
 
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields?
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields?
       max;
 
   @override
   List<Object?> get props => [count, max];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+class AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory();
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryFromJson(
           json);
 
-  DateTime? time;
+  late DateTime time;
 
   @override
   List<Object?> get props => [time];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate
+class AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate();
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory>
+          AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregateToJson(
-          this);
+      _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregateToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+class AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields();
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsFromJson(
           json);
 
   DateTime? time;
@@ -4694,41 +4808,86 @@ class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregat
   List<Object?> get props => [time];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+class AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsFromJson(
           json);
 
   late int count;
 
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields?
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields?
       max;
 
   @override
   List<Object?> get props => [count, max];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+class AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory();
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryFromJson(
+          json);
+
+  late DateTime time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregateFromJson(
+          json);
+
+  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFieldsFromJson(
           json);
 
   DateTime? time;
@@ -4737,43 +4896,261 @@ class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregat
   List<Object?> get props => [time];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+class AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate();
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFieldsFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields?
+  late int count;
+
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryFromJson(
+          json);
+
+  late DateTime time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregateFromJson(
+          json);
+
+  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory>
+          AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregateToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsFromJson(
+          json);
+
+  DateTime? time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+class AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryFromJson(
+          json);
+
+  DateTime? time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregateFromJson(
+          json);
+
+  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsFromJson(
+          json);
+
+  DateTime? time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsFromJson(
+          json);
+
+  late int count;
+
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields?
+      max;
+
+  @override
+  List<Object?> get props => [count, max];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryFromJson(
+          json);
+
+  DateTime? time;
+
+  @override
+  List<Object?> get props => [time];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate();
+
+  factory AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregateFromJson(
+          json);
+
+  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields?
+      aggregate;
+
+  late List<
+          AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory>
+      nodes;
+
+  @override
+  List<Object?> get props => [aggregate, nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregateToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
           json);
 
   DateTime? dayId;
@@ -4782,41 +5159,41 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$History
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
           json);
 
   late int count;
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
       max;
 
   @override
   List<Object?> get props => [count, max];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
           json);
 
   late DateTime dayId;
@@ -4825,43 +5202,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$History
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+          AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
           json);
 
   late int count;
@@ -4870,18 +5247,18 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$History
   List<Object?> get props => [count];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
           json);
 
   late DateTime dayId;
@@ -4890,44 +5267,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$History
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+          AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
+class AnalyzePerson$QueryRoot$Persons$PersonsServices$Services
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services();
+  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices$Services.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$ServicesFromJson(
-          json);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$ServicesFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -4938,10 +5314,10 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
 
   int? color;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+  late AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
+  late AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   @override
@@ -4954,37 +5330,35 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
       ];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$ServicesToJson(
-          this);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServices$ServicesToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices();
+class AnalyzePerson$QueryRoot$Persons$PersonsServices extends JsonSerializable
+    with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$PersonsServices();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsServices.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServicesFromJson(json);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServicesFromJson(json);
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
-      service;
+  late AnalyzePerson$QueryRoot$Persons$PersonsServices$Services service;
 
   @override
   List<Object?> get props => [service];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServicesToJson(this);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsServicesToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
           json);
 
   DateTime? dayId;
@@ -4993,41 +5367,41 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistory
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
           json);
 
   late int count;
 
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
       max;
 
   @override
   List<Object?> get props => [count, max];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
           json);
 
   late DateTime dayId;
@@ -5036,43 +5410,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistory
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+          AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
           json);
 
   late int count;
@@ -5081,18 +5455,18 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysCon
   List<Object?> get props => [count];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
           json);
 
   late DateTime dayId;
@@ -5101,43 +5475,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysCon
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
+class AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate();
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+          AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$Classes extends JsonSerializable
+class AnalyzePerson$QueryRoot$Persons$Classes extends JsonSerializable
     with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$Classes();
+  AnalyzePerson$QueryRoot$Persons$Classes();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$Classes.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$Classes.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$ClassesFromJson(json);
+      _$AnalyzePerson$QueryRoot$Persons$ClassesFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -5148,10 +5522,10 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes extends JsonSerializable
 
   int? color;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
+  late AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
+  late AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   @override
@@ -5164,17 +5538,17 @@ class AnalyzePersonAttendance$QueryRoot$Persons$Classes extends JsonSerializable
       ];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$ClassesToJson(this);
+      _$AnalyzePerson$QueryRoot$Persons$ClassesToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
           json);
 
   DateTime? dayId;
@@ -5183,41 +5557,41 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAtte
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
           json);
 
   late int count;
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields?
       max;
 
   @override
   List<Object?> get props => [count, max];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
           json);
 
   late DateTime dayId;
@@ -5226,43 +5600,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAtte
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
+          AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
           json);
 
   late int count;
@@ -5271,18 +5645,18 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAtte
   List<Object?> get props => [count];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
           json);
 
   late DateTime dayId;
@@ -5291,44 +5665,43 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAtte
   List<Object?> get props => [dayId];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateFromJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateFromJson(
           json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields?
       aggregate;
 
   late List<
-          AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
+          AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints>
       nodes;
 
   @override
   List<Object?> get props => [aggregate, nodes];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateToJson(
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups
     extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups();
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$GroupsFromJson(
-          json);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$GroupsFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -5339,10 +5712,10 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
 
   int? color;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+  late AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+  late AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   @override
@@ -5355,36 +5728,34 @@ class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
       ];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$GroupsToJson(
-          this);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$GroupsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups();
+class AnalyzePerson$QueryRoot$Persons$PersonsGroups extends JsonSerializable
+    with EquatableMixin {
+  AnalyzePerson$QueryRoot$Persons$PersonsGroups();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups.fromJson(
+  factory AnalyzePerson$QueryRoot$Persons$PersonsGroups.fromJson(
           Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroupsFromJson(json);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroupsFromJson(json);
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups group;
+  late AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups group;
 
   @override
   List<Object?> get props => [group];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroupsToJson(this);
+      _$AnalyzePerson$QueryRoot$Persons$PersonsGroupsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot$Persons extends JsonSerializable
+class AnalyzePerson$QueryRoot$Persons extends JsonSerializable
     with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot$Persons();
+  AnalyzePerson$QueryRoot$Persons();
 
-  factory AnalyzePersonAttendance$QueryRoot$Persons.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRoot$PersonsFromJson(json);
+  factory AnalyzePerson$QueryRoot$Persons.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRoot$PersonsFromJson(json);
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -5393,22 +5764,34 @@ class AnalyzePersonAttendance$QueryRoot$Persons extends JsonSerializable
 
   late String name;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate
+  late AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate
+      callHistoryAggregate;
+
+  late AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate
+      visitHistoryAggregate;
+
+  late AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate
+      editHistoryAggregate;
+
+  late AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate
       kodasHistoryAggregate;
 
-  late AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+  late AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate
       confessionHistoryAggregate;
 
-  late List<AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices> services;
+  late List<AnalyzePerson$QueryRoot$Persons$PersonsServices> services;
 
-  List<AnalyzePersonAttendance$QueryRoot$Persons$Classes>? classes;
+  List<AnalyzePerson$QueryRoot$Persons$Classes>? classes;
 
-  late List<AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups> groups;
+  late List<AnalyzePerson$QueryRoot$Persons$PersonsGroups> groups;
 
   @override
   List<Object?> get props => [
         id,
         name,
+        callHistoryAggregate,
+        visitHistoryAggregate,
+        editHistoryAggregate,
         kodasHistoryAggregate,
         confessionHistoryAggregate,
         services,
@@ -5417,249 +5800,22 @@ class AnalyzePersonAttendance$QueryRoot$Persons extends JsonSerializable
       ];
   @override
   Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRoot$PersonsToJson(this);
+      _$AnalyzePerson$QueryRoot$PersonsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendance$QueryRoot extends JsonSerializable
-    with EquatableMixin {
-  AnalyzePersonAttendance$QueryRoot();
+class AnalyzePerson$QueryRoot extends JsonSerializable with EquatableMixin {
+  AnalyzePerson$QueryRoot();
 
-  factory AnalyzePersonAttendance$QueryRoot.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendance$QueryRootFromJson(json);
+  factory AnalyzePerson$QueryRoot.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzePerson$QueryRootFromJson(json);
 
-  AnalyzePersonAttendance$QueryRoot$Persons? personsByPk;
+  AnalyzePerson$QueryRoot$Persons? personsByPk;
 
   @override
   List<Object?> get props => [personsByPk];
   @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendance$QueryRootToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsFromJson(
-          json);
-
-  DateTime? time;
-
-  @override
-  List<Object?> get props => [time];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsFromJson(
-          json);
-
-  late int count;
-
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields?
-      max;
-
-  @override
-  List<Object?> get props => [count, max];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryFromJson(
-          json);
-
-  late DateTime time;
-
-  @override
-  List<Object?> get props => [time];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregateFromJson(
-          json);
-
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields?
-      aggregate;
-
-  late List<
-          AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory>
-      nodes;
-
-  @override
-  List<Object?> get props => [aggregate, nodes];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregateToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsFromJson(
-          json);
-
-  DateTime? time;
-
-  @override
-  List<Object?> get props => [time];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsFromJson(
-          json);
-
-  late int count;
-
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields?
-      max;
-
-  @override
-  List<Object?> get props => [count, max];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryFromJson(
-          json);
-
-  late DateTime time;
-
-  @override
-  List<Object?> get props => [time];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate
-    extends JsonSerializable with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregateFromJson(
-          json);
-
-  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields?
-      aggregate;
-
-  late List<
-          AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory>
-      nodes;
-
-  @override
-  List<Object?> get props => [aggregate, nodes];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregateToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot$Persons extends JsonSerializable
-    with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot$Persons();
-
-  factory AnalyzePersonServicing$QueryRoot$Persons.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRoot$PersonsFromJson(json);
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidToDartUuidValue,
-      toJson: fromDartUuidValueToGraphQLUuid)
-  late UuidValue id;
-
-  late String name;
-
-  late AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate
-      callHistoryAggregate;
-
-  late AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate
-      visitHistoryAggregate;
-
-  @override
-  List<Object?> get props =>
-      [id, name, callHistoryAggregate, visitHistoryAggregate];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRoot$PersonsToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicing$QueryRoot extends JsonSerializable
-    with EquatableMixin {
-  AnalyzePersonServicing$QueryRoot();
-
-  factory AnalyzePersonServicing$QueryRoot.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonServicing$QueryRootFromJson(json);
-
-  AnalyzePersonServicing$QueryRoot$Persons? personsByPk;
-
-  @override
-  List<Object?> get props => [personsByPk];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicing$QueryRootToJson(this);
+  Map<String, dynamic> toJson() => _$AnalyzePerson$QueryRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -7125,117 +7281,6 @@ class PersonEditHistory$SubscriptionRoot extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$PersonEditHistory$SubscriptionRootToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class HistoryEditHistoryBoolExp extends JsonSerializable with EquatableMixin {
-  HistoryEditHistoryBoolExp(
-      {this.$and,
-      this.$not,
-      this.$or,
-      this.auditId,
-      this.isUserAllowedToRead,
-      this.recordId,
-      this.recordedBy,
-      this.table,
-      this.time,
-      this.user,
-      this.userRole});
-
-  factory HistoryEditHistoryBoolExp.fromJson(Map<String, dynamic> json) =>
-      _$HistoryEditHistoryBoolExpFromJson(json);
-
-  @JsonKey(name: '_and')
-  List<HistoryEditHistoryBoolExp>? $and;
-
-  @JsonKey(name: '_not')
-  HistoryEditHistoryBoolExp? $not;
-
-  @JsonKey(name: '_or')
-  List<HistoryEditHistoryBoolExp>? $or;
-
-  UuidComparisonExp? auditId;
-
-  BooleanComparisonExp? isUserAllowedToRead;
-
-  UuidComparisonExp? recordId;
-
-  UuidComparisonExp? recordedBy;
-
-  NameComparisonExp? table;
-
-  TimestamptzComparisonExp? time;
-
-  UsersBoolExp? user;
-
-  StringComparisonExp? userRole;
-
-  @override
-  List<Object?> get props => [
-        $and,
-        $not,
-        $or,
-        auditId,
-        isUserAllowedToRead,
-        recordId,
-        recordedBy,
-        table,
-        time,
-        user,
-        userRole
-      ];
-  @override
-  Map<String, dynamic> toJson() => _$HistoryEditHistoryBoolExpToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class NameComparisonExp extends JsonSerializable with EquatableMixin {
-  NameComparisonExp(
-      {this.$eq,
-      this.$gt,
-      this.$gte,
-      this.$in,
-      this.$isNull,
-      this.$lt,
-      this.$lte,
-      this.$neq,
-      this.$nin});
-
-  factory NameComparisonExp.fromJson(Map<String, dynamic> json) =>
-      _$NameComparisonExpFromJson(json);
-
-  @JsonKey(name: '_eq')
-  String? $eq;
-
-  @JsonKey(name: '_gt')
-  String? $gt;
-
-  @JsonKey(name: '_gte')
-  String? $gte;
-
-  @JsonKey(name: '_in')
-  List<String>? $in;
-
-  @JsonKey(name: '_isNull')
-  bool? $isNull;
-
-  @JsonKey(name: '_lt')
-  String? $lt;
-
-  @JsonKey(name: '_lte')
-  String? $lte;
-
-  @JsonKey(name: '_neq')
-  String? $neq;
-
-  @JsonKey(name: '_nin')
-  List<String>? $nin;
-
-  @override
-  List<Object?> get props =>
-      [$eq, $gt, $gte, $in, $isNull, $lt, $lte, $neq, $nin];
-  @override
-  Map<String, dynamic> toJson() => _$NameComparisonExpToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -11284,24 +11329,33 @@ class PersonsGeolocationsQuery extends GraphQLQuery<
 }
 
 @JsonSerializable(explicitToJson: true)
-class AnalyzePersonAttendanceArguments extends JsonSerializable
-    with EquatableMixin {
-  AnalyzePersonAttendanceArguments(
+class AnalyzePersonArguments extends JsonSerializable with EquatableMixin {
+  AnalyzePersonArguments(
       {required this.dateFrom,
       required this.dateTo,
+      required this.timeFrom,
+      required this.timeTo,
       required this.personId,
       this.groupsIds,
       this.classesIds,
-      this.servicesIds});
+      this.servicesIds,
+      required this.callHistory,
+      required this.visitHistory,
+      required this.editHistory,
+      required this.confessionHistory,
+      required this.kodasHistory});
 
   @override
-  factory AnalyzePersonAttendanceArguments.fromJson(
-          Map<String, dynamic> json) =>
-      _$AnalyzePersonAttendanceArgumentsFromJson(json);
+  factory AnalyzePersonArguments.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzePersonArgumentsFromJson(json);
 
   late DateTime dateFrom;
 
   late DateTime dateTo;
+
+  late DateTime timeFrom;
+
+  late DateTime timeTo;
 
   @JsonKey(
       fromJson: fromGraphQLUuidToDartUuidValue,
@@ -11323,20 +11377,41 @@ class AnalyzePersonAttendanceArguments extends JsonSerializable
       toJson: fromDartListNullableUuidValueToGraphQLListNullableUuid)
   final List<UuidValue>? servicesIds;
 
+  late bool callHistory;
+
+  late bool visitHistory;
+
+  late bool editHistory;
+
+  late bool confessionHistory;
+
+  late bool kodasHistory;
+
   @override
-  List<Object?> get props =>
-      [dateFrom, dateTo, personId, groupsIds, classesIds, servicesIds];
+  List<Object?> get props => [
+        dateFrom,
+        dateTo,
+        timeFrom,
+        timeTo,
+        personId,
+        groupsIds,
+        classesIds,
+        servicesIds,
+        callHistory,
+        visitHistory,
+        editHistory,
+        confessionHistory,
+        kodasHistory
+      ];
   @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonAttendanceArgumentsToJson(this);
+  Map<String, dynamic> toJson() => _$AnalyzePersonArgumentsToJson(this);
 }
 
-final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME =
-    'analyzePersonAttendance';
-final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
+final ANALYZE_PERSON_QUERY_DOCUMENT_OPERATION_NAME = 'analyzePerson';
+final ANALYZE_PERSON_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
-      name: NameNode(value: 'analyzePersonAttendance'),
+      name: NameNode(value: 'analyzePerson'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'dateFrom')),
@@ -11346,6 +11421,18 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'dateTo')),
             type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'timeFrom')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'timestamptz'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'timeTo')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'timestamptz'), isNonNull: true),
             defaultValue: DefaultValueNode(value: null),
             directives: []),
         VariableDefinitionNode(
@@ -11359,7 +11446,7 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 type: NamedTypeNode(
                     name: NameNode(value: 'uuid'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
+            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
             directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'classesIds')),
@@ -11367,7 +11454,7 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 type: NamedTypeNode(
                     name: NameNode(value: 'uuid'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
+            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
             directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'servicesIds')),
@@ -11375,7 +11462,42 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 type: NamedTypeNode(
                     name: NameNode(value: 'uuid'), isNonNull: true),
                 isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
+            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'callHistory')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'visitHistory')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'editHistory')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'confessionHistory')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'kodasHistory')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'Boolean'), isNonNull: true),
+            defaultValue:
+                DefaultValueNode(value: BooleanValueNode(value: false)),
             directives: [])
       ],
       directives: [],
@@ -11403,6 +11525,216 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
+                  name: NameNode(value: 'callHistoryAggregate'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'time'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeFrom'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeTo')))
+                              ]))
+                        ]))
+                  ],
+                  directives: [
+                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                      ArgumentNode(
+                          name: NameNode(value: 'if'),
+                          value: VariableNode(
+                              name: NameNode(value: 'callHistory')))
+                    ])
+                  ],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'aggregate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'count'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'max'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'time'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null)
+                              ]))
+                        ])),
+                    FieldNode(
+                        name: NameNode(value: 'nodes'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'time'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ]))
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'visitHistoryAggregate'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'time'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeFrom'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeTo')))
+                              ]))
+                        ]))
+                  ],
+                  directives: [
+                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                      ArgumentNode(
+                          name: NameNode(value: 'if'),
+                          value: VariableNode(
+                              name: NameNode(value: 'visitHistory')))
+                    ])
+                  ],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'aggregate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'count'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'max'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'time'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null)
+                              ]))
+                        ])),
+                    FieldNode(
+                        name: NameNode(value: 'nodes'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'time'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ]))
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'editHistoryAggregate'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'time'),
+                              value: ObjectValueNode(fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeFrom'))),
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'timeTo')))
+                              ]))
+                        ]))
+                  ],
+                  directives: [
+                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                      ArgumentNode(
+                          name: NameNode(value: 'if'),
+                          value: VariableNode(
+                              name: NameNode(value: 'editHistory')))
+                    ])
+                  ],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'aggregate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'count'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'max'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'time'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null)
+                              ]))
+                        ])),
+                    FieldNode(
+                        name: NameNode(value: 'nodes'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'time'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ]))
+                  ])),
+              FieldNode(
                   name: NameNode(value: 'kodasHistoryAggregate'),
                   alias: null,
                   arguments: [
@@ -11423,7 +11755,14 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                               ]))
                         ]))
                   ],
-                  directives: [],
+                  directives: [
+                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                      ArgumentNode(
+                          name: NameNode(value: 'if'),
+                          value: VariableNode(
+                              name: NameNode(value: 'kodasHistory')))
+                    ])
+                  ],
                   selectionSet: SelectionSetNode(selections: [
                     FieldNode(
                         name: NameNode(value: 'aggregate'),
@@ -11486,7 +11825,14 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
                               ]))
                         ]))
                   ],
-                  directives: [],
+                  directives: [
+                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                      ArgumentNode(
+                          name: NameNode(value: 'if'),
+                          value: VariableNode(
+                              name: NameNode(value: 'confessionHistory')))
+                    ])
+                  ],
                   selectionSet: SelectionSetNode(selections: [
                     FieldNode(
                         name: NameNode(value: 'aggregate'),
@@ -12066,251 +12412,24 @@ final ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
       ]))
 ]);
 
-class AnalyzePersonAttendanceQuery extends GraphQLQuery<
-    AnalyzePersonAttendance$QueryRoot, AnalyzePersonAttendanceArguments> {
-  AnalyzePersonAttendanceQuery({required this.variables});
+class AnalyzePersonQuery
+    extends GraphQLQuery<AnalyzePerson$QueryRoot, AnalyzePersonArguments> {
+  AnalyzePersonQuery({required this.variables});
 
   @override
-  final DocumentNode document = ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT;
+  final DocumentNode document = ANALYZE_PERSON_QUERY_DOCUMENT;
 
   @override
-  final String operationName =
-      ANALYZE_PERSON_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME;
+  final String operationName = ANALYZE_PERSON_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
-  final AnalyzePersonAttendanceArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  AnalyzePersonAttendance$QueryRoot parse(Map<String, dynamic> json) =>
-      AnalyzePersonAttendance$QueryRoot.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AnalyzePersonServicingArguments extends JsonSerializable
-    with EquatableMixin {
-  AnalyzePersonServicingArguments(
-      {required this.timeFrom, required this.timeTo, required this.personId});
-
-  @override
-  factory AnalyzePersonServicingArguments.fromJson(Map<String, dynamic> json) =>
-      _$AnalyzePersonServicingArgumentsFromJson(json);
-
-  late DateTime timeFrom;
-
-  late DateTime timeTo;
-
-  @JsonKey(
-      fromJson: fromGraphQLUuidToDartUuidValue,
-      toJson: fromDartUuidValueToGraphQLUuid)
-  late UuidValue personId;
-
-  @override
-  List<Object?> get props => [timeFrom, timeTo, personId];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$AnalyzePersonServicingArgumentsToJson(this);
-}
-
-final ANALYZE_PERSON_SERVICING_QUERY_DOCUMENT_OPERATION_NAME =
-    'analyzePersonServicing';
-final ANALYZE_PERSON_SERVICING_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'analyzePersonServicing'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'timeFrom')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'timeTo')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'personsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'personId')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'callHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'time'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'visitHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'time'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ]))
-            ]))
-      ]))
-]);
-
-class AnalyzePersonServicingQuery extends GraphQLQuery<
-    AnalyzePersonServicing$QueryRoot, AnalyzePersonServicingArguments> {
-  AnalyzePersonServicingQuery({required this.variables});
-
-  @override
-  final DocumentNode document = ANALYZE_PERSON_SERVICING_QUERY_DOCUMENT;
-
-  @override
-  final String operationName =
-      ANALYZE_PERSON_SERVICING_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final AnalyzePersonServicingArguments variables;
+  final AnalyzePersonArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  AnalyzePersonServicing$QueryRoot parse(Map<String, dynamic> json) =>
-      AnalyzePersonServicing$QueryRoot.fromJson(json);
+  AnalyzePerson$QueryRoot parse(Map<String, dynamic> json) =>
+      AnalyzePerson$QueryRoot.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)

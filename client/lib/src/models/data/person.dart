@@ -94,6 +94,11 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
       toJson: analysisDataToJson,
     )
         AnalysisData<DateTime>? visitHistoryAggregate,
+    @JsonKey(
+      fromJson: analysisDataFromJson,
+      toJson: analysisDataToJson,
+    )
+        AnalysisData<DateTime>? editHistoryAggregate,
   }) = _Person;
   Person._() : super();
 

@@ -33,12 +33,12 @@ class User extends ViewableWithID with _$User, UID implements PhotoObjectBase {
   bool get hasPhoto => photoUpdatedAt != null;
 
   @override
-  CAStorageReference? get photoRef => hasPhoto
+  CAStorageReference? get photoRef => hasPhoto && uid.isNotEmpty
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
           downloadUrl: () =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('users', id),
-          fullPath: 'users/$id.jpg',
+              GetIt.I<CAFunctionsService>().getDownloadUrl('users', uid),
+          fullPath: 'users/$uid.jpg',
         )
       : null;
 

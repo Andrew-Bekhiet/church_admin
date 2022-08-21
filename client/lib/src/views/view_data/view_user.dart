@@ -23,7 +23,7 @@ class ViewUser extends StatelessWidget {
       );
     },
     routes: [
-      PersonAttendanceAnalysis.userRoute,
+      PersonAnalysis.userRoute,
     ],
   );
 
@@ -312,13 +312,13 @@ class ViewUser extends StatelessWidget {
         'user': user,
         'person': user.person,
         'asAdmin': true,
-        'onEditOptions':
-            (context, options, void Function(AttendanceOptions) onComplete) =>
-                _SelectAttendanceOptions(
-                  user: user,
-                  onComplete: onComplete,
-                  options: options,
-                ),
+        'onEditOptions': (context, options,
+                void Function(PersonAnalysisOptions) onComplete) =>
+            _SelectAttendanceOptions(
+              user: user,
+              onComplete: onComplete,
+              options: options,
+            ),
       },
     );
   }
@@ -433,8 +433,8 @@ class _SelectAttendanceOptions extends StatefulWidget {
   });
 
   final User user;
-  final AttendanceOptions? options;
-  final void Function(AttendanceOptions) onComplete;
+  final PersonAnalysisOptions? options;
+  final void Function(PersonAnalysisOptions) onComplete;
 
   @override
   State<_SelectAttendanceOptions> createState() =>
@@ -653,7 +653,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
               _formKey.currentState!.save();
 
               widget.onComplete(
-                AttendanceOptions(
+                PersonAnalysisOptions(
                   dateRange: dateRange,
                   classes: selected.value.whereType<Class>().toList(),
                   groups: selected.value.whereType<Group>().toList(),

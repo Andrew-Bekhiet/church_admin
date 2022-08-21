@@ -997,6 +997,10 @@ PersonsBoolExp _$PersonsBoolExpFromJson(Map<String, dynamic> json) =>
           ? null
           : HistoryConfessionHistoryBoolExp.fromJson(
               json['confessionHistory'] as Map<String, dynamic>),
+      editHistory: json['editHistory'] == null
+          ? null
+          : HistoryEditHistoryBoolExp.fromJson(
+              json['editHistory'] as Map<String, dynamic>),
       family: json['family'] == null
           ? null
           : FamiliesBoolExp.fromJson(json['family'] as Map<String, dynamic>),
@@ -1190,6 +1194,7 @@ Map<String, dynamic> _$PersonsBoolExpToJson(PersonsBoolExp instance) =>
       'collegeId': instance.collegeId?.toJson(),
       'color': instance.color?.toJson(),
       'confessionHistory': instance.confessionHistory?.toJson(),
+      'editHistory': instance.editHistory?.toJson(),
       'family': instance.family?.toJson(),
       'familyId': instance.familyId?.toJson(),
       'father': instance.father?.toJson(),
@@ -1706,6 +1711,94 @@ Map<String, dynamic> _$HistoryConfessionHistoryBoolExpToJson(
       'recordedBy': instance.recordedBy?.toJson(),
       'time': instance.time?.toJson(),
       'user': instance.user?.toJson(),
+    };
+
+HistoryEditHistoryBoolExp _$HistoryEditHistoryBoolExpFromJson(
+        Map<String, dynamic> json) =>
+    HistoryEditHistoryBoolExp(
+      $and: (json['_and'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryEditHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $not: json['_not'] == null
+          ? null
+          : HistoryEditHistoryBoolExp.fromJson(
+              json['_not'] as Map<String, dynamic>),
+      $or: (json['_or'] as List<dynamic>?)
+          ?.map((e) =>
+              HistoryEditHistoryBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      auditId: json['auditId'] == null
+          ? null
+          : UuidComparisonExp.fromJson(json['auditId'] as Map<String, dynamic>),
+      isUserAllowedToRead: json['isUserAllowedToRead'] == null
+          ? null
+          : BooleanComparisonExp.fromJson(
+              json['isUserAllowedToRead'] as Map<String, dynamic>),
+      recordId: json['recordId'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['recordId'] as Map<String, dynamic>),
+      recordedBy: json['recordedBy'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['recordedBy'] as Map<String, dynamic>),
+      table: json['table'] == null
+          ? null
+          : NameComparisonExp.fromJson(json['table'] as Map<String, dynamic>),
+      time: json['time'] == null
+          ? null
+          : TimestamptzComparisonExp.fromJson(
+              json['time'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
+      userRole: json['userRole'] == null
+          ? null
+          : StringComparisonExp.fromJson(
+              json['userRole'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryEditHistoryBoolExpToJson(
+        HistoryEditHistoryBoolExp instance) =>
+    <String, dynamic>{
+      '_and': instance.$and?.map((e) => e.toJson()).toList(),
+      '_not': instance.$not?.toJson(),
+      '_or': instance.$or?.map((e) => e.toJson()).toList(),
+      'auditId': instance.auditId?.toJson(),
+      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
+      'recordId': instance.recordId?.toJson(),
+      'recordedBy': instance.recordedBy?.toJson(),
+      'table': instance.table?.toJson(),
+      'time': instance.time?.toJson(),
+      'user': instance.user?.toJson(),
+      'userRole': instance.userRole?.toJson(),
+    };
+
+NameComparisonExp _$NameComparisonExpFromJson(Map<String, dynamic> json) =>
+    NameComparisonExp(
+      $eq: json['_eq'] as String?,
+      $gt: json['_gt'] as String?,
+      $gte: json['_gte'] as String?,
+      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      $isNull: json['_isNull'] as bool?,
+      $lt: json['_lt'] as String?,
+      $lte: json['_lte'] as String?,
+      $neq: json['_neq'] as String?,
+      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$NameComparisonExpToJson(NameComparisonExp instance) =>
+    <String, dynamic>{
+      '_eq': instance.$eq,
+      '_gt': instance.$gt,
+      '_gte': instance.$gte,
+      '_in': instance.$in,
+      '_isNull': instance.$isNull,
+      '_lt': instance.$lt,
+      '_lte': instance.$lte,
+      '_neq': instance.$neq,
+      '_nin': instance.$nin,
     };
 
 FamiliesBoolExp _$FamiliesBoolExpFromJson(Map<String, dynamic> json) =>
@@ -3864,463 +3957,512 @@ Map<String, dynamic> _$PersonsGeolocations$QueryRootToJson(
       'persons': instance.persons.map((e) => e.toJson()).toList(),
     };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields()
+        AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields()
           ..time = json['time'] == null
               ? null
               : DateTime.parse(json['time'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
                 instance) =>
         <String, dynamic>{
           'time': instance.time?.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields()
           ..count = json['count'] as int
           ..max = json['max'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+              : AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
                   .fromJson(json['max'] as Map<String, dynamic>);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
           'max': instance.max?.toJson(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory()
-          ..time = json['time'] == null
-              ? null
-              : DateTime.parse(json['time'] as String);
+        AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory()
+          ..time = DateTime.parse(json['time'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
                 instance) =>
         <String, dynamic>{
-          'time': instance.time?.toIso8601String(),
+          'time': instance.time.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate()
+        AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+                  AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields()
+        AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields()
           ..time = json['time'] == null
               ? null
               : DateTime.parse(json['time'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
                 instance) =>
         <String, dynamic>{
           'time': instance.time?.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields()
           ..count = json['count'] as int
           ..max = json['max'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+              : AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
                   .fromJson(json['max'] as Map<String, dynamic>);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
           'max': instance.max?.toJson(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory()
-          ..time = json['time'] == null
-              ? null
-              : DateTime.parse(json['time'] as String);
+        AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory()
+          ..time = DateTime.parse(json['time'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
                 instance) =>
         <String, dynamic>{
-          'time': instance.time?.toIso8601String(),
+          'time': instance.time.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate()
+        AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+                  AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
+        AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields()
+          ..count = json['count'] as int
+          ..max = json['max'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields$HistoryEditHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'count': instance.count,
+          'max': instance.max?.toJson(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory()
+          ..time = DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>)
+          ..nodes = (json['nodes'] as List<dynamic>)
+              .map((e) =>
+                  AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate$HistoryEditHistory
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields()
+          ..count = json['count'] as int
+          ..max = json['max'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields$HistoryKodasHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'count': instance.count,
+          'max': instance.max?.toJson(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>)
+          ..nodes = (json['nodes'] as List<dynamic>)
+              .map((e) =>
+                  AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate$HistoryKodasHistory
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields()
+          ..count = json['count'] as int
+          ..max = json['max'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields$HistoryConfessionHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'count': instance.count,
+          'max': instance.max?.toJson(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>)
+          ..nodes = (json['nodes'] as List<dynamic>)
+              .map((e) =>
+                  AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate$HistoryConfessionHistory
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
           ..dayId = json['dayId'] == null
               ? null
               : DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId?.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
           ..count = json['count'] as int
           ..max = json['max'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+              : AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
                   .fromJson(json['max'] as Map<String, dynamic>);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
           'max': instance.max?.toJson(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
           ..dayId = DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+                  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
           ..count = json['count'] as int;
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
           ..dayId = DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+                  AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$ServicesFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices$Services
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServices$ServicesFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..color = json['color'] as int?
           ..attendanceHistoryAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+              AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
                   .fromJson(json['attendanceHistoryAggregate']
                       as Map<String, dynamic>)
           ..attendanceDaysConstraintsAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
+              AnalyzePerson$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceDaysConstraintsAggregate
                   .fromJson(json['attendanceDaysConstraintsAggregate']
                       as Map<String, dynamic>);
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$ServicesToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
-                instance) =>
-        <String, dynamic>{
-          'id': fromDartUuidValueToGraphQLUuid(instance.id),
-          'name': instance.name,
-          'color': instance.color,
-          'attendanceHistoryAggregate':
-              instance.attendanceHistoryAggregate.toJson(),
-          'attendanceDaysConstraintsAggregate':
-              instance.attendanceDaysConstraintsAggregate.toJson(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServicesFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices()
-          ..service =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices$Services
-                  .fromJson(json['service'] as Map<String, dynamic>);
 
 Map<String,
-    dynamic> _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsServicesToJson(
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices instance) =>
-    <String, dynamic>{
-      'service': instance.service.toJson(),
-    };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
-          ..dayId = json['dayId'] == null
-              ? null
-              : DateTime.parse(json['dayId'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
-                instance) =>
-        <String, dynamic>{
-          'dayId': instance.dayId?.toIso8601String(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
-          ..count = json['count'] as int
-          ..max = json['max'] == null
-              ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
-                  .fromJson(json['max'] as Map<String, dynamic>);
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
-                instance) =>
-        <String, dynamic>{
-          'count': instance.count,
-          'max': instance.max?.toJson(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
-          ..dayId = DateTime.parse(json['dayId'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
-                instance) =>
-        <String, dynamic>{
-          'dayId': instance.dayId.toIso8601String(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate()
-          ..aggregate = json['aggregate'] == null
-              ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
-                  .fromJson(json['aggregate'] as Map<String, dynamic>)
-          ..nodes = (json['nodes'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
-                instance) =>
-        <String, dynamic>{
-          'aggregate': instance.aggregate?.toJson(),
-          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
-          ..count = json['count'] as int;
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
-                instance) =>
-        <String, dynamic>{
-          'count': instance.count,
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
-          ..dayId = DateTime.parse(json['dayId'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
-                instance) =>
-        <String, dynamic>{
-          'dayId': instance.dayId.toIso8601String(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate()
-          ..aggregate = json['aggregate'] == null
-              ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
-                  .fromJson(json['aggregate'] as Map<String, dynamic>)
-          ..nodes = (json['nodes'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
-                instance) =>
-        <String, dynamic>{
-          'aggregate': instance.aggregate?.toJson(),
-          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
-        };
-
-AnalyzePersonAttendance$QueryRoot$Persons$Classes
-    _$AnalyzePersonAttendance$QueryRoot$Persons$ClassesFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..color = json['color'] as int?
-          ..attendanceHistoryAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
-                  .fromJson(json['attendanceHistoryAggregate']
-                      as Map<String, dynamic>)
-          ..attendanceDaysConstraintsAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
-                  .fromJson(json['attendanceDaysConstraintsAggregate']
-                      as Map<String, dynamic>);
-
-Map<String, dynamic> _$AnalyzePersonAttendance$QueryRoot$Persons$ClassesToJson(
-        AnalyzePersonAttendance$QueryRoot$Persons$Classes instance) =>
+    dynamic> _$AnalyzePerson$QueryRoot$Persons$PersonsServices$ServicesToJson(
+        AnalyzePerson$QueryRoot$Persons$PersonsServices$Services instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
@@ -4331,149 +4473,313 @@ Map<String, dynamic> _$AnalyzePersonAttendance$QueryRoot$Persons$ClassesToJson(
           instance.attendanceDaysConstraintsAggregate.toJson(),
     };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsServices
+    _$AnalyzePerson$QueryRoot$Persons$PersonsServicesFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
+        AnalyzePerson$QueryRoot$Persons$PersonsServices()
+          ..service =
+              AnalyzePerson$QueryRoot$Persons$PersonsServices$Services.fromJson(
+                  json['service'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$AnalyzePerson$QueryRoot$Persons$PersonsServicesToJson(
+        AnalyzePerson$QueryRoot$Persons$PersonsServices instance) =>
+    <String, dynamic>{
+      'service': instance.service.toJson(),
+    };
+
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
           ..dayId = json['dayId'] == null
               ? null
               : DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId?.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
           ..count = json['count'] as int
           ..max = json['max'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+              : AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
                   .fromJson(json['max'] as Map<String, dynamic>);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
           'max': instance.max?.toJson(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
           ..dayId = DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+                  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
           ..count = json['count'] as int;
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
                 instance) =>
         <String, dynamic>{
           'count': instance.count,
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
           ..dayId = DateTime.parse(json['dayId'] as String);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
                 instance) =>
         <String, dynamic>{
           'dayId': instance.dayId.toIso8601String(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate()
+        AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate()
           ..aggregate = json['aggregate'] == null
               ? null
-              : AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+              : AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
                   .fromJson(json['aggregate'] as Map<String, dynamic>)
           ..nodes = (json['nodes'] as List<dynamic>)
               .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+                  AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+    _$AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
                 instance) =>
         <String, dynamic>{
           'aggregate': instance.aggregate?.toJson(),
           'nodes': instance.nodes.map((e) => e.toJson()).toList(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$GroupsFromJson(
+AnalyzePerson$QueryRoot$Persons$Classes
+    _$AnalyzePerson$QueryRoot$Persons$ClassesFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups()
+        AnalyzePerson$QueryRoot$Persons$Classes()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..color = json['color'] as int?
           ..attendanceHistoryAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+              AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceHistoryAggregate
                   .fromJson(json['attendanceHistoryAggregate']
                       as Map<String, dynamic>)
           ..attendanceDaysConstraintsAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+              AnalyzePerson$QueryRoot$Persons$Classes$HistoryAttendanceDaysConstraintsAggregate
+                  .fromJson(json['attendanceDaysConstraintsAggregate']
+                      as Map<String, dynamic>);
+
+Map<String, dynamic> _$AnalyzePerson$QueryRoot$Persons$ClassesToJson(
+        AnalyzePerson$QueryRoot$Persons$Classes instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'attendanceHistoryAggregate':
+          instance.attendanceHistoryAggregate.toJson(),
+      'attendanceDaysConstraintsAggregate':
+          instance.attendanceDaysConstraintsAggregate.toJson(),
+    };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
+          ..dayId = json['dayId'] == null
+              ? null
+              : DateTime.parse(json['dayId'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'dayId': instance.dayId?.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
+          ..count = json['count'] as int
+          ..max = json['max'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'count': instance.count,
+          'max': instance.max?.toJson(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory()
+          ..dayId = DateTime.parse(json['dayId'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+                instance) =>
+        <String, dynamic>{
+          'dayId': instance.dayId.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>)
+          ..nodes = (json['nodes'] as List<dynamic>)
+              .map((e) =>
+                  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistory
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields()
+          ..count = json['count'] as int;
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFieldsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'count': instance.count,
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints()
+          ..dayId = DateTime.parse(json['dayId'] as String);
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+                instance) =>
+        <String, dynamic>{
+          'dayId': instance.dayId.toIso8601String(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraintsAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>)
+          ..nodes = (json['nodes'] as List<dynamic>)
+              .map((e) =>
+                  AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate$HistoryAttendanceDaysConstraints
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregateToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+        };
+
+AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$GroupsFromJson(
+            Map<String, dynamic> json) =>
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..attendanceHistoryAggregate =
+              AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+                  .fromJson(json['attendanceHistoryAggregate']
+                      as Map<String, dynamic>)
+          ..attendanceDaysConstraintsAggregate =
+              AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceDaysConstraintsAggregate
                   .fromJson(json['attendanceDaysConstraintsAggregate']
                       as Map<String, dynamic>);
 
 Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$GroupsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
-                instance) =>
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroups$GroupsToJson(
+            AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups instance) =>
         <String, dynamic>{
           'id': fromDartUuidValueToGraphQLUuid(instance.id),
           'name': instance.name,
@@ -4484,56 +4790,62 @@ Map<String, dynamic>
               instance.attendanceDaysConstraintsAggregate.toJson(),
         };
 
-AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroupsFromJson(
+AnalyzePerson$QueryRoot$Persons$PersonsGroups
+    _$AnalyzePerson$QueryRoot$Persons$PersonsGroupsFromJson(
             Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups()
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups()
           ..group =
-              AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups$Groups
-                  .fromJson(json['group'] as Map<String, dynamic>);
+              AnalyzePerson$QueryRoot$Persons$PersonsGroups$Groups.fromJson(
+                  json['group'] as Map<String, dynamic>);
 
-Map<String, dynamic>
-    _$AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroupsToJson(
-            AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups instance) =>
-        <String, dynamic>{
-          'group': instance.group.toJson(),
-        };
+Map<String, dynamic> _$AnalyzePerson$QueryRoot$Persons$PersonsGroupsToJson(
+        AnalyzePerson$QueryRoot$Persons$PersonsGroups instance) =>
+    <String, dynamic>{
+      'group': instance.group.toJson(),
+    };
 
-AnalyzePersonAttendance$QueryRoot$Persons
-    _$AnalyzePersonAttendance$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonAttendance$QueryRoot$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..kodasHistoryAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$HistoryKodasHistoryAggregate
-                  .fromJson(
-                      json['kodasHistoryAggregate'] as Map<String, dynamic>)
-          ..confessionHistoryAggregate =
-              AnalyzePersonAttendance$QueryRoot$Persons$HistoryConfessionHistoryAggregate
-                  .fromJson(json['confessionHistoryAggregate']
-                      as Map<String, dynamic>)
-          ..services = (json['services'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsServices
-                      .fromJson(e as Map<String, dynamic>))
-              .toList()
-          ..classes = (json['classes'] as List<dynamic>?)
-              ?.map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$Classes.fromJson(
-                      e as Map<String, dynamic>))
-              .toList()
-          ..groups = (json['groups'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonAttendance$QueryRoot$Persons$PersonsGroups
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
+AnalyzePerson$QueryRoot$Persons _$AnalyzePerson$QueryRoot$PersonsFromJson(
+        Map<String, dynamic> json) =>
+    AnalyzePerson$QueryRoot$Persons()
+      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+      ..name = json['name'] as String
+      ..callHistoryAggregate =
+          AnalyzePerson$QueryRoot$Persons$HistoryCallHistoryAggregate.fromJson(
+              json['callHistoryAggregate'] as Map<String, dynamic>)
+      ..visitHistoryAggregate =
+          AnalyzePerson$QueryRoot$Persons$HistoryVisitHistoryAggregate.fromJson(
+              json['visitHistoryAggregate'] as Map<String, dynamic>)
+      ..editHistoryAggregate =
+          AnalyzePerson$QueryRoot$Persons$HistoryEditHistoryAggregate.fromJson(
+              json['editHistoryAggregate'] as Map<String, dynamic>)
+      ..kodasHistoryAggregate =
+          AnalyzePerson$QueryRoot$Persons$HistoryKodasHistoryAggregate.fromJson(
+              json['kodasHistoryAggregate'] as Map<String, dynamic>)
+      ..confessionHistoryAggregate =
+          AnalyzePerson$QueryRoot$Persons$HistoryConfessionHistoryAggregate
+              .fromJson(
+                  json['confessionHistoryAggregate'] as Map<String, dynamic>)
+      ..services = (json['services'] as List<dynamic>)
+          .map((e) => AnalyzePerson$QueryRoot$Persons$PersonsServices.fromJson(
+              e as Map<String, dynamic>))
+          .toList()
+      ..classes = (json['classes'] as List<dynamic>?)
+          ?.map((e) => AnalyzePerson$QueryRoot$Persons$Classes.fromJson(
+              e as Map<String, dynamic>))
+          .toList()
+      ..groups = (json['groups'] as List<dynamic>)
+          .map((e) => AnalyzePerson$QueryRoot$Persons$PersonsGroups.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
 
-Map<String, dynamic> _$AnalyzePersonAttendance$QueryRoot$PersonsToJson(
-        AnalyzePersonAttendance$QueryRoot$Persons instance) =>
+Map<String, dynamic> _$AnalyzePerson$QueryRoot$PersonsToJson(
+        AnalyzePerson$QueryRoot$Persons instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
+      'callHistoryAggregate': instance.callHistoryAggregate.toJson(),
+      'visitHistoryAggregate': instance.visitHistoryAggregate.toJson(),
+      'editHistoryAggregate': instance.editHistoryAggregate.toJson(),
       'kodasHistoryAggregate': instance.kodasHistoryAggregate.toJson(),
       'confessionHistoryAggregate':
           instance.confessionHistoryAggregate.toJson(),
@@ -4542,198 +4854,16 @@ Map<String, dynamic> _$AnalyzePersonAttendance$QueryRoot$PersonsToJson(
       'groups': instance.groups.map((e) => e.toJson()).toList(),
     };
 
-AnalyzePersonAttendance$QueryRoot _$AnalyzePersonAttendance$QueryRootFromJson(
+AnalyzePerson$QueryRoot _$AnalyzePerson$QueryRootFromJson(
         Map<String, dynamic> json) =>
-    AnalyzePersonAttendance$QueryRoot()
+    AnalyzePerson$QueryRoot()
       ..personsByPk = json['personsByPk'] == null
           ? null
-          : AnalyzePersonAttendance$QueryRoot$Persons.fromJson(
+          : AnalyzePerson$QueryRoot$Persons.fromJson(
               json['personsByPk'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$AnalyzePersonAttendance$QueryRootToJson(
-        AnalyzePersonAttendance$QueryRoot instance) =>
-    <String, dynamic>{
-      'personsByPk': instance.personsByPk?.toJson(),
-    };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields()
-          ..time = json['time'] == null
-              ? null
-              : DateTime.parse(json['time'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFieldsToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
-                instance) =>
-        <String, dynamic>{
-          'time': instance.time?.toIso8601String(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields()
-          ..count = json['count'] as int
-          ..max = json['max'] == null
-              ? null
-              : AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields$HistoryCallHistoryMaxFields
-                  .fromJson(json['max'] as Map<String, dynamic>);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFieldsToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
-                instance) =>
-        <String, dynamic>{
-          'count': instance.count,
-          'max': instance.max?.toJson(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory()
-          ..time = DateTime.parse(json['time'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
-                instance) =>
-        <String, dynamic>{
-          'time': instance.time.toIso8601String(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregateFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate()
-          ..aggregate = json['aggregate'] == null
-              ? null
-              : AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistoryAggregateFields
-                  .fromJson(json['aggregate'] as Map<String, dynamic>)
-          ..nodes = (json['nodes'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate$HistoryCallHistory
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregateToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate
-                instance) =>
-        <String, dynamic>{
-          'aggregate': instance.aggregate?.toJson(),
-          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields()
-          ..time = json['time'] == null
-              ? null
-              : DateTime.parse(json['time'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFieldsToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
-                instance) =>
-        <String, dynamic>{
-          'time': instance.time?.toIso8601String(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields()
-          ..count = json['count'] as int
-          ..max = json['max'] == null
-              ? null
-              : AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields$HistoryVisitHistoryMaxFields
-                  .fromJson(json['max'] as Map<String, dynamic>);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFieldsToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
-                instance) =>
-        <String, dynamic>{
-          'count': instance.count,
-          'max': instance.max?.toJson(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory()
-          ..time = DateTime.parse(json['time'] as String);
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
-                instance) =>
-        <String, dynamic>{
-          'time': instance.time.toIso8601String(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregateFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate()
-          ..aggregate = json['aggregate'] == null
-              ? null
-              : AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistoryAggregateFields
-                  .fromJson(json['aggregate'] as Map<String, dynamic>)
-          ..nodes = (json['nodes'] as List<dynamic>)
-              .map((e) =>
-                  AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate$HistoryVisitHistory
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic>
-    _$AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregateToJson(
-            AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate
-                instance) =>
-        <String, dynamic>{
-          'aggregate': instance.aggregate?.toJson(),
-          'nodes': instance.nodes.map((e) => e.toJson()).toList(),
-        };
-
-AnalyzePersonServicing$QueryRoot$Persons
-    _$AnalyzePersonServicing$QueryRoot$PersonsFromJson(
-            Map<String, dynamic> json) =>
-        AnalyzePersonServicing$QueryRoot$Persons()
-          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
-          ..name = json['name'] as String
-          ..callHistoryAggregate =
-              AnalyzePersonServicing$QueryRoot$Persons$HistoryCallHistoryAggregate
-                  .fromJson(
-                      json['callHistoryAggregate'] as Map<String, dynamic>)
-          ..visitHistoryAggregate =
-              AnalyzePersonServicing$QueryRoot$Persons$HistoryVisitHistoryAggregate
-                  .fromJson(
-                      json['visitHistoryAggregate'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$AnalyzePersonServicing$QueryRoot$PersonsToJson(
-        AnalyzePersonServicing$QueryRoot$Persons instance) =>
-    <String, dynamic>{
-      'id': fromDartUuidValueToGraphQLUuid(instance.id),
-      'name': instance.name,
-      'callHistoryAggregate': instance.callHistoryAggregate.toJson(),
-      'visitHistoryAggregate': instance.visitHistoryAggregate.toJson(),
-    };
-
-AnalyzePersonServicing$QueryRoot _$AnalyzePersonServicing$QueryRootFromJson(
-        Map<String, dynamic> json) =>
-    AnalyzePersonServicing$QueryRoot()
-      ..personsByPk = json['personsByPk'] == null
-          ? null
-          : AnalyzePersonServicing$QueryRoot$Persons.fromJson(
-              json['personsByPk'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$AnalyzePersonServicing$QueryRootToJson(
-        AnalyzePersonServicing$QueryRoot instance) =>
+Map<String, dynamic> _$AnalyzePerson$QueryRootToJson(
+        AnalyzePerson$QueryRoot instance) =>
     <String, dynamic>{
       'personsByPk': instance.personsByPk?.toJson(),
     };
@@ -5910,94 +6040,6 @@ Map<String, dynamic> _$PersonEditHistory$SubscriptionRootToJson(
     <String, dynamic>{
       'historyEditHistory':
           instance.historyEditHistory.map((e) => e.toJson()).toList(),
-    };
-
-HistoryEditHistoryBoolExp _$HistoryEditHistoryBoolExpFromJson(
-        Map<String, dynamic> json) =>
-    HistoryEditHistoryBoolExp(
-      $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryEditHistoryBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      $not: json['_not'] == null
-          ? null
-          : HistoryEditHistoryBoolExp.fromJson(
-              json['_not'] as Map<String, dynamic>),
-      $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) =>
-              HistoryEditHistoryBoolExp.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      auditId: json['auditId'] == null
-          ? null
-          : UuidComparisonExp.fromJson(json['auditId'] as Map<String, dynamic>),
-      isUserAllowedToRead: json['isUserAllowedToRead'] == null
-          ? null
-          : BooleanComparisonExp.fromJson(
-              json['isUserAllowedToRead'] as Map<String, dynamic>),
-      recordId: json['recordId'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['recordId'] as Map<String, dynamic>),
-      recordedBy: json['recordedBy'] == null
-          ? null
-          : UuidComparisonExp.fromJson(
-              json['recordedBy'] as Map<String, dynamic>),
-      table: json['table'] == null
-          ? null
-          : NameComparisonExp.fromJson(json['table'] as Map<String, dynamic>),
-      time: json['time'] == null
-          ? null
-          : TimestamptzComparisonExp.fromJson(
-              json['time'] as Map<String, dynamic>),
-      user: json['user'] == null
-          ? null
-          : UsersBoolExp.fromJson(json['user'] as Map<String, dynamic>),
-      userRole: json['userRole'] == null
-          ? null
-          : StringComparisonExp.fromJson(
-              json['userRole'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$HistoryEditHistoryBoolExpToJson(
-        HistoryEditHistoryBoolExp instance) =>
-    <String, dynamic>{
-      '_and': instance.$and?.map((e) => e.toJson()).toList(),
-      '_not': instance.$not?.toJson(),
-      '_or': instance.$or?.map((e) => e.toJson()).toList(),
-      'auditId': instance.auditId?.toJson(),
-      'isUserAllowedToRead': instance.isUserAllowedToRead?.toJson(),
-      'recordId': instance.recordId?.toJson(),
-      'recordedBy': instance.recordedBy?.toJson(),
-      'table': instance.table?.toJson(),
-      'time': instance.time?.toJson(),
-      'user': instance.user?.toJson(),
-      'userRole': instance.userRole?.toJson(),
-    };
-
-NameComparisonExp _$NameComparisonExpFromJson(Map<String, dynamic> json) =>
-    NameComparisonExp(
-      $eq: json['_eq'] as String?,
-      $gt: json['_gt'] as String?,
-      $gte: json['_gte'] as String?,
-      $in: (json['_in'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      $isNull: json['_isNull'] as bool?,
-      $lt: json['_lt'] as String?,
-      $lte: json['_lte'] as String?,
-      $neq: json['_neq'] as String?,
-      $nin: (json['_nin'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    );
-
-Map<String, dynamic> _$NameComparisonExpToJson(NameComparisonExp instance) =>
-    <String, dynamic>{
-      '_eq': instance.$eq,
-      '_gt': instance.$gt,
-      '_gte': instance.$gte,
-      '_in': instance.$in,
-      '_isNull': instance.$isNull,
-      '_lt': instance.$lt,
-      '_lte': instance.$lte,
-      '_neq': instance.$neq,
-      '_nin': instance.$nin,
     };
 
 PersonServiceAttendance$SubscriptionRoot$HistoryAttendanceHistory
@@ -7561,11 +7603,13 @@ Map<String, dynamic> _$PersonsGeolocationsArgumentsToJson(
       'conditions': instance.conditions?.toJson(),
     };
 
-AnalyzePersonAttendanceArguments _$AnalyzePersonAttendanceArgumentsFromJson(
+AnalyzePersonArguments _$AnalyzePersonArgumentsFromJson(
         Map<String, dynamic> json) =>
-    AnalyzePersonAttendanceArguments(
+    AnalyzePersonArguments(
       dateFrom: DateTime.parse(json['dateFrom'] as String),
       dateTo: DateTime.parse(json['dateTo'] as String),
+      timeFrom: DateTime.parse(json['timeFrom'] as String),
+      timeTo: DateTime.parse(json['timeTo'] as String),
       personId: fromGraphQLUuidToDartUuidValue(json['personId']),
       groupsIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
           json['groupsIds'] as List?),
@@ -7573,13 +7617,20 @@ AnalyzePersonAttendanceArguments _$AnalyzePersonAttendanceArgumentsFromJson(
           json['classesIds'] as List?),
       servicesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
           json['servicesIds'] as List?),
+      callHistory: json['callHistory'] as bool,
+      visitHistory: json['visitHistory'] as bool,
+      editHistory: json['editHistory'] as bool,
+      confessionHistory: json['confessionHistory'] as bool,
+      kodasHistory: json['kodasHistory'] as bool,
     );
 
-Map<String, dynamic> _$AnalyzePersonAttendanceArgumentsToJson(
-        AnalyzePersonAttendanceArguments instance) =>
+Map<String, dynamic> _$AnalyzePersonArgumentsToJson(
+        AnalyzePersonArguments instance) =>
     <String, dynamic>{
       'dateFrom': instance.dateFrom.toIso8601String(),
       'dateTo': instance.dateTo.toIso8601String(),
+      'timeFrom': instance.timeFrom.toIso8601String(),
+      'timeTo': instance.timeTo.toIso8601String(),
       'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
       'groupsIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
           instance.groupsIds),
@@ -7587,22 +7638,11 @@ Map<String, dynamic> _$AnalyzePersonAttendanceArgumentsToJson(
           instance.classesIds),
       'servicesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
           instance.servicesIds),
-    };
-
-AnalyzePersonServicingArguments _$AnalyzePersonServicingArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    AnalyzePersonServicingArguments(
-      timeFrom: DateTime.parse(json['timeFrom'] as String),
-      timeTo: DateTime.parse(json['timeTo'] as String),
-      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
-    );
-
-Map<String, dynamic> _$AnalyzePersonServicingArgumentsToJson(
-        AnalyzePersonServicingArguments instance) =>
-    <String, dynamic>{
-      'timeFrom': instance.timeFrom.toIso8601String(),
-      'timeTo': instance.timeTo.toIso8601String(),
-      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'callHistory': instance.callHistory,
+      'visitHistory': instance.visitHistory,
+      'editHistory': instance.editHistory,
+      'confessionHistory': instance.confessionHistory,
+      'kodasHistory': instance.kodasHistory,
     };
 
 GetPersonClassesAndGroupsArguments _$GetPersonClassesAndGroupsArgumentsFromJson(

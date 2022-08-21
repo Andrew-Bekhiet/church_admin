@@ -3236,7 +3236,7 @@ input GeometryComparisonExp {
 }
 
 """
-TODO: attendance constraints field
+TODO: check validity while checking permissions
 """
 type Groups {
   """
@@ -5930,6 +5930,27 @@ type HistoryEditHistoryAggregateFields {
 }
 
 """
+order by aggregate values of table "history.edit_history"
+"""
+input HistoryEditHistoryAggregateOrderBy {
+  count: OrderBy
+  max: HistoryEditHistoryMaxOrderBy
+  min: HistoryEditHistoryMinOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "history.edit_history"
+"""
+input HistoryEditHistoryArrRelInsertInput {
+  data: [HistoryEditHistoryInsertInput!]!
+
+  """
+  upsert condition
+  """
+  onConflict: HistoryEditHistoryOnConflict
+}
+
+"""
 Boolean expression to filter rows from the table "history.edit_history". All fields are combined with a logical 'AND'.
 """
 input HistoryEditHistoryBoolExp {
@@ -5981,6 +6002,17 @@ type HistoryEditHistoryMaxFields {
 }
 
 """
+order by max() on columns of table "history.edit_history"
+"""
+input HistoryEditHistoryMaxOrderBy {
+  auditId: OrderBy
+  recordId: OrderBy
+  recordedBy: OrderBy
+  time: OrderBy
+  userRole: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type HistoryEditHistoryMinFields {
@@ -5989,6 +6021,17 @@ type HistoryEditHistoryMinFields {
   recordedBy: uuid
   time: timestamptz
   userRole: String
+}
+
+"""
+order by min() on columns of table "history.edit_history"
+"""
+input HistoryEditHistoryMinOrderBy {
+  auditId: OrderBy
+  recordId: OrderBy
+  recordedBy: OrderBy
+  time: OrderBy
+  userRole: OrderBy
 }
 
 """
@@ -7586,6 +7629,66 @@ type Persons {
   ): HistoryConfessionHistoryAggregate!
 
   """
+  An array relationship
+  """
+  editHistory(
+    """
+    distinct select on columns
+    """
+    distinctOn: [HistoryEditHistorySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [HistoryEditHistoryOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: HistoryEditHistoryBoolExp
+  ): [HistoryEditHistory!]!
+
+  """
+  An aggregate relationship
+  """
+  editHistoryAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [HistoryEditHistorySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [HistoryEditHistoryOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: HistoryEditHistoryBoolExp
+  ): HistoryEditHistoryAggregate!
+
+  """
   An object relationship
   """
   family: Families
@@ -8167,6 +8270,7 @@ input PersonsBoolExp {
   collegeId: UuidComparisonExp
   color: BigintComparisonExp
   confessionHistory: HistoryConfessionHistoryBoolExp
+  editHistory: HistoryEditHistoryBoolExp
   family: FamiliesBoolExp
   familyId: UuidComparisonExp
   father: FathersBoolExp
@@ -8515,6 +8619,7 @@ input PersonsInsertInput {
   collegeId: uuid
   color: bigint
   confessionHistory: HistoryConfessionHistoryArrRelInsertInput
+  editHistory: HistoryEditHistoryArrRelInsertInput
   family: FamiliesObjRelInsertInput
   familyId: uuid
   father: FathersObjRelInsertInput
@@ -8725,6 +8830,7 @@ input PersonsOrderBy {
   collegeId: OrderBy
   color: OrderBy
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateOrderBy
+  editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   family: FamiliesOrderBy
   familyId: OrderBy
   father: FathersOrderBy
@@ -10201,7 +10307,7 @@ input SchoolsUpdates {
 }
 
 """
-TODO: attendance constraints field
+columns and relationships of "services"
 """
 type Services {
   """
@@ -14417,6 +14523,16 @@ unique or primary key constraints on table "users_permissions"
 """
 enum UsersPermissionsConstraint {
   """
+  unique or primary key constraint on columns "uid", "admin_on_area"
+  """
+  users_permissions_area
+
+  """
+  unique or primary key constraint on columns "admin_on_group", "uid"
+  """
+  users_permissions_group
+
+  """
   unique or primary key constraint on columns "permission_id"
   """
   users_permissions_permission_id_key
@@ -14427,9 +14543,9 @@ enum UsersPermissionsConstraint {
   users_permissions_pkey
 
   """
-  unique or primary key constraint on columns "admin_on_group", "uid", "admin_on_service", "admin_on_area"
+  unique or primary key constraint on columns "service_study_year", "uid", "admin_on_service", "service_gender"
   """
-  users_permissions_uid_adminOnService_adminOnGroup_adminOnAr_key
+  users_permissions_service
 }
 
 """

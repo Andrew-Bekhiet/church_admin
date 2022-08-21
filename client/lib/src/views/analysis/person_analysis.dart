@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
-class PersonAttendanceAnalysis extends StatefulWidget {
+class PersonAnalysis extends StatefulWidget {
   static final personRoute = GoRoute(
-    name: 'person_attendance_analysis',
-    path: 'personAttendanceAnalysis',
+    name: 'person_analysis',
+    path: 'personAnalysis',
     builder: _routeBuilder,
   );
 
@@ -30,7 +30,7 @@ class PersonAttendanceAnalysis extends StatefulWidget {
 
     final extra = state.extra! as Map<String, dynamic>;
 
-    return PersonAttendanceAnalysis(
+    return PersonAnalysis(
       person: extra['person'],
       user: extra['user'],
       onEditOptions: extra['onEditOptions'],
@@ -40,14 +40,14 @@ class PersonAttendanceAnalysis extends StatefulWidget {
 
   final Person? person;
   final User? user;
-  final AttendanceOptions? options;
+  final PersonAnalysisOptions? options;
   final Widget Function(
     BuildContext,
-    AttendanceOptions?,
-    void Function(AttendanceOptions),
+    PersonAnalysisOptions?,
+    void Function(PersonAnalysisOptions),
   ) onEditOptions;
 
-  const PersonAttendanceAnalysis({
+  const PersonAnalysis({
     required this.onEditOptions,
     this.person,
     this.user,
@@ -56,12 +56,11 @@ class PersonAttendanceAnalysis extends StatefulWidget {
   }) : assert(user != null || person != null);
 
   @override
-  State<PersonAttendanceAnalysis> createState() =>
-      _PersonAttendanceAnalysisState();
+  State<PersonAnalysis> createState() => _PersonAnalysisState();
 }
 
-class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
-  late AttendanceOptions? options = widget.options;
+class _PersonAnalysisState extends State<PersonAnalysis> {
+  late PersonAnalysisOptions? options = widget.options;
 
   List<String> get groupsIds => options!.groups.map((e) => e.id).toList();
   List<String> get classesIds => options!.classes.map((e) => e.id).toList();
@@ -126,13 +125,9 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                     classesIds: classesIds.map(UuidValue.new).toList(),
                     servicesIds: servicesIds.map(UuidValue.new).toList(),
                   )
-                : CADatabaseRepository.I.persons.analyzePersonAttendance(
+                : CADatabaseRepository.I.persons.analyzePerson(
                     personId: widget.person!.id,
-                    dateFrom: dateRange.start,
-                    dateTo: dateRange.end,
-                    groupsIds: groupsIds.map(UuidValue.new).toList(),
-                    classesIds: classesIds.map(UuidValue.new).toList(),
-                    servicesIds: servicesIds.map(UuidValue.new).toList(),
+                    options: options!,
                   ),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -245,6 +240,113 @@ class _PersonAttendanceAnalysisState extends State<PersonAttendanceAnalysis> {
                           ),
                         ),
                       ),
+                  if (widget.person != null) ...[
+                    if (options!.kodasAnalysis)
+                      if (person?.kodasHistoryAggregate == null)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: KeepAlive(
+                            keepAlive: true,
+                            child: PersonAnalysisChart(
+                              analysisData: person!.kodasHistoryAggregate!,
+                              getHistoryStream: () => CADatabaseRepository
+                                  .I.persons
+                                  .personConfessionHistory(
+                                personId: widget.person!.id,
+                              ),
+                              title: 'الاعتراف',
+                              range: options!.dateRange,
+                              lastTimeName: 'أخر اعتراف',
+                            ),
+                          ),
+                        ),
+                    if (options!.confessionAnalysis)
+                      if (person?.confessionHistoryAggregate == null)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: KeepAlive(
+                            keepAlive: true,
+                            child: PersonAnalysisChart(
+                              analysisData: person!.confessionHistoryAggregate!,
+                              getHistoryStream: () => CADatabaseRepository
+                                  .I.persons
+                                  .personKodasHistory(
+                                personId: widget.person!.id,
+                              ),
+                              title: 'حضور القداس',
+                              range: options!.dateRange,
+                              lastTimeName: 'أخر حضور قداس',
+                            ),
+                          ),
+                        ),
+                    if (options!.callHistoryAnalysis)
+                      if (person?.callHistoryAggregate == null)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: KeepAlive(
+                            keepAlive: true,
+                            child: PersonAnalysisChart(
+                              analysisData: person!.callHistoryAggregate!,
+                              getHistoryStream: () => CADatabaseRepository
+                                  .I.persons
+                                  .personCallHistory(
+                                personId: widget.person!.id,
+                              ),
+                              title: 'خدمة المكالمات',
+                              range: options!.dateRange,
+                              lastTimeName: 'أخر مكالمة',
+                            ),
+                          ),
+                        ),
+                    if (options!.visitHistoryAnalysis)
+                      if (person?.visitHistoryAggregate == null)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: KeepAlive(
+                            keepAlive: true,
+                            child: PersonAnalysisChart(
+                              analysisData: person!.visitHistoryAggregate!,
+                              getHistoryStream: () => CADatabaseRepository
+                                  .I.persons
+                                  .personVisitHistory(
+                                personId: widget.person!.id,
+                              ),
+                              title: 'الافتقاد',
+                              range: options!.dateRange,
+                              lastTimeName: 'أخر افتقاد',
+                            ),
+                          ),
+                        ),
+                    if (options!.editHistoryAnalysis)
+                      if (person?.editHistoryAggregate == null)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: KeepAlive(
+                            keepAlive: true,
+                            child: PersonAnalysisChart(
+                              analysisData: person!.editHistoryAggregate!,
+                              getHistoryStream: () => CADatabaseRepository
+                                  .I.persons
+                                  .personEditHistory(
+                                personId: widget.person!.id,
+                              ),
+                              title: 'تحديث البيانات',
+                              range: options!.dateRange,
+                              lastTimeName: 'أخر تحديث للبيانات',
+                            ),
+                          ),
+                        ),
+                  ]
                 ],
               );
             },

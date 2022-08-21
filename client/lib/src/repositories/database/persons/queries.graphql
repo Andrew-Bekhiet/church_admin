@@ -141,20 +141,62 @@ query personsGeolocations($conditions: PersonsBoolExp) {
   }
 }
 
-query analyzePersonAttendance(
+query analyzePerson(
   $dateFrom: date!
   $dateTo: date!
+  $timeFrom: timestamptz!
+  $timeTo: timestamptz!
   $personId: uuid!
-  $groupsIds: [uuid!]
-  $classesIds: [uuid!]
-  $servicesIds: [uuid!]
+  $groupsIds: [uuid!] = []
+  $classesIds: [uuid!] = []
+  $servicesIds: [uuid!] = []
+  $callHistory: Boolean! = false
+  $visitHistory: Boolean! = false
+  $editHistory: Boolean! = false
+  $confessionHistory: Boolean! = false
+  $kodasHistory: Boolean! = false
 ) {
   personsByPk(id: $personId) {
     id
     name
-    kodasHistoryAggregate(
-      where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-    ) {
+    callHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $callHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    visitHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $visitHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    editHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $editHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    kodasHistoryAggregate(where: { dayId: { _gte: $dateFrom, _lte: $dateTo } })
+      @include(if: $kodasHistory) {
       aggregate {
         count
         max {
@@ -167,7 +209,7 @@ query analyzePersonAttendance(
     }
     confessionHistoryAggregate(
       where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-    ) {
+    ) @include(if: $confessionHistory) {
       aggregate {
         count
         max {
@@ -276,39 +318,6 @@ query analyzePersonAttendance(
             dayId
           }
         }
-      }
-    }
-  }
-}
-
-query analyzePersonServicing(
-  $timeFrom: timestamptz!
-  $timeTo: timestamptz!
-  $personId: uuid!
-) {
-  personsByPk(id: $personId) {
-    id
-    name
-    callHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
-      aggregate {
-        count
-        max {
-          time
-        }
-      }
-      nodes {
-        time
-      }
-    }
-    visitHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } }) {
-      aggregate {
-        count
-        max {
-          time
-        }
-      }
-      nodes {
-        time
       }
     }
   }
