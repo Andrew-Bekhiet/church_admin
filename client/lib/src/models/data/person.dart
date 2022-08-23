@@ -124,7 +124,7 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 
   bool spiritDataUpToDate() {
-    final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
+    final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
 
     return CAAuthRepository.I.currentUserData?.lastKodas != null &&
         CAAuthRepository.I.currentUserData!.lastConfession != null &&
