@@ -53,9 +53,7 @@ class StreetsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetStreetsStream$SubscriptionRoot.fromJson(d)
-                    .streets
-                    .map((e) => Street.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Street.fromJson),
               ),
             );
 

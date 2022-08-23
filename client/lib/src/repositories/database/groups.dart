@@ -53,9 +53,7 @@ class GroupsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetGroupsStream$SubscriptionRoot.fromJson(d)
-                    .groups
-                    .map((e) => Group.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Group.fromJson),
               ),
             );
 

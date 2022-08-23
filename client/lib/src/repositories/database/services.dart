@@ -83,9 +83,7 @@ class ServicesQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetServicesStream$SubscriptionRoot.fromJson(d)
-                    .services
-                    .map((e) => Service.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Service.fromJson),
               ),
             );
 

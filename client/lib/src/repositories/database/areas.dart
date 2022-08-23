@@ -53,9 +53,7 @@ class AreasQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetAreasStream$SubscriptionRoot.fromJson(d)
-                    .areas
-                    .map((e) => Area.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Area.fromJson),
               ),
             );
 

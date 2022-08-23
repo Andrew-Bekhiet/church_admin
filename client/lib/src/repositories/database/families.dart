@@ -53,9 +53,7 @@ class FamiliesQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetFamiliesStream$SubscriptionRoot.fromJson(d)
-                    .families
-                    .map((e) => Family.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Family.fromJson),
               ),
             );
 

@@ -36,11 +36,9 @@ class UsersQueries {
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
             parserFn: (d) {
-              final result = WatchUser$SubscriptionRoot.fromJson(d).usersByPk;
+              if (d.values.single == null) return null;
 
-              if (result == null) return null;
-
-              return User.fromJson(result.toJson());
+              return User.fromJson(d.values.single);
             },
           ),
         )
@@ -78,9 +76,7 @@ class UsersQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => UserEditHistory$SubscriptionRoot.fromJson(d)
-                    .historyEditHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)

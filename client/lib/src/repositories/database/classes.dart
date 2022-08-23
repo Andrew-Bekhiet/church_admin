@@ -53,9 +53,7 @@ class ClassesQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetClassesStream$SubscriptionRoot.fromJson(d)
-                    .classes
-                    .map((e) => Class.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Class.fromJson),
               ),
             );
 

@@ -94,6 +94,9 @@ Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
   return result;
 }
 
+Iterable<T> _parseListOfT<T>(Json d, T Function(Json) mapper) =>
+    (d.values.single as List).map((o) => mapper(o as Json));
+
 T stripNullValuesFrom<T>(T json, [Set<String> keep = const {}]) => json is Json
     ? {
         for (final kv in json.entries)

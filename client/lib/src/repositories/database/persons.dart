@@ -3,6 +3,14 @@ part of '../database_repository.dart';
 class PersonsQueries {
   PersonsQueries._();
 
+  Person? _parseDeepPersonOrNull(Map<String, dynamic> d) {
+    if (d.values.single == null) return null;
+
+    return Person.fromJson(
+      (d.values.single as Map).values.single,
+    );
+  }
+
   Future<Person?> updatePersonSpiritData({
     required String personId,
     required DateTime lastConfession,
@@ -24,15 +32,11 @@ class PersonsQueries {
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
             parserFn: (d) {
-              final rslt = UpdatePersonSpiritData$MutationRoot.fromJson(d);
-
-              if ((rslt.insertHistoryConfessionHistoryOne ??
-                      rslt.insertHistoryKodasHistoryOne) ==
-                  null) return null;
+              if (d.values.every((e) => e == null)) return null;
 
               return Person.fromJson(
-                rslt.insertHistoryConfessionHistoryOne?.person.toJson() ??
-                    rslt.insertHistoryKodasHistoryOne!.person.toJson(),
+                (d.values.first as Map?)?.values.single ??
+                    (d.values.last as Map).values.single,
               );
             },
           ),
@@ -59,15 +63,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) {
-              final rslt = InsertPersonLastCall$MutationRoot.fromJson(d);
-
-              if (rslt.insertHistoryCallHistoryOne == null) return null;
-
-              return Person.fromJson(
-                rslt.insertHistoryCallHistoryOne!.person.toJson(),
-              );
-            },
+            parserFn: _parseDeepPersonOrNull,
           ),
         )
         .then(_exceptionsMiddleware)
@@ -92,15 +88,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) {
-              final rslt = InsertPersonLastKodas$MutationRoot.fromJson(d);
-
-              if (rslt.insertHistoryKodasHistoryOne == null) return null;
-
-              return Person.fromJson(
-                rslt.insertHistoryKodasHistoryOne!.person.toJson(),
-              );
-            },
+            parserFn: _parseDeepPersonOrNull,
           ),
         )
         .then(_exceptionsMiddleware)
@@ -125,15 +113,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) {
-              final rslt = InsertPersonLastConfession$MutationRoot.fromJson(d);
-
-              if (rslt.insertHistoryConfessionHistoryOne == null) return null;
-
-              return Person.fromJson(
-                rslt.insertHistoryConfessionHistoryOne!.person.toJson(),
-              );
-            },
+            parserFn: _parseDeepPersonOrNull,
           ),
         )
         .then(_exceptionsMiddleware)
@@ -158,15 +138,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) {
-              final rslt = InsertPersonLastVisit$MutationRoot.fromJson(d);
-
-              if (rslt.insertHistoryVisitHistoryOne == null) return null;
-
-              return Person.fromJson(
-                rslt.insertHistoryVisitHistoryOne!.person.toJson(),
-              );
-            },
+            parserFn: _parseDeepPersonOrNull,
           ),
         )
         .then(_exceptionsMiddleware)
@@ -224,9 +196,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => GetPersonsStream$SubscriptionRoot.fromJson(d)
-                    .persons
-                    .map((e) => Person.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, Person.fromJson),
               ),
             );
 
@@ -367,14 +337,7 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) {
-              final result =
-                  WatchPerson$SubscriptionRoot.fromJson(d).personsByPk;
-
-              if (result == null) return null;
-
-              return Person.fromJson(result.toJson());
-            },
+            parserFn: _parseDeepPersonOrNull,
           ),
         )
         .map(_exceptionsMiddleware)
@@ -410,9 +373,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => CallHistory$SubscriptionRoot.fromJson(d)
-                    .historyCallHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -458,9 +419,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => VisitHistory$SubscriptionRoot.fromJson(d)
-                    .historyVisitHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -507,9 +466,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => ConfessionHistory$SubscriptionRoot.fromJson(d)
-                    .historyConfessionHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -555,9 +512,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => KodasHistory$SubscriptionRoot.fromJson(d)
-                    .historyKodasHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -604,9 +559,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => PersonEditHistory$SubscriptionRoot.fromJson(d)
-                    .historyEditHistory
-                    .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -765,14 +718,7 @@ class PersonsQueries {
         document: query.document,
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => PersonsGeolocations$QueryRoot.fromJson(d)
-            .persons
-            .map(
-              (p) => Person.fromJson(
-                p.toJson(),
-              ),
-            )
-            .toList(),
+        parserFn: (d) => _parseListOfT(d, Person.fromJson).toList(),
       ),
     );
     watchQuery.onData([
@@ -896,10 +842,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) =>
-                    PersonServiceAttendance$SubscriptionRoot.fromJson(d)
-                        .historyAttendanceHistory
-                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -950,10 +893,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) =>
-                    PersonClassAttendance$SubscriptionRoot.fromJson(d)
-                        .historyAttendanceHistory
-                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)
@@ -1004,10 +944,7 @@ class PersonsQueries {
                 document: subscription.document,
                 operationName: subscription.operationName,
                 variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) =>
-                    PersonGroupAttendance$SubscriptionRoot.fromJson(d)
-                        .historyAttendanceHistory
-                        .map((e) => LastRecordedByInfo.fromJson(e.toJson())),
+                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
               ),
             )
             .map(_exceptionsMiddleware)

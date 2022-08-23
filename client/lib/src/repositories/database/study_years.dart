@@ -15,12 +15,9 @@ class StudyYearsQueries {
             operationName: query.operationName,
             variables: query.variables.toJson().stripNullValues(),
             parserFn: (d) {
-              final data =
-                  GetStudyYearName$QueryRoot.fromJson(d).studyYearsByPk;
+              if (d.values.single == null) return null;
 
-              if (data == null) return null;
-
-              return StudyYear.fromJson(data.toJson());
+              return StudyYear.fromJson(d.values.single);
             },
           ),
         )
