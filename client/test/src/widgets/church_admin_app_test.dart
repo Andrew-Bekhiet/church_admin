@@ -56,21 +56,21 @@ void main() {
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
             DelegatingPaginatableStream(
-              onQuery: (_, __) async* {},
+              streamDelegate: (_, __) async* {},
             ),
           );
           when(personsQueries.getPersonsStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
             DelegatingPaginatableStream(
-              onQuery: (_, __) async* {},
+              streamDelegate: (_, __) async* {},
             ),
           );
           when(servicesQueries.getServicesStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
             DelegatingPaginatableStream(
-              onQuery: (_, __) async* {},
+              streamDelegate: (_, __) async* {},
             ),
           );
 

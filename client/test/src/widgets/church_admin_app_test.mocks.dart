@@ -112,10 +112,9 @@ class _FakeUsersQueries_13 extends _i1.SmartFake implements _i4.UsersQueries {
       : super(parent, parentInvocation);
 }
 
-class _FakeDelegatingPaginatableStream_14<T extends _i5.ViewableWithID>
-    extends _i1.SmartFake implements _i4.DelegatingPaginatableStream<T> {
-  _FakeDelegatingPaginatableStream_14(
-      Object parent, Invocation parentInvocation)
+class _FakeGQLPaginatableStream_14<T extends _i5.ViewableWithID>
+    extends _i1.SmartFake implements _i4.GQLPaginatableStream<T> {
+  _FakeGQLPaginatableStream_14(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
@@ -464,16 +463,14 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
       (super.noSuchMethod(Invocation.method(#watchUser, [], {#userId: userId}),
           returnValue: _i7.Stream<_i4.User?>.empty()) as _i7.Stream<_i4.User?>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
           {String? userId}) =>
       (super.noSuchMethod(
               Invocation.method(#userEditHistory, [], {#userId: userId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #userEditHistory, [], {#userId: userId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(#userEditHistory, [], {#userId: userId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i7.Stream<_i4.User?> analyzeUserAttendance(
           {String? personId,
@@ -548,15 +545,15 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Future<_i4.Person?>.value())
           as _i7.Future<_i4.Person?>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.Person> getPersonsStream(
+  _i4.GQLPaginatableStream<_i4.Person> getPersonsStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
           Invocation.method(#getPersonsStream, [], {#searchQuery: searchQuery}),
-          returnValue: _FakeDelegatingPaginatableStream_14<_i4.Person>(
+          returnValue: _FakeGQLPaginatableStream_14<_i4.Person>(
               this,
               Invocation.method(
                   #getPersonsStream, [], {#searchQuery: searchQuery}))) as _i4
-          .DelegatingPaginatableStream<_i4.Person>);
+          .GQLPaginatableStream<_i4.Person>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>
       getPersonsKodasWarning({DateTime? date}) => (super.noSuchMethod(
@@ -611,61 +608,56 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Stream<_i4.Person?>.empty())
           as _i7.Stream<_i4.Person?>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personCallHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personCallHistory(
           {String? personId}) =>
       (super.noSuchMethod(
               Invocation.method(#personCallHistory, [], {#personId: personId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #personCallHistory, [], {#personId: personId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(
+                      #personCallHistory, [], {#personId: personId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personVisitHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personVisitHistory(
           {String? personId}) =>
       (super.noSuchMethod(
               Invocation.method(#personVisitHistory, [], {#personId: personId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #personVisitHistory, [], {#personId: personId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(
+                      #personVisitHistory, [], {#personId: personId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personConfessionHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personConfessionHistory(
           {String? personId}) =>
       (super.noSuchMethod(
               Invocation.method(
                   #personConfessionHistory, [], {#personId: personId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #personConfessionHistory, [], {#personId: personId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(
+                      #personConfessionHistory, [], {#personId: personId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personKodasHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personKodasHistory(
           {String? personId}) =>
       (super.noSuchMethod(
               Invocation.method(#personKodasHistory, [], {#personId: personId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #personKodasHistory, [], {#personId: personId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(
+                      #personKodasHistory, [], {#personId: personId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personEditHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personEditHistory(
           {String? personId}) =>
       (super.noSuchMethod(
               Invocation.method(#personEditHistory, [], {#personId: personId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #personEditHistory, [], {#personId: personId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(
+                      #personEditHistory, [], {#personId: personId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i7.Stream<_i4.Person?> getMorePersonData(
           {String? personId,
@@ -720,7 +712,7 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Stream<_i4.Person?>.empty())
           as _i7.Stream<_i4.Person?>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personServiceAttendance(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personServiceAttendance(
           {String? personId, String? serviceId, bool? asAdmin = false}) =>
       (super.noSuchMethod(
               Invocation.method(#personServiceAttendance, [], {
@@ -728,33 +720,30 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                 #serviceId: serviceId,
                 #asAdmin: asAdmin
               }),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(#personServiceAttendance, [], {#personId: personId, #serviceId: serviceId, #asAdmin: asAdmin})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(#personServiceAttendance, [], {#personId: personId, #serviceId: serviceId, #asAdmin: asAdmin})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personClassAttendance(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personClassAttendance(
           {String? personId, String? classId, bool? asAdmin = false}) =>
       (super.noSuchMethod(
               Invocation.method(#personClassAttendance, [],
                   {#personId: personId, #classId: classId, #asAdmin: asAdmin}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(#personClassAttendance, [], {#personId: personId, #classId: classId, #asAdmin: asAdmin})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(#personClassAttendance, [], {#personId: personId, #classId: classId, #asAdmin: asAdmin})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> personGroupAttendance(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personGroupAttendance(
           {String? personId, String? groupId, bool? asAdmin = false}) =>
       (super.noSuchMethod(
               Invocation.method(#personGroupAttendance, [],
                   {#personId: personId, #groupId: groupId, #asAdmin: asAdmin}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_14<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(#personGroupAttendance, [], {#personId: personId, #groupId: groupId, #asAdmin: asAdmin})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_14<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(#personGroupAttendance, [], {#personId: personId, #groupId: groupId, #asAdmin: asAdmin})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
 }
 
 /// A class which mocks [AreasQueries].
@@ -766,15 +755,15 @@ class MockAreasQueries extends _i1.Mock implements _i4.AreasQueries {
   }
 
   @override
-  _i4.DelegatingPaginatableStream<_i4.Area> getAreasStream(
+  _i4.GQLPaginatableStream<_i4.Area> getAreasStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
           Invocation.method(#getAreasStream, [], {#searchQuery: searchQuery}),
-          returnValue: _FakeDelegatingPaginatableStream_14<_i4.Area>(
+          returnValue: _FakeGQLPaginatableStream_14<_i4.Area>(
               this,
               Invocation.method(
                   #getAreasStream, [], {#searchQuery: searchQuery}))) as _i4
-          .DelegatingPaginatableStream<_i4.Area>);
+          .GQLPaginatableStream<_i4.Area>);
 }
 
 /// A class which mocks [ServicesQueries].
@@ -786,16 +775,16 @@ class MockServicesQueries extends _i1.Mock implements _i4.ServicesQueries {
   }
 
   @override
-  _i4.DelegatingPaginatableStream<_i4.Service> getServicesStream(
+  _i4.GQLPaginatableStream<_i4.Service> getServicesStream(
           {_i7.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
               Invocation.method(
                   #getServicesStream, [], {#searchQuery: searchQuery}),
-              returnValue: _FakeDelegatingPaginatableStream_14<_i4.Service>(
+              returnValue: _FakeGQLPaginatableStream_14<_i4.Service>(
                   this,
                   Invocation.method(
                       #getServicesStream, [], {#searchQuery: searchQuery})))
-          as _i4.DelegatingPaginatableStream<_i4.Service>);
+          as _i4.GQLPaginatableStream<_i4.Service>);
 }
 
 /// A class which mocks [LocalAuthService].

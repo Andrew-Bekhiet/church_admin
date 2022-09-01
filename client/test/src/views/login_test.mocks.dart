@@ -108,6 +108,10 @@ class MockGoRouterState extends _i1.Mock implements _i9.GoRouterState {
       (super.noSuchMethod(Invocation.getter(#queryParams),
           returnValue: <String, String>{}) as Map<String, String>);
   @override
+  Map<String, List<String>> get queryParametersAll =>
+      (super.noSuchMethod(Invocation.getter(#queryParametersAll),
+          returnValue: <String, List<String>>{}) as Map<String, List<String>>);
+  @override
   _i2.ValueKey<String> get pageKey =>
       (super.noSuchMethod(Invocation.getter(#pageKey),
               returnValue:

@@ -122,10 +122,9 @@ class _FakeUsersQueries_15 extends _i1.SmartFake implements _i4.UsersQueries {
       : super(parent, parentInvocation);
 }
 
-class _FakeDelegatingPaginatableStream_16<T extends _i5.ViewableWithID>
-    extends _i1.SmartFake implements _i4.DelegatingPaginatableStream<T> {
-  _FakeDelegatingPaginatableStream_16(
-      Object parent, Invocation parentInvocation)
+class _FakeGQLPaginatableStream_16<T extends _i5.ViewableWithID>
+    extends _i1.SmartFake implements _i4.GQLPaginatableStream<T> {
+  _FakeGQLPaginatableStream_16(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
@@ -702,16 +701,14 @@ class MockUsersQueries extends _i1.Mock implements _i4.UsersQueries {
       (super.noSuchMethod(Invocation.method(#watchUser, [], {#userId: userId}),
           returnValue: _i6.Stream<_i4.User?>.empty()) as _i6.Stream<_i4.User?>);
   @override
-  _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> userEditHistory(
           {String? userId}) =>
       (super.noSuchMethod(
               Invocation.method(#userEditHistory, [], {#userId: userId}),
-              returnValue:
-                  _FakeDelegatingPaginatableStream_16<_i4.LastRecordedByInfo>(
-                      this,
-                      Invocation.method(
-                          #userEditHistory, [], {#userId: userId})))
-          as _i4.DelegatingPaginatableStream<_i4.LastRecordedByInfo>);
+              returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
+                  this,
+                  Invocation.method(#userEditHistory, [], {#userId: userId})))
+          as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i6.Stream<_i4.User?> analyzeUserAttendance(
           {String? personId,
