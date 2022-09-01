@@ -48,4 +48,7 @@ List<Json>? fromGraphQLListNullableGeometryToDartListNullableJson(
         List<Map>? data) =>
     fromGraphQLListNullableJsonbToDartListNullableJson(data);
 
+Json? readJsonValue(Map<dynamic, dynamic> d, String f) =>
+    d[f] is Json? ? d[f] : (d[f] as Map).cast<String, dynamic>();
+
 typedef Json = Map<String, dynamic>;
