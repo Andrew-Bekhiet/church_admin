@@ -17,9 +17,7 @@ class ViewUser extends StatelessWidget {
 
       return ViewUser(
         userId: state.queryParams['uid']!,
-        user: state.extra is User?
-            ? state.extra as User?
-            : (state.extra as Map?)?['user'] as User?,
+        user: (state.extra as Map?)?['user'] as User?,
       );
     },
     routes: [
@@ -63,7 +61,7 @@ class ViewUser extends StatelessWidget {
         final userData = user.userData!;
         final person = user.person;
 
-        final foregroundColor = person?.color?.getContrastingColor(
+        final foregroundColor = person?.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
               themeData.textTheme.subtitle1!.color!,

@@ -131,10 +131,13 @@ Future<void> initializeChurchAdmin() async {
     dispose: (g) => g.dispose(),
   );
 
-  GetIt.I.registerSingleton<DefaultViewableObjectService>(
+  GetIt.I.registerSingleton<CAViewableObjectService>(
     CAViewableObjectService(
       ChurchAdminApp.router,
     ),
+  );
+  GetIt.I.registerSingleton<DefaultViewableObjectService>(
+    GetIt.I<CAViewableObjectService>(),
   );
 
   setLocaleMessages('ar', ArMessages());

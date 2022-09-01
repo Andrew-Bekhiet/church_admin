@@ -21,31 +21,41 @@ class CAViewableObjectService implements DefaultViewableObjectService {
       router.goNamed(
         'view_person',
         queryParams: {'id': object.id},
-        extra: object,
+        extra: {
+          'person': object,
+        },
       );
     } else if (object is Service) {
       router.goNamed(
         'view_service',
         queryParams: {'id': object.id},
-        extra: object,
+        extra: {
+          'service': object,
+        },
       );
     } else if (object is Area) {
       router.goNamed(
         'view_area',
         queryParams: {'id': object.id},
-        extra: object,
+        extra: {
+          'area': object,
+        },
       );
     } else if (object is Group) {
       router.goNamed(
         'view_group',
         queryParams: {'id': object.id},
-        extra: object,
+        extra: {
+          'group': object,
+        },
       );
     } else if (object is Class) {
       router.goNamed(
         'view_class',
         queryParams: {'id': object.id},
-        extra: object,
+        extra: {
+          'class': object,
+        },
       );
     } else {
       throw UnimplementedError('Unexpected object:\n' + object.toString());

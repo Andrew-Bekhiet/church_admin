@@ -20,14 +20,13 @@ class ViewPerson extends StatelessWidget {
 
       return ViewPerson(
         personId: state.queryParams['id']!,
-        person: state.extra is Person?
-            ? state.extra as Person?
-            : (state.extra as Map?)?['person'] as Person?,
+        person: (state.extra as Map?)?['person'] as Person?,
       );
     },
     routes: [
-      PersonAnalysis.personRoute,
+      EditPerson.route,
       ViewUser.route,
+      PersonAnalysis.personRoute,
     ],
   );
 
@@ -65,7 +64,7 @@ class ViewPerson extends StatelessWidget {
 
         final person = snapshot.requireData!;
 
-        final foregroundColor = person.color?.getContrastingColor(
+        final foregroundColor = person.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
               themeData.textTheme.subtitle1!.color!,
@@ -149,16 +148,14 @@ class ViewPerson extends StatelessWidget {
                       (n) => _phoneCall(context, n),
                       (n) => _contactAdd(context, n, person),
                     ),
-                    ...person.otherPhones.entries
-                        .map(
-                          (e) => PhoneNumberProperty(
-                            e.key,
-                            e.value,
-                            (n) => _phoneCall(context, n),
-                            (n) => _contactAdd(context, n, person),
-                          ),
-                        )
-                        .toList(),
+                    ...person.otherPhones.entries.map(
+                      (e) => PhoneNumberProperty(
+                        e.key,
+                        e.value,
+                        (n) => _phoneCall(context, n),
+                        (n) => _contactAdd(context, n, person),
+                      ),
+                    ),
                     CopiablePropertyWidget(
                       'العنوان',
                       person.address,
@@ -455,33 +452,6 @@ class ViewPerson extends StatelessWidget {
                       ),
                     ),
                     const Divider(thickness: 1),
-                    /* StreamBuilder<List<Service>>(
-                      stream: MHDatabaseRepo.I.services.getAll(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data?.isEmpty ?? true) {
-                          return const SizedBox();
-                        }
-
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ...snapshot.data!
-                                .where((s) => person.last.containsKey(s.id))
-                                .map(
-                                  (e) => DayHistoryProperty(
-                                    e.name,
-                                    person.last[e.id],
-                                    person.id,
-                                    e.id,
-                                  ),
-                                ),
-                            const Divider(
-                              thickness: 1,
-                            )
-                          ],
-                        );
-                      },
-                    ), */
                     HistoryProperty(
                       name: 'أخر افتقاد',
                       value: person.lastVisit?.time,
