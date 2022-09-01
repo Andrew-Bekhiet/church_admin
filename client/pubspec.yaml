@@ -5,7 +5,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependency_overrides:
   churchdata_core:
@@ -17,7 +17,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  artemis: ^7.9.0-beta
   async: ^2.8.2
   churchdata_core:
     path: ../churchdata_core
@@ -69,6 +68,7 @@ dependencies:
   tinycolor2: ^2.1.0
 
 dev_dependencies:
+  artemis: ^7.9.0-beta
   build_runner: ^2.2.0
   churchdata_core_mocks:
     path: ../churchdata_core_mocks

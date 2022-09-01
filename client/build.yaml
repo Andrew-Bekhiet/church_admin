@@ -9,6 +9,8 @@ targets:
           ignore_for_file:
             - constant_identifier_names
             - overridden_fields
+            - always_put_required_named_parameters_first
+            - depend_on_referenced_packages
           schema_mapping:
             - schema: lib/graphql/schema.graphql
               queries_glob: lib/src/repositories/database/**/{subscriptions.graphql,queries.graphql,mutations.graphql}
