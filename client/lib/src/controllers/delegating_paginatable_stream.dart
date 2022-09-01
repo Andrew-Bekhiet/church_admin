@@ -7,23 +7,25 @@ import 'package:rxdart/rxdart.dart';
 class DelegatingPaginatableStream<T extends ViewableWithID>
     extends PaginatableStreamBase<T> {
   DelegatingPaginatableStream({
-    required OnQuery<T> onQuery,
+    required OnQuery<T> streamDelegate,
     super.limit = 100,
-  })  : _query = onQuery,
+  })  : _query = streamDelegate,
         super.private() {
-    _querySubscription = _offset.switchMap(
-      (o) {
-        log('Listening to offset ' + o.toString());
-        return _query(this, o).map(
-          (r) {
-            _canPaginateBackward =
-                r.canPaginateBackward ?? _canPaginateBackward;
-            _canPaginateForward = r.canPaginateForward ?? _canPaginateForward;
-            _isLoading = false;
+    _querySubscription = _query(
+      this,
+      _offset.map(
+        (o) {
+          log('Listening to offset ' + o.toString());
+          return o;
+        },
+      ),
+    ).map(
+      (r) {
+        _canPaginateBackward = r.canPaginateBackward ?? _canPaginateBackward;
+        _canPaginateForward = r.canPaginateForward ?? _canPaginateForward;
+        _isLoading = false;
 
-            return r.result;
-          },
-        );
+        return r.result;
       },
     ).listen(_subject.add, onError: _subject.addError);
   }
@@ -105,7 +107,7 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
 typedef OnQuery<TParsed extends ViewableWithID>
     = Stream<DelegatingStreamResult<TParsed>> Function(
   DelegatingPaginatableStream<TParsed> instance,
-  int offset,
+  Stream<int> offset,
 );
 
 class DelegatingStreamResult<T> {

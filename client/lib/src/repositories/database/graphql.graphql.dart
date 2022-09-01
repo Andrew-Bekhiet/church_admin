@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // @dart = 2.12
-// ignore_for_file: constant_identifier_names, overridden_fields
+// ignore_for_file: constant_identifier_names, overridden_fields, always_put_required_named_parameters_first, depend_on_referenced_packages
 
 import 'package:artemis/artemis.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:church_admin/graphql/scalars.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gql/ast.dart';
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 part 'graphql.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -8980,84 +8981,81 @@ class GetAreasStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetAreasStreamArgumentsToJson(this);
 }
 
-final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'getAreasStream';
-final GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'getAreasStream';
+const GET_AREAS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getAreasStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'AreasBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getAreasStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'AreasBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'areas'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'areas'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'bounds'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'bounds'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetAreasStreamSubscription extends GraphQLQuery<
@@ -9099,79 +9097,79 @@ class GetClassesStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetClassesStreamArgumentsToJson(this);
 }
 
-final GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getClassesStream';
-final GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_CLASSES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getClassesStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'ClassesBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getClassesStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'ClassesBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'classes'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'classes'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetClassesStreamSubscription extends GraphQLQuery<
@@ -9213,79 +9211,79 @@ class GetFamiliesStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetFamiliesStreamArgumentsToJson(this);
 }
 
-final GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getFamiliesStream';
-final GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_FAMILIES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getFamiliesStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'FamiliesBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getFamiliesStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'FamiliesBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'families'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'families'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetFamiliesStreamSubscription extends GraphQLQuery<
@@ -9327,73 +9325,76 @@ class GetGroupsStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetGroupsStreamArgumentsToJson(this);
 }
 
-final GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getGroupsStream';
-final GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_GROUPS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getGroupsStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'GroupsBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getGroupsStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'GroupsBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'groups'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'groups'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetGroupsStreamSubscription extends GraphQLQuery<
@@ -9442,110 +9443,117 @@ class InsertPersonLastConfessionArguments extends JsonSerializable
       _$InsertPersonLastConfessionArgumentsToJson(this);
 }
 
-final INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT_OPERATION_NAME =
+const INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT_OPERATION_NAME =
     'insertPersonLastConfession';
-final INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT =
+const INSERT_PERSON_LAST_CONFESSION_MUTATION_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.mutation,
-      name: NameNode(value: 'insertPersonLastConfession'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastConfession')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.mutation,
+    name: NameNode(value: 'insertPersonLastConfession'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'lastConfession'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'data'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'day'),
-                                    value: VariableNode(
-                                        name:
-                                            NameNode(value: 'lastConfession')))
-                              ])),
-                          ObjectFieldNode(
-                              name: NameNode(value: 'onConflict'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'constraint'),
-                                    value: EnumValueNode(
-                                        name: NameNode(
-                                            value: 'attendance_days_pkey'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'update_columns'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'day')))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'onConflict'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(
-                                value:
-                                    'confession_history_dayID_personID_key')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                    name: NameNode(value: 'day'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'data'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'lastConfession')))
+                            ],
+                          ),
+                        ),
+                        ObjectFieldNode(
+                          name: NameNode(value: 'onConflict'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'constraint'),
+                                value: EnumValueNode(
+                                    name: NameNode(
+                                        value: 'attendance_days_pkey')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'update_columns'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'day')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'onConflict'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                          name: NameNode(
+                              value: 'confession_history_dayID_personID_key')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class InsertPersonLastConfessionMutation extends GraphQLQuery<
@@ -9593,107 +9601,116 @@ class InsertPersonLastKodasArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$InsertPersonLastKodasArgumentsToJson(this);
 }
 
-final INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT_OPERATION_NAME =
+const INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT_OPERATION_NAME =
     'insertPersonLastKodas';
-final INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT = DocumentNode(definitions: [
+const INSERT_PERSON_LAST_KODAS_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.mutation,
-      name: NameNode(value: 'insertPersonLastKodas'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastKodas')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.mutation,
+    name: NameNode(value: 'insertPersonLastKodas'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'lastKodas'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'data'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'day'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'lastKodas')))
-                              ])),
-                          ObjectFieldNode(
-                              name: NameNode(value: 'onConflict'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'constraint'),
-                                    value: EnumValueNode(
-                                        name: NameNode(
-                                            value: 'attendance_days_pkey'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'update_columns'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'day')))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'onConflict'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(
-                                value: 'kodas_history_dayID_personID_key')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                    name: NameNode(value: 'day'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'data'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'lastKodas')))
+                            ],
+                          ),
+                        ),
+                        ObjectFieldNode(
+                          name: NameNode(value: 'onConflict'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'constraint'),
+                                value: EnumValueNode(
+                                    name: NameNode(
+                                        value: 'attendance_days_pkey')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'update_columns'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'day')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'onConflict'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                          name: NameNode(
+                              value: 'kodas_history_dayID_personID_key')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class InsertPersonLastKodasMutation extends GraphQLQuery<
@@ -9740,77 +9757,73 @@ class InsertPersonLastCallArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$InsertPersonLastCallArgumentsToJson(this);
 }
 
-final INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT_OPERATION_NAME =
+const INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT_OPERATION_NAME =
     'insertPersonLastCall';
-final INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT = DocumentNode(definitions: [
+const INSERT_PERSON_LAST_CALL_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.mutation,
-      name: NameNode(value: 'insertPersonLastCall'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastCall')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.mutation,
+    name: NameNode(value: 'insertPersonLastCall'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'lastCall'),
+          ),
+          type: NamedTypeNode(
+              name: NameNode(value: 'timestamptz'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'insertHistoryCallHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: VariableNode(name: NameNode(value: 'lastCall')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'insertHistoryCallHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastCall')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class InsertPersonLastCallMutation extends GraphQLQuery<
@@ -9857,77 +9870,73 @@ class InsertPersonLastVisitArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$InsertPersonLastVisitArgumentsToJson(this);
 }
 
-final INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT_OPERATION_NAME =
+const INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT_OPERATION_NAME =
     'insertPersonLastVisit';
-final INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT = DocumentNode(definitions: [
+const INSERT_PERSON_LAST_VISIT_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.mutation,
-      name: NameNode(value: 'insertPersonLastVisit'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastVisit')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.mutation,
+    name: NameNode(value: 'insertPersonLastVisit'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'lastVisit'),
+          ),
+          type: NamedTypeNode(
+              name: NameNode(value: 'timestamptz'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: VariableNode(name: NameNode(value: 'lastVisit')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastVisit')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class InsertPersonLastVisitMutation extends GraphQLQuery<
@@ -9979,194 +9988,207 @@ class UpdatePersonSpiritDataArguments extends JsonSerializable
       _$UpdatePersonSpiritDataArgumentsToJson(this);
 }
 
-final UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT_OPERATION_NAME =
+const UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT_OPERATION_NAME =
     'updatePersonSpiritData';
-final UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT = DocumentNode(definitions: [
+const UPDATE_PERSON_SPIRIT_DATA_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.mutation,
-      name: NameNode(value: 'updatePersonSpiritData'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastConfession')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'lastKodas')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
+    type: OperationType.mutation,
+    name: NameNode(value: 'updatePersonSpiritData'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'lastConfession'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'lastKodas'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
+        FieldNode(
+          name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                    name: NameNode(value: 'day'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'data'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'lastConfession')))
+                            ],
+                          ),
+                        ),
+                        ObjectFieldNode(
+                          name: NameNode(value: 'onConflict'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'constraint'),
+                                value: EnumValueNode(
+                                    name: NameNode(
+                                        value: 'attendance_days_pkey')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'update_columns'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'day')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'onConflict'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                          name: NameNode(
+                              value: 'confession_history_dayID_personID_key')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        FieldNode(
+          name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'object'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'personId'),
+                    value: VariableNode(name: NameNode(value: 'personId')),
+                  ),
+                  ObjectFieldNode(
+                    name: NameNode(value: 'day'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'data'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'lastKodas')))
+                            ],
+                          ),
+                        ),
+                        ObjectFieldNode(
+                          name: NameNode(value: 'onConflict'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'constraint'),
+                                value: EnumValueNode(
+                                    name: NameNode(
+                                        value: 'attendance_days_pkey')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'update_columns'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'day')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'onConflict'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                          name: NameNode(
+                              value: 'kodas_history_dayID_personID_key')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
       ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'data'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'day'),
-                                    value: VariableNode(
-                                        name:
-                                            NameNode(value: 'lastConfession')))
-                              ])),
-                          ObjectFieldNode(
-                              name: NameNode(value: 'onConflict'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'constraint'),
-                                    value: EnumValueNode(
-                                        name: NameNode(
-                                            value: 'attendance_days_pkey'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'update_columns'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'day')))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'onConflict'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(
-                                value:
-                                    'confession_history_dayID_personID_key')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ])),
-        FieldNode(
-            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'object'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: VariableNode(name: NameNode(value: 'personId'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'data'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'day'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'lastKodas')))
-                              ])),
-                          ObjectFieldNode(
-                              name: NameNode(value: 'onConflict'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'constraint'),
-                                    value: EnumValueNode(
-                                        name: NameNode(
-                                            value: 'attendance_days_pkey'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'update_columns'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'day')))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'onConflict'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(
-                                value: 'kodas_history_dayID_personID_key')))
-                  ]))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+    ),
+  )
 ]);
 
 class UpdatePersonSpiritDataMutation extends GraphQLQuery<
@@ -10209,61 +10231,70 @@ class GetPersonsAttendanceWarningArguments extends JsonSerializable
       _$GetPersonsAttendanceWarningArgumentsToJson(this);
 }
 
-final GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
+const GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsAttendanceWarning';
-final GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT =
+const GET_PERSONS_ATTENDANCE_WARNING_QUERY_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonsAttendanceWarning'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFilter')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonsAttendanceWarning'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'dateFilter'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'attendanceHistory'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_not'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'dateFilter')))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: IntValueNode(value: '25'))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'attendanceHistory'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_not'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'dayId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gte'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'dateFilter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '25'))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [FieldNode(name: NameNode(value: 'name'))],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsAttendanceWarningQuery extends GraphQLQuery<
@@ -10306,60 +10337,69 @@ class GetPersonsKodasWarningArguments extends JsonSerializable
       _$GetPersonsKodasWarningArgumentsToJson(this);
 }
 
-final GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
+const GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsKodasWarning';
-final GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_PERSONS_KODAS_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonsKodasWarning'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFilter')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonsKodasWarning'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'dateFilter'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'kodasHistory'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_not'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'dateFilter')))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: IntValueNode(value: '25'))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'kodasHistory'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_not'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'dayId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gte'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'dateFilter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '25'))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [FieldNode(name: NameNode(value: 'name'))],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsKodasWarningQuery extends GraphQLQuery<
@@ -10402,61 +10442,70 @@ class GetPersonsConfessionWarningArguments extends JsonSerializable
       _$GetPersonsConfessionWarningArgumentsToJson(this);
 }
 
-final GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
+const GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsConfessionWarning';
-final GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT =
+const GET_PERSONS_CONFESSION_WARNING_QUERY_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonsConfessionWarning'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFilter')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonsConfessionWarning'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'dateFilter'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'confessionHistory'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_not'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'dateFilter')))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: IntValueNode(value: '25'))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'confessionHistory'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_not'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'dayId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gte'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'dateFilter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '25'))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [FieldNode(name: NameNode(value: 'name'))],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsConfessionWarningQuery extends GraphQLQuery<
@@ -10499,61 +10548,70 @@ class GetPersonsVisitWarningArguments extends JsonSerializable
       _$GetPersonsVisitWarningArgumentsToJson(this);
 }
 
-final GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
+const GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonsVisitWarning';
-final GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_PERSONS_VISIT_WARNING_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonsVisitWarning'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFilter')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonsVisitWarning'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'dateFilter'),
+          ),
+          type: NamedTypeNode(
+              name: NameNode(value: 'timestamptz'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'visitHistory'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_not'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'time'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'dateFilter')))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: IntValueNode(value: '25'))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'visitHistory'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_not'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'time'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gte'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'dateFilter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '25'))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [FieldNode(name: NameNode(value: 'name'))],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsVisitWarningQuery extends GraphQLQuery<
@@ -10593,51 +10651,53 @@ class GetPersonsBirthdayArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetPersonsBirthdayArgumentsToJson(this);
 }
 
-final GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT_OPERATION_NAME = 'getPersonsBirthday';
-final GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT_OPERATION_NAME = 'getPersonsBirthday';
+const GET_PERSONS_BIRTHDAY_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonsBirthday'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFilter')),
-            type:
-                NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonsBirthday'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'dateFilter'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'birthday'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_eq'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'dateFilter')))
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: IntValueNode(value: '25'))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'birthday'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                                name: NameNode(value: 'dateFilter')))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '25'))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [FieldNode(name: NameNode(value: 'name'))],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsBirthdayQuery extends GraphQLQuery<GetPersonsBirthday$QueryRoot,
@@ -10694,438 +10754,450 @@ class GetMorePersonDataArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetMorePersonDataArgumentsToJson(this);
 }
 
-final GET_MORE_PERSON_DATA_QUERY_DOCUMENT_OPERATION_NAME = 'getMorePersonData';
-final GET_MORE_PERSON_DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_MORE_PERSON_DATA_QUERY_DOCUMENT_OPERATION_NAME = 'getMorePersonData';
+const GET_MORE_PERSON_DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getMorePersonData'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'id')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'areasAfter')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'String'), isNonNull: false),
-            defaultValue: DefaultValueNode(
-                value: StringValueNode(value: '', isBlock: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'classesAfter')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'String'), isNonNull: false),
-            defaultValue: DefaultValueNode(
-                value: StringValueNode(value: '', isBlock: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'groupsAfter')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'String'), isNonNull: false),
-            defaultValue: DefaultValueNode(
-                value: StringValueNode(value: '', isBlock: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'servicesAfter')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'String'), isNonNull: false),
-            defaultValue: DefaultValueNode(
-                value: StringValueNode(value: '', isBlock: false)),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getMorePersonData'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'id'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'areasAfter'),
+        ),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+        ),
+        defaultValue:
+            DefaultValueNode(value: StringValueNode(value: '', isBlock: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'classesAfter'),
+        ),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+        ),
+        defaultValue:
+            DefaultValueNode(value: StringValueNode(value: '', isBlock: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'groupsAfter'),
+        ),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+        ),
+        defaultValue:
+            DefaultValueNode(value: StringValueNode(value: '', isBlock: false)),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'servicesAfter'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+          ),
+          defaultValue: DefaultValueNode(
+              value: StringValueNode(value: '', isBlock: false)))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'personsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'id')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'personsByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'id'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'name'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'areas'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value:
-                                  EnumValueNode(name: NameNode(value: 'ASC')))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gt'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'areasAfter')))
-                              ]))
-                        ]))
+                name: NameNode(value: 'areas'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')))
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'name'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_gt'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'areasAfter')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
+                ),
+              ),
               FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value:
-                                  EnumValueNode(name: NameNode(value: 'ASC')))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gt'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'classesAfter')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'classes'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')))
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'name'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_gt'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'classesAfter')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'color'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'photoUpdatedAt'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'attendanceHistoryAggregate'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'where'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'personId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_eq'),
-                                          value: VariableNode(
-                                              name: NameNode(value: 'id')))
-                                    ]))
-                              ]))
+                      name: NameNode(value: 'attendanceHistoryAggregate'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'where'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'id')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'aggregate'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'max'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'aggregate'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'max'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'group'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'group'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gt'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'groupsAfter')))
-                                    ]))
-                              ]))
-                        ]))
+                      ),
+                    )
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name:
-                                                        NameNode(value: 'id')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
+                ),
+              ),
               FieldNode(
-                  name: NameNode(value: 'services'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'service'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'service'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gt'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'servicesAfter')))
-                                    ]))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'groups'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'group'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'group'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'name'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gt'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'groupsAfter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'name'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'color'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'photoUpdatedAt'),
+                          ),
                           FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name:
-                                                        NameNode(value: 'id')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(value: 'id')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
                                       FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
                                             FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ]))
-                              ]))
-                        ]))
-                  ]))
-            ]))
-      ]))
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'services'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'service'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'service'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'name'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_gt'),
+                                        value: VariableNode(
+                                            name: NameNode(
+                                                value: 'servicesAfter')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'photoUpdatedAt'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(value: 'id')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetMorePersonDataQuery extends GraphQLQuery<GetMorePersonData$QueryRoot,
@@ -11166,145 +11238,99 @@ class PersonsGeolocationsArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$PersonsGeolocationsArgumentsToJson(this);
 }
 
-final PERSONS_GEOLOCATIONS_QUERY_DOCUMENT_OPERATION_NAME =
+const PERSONS_GEOLOCATIONS_QUERY_DOCUMENT_OPERATION_NAME =
     'personsGeolocations';
-final PERSONS_GEOLOCATIONS_QUERY_DOCUMENT = DocumentNode(definitions: [
+const PERSONS_GEOLOCATIONS_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'personsGeolocations'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'conditions')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'PersonsBoolExp'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'personsGeolocations'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'conditions'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonsBoolExp'),
+          ),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: VariableNode(name: NameNode(value: 'conditions')))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: VariableNode(name: NameNode(value: 'conditions')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'geolocation'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'areas'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'bounds'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'streets'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'line'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'family'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'geolocation'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'geolocation'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'areas'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'bounds'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'streets'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'line'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'family'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'geolocation'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class PersonsGeolocationsQuery extends GraphQLQuery<
@@ -11407,1009 +11433,975 @@ class AnalyzePersonArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AnalyzePersonArgumentsToJson(this);
 }
 
-final ANALYZE_PERSON_QUERY_DOCUMENT_OPERATION_NAME = 'analyzePerson';
-final ANALYZE_PERSON_QUERY_DOCUMENT = DocumentNode(definitions: [
+const ANALYZE_PERSON_QUERY_DOCUMENT_OPERATION_NAME = 'analyzePerson';
+const ANALYZE_PERSON_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'analyzePerson'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFrom')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateTo')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'timeFrom')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'timeTo')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'timestamptz'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
+    type: OperationType.query,
+    name: NameNode(value: 'analyzePerson'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'dateFrom'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'dateTo'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'timeFrom'),
+        ),
+        type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'timeTo'),
+        ),
+        type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'groupsIds'),
+        ),
+        type: ListTypeNode(
             type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'groupsIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'classesIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'servicesIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'callHistory')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'visitHistory')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'editHistory')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'confessionHistory')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'kodasHistory')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ListValueNode()),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'classesIds'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ListValueNode()),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'servicesIds'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ListValueNode()),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'callHistory'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'visitHistory'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'editHistory'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'confessionHistory'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'kodasHistory'),
+          ),
+          type:
+              NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'personsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'personId')))
+          name: NameNode(value: 'personsByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'personId')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'callHistoryAggregate'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'time'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'timeFrom')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'timeTo')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                directives: [
+                  DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'if'),
+                        value:
+                            VariableNode(name: NameNode(value: 'callHistory')))
+                  ])
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'aggregate'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'time'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'nodes'),
+                      selectionSet: SelectionSetNode(
+                        selections: [FieldNode(name: NameNode(value: 'time'))],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'visitHistoryAggregate'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'time'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'timeFrom')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'timeTo')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                directives: [
+                  DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'if'),
+                        value:
+                            VariableNode(name: NameNode(value: 'visitHistory')))
+                  ])
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'aggregate'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'time'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'nodes'),
+                      selectionSet: SelectionSetNode(
+                        selections: [FieldNode(name: NameNode(value: 'time'))],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'editHistoryAggregate'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'time'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'timeFrom')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'timeTo')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                directives: [
+                  DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'if'),
+                        value:
+                            VariableNode(name: NameNode(value: 'editHistory')))
+                  ])
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'aggregate'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'time'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'nodes'),
+                      selectionSet: SelectionSetNode(
+                        selections: [FieldNode(name: NameNode(value: 'time'))],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'kodasHistoryAggregate'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'dayId'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateFrom')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'dateTo')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                directives: [
+                  DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'if'),
+                        value:
+                            VariableNode(name: NameNode(value: 'kodasHistory')))
+                  ])
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'aggregate'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'time'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'nodes'),
+                      selectionSet: SelectionSetNode(
+                        selections: [FieldNode(name: NameNode(value: 'time'))],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'confessionHistoryAggregate'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'dayId'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateFrom')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'dateTo')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                directives: [
+                  DirectiveNode(name: NameNode(value: 'include'), arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'if'),
+                        value: VariableNode(
+                            name: NameNode(value: 'confessionHistory')))
+                  ])
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'aggregate'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'time'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'nodes'),
+                      selectionSet: SelectionSetNode(
+                        selections: [FieldNode(name: NameNode(value: 'time'))],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'services'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'serviceId'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_in'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'servicesIds')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'personId')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'asAdmin'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: BooleanValueNode(
+                                                  value: false))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(
+                                        name: NameNode(value: 'count'),
+                                      ),
+                                      FieldNode(
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(
+                                value: 'attendanceDaysConstraintsAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'count'))
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'classes'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_in'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'classesIds')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'attendanceHistoryAggregate'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'where'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'dayId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_gte'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'dateFrom')),
+                                    ),
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_lte'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'dateTo')))
+                                  ],
+                                ),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'personId')))
+                                  ],
+                                ),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: 'asAdmin'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: BooleanValueNode(value: false))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'aggregate'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'count'),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'max'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'nodes'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'dayId'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name:
+                          NameNode(value: 'attendanceDaysConstraintsAggregate'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'where'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'dayId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_gte'),
+                                      value: VariableNode(
+                                          name: NameNode(value: 'dateFrom')),
+                                    ),
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_lte'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'dateTo')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'aggregate'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'count'))
+                              ],
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'nodes'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(name: NameNode(value: 'dayId'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'groups'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'groupId'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: '_in'),
+                                  value: VariableNode(
+                                      name: NameNode(value: 'groupsIds')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'personId')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'asAdmin'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: BooleanValueNode(
+                                                  value: false))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(
+                                        name: NameNode(value: 'count'),
+                                      ),
+                                      FieldNode(
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(
+                                value: 'attendanceDaysConstraintsAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'count'))
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'callHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'time'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [
-                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
-                      ArgumentNode(
-                          name: NameNode(value: 'if'),
-                          value: VariableNode(
-                              name: NameNode(value: 'callHistory')))
-                    ])
-                  ],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'visitHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'time'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [
-                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
-                      ArgumentNode(
-                          name: NameNode(value: 'if'),
-                          value: VariableNode(
-                              name: NameNode(value: 'visitHistory')))
-                    ])
-                  ],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'editHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'time'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'timeTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [
-                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
-                      ArgumentNode(
-                          name: NameNode(value: 'if'),
-                          value: VariableNode(
-                              name: NameNode(value: 'editHistory')))
-                    ])
-                  ],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'kodasHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'dayId'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'dateFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'dateTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [
-                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
-                      ArgumentNode(
-                          name: NameNode(value: 'if'),
-                          value: VariableNode(
-                              name: NameNode(value: 'kodasHistory')))
-                    ])
-                  ],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'confessionHistoryAggregate'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'dayId'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_gte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'dateFrom'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_lte'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'dateTo')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [
-                    DirectiveNode(name: NameNode(value: 'include'), arguments: [
-                      ArgumentNode(
-                          name: NameNode(value: 'if'),
-                          value: VariableNode(
-                              name: NameNode(value: 'confessionHistory')))
-                    ])
-                  ],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'aggregate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'count'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'max'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'time'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'nodes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'time'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'services'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'serviceId'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_in'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'servicesIds')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'personId')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'asAdmin'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: BooleanValueNode(
-                                                    value: false))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(
-                                  value: 'attendanceDaysConstraintsAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'id'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_in'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'classesIds')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'attendanceHistoryAggregate'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'where'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name:
-                                                  NameNode(value: 'dateFrom'))),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_lte'),
-                                          value: VariableNode(
-                                              name: NameNode(value: 'dateTo')))
-                                    ])),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'personId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_eq'),
-                                          value: VariableNode(
-                                              name:
-                                                  NameNode(value: 'personId')))
-                                    ])),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'asAdmin'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_eq'),
-                                          value: BooleanValueNode(value: false))
-                                    ]))
-                              ]))
-                        ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'aggregate'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'count'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'max'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(value: 'nodes'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(
-                            value: 'attendanceDaysConstraintsAggregate'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'where'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_gte'),
-                                          value: VariableNode(
-                                              name:
-                                                  NameNode(value: 'dateFrom'))),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_lte'),
-                                          value: VariableNode(
-                                              name: NameNode(value: 'dateTo')))
-                                    ]))
-                              ]))
-                        ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'aggregate'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'count'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ])),
-                          FieldNode(
-                              name: NameNode(value: 'nodes'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'dayId'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'groupId'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: '_in'),
-                                    value: VariableNode(
-                                        name: NameNode(value: 'groupsIds')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'personId')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'asAdmin'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: BooleanValueNode(
-                                                    value: false))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(
-                                  value: 'attendanceDaysConstraintsAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class AnalyzePersonQuery
@@ -12454,198 +12446,155 @@ class GetPersonClassesAndGroupsArguments extends JsonSerializable
       _$GetPersonClassesAndGroupsArgumentsToJson(this);
 }
 
-final GET_PERSON_CLASSES_AND_GROUPS_QUERY_DOCUMENT_OPERATION_NAME =
+const GET_PERSON_CLASSES_AND_GROUPS_QUERY_DOCUMENT_OPERATION_NAME =
     'getPersonClassesAndGroups';
-final GET_PERSON_CLASSES_AND_GROUPS_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_PERSON_CLASSES_AND_GROUPS_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getPersonClassesAndGroups'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'id')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getPersonClassesAndGroups'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'id'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'personsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'id')))
+          name: NameNode(value: 'personsByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'classes'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')))
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'photoUpdatedAt'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'groups'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'group'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'photoUpdatedAt'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'service'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'id'),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'name'),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'color'),
+                                ),
+                                FieldNode(
+                                    name: NameNode(value: 'photoUpdatedAt'))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value:
-                                  EnumValueNode(name: NameNode(value: 'ASC')))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'group'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'service'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'id'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'name'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'color'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'photoUpdatedAt'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ]))
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonClassesAndGroupsQuery extends GraphQLQuery<
@@ -12687,79 +12636,79 @@ class GetPersonsStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetPersonsStreamArgumentsToJson(this);
 }
 
-final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getPersonsStream';
-final GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_PERSONS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getPersonsStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'PersonsBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getPersonsStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'PersonsBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'persons'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'persons'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetPersonsStreamSubscription extends GraphQLQuery<
@@ -12802,844 +12751,623 @@ class WatchPersonArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$WatchPersonArgumentsToJson(this);
 }
 
-final WATCH_PERSON_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'watchPerson';
-final WATCH_PERSON_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const WATCH_PERSON_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'watchPerson';
+const WATCH_PERSON_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'watchPerson'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'id')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchPerson'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'id'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'personsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'id')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'personsByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'id'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'name'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'color'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'photoUpdatedAt'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'address'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'address'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'birthdate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'birthdate'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'areas'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'limit'),
-                        value: IntValueNode(value: '6')),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value:
-                                  EnumValueNode(name: NameNode(value: 'ASC')))
-                        ]))
+                name: NameNode(value: 'areas'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'limit'),
+                    value: IntValueNode(value: '6'),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')))
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
+                ),
+              ),
               FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'limit'),
-                        value: IntValueNode(value: '6')),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'name'),
-                              value:
-                                  EnumValueNode(name: NameNode(value: 'ASC')))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'classes'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'limit'),
+                    value: IntValueNode(value: '6'),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')))
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'color'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'photoUpdatedAt'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'attendanceHistoryAggregate'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'where'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'personId'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_eq'),
-                                          value: VariableNode(
-                                              name: NameNode(value: 'id')))
-                                    ]))
-                              ]))
+                      name: NameNode(value: 'attendanceHistoryAggregate'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'where'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'id')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'aggregate'),
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'max'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'time'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'aggregate'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'max'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'time'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'church'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'college'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'family'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'father'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'church'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'gender'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'geolocation'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'limit'),
-                        value: IntValueNode(value: '6')),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'group'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ]))
+                      ),
+                    )
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'church'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'college'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'family'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'father'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'church'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(name: NameNode(value: 'name'))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'gender'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'geolocation'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'groups'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'limit'),
+                    value: IntValueNode(value: '6'),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'group'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'name'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'color'),
+                          ),
                           FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name:
-                                                        NameNode(value: 'id')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            name: NameNode(value: 'photoUpdatedAt'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(value: 'id')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
                                       FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
                                             FieldNode(
-                                                name: NameNode(value: 'time'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'isServant'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'isShammas'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'isStudent'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'job'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'jobDescription'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'lastCall'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'lastConfession'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'lastEdit'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'lastKodas'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'lastVisit'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'mainPhone'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'notes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'otherPhones'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'personType'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'qualification'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'school'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'services'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'limit'),
-                        value: IntValueNode(value: '6')),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'service'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name:
-                                                        NameNode(value: 'id')))
-                                          ]))
-                                    ]))
+                                                name: NameNode(value: 'time'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
                               ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(value: 'time'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'shammasLevel'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'state'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'streets'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'studyYear'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'tags'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'tag'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'name'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ]))
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'tag'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
+                ),
+              ),
               FieldNode(
-                  name: NameNode(value: 'uid'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'isServant'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'isShammas'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'isStudent'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'job'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobDescription'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'lastCall'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'lastConfession'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'lastEdit'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'lastKodas'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'lastVisit'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'mainPhone'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'notes'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'otherPhones'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'personType'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'qualification'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'userData'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'school'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'services'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'limit'),
+                    value: IntValueNode(value: '6'),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'service'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'uid'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'email'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ]))
-            ]))
-      ]))
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'photoUpdatedAt'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(value: 'id')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'time'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'shammasLevel'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'order'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'state'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'name'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'streets'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'studyYear'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'order'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'tags'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'tag'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'tag'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(name: NameNode(value: 'color'))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'uid'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'userData'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'uid'),
+                          ),
+                          FieldNode(name: NameNode(value: 'email'))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class WatchPersonSubscription
@@ -13686,108 +13414,117 @@ class CallHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$CallHistoryArgumentsToJson(this);
 }
 
-final CALL_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'callHistory';
-final CALL_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const CALL_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'callHistory';
+const CALL_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'callHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryCallHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'callHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryCallHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyCallHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyCallHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class CallHistorySubscription
@@ -13834,108 +13571,117 @@ class VisitHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$VisitHistoryArgumentsToJson(this);
 }
 
-final VISIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'visitHistory';
-final VISIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const VISIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'visitHistory';
+const VISIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'visitHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'visitHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyVisitHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyVisitHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class VisitHistorySubscription
@@ -13983,109 +13729,118 @@ class ConfessionHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$ConfessionHistoryArgumentsToJson(this);
 }
 
-final CONFESSION_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const CONFESSION_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'confessionHistory';
-final CONFESSION_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const CONFESSION_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'confessionHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryConfessionHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'confessionHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryConfessionHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyConfessionHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyConfessionHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class ConfessionHistorySubscription extends GraphQLQuery<
@@ -14132,108 +13887,117 @@ class KodasHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$KodasHistoryArgumentsToJson(this);
 }
 
-final KODAS_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'kodasHistory';
-final KODAS_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const KODAS_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'kodasHistory';
+const KODAS_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'kodasHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryKodasHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'kodasHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryKodasHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyKodasHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyKodasHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class KodasHistorySubscription
@@ -14281,119 +14045,131 @@ class PersonEditHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$PersonEditHistoryArgumentsToJson(this);
 }
 
-final PERSON_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const PERSON_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'personEditHistory';
-final PERSON_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const PERSON_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'personEditHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryEditHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'personEditHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryEditHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyEditHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'table'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: StringValueNode(
-                                          value: 'persons', isBlock: false))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'recordId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyEditHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'table'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: StringValueNode(
+                                        value: 'persons', isBlock: false))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'recordId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class PersonEditHistorySubscription extends GraphQLQuery<
@@ -14455,123 +14231,143 @@ class PersonServiceAttendanceArguments extends JsonSerializable
       _$PersonServiceAttendanceArgumentsToJson(this);
 }
 
-final PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'personServiceAttendance';
-final PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+const PERSON_SERVICE_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'personServiceAttendance'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'serviceId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'asAdmin')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'personServiceAttendance'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'serviceId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'asAdmin'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'limit'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'addWhere'),
+          ),
+          type: ListTypeNode(
+              type: NamedTypeNode(
+                  name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                  isNonNull: true),
+              isNonNull: false),
+          defaultValue: DefaultValueNode(value: ObjectValueNode()))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyAttendanceHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'serviceId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'serviceId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'asAdmin'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'asAdmin')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'historyAttendanceHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'serviceId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'serviceId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'asAdmin'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'asAdmin')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'recordedBy'),
+              ),
+              FieldNode(name: NameNode(value: 'time'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'recordedBy'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class PersonServiceAttendanceSubscription extends GraphQLQuery<
@@ -14632,128 +14428,150 @@ class PersonClassAttendanceArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$PersonClassAttendanceArgumentsToJson(this);
 }
 
-final PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'personClassAttendance';
-final PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+const PERSON_CLASS_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'personClassAttendance'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'classId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'asAdmin')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'personClassAttendance'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'classId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'asAdmin'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'limit'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'addWhere'),
+          ),
+          type: ListTypeNode(
+              type: NamedTypeNode(
+                  name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                  isNonNull: true),
+              isNonNull: false),
+          defaultValue: DefaultValueNode(value: ObjectValueNode()))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyAttendanceHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'class'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'id'),
-                                      value: ObjectValueNode(fields: [
-                                        ObjectFieldNode(
-                                            name: NameNode(value: '_eq'),
-                                            value: VariableNode(
-                                                name:
-                                                    NameNode(value: 'classId')))
-                                      ]))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'asAdmin'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'asAdmin')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'historyAttendanceHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'class'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'id'),
+                                  value: ObjectValueNode(
+                                    fields: [
+                                      ObjectFieldNode(
+                                          name: NameNode(value: '_eq'),
+                                          value: VariableNode(
+                                              name: NameNode(value: 'classId')))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'asAdmin'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'asAdmin')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'recordedBy'),
+              ),
+              FieldNode(name: NameNode(value: 'time'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'recordedBy'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class PersonClassAttendanceSubscription extends GraphQLQuery<
@@ -14813,123 +14631,143 @@ class PersonGroupAttendanceArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$PersonGroupAttendanceArgumentsToJson(this);
 }
 
-final PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'personGroupAttendance';
-final PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
+const PERSON_GROUP_ATTENDANCE_SUBSCRIPTION_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'personGroupAttendance'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'groupId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'asAdmin')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'Boolean'), isNonNull: true),
-            defaultValue:
-                DefaultValueNode(value: BooleanValueNode(value: false)),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'personGroupAttendance'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'groupId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'asAdmin'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Boolean'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'limit'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'addWhere'),
+          ),
+          type: ListTypeNode(
+              type: NamedTypeNode(
+                  name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+                  isNonNull: true),
+              isNonNull: false),
+          defaultValue: DefaultValueNode(value: ObjectValueNode()))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyAttendanceHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'personId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'personId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'groupId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'groupId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'asAdmin'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'asAdmin')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'historyAttendanceHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'personId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'groupId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'groupId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'asAdmin'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'asAdmin')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'recordedBy'),
+              ),
+              FieldNode(name: NameNode(value: 'time'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'recordedBy'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class PersonGroupAttendanceSubscription extends GraphQLQuery<
@@ -14976,267 +14814,245 @@ class GetServicesStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetServicesStreamArgumentsToJson(this);
 }
 
-final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getServicesStream';
-final GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_SERVICES_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getServicesStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'ServicesBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'groupsAddWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'GroupsBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'classesAddWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'ClassesBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getServicesStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'ServicesBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'groupsAddWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'GroupsBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'classesAddWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'ClassesBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'services'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'studyYearFrom'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC'))),
-                    ObjectFieldNode(
-                        name: NameNode(value: 'studyYearTo'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'services'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'studyYearFrom'),
+                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                  ),
+                  ObjectFieldNode(
+                      name: NameNode(value: 'studyYearTo'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'photoUpdatedAt'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'fromStudyYear'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'order'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'toStudyYear'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'order'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'classes'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: '_and'),
+                            value: VariableNode(
+                                name: NameNode(value: 'classesAddWhere')))
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'studyYear'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'order'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        ),
+                        ObjectFieldNode(
+                            name: NameNode(value: 'serviceGender'),
+                            value: EnumValueNode(
+                                name: NameNode(value: 'DESC_NULLS_LAST')))
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'photoUpdatedAt'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'studyYear'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(name: NameNode(value: 'order'))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'groups'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                            name: NameNode(value: '_and'),
+                            value: VariableNode(
+                                name: NameNode(value: 'groupsAddWhere')))
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'service'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'studyYearFrom'),
+                                value:
+                                    EnumValueNode(name: NameNode(value: 'ASC')),
+                              ),
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'studyYearTo'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'fromStudyYear'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'toStudyYear'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_and'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'classesAddWhere')))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'studyYear'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'order'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ])),
-                          ObjectFieldNode(
-                              name: NameNode(value: 'serviceGender'),
-                              value: EnumValueNode(
-                                  name: NameNode(value: 'DESC_NULLS_LAST')))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'studyYear'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'order'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: '_and'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'groupsAddWhere')))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'service'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'studyYearFrom'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC'))),
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'studyYearTo'),
-                                    value: EnumValueNode(
-                                        name: NameNode(value: 'ASC')))
-                              ]))
-                        ]))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetServicesStreamSubscription extends GraphQLQuery<
@@ -15278,85 +15094,82 @@ class GetStreetsStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetStreetsStreamArgumentsToJson(this);
 }
 
-final GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getStreetsStream';
-final GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_STREETS_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getStreetsStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'StreetsBoolExp'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getStreetsStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'StreetsBoolExp'), isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'streets'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: VariableNode(name: NameNode(value: 'addWhere')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit')))
+          name: NameNode(value: 'streets'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'addWhere')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')))
+                ],
+              ),
+            ),
+            ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'line'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'color'),
+              ),
+              FieldNode(name: NameNode(value: 'photoUpdatedAt'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'line'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'color'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetStreetsStreamSubscription extends GraphQLQuery<
@@ -15396,45 +15209,41 @@ class GetStudyYearNameArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetStudyYearNameArgumentsToJson(this);
 }
 
-final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT_OPERATION_NAME = 'getStudyYearName';
-final GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(definitions: [
+const GET_STUDY_YEAR_NAME_QUERY_DOCUMENT_OPERATION_NAME = 'getStudyYearName';
+const GET_STUDY_YEAR_NAME_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getStudyYearName'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'order')),
-            type: NamedTypeNode(
-                name: NameNode(value: 'smallint'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.query,
+    name: NameNode(value: 'getStudyYearName'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'order'),
+          ),
+          type:
+              NamedTypeNode(name: NameNode(value: 'smallint'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'studyYearsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'order'),
-                  value: VariableNode(name: NameNode(value: 'order')))
+          name: NameNode(value: 'studyYearsByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'order'),
+                value: VariableNode(name: NameNode(value: 'order')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'order'),
+              ),
+              FieldNode(name: NameNode(value: 'name'))
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'order'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetStudyYearNameQuery extends GraphQLQuery<GetStudyYearName$QueryRoot,
@@ -15510,692 +15319,697 @@ class AnalyzeUserAttendanceArguments extends JsonSerializable
   Map<String, dynamic> toJson() => _$AnalyzeUserAttendanceArgumentsToJson(this);
 }
 
-final ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME =
+const ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT_OPERATION_NAME =
     'analyzeUserAttendance';
-final ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
+const ANALYZE_USER_ATTENDANCE_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'analyzeUserAttendance'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateFrom')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'dateTo')),
-            type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'personId')),
+    type: OperationType.query,
+    name: NameNode(value: 'analyzeUserAttendance'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'dateFrom'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'dateTo'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'personId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'userId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'groupsIds'),
+        ),
+        type: ListTypeNode(
             type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'userId')),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'classesIds'),
+        ),
+        type: ListTypeNode(
             type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'groupsIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'classesIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'servicesIds')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'uuid'), isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'servicesIds'),
+          ),
+          type: ListTypeNode(
+              type:
+                  NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+              isNonNull: false),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'usersByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'uid'),
-                  value: VariableNode(name: NameNode(value: 'userId')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'usersByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'uid'),
+                value: VariableNode(name: NameNode(value: 'userId')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'uid'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'uid'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'name'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'adminOn'),
-                  alias: NameNode(value: 'servicesHistory'),
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'service'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'id'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_in'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'servicesIds')))
-                                    ]))
-                              ]))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'distinctOn'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'adminOnService')))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'adminOn'),
+                alias: NameNode(value: 'servicesHistory'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'service'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'id'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_in'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'servicesIds')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                      name: NameNode(value: 'distinctOn'),
+                      value: EnumValueNode(
+                          name: NameNode(value: 'adminOnService')))
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'permissionId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'permissionId'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'name'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'color'),
+                          ),
                           FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'personId')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'asAdmin'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: BooleanValueNode(
-                                                    value: true))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'personId')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'asAdmin'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value:
+                                                  BooleanValueNode(value: true))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
                                       FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
+                                        name: NameNode(value: 'count'),
+                                      ),
                                       FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
                                             FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ])),
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                                 FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(
-                                  value: 'attendanceDaysConstraintsAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ]))
-                                    ]))
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
                               ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(
+                                value: 'attendanceDaysConstraintsAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'count'))
+                                    ],
+                                  ),
+                                ),
                                 FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'adminOn'),
-                  alias: NameNode(value: 'classesHistory'),
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'classes'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'id'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_in'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'classesIds')))
-                                    ]))
-                              ]))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'distinctOn'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'adminOnService')))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'permissionId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'classes'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'where'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'id'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_in'),
-                                          value: VariableNode(
-                                              name: NameNode(
-                                                  value: 'classesIds')))
-                                    ]))
-                              ])),
-                          ArgumentNode(
-                              name: NameNode(value: 'distinctOn'),
-                              value: EnumValueNode(name: NameNode(value: 'id')))
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'personId')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'asAdmin'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: BooleanValueNode(
-                                                    value: true))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(
-                                  value: 'attendanceDaysConstraintsAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'adminOn'),
-                  alias: NameNode(value: 'groupsHistory'),
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'where'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                              name: NameNode(value: 'group'),
-                              value: ObjectValueNode(fields: [
-                                ObjectFieldNode(
-                                    name: NameNode(value: 'id'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: '_in'),
-                                          value: VariableNode(
-                                              name:
-                                                  NameNode(value: 'groupsIds')))
-                                    ]))
-                              ]))
-                        ])),
-                    ArgumentNode(
-                        name: NameNode(value: 'distinctOn'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'adminOnGroup')))
+                      ),
+                    )
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'adminOn'),
+                alias: NameNode(value: 'classesHistory'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'classes'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'id'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_in'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'classesIds')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                      name: NameNode(value: 'distinctOn'),
+                      value: EnumValueNode(
+                          name: NameNode(value: 'adminOnService')))
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'permissionId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'permissionId'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
+                      name: NameNode(value: 'classes'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'where'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'id'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_in'),
+                                        value: VariableNode(
+                                            name:
+                                                NameNode(value: 'classesIds')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        ArgumentNode(
+                            name: NameNode(value: 'distinctOn'),
+                            value: EnumValueNode(name: NameNode(value: 'id')))
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
                           FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'id'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'name'),
+                          ),
                           FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
+                            name: NameNode(value: 'color'),
+                          ),
                           FieldNode(
-                              name:
-                                  NameNode(value: 'attendanceHistoryAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'personId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'personId')))
-                                          ])),
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'asAdmin'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_eq'),
-                                                value: BooleanValueNode(
-                                                    value: true))
-                                          ]))
-                                    ]))
-                              ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'personId')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'asAdmin'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value:
+                                                  BooleanValueNode(value: true))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
                                       FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
+                                        name: NameNode(value: 'count'),
+                                      ),
                                       FieldNode(
-                                          name: NameNode(value: 'max'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
                                             FieldNode(
-                                                name: NameNode(value: 'dayId'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ])),
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                                 FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ])),
-                          FieldNode(
-                              name: NameNode(
-                                  value: 'attendanceDaysConstraintsAggregate'),
-                              alias: null,
-                              arguments: [
-                                ArgumentNode(
-                                    name: NameNode(value: 'where'),
-                                    value: ObjectValueNode(fields: [
-                                      ObjectFieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          value: ObjectValueNode(fields: [
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_gte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateFrom'))),
-                                            ObjectFieldNode(
-                                                name: NameNode(value: '_lte'),
-                                                value: VariableNode(
-                                                    name: NameNode(
-                                                        value: 'dateTo')))
-                                          ]))
-                                    ]))
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
                               ],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(
+                                value: 'attendanceDaysConstraintsAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
                                 FieldNode(
-                                    name: NameNode(value: 'aggregate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'count'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'count'))
+                                    ],
+                                  ),
+                                ),
                                 FieldNode(
-                                    name: NameNode(value: 'nodes'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'adminOn'),
+                alias: NameNode(value: 'groupsHistory'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'where'),
+                    value: ObjectValueNode(
+                      fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'group'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'id'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                        name: NameNode(value: '_in'),
+                                        value: VariableNode(
+                                            name: NameNode(value: 'groupsIds')))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ArgumentNode(
+                      name: NameNode(value: 'distinctOn'),
+                      value:
+                          EnumValueNode(name: NameNode(value: 'adminOnGroup')))
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'permissionId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'attendanceHistoryAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'personId')))
+                                        ],
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'asAdmin'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_eq'),
+                                              value:
+                                                  BooleanValueNode(value: true))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
                                       FieldNode(
-                                          name: NameNode(value: 'dayId'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ]))
-                              ]))
-                        ]))
-                  ]))
-            ]))
-      ]))
+                                        name: NameNode(value: 'count'),
+                                      ),
+                                      FieldNode(
+                                        name: NameNode(value: 'max'),
+                                        selectionSet: SelectionSetNode(
+                                          selections: [
+                                            FieldNode(
+                                                name: NameNode(value: 'dayId'))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          FieldNode(
+                            name: NameNode(
+                                value: 'attendanceDaysConstraintsAggregate'),
+                            arguments: [
+                              ArgumentNode(
+                                name: NameNode(value: 'where'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_gte'),
+                                            value: VariableNode(
+                                                name: NameNode(
+                                                    value: 'dateFrom')),
+                                          ),
+                                          ObjectFieldNode(
+                                              name: NameNode(value: '_lte'),
+                                              value: VariableNode(
+                                                  name: NameNode(
+                                                      value: 'dateTo')))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                            selectionSet: SelectionSetNode(
+                              selections: [
+                                FieldNode(
+                                  name: NameNode(value: 'aggregate'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'count'))
+                                    ],
+                                  ),
+                                ),
+                                FieldNode(
+                                  name: NameNode(value: 'nodes'),
+                                  selectionSet: SelectionSetNode(
+                                    selections: [
+                                      FieldNode(name: NameNode(value: 'dayId'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class AnalyzeUserAttendanceQuery extends GraphQLQuery<
@@ -16238,282 +16052,166 @@ class GetUserInfoStreamArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetUserInfoStreamArgumentsToJson(this);
 }
 
-final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'getUserInfoStream';
-final GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const GET_USER_INFO_STREAM_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'getUserInfoStream'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'uid')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'getUserInfoStream'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'uid'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'usersByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'uid'),
-                  value: VariableNode(name: NameNode(value: 'uid')))
+          name: NameNode(value: 'usersByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'uid'),
+                value: VariableNode(name: NameNode(value: 'uid')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'uid'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'photoUpdatedAt'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'userData'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'firebaseAuthUid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'email'),
+                    ),
+                    FieldNode(name: NameNode(value: 'permissions'))
+                  ],
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'id'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'address'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'geolocation'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'mainPhone'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'otherPhones'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'birthdate'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'gender'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'isShammas'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'shammasLevel'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(name: NameNode(value: 'order'))
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'schoolId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'collegeId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'churchId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'fatherId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'isStudent'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'jobId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'jobDescription'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'qualificationId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'personTypeId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'stateId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'isServant'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'notes'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'familyId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'storeId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'studyYearId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'photoUpdatedAt'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'lastKodas'),
+                    ),
+                    FieldNode(name: NameNode(value: 'lastConfession'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'uid'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'userData'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'firebaseAuthUid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'email'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'permissions'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'address'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'geolocation'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'mainPhone'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'otherPhones'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'birthdate'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'gender'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'isShammas'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'shammasLevel'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'order'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'schoolId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'collegeId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'churchId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'fatherId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'isStudent'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'jobId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'jobDescription'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'qualificationId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'personTypeId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'stateId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'isServant'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'notes'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'familyId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'storeId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'studyYearId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'lastKodas'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'lastConfession'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class GetUserInfoStreamSubscription extends GraphQLQuery<
@@ -16556,383 +16254,281 @@ class WatchUserArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$WatchUserArgumentsToJson(this);
 }
 
-final WATCH_USER_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'watchUser';
-final WATCH_USER_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const WATCH_USER_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'watchUser';
+const WATCH_USER_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'watchUser'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'uid')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'uid'),
+          ),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'usersByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'uid'),
-                  value: VariableNode(name: NameNode(value: 'uid')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
+          name: NameNode(value: 'usersByPk'),
+          arguments: [
+            ArgumentNode(
+                name: NameNode(value: 'uid'),
+                value: VariableNode(name: NameNode(value: 'uid')))
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
               FieldNode(
-                  name: NameNode(value: 'uid'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'uid'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'name'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'name'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'photoUpdatedAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                name: NameNode(value: 'photoUpdatedAt'),
+              ),
               FieldNode(
-                  name: NameNode(value: 'person'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'person'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'id'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'name'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              FieldNode(
-                  name: NameNode(value: 'adminOn'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'orderBy'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'area'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'name'),
-                                      value: EnumValueNode(
-                                          name: NameNode(
-                                              value: 'ASC_NULLS_LAST')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'service'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'studyYearFrom'),
-                                      value: EnumValueNode(
-                                          name: NameNode(value: 'ASC'))),
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'studyYearTo'),
-                                      value: EnumValueNode(
-                                          name: NameNode(value: 'ASC')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'serviceStudyYear'),
-                                value:
-                                    EnumValueNode(name: NameNode(value: 'ASC')))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'serviceGender'),
-                                value: EnumValueNode(
-                                    name: NameNode(value: 'DESC_NULLS_FIRST')))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'service'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'name'),
-                                      value: EnumValueNode(
-                                          name: NameNode(
-                                              value: 'ASC_NULLS_LAST')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'group'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: 'name'),
-                                      value: EnumValueNode(
-                                          name: NameNode(
-                                              value: 'ASC_NULLS_LAST')))
-                                ]))
-                          ])
-                        ]))
+                      name: NameNode(value: 'color'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
                   ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'permissionId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'area'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'areaAllowEdit'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'areaAdminOnUsers'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'serviceStudyYearData'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'order'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'serviceGender'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'serviceAllowEdit'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'serviceAdminOnUsers'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'classes'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'orderBy'),
-                              value: ObjectValueNode(fields: [
+                ),
+              ),
+              FieldNode(
+                name: NameNode(value: 'adminOn'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'orderBy'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'area'),
+                            value: ObjectValueNode(
+                              fields: [
                                 ObjectFieldNode(
                                     name: NameNode(value: 'name'),
                                     value: EnumValueNode(
+                                        name:
+                                            NameNode(value: 'ASC_NULLS_LAST')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'service'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'studyYearFrom'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')),
+                                ),
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'studyYearTo'),
+                                    value: EnumValueNode(
                                         name: NameNode(value: 'ASC')))
-                              ]))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'serviceStudyYear'),
+                              value:
+                                  EnumValueNode(name: NameNode(value: 'ASC')))
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: 'serviceGender'),
+                              value: EnumValueNode(
+                                  name: NameNode(value: 'DESC_NULLS_FIRST')))
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'service'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'name'),
+                                    value: EnumValueNode(
+                                        name:
+                                            NameNode(value: 'ASC_NULLS_LAST')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'group'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: 'name'),
+                                    value: EnumValueNode(
+                                        name:
+                                            NameNode(value: 'ASC_NULLS_LAST')))
+                              ],
+                            ),
+                          )
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'permissionId'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'area'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(name: NameNode(value: 'photoUpdatedAt'))
                         ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
+                      ),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'color'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'photoUpdatedAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ])),
+                      name: NameNode(value: 'areaAllowEdit'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'groupAllowEdit'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'areaAdminOnUsers'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'groupAdminOnUsers'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
+                      name: NameNode(value: 'service'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'serviceStudyYearData'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(name: NameNode(value: 'order'))
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'serviceGender'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'serviceAllowEdit'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'serviceAdminOnUsers'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'classes'),
+                      arguments: [
+                        ArgumentNode(
+                          name: NameNode(value: 'orderBy'),
+                          value: ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                      name: NameNode(value: 'ASC')))
+                            ],
+                          ),
+                        )
+                      ],
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'group'),
+                      selectionSet: SelectionSetNode(
+                        selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'name'),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'color'),
+                          ),
+                          FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                        ],
+                      ),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'groupAllowEdit'),
+                    ),
+                    FieldNode(name: NameNode(value: 'groupAdminOnUsers'))
+                  ],
+                ),
+              ),
               FieldNode(
-                  name: NameNode(value: 'userData'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
+                name: NameNode(value: 'userData'),
+                selectionSet: SelectionSetNode(
+                  selections: [
                     FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'uid'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'email'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
+                      name: NameNode(value: 'email'),
+                    ),
                     FieldNode(
-                        name: NameNode(value: 'lastEdit'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'permissions'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+                      name: NameNode(value: 'lastEdit'),
+                    ),
+                    FieldNode(name: NameNode(value: 'permissions'))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class WatchUserSubscription
@@ -16978,119 +16574,131 @@ class UserEditHistoryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$UserEditHistoryArgumentsToJson(this);
 }
 
-final USER_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+const USER_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
     'userEditHistory';
-final USER_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+const USER_EDIT_HISTORY_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'userEditHistory'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'userId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'addWhere')),
-            type: ListTypeNode(
-                type: NamedTypeNode(
-                    name: NameNode(value: 'HistoryEditHistoryBoolExp'),
-                    isNonNull: true),
-                isNonNull: false),
-            defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'limit')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-            defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
+    type: OperationType.subscription,
+    name: NameNode(value: 'userEditHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'userId'),
+        ),
+        type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+        defaultValue: DefaultValueNode(value: null),
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(
+          name: NameNode(value: 'addWhere'),
+        ),
+        type: ListTypeNode(
+            type: NamedTypeNode(
+                name: NameNode(value: 'HistoryEditHistoryBoolExp'),
+                isNonNull: true),
+            isNonNull: false),
+        defaultValue: DefaultValueNode(value: ObjectValueNode()),
+      ),
+      VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'limit'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Int'),
+          ),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')))
+    ],
+    selectionSet: SelectionSetNode(
+      selections: [
         FieldNode(
-            name: NameNode(value: 'historyEditHistory'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: '_and'),
-                        value: ListValueNode(values: [
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'table'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: StringValueNode(
-                                          value: 'users', isBlock: false))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: 'recordId'),
-                                value: ObjectValueNode(fields: [
-                                  ObjectFieldNode(
-                                      name: NameNode(value: '_eq'),
-                                      value: VariableNode(
-                                          name: NameNode(value: 'userId')))
-                                ]))
-                          ]),
-                          ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                                name: NameNode(value: '_and'),
-                                value: VariableNode(
-                                    name: NameNode(value: 'addWhere')))
-                          ])
-                        ]))
-                  ])),
-              ArgumentNode(
-                  name: NameNode(value: 'limit'),
-                  value: VariableNode(name: NameNode(value: 'limit'))),
-              ArgumentNode(
-                  name: NameNode(value: 'orderBy'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                        name: NameNode(value: 'time'),
-                        value: EnumValueNode(name: NameNode(value: 'DESC')))
-                  ]))
+          name: NameNode(value: 'historyEditHistory'),
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'where'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_and'),
+                    value: ListValueNode(
+                      values: [
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'table'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: StringValueNode(
+                                        value: 'users', isBlock: false))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'recordId'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'userId')))
+                              ],
+                            ),
+                          )
+                        ]),
+                        ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                              name: NameNode(value: '_and'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'addWhere')))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'limit'),
+              value: VariableNode(name: NameNode(value: 'limit')),
+            ),
+            ArgumentNode(
+              name: NameNode(value: 'orderBy'),
+              value: ObjectValueNode(
+                fields: [
+                  ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')))
+                ],
+              ),
+            )
+          ],
+          selectionSet: SelectionSetNode(
+            selections: [
+              FieldNode(
+                name: NameNode(value: 'time'),
+              ),
+              FieldNode(
+                name: NameNode(value: 'user'),
+                selectionSet: SelectionSetNode(
+                  selections: [
+                    FieldNode(
+                      name: NameNode(value: 'uid'),
+                    ),
+                    FieldNode(
+                      name: NameNode(value: 'name'),
+                    ),
+                    FieldNode(name: NameNode(value: 'photoUpdatedAt'))
+                  ],
+                ),
+              )
             ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'time'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'user'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'uid'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
+          ),
+        )
+      ],
+    ),
+  )
 ]);
 
 class UserEditHistorySubscription extends GraphQLQuery<

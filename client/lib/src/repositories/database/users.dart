@@ -19,7 +19,7 @@ class UsersQueries {
             ),
           ),
         )
-        .map(_exceptionsMiddleware);
+        .map(exceptionsMiddleware);
   }
 
   Stream<User?> watchUser({
@@ -38,19 +38,22 @@ class UsersQueries {
             parserFn: (d) {
               if (d.values.single == null) return null;
 
-              return User.fromJson(d.values.single);
+              return User.fromJson(castAllHashMaps(d.values.single));
             },
           ),
         )
-        .map(_exceptionsMiddleware)
+        .map(exceptionsMiddleware)
         .map((u) => u.parsedData);
   }
 
-  DelegatingPaginatableStream<LastRecordedByInfo> userEditHistory({
+  GQLPaginatableStream<LastRecordedByInfo> userEditHistory({
     required String userId,
   }) {
-    return DelegatingPaginatableStream<LastRecordedByInfo>(
-      onQuery: (instance, offset) {
+    return GQLPaginatableStream<LastRecordedByInfo>(
+      subscriptionStream: (event) {
+        final instance = event.instance;
+        final offset = event.offset;
+
         final UserEditHistorySubscription subscription =
             UserEditHistorySubscription(
           variables: UserEditHistoryArguments(
@@ -70,25 +73,14 @@ class UsersQueries {
           ),
         );
 
-        return GetIt.I<GraphQLClient>()
-            .subscribe(
-              SubscriptionOptions(
-                document: subscription.document,
-                operationName: subscription.operationName,
-                variables: subscription.variables.toJson().stripNullValues(),
-                parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
-              ),
-            )
-            .map(_exceptionsMiddleware)
-            .map(
-              (event) => _clampResults(
-                null,
-                null,
-                offset,
-                instance,
-                event.parsedData!.toList(),
-              ),
-            );
+        return GetIt.I<GraphQLClient>().subscribe(
+          SubscriptionOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+          ),
+        );
       },
     );
   }
@@ -122,7 +114,7 @@ class UsersQueries {
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
         parserFn: (d) => User.fromJson(
-          d.values.single,
+          castAllHashMaps(d.values.single),
         ),
       ),
     );
@@ -133,7 +125,7 @@ class UsersQueries {
     ]);
 
     return watchQuery.stream
-        .map(_exceptionsMiddleware)
+        .map(exceptionsMiddleware)
         .map((value) => value.parsedData);
   }
 }

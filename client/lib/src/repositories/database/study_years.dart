@@ -21,7 +21,7 @@ class StudyYearsQueries {
             },
           ),
         )
-        .then(_exceptionsMiddleware)
+        .then(exceptionsMiddleware)
         .then((value) => value.parsedData);
   }
 }

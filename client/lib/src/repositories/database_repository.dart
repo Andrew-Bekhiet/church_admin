@@ -6,7 +6,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' hide JsonSerializable;
-import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
 import 'database/graphql.graphql.dart';
@@ -89,13 +88,24 @@ class CADatabaseRepository implements DatabaseRepository {
       throw UnimplementedError();
 }
 
-Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
+Q exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
   if (result.hasException) throw result.exception!;
   return result;
 }
 
+Json castAllHashMaps(Map d) => d.map(
+      (k, v) => MapEntry(
+        k as String,
+        v is Map && v is! Json ? castAllHashMaps(v) : v,
+      ),
+    );
+
 Iterable<T> _parseListOfT<T>(Json d, T Function(Json) mapper) =>
-    (d.values.single as List).map((o) => mapper(o as Json));
+    (d.values.single as List).map(
+      (o) => mapper(
+        castAllHashMaps(o),
+      ),
+    );
 
 T stripNullValuesFrom<T>(T json, [Set<String> keep = const {}]) => json is Json
     ? {
@@ -129,7 +139,7 @@ extension ListX on List {
       );
 }
 
-DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(
+DelegatingStreamResult<T> clampResults<T extends ViewableWithID>(
   String? lastSearch,
   String? search,
   int offset,
@@ -150,9 +160,7 @@ DelegatingStreamResult<T> _clampResults<T extends ViewableWithID>(
     );
   } else {
     return DelegatingStreamResult(
-      result: start < current.length
-          ? (current..replaceRange(start, end, sublist))
-          : sublist,
+      result: sublist,
       canPaginateForward: result.length >= instance.limit,
     );
   }
