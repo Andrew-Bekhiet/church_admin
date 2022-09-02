@@ -69,8 +69,6 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     return themeData.copyWith(
       cardTheme: themeData.cardTheme.copyWith(
         clipBehavior: Clip.antiAlias,
-        elevation: 3,
-        shadowColor: Colors.grey.withOpacity(0.5),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
@@ -78,22 +76,7 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
           borderSide: BorderSide(color: primary),
         ),
       ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ).copyWith(
-          side: MaterialStateBorderSide.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return BorderSide(color: themeData.disabledColor);
-            }
-            return BorderSide(
-              color: themeData.colorScheme.outline,
-            );
-          }),
-        ),
-      ),
+      useMaterial3: true,
     );
     //TODO: tune theming
     /* .copyWith(
