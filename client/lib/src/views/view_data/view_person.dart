@@ -154,6 +154,7 @@ class ViewPerson extends StatelessWidget {
                             child: PhotoObjectWidget(
                               person,
                               circleCrop: false,
+                              heroTag: this.person,
                             ),
                           ),
                         ),

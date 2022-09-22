@@ -280,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
             scale: 1 - offset.abs(),
             child: FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 if (newIndex == 0) {
                   context.goNamed('new_person');
@@ -303,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
       ),
       bottomNavigationBar: AnimatedBuilder(
-        animation: _tabController,
+        animation: _tabController.animation!,
         builder: (context, child) {
           return BottomNavigationBar(
             landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
@@ -317,7 +318,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 _typeToIndex.keys.elementAt(_tabController.index),
               );
             },
-            currentIndex: _tabController.index,
+            currentIndex:
+                _tabController.animation?.value.round() ?? _tabController.index,
             items: const [
               BottomNavigationBarItem(
                 label: 'المخدومين',
@@ -349,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       p,
       onLongPress: onLongPress != null ? () => onLongPress(p) : null,
       onTap: onTap != null ? () => onTap(p) : null,
-      photo: PhotoObjectWidget(p),
+      photo: PhotoObjectWidget(p, heroTag: p),
       subtitle: subtitle,
     );
   }
