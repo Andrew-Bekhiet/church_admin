@@ -182,6 +182,7 @@ export async function insertUser(user: {
         },
         operationName: "addUser",
       }),
+      method: "POST",
       headers: {
         "content-type": "application/json",
         "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
@@ -224,6 +225,7 @@ export async function updatePhotoTime(
         },
         operationName: "updatePhotoTime",
       }),
+      method: "POST",
       headers: {
         "content-type": "application/json",
         "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
