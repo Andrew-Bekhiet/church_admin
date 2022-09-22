@@ -1,0 +1,9 @@
+subscription getCollegesStream(
+  $addWhere: [CollegesBoolExp!] = {}
+  $limit: Int = 25
+) {
+  colleges(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
+    id
+    name
+  }
+}

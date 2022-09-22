@@ -1,0 +1,14 @@
+subscription getShammasLevelsStream(
+  $addWhere: [ShammasLevelsBoolExp!] = {}
+  $limit: Int = 25
+) {
+  shammasLevels(
+    where: { _and: $addWhere }
+    orderBy: { order: ASC }
+    limit: $limit
+  ) {
+    id
+    order
+    name
+  }
+}

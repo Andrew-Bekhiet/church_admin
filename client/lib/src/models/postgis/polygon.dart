@@ -1,8 +1,9 @@
 import 'package:church_admin/graphql/scalars.dart';
+import 'package:equatable/equatable.dart';
 
 import 'point.dart';
 
-class Polygon {
+class Polygon with EquatableMixin {
   final List<Point> coordinates;
 
   Polygon(this.coordinates);
@@ -24,6 +25,9 @@ class Polygon {
       ]
     };
   }
+
+  @override
+  List<Object?> get props => coordinates;
 }
 
 Json? polygonToJson(Polygon? data) => data?.asPostGISPolygon();

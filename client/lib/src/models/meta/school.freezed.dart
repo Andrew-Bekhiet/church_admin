@@ -98,8 +98,8 @@ class __$$_SchoolCopyWithImpl<$Res> extends _$SchoolCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_School implements _School {
-  const _$_School({required this.id, required this.name});
+class _$_School extends _School {
+  _$_School({required this.id, required this.name}) : super._();
 
   factory _$_School.fromJson(Map<String, dynamic> json) =>
       _$$_SchoolFromJson(json);
@@ -143,9 +143,10 @@ class _$_School implements _School {
   }
 }
 
-abstract class _School implements School {
-  const factory _School(
-      {required final String id, required final String name}) = _$_School;
+abstract class _School extends School {
+  factory _School({required final String id, required final String name}) =
+      _$_School;
+  _School._() : super._();
 
   factory _School.fromJson(Map<String, dynamic> json) = _$_School.fromJson;
 

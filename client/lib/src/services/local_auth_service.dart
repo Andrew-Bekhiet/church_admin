@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
   static LocalAuthService get I => GetIt.I<LocalAuthService>();
@@ -106,8 +107,8 @@ class LocalAuthService with WidgetsBindingObserver {
       localAuthentication
           .authenticate(
         localizedReason: 'برجاء التحقق للمتابعة',
-        options: const AuthenticationOptions(
-          biometricOnly: true,
+        options: AuthenticationOptions(
+          biometricOnly: !UniversalPlatform.isWindows,
           useErrorDialogs: false,
         ),
       )

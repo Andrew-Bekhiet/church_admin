@@ -147,8 +147,31 @@ class PersonsQueries {
         .then((value) => value.parsedData);
   }
 
+  Future<Person?> deletePerson({
+    required String personId,
+  }) async {
+    final DeletePersonMutation subscription = DeletePersonMutation(
+      variables: DeletePersonArguments(
+        personId: UuidValue(personId),
+      ),
+    );
+
+    return GetIt.I<GraphQLClient>()
+        .mutate(
+          MutationOptions(
+            document: subscription.document,
+            operationName: subscription.operationName,
+            variables: subscription.variables.toJson().stripNullValues(),
+            parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.single)),
+          ),
+        )
+        .then(exceptionsMiddleware)
+        .then((value) => value.parsedData);
+  }
+
   GQLPaginatableStream<Person> getPersonsStream({
     Stream<String?>? searchQuery,
+    String? secondLineFieldName,
   }) {
     return GQLPaginatableStream<Person>(
       searchQuery: searchQuery,
@@ -182,7 +205,16 @@ class PersonsQueries {
 
         return GetIt.I<GraphQLClient>().subscribe(
           SubscriptionOptions(
-            document: subscription.document,
+            document: secondLineFieldName == null
+                ? subscription.document
+                : addSelectionFields(
+                    {
+                      'persons': [
+                        FieldNode(name: NameNode(value: secondLineFieldName))
+                      ]
+                    },
+                    subscription.document,
+                  ),
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
             parserFn: (d) => _parseListOfT(d, Person.fromJson),
@@ -308,7 +340,9 @@ class PersonsQueries {
             document: subscription.document,
             operationName: subscription.operationName,
             variables: subscription.variables.toJson().stripNullValues(),
-            parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.single)),
+            parserFn: (d) => d.values.single != null
+                ? Person.fromJson(castAllHashMaps(d.values.single))
+                : null,
           ),
         )
         .map(exceptionsMiddleware)
@@ -542,17 +576,21 @@ class PersonsQueries {
 
     return watchQuery.stream
         .map(exceptionsMiddleware)
-        .map((value) => value.parsedData);
+        .map((value) => value.parsedData!);
   }
 
-  Stream<List<Person>?> personsGeolocations({
+  Stream<Map<Type, Set<Object>>?> personsGeolocations({
     String? personId,
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
+    List<UuidValue> familiesIds = const [],
     List<UuidValue> servicesIds = const [],
     List<UuidValue> classesIds = const [],
     List<UuidValue> groupsIds = const [],
-    List<UuidValue> familiesIds = const [],
+    bool getAreas = false,
+    bool getStreets = false,
+    bool getFamilies = false,
+    bool getPersons = false,
   }) {
     assert(
       personId != null ||
@@ -564,81 +602,84 @@ class PersonsQueries {
           familiesIds.isNotEmpty,
       'At least one condition should be given',
     );
+    assert(getAreas || getStreets || getFamilies || getPersons,
+        'At lease one type should be fetched');
 
     final PersonsGeolocationsQuery query = PersonsGeolocationsQuery(
       variables: PersonsGeolocationsArguments(
-        conditions: PersonsBoolExp(
-          $and: [
-            if (personId != null)
-              PersonsBoolExp(
-                id: UuidComparisonExp(
-                  $eq: UuidValue(personId),
-                ),
+        areasIds: areasIds,
+        familiesIds: familiesIds,
+        streetsIds: streetsIds,
+        personsConditions: [
+          if (personId != null)
+            PersonsBoolExp(
+              id: UuidComparisonExp(
+                $eq: UuidValue(personId),
               ),
-            if (areasIds.isNotEmpty ||
-                streetsIds.isNotEmpty ||
-                familiesIds.isNotEmpty)
-              PersonsBoolExp(
-                $or: [
-                  if (areasIds.isNotEmpty)
-                    PersonsBoolExp(
-                      areas: AreasBoolExp(
-                        id: UuidComparisonExp(
-                          $in: areasIds,
-                        ),
+            ),
+          if (areasIds.isNotEmpty ||
+              streetsIds.isNotEmpty ||
+              familiesIds.isNotEmpty)
+            PersonsBoolExp(
+              $or: [
+                if (areasIds.isNotEmpty)
+                  PersonsBoolExp(
+                    areas: AreasBoolExp(
+                      id: UuidComparisonExp(
+                        $in: areasIds,
                       ),
                     ),
-                  if (streetsIds.isNotEmpty)
-                    PersonsBoolExp(
-                      streets: StreetsBoolExp(
-                        id: UuidComparisonExp(
-                          $in: streetsIds,
-                        ),
+                  ),
+                if (streetsIds.isNotEmpty)
+                  PersonsBoolExp(
+                    streets: StreetsBoolExp(
+                      id: UuidComparisonExp(
+                        $in: streetsIds,
                       ),
                     ),
-                  if (familiesIds.isNotEmpty)
-                    PersonsBoolExp(
-                      family: FamiliesBoolExp(
-                        id: UuidComparisonExp(
-                          $in: familiesIds,
-                        ),
+                  ),
+                if (familiesIds.isNotEmpty)
+                  PersonsBoolExp(
+                    family: FamiliesBoolExp(
+                      id: UuidComparisonExp(
+                        $in: familiesIds,
                       ),
                     ),
-                ],
-              ),
-            if (servicesIds.isNotEmpty ||
-                classesIds.isNotEmpty ||
-                groupsIds.isNotEmpty)
-              PersonsBoolExp(
-                $or: [
-                  if (servicesIds.isNotEmpty)
-                    PersonsBoolExp(
-                      services: PersonsServicesBoolExp(
-                        serviceId: UuidComparisonExp(
-                          $in: servicesIds,
-                        ),
+                  ),
+              ],
+            ),
+          if (servicesIds.isNotEmpty ||
+              classesIds.isNotEmpty ||
+              groupsIds.isNotEmpty)
+            PersonsBoolExp(
+              $or: [
+                if (servicesIds.isNotEmpty)
+                  PersonsBoolExp(
+                    services: PersonsServicesBoolExp(
+                      serviceId: UuidComparisonExp(
+                        $in: servicesIds,
                       ),
                     ),
-                  if (classesIds.isNotEmpty)
-                    PersonsBoolExp(
-                      classes: ClassesBoolExp(
-                        id: UuidComparisonExp(
-                          $in: classesIds,
-                        ),
+                  ),
+                if (classesIds.isNotEmpty)
+                  PersonsBoolExp(
+                    classes: ClassesBoolExp(
+                      id: UuidComparisonExp(
+                        $in: classesIds,
                       ),
                     ),
-                  if (groupsIds.isNotEmpty)
-                    PersonsBoolExp(
-                      groups: PersonsGroupsBoolExp(
-                        groupId: UuidComparisonExp(
-                          $in: groupsIds,
-                        ),
+                  ),
+                if (groupsIds.isNotEmpty)
+                  PersonsBoolExp(
+                    groups: PersonsGroupsBoolExp(
+                      groupId: UuidComparisonExp(
+                        $in: groupsIds,
                       ),
                     ),
-                ],
-              ),
-          ],
-        ),
+                  ),
+              ],
+            ),
+        ],
       ),
     );
 
@@ -646,10 +687,30 @@ class PersonsQueries {
       WatchQueryOptions(
         fetchResults: true,
         eagerlyFetchResults: false,
-        document: query.document,
+        document: getAreas && getStreets && getFamilies && getPersons
+            ? query.document
+            : removeVariables(
+                {
+                  if (!getAreas) ...{
+                    'areasIds',
+                    if (!getStreets) ...{
+                      'streetsIds',
+                      if (!getFamilies) 'familiesIds',
+                    },
+                  },
+                },
+                removeTopFields(
+                  {
+                    if (!getAreas) 'areas',
+                    if (!getStreets) 'streets',
+                    if (!getFamilies) 'families',
+                    if (!getPersons) 'persons',
+                  },
+                  query.document,
+                ),
+              ),
         operationName: query.operationName,
         variables: query.variables.toJson().stripNullValues(),
-        parserFn: (d) => _parseListOfT(d, Person.fromJson).toList(),
       ),
     );
     watchQuery.onData([
@@ -658,9 +719,41 @@ class PersonsQueries {
           : null
     ]);
 
-    return watchQuery.stream
-        .map(exceptionsMiddleware)
-        .map((value) => value.parsedData);
+    return watchQuery.stream.asyncMap(
+      (value) => compute(
+        (d) => {
+          Area: (d['areas'] as List? ?? {})
+              .map(
+                (e) => Area.fromJson(
+                  castAllHashMaps(e),
+                ),
+              )
+              .toSet(),
+          Street: (d['streets'] as List? ?? {})
+              .map(
+                (e) => Street.fromJson(
+                  castAllHashMaps(e),
+                ),
+              )
+              .toSet(),
+          Family: (d['families'] as List? ?? {})
+              .map(
+                (e) => Family.fromJson(
+                  castAllHashMaps(e),
+                ),
+              )
+              .toSet(),
+          Person: (d['persons'] as List? ?? {})
+              .map(
+                (e) => Person.fromJson(
+                  castAllHashMaps(e),
+                ),
+              )
+              .toSet(),
+        },
+        value.data ?? {},
+      ),
+    );
   }
 
   Stream<Person?> analyzePerson({
@@ -737,6 +830,268 @@ class PersonsQueries {
     return watchQuery.stream
         .map(exceptionsMiddleware)
         .map((value) => value.parsedData);
+  }
+
+  Future<Person> getFullPersonData({
+    required String personId,
+  }) async {
+    final GetFullPersonDataQuery query = GetFullPersonDataQuery(
+      variables: GetFullPersonDataArguments(
+        id: UuidValue(personId),
+      ),
+    );
+
+    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+      WatchQueryOptions(
+        eagerlyFetchResults: true,
+        fetchResults: true,
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(),
+        parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.single)),
+      ),
+    );
+
+    if (await CADatabaseRepository.isConnectedToInternet()) {
+      return watchQuery.stream
+          .map(exceptionsMiddleware)
+          .map((value) => value.parsedData)
+          .whereNotNull()
+          .elementAt(1);
+    } else {
+      return watchQuery.stream
+          .map(exceptionsMiddleware)
+          .map((value) => value.parsedData)
+          .whereNotNull()
+          .first;
+    }
+  }
+
+  Future<void> updatePerson({
+    required Person oldPerson,
+    required Person newPerson,
+  }) async {
+    final idEquality = EqualityBy<ID, String>((o) => o.id);
+
+    final collectionEquality =
+        DeepCollectionEquality.unordered(EqualityBy((o) => o is ID ? o.id : o));
+
+    final initialJson = oldPerson.toJson();
+    final delta = {
+      for (final kv in newPerson.toJson().entries)
+        if (!collectionEquality.equals(kv.value, initialJson[kv.key]))
+          kv.key: kv.value,
+    };
+
+    //Lists Diffs:
+    final servicesDiff = diff(
+      EqualitySet<ID>.from(idEquality, oldPerson.services ?? []),
+      EqualitySet<ID>.from(idEquality, newPerson.services ?? []),
+    );
+
+    final groupsDiff = diff(
+      EqualitySet<ID>.from(idEquality, oldPerson.groups ?? []),
+      EqualitySet<ID>.from(idEquality, newPerson.groups ?? []),
+    );
+
+    final tagsDiff = diff(
+      EqualitySet<ID>.from(idEquality, oldPerson.tags ?? []),
+      EqualitySet<ID>.from(idEquality, newPerson.tags ?? []),
+    );
+
+    final deleteServices =
+        servicesDiff.item1.map((s) => s.id.toUuid()).toList();
+    final newServices = servicesDiff.item2
+        .map(
+          (e) => PersonsServicesInsertInput(
+            personId: newPerson.id.toUuid(),
+            serviceId: e.id.toUuid(),
+          ),
+        )
+        .toList();
+    final deleteGroups = groupsDiff.item1.map((g) => g.id.toUuid()).toList();
+    final newGroups = groupsDiff.item2
+        .map(
+          (g) => PersonsGroupsInsertInput(
+            personId: newPerson.id.toUuid(),
+            groupId: g.id.toUuid(),
+          ),
+        )
+        .toList();
+    final deleteTags = tagsDiff.item1.map((t) => t.id.toUuid()).toList();
+    final newTags = tagsDiff.item2
+        .map(
+          (t) => PersonsTagsInsertInput(
+            personId: newPerson.id.toUuid(),
+            tagId: t.id.toUuid(),
+          ),
+        )
+        .toList();
+    //
+
+    final UpdatePersonMutation query = UpdatePersonMutation(
+      variables: UpdatePersonArguments(
+        personId: newPerson.id.toUuid(),
+        newPerson: PersonsSetInput.fromJson(delta),
+        //Filter only services that exist in old person services
+        //but not in new person services
+        deleteServices: deleteServices,
+        //Filter only services that exist in new person services
+        //but not in old person services
+        newServices: newServices,
+        deleteGroups: deleteGroups,
+        newGroups: newGroups,
+        deleteTags: deleteTags,
+        newTags: newTags,
+        lastCall: delta['lastCall'] != null
+            ? LastRecordedByInfo.fromJson(delta['lastCall']).time
+            : null,
+        lastConfession: delta['lastConfession'] != null
+            ? LastRecordedByInfo.fromJson(delta['lastConfession']).time
+            : null,
+        lastKodas: delta['lastKodas'] != null
+            ? LastRecordedByInfo.fromJson(delta['lastKodas']).time
+            : null,
+        lastVisit: delta['lastVisit'] != null
+            ? LastRecordedByInfo.fromJson(delta['lastVisit']).time
+            : null,
+      ),
+    );
+
+    final fieldsToRemove = {
+      if (newGroups.isEmpty) 'insertPersonsGroups',
+      if (newServices.isEmpty) 'insertPersonsServices',
+      if (newTags.isEmpty) 'insertPersonsTags',
+      if (deleteGroups.isEmpty) 'deletePersonsGroups',
+      if (deleteServices.isEmpty) 'deletePersonsServices',
+      if (deleteTags.isEmpty) 'deletePersonsTags',
+      if (delta.isEmpty) 'updatePersonsByPk',
+      if (delta['lastConfession'] == null) 'insertHistoryConfessionHistoryOne',
+      if (delta['lastKodas'] == null) 'insertHistoryKodasHistoryOne',
+      if (delta['lastCall'] == null) 'insertHistoryCallHistoryOne',
+      if (delta['lastVisit'] == null) 'insertHistoryVisitHistoryOne',
+    };
+
+    final varsToRemove = {
+      if (newGroups.isEmpty) 'newGroups',
+      if (newServices.isEmpty) 'newServices',
+      if (newTags.isEmpty) 'newTags',
+      if (deleteGroups.isEmpty) 'deleteGroups',
+      if (deleteServices.isEmpty) 'deleteServices',
+      if (deleteTags.isEmpty) 'deleteTags',
+      if (delta.isEmpty) 'newPerson',
+      if (delta['lastConfession'] == null) 'lastConfession',
+      if (delta['lastKodas'] == null) 'lastKodas',
+      if (delta['lastCall'] == null) 'lastCall',
+      if (delta['lastVisit'] == null) 'lastVisit',
+    };
+
+    final mutation = GetIt.I<GraphQLClient>().mutate(
+      MutationOptions(
+        document: fieldsToRemove.isEmpty
+            ? query.document
+            : removeVariables(
+                varsToRemove,
+                removeTopFields(fieldsToRemove, query.document),
+              ),
+        operationName: query.operationName,
+        variables: {
+          for (final kv in query.variables
+              .toJson()
+              .stripNullValues(delta.keys.toSet())
+              .entries)
+            if (!varsToRemove.contains(kv.key)) kv.key: kv.value,
+        },
+        parserFn: (d) => d['updatePersonsByPk']?.isNotEmpty ?? false
+            ? Person.fromJson(castAllHashMaps(d['updatePersonsByPk']))
+            : null,
+      ),
+    );
+
+    await mutation.then(exceptionsMiddleware);
+  }
+
+  Future<Person> insertPerson({
+    required Person newPerson,
+  }) {
+    final collectionEquality = DeepCollectionEquality.unordered(
+      EqualityBy((o) => o is ID ? o.id : o),
+    );
+
+    final initialJson = Person(id: '', name: '').toJson();
+    final delta = {
+      for (final kv in newPerson
+          .copyWith(
+            church: null,
+            college: null,
+            family: null,
+            father: null,
+            job: null,
+            personType: null,
+            qualification: null,
+            school: null,
+            shammasLevel: null,
+            studyYear: null,
+            state: null,
+          )
+          .toJson()
+          .entries)
+        if (kv.key != 'id' &&
+            !collectionEquality.equals(kv.value, initialJson[kv.key]))
+          kv.key: kv.value,
+    };
+
+    final updateColumns = delta.keys.toSet();
+
+    final InsertPersonMutation query = InsertPersonMutation(
+      variables: InsertPersonArguments(
+        newPerson: PersonsInsertInput.fromJson(
+          {
+            ...delta,
+            'services': PersonsServicesArrRelInsertInput(
+              data: (newPerson.services ?? [])
+                  .map(
+                    (e) => PersonsServicesInsertInput(
+                      serviceId: e.id.toUuid(),
+                    ),
+                  )
+                  .toList(),
+            ).toJson(),
+            'groups': PersonsGroupsArrRelInsertInput(
+              data: (newPerson.groups ?? [])
+                  .map(
+                    (e) => PersonsGroupsInsertInput(
+                      groupId: e.id.toUuid(),
+                    ),
+                  )
+                  .toList(),
+            ).toJson(),
+            'tags': PersonsTagsArrRelInsertInput(
+              data: (newPerson.tags ?? [])
+                  .map(
+                    (e) => PersonsTagsInsertInput(
+                      tagId: e.id.toUuid(),
+                    ),
+                  )
+                  .toList(),
+            ).toJson(),
+          },
+        ),
+      ),
+    );
+
+    final mutation = GetIt.I<GraphQLClient>().mutate(
+      MutationOptions(
+        document: query.document,
+        operationName: query.operationName,
+        variables: query.variables.toJson().stripNullValues(updateColumns),
+        parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.single)),
+      ),
+    );
+
+    return mutation
+        .then(exceptionsMiddleware)
+        .then((value) => value.parsedData!);
   }
 
   GQLPaginatableStream<LastRecordedByInfo> personServiceAttendance({

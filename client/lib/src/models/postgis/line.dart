@@ -1,8 +1,9 @@
 import 'package:church_admin/graphql/scalars.dart';
+import 'package:equatable/equatable.dart';
 
 import 'point.dart';
 
-class Line {
+class Line with EquatableMixin {
   final List<Point> coordinates;
 
   Line(this.coordinates);
@@ -20,6 +21,9 @@ class Line {
         ..add([coordinates.first.longitude, coordinates.first.latitude])
     };
   }
+
+  @override
+  List<Object?> get props => coordinates;
 }
 
 Json? lineToJson(Line? data) => data?.asPostGISLineString();

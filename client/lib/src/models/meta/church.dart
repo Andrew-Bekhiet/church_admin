@@ -7,11 +7,12 @@ part 'church.freezed.dart';
 part 'church.g.dart';
 
 @freezed
-class Church extends ID with _$Church {
-  const factory Church({
+class Church extends ViewableWithID with _$Church {
+  factory Church({
     required String id,
     required String name,
   }) = _Church;
+  Church._();
 
   factory Church.fromJson(Map<String, Object?> json) => _$ChurchFromJson(json);
 }

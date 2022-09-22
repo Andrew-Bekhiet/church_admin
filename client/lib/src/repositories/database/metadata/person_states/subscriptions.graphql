@@ -1,0 +1,7 @@
+subscription getPersonStatesStream($addWhere: [PersonStatesBoolExp!] = {}) {
+  personStates(where: { _and: $addWhere }, orderBy: { name: ASC }) {
+    id
+    name
+    color
+  }
+}

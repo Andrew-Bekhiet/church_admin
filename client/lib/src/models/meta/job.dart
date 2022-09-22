@@ -7,11 +7,12 @@ part 'job.freezed.dart';
 part 'job.g.dart';
 
 @freezed
-class Job extends ID with _$Job {
-  const factory Job({
+class Job extends ViewableWithID with _$Job {
+  factory Job({
     required String id,
     required String name,
   }) = _Job;
+  Job._();
 
   factory Job.fromJson(Map<String, Object?> json) => _$JobFromJson(json);
 }

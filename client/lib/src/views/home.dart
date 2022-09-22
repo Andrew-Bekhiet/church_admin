@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -14,6 +12,7 @@ class HomeScreen extends StatefulWidget {
     builder: (context, state) => const HomeScreen(),
     routes: [
       ViewPerson.route,
+      EditPerson.newPersonRoute,
       GoRoute(
         name: 'service_info',
         path: 'viewService',
@@ -105,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     ListControllerBase<void, Person>(
       objectsPaginatableStream: CADatabaseRepository.I.persons.getPersonsStream(
         searchQuery: _getSearchStreamFor<Person>(),
+        secondLineFieldName: GetIt.I<UserSettings>().getSecondLineFor(Person),
       ),
     ),
     ListControllerBase<void, Service>(
@@ -126,9 +126,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     initialIndex: 1,
   );
 
-  final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
+  late final _fabAnimationController = AnimationController(
+    vsync: this,
+    duration: _tabController.animationDuration,
+    lowerBound: -1,
+    value: 0,
+  );
 
-  final List<AnimationController> _animationControllers = [];
+  final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
 
   Stream<String?> _getSearchStreamFor<T>() {
     return Rx.combineLatest2<String?, Type, String?>(
@@ -140,12 +145,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _tabController.addListener(
-      () => _bottomNavBar.add(
-        _typeToIndex.keys.elementAt(_tabController.index),
-      ),
-    );
     super.initState();
+
+    _tabController.addListener(_tabControllerListener);
+    _tabController.animation!.addListener(_tabControllerAnimationListener);
+  }
+
+  void _tabControllerListener() {
+    if (_typeToIndex.keys.elementAt(_tabController.index) !=
+        _bottomNavBar.value) {
+      _bottomNavBar.add(_typeToIndex.keys.elementAt(_tabController.index));
+    }
+  }
+
+  void _tabControllerAnimationListener() {
+    _fabAnimationController.value = _tabController.offset;
   }
 
   @override
@@ -153,13 +167,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
 
     _tabController.dispose();
+    _fabAnimationController.dispose();
     await _search.close();
     await _bottomNavBar.close();
 
     await Future.wait(_listsControllers.map((c) => c.dispose()));
-    for (final c in _animationControllers) {
-      c.dispose();
-    }
   }
 
   @override
@@ -171,25 +183,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           builder: (context, searchData) {
             if (searchData.hasData) {
               //TODO: data filters
-              return TextFormField(
-                autofocus: true,
-                onChanged: _search.add,
-                textInputAction: TextInputAction.search,
-                style: DefaultTextStyle.of(context).style,
-                decoration: InputDecoration(
-                  hintText: 'بحث ...',
-                  hintStyle: DefaultTextStyle.of(context).style.copyWith(
-                        color: Theme.of(context).hintColor,
-                      ),
-                  contentPadding: const EdgeInsets.all(10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () => _search.add(null),
-                    icon: const Icon(Icons.clear),
-                  ),
-                ),
+              return SearchField(
+                searchSink: _search,
+                canHide: true,
               );
             }
 
@@ -215,30 +211,112 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             autoDisposeController: false,
             itemBuilder: _buildPersonTile,
           ),
-          DataObjectListViewBase<void, Service>(
+          ServicesHierarchyList(
             key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
-            controller: _listsControllers[_typeToIndex[Service]!]
+            listController: _listsControllers[_typeToIndex[Service]!]
                 as ListControllerBase<void, Service>,
-            autoDisposeController: false,
-            itemBuilder: _buildServiceTile,
+            serviceBuilder: (
+              context,
+              s, {
+              onLongPress,
+              onTap,
+              subtitle,
+              trailing,
+            }) =>
+                IconButton(
+              onPressed: onTap != null ? () => onTap(s) : null,
+              icon: const Icon(Icons.info),
+            ),
           ),
           DataObjectListViewBase<void, Area>(
             key: PageStorageKey(_listsControllers[_typeToIndex[Area]!]),
             controller: _listsControllers[_typeToIndex[Area]!]
                 as ListControllerBase<void, Area>,
             autoDisposeController: false,
+            itemBuilder: (a, {onLongPress, onTap, subtitle, trailing}) =>
+                ViewableObjectWidget(
+              a,
+              showSubtitle: false,
+              onLongPress: onLongPress != null ? () => onLongPress(a) : null,
+              onTap: onTap != null ? () => onTap(a) : null,
+              trailing: trailing,
+            ),
           ),
         ],
+      ),
+      floatingActionButton: AnimatedBuilder(
+        animation: _fabAnimationController,
+        builder: (context, child) {
+          final offset = _fabAnimationController.value;
+
+          final newIndex = offset.isNegative
+              ? (_tabController.index + offset).floor()
+              : (_tabController.index + offset).ceil();
+
+          final fgAnimatiedWidget = Transform.scale(
+            alignment: Alignment(
+              offset.isNegative ? 1 - offset : offset - 1,
+              0,
+            ),
+            scale: offset.abs(),
+            child: FloatingActionButton(
+              onPressed: () {
+                if (newIndex == 0) {
+                  context.goNamed('new_person');
+                }
+              },
+              child: newIndex == 0
+                  ? const Icon(Icons.person_add_alt_1)
+                  : newIndex == 1
+                      ? const Icon(Icons.add)
+                      : const Icon(Icons.add_location),
+            ),
+          );
+
+          final bgAnimatiedWidget = Transform.scale(
+            alignment: Alignment(
+              offset.isNegative ? offset - 1 : offset + 1,
+              0,
+            ),
+            scale: 1 - offset.abs(),
+            child: FloatingActionButton(
+              onPressed: () {
+                if (newIndex == 0) {
+                  context.goNamed('new_person');
+                }
+              },
+              child: _tabController.index == 0
+                  ? const Icon(Icons.person_add_alt_1)
+                  : _tabController.index == 1
+                      ? const Icon(Icons.add)
+                      : const Icon(Icons.add_location),
+            ),
+          );
+
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              bgAnimatiedWidget,
+              fgAnimatiedWidget,
+            ],
+          );
+        },
       ),
       bottomNavigationBar: AnimatedBuilder(
         animation: _tabController,
         builder: (context, child) {
           return BottomNavigationBar(
+            landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
             backgroundColor: Theme.of(context).colorScheme.primary,
             selectedItemColor: Theme.of(context).colorScheme.primary,
             unselectedItemColor: Theme.of(context).colorScheme.background,
             type: BottomNavigationBarType.shifting,
-            onTap: (v) => _tabController.index = v,
+            onTap: (v) {
+              _tabController.animateTo(v);
+              _bottomNavBar.add(
+                _typeToIndex.keys.elementAt(_tabController.index),
+              );
+            },
             currentIndex: _tabController.index,
             items: const [
               BottomNavigationBarItem(
@@ -256,114 +334,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ],
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildServiceTile(
-    Service s, {
-    void Function(Service)? onLongPress,
-    void Function(Service)? onTap,
-    Widget? trailing,
-    Widget? subtitle,
-  }) {
-    final _topController = AnimationController(
-      duration: const Duration(milliseconds: 225),
-      vsync: this,
-    );
-
-    _animationControllers.add(_topController);
-
-    return AnimatedBuilder(
-      animation: _topController.drive(
-        Tween(begin: 0, end: 1).chain(
-          CurveTween(curve: Curves.easeIn),
-        ),
-      ),
-      builder: (contex, child) => Card(
-        elevation: _topController.value * 3,
-        child: ExpansionTile(
-          key: PageStorageKey(s),
-          leading: PhotoObjectWidget(
-            s,
-            circleCrop: false,
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Transform.rotate(
-                angle: _topController.value * pi,
-                child: const Icon(Icons.expand_more),
-              ),
-              IconButton(
-                onPressed: onTap != null ? () => onTap(s) : null,
-                icon: const Icon(Icons.info),
-              ),
-            ],
-          ),
-          onExpansionChanged: (e) =>
-              e ? _topController.forward() : _topController.animateBack(0),
-          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          maintainState: true,
-          title: GestureDetector(
-            onLongPress: onLongPress != null ? () => onLongPress(s) : null,
-            child: Text(s.name),
-          ),
-          children: [
-            for (final sc
-                in s.classes?.groupListsBy((c) => c.studyYear!).entries ??
-                    <StudyYear, List<Class>>{}.entries)
-              if (sc.value.length > 1)
-                Padding(
-                  padding: EdgeInsets.only(right: _topController.value * 20),
-                  child: Card(
-                    elevation: 0,
-                    child: ExpansionTile(
-                      key: PageStorageKey(sc.key),
-                      title: Text(sc.key.name),
-                      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-                      maintainState: true,
-                      children: [
-                        for (final c in sc.value)
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: _topController.value * 20),
-                            child: ViewableObjectWidget(
-                              c,
-                              showSubtitle: false,
-                              wrapInCard: false,
-                              isDense: true,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                )
-              else
-                Padding(
-                  padding: EdgeInsets.only(right: _topController.value * 20),
-                  child: ViewableObjectWidget(
-                    sc.value.single,
-                    showSubtitle: false,
-                    wrapInCard: false,
-                  ),
-                ),
-            if (s.fromStudyYear != null &&
-                s.toStudyYear != null &&
-                s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&
-                (s.groups?.isNotEmpty ?? false))
-              const Divider(),
-            for (final g in s.groups ?? <Group>[])
-              Padding(
-                padding: EdgeInsets.only(right: _topController.value * 20),
-                child: ViewableObjectWidget(
-                  g,
-                  showSubtitle: false,
-                  wrapInCard: false,
-                ),
-              ),
-          ],
-        ),
       ),
     );
   }

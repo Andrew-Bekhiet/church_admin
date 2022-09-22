@@ -5,15 +5,21 @@ import 'package:church_admin/firebase_options.dart';
 import 'package:church_admin/graphql/church_admin_link.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:cloud_functions_platform_interface/cloud_functions_platform_interface.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:firebase_auth_desktop/firebase_auth_desktop.dart';
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:firebase_functions_desktop/firebase_functions_desktop.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +27,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timeago/timeago.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -140,6 +147,22 @@ Future<void> initializeChurchAdmin() async {
     GetIt.I<CAViewableObjectService>(),
   );
 
+  GetIt.I.registerSingleton<ImagePickerService>(ImagePickerService());
+  GetIt.I.registerSingleton<ContactsService>(ContactsService());
+  GetIt.I.registerSingleton<PhoneNumberService>(PhoneNumberService());
+
+  FMTC.initialise(
+    await RootDirectory.normalCache,
+    settings: FMTCSettings(
+      defaultTileProviderSettings: FMTCTileProviderSettings(
+        cachedValidDuration: const Duration(days: 30),
+      ),
+    ),
+  );
+
+  GetIt.I.registerSingleton<FMTC>(FMTC.instance);
+  GetIt.I.registerSingleton<Dio>(Dio());
+
   setLocaleMessages('ar', ArMessages());
 
   return _initialization.complete();
@@ -179,9 +202,11 @@ Future<void> registerGraphQLClient() async {
 Future<void> initializeFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await FirebaseAppCheck.instance
-      .activate(webRecaptchaSiteKey: webRecaptchaSiteKey);
-  await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+  if (!UniversalPlatform.isWindows) {
+    await FirebaseAppCheck.instance
+        .activate(webRecaptchaSiteKey: webRecaptchaSiteKey);
+    await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+  }
 
   String? kEmulatorsHost;
 
@@ -203,6 +228,15 @@ Future<void> initializeFirebase() async {
 
 void registerFirebaseDependencies() {
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
+
+  if (UniversalPlatform.isDesktop) {
+    FirebaseAuthPlatform.instance = FirebaseAuthDesktop.instance;
+    FirebaseFunctionsPlatform.instance = FirebaseFunctionsDesktop(
+      app: FirebaseFunctionsDesktop.instance.app,
+      region: 'europe-west6',
+    );
+  }
+
   GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   GetIt.I.registerSingleton<FirebaseDatabase>(FirebaseDatabase.instance);
   GetIt.I.registerSingleton<FirebaseFunctions>(

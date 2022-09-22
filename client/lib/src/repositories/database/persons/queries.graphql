@@ -111,33 +111,68 @@ query getMorePersonData(
   }
 }
 
-query personsGeolocations($conditions: PersonsBoolExp) {
-  persons(where: $conditions) {
+query personsGeolocations(
+  $areasIds: [uuid!]
+  $streetsIds: [uuid!]
+  $familiesIds: [uuid!]
+  $personsConditions: [PersonsBoolExp!] = {}
+) {
+  areas(
+    where: {
+      _or: [
+        { id: { _in: $areasIds } }
+        { streets: { id: { _in: $streetsIds } } }
+        { families: { id: { _in: $familiesIds } } }
+        { persons: { _and: $personsConditions } }
+      ]
+      bounds: { _isNull: false }
+    }
+  ) {
     id
     name
+    color
+
+    bounds
+  }
+  streets(
+    where: {
+      _or: [
+        { id: { _in: $streetsIds } }
+        { families: { id: { _in: $familiesIds } } }
+        { persons: { _and: $personsConditions } }
+      ]
+      line: { _isNull: false }
+    }
+  ) {
+    id
+    name
+    color
+
+    line
+  }
+  families(
+    where: {
+      _or: [
+        { id: { _in: $familiesIds } }
+        { persons: { _and: $personsConditions } }
+      ]
+      geolocation: { _isNull: false }
+    }
+  ) {
+    id
+    name
+    color
 
     geolocation
-    areas {
-      id
-      name
-      color
+  }
+  persons(
+    where: { _and: $personsConditions, geolocation: { _isNull: false } }
+  ) {
+    id
+    name
+    color
 
-      bounds
-    }
-    streets {
-      id
-      name
-      color
-
-      line
-    }
-    family {
-      id
-      name
-      color
-
-      geolocation
-    }
+    geolocation
   }
 }
 
@@ -351,6 +386,123 @@ query getPersonClassesAndGroups($id: uuid!) {
           color
           photoUpdatedAt
         }
+      }
+    }
+  }
+}
+
+query getFullPersonData($id: uuid!) {
+  personsByPk(id: $id) {
+    id
+    name
+    color
+    photoUpdatedAt
+    address
+    birthdate
+    church {
+      id
+      name
+    }
+    college {
+      id
+      name
+    }
+    family {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    father {
+      id
+      name
+      church {
+        id
+        name
+      }
+    }
+    gender
+    geolocation
+    groups {
+      group {
+        id
+        name
+        color
+        photoUpdatedAt
+        service {
+          id
+          name
+          color
+          photoUpdatedAt
+        }
+
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
+      }
+    }
+    isServant
+    isShammas
+    isStudent
+    job {
+      id
+      name
+    }
+    jobDescription
+    mainPhone
+    notes
+    otherPhones
+    personType {
+      id
+      name
+    }
+    qualification {
+      id
+      name
+    }
+    school {
+      id
+      name
+    }
+    services {
+      service {
+        id
+        name
+        color
+        photoUpdatedAt
+
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
+      }
+    }
+    shammasLevel {
+      id
+      name
+      order
+    }
+    state {
+      id
+      color
+      name
+    }
+    studyYear {
+      name
+      order
+    }
+    tags(orderBy: { tag: { name: ASC } }) {
+      tag {
+        id
+        name
+        color
       }
     }
   }

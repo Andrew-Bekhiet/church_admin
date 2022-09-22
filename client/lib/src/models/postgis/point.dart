@@ -1,6 +1,7 @@
 import 'package:church_admin/graphql/scalars.dart';
+import 'package:equatable/equatable.dart';
 
-class Point {
+class Point with EquatableMixin {
   final double latitude;
   final double longitude;
 
@@ -14,6 +15,9 @@ class Point {
       'coordinates': [longitude, latitude]
     };
   }
+
+  @override
+  List<Object?> get props => [longitude, latitude];
 }
 
 Json? pointToJson(Point? data) => data?.toPostGISJson();

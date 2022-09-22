@@ -1,12 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -47,13 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.shortestSide * 0.5,
                   width: MediaQuery.of(context).size.shortestSide * 0.5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      'assets/Logo.png',
-                      color: Theme.of(context).colorScheme.primary,
-                      colorBlendMode: BlendMode.softLight,
-                    ),
+                  child: Image.asset(
+                    'assets/Logo.png',
+                    color: Theme.of(context).colorScheme.primary,
+                    fit: BoxFit.scaleDown,
+                    colorBlendMode: BlendMode.softLight,
                   ),
                 ),
                 const SizedBox(
@@ -140,38 +135,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginWithGoogle() async {
     setState(() => _loading = true);
     try {
-      Future<UserCredential>? signInFuture;
-      if (kIsWeb) {
-        final credential = (await GetIt.I<FirebaseAuth>().signInWithPopup(
-          GoogleAuthProvider(),
-        ))
-            .credential;
-        if (credential != null) {
-          signInFuture =
-              GetIt.I<FirebaseAuth>().signInWithCredential(credential);
-        }
-      } else {
-        final googleUser = await GetIt.I<GoogleSignIn>().signIn();
-        if (googleUser != null) {
-          final googleAuth = await googleUser.authentication;
-          if (googleAuth.accessToken != null) {
-            final credential = GoogleAuthProvider.credential(
-              idToken: googleAuth.idToken,
-              accessToken: googleAuth.accessToken,
-            );
-            signInFuture =
-                GetIt.I<FirebaseAuth>().signInWithCredential(credential);
-          }
-        }
-      }
-      if (signInFuture != null) {
-        await signInFuture;
-        await CAAuthRepository.I.userStream.whereNotNull().next;
-        await setupSettings();
+      await CAAuthRepository.I.signInWithGoogle();
+      await CAAuthRepository.I.userStream.whereNotNull().next;
+      await setupSettings();
 
-        if (mounted) {
-          setState(() => _loading = false);
-        }
+      if (mounted) {
+        setState(() => _loading = false);
       }
     } catch (err, stack) {
       setState(() => _loading = false);
@@ -193,9 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final settings = GetIt.I<UserSettings>();
 
-      await settings.setSecondLineFor(Area, 'lastVisit');
-      await settings.setSecondLineFor(Street, 'lastVisit');
-      await settings.setSecondLineFor(Family, 'lastVisit');
+      // await settings.setSecondLineFor(Area, 'lastVisit');
+      // await settings.setSecondLineFor(Street, 'lastVisit');
+      // await settings.setSecondLineFor(Family, 'lastVisit');
       await settings.setSecondLineFor(Person, 'birthdate');
 
       final notificationsSettings = await GetIt.I<CacheRepository>()

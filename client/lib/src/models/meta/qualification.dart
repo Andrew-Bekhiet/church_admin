@@ -7,11 +7,12 @@ part 'qualification.freezed.dart';
 part 'qualification.g.dart';
 
 @freezed
-class Qualification extends ID with _$Qualification {
-  const factory Qualification({
+class Qualification extends ViewableWithID with _$Qualification {
+  factory Qualification({
     required String id,
     required String name,
   }) = _Qualification;
+  Qualification._();
 
   factory Qualification.fromJson(Map<String, Object?> json) =>
       _$QualificationFromJson(json);

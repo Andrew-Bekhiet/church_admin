@@ -105,8 +105,8 @@ class __$$_QualificationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Qualification implements _Qualification {
-  const _$_Qualification({required this.id, required this.name});
+class _$_Qualification extends _Qualification {
+  _$_Qualification({required this.id, required this.name}) : super._();
 
   factory _$_Qualification.fromJson(Map<String, dynamic> json) =>
       _$$_QualificationFromJson(json);
@@ -150,10 +150,11 @@ class _$_Qualification implements _Qualification {
   }
 }
 
-abstract class _Qualification implements Qualification {
-  const factory _Qualification(
+abstract class _Qualification extends Qualification {
+  factory _Qualification(
       {required final String id,
       required final String name}) = _$_Qualification;
+  _Qualification._() : super._();
 
   factory _Qualification.fromJson(Map<String, dynamic> json) =
       _$_Qualification.fromJson;

@@ -541,6 +541,33 @@ input AreasStddevSampOrderBy {
 }
 
 """
+Streaming cursor of the table "areas"
+"""
+input AreasStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: AreasStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input AreasStreamCursorValueInput {
+  bounds: geography
+  color: bigint
+  firestoreId: String
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+}
+
+"""
 aggregate sum on columns
 """
 type AreasSumFields {
@@ -944,6 +971,29 @@ enum ChurchesSelectColumn {
 input type for updating data in table "churches"
 """
 input ChurchesSetInput {
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "churches"
+"""
+input ChurchesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ChurchesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ChurchesStreamCursorValueInput {
   id: uuid
   name: String
 }
@@ -1458,6 +1508,34 @@ input ClassesStddevSampOrderBy {
 }
 
 """
+Streaming cursor of the table "classes"
+"""
+input ClassesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ClassesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ClassesStreamCursorValueInput {
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: time
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+"""
 aggregate sum on columns
 """
 type ClassesSumFields {
@@ -1846,6 +1924,30 @@ input CollegesSetInput {
 }
 
 """
+Streaming cursor of the table "colleges"
+"""
+input CollegesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: CollegesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input CollegesStreamCursorValueInput {
+  id: uuid
+  name: String
+  universityId: uuid
+}
+
+"""
 update columns of table "colleges"
 """
 enum CollegesUpdateColumn {
@@ -1871,6 +1973,21 @@ input CollegesUpdates {
   """
   _set: CollegesSetInput
   where: CollegesBoolExp!
+}
+
+"""
+ordering argument of a cursor
+"""
+enum CursorOrdering {
+  """
+  ascending ordering of the cursor
+  """
+  ASC
+
+  """
+  descending ordering of the cursor
+  """
+  DESC
 }
 
 """
@@ -2474,6 +2591,29 @@ input FamiliesFamiliesSetInput {
 }
 
 """
+Streaming cursor of the table "families_families"
+"""
+input FamiliesFamiliesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: FamiliesFamiliesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input FamiliesFamiliesStreamCursorValueInput {
+  innerFamilyId: uuid
+  outerFamilyId: uuid
+}
+
+"""
 update columns of table "families_families"
 """
 enum FamiliesFamiliesUpdateColumn {
@@ -2726,6 +2866,34 @@ order by stddev_samp() on columns of table "families"
 """
 input FamiliesStddevSampOrderBy {
   color: OrderBy
+}
+
+"""
+Streaming cursor of the table "families"
+"""
+input FamiliesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: FamiliesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input FamiliesStreamCursorValueInput {
+  address: String
+  color: Int
+  geolocation: geography
+  id: uuid
+  name: String
+  notes: String
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -3102,6 +3270,30 @@ enum FathersSelectColumn {
 input type for updating data in table "fathers"
 """
 input FathersSetInput {
+  churchId: uuid
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "fathers"
+"""
+input FathersStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: FathersStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input FathersStreamCursorValueInput {
   churchId: uuid
   id: uuid
   name: String
@@ -3830,6 +4022,33 @@ order by stddev_samp() on columns of table "groups"
 """
 input GroupsStddevSampOrderBy {
   color: OrderBy
+}
+
+"""
+Streaming cursor of the table "groups"
+"""
+input GroupsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: GroupsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input GroupsStreamCursorValueInput {
+  color: Int
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
+  validity: daterange
 }
 
 """
@@ -4585,6 +4804,33 @@ input HistoryAttendanceDaysConstraintsStddevSampOrderBy {
 }
 
 """
+Streaming cursor of the table "history_attendance_days_constraints"
+"""
+input HistoryAttendanceDaysConstraintsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryAttendanceDaysConstraintsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryAttendanceDaysConstraintsStreamCursorValueInput {
+  dayId: date
+  groupId: uuid
+  id: uuid
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+"""
 aggregate sum on columns
 """
 type HistoryAttendanceDaysConstraintsSumFields {
@@ -4791,6 +5037,29 @@ enum HistoryAttendanceDaysSelectColumn {
 input type for updating data in table "history.attendance_days"
 """
 input HistoryAttendanceDaysSetInput {
+  day: date
+  notes: String
+}
+
+"""
+Streaming cursor of the table "history_attendance_days"
+"""
+input HistoryAttendanceDaysStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryAttendanceDaysStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryAttendanceDaysStreamCursorValueInput {
   day: date
   notes: String
 }
@@ -5249,6 +5518,37 @@ input HistoryAttendanceHistoryStddevSampOrderBy {
 }
 
 """
+Streaming cursor of the table "history_attendance_history"
+"""
+input HistoryAttendanceHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryAttendanceHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryAttendanceHistoryStreamCursorValueInput {
+  asAdmin: Boolean
+  dayId: date
+  groupId: uuid
+  id: uuid
+  personId: uuid
+  recordedBy: uuid
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+  time: timestamp
+}
+
+"""
 aggregate sum on columns
 """
 type HistoryAttendanceHistorySumFields {
@@ -5585,6 +5885,31 @@ input HistoryCallHistorySetInput {
 }
 
 """
+Streaming cursor of the table "history_call_history"
+"""
+input HistoryCallHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryCallHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryCallHistoryStreamCursorValueInput {
+  personId: uuid
+  recordedBy: uuid
+  time: timestamptz
+  userRole: String
+}
+
+"""
 update columns of table "history.call_history"
 """
 enum HistoryCallHistoryUpdateColumn {
@@ -5858,6 +6183,32 @@ input HistoryConfessionHistorySetInput {
 }
 
 """
+Streaming cursor of the table "history_confession_history"
+"""
+input HistoryConfessionHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryConfessionHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryConfessionHistoryStreamCursorValueInput {
+  dayId: date
+  id: uuid
+  personId: uuid
+  recordedBy: uuid
+  time: date
+}
+
+"""
 update columns of table "history.confession_history"
 """
 enum HistoryConfessionHistoryUpdateColumn {
@@ -6118,6 +6469,33 @@ enum HistoryEditHistorySelectColumn {
 input type for updating data in table "history.edit_history"
 """
 input HistoryEditHistorySetInput {
+  auditId: uuid
+  recordId: uuid
+  recordedBy: uuid
+  table: name
+  time: timestamptz
+  userRole: String
+}
+
+"""
+Streaming cursor of the table "history_edit_history"
+"""
+input HistoryEditHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryEditHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryEditHistoryStreamCursorValueInput {
   auditId: uuid
   recordId: uuid
   recordedBy: uuid
@@ -6407,6 +6785,32 @@ input HistoryKodasHistorySetInput {
 }
 
 """
+Streaming cursor of the table "history_kodas_history"
+"""
+input HistoryKodasHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryKodasHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryKodasHistoryStreamCursorValueInput {
+  dayId: date
+  id: uuid
+  personId: uuid
+  recordedBy: uuid
+  time: date
+}
+
+"""
 update columns of table "history.kodas_history"
 """
 enum HistoryKodasHistoryUpdateColumn {
@@ -6645,6 +7049,31 @@ enum HistoryVisitHistorySelectColumn {
 input type for updating data in table "history.visit_history"
 """
 input HistoryVisitHistorySetInput {
+  personId: uuid
+  recordedBy: uuid
+  time: timestamptz
+  userRole: String
+}
+
+"""
+Streaming cursor of the table "history_visit_history"
+"""
+input HistoryVisitHistoryStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: HistoryVisitHistoryStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input HistoryVisitHistoryStreamCursorValueInput {
   personId: uuid
   recordedBy: uuid
   time: timestamptz
@@ -6912,6 +7341,29 @@ input JobsSetInput {
 }
 
 """
+Streaming cursor of the table "jobs"
+"""
+input JobsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: JobsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input JobsStreamCursorValueInput {
+  id: uuid
+  name: String
+}
+
+"""
 update columns of table "jobs"
 """
 enum JobsUpdateColumn {
@@ -7032,6 +7484,363 @@ enum OrderBy {
   in descending order, nulls last
   """
   DESC_NULLS_LAST
+}
+
+"""
+columns and relationships of "person_states"
+"""
+type PersonStates {
+  color: bigint!
+  id: uuid!
+  name: String!
+
+  """
+  An array relationship
+  """
+  persons(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonsSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonsOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonsBoolExp
+  ): [Persons!]!
+
+  """
+  An aggregate relationship
+  """
+  personsAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonsSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonsOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonsBoolExp
+  ): PersonsAggregate!
+}
+
+"""
+aggregated selection of "person_states"
+"""
+type PersonStatesAggregate {
+  aggregate: PersonStatesAggregateFields
+  nodes: [PersonStates!]!
+}
+
+"""
+aggregate fields of "person_states"
+"""
+type PersonStatesAggregateFields {
+  avg: PersonStatesAvgFields
+  count(columns: [PersonStatesSelectColumn!], distinct: Boolean): Int!
+  max: PersonStatesMaxFields
+  min: PersonStatesMinFields
+  stddev: PersonStatesStddevFields
+  stddevPop: PersonStatesStddevPopFields
+  stddevSamp: PersonStatesStddevSampFields
+  sum: PersonStatesSumFields
+  varPop: PersonStatesVarPopFields
+  varSamp: PersonStatesVarSampFields
+  variance: PersonStatesVarianceFields
+}
+
+"""
+aggregate avg on columns
+"""
+type PersonStatesAvgFields {
+  color: Float
+}
+
+"""
+Boolean expression to filter rows from the table "person_states". All fields are combined with a logical 'AND'.
+"""
+input PersonStatesBoolExp {
+  _and: [PersonStatesBoolExp!]
+  _not: PersonStatesBoolExp
+  _or: [PersonStatesBoolExp!]
+  color: BigintComparisonExp
+  id: UuidComparisonExp
+  name: StringComparisonExp
+  persons: PersonsBoolExp
+}
+
+"""
+unique or primary key constraints on table "person_states"
+"""
+enum PersonStatesConstraint {
+  """
+  unique or primary key constraint on columns "color"
+  """
+  states_color_key
+
+  """
+  unique or primary key constraint on columns "name"
+  """
+  states_name_key
+
+  """
+  unique or primary key constraint on columns "id"
+  """
+  states_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "person_states"
+"""
+input PersonStatesIncInput {
+  color: bigint
+}
+
+"""
+input type for inserting data into table "person_states"
+"""
+input PersonStatesInsertInput {
+  color: bigint
+  id: uuid
+  name: String
+  persons: PersonsArrRelInsertInput
+}
+
+"""
+aggregate max on columns
+"""
+type PersonStatesMaxFields {
+  color: bigint
+  id: uuid
+  name: String
+}
+
+"""
+aggregate min on columns
+"""
+type PersonStatesMinFields {
+  color: bigint
+  id: uuid
+  name: String
+}
+
+"""
+response of any mutation on the table "person_states"
+"""
+type PersonStatesMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affected_rows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [PersonStates!]!
+}
+
+"""
+input type for inserting object relation for remote table "person_states"
+"""
+input PersonStatesObjRelInsertInput {
+  data: PersonStatesInsertInput!
+
+  """
+  upsert condition
+  """
+  onConflict: PersonStatesOnConflict
+}
+
+"""
+on_conflict condition type for table "person_states"
+"""
+input PersonStatesOnConflict {
+  constraint: PersonStatesConstraint!
+  update_columns: [PersonStatesUpdateColumn!]! = []
+  where: PersonStatesBoolExp
+}
+
+"""
+Ordering options when selecting data from "person_states".
+"""
+input PersonStatesOrderBy {
+  color: OrderBy
+  id: OrderBy
+  name: OrderBy
+  personsAggregate: PersonsAggregateOrderBy
+}
+
+"""
+primary key columns input for table: person_states
+"""
+input PersonStatesPkColumnsInput {
+  id: uuid!
+}
+
+"""
+select columns of table "person_states"
+"""
+enum PersonStatesSelectColumn {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  name
+}
+
+"""
+input type for updating data in table "person_states"
+"""
+input PersonStatesSetInput {
+  color: bigint
+  id: uuid
+  name: String
+}
+
+"""
+aggregate stddev on columns
+"""
+type PersonStatesStddevFields {
+  color: Float
+}
+
+"""
+aggregate stddev_pop on columns
+"""
+type PersonStatesStddevPopFields {
+  color: Float
+}
+
+"""
+aggregate stddev_samp on columns
+"""
+type PersonStatesStddevSampFields {
+  color: Float
+}
+
+"""
+Streaming cursor of the table "person_states"
+"""
+input PersonStatesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonStatesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonStatesStreamCursorValueInput {
+  color: bigint
+  id: uuid
+  name: String
+}
+
+"""
+aggregate sum on columns
+"""
+type PersonStatesSumFields {
+  color: bigint
+}
+
+"""
+update columns of table "person_states"
+"""
+enum PersonStatesUpdateColumn {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  name
+}
+
+input PersonStatesUpdates {
+  """
+  increments the numeric columns with given value of the filtered values
+  """
+  _inc: PersonStatesIncInput
+
+  """
+  sets the columns of the filtered rows to the given values
+  """
+  _set: PersonStatesSetInput
+  where: PersonStatesBoolExp!
+}
+
+"""
+aggregate var_pop on columns
+"""
+type PersonStatesVarPopFields {
+  color: Float
+}
+
+"""
+aggregate var_samp on columns
+"""
+type PersonStatesVarSampFields {
+  color: Float
+}
+
+"""
+aggregate variance on columns
+"""
+type PersonStatesVarianceFields {
+  color: Float
 }
 
 """
@@ -7304,6 +8113,30 @@ aggregate stddev_samp on columns
 """
 type PersonTypesStddevSampFields {
   order: Float
+}
+
+"""
+Streaming cursor of the table "person_types"
+"""
+input PersonTypesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonTypesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonTypesStreamCursorValueInput {
+  id: uuid
+  name: String
+  order: Int
 }
 
 """
@@ -7765,7 +8598,7 @@ type Persons {
   id: uuid!
   isServant: Boolean!
   isShammas: Boolean!
-  isStudent: Boolean!
+  isStudent: Boolean
 
   """
   A computed field, executes function "user_allowed_to_read_person"
@@ -8006,7 +8839,7 @@ type Persons {
   """
   An object relationship
   """
-  state: States
+  state: PersonStates
   stateId: uuid
   storeId: uuid
 
@@ -8308,7 +9141,7 @@ input PersonsBoolExp {
   services: PersonsServicesBoolExp
   shammasLevel: ShammasLevelsBoolExp
   shammasLevelId: UuidComparisonExp
-  state: StatesBoolExp
+  state: PersonStatesBoolExp
   stateId: UuidComparisonExp
   storeId: UuidComparisonExp
   streets: StreetsBoolExp
@@ -8570,6 +9403,30 @@ input PersonsGroupsSetInput {
 }
 
 """
+Streaming cursor of the table "persons_groups"
+"""
+input PersonsGroupsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonsGroupsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonsGroupsStreamCursorValueInput {
+  groupId: uuid
+  personId: uuid
+  relId: uuid
+}
+
+"""
 update columns of table "persons_groups"
 """
 enum PersonsGroupsUpdateColumn {
@@ -8650,7 +9507,7 @@ input PersonsInsertInput {
   services: PersonsServicesArrRelInsertInput
   shammasLevel: ShammasLevelsObjRelInsertInput
   shammasLevelId: uuid
-  state: StatesObjRelInsertInput
+  state: PersonStatesObjRelInsertInput
   stateId: uuid
   storeId: uuid
   studyYear: StudyYearsObjRelInsertInput
@@ -8868,7 +9725,7 @@ input PersonsOrderBy {
   servicesAggregate: PersonsServicesAggregateOrderBy
   shammasLevel: ShammasLevelsOrderBy
   shammasLevelId: OrderBy
-  state: StatesOrderBy
+  state: PersonStatesOrderBy
   stateId: OrderBy
   storeId: OrderBy
   streetsAggregate: StreetsAggregateOrderBy
@@ -9248,6 +10105,30 @@ input PersonsServicesSetInput {
 }
 
 """
+Streaming cursor of the table "persons_services"
+"""
+input PersonsServicesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonsServicesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonsServicesStreamCursorValueInput {
+  personId: uuid
+  relId: uuid
+  serviceId: uuid
+}
+
+"""
 update columns of table "persons_services"
 """
 enum PersonsServicesUpdateColumn {
@@ -9356,6 +10237,56 @@ order by stddev_samp() on columns of table "persons"
 input PersonsStddevSampOrderBy {
   color: OrderBy
   studyYearId: OrderBy
+}
+
+"""
+Streaming cursor of the table "persons"
+"""
+input PersonsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonsStreamCursorValueInput {
+  address: String
+  birthdate: date
+  churchId: uuid
+  collegeId: uuid
+  color: bigint
+  familyId: uuid
+  fatherId: uuid
+  firestoreId: String
+  gender: Boolean
+  geolocation: geography
+  id: uuid
+  isServant: Boolean
+  isShammas: Boolean
+  isStudent: Boolean
+  jobDescription: String
+  jobId: uuid
+  mainPhone: String
+  name: String
+  notes: String
+  otherPhones: jsonb
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
+  shammasLevelId: uuid
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
+  uid: uuid
 }
 
 """
@@ -9567,6 +10498,30 @@ enum PersonsTagsSelectColumn {
 input type for updating data in table "persons_tags"
 """
 input PersonsTagsSetInput {
+  personId: uuid
+  relId: uuid
+  tagId: uuid
+}
+
+"""
+Streaming cursor of the table "persons_tags"
+"""
+input PersonsTagsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PersonsTagsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PersonsTagsStreamCursorValueInput {
   personId: uuid
   relId: uuid
   tagId: uuid
@@ -10049,6 +11004,29 @@ input QualificationsSetInput {
 }
 
 """
+Streaming cursor of the table "qualifications"
+"""
+input QualificationsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: QualificationsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input QualificationsStreamCursorValueInput {
+  id: uuid
+  name: String
+}
+
+"""
 update columns of table "qualifications"
 """
 enum QualificationsUpdateColumn {
@@ -10279,6 +11257,29 @@ enum SchoolsSelectColumn {
 input type for updating data in table "schools"
 """
 input SchoolsSetInput {
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "schools"
+"""
+input SchoolsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: SchoolsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input SchoolsStreamCursorValueInput {
   id: uuid
   name: String
 }
@@ -10578,6 +11579,7 @@ type Services {
     path: String
   ): jsonb
   name: String!
+  nextService: uuid
 
   """
   An array relationship
@@ -10761,6 +11763,7 @@ input ServicesBoolExp {
   isUserAllowedToWrite: BooleanComparisonExp
   lastEdit: JsonbComparisonExp
   name: StringComparisonExp
+  nextService: UuidComparisonExp
   persons: PersonsServicesBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
   studyYearFrom: SmallintComparisonExp
@@ -10811,6 +11814,7 @@ input ServicesInsertInput {
   groups: GroupsArrRelInsertInput
   id: uuid
   name: String
+  nextService: uuid
   persons: PersonsServicesArrRelInsertInput
   photoUpdatedAt: timestamptz
   studyYearFrom: smallint
@@ -10827,6 +11831,7 @@ type ServicesMaxFields {
   firestoreId: String
   id: uuid
   name: String
+  nextService: uuid
   photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
@@ -10840,6 +11845,7 @@ type ServicesMinFields {
   firestoreId: String
   id: uuid
   name: String
+  nextService: uuid
   photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
@@ -10897,6 +11903,7 @@ input ServicesOrderBy {
   isUserAllowedToWrite: OrderBy
   lastEdit: OrderBy
   name: OrderBy
+  nextService: OrderBy
   personsAggregate: PersonsServicesAggregateOrderBy
   photoUpdatedAt: OrderBy
   studyYearFrom: OrderBy
@@ -10939,6 +11946,11 @@ enum ServicesSelectColumn {
   """
   column name
   """
+  nextService
+
+  """
+  column name
+  """
   photoUpdatedAt
 
   """
@@ -10960,6 +11972,7 @@ input ServicesSetInput {
   firestoreId: String
   id: uuid
   name: String
+  nextService: uuid
   photoUpdatedAt: timestamptz
   studyYearFrom: smallint
   studyYearTo: smallint
@@ -10990,6 +12003,35 @@ type ServicesStddevSampFields {
   color: Float
   studyYearFrom: Float
   studyYearTo: Float
+}
+
+"""
+Streaming cursor of the table "services"
+"""
+input ServicesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ServicesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ServicesStreamCursorValueInput {
+  color: Int
+  firestoreId: String
+  id: uuid
+  name: String
+  nextService: uuid
+  photoUpdatedAt: timestamptz
+  studyYearFrom: smallint
+  studyYearTo: smallint
 }
 
 """
@@ -11024,6 +12066,11 @@ enum ServicesUpdateColumn {
   column name
   """
   name
+
+  """
+  column name
+  """
+  nextService
 
   """
   column name
@@ -11291,6 +12338,30 @@ type ShammasLevelsStddevSampFields {
 }
 
 """
+Streaming cursor of the table "shammas_levels"
+"""
+input ShammasLevelsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ShammasLevelsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ShammasLevelsStreamCursorValueInput {
+  id: uuid
+  name: String
+  order: Int
+}
+
+"""
 aggregate sum on columns
 """
 type ShammasLevelsSumFields {
@@ -11364,339 +12435,6 @@ input SmallintComparisonExp {
   _lte: smallint
   _neq: smallint
   _nin: [smallint!]
-}
-
-"""
-columns and relationships of "states"
-"""
-type States {
-  color: bigint!
-  id: uuid!
-  name: String!
-
-  """
-  An array relationship
-  """
-  persons(
-    """
-    distinct select on columns
-    """
-    distinctOn: [PersonsSelectColumn!]
-
-    """
-    limit the number of rows returned
-    """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [PersonsOrderBy!]
-
-    """
-    filter the rows returned
-    """
-    where: PersonsBoolExp
-  ): [Persons!]!
-
-  """
-  An aggregate relationship
-  """
-  personsAggregate(
-    """
-    distinct select on columns
-    """
-    distinctOn: [PersonsSelectColumn!]
-
-    """
-    limit the number of rows returned
-    """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [PersonsOrderBy!]
-
-    """
-    filter the rows returned
-    """
-    where: PersonsBoolExp
-  ): PersonsAggregate!
-}
-
-"""
-aggregated selection of "states"
-"""
-type StatesAggregate {
-  aggregate: StatesAggregateFields
-  nodes: [States!]!
-}
-
-"""
-aggregate fields of "states"
-"""
-type StatesAggregateFields {
-  avg: StatesAvgFields
-  count(columns: [StatesSelectColumn!], distinct: Boolean): Int!
-  max: StatesMaxFields
-  min: StatesMinFields
-  stddev: StatesStddevFields
-  stddevPop: StatesStddevPopFields
-  stddevSamp: StatesStddevSampFields
-  sum: StatesSumFields
-  varPop: StatesVarPopFields
-  varSamp: StatesVarSampFields
-  variance: StatesVarianceFields
-}
-
-"""
-aggregate avg on columns
-"""
-type StatesAvgFields {
-  color: Float
-}
-
-"""
-Boolean expression to filter rows from the table "states". All fields are combined with a logical 'AND'.
-"""
-input StatesBoolExp {
-  _and: [StatesBoolExp!]
-  _not: StatesBoolExp
-  _or: [StatesBoolExp!]
-  color: BigintComparisonExp
-  id: UuidComparisonExp
-  name: StringComparisonExp
-  persons: PersonsBoolExp
-}
-
-"""
-unique or primary key constraints on table "states"
-"""
-enum StatesConstraint {
-  """
-  unique or primary key constraint on columns "color"
-  """
-  states_color_key
-
-  """
-  unique or primary key constraint on columns "name"
-  """
-  states_name_key
-
-  """
-  unique or primary key constraint on columns "id"
-  """
-  states_pkey
-}
-
-"""
-input type for incrementing numeric columns in table "states"
-"""
-input StatesIncInput {
-  color: bigint
-}
-
-"""
-input type for inserting data into table "states"
-"""
-input StatesInsertInput {
-  color: bigint
-  id: uuid
-  name: String
-  persons: PersonsArrRelInsertInput
-}
-
-"""
-aggregate max on columns
-"""
-type StatesMaxFields {
-  color: bigint
-  id: uuid
-  name: String
-}
-
-"""
-aggregate min on columns
-"""
-type StatesMinFields {
-  color: bigint
-  id: uuid
-  name: String
-}
-
-"""
-response of any mutation on the table "states"
-"""
-type StatesMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
-  affected_rows: Int!
-
-  """
-  data from the rows affected by the mutation
-  """
-  returning: [States!]!
-}
-
-"""
-input type for inserting object relation for remote table "states"
-"""
-input StatesObjRelInsertInput {
-  data: StatesInsertInput!
-
-  """
-  upsert condition
-  """
-  onConflict: StatesOnConflict
-}
-
-"""
-on_conflict condition type for table "states"
-"""
-input StatesOnConflict {
-  constraint: StatesConstraint!
-  update_columns: [StatesUpdateColumn!]! = []
-  where: StatesBoolExp
-}
-
-"""
-Ordering options when selecting data from "states".
-"""
-input StatesOrderBy {
-  color: OrderBy
-  id: OrderBy
-  name: OrderBy
-  personsAggregate: PersonsAggregateOrderBy
-}
-
-"""
-primary key columns input for table: states
-"""
-input StatesPkColumnsInput {
-  id: uuid!
-}
-
-"""
-select columns of table "states"
-"""
-enum StatesSelectColumn {
-  """
-  column name
-  """
-  color
-
-  """
-  column name
-  """
-  id
-
-  """
-  column name
-  """
-  name
-}
-
-"""
-input type for updating data in table "states"
-"""
-input StatesSetInput {
-  color: bigint
-  id: uuid
-  name: String
-}
-
-"""
-aggregate stddev on columns
-"""
-type StatesStddevFields {
-  color: Float
-}
-
-"""
-aggregate stddev_pop on columns
-"""
-type StatesStddevPopFields {
-  color: Float
-}
-
-"""
-aggregate stddev_samp on columns
-"""
-type StatesStddevSampFields {
-  color: Float
-}
-
-"""
-aggregate sum on columns
-"""
-type StatesSumFields {
-  color: bigint
-}
-
-"""
-update columns of table "states"
-"""
-enum StatesUpdateColumn {
-  """
-  column name
-  """
-  color
-
-  """
-  column name
-  """
-  id
-
-  """
-  column name
-  """
-  name
-}
-
-input StatesUpdates {
-  """
-  increments the numeric columns with given value of the filtered values
-  """
-  _inc: StatesIncInput
-
-  """
-  sets the columns of the filtered rows to the given values
-  """
-  _set: StatesSetInput
-  where: StatesBoolExp!
-}
-
-"""
-aggregate var_pop on columns
-"""
-type StatesVarPopFields {
-  color: Float
-}
-
-"""
-aggregate var_samp on columns
-"""
-type StatesVarSampFields {
-  color: Float
-}
-
-"""
-aggregate variance on columns
-"""
-type StatesVarianceFields {
-  color: Float
 }
 
 """
@@ -12095,6 +12833,33 @@ order by stddev_samp() on columns of table "stores"
 """
 input StoresStddevSampOrderBy {
   color: OrderBy
+}
+
+"""
+Streaming cursor of the table "stores"
+"""
+input StoresStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: StoresStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input StoresStreamCursorValueInput {
+  adminFamily: uuid
+  color: Int
+  geolocation: geography
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -12626,6 +13391,32 @@ order by stddev_samp() on columns of table "streets"
 """
 input StreetsStddevSampOrderBy {
   color: OrderBy
+}
+
+"""
+Streaming cursor of the table "streets"
+"""
+input StreetsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: StreetsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input StreetsStreamCursorValueInput {
+  color: bigint
+  id: uuid
+  line: geography
+  name: String
+  photoUpdatedAt: timestamptz
 }
 
 """
@@ -13178,6 +13969,29 @@ type StudyYearsStddevSampFields {
 }
 
 """
+Streaming cursor of the table "study_years"
+"""
+input StudyYearsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: StudyYearsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input StudyYearsStreamCursorValueInput {
+  name: String
+  order: smallint
+}
+
+"""
 aggregate sum on columns
 """
 type StudyYearsSumFields {
@@ -13501,6 +14315,30 @@ type TagsStddevSampFields {
 }
 
 """
+Streaming cursor of the table "tags"
+"""
+input TagsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: TagsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input TagsStreamCursorValueInput {
+  color: bigint
+  id: uuid
+  name: String
+}
+
+"""
 aggregate sum on columns
 """
 type TagsSumFields {
@@ -13813,6 +14651,29 @@ enum UniversitiesSelectColumn {
 input type for updating data in table "universities"
 """
 input UniversitiesSetInput {
+  id: uuid
+  name: String
+}
+
+"""
+Streaming cursor of the table "universities"
+"""
+input UniversitiesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UniversitiesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UniversitiesStreamCursorValueInput {
   id: uuid
   name: String
 }
@@ -14182,6 +15043,32 @@ enum UsersDataSelectColumn {
 input type for updating data in table "users_data"
 """
 input UsersDataSetInput {
+  email: String
+  firebaseAuthUid: String
+  firestoreId: String
+  permissions: _text
+  uid: uuid
+}
+
+"""
+Streaming cursor of the table "users_data"
+"""
+input UsersDataStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UsersDataStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UsersDataStreamCursorValueInput {
   email: String
   firebaseAuthUid: String
   firestoreId: String
@@ -14818,6 +15705,40 @@ input UsersPermissionsStddevSampOrderBy {
 }
 
 """
+Streaming cursor of the table "users_permissions"
+"""
+input UsersPermissionsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UsersPermissionsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UsersPermissionsStreamCursorValueInput {
+  adminOnArea: uuid
+  adminOnGroup: uuid
+  adminOnService: uuid
+  areaAdminOnUsers: Boolean
+  areaAllowEdit: Boolean
+  groupAdminOnUsers: Boolean
+  groupAllowEdit: Boolean
+  permissionId: uuid
+  serviceAdminOnUsers: Boolean
+  serviceAllowEdit: Boolean
+  serviceGender: Boolean
+  serviceStudyYear: smallint
+  uid: uuid
+}
+
+"""
 aggregate sum on columns
 """
 type UsersPermissionsSumFields {
@@ -14987,6 +15908,30 @@ enum UsersSelectColumn {
 input type for updating data in table "users"
 """
 input UsersSetInput {
+  name: String
+  photoUpdatedAt: timestamptz
+  uid: uuid
+}
+
+"""
+Streaming cursor of the table "users"
+"""
+input UsersStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UsersStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UsersStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
   uid: uuid
@@ -15326,6 +16271,21 @@ type mutation_root {
   deleteJobsByPk(id: uuid!): Jobs
 
   """
+  delete data from the table: "person_states"
+  """
+  deletePersonStates(
+    """
+    filter the rows which have to be deleted
+    """
+    where: PersonStatesBoolExp!
+  ): PersonStatesMutationResponse
+
+  """
+  delete single row from the table: "person_states"
+  """
+  deletePersonStatesByPk(id: uuid!): PersonStates
+
+  """
   delete data from the table: "person_types"
   """
   deletePersonTypes(
@@ -15459,21 +16419,6 @@ type mutation_root {
   delete single row from the table: "shammas_levels"
   """
   deleteShammasLevelsByPk(id: uuid!): ShammasLevels
-
-  """
-  delete data from the table: "states"
-  """
-  deleteStates(
-    """
-    filter the rows which have to be deleted
-    """
-    where: StatesBoolExp!
-  ): StatesMutationResponse
-
-  """
-  delete single row from the table: "states"
-  """
-  deleteStatesByPk(id: uuid!): States
 
   """
   delete data from the table: "stores"
@@ -16106,6 +17051,36 @@ type mutation_root {
   ): Jobs
 
   """
+  insert data into the table: "person_states"
+  """
+  insertPersonStates(
+    """
+    the rows to be inserted
+    """
+    objects: [PersonStatesInsertInput!]!
+
+    """
+    upsert condition
+    """
+    onConflict: PersonStatesOnConflict
+  ): PersonStatesMutationResponse
+
+  """
+  insert a single row into the table: "person_states"
+  """
+  insertPersonStatesOne(
+    """
+    the row to be inserted
+    """
+    object: PersonStatesInsertInput!
+
+    """
+    upsert condition
+    """
+    onConflict: PersonStatesOnConflict
+  ): PersonStates
+
+  """
   insert data into the table: "person_types"
   """
   insertPersonTypes(
@@ -16374,36 +17349,6 @@ type mutation_root {
     """
     onConflict: ShammasLevelsOnConflict
   ): ShammasLevels
-
-  """
-  insert data into the table: "states"
-  """
-  insertStates(
-    """
-    the rows to be inserted
-    """
-    objects: [StatesInsertInput!]!
-
-    """
-    upsert condition
-    """
-    onConflict: StatesOnConflict
-  ): StatesMutationResponse
-
-  """
-  insert a single row into the table: "states"
-  """
-  insertStatesOne(
-    """
-    the row to be inserted
-    """
-    object: StatesInsertInput!
-
-    """
-    upsert condition
-    """
-    onConflict: StatesOnConflict
-  ): States
 
   """
   insert data into the table: "stores"
@@ -17318,6 +18263,52 @@ type mutation_root {
   ): [JobsMutationResponse]
 
   """
+  update data of the table: "person_states"
+  """
+  updatePersonStates(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: PersonStatesIncInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: PersonStatesSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: PersonStatesBoolExp!
+  ): PersonStatesMutationResponse
+
+  """
+  update single row of the table: "person_states"
+  """
+  updatePersonStatesByPk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: PersonStatesIncInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: PersonStatesSetInput
+    pk_columns: PersonStatesPkColumnsInput!
+  ): PersonStates
+
+  """
+  update multiples rows of table: "person_states"
+  """
+  updatePersonStatesMany(
+    """
+    updates to execute, in order
+    """
+    updates: [PersonStatesUpdates!]!
+  ): [PersonStatesMutationResponse]
+
+  """
   update data of the table: "person_types"
   """
   updatePersonTypes(
@@ -17730,52 +18721,6 @@ type mutation_root {
     """
     updates: [ShammasLevelsUpdates!]!
   ): [ShammasLevelsMutationResponse]
-
-  """
-  update data of the table: "states"
-  """
-  updateStates(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
-    _inc: StatesIncInput
-
-    """
-    sets the columns of the filtered rows to the given values
-    """
-    _set: StatesSetInput
-
-    """
-    filter the rows which have to be updated
-    """
-    where: StatesBoolExp!
-  ): StatesMutationResponse
-
-  """
-  update single row of the table: "states"
-  """
-  updateStatesByPk(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
-    _inc: StatesIncInput
-
-    """
-    sets the columns of the filtered rows to the given values
-    """
-    _set: StatesSetInput
-    pk_columns: StatesPkColumnsInput!
-  ): States
-
-  """
-  update multiples rows of table: "states"
-  """
-  updateStatesMany(
-    """
-    updates to execute, in order
-    """
-    updates: [StatesUpdates!]!
-  ): [StatesMutationResponse]
 
   """
   update data of the table: "stores"
@@ -19227,6 +20172,71 @@ type query_root {
   jobsByPk(id: uuid!): Jobs
 
   """
+  fetch data from the table: "person_states"
+  """
+  personStates(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonStatesSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonStatesOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonStatesBoolExp
+  ): [PersonStates!]!
+
+  """
+  fetch aggregated fields from the table: "person_states"
+  """
+  personStatesAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonStatesSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonStatesOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonStatesBoolExp
+  ): PersonStatesAggregate!
+
+  """
+  fetch data from the table: "person_states" using primary key columns
+  """
+  personStatesByPk(id: uuid!): PersonStates
+
+  """
   fetch data from the table: "person_types"
   """
   personTypes(
@@ -19810,71 +20820,6 @@ type query_root {
   fetch data from the table: "shammas_levels" using primary key columns
   """
   shammasLevelsByPk(id: uuid!): ShammasLevels
-
-  """
-  fetch data from the table: "states"
-  """
-  states(
-    """
-    distinct select on columns
-    """
-    distinctOn: [StatesSelectColumn!]
-
-    """
-    limit the number of rows returned
-    """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [StatesOrderBy!]
-
-    """
-    filter the rows returned
-    """
-    where: StatesBoolExp
-  ): [States!]!
-
-  """
-  fetch aggregated fields from the table: "states"
-  """
-  statesAggregate(
-    """
-    distinct select on columns
-    """
-    distinctOn: [StatesSelectColumn!]
-
-    """
-    limit the number of rows returned
-    """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [StatesOrderBy!]
-
-    """
-    filter the rows returned
-    """
-    where: StatesBoolExp
-  ): StatesAggregate!
-
-  """
-  fetch data from the table: "states" using primary key columns
-  """
-  statesByPk(id: uuid!): States
 
   """
   An array relationship
@@ -20477,6 +21422,26 @@ type subscription_root {
   areasByPk(id: uuid!): Areas
 
   """
+  fetch data from the table in a streaming manner : "areas"
+  """
+  areasStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [AreasStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: AreasBoolExp
+  ): [Areas!]!
+
+  """
   fetch data from the table: "churches"
   """
   churches(
@@ -20540,6 +21505,26 @@ type subscription_root {
   fetch data from the table: "churches" using primary key columns
   """
   churchesByPk(id: uuid!): Churches
+
+  """
+  fetch data from the table in a streaming manner : "churches"
+  """
+  churchesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [ChurchesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: ChurchesBoolExp
+  ): [Churches!]!
 
   """
   An array relationship
@@ -20607,6 +21592,26 @@ type subscription_root {
   classesByPk(id: uuid!): Classes
 
   """
+  fetch data from the table in a streaming manner : "classes"
+  """
+  classesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [ClassesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: ClassesBoolExp
+  ): [Classes!]!
+
+  """
   An array relationship
   """
   colleges(
@@ -20670,6 +21675,26 @@ type subscription_root {
   fetch data from the table: "colleges" using primary key columns
   """
   collegesByPk(id: uuid!): Colleges
+
+  """
+  fetch data from the table in a streaming manner : "colleges"
+  """
+  collegesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [CollegesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: CollegesBoolExp
+  ): [Colleges!]!
 
   """
   fetch data from the table: "families"
@@ -20802,6 +21827,46 @@ type subscription_root {
   familiesFamiliesByPk(innerFamilyId: uuid!): FamiliesFamilies
 
   """
+  fetch data from the table in a streaming manner : "families_families"
+  """
+  familiesFamiliesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [FamiliesFamiliesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: FamiliesFamiliesBoolExp
+  ): [FamiliesFamilies!]!
+
+  """
+  fetch data from the table in a streaming manner : "families"
+  """
+  familiesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [FamiliesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: FamiliesBoolExp
+  ): [Families!]!
+
+  """
   An array relationship
   """
   fathers(
@@ -20867,6 +21932,26 @@ type subscription_root {
   fathersByPk(id: uuid!): Fathers
 
   """
+  fetch data from the table in a streaming manner : "fathers"
+  """
+  fathersStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [FathersStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: FathersBoolExp
+  ): [Fathers!]!
+
+  """
   An array relationship
   """
   groups(
@@ -20930,6 +22015,26 @@ type subscription_root {
   fetch data from the table: "groups" using primary key columns
   """
   groupsByPk(id: uuid!): Groups
+
+  """
+  fetch data from the table in a streaming manner : "groups"
+  """
+  groupsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [GroupsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: GroupsBoolExp
+  ): [Groups!]!
 
   """
   fetch data from the table: "history.attendance_days"
@@ -21064,6 +22169,46 @@ type subscription_root {
   ): HistoryAttendanceDaysConstraints
 
   """
+  fetch data from the table in a streaming manner : "history.attendance_days_constraints"
+  """
+  historyAttendanceDaysConstraintsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryAttendanceDaysConstraintsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryAttendanceDaysConstraintsBoolExp
+  ): [HistoryAttendanceDaysConstraints!]!
+
+  """
+  fetch data from the table in a streaming manner : "history.attendance_days"
+  """
+  historyAttendanceDaysStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryAttendanceDaysStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryAttendanceDaysBoolExp
+  ): [HistoryAttendanceDays!]!
+
+  """
   fetch data from the table: "history.attendance_history"
   """
   historyAttendanceHistory(
@@ -21127,6 +22272,26 @@ type subscription_root {
   fetch data from the table: "history.attendance_history" using primary key columns
   """
   historyAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
+
+  """
+  fetch data from the table in a streaming manner : "history.attendance_history"
+  """
+  historyAttendanceHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryAttendanceHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryAttendanceHistoryBoolExp
+  ): [HistoryAttendanceHistory!]!
 
   """
   fetch data from the table: "history.call_history"
@@ -21194,6 +22359,26 @@ type subscription_root {
   historyCallHistoryByPk(time: timestamptz!): HistoryCallHistory
 
   """
+  fetch data from the table in a streaming manner : "history.call_history"
+  """
+  historyCallHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryCallHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryCallHistoryBoolExp
+  ): [HistoryCallHistory!]!
+
+  """
   fetch data from the table: "history.confession_history"
   """
   historyConfessionHistory(
@@ -21257,6 +22442,26 @@ type subscription_root {
   fetch data from the table: "history.confession_history" using primary key columns
   """
   historyConfessionHistoryByPk(id: uuid!): HistoryConfessionHistory
+
+  """
+  fetch data from the table in a streaming manner : "history.confession_history"
+  """
+  historyConfessionHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryConfessionHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryConfessionHistoryBoolExp
+  ): [HistoryConfessionHistory!]!
 
   """
   fetch data from the table: "history.edit_history"
@@ -21324,6 +22529,26 @@ type subscription_root {
   historyEditHistoryByPk(auditId: uuid!): HistoryEditHistory
 
   """
+  fetch data from the table in a streaming manner : "history.edit_history"
+  """
+  historyEditHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryEditHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryEditHistoryBoolExp
+  ): [HistoryEditHistory!]!
+
+  """
   fetch data from the table: "history.kodas_history"
   """
   historyKodasHistory(
@@ -21387,6 +22612,26 @@ type subscription_root {
   fetch data from the table: "history.kodas_history" using primary key columns
   """
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
+
+  """
+  fetch data from the table in a streaming manner : "history.kodas_history"
+  """
+  historyKodasHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryKodasHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryKodasHistoryBoolExp
+  ): [HistoryKodasHistory!]!
 
   """
   fetch data from the table: "history.visit_history"
@@ -21454,6 +22699,26 @@ type subscription_root {
   historyVisitHistoryByPk(time: timestamptz!): HistoryVisitHistory
 
   """
+  fetch data from the table in a streaming manner : "history.visit_history"
+  """
+  historyVisitHistoryStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [HistoryVisitHistoryStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: HistoryVisitHistoryBoolExp
+  ): [HistoryVisitHistory!]!
+
+  """
   fetch data from the table: "jobs"
   """
   jobs(
@@ -21519,6 +22784,111 @@ type subscription_root {
   jobsByPk(id: uuid!): Jobs
 
   """
+  fetch data from the table in a streaming manner : "jobs"
+  """
+  jobsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [JobsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: JobsBoolExp
+  ): [Jobs!]!
+
+  """
+  fetch data from the table: "person_states"
+  """
+  personStates(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonStatesSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonStatesOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonStatesBoolExp
+  ): [PersonStates!]!
+
+  """
+  fetch aggregated fields from the table: "person_states"
+  """
+  personStatesAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [PersonStatesSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PersonStatesOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PersonStatesBoolExp
+  ): PersonStatesAggregate!
+
+  """
+  fetch data from the table: "person_states" using primary key columns
+  """
+  personStatesByPk(id: uuid!): PersonStates
+
+  """
+  fetch data from the table in a streaming manner : "person_states"
+  """
+  personStatesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonStatesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonStatesBoolExp
+  ): [PersonStates!]!
+
+  """
   fetch data from the table: "person_types"
   """
   personTypes(
@@ -21582,6 +22952,26 @@ type subscription_root {
   fetch data from the table: "person_types" using primary key columns
   """
   personTypesByPk(id: uuid!): PersonTypes
+
+  """
+  fetch data from the table in a streaming manner : "person_types"
+  """
+  personTypesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonTypesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonTypesBoolExp
+  ): [PersonTypes!]!
 
   """
   An array relationship
@@ -21714,6 +23104,26 @@ type subscription_root {
   personsGroupsByPk(relId: uuid!): PersonsGroups
 
   """
+  fetch data from the table in a streaming manner : "persons_groups"
+  """
+  personsGroupsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonsGroupsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonsGroupsBoolExp
+  ): [PersonsGroups!]!
+
+  """
   fetch data from the table: "persons_services"
   """
   personsServices(
@@ -21777,6 +23187,46 @@ type subscription_root {
   fetch data from the table: "persons_services" using primary key columns
   """
   personsServicesByPk(relId: uuid!): PersonsServices
+
+  """
+  fetch data from the table in a streaming manner : "persons_services"
+  """
+  personsServicesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonsServicesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonsServicesBoolExp
+  ): [PersonsServices!]!
+
+  """
+  fetch data from the table in a streaming manner : "persons"
+  """
+  personsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonsBoolExp
+  ): [Persons!]!
 
   """
   fetch data from the table: "persons_tags"
@@ -21844,6 +23294,26 @@ type subscription_root {
   personsTagsByPk(relId: uuid!): PersonsTags
 
   """
+  fetch data from the table in a streaming manner : "persons_tags"
+  """
+  personsTagsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [PersonsTagsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: PersonsTagsBoolExp
+  ): [PersonsTags!]!
+
+  """
   fetch data from the table: "qualifications"
   """
   qualifications(
@@ -21907,6 +23377,26 @@ type subscription_root {
   fetch data from the table: "qualifications" using primary key columns
   """
   qualificationsByPk(id: uuid!): Qualifications
+
+  """
+  fetch data from the table in a streaming manner : "qualifications"
+  """
+  qualificationsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [QualificationsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: QualificationsBoolExp
+  ): [Qualifications!]!
 
   """
   fetch data from the table: "schools"
@@ -21974,6 +23464,26 @@ type subscription_root {
   schoolsByPk(id: uuid!): Schools
 
   """
+  fetch data from the table in a streaming manner : "schools"
+  """
+  schoolsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [SchoolsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: SchoolsBoolExp
+  ): [Schools!]!
+
+  """
   fetch data from the table: "services"
   """
   services(
@@ -22037,6 +23547,26 @@ type subscription_root {
   fetch data from the table: "services" using primary key columns
   """
   servicesByPk(id: uuid!): Services
+
+  """
+  fetch data from the table in a streaming manner : "services"
+  """
+  servicesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [ServicesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: ServicesBoolExp
+  ): [Services!]!
 
   """
   fetch data from the table: "shammas_levels"
@@ -22104,69 +23634,24 @@ type subscription_root {
   shammasLevelsByPk(id: uuid!): ShammasLevels
 
   """
-  fetch data from the table: "states"
+  fetch data from the table in a streaming manner : "shammas_levels"
   """
-  states(
+  shammasLevelsStream(
     """
-    distinct select on columns
+    maximum number of rows returned in a single batch
     """
-    distinctOn: [StatesSelectColumn!]
+    batchSize: Int!
 
     """
-    limit the number of rows returned
+    cursor to stream the results returned by the query
     """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [StatesOrderBy!]
+    cursor: [ShammasLevelsStreamCursorInput]!
 
     """
     filter the rows returned
     """
-    where: StatesBoolExp
-  ): [States!]!
-
-  """
-  fetch aggregated fields from the table: "states"
-  """
-  statesAggregate(
-    """
-    distinct select on columns
-    """
-    distinctOn: [StatesSelectColumn!]
-
-    """
-    limit the number of rows returned
-    """
-    limit: Int
-
-    """
-    skip the first n rows. Use only with order_by
-    """
-    offset: Int
-
-    """
-    sort the rows by one or more columns
-    """
-    orderBy: [StatesOrderBy!]
-
-    """
-    filter the rows returned
-    """
-    where: StatesBoolExp
-  ): StatesAggregate!
-
-  """
-  fetch data from the table: "states" using primary key columns
-  """
-  statesByPk(id: uuid!): States
+    where: ShammasLevelsBoolExp
+  ): [ShammasLevels!]!
 
   """
   An array relationship
@@ -22234,6 +23719,26 @@ type subscription_root {
   storesByPk(id: uuid!): Stores
 
   """
+  fetch data from the table in a streaming manner : "stores"
+  """
+  storesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [StoresStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: StoresBoolExp
+  ): [Stores!]!
+
+  """
   fetch data from the table: "streets"
   """
   streets(
@@ -22297,6 +23802,26 @@ type subscription_root {
   fetch data from the table: "streets" using primary key columns
   """
   streetsByPk(id: uuid!): Streets
+
+  """
+  fetch data from the table in a streaming manner : "streets"
+  """
+  streetsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [StreetsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: StreetsBoolExp
+  ): [Streets!]!
 
   """
   fetch data from the table: "study_years"
@@ -22364,6 +23889,26 @@ type subscription_root {
   studyYearsByPk(order: smallint!): StudyYears
 
   """
+  fetch data from the table in a streaming manner : "study_years"
+  """
+  studyYearsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [StudyYearsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: StudyYearsBoolExp
+  ): [StudyYears!]!
+
+  """
   fetch data from the table: "tags"
   """
   tags(
@@ -22429,6 +23974,26 @@ type subscription_root {
   tagsByPk(id: uuid!): Tags
 
   """
+  fetch data from the table in a streaming manner : "tags"
+  """
+  tagsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [TagsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: TagsBoolExp
+  ): [Tags!]!
+
+  """
   fetch data from the table: "universities"
   """
   universities(
@@ -22492,6 +24057,26 @@ type subscription_root {
   fetch data from the table: "universities" using primary key columns
   """
   universitiesByPk(id: uuid!): Universities
+
+  """
+  fetch data from the table in a streaming manner : "universities"
+  """
+  universitiesStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [UniversitiesStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: UniversitiesBoolExp
+  ): [Universities!]!
 
   """
   fetch data from the table: "users"
@@ -22624,6 +24209,26 @@ type subscription_root {
   usersDataByPk(uid: uuid!): UsersData
 
   """
+  fetch data from the table in a streaming manner : "users_data"
+  """
+  usersDataStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [UsersDataStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: UsersDataBoolExp
+  ): [UsersData!]!
+
+  """
   fetch data from the table: "users_permissions"
   """
   usersPermissions(
@@ -22687,6 +24292,46 @@ type subscription_root {
   fetch data from the table: "users_permissions" using primary key columns
   """
   usersPermissionsByPk(permissionId: uuid!): UsersPermissions
+
+  """
+  fetch data from the table in a streaming manner : "users_permissions"
+  """
+  usersPermissionsStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [UsersPermissionsStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: UsersPermissionsBoolExp
+  ): [UsersPermissions!]!
+
+  """
+  fetch data from the table in a streaming manner : "users"
+  """
+  usersStream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batchSize: Int!
+
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [UsersStreamCursorInput]!
+
+    """
+    filter the rows returned
+    """
+    where: UsersBoolExp
+  ): [Users!]!
 }
 
 scalar time

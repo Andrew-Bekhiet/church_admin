@@ -7,12 +7,13 @@ part 'father.freezed.dart';
 part 'father.g.dart';
 
 @freezed
-class Father extends ID with _$Father {
-  const factory Father({
+class Father extends ViewableWithID with _$Father {
+  factory Father({
     required String id,
     required String name,
     String? churchId,
   }) = _Father;
+  Father._();
 
   factory Father.fromJson(Map<String, Object?> json) => _$FatherFromJson(json);
 }

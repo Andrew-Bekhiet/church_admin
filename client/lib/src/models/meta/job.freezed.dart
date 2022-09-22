@@ -98,8 +98,8 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Job implements _Job {
-  const _$_Job({required this.id, required this.name});
+class _$_Job extends _Job {
+  _$_Job({required this.id, required this.name}) : super._();
 
   factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
 
@@ -142,9 +142,9 @@ class _$_Job implements _Job {
   }
 }
 
-abstract class _Job implements Job {
-  const factory _Job({required final String id, required final String name}) =
-      _$_Job;
+abstract class _Job extends Job {
+  factory _Job({required final String id, required final String name}) = _$_Job;
+  _Job._() : super._();
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
 

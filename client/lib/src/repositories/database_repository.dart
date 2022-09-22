@@ -1,11 +1,27 @@
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
+import 'package:churchdata_core/churchdata_core.dart'
+    show
+        DatabaseRepository,
+        ID,
+        Json,
+        JsonRef,
+        QueryCompleter,
+        ViewableWithID,
+        kDefaultQueryCompleter;
+import 'package:collection/collection.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' hide JsonSerializable;
+import 'package:http/http.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:uuid/uuid.dart';
 
 import 'database/graphql.graphql.dart';
@@ -14,10 +30,21 @@ part 'database/areas.dart';
 part 'database/classes.dart';
 part 'database/families.dart';
 part 'database/groups.dart';
+part 'database/metadata.dart';
+part 'database/metadata/churches.dart';
+part 'database/metadata/colleges.dart';
+part 'database/metadata/fathers.dart';
+part 'database/metadata/jobs.dart';
+part 'database/metadata/person_states.dart';
+part 'database/metadata/person_types.dart';
+part 'database/metadata/qualifications.dart';
+part 'database/metadata/schools.dart';
+part 'database/metadata/shammas_levels.dart';
+part 'database/metadata/study_years.dart';
+part 'database/metadata/tags.dart';
 part 'database/persons.dart';
 part 'database/services.dart';
 part 'database/streets.dart';
-part 'database/study_years.dart';
 part 'database/users.dart';
 
 class CADatabaseRepository implements DatabaseRepository {
@@ -26,11 +53,19 @@ class CADatabaseRepository implements DatabaseRepository {
 
   static Future<bool> isConnectedToInternet() async {
     try {
-      final data = await GetIt.I<FirebaseDatabase>()
-          .ref()
-          .child('.info/connected')
-          .once();
-      return data.snapshot.value == true;
+      if (!UniversalPlatform.isDesktop) {
+        final data = await GetIt.I<FirebaseDatabase>()
+            .ref()
+            .child('.info/connected')
+            .once();
+        return data.snapshot.value == true;
+      } else {
+        final res = await get(
+          Uri.parse(dotenv.env['HASURA_SERVER']!)
+              .replace(pathSegments: ['healthz']),
+        ).timeout(const Duration(seconds: 15));
+        return res.body == 'OK';
+      }
     } on Exception {
       return false;
     }
@@ -46,9 +81,9 @@ class CADatabaseRepository implements DatabaseRepository {
   final classes = ClassesQueries._();
   final groups = GroupsQueries._();
 
-  final studyYears = StudyYearsQueries._();
-
   final users = UsersQueries._();
+
+  final metadata = MetadataQueries._();
 
   @override
   Never batch() => throw UnimplementedError();
@@ -88,8 +123,119 @@ class CADatabaseRepository implements DatabaseRepository {
       throw UnimplementedError();
 }
 
-Q exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
-  if (result.hasException) throw result.exception!;
+DocumentNode removeTopFields(
+  Set<String> fieldsToRemove,
+  DocumentNode document,
+) {
+  return DocumentNode(
+    definitions: document.definitions
+        .map(
+          (d) => d is OperationDefinitionNode
+              ? OperationDefinitionNode(
+                  type: d.type,
+                  directives: d.directives,
+                  name: d.name,
+                  span: d.span,
+                  variableDefinitions: d.variableDefinitions,
+                  selectionSet: SelectionSetNode(
+                    span: d.selectionSet.span,
+                    selections: d.selectionSet.selections
+                        .where(
+                          (e) =>
+                              e is! FieldNode ||
+                              !fieldsToRemove.contains(e.name.value),
+                        )
+                        .toList(),
+                  ),
+                )
+              : d,
+        )
+        .toList(),
+    span: document.span,
+  );
+}
+
+DocumentNode addSelectionFields(
+  Map<String, List<FieldNode>> fieldsToAdd,
+  DocumentNode document,
+) {
+  return DocumentNode(
+    definitions: document.definitions
+        .map(
+          (d) => d is OperationDefinitionNode
+              ? OperationDefinitionNode(
+                  type: d.type,
+                  directives: d.directives,
+                  name: d.name,
+                  span: d.span,
+                  variableDefinitions: d.variableDefinitions,
+                  selectionSet: SelectionSetNode(
+                    span: d.selectionSet.span,
+                    selections: d.selectionSet.selections
+                        .map(
+                          (f) => f is FieldNode &&
+                                  fieldsToAdd.containsKey(f.name.value)
+                              ? FieldNode(
+                                  name: f.name,
+                                  alias: f.alias,
+                                  arguments: f.arguments,
+                                  directives: f.directives,
+                                  span: f.span,
+                                  selectionSet: SelectionSetNode(
+                                    span: f.selectionSet?.span,
+                                    selections: [
+                                      ...f.selectionSet?.selections ?? [],
+                                      ...fieldsToAdd[f.name.value] ?? []
+                                    ],
+                                  ),
+                                )
+                              : f,
+                        )
+                        .toList(),
+                  ),
+                )
+              : d,
+        )
+        .toList(),
+    span: document.span,
+  );
+}
+
+DocumentNode removeVariables(
+  Set<String> varsToRemove,
+  DocumentNode document,
+) {
+  return DocumentNode(
+    definitions: document.definitions
+        .map(
+          (d) => d is OperationDefinitionNode
+              ? OperationDefinitionNode(
+                  type: d.type,
+                  directives: d.directives,
+                  name: d.name,
+                  span: d.span,
+                  variableDefinitions: d.variableDefinitions
+                      .where(
+                        (v) => !varsToRemove.contains(v.variable.name.value),
+                      )
+                      .toList(),
+                  selectionSet: d.selectionSet,
+                )
+              : d,
+        )
+        .toList(),
+    span: document.span,
+  );
+}
+
+Q exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result,
+    [bool ignoreUnexpectedStructure = false]) {
+  if (result.hasException &&
+      (!ignoreUnexpectedStructure ||
+          result.exception!.linkException
+              is! UnexpectedResponseStructureException)) {
+    throw result.exception!;
+  }
   return result;
 }
 
@@ -125,6 +271,13 @@ T stripNullValuesFrom<T>(T json, [Set<String> keep = const {}]) => json is Json
           ] as T
         : json;
 
+Tuple2<Iterable<T>, Iterable<T>> diff<T>(Set<T> old, Set<T> $new) {
+  return Tuple2(
+    old.where((s) => !$new.contains(s)).toSet(),
+    $new.where((s) => !old.contains(s)).toSet(),
+  );
+}
+
 extension JsonX on Json {
   Json stripNullValues([Set<String> keep = const {}]) => stripNullValuesFrom(
         this,
@@ -154,7 +307,7 @@ DelegatingStreamResult<T> clampResults<T extends ViewableWithID>(
   if (lastSearch == search) {
     return DelegatingStreamResult(
       result: start < current.length
-          ? (current..replaceRange(start, end, sublist))
+          ? (current..replaceRange(start, min(end, current.length), sublist))
           : (current..addAll(sublist)),
       canPaginateForward: result.length >= instance.limit,
     );
@@ -164,4 +317,8 @@ DelegatingStreamResult<T> clampResults<T extends ViewableWithID>(
       canPaginateForward: result.length >= instance.limit,
     );
   }
+}
+
+extension StringToUuid on String {
+  UuidValue toUuid() => UuidValue(this);
 }

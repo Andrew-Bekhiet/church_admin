@@ -1,0 +1,9 @@
+subscription getFathersStream(
+  $addWhere: [FathersBoolExp!] = {}
+  $limit: Int = 25
+) {
+  fathers(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
+    id
+    name
+  }
+}

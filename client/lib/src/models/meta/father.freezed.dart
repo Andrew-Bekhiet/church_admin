@@ -109,8 +109,8 @@ class __$$_FatherCopyWithImpl<$Res> extends _$FatherCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Father implements _Father {
-  const _$_Father({required this.id, required this.name, this.churchId});
+class _$_Father extends _Father {
+  _$_Father({required this.id, required this.name, this.churchId}) : super._();
 
   factory _$_Father.fromJson(Map<String, dynamic> json) =>
       _$$_FatherFromJson(json);
@@ -158,11 +158,12 @@ class _$_Father implements _Father {
   }
 }
 
-abstract class _Father implements Father {
-  const factory _Father(
+abstract class _Father extends Father {
+  factory _Father(
       {required final String id,
       required final String name,
       final String? churchId}) = _$_Father;
+  _Father._() : super._();
 
   factory _Father.fromJson(Map<String, dynamic> json) = _$_Father.fromJson;
 

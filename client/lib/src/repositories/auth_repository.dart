@@ -3,11 +3,15 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:desktop_webview_auth/desktop_webview_auth.dart';
+import 'package:desktop_webview_auth/google.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class CAAuthRepository extends AuthRepository<User, Person> {
   static CAAuthRepository get instance => GetIt.I<CAAuthRepository>();
@@ -32,6 +36,13 @@ class CAAuthRepository extends AuthRepository<User, Person> {
             backgroundColor: Colors.greenAccent,
             content: Text('تم استرجاع الاتصال بالانترنت'),
           ),
+        );
+      }
+
+      if (_jwtExpired(idToken!)) {
+        refreshIdToken(
+          GetIt.I<auth.FirebaseAuth>().currentUser!,
+          true,
         );
       }
     } else if (WidgetsBinding.instance.lifecycleState ==
@@ -86,10 +97,26 @@ class CAAuthRepository extends AuthRepository<User, Person> {
     String? phone,
     String? email,
   }) async {
-    if (_jwtExpired(idTokenClaims['_idToken'])) {
+    final connected = await CADatabaseRepository.isConnectedToInternet();
+
+    if (_jwtExpired(idTokenClaims['_idToken']) && connected) {
       return await refreshIdToken(
         GetIt.I<auth.FirebaseAuth>().currentUser!,
         true,
+      );
+    } else if (connected) {
+      unawaited(
+        Future.delayed(
+          _jwtExpiry(idTokenClaims['_idToken'])
+              .subtract(const Duration(minutes: 1))
+              .difference(DateTime.now()),
+          () => GetIt.I<auth.FirebaseAuth>().currentUser != null
+              ? refreshIdToken(
+                  GetIt.I<auth.FirebaseAuth>().currentUser!,
+                  true,
+                )
+              : null,
+        ),
       );
     }
 
@@ -97,20 +124,6 @@ class CAAuthRepository extends AuthRepository<User, Person> {
         idTokenClaims['_idToken'] != null) {
       _idToken.add(idTokenClaims['_idToken']);
     }
-
-    unawaited(
-      Future.delayed(
-        _jwtExpiry(idTokenClaims['_idToken'])
-            .subtract(const Duration(minutes: 1))
-            .difference(DateTime.now()),
-        () => GetIt.I<auth.FirebaseAuth>().currentUser != null
-            ? refreshIdToken(
-                GetIt.I<auth.FirebaseAuth>().currentUser!,
-                true,
-              )
-            : null,
-      ),
-    );
 
     personListener ??= CADatabaseRepository.I.users
         .getUserInfoStream(uid: idTokenClaims['x-hasura-user-id'])
@@ -181,5 +194,49 @@ class CAAuthRepository extends AuthRepository<User, Person> {
   Future<void> dispose() async {
     await super.dispose();
     await _idToken.close();
+  }
+
+  Future<void> signInWithGoogle() async {
+    if (UniversalPlatform.isWeb) {
+      final credential = (await GetIt.I<auth.FirebaseAuth>().signInWithPopup(
+        auth.GoogleAuthProvider(),
+      ))
+          .credential;
+      if (credential != null) {
+        await GetIt.I<auth.FirebaseAuth>().signInWithCredential(credential);
+      }
+    } else {
+      if (UniversalPlatform.isDesktop) {
+        final credential = await DesktopWebviewAuth.signIn(
+          GoogleSignInArgs(
+            redirectUri: webAuthHandler,
+            clientId: desktopClientId,
+          ),
+        );
+        if (credential != null) {
+          await GetIt.I<auth.FirebaseAuth>().signInWithCredential(
+            auth.OAuthCredential(
+              accessToken: credential.accessToken,
+              idToken: credential.idToken,
+              secret: credential.tokenSecret,
+              providerId: 'google.com',
+              signInMethod: 'google.com',
+            ),
+          );
+        }
+      } else {
+        final googleUser = await GetIt.I<GoogleSignIn>().signIn();
+        if (googleUser != null) {
+          final googleAuth = await googleUser.authentication;
+          if (googleAuth.accessToken != null) {
+            final credential = auth.GoogleAuthProvider.credential(
+              idToken: googleAuth.idToken,
+              accessToken: googleAuth.accessToken,
+            );
+            await GetIt.I<auth.FirebaseAuth>().signInWithCredential(credential);
+          }
+        }
+      }
+    }
   }
 }

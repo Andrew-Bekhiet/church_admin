@@ -1143,7 +1143,7 @@ PersonsBoolExp _$PersonsBoolExpFromJson(Map<String, dynamic> json) =>
               json['shammasLevelId'] as Map<String, dynamic>),
       state: json['state'] == null
           ? null
-          : StatesBoolExp.fromJson(json['state'] as Map<String, dynamic>),
+          : PersonStatesBoolExp.fromJson(json['state'] as Map<String, dynamic>),
       stateId: json['stateId'] == null
           ? null
           : UuidComparisonExp.fromJson(json['stateId'] as Map<String, dynamic>),
@@ -2558,6 +2558,10 @@ ServicesBoolExp _$ServicesBoolExpFromJson(Map<String, dynamic> json) =>
       name: json['name'] == null
           ? null
           : StringComparisonExp.fromJson(json['name'] as Map<String, dynamic>),
+      nextService: json['nextService'] == null
+          ? null
+          : UuidComparisonExp.fromJson(
+              json['nextService'] as Map<String, dynamic>),
       persons: json['persons'] == null
           ? null
           : PersonsServicesBoolExp.fromJson(
@@ -2601,6 +2605,7 @@ Map<String, dynamic> _$ServicesBoolExpToJson(ServicesBoolExp instance) =>
       'isUserAllowedToWrite': instance.isUserAllowedToWrite?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
       'name': instance.name?.toJson(),
+      'nextService': instance.nextService?.toJson(),
       'persons': instance.persons?.toJson(),
       'photoUpdatedAt': instance.photoUpdatedAt?.toJson(),
       'studyYearFrom': instance.studyYearFrom?.toJson(),
@@ -2713,16 +2718,16 @@ Map<String, dynamic> _$ShammasLevelsBoolExpToJson(
       'order': instance.order?.toJson(),
     };
 
-StatesBoolExp _$StatesBoolExpFromJson(Map<String, dynamic> json) =>
-    StatesBoolExp(
+PersonStatesBoolExp _$PersonStatesBoolExpFromJson(Map<String, dynamic> json) =>
+    PersonStatesBoolExp(
       $and: (json['_and'] as List<dynamic>?)
-          ?.map((e) => StatesBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonStatesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       $not: json['_not'] == null
           ? null
-          : StatesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
+          : PersonStatesBoolExp.fromJson(json['_not'] as Map<String, dynamic>),
       $or: (json['_or'] as List<dynamic>?)
-          ?.map((e) => StatesBoolExp.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PersonStatesBoolExp.fromJson(e as Map<String, dynamic>))
           .toList(),
       color: json['color'] == null
           ? null
@@ -2738,7 +2743,8 @@ StatesBoolExp _$StatesBoolExpFromJson(Map<String, dynamic> json) =>
           : PersonsBoolExp.fromJson(json['persons'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$StatesBoolExpToJson(StatesBoolExp instance) =>
+Map<String, dynamic> _$PersonStatesBoolExpToJson(
+        PersonStatesBoolExp instance) =>
     <String, dynamic>{
       '_and': instance.$and?.map((e) => e.toJson()).toList(),
       '_not': instance.$not?.toJson(),
@@ -3075,6 +3081,359 @@ Map<String, dynamic> _$GetGroupsStream$SubscriptionRootToJson(
       'groups': instance.groups.map((e) => e.toJson()).toList(),
     };
 
+GetChurchesStream$SubscriptionRoot$Churches
+    _$GetChurchesStream$SubscriptionRoot$ChurchesFromJson(
+            Map<String, dynamic> json) =>
+        GetChurchesStream$SubscriptionRoot$Churches()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetChurchesStream$SubscriptionRoot$ChurchesToJson(
+        GetChurchesStream$SubscriptionRoot$Churches instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetChurchesStream$SubscriptionRoot _$GetChurchesStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetChurchesStream$SubscriptionRoot()
+      ..churches = (json['churches'] as List<dynamic>)
+          .map((e) => GetChurchesStream$SubscriptionRoot$Churches.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetChurchesStream$SubscriptionRootToJson(
+        GetChurchesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'churches': instance.churches.map((e) => e.toJson()).toList(),
+    };
+
+GetCollegesStream$SubscriptionRoot$Colleges
+    _$GetCollegesStream$SubscriptionRoot$CollegesFromJson(
+            Map<String, dynamic> json) =>
+        GetCollegesStream$SubscriptionRoot$Colleges()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetCollegesStream$SubscriptionRoot$CollegesToJson(
+        GetCollegesStream$SubscriptionRoot$Colleges instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetCollegesStream$SubscriptionRoot _$GetCollegesStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetCollegesStream$SubscriptionRoot()
+      ..colleges = (json['colleges'] as List<dynamic>)
+          .map((e) => GetCollegesStream$SubscriptionRoot$Colleges.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetCollegesStream$SubscriptionRootToJson(
+        GetCollegesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'colleges': instance.colleges.map((e) => e.toJson()).toList(),
+    };
+
+GetFathersStream$SubscriptionRoot$Fathers
+    _$GetFathersStream$SubscriptionRoot$FathersFromJson(
+            Map<String, dynamic> json) =>
+        GetFathersStream$SubscriptionRoot$Fathers()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFathersStream$SubscriptionRoot$FathersToJson(
+        GetFathersStream$SubscriptionRoot$Fathers instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFathersStream$SubscriptionRoot _$GetFathersStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetFathersStream$SubscriptionRoot()
+      ..fathers = (json['fathers'] as List<dynamic>)
+          .map((e) => GetFathersStream$SubscriptionRoot$Fathers.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetFathersStream$SubscriptionRootToJson(
+        GetFathersStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'fathers': instance.fathers.map((e) => e.toJson()).toList(),
+    };
+
+GetJobsStream$SubscriptionRoot$Jobs
+    _$GetJobsStream$SubscriptionRoot$JobsFromJson(Map<String, dynamic> json) =>
+        GetJobsStream$SubscriptionRoot$Jobs()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetJobsStream$SubscriptionRoot$JobsToJson(
+        GetJobsStream$SubscriptionRoot$Jobs instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetJobsStream$SubscriptionRoot _$GetJobsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetJobsStream$SubscriptionRoot()
+      ..jobs = (json['jobs'] as List<dynamic>)
+          .map((e) => GetJobsStream$SubscriptionRoot$Jobs.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetJobsStream$SubscriptionRootToJson(
+        GetJobsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'jobs': instance.jobs.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonStatesStream$SubscriptionRoot$PersonStates
+    _$GetPersonStatesStream$SubscriptionRoot$PersonStatesFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonStatesStream$SubscriptionRoot$PersonStates()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int;
+
+Map<String, dynamic>
+    _$GetPersonStatesStream$SubscriptionRoot$PersonStatesToJson(
+            GetPersonStatesStream$SubscriptionRoot$PersonStates instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+        };
+
+GetPersonStatesStream$SubscriptionRoot
+    _$GetPersonStatesStream$SubscriptionRootFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonStatesStream$SubscriptionRoot()
+          ..personStates = (json['personStates'] as List<dynamic>)
+              .map((e) =>
+                  GetPersonStatesStream$SubscriptionRoot$PersonStates.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetPersonStatesStream$SubscriptionRootToJson(
+        GetPersonStatesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'personStates': instance.personStates.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonTypesStream$SubscriptionRoot$PersonTypes
+    _$GetPersonTypesStream$SubscriptionRoot$PersonTypesFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonTypesStream$SubscriptionRoot$PersonTypes()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..order = json['order'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetPersonTypesStream$SubscriptionRoot$PersonTypesToJson(
+        GetPersonTypesStream$SubscriptionRoot$PersonTypes instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'order': instance.order,
+      'name': instance.name,
+    };
+
+GetPersonTypesStream$SubscriptionRoot
+    _$GetPersonTypesStream$SubscriptionRootFromJson(
+            Map<String, dynamic> json) =>
+        GetPersonTypesStream$SubscriptionRoot()
+          ..personTypes = (json['personTypes'] as List<dynamic>)
+              .map((e) =>
+                  GetPersonTypesStream$SubscriptionRoot$PersonTypes.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetPersonTypesStream$SubscriptionRootToJson(
+        GetPersonTypesStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'personTypes': instance.personTypes.map((e) => e.toJson()).toList(),
+    };
+
+GetQualificationsStream$SubscriptionRoot$Qualifications
+    _$GetQualificationsStream$SubscriptionRoot$QualificationsFromJson(
+            Map<String, dynamic> json) =>
+        GetQualificationsStream$SubscriptionRoot$Qualifications()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$GetQualificationsStream$SubscriptionRoot$QualificationsToJson(
+            GetQualificationsStream$SubscriptionRoot$Qualifications instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+        };
+
+GetQualificationsStream$SubscriptionRoot
+    _$GetQualificationsStream$SubscriptionRootFromJson(
+            Map<String, dynamic> json) =>
+        GetQualificationsStream$SubscriptionRoot()
+          ..qualifications = (json['qualifications'] as List<dynamic>)
+              .map((e) =>
+                  GetQualificationsStream$SubscriptionRoot$Qualifications
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetQualificationsStream$SubscriptionRootToJson(
+        GetQualificationsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'qualifications': instance.qualifications.map((e) => e.toJson()).toList(),
+    };
+
+GetSchoolsStream$SubscriptionRoot$Schools
+    _$GetSchoolsStream$SubscriptionRoot$SchoolsFromJson(
+            Map<String, dynamic> json) =>
+        GetSchoolsStream$SubscriptionRoot$Schools()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetSchoolsStream$SubscriptionRoot$SchoolsToJson(
+        GetSchoolsStream$SubscriptionRoot$Schools instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetSchoolsStream$SubscriptionRoot _$GetSchoolsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetSchoolsStream$SubscriptionRoot()
+      ..schools = (json['schools'] as List<dynamic>)
+          .map((e) => GetSchoolsStream$SubscriptionRoot$Schools.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetSchoolsStream$SubscriptionRootToJson(
+        GetSchoolsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'schools': instance.schools.map((e) => e.toJson()).toList(),
+    };
+
+GetShammasLevelsStream$SubscriptionRoot$ShammasLevels
+    _$GetShammasLevelsStream$SubscriptionRoot$ShammasLevelsFromJson(
+            Map<String, dynamic> json) =>
+        GetShammasLevelsStream$SubscriptionRoot$ShammasLevels()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..order = json['order'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$GetShammasLevelsStream$SubscriptionRoot$ShammasLevelsToJson(
+            GetShammasLevelsStream$SubscriptionRoot$ShammasLevels instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'order': instance.order,
+          'name': instance.name,
+        };
+
+GetShammasLevelsStream$SubscriptionRoot
+    _$GetShammasLevelsStream$SubscriptionRootFromJson(
+            Map<String, dynamic> json) =>
+        GetShammasLevelsStream$SubscriptionRoot()
+          ..shammasLevels = (json['shammasLevels'] as List<dynamic>)
+              .map((e) => GetShammasLevelsStream$SubscriptionRoot$ShammasLevels
+                  .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetShammasLevelsStream$SubscriptionRootToJson(
+        GetShammasLevelsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'shammasLevels': instance.shammasLevels.map((e) => e.toJson()).toList(),
+    };
+
+GetStudyYearName$QueryRoot$StudyYears
+    _$GetStudyYearName$QueryRoot$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetStudyYearName$QueryRoot$StudyYears()
+          ..order = json['order'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetStudyYearName$QueryRoot$StudyYearsToJson(
+        GetStudyYearName$QueryRoot$StudyYears instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+      'name': instance.name,
+    };
+
+GetStudyYearName$QueryRoot _$GetStudyYearName$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearName$QueryRoot()
+      ..studyYearsByPk = json['studyYearsByPk'] == null
+          ? null
+          : GetStudyYearName$QueryRoot$StudyYears.fromJson(
+              json['studyYearsByPk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetStudyYearName$QueryRootToJson(
+        GetStudyYearName$QueryRoot instance) =>
+    <String, dynamic>{
+      'studyYearsByPk': instance.studyYearsByPk?.toJson(),
+    };
+
+GetStudyYearsStream$SubscriptionRoot$StudyYears
+    _$GetStudyYearsStream$SubscriptionRoot$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetStudyYearsStream$SubscriptionRoot$StudyYears()
+          ..order = json['order'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetStudyYearsStream$SubscriptionRoot$StudyYearsToJson(
+        GetStudyYearsStream$SubscriptionRoot$StudyYears instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+      'name': instance.name,
+    };
+
+GetStudyYearsStream$SubscriptionRoot
+    _$GetStudyYearsStream$SubscriptionRootFromJson(Map<String, dynamic> json) =>
+        GetStudyYearsStream$SubscriptionRoot()
+          ..studyYears = (json['studyYears'] as List<dynamic>)
+              .map((e) =>
+                  GetStudyYearsStream$SubscriptionRoot$StudyYears.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetStudyYearsStream$SubscriptionRootToJson(
+        GetStudyYearsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'studyYears': instance.studyYears.map((e) => e.toJson()).toList(),
+    };
+
+GetTagsStream$SubscriptionRoot$Tags
+    _$GetTagsStream$SubscriptionRoot$TagsFromJson(Map<String, dynamic> json) =>
+        GetTagsStream$SubscriptionRoot$Tags()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?;
+
+Map<String, dynamic> _$GetTagsStream$SubscriptionRoot$TagsToJson(
+        GetTagsStream$SubscriptionRoot$Tags instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+    };
+
+GetTagsStream$SubscriptionRoot _$GetTagsStream$SubscriptionRootFromJson(
+        Map<String, dynamic> json) =>
+    GetTagsStream$SubscriptionRoot()
+      ..tags = (json['tags'] as List<dynamic>)
+          .map((e) => GetTagsStream$SubscriptionRoot$Tags.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetTagsStream$SubscriptionRootToJson(
+        GetTagsStream$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'tags': instance.tags.map((e) => e.toJson()).toList(),
+    };
+
 InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$Persons
     _$InsertPersonLastConfession$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
             Map<String, dynamic> json) =>
@@ -3389,6 +3748,3815 @@ Map<String, dynamic> _$UpdatePersonSpiritData$MutationRootToJson(
           instance.insertHistoryConfessionHistoryOne?.toJson(),
       'insertHistoryKodasHistoryOne':
           instance.insertHistoryKodasHistoryOne?.toJson(),
+    };
+
+DeletePerson$MutationRoot$Persons _$DeletePerson$MutationRoot$PersonsFromJson(
+        Map<String, dynamic> json) =>
+    DeletePerson$MutationRoot$Persons()
+      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+      ..name = json['name'] as String
+      ..color = json['color'] as int?
+      ..photoUpdatedAt = json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$DeletePerson$MutationRoot$PersonsToJson(
+        DeletePerson$MutationRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+DeletePerson$MutationRoot _$DeletePerson$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    DeletePerson$MutationRoot()
+      ..deletePersonsByPk = json['deletePersonsByPk'] == null
+          ? null
+          : DeletePerson$MutationRoot$Persons.fromJson(
+              json['deletePersonsByPk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$DeletePerson$MutationRootToJson(
+        DeletePerson$MutationRoot instance) =>
+    <String, dynamic>{
+      'deletePersonsByPk': instance.deletePersonsByPk?.toJson(),
+    };
+
+UpdatePerson$MutationRoot$PersonsGroupsMutationResponse
+    _$UpdatePerson$MutationRoot$PersonsGroupsMutationResponseFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$PersonsGroupsMutationResponse()
+          ..affectedRows = json['affected_rows'] as int;
+
+Map<String, dynamic>
+    _$UpdatePerson$MutationRoot$PersonsGroupsMutationResponseToJson(
+            UpdatePerson$MutationRoot$PersonsGroupsMutationResponse instance) =>
+        <String, dynamic>{
+          'affected_rows': instance.affectedRows,
+        };
+
+UpdatePerson$MutationRoot$PersonsServicesMutationResponse
+    _$UpdatePerson$MutationRoot$PersonsServicesMutationResponseFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$PersonsServicesMutationResponse()
+          ..affectedRows = json['affected_rows'] as int;
+
+Map<String,
+    dynamic> _$UpdatePerson$MutationRoot$PersonsServicesMutationResponseToJson(
+        UpdatePerson$MutationRoot$PersonsServicesMutationResponse instance) =>
+    <String, dynamic>{
+      'affected_rows': instance.affectedRows,
+    };
+
+UpdatePerson$MutationRoot$PersonsTagsMutationResponse
+    _$UpdatePerson$MutationRoot$PersonsTagsMutationResponseFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$PersonsTagsMutationResponse()
+          ..affectedRows = json['affected_rows'] as int;
+
+Map<String, dynamic>
+    _$UpdatePerson$MutationRoot$PersonsTagsMutationResponseToJson(
+            UpdatePerson$MutationRoot$PersonsTagsMutationResponse instance) =>
+        <String, dynamic>{
+          'affected_rows': instance.affectedRows,
+        };
+
+UpdatePerson$MutationRoot$Persons _$UpdatePerson$MutationRoot$PersonsFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePerson$MutationRoot$Persons()
+      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+      ..name = json['name'] as String
+      ..color = json['color'] as int?
+      ..photoUpdatedAt = json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$PersonsToJson(
+        UpdatePerson$MutationRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+UpdatePerson$MutationRoot$HistoryConfessionHistory$Persons
+    _$UpdatePerson$MutationRoot$HistoryConfessionHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryConfessionHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String,
+    dynamic> _$UpdatePerson$MutationRoot$HistoryConfessionHistory$PersonsToJson(
+        UpdatePerson$MutationRoot$HistoryConfessionHistory$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+UpdatePerson$MutationRoot$HistoryConfessionHistory
+    _$UpdatePerson$MutationRoot$HistoryConfessionHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryConfessionHistory()
+          ..person = UpdatePerson$MutationRoot$HistoryConfessionHistory$Persons
+              .fromJson(json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$HistoryConfessionHistoryToJson(
+        UpdatePerson$MutationRoot$HistoryConfessionHistory instance) =>
+    <String, dynamic>{
+      'person': instance.person.toJson(),
+    };
+
+UpdatePerson$MutationRoot$HistoryKodasHistory$Persons
+    _$UpdatePerson$MutationRoot$HistoryKodasHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryKodasHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$UpdatePerson$MutationRoot$HistoryKodasHistory$PersonsToJson(
+            UpdatePerson$MutationRoot$HistoryKodasHistory$Persons instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+        };
+
+UpdatePerson$MutationRoot$HistoryKodasHistory
+    _$UpdatePerson$MutationRoot$HistoryKodasHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryKodasHistory()
+          ..person =
+              UpdatePerson$MutationRoot$HistoryKodasHistory$Persons.fromJson(
+                  json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$HistoryKodasHistoryToJson(
+        UpdatePerson$MutationRoot$HistoryKodasHistory instance) =>
+    <String, dynamic>{
+      'person': instance.person.toJson(),
+    };
+
+UpdatePerson$MutationRoot$HistoryCallHistory$Persons
+    _$UpdatePerson$MutationRoot$HistoryCallHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryCallHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$UpdatePerson$MutationRoot$HistoryCallHistory$PersonsToJson(
+            UpdatePerson$MutationRoot$HistoryCallHistory$Persons instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+        };
+
+UpdatePerson$MutationRoot$HistoryCallHistory
+    _$UpdatePerson$MutationRoot$HistoryCallHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryCallHistory()
+          ..person =
+              UpdatePerson$MutationRoot$HistoryCallHistory$Persons.fromJson(
+                  json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$HistoryCallHistoryToJson(
+        UpdatePerson$MutationRoot$HistoryCallHistory instance) =>
+    <String, dynamic>{
+      'person': instance.person.toJson(),
+    };
+
+UpdatePerson$MutationRoot$HistoryVisitHistory$Persons
+    _$UpdatePerson$MutationRoot$HistoryVisitHistory$PersonsFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryVisitHistory$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$UpdatePerson$MutationRoot$HistoryVisitHistory$PersonsToJson(
+            UpdatePerson$MutationRoot$HistoryVisitHistory$Persons instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+        };
+
+UpdatePerson$MutationRoot$HistoryVisitHistory
+    _$UpdatePerson$MutationRoot$HistoryVisitHistoryFromJson(
+            Map<String, dynamic> json) =>
+        UpdatePerson$MutationRoot$HistoryVisitHistory()
+          ..person =
+              UpdatePerson$MutationRoot$HistoryVisitHistory$Persons.fromJson(
+                  json['person'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRoot$HistoryVisitHistoryToJson(
+        UpdatePerson$MutationRoot$HistoryVisitHistory instance) =>
+    <String, dynamic>{
+      'person': instance.person.toJson(),
+    };
+
+UpdatePerson$MutationRoot _$UpdatePerson$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePerson$MutationRoot()
+      ..insertPersonsGroups = json['insertPersonsGroups'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsGroupsMutationResponse.fromJson(
+              json['insertPersonsGroups'] as Map<String, dynamic>)
+      ..insertPersonsServices = json['insertPersonsServices'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsServicesMutationResponse.fromJson(
+              json['insertPersonsServices'] as Map<String, dynamic>)
+      ..insertPersonsTags = json['insertPersonsTags'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsTagsMutationResponse.fromJson(
+              json['insertPersonsTags'] as Map<String, dynamic>)
+      ..deletePersonsGroups = json['deletePersonsGroups'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsGroupsMutationResponse.fromJson(
+              json['deletePersonsGroups'] as Map<String, dynamic>)
+      ..deletePersonsServices = json['deletePersonsServices'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsServicesMutationResponse.fromJson(
+              json['deletePersonsServices'] as Map<String, dynamic>)
+      ..deletePersonsTags = json['deletePersonsTags'] == null
+          ? null
+          : UpdatePerson$MutationRoot$PersonsTagsMutationResponse.fromJson(
+              json['deletePersonsTags'] as Map<String, dynamic>)
+      ..updatePersonsByPk = json['updatePersonsByPk'] == null
+          ? null
+          : UpdatePerson$MutationRoot$Persons.fromJson(
+              json['updatePersonsByPk'] as Map<String, dynamic>)
+      ..insertHistoryConfessionHistoryOne =
+          json['insertHistoryConfessionHistoryOne'] == null
+              ? null
+              : UpdatePerson$MutationRoot$HistoryConfessionHistory.fromJson(
+                  json['insertHistoryConfessionHistoryOne']
+                      as Map<String, dynamic>)
+      ..insertHistoryKodasHistoryOne =
+          json['insertHistoryKodasHistoryOne'] == null
+              ? null
+              : UpdatePerson$MutationRoot$HistoryKodasHistory.fromJson(
+                  json['insertHistoryKodasHistoryOne'] as Map<String, dynamic>)
+      ..insertHistoryCallHistoryOne =
+          json['insertHistoryCallHistoryOne'] == null
+              ? null
+              : UpdatePerson$MutationRoot$HistoryCallHistory.fromJson(
+                  json['insertHistoryCallHistoryOne'] as Map<String, dynamic>)
+      ..insertHistoryVisitHistoryOne =
+          json['insertHistoryVisitHistoryOne'] == null
+              ? null
+              : UpdatePerson$MutationRoot$HistoryVisitHistory.fromJson(
+                  json['insertHistoryVisitHistoryOne'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UpdatePerson$MutationRootToJson(
+        UpdatePerson$MutationRoot instance) =>
+    <String, dynamic>{
+      'insertPersonsGroups': instance.insertPersonsGroups?.toJson(),
+      'insertPersonsServices': instance.insertPersonsServices?.toJson(),
+      'insertPersonsTags': instance.insertPersonsTags?.toJson(),
+      'deletePersonsGroups': instance.deletePersonsGroups?.toJson(),
+      'deletePersonsServices': instance.deletePersonsServices?.toJson(),
+      'deletePersonsTags': instance.deletePersonsTags?.toJson(),
+      'updatePersonsByPk': instance.updatePersonsByPk?.toJson(),
+      'insertHistoryConfessionHistoryOne':
+          instance.insertHistoryConfessionHistoryOne?.toJson(),
+      'insertHistoryKodasHistoryOne':
+          instance.insertHistoryKodasHistoryOne?.toJson(),
+      'insertHistoryCallHistoryOne':
+          instance.insertHistoryCallHistoryOne?.toJson(),
+      'insertHistoryVisitHistoryOne':
+          instance.insertHistoryVisitHistoryOne?.toJson(),
+    };
+
+PersonsSetInput _$PersonsSetInputFromJson(Map<String, dynamic> json) =>
+    PersonsSetInput(
+      address: json['address'] as String?,
+      birthdate: json['birthdate'] == null
+          ? null
+          : DateTime.parse(json['birthdate'] as String),
+      churchId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId']),
+      collegeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId']),
+      color: json['color'] as int?,
+      familyId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId']),
+      fatherId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId']),
+      firestoreId: json['firestoreId'] as String?,
+      gender: json['gender'] as bool?,
+      geolocation:
+          fromGraphQLGeographyNullableToDartJsonNullable(json['geolocation']),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      isServant: json['isServant'] as bool?,
+      isShammas: json['isShammas'] as bool?,
+      isStudent: json['isStudent'] as bool?,
+      jobDescription: json['jobDescription'] as String?,
+      jobId: fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId']),
+      mainPhone: json['mainPhone'] as String?,
+      name: json['name'] as String?,
+      notes: json['notes'] as String?,
+      otherPhones:
+          fromGraphQLJsonbNullableToDartJsonNullable(json['otherPhones']),
+      personTypeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personTypeId']),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      qualificationId: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['qualificationId']),
+      schoolId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId']),
+      shammasLevelId: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['shammasLevelId']),
+      stateId: fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId']),
+      storeId: fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId']),
+      studyYearId: json['studyYearId'] as int?,
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+    );
+
+Map<String, dynamic> _$PersonsSetInputToJson(PersonsSetInput instance) =>
+    <String, dynamic>{
+      'address': instance.address,
+      'birthdate': instance.birthdate?.toIso8601String(),
+      'churchId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
+      'collegeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
+      'color': instance.color,
+      'familyId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
+      'fatherId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
+      'firestoreId': instance.firestoreId,
+      'gender': instance.gender,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'isServant': instance.isServant,
+      'isShammas': instance.isShammas,
+      'isStudent': instance.isStudent,
+      'jobDescription': instance.jobDescription,
+      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
+      'mainPhone': instance.mainPhone,
+      'name': instance.name,
+      'notes': instance.notes,
+      'otherPhones':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.otherPhones),
+      'personTypeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.qualificationId),
+      'schoolId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
+      'shammasLevelId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.shammasLevelId),
+      'stateId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
+      'storeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
+      'studyYearId': instance.studyYearId,
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+    };
+
+PersonsGroupsInsertInput _$PersonsGroupsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsGroupsInsertInput(
+      group: json['group'] == null
+          ? null
+          : GroupsObjRelInsertInput.fromJson(
+              json['group'] as Map<String, dynamic>),
+      groupId: fromGraphQLUuidNullableToDartUuidValueNullable(json['groupId']),
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      relId: fromGraphQLUuidNullableToDartUuidValueNullable(json['relId']),
+    );
+
+Map<String, dynamic> _$PersonsGroupsInsertInputToJson(
+        PersonsGroupsInsertInput instance) =>
+    <String, dynamic>{
+      'group': instance.group?.toJson(),
+      'groupId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.groupId),
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'relId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.relId),
+    };
+
+GroupsObjRelInsertInput _$GroupsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    GroupsObjRelInsertInput(
+      data: GroupsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : GroupsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GroupsObjRelInsertInputToJson(
+        GroupsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+GroupsInsertInput _$GroupsInsertInputFromJson(Map<String, dynamic> json) =>
+    GroupsInsertInput(
+      adminUsers: json['adminUsers'] == null
+          ? null
+          : UsersPermissionsArrRelInsertInput.fromJson(
+              json['adminUsers'] as Map<String, dynamic>),
+      attendanceDaysConstraints: json['attendanceDaysConstraints'] == null
+          ? null
+          : HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              json['attendanceDaysConstraints'] as Map<String, dynamic>),
+      attendanceHistory: json['attendanceHistory'] == null
+          ? null
+          : HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              json['attendanceHistory'] as Map<String, dynamic>),
+      color: json['color'] as int?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsGroupsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      service: json['service'] == null
+          ? null
+          : ServicesObjRelInsertInput.fromJson(
+              json['service'] as Map<String, dynamic>),
+      serviceId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['serviceId']),
+      validity: json['validity'] as String?,
+    );
+
+Map<String, dynamic> _$GroupsInsertInputToJson(GroupsInsertInput instance) =>
+    <String, dynamic>{
+      'adminUsers': instance.adminUsers?.toJson(),
+      'attendanceDaysConstraints': instance.attendanceDaysConstraints?.toJson(),
+      'attendanceHistory': instance.attendanceHistory?.toJson(),
+      'color': instance.color,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'service': instance.service?.toJson(),
+      'serviceId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.serviceId),
+      'validity': instance.validity,
+    };
+
+UsersPermissionsArrRelInsertInput _$UsersPermissionsArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UsersPermissionsArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) =>
+              UsersPermissionsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : UsersPermissionsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersPermissionsArrRelInsertInputToJson(
+        UsersPermissionsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+UsersPermissionsInsertInput _$UsersPermissionsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UsersPermissionsInsertInput(
+      adminOnArea:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['adminOnArea']),
+      adminOnGroup:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['adminOnGroup']),
+      adminOnService: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['adminOnService']),
+      area: json['area'] == null
+          ? null
+          : AreasObjRelInsertInput.fromJson(
+              json['area'] as Map<String, dynamic>),
+      areaAdminOnUsers: json['areaAdminOnUsers'] as bool?,
+      areaAllowEdit: json['areaAllowEdit'] as bool?,
+      classes: json['classes'] == null
+          ? null
+          : ClassesArrRelInsertInput.fromJson(
+              json['classes'] as Map<String, dynamic>),
+      group: json['group'] == null
+          ? null
+          : GroupsObjRelInsertInput.fromJson(
+              json['group'] as Map<String, dynamic>),
+      groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
+      groupAllowEdit: json['groupAllowEdit'] as bool?,
+      permissionId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['permissionId']),
+      service: json['service'] == null
+          ? null
+          : ServicesObjRelInsertInput.fromJson(
+              json['service'] as Map<String, dynamic>),
+      serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
+      serviceAllowEdit: json['serviceAllowEdit'] as bool?,
+      serviceGender: json['serviceGender'] as bool?,
+      serviceStudyYear: json['serviceStudyYear'] as int?,
+      serviceStudyYearData: json['serviceStudyYearData'] == null
+          ? null
+          : StudyYearsObjRelInsertInput.fromJson(
+              json['serviceStudyYearData'] as Map<String, dynamic>),
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersPermissionsInsertInputToJson(
+        UsersPermissionsInsertInput instance) =>
+    <String, dynamic>{
+      'adminOnArea':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.adminOnArea),
+      'adminOnGroup':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.adminOnGroup),
+      'adminOnService': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.adminOnService),
+      'area': instance.area?.toJson(),
+      'areaAdminOnUsers': instance.areaAdminOnUsers,
+      'areaAllowEdit': instance.areaAllowEdit,
+      'classes': instance.classes?.toJson(),
+      'group': instance.group?.toJson(),
+      'groupAdminOnUsers': instance.groupAdminOnUsers,
+      'groupAllowEdit': instance.groupAllowEdit,
+      'permissionId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.permissionId),
+      'service': instance.service?.toJson(),
+      'serviceAdminOnUsers': instance.serviceAdminOnUsers,
+      'serviceAllowEdit': instance.serviceAllowEdit,
+      'serviceGender': instance.serviceGender,
+      'serviceStudyYear': instance.serviceStudyYear,
+      'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+      'user': instance.user?.toJson(),
+    };
+
+AreasObjRelInsertInput _$AreasObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    AreasObjRelInsertInput(
+      data: AreasInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : AreasOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AreasObjRelInsertInputToJson(
+        AreasObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+AreasInsertInput _$AreasInsertInputFromJson(Map<String, dynamic> json) =>
+    AreasInsertInput(
+      adminUsers: json['adminUsers'] == null
+          ? null
+          : UsersPermissionsArrRelInsertInput.fromJson(
+              json['adminUsers'] as Map<String, dynamic>),
+      bounds: fromGraphQLGeographyNullableToDartJsonNullable(json['bounds']),
+      color: json['color'] as int?,
+      firestoreId: json['firestoreId'] as String?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+    );
+
+Map<String, dynamic> _$AreasInsertInputToJson(AreasInsertInput instance) =>
+    <String, dynamic>{
+      'adminUsers': instance.adminUsers?.toJson(),
+      'bounds': fromDartJsonNullableToGraphQLGeographyNullable(instance.bounds),
+      'color': instance.color,
+      'firestoreId': instance.firestoreId,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+AreasOnConflict _$AreasOnConflictFromJson(Map<String, dynamic> json) =>
+    AreasOnConflict(
+      constraint: $enumDecode(_$AreasConstraintEnumMap, json['constraint'],
+          unknownValue: AreasConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$AreasUpdateColumnEnumMap, e,
+              unknownValue: AreasUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : AreasBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AreasOnConflictToJson(AreasOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$AreasConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$AreasUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$AreasConstraintEnumMap = {
+  AreasConstraint.areasFirestoreIdKey: 'areas_firestore_id_key',
+  AreasConstraint.areasPkey: 'areas_pkey',
+  AreasConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$AreasUpdateColumnEnumMap = {
+  AreasUpdateColumn.bounds: 'bounds',
+  AreasUpdateColumn.color: 'color',
+  AreasUpdateColumn.firestoreId: 'firestoreId',
+  AreasUpdateColumn.id: 'id',
+  AreasUpdateColumn.name: 'name',
+  AreasUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  AreasUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+ClassesArrRelInsertInput _$ClassesArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ClassesArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => ClassesInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : ClassesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ClassesArrRelInsertInputToJson(
+        ClassesArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+ClassesInsertInput _$ClassesInsertInputFromJson(Map<String, dynamic> json) =>
+    ClassesInsertInput(
+      attendanceDaysConstraints: json['attendanceDaysConstraints'] == null
+          ? null
+          : HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              json['attendanceDaysConstraints'] as Map<String, dynamic>),
+      attendanceHistory: json['attendanceHistory'] == null
+          ? null
+          : HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              json['attendanceHistory'] as Map<String, dynamic>),
+      color: json['color'] as int?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      service: json['service'] == null
+          ? null
+          : ServicesObjRelInsertInput.fromJson(
+              json['service'] as Map<String, dynamic>),
+      serviceGender: json['serviceGender'] as bool?,
+      serviceId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['serviceId']),
+      serviceStudyYear: json['serviceStudyYear'] as int?,
+      studyYear: json['studyYear'] == null
+          ? null
+          : StudyYearsObjRelInsertInput.fromJson(
+              json['studyYear'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ClassesInsertInputToJson(ClassesInsertInput instance) =>
+    <String, dynamic>{
+      'attendanceDaysConstraints': instance.attendanceDaysConstraints?.toJson(),
+      'attendanceHistory': instance.attendanceHistory?.toJson(),
+      'color': instance.color,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'service': instance.service?.toJson(),
+      'serviceGender': instance.serviceGender,
+      'serviceId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.serviceId),
+      'serviceStudyYear': instance.serviceStudyYear,
+      'studyYear': instance.studyYear?.toJson(),
+    };
+
+HistoryAttendanceDaysConstraintsArrRelInsertInput
+    _$HistoryAttendanceDaysConstraintsArrRelInsertInputFromJson(
+            Map<String, dynamic> json) =>
+        HistoryAttendanceDaysConstraintsArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryAttendanceDaysConstraintsInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryAttendanceDaysConstraintsOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceDaysConstraintsArrRelInsertInputToJson(
+        HistoryAttendanceDaysConstraintsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryAttendanceDaysConstraintsInsertInput
+    _$HistoryAttendanceDaysConstraintsInsertInputFromJson(
+            Map<String, dynamic> json) =>
+        HistoryAttendanceDaysConstraintsInsertInput(
+          day: json['day'] == null
+              ? null
+              : HistoryAttendanceDaysObjRelInsertInput.fromJson(
+                  json['day'] as Map<String, dynamic>),
+          dayId: json['dayId'] == null
+              ? null
+              : DateTime.parse(json['dayId'] as String),
+          group: json['group'] == null
+              ? null
+              : GroupsObjRelInsertInput.fromJson(
+                  json['group'] as Map<String, dynamic>),
+          groupId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['groupId']),
+          id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+          service: json['service'] == null
+              ? null
+              : ServicesObjRelInsertInput.fromJson(
+                  json['service'] as Map<String, dynamic>),
+          serviceGender: json['serviceGender'] as bool?,
+          serviceId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['serviceId']),
+          serviceStudyYear: json['serviceStudyYear'] as int?,
+          studyYear: json['studyYear'] == null
+              ? null
+              : StudyYearsObjRelInsertInput.fromJson(
+                  json['studyYear'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceDaysConstraintsInsertInputToJson(
+        HistoryAttendanceDaysConstraintsInsertInput instance) =>
+    <String, dynamic>{
+      'day': instance.day?.toJson(),
+      'dayId': instance.dayId?.toIso8601String(),
+      'group': instance.group?.toJson(),
+      'groupId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.groupId),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'service': instance.service?.toJson(),
+      'serviceGender': instance.serviceGender,
+      'serviceId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.serviceId),
+      'serviceStudyYear': instance.serviceStudyYear,
+      'studyYear': instance.studyYear?.toJson(),
+    };
+
+HistoryAttendanceDaysObjRelInsertInput
+    _$HistoryAttendanceDaysObjRelInsertInputFromJson(
+            Map<String, dynamic> json) =>
+        HistoryAttendanceDaysObjRelInsertInput(
+          data: HistoryAttendanceDaysInsertInput.fromJson(
+              json['data'] as Map<String, dynamic>),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryAttendanceDaysOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceDaysObjRelInsertInputToJson(
+        HistoryAttendanceDaysObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryAttendanceDaysInsertInput _$HistoryAttendanceDaysInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    HistoryAttendanceDaysInsertInput(
+      attendanceHistory: json['attendanceHistory'] == null
+          ? null
+          : HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              json['attendanceHistory'] as Map<String, dynamic>),
+      confessionHistory: json['confessionHistory'] == null
+          ? null
+          : HistoryConfessionHistoryArrRelInsertInput.fromJson(
+              json['confessionHistory'] as Map<String, dynamic>),
+      constraints: json['constraints'] == null
+          ? null
+          : HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              json['constraints'] as Map<String, dynamic>),
+      day: json['day'] == null ? null : DateTime.parse(json['day'] as String),
+      kodasHistory: json['kodasHistory'] == null
+          ? null
+          : HistoryKodasHistoryArrRelInsertInput.fromJson(
+              json['kodasHistory'] as Map<String, dynamic>),
+      notes: json['notes'] as String?,
+    );
+
+Map<String, dynamic> _$HistoryAttendanceDaysInsertInputToJson(
+        HistoryAttendanceDaysInsertInput instance) =>
+    <String, dynamic>{
+      'attendanceHistory': instance.attendanceHistory?.toJson(),
+      'confessionHistory': instance.confessionHistory?.toJson(),
+      'constraints': instance.constraints?.toJson(),
+      'day': instance.day?.toIso8601String(),
+      'kodasHistory': instance.kodasHistory?.toJson(),
+      'notes': instance.notes,
+    };
+
+HistoryAttendanceHistoryArrRelInsertInput
+    _$HistoryAttendanceHistoryArrRelInsertInputFromJson(
+            Map<String, dynamic> json) =>
+        HistoryAttendanceHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryAttendanceHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryAttendanceHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceHistoryArrRelInsertInputToJson(
+        HistoryAttendanceHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryAttendanceHistoryInsertInput
+    _$HistoryAttendanceHistoryInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryAttendanceHistoryInsertInput(
+          asAdmin: json['asAdmin'] as bool?,
+          kw$class: json['class'] == null
+              ? null
+              : ClassesObjRelInsertInput.fromJson(
+                  json['class'] as Map<String, dynamic>),
+          day: json['day'] == null
+              ? null
+              : HistoryAttendanceDaysObjRelInsertInput.fromJson(
+                  json['day'] as Map<String, dynamic>),
+          dayId: json['dayId'] == null
+              ? null
+              : DateTime.parse(json['dayId'] as String),
+          group: json['group'] == null
+              ? null
+              : GroupsObjRelInsertInput.fromJson(
+                  json['group'] as Map<String, dynamic>),
+          groupId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['groupId']),
+          id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+          person: json['person'] == null
+              ? null
+              : PersonsObjRelInsertInput.fromJson(
+                  json['person'] as Map<String, dynamic>),
+          personId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+          recordedBy: fromGraphQLUuidNullableToDartUuidValueNullable(
+              json['recordedBy']),
+          service: json['service'] == null
+              ? null
+              : ServicesObjRelInsertInput.fromJson(
+                  json['service'] as Map<String, dynamic>),
+          serviceGender: json['serviceGender'] as bool?,
+          serviceId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['serviceId']),
+          serviceStudyYear: json['serviceStudyYear'] as int?,
+          studyYear: json['studyYear'] == null
+              ? null
+              : StudyYearsObjRelInsertInput.fromJson(
+                  json['studyYear'] as Map<String, dynamic>),
+          time: json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String),
+          user: json['user'] == null
+              ? null
+              : UsersObjRelInsertInput.fromJson(
+                  json['user'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceHistoryInsertInputToJson(
+        HistoryAttendanceHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'asAdmin': instance.asAdmin,
+      'class': instance.kw$class?.toJson(),
+      'day': instance.day?.toJson(),
+      'dayId': instance.dayId?.toIso8601String(),
+      'group': instance.group?.toJson(),
+      'groupId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.groupId),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'service': instance.service?.toJson(),
+      'serviceGender': instance.serviceGender,
+      'serviceId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.serviceId),
+      'serviceStudyYear': instance.serviceStudyYear,
+      'studyYear': instance.studyYear?.toJson(),
+      'time': instance.time?.toIso8601String(),
+      'user': instance.user?.toJson(),
+    };
+
+ClassesObjRelInsertInput _$ClassesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ClassesObjRelInsertInput(
+      data: ClassesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : ClassesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ClassesObjRelInsertInputToJson(
+        ClassesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+ClassesOnConflict _$ClassesOnConflictFromJson(Map<String, dynamic> json) =>
+    ClassesOnConflict(
+      constraint: $enumDecode(_$ClassesConstraintEnumMap, json['constraint'],
+          unknownValue: ClassesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$ClassesUpdateColumnEnumMap, e,
+              unknownValue: ClassesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : ClassesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ClassesOnConflictToJson(ClassesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$ClassesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$ClassesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$ClassesConstraintEnumMap = {
+  ClassesConstraint.classesPkey: 'classes_pkey',
+  ClassesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$ClassesUpdateColumnEnumMap = {
+  ClassesUpdateColumn.color: 'color',
+  ClassesUpdateColumn.id: 'id',
+  ClassesUpdateColumn.name: 'name',
+  ClassesUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  ClassesUpdateColumn.serviceGender: 'serviceGender',
+  ClassesUpdateColumn.serviceId: 'serviceId',
+  ClassesUpdateColumn.serviceStudyYear: 'serviceStudyYear',
+  ClassesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonsObjRelInsertInput _$PersonsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsObjRelInsertInput(
+      data: PersonsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsObjRelInsertInputToJson(
+        PersonsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsInsertInput _$PersonsInsertInputFromJson(Map<String, dynamic> json) =>
+    PersonsInsertInput(
+      address: json['address'] as String?,
+      attendanceHistory: json['attendanceHistory'] == null
+          ? null
+          : HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              json['attendanceHistory'] as Map<String, dynamic>),
+      birthdate: json['birthdate'] == null
+          ? null
+          : DateTime.parse(json['birthdate'] as String),
+      callHistory: json['callHistory'] == null
+          ? null
+          : HistoryCallHistoryArrRelInsertInput.fromJson(
+              json['callHistory'] as Map<String, dynamic>),
+      church: json['church'] == null
+          ? null
+          : ChurchesObjRelInsertInput.fromJson(
+              json['church'] as Map<String, dynamic>),
+      churchId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId']),
+      college: json['college'] == null
+          ? null
+          : CollegesObjRelInsertInput.fromJson(
+              json['college'] as Map<String, dynamic>),
+      collegeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['collegeId']),
+      color: json['color'] as int?,
+      confessionHistory: json['confessionHistory'] == null
+          ? null
+          : HistoryConfessionHistoryArrRelInsertInput.fromJson(
+              json['confessionHistory'] as Map<String, dynamic>),
+      editHistory: json['editHistory'] == null
+          ? null
+          : HistoryEditHistoryArrRelInsertInput.fromJson(
+              json['editHistory'] as Map<String, dynamic>),
+      family: json['family'] == null
+          ? null
+          : FamiliesObjRelInsertInput.fromJson(
+              json['family'] as Map<String, dynamic>),
+      familyId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['familyId']),
+      father: json['father'] == null
+          ? null
+          : FathersObjRelInsertInput.fromJson(
+              json['father'] as Map<String, dynamic>),
+      fatherId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId']),
+      firestoreId: json['firestoreId'] as String?,
+      gender: json['gender'] as bool?,
+      geolocation:
+          fromGraphQLGeographyNullableToDartJsonNullable(json['geolocation']),
+      groups: json['groups'] == null
+          ? null
+          : PersonsGroupsArrRelInsertInput.fromJson(
+              json['groups'] as Map<String, dynamic>),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      isServant: json['isServant'] as bool?,
+      isShammas: json['isShammas'] as bool?,
+      isStudent: json['isStudent'] as bool?,
+      job: json['job'] == null
+          ? null
+          : JobsObjRelInsertInput.fromJson(json['job'] as Map<String, dynamic>),
+      jobDescription: json['jobDescription'] as String?,
+      jobId: fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId']),
+      kodasHistory: json['kodasHistory'] == null
+          ? null
+          : HistoryKodasHistoryArrRelInsertInput.fromJson(
+              json['kodasHistory'] as Map<String, dynamic>),
+      mainPhone: json['mainPhone'] as String?,
+      name: json['name'] as String?,
+      notes: json['notes'] as String?,
+      otherPhones:
+          fromGraphQLJsonbNullableToDartJsonNullable(json['otherPhones']),
+      personType: json['personType'] == null
+          ? null
+          : PersonTypesObjRelInsertInput.fromJson(
+              json['personType'] as Map<String, dynamic>),
+      personTypeId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personTypeId']),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      qualification: json['qualification'] == null
+          ? null
+          : QualificationsObjRelInsertInput.fromJson(
+              json['qualification'] as Map<String, dynamic>),
+      qualificationId: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['qualificationId']),
+      school: json['school'] == null
+          ? null
+          : SchoolsObjRelInsertInput.fromJson(
+              json['school'] as Map<String, dynamic>),
+      schoolId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['schoolId']),
+      services: json['services'] == null
+          ? null
+          : PersonsServicesArrRelInsertInput.fromJson(
+              json['services'] as Map<String, dynamic>),
+      shammasLevel: json['shammasLevel'] == null
+          ? null
+          : ShammasLevelsObjRelInsertInput.fromJson(
+              json['shammasLevel'] as Map<String, dynamic>),
+      shammasLevelId: fromGraphQLUuidNullableToDartUuidValueNullable(
+          json['shammasLevelId']),
+      state: json['state'] == null
+          ? null
+          : PersonStatesObjRelInsertInput.fromJson(
+              json['state'] as Map<String, dynamic>),
+      stateId: fromGraphQLUuidNullableToDartUuidValueNullable(json['stateId']),
+      storeId: fromGraphQLUuidNullableToDartUuidValueNullable(json['storeId']),
+      studyYear: json['studyYear'] == null
+          ? null
+          : StudyYearsObjRelInsertInput.fromJson(
+              json['studyYear'] as Map<String, dynamic>),
+      studyYearId: json['studyYearId'] as int?,
+      tags: json['tags'] == null
+          ? null
+          : PersonsTagsArrRelInsertInput.fromJson(
+              json['tags'] as Map<String, dynamic>),
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+      visitHistory: json['visitHistory'] == null
+          ? null
+          : HistoryVisitHistoryArrRelInsertInput.fromJson(
+              json['visitHistory'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsInsertInputToJson(PersonsInsertInput instance) =>
+    <String, dynamic>{
+      'address': instance.address,
+      'attendanceHistory': instance.attendanceHistory?.toJson(),
+      'birthdate': instance.birthdate?.toIso8601String(),
+      'callHistory': instance.callHistory?.toJson(),
+      'church': instance.church?.toJson(),
+      'churchId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
+      'college': instance.college?.toJson(),
+      'collegeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.collegeId),
+      'color': instance.color,
+      'confessionHistory': instance.confessionHistory?.toJson(),
+      'editHistory': instance.editHistory?.toJson(),
+      'family': instance.family?.toJson(),
+      'familyId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.familyId),
+      'father': instance.father?.toJson(),
+      'fatherId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.fatherId),
+      'firestoreId': instance.firestoreId,
+      'gender': instance.gender,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'groups': instance.groups?.toJson(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'isServant': instance.isServant,
+      'isShammas': instance.isShammas,
+      'isStudent': instance.isStudent,
+      'job': instance.job?.toJson(),
+      'jobDescription': instance.jobDescription,
+      'jobId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.jobId),
+      'kodasHistory': instance.kodasHistory?.toJson(),
+      'mainPhone': instance.mainPhone,
+      'name': instance.name,
+      'notes': instance.notes,
+      'otherPhones':
+          fromDartJsonNullableToGraphQLJsonbNullable(instance.otherPhones),
+      'personType': instance.personType?.toJson(),
+      'personTypeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personTypeId),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'qualification': instance.qualification?.toJson(),
+      'qualificationId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.qualificationId),
+      'school': instance.school?.toJson(),
+      'schoolId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.schoolId),
+      'services': instance.services?.toJson(),
+      'shammasLevel': instance.shammasLevel?.toJson(),
+      'shammasLevelId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.shammasLevelId),
+      'state': instance.state?.toJson(),
+      'stateId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.stateId),
+      'storeId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.storeId),
+      'studyYear': instance.studyYear?.toJson(),
+      'studyYearId': instance.studyYearId,
+      'tags': instance.tags?.toJson(),
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+      'user': instance.user?.toJson(),
+      'visitHistory': instance.visitHistory?.toJson(),
+    };
+
+HistoryCallHistoryArrRelInsertInput
+    _$HistoryCallHistoryArrRelInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryCallHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryCallHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryCallHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryCallHistoryArrRelInsertInputToJson(
+        HistoryCallHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryCallHistoryInsertInput _$HistoryCallHistoryInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    HistoryCallHistoryInsertInput(
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      recordedBy:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['recordedBy']),
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+      userRole: json['userRole'] as String?,
+    );
+
+Map<String, dynamic> _$HistoryCallHistoryInsertInputToJson(
+        HistoryCallHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'time': instance.time?.toIso8601String(),
+      'user': instance.user?.toJson(),
+      'userRole': instance.userRole,
+    };
+
+UsersObjRelInsertInput _$UsersObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UsersObjRelInsertInput(
+      data: UsersInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : UsersOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersObjRelInsertInputToJson(
+        UsersObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+UsersInsertInput _$UsersInsertInputFromJson(Map<String, dynamic> json) =>
+    UsersInsertInput(
+      adminOn: json['adminOn'] == null
+          ? null
+          : UsersPermissionsArrRelInsertInput.fromJson(
+              json['adminOn'] as Map<String, dynamic>),
+      name: json['name'] as String?,
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+      userData: json['userData'] == null
+          ? null
+          : UsersDataObjRelInsertInput.fromJson(
+              json['userData'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersInsertInputToJson(UsersInsertInput instance) =>
+    <String, dynamic>{
+      'adminOn': instance.adminOn?.toJson(),
+      'name': instance.name,
+      'person': instance.person?.toJson(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+      'userData': instance.userData?.toJson(),
+    };
+
+UsersDataObjRelInsertInput _$UsersDataObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UsersDataObjRelInsertInput(
+      data: UsersDataInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : UsersDataOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersDataObjRelInsertInputToJson(
+        UsersDataObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+UsersDataInsertInput _$UsersDataInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UsersDataInsertInput(
+      email: json['email'] as String?,
+      firebaseAuthUid: json['firebaseAuthUid'] as String?,
+      firestoreId: json['firestoreId'] as String?,
+      permissions: (json['permissions'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      uid: fromGraphQLUuidNullableToDartUuidValueNullable(json['uid']),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersDataInsertInputToJson(
+        UsersDataInsertInput instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'firebaseAuthUid': instance.firebaseAuthUid,
+      'firestoreId': instance.firestoreId,
+      'permissions': instance.permissions,
+      'uid': fromDartUuidValueNullableToGraphQLUuidNullable(instance.uid),
+      'user': instance.user?.toJson(),
+    };
+
+UsersDataOnConflict _$UsersDataOnConflictFromJson(Map<String, dynamic> json) =>
+    UsersDataOnConflict(
+      constraint: $enumDecode(_$UsersDataConstraintEnumMap, json['constraint'],
+          unknownValue: UsersDataConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$UsersDataUpdateColumnEnumMap, e,
+              unknownValue: UsersDataUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : UsersDataBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersDataOnConflictToJson(
+        UsersDataOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$UsersDataConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$UsersDataUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$UsersDataConstraintEnumMap = {
+  UsersDataConstraint.usersDataEmailKey: 'users_data_email_key',
+  UsersDataConstraint.usersDataFirebaseAuthIdKey:
+      'users_data_firebase_auth_id_key',
+  UsersDataConstraint.usersDataFirestoreIdKey: 'users_data_firestore_id_key',
+  UsersDataConstraint.usersDataPkey: 'users_data_pkey',
+  UsersDataConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$UsersDataUpdateColumnEnumMap = {
+  UsersDataUpdateColumn.email: 'email',
+  UsersDataUpdateColumn.firebaseAuthUid: 'firebaseAuthUid',
+  UsersDataUpdateColumn.firestoreId: 'firestoreId',
+  UsersDataUpdateColumn.permissions: 'permissions',
+  UsersDataUpdateColumn.uid: 'uid',
+  UsersDataUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+UsersOnConflict _$UsersOnConflictFromJson(Map<String, dynamic> json) =>
+    UsersOnConflict(
+      constraint: $enumDecode(_$UsersConstraintEnumMap, json['constraint'],
+          unknownValue: UsersConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$UsersUpdateColumnEnumMap, e,
+              unknownValue: UsersUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : UsersBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersOnConflictToJson(UsersOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$UsersConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$UsersUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$UsersConstraintEnumMap = {
+  UsersConstraint.usersPkey: 'users_pkey',
+  UsersConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$UsersUpdateColumnEnumMap = {
+  UsersUpdateColumn.name: 'name',
+  UsersUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  UsersUpdateColumn.uid: 'uid',
+  UsersUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryCallHistoryOnConflict _$HistoryCallHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryCallHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryCallHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryCallHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$HistoryCallHistoryUpdateColumnEnumMap, e,
+              unknownValue: HistoryCallHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryCallHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryCallHistoryOnConflictToJson(
+        HistoryCallHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$HistoryCallHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryCallHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryCallHistoryConstraintEnumMap = {
+  HistoryCallHistoryConstraint.callHistoryPkey: 'call_history_pkey',
+  HistoryCallHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryCallHistoryUpdateColumnEnumMap = {
+  HistoryCallHistoryUpdateColumn.personId: 'personId',
+  HistoryCallHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryCallHistoryUpdateColumn.time: 'time',
+  HistoryCallHistoryUpdateColumn.userRole: 'userRole',
+  HistoryCallHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+ChurchesObjRelInsertInput _$ChurchesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ChurchesObjRelInsertInput(
+      data: ChurchesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : ChurchesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ChurchesObjRelInsertInputToJson(
+        ChurchesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+ChurchesInsertInput _$ChurchesInsertInputFromJson(Map<String, dynamic> json) =>
+    ChurchesInsertInput(
+      fathers: json['fathers'] == null
+          ? null
+          : FathersArrRelInsertInput.fromJson(
+              json['fathers'] as Map<String, dynamic>),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ChurchesInsertInputToJson(
+        ChurchesInsertInput instance) =>
+    <String, dynamic>{
+      'fathers': instance.fathers?.toJson(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+FathersArrRelInsertInput _$FathersArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FathersArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => FathersInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : FathersOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FathersArrRelInsertInputToJson(
+        FathersArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+FathersInsertInput _$FathersInsertInputFromJson(Map<String, dynamic> json) =>
+    FathersInsertInput(
+      church: json['church'] == null
+          ? null
+          : ChurchesObjRelInsertInput.fromJson(
+              json['church'] as Map<String, dynamic>),
+      churchId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId']),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FathersInsertInputToJson(FathersInsertInput instance) =>
+    <String, dynamic>{
+      'church': instance.church?.toJson(),
+      'churchId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.churchId),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+PersonsArrRelInsertInput _$PersonsArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => PersonsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsArrRelInsertInputToJson(
+        PersonsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsOnConflict _$PersonsOnConflictFromJson(Map<String, dynamic> json) =>
+    PersonsOnConflict(
+      constraint: $enumDecode(_$PersonsConstraintEnumMap, json['constraint'],
+          unknownValue: PersonsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonsUpdateColumnEnumMap, e,
+              unknownValue: PersonsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsOnConflictToJson(PersonsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonsConstraintEnumMap = {
+  PersonsConstraint.personsFirestoreIdKey: 'persons_firestore_id_key',
+  PersonsConstraint.personsMainPhoneBirthdateKey:
+      'persons_mainPhone_birthdate_key',
+  PersonsConstraint.personsPkey: 'persons_pkey',
+  PersonsConstraint.personsUidKey: 'persons_uid_key',
+  PersonsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonsUpdateColumnEnumMap = {
+  PersonsUpdateColumn.address: 'address',
+  PersonsUpdateColumn.birthdate: 'birthdate',
+  PersonsUpdateColumn.churchId: 'churchId',
+  PersonsUpdateColumn.collegeId: 'collegeId',
+  PersonsUpdateColumn.color: 'color',
+  PersonsUpdateColumn.familyId: 'familyId',
+  PersonsUpdateColumn.fatherId: 'fatherId',
+  PersonsUpdateColumn.firestoreId: 'firestoreId',
+  PersonsUpdateColumn.gender: 'gender',
+  PersonsUpdateColumn.geolocation: 'geolocation',
+  PersonsUpdateColumn.id: 'id',
+  PersonsUpdateColumn.isServant: 'isServant',
+  PersonsUpdateColumn.isShammas: 'isShammas',
+  PersonsUpdateColumn.isStudent: 'isStudent',
+  PersonsUpdateColumn.jobDescription: 'jobDescription',
+  PersonsUpdateColumn.jobId: 'jobId',
+  PersonsUpdateColumn.mainPhone: 'mainPhone',
+  PersonsUpdateColumn.name: 'name',
+  PersonsUpdateColumn.notes: 'notes',
+  PersonsUpdateColumn.otherPhones: 'otherPhones',
+  PersonsUpdateColumn.personTypeId: 'personTypeId',
+  PersonsUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  PersonsUpdateColumn.qualificationId: 'qualificationId',
+  PersonsUpdateColumn.schoolId: 'schoolId',
+  PersonsUpdateColumn.shammasLevelId: 'shammasLevelId',
+  PersonsUpdateColumn.stateId: 'stateId',
+  PersonsUpdateColumn.storeId: 'storeId',
+  PersonsUpdateColumn.studyYearId: 'studyYearId',
+  PersonsUpdateColumn.uid: 'uid',
+  PersonsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+FathersOnConflict _$FathersOnConflictFromJson(Map<String, dynamic> json) =>
+    FathersOnConflict(
+      constraint: $enumDecode(_$FathersConstraintEnumMap, json['constraint'],
+          unknownValue: FathersConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$FathersUpdateColumnEnumMap, e,
+              unknownValue: FathersUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : FathersBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FathersOnConflictToJson(FathersOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$FathersConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$FathersUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$FathersConstraintEnumMap = {
+  FathersConstraint.fathersNameKey: 'fathers_name_key',
+  FathersConstraint.fathersPkey: 'fathers_pkey',
+  FathersConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$FathersUpdateColumnEnumMap = {
+  FathersUpdateColumn.churchId: 'churchId',
+  FathersUpdateColumn.id: 'id',
+  FathersUpdateColumn.name: 'name',
+  FathersUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+ChurchesOnConflict _$ChurchesOnConflictFromJson(Map<String, dynamic> json) =>
+    ChurchesOnConflict(
+      constraint: $enumDecode(_$ChurchesConstraintEnumMap, json['constraint'],
+          unknownValue: ChurchesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$ChurchesUpdateColumnEnumMap, e,
+              unknownValue: ChurchesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : ChurchesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ChurchesOnConflictToJson(ChurchesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$ChurchesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$ChurchesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$ChurchesConstraintEnumMap = {
+  ChurchesConstraint.churchesNameKey: 'churches_name_key',
+  ChurchesConstraint.churchesPkey: 'churches_pkey',
+  ChurchesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$ChurchesUpdateColumnEnumMap = {
+  ChurchesUpdateColumn.id: 'id',
+  ChurchesUpdateColumn.name: 'name',
+  ChurchesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+CollegesObjRelInsertInput _$CollegesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    CollegesObjRelInsertInput(
+      data: CollegesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : CollegesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CollegesObjRelInsertInputToJson(
+        CollegesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+CollegesInsertInput _$CollegesInsertInputFromJson(Map<String, dynamic> json) =>
+    CollegesInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+      university: json['university'] == null
+          ? null
+          : UniversitiesObjRelInsertInput.fromJson(
+              json['university'] as Map<String, dynamic>),
+      universityId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['universityId']),
+    );
+
+Map<String, dynamic> _$CollegesInsertInputToJson(
+        CollegesInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+      'university': instance.university?.toJson(),
+      'universityId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.universityId),
+    };
+
+UniversitiesObjRelInsertInput _$UniversitiesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UniversitiesObjRelInsertInput(
+      data: UniversitiesInsertInput.fromJson(
+          json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : UniversitiesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UniversitiesObjRelInsertInputToJson(
+        UniversitiesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+UniversitiesInsertInput _$UniversitiesInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    UniversitiesInsertInput(
+      colleges: json['colleges'] == null
+          ? null
+          : CollegesArrRelInsertInput.fromJson(
+              json['colleges'] as Map<String, dynamic>),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$UniversitiesInsertInputToJson(
+        UniversitiesInsertInput instance) =>
+    <String, dynamic>{
+      'colleges': instance.colleges?.toJson(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+    };
+
+CollegesArrRelInsertInput _$CollegesArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    CollegesArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => CollegesInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : CollegesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CollegesArrRelInsertInputToJson(
+        CollegesArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+CollegesOnConflict _$CollegesOnConflictFromJson(Map<String, dynamic> json) =>
+    CollegesOnConflict(
+      constraint: $enumDecode(_$CollegesConstraintEnumMap, json['constraint'],
+          unknownValue: CollegesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$CollegesUpdateColumnEnumMap, e,
+              unknownValue: CollegesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : CollegesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CollegesOnConflictToJson(CollegesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$CollegesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$CollegesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$CollegesConstraintEnumMap = {
+  CollegesConstraint.collegesNameKey: 'colleges_name_key',
+  CollegesConstraint.collegesPkey: 'colleges_pkey',
+  CollegesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$CollegesUpdateColumnEnumMap = {
+  CollegesUpdateColumn.id: 'id',
+  CollegesUpdateColumn.name: 'name',
+  CollegesUpdateColumn.universityId: 'universityId',
+  CollegesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+UniversitiesOnConflict _$UniversitiesOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    UniversitiesOnConflict(
+      constraint: $enumDecode(
+          _$UniversitiesConstraintEnumMap, json['constraint'],
+          unknownValue: UniversitiesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$UniversitiesUpdateColumnEnumMap, e,
+              unknownValue: UniversitiesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : UniversitiesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UniversitiesOnConflictToJson(
+        UniversitiesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$UniversitiesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$UniversitiesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$UniversitiesConstraintEnumMap = {
+  UniversitiesConstraint.universitiesNameKey: 'universities_name_key',
+  UniversitiesConstraint.universitiesPkey: 'universities_pkey',
+  UniversitiesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$UniversitiesUpdateColumnEnumMap = {
+  UniversitiesUpdateColumn.id: 'id',
+  UniversitiesUpdateColumn.name: 'name',
+  UniversitiesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryConfessionHistoryArrRelInsertInput
+    _$HistoryConfessionHistoryArrRelInsertInputFromJson(
+            Map<String, dynamic> json) =>
+        HistoryConfessionHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryConfessionHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryConfessionHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryConfessionHistoryArrRelInsertInputToJson(
+        HistoryConfessionHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryConfessionHistoryInsertInput
+    _$HistoryConfessionHistoryInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryConfessionHistoryInsertInput(
+          day: json['day'] == null
+              ? null
+              : HistoryAttendanceDaysObjRelInsertInput.fromJson(
+                  json['day'] as Map<String, dynamic>),
+          dayId: json['dayId'] == null
+              ? null
+              : DateTime.parse(json['dayId'] as String),
+          id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+          person: json['person'] == null
+              ? null
+              : PersonsObjRelInsertInput.fromJson(
+                  json['person'] as Map<String, dynamic>),
+          personId:
+              fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+          recordedBy: fromGraphQLUuidNullableToDartUuidValueNullable(
+              json['recordedBy']),
+          user: json['user'] == null
+              ? null
+              : UsersObjRelInsertInput.fromJson(
+                  json['user'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryConfessionHistoryInsertInputToJson(
+        HistoryConfessionHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'day': instance.day?.toJson(),
+      'dayId': instance.dayId?.toIso8601String(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'user': instance.user?.toJson(),
+    };
+
+HistoryConfessionHistoryOnConflict _$HistoryConfessionHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryConfessionHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryConfessionHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryConfessionHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(
+              _$HistoryConfessionHistoryUpdateColumnEnumMap, e,
+              unknownValue:
+                  HistoryConfessionHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryConfessionHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryConfessionHistoryOnConflictToJson(
+        HistoryConfessionHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint':
+          _$HistoryConfessionHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryConfessionHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryConfessionHistoryConstraintEnumMap = {
+  HistoryConfessionHistoryConstraint.confessionHistoryDayIDPersonIDKey:
+      'confession_history_dayID_personID_key',
+  HistoryConfessionHistoryConstraint.confessionHistoryPkey:
+      'confession_history_pkey',
+  HistoryConfessionHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryConfessionHistoryUpdateColumnEnumMap = {
+  HistoryConfessionHistoryUpdateColumn.dayId: 'dayId',
+  HistoryConfessionHistoryUpdateColumn.id: 'id',
+  HistoryConfessionHistoryUpdateColumn.personId: 'personId',
+  HistoryConfessionHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryConfessionHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryEditHistoryArrRelInsertInput
+    _$HistoryEditHistoryArrRelInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryEditHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryEditHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryEditHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryEditHistoryArrRelInsertInputToJson(
+        HistoryEditHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryEditHistoryInsertInput _$HistoryEditHistoryInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    HistoryEditHistoryInsertInput(
+      auditId: fromGraphQLUuidNullableToDartUuidValueNullable(json['auditId']),
+      recordId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['recordId']),
+      recordedBy:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['recordedBy']),
+      table: json['table'] as String?,
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+      userRole: json['userRole'] as String?,
+    );
+
+Map<String, dynamic> _$HistoryEditHistoryInsertInputToJson(
+        HistoryEditHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'auditId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.auditId),
+      'recordId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'table': instance.table,
+      'time': instance.time?.toIso8601String(),
+      'user': instance.user?.toJson(),
+      'userRole': instance.userRole,
+    };
+
+HistoryEditHistoryOnConflict _$HistoryEditHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryEditHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryEditHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryEditHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$HistoryEditHistoryUpdateColumnEnumMap, e,
+              unknownValue: HistoryEditHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryEditHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryEditHistoryOnConflictToJson(
+        HistoryEditHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$HistoryEditHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryEditHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryEditHistoryConstraintEnumMap = {
+  HistoryEditHistoryConstraint.editHistoryPkey: 'edit_history_pkey',
+  HistoryEditHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryEditHistoryUpdateColumnEnumMap = {
+  HistoryEditHistoryUpdateColumn.auditId: 'auditId',
+  HistoryEditHistoryUpdateColumn.recordId: 'recordId',
+  HistoryEditHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryEditHistoryUpdateColumn.table: 'table',
+  HistoryEditHistoryUpdateColumn.time: 'time',
+  HistoryEditHistoryUpdateColumn.userRole: 'userRole',
+  HistoryEditHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+FamiliesObjRelInsertInput _$FamiliesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FamiliesObjRelInsertInput(
+      data: FamiliesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : FamiliesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesObjRelInsertInputToJson(
+        FamiliesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+FamiliesInsertInput _$FamiliesInsertInputFromJson(Map<String, dynamic> json) =>
+    FamiliesInsertInput(
+      address: json['address'] as String?,
+      color: json['color'] as int?,
+      families: json['families'] == null
+          ? null
+          : FamiliesFamiliesArrRelInsertInput.fromJson(
+              json['families'] as Map<String, dynamic>),
+      family: json['family'] == null
+          ? null
+          : FamiliesFamiliesObjRelInsertInput.fromJson(
+              json['family'] as Map<String, dynamic>),
+      geolocation:
+          fromGraphQLGeographyNullableToDartJsonNullable(json['geolocation']),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      notes: json['notes'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      stores: json['stores'] == null
+          ? null
+          : StoresArrRelInsertInput.fromJson(
+              json['stores'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesInsertInputToJson(
+        FamiliesInsertInput instance) =>
+    <String, dynamic>{
+      'address': instance.address,
+      'color': instance.color,
+      'families': instance.families?.toJson(),
+      'family': instance.family?.toJson(),
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'notes': instance.notes,
+      'persons': instance.persons?.toJson(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'stores': instance.stores?.toJson(),
+    };
+
+FamiliesFamiliesArrRelInsertInput _$FamiliesFamiliesArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FamiliesFamiliesArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) =>
+              FamiliesFamiliesInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : FamiliesFamiliesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesFamiliesArrRelInsertInputToJson(
+        FamiliesFamiliesArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+FamiliesFamiliesInsertInput _$FamiliesFamiliesInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FamiliesFamiliesInsertInput(
+      innerFamily: json['innerFamily'] == null
+          ? null
+          : FamiliesObjRelInsertInput.fromJson(
+              json['innerFamily'] as Map<String, dynamic>),
+      innerFamilyId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['innerFamilyId']),
+      outerFamily: json['outerFamily'] == null
+          ? null
+          : FamiliesObjRelInsertInput.fromJson(
+              json['outerFamily'] as Map<String, dynamic>),
+      outerFamilyId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['outerFamilyId']),
+    );
+
+Map<String, dynamic> _$FamiliesFamiliesInsertInputToJson(
+        FamiliesFamiliesInsertInput instance) =>
+    <String, dynamic>{
+      'innerFamily': instance.innerFamily?.toJson(),
+      'innerFamilyId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.innerFamilyId),
+      'outerFamily': instance.outerFamily?.toJson(),
+      'outerFamilyId': fromDartUuidValueNullableToGraphQLUuidNullable(
+          instance.outerFamilyId),
+    };
+
+FamiliesFamiliesOnConflict _$FamiliesFamiliesOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    FamiliesFamiliesOnConflict(
+      constraint: $enumDecode(
+          _$FamiliesFamiliesConstraintEnumMap, json['constraint'],
+          unknownValue: FamiliesFamiliesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$FamiliesFamiliesUpdateColumnEnumMap, e,
+              unknownValue: FamiliesFamiliesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : FamiliesFamiliesBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesFamiliesOnConflictToJson(
+        FamiliesFamiliesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$FamiliesFamiliesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$FamiliesFamiliesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$FamiliesFamiliesConstraintEnumMap = {
+  FamiliesFamiliesConstraint.familiesFamiliesOuterFamilyIDInnerFamilyIDKey:
+      'families_families_outerFamilyID_innerFamilyID_key',
+  FamiliesFamiliesConstraint.familiesFamiliesPkey: 'families_families_pkey',
+  FamiliesFamiliesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$FamiliesFamiliesUpdateColumnEnumMap = {
+  FamiliesFamiliesUpdateColumn.innerFamilyId: 'innerFamilyId',
+  FamiliesFamiliesUpdateColumn.outerFamilyId: 'outerFamilyId',
+  FamiliesFamiliesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+FamiliesFamiliesObjRelInsertInput _$FamiliesFamiliesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FamiliesFamiliesObjRelInsertInput(
+      data: FamiliesFamiliesInsertInput.fromJson(
+          json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : FamiliesFamiliesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesFamiliesObjRelInsertInputToJson(
+        FamiliesFamiliesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+StoresArrRelInsertInput _$StoresArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    StoresArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => StoresInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : StoresOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StoresArrRelInsertInputToJson(
+        StoresArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+StoresInsertInput _$StoresInsertInputFromJson(Map<String, dynamic> json) =>
+    StoresInsertInput(
+      adminFamily:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['adminFamily']),
+      color: json['color'] as int?,
+      family: json['family'] == null
+          ? null
+          : FamiliesObjRelInsertInput.fromJson(
+              json['family'] as Map<String, dynamic>),
+      geolocation:
+          fromGraphQLGeographyNullableToDartJsonNullable(json['geolocation']),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+    );
+
+Map<String, dynamic> _$StoresInsertInputToJson(StoresInsertInput instance) =>
+    <String, dynamic>{
+      'adminFamily':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.adminFamily),
+      'color': instance.color,
+      'family': instance.family?.toJson(),
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+StoresOnConflict _$StoresOnConflictFromJson(Map<String, dynamic> json) =>
+    StoresOnConflict(
+      constraint: $enumDecode(_$StoresConstraintEnumMap, json['constraint'],
+          unknownValue: StoresConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$StoresUpdateColumnEnumMap, e,
+              unknownValue: StoresUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : StoresBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StoresOnConflictToJson(StoresOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$StoresConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$StoresUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$StoresConstraintEnumMap = {
+  StoresConstraint.storesPkey: 'stores_pkey',
+  StoresConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$StoresUpdateColumnEnumMap = {
+  StoresUpdateColumn.adminFamily: 'adminFamily',
+  StoresUpdateColumn.color: 'color',
+  StoresUpdateColumn.geolocation: 'geolocation',
+  StoresUpdateColumn.id: 'id',
+  StoresUpdateColumn.name: 'name',
+  StoresUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  StoresUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+FamiliesOnConflict _$FamiliesOnConflictFromJson(Map<String, dynamic> json) =>
+    FamiliesOnConflict(
+      constraint: $enumDecode(_$FamiliesConstraintEnumMap, json['constraint'],
+          unknownValue: FamiliesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$FamiliesUpdateColumnEnumMap, e,
+              unknownValue: FamiliesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : FamiliesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FamiliesOnConflictToJson(FamiliesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$FamiliesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$FamiliesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$FamiliesConstraintEnumMap = {
+  FamiliesConstraint.familiesPkey: 'families_pkey',
+  FamiliesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$FamiliesUpdateColumnEnumMap = {
+  FamiliesUpdateColumn.address: 'address',
+  FamiliesUpdateColumn.color: 'color',
+  FamiliesUpdateColumn.geolocation: 'geolocation',
+  FamiliesUpdateColumn.id: 'id',
+  FamiliesUpdateColumn.name: 'name',
+  FamiliesUpdateColumn.notes: 'notes',
+  FamiliesUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  FamiliesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+FathersObjRelInsertInput _$FathersObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    FathersObjRelInsertInput(
+      data: FathersInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : FathersOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FathersObjRelInsertInputToJson(
+        FathersObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsGroupsArrRelInsertInput _$PersonsGroupsArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsGroupsArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) =>
+              PersonsGroupsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonsGroupsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsGroupsArrRelInsertInputToJson(
+        PersonsGroupsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsGroupsOnConflict _$PersonsGroupsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    PersonsGroupsOnConflict(
+      constraint: $enumDecode(
+          _$PersonsGroupsConstraintEnumMap, json['constraint'],
+          unknownValue: PersonsGroupsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonsGroupsUpdateColumnEnumMap, e,
+              unknownValue: PersonsGroupsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonsGroupsBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsGroupsOnConflictToJson(
+        PersonsGroupsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonsGroupsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonsGroupsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonsGroupsConstraintEnumMap = {
+  PersonsGroupsConstraint.personsGroupsPersonIDGroupIDKey:
+      'persons_groups_personID_groupID_key',
+  PersonsGroupsConstraint.personsGroupsPkey: 'persons_groups_pkey',
+  PersonsGroupsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonsGroupsUpdateColumnEnumMap = {
+  PersonsGroupsUpdateColumn.groupId: 'groupId',
+  PersonsGroupsUpdateColumn.personId: 'personId',
+  PersonsGroupsUpdateColumn.relId: 'relId',
+  PersonsGroupsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+JobsObjRelInsertInput _$JobsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    JobsObjRelInsertInput(
+      data: JobsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : JobsOnConflict.fromJson(json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$JobsObjRelInsertInputToJson(
+        JobsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+JobsInsertInput _$JobsInsertInputFromJson(Map<String, dynamic> json) =>
+    JobsInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$JobsInsertInputToJson(JobsInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+JobsOnConflict _$JobsOnConflictFromJson(Map<String, dynamic> json) =>
+    JobsOnConflict(
+      constraint: $enumDecode(_$JobsConstraintEnumMap, json['constraint'],
+          unknownValue: JobsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$JobsUpdateColumnEnumMap, e,
+              unknownValue: JobsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : JobsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$JobsOnConflictToJson(JobsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$JobsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$JobsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$JobsConstraintEnumMap = {
+  JobsConstraint.jobsNameKey: 'jobs_name_key',
+  JobsConstraint.jobsPkey: 'jobs_pkey',
+  JobsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$JobsUpdateColumnEnumMap = {
+  JobsUpdateColumn.id: 'id',
+  JobsUpdateColumn.name: 'name',
+  JobsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryKodasHistoryArrRelInsertInput
+    _$HistoryKodasHistoryArrRelInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryKodasHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryKodasHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryKodasHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryKodasHistoryArrRelInsertInputToJson(
+        HistoryKodasHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryKodasHistoryInsertInput _$HistoryKodasHistoryInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    HistoryKodasHistoryInsertInput(
+      day: json['day'] == null
+          ? null
+          : HistoryAttendanceDaysObjRelInsertInput.fromJson(
+              json['day'] as Map<String, dynamic>),
+      dayId: json['dayId'] == null
+          ? null
+          : DateTime.parse(json['dayId'] as String),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      recordedBy:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['recordedBy']),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryKodasHistoryInsertInputToJson(
+        HistoryKodasHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'day': instance.day?.toJson(),
+      'dayId': instance.dayId?.toIso8601String(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'user': instance.user?.toJson(),
+    };
+
+HistoryKodasHistoryOnConflict _$HistoryKodasHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryKodasHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryKodasHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryKodasHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$HistoryKodasHistoryUpdateColumnEnumMap, e,
+              unknownValue: HistoryKodasHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryKodasHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryKodasHistoryOnConflictToJson(
+        HistoryKodasHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint':
+          _$HistoryKodasHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryKodasHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryKodasHistoryConstraintEnumMap = {
+  HistoryKodasHistoryConstraint.kodasHistoryDayIDPersonIDKey:
+      'kodas_history_dayID_personID_key',
+  HistoryKodasHistoryConstraint.kodasHistoryPkey: 'kodas_history_pkey',
+  HistoryKodasHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryKodasHistoryUpdateColumnEnumMap = {
+  HistoryKodasHistoryUpdateColumn.dayId: 'dayId',
+  HistoryKodasHistoryUpdateColumn.id: 'id',
+  HistoryKodasHistoryUpdateColumn.personId: 'personId',
+  HistoryKodasHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryKodasHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonTypesObjRelInsertInput _$PersonTypesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonTypesObjRelInsertInput(
+      data:
+          PersonTypesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonTypesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonTypesObjRelInsertInputToJson(
+        PersonTypesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonTypesInsertInput _$PersonTypesInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonTypesInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      order: json['order'] as int?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonTypesInsertInputToJson(
+        PersonTypesInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'order': instance.order,
+      'persons': instance.persons?.toJson(),
+    };
+
+PersonTypesOnConflict _$PersonTypesOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    PersonTypesOnConflict(
+      constraint: $enumDecode(
+          _$PersonTypesConstraintEnumMap, json['constraint'],
+          unknownValue: PersonTypesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonTypesUpdateColumnEnumMap, e,
+              unknownValue: PersonTypesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonTypesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonTypesOnConflictToJson(
+        PersonTypesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonTypesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonTypesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonTypesConstraintEnumMap = {
+  PersonTypesConstraint.personTypesNameKey: 'personTypes_name_key',
+  PersonTypesConstraint.personTypesOrderKey: 'personTypes_order_key',
+  PersonTypesConstraint.personTypesPkey: 'personTypes_pkey',
+  PersonTypesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonTypesUpdateColumnEnumMap = {
+  PersonTypesUpdateColumn.id: 'id',
+  PersonTypesUpdateColumn.name: 'name',
+  PersonTypesUpdateColumn.order: 'order',
+  PersonTypesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+QualificationsObjRelInsertInput _$QualificationsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    QualificationsObjRelInsertInput(
+      data: QualificationsInsertInput.fromJson(
+          json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : QualificationsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$QualificationsObjRelInsertInputToJson(
+        QualificationsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+QualificationsInsertInput _$QualificationsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    QualificationsInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$QualificationsInsertInputToJson(
+        QualificationsInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+QualificationsOnConflict _$QualificationsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    QualificationsOnConflict(
+      constraint: $enumDecode(
+          _$QualificationsConstraintEnumMap, json['constraint'],
+          unknownValue: QualificationsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$QualificationsUpdateColumnEnumMap, e,
+              unknownValue: QualificationsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : QualificationsBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$QualificationsOnConflictToJson(
+        QualificationsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$QualificationsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$QualificationsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$QualificationsConstraintEnumMap = {
+  QualificationsConstraint.qualificationsNameKey: 'qualifications_name_key',
+  QualificationsConstraint.qualificationsPkey: 'qualifications_pkey',
+  QualificationsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$QualificationsUpdateColumnEnumMap = {
+  QualificationsUpdateColumn.id: 'id',
+  QualificationsUpdateColumn.name: 'name',
+  QualificationsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+SchoolsObjRelInsertInput _$SchoolsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    SchoolsObjRelInsertInput(
+      data: SchoolsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : SchoolsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SchoolsObjRelInsertInputToJson(
+        SchoolsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+SchoolsInsertInput _$SchoolsInsertInputFromJson(Map<String, dynamic> json) =>
+    SchoolsInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SchoolsInsertInputToJson(SchoolsInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+SchoolsOnConflict _$SchoolsOnConflictFromJson(Map<String, dynamic> json) =>
+    SchoolsOnConflict(
+      constraint: $enumDecode(_$SchoolsConstraintEnumMap, json['constraint'],
+          unknownValue: SchoolsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$SchoolsUpdateColumnEnumMap, e,
+              unknownValue: SchoolsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : SchoolsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SchoolsOnConflictToJson(SchoolsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$SchoolsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$SchoolsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$SchoolsConstraintEnumMap = {
+  SchoolsConstraint.schoolsNameKey: 'schools_name_key',
+  SchoolsConstraint.schoolsPkey: 'schools_pkey',
+  SchoolsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$SchoolsUpdateColumnEnumMap = {
+  SchoolsUpdateColumn.id: 'id',
+  SchoolsUpdateColumn.name: 'name',
+  SchoolsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonsServicesArrRelInsertInput _$PersonsServicesArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsServicesArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) =>
+              PersonsServicesInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonsServicesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsServicesArrRelInsertInputToJson(
+        PersonsServicesArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsServicesInsertInput _$PersonsServicesInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsServicesInsertInput(
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      relId: fromGraphQLUuidNullableToDartUuidValueNullable(json['relId']),
+      service: json['service'] == null
+          ? null
+          : ServicesObjRelInsertInput.fromJson(
+              json['service'] as Map<String, dynamic>),
+      serviceId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['serviceId']),
+    );
+
+Map<String, dynamic> _$PersonsServicesInsertInputToJson(
+        PersonsServicesInsertInput instance) =>
+    <String, dynamic>{
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'relId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.relId),
+      'service': instance.service?.toJson(),
+      'serviceId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.serviceId),
+    };
+
+ServicesObjRelInsertInput _$ServicesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ServicesObjRelInsertInput(
+      data: ServicesInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : ServicesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ServicesObjRelInsertInputToJson(
+        ServicesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+ServicesInsertInput _$ServicesInsertInputFromJson(Map<String, dynamic> json) =>
+    ServicesInsertInput(
+      attendanceDaysConstraints: json['attendanceDaysConstraints'] == null
+          ? null
+          : HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              json['attendanceDaysConstraints'] as Map<String, dynamic>),
+      attendanceHistory: json['attendanceHistory'] == null
+          ? null
+          : HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              json['attendanceHistory'] as Map<String, dynamic>),
+      classes: json['classes'] == null
+          ? null
+          : ClassesArrRelInsertInput.fromJson(
+              json['classes'] as Map<String, dynamic>),
+      color: json['color'] as int?,
+      firestoreId: json['firestoreId'] as String?,
+      fromStudyYear: json['fromStudyYear'] == null
+          ? null
+          : StudyYearsObjRelInsertInput.fromJson(
+              json['fromStudyYear'] as Map<String, dynamic>),
+      groups: json['groups'] == null
+          ? null
+          : GroupsArrRelInsertInput.fromJson(
+              json['groups'] as Map<String, dynamic>),
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      nextService:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['nextService']),
+      persons: json['persons'] == null
+          ? null
+          : PersonsServicesArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+      photoUpdatedAt: json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String),
+      studyYearFrom: json['studyYearFrom'] as int?,
+      studyYearTo: json['studyYearTo'] as int?,
+      toStudyYear: json['toStudyYear'] == null
+          ? null
+          : StudyYearsObjRelInsertInput.fromJson(
+              json['toStudyYear'] as Map<String, dynamic>),
+      users: json['users'] == null
+          ? null
+          : UsersPermissionsArrRelInsertInput.fromJson(
+              json['users'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ServicesInsertInputToJson(
+        ServicesInsertInput instance) =>
+    <String, dynamic>{
+      'attendanceDaysConstraints': instance.attendanceDaysConstraints?.toJson(),
+      'attendanceHistory': instance.attendanceHistory?.toJson(),
+      'classes': instance.classes?.toJson(),
+      'color': instance.color,
+      'firestoreId': instance.firestoreId,
+      'fromStudyYear': instance.fromStudyYear?.toJson(),
+      'groups': instance.groups?.toJson(),
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'nextService':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.nextService),
+      'persons': instance.persons?.toJson(),
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'studyYearFrom': instance.studyYearFrom,
+      'studyYearTo': instance.studyYearTo,
+      'toStudyYear': instance.toStudyYear?.toJson(),
+      'users': instance.users?.toJson(),
+    };
+
+StudyYearsObjRelInsertInput _$StudyYearsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    StudyYearsObjRelInsertInput(
+      data:
+          StudyYearsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : StudyYearsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudyYearsObjRelInsertInputToJson(
+        StudyYearsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+StudyYearsInsertInput _$StudyYearsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    StudyYearsInsertInput(
+      attendanceDaysConstraints: json['attendanceDaysConstraints'] == null
+          ? null
+          : HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              json['attendanceDaysConstraints'] as Map<String, dynamic>),
+      classes: json['classes'] == null
+          ? null
+          : ClassesArrRelInsertInput.fromJson(
+              json['classes'] as Map<String, dynamic>),
+      name: json['name'] as String?,
+      order: json['order'] as int?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudyYearsInsertInputToJson(
+        StudyYearsInsertInput instance) =>
+    <String, dynamic>{
+      'attendanceDaysConstraints': instance.attendanceDaysConstraints?.toJson(),
+      'classes': instance.classes?.toJson(),
+      'name': instance.name,
+      'order': instance.order,
+      'persons': instance.persons?.toJson(),
+    };
+
+StudyYearsOnConflict _$StudyYearsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    StudyYearsOnConflict(
+      constraint: $enumDecode(_$StudyYearsConstraintEnumMap, json['constraint'],
+          unknownValue: StudyYearsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$StudyYearsUpdateColumnEnumMap, e,
+              unknownValue: StudyYearsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : StudyYearsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudyYearsOnConflictToJson(
+        StudyYearsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$StudyYearsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$StudyYearsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$StudyYearsConstraintEnumMap = {
+  StudyYearsConstraint.studyYearsNameKey: 'studyYears_name_key',
+  StudyYearsConstraint.studyYearsOrderKey: 'studyYears_order_key',
+  StudyYearsConstraint.studyYearsPkey: 'studyYears_pkey',
+  StudyYearsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$StudyYearsUpdateColumnEnumMap = {
+  StudyYearsUpdateColumn.name: 'name',
+  StudyYearsUpdateColumn.order: 'order',
+  StudyYearsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+GroupsArrRelInsertInput _$GroupsArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    GroupsArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => GroupsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : GroupsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GroupsArrRelInsertInputToJson(
+        GroupsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+GroupsOnConflict _$GroupsOnConflictFromJson(Map<String, dynamic> json) =>
+    GroupsOnConflict(
+      constraint: $enumDecode(_$GroupsConstraintEnumMap, json['constraint'],
+          unknownValue: GroupsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$GroupsUpdateColumnEnumMap, e,
+              unknownValue: GroupsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : GroupsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GroupsOnConflictToJson(GroupsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$GroupsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$GroupsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$GroupsConstraintEnumMap = {
+  GroupsConstraint.groupsPkey: 'groups_pkey',
+  GroupsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$GroupsUpdateColumnEnumMap = {
+  GroupsUpdateColumn.color: 'color',
+  GroupsUpdateColumn.id: 'id',
+  GroupsUpdateColumn.name: 'name',
+  GroupsUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  GroupsUpdateColumn.serviceId: 'serviceId',
+  GroupsUpdateColumn.validity: 'validity',
+  GroupsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+ServicesOnConflict _$ServicesOnConflictFromJson(Map<String, dynamic> json) =>
+    ServicesOnConflict(
+      constraint: $enumDecode(_$ServicesConstraintEnumMap, json['constraint'],
+          unknownValue: ServicesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$ServicesUpdateColumnEnumMap, e,
+              unknownValue: ServicesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : ServicesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ServicesOnConflictToJson(ServicesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$ServicesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$ServicesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$ServicesConstraintEnumMap = {
+  ServicesConstraint.servicesFirestoreIdKey: 'services_firestore_id_key',
+  ServicesConstraint.servicesNameKey: 'services_name_key',
+  ServicesConstraint.servicesPkey: 'services_pkey',
+  ServicesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$ServicesUpdateColumnEnumMap = {
+  ServicesUpdateColumn.color: 'color',
+  ServicesUpdateColumn.firestoreId: 'firestoreId',
+  ServicesUpdateColumn.id: 'id',
+  ServicesUpdateColumn.name: 'name',
+  ServicesUpdateColumn.nextService: 'nextService',
+  ServicesUpdateColumn.photoUpdatedAt: 'photoUpdatedAt',
+  ServicesUpdateColumn.studyYearFrom: 'studyYearFrom',
+  ServicesUpdateColumn.studyYearTo: 'studyYearTo',
+  ServicesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonsServicesOnConflict _$PersonsServicesOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    PersonsServicesOnConflict(
+      constraint: $enumDecode(
+          _$PersonsServicesConstraintEnumMap, json['constraint'],
+          unknownValue: PersonsServicesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonsServicesUpdateColumnEnumMap, e,
+              unknownValue: PersonsServicesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonsServicesBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsServicesOnConflictToJson(
+        PersonsServicesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonsServicesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonsServicesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonsServicesConstraintEnumMap = {
+  PersonsServicesConstraint.personsServicesPersonIDServiceIDKey:
+      'persons_services_personID_serviceID_key',
+  PersonsServicesConstraint.personsServicesPkey: 'persons_services_pkey',
+  PersonsServicesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonsServicesUpdateColumnEnumMap = {
+  PersonsServicesUpdateColumn.personId: 'personId',
+  PersonsServicesUpdateColumn.relId: 'relId',
+  PersonsServicesUpdateColumn.serviceId: 'serviceId',
+  PersonsServicesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+ShammasLevelsObjRelInsertInput _$ShammasLevelsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ShammasLevelsObjRelInsertInput(
+      data: ShammasLevelsInsertInput.fromJson(
+          json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : ShammasLevelsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShammasLevelsObjRelInsertInputToJson(
+        ShammasLevelsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+ShammasLevelsInsertInput _$ShammasLevelsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    ShammasLevelsInsertInput(
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      order: json['order'] as int?,
+    );
+
+Map<String, dynamic> _$ShammasLevelsInsertInputToJson(
+        ShammasLevelsInsertInput instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'order': instance.order,
+    };
+
+ShammasLevelsOnConflict _$ShammasLevelsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    ShammasLevelsOnConflict(
+      constraint: $enumDecode(
+          _$ShammasLevelsConstraintEnumMap, json['constraint'],
+          unknownValue: ShammasLevelsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$ShammasLevelsUpdateColumnEnumMap, e,
+              unknownValue: ShammasLevelsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : ShammasLevelsBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShammasLevelsOnConflictToJson(
+        ShammasLevelsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$ShammasLevelsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$ShammasLevelsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$ShammasLevelsConstraintEnumMap = {
+  ShammasLevelsConstraint.shammasLevelNameKey: 'shammas_level_name_key',
+  ShammasLevelsConstraint.shammasLevelOrderKey: 'shammas_level_order_key',
+  ShammasLevelsConstraint.shammasLevelPkey: 'shammas_level_pkey',
+  ShammasLevelsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$ShammasLevelsUpdateColumnEnumMap = {
+  ShammasLevelsUpdateColumn.id: 'id',
+  ShammasLevelsUpdateColumn.name: 'name',
+  ShammasLevelsUpdateColumn.order: 'order',
+  ShammasLevelsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonStatesObjRelInsertInput _$PersonStatesObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonStatesObjRelInsertInput(
+      data: PersonStatesInsertInput.fromJson(
+          json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonStatesOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonStatesObjRelInsertInputToJson(
+        PersonStatesObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonStatesInsertInput _$PersonStatesInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonStatesInsertInput(
+      color: json['color'] as int?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonStatesInsertInputToJson(
+        PersonStatesInsertInput instance) =>
+    <String, dynamic>{
+      'color': instance.color,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+PersonStatesOnConflict _$PersonStatesOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    PersonStatesOnConflict(
+      constraint: $enumDecode(
+          _$PersonStatesConstraintEnumMap, json['constraint'],
+          unknownValue: PersonStatesConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonStatesUpdateColumnEnumMap, e,
+              unknownValue: PersonStatesUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonStatesBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonStatesOnConflictToJson(
+        PersonStatesOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonStatesConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonStatesUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonStatesConstraintEnumMap = {
+  PersonStatesConstraint.statesColorKey: 'states_color_key',
+  PersonStatesConstraint.statesNameKey: 'states_name_key',
+  PersonStatesConstraint.statesPkey: 'states_pkey',
+  PersonStatesConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonStatesUpdateColumnEnumMap = {
+  PersonStatesUpdateColumn.color: 'color',
+  PersonStatesUpdateColumn.id: 'id',
+  PersonStatesUpdateColumn.name: 'name',
+  PersonStatesUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonsTagsArrRelInsertInput _$PersonsTagsArrRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsTagsArrRelInsertInput(
+      data: (json['data'] as List<dynamic>)
+          .map(
+              (e) => PersonsTagsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      onConflict: json['onConflict'] == null
+          ? null
+          : PersonsTagsOnConflict.fromJson(
+              json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsTagsArrRelInsertInputToJson(
+        PersonsTagsArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+PersonsTagsInsertInput _$PersonsTagsInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    PersonsTagsInsertInput(
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      relId: fromGraphQLUuidNullableToDartUuidValueNullable(json['relId']),
+      tag: json['tag'] == null
+          ? null
+          : TagsObjRelInsertInput.fromJson(json['tag'] as Map<String, dynamic>),
+      tagId: fromGraphQLUuidNullableToDartUuidValueNullable(json['tagId']),
+    );
+
+Map<String, dynamic> _$PersonsTagsInsertInputToJson(
+        PersonsTagsInsertInput instance) =>
+    <String, dynamic>{
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'relId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.relId),
+      'tag': instance.tag?.toJson(),
+      'tagId': fromDartUuidValueNullableToGraphQLUuidNullable(instance.tagId),
+    };
+
+TagsObjRelInsertInput _$TagsObjRelInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    TagsObjRelInsertInput(
+      data: TagsInsertInput.fromJson(json['data'] as Map<String, dynamic>),
+      onConflict: json['onConflict'] == null
+          ? null
+          : TagsOnConflict.fromJson(json['onConflict'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TagsObjRelInsertInputToJson(
+        TagsObjRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.toJson(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+TagsInsertInput _$TagsInsertInputFromJson(Map<String, dynamic> json) =>
+    TagsInsertInput(
+      color: json['color'] as int?,
+      id: fromGraphQLUuidNullableToDartUuidValueNullable(json['id']),
+      name: json['name'] as String?,
+      persons: json['persons'] == null
+          ? null
+          : PersonsTagsArrRelInsertInput.fromJson(
+              json['persons'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TagsInsertInputToJson(TagsInsertInput instance) =>
+    <String, dynamic>{
+      'color': instance.color,
+      'id': fromDartUuidValueNullableToGraphQLUuidNullable(instance.id),
+      'name': instance.name,
+      'persons': instance.persons?.toJson(),
+    };
+
+TagsOnConflict _$TagsOnConflictFromJson(Map<String, dynamic> json) =>
+    TagsOnConflict(
+      constraint: $enumDecode(_$TagsConstraintEnumMap, json['constraint'],
+          unknownValue: TagsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$TagsUpdateColumnEnumMap, e,
+              unknownValue: TagsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : TagsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TagsOnConflictToJson(TagsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$TagsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$TagsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$TagsConstraintEnumMap = {
+  TagsConstraint.tagsNameKey: 'tags_name_key',
+  TagsConstraint.tagsPkey: 'tags_pkey',
+  TagsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$TagsUpdateColumnEnumMap = {
+  TagsUpdateColumn.color: 'color',
+  TagsUpdateColumn.id: 'id',
+  TagsUpdateColumn.name: 'name',
+  TagsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+PersonsTagsOnConflict _$PersonsTagsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    PersonsTagsOnConflict(
+      constraint: $enumDecode(
+          _$PersonsTagsConstraintEnumMap, json['constraint'],
+          unknownValue: PersonsTagsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$PersonsTagsUpdateColumnEnumMap, e,
+              unknownValue: PersonsTagsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : PersonsTagsBoolExp.fromJson(json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PersonsTagsOnConflictToJson(
+        PersonsTagsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$PersonsTagsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$PersonsTagsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$PersonsTagsConstraintEnumMap = {
+  PersonsTagsConstraint.personsTagsPkey: 'persons_tags_pkey',
+  PersonsTagsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$PersonsTagsUpdateColumnEnumMap = {
+  PersonsTagsUpdateColumn.personId: 'personId',
+  PersonsTagsUpdateColumn.relId: 'relId',
+  PersonsTagsUpdateColumn.tagId: 'tagId',
+  PersonsTagsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryVisitHistoryArrRelInsertInput
+    _$HistoryVisitHistoryArrRelInsertInputFromJson(Map<String, dynamic> json) =>
+        HistoryVisitHistoryArrRelInsertInput(
+          data: (json['data'] as List<dynamic>)
+              .map((e) => HistoryVisitHistoryInsertInput.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          onConflict: json['onConflict'] == null
+              ? null
+              : HistoryVisitHistoryOnConflict.fromJson(
+                  json['onConflict'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryVisitHistoryArrRelInsertInputToJson(
+        HistoryVisitHistoryArrRelInsertInput instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'onConflict': instance.onConflict?.toJson(),
+    };
+
+HistoryVisitHistoryInsertInput _$HistoryVisitHistoryInsertInputFromJson(
+        Map<String, dynamic> json) =>
+    HistoryVisitHistoryInsertInput(
+      person: json['person'] == null
+          ? null
+          : PersonsObjRelInsertInput.fromJson(
+              json['person'] as Map<String, dynamic>),
+      personId:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['personId']),
+      recordedBy:
+          fromGraphQLUuidNullableToDartUuidValueNullable(json['recordedBy']),
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
+      user: json['user'] == null
+          ? null
+          : UsersObjRelInsertInput.fromJson(
+              json['user'] as Map<String, dynamic>),
+      userRole: json['userRole'] as String?,
+    );
+
+Map<String, dynamic> _$HistoryVisitHistoryInsertInputToJson(
+        HistoryVisitHistoryInsertInput instance) =>
+    <String, dynamic>{
+      'person': instance.person?.toJson(),
+      'personId':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.personId),
+      'recordedBy':
+          fromDartUuidValueNullableToGraphQLUuidNullable(instance.recordedBy),
+      'time': instance.time?.toIso8601String(),
+      'user': instance.user?.toJson(),
+      'userRole': instance.userRole,
+    };
+
+HistoryVisitHistoryOnConflict _$HistoryVisitHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryVisitHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryVisitHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryVisitHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$HistoryVisitHistoryUpdateColumnEnumMap, e,
+              unknownValue: HistoryVisitHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryVisitHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryVisitHistoryOnConflictToJson(
+        HistoryVisitHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint':
+          _$HistoryVisitHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryVisitHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryVisitHistoryConstraintEnumMap = {
+  HistoryVisitHistoryConstraint.visitHistoryPkey: 'visit_history_pkey',
+  HistoryVisitHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryVisitHistoryUpdateColumnEnumMap = {
+  HistoryVisitHistoryUpdateColumn.personId: 'personId',
+  HistoryVisitHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryVisitHistoryUpdateColumn.time: 'time',
+  HistoryVisitHistoryUpdateColumn.userRole: 'userRole',
+  HistoryVisitHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryAttendanceHistoryOnConflict _$HistoryAttendanceHistoryOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryAttendanceHistoryOnConflict(
+      constraint: $enumDecode(
+          _$HistoryAttendanceHistoryConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryAttendanceHistoryConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(
+              _$HistoryAttendanceHistoryUpdateColumnEnumMap, e,
+              unknownValue:
+                  HistoryAttendanceHistoryUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryAttendanceHistoryBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryAttendanceHistoryOnConflictToJson(
+        HistoryAttendanceHistoryOnConflict instance) =>
+    <String, dynamic>{
+      'constraint':
+          _$HistoryAttendanceHistoryConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryAttendanceHistoryUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryAttendanceHistoryConstraintEnumMap = {
+  HistoryAttendanceHistoryConstraint
+          .attendanceHistoryDayIDServiceIDGroupIDPersonIDKey:
+      'attendance_history_dayID_serviceID_groupID_personID_key',
+  HistoryAttendanceHistoryConstraint.attendanceHistoryPkey:
+      'attendance_history_pkey',
+  HistoryAttendanceHistoryConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryAttendanceHistoryUpdateColumnEnumMap = {
+  HistoryAttendanceHistoryUpdateColumn.asAdmin: 'asAdmin',
+  HistoryAttendanceHistoryUpdateColumn.dayId: 'dayId',
+  HistoryAttendanceHistoryUpdateColumn.groupId: 'groupId',
+  HistoryAttendanceHistoryUpdateColumn.id: 'id',
+  HistoryAttendanceHistoryUpdateColumn.personId: 'personId',
+  HistoryAttendanceHistoryUpdateColumn.recordedBy: 'recordedBy',
+  HistoryAttendanceHistoryUpdateColumn.serviceGender: 'serviceGender',
+  HistoryAttendanceHistoryUpdateColumn.serviceId: 'serviceId',
+  HistoryAttendanceHistoryUpdateColumn.serviceStudyYear: 'serviceStudyYear',
+  HistoryAttendanceHistoryUpdateColumn.time: 'time',
+  HistoryAttendanceHistoryUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryAttendanceDaysOnConflict _$HistoryAttendanceDaysOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    HistoryAttendanceDaysOnConflict(
+      constraint: $enumDecode(
+          _$HistoryAttendanceDaysConstraintEnumMap, json['constraint'],
+          unknownValue: HistoryAttendanceDaysConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$HistoryAttendanceDaysUpdateColumnEnumMap, e,
+              unknownValue: HistoryAttendanceDaysUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : HistoryAttendanceDaysBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$HistoryAttendanceDaysOnConflictToJson(
+        HistoryAttendanceDaysOnConflict instance) =>
+    <String, dynamic>{
+      'constraint':
+          _$HistoryAttendanceDaysConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryAttendanceDaysUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryAttendanceDaysConstraintEnumMap = {
+  HistoryAttendanceDaysConstraint.attendanceDaysPkey: 'attendance_days_pkey',
+  HistoryAttendanceDaysConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryAttendanceDaysUpdateColumnEnumMap = {
+  HistoryAttendanceDaysUpdateColumn.day: 'day',
+  HistoryAttendanceDaysUpdateColumn.notes: 'notes',
+  HistoryAttendanceDaysUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+HistoryAttendanceDaysConstraintsOnConflict
+    _$HistoryAttendanceDaysConstraintsOnConflictFromJson(
+            Map<String, dynamic> json) =>
+        HistoryAttendanceDaysConstraintsOnConflict(
+          constraint: $enumDecode(
+              _$HistoryAttendanceDaysConstraintsConstraintEnumMap,
+              json['constraint'],
+              unknownValue:
+                  HistoryAttendanceDaysConstraintsConstraint.artemisUnknown),
+          updateColumns: (json['update_columns'] as List<dynamic>)
+              .map((e) => $enumDecode(
+                  _$HistoryAttendanceDaysConstraintsUpdateColumnEnumMap, e,
+                  unknownValue: HistoryAttendanceDaysConstraintsUpdateColumn
+                      .artemisUnknown))
+              .toList(),
+          where: json['where'] == null
+              ? null
+              : HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+                  json['where'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$HistoryAttendanceDaysConstraintsOnConflictToJson(
+        HistoryAttendanceDaysConstraintsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$HistoryAttendanceDaysConstraintsConstraintEnumMap[
+          instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$HistoryAttendanceDaysConstraintsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$HistoryAttendanceDaysConstraintsConstraintEnumMap = {
+  HistoryAttendanceDaysConstraintsConstraint
+          .attendanceDaysConstraintsDayServiceServiceStudyYearSKey:
+      'attendance_days_constraints_day_service_service_studyYear_s_key',
+  HistoryAttendanceDaysConstraintsConstraint.attendanceDaysConstraintsPkey:
+      'attendance_days_constraints_pkey',
+  HistoryAttendanceDaysConstraintsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$HistoryAttendanceDaysConstraintsUpdateColumnEnumMap = {
+  HistoryAttendanceDaysConstraintsUpdateColumn.dayId: 'dayId',
+  HistoryAttendanceDaysConstraintsUpdateColumn.groupId: 'groupId',
+  HistoryAttendanceDaysConstraintsUpdateColumn.id: 'id',
+  HistoryAttendanceDaysConstraintsUpdateColumn.serviceGender: 'serviceGender',
+  HistoryAttendanceDaysConstraintsUpdateColumn.serviceId: 'serviceId',
+  HistoryAttendanceDaysConstraintsUpdateColumn.serviceStudyYear:
+      'serviceStudyYear',
+  HistoryAttendanceDaysConstraintsUpdateColumn.artemisUnknown:
+      'ARTEMIS_UNKNOWN',
+};
+
+UsersPermissionsOnConflict _$UsersPermissionsOnConflictFromJson(
+        Map<String, dynamic> json) =>
+    UsersPermissionsOnConflict(
+      constraint: $enumDecode(
+          _$UsersPermissionsConstraintEnumMap, json['constraint'],
+          unknownValue: UsersPermissionsConstraint.artemisUnknown),
+      updateColumns: (json['update_columns'] as List<dynamic>)
+          .map((e) => $enumDecode(_$UsersPermissionsUpdateColumnEnumMap, e,
+              unknownValue: UsersPermissionsUpdateColumn.artemisUnknown))
+          .toList(),
+      where: json['where'] == null
+          ? null
+          : UsersPermissionsBoolExp.fromJson(
+              json['where'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersPermissionsOnConflictToJson(
+        UsersPermissionsOnConflict instance) =>
+    <String, dynamic>{
+      'constraint': _$UsersPermissionsConstraintEnumMap[instance.constraint]!,
+      'update_columns': instance.updateColumns
+          .map((e) => _$UsersPermissionsUpdateColumnEnumMap[e]!)
+          .toList(),
+      'where': instance.where?.toJson(),
+    };
+
+const _$UsersPermissionsConstraintEnumMap = {
+  UsersPermissionsConstraint.usersPermissionsArea: 'users_permissions_area',
+  UsersPermissionsConstraint.usersPermissionsGroup: 'users_permissions_group',
+  UsersPermissionsConstraint.usersPermissionsPermissionIdKey:
+      'users_permissions_permission_id_key',
+  UsersPermissionsConstraint.usersPermissionsPkey: 'users_permissions_pkey',
+  UsersPermissionsConstraint.usersPermissionsService:
+      'users_permissions_service',
+  UsersPermissionsConstraint.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$UsersPermissionsUpdateColumnEnumMap = {
+  UsersPermissionsUpdateColumn.adminOnArea: 'adminOnArea',
+  UsersPermissionsUpdateColumn.adminOnGroup: 'adminOnGroup',
+  UsersPermissionsUpdateColumn.adminOnService: 'adminOnService',
+  UsersPermissionsUpdateColumn.areaAdminOnUsers: 'areaAdminOnUsers',
+  UsersPermissionsUpdateColumn.areaAllowEdit: 'areaAllowEdit',
+  UsersPermissionsUpdateColumn.groupAdminOnUsers: 'groupAdminOnUsers',
+  UsersPermissionsUpdateColumn.groupAllowEdit: 'groupAllowEdit',
+  UsersPermissionsUpdateColumn.permissionId: 'permissionId',
+  UsersPermissionsUpdateColumn.serviceAdminOnUsers: 'serviceAdminOnUsers',
+  UsersPermissionsUpdateColumn.serviceAllowEdit: 'serviceAllowEdit',
+  UsersPermissionsUpdateColumn.serviceGender: 'serviceGender',
+  UsersPermissionsUpdateColumn.serviceStudyYear: 'serviceStudyYear',
+  UsersPermissionsUpdateColumn.uid: 'uid',
+  UsersPermissionsUpdateColumn.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+InsertPerson$MutationRoot$Persons _$InsertPerson$MutationRoot$PersonsFromJson(
+        Map<String, dynamic> json) =>
+    InsertPerson$MutationRoot$Persons()
+      ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+      ..name = json['name'] as String
+      ..color = json['color'] as int?
+      ..photoUpdatedAt = json['photoUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$InsertPerson$MutationRoot$PersonsToJson(
+        InsertPerson$MutationRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+InsertPerson$MutationRoot _$InsertPerson$MutationRootFromJson(
+        Map<String, dynamic> json) =>
+    InsertPerson$MutationRoot()
+      ..insertPersonsOne = json['insertPersonsOne'] == null
+          ? null
+          : InsertPerson$MutationRoot$Persons.fromJson(
+              json['insertPersonsOne'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$InsertPerson$MutationRootToJson(
+        InsertPerson$MutationRoot instance) =>
+    <String, dynamic>{
+      'insertPersonsOne': instance.insertPersonsOne?.toJson(),
     };
 
 GetPersonsAttendanceWarning$QueryRoot$Persons
@@ -3852,18 +8020,17 @@ Map<String, dynamic> _$GetMorePersonData$QueryRootToJson(
       'personsByPk': instance.personsByPk?.toJson(),
     };
 
-PersonsGeolocations$QueryRoot$Persons$Areas
-    _$PersonsGeolocations$QueryRoot$Persons$AreasFromJson(
-            Map<String, dynamic> json) =>
-        PersonsGeolocations$QueryRoot$Persons$Areas()
+PersonsGeolocations$QueryRoot$Areas
+    _$PersonsGeolocations$QueryRoot$AreasFromJson(Map<String, dynamic> json) =>
+        PersonsGeolocations$QueryRoot$Areas()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..color = json['color'] as int?
           ..bounds =
               fromGraphQLGeographyNullableToDartJsonNullable(json['bounds']);
 
-Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$AreasToJson(
-        PersonsGeolocations$QueryRoot$Persons$Areas instance) =>
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$AreasToJson(
+        PersonsGeolocations$QueryRoot$Areas instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
@@ -3871,17 +8038,17 @@ Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$AreasToJson(
       'bounds': fromDartJsonNullableToGraphQLGeographyNullable(instance.bounds),
     };
 
-PersonsGeolocations$QueryRoot$Persons$Streets
-    _$PersonsGeolocations$QueryRoot$Persons$StreetsFromJson(
+PersonsGeolocations$QueryRoot$Streets
+    _$PersonsGeolocations$QueryRoot$StreetsFromJson(
             Map<String, dynamic> json) =>
-        PersonsGeolocations$QueryRoot$Persons$Streets()
+        PersonsGeolocations$QueryRoot$Streets()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..color = json['color'] as int?
           ..line = fromGraphQLGeographyNullableToDartJsonNullable(json['line']);
 
-Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$StreetsToJson(
-        PersonsGeolocations$QueryRoot$Persons$Streets instance) =>
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$StreetsToJson(
+        PersonsGeolocations$QueryRoot$Streets instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
@@ -3889,18 +8056,18 @@ Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$StreetsToJson(
       'line': fromDartJsonNullableToGraphQLGeographyNullable(instance.line),
     };
 
-PersonsGeolocations$QueryRoot$Persons$Families
-    _$PersonsGeolocations$QueryRoot$Persons$FamiliesFromJson(
+PersonsGeolocations$QueryRoot$Families
+    _$PersonsGeolocations$QueryRoot$FamiliesFromJson(
             Map<String, dynamic> json) =>
-        PersonsGeolocations$QueryRoot$Persons$Families()
+        PersonsGeolocations$QueryRoot$Families()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
           ..color = json['color'] as int?
           ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
               json['geolocation']);
 
-Map<String, dynamic> _$PersonsGeolocations$QueryRoot$Persons$FamiliesToJson(
-        PersonsGeolocations$QueryRoot$Persons$Families instance) =>
+Map<String, dynamic> _$PersonsGeolocations$QueryRoot$FamiliesToJson(
+        PersonsGeolocations$QueryRoot$Families instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
@@ -3915,37 +8082,35 @@ PersonsGeolocations$QueryRoot$Persons
         PersonsGeolocations$QueryRoot$Persons()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..name = json['name'] as String
+          ..color = json['color'] as int?
           ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
-              json['geolocation'])
-          ..areas = (json['areas'] as List<dynamic>?)
-              ?.map((e) => PersonsGeolocations$QueryRoot$Persons$Areas.fromJson(
-                  e as Map<String, dynamic>))
-              .toList()
-          ..streets = (json['streets'] as List<dynamic>?)
-              ?.map((e) =>
-                  PersonsGeolocations$QueryRoot$Persons$Streets.fromJson(
-                      e as Map<String, dynamic>))
-              .toList()
-          ..family = json['family'] == null
-              ? null
-              : PersonsGeolocations$QueryRoot$Persons$Families.fromJson(
-                  json['family'] as Map<String, dynamic>);
+              json['geolocation']);
 
 Map<String, dynamic> _$PersonsGeolocations$QueryRoot$PersonsToJson(
         PersonsGeolocations$QueryRoot$Persons instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'name': instance.name,
+      'color': instance.color,
       'geolocation':
           fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
-      'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': instance.streets?.map((e) => e.toJson()).toList(),
-      'family': instance.family?.toJson(),
     };
 
 PersonsGeolocations$QueryRoot _$PersonsGeolocations$QueryRootFromJson(
         Map<String, dynamic> json) =>
     PersonsGeolocations$QueryRoot()
+      ..areas = (json['areas'] as List<dynamic>)
+          .map((e) => PersonsGeolocations$QueryRoot$Areas.fromJson(
+              e as Map<String, dynamic>))
+          .toList()
+      ..streets = (json['streets'] as List<dynamic>)
+          .map((e) => PersonsGeolocations$QueryRoot$Streets.fromJson(
+              e as Map<String, dynamic>))
+          .toList()
+      ..families = (json['families'] as List<dynamic>)
+          .map((e) => PersonsGeolocations$QueryRoot$Families.fromJson(
+              e as Map<String, dynamic>))
+          .toList()
       ..persons = (json['persons'] as List<dynamic>)
           .map((e) => PersonsGeolocations$QueryRoot$Persons.fromJson(
               e as Map<String, dynamic>))
@@ -3954,6 +8119,9 @@ PersonsGeolocations$QueryRoot _$PersonsGeolocations$QueryRootFromJson(
 Map<String, dynamic> _$PersonsGeolocations$QueryRootToJson(
         PersonsGeolocations$QueryRoot instance) =>
     <String, dynamic>{
+      'areas': instance.areas.map((e) => e.toJson()).toList(),
+      'streets': instance.streets.map((e) => e.toJson()).toList(),
+      'families': instance.families.map((e) => e.toJson()).toList(),
       'persons': instance.persons.map((e) => e.toJson()).toList(),
     };
 
@@ -5018,6 +9186,562 @@ Map<String, dynamic> _$GetPersonClassesAndGroups$QueryRootToJson(
       'personsByPk': instance.personsByPk?.toJson(),
     };
 
+GetFullPersonData$QueryRoot$Persons$Churches
+    _$GetFullPersonData$QueryRoot$Persons$ChurchesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Churches()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$ChurchesToJson(
+        GetFullPersonData$QueryRoot$Persons$Churches instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$Colleges
+    _$GetFullPersonData$QueryRoot$Persons$CollegesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Colleges()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$CollegesToJson(
+        GetFullPersonData$QueryRoot$Persons$Colleges instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$Families
+    _$GetFullPersonData$QueryRoot$Persons$FamiliesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Families()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$FamiliesToJson(
+        GetFullPersonData$QueryRoot$Persons$Families instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    };
+
+GetFullPersonData$QueryRoot$Persons$Fathers$Churches
+    _$GetFullPersonData$QueryRoot$Persons$Fathers$ChurchesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Fathers$Churches()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$Fathers$ChurchesToJson(
+            GetFullPersonData$QueryRoot$Persons$Fathers$Churches instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+        };
+
+GetFullPersonData$QueryRoot$Persons$Fathers
+    _$GetFullPersonData$QueryRoot$Persons$FathersFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Fathers()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..church = json['church'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Fathers$Churches.fromJson(
+                  json['church'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$FathersToJson(
+        GetFullPersonData$QueryRoot$Persons$Fathers instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'church': instance.church?.toJson(),
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$Services
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$ServicesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$Services()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$ServicesToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$Services
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
+          ..max = json['max'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'max': instance.max?.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregateToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$GroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..service =
+              GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$Services
+                  .fromJson(json['service'] as Map<String, dynamic>)
+          ..attendanceHistoryAggregate =
+              GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups$HistoryAttendanceHistoryAggregate
+                  .fromJson(json['attendanceHistoryAggregate']
+                      as Map<String, dynamic>);
+
+Map<String,
+    dynamic> _$GetFullPersonData$QueryRoot$Persons$PersonsGroups$GroupsToJson(
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'service': instance.service.toJson(),
+      'attendanceHistoryAggregate':
+          instance.attendanceHistoryAggregate.toJson(),
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonsGroups
+    _$GetFullPersonData$QueryRoot$Persons$PersonsGroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups()
+          ..group =
+              GetFullPersonData$QueryRoot$Persons$PersonsGroups$Groups.fromJson(
+                  json['group'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$PersonsGroupsToJson(
+        GetFullPersonData$QueryRoot$Persons$PersonsGroups instance) =>
+    <String, dynamic>{
+      'group': instance.group.toJson(),
+    };
+
+GetFullPersonData$QueryRoot$Persons$Jobs
+    _$GetFullPersonData$QueryRoot$Persons$JobsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Jobs()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$JobsToJson(
+        GetFullPersonData$QueryRoot$Persons$Jobs instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonTypes
+    _$GetFullPersonData$QueryRoot$Persons$PersonTypesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonTypes()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$PersonTypesToJson(
+        GetFullPersonData$QueryRoot$Persons$PersonTypes instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$Qualifications
+    _$GetFullPersonData$QueryRoot$Persons$QualificationsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Qualifications()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$QualificationsToJson(
+        GetFullPersonData$QueryRoot$Persons$Qualifications instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$Schools
+    _$GetFullPersonData$QueryRoot$Persons$SchoolsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$Schools()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$SchoolsToJson(
+        GetFullPersonData$QueryRoot$Persons$Schools instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields()
+          ..time = json['time'] == null
+              ? null
+              : DateTime.parse(json['time'] as String);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFieldsToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                instance) =>
+        <String, dynamic>{
+          'time': instance.time?.toIso8601String(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields()
+          ..max = json['max'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
+                  .fromJson(json['max'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFieldsToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                instance) =>
+        <String, dynamic>{
+          'max': instance.max?.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate()
+          ..aggregate = json['aggregate'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields
+                  .fromJson(json['aggregate'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregateToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+                instance) =>
+        <String, dynamic>{
+          'aggregate': instance.aggregate?.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsServices$Services
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$ServicesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsServices$Services()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..attendanceHistoryAggregate =
+              GetFullPersonData$QueryRoot$Persons$PersonsServices$Services$HistoryAttendanceHistoryAggregate
+                  .fromJson(json['attendanceHistoryAggregate']
+                      as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServices$ServicesToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsServices$Services
+                instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+          'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+          'attendanceHistoryAggregate':
+              instance.attendanceHistoryAggregate.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsServices
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServicesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsServices()
+          ..service =
+              GetFullPersonData$QueryRoot$Persons$PersonsServices$Services
+                  .fromJson(json['service'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsServicesToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsServices instance) =>
+        <String, dynamic>{
+          'service': instance.service.toJson(),
+        };
+
+GetFullPersonData$QueryRoot$Persons$ShammasLevels
+    _$GetFullPersonData$QueryRoot$Persons$ShammasLevelsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$ShammasLevels()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$ShammasLevelsToJson(
+        GetFullPersonData$QueryRoot$Persons$ShammasLevels instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'order': instance.order,
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonStates
+    _$GetFullPersonData$QueryRoot$Persons$PersonStatesFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonStates()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..color = json['color'] as int
+          ..name = json['name'] as String;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$PersonStatesToJson(
+        GetFullPersonData$QueryRoot$Persons$PersonStates instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'color': instance.color,
+      'name': instance.name,
+    };
+
+GetFullPersonData$QueryRoot$Persons$StudyYears
+    _$GetFullPersonData$QueryRoot$Persons$StudyYearsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$StudyYears()
+          ..name = json['name'] as String
+          ..order = json['order'] as int;
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$StudyYearsToJson(
+        GetFullPersonData$QueryRoot$Persons$StudyYears instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'order': instance.order,
+    };
+
+GetFullPersonData$QueryRoot$Persons$PersonsTags$Tags
+    _$GetFullPersonData$QueryRoot$Persons$PersonsTags$TagsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsTags$Tags()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?;
+
+Map<String, dynamic>
+    _$GetFullPersonData$QueryRoot$Persons$PersonsTags$TagsToJson(
+            GetFullPersonData$QueryRoot$Persons$PersonsTags$Tags instance) =>
+        <String, dynamic>{
+          'id': fromDartUuidValueToGraphQLUuid(instance.id),
+          'name': instance.name,
+          'color': instance.color,
+        };
+
+GetFullPersonData$QueryRoot$Persons$PersonsTags
+    _$GetFullPersonData$QueryRoot$Persons$PersonsTagsFromJson(
+            Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons$PersonsTags()
+          ..tag = GetFullPersonData$QueryRoot$Persons$PersonsTags$Tags.fromJson(
+              json['tag'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$Persons$PersonsTagsToJson(
+        GetFullPersonData$QueryRoot$Persons$PersonsTags instance) =>
+    <String, dynamic>{
+      'tag': instance.tag.toJson(),
+    };
+
+GetFullPersonData$QueryRoot$Persons
+    _$GetFullPersonData$QueryRoot$PersonsFromJson(Map<String, dynamic> json) =>
+        GetFullPersonData$QueryRoot$Persons()
+          ..id = fromGraphQLUuidToDartUuidValue(json['id'])
+          ..name = json['name'] as String
+          ..color = json['color'] as int?
+          ..photoUpdatedAt = json['photoUpdatedAt'] == null
+              ? null
+              : DateTime.parse(json['photoUpdatedAt'] as String)
+          ..address = json['address'] as String?
+          ..birthdate = json['birthdate'] == null
+              ? null
+              : DateTime.parse(json['birthdate'] as String)
+          ..church = json['church'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Churches.fromJson(
+                  json['church'] as Map<String, dynamic>)
+          ..college = json['college'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Colleges.fromJson(
+                  json['college'] as Map<String, dynamic>)
+          ..family = json['family'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Families.fromJson(
+                  json['family'] as Map<String, dynamic>)
+          ..father = json['father'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Fathers.fromJson(
+                  json['father'] as Map<String, dynamic>)
+          ..gender = json['gender'] as bool
+          ..geolocation = fromGraphQLGeographyNullableToDartJsonNullable(
+              json['geolocation'])
+          ..groups = (json['groups'] as List<dynamic>)
+              .map((e) =>
+                  GetFullPersonData$QueryRoot$Persons$PersonsGroups.fromJson(
+                      e as Map<String, dynamic>))
+              .toList()
+          ..isServant = json['isServant'] as bool
+          ..isShammas = json['isShammas'] as bool
+          ..isStudent = json['isStudent'] as bool?
+          ..job = json['job'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Jobs.fromJson(
+                  json['job'] as Map<String, dynamic>)
+          ..jobDescription = json['jobDescription'] as String?
+          ..mainPhone = json['mainPhone'] as String?
+          ..notes = json['notes'] as String?
+          ..otherPhones = fromGraphQLJsonbToDartJson(json['otherPhones'])
+          ..personType = json['personType'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonTypes.fromJson(
+                  json['personType'] as Map<String, dynamic>)
+          ..qualification = json['qualification'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Qualifications.fromJson(
+                  json['qualification'] as Map<String, dynamic>)
+          ..school = json['school'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$Schools.fromJson(
+                  json['school'] as Map<String, dynamic>)
+          ..services = (json['services'] as List<dynamic>)
+              .map((e) =>
+                  GetFullPersonData$QueryRoot$Persons$PersonsServices.fromJson(
+                      e as Map<String, dynamic>))
+              .toList()
+          ..shammasLevel = json['shammasLevel'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$ShammasLevels.fromJson(
+                  json['shammasLevel'] as Map<String, dynamic>)
+          ..state = json['state'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$PersonStates.fromJson(
+                  json['state'] as Map<String, dynamic>)
+          ..studyYear = json['studyYear'] == null
+              ? null
+              : GetFullPersonData$QueryRoot$Persons$StudyYears.fromJson(
+                  json['studyYear'] as Map<String, dynamic>)
+          ..tags = (json['tags'] as List<dynamic>)
+              .map((e) =>
+                  GetFullPersonData$QueryRoot$Persons$PersonsTags.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetFullPersonData$QueryRoot$PersonsToJson(
+        GetFullPersonData$QueryRoot$Persons instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+      'name': instance.name,
+      'color': instance.color,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'address': instance.address,
+      'birthdate': instance.birthdate?.toIso8601String(),
+      'church': instance.church?.toJson(),
+      'college': instance.college?.toJson(),
+      'family': instance.family?.toJson(),
+      'father': instance.father?.toJson(),
+      'gender': instance.gender,
+      'geolocation':
+          fromDartJsonNullableToGraphQLGeographyNullable(instance.geolocation),
+      'groups': instance.groups.map((e) => e.toJson()).toList(),
+      'isServant': instance.isServant,
+      'isShammas': instance.isShammas,
+      'isStudent': instance.isStudent,
+      'job': instance.job?.toJson(),
+      'jobDescription': instance.jobDescription,
+      'mainPhone': instance.mainPhone,
+      'notes': instance.notes,
+      'otherPhones': fromDartJsonToGraphQLJsonb(instance.otherPhones),
+      'personType': instance.personType?.toJson(),
+      'qualification': instance.qualification?.toJson(),
+      'school': instance.school?.toJson(),
+      'services': instance.services.map((e) => e.toJson()).toList(),
+      'shammasLevel': instance.shammasLevel?.toJson(),
+      'state': instance.state?.toJson(),
+      'studyYear': instance.studyYear?.toJson(),
+      'tags': instance.tags.map((e) => e.toJson()).toList(),
+    };
+
+GetFullPersonData$QueryRoot _$GetFullPersonData$QueryRootFromJson(
+        Map<String, dynamic> json) =>
+    GetFullPersonData$QueryRoot()
+      ..personsByPk = json['personsByPk'] == null
+          ? null
+          : GetFullPersonData$QueryRoot$Persons.fromJson(
+              json['personsByPk'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetFullPersonData$QueryRootToJson(
+        GetFullPersonData$QueryRoot instance) =>
+    <String, dynamic>{
+      'personsByPk': instance.personsByPk?.toJson(),
+    };
+
 GetPersonsStream$SubscriptionRoot$Persons
     _$GetPersonsStream$SubscriptionRoot$PersonsFromJson(
             Map<String, dynamic> json) =>
@@ -5486,16 +10210,16 @@ Map<String, dynamic> _$WatchPerson$SubscriptionRoot$Persons$ShammasLevelsToJson(
       'order': instance.order,
     };
 
-WatchPerson$SubscriptionRoot$Persons$States
-    _$WatchPerson$SubscriptionRoot$Persons$StatesFromJson(
+WatchPerson$SubscriptionRoot$Persons$PersonStates
+    _$WatchPerson$SubscriptionRoot$Persons$PersonStatesFromJson(
             Map<String, dynamic> json) =>
-        WatchPerson$SubscriptionRoot$Persons$States()
+        WatchPerson$SubscriptionRoot$Persons$PersonStates()
           ..id = fromGraphQLUuidToDartUuidValue(json['id'])
           ..color = json['color'] as int
           ..name = json['name'] as String;
 
-Map<String, dynamic> _$WatchPerson$SubscriptionRoot$Persons$StatesToJson(
-        WatchPerson$SubscriptionRoot$Persons$States instance) =>
+Map<String, dynamic> _$WatchPerson$SubscriptionRoot$Persons$PersonStatesToJson(
+        WatchPerson$SubscriptionRoot$Persons$PersonStates instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
       'color': instance.color,
@@ -5649,7 +10373,7 @@ WatchPerson$SubscriptionRoot$Persons
               .toList()
           ..isServant = json['isServant'] as bool
           ..isShammas = json['isShammas'] as bool
-          ..isStudent = json['isStudent'] as bool
+          ..isStudent = json['isStudent'] as bool?
           ..job = json['job'] == null
               ? null
               : WatchPerson$SubscriptionRoot$Persons$Jobs.fromJson(
@@ -5691,7 +10415,7 @@ WatchPerson$SubscriptionRoot$Persons
                   json['shammasLevel'] as Map<String, dynamic>)
           ..state = json['state'] == null
               ? null
-              : WatchPerson$SubscriptionRoot$Persons$States.fromJson(
+              : WatchPerson$SubscriptionRoot$Persons$PersonStates.fromJson(
                   json['state'] as Map<String, dynamic>)
           ..streets = (json['streets'] as List<dynamic>?)
               ?.map((e) =>
@@ -6310,34 +11034,6 @@ Map<String, dynamic> _$GetStreetsStream$SubscriptionRootToJson(
         GetStreetsStream$SubscriptionRoot instance) =>
     <String, dynamic>{
       'streets': instance.streets.map((e) => e.toJson()).toList(),
-    };
-
-GetStudyYearName$QueryRoot$StudyYears
-    _$GetStudyYearName$QueryRoot$StudyYearsFromJson(
-            Map<String, dynamic> json) =>
-        GetStudyYearName$QueryRoot$StudyYears()
-          ..order = json['order'] as int
-          ..name = json['name'] as String;
-
-Map<String, dynamic> _$GetStudyYearName$QueryRoot$StudyYearsToJson(
-        GetStudyYearName$QueryRoot$StudyYears instance) =>
-    <String, dynamic>{
-      'order': instance.order,
-      'name': instance.name,
-    };
-
-GetStudyYearName$QueryRoot _$GetStudyYearName$QueryRootFromJson(
-        Map<String, dynamic> json) =>
-    GetStudyYearName$QueryRoot()
-      ..studyYearsByPk = json['studyYearsByPk'] == null
-          ? null
-          : GetStudyYearName$QueryRoot$StudyYears.fromJson(
-              json['studyYearsByPk'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetStudyYearName$QueryRootToJson(
-        GetStudyYearName$QueryRoot instance) =>
-    <String, dynamic>{
-      'studyYearsByPk': instance.studyYearsByPk?.toJson(),
     };
 
 AnalyzeUserAttendance$QueryRoot$Users$ServicesHistory$Services$HistoryAttendanceHistoryAggregate$HistoryAttendanceHistoryAggregateFields$HistoryAttendanceHistoryMaxFields
@@ -6965,7 +11661,7 @@ GetUserInfoStream$SubscriptionRoot$Users$Persons
               fromGraphQLUuidNullableToDartUuidValueNullable(json['churchId'])
           ..fatherId =
               fromGraphQLUuidNullableToDartUuidValueNullable(json['fatherId'])
-          ..isStudent = json['isStudent'] as bool
+          ..isStudent = json['isStudent'] as bool?
           ..jobId =
               fromGraphQLUuidNullableToDartUuidValueNullable(json['jobId'])
           ..jobDescription = json['jobDescription'] as String?
@@ -7437,6 +12133,193 @@ Map<String, dynamic> _$GetGroupsStreamArgumentsToJson(
       'limit': instance.limit,
     };
 
+GetChurchesStreamArguments _$GetChurchesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetChurchesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => ChurchesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetChurchesStreamArgumentsToJson(
+        GetChurchesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetCollegesStreamArguments _$GetCollegesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetCollegesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => CollegesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetCollegesStreamArgumentsToJson(
+        GetCollegesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetFathersStreamArguments _$GetFathersStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFathersStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => FathersBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetFathersStreamArgumentsToJson(
+        GetFathersStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetJobsStreamArguments _$GetJobsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetJobsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => JobsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetJobsStreamArgumentsToJson(
+        GetJobsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetPersonStatesStreamArguments _$GetPersonStatesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonStatesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => PersonStatesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetPersonStatesStreamArgumentsToJson(
+        GetPersonStatesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+    };
+
+GetPersonTypesStreamArguments _$GetPersonTypesStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetPersonTypesStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => PersonTypesBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetPersonTypesStreamArgumentsToJson(
+        GetPersonTypesStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetQualificationsStreamArguments _$GetQualificationsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetQualificationsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map(
+              (e) => QualificationsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetQualificationsStreamArgumentsToJson(
+        GetQualificationsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetSchoolsStreamArguments _$GetSchoolsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetSchoolsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => SchoolsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetSchoolsStreamArgumentsToJson(
+        GetSchoolsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetShammasLevelsStreamArguments _$GetShammasLevelsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetShammasLevelsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => ShammasLevelsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetShammasLevelsStreamArgumentsToJson(
+        GetShammasLevelsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetStudyYearNameArguments _$GetStudyYearNameArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearNameArguments(
+      order: json['order'] as int,
+    );
+
+Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
+        GetStudyYearNameArguments instance) =>
+    <String, dynamic>{
+      'order': instance.order,
+    };
+
+GetStudyYearsStreamArguments _$GetStudyYearsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetStudyYearsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => StudyYearsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetStudyYearsStreamArgumentsToJson(
+        GetStudyYearsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
+GetTagsStreamArguments _$GetTagsStreamArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetTagsStreamArguments(
+      addWhere: (json['addWhere'] as List<dynamic>?)
+          ?.map((e) => TagsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$GetTagsStreamArgumentsToJson(
+        GetTagsStreamArguments instance) =>
+    <String, dynamic>{
+      'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
+      'limit': instance.limit,
+    };
+
 InsertPersonLastConfessionArguments
     _$InsertPersonLastConfessionArgumentsFromJson(Map<String, dynamic> json) =>
         InsertPersonLastConfessionArguments(
@@ -7507,6 +12390,89 @@ Map<String, dynamic> _$UpdatePersonSpiritDataArgumentsToJson(
       'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
       'lastConfession': instance.lastConfession.toIso8601String(),
       'lastKodas': instance.lastKodas.toIso8601String(),
+    };
+
+DeletePersonArguments _$DeletePersonArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    DeletePersonArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+    );
+
+Map<String, dynamic> _$DeletePersonArgumentsToJson(
+        DeletePersonArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+    };
+
+UpdatePersonArguments _$UpdatePersonArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePersonArguments(
+      personId: fromGraphQLUuidToDartUuidValue(json['personId']),
+      newPerson:
+          PersonsSetInput.fromJson(json['newPerson'] as Map<String, dynamic>),
+      newGroups: (json['newGroups'] as List<dynamic>)
+          .map((e) =>
+              PersonsGroupsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      deleteGroups: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['deleteGroups'] as List?),
+      newServices: (json['newServices'] as List<dynamic>)
+          .map((e) =>
+              PersonsServicesInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      deleteServices: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['deleteServices'] as List?),
+      newTags: (json['newTags'] as List<dynamic>)
+          .map(
+              (e) => PersonsTagsInsertInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      deleteTags: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['deleteTags'] as List?),
+      lastConfession: json['lastConfession'] == null
+          ? null
+          : DateTime.parse(json['lastConfession'] as String),
+      lastKodas: json['lastKodas'] == null
+          ? null
+          : DateTime.parse(json['lastKodas'] as String),
+      lastCall: json['lastCall'] == null
+          ? null
+          : DateTime.parse(json['lastCall'] as String),
+      lastVisit: json['lastVisit'] == null
+          ? null
+          : DateTime.parse(json['lastVisit'] as String),
+    );
+
+Map<String, dynamic> _$UpdatePersonArgumentsToJson(
+        UpdatePersonArguments instance) =>
+    <String, dynamic>{
+      'personId': fromDartUuidValueToGraphQLUuid(instance.personId),
+      'newPerson': instance.newPerson.toJson(),
+      'newGroups': instance.newGroups.map((e) => e.toJson()).toList(),
+      'deleteGroups': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.deleteGroups),
+      'newServices': instance.newServices.map((e) => e.toJson()).toList(),
+      'deleteServices': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.deleteServices),
+      'newTags': instance.newTags.map((e) => e.toJson()).toList(),
+      'deleteTags': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.deleteTags),
+      'lastConfession': instance.lastConfession?.toIso8601String(),
+      'lastKodas': instance.lastKodas?.toIso8601String(),
+      'lastCall': instance.lastCall?.toIso8601String(),
+      'lastVisit': instance.lastVisit?.toIso8601String(),
+    };
+
+InsertPersonArguments _$InsertPersonArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    InsertPersonArguments(
+      newPerson: PersonsInsertInput.fromJson(
+          json['newPerson'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InsertPersonArgumentsToJson(
+        InsertPersonArguments instance) =>
+    <String, dynamic>{
+      'newPerson': instance.newPerson.toJson(),
     };
 
 GetPersonsAttendanceWarningArguments
@@ -7592,15 +12558,28 @@ Map<String, dynamic> _$GetMorePersonDataArgumentsToJson(
 PersonsGeolocationsArguments _$PersonsGeolocationsArgumentsFromJson(
         Map<String, dynamic> json) =>
     PersonsGeolocationsArguments(
-      conditions: json['conditions'] == null
-          ? null
-          : PersonsBoolExp.fromJson(json['conditions'] as Map<String, dynamic>),
+      areasIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['areasIds'] as List?),
+      streetsIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['streetsIds'] as List?),
+      familiesIds: fromGraphQLListNullableUuidToDartListNullableUuidValue(
+          json['familiesIds'] as List?),
+      personsConditions: (json['personsConditions'] as List<dynamic>?)
+          ?.map((e) => PersonsBoolExp.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$PersonsGeolocationsArgumentsToJson(
         PersonsGeolocationsArguments instance) =>
     <String, dynamic>{
-      'conditions': instance.conditions?.toJson(),
+      'areasIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.areasIds),
+      'streetsIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.streetsIds),
+      'familiesIds': fromDartListNullableUuidValueToGraphQLListNullableUuid(
+          instance.familiesIds),
+      'personsConditions':
+          instance.personsConditions?.map((e) => e.toJson()).toList(),
     };
 
 AnalyzePersonArguments _$AnalyzePersonArgumentsFromJson(
@@ -7653,6 +12632,18 @@ GetPersonClassesAndGroupsArguments _$GetPersonClassesAndGroupsArgumentsFromJson(
 
 Map<String, dynamic> _$GetPersonClassesAndGroupsArgumentsToJson(
         GetPersonClassesAndGroupsArguments instance) =>
+    <String, dynamic>{
+      'id': fromDartUuidValueToGraphQLUuid(instance.id),
+    };
+
+GetFullPersonDataArguments _$GetFullPersonDataArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFullPersonDataArguments(
+      id: fromGraphQLUuidToDartUuidValue(json['id']),
+    );
+
+Map<String, dynamic> _$GetFullPersonDataArgumentsToJson(
+        GetFullPersonDataArguments instance) =>
     <String, dynamic>{
       'id': fromDartUuidValueToGraphQLUuid(instance.id),
     };
@@ -7889,18 +12880,6 @@ Map<String, dynamic> _$GetStreetsStreamArgumentsToJson(
     <String, dynamic>{
       'addWhere': instance.addWhere?.map((e) => e.toJson()).toList(),
       'limit': instance.limit,
-    };
-
-GetStudyYearNameArguments _$GetStudyYearNameArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetStudyYearNameArguments(
-      order: json['order'] as int,
-    );
-
-Map<String, dynamic> _$GetStudyYearNameArgumentsToJson(
-        GetStudyYearNameArguments instance) =>
-    <String, dynamic>{
-      'order': instance.order,
     };
 
 AnalyzeUserAttendanceArguments _$AnalyzeUserAttendanceArgumentsFromJson(

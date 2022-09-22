@@ -2,12 +2,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' hide Group;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:transparent_pointer/transparent_pointer.dart';
 
 class ViewPerson extends StatelessWidget {
   static final route = GoRoute(
@@ -24,7 +24,7 @@ class ViewPerson extends StatelessWidget {
       );
     },
     routes: [
-      EditPerson.route,
+      EditPerson.editPersonRoute,
       ViewUser.route,
       PersonAnalysis.personRoute,
     ],
@@ -48,16 +48,34 @@ class ViewPerson extends StatelessWidget {
         final themeData = Theme.of(context);
 
         if (snapshot.hasError) {
-          return ErrorWidget.builder(
-              FlutterErrorDetails(exception: snapshot.error!));
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            body: ErrorWidget.builder(
+              FlutterErrorDetails(exception: snapshot.error!),
+            ),
+          );
         } else if (!snapshot.hasData &&
             snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         } else if (!snapshot.hasData) {
-          return Center(
-            child: Text(
-              'لم يتم العثور على المخدوم',
-              style: themeData.textTheme.titleLarge,
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            body: Center(
+              child: Text(
+                'لم يتم العثور على المخدوم',
+                style: themeData.textTheme.titleLarge,
+              ),
             ),
           );
         }
@@ -83,6 +101,16 @@ class ViewPerson extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(8),
                       child: Center(child: CircularProgressIndicator()),
+                    )
+                  else
+                    IconButton(
+                      tooltip: 'تعديل',
+                      onPressed: () => context.goNamed(
+                        'edit_person',
+                        queryParams: {'id': personId},
+                        extra: {'person': person},
+                      ),
+                      icon: const Icon(Icons.edit),
                     ),
                 ],
                 flexibleSpace: SafeArea(
@@ -98,18 +126,20 @@ class ViewPerson extends StatelessWidget {
                           start: 72,
                           end: 10,
                         ),
-                        title: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 300),
-                          opacity:
-                              constraints.biggest.height > kToolbarHeight * 2
-                                  ? 0
-                                  : 1,
-                          child: Text(
-                            person.name,
-                            style: themeData.textTheme.titleLarge?.copyWith(
-                              color: foregroundColor,
+                        title: TransparentPointer(
+                          child: AnimatedOpacity(
+                            duration: const Duration(milliseconds: 300),
+                            opacity:
+                                constraints.biggest.height > kToolbarHeight * 2
+                                    ? 0
+                                    : 1,
+                            child: Text(
+                              person.name,
+                              style: themeData.textTheme.titleLarge?.copyWith(
+                                color: foregroundColor,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         background: ProgressIndicatorTheme(
@@ -242,11 +272,12 @@ class ViewPerson extends StatelessWidget {
                         ListTile(
                           title: const Text('الكلية'),
                           subtitle: Text(person.college?.name ?? ''),
+                        )
+                      else
+                        ListTile(
+                          title: const Text('المدرسة'),
+                          subtitle: Text(person.school?.name ?? ''),
                         ),
-                      ListTile(
-                        title: const Text('المدرسة'),
-                        subtitle: Text(person.school?.name ?? ''),
-                      ),
                     ] else ...[
                       ListTile(
                         title: const Text('المؤهل'),
@@ -267,7 +298,7 @@ class ViewPerson extends StatelessWidget {
                       subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
                     ),
                     ListTile(
-                      title: const Text('نوع الفرد'),
+                      title: const Text('الحالة الاجتماعية'),
                       subtitle: Text(person.personType?.name ?? ''),
                     ),
                     const Divider(thickness: 1),
@@ -313,7 +344,7 @@ class ViewPerson extends StatelessWidget {
                     ),
                     const Divider(thickness: 1),
                     ListTile(
-                      title: const Text('الحالة'),
+                      title: const Text('الحالة الروحية'),
                       subtitle: Text(person.state?.name ?? ''),
                       trailing: person.state?.color == null
                           ? null
@@ -598,20 +629,21 @@ class ViewPerson extends StatelessWidget {
             ),
           ) ==
           true) {
-        final c = Contact(
-          addresses: [
-            if (person.address != null)
-              Address(
-                person.address!,
-              )
-          ],
-          name: Name(first: _name.text),
-          photo: person.hasPhoto
-              ? await person.photoRef!.getData(100 * 1024 * 1024)
-              : null,
-          phones: [Phone(phone ?? '')],
+        await GetIt.I<ContactsService>().insertContact(
+          Contact(
+            addresses: [
+              if (person.address != null)
+                Address(
+                  person.address!,
+                )
+            ],
+            name: Name(first: _name.text),
+            photo: person.hasPhoto
+                ? await person.photoRef!.getData(100 * 1024 * 1024)
+                : null,
+            phones: [Phone(phone ?? '')],
+          ),
         );
-        await c.insert();
       }
     }
   }
@@ -666,10 +698,12 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final field = getField(person) ?? <T>[];
+
     return Column(
       children: [
-        for (final o in getField(person) ?? <T>[])
-          if (getField(person)!.length >= 6 && o == getField(person)![5])
+        for (final o in field)
+          if (field.length >= 6 && o == field[5])
             ExpansionTile(
               title: const Text('اظهار المزيد'),
               children: [

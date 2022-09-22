@@ -56,7 +56,14 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
           child: ListView(
             padding: const EdgeInsets.all(12),
             children: <Widget>[
-              Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
+              SizedBox(
+                height: MediaQuery.of(context).size.shortestSide * 0.7,
+                width: MediaQuery.of(context).size.shortestSide * 0.7,
+                child: Image.asset(
+                  _getAssetImage(),
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
               const SizedBox(height: 10),
               PasswordFormField(
                 onFieldSubmitted: _submit,
