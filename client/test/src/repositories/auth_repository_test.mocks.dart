@@ -111,14 +111,14 @@ class _FakeGroupsQueries_13 extends _i1.SmartFake implements _i4.GroupsQueries {
       : super(parent, parentInvocation);
 }
 
-class _FakeStudyYearsQueries_14 extends _i1.SmartFake
-    implements _i4.StudyYearsQueries {
-  _FakeStudyYearsQueries_14(Object parent, Invocation parentInvocation)
+class _FakeUsersQueries_14 extends _i1.SmartFake implements _i4.UsersQueries {
+  _FakeUsersQueries_14(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
-class _FakeUsersQueries_15 extends _i1.SmartFake implements _i4.UsersQueries {
-  _FakeUsersQueries_15(Object parent, Invocation parentInvocation)
+class _FakeMetadataQueries_15 extends _i1.SmartFake
+    implements _i4.MetadataQueries {
+  _FakeMetadataQueries_15(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
@@ -522,15 +522,15 @@ class MockCADatabaseRepository extends _i1.Mock
           returnValue: _FakeGroupsQueries_13(this, Invocation.getter(#groups)))
       as _i4.GroupsQueries);
   @override
-  _i4.StudyYearsQueries get studyYears => (super.noSuchMethod(
-          Invocation.getter(#studyYears),
-          returnValue:
-              _FakeStudyYearsQueries_14(this, Invocation.getter(#studyYears)))
-      as _i4.StudyYearsQueries);
-  @override
   _i4.UsersQueries get users => (super.noSuchMethod(Invocation.getter(#users),
-          returnValue: _FakeUsersQueries_15(this, Invocation.getter(#users)))
+          returnValue: _FakeUsersQueries_14(this, Invocation.getter(#users)))
       as _i4.UsersQueries);
+  @override
+  _i4.MetadataQueries get metadata =>
+      (super.noSuchMethod(Invocation.getter(#metadata),
+              returnValue:
+                  _FakeMetadataQueries_15(this, Invocation.getter(#metadata)))
+          as _i4.MetadataQueries);
   @override
   Never get runTransaction =>
       (super.noSuchMethod(Invocation.getter(#runTransaction), returnValue: null)

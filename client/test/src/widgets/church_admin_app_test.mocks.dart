@@ -101,14 +101,14 @@ class _FakeGroupsQueries_11 extends _i1.SmartFake implements _i4.GroupsQueries {
       : super(parent, parentInvocation);
 }
 
-class _FakeStudyYearsQueries_12 extends _i1.SmartFake
-    implements _i4.StudyYearsQueries {
-  _FakeStudyYearsQueries_12(Object parent, Invocation parentInvocation)
+class _FakeUsersQueries_12 extends _i1.SmartFake implements _i4.UsersQueries {
+  _FakeUsersQueries_12(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
-class _FakeUsersQueries_13 extends _i1.SmartFake implements _i4.UsersQueries {
-  _FakeUsersQueries_13(Object parent, Invocation parentInvocation)
+class _FakeMetadataQueries_13 extends _i1.SmartFake
+    implements _i4.MetadataQueries {
+  _FakeMetadataQueries_13(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
@@ -124,8 +124,13 @@ class _FakeQueryResult_15<TParsed extends Object?> extends _i1.SmartFake
       : super(parent, parentInvocation);
 }
 
-class _FakeDuration_16 extends _i1.SmartFake implements Duration {
-  _FakeDuration_16(Object parent, Invocation parentInvocation)
+class _FakePerson_16 extends _i1.SmartFake implements _i4.Person {
+  _FakePerson_16(Object parent, Invocation parentInvocation)
+      : super(parent, parentInvocation);
+}
+
+class _FakeDuration_17 extends _i1.SmartFake implements Duration {
+  _FakeDuration_17(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
@@ -284,6 +289,11 @@ class MockCAAuthRepository extends _i1.Mock implements _i4.CAAuthRepository {
       returnValue: _i7.Future<void>.value(),
       returnValueForMissingStub: _i7.Future<void>.value()) as _i7.Future<void>);
   @override
+  _i7.Future<void> signInWithGoogle() => (super.noSuchMethod(
+      Invocation.method(#signInWithGoogle, []),
+      returnValue: _i7.Future<void>.value(),
+      returnValueForMissingStub: _i7.Future<void>.value()) as _i7.Future<void>);
+  @override
   void initListeners() =>
       super.noSuchMethod(Invocation.method(#initListeners, []),
           returnValueForMissingStub: null);
@@ -371,15 +381,15 @@ class MockCADatabaseRepository extends _i1.Mock
           returnValue: _FakeGroupsQueries_11(this, Invocation.getter(#groups)))
       as _i4.GroupsQueries);
   @override
-  _i4.StudyYearsQueries get studyYears => (super.noSuchMethod(
-          Invocation.getter(#studyYears),
-          returnValue:
-              _FakeStudyYearsQueries_12(this, Invocation.getter(#studyYears)))
-      as _i4.StudyYearsQueries);
-  @override
   _i4.UsersQueries get users => (super.noSuchMethod(Invocation.getter(#users),
-          returnValue: _FakeUsersQueries_13(this, Invocation.getter(#users)))
+          returnValue: _FakeUsersQueries_12(this, Invocation.getter(#users)))
       as _i4.UsersQueries);
+  @override
+  _i4.MetadataQueries get metadata =>
+      (super.noSuchMethod(Invocation.getter(#metadata),
+              returnValue:
+                  _FakeMetadataQueries_13(this, Invocation.getter(#metadata)))
+          as _i4.MetadataQueries);
   @override
   Never get runTransaction =>
       (super.noSuchMethod(Invocation.getter(#runTransaction), returnValue: null)
@@ -545,15 +555,22 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Future<_i4.Person?>.value())
           as _i7.Future<_i4.Person?>);
   @override
-  _i4.GQLPaginatableStream<_i4.Person> getPersonsStream(
-          {_i7.Stream<String?>? searchQuery}) =>
+  _i7.Future<_i4.Person?> deletePerson({String? personId}) =>
       (super.noSuchMethod(
-          Invocation.method(#getPersonsStream, [], {#searchQuery: searchQuery}),
-          returnValue: _FakeGQLPaginatableStream_14<_i4.Person>(
-              this,
-              Invocation.method(
-                  #getPersonsStream, [], {#searchQuery: searchQuery}))) as _i4
-          .GQLPaginatableStream<_i4.Person>);
+              Invocation.method(#deletePerson, [], {#personId: personId}),
+              returnValue: _i7.Future<_i4.Person?>.value())
+          as _i7.Future<_i4.Person?>);
+  @override
+  _i4.GQLPaginatableStream<_i4.Person> getPersonsStream(
+          {_i7.Stream<String?>? searchQuery, String? secondLineFieldName}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getPersonsStream, [], {
+                #searchQuery: searchQuery,
+                #secondLineFieldName: secondLineFieldName
+              }),
+              returnValue: _FakeGQLPaginatableStream_14<_i4.Person>(this,
+                  Invocation.method(#getPersonsStream, [], {#searchQuery: searchQuery, #secondLineFieldName: secondLineFieldName})))
+          as _i4.GQLPaginatableStream<_i4.Person>);
   @override
   _i7.Future<_i6.QueryResult<_i13.GetPersonsKodasWarning$QueryRoot>>
       getPersonsKodasWarning({DateTime? date}) => (super.noSuchMethod(
@@ -676,26 +693,34 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
               returnValue: _i7.Stream<_i4.Person?>.empty())
           as _i7.Stream<_i4.Person?>);
   @override
-  _i7.Stream<List<_i4.Person>?> personsGeolocations(
+  _i7.Stream<Map<Type, Set<Object>>?> personsGeolocations(
           {String? personId,
           List<_i14.UuidValue>? areasIds = const [],
           List<_i14.UuidValue>? streetsIds = const [],
+          List<_i14.UuidValue>? familiesIds = const [],
           List<_i14.UuidValue>? servicesIds = const [],
           List<_i14.UuidValue>? classesIds = const [],
           List<_i14.UuidValue>? groupsIds = const [],
-          List<_i14.UuidValue>? familiesIds = const []}) =>
+          bool? getAreas = false,
+          bool? getStreets = false,
+          bool? getFamilies = false,
+          bool? getPersons = false}) =>
       (super.noSuchMethod(
               Invocation.method(#personsGeolocations, [], {
                 #personId: personId,
                 #areasIds: areasIds,
                 #streetsIds: streetsIds,
+                #familiesIds: familiesIds,
                 #servicesIds: servicesIds,
                 #classesIds: classesIds,
                 #groupsIds: groupsIds,
-                #familiesIds: familiesIds
+                #getAreas: getAreas,
+                #getStreets: getStreets,
+                #getFamilies: getFamilies,
+                #getPersons: getPersons
               }),
-              returnValue: _i7.Stream<List<_i4.Person>?>.empty())
-          as _i7.Stream<List<_i4.Person>?>);
+              returnValue: _i7.Stream<Map<Type, Set<Object>>?>.empty())
+          as _i7.Stream<Map<Type, Set<Object>>?>);
   @override
   _i7.Stream<_i4.Person?> analyzePerson(
           {String? personId, _i4.PersonAnalysisOptions? options}) =>
@@ -711,6 +736,33 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
                   #getPersonClassesAndGroups, [], {#personId: personId}),
               returnValue: _i7.Stream<_i4.Person?>.empty())
           as _i7.Stream<_i4.Person?>);
+  @override
+  _i7.Future<_i4.Person> getFullPersonData({String? personId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getFullPersonData, [], {#personId: personId}),
+              returnValue: _i7.Future<_i4.Person>.value(_FakePerson_16(
+                  this,
+                  Invocation.method(
+                      #getFullPersonData, [], {#personId: personId}))))
+          as _i7.Future<_i4.Person>);
+  @override
+  _i7.Future<void> updatePerson(
+          {_i4.Person? oldPerson, _i4.Person? newPerson}) =>
+      (super.noSuchMethod(
+              Invocation.method(#updatePerson, [],
+                  {#oldPerson: oldPerson, #newPerson: newPerson}),
+              returnValue: _i7.Future<void>.value(),
+              returnValueForMissingStub: _i7.Future<void>.value())
+          as _i7.Future<void>);
+  @override
+  _i7.Future<_i4.Person> insertPerson({_i4.Person? newPerson}) =>
+      (super.noSuchMethod(
+              Invocation.method(#insertPerson, [], {#newPerson: newPerson}),
+              returnValue: _i7.Future<_i4.Person>.value(_FakePerson_16(
+                  this,
+                  Invocation.method(
+                      #insertPerson, [], {#newPerson: newPerson}))))
+          as _i7.Future<_i4.Person>);
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> personServiceAttendance(
           {String? personId, String? serviceId, bool? asAdmin = false}) =>
@@ -806,7 +858,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
           Invocation.getter(#timeToReauth),
-          returnValue: _FakeDuration_16(this, Invocation.getter(#timeToReauth)))
+          returnValue: _FakeDuration_17(this, Invocation.getter(#timeToReauth)))
       as Duration);
   @override
   _i7.Stream<void> get refreshUIStream =>

@@ -55,22 +55,22 @@ void main() {
           when(areasQueries.getAreasStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
-            DelegatingPaginatableStream(
-              streamDelegate: (_, __) async* {},
+            GQLPaginatableStream(
+              subscriptionStream: (_) async* {},
             ),
           );
           when(personsQueries.getPersonsStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
-            DelegatingPaginatableStream(
-              streamDelegate: (_, __) async* {},
+            GQLPaginatableStream(
+              subscriptionStream: (_) async* {},
             ),
           );
           when(servicesQueries.getServicesStream(
                   searchQuery: anyNamed('searchQuery')))
               .thenReturn(
-            DelegatingPaginatableStream(
-              streamDelegate: (_, __) async* {},
+            GQLPaginatableStream(
+              subscriptionStream: (_) async* {},
             ),
           );
 
