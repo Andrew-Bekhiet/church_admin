@@ -1,0 +1,42 @@
+table:
+  name: fathers
+  schema: public
+object_relationships:
+  - name: church
+    using:
+      foreign_key_constraint_on: church_id
+array_relationships:
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: father_id
+        table:
+          name: persons
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - church_id
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - church_id
+        - id
+        - name
+      filter: {}
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

@@ -1,0 +1,90 @@
+table:
+  name: streets
+  schema: public
+computed_fields:
+  - name: areas
+    definition:
+      function:
+        name: street_areas
+        schema: public
+      session_argument: hasura_session
+  - name: families
+    definition:
+      function:
+        name: street_families
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_street
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_street
+        schema: public
+      session_argument: hasura_session
+  - name: lastEdit
+    definition:
+      function:
+        name: get_street_last_edit
+        schema: history
+      session_argument: hasura_session
+  - name: persons
+    definition:
+      function:
+        name: street_persons
+        schema: public
+      session_argument: hasura_session
+  - name: stores
+    definition:
+      function:
+        name: street_stores
+        schema: public
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+      columns:
+        - color
+        - line
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - id
+        - line
+        - name
+        - photo_updated_at
+      computed_fields:
+        - lastEdit
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - line
+        - name
+      filter:
+        isUserAllowedToWrite:
+          _eq: true
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        isUserAllowedToWrite:
+          _eq: true

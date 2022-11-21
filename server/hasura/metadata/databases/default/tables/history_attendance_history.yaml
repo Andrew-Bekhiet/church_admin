@@ -1,0 +1,103 @@
+table:
+  name: attendance_history
+  schema: history
+object_relationships:
+  - name: class
+    using:
+      manual_configuration:
+        column_mapping:
+          service_gender: service_gender
+          service_id: service_id
+          service_study_year: service_study_year
+        insertion_order: null
+        remote_table:
+          name: classes
+          schema: public
+  - name: day
+    using:
+      foreign_key_constraint_on: day_id
+  - name: group
+    using:
+      foreign_key_constraint_on: group_id
+  - name: person
+    using:
+      foreign_key_constraint_on: person_id
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - name: studyYear
+    using:
+      foreign_key_constraint_on: service_study_year
+  - name: user
+    using:
+      foreign_key_constraint_on: recorded_by
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_attendance_record
+        schema: history
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_attendance_record
+        schema: history
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+      set:
+        recorded_by: x-hasura-user-id
+        service_study_year: x-hasura-
+      columns:
+        - as_admin
+        - day_id
+        - group_id
+        - person_id
+        - service_gender
+        - service_id
+        - service_study_year
+        - time
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - as_admin
+        - day_id
+        - group_id
+        - id
+        - person_id
+        - recorded_by
+        - service_gender
+        - service_id
+        - service_study_year
+        - time
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - day_id
+        - group_id
+        - person_id
+        - service_id
+        - time
+      filter:
+        isUserAllowedToWrite:
+          _eq: true
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        isUserAllowedToWrite:
+          _eq: true

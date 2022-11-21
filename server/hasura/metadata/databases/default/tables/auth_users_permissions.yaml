@@ -1,0 +1,34 @@
+table:
+  name: users_permissions
+  schema: auth
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: uid
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user:
+          isUserAllowedToChange:
+            _eq: true
+      columns:
+        - permission
+        - uid
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - permission
+        - uid
+      filter:
+        user:
+          isUserAllowedToRead:
+            _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user:
+          isUserAllowedToChange:
+            _eq: true

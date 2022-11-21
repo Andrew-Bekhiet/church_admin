@@ -1,0 +1,72 @@
+table:
+  name: families_families
+  schema: public
+object_relationships:
+  - name: innerFamily
+    using:
+      foreign_key_constraint_on: inner_family_id
+  - name: outerFamily
+    using:
+      foreign_key_constraint_on: outer_family_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _and:
+          - outerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+          - innerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+      columns:
+        - inner_family_id
+        - outer_family_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - outer_family_id
+        - inner_family_id
+      filter:
+        _and:
+          - outerFamily:
+              isUserAllowedToRead:
+                _eq: true
+          - innerFamily:
+              isUserAllowedToRead:
+                _eq: true
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - outer_family_id
+        - inner_family_id
+      filter:
+        _and:
+          - outerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+          - innerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+      check:
+        _and:
+          - outerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+          - innerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _and:
+          - outerFamily:
+              isUserAllowedToWrite:
+                _eq: true
+          - innerFamily:
+              isUserAllowedToWrite:
+                _eq: true

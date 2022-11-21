@@ -1,0 +1,61 @@
+table:
+  name: attendance_days_constraints
+  schema: history
+object_relationships:
+  - name: day
+    using:
+      foreign_key_constraint_on: day_id
+  - name: group
+    using:
+      foreign_key_constraint_on: group_id
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - name: studyYear
+    using:
+      foreign_key_constraint_on: service_study_year
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_day_constraint
+        schema: history
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_day_constraint
+        schema: history
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+      columns:
+        - day_id
+        - group_id
+        - service_id
+        - service_gender
+        - service_study_year
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - service_gender
+        - day_id
+        - service_study_year
+        - group_id
+        - id
+        - service_id
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      allow_aggregations: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        isUserAllowedToWrite:
+          _eq: true

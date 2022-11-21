@@ -1,0 +1,42 @@
+table:
+  name: colleges
+  schema: public
+object_relationships:
+  - name: university
+    using:
+      foreign_key_constraint_on: university_id
+array_relationships:
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: college_id
+        table:
+          name: persons
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - name
+        - university_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - name
+        - university_id
+      filter: {}
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

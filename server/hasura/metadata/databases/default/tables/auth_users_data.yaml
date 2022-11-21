@@ -1,0 +1,58 @@
+table:
+  name: users_data
+  schema: auth
+object_relationships:
+  - name: person
+    using:
+      foreign_key_constraint_on:
+        column: uid
+        table:
+          name: persons
+          schema: public
+array_relationships:
+  - name: adminOn
+    using:
+      foreign_key_constraint_on:
+        column: uid
+        table:
+          name: users_admin_on
+          schema: auth
+  - name: permissions
+    using:
+      foreign_key_constraint_on:
+        column: uid
+        table:
+          name: users_permissions
+          schema: auth
+computed_fields:
+  - name: isUserAllowedToChange
+    definition:
+      function:
+        name: user_allowed_to_change_user_data
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_user
+        schema: public
+      session_argument: hasura_session
+  - name: lastEdit
+    definition:
+      function:
+        name: get_user_last_edit
+        schema: history
+      session_argument: hasura_session
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - name
+        - photo_updated_at
+        - uid
+      computed_fields:
+        - lastEdit
+      filter:
+        isUserAllowedToRead:
+          _eq: true

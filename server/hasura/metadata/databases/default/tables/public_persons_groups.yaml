@@ -1,0 +1,65 @@
+table:
+  name: persons_groups
+  schema: public
+object_relationships:
+  - name: group
+    using:
+      foreign_key_constraint_on: group_id
+  - name: person
+    using:
+      foreign_key_constraint_on: person_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - group_id
+        - person_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - group_id
+        - person_id
+      filter:
+        _and:
+          - person:
+              isUserAllowedToRead:
+                _eq: true
+          - group:
+              isUserAllowedToRead:
+                _eq: true
+      limit: 100
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - group_id
+        - person_id
+      filter:
+        _and:
+          - person:
+              isUserAllowedToWrite:
+                _eq: true
+          - group:
+              isUserAllowedToWrite:
+                _eq: true
+      check:
+        _and:
+          - person:
+              isUserAllowedToWrite:
+                _eq: true
+          - group:
+              isUserAllowedToWrite:
+                _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _and:
+          - person:
+              isUserAllowedToWrite:
+                _eq: true
+          - group:
+              isUserAllowedToWrite:
+                _eq: true

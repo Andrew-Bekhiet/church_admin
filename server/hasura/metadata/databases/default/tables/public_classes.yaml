@@ -1,0 +1,96 @@
+table:
+  name: classes
+  schema: public
+object_relationships:
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - name: studyYear
+    using:
+      foreign_key_constraint_on: service_study_year
+array_relationships:
+  - name: attendanceDaysConstraints
+    using:
+      manual_configuration:
+        column_mapping:
+          service_gender: service_gender
+          service_id: service_id
+          service_study_year: service_study_year
+        insertion_order: null
+        remote_table:
+          name: attendance_days_constraints
+          schema: history
+  - name: attendanceHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          service_gender: service_gender
+          service_id: service_id
+          service_study_year: service_study_year
+        insertion_order: null
+        remote_table:
+          name: attendance_history
+          schema: history
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_class
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_class
+        schema: public
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+      columns:
+        - color
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - id
+        - name
+        - photo_updated_at
+        - service_id
+        - service_study_year
+        - service_gender
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - name
+        - photo_updated_at
+        - service_id
+        - service_study_year
+        - service_gender
+      filter:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+      check:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true

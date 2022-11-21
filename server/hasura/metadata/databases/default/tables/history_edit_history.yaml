@@ -1,0 +1,26 @@
+table:
+  name: edit_history
+  schema: history
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: recorded_by
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_audit
+        schema: history
+      session_argument: hasura_session
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - record_id
+        - table
+        - time
+        - recorded_by
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      allow_aggregations: true

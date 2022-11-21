@@ -1,0 +1,102 @@
+table:
+  name: groups
+  schema: public
+object_relationships:
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+array_relationships:
+  - name: adminUsers
+    using:
+      foreign_key_constraint_on:
+        column: admin_on_group
+        table:
+          name: users_admin_on
+          schema: auth
+  - name: attendanceDaysConstraints
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: attendance_days_constraints
+          schema: history
+  - name: attendanceHistory
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: attendance_history
+          schema: history
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: persons_groups
+          schema: public
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_group
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_group
+        schema: public
+      session_argument: hasura_session
+  - name: lastEdit
+    definition:
+      function:
+        name: get_group_last_edit
+        schema: history
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+      columns:
+        - color
+        - name
+        - service_id
+        - validity
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - id
+        - name
+        - photo_updated_at
+        - service_id
+        - validity
+      computed_fields:
+        - lastEdit
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - name
+        - service_id
+        - validity
+      filter:
+        isUserAllowedToWrite:
+          _eq: true
+      check:
+        isUserAllowedToWrite:
+          _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        isUserAllowedToWrite:
+          _eq: true

@@ -1,0 +1,99 @@
+table:
+  name: stores
+  schema: public
+object_relationships:
+  - name: family
+    using:
+      foreign_key_constraint_on: admin_family
+computed_fields:
+  - name: areas
+    definition:
+      function:
+        name: store_areas
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_store
+        schema: public
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_store
+        schema: public
+      session_argument: hasura_session
+  - name: lastEdit
+    definition:
+      function:
+        name: get_store_last_edit
+        schema: history
+      session_argument: hasura_session
+  - name: streets
+    definition:
+      function:
+        name: store_streets
+        schema: public
+      session_argument: hasura_session
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+          - _or:
+              - admin_family:
+                  _eq: null
+              - family:
+                  isUserAllowedToWrite:
+                    _eq: true
+      columns:
+        - admin_family
+        - color
+        - geolocation
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - admin_family
+        - color
+        - geolocation
+        - id
+        - name
+        - photo_updated_at
+      computed_fields:
+        - lastEdit
+      filter:
+        _and:
+          - isUserAllowedToRead:
+              _eq: true
+      limit: 100
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - admin_family
+        - color
+        - geolocation
+        - name
+      filter:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+      check:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _and:
+          - isUserAllowedToWrite:
+              _eq: true
+          - family:
+              isUserAllowedToWrite:
+                _eq: true

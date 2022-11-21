@@ -10,7 +10,7 @@ import {
 } from "./hasura_interface";
 
 export const getDownloadUrl = runWith({
-  allowInvalidAppCheckToken: false,
+  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
 })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
@@ -18,7 +18,7 @@ export const getDownloadUrl = runWith({
   });
 
 export const getUploadUrl = runWith({
-  allowInvalidAppCheckToken: false,
+  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
 })
   .region("europe-west6")
   .https.onCall(async (data, context) => {

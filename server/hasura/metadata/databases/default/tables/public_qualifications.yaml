@@ -1,0 +1,36 @@
+table:
+  name: qualifications
+  schema: public
+array_relationships:
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: qualification_id
+        table:
+          name: persons
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - name
+      filter: {}
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

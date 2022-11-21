@@ -1,0 +1,39 @@
+table:
+  name: person_states
+  schema: public
+array_relationships:
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: state_id
+        table:
+          name: persons
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - color
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - id
+        - name
+      filter: {}
+      limit: 200
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - name
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}
