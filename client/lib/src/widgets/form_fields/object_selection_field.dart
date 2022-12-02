@@ -70,8 +70,13 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                         controller: controller,
                         autoDisposeController: true,
                         onTap: Navigator.of(context).pop,
-                        itemBuilder: (o,
-                                {onLongPress, onTap, subtitle, trailing}) =>
+                        itemBuilder: (
+                          o, {
+                          onLongPress,
+                          onTap,
+                          subtitle,
+                          trailing,
+                        }) =>
                             ViewableObjectWidget(
                           o,
                           onTap: () => onTap!(o),

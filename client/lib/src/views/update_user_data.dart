@@ -12,13 +12,16 @@ class UpdateUserData extends StatefulWidget {
     name: 'update_user_data',
     path: '/updateUserData',
     builder: (context, state) => const UpdateUserData(),
-    redirect: (state) {
-      if (!CAAuthRepository.I.isSignedIn) {
-        return state.namedLocation('login');
-      } else if (CAAuthRepository.I.currentUserData!.spiritDataUpToDate()) {
+    redirect: (context, state) {
+      if (!AuthService.instance.isSignedIn) {
+        return ChurchAdminApp.router.routeInformationParser.configuration
+            .namedLocation('login');
+      } else if (AuthService.instance.currentUser!.person!
+          .spiritDataUpToDate()) {
         return '/';
       } else if (LocalAuthService.I.shouldAuthenticate) {
-        return state.namedLocation(
+        return ChurchAdminApp.router.routeInformationParser.configuration
+            .namedLocation(
           'authenticate',
           queryParams: {'next': state.location},
         );
@@ -36,7 +39,7 @@ class UpdateUserData extends StatefulWidget {
 
 class _UpdateUserDataState extends State<UpdateUserData> {
   late Person _userData =
-      widget.userData ?? CAAuthRepository.I.currentUserData!;
+      widget.userData ?? AuthService.instance.currentUser!.person!;
   final _formKey = GlobalKey<FormState>();
   bool _isSaving = false;
 
@@ -89,13 +92,14 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: CAAuthRepository.I.currentUser!.uid,
+                    recordedBy: AuthService.instance.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر تناول'
                     : value.isBefore(
-                            DateTime.now().subtract(const Duration(days: 60)))
+                        DateTime.now().subtract(const Duration(days: 60)),
+                      )
                         ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
                         : null,
               ),
@@ -129,13 +133,14 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: CAAuthRepository.I.currentUser!.uid,
+                    recordedBy: AuthService.instance.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر اعتراف'
                     : value.isBefore(
-                            DateTime.now().subtract(const Duration(days: 60)))
+                        DateTime.now().subtract(const Duration(days: 60)),
+                      )
                         ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
                         : null,
               ),

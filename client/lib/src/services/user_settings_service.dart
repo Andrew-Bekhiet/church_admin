@@ -1,17 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class UserSettings {
-  late final box = GetIt.I<HiveInterface>().box('Settings');
+class UserSettingsService {
+  static UserSettingsService get I => GetIt.I<UserSettingsService>();
 
-  UserSettings() {
-    _openSettingsBox();
-  }
+  final Box box;
 
-  Future<void> _openSettingsBox() async {
-    await GetIt.I<HiveInterface>().openBox('Settings');
-    GetIt.I.signalReady(this);
+  UserSettingsService({Box? box})
+      : box = box ?? GetIt.I<HiveInterface>().box('Settings') {
+    assert(this.box.isOpen);
   }
 
   bool get darkTheme => box.get(
@@ -21,6 +21,10 @@ class UserSettings {
       )!;
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
 
+  String? get registeredFCMToken => box.get('registeredFCMToken')!;
+  Future<void> setRegisteredFCMToken(String? value) =>
+      box.put('registeredFCMToken', value);
+
   bool get greatFeastTheme => box.get('greatFeastTheme', defaultValue: true)!;
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
@@ -28,5 +32,7 @@ class UserSettings {
   String? getSecondLineFor(Type t) =>
       box.get((t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine');
   Future<void> setSecondLineFor(Type t, String? value) => box.put(
-      (t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine', value);
+        (t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine',
+        value,
+      );
 }

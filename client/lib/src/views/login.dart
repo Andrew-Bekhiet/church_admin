@@ -4,20 +4,28 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rxdart/rxdart.dart';
 
 class LoginScreen extends StatefulWidget {
   static final GoRoute route = GoRoute(
     name: 'login',
     path: '/login',
     builder: (context, state) => const LoginScreen(),
-    redirect: (state) {
-      if (CAAuthRepository.I.isSignedIn) {
-        return state.namedLocation('home');
-      }
-      return null;
+    redirect: (context, state) {
+      return redirect(
+        ChurchAdminApp
+            .router.routeInformationParser.configuration.namedLocation,
+        state,
+      );
     },
   );
+
+  @visibleForTesting
+  static String? redirect(NamedLocation namedLocation, GoRouterState _) {
+    if (AuthService.instance.isSignedIn) {
+      return namedLocation('home');
+    }
+    return null;
+  }
 
   const LoginScreen({super.key});
 
@@ -91,7 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     style: const TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w600),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
                     children: [
                       TextSpan(
                         style: Theme.of(context).textTheme.bodySmall,
@@ -135,8 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginWithGoogle() async {
     setState(() => _loading = true);
     try {
-      await CAAuthRepository.I.signInWithGoogle();
-      await CAAuthRepository.I.userStream.whereNotNull().next;
+      await AuthService.instance.signInWithGoogle();
+
+      await AuthService.instance.userStream.nextNonNullStrict;
       await setupSettings();
 
       if (mounted) {
@@ -159,15 +170,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> setupSettings() async {
+    final getIt = GetIt.I;
+
     try {
-      final settings = GetIt.I<UserSettings>();
+      final settings = getIt<UserSettingsService>();
 
       // await settings.setSecondLineFor(Area, 'lastVisit');
       // await settings.setSecondLineFor(Street, 'lastVisit');
       // await settings.setSecondLineFor(Family, 'lastVisit');
       await settings.setSecondLineFor(Person, 'birthdate');
 
-      final notificationsSettings = await GetIt.I<CacheRepository>()
+      final notificationsSettings = await getIt<CacheRepository>()
           .openBox<NotificationSetting>('NotificationsSettings');
 
       await notificationsSettings.put(
@@ -175,10 +188,10 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 1),
       );
 
-      await GetIt.I<CANotificationsService>().schedulePeriodic(
+      await getIt<CANotificationsService>().schedulePeriodic(
         const Duration(days: 1),
         'BirthDay'.hashCode,
-        CANotificationsService.showBirthDayNotification,
+        NotificationsServiceCallbacks.showBirthDayNotification,
         exact: true,
         startAt: DateTime.now().replaceTimeOfDay(
           const TimeOfDay(hour: 11, minute: 0),
@@ -192,10 +205,10 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await GetIt.I<CANotificationsService>().schedulePeriodic(
+      await getIt<CANotificationsService>().schedulePeriodic(
         const Duration(days: 7),
         'Kodas'.hashCode,
-        CANotificationsService.showKodasNotification,
+        NotificationsServiceCallbacks.showKodasNotification,
         exact: true,
         startAt: DateTime.now().replaceTimeOfDay(
           const TimeOfDay(hour: 11, minute: 0),
@@ -208,10 +221,10 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await GetIt.I<CANotificationsService>().schedulePeriodic(
+      await getIt<CANotificationsService>().schedulePeriodic(
         const Duration(days: 7),
         'Meeting'.hashCode,
-        CANotificationsService.showMeetingNotification,
+        NotificationsServiceCallbacks.showMeetingNotification,
         exact: true,
         startAt: DateTime.now().replaceTimeOfDay(
           const TimeOfDay(hour: 11, minute: 0),
@@ -224,10 +237,10 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await GetIt.I<CANotificationsService>().schedulePeriodic(
+      await getIt<CANotificationsService>().schedulePeriodic(
         const Duration(days: 7),
         'Confessions'.hashCode,
-        CANotificationsService.showConfessionNotification,
+        NotificationsServiceCallbacks.showConfessionNotification,
         exact: true,
         startAt: DateTime.now().replaceTimeOfDay(
           const TimeOfDay(hour: 11, minute: 0),
@@ -235,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
         rescheduleOnReboot: true,
       );
     } catch (err, stack) {
-      await GetIt.I<LoggingService>().reportError(
+      await getIt<LoggingService>().reportError(
         err as Exception,
         stackTrace: stack,
       );

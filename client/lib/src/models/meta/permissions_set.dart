@@ -41,6 +41,9 @@ extension RemoveQuotes on String {
   String removeQuotes() => replaceAll('"', '').replaceAll("'", '');
 }
 
-Set<String> permissionsSetToJson(CAPermissionsSet data) => data.permissions;
+List<Json> permissionsSetToJson(CAPermissionsSet data) =>
+    data.permissions.map((e) => {'permission': e}).toList();
 CAPermissionsSet permissionsSetFromJson(dynamic data) =>
-    CAPermissionsSet.fromSet((data as List?)?.toSet().cast() ?? {});
+    CAPermissionsSet.fromSet(
+      (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
+    );

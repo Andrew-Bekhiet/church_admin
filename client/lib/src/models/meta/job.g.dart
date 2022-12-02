@@ -6,7 +6,7 @@ part of 'job.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
+_$_Job _$$_JobFromJson(Map json) => _$_Job(
       id: json['id'] as String,
       name: json['name'] as String,
     );

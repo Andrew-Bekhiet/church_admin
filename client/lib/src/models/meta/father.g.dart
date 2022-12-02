@@ -6,7 +6,7 @@ part of 'father.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Father _$$_FatherFromJson(Map<String, dynamic> json) => _$_Father(
+_$_Father _$$_FatherFromJson(Map json) => _$_Father(
       id: json['id'] as String,
       name: json['name'] as String,
       churchId: json['churchId'] as String?,

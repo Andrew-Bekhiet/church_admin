@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'geo_map_options.dart';
 
@@ -33,7 +33,8 @@ mixin _$GeoMapOptions {
 abstract class $GeoMapOptionsCopyWith<$Res> {
   factory $GeoMapOptionsCopyWith(
           GeoMapOptions value, $Res Function(GeoMapOptions) then) =
-      _$GeoMapOptionsCopyWithImpl<$Res>;
+      _$GeoMapOptionsCopyWithImpl<$Res, GeoMapOptions>;
+  @useResult
   $Res call(
       {Set<GeoMapLayer> layers,
       Set<Area> selectedAreas,
@@ -45,54 +46,56 @@ abstract class $GeoMapOptionsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GeoMapOptionsCopyWithImpl<$Res>
+class _$GeoMapOptionsCopyWithImpl<$Res, $Val extends GeoMapOptions>
     implements $GeoMapOptionsCopyWith<$Res> {
   _$GeoMapOptionsCopyWithImpl(this._value, this._then);
 
-  final GeoMapOptions _value;
   // ignore: unused_field
-  final $Res Function(GeoMapOptions) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? layers = freezed,
-    Object? selectedAreas = freezed,
-    Object? selectedStreets = freezed,
-    Object? selectedFamilies = freezed,
-    Object? selectedServices = freezed,
-    Object? selectedClasses = freezed,
-    Object? selectedGroups = freezed,
+    Object? layers = null,
+    Object? selectedAreas = null,
+    Object? selectedStreets = null,
+    Object? selectedFamilies = null,
+    Object? selectedServices = null,
+    Object? selectedClasses = null,
+    Object? selectedGroups = null,
   }) {
     return _then(_value.copyWith(
-      layers: layers == freezed
+      layers: null == layers
           ? _value.layers
           : layers // ignore: cast_nullable_to_non_nullable
               as Set<GeoMapLayer>,
-      selectedAreas: selectedAreas == freezed
+      selectedAreas: null == selectedAreas
           ? _value.selectedAreas
           : selectedAreas // ignore: cast_nullable_to_non_nullable
               as Set<Area>,
-      selectedStreets: selectedStreets == freezed
+      selectedStreets: null == selectedStreets
           ? _value.selectedStreets
           : selectedStreets // ignore: cast_nullable_to_non_nullable
               as Set<Street>,
-      selectedFamilies: selectedFamilies == freezed
+      selectedFamilies: null == selectedFamilies
           ? _value.selectedFamilies
           : selectedFamilies // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
-      selectedServices: selectedServices == freezed
+      selectedServices: null == selectedServices
           ? _value.selectedServices
           : selectedServices // ignore: cast_nullable_to_non_nullable
               as Set<Service>,
-      selectedClasses: selectedClasses == freezed
+      selectedClasses: null == selectedClasses
           ? _value.selectedClasses
           : selectedClasses // ignore: cast_nullable_to_non_nullable
               as Set<Class>,
-      selectedGroups: selectedGroups == freezed
+      selectedGroups: null == selectedGroups
           ? _value.selectedGroups
           : selectedGroups // ignore: cast_nullable_to_non_nullable
               as Set<Group>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -103,6 +106,7 @@ abstract class _$$_GeoMapOptionsCopyWith<$Res>
           _$_GeoMapOptions value, $Res Function(_$_GeoMapOptions) then) =
       __$$_GeoMapOptionsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Set<GeoMapLayer> layers,
       Set<Area> selectedAreas,
@@ -115,51 +119,49 @@ abstract class _$$_GeoMapOptionsCopyWith<$Res>
 
 /// @nodoc
 class __$$_GeoMapOptionsCopyWithImpl<$Res>
-    extends _$GeoMapOptionsCopyWithImpl<$Res>
+    extends _$GeoMapOptionsCopyWithImpl<$Res, _$_GeoMapOptions>
     implements _$$_GeoMapOptionsCopyWith<$Res> {
   __$$_GeoMapOptionsCopyWithImpl(
       _$_GeoMapOptions _value, $Res Function(_$_GeoMapOptions) _then)
-      : super(_value, (v) => _then(v as _$_GeoMapOptions));
+      : super(_value, _then);
 
-  @override
-  _$_GeoMapOptions get _value => super._value as _$_GeoMapOptions;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? layers = freezed,
-    Object? selectedAreas = freezed,
-    Object? selectedStreets = freezed,
-    Object? selectedFamilies = freezed,
-    Object? selectedServices = freezed,
-    Object? selectedClasses = freezed,
-    Object? selectedGroups = freezed,
+    Object? layers = null,
+    Object? selectedAreas = null,
+    Object? selectedStreets = null,
+    Object? selectedFamilies = null,
+    Object? selectedServices = null,
+    Object? selectedClasses = null,
+    Object? selectedGroups = null,
   }) {
     return _then(_$_GeoMapOptions(
-      layers: layers == freezed
+      layers: null == layers
           ? _value._layers
           : layers // ignore: cast_nullable_to_non_nullable
               as Set<GeoMapLayer>,
-      selectedAreas: selectedAreas == freezed
+      selectedAreas: null == selectedAreas
           ? _value._selectedAreas
           : selectedAreas // ignore: cast_nullable_to_non_nullable
               as Set<Area>,
-      selectedStreets: selectedStreets == freezed
+      selectedStreets: null == selectedStreets
           ? _value._selectedStreets
           : selectedStreets // ignore: cast_nullable_to_non_nullable
               as Set<Street>,
-      selectedFamilies: selectedFamilies == freezed
+      selectedFamilies: null == selectedFamilies
           ? _value._selectedFamilies
           : selectedFamilies // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
-      selectedServices: selectedServices == freezed
+      selectedServices: null == selectedServices
           ? _value._selectedServices
           : selectedServices // ignore: cast_nullable_to_non_nullable
               as Set<Service>,
-      selectedClasses: selectedClasses == freezed
+      selectedClasses: null == selectedClasses
           ? _value._selectedClasses
           : selectedClasses // ignore: cast_nullable_to_non_nullable
               as Set<Class>,
-      selectedGroups: selectedGroups == freezed
+      selectedGroups: null == selectedGroups
           ? _value._selectedGroups
           : selectedGroups // ignore: cast_nullable_to_non_nullable
               as Set<Group>,
@@ -191,6 +193,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<GeoMapLayer> get layers {
+    if (_layers is EqualUnmodifiableSetView) return _layers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_layers);
   }
@@ -199,6 +202,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Area> get selectedAreas {
+    if (_selectedAreas is EqualUnmodifiableSetView) return _selectedAreas;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedAreas);
   }
@@ -207,6 +211,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Street> get selectedStreets {
+    if (_selectedStreets is EqualUnmodifiableSetView) return _selectedStreets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedStreets);
   }
@@ -215,6 +220,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Family> get selectedFamilies {
+    if (_selectedFamilies is EqualUnmodifiableSetView) return _selectedFamilies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedFamilies);
   }
@@ -223,6 +229,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Service> get selectedServices {
+    if (_selectedServices is EqualUnmodifiableSetView) return _selectedServices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedServices);
   }
@@ -231,6 +238,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Class> get selectedClasses {
+    if (_selectedClasses is EqualUnmodifiableSetView) return _selectedClasses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedClasses);
   }
@@ -239,6 +247,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @override
   @JsonKey()
   Set<Group> get selectedGroups {
+    if (_selectedGroups is EqualUnmodifiableSetView) return _selectedGroups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_selectedGroups);
   }
@@ -281,6 +290,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GeoMapOptionsCopyWith<_$_GeoMapOptions> get copyWith =>
       __$$_GeoMapOptionsCopyWithImpl<_$_GeoMapOptions>(this, _$identity);
 }

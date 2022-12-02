@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'analysis_data.dart';
 
@@ -28,42 +28,46 @@ mixin _$AnalysisData<T> {
 abstract class $AnalysisDataCopyWith<T, $Res> {
   factory $AnalysisDataCopyWith(
           AnalysisData<T> value, $Res Function(AnalysisData<T>) then) =
-      _$AnalysisDataCopyWithImpl<T, $Res>;
+      _$AnalysisDataCopyWithImpl<T, $Res, AnalysisData<T>>;
+  @useResult
   $Res call({AggregateData<T?> aggregate, List<T> nodes});
 
   $AggregateDataCopyWith<T?, $Res> get aggregate;
 }
 
 /// @nodoc
-class _$AnalysisDataCopyWithImpl<T, $Res>
+class _$AnalysisDataCopyWithImpl<T, $Res, $Val extends AnalysisData<T>>
     implements $AnalysisDataCopyWith<T, $Res> {
   _$AnalysisDataCopyWithImpl(this._value, this._then);
 
-  final AnalysisData<T> _value;
   // ignore: unused_field
-  final $Res Function(AnalysisData<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? aggregate = freezed,
-    Object? nodes = freezed,
+    Object? aggregate = null,
+    Object? nodes = null,
   }) {
     return _then(_value.copyWith(
-      aggregate: aggregate == freezed
+      aggregate: null == aggregate
           ? _value.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
               as AggregateData<T?>,
-      nodes: nodes == freezed
+      nodes: null == nodes
           ? _value.nodes
           : nodes // ignore: cast_nullable_to_non_nullable
               as List<T>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AggregateDataCopyWith<T?, $Res> get aggregate {
     return $AggregateDataCopyWith<T?, $Res>(_value.aggregate, (value) {
-      return _then(_value.copyWith(aggregate: value));
+      return _then(_value.copyWith(aggregate: value) as $Val);
     });
   }
 }
@@ -75,6 +79,7 @@ abstract class _$$_AnalysisDataCopyWith<T, $Res>
           _$_AnalysisData<T> value, $Res Function(_$_AnalysisData<T>) then) =
       __$$_AnalysisDataCopyWithImpl<T, $Res>;
   @override
+  @useResult
   $Res call({AggregateData<T?> aggregate, List<T> nodes});
 
   @override
@@ -83,26 +88,24 @@ abstract class _$$_AnalysisDataCopyWith<T, $Res>
 
 /// @nodoc
 class __$$_AnalysisDataCopyWithImpl<T, $Res>
-    extends _$AnalysisDataCopyWithImpl<T, $Res>
+    extends _$AnalysisDataCopyWithImpl<T, $Res, _$_AnalysisData<T>>
     implements _$$_AnalysisDataCopyWith<T, $Res> {
   __$$_AnalysisDataCopyWithImpl(
       _$_AnalysisData<T> _value, $Res Function(_$_AnalysisData<T>) _then)
-      : super(_value, (v) => _then(v as _$_AnalysisData<T>));
+      : super(_value, _then);
 
-  @override
-  _$_AnalysisData<T> get _value => super._value as _$_AnalysisData<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? aggregate = freezed,
-    Object? nodes = freezed,
+    Object? aggregate = null,
+    Object? nodes = null,
   }) {
     return _then(_$_AnalysisData<T>(
-      aggregate: aggregate == freezed
+      aggregate: null == aggregate
           ? _value.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
               as AggregateData<T?>,
-      nodes: nodes == freezed
+      nodes: null == nodes
           ? _value._nodes
           : nodes // ignore: cast_nullable_to_non_nullable
               as List<T>,
@@ -122,6 +125,7 @@ class _$_AnalysisData<T> implements _AnalysisData<T> {
   @override
   @JsonKey()
   List<T> get nodes {
+    if (_nodes is EqualUnmodifiableListView) return _nodes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_nodes);
   }
@@ -136,18 +140,18 @@ class _$_AnalysisData<T> implements _AnalysisData<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AnalysisData<T> &&
-            const DeepCollectionEquality().equals(other.aggregate, aggregate) &&
+            (identical(other.aggregate, aggregate) ||
+                other.aggregate == aggregate) &&
             const DeepCollectionEquality().equals(other._nodes, _nodes));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(aggregate),
-      const DeepCollectionEquality().hash(_nodes));
+      runtimeType, aggregate, const DeepCollectionEquality().hash(_nodes));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AnalysisDataCopyWith<T, _$_AnalysisData<T>> get copyWith =>
       __$$_AnalysisDataCopyWithImpl<T, _$_AnalysisData<T>>(this, _$identity);
 }

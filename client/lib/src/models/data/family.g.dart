@@ -6,7 +6,7 @@ part of 'family.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Family _$$_FamilyFromJson(Map<String, dynamic> json) => _$_Family(
+_$_Family _$$_FamilyFromJson(Map json) => _$_Family(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String?,

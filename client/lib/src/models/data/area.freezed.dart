@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'area.dart';
 
@@ -36,7 +36,8 @@ mixin _$Area {
 /// @nodoc
 abstract class $AreaCopyWith<$Res> {
   factory $AreaCopyWith(Area value, $Res Function(Area) then) =
-      _$AreaCopyWithImpl<$Res>;
+      _$AreaCopyWithImpl<$Res, Area>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -48,43 +49,46 @@ abstract class $AreaCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
+class _$AreaCopyWithImpl<$Res, $Val extends Area>
+    implements $AreaCopyWith<$Res> {
   _$AreaCopyWithImpl(this._value, this._then);
 
-  final Area _value;
   // ignore: unused_field
-  final $Res Function(Area) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      bounds: bounds == freezed
+      bounds: freezed == bounds
           ? _value.bounds
           : bounds // ignore: cast_nullable_to_non_nullable
               as Polygon?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -93,6 +97,7 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
   factory _$$_AreaCopyWith(_$_Area value, $Res Function(_$_Area) then) =
       __$$_AreaCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -104,40 +109,38 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res>
+class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
     implements _$$_AreaCopyWith<$Res> {
   __$$_AreaCopyWithImpl(_$_Area _value, $Res Function(_$_Area) _then)
-      : super(_value, (v) => _then(v as _$_Area));
+      : super(_value, _then);
 
-  @override
-  _$_Area get _value => super._value as _$_Area;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_$_Area(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      bounds: bounds == freezed
+      bounds: freezed == bounds
           ? _value.bounds
           : bounds // ignore: cast_nullable_to_non_nullable
               as Polygon?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -181,26 +184,22 @@ class _$_Area extends _Area {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Area &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.bounds, bounds) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.bounds, bounds) || other.bounds == bounds) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(bounds),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(photoUpdatedAt));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, bounds, color, photoUpdatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AreaCopyWith<_$_Area> get copyWith =>
       __$$_AreaCopyWithImpl<_$_Area>(this, _$identity);
 

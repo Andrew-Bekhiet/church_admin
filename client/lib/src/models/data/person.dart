@@ -114,7 +114,7 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   CAStorageReference? get photoRef => hasPhoto
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () =>
+          downloadUrl: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('persons', id),
           fullPath: 'persons/$id.jpg',
         )
@@ -126,12 +126,12 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
 
-    return CAAuthRepository.I.currentUserData?.lastKodas != null &&
-        CAAuthRepository.I.currentUserData!.lastConfession != null &&
-        !CAAuthRepository.I.currentUserData!.lastKodas!.time.isBefore(
+    return lastKodas != null &&
+        lastConfession != null &&
+        !lastKodas!.time.isBefore(
           thirtyDaysAgo,
         ) &&
-        !CAAuthRepository.I.currentUserData!.lastConfession!.time.isBefore(
+        !lastConfession!.time.isBefore(
           thirtyDaysAgo,
         );
   }

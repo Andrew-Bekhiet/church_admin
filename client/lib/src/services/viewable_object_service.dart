@@ -1,17 +1,20 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide Json;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class CAViewableObjectService implements DefaultViewableObjectService {
+  static CAViewableObjectService get I => GetIt.I<CAViewableObjectService>();
+
   CAViewableObjectService(this.router);
 
   final GoRouter router;
 
   @override
-  NavigatorState get navigator => router.navigator!;
+  NavigatorState get navigator =>
+      router.routeInformationParser.configuration.navigatorKey.currentState!;
 
   @override
   GlobalKey<NavigatorState> get navigatorKey => throw UnimplementedError();
@@ -95,7 +98,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         return 'غير محدد';
       }
     } else if (key == 'color') {
-      return '0x' + (value as int).toRadixString(15);
+      return '#' + (value as int).toRadixString(16);
     }
 
     return value.toString();
@@ -103,7 +106,8 @@ class CAViewableObjectService implements DefaultViewableObjectService {
 
   @override
   String? getSecondLine(Viewable object) {
-    final key = GetIt.I<UserSettings>().getSecondLineFor(object.runtimeType);
+    final key =
+        GetIt.I<UserSettingsService>().getSecondLineFor(object.runtimeType);
 
     if (object is Person) {
       return getFormattedValue(

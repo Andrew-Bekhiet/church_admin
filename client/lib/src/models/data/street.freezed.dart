@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'street.dart';
 
@@ -36,7 +36,8 @@ mixin _$Street {
 /// @nodoc
 abstract class $StreetCopyWith<$Res> {
   factory $StreetCopyWith(Street value, $Res Function(Street) then) =
-      _$StreetCopyWithImpl<$Res>;
+      _$StreetCopyWithImpl<$Res, Street>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -46,43 +47,46 @@ abstract class $StreetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
+class _$StreetCopyWithImpl<$Res, $Val extends Street>
+    implements $StreetCopyWith<$Res> {
   _$StreetCopyWithImpl(this._value, this._then);
 
-  final Street _value;
   // ignore: unused_field
-  final $Res Function(Street) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      line: line == freezed
+      line: freezed == line
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
               as Line?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +95,7 @@ abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
   factory _$$_StreetCopyWith(_$_Street value, $Res Function(_$_Street) then) =
       __$$_StreetCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -100,40 +105,39 @@ abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StreetCopyWithImpl<$Res> extends _$StreetCopyWithImpl<$Res>
+class __$$_StreetCopyWithImpl<$Res>
+    extends _$StreetCopyWithImpl<$Res, _$_Street>
     implements _$$_StreetCopyWith<$Res> {
   __$$_StreetCopyWithImpl(_$_Street _value, $Res Function(_$_Street) _then)
-      : super(_value, (v) => _then(v as _$_Street));
+      : super(_value, _then);
 
-  @override
-  _$_Street get _value => super._value as _$_Street;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_$_Street(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      line: line == freezed
+      line: freezed == line
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
               as Line?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -178,26 +182,22 @@ class _$_Street extends _Street {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Street &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.line, line) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.line, line) || other.line == line) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(line),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(photoUpdatedAt));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, line, color, photoUpdatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StreetCopyWith<_$_Street> get copyWith =>
       __$$_StreetCopyWithImpl<_$_Street>(this, _$identity);
 

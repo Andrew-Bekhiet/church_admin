@@ -6,7 +6,7 @@ part of 'street.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Street _$$_StreetFromJson(Map<String, dynamic> json) => _$_Street(
+_$_Street _$$_StreetFromJson(Map json) => _$_Street(
       id: json['id'] as String,
       name: json['name'] as String,
       line: lineFromJson(json['line']),

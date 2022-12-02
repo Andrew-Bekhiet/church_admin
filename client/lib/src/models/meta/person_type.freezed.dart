@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'person_type.dart';
 
@@ -35,7 +35,8 @@ mixin _$PersonType {
 abstract class $PersonTypeCopyWith<$Res> {
   factory $PersonTypeCopyWith(
           PersonType value, $Res Function(PersonType) then) =
-      _$PersonTypeCopyWithImpl<$Res>;
+      _$PersonTypeCopyWithImpl<$Res, PersonType>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -43,33 +44,36 @@ abstract class $PersonTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PersonTypeCopyWithImpl<$Res> implements $PersonTypeCopyWith<$Res> {
+class _$PersonTypeCopyWithImpl<$Res, $Val extends PersonType>
+    implements $PersonTypeCopyWith<$Res> {
   _$PersonTypeCopyWithImpl(this._value, this._then);
 
-  final PersonType _value;
   // ignore: unused_field
-  final $Res Function(PersonType) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? color = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -80,6 +84,7 @@ abstract class _$$_PersonTypeCopyWith<$Res>
           _$_PersonType value, $Res Function(_$_PersonType) then) =
       __$$_PersonTypeCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -87,31 +92,30 @@ abstract class _$$_PersonTypeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PersonTypeCopyWithImpl<$Res> extends _$PersonTypeCopyWithImpl<$Res>
+class __$$_PersonTypeCopyWithImpl<$Res>
+    extends _$PersonTypeCopyWithImpl<$Res, _$_PersonType>
     implements _$$_PersonTypeCopyWith<$Res> {
   __$$_PersonTypeCopyWithImpl(
       _$_PersonType _value, $Res Function(_$_PersonType) _then)
-      : super(_value, (v) => _then(v as _$_PersonType));
+      : super(_value, _then);
 
-  @override
-  _$_PersonType get _value => super._value as _$_PersonType;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? color = freezed,
   }) {
     return _then(_$_PersonType(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
@@ -149,21 +153,18 @@ class _$_PersonType extends _PersonType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PersonType &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color));
+  int get hashCode => Object.hash(runtimeType, id, name, color);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PersonTypeCopyWith<_$_PersonType> get copyWith =>
       __$$_PersonTypeCopyWithImpl<_$_PersonType>(this, _$identity);
 

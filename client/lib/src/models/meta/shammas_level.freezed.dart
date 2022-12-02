@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'shammas_level.dart';
 
@@ -34,38 +34,42 @@ mixin _$ShammasLevel {
 abstract class $ShammasLevelCopyWith<$Res> {
   factory $ShammasLevelCopyWith(
           ShammasLevel value, $Res Function(ShammasLevel) then) =
-      _$ShammasLevelCopyWithImpl<$Res>;
+      _$ShammasLevelCopyWithImpl<$Res, ShammasLevel>;
+  @useResult
   $Res call({int order, String name, String id});
 }
 
 /// @nodoc
-class _$ShammasLevelCopyWithImpl<$Res> implements $ShammasLevelCopyWith<$Res> {
+class _$ShammasLevelCopyWithImpl<$Res, $Val extends ShammasLevel>
+    implements $ShammasLevelCopyWith<$Res> {
   _$ShammasLevelCopyWithImpl(this._value, this._then);
 
-  final ShammasLevel _value;
   // ignore: unused_field
-  final $Res Function(ShammasLevel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? order = freezed,
-    Object? name = freezed,
-    Object? id = freezed,
+    Object? order = null,
+    Object? name = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      order: order == freezed
+      order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,36 +80,35 @@ abstract class _$$_ShammasLevelCopyWith<$Res>
           _$_ShammasLevel value, $Res Function(_$_ShammasLevel) then) =
       __$$_ShammasLevelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int order, String name, String id});
 }
 
 /// @nodoc
 class __$$_ShammasLevelCopyWithImpl<$Res>
-    extends _$ShammasLevelCopyWithImpl<$Res>
+    extends _$ShammasLevelCopyWithImpl<$Res, _$_ShammasLevel>
     implements _$$_ShammasLevelCopyWith<$Res> {
   __$$_ShammasLevelCopyWithImpl(
       _$_ShammasLevel _value, $Res Function(_$_ShammasLevel) _then)
-      : super(_value, (v) => _then(v as _$_ShammasLevel));
+      : super(_value, _then);
 
-  @override
-  _$_ShammasLevel get _value => super._value as _$_ShammasLevel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? order = freezed,
-    Object? name = freezed,
-    Object? id = freezed,
+    Object? order = null,
+    Object? name = null,
+    Object? id = null,
   }) {
     return _then(_$_ShammasLevel(
-      order: order == freezed
+      order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
@@ -139,21 +142,18 @@ class _$_ShammasLevel extends _ShammasLevel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShammasLevel &&
-            const DeepCollectionEquality().equals(other.order, order) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(order),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, order, name, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShammasLevelCopyWith<_$_ShammasLevel> get copyWith =>
       __$$_ShammasLevelCopyWithImpl<_$_ShammasLevel>(this, _$identity);
 

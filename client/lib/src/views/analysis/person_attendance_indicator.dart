@@ -44,29 +44,36 @@ class PersonAttendanceIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (totalAnalysisData.aggregate.count == 0) {
+    final themeData = Theme.of(context);
+
+    final totalAnalysisCount = totalAnalysisData.aggregate.count ?? 0;
+
+    if (totalAnalysisCount == 0) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 10),
           Text(
             'نسبة الحضور في ' + name,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: themeData.textTheme.headlineSmall,
           ),
           const SizedBox(height: 10),
           Text(
             'لا يوجد سجل',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: themeData.textTheme.titleMedium,
           ),
         ],
       );
     }
 
-    final primaryColor = Theme.of(context).colorScheme.primary;
-    final errorColor = Theme.of(context).colorScheme.error;
+    final colorScheme = themeData.colorScheme;
 
-    final percent =
-        analysisData.aggregate.count! / totalAnalysisData.aggregate.count!;
+    final primaryColor = colorScheme.primary;
+    final errorColor = colorScheme.error;
+    final bodyText2 = themeData.textTheme.bodyText2!;
+
+    final analysisCount = analysisData.aggregate.count!;
+    final percent = analysisCount / totalAnalysisCount;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -74,7 +81,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           'نسبة الحضور في ' + name,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: themeData.textTheme.headlineSmall,
         ),
         ValueListenableBuilder<CalendarFormat>(
           valueListenable: _calendarFormat,
@@ -118,6 +125,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
                       availableCalendarFormats: const {
                         CalendarFormat.month: 'شهر',
                         CalendarFormat.week: 'أسبوع',
+                        CalendarFormat.twoWeeks: 'أسبوعين',
                       },
                       calendarBuilders: CalendarBuilders(
                         disabledBuilder: (context, day, focusedDay) =>
@@ -128,12 +136,9 @@ class PersonAttendanceIndicator extends StatelessWidget {
                               const BoxDecoration(shape: BoxShape.circle),
                           child: Text(
                             day.day.toString(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Theme.of(context).disabledColor,
-                                ),
+                            style: themeData.textTheme.bodyMedium!.copyWith(
+                              color: themeData.disabledColor,
+                            ),
                           ),
                         ),
                         defaultBuilder: (context, day, focusedDay) => Container(
@@ -170,33 +175,26 @@ class PersonAttendanceIndicator extends StatelessWidget {
         ListTile(
           title: const Text('اجمالي عدد أيام الحضور'),
           trailing: Text(
-            analysisData.aggregate.count.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2!
-                .copyWith(color: primaryColor),
+            analysisCount.toString(),
+            style: bodyText2.copyWith(color: primaryColor),
           ),
         ),
         ListTile(
           title: const Text('اجمالي عدد أيام الغياب'),
           trailing: Text(
-            (totalAnalysisData.aggregate.count! - analysisData.aggregate.count!)
-                .toString(),
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2!
-                .copyWith(color: errorColor),
+            (totalAnalysisCount - analysisCount).toString(),
+            style: bodyText2.copyWith(color: errorColor),
           ),
         ),
         ListTile(
           title: const Text('الاجمالي'),
           trailing: Text(
             totalAnalysisData.aggregate.count.toString(),
-            style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.onSecondary
-                      : Theme.of(context).colorScheme.onPrimary,
-                ),
+            style: bodyText2.copyWith(
+              color: themeData.brightness == Brightness.light
+                  ? colorScheme.onSecondary
+                  : colorScheme.onPrimary,
+            ),
           ),
         ),
         HistoryProperty(

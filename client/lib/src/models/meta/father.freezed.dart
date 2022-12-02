@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'father.dart';
 
@@ -32,38 +32,42 @@ mixin _$Father {
 /// @nodoc
 abstract class $FatherCopyWith<$Res> {
   factory $FatherCopyWith(Father value, $Res Function(Father) then) =
-      _$FatherCopyWithImpl<$Res>;
+      _$FatherCopyWithImpl<$Res, Father>;
+  @useResult
   $Res call({String id, String name, String? churchId});
 }
 
 /// @nodoc
-class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
+class _$FatherCopyWithImpl<$Res, $Val extends Father>
+    implements $FatherCopyWith<$Res> {
   _$FatherCopyWithImpl(this._value, this._then);
 
-  final Father _value;
   // ignore: unused_field
-  final $Res Function(Father) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? churchId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      churchId: churchId == freezed
+      churchId: freezed == churchId
           ? _value.churchId
           : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -72,34 +76,34 @@ abstract class _$$_FatherCopyWith<$Res> implements $FatherCopyWith<$Res> {
   factory _$$_FatherCopyWith(_$_Father value, $Res Function(_$_Father) then) =
       __$$_FatherCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String name, String? churchId});
 }
 
 /// @nodoc
-class __$$_FatherCopyWithImpl<$Res> extends _$FatherCopyWithImpl<$Res>
+class __$$_FatherCopyWithImpl<$Res>
+    extends _$FatherCopyWithImpl<$Res, _$_Father>
     implements _$$_FatherCopyWith<$Res> {
   __$$_FatherCopyWithImpl(_$_Father _value, $Res Function(_$_Father) _then)
-      : super(_value, (v) => _then(v as _$_Father));
+      : super(_value, _then);
 
-  @override
-  _$_Father get _value => super._value as _$_Father;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? churchId = freezed,
   }) {
     return _then(_$_Father(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      churchId: churchId == freezed
+      churchId: freezed == churchId
           ? _value.churchId
           : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -132,21 +136,19 @@ class _$_Father extends _Father {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Father &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.churchId, churchId));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.churchId, churchId) ||
+                other.churchId == churchId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(churchId));
+  int get hashCode => Object.hash(runtimeType, id, name, churchId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FatherCopyWith<_$_Father> get copyWith =>
       __$$_FatherCopyWithImpl<_$_Father>(this, _$identity);
 

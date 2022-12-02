@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'aggregate_data.dart';
 
@@ -35,34 +35,37 @@ mixin _$AggregateData<T> {
 abstract class $AggregateDataCopyWith<T, $Res> {
   factory $AggregateDataCopyWith(
           AggregateData<T> value, $Res Function(AggregateData<T>) then) =
-      _$AggregateDataCopyWithImpl<T, $Res>;
+      _$AggregateDataCopyWithImpl<T, $Res, AggregateData<T>>;
+  @useResult
   $Res call({int? count, T? max});
 }
 
 /// @nodoc
-class _$AggregateDataCopyWithImpl<T, $Res>
+class _$AggregateDataCopyWithImpl<T, $Res, $Val extends AggregateData<T>>
     implements $AggregateDataCopyWith<T, $Res> {
   _$AggregateDataCopyWithImpl(this._value, this._then);
 
-  final AggregateData<T> _value;
   // ignore: unused_field
-  final $Res Function(AggregateData<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? count = freezed,
     Object? max = freezed,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed
+      count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      max: max == freezed
+      max: freezed == max
           ? _value.max
           : max // ignore: cast_nullable_to_non_nullable
               as T?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -73,31 +76,30 @@ abstract class _$$_AggregateDataCopyWith<T, $Res>
           _$_AggregateData<T> value, $Res Function(_$_AggregateData<T>) then) =
       __$$_AggregateDataCopyWithImpl<T, $Res>;
   @override
+  @useResult
   $Res call({int? count, T? max});
 }
 
 /// @nodoc
 class __$$_AggregateDataCopyWithImpl<T, $Res>
-    extends _$AggregateDataCopyWithImpl<T, $Res>
+    extends _$AggregateDataCopyWithImpl<T, $Res, _$_AggregateData<T>>
     implements _$$_AggregateDataCopyWith<T, $Res> {
   __$$_AggregateDataCopyWithImpl(
       _$_AggregateData<T> _value, $Res Function(_$_AggregateData<T>) _then)
-      : super(_value, (v) => _then(v as _$_AggregateData<T>));
+      : super(_value, _then);
 
-  @override
-  _$_AggregateData<T> get _value => super._value as _$_AggregateData<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? count = freezed,
     Object? max = freezed,
   }) {
     return _then(_$_AggregateData<T>(
-      count: count == freezed
+      count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      max: max == freezed
+      max: freezed == max
           ? _value.max
           : max // ignore: cast_nullable_to_non_nullable
               as T?,
@@ -129,19 +131,18 @@ class _$_AggregateData<T> implements _AggregateData<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AggregateData<T> &&
-            const DeepCollectionEquality().equals(other.count, count) &&
+            (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality().equals(other.max, max));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(count),
-      const DeepCollectionEquality().hash(max));
+  int get hashCode =>
+      Object.hash(runtimeType, count, const DeepCollectionEquality().hash(max));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AggregateDataCopyWith<T, _$_AggregateData<T>> get copyWith =>
       __$$_AggregateDataCopyWithImpl<T, _$_AggregateData<T>>(this, _$identity);
 

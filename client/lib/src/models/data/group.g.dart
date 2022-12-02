@@ -6,7 +6,7 @@ part of 'group.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Group _$$_GroupFromJson(Map<String, dynamic> json) => _$_Group(
+_$_Group _$$_GroupFromJson(Map json) => _$_Group(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),
@@ -15,7 +15,7 @@ _$_Group _$$_GroupFromJson(Map<String, dynamic> json) => _$_Group(
           : DateTime.parse(json['photoUpdatedAt'] as String),
       service: json['service'] == null
           ? null
-          : Service.fromJson(json['service'] as Map<String, dynamic>),
+          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(

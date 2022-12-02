@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'church.dart';
 
@@ -31,33 +31,37 @@ mixin _$Church {
 /// @nodoc
 abstract class $ChurchCopyWith<$Res> {
   factory $ChurchCopyWith(Church value, $Res Function(Church) then) =
-      _$ChurchCopyWithImpl<$Res>;
+      _$ChurchCopyWithImpl<$Res, Church>;
+  @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class _$ChurchCopyWithImpl<$Res> implements $ChurchCopyWith<$Res> {
+class _$ChurchCopyWithImpl<$Res, $Val extends Church>
+    implements $ChurchCopyWith<$Res> {
   _$ChurchCopyWithImpl(this._value, this._then);
 
-  final Church _value;
   // ignore: unused_field
-  final $Res Function(Church) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,29 +70,29 @@ abstract class _$$_ChurchCopyWith<$Res> implements $ChurchCopyWith<$Res> {
   factory _$$_ChurchCopyWith(_$_Church value, $Res Function(_$_Church) then) =
       __$$_ChurchCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_ChurchCopyWithImpl<$Res> extends _$ChurchCopyWithImpl<$Res>
+class __$$_ChurchCopyWithImpl<$Res>
+    extends _$ChurchCopyWithImpl<$Res, _$_Church>
     implements _$$_ChurchCopyWith<$Res> {
   __$$_ChurchCopyWithImpl(_$_Church _value, $Res Function(_$_Church) _then)
-      : super(_value, (v) => _then(v as _$_Church));
+      : super(_value, _then);
 
-  @override
-  _$_Church get _value => super._value as _$_Church;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_$_Church(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -119,19 +123,17 @@ class _$_Church extends _Church {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Church &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ChurchCopyWith<_$_Church> get copyWith =>
       __$$_ChurchCopyWithImpl<_$_Church>(this, _$identity);
 

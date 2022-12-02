@@ -8,15 +8,19 @@ String fromDartListOfStringToGraphQL$text(ListOfString data) =>
     '{${data.map((s) => "'${jsonEncode(s).replaceAll('"', "")}'").join(',')}}';
 
 ListOfString? fromGraphQL$textNullableToDartListOfStringNullable(
-        String? data) =>
+  String? data,
+) =>
     data == null ? null : fromGraphQL$textToDartListOfString(data);
 String? fromDartListOfStringNullableToGraphQL$textNullable(
-        ListOfString? data) =>
+  ListOfString? data,
+) =>
     data == null ? null : fromDartListOfStringToGraphQL$text(data);
 
 List<ListOfString>? fromGraphQLListNullable$textToDartListNullableListOfString(
-        List<String>? data) =>
+  List<String>? data,
+) =>
     data?.map(fromGraphQL$textToDartListOfString).toList();
 List<String>? fromDartListNullableListOfStringToGraphQLListNullable$text(
-        List<ListOfString>? data) =>
+  List<ListOfString>? data,
+) =>
     data?.map(fromDartListOfStringToGraphQL$text).toList();

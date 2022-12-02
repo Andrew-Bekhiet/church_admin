@@ -6,24 +6,26 @@ part of 'service.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Service _$$_ServiceFromJson(Map<String, dynamic> json) => _$_Service(
+_$_Service _$$_ServiceFromJson(Map json) => _$_Service(
       id: json['id'] as String,
       name: json['name'] as String,
       fromStudyYear: json['fromStudyYear'] == null
           ? null
-          : StudyYear.fromJson(json['fromStudyYear'] as Map<String, dynamic>),
+          : StudyYear.fromJson(
+              Map<String, Object?>.from(json['fromStudyYear'] as Map)),
       toStudyYear: json['toStudyYear'] == null
           ? null
-          : StudyYear.fromJson(json['toStudyYear'] as Map<String, dynamic>),
+          : StudyYear.fromJson(
+              Map<String, Object?>.from(json['toStudyYear'] as Map)),
       color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
       classes: (json['classes'] as List<dynamic>?)
-          ?.map((e) => Class.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       groups: (json['groups'] as List<dynamic>?)
-          ?.map((e) => Group.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistoryAggregate'] as Map<String, dynamic>?),

@@ -24,7 +24,7 @@ class CAStorageReference extends StorageReference {
 
     try {
       if (cache == null ||
-          cache.split('|')[0] !=
+          cache.split('|').first !=
               photoUpdatedAt.millisecondsSinceEpoch.toString()) {
         final downloadUrl = getDownloadURL();
 

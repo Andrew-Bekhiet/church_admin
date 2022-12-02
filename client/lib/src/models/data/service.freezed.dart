@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'service.dart';
 
@@ -44,7 +44,8 @@ mixin _$Service {
 /// @nodoc
 abstract class $ServiceCopyWith<$Res> {
   factory $ServiceCopyWith(Service value, $Res Function(Service) then) =
-      _$ServiceCopyWithImpl<$Res>;
+      _$ServiceCopyWithImpl<$Res, Service>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -67,17 +68,20 @@ abstract class $ServiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
+class _$ServiceCopyWithImpl<$Res, $Val extends Service>
+    implements $ServiceCopyWith<$Res> {
   _$ServiceCopyWithImpl(this._value, this._then);
 
-  final Service _value;
   // ignore: unused_field
-  final $Res Function(Service) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? fromStudyYear = freezed,
     Object? toStudyYear = freezed,
     Object? color = freezed,
@@ -88,73 +92,76 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      fromStudyYear: fromStudyYear == freezed
+      fromStudyYear: freezed == fromStudyYear
           ? _value.fromStudyYear
           : fromStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      toStudyYear: toStudyYear == freezed
+      toStudyYear: freezed == toStudyYear
           ? _value.toStudyYear
           : toStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      classes: classes == freezed
+      classes: freezed == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>?,
-      groups: groups == freezed
+      groups: freezed == groups
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
-      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
-              freezed
+      attendanceDaysConstraintsAggregate: freezed ==
+              attendanceDaysConstraintsAggregate
           ? _value.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get fromStudyYear {
     if (_value.fromStudyYear == null) {
       return null;
     }
 
     return $StudyYearCopyWith<$Res>(_value.fromStudyYear!, (value) {
-      return _then(_value.copyWith(fromStudyYear: value));
+      return _then(_value.copyWith(fromStudyYear: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get toStudyYear {
     if (_value.toStudyYear == null) {
       return null;
     }
 
     return $StudyYearCopyWith<$Res>(_value.toStudyYear!, (value) {
-      return _then(_value.copyWith(toStudyYear: value));
+      return _then(_value.copyWith(toStudyYear: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate {
     if (_value.attendanceHistoryAggregate == null) {
       return null;
@@ -162,11 +169,12 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(
         _value.attendanceHistoryAggregate!, (value) {
-      return _then(_value.copyWith(attendanceHistoryAggregate: value));
+      return _then(_value.copyWith(attendanceHistoryAggregate: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>?
       get attendanceDaysConstraintsAggregate {
     if (_value.attendanceDaysConstraintsAggregate == null) {
@@ -175,7 +183,8 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(
         _value.attendanceDaysConstraintsAggregate!, (value) {
-      return _then(_value.copyWith(attendanceDaysConstraintsAggregate: value));
+      return _then(
+          _value.copyWith(attendanceDaysConstraintsAggregate: value) as $Val);
     });
   }
 }
@@ -186,6 +195,7 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
           _$_Service value, $Res Function(_$_Service) then) =
       __$$_ServiceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -212,18 +222,17 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
+class __$$_ServiceCopyWithImpl<$Res>
+    extends _$ServiceCopyWithImpl<$Res, _$_Service>
     implements _$$_ServiceCopyWith<$Res> {
   __$$_ServiceCopyWithImpl(_$_Service _value, $Res Function(_$_Service) _then)
-      : super(_value, (v) => _then(v as _$_Service));
+      : super(_value, _then);
 
-  @override
-  _$_Service get _value => super._value as _$_Service;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? fromStudyYear = freezed,
     Object? toStudyYear = freezed,
     Object? color = freezed,
@@ -234,44 +243,44 @@ class __$$_ServiceCopyWithImpl<$Res> extends _$ServiceCopyWithImpl<$Res>
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
     return _then(_$_Service(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      fromStudyYear: fromStudyYear == freezed
+      fromStudyYear: freezed == fromStudyYear
           ? _value.fromStudyYear
           : fromStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      toStudyYear: toStudyYear == freezed
+      toStudyYear: freezed == toStudyYear
           ? _value.toStudyYear
           : toStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      classes: classes == freezed
+      classes: freezed == classes
           ? _value._classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>?,
-      groups: groups == freezed
+      groups: freezed == groups
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
-      attendanceHistoryAggregate: attendanceHistoryAggregate == freezed
+      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
-              freezed
+      attendanceDaysConstraintsAggregate: freezed ==
+              attendanceDaysConstraintsAggregate
           ? _value.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
@@ -321,6 +330,7 @@ class _$_Service extends _Service {
   List<Class>? get classes {
     final value = _classes;
     if (value == null) return null;
+    if (_classes is EqualUnmodifiableListView) return _classes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -330,6 +340,7 @@ class _$_Service extends _Service {
   List<Group>? get groups {
     final value = _groups;
     if (value == null) return null;
+    if (_groups is EqualUnmodifiableListView) return _groups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -351,41 +362,45 @@ class _$_Service extends _Service {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Service &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.fromStudyYear, fromStudyYear) &&
-            const DeepCollectionEquality()
-                .equals(other.toStudyYear, toStudyYear) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.fromStudyYear, fromStudyYear) ||
+                other.fromStudyYear == fromStudyYear) &&
+            (identical(other.toStudyYear, toStudyYear) ||
+                other.toStudyYear == toStudyYear) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
-            const DeepCollectionEquality().equals(
-                other.attendanceHistoryAggregate, attendanceHistoryAggregate) &&
-            const DeepCollectionEquality().equals(
-                other.attendanceDaysConstraintsAggregate,
-                attendanceDaysConstraintsAggregate));
+            (identical(other.attendanceHistoryAggregate,
+                    attendanceHistoryAggregate) ||
+                other.attendanceHistoryAggregate ==
+                    attendanceHistoryAggregate) &&
+            (identical(other.attendanceDaysConstraintsAggregate,
+                    attendanceDaysConstraintsAggregate) ||
+                other.attendanceDaysConstraintsAggregate ==
+                    attendanceDaysConstraintsAggregate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(fromStudyYear),
-      const DeepCollectionEquality().hash(toStudyYear),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(photoUpdatedAt),
+      id,
+      name,
+      fromStudyYear,
+      toStudyYear,
+      color,
+      photoUpdatedAt,
       const DeepCollectionEquality().hash(_classes),
       const DeepCollectionEquality().hash(_groups),
-      const DeepCollectionEquality().hash(attendanceHistoryAggregate),
-      const DeepCollectionEquality().hash(attendanceDaysConstraintsAggregate));
+      attendanceHistoryAggregate,
+      attendanceDaysConstraintsAggregate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ServiceCopyWith<_$_Service> get copyWith =>
       __$$_ServiceCopyWithImpl<_$_Service>(this, _$identity);
 

@@ -35,7 +35,7 @@ class Family extends ViewableWithID with _$Family implements PhotoObjectBase {
   CAStorageReference? get photoRef => hasPhoto
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () =>
+          downloadUrl: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('families', id),
           fullPath: 'families/$id.jpg',
         )

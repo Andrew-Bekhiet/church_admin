@@ -2,29 +2,30 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
-import 'package:church_admin/graphql/church_admin_link.dart';
+import 'package:church_admin/graphql/links.dart';
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:cloud_functions_platform_interface/cloud_functions_platform_interface.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:firebase_auth_desktop/firebase_auth_desktop.dart';
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:firebase_functions_desktop/firebase_functions_desktop.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timeago/timeago.dart';
 import 'package:universal_platform/universal_platform.dart';
@@ -37,50 +38,32 @@ Future<void> main() async {
   runApp(const ChurchAdminApp());
 }
 
-Completer<void> _initialization = Completer();
+final Completer<void> _initialization = Completer();
+
 bool _initializing = false;
 
 Future<void> initializeChurchAdmin() async {
   if (_initializing) return _initialization.future;
   _initializing = true;
 
-  await dotenv.load();
+  usePathUrlStrategy();
 
-  await Hive.initFlutter();
+  _initializeSecretsRepo();
 
-  await initializeFirebase();
+  await _initializeEncryptionService();
 
-  GetIt.I.registerSingleton<HiveInterface>(Hive);
+  await _initializeHive();
 
-  GetIt.I.registerSingleton<UserSettings>(UserSettings(), signalsReady: true);
-  await GetIt.I.isReady<UserSettings>();
+  await _initializeUserSettings();
 
-  await registerGraphQLClient();
+  await _initializeFirebase();
 
   await initCore(
-    sentryDSN: dotenv.env['SENTRY_DSN']!,
-    userBoxCipher: await EncryptionService.getHiveCipher(
+    sentryDSN: SecretsService.I.sentryDSN,
+    userBoxCipher: await EncryptionService.I.getHiveCipher(
       boxName: 'User',
     ),
     overrides: {
-      AuthRepository: () {
-        final instance = CAAuthRepository();
-
-        GetIt.I.registerSingleton<CAAuthRepository>(
-          instance,
-          signalsReady: true,
-          dispose: (a) => a.dispose(),
-        );
-
-        return instance;
-      },
-      DatabaseRepository: () {
-        final instance = CADatabaseRepository();
-
-        GetIt.I.registerSingleton<CADatabaseRepository>(instance);
-
-        return instance;
-      },
       NotificationsService: () {
         final instance = CANotificationsService();
 
@@ -119,92 +102,84 @@ Future<void> initializeChurchAdmin() async {
       UpdatesService: UpdatesService.new,
     },
   );
+  _initializeDio();
 
-  GetIt.I.registerSingleton<LocalAuthService>(
-    LocalAuthService(),
-    dispose: (l) => l.dispose(),
-  );
+  _initializeConnectivityService();
 
-  GetIt.I.registerSingleton<GoRouterRefreshStream>(
-    GoRouterRefreshStream(
-      Rx.combineLatest3(
-        CAAuthRepository.I.userStream,
-        CAAuthRepository.I.userDataStream,
-        LocalAuthService.I.refreshUIStream.startWith(null),
-        //Just notify when any stream emits
-        (a, b, c) => [a, b, c],
-      ),
-    ),
-    dispose: (g) => g.dispose(),
-  );
+  await _initializeGraphQLClient();
 
-  GetIt.I.registerSingleton<CAViewableObjectService>(
-    CAViewableObjectService(
-      ChurchAdminApp.router,
-    ),
-  );
-  GetIt.I.registerSingleton<DefaultViewableObjectService>(
-    GetIt.I<CAViewableObjectService>(),
-  );
+  _initializeCADatabaseService();
 
-  GetIt.I.registerSingleton<ImagePickerService>(ImagePickerService());
-  GetIt.I.registerSingleton<ContactsService>(ContactsService());
-  GetIt.I.registerSingleton<PhoneNumberService>(PhoneNumberService());
+  _initializeAuthService();
 
-  FMTC.initialise(
-    await RootDirectory.normalCache,
-    settings: FMTCSettings(
-      defaultTileProviderSettings: FMTCTileProviderSettings(
-        cachedValidDuration: const Duration(days: 30),
-      ),
-    ),
-  );
+  _initializeLocalAuthService();
 
-  GetIt.I.registerSingleton<FMTC>(FMTC.instance);
-  GetIt.I.registerSingleton<Dio>(Dio());
+  _initializePersistenceService();
 
-  setLocaleMessages('ar', ArMessages());
+  _initializeGoRouterRefreshStream();
+
+  _initializeViewableObjectService();
+
+  _initializeImagePickerService();
+  _initializeContactsService();
+  _initializePhoneNumberService();
+
+  await _initializeFMTC();
+
+  _initializeLocalMessages();
+
+  await AuthService.instance.userStream.first;
 
   return _initialization.complete();
 }
 
-Future<void> registerGraphQLClient() async {
-  GetIt.I.registerSingleton<GraphQLClient>(
-    GraphQLClient(
-      cache: GraphQLCache(
-        store: HiveStore(
-          await GetIt.I<HiveInterface>().openBox(
-            'cache',
-            encryptionCipher: await EncryptionService.getHiveCipher(
-              boxName: 'cache',
-            ),
-          ),
-        ),
-      ),
-      defaultPolicies: DefaultPolicies(
-        query: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
-        watchQuery: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
-        subscribe: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
-      ),
-      link: ChurchAdminLink(
-        url: dotenv.env['HASURA_SERVER']!,
-      ),
+void _initializeAuthService() {
+  GetIt.I.registerSingleton<AuthCache>(
+    AuthCache(secureStorage: const FlutterSecureStorage()),
+  );
+  GetIt.I.registerSingleton<AuthAdapter>(FirebaseAuthAdapter());
+
+  GetIt.I.registerSingleton<AuthService>(
+    AuthService(),
+    dispose: (a) async => a.dispose(),
+  );
+}
+
+void _initializeCADatabaseService() {
+  GetIt.I.registerSingleton<CADatabaseRepository>(const CADatabaseRepository());
+}
+
+void _initializeConnectivityService() {
+  GetIt.I.registerSingleton<ConnectivityService>(
+    ConnectivityService(
+      connectivityPlugin: Connectivity(),
     ),
   );
 }
 
-Future<void> initializeFirebase() async {
+void _initializeContactsService() {
+  GetIt.I.registerSingleton<ContactsService>(const ContactsService());
+}
+
+void _initializeDio() {
+  GetIt.I.registerSingleton<Dio>(Dio());
+}
+
+Future<void> _initializeEncryptionService() async {
+  final encryptionServiceImpl = EncryptionServiceImpl();
+
+  await encryptionServiceImpl.init();
+
+  GetIt.I.registerSingleton<EncryptionService>(encryptionServiceImpl);
+}
+
+Future<void> _initializeFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   if (!UniversalPlatform.isWindows) {
-    await FirebaseAppCheck.instance
-        .activate(webRecaptchaSiteKey: webRecaptchaSiteKey);
+    await FirebaseAppCheck.instance.activate(
+      webRecaptchaSiteKey: SecretsService.I.webRecaptchaSiteKey,
+    );
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
   }
 
@@ -223,26 +198,142 @@ Future<void> initializeFirebase() async {
     }
   }
 
-  registerFirebaseDependencies();
+  _initializeFirebaseDependencies();
 }
 
-void registerFirebaseDependencies() {
+void _initializeFirebaseDependencies() {
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
 
-  if (UniversalPlatform.isDesktop) {
+  /* if (UniversalPlatform.isDesktop) {
     FirebaseAuthPlatform.instance = FirebaseAuthDesktop.instance;
     FirebaseFunctionsPlatform.instance = FirebaseFunctionsDesktop(
       app: FirebaseFunctionsDesktop.instance.app,
       region: 'europe-west6',
     );
-  }
+  } */
 
   GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   GetIt.I.registerSingleton<FirebaseDatabase>(FirebaseDatabase.instance);
+  GetIt.I.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
   GetIt.I.registerSingleton<FirebaseFunctions>(
     FirebaseFunctions.instanceFor(region: 'europe-west6'),
   );
   GetIt.I.registerSingleton<FirebaseMessaging>(FirebaseMessaging.instance);
   GetIt.I
       .registerSingleton<FirebaseDynamicLinks>(FirebaseDynamicLinks.instance);
+}
+
+Future<void> _initializeFMTC() async {
+  FMTC.initialise(
+    await RootDirectory.normalCache,
+    settings: FMTCSettings(
+      defaultTileProviderSettings: FMTCTileProviderSettings(
+        cachedValidDuration: const Duration(days: 30),
+      ),
+    ),
+  );
+
+  GetIt.I.registerSingleton<FMTC>(FMTC.instance);
+}
+
+void _initializeGoRouterRefreshStream() {
+  GetIt.I.registerSingleton<GoRouterRefreshStream>(
+    GoRouterRefreshStream(
+      Rx.combineLatest2(
+        AuthService.instance.userStream,
+        LocalAuthService.I.refreshUIStream.startWith(null),
+        //Just notify when any stream emits
+        (_, __) => Object(),
+      ),
+    ),
+    dispose: (g) async => g.dispose(),
+  );
+}
+
+Future<void> _initializeGraphQLClient() async {
+  GetIt.I.registerSingleton<GraphQLClient>(
+    GraphQLClient(
+      defaultPolicies: DefaultPolicies(
+        query: Policies(
+          fetch: FetchPolicy.cacheAndNetwork,
+        ),
+        watchQuery: Policies(
+          fetch: FetchPolicy.cacheAndNetwork,
+        ),
+        subscribe: Policies(
+          fetch: FetchPolicy.cacheAndNetwork,
+        ),
+      ),
+      link: Link.concat(
+        AddAuthLink(url: SecretsService.I.hasuraServer),
+        const LoggingLink(),
+      ),
+      cache: GraphQLCache(
+        store: HiveStore(
+          await GetIt.I<HiveInterface>().openBox(
+            'cache',
+            encryptionCipher: await EncryptionService.I.getHiveCipher(
+              boxName: 'cache',
+            ),
+          ),
+        ),
+      ),
+    ),
+    dispose: (c) => c.link.dispose(),
+  );
+}
+
+Future<void> _initializeHive() async {
+  await Hive.initFlutter();
+
+  GetIt.I.registerSingleton<HiveInterface>(Hive);
+}
+
+void _initializeImagePickerService() {
+  GetIt.I.registerSingleton<ImagePickerService>(
+    ImagePickerService(
+      imageCropper: ImageCropper(),
+      imagePicker: ImagePicker(),
+    ),
+  );
+}
+
+void _initializeLocalAuthService() {
+  GetIt.I.registerSingleton<LocalAuthService>(
+    LocalAuthService(localAuthPlugin: LocalAuthentication()),
+    dispose: (l) async => l.dispose(),
+  );
+}
+
+void _initializeLocalMessages() {
+  setLocaleMessages('ar', ArMessages());
+}
+
+void _initializePersistenceService() {
+  GetIt.I.registerSingleton(UserPersistenceService());
+}
+
+void _initializePhoneNumberService() {
+  GetIt.I.registerSingleton<PhoneNumberService>(const PhoneNumberService());
+}
+
+void _initializeSecretsRepo() {
+  GetIt.I.registerSingleton<SecretsService>(SecretsServiceImpl());
+}
+
+Future<void> _initializeUserSettings() async {
+  GetIt.I.registerSingleton<UserSettingsService>(
+    UserSettingsService(box: await Hive.openBox('Settings')),
+  );
+}
+
+void _initializeViewableObjectService() {
+  GetIt.I.registerSingleton<CAViewableObjectService>(
+    CAViewableObjectService(
+      ChurchAdminApp.router,
+    ),
+  );
+  GetIt.I.registerSingleton<DefaultViewableObjectService>(
+    GetIt.I<CAViewableObjectService>(),
+  );
 }

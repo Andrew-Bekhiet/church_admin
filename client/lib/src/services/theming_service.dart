@@ -5,6 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'user_settings_service.dart';
 
 class CAThemingService extends ThemingService with WidgetsBindingObserver {
+  static CAThemingService get I => GetIt.I<CAThemingService>();
+
   static const MaterialColor black = MaterialColor(0xFF000000, <int, Color>{
     50: Color(0xFFE0E0E0),
     100: Color(0xFFB3B3B3),
@@ -30,10 +32,10 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     bool? darkTheme,
     bool? greatFeastThemeOverride,
   }) {
-    bool isDark = darkTheme ?? GetIt.I<UserSettings>().darkTheme;
+    bool isDark = darkTheme ?? GetIt.I<UserSettingsService>().darkTheme;
 
-    final bool greatFeastTheme =
-        greatFeastThemeOverride ?? GetIt.I<UserSettings>().greatFeastTheme;
+    final bool greatFeastTheme = greatFeastThemeOverride ??
+        GetIt.I<UserSettingsService>().greatFeastTheme;
 
     MaterialColor primary = Colors.teal;
     Color secondary = Colors.tealAccent;
@@ -72,7 +74,7 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
           borderSide: BorderSide(color: primary),
         ),
       ),
@@ -135,7 +137,7 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    switchTheme(GetIt.I<UserSettings>().darkTheme);
+    switchTheme(GetIt.I<UserSettingsService>().darkTheme);
   }
 
   @override

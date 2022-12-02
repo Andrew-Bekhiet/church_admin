@@ -10,18 +10,27 @@ class AuthenticateScreen extends StatefulWidget {
     name: 'authenticate',
     path: '/authenticate',
     builder: (context, state) => const AuthenticateScreen(),
-    redirect: (state) {
-      if (!CAAuthRepository.I.isSignedIn) {
-        return state.namedLocation('login');
-      } else if (CAAuthRepository.I.currentUser?.userData?.password == null) {
-        return state.namedLocation('register_user_data');
-      } else if (LocalAuthService.I.shouldAuthenticate) {
-        return null;
-      } else {
-        return state.queryParams['next'] ?? '/';
-      }
+    redirect: (context, state) {
+      return redirect(
+        ChurchAdminApp
+            .router.routeInformationParser.configuration.namedLocation,
+        state,
+      );
     },
   );
+
+  @visibleForTesting
+  static String? redirect(NamedLocation namedLocation, GoRouterState state) {
+    if (!AuthService.instance.isSignedIn) {
+      return namedLocation('login');
+    } else if (AuthService.instance.currentUser?.password == null) {
+      return namedLocation('register_user_data');
+    } else if (LocalAuthService.I.shouldAuthenticate) {
+      return null;
+    } else {
+      return state.queryParams['next'] ?? '/';
+    }
+  }
 
   const AuthenticateScreen({super.key});
 
@@ -33,18 +42,11 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   final _passwordText = TextEditingController();
   final _form = GlobalKey<FormState>();
 
-  String _getAssetImage() {
-    final riseDay = getRiseDay();
-    if (DateTime.now()
-            .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
-        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/holyweek.jpeg';
-    } else if (DateTime.now()
-            .isBefore(riseDay.add(const Duration(days: 50, seconds: 20))) &&
-        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/risen.jpg';
-    }
-    return 'assets/Logo.png';
+  @override
+  void initState() {
+    super.initState();
+
+    unawaited(_authenticate());
   }
 
   @override
@@ -73,11 +75,11 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 textInputAction: TextInputAction.done,
               ),
               ElevatedButton(
-                onPressed: () => _submit(_passwordText.text),
+                onPressed: () async => _submit(_passwordText.text),
                 child: const Text('تسجيل الدخول'),
               ),
               FutureBuilder<bool>(
-                future: LocalAuthService.I.canCheckBiometrics(),
+                future: Future.sync(LocalAuthService.I.canCheckBiometrics),
                 builder: (context, canCheckBiometricsData) {
                   if (canCheckBiometricsData.data ?? false) {
                     return OutlinedButton.icon(
@@ -99,10 +101,18 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _authenticate();
+  String _getAssetImage() {
+    final riseDay = getRiseDay();
+    if (DateTime.now()
+            .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
+        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
+      return 'assets/holyweek.jpeg';
+    } else if (DateTime.now()
+            .isBefore(riseDay.add(const Duration(days: 50, seconds: 20))) &&
+        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
+      return 'assets/risen.jpg';
+    }
+    return 'assets/Logo.png';
   }
 
   Future<void> _authenticate() async {
@@ -132,10 +142,9 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     }
 
     String? encryptedPassword =
-        await EncryptionService.encryptPassword(password);
+        await EncryptionService.I.encryptPassword(password);
 
-    if (CAAuthRepository.I.currentUser!.userData?.password ==
-        encryptedPassword) {
+    if (AuthService.instance.currentUser?.password == encryptedPassword) {
       encryptedPassword = null;
       LocalAuthService.I.resetAuthState();
     } else {

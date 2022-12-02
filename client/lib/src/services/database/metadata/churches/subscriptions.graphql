@@ -1,0 +1,9 @@
+subscription getChurchesStream(
+  $where: [ChurchesBoolExp!] = {}
+  $limit: Int = 25
+) {
+  churches(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+    id
+    name
+  }
+}

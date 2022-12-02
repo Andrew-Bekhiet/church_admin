@@ -17,7 +17,7 @@ class PersonAnalysis extends StatefulWidget {
     builder: _routeBuilder,
   );
 
-  static Widget _routeBuilder(BuildContext context, GoRouterState state) {
+  static Widget _routeBuilder(BuildContext _, GoRouterState state) {
     if (state.extra == null) {
       throw ArgumentError.notNull('state.extra');
     } else if (state.extra is! Map<String, dynamic>) {
@@ -125,7 +125,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                     classesIds: classesIds.map(UuidValue.new).toList(),
                     servicesIds: servicesIds.map(UuidValue.new).toList(),
                   )
-                : CADatabaseRepository.I.persons.analyzePerson(
+                : CADatabaseRepository.I.persons.getPersonAnalysis(
                     personId: widget.person!.id,
                     options: options!,
                   ),
@@ -146,6 +146,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
               final person = snapshot.requireData! is Person
                   ? snapshot.requireData! as Person
                   : null;
+              final userColor = user?.color ?? person?.color;
 
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -170,13 +171,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                                 s.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => CADatabaseRepository
                                 .I.persons
-                                .personServiceAttendance(
+                                .paginatePersonServiceAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
                               asAdmin: widget.user != null,
                               serviceId: s.id,
                             ),
-                            color: s.color ?? (user ?? person)?.color,
+                            color: s.color ?? userColor,
                           ),
                         ),
                       ),
@@ -201,13 +202,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                                 c.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => CADatabaseRepository
                                 .I.persons
-                                .personClassAttendance(
+                                .paginatePersonClassAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
                               asAdmin: widget.user != null,
                               classId: c.id,
                             ),
-                            color: c.color ?? (user ?? person)?.color,
+                            color: c.color ?? userColor,
                           ),
                         ),
                       ),
@@ -230,13 +231,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                                 g.attendanceDaysConstraintsAggregate!,
                             getHistoryStream: () => CADatabaseRepository
                                 .I.persons
-                                .personGroupAttendance(
+                                .paginatePersonGroupAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
                               asAdmin: widget.user != null,
                               groupId: g.id,
                             ),
-                            color: g.color ?? (user ?? person)?.color,
+                            color: g.color ?? userColor,
                           ),
                         ),
                       ),
@@ -253,11 +254,11 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                               analysisData: person!.kodasHistoryAggregate!,
                               getHistoryStream: () => CADatabaseRepository
                                   .I.persons
-                                  .personConfessionHistory(
+                                  .paginatePersonConfessionHistory(
                                 personId: widget.person!.id,
                               ),
                               title: 'الاعتراف',
-                              range: options!.dateRange,
+                              range: dateRange,
                               lastTimeName: 'أخر اعتراف',
                             ),
                           ),
@@ -274,11 +275,11 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                               analysisData: person!.confessionHistoryAggregate!,
                               getHistoryStream: () => CADatabaseRepository
                                   .I.persons
-                                  .personKodasHistory(
+                                  .paginatePersonKodasHistory(
                                 personId: widget.person!.id,
                               ),
                               title: 'حضور القداس',
-                              range: options!.dateRange,
+                              range: dateRange,
                               lastTimeName: 'أخر حضور قداس',
                             ),
                           ),
@@ -295,11 +296,11 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                               analysisData: person!.callHistoryAggregate!,
                               getHistoryStream: () => CADatabaseRepository
                                   .I.persons
-                                  .personCallHistory(
+                                  .paginatePersonCallHistory(
                                 personId: widget.person!.id,
                               ),
                               title: 'خدمة المكالمات',
-                              range: options!.dateRange,
+                              range: dateRange,
                               lastTimeName: 'أخر مكالمة',
                             ),
                           ),
@@ -316,11 +317,11 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                               analysisData: person!.visitHistoryAggregate!,
                               getHistoryStream: () => CADatabaseRepository
                                   .I.persons
-                                  .personVisitHistory(
+                                  .paginatePersonVisitHistory(
                                 personId: widget.person!.id,
                               ),
                               title: 'الافتقاد',
-                              range: options!.dateRange,
+                              range: dateRange,
                               lastTimeName: 'أخر افتقاد',
                             ),
                           ),
@@ -337,16 +338,16 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                               analysisData: person!.editHistoryAggregate!,
                               getHistoryStream: () => CADatabaseRepository
                                   .I.persons
-                                  .personEditHistory(
+                                  .paginatePersonEditHistory(
                                 personId: widget.person!.id,
                               ),
                               title: 'تحديث البيانات',
-                              range: options!.dateRange,
+                              range: dateRange,
                               lastTimeName: 'أخر تحديث للبيانات',
                             ),
                           ),
                         ),
-                  ]
+                  ],
                 ],
               );
             },

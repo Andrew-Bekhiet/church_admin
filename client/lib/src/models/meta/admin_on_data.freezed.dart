@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'admin_on_data.dart';
 
@@ -44,7 +44,8 @@ mixin _$AdminOnData {
 abstract class $AdminOnDataCopyWith<$Res> {
   factory $AdminOnDataCopyWith(
           AdminOnData value, $Res Function(AdminOnData) then) =
-      _$AdminOnDataCopyWithImpl<$Res>;
+      _$AdminOnDataCopyWithImpl<$Res, AdminOnData>;
+  @useResult
   $Res call(
       {String permissionId,
       Area? area,
@@ -67,16 +68,19 @@ abstract class $AdminOnDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
+class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
+    implements $AdminOnDataCopyWith<$Res> {
   _$AdminOnDataCopyWithImpl(this._value, this._then);
 
-  final AdminOnData _value;
   // ignore: unused_field
-  final $Res Function(AdminOnData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? permissionId = freezed,
+    Object? permissionId = null,
     Object? area = freezed,
     Object? areaAllowEdit = freezed,
     Object? areaAdminOnUsers = freezed,
@@ -85,108 +89,112 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
     Object? serviceGender = freezed,
     Object? serviceAllowEdit = freezed,
     Object? serviceAdminOnUsers = freezed,
-    Object? classes = freezed,
+    Object? classes = null,
     Object? group = freezed,
     Object? groupAllowEdit = freezed,
     Object? groupAdminOnUsers = freezed,
   }) {
     return _then(_value.copyWith(
-      permissionId: permissionId == freezed
+      permissionId: null == permissionId
           ? _value.permissionId
           : permissionId // ignore: cast_nullable_to_non_nullable
               as String,
-      area: area == freezed
+      area: freezed == area
           ? _value.area
           : area // ignore: cast_nullable_to_non_nullable
               as Area?,
-      areaAllowEdit: areaAllowEdit == freezed
+      areaAllowEdit: freezed == areaAllowEdit
           ? _value.areaAllowEdit
           : areaAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      areaAdminOnUsers: areaAdminOnUsers == freezed
+      areaAdminOnUsers: freezed == areaAdminOnUsers
           ? _value.areaAdminOnUsers
           : areaAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
-      service: service == freezed
+      service: freezed == service
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
-      serviceStudyYearData: serviceStudyYearData == freezed
+      serviceStudyYearData: freezed == serviceStudyYearData
           ? _value.serviceStudyYearData
           : serviceStudyYearData // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      serviceGender: serviceGender == freezed
+      serviceGender: freezed == serviceGender
           ? _value.serviceGender
           : serviceGender // ignore: cast_nullable_to_non_nullable
               as bool?,
-      serviceAllowEdit: serviceAllowEdit == freezed
+      serviceAllowEdit: freezed == serviceAllowEdit
           ? _value.serviceAllowEdit
           : serviceAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      serviceAdminOnUsers: serviceAdminOnUsers == freezed
+      serviceAdminOnUsers: freezed == serviceAdminOnUsers
           ? _value.serviceAdminOnUsers
           : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
-      classes: classes == freezed
+      classes: null == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>,
-      group: group == freezed
+      group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as Group?,
-      groupAllowEdit: groupAllowEdit == freezed
+      groupAllowEdit: freezed == groupAllowEdit
           ? _value.groupAllowEdit
           : groupAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      groupAdminOnUsers: groupAdminOnUsers == freezed
+      groupAdminOnUsers: freezed == groupAdminOnUsers
           ? _value.groupAdminOnUsers
           : groupAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AreaCopyWith<$Res>? get area {
     if (_value.area == null) {
       return null;
     }
 
     return $AreaCopyWith<$Res>(_value.area!, (value) {
-      return _then(_value.copyWith(area: value));
+      return _then(_value.copyWith(area: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get service {
     if (_value.service == null) {
       return null;
     }
 
     return $ServiceCopyWith<$Res>(_value.service!, (value) {
-      return _then(_value.copyWith(service: value));
+      return _then(_value.copyWith(service: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get serviceStudyYearData {
     if (_value.serviceStudyYearData == null) {
       return null;
     }
 
     return $StudyYearCopyWith<$Res>(_value.serviceStudyYearData!, (value) {
-      return _then(_value.copyWith(serviceStudyYearData: value));
+      return _then(_value.copyWith(serviceStudyYearData: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $GroupCopyWith<$Res>? get group {
     if (_value.group == null) {
       return null;
     }
 
     return $GroupCopyWith<$Res>(_value.group!, (value) {
-      return _then(_value.copyWith(group: value));
+      return _then(_value.copyWith(group: value) as $Val);
     });
   }
 }
@@ -198,6 +206,7 @@ abstract class _$$_AdminOnDataCopyWith<$Res>
           _$_AdminOnData value, $Res Function(_$_AdminOnData) then) =
       __$$_AdminOnDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String permissionId,
       Area? area,
@@ -224,18 +233,17 @@ abstract class _$$_AdminOnDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminOnDataCopyWithImpl<$Res> extends _$AdminOnDataCopyWithImpl<$Res>
+class __$$_AdminOnDataCopyWithImpl<$Res>
+    extends _$AdminOnDataCopyWithImpl<$Res, _$_AdminOnData>
     implements _$$_AdminOnDataCopyWith<$Res> {
   __$$_AdminOnDataCopyWithImpl(
       _$_AdminOnData _value, $Res Function(_$_AdminOnData) _then)
-      : super(_value, (v) => _then(v as _$_AdminOnData));
+      : super(_value, _then);
 
-  @override
-  _$_AdminOnData get _value => super._value as _$_AdminOnData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? permissionId = freezed,
+    Object? permissionId = null,
     Object? area = freezed,
     Object? areaAllowEdit = freezed,
     Object? areaAdminOnUsers = freezed,
@@ -244,61 +252,61 @@ class __$$_AdminOnDataCopyWithImpl<$Res> extends _$AdminOnDataCopyWithImpl<$Res>
     Object? serviceGender = freezed,
     Object? serviceAllowEdit = freezed,
     Object? serviceAdminOnUsers = freezed,
-    Object? classes = freezed,
+    Object? classes = null,
     Object? group = freezed,
     Object? groupAllowEdit = freezed,
     Object? groupAdminOnUsers = freezed,
   }) {
     return _then(_$_AdminOnData(
-      permissionId: permissionId == freezed
+      permissionId: null == permissionId
           ? _value.permissionId
           : permissionId // ignore: cast_nullable_to_non_nullable
               as String,
-      area: area == freezed
+      area: freezed == area
           ? _value.area
           : area // ignore: cast_nullable_to_non_nullable
               as Area?,
-      areaAllowEdit: areaAllowEdit == freezed
+      areaAllowEdit: freezed == areaAllowEdit
           ? _value.areaAllowEdit
           : areaAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      areaAdminOnUsers: areaAdminOnUsers == freezed
+      areaAdminOnUsers: freezed == areaAdminOnUsers
           ? _value.areaAdminOnUsers
           : areaAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
-      service: service == freezed
+      service: freezed == service
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
-      serviceStudyYearData: serviceStudyYearData == freezed
+      serviceStudyYearData: freezed == serviceStudyYearData
           ? _value.serviceStudyYearData
           : serviceStudyYearData // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      serviceGender: serviceGender == freezed
+      serviceGender: freezed == serviceGender
           ? _value.serviceGender
           : serviceGender // ignore: cast_nullable_to_non_nullable
               as bool?,
-      serviceAllowEdit: serviceAllowEdit == freezed
+      serviceAllowEdit: freezed == serviceAllowEdit
           ? _value.serviceAllowEdit
           : serviceAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      serviceAdminOnUsers: serviceAdminOnUsers == freezed
+      serviceAdminOnUsers: freezed == serviceAdminOnUsers
           ? _value.serviceAdminOnUsers
           : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
-      classes: classes == freezed
+      classes: null == classes
           ? _value._classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>,
-      group: group == freezed
+      group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as Group?,
-      groupAllowEdit: groupAllowEdit == freezed
+      groupAllowEdit: freezed == groupAllowEdit
           ? _value.groupAllowEdit
           : groupAllowEdit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      groupAdminOnUsers: groupAdminOnUsers == freezed
+      groupAdminOnUsers: freezed == groupAdminOnUsers
           ? _value.groupAdminOnUsers
           : groupAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -350,6 +358,7 @@ class _$_AdminOnData implements _AdminOnData {
   @override
   @JsonKey()
   List<Class> get classes {
+    if (_classes is EqualUnmodifiableListView) return _classes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_classes);
   }
@@ -371,50 +380,51 @@ class _$_AdminOnData implements _AdminOnData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AdminOnData &&
-            const DeepCollectionEquality()
-                .equals(other.permissionId, permissionId) &&
-            const DeepCollectionEquality().equals(other.area, area) &&
-            const DeepCollectionEquality()
-                .equals(other.areaAllowEdit, areaAllowEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.areaAdminOnUsers, areaAdminOnUsers) &&
-            const DeepCollectionEquality().equals(other.service, service) &&
-            const DeepCollectionEquality()
-                .equals(other.serviceStudyYearData, serviceStudyYearData) &&
-            const DeepCollectionEquality()
-                .equals(other.serviceGender, serviceGender) &&
-            const DeepCollectionEquality()
-                .equals(other.serviceAllowEdit, serviceAllowEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.serviceAdminOnUsers, serviceAdminOnUsers) &&
+            (identical(other.permissionId, permissionId) ||
+                other.permissionId == permissionId) &&
+            (identical(other.area, area) || other.area == area) &&
+            (identical(other.areaAllowEdit, areaAllowEdit) ||
+                other.areaAllowEdit == areaAllowEdit) &&
+            (identical(other.areaAdminOnUsers, areaAdminOnUsers) ||
+                other.areaAdminOnUsers == areaAdminOnUsers) &&
+            (identical(other.service, service) || other.service == service) &&
+            (identical(other.serviceStudyYearData, serviceStudyYearData) ||
+                other.serviceStudyYearData == serviceStudyYearData) &&
+            (identical(other.serviceGender, serviceGender) ||
+                other.serviceGender == serviceGender) &&
+            (identical(other.serviceAllowEdit, serviceAllowEdit) ||
+                other.serviceAllowEdit == serviceAllowEdit) &&
+            (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
+                other.serviceAdminOnUsers == serviceAdminOnUsers) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
-            const DeepCollectionEquality().equals(other.group, group) &&
-            const DeepCollectionEquality()
-                .equals(other.groupAllowEdit, groupAllowEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.groupAdminOnUsers, groupAdminOnUsers));
+            (identical(other.group, group) || other.group == group) &&
+            (identical(other.groupAllowEdit, groupAllowEdit) ||
+                other.groupAllowEdit == groupAllowEdit) &&
+            (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
+                other.groupAdminOnUsers == groupAdminOnUsers));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(permissionId),
-      const DeepCollectionEquality().hash(area),
-      const DeepCollectionEquality().hash(areaAllowEdit),
-      const DeepCollectionEquality().hash(areaAdminOnUsers),
-      const DeepCollectionEquality().hash(service),
-      const DeepCollectionEquality().hash(serviceStudyYearData),
-      const DeepCollectionEquality().hash(serviceGender),
-      const DeepCollectionEquality().hash(serviceAllowEdit),
-      const DeepCollectionEquality().hash(serviceAdminOnUsers),
+      permissionId,
+      area,
+      areaAllowEdit,
+      areaAdminOnUsers,
+      service,
+      serviceStudyYearData,
+      serviceGender,
+      serviceAllowEdit,
+      serviceAdminOnUsers,
       const DeepCollectionEquality().hash(_classes),
-      const DeepCollectionEquality().hash(group),
-      const DeepCollectionEquality().hash(groupAllowEdit),
-      const DeepCollectionEquality().hash(groupAdminOnUsers));
+      group,
+      groupAllowEdit,
+      groupAdminOnUsers);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AdminOnDataCopyWith<_$_AdminOnData> get copyWith =>
       __$$_AdminOnDataCopyWithImpl<_$_AdminOnData>(this, _$identity);
 

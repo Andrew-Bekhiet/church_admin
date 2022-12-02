@@ -6,7 +6,7 @@ part of 'area.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Area _$$_AreaFromJson(Map<String, dynamic> json) => _$_Area(
+_$_Area _$$_AreaFromJson(Map json) => _$_Area(
       id: json['id'] as String,
       name: json['name'] as String,
       bounds: polygonFromJson(json['bounds']),

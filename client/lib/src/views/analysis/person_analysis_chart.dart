@@ -50,6 +50,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     if (widget.analysisData.aggregate.count == 0) {
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -57,18 +58,19 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
           const SizedBox(height: 10),
           Text(
             widget.title,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: themeData.textTheme.headlineSmall,
           ),
           const SizedBox(height: 10),
           Text(
             'لا يوجد سجل',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: themeData.textTheme.titleMedium,
           ),
         ],
       );
     }
 
-    final chartColor = widget.color ?? Theme.of(context).colorScheme.secondary;
+    final colorScheme = themeData.colorScheme;
+    final chartColor = widget.color ?? colorScheme.secondary;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -76,7 +78,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
         const SizedBox(height: 10),
         Text(
           widget.title,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: themeData.textTheme.headlineSmall,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.4,
@@ -109,8 +111,9 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                     tooltipMargin: 10,
                     tooltipRoundedRadius: 20,
                     tooltipBorder: BorderSide(
-                        color: Theme.of(context).colorScheme.outline),
-                    tooltipBgColor: Theme.of(context).colorScheme.surface,
+                      color: colorScheme.outline,
+                    ),
+                    tooltipBgColor: colorScheme.surface,
                     getTooltipItems: (o) => o
                         .map(
                           (e) => LineTooltipItem(
@@ -120,8 +123,10 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                                   ),
                                 ) +
                                 '\n',
-                            Theme.of(context).textTheme.caption!.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface),
+                            Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: colorScheme.onSurface),
                             children: [
                               TextSpan(
                                 locale: const Locale('ar', 'EG'),
@@ -232,11 +237,11 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
           title: const Text('الاجمالي'),
           trailing: Text(
             widget.analysisData.aggregate.count.toString(),
-            style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.onSecondary
-                      : Theme.of(context).colorScheme.onPrimary,
-                ),
+            style: themeData.textTheme.bodyText2!.copyWith(
+              color: themeData.brightness == Brightness.light
+                  ? colorScheme.onSecondary
+                  : colorScheme.onPrimary,
+            ),
           ),
         ),
         HistoryProperty(

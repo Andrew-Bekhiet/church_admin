@@ -6,7 +6,7 @@ part of 'church.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Church _$$_ChurchFromJson(Map<String, dynamic> json) => _$_Church(
+_$_Church _$$_ChurchFromJson(Map json) => _$_Church(
       id: json['id'] as String,
       name: json['name'] as String,
     );

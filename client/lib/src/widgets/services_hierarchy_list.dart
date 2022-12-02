@@ -67,14 +67,15 @@ class ServicesHierarchyList extends StatefulWidget {
 
 class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     with TickerProviderStateMixin {
-  final _animationControllers = <Object, AnimationController>{};
-
   late final search = widget.search ?? BehaviorSubject<String?>.seeded(null);
   late final listController = widget.listController ??
       ListControllerBase<void, Service>(
         objectsPaginatableStream: CADatabaseRepository.I.services
             .getServicesStream(searchQuery: search),
       );
+
+  final _animationControllers = <Object, AnimationController>{};
+
   @override
   Widget build(BuildContext context) {
     return DataObjectListViewBase(
@@ -158,7 +159,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                               for (final c in sc.value)
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      right: _topController.value * 20),
+                                    right: _topController.value * 20,
+                                  ),
                                   child: widget.classBuilder?.call(
                                         context,
                                         studyYear: sc.key,
@@ -223,8 +225,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     for (final c in _animationControllers.values) {
       c.dispose();
     }
-    if (search is StreamSink) {
-      await (search as StreamSink).close();
+    if (search is BehaviorSubject) {
+      await (search as BehaviorSubject).close();
     }
   }
 }

@@ -17,7 +17,9 @@ AnalysisData<DateTime>? analysisDataFromJson(Json? json) => json == null
     : AnalysisData<DateTime>(
         aggregate: AggregateData.fromJson(
           json['aggregate'],
-          (j) => j is! Json || (j['dayId'] ?? j['time'])==null ? null : dateFromString(j['dayId'] ?? j['time']!),
+          (j) => j is! Json || (j['dayId'] ?? j['time']) == null
+              ? null
+              : dateFromString(j['dayId'] ?? j['time']!),
         ),
         nodes: (json['nodes'] as List?)
                 ?.map(
@@ -27,4 +29,4 @@ AnalysisData<DateTime>? analysisDataFromJson(Json? json) => json == null
             [],
       );
 
-Json? analysisDataToJson(AnalysisData? json) => null;
+Json? analysisDataToJson(AnalysisData? _) => null;

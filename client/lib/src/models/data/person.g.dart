@@ -6,13 +6,16 @@ part of 'person.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
+_$_Person _$$_PersonFromJson(Map json) => _$_Person(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String?,
       geolocation: pointFromJson(json['geolocation']),
       mainPhone: json['mainPhone'] as String?,
-      otherPhones: json['otherPhones'] as Map<String, dynamic>? ?? const {},
+      otherPhones: (json['otherPhones'] as Map?)?.map(
+            (k, e) => MapEntry(k as String, e),
+          ) ??
+          const {},
       birthdate: json['birthdate'] == null
           ? null
           : DateTime.parse(json['birthdate'] as String),
@@ -21,52 +24,56 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       shammasLevelId: json['shammasLevelId'] as String?,
       shammasLevel: json['shammasLevel'] == null
           ? null
-          : ShammasLevel.fromJson(json['shammasLevel'] as Map<String, dynamic>),
+          : ShammasLevel.fromJson(
+              Map<String, Object?>.from(json['shammasLevel'] as Map)),
       school: json['school'] == null
           ? null
-          : School.fromJson(json['school'] as Map<String, dynamic>),
+          : School.fromJson(Map<String, Object?>.from(json['school'] as Map)),
       schoolId: json['schoolId'] as String?,
       college: json['college'] == null
           ? null
-          : College.fromJson(json['college'] as Map<String, dynamic>),
+          : College.fromJson(Map<String, Object?>.from(json['college'] as Map)),
       collegeId: json['collegeId'] as String?,
       church: json['church'] == null
           ? null
-          : Church.fromJson(json['church'] as Map<String, dynamic>),
+          : Church.fromJson(Map<String, Object?>.from(json['church'] as Map)),
       churchId: json['churchId'] as String?,
       father: json['father'] == null
           ? null
-          : Father.fromJson(json['father'] as Map<String, dynamic>),
+          : Father.fromJson(Map<String, Object?>.from(json['father'] as Map)),
       fatherId: json['fatherId'] as String?,
       isStudent: json['isStudent'] as bool? ?? false,
       job: json['job'] == null
           ? null
-          : Job.fromJson(json['job'] as Map<String, dynamic>),
+          : Job.fromJson(Map<String, Object?>.from(json['job'] as Map)),
       jobId: json['jobId'] as String?,
       jobDescription: json['jobDescription'] as String?,
       qualification: json['qualification'] == null
           ? null
           : Qualification.fromJson(
-              json['qualification'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['qualification'] as Map)),
       qualificationId: json['qualificationId'] as String?,
       personType: json['personType'] == null
           ? null
-          : PersonType.fromJson(json['personType'] as Map<String, dynamic>),
+          : PersonType.fromJson(
+              Map<String, Object?>.from(json['personType'] as Map)),
       personTypeId: json['personTypeId'] as String?,
       state: json['state'] == null
           ? null
-          : PersonState.fromJson(json['state'] as Map<String, dynamic>),
+          : PersonState.fromJson(
+              Map<String, Object?>.from(json['state'] as Map)),
       stateId: json['stateId'] as String?,
       isServant: json['isServant'] as bool? ?? false,
       notes: json['notes'] as String?,
       family: json['family'] == null
           ? null
-          : Family.fromJson(json['family'] as Map<String, dynamic>),
+          : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
       familyId: json['familyId'] as String?,
       storeId: json['storeId'] as String?,
       studyYear: json['studyYear'] == null
           ? null
-          : StudyYear.fromJson(json['studyYear'] as Map<String, dynamic>),
+          : StudyYear.fromJson(
+              Map<String, Object?>.from(json['studyYear'] as Map)),
       studyYearId: json['studyYearId'] as int?,
       color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -75,38 +82,38 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       lastConfession: json['lastConfession'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastConfession'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastConfession'] as Map)),
       lastKodas: json['lastKodas'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastKodas'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastKodas'] as Map)),
       lastCall: json['lastCall'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastCall'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastCall'] as Map)),
       lastVisit: json['lastVisit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastVisit'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastVisit'] as Map)),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastEdit'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
       classes: (json['classes'] as List<dynamic>?)
-          ?.map((e) => Class.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       groups: personsGroupsFromJson(json['groups'] as List?),
       services: personsServicesFromJson(json['services'] as List?),
       areas: (json['areas'] as List<dynamic>?)
-          ?.map((e) => Area.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       streets: (json['streets'] as List<dynamic>?)
-          ?.map((e) => Street.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       tags: personsTagsFromJson(json['tags'] as List?),
       user: json['user'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
       kodasHistoryAggregate: analysisDataFromJson(
           json['kodasHistoryAggregate'] as Map<String, dynamic>?),
       confessionHistoryAggregate: analysisDataFromJson(

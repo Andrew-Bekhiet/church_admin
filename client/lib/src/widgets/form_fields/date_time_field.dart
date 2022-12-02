@@ -29,24 +29,6 @@ class DateTimeField extends StatelessWidget {
     super.key,
   }) : dateFormat = dateFormat ?? DateFormat('yyyy/M/d');
 
-  Future<DateTime?> _selectDate(
-    BuildContext context,
-    DateTime initialDate,
-  ) async {
-    final picked = await showDatePicker(
-      helpText: label,
-      locale: const Locale('ar', 'EG'),
-      context: context,
-      initialDate: initialDate,
-      firstDate: DateTime(1500),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != initialDate) {
-      return picked;
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return TappableFormField<DateTime?>(
@@ -100,5 +82,23 @@ class DateTimeField extends StatelessWidget {
       validator: validator ??
           (v) => v == null && !nullable ? 'برجاء ادخال ' + label : null,
     );
+  }
+
+  Future<DateTime?> _selectDate(
+    BuildContext context,
+    DateTime initialDate,
+  ) async {
+    final picked = await showDatePicker(
+      helpText: label,
+      locale: const Locale('ar', 'EG'),
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(1500),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != initialDate) {
+      return picked;
+    }
+    return null;
   }
 }

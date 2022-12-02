@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CAErrorDialog extends StatelessWidget {
+  // ignore: no-object-declaration
   final Object exception;
   const CAErrorDialog({required this.exception, super.key});
 

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'family.dart';
 
@@ -38,7 +38,8 @@ mixin _$Family {
 /// @nodoc
 abstract class $FamilyCopyWith<$Res> {
   factory $FamilyCopyWith(Family value, $Res Function(Family) then) =
-      _$FamilyCopyWithImpl<$Res>;
+      _$FamilyCopyWithImpl<$Res, Family>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -50,17 +51,20 @@ abstract class $FamilyCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
+class _$FamilyCopyWithImpl<$Res, $Val extends Family>
+    implements $FamilyCopyWith<$Res> {
   _$FamilyCopyWithImpl(this._value, this._then);
 
-  final Family _value;
   // ignore: unused_field
-  final $Res Function(Family) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? address = freezed,
     Object? geolocation = freezed,
     Object? notes = freezed,
@@ -68,35 +72,35 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: geolocation == freezed
+      geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Point?,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -105,6 +109,7 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
   factory _$$_FamilyCopyWith(_$_Family value, $Res Function(_$_Family) then) =
       __$$_FamilyCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -116,18 +121,17 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FamilyCopyWithImpl<$Res> extends _$FamilyCopyWithImpl<$Res>
+class __$$_FamilyCopyWithImpl<$Res>
+    extends _$FamilyCopyWithImpl<$Res, _$_Family>
     implements _$$_FamilyCopyWith<$Res> {
   __$$_FamilyCopyWithImpl(_$_Family _value, $Res Function(_$_Family) _then)
-      : super(_value, (v) => _then(v as _$_Family));
+      : super(_value, _then);
 
-  @override
-  _$_Family get _value => super._value as _$_Family;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? address = freezed,
     Object? geolocation = freezed,
     Object? notes = freezed,
@@ -135,31 +139,31 @@ class __$$_FamilyCopyWithImpl<$Res> extends _$FamilyCopyWithImpl<$Res>
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_$_Family(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: geolocation == freezed
+      geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Point?,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -210,31 +214,25 @@ class _$_Family extends _Family {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Family &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality()
-                .equals(other.geolocation, geolocation) &&
-            const DeepCollectionEquality().equals(other.notes, notes) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.geolocation, geolocation) ||
+                other.geolocation == geolocation) &&
+            (identical(other.notes, notes) || other.notes == notes) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(geolocation),
-      const DeepCollectionEquality().hash(notes),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(photoUpdatedAt));
+  int get hashCode => Object.hash(runtimeType, id, name, address, geolocation,
+      notes, color, photoUpdatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FamilyCopyWith<_$_Family> get copyWith =>
       __$$_FamilyCopyWithImpl<_$_Family>(this, _$identity);
 

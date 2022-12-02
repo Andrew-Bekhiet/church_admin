@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'person.dart';
 
@@ -99,7 +99,8 @@ mixin _$Person {
 /// @nodoc
 abstract class $PersonCopyWith<$Res> {
   factory $PersonCopyWith(Person value, $Res Function(Person) then) =
-      _$PersonCopyWithImpl<$Res>;
+      _$PersonCopyWithImpl<$Res, Person>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -192,24 +193,27 @@ abstract class $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
+class _$PersonCopyWithImpl<$Res, $Val extends Person>
+    implements $PersonCopyWith<$Res> {
   _$PersonCopyWithImpl(this._value, this._then);
 
-  final Person _value;
   // ignore: unused_field
-  final $Res Function(Person) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? address = freezed,
     Object? geolocation = freezed,
     Object? mainPhone = freezed,
-    Object? otherPhones = freezed,
+    Object? otherPhones = null,
     Object? birthdate = freezed,
-    Object? gender = freezed,
-    Object? isShammas = freezed,
+    Object? gender = null,
+    Object? isShammas = null,
     Object? shammasLevelId = freezed,
     Object? shammasLevel = freezed,
     Object? school = freezed,
@@ -220,7 +224,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? churchId = freezed,
     Object? father = freezed,
     Object? fatherId = freezed,
-    Object? isStudent = freezed,
+    Object? isStudent = null,
     Object? job = freezed,
     Object? jobId = freezed,
     Object? jobDescription = freezed,
@@ -230,7 +234,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? personTypeId = freezed,
     Object? state = freezed,
     Object? stateId = freezed,
-    Object? isServant = freezed,
+    Object? isServant = null,
     Object? notes = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
@@ -258,417 +262,435 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? editHistoryAggregate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: geolocation == freezed
+      geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Point?,
-      mainPhone: mainPhone == freezed
+      mainPhone: freezed == mainPhone
           ? _value.mainPhone
           : mainPhone // ignore: cast_nullable_to_non_nullable
               as String?,
-      otherPhones: otherPhones == freezed
+      otherPhones: null == otherPhones
           ? _value.otherPhones
           : otherPhones // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      birthdate: birthdate == freezed
+      birthdate: freezed == birthdate
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      isShammas: isShammas == freezed
+      isShammas: null == isShammas
           ? _value.isShammas
           : isShammas // ignore: cast_nullable_to_non_nullable
               as bool,
-      shammasLevelId: shammasLevelId == freezed
+      shammasLevelId: freezed == shammasLevelId
           ? _value.shammasLevelId
           : shammasLevelId // ignore: cast_nullable_to_non_nullable
               as String?,
-      shammasLevel: shammasLevel == freezed
+      shammasLevel: freezed == shammasLevel
           ? _value.shammasLevel
           : shammasLevel // ignore: cast_nullable_to_non_nullable
               as ShammasLevel?,
-      school: school == freezed
+      school: freezed == school
           ? _value.school
           : school // ignore: cast_nullable_to_non_nullable
               as School?,
-      schoolId: schoolId == freezed
+      schoolId: freezed == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as String?,
-      college: college == freezed
+      college: freezed == college
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as College?,
-      collegeId: collegeId == freezed
+      collegeId: freezed == collegeId
           ? _value.collegeId
           : collegeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      church: church == freezed
+      church: freezed == church
           ? _value.church
           : church // ignore: cast_nullable_to_non_nullable
               as Church?,
-      churchId: churchId == freezed
+      churchId: freezed == churchId
           ? _value.churchId
           : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
-      father: father == freezed
+      father: freezed == father
           ? _value.father
           : father // ignore: cast_nullable_to_non_nullable
               as Father?,
-      fatherId: fatherId == freezed
+      fatherId: freezed == fatherId
           ? _value.fatherId
           : fatherId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isStudent: isStudent == freezed
+      isStudent: null == isStudent
           ? _value.isStudent
           : isStudent // ignore: cast_nullable_to_non_nullable
               as bool,
-      job: job == freezed
+      job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
               as Job?,
-      jobId: jobId == freezed
+      jobId: freezed == jobId
           ? _value.jobId
           : jobId // ignore: cast_nullable_to_non_nullable
               as String?,
-      jobDescription: jobDescription == freezed
+      jobDescription: freezed == jobDescription
           ? _value.jobDescription
           : jobDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      qualification: qualification == freezed
+      qualification: freezed == qualification
           ? _value.qualification
           : qualification // ignore: cast_nullable_to_non_nullable
               as Qualification?,
-      qualificationId: qualificationId == freezed
+      qualificationId: freezed == qualificationId
           ? _value.qualificationId
           : qualificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      personType: personType == freezed
+      personType: freezed == personType
           ? _value.personType
           : personType // ignore: cast_nullable_to_non_nullable
               as PersonType?,
-      personTypeId: personTypeId == freezed
+      personTypeId: freezed == personTypeId
           ? _value.personTypeId
           : personTypeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      state: state == freezed
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as PersonState?,
-      stateId: stateId == freezed
+      stateId: freezed == stateId
           ? _value.stateId
           : stateId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isServant: isServant == freezed
+      isServant: null == isServant
           ? _value.isServant
           : isServant // ignore: cast_nullable_to_non_nullable
               as bool,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      family: family == freezed
+      family: freezed == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
-      familyId: familyId == freezed
+      familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeId: storeId == freezed
+      storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      studyYear: studyYear == freezed
+      studyYear: freezed == studyYear
           ? _value.studyYear
           : studyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      studyYearId: studyYearId == freezed
+      studyYearId: freezed == studyYearId
           ? _value.studyYearId
           : studyYearId // ignore: cast_nullable_to_non_nullable
               as int?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastConfession: lastConfession == freezed
+      lastConfession: freezed == lastConfession
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastKodas: lastKodas == freezed
+      lastKodas: freezed == lastKodas
           ? _value.lastKodas
           : lastKodas // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastCall: lastCall == freezed
+      lastCall: freezed == lastCall
           ? _value.lastCall
           : lastCall // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastVisit: lastVisit == freezed
+      lastVisit: freezed == lastVisit
           ? _value.lastVisit
           : lastVisit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastEdit: lastEdit == freezed
+      lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      classes: classes == freezed
+      classes: freezed == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>?,
-      groups: groups == freezed
+      groups: freezed == groups
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
-      services: services == freezed
+      services: freezed == services
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<Service>?,
-      areas: areas == freezed
+      areas: freezed == areas
           ? _value.areas
           : areas // ignore: cast_nullable_to_non_nullable
               as List<Area>?,
-      streets: streets == freezed
+      streets: freezed == streets
           ? _value.streets
           : streets // ignore: cast_nullable_to_non_nullable
               as List<Street>?,
-      tags: tags == freezed
+      tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      kodasHistoryAggregate: kodasHistoryAggregate == freezed
+      kodasHistoryAggregate: freezed == kodasHistoryAggregate
           ? _value.kodasHistoryAggregate
           : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      confessionHistoryAggregate: confessionHistoryAggregate == freezed
+      confessionHistoryAggregate: freezed == confessionHistoryAggregate
           ? _value.confessionHistoryAggregate
           : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      callHistoryAggregate: callHistoryAggregate == freezed
+      callHistoryAggregate: freezed == callHistoryAggregate
           ? _value.callHistoryAggregate
           : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      visitHistoryAggregate: visitHistoryAggregate == freezed
+      visitHistoryAggregate: freezed == visitHistoryAggregate
           ? _value.visitHistoryAggregate
           : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      editHistoryAggregate: editHistoryAggregate == freezed
+      editHistoryAggregate: freezed == editHistoryAggregate
           ? _value.editHistoryAggregate
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShammasLevelCopyWith<$Res>? get shammasLevel {
     if (_value.shammasLevel == null) {
       return null;
     }
 
     return $ShammasLevelCopyWith<$Res>(_value.shammasLevel!, (value) {
-      return _then(_value.copyWith(shammasLevel: value));
+      return _then(_value.copyWith(shammasLevel: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SchoolCopyWith<$Res>? get school {
     if (_value.school == null) {
       return null;
     }
 
     return $SchoolCopyWith<$Res>(_value.school!, (value) {
-      return _then(_value.copyWith(school: value));
+      return _then(_value.copyWith(school: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CollegeCopyWith<$Res>? get college {
     if (_value.college == null) {
       return null;
     }
 
     return $CollegeCopyWith<$Res>(_value.college!, (value) {
-      return _then(_value.copyWith(college: value));
+      return _then(_value.copyWith(college: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ChurchCopyWith<$Res>? get church {
     if (_value.church == null) {
       return null;
     }
 
     return $ChurchCopyWith<$Res>(_value.church!, (value) {
-      return _then(_value.copyWith(church: value));
+      return _then(_value.copyWith(church: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FatherCopyWith<$Res>? get father {
     if (_value.father == null) {
       return null;
     }
 
     return $FatherCopyWith<$Res>(_value.father!, (value) {
-      return _then(_value.copyWith(father: value));
+      return _then(_value.copyWith(father: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $JobCopyWith<$Res>? get job {
     if (_value.job == null) {
       return null;
     }
 
     return $JobCopyWith<$Res>(_value.job!, (value) {
-      return _then(_value.copyWith(job: value));
+      return _then(_value.copyWith(job: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $QualificationCopyWith<$Res>? get qualification {
     if (_value.qualification == null) {
       return null;
     }
 
     return $QualificationCopyWith<$Res>(_value.qualification!, (value) {
-      return _then(_value.copyWith(qualification: value));
+      return _then(_value.copyWith(qualification: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PersonTypeCopyWith<$Res>? get personType {
     if (_value.personType == null) {
       return null;
     }
 
     return $PersonTypeCopyWith<$Res>(_value.personType!, (value) {
-      return _then(_value.copyWith(personType: value));
+      return _then(_value.copyWith(personType: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PersonStateCopyWith<$Res>? get state {
     if (_value.state == null) {
       return null;
     }
 
     return $PersonStateCopyWith<$Res>(_value.state!, (value) {
-      return _then(_value.copyWith(state: value));
+      return _then(_value.copyWith(state: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FamilyCopyWith<$Res>? get family {
     if (_value.family == null) {
       return null;
     }
 
     return $FamilyCopyWith<$Res>(_value.family!, (value) {
-      return _then(_value.copyWith(family: value));
+      return _then(_value.copyWith(family: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYear {
     if (_value.studyYear == null) {
       return null;
     }
 
     return $StudyYearCopyWith<$Res>(_value.studyYear!, (value) {
-      return _then(_value.copyWith(studyYear: value));
+      return _then(_value.copyWith(studyYear: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastConfession {
     if (_value.lastConfession == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastConfession!, (value) {
-      return _then(_value.copyWith(lastConfession: value));
+      return _then(_value.copyWith(lastConfession: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastKodas {
     if (_value.lastKodas == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastKodas!, (value) {
-      return _then(_value.copyWith(lastKodas: value));
+      return _then(_value.copyWith(lastKodas: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastCall {
     if (_value.lastCall == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastCall!, (value) {
-      return _then(_value.copyWith(lastCall: value));
+      return _then(_value.copyWith(lastCall: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
     if (_value.lastVisit == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastVisit!, (value) {
-      return _then(_value.copyWith(lastVisit: value));
+      return _then(_value.copyWith(lastVisit: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
     if (_value.lastEdit == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value));
+      return _then(_value.copyWith(lastEdit: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
     return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate {
     if (_value.kodasHistoryAggregate == null) {
       return null;
@@ -676,11 +698,12 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(_value.kodasHistoryAggregate!,
         (value) {
-      return _then(_value.copyWith(kodasHistoryAggregate: value));
+      return _then(_value.copyWith(kodasHistoryAggregate: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate {
     if (_value.confessionHistoryAggregate == null) {
       return null;
@@ -688,11 +711,12 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(
         _value.confessionHistoryAggregate!, (value) {
-      return _then(_value.copyWith(confessionHistoryAggregate: value));
+      return _then(_value.copyWith(confessionHistoryAggregate: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate {
     if (_value.callHistoryAggregate == null) {
       return null;
@@ -700,11 +724,12 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(_value.callHistoryAggregate!,
         (value) {
-      return _then(_value.copyWith(callHistoryAggregate: value));
+      return _then(_value.copyWith(callHistoryAggregate: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate {
     if (_value.visitHistoryAggregate == null) {
       return null;
@@ -712,11 +737,12 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(_value.visitHistoryAggregate!,
         (value) {
-      return _then(_value.copyWith(visitHistoryAggregate: value));
+      return _then(_value.copyWith(visitHistoryAggregate: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnalysisDataCopyWith<DateTime, $Res>? get editHistoryAggregate {
     if (_value.editHistoryAggregate == null) {
       return null;
@@ -724,7 +750,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 
     return $AnalysisDataCopyWith<DateTime, $Res>(_value.editHistoryAggregate!,
         (value) {
-      return _then(_value.copyWith(editHistoryAggregate: value));
+      return _then(_value.copyWith(editHistoryAggregate: value) as $Val);
     });
   }
 }
@@ -734,6 +760,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
   factory _$$_PersonCopyWith(_$_Person value, $Res Function(_$_Person) then) =
       __$$_PersonCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -848,25 +875,24 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
+class __$$_PersonCopyWithImpl<$Res>
+    extends _$PersonCopyWithImpl<$Res, _$_Person>
     implements _$$_PersonCopyWith<$Res> {
   __$$_PersonCopyWithImpl(_$_Person _value, $Res Function(_$_Person) _then)
-      : super(_value, (v) => _then(v as _$_Person));
+      : super(_value, _then);
 
-  @override
-  _$_Person get _value => super._value as _$_Person;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? address = freezed,
     Object? geolocation = freezed,
     Object? mainPhone = freezed,
-    Object? otherPhones = freezed,
+    Object? otherPhones = null,
     Object? birthdate = freezed,
-    Object? gender = freezed,
-    Object? isShammas = freezed,
+    Object? gender = null,
+    Object? isShammas = null,
     Object? shammasLevelId = freezed,
     Object? shammasLevel = freezed,
     Object? school = freezed,
@@ -877,7 +903,7 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? churchId = freezed,
     Object? father = freezed,
     Object? fatherId = freezed,
-    Object? isStudent = freezed,
+    Object? isStudent = null,
     Object? job = freezed,
     Object? jobId = freezed,
     Object? jobDescription = freezed,
@@ -887,7 +913,7 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? personTypeId = freezed,
     Object? state = freezed,
     Object? stateId = freezed,
-    Object? isServant = freezed,
+    Object? isServant = null,
     Object? notes = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
@@ -915,223 +941,223 @@ class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? editHistoryAggregate = freezed,
   }) {
     return _then(_$_Person(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: geolocation == freezed
+      geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Point?,
-      mainPhone: mainPhone == freezed
+      mainPhone: freezed == mainPhone
           ? _value.mainPhone
           : mainPhone // ignore: cast_nullable_to_non_nullable
               as String?,
-      otherPhones: otherPhones == freezed
+      otherPhones: null == otherPhones
           ? _value._otherPhones
           : otherPhones // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      birthdate: birthdate == freezed
+      birthdate: freezed == birthdate
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      isShammas: isShammas == freezed
+      isShammas: null == isShammas
           ? _value.isShammas
           : isShammas // ignore: cast_nullable_to_non_nullable
               as bool,
-      shammasLevelId: shammasLevelId == freezed
+      shammasLevelId: freezed == shammasLevelId
           ? _value.shammasLevelId
           : shammasLevelId // ignore: cast_nullable_to_non_nullable
               as String?,
-      shammasLevel: shammasLevel == freezed
+      shammasLevel: freezed == shammasLevel
           ? _value.shammasLevel
           : shammasLevel // ignore: cast_nullable_to_non_nullable
               as ShammasLevel?,
-      school: school == freezed
+      school: freezed == school
           ? _value.school
           : school // ignore: cast_nullable_to_non_nullable
               as School?,
-      schoolId: schoolId == freezed
+      schoolId: freezed == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as String?,
-      college: college == freezed
+      college: freezed == college
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as College?,
-      collegeId: collegeId == freezed
+      collegeId: freezed == collegeId
           ? _value.collegeId
           : collegeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      church: church == freezed
+      church: freezed == church
           ? _value.church
           : church // ignore: cast_nullable_to_non_nullable
               as Church?,
-      churchId: churchId == freezed
+      churchId: freezed == churchId
           ? _value.churchId
           : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
-      father: father == freezed
+      father: freezed == father
           ? _value.father
           : father // ignore: cast_nullable_to_non_nullable
               as Father?,
-      fatherId: fatherId == freezed
+      fatherId: freezed == fatherId
           ? _value.fatherId
           : fatherId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isStudent: isStudent == freezed
+      isStudent: null == isStudent
           ? _value.isStudent
           : isStudent // ignore: cast_nullable_to_non_nullable
               as bool,
-      job: job == freezed
+      job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
               as Job?,
-      jobId: jobId == freezed
+      jobId: freezed == jobId
           ? _value.jobId
           : jobId // ignore: cast_nullable_to_non_nullable
               as String?,
-      jobDescription: jobDescription == freezed
+      jobDescription: freezed == jobDescription
           ? _value.jobDescription
           : jobDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      qualification: qualification == freezed
+      qualification: freezed == qualification
           ? _value.qualification
           : qualification // ignore: cast_nullable_to_non_nullable
               as Qualification?,
-      qualificationId: qualificationId == freezed
+      qualificationId: freezed == qualificationId
           ? _value.qualificationId
           : qualificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      personType: personType == freezed
+      personType: freezed == personType
           ? _value.personType
           : personType // ignore: cast_nullable_to_non_nullable
               as PersonType?,
-      personTypeId: personTypeId == freezed
+      personTypeId: freezed == personTypeId
           ? _value.personTypeId
           : personTypeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      state: state == freezed
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as PersonState?,
-      stateId: stateId == freezed
+      stateId: freezed == stateId
           ? _value.stateId
           : stateId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isServant: isServant == freezed
+      isServant: null == isServant
           ? _value.isServant
           : isServant // ignore: cast_nullable_to_non_nullable
               as bool,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      family: family == freezed
+      family: freezed == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
-      familyId: familyId == freezed
+      familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeId: storeId == freezed
+      storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      studyYear: studyYear == freezed
+      studyYear: freezed == studyYear
           ? _value.studyYear
           : studyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
-      studyYearId: studyYearId == freezed
+      studyYearId: freezed == studyYearId
           ? _value.studyYearId
           : studyYearId // ignore: cast_nullable_to_non_nullable
               as int?,
-      color: color == freezed
+      color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      photoUpdatedAt: photoUpdatedAt == freezed
+      photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastConfession: lastConfession == freezed
+      lastConfession: freezed == lastConfession
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastKodas: lastKodas == freezed
+      lastKodas: freezed == lastKodas
           ? _value.lastKodas
           : lastKodas // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastCall: lastCall == freezed
+      lastCall: freezed == lastCall
           ? _value.lastCall
           : lastCall // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastVisit: lastVisit == freezed
+      lastVisit: freezed == lastVisit
           ? _value.lastVisit
           : lastVisit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      lastEdit: lastEdit == freezed
+      lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-      classes: classes == freezed
+      classes: freezed == classes
           ? _value._classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>?,
-      groups: groups == freezed
+      groups: freezed == groups
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
-      services: services == freezed
+      services: freezed == services
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
               as List<Service>?,
-      areas: areas == freezed
+      areas: freezed == areas
           ? _value._areas
           : areas // ignore: cast_nullable_to_non_nullable
               as List<Area>?,
-      streets: streets == freezed
+      streets: freezed == streets
           ? _value._streets
           : streets // ignore: cast_nullable_to_non_nullable
               as List<Street>?,
-      tags: tags == freezed
+      tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      kodasHistoryAggregate: kodasHistoryAggregate == freezed
+      kodasHistoryAggregate: freezed == kodasHistoryAggregate
           ? _value.kodasHistoryAggregate
           : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      confessionHistoryAggregate: confessionHistoryAggregate == freezed
+      confessionHistoryAggregate: freezed == confessionHistoryAggregate
           ? _value.confessionHistoryAggregate
           : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      callHistoryAggregate: callHistoryAggregate == freezed
+      callHistoryAggregate: freezed == callHistoryAggregate
           ? _value.callHistoryAggregate
           : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      visitHistoryAggregate: visitHistoryAggregate == freezed
+      visitHistoryAggregate: freezed == visitHistoryAggregate
           ? _value.visitHistoryAggregate
           : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
-      editHistoryAggregate: editHistoryAggregate == freezed
+      editHistoryAggregate: freezed == editHistoryAggregate
           ? _value.editHistoryAggregate
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as AnalysisData<DateTime>?,
@@ -1235,6 +1261,7 @@ class _$_Person extends _Person {
   @override
   @JsonKey()
   Map<String, dynamic> get otherPhones {
+    if (_otherPhones is EqualUnmodifiableMapView) return _otherPhones;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_otherPhones);
   }
@@ -1323,6 +1350,7 @@ class _$_Person extends _Person {
   List<Class>? get classes {
     final value = _classes;
     if (value == null) return null;
+    if (_classes is EqualUnmodifiableListView) return _classes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1333,6 +1361,7 @@ class _$_Person extends _Person {
   List<Group>? get groups {
     final value = _groups;
     if (value == null) return null;
+    if (_groups is EqualUnmodifiableListView) return _groups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1343,6 +1372,7 @@ class _$_Person extends _Person {
   List<Service>? get services {
     final value = _services;
     if (value == null) return null;
+    if (_services is EqualUnmodifiableListView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1352,6 +1382,7 @@ class _$_Person extends _Person {
   List<Area>? get areas {
     final value = _areas;
     if (value == null) return null;
+    if (_areas is EqualUnmodifiableListView) return _areas;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1361,6 +1392,7 @@ class _$_Person extends _Person {
   List<Street>? get streets {
     final value = _streets;
     if (value == null) return null;
+    if (_streets is EqualUnmodifiableListView) return _streets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1371,6 +1403,7 @@ class _$_Person extends _Person {
   List<Tag>? get tags {
     final value = _tags;
     if (value == null) return null;
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1403,143 +1436,161 @@ class _$_Person extends _Person {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Person &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality()
-                .equals(other.geolocation, geolocation) &&
-            const DeepCollectionEquality().equals(other.mainPhone, mainPhone) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.geolocation, geolocation) ||
+                other.geolocation == geolocation) &&
+            (identical(other.mainPhone, mainPhone) ||
+                other.mainPhone == mainPhone) &&
             const DeepCollectionEquality()
                 .equals(other._otherPhones, _otherPhones) &&
-            const DeepCollectionEquality().equals(other.birthdate, birthdate) &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.isShammas, isShammas) &&
-            const DeepCollectionEquality()
-                .equals(other.shammasLevelId, shammasLevelId) &&
-            const DeepCollectionEquality()
-                .equals(other.shammasLevel, shammasLevel) &&
-            const DeepCollectionEquality().equals(other.school, school) &&
-            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
-            const DeepCollectionEquality().equals(other.college, college) &&
-            const DeepCollectionEquality().equals(other.collegeId, collegeId) &&
-            const DeepCollectionEquality().equals(other.church, church) &&
-            const DeepCollectionEquality().equals(other.churchId, churchId) &&
-            const DeepCollectionEquality().equals(other.father, father) &&
-            const DeepCollectionEquality().equals(other.fatherId, fatherId) &&
-            const DeepCollectionEquality().equals(other.isStudent, isStudent) &&
-            const DeepCollectionEquality().equals(other.job, job) &&
-            const DeepCollectionEquality().equals(other.jobId, jobId) &&
-            const DeepCollectionEquality()
-                .equals(other.jobDescription, jobDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.qualification, qualification) &&
-            const DeepCollectionEquality()
-                .equals(other.qualificationId, qualificationId) &&
-            const DeepCollectionEquality()
-                .equals(other.personType, personType) &&
-            const DeepCollectionEquality()
-                .equals(other.personTypeId, personTypeId) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality().equals(other.stateId, stateId) &&
-            const DeepCollectionEquality().equals(other.isServant, isServant) &&
-            const DeepCollectionEquality().equals(other.notes, notes) &&
-            const DeepCollectionEquality().equals(other.family, family) &&
-            const DeepCollectionEquality().equals(other.familyId, familyId) &&
-            const DeepCollectionEquality().equals(other.storeId, storeId) &&
-            const DeepCollectionEquality().equals(other.studyYear, studyYear) &&
-            const DeepCollectionEquality()
-                .equals(other.studyYearId, studyYearId) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.photoUpdatedAt, photoUpdatedAt) &&
-            const DeepCollectionEquality()
-                .equals(other.lastConfession, lastConfession) &&
-            const DeepCollectionEquality().equals(other.lastKodas, lastKodas) &&
-            const DeepCollectionEquality().equals(other.lastCall, lastCall) &&
-            const DeepCollectionEquality().equals(other.lastVisit, lastVisit) &&
-            const DeepCollectionEquality().equals(other.lastEdit, lastEdit) &&
+            (identical(other.birthdate, birthdate) ||
+                other.birthdate == birthdate) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.isShammas, isShammas) ||
+                other.isShammas == isShammas) &&
+            (identical(other.shammasLevelId, shammasLevelId) ||
+                other.shammasLevelId == shammasLevelId) &&
+            (identical(other.shammasLevel, shammasLevel) ||
+                other.shammasLevel == shammasLevel) &&
+            (identical(other.school, school) || other.school == school) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.college, college) || other.college == college) &&
+            (identical(other.collegeId, collegeId) ||
+                other.collegeId == collegeId) &&
+            (identical(other.church, church) || other.church == church) &&
+            (identical(other.churchId, churchId) ||
+                other.churchId == churchId) &&
+            (identical(other.father, father) || other.father == father) &&
+            (identical(other.fatherId, fatherId) ||
+                other.fatherId == fatherId) &&
+            (identical(other.isStudent, isStudent) ||
+                other.isStudent == isStudent) &&
+            (identical(other.job, job) || other.job == job) &&
+            (identical(other.jobId, jobId) || other.jobId == jobId) &&
+            (identical(other.jobDescription, jobDescription) ||
+                other.jobDescription == jobDescription) &&
+            (identical(other.qualification, qualification) ||
+                other.qualification == qualification) &&
+            (identical(other.qualificationId, qualificationId) ||
+                other.qualificationId == qualificationId) &&
+            (identical(other.personType, personType) ||
+                other.personType == personType) &&
+            (identical(other.personTypeId, personTypeId) ||
+                other.personTypeId == personTypeId) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.stateId, stateId) || other.stateId == stateId) &&
+            (identical(other.isServant, isServant) ||
+                other.isServant == isServant) &&
+            (identical(other.notes, notes) || other.notes == notes) &&
+            (identical(other.family, family) || other.family == family) &&
+            (identical(other.familyId, familyId) ||
+                other.familyId == familyId) &&
+            (identical(other.storeId, storeId) || other.storeId == storeId) &&
+            (identical(other.studyYear, studyYear) ||
+                other.studyYear == studyYear) &&
+            (identical(other.studyYearId, studyYearId) ||
+                other.studyYearId == studyYearId) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.lastConfession, lastConfession) ||
+                other.lastConfession == lastConfession) &&
+            (identical(other.lastKodas, lastKodas) ||
+                other.lastKodas == lastKodas) &&
+            (identical(other.lastCall, lastCall) ||
+                other.lastCall == lastCall) &&
+            (identical(other.lastVisit, lastVisit) ||
+                other.lastVisit == lastVisit) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
             const DeepCollectionEquality().equals(other._services, _services) &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality()
-                .equals(other.kodasHistoryAggregate, kodasHistoryAggregate) &&
-            const DeepCollectionEquality().equals(
-                other.confessionHistoryAggregate, confessionHistoryAggregate) &&
-            const DeepCollectionEquality()
-                .equals(other.callHistoryAggregate, callHistoryAggregate) &&
-            const DeepCollectionEquality()
-                .equals(other.visitHistoryAggregate, visitHistoryAggregate) &&
-            const DeepCollectionEquality()
-                .equals(other.editHistoryAggregate, editHistoryAggregate));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
+                other.kodasHistoryAggregate == kodasHistoryAggregate) &&
+            (identical(other.confessionHistoryAggregate,
+                    confessionHistoryAggregate) ||
+                other.confessionHistoryAggregate ==
+                    confessionHistoryAggregate) &&
+            (identical(other.callHistoryAggregate, callHistoryAggregate) ||
+                other.callHistoryAggregate == callHistoryAggregate) &&
+            (identical(other.visitHistoryAggregate, visitHistoryAggregate) ||
+                other.visitHistoryAggregate == visitHistoryAggregate) &&
+            (identical(other.editHistoryAggregate, editHistoryAggregate) ||
+                other.editHistoryAggregate == editHistoryAggregate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(id),
-        const DeepCollectionEquality().hash(name),
-        const DeepCollectionEquality().hash(address),
-        const DeepCollectionEquality().hash(geolocation),
-        const DeepCollectionEquality().hash(mainPhone),
+        id,
+        name,
+        address,
+        geolocation,
+        mainPhone,
         const DeepCollectionEquality().hash(_otherPhones),
-        const DeepCollectionEquality().hash(birthdate),
-        const DeepCollectionEquality().hash(gender),
-        const DeepCollectionEquality().hash(isShammas),
-        const DeepCollectionEquality().hash(shammasLevelId),
-        const DeepCollectionEquality().hash(shammasLevel),
-        const DeepCollectionEquality().hash(school),
-        const DeepCollectionEquality().hash(schoolId),
-        const DeepCollectionEquality().hash(college),
-        const DeepCollectionEquality().hash(collegeId),
-        const DeepCollectionEquality().hash(church),
-        const DeepCollectionEquality().hash(churchId),
-        const DeepCollectionEquality().hash(father),
-        const DeepCollectionEquality().hash(fatherId),
-        const DeepCollectionEquality().hash(isStudent),
-        const DeepCollectionEquality().hash(job),
-        const DeepCollectionEquality().hash(jobId),
-        const DeepCollectionEquality().hash(jobDescription),
-        const DeepCollectionEquality().hash(qualification),
-        const DeepCollectionEquality().hash(qualificationId),
-        const DeepCollectionEquality().hash(personType),
-        const DeepCollectionEquality().hash(personTypeId),
-        const DeepCollectionEquality().hash(state),
-        const DeepCollectionEquality().hash(stateId),
-        const DeepCollectionEquality().hash(isServant),
-        const DeepCollectionEquality().hash(notes),
-        const DeepCollectionEquality().hash(family),
-        const DeepCollectionEquality().hash(familyId),
-        const DeepCollectionEquality().hash(storeId),
-        const DeepCollectionEquality().hash(studyYear),
-        const DeepCollectionEquality().hash(studyYearId),
-        const DeepCollectionEquality().hash(color),
-        const DeepCollectionEquality().hash(photoUpdatedAt),
-        const DeepCollectionEquality().hash(lastConfession),
-        const DeepCollectionEquality().hash(lastKodas),
-        const DeepCollectionEquality().hash(lastCall),
-        const DeepCollectionEquality().hash(lastVisit),
-        const DeepCollectionEquality().hash(lastEdit),
+        birthdate,
+        gender,
+        isShammas,
+        shammasLevelId,
+        shammasLevel,
+        school,
+        schoolId,
+        college,
+        collegeId,
+        church,
+        churchId,
+        father,
+        fatherId,
+        isStudent,
+        job,
+        jobId,
+        jobDescription,
+        qualification,
+        qualificationId,
+        personType,
+        personTypeId,
+        state,
+        stateId,
+        isServant,
+        notes,
+        family,
+        familyId,
+        storeId,
+        studyYear,
+        studyYearId,
+        color,
+        photoUpdatedAt,
+        lastConfession,
+        lastKodas,
+        lastCall,
+        lastVisit,
+        lastEdit,
         const DeepCollectionEquality().hash(_classes),
         const DeepCollectionEquality().hash(_groups),
         const DeepCollectionEquality().hash(_services),
         const DeepCollectionEquality().hash(_areas),
         const DeepCollectionEquality().hash(_streets),
         const DeepCollectionEquality().hash(_tags),
-        const DeepCollectionEquality().hash(user),
-        const DeepCollectionEquality().hash(kodasHistoryAggregate),
-        const DeepCollectionEquality().hash(confessionHistoryAggregate),
-        const DeepCollectionEquality().hash(callHistoryAggregate),
-        const DeepCollectionEquality().hash(visitHistoryAggregate),
-        const DeepCollectionEquality().hash(editHistoryAggregate)
+        user,
+        kodasHistoryAggregate,
+        confessionHistoryAggregate,
+        callHistoryAggregate,
+        visitHistoryAggregate,
+        editHistoryAggregate
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PersonCopyWith<_$_Person> get copyWith =>
       __$$_PersonCopyWithImpl<_$_Person>(this, _$identity);
 

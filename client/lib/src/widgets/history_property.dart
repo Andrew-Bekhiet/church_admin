@@ -43,8 +43,8 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
           IconButton(
             tooltip: 'السجل',
             icon: const Icon(Icons.history),
-            onPressed: () {
-              showDialog(
+            onPressed: () async {
+              await showDialog(
                 context: context,
                 builder: (context) => Dialog(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -53,8 +53,13 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                       objectsPaginatableStream: getHistoryStream(),
                     ),
                     autoDisposeController: true,
-                    itemBuilder: (o,
-                            {onLongPress, onTap, subtitle, trailing}) =>
+                    itemBuilder: (
+                      o, {
+                      onLongPress,
+                      onTap,
+                      subtitle,
+                      trailing,
+                    }) =>
                         ViewableObjectWidget(
                       o.user ??
                           User(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -8,16 +9,24 @@ export 'package:image_cropper/image_cropper.dart'
 export 'package:image_picker/image_picker.dart' show ImageSource;
 
 class ImagePickerService {
-  ImagePickerService();
+  static ImagePickerService get I => GetIt.I<ImagePickerService>();
 
-  final _imagePicker = ImagePicker();
-  final _imageCropper = ImageCropper();
+  static const deleteImage = _DeleteImage();
+
+  ImagePickerService({
+    ImagePicker? imagePicker,
+    ImageCropper? imageCropper,
+  })  : _imagePicker = imagePicker ?? GetIt.I<ImagePicker>(),
+        _imageCropper = imageCropper ?? GetIt.I<ImageCropper>();
+
+  final ImagePicker _imagePicker;
+  final ImageCropper _imageCropper;
 
   /// Shows a Modal Bottom Sheet to select [ImageSource]
   /// or delete the image if [canDelete] is true
   ///
-  /// returns [ImageSource] or [true] in case the user
-  /// tapped on the delete button
+  /// returns [ImageSource] or the constant [deleteImage]
+  /// in case the user tapped on the delete button
   Future<Object?> showSourceSheet({
     required BuildContext context,
     bool canDelete = true,
@@ -100,7 +109,7 @@ class ImagePickerService {
                     ),
                   );
 
-                  if (rslt == true) navigator.pop(true);
+                  if (rslt == true) navigator.pop(deleteImage);
                 },
                 icon: const Icon(Icons.delete),
                 tooltip: 'حذف الصورة',
@@ -161,4 +170,8 @@ class ImagePickerService {
       ],
     );
   }
+}
+
+class _DeleteImage {
+  const _DeleteImage();
 }

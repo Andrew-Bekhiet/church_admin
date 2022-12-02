@@ -44,7 +44,8 @@ class ViewUser extends StatelessWidget {
 
         if (snapshot.hasError) {
           return ErrorWidget.builder(
-              FlutterErrorDetails(exception: snapshot.error!));
+            FlutterErrorDetails(exception: snapshot.error!),
+          );
         } else if (!snapshot.hasData &&
             snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -58,7 +59,6 @@ class ViewUser extends StatelessWidget {
         }
 
         final user = snapshot.requireData!;
-        final userData = user.userData!;
         final person = user.person;
 
         final foregroundColor = person?.color.getContrastingColor(
@@ -141,56 +141,56 @@ class ViewUser extends StatelessWidget {
                     ),
                     CopiablePropertyWidget(
                       'البريد الاكتروني',
-                      userData.email,
+                      user.email,
                     ),
                     //TODO: approving pending users
                     const Divider(thickness: 1),
                     ListTile(
                       title: const Text('الصلاحيات'),
-                      subtitle: userData.permissions.permissions.isEmpty
+                      subtitle: user.permissions.permissions.isEmpty
                           ? const Text('لا يملك هذا الخادم صلاحيات محددة')
                           : Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                if (userData.permissions.manageAllUsers)
+                                if (user.permissions.manageAllUsers)
                                   const ListTile(
                                     leading: Icon(Icons.manage_accounts),
                                     title: Text('إدارة جميع المستخدمين'),
                                   ),
-                                if (userData.permissions.readAllData)
+                                if (user.permissions.readAllData)
                                   const ListTile(
                                     leading: Icon(Icons.visibility),
                                     title: Text('رؤية جميع البيانات'),
                                   ),
-                                if (userData.permissions.writeAllData)
+                                if (user.permissions.writeAllData)
                                   const ListTile(
                                     leading: Icon(Icons.edit),
                                     title: Text('تعديل جميع البيانات'),
                                   ),
-                                if ((userData.permissions.manageAllUsers ||
-                                        userData.permissions.readAllData ||
-                                        userData.permissions.writeAllData) &&
-                                    (userData.permissions.recordHistory ||
-                                        userData.permissions.changeOldHistory ||
-                                        userData.permissions.recoverDeleted ||
-                                        userData.permissions.exportData))
+                                if ((user.permissions.manageAllUsers ||
+                                        user.permissions.readAllData ||
+                                        user.permissions.writeAllData) &&
+                                    (user.permissions.recordHistory ||
+                                        user.permissions.changeOldHistory ||
+                                        user.permissions.recoverDeleted ||
+                                        user.permissions.exportData))
                                   const Divider(),
-                                if (userData.permissions.recordHistory)
+                                if (user.permissions.recordHistory)
                                   const ListTile(
                                     leading: Icon(Icons.history),
                                     title: Text('تسجيل الحضور لليوم الحالي'),
                                   ),
-                                if (userData.permissions.changeOldHistory)
+                                if (user.permissions.changeOldHistory)
                                   const ListTile(
                                     leading: Icon(Icons.history),
                                     title: Text('تغيير الحضور لأي يوم'),
                                   ),
-                                if (userData.permissions.recoverDeleted)
+                                if (user.permissions.recoverDeleted)
                                   const ListTile(
                                     leading: Icon(Icons.restore_from_trash),
                                     title: Text('استرجاع المحذوفات'),
                                   ),
-                                if (userData.permissions.exportData)
+                                if (user.permissions.exportData)
                                   const ListTile(
                                     leading: Icon(Icons.file_upload),
                                     title: Text('تصدير البيانات'),
@@ -284,7 +284,7 @@ class ViewUser extends StatelessWidget {
                     const Divider(thickness: 1),
                     HistoryProperty(
                       name: 'أخر تحديث لبيانات الخادم',
-                      value: userData.lastEdit?.time,
+                      value: user.lastEdit?.time,
                       getHistoryStream: () => CADatabaseRepository.I.users
                           .userEditHistory(userId: user.id),
                     ),
@@ -299,7 +299,7 @@ class ViewUser extends StatelessWidget {
     );
   }
 
-  Future<void> _attendanceAnalysis(BuildContext context, User user) async {
+  void _attendanceAnalysis(BuildContext context, User user) {
     context.goNamed(
       'user_attendance_analysis',
       queryParams: {
@@ -310,8 +310,11 @@ class ViewUser extends StatelessWidget {
         'user': user,
         'person': user.person,
         'asAdmin': true,
-        'onEditOptions': (context, options,
-                void Function(PersonAnalysisOptions) onComplete) =>
+        'onEditOptions': (
+          context,
+          options,
+          void Function(PersonAnalysisOptions) onComplete,
+        ) =>
             _SelectAttendanceOptions(
               user: user,
               onComplete: onComplete,
@@ -363,9 +366,11 @@ class _AdminOnServiceWidget extends StatelessWidget {
                       ? const Text('(جميع البيانات داخل الخدمة)')
                       : p.serviceGender != null &&
                               p.serviceStudyYearData == null
-                          ? Text(p.serviceGender!
-                              ? '(جميع البنين في الخدمة)'
-                              : '(جميع البنات داخل الخدمة)')
+                          ? Text(
+                              p.serviceGender!
+                                  ? '(جميع البنين في الخدمة)'
+                                  : '(جميع البنات داخل الخدمة)',
+                            )
                           : p.serviceGender != null
                               ? Text(
                                   '(' +
@@ -457,13 +462,6 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       );
 
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    selected.close();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -575,7 +573,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                             onTap: (s) => selected.value.contains(s)
                                 ? selected.add(
                                     selected.value.difference(
-                                      {s},
+                                      <ViewableWithID>{s},
                                     ),
                                   )
                                 : selected.add({...selected.value, s}),
@@ -590,7 +588,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                   } else {
                                     selected.add(
                                       selected.value.difference(
-                                        {s},
+                                        <ViewableWithID>{s},
                                       ),
                                     );
                                   }
@@ -625,7 +623,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                               } else {
                                 selected.add(
                                   selected.value.difference(
-                                    {adminData.group},
+                                    <Group?>{adminData.group},
                                   ),
                                 );
                               }
@@ -666,5 +664,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         ),
       ],
     );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await selected.close();
+
+    super.dispose();
   }
 }

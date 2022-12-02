@@ -1,0 +1,276 @@
+subscription getPersonsStream(
+  $where: [PersonsBoolExp!] = {}
+  $orderBy: [PersonsOrderBy!] = { name: ASC }
+  $limit: Int = 200
+) {
+  persons(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}
+
+subscription watchPerson($id: uuid!) {
+  personsByPk(id: $id) {
+    id
+    name
+    color
+    photoUpdatedAt
+    address
+    birthdate
+    areas(limit: 6, orderBy: { name: ASC }) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    classes(limit: 6, orderBy: { name: ASC }) {
+      id
+      name
+      color
+      photoUpdatedAt
+
+      attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+        aggregate {
+          max {
+            time
+          }
+        }
+      }
+    }
+    church {
+      id
+      name
+    }
+    college {
+      id
+      name
+    }
+    family {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    father {
+      id
+      name
+      church {
+        id
+        name
+      }
+    }
+    gender
+    geolocation
+    groups(limit: 6, orderBy: { group: { name: ASC } }) {
+      group {
+        id
+        name
+        color
+        photoUpdatedAt
+
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
+      }
+    }
+    isServant
+    isShammas
+    isStudent
+    job {
+      id
+      name
+    }
+    jobDescription
+    lastCall
+    lastConfession
+    lastEdit
+    lastKodas
+    lastVisit
+    mainPhone
+    notes
+    otherPhones
+    personType {
+      id
+      name
+    }
+    qualification {
+      id
+      name
+    }
+    school {
+      id
+      name
+    }
+    services(limit: 6, orderBy: { service: { name: ASC } }) {
+      service {
+        id
+        name
+        color
+        photoUpdatedAt
+
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
+          }
+        }
+      }
+    }
+    shammasLevel {
+      id
+      name
+      order
+    }
+    state {
+      id
+      color
+      name
+    }
+    streets {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+    studyYear {
+      name
+      order
+    }
+    tags(orderBy: { tag: { name: ASC } }) {
+      tag {
+        id
+        name
+        color
+      }
+    }
+    uid
+    user {
+      uid
+      name
+      email
+    }
+  }
+}
+
+subscription callHistory(
+  $personId: uuid!
+  $where: [HistoryCallHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyCallHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
+    }
+  }
+}
+
+subscription visitHistory(
+  $personId: uuid!
+  $where: [HistoryVisitHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyVisitHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
+    }
+  }
+}
+
+subscription confessionHistory(
+  $personId: uuid!
+  $where: [HistoryConfessionHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyConfessionHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
+    }
+  }
+}
+
+subscription kodasHistory(
+  $personId: uuid!
+  $where: [HistoryKodasHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyKodasHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
+    }
+  }
+}
+
+subscription personEditHistory(
+  $personId: uuid!
+  $where: [HistoryEditHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyEditHistory(
+    where: {
+      _and: [
+        { table: { _eq: "persons" } }
+        { recordId: { _eq: $personId } }
+        { _and: $where }
+      ]
+    }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    time
+    user {
+      uid
+      name
+      photoUpdatedAt
+    }
+  }
+}
+
+subscription personAttendance(
+  $where: [HistoryAttendanceHistoryBoolExp!] = {}
+  $orderBy: [HistoryAttendanceHistoryOrderBy!] = { time: DESC }
+  $limit: Int! = 200
+) {
+  historyAttendanceHistory(
+    where: { _and: $where }
+    orderBy: $orderBy
+    limit: $limit
+  ) {
+    recordedBy
+    time
+  }
+}

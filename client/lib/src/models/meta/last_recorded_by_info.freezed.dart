@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'last_recorded_by_info.dart';
 
@@ -35,7 +35,8 @@ mixin _$LastRecordedByInfo {
 abstract class $LastRecordedByInfoCopyWith<$Res> {
   factory $LastRecordedByInfoCopyWith(
           LastRecordedByInfo value, $Res Function(LastRecordedByInfo) then) =
-      _$LastRecordedByInfoCopyWithImpl<$Res>;
+      _$LastRecordedByInfoCopyWithImpl<$Res, LastRecordedByInfo>;
+  @useResult
   $Res call(
       {DateTime time,
       @JsonKey(readValue: readRecordedBy) String? recordedBy,
@@ -45,44 +46,47 @@ abstract class $LastRecordedByInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LastRecordedByInfoCopyWithImpl<$Res>
+class _$LastRecordedByInfoCopyWithImpl<$Res, $Val extends LastRecordedByInfo>
     implements $LastRecordedByInfoCopyWith<$Res> {
   _$LastRecordedByInfoCopyWithImpl(this._value, this._then);
 
-  final LastRecordedByInfo _value;
   // ignore: unused_field
-  final $Res Function(LastRecordedByInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
     Object? recordedBy = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recordedBy: recordedBy == freezed
+      recordedBy: freezed == recordedBy
           ? _value.recordedBy
           : recordedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
     return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -94,6 +98,7 @@ abstract class _$$_LastRecordedByInfoCopyWith<$Res>
           $Res Function(_$_LastRecordedByInfo) then) =
       __$$_LastRecordedByInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {DateTime time,
       @JsonKey(readValue: readRecordedBy) String? recordedBy,
@@ -105,31 +110,29 @@ abstract class _$$_LastRecordedByInfoCopyWith<$Res>
 
 /// @nodoc
 class __$$_LastRecordedByInfoCopyWithImpl<$Res>
-    extends _$LastRecordedByInfoCopyWithImpl<$Res>
+    extends _$LastRecordedByInfoCopyWithImpl<$Res, _$_LastRecordedByInfo>
     implements _$$_LastRecordedByInfoCopyWith<$Res> {
   __$$_LastRecordedByInfoCopyWithImpl(
       _$_LastRecordedByInfo _value, $Res Function(_$_LastRecordedByInfo) _then)
-      : super(_value, (v) => _then(v as _$_LastRecordedByInfo));
+      : super(_value, _then);
 
-  @override
-  _$_LastRecordedByInfo get _value => super._value as _$_LastRecordedByInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
     Object? recordedBy = freezed,
     Object? user = freezed,
   }) {
     return _then(_$_LastRecordedByInfo(
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recordedBy: recordedBy == freezed
+      recordedBy: freezed == recordedBy
           ? _value.recordedBy
           : recordedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
@@ -167,22 +170,19 @@ class _$_LastRecordedByInfo extends _LastRecordedByInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LastRecordedByInfo &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality()
-                .equals(other.recordedBy, recordedBy) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.recordedBy, recordedBy) ||
+                other.recordedBy == recordedBy) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(recordedBy),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, time, recordedBy, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LastRecordedByInfoCopyWith<_$_LastRecordedByInfo> get copyWith =>
       __$$_LastRecordedByInfoCopyWithImpl<_$_LastRecordedByInfo>(
           this, _$identity);

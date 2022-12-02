@@ -14,9 +14,21 @@ class User extends ViewableWithID with _$User, UID implements PhotoObjectBase {
   factory User({
     required String uid,
     required String name,
+    String? email,
     DateTime? photoUpdatedAt,
     List<AdminOnData>? adminOn,
-    UserData? userData,
+    @JsonKey(
+      fromJson: permissionsSetFromJson,
+      toJson: permissionsSetToJson,
+    )
+    @Default(CAPermissionsSet.empty())
+        CAPermissionsSet permissions,
+    String? authId,
+    @JsonKey(includeIfNull: false)
+        String? password,
+    @JsonKey(includeIfNull: false)
+        String? idToken,
+    LastRecordedByInfo? lastEdit,
     Person? person,
     List<AdminOnData>? servicesHistory,
     List<AdminOnData>? classesHistory,
@@ -36,7 +48,7 @@ class User extends ViewableWithID with _$User, UID implements PhotoObjectBase {
   CAStorageReference? get photoRef => hasPhoto && uid.isNotEmpty
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () =>
+          downloadUrl: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('users', uid),
           fullPath: 'users/$uid.jpg',
         )

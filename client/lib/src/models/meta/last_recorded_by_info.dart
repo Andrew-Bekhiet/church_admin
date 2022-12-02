@@ -26,5 +26,5 @@ class LastRecordedByInfo extends ViewableWithID with _$LastRecordedByInfo {
   String get id => time.toString();
 }
 
-String? readRecordedBy(Map json, String key) =>
+String? readRecordedBy(Map json, String _) =>
     json['recordedBy'] ?? json['recorded_by'];

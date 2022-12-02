@@ -6,7 +6,7 @@ part of 'class.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Class _$$_ClassFromJson(Map<String, dynamic> json) => _$_Class(
+_$_Class _$$_ClassFromJson(Map json) => _$_Class(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),
@@ -15,10 +15,11 @@ _$_Class _$$_ClassFromJson(Map<String, dynamic> json) => _$_Class(
           : DateTime.parse(json['photoUpdatedAt'] as String),
       service: json['service'] == null
           ? null
-          : Service.fromJson(json['service'] as Map<String, dynamic>),
+          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
       studyYear: json['studyYear'] == null
           ? null
-          : StudyYear.fromJson(json['studyYear'] as Map<String, dynamic>),
+          : StudyYear.fromJson(
+              Map<String, Object?>.from(json['studyYear'] as Map)),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +14,6 @@ class ChurchAdminApp extends StatefulWidget {
       GetIt.I<LoggingService>().navigatorObserver,
     ],
     refreshListenable: GetIt.I<GoRouterRefreshStream>(),
-    urlPathStrategy: UrlPathStrategy.path,
     routes: [
       HomeScreen.route,
       LoginScreen.route,
@@ -39,12 +40,12 @@ class ChurchAdminApp extends StatefulWidget {
             ],
           ),
         ) /* UpdateUserDataScreen() */,
-        redirect: (state) {
-          if (!CAAuthRepository.I.isSignedIn) {
-            return state.namedLocation('login');
-          } else if (CAAuthRepository.I.currentUser?.userData?.password !=
-                  null &&
-              CAAuthRepository.I.currentUserData != null) {
+        redirect: (context, state) {
+          if (!AuthService.instance.isSignedIn) {
+            return ChurchAdminApp.router.routeInformationParser.configuration
+                .namedLocation('login');
+          } else if (AuthService.instance.currentUser?.password != null &&
+              AuthService.instance.currentUser?.person != null) {
             return '/';
           }
           return null;
@@ -84,6 +85,19 @@ class ChurchAdminApp extends StatefulWidget {
 }
 
 class _ChurchAdminAppState extends State<ChurchAdminApp> {
+  late final StreamSubscription<bool> _connectivityListener;
+
+  @override
+  void initState() {
+    _connectivityListener = GetIt.I<ConnectivityService>()
+        .connectivityStream
+        .skip(1)
+        .distinct()
+        .listen(_onConnectivityChanged);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ThemeData>(
@@ -113,12 +127,39 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     );
   }
 
+  void _onConnectivityChanged(bool connected) {
+    final isScaffoldMessengerMounted =
+        scaffoldMessengerKey.currentState?.mounted ?? false;
+    final currentLifecycleState = WidgetsBinding.instance.lifecycleState;
+
+    if (currentLifecycleState == AppLifecycleState.resumed &&
+        isScaffoldMessengerMounted) {
+      if (connected) {
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.greenAccent,
+            content: Text('تم استرجاع الاتصال بالانترنت'),
+          ),
+        );
+      } else {
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text('لا يوجد اتصال بالانترنت!'),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Future<void> dispose() async {
+    super.dispose();
+
+    await _connectivityListener.cancel();
+
     if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.detached) {
       await GetIt.I.reset();
     }
-
-    super.dispose();
   }
 }

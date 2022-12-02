@@ -33,7 +33,7 @@ class Street extends ViewableWithID with _$Street implements PhotoObjectBase {
   CAStorageReference? get photoRef => hasPhoto
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () =>
+          downloadUrl: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('streets', id),
           fullPath: 'streets/$id.jpg',
         )

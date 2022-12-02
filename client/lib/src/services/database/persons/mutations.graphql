@@ -1,0 +1,222 @@
+mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}
+
+mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}
+
+mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
+  insertHistoryCallHistoryOne(
+    object: { personId: $personId, time: $lastCall }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}
+
+mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
+  insertHistoryVisitHistoryOne(
+    object: { personId: $personId, time: $lastVisit }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}
+
+mutation updatePersonSpiritData(
+  $personId: uuid!
+  $lastConfession: date!
+  $lastKodas: date!
+) {
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}
+
+mutation deletePerson($personId: uuid!) {
+  deletePersonsByPk(id: $personId) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}
+
+mutation updatePerson(
+  $personId: uuid!
+  $newPerson: PersonsSetInput!
+  $newGroups: [PersonsGroupsInsertInput!]! = []
+  $deleteGroups: [uuid!]
+  $newServices: [PersonsServicesInsertInput!]! = []
+  $deleteServices: [uuid!]
+  $newTags: [PersonsTagsInsertInput!]! = []
+  $deleteTags: [uuid!]
+  $lastConfession: date
+  $lastKodas: date
+  $lastCall: timestamptz
+  $lastVisit: timestamptz
+) {
+  updatePersonsByPk(pk_columns: { id: $personId }, _set: $newPerson) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+
+  insertPersonsServices(objects: $newServices) {
+    affected_rows
+  }
+  insertPersonsGroups(objects: $newGroups) {
+    affected_rows
+  }
+  insertPersonsTags(objects: $newTags) {
+    affected_rows
+  }
+
+  deletePersonsTags(
+    where: { personId: { _eq: $personId }, tagId: { _in: $deleteTags } }
+  ) {
+    affected_rows
+  }
+  deletePersonsGroups(
+    where: { personId: { _eq: $personId }, groupId: { _in: $deleteGroups } }
+  ) {
+    affected_rows
+  }
+  deletePersonsServices(
+    where: { personId: { _eq: $personId }, serviceId: { _in: $deleteServices } }
+  ) {
+    affected_rows
+  }
+
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryCallHistoryOne(
+    object: { personId: $personId, time: $lastCall }
+  ) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryVisitHistoryOne(
+    object: { personId: $personId, time: $lastVisit }
+  ) {
+    person {
+      id
+      name
+    }
+  }
+}
+
+mutation insertPerson($newPerson: PersonsInsertInput!) {
+  insertPersonsOne(object: $newPerson) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}

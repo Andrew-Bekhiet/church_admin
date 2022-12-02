@@ -6,7 +6,7 @@ part of 'study_year.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StudyYear _$$_StudyYearFromJson(Map<String, dynamic> json) => _$_StudyYear(
+_$_StudyYear _$$_StudyYearFromJson(Map json) => _$_StudyYear(
       order: json['order'] as int,
       name: json['name'] as String,
     );

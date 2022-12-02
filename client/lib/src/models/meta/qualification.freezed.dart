@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'qualification.dart';
 
@@ -33,34 +33,37 @@ mixin _$Qualification {
 abstract class $QualificationCopyWith<$Res> {
   factory $QualificationCopyWith(
           Qualification value, $Res Function(Qualification) then) =
-      _$QualificationCopyWithImpl<$Res>;
+      _$QualificationCopyWithImpl<$Res, Qualification>;
+  @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class _$QualificationCopyWithImpl<$Res>
+class _$QualificationCopyWithImpl<$Res, $Val extends Qualification>
     implements $QualificationCopyWith<$Res> {
   _$QualificationCopyWithImpl(this._value, this._then);
 
-  final Qualification _value;
   // ignore: unused_field
-  final $Res Function(Qualification) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,31 +74,30 @@ abstract class _$$_QualificationCopyWith<$Res>
           _$_Qualification value, $Res Function(_$_Qualification) then) =
       __$$_QualificationCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
 class __$$_QualificationCopyWithImpl<$Res>
-    extends _$QualificationCopyWithImpl<$Res>
+    extends _$QualificationCopyWithImpl<$Res, _$_Qualification>
     implements _$$_QualificationCopyWith<$Res> {
   __$$_QualificationCopyWithImpl(
       _$_Qualification _value, $Res Function(_$_Qualification) _then)
-      : super(_value, (v) => _then(v as _$_Qualification));
+      : super(_value, _then);
 
-  @override
-  _$_Qualification get _value => super._value as _$_Qualification;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_$_Qualification(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -126,19 +128,17 @@ class _$_Qualification extends _Qualification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Qualification &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_QualificationCopyWith<_$_Qualification> get copyWith =>
       __$$_QualificationCopyWithImpl<_$_Qualification>(this, _$identity);
 

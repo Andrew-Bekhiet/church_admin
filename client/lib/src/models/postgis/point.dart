@@ -1,4 +1,4 @@
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 class Point with EquatableMixin {

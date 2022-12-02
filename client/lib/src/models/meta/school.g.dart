@@ -6,7 +6,7 @@ part of 'school.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_School _$$_SchoolFromJson(Map<String, dynamic> json) => _$_School(
+_$_School _$$_SchoolFromJson(Map json) => _$_School(
       id: json['id'] as String,
       name: json['name'] as String,
     );

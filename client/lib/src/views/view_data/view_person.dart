@@ -43,7 +43,7 @@ class ViewPerson extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<Person?>(
       initialData: person,
-      stream: CADatabaseRepository.I.persons.watchPerson(personId: personId),
+      stream: CADatabaseRepository.I.persons.streamPerson(personId: personId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -176,15 +176,15 @@ class ViewPerson extends StatelessWidget {
                     PhoneNumberProperty(
                       'رقم الهاتف',
                       person.mainPhone,
-                      (n) => _phoneCall(context, n),
-                      (n) => _contactAdd(context, n, person),
+                      (n) async => _phoneCall(context, n),
+                      (n) async => _contactAdd(context, n, person),
                     ),
                     ...person.otherPhones.entries.map(
                       (e) => PhoneNumberProperty(
                         e.key,
                         e.value,
-                        (n) => _phoneCall(context, n),
-                        (n) => _contactAdd(context, n, person),
+                        (n) async => _phoneCall(context, n),
+                        (n) async => _contactAdd(context, n, person),
                       ),
                     ),
                     CopiablePropertyWidget(
@@ -194,7 +194,7 @@ class ViewPerson extends StatelessWidget {
                         if (person.geolocation != null)
                           IconButton(
                             icon: const Icon(Icons.map),
-                            onPressed: () => Navigator.of(context).push(
+                            onPressed: () async => Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
                                     DataGeomap(initialPerson: person),
@@ -324,8 +324,7 @@ class ViewPerson extends StatelessWidget {
                     ListTile(
                       title: const Text('خادم؟'),
                       subtitle: Text(person.isServant ? 'نعم' : 'لا'),
-                      trailing: person.isServant &&
-                              person.user?.userData?.email != null
+                      trailing: person.isServant && person.user?.email != null
                           ? IconButton(
                               onPressed: () => context.goNamed(
                                 'view_user',
@@ -350,7 +349,8 @@ class ViewPerson extends StatelessWidget {
                       trailing: person.state?.color == null
                           ? null
                           : ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
                               child: Container(
                                 width: 50,
                                 height: 50,
@@ -464,8 +464,8 @@ class ViewPerson extends StatelessWidget {
                       value: person.lastKodas?.time,
                       showTime: false,
                       getHistoryStream: () => CADatabaseRepository.I.persons
-                          .personKodasHistory(personId: person.id),
-                      onRecordNow: () =>
+                          .paginatePersonKodasHistory(personId: person.id),
+                      onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastKodas(
                         personId: personId,
                         lastKodas: DateTime.now(),
@@ -476,8 +476,8 @@ class ViewPerson extends StatelessWidget {
                       value: person.lastConfession?.time,
                       showTime: false,
                       getHistoryStream: () => CADatabaseRepository.I.persons
-                          .personConfessionHistory(personId: person.id),
-                      onRecordNow: () => CADatabaseRepository.I.persons
+                          .paginatePersonConfessionHistory(personId: person.id),
+                      onRecordNow: () async => CADatabaseRepository.I.persons
                           .updatePersonLastConfession(
                         personId: personId,
                         lastConfession: DateTime.now(),
@@ -488,8 +488,8 @@ class ViewPerson extends StatelessWidget {
                       name: 'أخر افتقاد',
                       value: person.lastVisit?.time,
                       getHistoryStream: () => CADatabaseRepository.I.persons
-                          .personVisitHistory(personId: person.id),
-                      onRecordNow: () =>
+                          .paginatePersonVisitHistory(personId: person.id),
+                      onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastVisit(
                         personId: personId,
                         lastVisit: DateTime.now(),
@@ -499,8 +499,8 @@ class ViewPerson extends StatelessWidget {
                       name: 'أخر مكالمة',
                       value: person.lastCall?.time,
                       getHistoryStream: () => CADatabaseRepository.I.persons
-                          .personCallHistory(personId: person.id),
-                      onRecordNow: () =>
+                          .paginatePersonCallHistory(personId: person.id),
+                      onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastCall(
                         personId: personId,
                         lastCall: DateTime.now(),
@@ -510,7 +510,7 @@ class ViewPerson extends StatelessWidget {
                       name: 'أخر تحديث للبيانات',
                       value: person.lastEdit?.time,
                       getHistoryStream: () => CADatabaseRepository.I.persons
-                          .personEditHistory(personId: person.id),
+                          .paginatePersonEditHistory(personId: person.id),
                     ),
                     const SizedBox(height: 50),
                   ],
@@ -523,7 +523,7 @@ class ViewPerson extends StatelessWidget {
     );
   }
 
-  Future<void> _analysis(BuildContext context, Person person) async {
+  void _analysis(BuildContext context, Person person) {
     context.goNamed(
       'person_analysis',
       queryParams: {
@@ -531,8 +531,11 @@ class ViewPerson extends StatelessWidget {
       },
       extra: {
         'person': person,
-        'onEditOptions': (context, options,
-                void Function(PersonAnalysisOptions) onComplete) =>
+        'onEditOptions': (
+          context,
+          options,
+          void Function(PersonAnalysisOptions) onComplete,
+        ) =>
             _SelectAttendanceOptions(
               person: person,
               onComplete: onComplete,
@@ -624,8 +627,9 @@ class ViewPerson extends StatelessWidget {
               ),
               actions: [
                 TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: const Text('حفظ جهة الاتصال'))
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('حفظ جهة الاتصال'),
+                )
               ],
             ),
           ) ==
@@ -667,36 +671,6 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   DateFormat get dateFormat =>
       DateFormat('yyyy/M/d' + (showTime ? '   h:m a' : ''), 'ar-EG');
 
-  Widget? _getSubtitle(BuildContext context, T o) => _hasSubtitle(o)
-      ? Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                (o as AttendanceAnalyzable)
-                    .attendanceHistoryAggregate!
-                    .aggregate
-                    .max!
-                    .toDurationString(),
-              ),
-            ),
-            Text(
-              dateFormat.format(
-                (o as AttendanceAnalyzable)
-                    .attendanceHistoryAggregate!
-                    .aggregate
-                    .max!,
-              ),
-              style: Theme.of(context).textTheme.overline,
-            ),
-          ],
-        )
-      : null;
-
-  bool _hasSubtitle(T o) =>
-      o is AttendanceAnalyzable &&
-      (o as AttendanceAnalyzable).attendanceHistoryAggregate?.aggregate.max !=
-          null;
-
   @override
   Widget build(BuildContext context) {
     final field = getField(person) ?? <T>[];
@@ -712,7 +686,12 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                   o,
                   isDense: true,
                   showSubtitle: _hasSubtitle(o),
-                  subtitle: _getSubtitle(context, o),
+                  subtitle: _hasSubtitle(o)
+                      ? _ShowMoreSubtitle(
+                          viewable: o,
+                          dateFormat: dateFormat,
+                        )
+                      : null,
                 ),
                 StreamBuilder<List<T>>(
                   initialData: const [],
@@ -728,7 +707,12 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                                 o,
                                 isDense: true,
                                 showSubtitle: _hasSubtitle(o),
-                                subtitle: _getSubtitle(context, o),
+                                subtitle: _hasSubtitle(o)
+                                    ? _ShowMoreSubtitle(
+                                        viewable: o,
+                                        dateFormat: dateFormat,
+                                      )
+                                    : null,
                               ),
                           ],
                         ),
@@ -740,8 +724,54 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
               o,
               isDense: true,
               showSubtitle: _hasSubtitle(o),
-              subtitle: _getSubtitle(context, o),
+              subtitle: _hasSubtitle(o)
+                  ? _ShowMoreSubtitle(
+                      viewable: o,
+                      dateFormat: dateFormat,
+                    )
+                  : null,
             ),
+      ],
+    );
+  }
+
+  bool _hasSubtitle(T o) =>
+      o is AttendanceAnalyzable &&
+      (o as AttendanceAnalyzable).attendanceHistoryAggregate?.aggregate.max !=
+          null;
+}
+
+class _ShowMoreSubtitle<T extends Viewable> extends StatelessWidget {
+  const _ShowMoreSubtitle({
+    required this.dateFormat,
+    required this.viewable,
+  });
+
+  final T viewable;
+  final DateFormat dateFormat;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            (viewable as AttendanceAnalyzable)
+                .attendanceHistoryAggregate!
+                .aggregate
+                .max!
+                .toDurationString(),
+          ),
+        ),
+        Text(
+          dateFormat.format(
+            (viewable as AttendanceAnalyzable)
+                .attendanceHistoryAggregate!
+                .aggregate
+                .max!,
+          ),
+          style: Theme.of(context).textTheme.overline,
+        ),
       ],
     );
   }
@@ -789,13 +819,6 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       );
 
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    selected.close();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -858,7 +881,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           builder: (context, state) {
                             return state.value != null
                                 ? Text(
-                                    DateFormat('yyyy/M/d').format(state.value!))
+                                    DateFormat('yyyy/M/d').format(state.value!),
+                                  )
                                 : null;
                           },
                           onSaved: (v) => dateRange = DateTimeRange(
@@ -897,7 +921,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           builder: (context, state) {
                             return state.value != null
                                 ? Text(
-                                    DateFormat('yyyy/M/d').format(state.value!))
+                                    DateFormat('yyyy/M/d').format(state.value!),
+                                  )
                                 : null;
                           },
                           onSaved: (v) => dateRange = DateTimeRange(
@@ -923,7 +948,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           } else {
                             selected.add(
                               selected.value.difference(
-                                {entry.key},
+                                <ViewableWithID>{entry.key},
                               ),
                             );
                           }
@@ -949,7 +974,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                   } else {
                                     selected.add(
                                       selected.value.difference(
-                                        {o},
+                                        <ViewableWithID>{o},
                                       ),
                                     );
                                   }
@@ -1025,5 +1050,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         ),
       ],
     );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await selected.close();
+
+    super.dispose();
   }
 }

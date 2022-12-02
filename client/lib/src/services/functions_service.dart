@@ -1,6 +1,5 @@
 // coverage:ignore-file
 import 'dart:async';
-import 'dart:convert';
 
 //TODO: support web
 
@@ -72,7 +71,7 @@ class CAFunctionsService extends FunctionsService {
         },
       ),
     );
-    return json.decode(response.data)['display_name'];
+    return response.data['display_name'];
   }
 
   Future<Response> uploadPhoto({
@@ -81,7 +80,7 @@ class CAFunctionsService extends FunctionsService {
     String? contentType,
     int? fileLength,
     void Function(int, int)? onSendProgress,
-  }) async {
+  }) {
     return GetIt.I<Dio>().put(
       url,
       data: fileStream,
@@ -93,5 +92,15 @@ class CAFunctionsService extends FunctionsService {
       ),
       onSendProgress: onSendProgress,
     );
+  }
+
+  Future<bool> checkHasuraHealth() async {
+    final res = await GetIt.I<Dio>()
+        .getUri(
+          Uri.parse(SecretsService.I.hasuraServer)
+              .replace(pathSegments: ['healthz']),
+        )
+        .timeout(const Duration(seconds: 15));
+    return res.data == 'OK';
   }
 }

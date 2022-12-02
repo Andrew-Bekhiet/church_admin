@@ -10,19 +10,24 @@ import 'package:universal_platform/universal_platform.dart';
 class LocalAuthService with WidgetsBindingObserver {
   static LocalAuthService get I => GetIt.I<LocalAuthService>();
 
-  final LocalAuthentication _localAuthPlugin = LocalAuthentication();
+  final Duration timeToReauth;
 
-  bool shouldAuthenticate = false;
+  final LocalAuthentication _localAuthPlugin;
+
+  bool get shouldAuthenticate => _shouldAuthenticate;
+  bool _shouldAuthenticate = false;
 
   Timer? _timer;
   Completer<bool>? _localAuthCompleter;
-  final Duration timeToReauth;
 
+  Stream<void> get refreshUIStream => _refreshUI.stream;
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
-  Stream<void> get refreshUIStream => _refreshUI.stream;
 
-  LocalAuthService({this.timeToReauth = const Duration(seconds: 30)}) {
+  LocalAuthService({
+    LocalAuthentication? localAuthPlugin,
+    this.timeToReauth = const Duration(seconds: 30),
+  }) : _localAuthPlugin = localAuthPlugin ?? GetIt.I<LocalAuthentication>() {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -31,8 +36,9 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   LocalAuthService.noInitialAuth({
+    LocalAuthentication? localAuthPlugin,
     this.timeToReauth = const Duration(seconds: 30),
-  }) {
+  }) : _localAuthPlugin = localAuthPlugin ?? GetIt.I<LocalAuthentication>() {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
@@ -45,48 +51,30 @@ class LocalAuthService with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed) {
       if (shouldAuthenticate) _refreshUI.add(null);
-    } else if (CAAuthRepository.I.isSignedIn && !shouldAuthenticate) {
+    } else if (AuthService.instance.isSignedIn && !shouldAuthenticate) {
       _timer = _createTimer();
     }
   }
 
   void scheduleReauth() {
-    shouldAuthenticate = true;
+    _shouldAuthenticate = true;
 
     final notificationsService = GetIt.I<CANotificationsService>();
 
-    if (!(notificationsService.onFCMTokenRefresh?.isPaused ?? false)) {
-      notificationsService.onFCMTokenRefresh?.pause();
-    }
-
-    if (!(notificationsService.onForegroundMessageSubscription?.isPaused ??
-        false)) {
-      notificationsService.onForegroundMessageSubscription?.pause();
-    }
-
-    if (!notificationsService.onMessageOpenedAppSubscription.isPaused) {
-      notificationsService.onMessageOpenedAppSubscription.pause();
+    if (!notificationsService.isPaused) {
+      notificationsService.pauseListeners();
     }
   }
 
   void resetAuthState() {
-    shouldAuthenticate = false;
+    _shouldAuthenticate = false;
 
     _refreshUI.add(null);
 
     final notificationsService = GetIt.I<CANotificationsService>();
 
-    if (notificationsService.onFCMTokenRefresh?.isPaused ?? false) {
-      notificationsService.onFCMTokenRefresh?.resume();
-    }
-
-    if (notificationsService.onForegroundMessageSubscription?.isPaused ??
-        false) {
-      notificationsService.onForegroundMessageSubscription?.resume();
-    }
-
-    if (notificationsService.onMessageOpenedAppSubscription.isPaused) {
-      notificationsService.onMessageOpenedAppSubscription.resume();
+    if (notificationsService.isPaused) {
+      notificationsService.resumeListeners();
     }
     _timer = null;
   }

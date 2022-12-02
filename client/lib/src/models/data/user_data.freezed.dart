@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_data.dart';
 
@@ -38,7 +38,8 @@ mixin _$UserData {
 /// @nodoc
 abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
-      _$UserDataCopyWithImpl<$Res>;
+      _$UserDataCopyWithImpl<$Res, UserData>;
+  @useResult
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
@@ -53,58 +54,62 @@ abstract class $UserDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
+class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
+    implements $UserDataCopyWith<$Res> {
   _$UserDataCopyWithImpl(this._value, this._then);
 
-  final UserData _value;
   // ignore: unused_field
-  final $Res Function(UserData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? permissions = freezed,
-    Object? email = freezed,
+    Object? uid = null,
+    Object? permissions = null,
+    Object? email = null,
     Object? firebaseAuthUid = freezed,
     Object? password = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
+      uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      permissions: permissions == freezed
+      permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
               as CAPermissionsSet,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firebaseAuthUid: firebaseAuthUid == freezed
+      firebaseAuthUid: freezed == firebaseAuthUid
           ? _value.firebaseAuthUid
           : firebaseAuthUid // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastEdit: lastEdit == freezed
+      lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
     if (_value.lastEdit == null) {
       return null;
     }
 
     return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value));
+      return _then(_value.copyWith(lastEdit: value) as $Val);
     });
   }
 }
@@ -115,6 +120,7 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
           _$_UserData value, $Res Function(_$_UserData) then) =
       __$$_UserDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
@@ -130,46 +136,45 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
+class __$$_UserDataCopyWithImpl<$Res>
+    extends _$UserDataCopyWithImpl<$Res, _$_UserData>
     implements _$$_UserDataCopyWith<$Res> {
   __$$_UserDataCopyWithImpl(
       _$_UserData _value, $Res Function(_$_UserData) _then)
-      : super(_value, (v) => _then(v as _$_UserData));
+      : super(_value, _then);
 
-  @override
-  _$_UserData get _value => super._value as _$_UserData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? permissions = freezed,
-    Object? email = freezed,
+    Object? uid = null,
+    Object? permissions = null,
+    Object? email = null,
     Object? firebaseAuthUid = freezed,
     Object? password = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_$_UserData(
-      uid: uid == freezed
+      uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      permissions: permissions == freezed
+      permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
               as CAPermissionsSet,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firebaseAuthUid: firebaseAuthUid == freezed
+      firebaseAuthUid: freezed == firebaseAuthUid
           ? _value.firebaseAuthUid
           : firebaseAuthUid // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastEdit: lastEdit == freezed
+      lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
@@ -218,29 +223,26 @@ class _$_UserData implements _UserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserData &&
-            const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality()
-                .equals(other.permissions, permissions) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality()
-                .equals(other.firebaseAuthUid, firebaseAuthUid) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.lastEdit, lastEdit));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.permissions, permissions) ||
+                other.permissions == permissions) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.firebaseAuthUid, firebaseAuthUid) ||
+                other.firebaseAuthUid == firebaseAuthUid) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uid),
-      const DeepCollectionEquality().hash(permissions),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(firebaseAuthUid),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(lastEdit));
+  int get hashCode => Object.hash(runtimeType, uid, permissions, email,
+      firebaseAuthUid, password, lastEdit);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserDataCopyWith<_$_UserData> get copyWith =>
       __$$_UserDataCopyWithImpl<_$_UserData>(this, _$identity);
 

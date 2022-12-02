@@ -6,31 +6,30 @@ part of 'admin_on_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AdminOnData _$$_AdminOnDataFromJson(Map<String, dynamic> json) =>
-    _$_AdminOnData(
+_$_AdminOnData _$$_AdminOnDataFromJson(Map json) => _$_AdminOnData(
       permissionId: json['permissionId'] as String,
       area: json['area'] == null
           ? null
-          : Area.fromJson(json['area'] as Map<String, dynamic>),
+          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
       areaAllowEdit: json['areaAllowEdit'] as bool?,
       areaAdminOnUsers: json['areaAdminOnUsers'] as bool?,
       service: json['service'] == null
           ? null
-          : Service.fromJson(json['service'] as Map<String, dynamic>),
+          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
       serviceStudyYearData: json['serviceStudyYearData'] == null
           ? null
           : StudyYear.fromJson(
-              json['serviceStudyYearData'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['serviceStudyYearData'] as Map)),
       serviceGender: json['serviceGender'] as bool?,
       serviceAllowEdit: json['serviceAllowEdit'] as bool?,
       serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
       classes: (json['classes'] as List<dynamic>?)
-              ?.map((e) => Class.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
               .toList() ??
           const [],
       group: json['group'] == null
           ? null
-          : Group.fromJson(json['group'] as Map<String, dynamic>),
+          : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
       groupAllowEdit: json['groupAllowEdit'] as bool?,
       groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
     );

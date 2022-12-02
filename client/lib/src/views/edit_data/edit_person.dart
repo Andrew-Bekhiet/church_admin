@@ -57,13 +57,12 @@ class EditPerson extends StatefulWidget {
 }
 
 class _EditPersonState extends State<EditPerson> {
-  bool _saveLock = false;
-
-  final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
   late Person initialPerson =
       widget.person ?? Person(id: const Uuid().v4(), name: 'مخدوم جديد');
   late Person newPerson = initialPerson;
+
+  bool _saveLock = false;
+  final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   String? _suggestedAddress;
   _PersonPhotoState _photoState = _PersonPhotoState(deletePhoto: false);
@@ -85,291 +84,12 @@ class _EditPersonState extends State<EditPerson> {
           newPerson = initialPerson = fullData;
           _fullDataLoaded = true;
 
-          setState(() {});
+          if (mounted) {
+            setState(() {});
+          }
         },
       );
     }
-  }
-
-  Future<void> _delete() async {
-    final navigator = Navigator.of(context);
-    final rslt = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('هل تريد حذف ' + initialPerson.name + '؟'),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('لا'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('نعم'),
-          ),
-        ],
-      ),
-    );
-
-    if (rslt == true) {
-      await CADatabaseRepository.I.persons
-          .deletePerson(personId: initialPerson.id);
-      navigator.pop();
-    }
-  }
-
-  Future<Object?> _getPhoneFieldName(
-      [bool canDelete = false, String? initialName]) async {
-    final name = TextEditingController(text: initialName);
-    final innerForm = GlobalKey<FormState>();
-
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('اسم الهاتف'),
-        content: Form(
-          key: innerForm,
-          child: TextFormField(
-            controller: name,
-            decoration: const InputDecoration(
-              hintText: 'مثال: رقم المنزل',
-            ),
-            validator: (v) => v == null || v.isEmpty
-                ? 'برجاء ادخال اسم رقم الهاتف'
-                : GetIt.I<PhoneNumberService>().validate(v)
-                    ? 'لا يجب ادخال رقم الهاتف هنا'
-                    : null,
-          ),
-        ),
-        actions: [
-          if (canDelete)
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('حذف'),
-            ),
-          OutlinedButton(
-            onPressed: () => innerForm.currentState!.validate()
-                ? Navigator.of(context).pop(name.text)
-                : null,
-            child: const Text('حفظ'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _importFromContacts() async {
-    FocusScope.of(context).requestFocus();
-
-    final permissionStatus = await Permission.contacts.request();
-    if (permissionStatus != PermissionStatus.granted &&
-        permissionStatus != PermissionStatus.limited) {
-      return;
-    }
-
-    final contact = await GetIt.I<ContactsService>().pickContact();
-    if (contact == null) return;
-
-    bool importName = false;
-    final Set<Tuple2<String, String>> numbersToImport = {};
-
-    final rslt = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('اختيار العناصر'),
-        content: StatefulBuilder(
-          builder: (context, setState) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CheckboxListTile(
-                    title: const Text('الاسم'),
-                    subtitle: Text(contact.displayName),
-                    value: importName,
-                    onChanged: (v) => setState(() => importName = v!),
-                  ),
-                  ...contact.phones
-                      .where(
-                    (e) => e.normalizedNumber.isNotEmpty || e.number.isNotEmpty,
-                  )
-                      .map(
-                    (e) {
-                      final String label = e.customLabel.isNotEmpty
-                          ? e.customLabel
-                          : e.label.name;
-                      final String value = e.normalizedNumber.isNotEmpty
-                          ? e.normalizedNumber
-                          : e.number;
-
-                      return CheckboxListTile(
-                        title: Text(label),
-                        subtitle: Text(value),
-                        value: numbersToImport.contains(Tuple2(label, value)),
-                        onChanged: (v) => setState(
-                          () => v ?? false
-                              ? numbersToImport.add(Tuple2(label, value))
-                              : numbersToImport.remove(Tuple2(label, value)),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('تم'),
-          ),
-        ],
-      ),
-    );
-
-    if (rslt == true) {
-      newPerson = newPerson.copyWith(
-        name: importName ? contact.displayName : newPerson.name,
-        otherPhones: {
-          ...newPerson.otherPhones,
-          for (final n in numbersToImport) n.item1: n.item2,
-        },
-      );
-      setState(() {});
-    }
-  }
-
-  Future<void> _selectServices(
-    FormFieldState<Tuple2<Set<Service>, Set<Group>>> state,
-  ) async {
-    final focusScope = FocusScope.of(state.context);
-    final Set<Service>? rslt = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => _SelectServicesPage(
-          selected: state.value != null
-              ? _combineGroupsWithServices(
-                      state.value!.item1, state.value!.item2)
-                  .toSet()
-              : {},
-        ),
-      ),
-    );
-
-    if (rslt != null) {
-      final services = rslt;
-      final groups = rslt
-          .map((s) => s.groups?.map((g) => g.copyWith(service: s)) ?? [])
-          .expand((e) => e)
-          .toSet();
-      WidgetsBinding.instance.addPostFrameCallback(
-          (_) => state.didChange(Tuple2(services, groups)));
-      newPerson = newPerson.copyWith(
-        services: services.toList(),
-        groups: groups.toList(),
-      );
-      focusScope.nextFocus();
-    }
-  }
-
-  Future<void> _selectColor(FormFieldState<Color?> state) async {
-    final Color newColor = await showColorPickerDialog(
-      state.context,
-      state.value ?? Colors.transparent,
-      title: Text(
-        'اختيار اللون',
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      spacing: 10,
-      runSpacing: 10,
-      borderRadius: 20,
-      wheelDiameter: 165,
-      enableOpacity: true,
-      enableTonalPalette: true,
-      showColorCode: true,
-      colorCodeHasColor: true,
-      pickersEnabled: <ColorPickerType, bool>{
-        ColorPickerType.wheel: true,
-        ColorPickerType.primary: false,
-        ColorPickerType.accent: false,
-      },
-      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-        copyButton: true,
-        pasteButton: true,
-        longPressMenu: true,
-      ),
-      barrierColor: Colors.black54,
-      constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height * 0.8,
-        minWidth: MediaQuery.of(context).size.height * 0.7,
-      ),
-    );
-    state.didChange(newColor);
-    setState(
-      () => newPerson = newPerson.copyWith(color: newColor),
-    );
-  }
-
-  Future<void> _editGeoLocation(BuildContext context) async {
-    final Person? result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => DataGeomap(
-          editPerson: true,
-          initialPerson: newPerson,
-          initialLayers: const {
-            GeoMapLayer.areas,
-            GeoMapLayer.families,
-            GeoMapLayer.streets,
-          },
-        ),
-      ),
-    );
-    if (result != null) {
-      newPerson = result;
-      final address = await GetIt.I<CAFunctionsService>()
-          .getAddressFromLocation(result.geolocation!);
-
-      if (address != null) setState(() => _suggestedAddress = address);
-    }
-  }
-
-  String? _personGeneralCheckValidator([_]) {
-    if (newPerson.geolocation == null &&
-        (newPerson.family == null || newPerson.familyId == null) &&
-        (newPerson.services?.isEmpty ?? true) &&
-        (newPerson.groups?.isEmpty ?? true)) {
-      return 'يجب تحديد على الأقل واحد من الآتي:\n'
-          '(الموقع الجغرافي - العائلة - خدمة أو أكثر - مجموعة أو أكثر)';
-    } else {
-      return null;
-    }
-  }
-
-  String? _validatePhoneField(v) =>
-      v != null && !GetIt.I<PhoneNumberService>().validate(v)
-          ? 'برجاء ادخال رقم هاتف صالح'
-          : null;
-
-  Future<bool> _confirmExit() async {
-    _form.currentState!.save();
-    return newPerson == initialPerson ||
-        (await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('هل تريد تجاهل التغييرات؟'),
-                actions: [
-                  OutlinedButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text('البقاء'),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: const Text('تجاهل'),
-                  ),
-                ],
-              ),
-            ) ??
-            false);
   }
 
   @override
@@ -404,7 +124,7 @@ class _EditPersonState extends State<EditPerson> {
 
                       if (source == null) {
                         return;
-                      } else if (source == true) {
+                      } else if (source == ImagePickerService.deleteImage) {
                         state
                           ..didChange(_PersonPhotoState(deletePhoto: true))
                           ..save();
@@ -432,7 +152,7 @@ class _EditPersonState extends State<EditPerson> {
                     tooltip: 'اختيار صورة',
                   ),
                   if (widget.person != null &&
-                      widget.person?.user?.userData?.email == null)
+                      widget.person?.user?.email == null)
                     IconButton(
                       onPressed: _delete,
                       icon: const Icon(Icons.delete),
@@ -602,27 +322,31 @@ class _EditPersonState extends State<EditPerson> {
                                             onPressed: () async {
                                               final name =
                                                   await _getPhoneFieldName(
-                                                      true, e.key);
+                                                true,
+                                                e.key,
+                                              );
 
                                               if (name == true) {
-                                                newPerson = newPerson
-                                                    .copyWith(otherPhones: {
-                                                  for (final p in newPerson
-                                                      .otherPhones.entries)
-                                                    if (p.key != e.key)
-                                                      p.key: p.value
-                                                });
+                                                newPerson = newPerson.copyWith(
+                                                  otherPhones: {
+                                                    for (final p in newPerson
+                                                        .otherPhones.entries)
+                                                      if (p.key != e.key)
+                                                        p.key: p.value
+                                                  },
+                                                );
 
                                                 setState(() {});
                                               } else if (name is String) {
-                                                newPerson = newPerson
-                                                    .copyWith(otherPhones: {
-                                                  for (final p in newPerson
-                                                      .otherPhones.entries)
-                                                    if (p.key != e.key)
-                                                      p.key: p.value,
-                                                  name: e.value
-                                                });
+                                                newPerson = newPerson.copyWith(
+                                                  otherPhones: {
+                                                    for (final p in newPerson
+                                                        .otherPhones.entries)
+                                                      if (p.key != e.key)
+                                                        p.key: p.value,
+                                                    name: e.value
+                                                  },
+                                                );
 
                                                 setState(() {});
                                               }
@@ -676,11 +400,12 @@ class _EditPersonState extends State<EditPerson> {
                                   onPressed: () async {
                                     final name = await _getPhoneFieldName();
                                     if (name is String) {
-                                      newPerson =
-                                          newPerson.copyWith(otherPhones: {
-                                        ...newPerson.otherPhones,
-                                        name: '',
-                                      });
+                                      newPerson = newPerson.copyWith(
+                                        otherPhones: {
+                                          ...newPerson.otherPhones,
+                                          name: '',
+                                        },
+                                      );
                                       setState(() {});
                                     }
                                   },
@@ -696,7 +421,8 @@ class _EditPersonState extends State<EditPerson> {
                               decoration: InputDecoration(
                                 labelText: 'العنوان والموقع',
                                 suffixIcon: IconButton(
-                                  onPressed: () => _editGeoLocation(context),
+                                  onPressed: () async =>
+                                      _editGeoLocation(context),
                                   icon: const Icon(Icons.edit_location),
                                 ),
                               ),
@@ -761,8 +487,8 @@ class _EditPersonState extends State<EditPerson> {
                                   newPerson.studyYear != null &&
                                   v!.item1.any(
                                     (s) =>
-                                        s.fromStudyYear != null &&
-                                        s.toStudyYear != null &&
+                                        s.fromStudyYear == null ||
+                                        s.toStudyYear == null ||
                                         (newPerson.studyYear!.order <
                                                 s.fromStudyYear!.order ||
                                             newPerson.studyYear!.order >
@@ -846,26 +572,24 @@ class _EditPersonState extends State<EditPerson> {
                               value: state.value,
                               onChanged: (v) {
                                 state.didChange(v);
-                                if (v!) {
-                                  newPerson = newPerson.copyWith(
-                                    isStudent: v,
-                                    qualification: null,
-                                    qualificationId: null,
-                                    job: null,
-                                    jobId: null,
-                                    jobDescription: null,
-                                  );
-                                } else {
-                                  newPerson = newPerson.copyWith(
-                                    isStudent: v,
-                                    studyYear: null,
-                                    studyYearId: null,
-                                    college: null,
-                                    collegeId: null,
-                                    school: null,
-                                    schoolId: null,
-                                  );
-                                }
+                                newPerson = v!
+                                    ? newPerson.copyWith(
+                                        isStudent: v,
+                                        qualification: null,
+                                        qualificationId: null,
+                                        job: null,
+                                        jobId: null,
+                                        jobDescription: null,
+                                      )
+                                    : newPerson.copyWith(
+                                        isStudent: v,
+                                        studyYear: null,
+                                        studyYearId: null,
+                                        college: null,
+                                        collegeId: null,
+                                        school: null,
+                                        schoolId: null,
+                                      );
                                 setState(() {});
                               },
                             ),
@@ -1033,16 +757,14 @@ class _EditPersonState extends State<EditPerson> {
                               ),
                             ],
                             onChanged: (v) {
-                              if (v!) {
-                                newPerson = newPerson.copyWith(gender: v);
-                              } else {
-                                newPerson = newPerson.copyWith(
-                                  gender: v,
-                                  isShammas: false,
-                                  shammasLevel: null,
-                                  shammasLevelId: null,
-                                );
-                              }
+                              newPerson = v!
+                                  ? newPerson.copyWith(gender: v)
+                                  : newPerson.copyWith(
+                                      gender: v,
+                                      isShammas: false,
+                                      shammasLevel: null,
+                                      shammasLevelId: null,
+                                    );
                               setState(() {});
                             },
                             value: newPerson.gender,
@@ -1079,16 +801,13 @@ class _EditPersonState extends State<EditPerson> {
                                 value: state.value,
                                 onChanged: (v) {
                                   state.didChange(v);
-                                  if (v!) {
-                                    newPerson =
-                                        newPerson.copyWith(isShammas: v);
-                                  } else {
-                                    newPerson = newPerson.copyWith(
-                                      isShammas: v,
-                                      shammasLevel: null,
-                                      shammasLevelId: null,
-                                    );
-                                  }
+                                  newPerson = v!
+                                      ? newPerson.copyWith(isShammas: v)
+                                      : newPerson.copyWith(
+                                          isShammas: v,
+                                          shammasLevel: null,
+                                          shammasLevelId: null,
+                                        );
                                   setState(() {});
                                 },
                               ),
@@ -1202,7 +921,9 @@ class _EditPersonState extends State<EditPerson> {
                                             ? null
                                             : ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                    const BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
                                                 child: Container(
                                                   width: 50,
                                                   height: 50,
@@ -1301,7 +1022,7 @@ class _EditPersonState extends State<EditPerson> {
                             initialValue: newPerson.color,
                             builder: (state) => ListTile(
                               title: const Text('اللون'),
-                              onTap: () => _selectColor(state),
+                              onTap: () async => _selectColor(state),
                               trailing: ColorIndicator(
                                 width: 50,
                                 height: 50,
@@ -1374,7 +1095,7 @@ class _EditPersonState extends State<EditPerson> {
                                   lastKodas: LastRecordedByInfo(
                                     time: v,
                                     recordedBy:
-                                        CAAuthRepository.I.currentUser?.uid,
+                                        AuthService.instance.currentUser?.uid,
                                   ),
                                 );
                               }
@@ -1390,7 +1111,7 @@ class _EditPersonState extends State<EditPerson> {
                                   lastConfession: LastRecordedByInfo(
                                     time: v,
                                     recordedBy:
-                                        CAAuthRepository.I.currentUser?.uid,
+                                        AuthService.instance.currentUser?.uid,
                                   ),
                                 );
                               }
@@ -1407,7 +1128,7 @@ class _EditPersonState extends State<EditPerson> {
                                   lastVisit: LastRecordedByInfo(
                                     time: v,
                                     recordedBy:
-                                        CAAuthRepository.I.currentUser?.uid,
+                                        AuthService.instance.currentUser?.uid,
                                   ),
                                 );
                               }
@@ -1423,7 +1144,7 @@ class _EditPersonState extends State<EditPerson> {
                                   lastCall: LastRecordedByInfo(
                                     time: v,
                                     recordedBy:
-                                        CAAuthRepository.I.currentUser?.uid,
+                                        AuthService.instance.currentUser?.uid,
                                   ),
                                 );
                               }
@@ -1447,6 +1168,292 @@ class _EditPersonState extends State<EditPerson> {
         child: const Icon(Icons.save),
       ),
     );
+  }
+
+  Future<void> _delete() async {
+    final navigator = Navigator.of(context);
+    final rslt = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('هل تريد حذف ' + initialPerson.name + '؟'),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('لا'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('نعم'),
+          ),
+        ],
+      ),
+    );
+
+    if (rslt == true) {
+      await CADatabaseRepository.I.persons
+          .deletePerson(personId: initialPerson.id);
+      navigator.pop();
+    }
+  }
+
+  Future<Object?> _getPhoneFieldName([
+    bool canDelete = false,
+    String? initialName,
+  ]) {
+    final name = TextEditingController(text: initialName);
+    final innerForm = GlobalKey<FormState>();
+
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('اسم الهاتف'),
+        content: Form(
+          key: innerForm,
+          child: TextFormField(
+            controller: name,
+            decoration: const InputDecoration(
+              hintText: 'مثال: رقم المنزل',
+            ),
+            validator: (v) => v == null || v.isEmpty
+                ? 'برجاء ادخال اسم رقم الهاتف'
+                : GetIt.I<PhoneNumberService>().validate(v)
+                    ? 'لا يجب ادخال رقم الهاتف هنا'
+                    : null,
+          ),
+        ),
+        actions: [
+          if (canDelete)
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('حذف'),
+            ),
+          OutlinedButton(
+            onPressed: () => innerForm.currentState!.validate()
+                ? Navigator.of(context).pop(name.text)
+                : null,
+            child: const Text('حفظ'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _importFromContacts() async {
+    FocusScope.of(context).requestFocus();
+
+    final permissionStatus = await Permission.contacts.request();
+    if (permissionStatus != PermissionStatus.granted &&
+        permissionStatus != PermissionStatus.limited) {
+      return;
+    }
+
+    final contact = await GetIt.I<ContactsService>().pickContact();
+    if (contact == null) return;
+
+    bool importName = false;
+    final Set<Tuple2<String, String>> numbersToImport = {};
+
+    final rslt = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('اختيار العناصر'),
+        content: StatefulBuilder(
+          builder: (context, setState) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CheckboxListTile(
+                    title: const Text('الاسم'),
+                    subtitle: Text(contact.displayName),
+                    value: importName,
+                    onChanged: (v) => setState(() => importName = v!),
+                  ),
+                  ...contact.phones
+                      .where(
+                    (e) => e.normalizedNumber.isNotEmpty || e.number.isNotEmpty,
+                  )
+                      .map(
+                    (e) {
+                      final String label = e.customLabel.isNotEmpty
+                          ? e.customLabel
+                          : e.label.name;
+                      final String value = e.normalizedNumber.isNotEmpty
+                          ? e.normalizedNumber
+                          : e.number;
+
+                      return CheckboxListTile(
+                        title: Text(label),
+                        subtitle: Text(value),
+                        value: numbersToImport.contains(Tuple2(label, value)),
+                        onChanged: (v) => setState(
+                          () => v ?? false
+                              ? numbersToImport.add(Tuple2(label, value))
+                              : numbersToImport.remove(Tuple2(label, value)),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('تم'),
+          ),
+        ],
+      ),
+    );
+
+    if (rslt == true) {
+      newPerson = newPerson.copyWith(
+        name: importName ? contact.displayName : newPerson.name,
+        otherPhones: {
+          ...newPerson.otherPhones,
+          for (final n in numbersToImport) n.item1: n.item2,
+        },
+      );
+      setState(() {});
+    }
+  }
+
+  Future<void> _selectServices(
+    FormFieldState<Tuple2<Set<Service>, Set<Group>>> state,
+  ) async {
+    final focusScope = FocusScope.of(state.context);
+    final Set<Service>? rslt = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => _SelectServicesPage(
+          selected: state.value != null
+              ? _combineGroupsWithServices(
+                  state.value!.item1,
+                  state.value!.item2,
+                ).toSet()
+              : {},
+        ),
+      ),
+    );
+
+    if (rslt != null) {
+      final services = rslt;
+      final groups = rslt
+          .map((s) => s.groups?.map((g) => g.copyWith(service: s)) ?? [])
+          .expand((e) => e)
+          .toSet();
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => state.didChange(Tuple2(services, groups)),
+      );
+      newPerson = newPerson.copyWith(
+        services: services.toList(),
+        groups: groups.toList(),
+      );
+      focusScope.nextFocus();
+    }
+  }
+
+  Future<void> _selectColor(FormFieldState<Color?> state) async {
+    final Color newColor = await showColorPickerDialog(
+      state.context,
+      state.value ?? Colors.transparent,
+      title: Text(
+        'اختيار اللون',
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      spacing: 10,
+      runSpacing: 10,
+      borderRadius: 20,
+      wheelDiameter: 165,
+      enableOpacity: true,
+      enableTonalPalette: true,
+      showColorCode: true,
+      colorCodeHasColor: true,
+      pickersEnabled: <ColorPickerType, bool>{
+        ColorPickerType.wheel: true,
+        ColorPickerType.primary: false,
+        ColorPickerType.accent: false,
+        ColorPickerType.both: false,
+        ColorPickerType.bw: false,
+        ColorPickerType.custom: false,
+      },
+      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+        copyButton: true,
+        pasteButton: true,
+        longPressMenu: true,
+      ),
+      barrierColor: Colors.black54,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.8,
+        minWidth: MediaQuery.of(context).size.height * 0.7,
+      ),
+    );
+    state.didChange(newColor);
+    setState(
+      () => newPerson = newPerson.copyWith(color: newColor),
+    );
+  }
+
+  Future<void> _editGeoLocation(BuildContext context) async {
+    final Person? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DataGeomap(
+          editPerson: true,
+          initialPerson: newPerson,
+          initialLayers: const {
+            GeoMapLayer.areas,
+            GeoMapLayer.families,
+            GeoMapLayer.streets,
+          },
+        ),
+      ),
+    );
+    if (result != null) {
+      newPerson = result;
+      final address = await GetIt.I<CAFunctionsService>()
+          .getAddressFromLocation(result.geolocation!);
+
+      if (address != null) setState(() => _suggestedAddress = address);
+    }
+  }
+
+  String? _personGeneralCheckValidator([_]) {
+    return newPerson.geolocation == null &&
+            (newPerson.family == null || newPerson.familyId == null) &&
+            (newPerson.services?.isEmpty ?? true) &&
+            (newPerson.groups?.isEmpty ?? true)
+        ? 'يجب تحديد على الأقل واحد من الآتي:\n'
+            '(الموقع الجغرافي - العائلة - خدمة أو أكثر - مجموعة أو أكثر)'
+        : null;
+  }
+
+  String? _validatePhoneField(v) =>
+      v != null && !GetIt.I<PhoneNumberService>().validate(v)
+          ? 'برجاء ادخال رقم هاتف صالح'
+          : null;
+
+  Future<bool> _confirmExit() async {
+    _form.currentState!.save();
+    return newPerson == initialPerson ||
+        (await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('هل تريد تجاهل التغييرات؟'),
+                actions: [
+                  OutlinedButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text('البقاء'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: const Text('تجاهل'),
+                  ),
+                ],
+              ),
+            ) ??
+            false);
   }
 
   Future<void> _save() async {
@@ -1540,10 +1547,12 @@ class _EditPersonState extends State<EditPerson> {
     } on Exception catch (e, stackTrace) {
       scaffoldMessenger.hideCurrentSnackBar();
 
-      unawaited(showDialog(
-        context: context,
-        builder: (context) => CAErrorDialog(exception: e),
-      ));
+      unawaited(
+        showDialog(
+          context: context,
+          builder: (context) => CAErrorDialog(exception: e),
+        ),
+      );
 
       unawaited(
         GetIt.I<LoggingService>().reportError(
@@ -1608,8 +1617,6 @@ class _SelectServicesPage extends StatefulWidget {
 
 class __SelectServicesPageState extends State<_SelectServicesPage>
     with TickerProviderStateMixin {
-  final _animationControllers = <Object, AnimationController>{};
-
   final search = BehaviorSubject<String?>.seeded(null);
   late final listController = ListControllerBase<void, Service>(
     objectsPaginatableStream: CADatabaseRepository.I.services.getServicesStream(
@@ -1623,6 +1630,8 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
       for (final s in widget.selected) s.id: s,
     },
   );
+
+  final _animationControllers = <Object, AnimationController>{};
 
   @override
   Widget build(BuildContext context) {
@@ -1660,10 +1669,11 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
                 selected.add({
                   ...selected.value,
                   service.id: (selected.value[service.id] ?? service).copyWith(
-                      groups: [
-                        ...selected.value[service.id]?.groups ?? [],
-                        group
-                      ])
+                    groups: [
+                      ...selected.value[service.id]?.groups ?? [],
+                      group
+                    ],
+                  )
                 });
               } else {
                 selected.add({

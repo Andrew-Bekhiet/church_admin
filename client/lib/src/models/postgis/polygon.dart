@@ -1,7 +1,5 @@
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
-
-import 'point.dart';
 
 class Polygon with EquatableMixin {
   final List<Point> coordinates;

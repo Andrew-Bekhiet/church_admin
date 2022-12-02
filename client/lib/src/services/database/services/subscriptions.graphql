@@ -1,0 +1,46 @@
+subscription getServicesStream(
+  $where: [ServicesBoolExp!] = {}
+  $groupsWhere: [GroupsBoolExp!] = {}
+  $classesWhere: [ClassesBoolExp!] = {}
+  $orderBy: [ServicesOrderBy!] = { studyYearFrom: ASC, studyYearTo: ASC }
+  $classesOrderBy: [ClassesOrderBy!] = {
+    studyYear: { order: ASC }
+    serviceGender: DESC_NULLS_LAST
+  }
+  $groupsOrderBy: [GroupsOrderBy!] = {
+    service: { studyYearFrom: ASC, studyYearTo: ASC }
+  }
+  $limit: Int = 200
+) {
+  services(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    id
+    name
+    color
+    photoUpdatedAt
+    fromStudyYear {
+      name
+      order
+    }
+    toStudyYear {
+      name
+      order
+    }
+    classes(where: { _and: $classesWhere }, orderBy: $classesOrderBy) {
+      id
+      name
+      color
+      photoUpdatedAt
+
+      studyYear {
+        name
+        order
+      }
+    }
+    groups(where: { _and: $groupsWhere }, orderBy: $groupsOrderBy) {
+      id
+      name
+      color
+      photoUpdatedAt
+    }
+  }
+}

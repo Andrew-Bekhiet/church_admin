@@ -7,7 +7,7 @@ part of 'aggregate_data.dart';
 // **************************************************************************
 
 _$_AggregateData<T> _$$_AggregateDataFromJson<T>(
-  Map<String, dynamic> json,
+  Map json,
   T Function(Object? json) fromJsonT,
 ) =>
     _$_AggregateData<T>(

@@ -1,7 +1,0 @@
-subscription getTagsStream($addWhere: [TagsBoolExp!] = {}, $limit: Int = 25) {
-  tags(where: { _and: $addWhere }, orderBy: { name: ASC }, limit: $limit) {
-    id
-    name
-    color
-  }
-}

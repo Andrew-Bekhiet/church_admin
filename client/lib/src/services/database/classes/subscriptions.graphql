@@ -1,0 +1,12 @@
+subscription getClassesStream(
+  $limit: Int = 200
+  $orderBy: [ClassesOrderBy!] = { name: ASC }
+  $where: [ClassesBoolExp!] = {}
+) {
+  classes(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
+    id
+    name
+    color
+    photoUpdatedAt
+  }
+}

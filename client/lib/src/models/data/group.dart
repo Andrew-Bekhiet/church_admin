@@ -47,7 +47,7 @@ class Group extends ViewableWithID
   CAStorageReference? get photoRef => hasPhoto
       ? CAStorageReference(
           photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () =>
+          downloadUrl: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('areas', id),
           fullPath: 'areas/$id.jpg',
         )

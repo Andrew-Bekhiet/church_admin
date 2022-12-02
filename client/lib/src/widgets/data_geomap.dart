@@ -66,6 +66,57 @@ class DataGeomap extends StatefulWidget {
 }
 
 class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
+  //Requests location permission, converts result to stream,
+  //then fetches geolocations stream and combine the two results
+  late final Stream<Tuple3<String, Position?, Map<Type, Set<Object>>?>>?
+      stream = Rx.combineLatest3(
+    _locationMemoizer
+        .runOnce(
+          () async {
+            final permissionStatus = await Permission.location.request();
+            if (await Geolocator.isLocationServiceEnabled() &&
+                (permissionStatus == PermissionStatus.granted ||
+                    permissionStatus == PermissionStatus.limited)) {
+              return Geolocator.getCurrentPosition();
+            }
+            return null;
+          },
+        )
+        .asStream()
+        .startWith(null),
+    PackageInfo.fromPlatform().asStream(),
+    _mapOptions.switchMap(
+      (options) => CADatabaseRepository.I.persons.getPersonsGeolocations(
+        personId: options.selectedAreas.isEmpty &&
+                options.selectedStreets.isEmpty &&
+                options.selectedFamilies.isEmpty &&
+                options.selectedClasses.isEmpty &&
+                options.selectedGroups.isEmpty &&
+                options.selectedServices.isEmpty
+            ? widget.initialPerson?.id
+            : null,
+        getAreas: options.layers.contains(GeoMapLayer.areas),
+        getFamilies: options.layers.contains(GeoMapLayer.families),
+        getStreets: options.layers.contains(GeoMapLayer.streets),
+        getPersons: options.layers.contains(GeoMapLayer.persons),
+        areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
+        streetsIds:
+            options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
+        familiesIds:
+            options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
+        classesIds:
+            options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
+        servicesIds:
+            options.selectedServices.map((e) => UuidValue(e.id)).toList(),
+        groupsIds: options.selectedGroups.map((e) => UuidValue(e.id)).toList(),
+      ),
+    ),
+    (location, packageInfo, data) =>
+        Tuple3(packageInfo.packageName, location, data),
+  );
+
+  late BehaviorSubject<Person>? resultPerson =
+      widget.editPerson ? BehaviorSubject.seeded(widget.initialPerson!) : null;
   final _sheetScrollController = ScrollController();
 
   final _locationMemoizer = AsyncMemoizer<Position?>();
@@ -101,88 +152,6 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
   GeoMapOptions get _currentMapOptions => _mapOptions.value;
 
   final MapController _mapController = MapController();
-
-  //Requests location permission, converts result to stream,
-  //then fetches geolocations stream and combine the two results
-  late final stream = Rx.combineLatest3(
-    _locationMemoizer
-        .runOnce(
-          () async {
-            final permissionStatus = await Permission.location.request();
-            if (await Geolocator.isLocationServiceEnabled() &&
-                (permissionStatus == PermissionStatus.granted ||
-                    permissionStatus == PermissionStatus.limited)) {
-              return Geolocator.getCurrentPosition();
-            }
-            return null;
-          },
-        )
-        .asStream()
-        .startWith(null),
-    PackageInfo.fromPlatform().asStream(),
-    _mapOptions.switchMap(
-      (options) => CADatabaseRepository.I.persons.personsGeolocations(
-        personId: options.selectedAreas.isEmpty &&
-                options.selectedStreets.isEmpty &&
-                options.selectedFamilies.isEmpty &&
-                options.selectedClasses.isEmpty &&
-                options.selectedGroups.isEmpty &&
-                options.selectedServices.isEmpty
-            ? widget.initialPerson?.id
-            : null,
-        getAreas: options.layers.contains(GeoMapLayer.areas),
-        getFamilies: options.layers.contains(GeoMapLayer.families),
-        getStreets: options.layers.contains(GeoMapLayer.streets),
-        getPersons: options.layers.contains(GeoMapLayer.persons),
-        areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
-        streetsIds:
-            options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
-        familiesIds:
-            options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
-        classesIds:
-            options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
-        servicesIds:
-            options.selectedServices.map((e) => UuidValue(e.id)).toList(),
-        groupsIds: options.selectedGroups.map((e) => UuidValue(e.id)).toList(),
-      ),
-    ),
-    (location, packageInfo, data) =>
-        Tuple3(packageInfo.packageName, location, data),
-  );
-
-  late BehaviorSubject<Person>? resultPerson =
-      widget.editPerson ? BehaviorSubject.seeded(widget.initialPerson!) : null;
-
-  void _animatedMapMove(LatLng destLocation, double destZoom) {
-    final latTween = Tween<double>(
-        begin: _mapController.center.latitude, end: destLocation.latitude);
-    final lngTween = Tween<double>(
-        begin: _mapController.center.longitude, end: destLocation.longitude);
-    final zoomTween = Tween<double>(begin: _mapController.zoom, end: destZoom);
-
-    final controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    final Animation<double> animation =
-        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
-
-    controller.addListener(() {
-      _mapController.move(
-          LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
-          zoomTween.evaluate(animation));
-    });
-
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.dispose();
-      } else if (status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
-
-    controller.forward();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -325,7 +294,8 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                 AttributionWidget.defaultWidget(
                   alignment: Alignment.topLeft,
                   source: 'OpenStreetMap',
-                  onSourceTapped: () => GetIt.I<LauncherService>().launchUrl(
+                  onSourceTapped: () async =>
+                      GetIt.I<LauncherService>().launchUrl(
                     Uri.parse('https://openstreetmap.org/copyright'),
                   ),
                 ),
@@ -403,9 +373,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                       : [],
                 ),
                 if (currentLocation != null)
-                  LocationMarkerLayerWidget(
-                    options: LocationMarkerLayerOptions(),
-                  ),
+                  CurrentLocationLayer(),
                 if (widget.editPerson)
                   StreamBuilder<Person>(
                     initialData: resultPerson!.value,
@@ -454,8 +422,10 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                                     afterTap: () {
                                       _focusedLocation.value = f.geolocation;
                                       _animatedMapMove(
-                                        LatLng(f.geolocation!.latitude,
-                                            f.geolocation!.longitude),
+                                        LatLng(
+                                          f.geolocation!.latitude,
+                                          f.geolocation!.longitude,
+                                        ),
                                         _mapController.zoom,
                                       );
                                     },
@@ -485,8 +455,10 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                                   afterTap: () {
                                     _focusedLocation.value = p.geolocation;
                                     _animatedMapMove(
-                                      LatLng(p.geolocation!.latitude,
-                                          p.geolocation!.longitude),
+                                      LatLng(
+                                        p.geolocation!.latitude,
+                                        p.geolocation!.longitude,
+                                      ),
                                       _mapController.zoom,
                                     );
                                   },
@@ -576,6 +548,42 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
     );
   }
 
+  void _animatedMapMove(LatLng destLocation, double destZoom) {
+    final latTween = Tween<double>(
+      begin: _mapController.center.latitude,
+      end: destLocation.latitude,
+    );
+    final lngTween = Tween<double>(
+      begin: _mapController.center.longitude,
+      end: destLocation.longitude,
+    );
+    final zoomTween = Tween<double>(begin: _mapController.zoom, end: destZoom);
+
+    final controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    final Animation<double> animation =
+        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+
+    controller.addListener(() {
+      _mapController.move(
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
+    });
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.dispose();
+      } else if (status == AnimationStatus.dismissed) {
+        controller.dispose();
+      }
+    });
+
+    controller.forward();
+  }
+
   LatLng _getMapCenter({
     Position? location,
     Set<Area> areas = const {},
@@ -621,15 +629,6 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
     }
   }
 
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-
-    await _focusedLocation.close();
-    await _mapOptions.close();
-    await resultPerson?.close();
-  }
-
   String _getPlatformName() {
     if (UniversalPlatform.isWeb) return 'web';
     if (UniversalPlatform.isAndroid) {
@@ -646,6 +645,15 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
       return 'fuchsia';
     }
     return 'unknown';
+  }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+
+    await _focusedLocation.close();
+    await _mapOptions.close();
+    await resultPerson?.close();
   }
 }
 
@@ -749,113 +757,6 @@ class _MapOptionsWidget extends StatefulWidget {
 
 class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
   late GeoMapOptions stagingMapOptions = widget.mapOptions.copyWith();
-
-  void Function(bool?)? _onChanged(GeoMapLayer value) =>
-      stagingMapOptions.layers.length == 1 &&
-              stagingMapOptions.layers.single == value
-          ? null
-          : (v) => setState(
-                () => stagingMapOptions = stagingMapOptions.copyWith(
-                  layers: v ?? false
-                      ? stagingMapOptions.layers.union({value})
-                      : stagingMapOptions.layers.difference({value}),
-                ),
-              );
-
-  Future<List<T>?> _select<T extends ViewableWithID>({
-    required DelegatingPaginatableStream<T> stream,
-    required List<T> selected,
-    required String title,
-  }) async {
-    final _search = BehaviorSubject<String?>.seeded(null);
-
-    final _controller = ListController<void, T>(
-      objectsPaginatableStream: stream,
-      searchStream: _search.map((s) => s ?? ''),
-    )..selectAll(selected);
-
-    final rslt = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: StreamBuilder<String?>(
-              stream: _search,
-              builder: (context, searchData) {
-                if (searchData.hasData) {
-                  return TextFormField(
-                    autofocus: true,
-                    onChanged: _search.add,
-                    textInputAction: TextInputAction.search,
-                    style: DefaultTextStyle.of(context).style,
-                    decoration: InputDecoration(
-                      hintText: 'بحث ...',
-                      hintStyle: DefaultTextStyle.of(context).style.copyWith(
-                            color: Theme.of(context).hintColor,
-                          ),
-                      contentPadding: const EdgeInsets.all(10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () => _search.add(null),
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ),
-                  );
-                }
-
-                return Row(
-                  children: [
-                    Expanded(
-                      child: Text(title),
-                    ),
-                    IconButton(
-                      onPressed: () => _search.add(''),
-                      icon: const Icon(Icons.search),
-                    ),
-                  ],
-                );
-              },
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.select_all),
-                onPressed: _controller.selectAll,
-                tooltip: 'تحديد الكل',
-              ),
-              IconButton(
-                icon: const Icon(Icons.check_box_outline_blank),
-                onPressed: _controller.deselectAll,
-                tooltip: 'تحديد لا شئ',
-              ),
-              IconButton(
-                icon: const Icon(Icons.done),
-                onPressed: () => Navigator.of(context).pop(true),
-                tooltip: 'تم',
-              ),
-            ],
-          ),
-          body: DataObjectListViewBase(
-            controller: _controller,
-            autoDisposeController: false,
-          ),
-        ),
-      ),
-    );
-
-    if (rslt == true) {
-      unawaited(_controller.dispose().then((_) async {
-        if (!_search.isClosed) await _search.close();
-      }));
-
-      return _controller.currentSelection?.whereType<T>().toList();
-    }
-    await _controller.dispose().then((_) async {
-      if (!_search.isClosed) await _search.close();
-    });
-
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -1120,6 +1021,115 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
         ],
       ),
     );
+  }
+
+  void Function(bool?)? _onChanged(GeoMapLayer value) =>
+      stagingMapOptions.layers.length == 1 &&
+              stagingMapOptions.layers.single == value
+          ? null
+          : (v) => setState(
+                () => stagingMapOptions = stagingMapOptions.copyWith(
+                  layers: v ?? false
+                      ? stagingMapOptions.layers.union({value})
+                      : stagingMapOptions.layers.difference({value}),
+                ),
+              );
+
+  Future<List<T>?> _select<T extends ViewableWithID>({
+    required DelegatingPaginatableStream<T> stream,
+    required List<T> selected,
+    required String title,
+  }) async {
+    final _search = BehaviorSubject<String?>.seeded(null);
+
+    final _controller = ListController<void, T>(
+      objectsPaginatableStream: stream,
+      searchStream: _search.map((s) => s ?? ''),
+    )..selectAll(selected);
+
+    final rslt = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: StreamBuilder<String?>(
+              stream: _search,
+              builder: (context, searchData) {
+                if (searchData.hasData) {
+                  return TextFormField(
+                    autofocus: true,
+                    onChanged: _search.add,
+                    textInputAction: TextInputAction.search,
+                    style: DefaultTextStyle.of(context).style,
+                    decoration: InputDecoration(
+                      hintText: 'بحث ...',
+                      hintStyle: DefaultTextStyle.of(context).style.copyWith(
+                            color: Theme.of(context).hintColor,
+                          ),
+                      contentPadding: const EdgeInsets.all(10),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () => _search.add(null),
+                        icon: const Icon(Icons.clear),
+                      ),
+                    ),
+                  );
+                }
+
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Text(title),
+                    ),
+                    IconButton(
+                      onPressed: () => _search.add(''),
+                      icon: const Icon(Icons.search),
+                    ),
+                  ],
+                );
+              },
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.select_all),
+                onPressed: _controller.selectAll,
+                tooltip: 'تحديد الكل',
+              ),
+              IconButton(
+                icon: const Icon(Icons.check_box_outline_blank),
+                onPressed: _controller.deselectAll,
+                tooltip: 'تحديد لا شئ',
+              ),
+              IconButton(
+                icon: const Icon(Icons.done),
+                onPressed: () => Navigator.of(context).pop(true),
+                tooltip: 'تم',
+              ),
+            ],
+          ),
+          body: DataObjectListViewBase(
+            controller: _controller,
+            autoDisposeController: false,
+          ),
+        ),
+      ),
+    );
+
+    if (rslt == true) {
+      unawaited(
+        _controller.dispose().then((_) async {
+          if (!_search.isClosed) await _search.close();
+        }),
+      );
+
+      return _controller.currentSelection?.whereType<T>().toList();
+    }
+    await _controller.dispose().then((_) async {
+      if (!_search.isClosed) await _search.close();
+    });
+
+    return null;
   }
 }
 

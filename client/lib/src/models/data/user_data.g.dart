@@ -6,7 +6,7 @@ part of 'user_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserData _$$_UserDataFromJson(Map<String, dynamic> json) => _$_UserData(
+_$_UserData _$$_UserDataFromJson(Map json) => _$_UserData(
       uid: json['uid'] as String,
       permissions: permissionsSetFromJson(json['permissions']),
       email: json['email'] as String,
@@ -14,7 +14,7 @@ _$_UserData _$$_UserDataFromJson(Map<String, dynamic> json) => _$_UserData(
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
-              json['lastEdit'] as Map<String, dynamic>),
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
 Map<String, dynamic> _$$_UserDataToJson(_$_UserData instance) =>

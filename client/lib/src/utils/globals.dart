@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 
 ScaffoldMessengerState get scaffoldMessenger =>

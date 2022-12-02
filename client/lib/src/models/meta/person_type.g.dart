@@ -6,8 +6,7 @@ part of 'person_type.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PersonType _$$_PersonTypeFromJson(Map<String, dynamic> json) =>
-    _$_PersonType(
+_$_PersonType _$$_PersonTypeFromJson(Map json) => _$_PersonType(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),

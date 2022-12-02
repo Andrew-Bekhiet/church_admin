@@ -2,23 +2,28 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-class DelegatingPaginatableStream<T extends ViewableWithID>
-    extends PaginatableStreamBase<T> {
+class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
+  @protected
+  final OnQuery<T> streamDelegate;
+
   DelegatingPaginatableStream({
-    required OnQuery<T> streamDelegate,
+    required this.streamDelegate,
+    bool isLogging = kDebugMode,
     super.limit = 100,
-  })  : _query = streamDelegate,
-        super.private() {
-    _querySubscription = _query(
+  }) : super.private() {
+    _querySubscription = streamDelegate(
       this,
-      _offset.map(
-        (o) {
-          log('Listening to offset ' + o.toString());
-          return o;
-        },
-      ),
+      isLogging
+          ? _offset.map(
+              (o) {
+                log('Listening to offset ' + o.toString());
+                return o;
+              },
+            )
+          : _offset,
     ).map(
       (r) {
         _canPaginateBackward = r.canPaginateBackward ?? _canPaginateBackward;
@@ -32,38 +37,31 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
 
   late final StreamSubscription<List<T>> _querySubscription;
 
-  final OnQuery<T> _query;
-
-  bool _isLoading = true;
-  @override
-  bool get isLoading => _isLoading;
-
-  bool _canPaginateBackward = false;
-  @override
-  bool get canPaginateBackward => _canPaginateBackward;
-
-  bool _canPaginateForward = false;
-  @override
-  bool get canPaginateForward => _canPaginateForward;
-
   final BehaviorSubject<List<T>> _subject = BehaviorSubject();
   final BehaviorSubject<int> _offset = BehaviorSubject.seeded(0);
+
+  bool _isLoading = true;
+  bool _canPaginateBackward = false;
+  bool _canPaginateForward = false;
+
+  @override
+  bool get isLoading => _isLoading;
+  @override
+  bool get canPaginateBackward => _canPaginateBackward;
+  @override
+  bool get canPaginateForward => _canPaginateForward;
 
   @override
   int get currentOffset => _offset.value;
 
   @override
-  ValueStream<List<T>> get stream =>
-      _subject.map((event) => event.toList()).shareValue();
+  ValueStream<List<T>> get stream => _subject.shareValue();
 
   @override
   List<T> get currentValue => _subject.value.toList();
 
   @override
   List<T>? get currentValueOrNull => _subject.valueOrNull?.toList();
-
-  List<T> get currentList => _subject.value;
-  List<T>? get currentSetOrNull => _subject.valueOrNull;
 
   @override
   Future<void> loadPage(int offset) async {
@@ -79,7 +77,7 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
     if (canPaginateForward) {
       _canPaginateForward = false;
       _isLoading = true;
-      _offset.add((currentValue.length / limit).ceil());
+      _offset.add(_offset.value + 1);
     } else {
       throw StateError('Cannot paginate forward');
     }
@@ -104,8 +102,7 @@ class DelegatingPaginatableStream<T extends ViewableWithID>
   }
 }
 
-typedef OnQuery<TParsed extends ViewableWithID>
-    = Stream<DelegatingStreamResult<TParsed>> Function(
+typedef OnQuery<TParsed> = Stream<DelegatingStreamResult<TParsed>> Function(
   DelegatingPaginatableStream<TParsed> instance,
   Stream<int> offset,
 );

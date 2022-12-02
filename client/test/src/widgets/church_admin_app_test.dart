@@ -1,3 +1,5 @@
+// ignore_for_file: discarded_futures
+
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
@@ -6,142 +8,236 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:rxdart/subjects.dart';
 
 import 'church_admin_app_test.mocks.dart';
 
-@GenerateMocks([
-  LoggingService,
-  CAAuthRepository,
-  CADatabaseRepository,
-  UsersQueries,
-  PersonsQueries,
-  AreasQueries,
-  ServicesQueries,
-  LocalAuthService
+@GenerateNiceMocks([
+  MockSpec<LoggingService>(),
+  MockSpec<AuthService>(),
+  MockSpec<CADatabaseRepository>(),
+  MockSpec<UsersQueries>(),
+  MockSpec<PersonsQueries>(),
+  MockSpec<AreasQueries>(),
+  MockSpec<ServicesQueries>(),
+  MockSpec<LocalAuthService>()
 ])
+@GenerateNiceMocks([MockSpec<ConnectivityService>()])
 void main() {
-  group(
-    'Church Admin App widget tests: ',
-    () {
-      final FirstScreenVariant firstScreenVariant = FirstScreenVariant();
+  final FirstScreenVariant firstScreenVariant = FirstScreenVariant();
 
-      setUp(
-        () async {
-          final mockLoggingService = MockLoggingService();
-          when(mockLoggingService.navigatorObserver)
-              .thenReturn(NavigatorObserver());
+  setUp(_setUp);
 
-          GetIt.I.registerSingleton<LoggingService>(mockLoggingService);
-          GetIt.I.registerSingleton<GoRouterRefreshStream>(
-            GoRouterRefreshStream(
-              const Stream.empty(),
-            ),
-            dispose: (g) => g.dispose(),
-          );
+  tearDown(GetIt.I.reset);
 
-          GetIt.I.registerSingleton<ThemingService>(
-            ThemingService.withInitialThemeata(
-              ThemeData.light(),
-            ),
-            dispose: (t) => t.dispose(),
-          );
+  testWidgets(
+    'Church Admin App => First Screen',
+    (tester) async {
+      await tester.pumpWidget(const ChurchAdminApp());
 
-          final usersQueries = MockUsersQueries();
-          final areasQueries = MockAreasQueries();
-          final personsQueries = MockPersonsQueries();
-          final servicesQueries = MockServicesQueries();
+      if (firstScreenVariant.currentValue ==
+          FirstScreenVariantEnum.values.first) {
+        verify(GetIt.I<LoggingService>().navigatorObserver);
+      }
 
-          when(usersQueries.getUserInfoStream()).thenAnswer((_) async* {});
-          when(areasQueries.getAreasStream(
-                  searchQuery: anyNamed('searchQuery')))
-              .thenReturn(
-            GQLPaginatableStream(
-              subscriptionStream: (_) async* {},
-            ),
-          );
-          when(personsQueries.getPersonsStream(
-                  searchQuery: anyNamed('searchQuery')))
-              .thenReturn(
-            GQLPaginatableStream(
-              subscriptionStream: (_) async* {},
-            ),
-          );
-          when(servicesQueries.getServicesStream(
-                  searchQuery: anyNamed('searchQuery')))
-              .thenReturn(
-            GQLPaginatableStream(
-              subscriptionStream: (_) async* {},
-            ),
-          );
+      // await tester.pumpAndSettle();
 
-          final mockCADatabaseRepository = MockCADatabaseRepository();
-          when(mockCADatabaseRepository.users).thenReturn(usersQueries);
-          when(mockCADatabaseRepository.areas).thenReturn(areasQueries);
-          when(mockCADatabaseRepository.persons).thenReturn(personsQueries);
-          when(mockCADatabaseRepository.services).thenReturn(servicesQueries);
+      final goRouter = tester
+          .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
+          .goRouter;
 
-          GetIt.I.registerSingleton<CADatabaseRepository>(
-              mockCADatabaseRepository);
-        },
+      expect(
+        goRouter.location,
+        firstScreenVariant.expectedLocation(),
       );
 
-      tearDown(GetIt.I.reset);
+      await _disposeLocalAuthService();
+    },
+    variant: firstScreenVariant,
+  );
 
-      testWidgets(
-        'First Screen',
-        (tester) async {
-          await tester.pumpWidget(const ChurchAdminApp());
+  testWidgets(
+    'Church Admin App => Observes ThemingService',
+    (tester) async {
+      _setUpAuthService();
 
-          if (firstScreenVariant.currentValue ==
-              FirstScreenVariantEnum.values.first) {
-            verify(GetIt.I<LoggingService>().navigatorObserver);
-          }
+      await tester.pumpWidget(const ChurchAdminApp());
 
-          expect(
-            tester
-                .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
-                .goRouter
-                .location,
-            firstScreenVariant.currentValue == FirstScreenVariantEnum.login
-                ? '/login'
-                : firstScreenVariant.currentValue ==
-                        FirstScreenVariantEnum.updateUserData
-                    ? '/updateUserData?forced=true'
-                    : firstScreenVariant.currentValue ==
-                            FirstScreenVariantEnum.authenticate
-                        ? '/authenticate?next=%2F'
-                        : '/',
-          );
-        },
-        variant: firstScreenVariant,
+      expect(
+        tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+        GetIt.I<ThemingService>().theme,
       );
 
-      testWidgets(
-        'Observes ThemingService',
-        (tester) async {
-          final mock = MockCAAuthRepository();
-          when(mock.isSignedIn).thenReturn(false);
-          GetIt.I.registerSingleton<CAAuthRepository>(mock);
+      GetIt.I<ThemingService>().theme = ThemeData.dark();
+      await tester.pumpAndSettle();
 
-          await tester.pumpWidget(const ChurchAdminApp());
-
-          expect(
-            tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-            GetIt.I<ThemingService>().theme,
-          );
-
-          GetIt.I<ThemingService>().theme = ThemeData.dark();
-          await tester.pumpAndSettle();
-
-          expect(
-            tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-            GetIt.I<ThemingService>().theme,
-          );
-        },
-        variant: ValueVariant({FirstScreenVariantEnum.login}),
+      expect(
+        tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+        GetIt.I<ThemingService>().theme,
       );
     },
   );
+
+  testWidgets(
+    'Church Admin App => Shows SnackBar on connectivity changed',
+    (tester) async {
+      _setUpAuthService();
+
+      final _connectivityController = BehaviorSubject.seeded(true);
+      addTearDown(_connectivityController.close);
+
+      when(GetIt.I<ConnectivityService>().connectivityStream)
+          .thenAnswer((_) => _connectivityController);
+
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+
+      await tester.pumpWidget(const ChurchAdminApp());
+
+      expect(find.byType(SnackBar), findsNothing);
+
+      _connectivityController.add(false);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SnackBar), findsOneWidget);
+    },
+  );
+}
+
+void _setUpAuthService() {
+  final mock = MockAuthService();
+
+  when(mock.isSignedIn).thenReturn(false);
+  when(mock.userStream).thenAnswer((_) => Stream.value(null));
+
+  GetIt.I.registerSingleton<AuthService>(mock);
+}
+
+Future<void> _disposeLocalAuthService() async {
+  if (GetIt.I.isRegistered<LocalAuthService>()) {
+    await GetIt.I<LocalAuthService>().dispose();
+  }
+}
+
+void _setUp() {
+  _setUpLoggingService();
+
+  _setUpUserSettings();
+
+  _setUpGoRouterRefreshStream();
+
+  _setUpThemingService();
+
+  _setUpDatabaseRepo();
+
+  _setUpConnectivityService();
+}
+
+void _setUpConnectivityService() {
+  final mock = MockConnectivityService();
+
+  when(mock.connectivityStream).thenAnswer((_) => Stream.value(false));
+
+  GetIt.I.registerSingleton<ConnectivityService>(mock);
+}
+
+void _setUpUserSettings() {
+  GetIt.I.registerSingleton<UserSettingsService>(FakeUserSettings());
+}
+
+void _setUpDatabaseRepo() {
+  final usersQueries = _setUpUsersQueries();
+  final areasQueries = _setUpAreasQueries();
+  final personsQueries = _setUpPersonsQueries();
+  final servicesQueries = _setUpServiceQueries();
+
+  final mockCADatabaseRepository = MockCADatabaseRepository();
+  when(mockCADatabaseRepository.users).thenReturn(usersQueries);
+  when(mockCADatabaseRepository.areas).thenReturn(areasQueries);
+  when(mockCADatabaseRepository.persons).thenReturn(personsQueries);
+  when(mockCADatabaseRepository.services).thenReturn(servicesQueries);
+
+  GetIt.I.registerSingleton<CADatabaseRepository>(
+    mockCADatabaseRepository,
+  );
+}
+
+MockUsersQueries _setUpUsersQueries() {
+  final usersQueries = MockUsersQueries();
+  when(usersQueries.getUserInfoStream(uid: anyNamed('uid')))
+      .thenAnswer((_) async* {});
+
+  return usersQueries;
+}
+
+MockServicesQueries _setUpServiceQueries() {
+  final servicesQueries = MockServicesQueries();
+  when(
+    servicesQueries.getServicesStream(
+      searchQuery: anyNamed('searchQuery'),
+    ),
+  ).thenReturn(
+    GQLPaginatableStream(
+      subscriptionStreamCallback: (_) async* {},
+    ),
+  );
+
+  return servicesQueries;
+}
+
+MockPersonsQueries _setUpPersonsQueries() {
+  final personsQueries = MockPersonsQueries();
+  when(
+    personsQueries.paginatePersons(
+      searchQuery: anyNamed('searchQuery'),
+    ),
+  ).thenReturn(
+    GQLPaginatableStream(
+      subscriptionStreamCallback: (_) async* {},
+    ),
+  );
+
+  return personsQueries;
+}
+
+MockAreasQueries _setUpAreasQueries() {
+  final areasQueries = MockAreasQueries();
+  when(
+    areasQueries.getAreasStream(
+      searchQuery: anyNamed('searchQuery'),
+    ),
+  ).thenReturn(
+    GQLPaginatableStream(
+      subscriptionStreamCallback: (_) async* {},
+    ),
+  );
+
+  return areasQueries;
+}
+
+void _setUpThemingService() {
+  GetIt.I.registerSingleton<ThemingService>(
+    ThemingService.withInitialThemeata(
+      ThemeData.light(),
+    ),
+    dispose: (t) => t.dispose(),
+  );
+}
+
+void _setUpGoRouterRefreshStream() {
+  GetIt.I.registerSingleton<GoRouterRefreshStream>(
+    GoRouterRefreshStream(
+      const Stream.empty(),
+    ),
+    dispose: (g) => g.dispose(),
+  );
+}
+
+void _setUpLoggingService() {
+  final mockLoggingService = MockLoggingService();
+  when(mockLoggingService.navigatorObserver).thenReturn(NavigatorObserver());
+
+  GetIt.I.registerSingleton<LoggingService>(mockLoggingService);
 }
 
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
@@ -151,23 +247,46 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    final mock = MockCAAuthRepository();
+    _setUpAuthService(value);
+
+    if (value != FirstScreenVariantEnum.login) {
+      _setUpLocalAuthService(value);
+    }
+
+    return value;
+  }
+
+  void _setUpLocalAuthService(FirstScreenVariantEnum value) {
+    final mockLocalAuthService = MockLocalAuthService();
+
+    when(mockLocalAuthService.shouldAuthenticate)
+        .thenReturn(value == FirstScreenVariantEnum.authenticate);
+    when(mockLocalAuthService.canCheckBiometrics())
+        .thenAnswer((_) async => false);
+
+    GetIt.I.registerSingleton<LocalAuthService>(
+      mockLocalAuthService,
+    );
+  }
+
+  void _setUpAuthService(FirstScreenVariantEnum value) {
+    final mock = MockAuthService();
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
     when(mock.currentUser).thenReturn(
       User(
-        name: '',
-        userData: UserData(
-          password: '',
-          uid: 'uid',
-          permissions: CAPermissionsSet.fromSet(const {}),
-          email: 'email',
-          firebaseAuthUid: 'firebaseAuthUID',
-        ),
         uid: 'uid',
+        name: '',
+        password: '',
+        permissions: CAPermissionsSet.fromSet(const {}),
+        email: 'email',
+        authId: 'firebaseAuthUID',
       ),
     );
-    when(mock.currentUserData).thenReturn(
-      Person(
+    final user = User(
+      uid: 'uid',
+      name: 'name',
+      password: 'pass',
+      person: Person(
         id: 'id',
         name: 'name',
         otherPhones: const {},
@@ -183,31 +302,35 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
             : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
       ),
     );
+    when(mock.currentUser).thenReturn(user);
 
-    GetIt.I.registerSingleton<CAAuthRepository>(mock);
+    when(mock.userStream).thenAnswer((_) => Stream.value(user));
 
-    if (value != FirstScreenVariantEnum.login) {
-      final mockLocalAuthService = MockLocalAuthService();
+    GetIt.I.allowReassignment = true;
+    GetIt.I.registerSingleton<AuthService>(mock);
+    GetIt.I.allowReassignment = false;
+  }
 
-      when(mockLocalAuthService.shouldAuthenticate)
-          .thenReturn(value == FirstScreenVariantEnum.authenticate);
-      when(mockLocalAuthService.canCheckBiometrics())
-          .thenAnswer((_) async => false);
-
-      GetIt.I.registerSingleton<LocalAuthService>(
-        mockLocalAuthService,
-      );
+  String expectedLocation() {
+    if (currentValue == FirstScreenVariantEnum.login) {
+      return '/login';
+    } else if (currentValue == FirstScreenVariantEnum.updateUserData) {
+      return '/updateUserData?forced=true';
+    } else if (currentValue == FirstScreenVariantEnum.authenticate) {
+      return '/authenticate?next=%2F';
+    } else {
+      return '/';
     }
-
-    return value;
   }
 
   @override
   Future<void> tearDown(
-      FirstScreenVariantEnum value, FirstScreenVariantEnum memento) async {
+    FirstScreenVariantEnum value,
+    FirstScreenVariantEnum memento,
+  ) async {
     await super.tearDown(value, memento);
 
-    await GetIt.I.unregister<CAAuthRepository>();
+    await GetIt.I.unregister<AuthService>();
 
     if (GetIt.I.isRegistered<LocalAuthService>()) {
       await GetIt.I.unregister<LocalAuthService>();
@@ -216,3 +339,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
 }
 
 enum FirstScreenVariantEnum { login, updateUserData, authenticate, home }
+
+class FakeUserSettings extends Fake implements UserSettingsService {
+  @override
+  String? getSecondLineFor(Type t) {
+    return null;
+  }
+}

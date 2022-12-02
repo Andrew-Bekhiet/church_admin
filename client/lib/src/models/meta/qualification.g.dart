@@ -6,8 +6,7 @@ part of 'qualification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Qualification _$$_QualificationFromJson(Map<String, dynamic> json) =>
-    _$_Qualification(
+_$_Qualification _$$_QualificationFromJson(Map json) => _$_Qualification(
       id: json['id'] as String,
       name: json['name'] as String,
     );
