@@ -3,67 +3,68 @@ targets:
     builders:
       json_serializable:
         options:
+          any_map: true
           explicit_to_json: true
-      artemis:
+      graphql_codegen:
+        enabled: true
         options:
-          ignore_for_file:
-            - constant_identifier_names
-            - overridden_fields
-            - always_put_required_named_parameters_first
-            - depend_on_referenced_packages
-          schema_mapping:
-            - schema: lib/graphql/schema.graphql
-              queries_glob: lib/src/repositories/database/**/{subscriptions.graphql,queries.graphql,mutations.graphql}
-              output: lib/src/repositories/database/graphql.graphql.dart
-          scalar_mapping:
-            - graphql_type: name
-              dart_type: String
-
-            - graphql_type: _text
-              dart_type: List<String>
-
-            - graphql_type: uuid
-              dart_type: UuidValue
-              custom_parser_import: package:church_admin/graphql/scalars.dart
-              use_custom_parser: true
-
-            - graphql_type: geography
-              dart_type: Json
-              custom_parser_import: package:church_admin/graphql/scalars.dart
-              use_custom_parser: true
-
-            - graphql_type: geometry
-              dart_type: Json
-              custom_parser_import: package:church_admin/graphql/scalars.dart
-              use_custom_parser: true
-
-            - graphql_type: jsonb
-              dart_type: Json
-              custom_parser_import: package:church_admin/graphql/scalars.dart
-              use_custom_parser: true
-
-            - graphql_type: smallint
-              dart_type: int
-
-            - graphql_type: bigint
-              dart_type: int
-
-            - graphql_type: timestamptz
-              dart_type: DateTime
-              use_custom_parser: true
-
-            - graphql_type: timestamp
-              dart_type: DateTime
-              use_custom_parser: true
-
-            - graphql_type: date
-              dart_type: DateTime
-              use_custom_parser: true
-
-            - graphql_type: time
-              dart_type: DateTime
-              use_custom_parser: true
-
-            - graphql_type: daterange
-              dart_type: String
-              use_custom_parser: true
+          # generatedFileHeader: "// ignore_for_file: directives_ordering, prefer_is_not_operator, prefer_if_elements_to_conditional_expressions, annotate_overrides, prefer_final_fields, always_declare_return_types, avoid_redundant_argument_values"
+          addTypenameExcludedPaths: ["subscription"]
+          outputDirectory: "__generated__"
+          scalars:
+            uuid:
+              type: UuidValue
+              fromJsonFunctionName: stringToUuid
+              toJsonFunctionName: uuidToString
+              import: package:church_admin/graphql/scalars.dart
+            bytea:
+              type: String
+            citext:
+              type: String
+            name:
+              type: String
+            bigint:
+              type: int
+            smallint:
+              type: int
+            date:
+              type: DateTime
+              fromJsonFunctionName: dateFromString
+              toJsonFunctionName: dateToString
+              import: package:church_admin/graphql/scalars.dart
+            daterange:
+              type: DateTimeRange
+              fromJsonFunctionName: dateRangeFromString
+              toJsonFunctionName: dateRangeToString
+              import: package:church_admin/graphql/scalars.dart
+            timetz:
+              type: DateTime
+              fromJsonFunctionName: tstzFromString
+              toJsonFunctionName: tstzToString
+              import: package:church_admin/graphql/scalars.dart
+            time:
+              type: DateTime
+              fromJsonFunctionName: tstzFromString
+              toJsonFunctionName: tstzToString
+              import: package:church_admin/graphql/scalars.dart
+            timestamp:
+              type: DateTime
+              fromJsonFunctionName: tstzFromString
+              toJsonFunctionName: tstzToString
+              import: package:church_admin/graphql/scalars.dart
+            timestamptz:
+              type: DateTime
+              fromJsonFunctionName: tstzFromString
+              toJsonFunctionName: tstzToString
+              import: package:church_admin/graphql/scalars.dart
+            _text:
+              type: List<String>
+            json:
+              type: Json
+            jsonb:
+              type: Json
+            geography:
+              type: Map<String, dynamic>
+            geometry:
+              type: Map<String, dynamic>
+          clients: []

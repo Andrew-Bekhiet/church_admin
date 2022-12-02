@@ -54,8 +54,8 @@ android/app/google-services.json
 .env
 .env.*
 
-lib/src/repositories/secrets/secrets_impl.dart
-lib/src/services/encryption_service_impl.dart
+lib/src/services/secrets/secrets_service_impl.dart
+lib/src/services/encryption/encryption_service_impl.dart
 lib/main.dart.backup
 theme.zip
 android/app/src/main/res/values/strings.xml

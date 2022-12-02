@@ -6,102 +6,109 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
+  flutter: ">=3.3.0"
 
 dependency_overrides:
   churchdata_core:
     path: ../churchdata_core
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-
-  async: ^2.8.2
+  async: ^2.9.0
   churchdata_core:
     path: ../churchdata_core
-  cloud_functions_platform_interface: ^5.1.16
-  cloud_functions: ^3.3.3
+  cloud_functions: ^4.0.3
   collection: ^1.16.0
+  connectivity_plus: ^2.3.9
   cupertino_icons: ^1.0.5
-  desktop_webview_auth: ^0.0.9
-  device_info_plus: ^4.0.1
+  device_info_plus: ^8.0.0
   dio: ^4.0.6
-  equatable: ^2.0.3
-  firebase_app_check: ^0.0.6+18
-  firebase_auth_desktop: ^1.0.2
-  firebase_auth_platform_interface: ^6.7.0
-  firebase_auth: ^3.5.0
-  firebase_core_desktop: ^1.0.2
-  firebase_core: ^1.20.0
-  firebase_database: ^9.0.20
-  firebase_dynamic_links: ^4.3.3
-  firebase_functions_desktop: ^0.2.0+3
-  firebase_messaging: ^12.0.1
-  fl_chart: ^0.55.1
-  flex_color_picker: ^2.6.0
+  equatable: ^2.0.5
+  firebase_app_check: ^0.1.1+1
+  firebase_auth: ^4.1.1
+  firebase_core: ^2.1.0
+  firebase_database: ^10.0.2
+  firebase_dynamic_links: ^5.0.2
+  firebase_messaging: ^14.0.2
+  fl_chart: ^0.55.2
+  flex_color_picker: ^3.0.0
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^1.1.5
-  flutter_dotenv: ^5.0.2
-  flutter_local_notifications: ^9.7.0
-  flutter_map_location_marker:
-    git:
-      url: https://github.com/Andrew-Bekhiet/flutter_map_location_marker.git
-      ref: master
-  flutter_map_tile_caching: ^6.0.0
+  flutter_local_notifications: ^12.0.4
+  flutter_localizations:
+    sdk: flutter
+  flutter_map_location_marker: 5.0.0+1
+  flutter_map_tile_caching: ^6.0.1
   flutter_map: ^3.0.0
   flutter_secure_storage: ^6.0.0
-  freezed_annotation: ^2.1.0
-  geolocator: ^9.0.1
+  flutter_web_plugins:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^2.2.0
+  geolocator: ^9.0.2
   get_it: ^7.2.0
-  go_router: ^4.2.0
-  google_maps_flutter: ^2.1.10
-  google_sign_in: ^5.4.0
-  gql: ^0.13.1
+  go_router: ^5.1.5
+  google_maps_flutter: ^2.2.1
+  google_sign_in: ^5.4.2
+  gql: ^0.14.0
   graphql_flutter: ^5.1.0
+  graphql: ^5.1.1
   hive_flutter: ^1.1.0
-  http: ^0.13.4
+  http: ^0.13.5
   image_cropper: ^3.0.0
-  image_picker: ^0.8.5+3
+  image_picker: ^0.8.6
   intl: ^0.17.0
-  json_annotation: ^4.6.0
+  json_annotation: ^4.7.0
   latlong2: ^0.8.1
-  local_auth: ^2.1.0
-  map_launcher: ^2.3.0+1
+  local_auth: ^2.1.2
+  map_launcher: ^2.4.0
+  meta: ^1.8.0
   mime: ^1.0.2
-  package_info_plus: ^1.4.3+1
+  package_info_plus: ^3.0.1
   percent_indicator: ^4.2.2
-  permission_handler: ^10.0.0
-  phone_numbers_parser: ^7.0.0
-  pointycastle: ^3.6.1
+  permission_handler: ^10.2.0
+  phone_numbers_parser: ^7.0.0+1
+  pointycastle: ^3.6.2
+  rxdart_ext: ^0.2.6
   rxdart: ^0.27.5
   snapping_sheet: ^3.1.0
-  table_calendar: ^3.0.6
-  timeago: ^3.2.2
-  tinycolor2: ^2.1.0
+  table_calendar: ^3.0.7
+  timeago: ^3.3.0
+  tinycolor2: ^3.0.1
   transparent_pointer: ^1.0.0
-  tuple: ^2.0.0
+  tuple: ^2.0.1
   universal_file: ^1.0.0
   universal_platform: ^1.0.0+1
   uuid: ^3.0.6
+  android_alarm_manager_plus: ^2.1.0
 
 dev_dependencies:
-  artemis: ^7.9.0-beta
-  build_runner: ^2.2.0
+  build_runner: ^2.3.2
   churchdata_core_mocks:
     path: ../churchdata_core_mocks
+  dart_code_metrics: ^5.0.1
+  device_info_plus_platform_interface: ^7.0.0
+  firebase_auth_platform_interface: ^6.11.1
   flutter_test:
     sdk: flutter
-  freezed: ^2.1.0+1
-  json_serializable: ^6.3.1
-  local_auth_platform_interface: ^1.0.4
-  mockito: ^5.2.0
-  plugin_platform_interface: ^2.1.2
+  freezed: ^2.2.0
+  graphql_codegen:
+    git:
+      url: https://github.com/seanolsen/graphql_codegen
+      path: ./packages/graphql_codegen
+  hive_generator: ^2.0.0
+  image_cropper_platform_interface: ^3.0.3
+  image_picker_platform_interface: ^2.6.2
+  json_serializable: ^6.5.4
+  local_auth_platform_interface: ^1.0.5
+  mock_data: ^2.0.0
+  mockito: ^5.3.2
+  permission_handler_platform_interface: ^3.9.0
+  plugin_platform_interface: ^2.1.3
 
 flutter:
   uses-material-design: true
   assets:
-    - .env
     - assets/Logo.png
     - assets/google_logo.png
     - assets/holyweek.jpeg
