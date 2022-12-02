@@ -8,8 +8,7 @@ import Foundation
 import cloud_firestore
 import cloud_functions
 import connectivity_plus_macos
-import desktop_webview_auth
-import device_info_plus_macos
+import device_info_plus
 import firebase_app_check
 import firebase_auth
 import firebase_core
@@ -20,10 +19,10 @@ import firebase_storage
 import flutter_local_notifications
 import flutter_secure_storage_macos
 import geolocator_apple
-import package_info_plus_macos
+import package_info_plus
 import path_provider_macos
 import sentry_flutter
-import share_plus_macos
+import share_plus
 import sqflite
 import url_launcher_macos
 
@@ -31,7 +30,6 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))
   FLTFirebaseFunctionsPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFunctionsPlugin"))
   ConnectivityPlugin.register(with: registry.registrar(forPlugin: "ConnectivityPlugin"))
-  DesktopWebviewAuthPlugin.register(with: registry.registrar(forPlugin: "DesktopWebviewAuthPlugin"))
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   FLTFirebaseAppCheckPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseAppCheckPlugin"))
   FLTFirebaseAuthPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseAuthPlugin"))
