@@ -3,15 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:church_admin/church_admin.dart' as _i2;
+import 'package:church_admin/church_admin.dart' as _i3;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    as _i4;
-import 'package:local_auth_platform_interface/local_auth_platform_interface.dart'
     as _i5;
-import 'package:local_auth_platform_interface/types/types.dart' as _i6;
+import 'package:local_auth_platform_interface/local_auth_platform_interface.dart'
+    as _i6;
+import 'package:local_auth_platform_interface/types/types.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:rxdart/rxdart.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,28 +25,42 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeValueStream_0<T> extends _i1.SmartFake
+    implements _i2.ValueStream<T> {
+  _FakeValueStream_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [CANotificationsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCANotificationsService extends _i1.Mock
-    implements _i2.CANotificationsService {
+    implements _i3.CANotificationsService {
   MockCANotificationsService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Stream<_i2.Notification> get foregroundNotificationsStream =>
+  _i2.ValueStream<_i3.Notification> get foregroundNotificationsStream =>
       (super.noSuchMethod(
         Invocation.getter(#foregroundNotificationsStream),
-        returnValue: _i3.Stream<_i2.Notification>.empty(),
-      ) as _i3.Stream<_i2.Notification>);
+        returnValue: _FakeValueStream_0<_i3.Notification>(
+          this,
+          Invocation.getter(#foregroundNotificationsStream),
+        ),
+      ) as _i2.ValueStream<_i3.Notification>);
   @override
   bool get isPaused => (super.noSuchMethod(
         Invocation.getter(#isPaused),
         returnValue: false,
       ) as bool);
   @override
-  _i3.Future<bool> schedulePeriodic(
+  _i4.Future<bool> schedulePeriodic(
     Duration? duration,
     int? id,
     Function? callback, {
@@ -71,39 +86,39 @@ class MockCANotificationsService extends _i1.Mock
             #rescheduleOnReboot: rescheduleOnReboot,
           },
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
+  _i4.Future<_i3.Notification?> getInitialNotification() => (super.noSuchMethod(
         Invocation.method(
           #getInitialNotification,
           [],
         ),
-        returnValue: _i3.Future<_i2.Notification?>.value(),
-      ) as _i3.Future<_i2.Notification?>);
+        returnValue: _i4.Future<_i3.Notification?>.value(),
+      ) as _i4.Future<_i3.Notification?>);
   @override
-  _i3.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
+  _i4.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerFCMTokenAndListenForChanges,
           [],
           {#cachedToken: cachedToken},
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
+  _i4.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
         Invocation.method(
           #requestNotificationsPermission,
           [],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<void> show(
-    _i2.Notification? notification, {
+  _i4.Future<void> show(
+    _i3.Notification? notification, {
     int? id,
-    _i4.NotificationDetails? notificationDetails,
+    _i5.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -114,9 +129,9 @@ class MockCANotificationsService extends _i1.Mock
             #notificationDetails: notificationDetails,
           },
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   void pauseListeners() => super.noSuchMethod(
         Invocation.method(
@@ -134,20 +149,20 @@ class MockCANotificationsService extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i3.Future<void> dispose() => (super.noSuchMethod(
+  _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i2.AuthService {
+class MockAuthService extends _i1.Mock implements _i3.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
@@ -158,65 +173,71 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: false,
       ) as bool);
   @override
-  _i3.Stream<_i2.User?> get userStream => (super.noSuchMethod(
+  _i2.ValueStream<_i3.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _i3.Stream<_i2.User?>.empty(),
-      ) as _i3.Stream<_i2.User?>);
+        returnValue: _FakeValueStream_0<_i3.User?>(
+          this,
+          Invocation.getter(#userStream),
+        ),
+      ) as _i2.ValueStream<_i3.User?>);
   @override
-  _i3.Stream<String?> get idTokenStream => (super.noSuchMethod(
+  _i2.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _i3.Stream<String?>.empty(),
-      ) as _i3.Stream<String?>);
+        returnValue: _FakeValueStream_0<String?>(
+          this,
+          Invocation.getter(#idTokenStream),
+        ),
+      ) as _i2.ValueStream<String?>);
   @override
-  _i3.Future<_i2.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i4.Future<_i3.User?> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i3.Future<_i2.User?>.value(),
-      ) as _i3.Future<_i2.User?>);
+        returnValue: _i4.Future<_i3.User?>.value(),
+      ) as _i4.Future<_i3.User?>);
   @override
-  _i3.Future<void> refreshToken() => (super.noSuchMethod(
+  _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  _i3.Future<void> signOut() => (super.noSuchMethod(
+  _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  _i3.Future<void> dispose() => (super.noSuchMethod(
+  _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [LocalAuthPlatform].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class LocalAuthPlatformMock extends _i1.Mock implements _i5.LocalAuthPlatform {
+class LocalAuthPlatformMock extends _i1.Mock implements _i6.LocalAuthPlatform {
   LocalAuthPlatformMock() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<bool> authenticate({
+  _i4.Future<bool> authenticate({
     required String? localizedReason,
-    required Iterable<_i6.AuthMessages>? authMessages,
-    _i6.AuthenticationOptions? options = const _i6.AuthenticationOptions(),
+    required Iterable<_i7.AuthMessages>? authMessages,
+    _i7.AuthenticationOptions? options = const _i7.AuthenticationOptions(),
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -228,40 +249,40 @@ class LocalAuthPlatformMock extends _i1.Mock implements _i5.LocalAuthPlatform {
             #options: options,
           },
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> deviceSupportsBiometrics() => (super.noSuchMethod(
+  _i4.Future<bool> deviceSupportsBiometrics() => (super.noSuchMethod(
         Invocation.method(
           #deviceSupportsBiometrics,
           [],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<List<_i6.BiometricType>> getEnrolledBiometrics() =>
+  _i4.Future<List<_i7.BiometricType>> getEnrolledBiometrics() =>
       (super.noSuchMethod(
         Invocation.method(
           #getEnrolledBiometrics,
           [],
         ),
         returnValue:
-            _i3.Future<List<_i6.BiometricType>>.value(<_i6.BiometricType>[]),
-      ) as _i3.Future<List<_i6.BiometricType>>);
+            _i4.Future<List<_i7.BiometricType>>.value(<_i7.BiometricType>[]),
+      ) as _i4.Future<List<_i7.BiometricType>>);
   @override
-  _i3.Future<bool> isDeviceSupported() => (super.noSuchMethod(
+  _i4.Future<bool> isDeviceSupported() => (super.noSuchMethod(
         Invocation.method(
           #isDeviceSupported,
           [],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> stopAuthentication() => (super.noSuchMethod(
+  _i4.Future<bool> stopAuthentication() => (super.noSuchMethod(
         Invocation.method(
           #stopAuthentication,
           [],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

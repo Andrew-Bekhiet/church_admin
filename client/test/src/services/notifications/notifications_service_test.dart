@@ -397,7 +397,7 @@ void _setUpFunctionsService() {
 }
 
 void _setUpUserSettingsService() {
-  GetIt.I.registerSingleton<UserSettingsService>(MockUserSettings());
+  GetIt.I.registerSingleton<UserSettingsService>(MockUserSettingsService());
 }
 
 void _setUpAuthService() {

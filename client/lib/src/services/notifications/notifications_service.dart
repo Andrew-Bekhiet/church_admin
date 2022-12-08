@@ -86,7 +86,7 @@ class CANotificationsService {
 
   StreamSubscription<String?>? _onFCMTokenRefresh;
 
-  Stream<Notification> get foregroundNotificationsStream =>
+  ValueStream<Notification> get foregroundNotificationsStream =>
       _foregroundNotificationsStreamNotificationsStreamController.stream;
 
   bool get isPaused => _isPaused;

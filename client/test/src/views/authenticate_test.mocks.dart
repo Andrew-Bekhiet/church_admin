@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
-import 'dart:ui' as _i6;
+import 'dart:async' as _i5;
+import 'dart:ui' as _i7;
 
-import 'package:church_admin/church_admin.dart' as _i3;
-import 'package:flutter/widgets.dart' as _i2;
+import 'package:church_admin/church_admin.dart' as _i4;
+import 'package:flutter/widgets.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
 
-import '../dummy_named_location.dart' as _i5;
+import '../dummy_named_location.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,8 +24,9 @@ import '../dummy_named_location.dart' as _i5;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueKey_0<T> extends _i1.SmartFake implements _i2.ValueKey<T> {
-  _FakeValueKey_0(
+class _FakeValueStream_0<T> extends _i1.SmartFake
+    implements _i2.ValueStream<T> {
+  _FakeValueStream_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -33,8 +35,18 @@ class _FakeValueKey_0<T> extends _i1.SmartFake implements _i2.ValueKey<T> {
         );
 }
 
-class _FakeDuration_1 extends _i1.SmartFake implements Duration {
-  _FakeDuration_1(
+class _FakeValueKey_1<T> extends _i1.SmartFake implements _i3.ValueKey<T> {
+  _FakeValueKey_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_2 extends _i1.SmartFake implements Duration {
+  _FakeDuration_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,7 +58,7 @@ class _FakeDuration_1 extends _i1.SmartFake implements Duration {
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i3.AuthService {
+class MockAuthService extends _i1.Mock implements _i4.AuthService {
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
@@ -54,53 +66,65 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i4.Stream<_i3.User?> get userStream => (super.noSuchMethod(
+  _i2.ValueStream<_i4.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _i4.Stream<_i3.User?>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i3.User?>.empty(),
-      ) as _i4.Stream<_i3.User?>);
+        returnValue: _FakeValueStream_0<_i4.User?>(
+          this,
+          Invocation.getter(#userStream),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<_i4.User?>(
+          this,
+          Invocation.getter(#userStream),
+        ),
+      ) as _i2.ValueStream<_i4.User?>);
   @override
-  _i4.Stream<String?> get idTokenStream => (super.noSuchMethod(
+  _i2.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _i4.Stream<String?>.empty(),
-        returnValueForMissingStub: _i4.Stream<String?>.empty(),
-      ) as _i4.Stream<String?>);
+        returnValue: _FakeValueStream_0<String?>(
+          this,
+          Invocation.getter(#idTokenStream),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<String?>(
+          this,
+          Invocation.getter(#idTokenStream),
+        ),
+      ) as _i2.ValueStream<String?>);
   @override
-  _i4.Future<_i3.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i5.Future<_i4.User?> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i4.Future<_i3.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i3.User?>.value(),
-      ) as _i4.Future<_i3.User?>);
+        returnValue: _i5.Future<_i4.User?>.value(),
+        returnValueForMissingStub: _i5.Future<_i4.User?>.value(),
+      ) as _i5.Future<_i4.User?>);
   @override
-  _i4.Future<void> refreshToken() => (super.noSuchMethod(
+  _i5.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i4.Future<void> signOut() => (super.noSuchMethod(
+  _i5.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
+  _i5.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
 
 /// A class which mocks [DummyNamedLocation].
@@ -108,7 +132,7 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
 class MockDummyNamedLocation extends _i1.Mock
-    implements _i5.DummyNamedLocation {
+    implements _i6.DummyNamedLocation {
   @override
   String get location => (super.noSuchMethod(
         Invocation.getter(#location),
@@ -140,17 +164,17 @@ class MockDummyNamedLocation extends _i1.Mock
         returnValueForMissingStub: <String, List<String>>{},
       ) as Map<String, List<String>>);
   @override
-  _i2.ValueKey<String> get pageKey => (super.noSuchMethod(
+  _i3.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_0<String>(
+        returnValue: _FakeValueKey_1<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-        returnValueForMissingStub: _FakeValueKey_0<String>(
+        returnValueForMissingStub: _FakeValueKey_1<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-      ) as _i2.ValueKey<String>);
+      ) as _i3.ValueKey<String>);
   @override
   String namedLocation(
     String? name, {
@@ -174,15 +198,15 @@ class MockDummyNamedLocation extends _i1.Mock
 /// A class which mocks [LocalAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
+class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_1(
+        returnValue: _FakeDuration_2(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_1(
+        returnValueForMissingStub: _FakeDuration_2(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -194,13 +218,13 @@ class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i4.Stream<void> get refreshUIStream => (super.noSuchMethod(
+  _i5.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
-        returnValue: _i4.Stream<void>.empty(),
-        returnValueForMissingStub: _i4.Stream<void>.empty(),
-      ) as _i4.Stream<void>);
+        returnValue: _i5.Stream<void>.empty(),
+        returnValueForMissingStub: _i5.Stream<void>.empty(),
+      ) as _i5.Stream<void>);
   @override
-  void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i7.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -225,61 +249,61 @@ class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
+  _i5.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
           #canCheckBiometrics,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i4.Future<bool> authenticate() => (super.noSuchMethod(
+  _i5.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
           #authenticate,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
+  _i5.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i4.Future<bool> didPopRoute() => (super.noSuchMethod(
+  _i5.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
           #didPopRoute,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i4.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
+  _i5.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
           [route],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i4.Future<bool> didPushRouteInformation(
-          _i2.RouteInformation? routeInformation) =>
+  _i5.Future<bool> didPushRouteInformation(
+          _i3.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
           [routeInformation],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
   void didChangeMetrics() => super.noSuchMethod(
         Invocation.method(
@@ -305,7 +329,7 @@ class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i7.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],

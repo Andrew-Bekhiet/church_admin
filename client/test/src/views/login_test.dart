@@ -143,7 +143,7 @@ Future<void> _setUpCacheRepo({bool mock = true}) async {
 }
 
 void _setUpUserSettings() {
-  final userSettings = MockUserSettings();
+  final userSettings = MockUserSettingsService();
   when(userSettings.setSecondLineFor(Area, captureAny))
       .thenAnswer((_) async {});
   when(userSettings.setSecondLineFor(Street, captureAny))

@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'church_admin_app_test.mocks.dart';
@@ -108,7 +109,7 @@ void _setUpAuthService() {
   final mock = MockAuthService();
 
   when(mock.isSignedIn).thenReturn(false);
-  when(mock.userStream).thenAnswer((_) => Stream.value(null));
+  when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(null));
 
   GetIt.I.registerSingleton<AuthService>(mock);
 }
@@ -304,7 +305,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     );
     when(mock.currentUser).thenReturn(user);
 
-    when(mock.userStream).thenAnswer((_) => Stream.value(user));
+    when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
 
     GetIt.I.allowReassignment = true;
     GetIt.I.registerSingleton<AuthService>(mock);

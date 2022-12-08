@@ -31,9 +31,9 @@ class AuthService {
   bool get isSignedIn => _currentUser != null;
 
   User? get currentUser => _currentUser;
-  Stream<User?> get userStream => _userStreamController.stream;
+  ValueStream<User?> get userStream => _userStreamController.stream;
 
-  Stream<String?> get idTokenStream => _idTokenStreamController.stream;
+  ValueStream<String?> get idTokenStream => _idTokenStreamController.stream;
   String? get currentIdToken => _idTokenStreamController.valueOrNull;
 
   User? get _currentUser => _userStreamController.valueOrNull;
