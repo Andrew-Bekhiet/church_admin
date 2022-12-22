@@ -36,12 +36,14 @@ class FirebaseAuthAdapter extends AuthAdapter {
   late final Stream<User?> userStream = _firebaseAuth
       .userChanges()
       .asyncMap(_getIdTokenResultFromAuthUser)
+      .onErrorReturn(null)
       .switchMap(_onUserChanged);
 
   @override
   late final Stream<String?> idTokenStream = _firebaseAuth
       .userChanges()
       .asyncMap(_getIdTokenResultFromAuthUser)
+      .onErrorReturn(null)
       .map((t) => t?.token)
       .distinct();
 
