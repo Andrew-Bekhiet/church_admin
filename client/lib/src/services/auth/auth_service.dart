@@ -81,12 +81,9 @@ class AuthService {
 
   StreamSubscription<User?> _createUserStreamSubscription(bool cachedUser) {
     return (cachedUser
-            ? Stream.fromFuture(Future(_cache.getUserFromCache))
+            ? _adapter.userStream
                 .asBroadcastStream()
-                .switchMap(
-                  (value) =>
-                      _adapter.userStream.asBroadcastStream().startWith(value),
-                )
+                .startWithFuture(Future.sync(_cache.getUserFromCache))
             : _adapter.userStream.asBroadcastStream().startWith(null))
         .distinct()
         .asyncMap(_saveUserToCache)

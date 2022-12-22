@@ -3,10 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:church_admin/church_admin.dart' as _i2;
+import 'package:church_admin/church_admin.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:rxdart/rxdart.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -19,66 +20,77 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeValueStream_0<T> extends _i1.SmartFake
+    implements _i2.ValueStream<T> {
+  _FakeValueStream_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthCache].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthCache extends _i1.Mock implements _i2.AuthCache {
+class MockAuthCache extends _i1.Mock implements _i3.AuthCache {
   @override
-  _i3.Future<_i2.User?> getUserFromCache() => (super.noSuchMethod(
+  _i4.Future<_i3.User?> getUserFromCache() => (super.noSuchMethod(
         Invocation.method(
           #getUserFromCache,
           [],
         ),
-        returnValue: _i3.Future<_i2.User?>.value(),
-        returnValueForMissingStub: _i3.Future<_i2.User?>.value(),
-      ) as _i3.Future<_i2.User?>);
+        returnValue: _i4.Future<_i3.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i3.User?>.value(),
+      ) as _i4.Future<_i3.User?>);
   @override
-  _i3.Future<void> writeUserToCache(_i2.User? user) => (super.noSuchMethod(
+  _i4.Future<void> writeUserToCache(_i3.User? user) => (super.noSuchMethod(
         Invocation.method(
           #writeUserToCache,
           [user],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [AuthAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
+class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
   @override
-  _i3.Stream<_i2.User?> get userStream => (super.noSuchMethod(
+  _i4.Stream<_i3.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _i3.Stream<_i2.User?>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.User?>.empty(),
-      ) as _i3.Stream<_i2.User?>);
+        returnValue: _i4.Stream<_i3.User?>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i3.User?>.empty(),
+      ) as _i4.Stream<_i3.User?>);
   @override
-  _i3.Stream<String?> get idTokenStream => (super.noSuchMethod(
+  _i4.Stream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _i3.Stream<String?>.empty(),
-        returnValueForMissingStub: _i3.Stream<String?>.empty(),
-      ) as _i3.Stream<String?>);
+        returnValue: _i4.Stream<String?>.empty(),
+        returnValueForMissingStub: _i4.Stream<String?>.empty(),
+      ) as _i4.Stream<String?>);
   @override
-  _i3.Future<_i2.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i4.Future<_i3.User?> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i3.Future<_i2.User?>.value(),
-        returnValueForMissingStub: _i3.Future<_i2.User?>.value(),
-      ) as _i3.Future<_i2.User?>);
+        returnValue: _i4.Future<_i3.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i3.User?>.value(),
+      ) as _i4.Future<_i3.User?>);
   @override
-  _i3.Future<void> refreshToken() => (super.noSuchMethod(
+  _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  bool isTokenUpToDate(_i2.User? user) => (super.noSuchMethod(
+  bool isTokenUpToDate(_i3.User? user) => (super.noSuchMethod(
         Invocation.method(
           #isTokenUpToDate,
           [user],
@@ -87,30 +99,30 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i3.Future<void> signOut() => (super.noSuchMethod(
+  _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  _i3.Future<void> dispose() => (super.noSuchMethod(
+  _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [ConnectivityService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockConnectivityService extends _i1.Mock
-    implements _i2.ConnectivityService {
+    implements _i3.ConnectivityService {
   @override
   String get urlToPing => (super.noSuchMethod(
         Invocation.getter(#urlToPing),
@@ -118,18 +130,33 @@ class MockConnectivityService extends _i1.Mock
         returnValueForMissingStub: '',
       ) as String);
   @override
-  _i3.Stream<bool> get connectivityStream => (super.noSuchMethod(
+  _i2.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _i3.Stream<bool>.empty(),
-        returnValueForMissingStub: _i3.Stream<bool>.empty(),
-      ) as _i3.Stream<bool>);
+        returnValue: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+      ) as _i2.ValueStream<bool>);
   @override
-  _i3.Future<bool> isConnected() => (super.noSuchMethod(
+  _i4.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
           #isConnected,
           [],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

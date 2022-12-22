@@ -169,8 +169,19 @@ class _FakePerson_12 extends _i1.SmartFake implements _i4.Person {
         );
 }
 
-class _FakeDuration_13 extends _i1.SmartFake implements Duration {
-  _FakeDuration_13(
+class _FakeGetAreasStream_13 extends _i1.SmartFake
+    implements _i4.GetAreasStream {
+  _FakeGetAreasStream_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_14 extends _i1.SmartFake implements Duration {
+  _FakeDuration_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1235,6 +1246,18 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
 /// See the documentation for Mockito's code generation for more information.
 class MockAreasQueries extends _i1.Mock implements _i4.AreasQueries {
   @override
+  _i4.GetAreasStream get getAreasStreamInternal => (super.noSuchMethod(
+        Invocation.getter(#getAreasStreamInternal),
+        returnValue: _FakeGetAreasStream_13(
+          this,
+          Invocation.getter(#getAreasStreamInternal),
+        ),
+        returnValueForMissingStub: _FakeGetAreasStream_13(
+          this,
+          Invocation.getter(#getAreasStreamInternal),
+        ),
+      ) as _i4.GetAreasStream);
+  @override
   _i4.GQLPaginatableStream<_i4.Area> getAreasStream(
           {_i6.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
@@ -1301,11 +1324,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_13(
+        returnValue: _FakeDuration_14(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_13(
+        returnValueForMissingStub: _FakeDuration_14(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -1465,11 +1488,17 @@ class MockConnectivityService extends _i1.Mock
         returnValueForMissingStub: '',
       ) as String);
   @override
-  _i6.Stream<bool> get connectivityStream => (super.noSuchMethod(
+  _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _i6.Stream<bool>.empty(),
-        returnValueForMissingStub: _i6.Stream<bool>.empty(),
-      ) as _i6.Stream<bool>);
+        returnValue: _FakeValueStream_1<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+        returnValueForMissingStub: _FakeValueStream_1<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+      ) as _i3.ValueStream<bool>);
   @override
   _i6.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
@@ -1479,4 +1508,13 @@ class MockConnectivityService extends _i1.Mock
         returnValue: _i6.Future<bool>.value(false),
         returnValueForMissingStub: _i6.Future<bool>.value(false),
       ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }

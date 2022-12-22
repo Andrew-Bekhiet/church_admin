@@ -8,8 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart_ext/not_replay_value_stream.dart';
 
 import 'church_admin_app_test.mocks.dart';
 
@@ -137,7 +136,8 @@ void _setUp() {
 void _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
-  when(mock.connectivityStream).thenAnswer((_) => Stream.value(false));
+  when(mock.connectivityStream)
+      .thenAnswer((_) => BehaviorSubject.seeded(false));
 
   GetIt.I.registerSingleton<ConnectivityService>(mock);
 }

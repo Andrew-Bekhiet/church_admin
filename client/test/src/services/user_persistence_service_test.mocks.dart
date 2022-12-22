@@ -11,7 +11,7 @@ import 'package:firebase_database/firebase_database.dart' as _i4;
 import 'package:firebase_database_platform_interface/firebase_database_platform_interface.dart'
     as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
+import 'package:rxdart/rxdart.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -119,11 +119,17 @@ class MockConnectivityService extends _i1.Mock
         returnValueForMissingStub: '',
       ) as String);
   @override
-  _i6.Stream<bool> get connectivityStream => (super.noSuchMethod(
+  _i2.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _i6.Stream<bool>.empty(),
-        returnValueForMissingStub: _i6.Stream<bool>.empty(),
-      ) as _i6.Stream<bool>);
+        returnValue: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#connectivityStream),
+        ),
+      ) as _i2.ValueStream<bool>);
   @override
   _i6.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
@@ -133,6 +139,15 @@ class MockConnectivityService extends _i1.Mock
         returnValue: _i6.Future<bool>.value(false),
         returnValueForMissingStub: _i6.Future<bool>.value(false),
       ) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [AuthService].

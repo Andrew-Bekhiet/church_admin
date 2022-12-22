@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'user_persistence_service_test.mocks.dart';
 
@@ -61,7 +62,7 @@ void main() {
     'Persistence Service => connectivity listener',
     () async {
       when(GetIt.I<ConnectivityService>().connectivityStream)
-          .thenAnswer((_) => Stream.value(true));
+          .thenAnswer((_) => BehaviorSubject.seeded(true));
 
       final unit = UserPersistenceService();
       addTearDown(unit.dispose);
@@ -131,7 +132,8 @@ void _setUpAuthService() {
 void _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
-  when(mock.connectivityStream).thenAnswer((_) => Stream.value(false));
+  when(mock.connectivityStream)
+      .thenAnswer((_) => ValueStreamController(false).stream);
 
   GetIt.I.registerSingleton<ConnectivityService>(mock);
 }

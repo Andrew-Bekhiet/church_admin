@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_service_test.mocks.dart';
 
@@ -26,6 +26,7 @@ void main() {
           .thenAnswer((_) async => ConnectivityResult.wifi);
 
       final unit = ConnectivityService();
+      addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isTrue));
 
@@ -51,6 +52,7 @@ void main() {
           .thenAnswer((_) async => ConnectivityResult.none);
 
       final unit = ConnectivityService();
+      addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isFalse));
 
@@ -83,6 +85,7 @@ void main() {
       };
 
       final unit = ConnectivityService();
+      addTearDown(unit.dispose);
 
       expect(
         unit.connectivityStream,

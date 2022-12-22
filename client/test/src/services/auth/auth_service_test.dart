@@ -226,6 +226,7 @@ Future<void> _setUpMockConnectivity() async {
   final mock = MockConnectivityService();
 
   when(mock.isConnected()).thenAnswer((_) async => true);
+  when(mock.connectivityStream).thenAnswer((_) => BehaviorSubject.seeded(true));
 
   GetIt.I.registerSingleton<ConnectivityService>(mock);
 }
