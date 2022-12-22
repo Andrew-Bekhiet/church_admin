@@ -169,19 +169,8 @@ class _FakePerson_12 extends _i1.SmartFake implements _i4.Person {
         );
 }
 
-class _FakeGetAreasStream_13 extends _i1.SmartFake
-    implements _i4.GetAreasStream {
-  _FakeGetAreasStream_13(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDuration_14 extends _i1.SmartFake implements Duration {
-  _FakeDuration_14(
+class _FakeDuration_13 extends _i1.SmartFake implements Duration {
+  _FakeDuration_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1246,18 +1235,6 @@ class MockPersonsQueries extends _i1.Mock implements _i4.PersonsQueries {
 /// See the documentation for Mockito's code generation for more information.
 class MockAreasQueries extends _i1.Mock implements _i4.AreasQueries {
   @override
-  _i4.GetAreasStream get getAreasStreamInternal => (super.noSuchMethod(
-        Invocation.getter(#getAreasStreamInternal),
-        returnValue: _FakeGetAreasStream_13(
-          this,
-          Invocation.getter(#getAreasStreamInternal),
-        ),
-        returnValueForMissingStub: _FakeGetAreasStream_13(
-          this,
-          Invocation.getter(#getAreasStreamInternal),
-        ),
-      ) as _i4.GetAreasStream);
-  @override
   _i4.GQLPaginatableStream<_i4.Area> getAreasStream(
           {_i6.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
@@ -1324,11 +1301,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_14(
+        returnValue: _FakeDuration_13(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_14(
+        returnValueForMissingStub: _FakeDuration_13(
           this,
           Invocation.getter(#timeToReauth),
         ),

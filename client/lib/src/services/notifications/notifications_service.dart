@@ -44,7 +44,7 @@ class CANotificationsService {
   CANotificationsService({
     FirebaseMessaging? firebaseMessaging,
     FlutterLocalNotificationsPlugin? localNotificationsPlugin,
-    AuthService? authService,
+    AuthService Function()? getAuthService,
     UserSettingsService? userSettingsService,
     CAFunctionsService? functionsService,
     NotificationsStorage? storage,
@@ -54,7 +54,7 @@ class CANotificationsService {
         _firebaseMessaging = firebaseMessaging ?? GetIt.I<FirebaseMessaging>(),
         _localNotificationsPlugin = localNotificationsPlugin ??
             GetIt.I<FlutterLocalNotificationsPlugin>(),
-        _authService = authService ?? GetIt.I<AuthService>(),
+        _getAuthService = getAuthService ?? GetIt.I<AuthService>,
         _userSettingsService =
             userSettingsService ?? GetIt.I<UserSettingsService>(),
         _functionsService = functionsService ?? GetIt.I<CAFunctionsService>() {
@@ -71,7 +71,7 @@ class CANotificationsService {
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
-  final AuthService _authService;
+  final AuthService Function() _getAuthService;
   final UserSettingsService _userSettingsService;
   final CAFunctionsService _functionsService;
 
@@ -148,7 +148,8 @@ class CANotificationsService {
   Future<bool> registerFCMTokenAndListenForChanges({
     String? cachedToken,
   }) async {
-    if (_authService.isSignedIn && await _firebaseMessaging.isSupported()) {
+    if (_getAuthService().isSignedIn &&
+        await _firebaseMessaging.isSupported()) {
       final permissionGranted = await requestNotificationsPermission();
 
       if (permissionGranted) {
