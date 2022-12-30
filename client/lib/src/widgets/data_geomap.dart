@@ -71,55 +71,21 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
   late final Stream<Tuple3<String, Position?, Map<Type, Set<Object>>?>>?
       stream = Rx.combineLatest3(
     _locationMemoizer
-        .runOnce(
-          () async {
-            final permissionStatus = await Permission.location.request();
-            if (await Geolocator.isLocationServiceEnabled() &&
-                (permissionStatus == PermissionStatus.granted ||
-                    permissionStatus == PermissionStatus.limited)) {
-              return Geolocator.getCurrentPosition();
-            }
-            return null;
-          },
-        )
+        .runOnce(_requestLocationPermission)
         .asStream()
         .startWith(null),
     PackageInfo.fromPlatform().asStream(),
-    _mapOptions.switchMap(
-      (options) => CADatabaseRepository.I.persons.getPersonsGeolocations(
-        personId: options.selectedAreas.isEmpty &&
-                options.selectedStreets.isEmpty &&
-                options.selectedFamilies.isEmpty &&
-                options.selectedClasses.isEmpty &&
-                options.selectedGroups.isEmpty &&
-                options.selectedServices.isEmpty
-            ? widget.initialPerson?.id
-            : null,
-        getAreas: options.layers.contains(GeoMapLayer.areas),
-        getFamilies: options.layers.contains(GeoMapLayer.families),
-        getStreets: options.layers.contains(GeoMapLayer.streets),
-        getPersons: options.layers.contains(GeoMapLayer.persons),
-        areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
-        streetsIds:
-            options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
-        familiesIds:
-            options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
-        classesIds:
-            options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
-        servicesIds:
-            options.selectedServices.map((e) => UuidValue(e.id)).toList(),
-        groupsIds: options.selectedGroups.map((e) => UuidValue(e.id)).toList(),
-      ),
-    ),
+    _mapOptions.switchMap(_getPersonsLocations),
     (location, packageInfo, data) =>
         Tuple3(packageInfo.packageName, location, data),
   );
 
   late BehaviorSubject<Person>? resultPerson =
       widget.editPerson ? BehaviorSubject.seeded(widget.initialPerson!) : null;
-  final _sheetScrollController = ScrollController();
 
   final _locationMemoizer = AsyncMemoizer<Position?>();
+
+  final _sheetScrollController = ScrollController();
 
   final BehaviorSubject<Point?> _focusedLocation = BehaviorSubject.seeded(null);
   Point? _oldFocusedLocation;
@@ -372,8 +338,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                           .toList()
                       : [],
                 ),
-                if (currentLocation != null)
-                  CurrentLocationLayer(),
+                if (currentLocation != null) CurrentLocationLayer(),
                 if (widget.editPerson)
                   StreamBuilder<Person>(
                     initialData: resultPerson!.value,
@@ -547,6 +512,42 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
       ),
     );
   }
+
+  Future<Position?> _requestLocationPermission() async {
+    final permissionStatus = await Permission.location.request();
+    if (await Geolocator.isLocationServiceEnabled() &&
+        (permissionStatus == PermissionStatus.granted ||
+            permissionStatus == PermissionStatus.limited)) {
+      return Geolocator.getCurrentPosition();
+    }
+    return null;
+  }
+
+  Stream<Map<Type, Set<Object>>?> _getPersonsLocations(GeoMapOptions options) =>
+      CADatabaseRepository.I.persons.getPersonsGeolocations(
+        personId: options.selectedAreas.isEmpty &&
+                options.selectedStreets.isEmpty &&
+                options.selectedFamilies.isEmpty &&
+                options.selectedClasses.isEmpty &&
+                options.selectedGroups.isEmpty &&
+                options.selectedServices.isEmpty
+            ? widget.initialPerson?.id
+            : null,
+        getAreas: options.layers.contains(GeoMapLayer.areas),
+        getFamilies: options.layers.contains(GeoMapLayer.families),
+        getStreets: options.layers.contains(GeoMapLayer.streets),
+        getPersons: options.layers.contains(GeoMapLayer.persons),
+        areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
+        streetsIds:
+            options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
+        familiesIds:
+            options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
+        classesIds:
+            options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
+        servicesIds:
+            options.selectedServices.map((e) => UuidValue(e.id)).toList(),
+        groupsIds: options.selectedGroups.map((e) => UuidValue(e.id)).toList(),
+      );
 
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final latTween = Tween<double>(
