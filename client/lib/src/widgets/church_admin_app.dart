@@ -91,8 +91,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
   void initState() {
     _connectivityListener = GetIt.I<ConnectivityService>()
         .connectivityStream
-        .skip(1)
         .distinct()
+        .skip(1)
         .listen(_onConnectivityChanged);
 
     super.initState();
