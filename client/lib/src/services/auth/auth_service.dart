@@ -72,11 +72,11 @@ class AuthService {
   }
 
   StreamSubscription<String?> _createIdTokenStreamSubscription() {
-    return _adapter.idTokenStream.listen(
-      _idTokenStreamController.add,
-      onError: _idTokenStreamController.addError,
-      onDone: _idTokenStreamController.close,
-    );
+    return _adapter.idTokenStream.map(_scheduleTokenRefersh).listen(
+          _idTokenStreamController.add,
+          onError: _idTokenStreamController.addError,
+          onDone: _idTokenStreamController.close,
+        );
   }
 
   StreamSubscription<User?> _createUserStreamSubscription(bool cachedUser) {
@@ -92,6 +92,17 @@ class AuthService {
           onError: _userStreamController.addError,
           onDone: _userStreamController.close,
         );
+  }
+
+  String? _scheduleTokenRefersh(String? idToken) {
+    if (idToken != null) {
+      Future.delayed(
+        _adapter.tokenExpiry(idToken).difference(DateTime.now()),
+        refreshToken,
+      );
+    }
+
+    return idToken;
   }
 
   Future<void> _onConnectivityChanged(bool connected) async {

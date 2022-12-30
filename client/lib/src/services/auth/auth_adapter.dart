@@ -10,6 +10,8 @@ abstract class AuthAdapter {
 
   bool isTokenUpToDate(User user);
 
+  DateTime tokenExpiry(String idToken);
+
   Future<void> signOut();
 
   Future<void> dispose();

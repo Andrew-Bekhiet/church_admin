@@ -106,10 +106,11 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   @override
   bool isTokenUpToDate(User user) {
-    return _jwtExpiry(user.idToken!).isAfter(DateTime.now());
+    return tokenExpiry(user.idToken!).isAfter(DateTime.now());
   }
 
-  DateTime _jwtExpiry(String idToken) {
+  @override
+  DateTime tokenExpiry(String idToken) {
     return DateTime.fromMillisecondsSinceEpoch(
       ((json.decode(
                 utf8.decode(
