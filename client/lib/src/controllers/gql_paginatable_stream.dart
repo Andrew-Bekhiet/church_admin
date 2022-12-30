@@ -97,11 +97,9 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
           };
 
   Stream<String?> _transformSearchQuery() {
-    return (searchQuery ?? Stream.value(null))
-        .distinct(
+    return (searchQuery ?? Stream.value(null)).startWith(null).distinct(
           (p, n) => p == n || (n == '' && p == null) || (p == '' && n == null),
-        )
-        .startWith(null);
+        );
   }
 
   DelegatingStreamResult<T> Function(DelegatingStreamResult<T> event)
