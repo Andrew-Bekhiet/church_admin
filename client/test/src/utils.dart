@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 GoRouter testRedirectWith({
   String? expectedPath,
@@ -32,4 +33,9 @@ GoRouter testRedirectWith({
         ),
     ],
   );
+}
+
+void flushVisibilityDetectors() {
+  VisibilityDetectorController.instance.updateInterval = Duration.zero;
+  VisibilityDetectorController.instance.notifyNow();
 }

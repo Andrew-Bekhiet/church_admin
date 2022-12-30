@@ -21,7 +21,7 @@ class UserSettingsService {
       )!;
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
 
-  String? get registeredFCMToken => box.get('registeredFCMToken')!;
+  String? get registeredFCMToken => box.get('registeredFCMToken');
   Future<void> setRegisteredFCMToken(String? value) =>
       box.put('registeredFCMToken', value);
 

@@ -43,39 +43,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
           IconButton(
             tooltip: 'السجل',
             icon: const Icon(Icons.history),
-            onPressed: () async {
-              await showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  child: DataObjectListViewBase<void, T>(
-                    controller: ListControllerBase(
-                      objectsPaginatableStream: getHistoryStream(),
-                    ),
-                    autoDisposeController: true,
-                    itemBuilder: (
-                      o, {
-                      onLongPress,
-                      onTap,
-                      subtitle,
-                      trailing,
-                    }) =>
-                        ViewableObjectWidget(
-                      o.user ??
-                          User(
-                            name: o.name,
-                            uid: o.recordedBy ?? '',
-                          ),
-                      title: Text(dateFormat.format(o.time)),
-                      subtitle: Text(o.user?.name ?? ''),
-                      onLongPress: () => onLongPress?.call(o),
-                      onTap: () => onTap?.call(o),
-                      trailing: trailing,
-                    ),
-                  ),
-                ),
-              );
-            },
+            onPressed: _onHistoryTap(context),
           ),
           if (onRecordNow != null)
             IconButton(
@@ -87,4 +55,38 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
       ),
     );
   }
+
+  void Function() _onHistoryTap(BuildContext context) => () async {
+        await showDialog(
+          context: context,
+          builder: (context) => Dialog(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            child: DataObjectListViewBase<void, T>(
+              controller: ListControllerBase(
+                objectsPaginatableStream: getHistoryStream(),
+              ),
+              autoDisposeController: true,
+              itemBuilder: (
+                o, {
+                onLongPress,
+                onTap,
+                subtitle,
+                trailing,
+              }) =>
+                  ViewableObjectWidget(
+                o.user ??
+                    User(
+                      name: o.name,
+                      uid: o.recordedBy ?? '',
+                    ),
+                title: Text(dateFormat.format(o.time)),
+                subtitle: Text(o.user?.name ?? ''),
+                onLongPress: () => onLongPress?.call(o),
+                onTap: () => onTap?.call(o),
+                trailing: trailing,
+              ),
+            ),
+          ),
+        );
+      };
 }

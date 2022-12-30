@@ -12,37 +12,45 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+typedef ServiceBuilder = Widget Function(
+  BuildContext,
+  Service, {
+  void Function(Service)? onLongPress,
+  void Function(Service)? onTap,
+  Widget? trailing,
+  Widget? subtitle,
+});
+
+typedef StudyYearBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required StudyYear studyYear,
+});
+
+typedef GroupBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required Group group,
+});
+
+typedef ClassBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required Class $class,
+  required StudyYear studyYear,
+});
+
 class ServicesHierarchyList extends StatefulWidget {
   final bool showClasses;
   final bool showGroups;
 
-  final Widget Function(
-    BuildContext,
-    Service, {
-    void Function(Service)? onLongPress,
-    void Function(Service)? onTap,
-    Widget? trailing,
-    Widget? subtitle,
-  })? serviceBuilder;
+  final ServiceBuilder? serviceBuilder;
 
-  final Widget Function(
-    BuildContext, {
-    required Service service,
-    required StudyYear studyYear,
-  })? studyYearBuilder;
+  final StudyYearBuilder? studyYearBuilder;
 
-  final Widget Function(
-    BuildContext, {
-    required Service service,
-    required Group group,
-  })? groupBuilder;
+  final GroupBuilder? groupBuilder;
 
-  final Widget Function(
-    BuildContext, {
-    required Service service,
-    required Class $class,
-    required StudyYear studyYear,
-  })? classBuilder;
+  final ClassBuilder? classBuilder;
 
   final ListControllerBase<void, Service>? listController;
   final Stream<String?>? search;
@@ -111,23 +119,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             s,
             circleCrop: false,
           ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Transform.rotate(
-                angle: _topController.value * pi,
-                child: const Icon(Icons.expand_more),
-              ),
-              if (widget.serviceBuilder != null)
-                widget.serviceBuilder!(
-                  context,
-                  s,
-                  onLongPress: onLongPress,
-                  onTap: onTap,
-                  trailing: trailing,
-                  subtitle: subtitle,
-                ),
-            ],
+          trailing: Transform.rotate(
+            angle: _topController.value * pi,
+            child: const Icon(Icons.expand_more),
           ),
           onExpansionChanged: (e) =>
               e ? _topController.forward() : _topController.animateBack(0),
@@ -135,64 +129,25 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           maintainState: true,
           title: GestureDetector(
             onLongPress: onLongPress != null ? () => onLongPress(s) : null,
-            child: Text(s.name),
+            child: widget.serviceBuilder == null
+                ? Text(s.name)
+                : widget.serviceBuilder!(
+                    context,
+                    s,
+                    onLongPress: onLongPress,
+                    onTap: onTap,
+                    trailing: trailing,
+                    subtitle: subtitle,
+                  ),
           ),
           children: [
             if (widget.showClasses)
-              for (final sc
-                  in s.classes?.groupListsBy((c) => c.studyYear!).entries ??
-                      <StudyYear, List<Class>>{}.entries)
-                if (sc.value.length > 1)
-                  Padding(
-                    padding: EdgeInsets.only(right: _topController.value * 20),
-                    child: widget.studyYearBuilder
-                            ?.call(context, service: s, studyYear: sc.key) ??
-                        Card(
-                          elevation: 0,
-                          child: ExpansionTile(
-                            key: PageStorageKey(sc.key),
-                            title: Text(sc.key.name),
-                            expandedCrossAxisAlignment:
-                                CrossAxisAlignment.stretch,
-                            maintainState: true,
-                            children: [
-                              for (final c in sc.value)
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    right: _topController.value * 20,
-                                  ),
-                                  child: widget.classBuilder?.call(
-                                        context,
-                                        studyYear: sc.key,
-                                        service: s,
-                                        $class: c,
-                                      ) ??
-                                      ViewableObjectWidget(
-                                        c,
-                                        showSubtitle: false,
-                                        wrapInCard: false,
-                                        isDense: true,
-                                      ),
-                                ),
-                            ],
-                          ),
-                        ),
-                  )
-                else
-                  Padding(
-                    padding: EdgeInsets.only(right: _topController.value * 20),
-                    child: widget.classBuilder?.call(
-                          context,
-                          service: s,
-                          studyYear: sc.key,
-                          $class: sc.value.single,
-                        ) ??
-                        ViewableObjectWidget(
-                          sc.value.single,
-                          showSubtitle: false,
-                          wrapInCard: false,
-                        ),
-                  ),
+              _Classes(
+                service: s,
+                topController: _topController,
+                classBuilder: widget.classBuilder,
+                studyYearBuilder: widget.studyYearBuilder,
+              ),
             if (widget.showClasses &&
                 widget.showGroups &&
                 s.fromStudyYear != null &&
@@ -201,17 +156,11 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                 (s.groups?.isNotEmpty ?? false))
               const Divider(),
             if (widget.showGroups)
-              for (final g in s.groups ?? <Group>[])
-                Padding(
-                  padding: EdgeInsets.only(right: _topController.value * 20),
-                  child: widget.groupBuilder
-                          ?.call(context, group: g, service: s) ??
-                      ViewableObjectWidget(
-                        g,
-                        showSubtitle: false,
-                        wrapInCard: false,
-                      ),
-                ),
+              _Groups(
+                service: s,
+                topController: _topController,
+                groupBuilder: widget.groupBuilder,
+              ),
           ],
         ),
       ),
@@ -220,13 +169,126 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     for (final c in _animationControllers.values) {
       c.dispose();
     }
+
+    super.dispose();
+
     if (search is BehaviorSubject) {
       await (search as BehaviorSubject).close();
     }
+  }
+}
+
+class _Classes extends StatelessWidget {
+  final Service service;
+  final AnimationController topController;
+
+  final StudyYearBuilder? studyYearBuilder;
+
+  final ClassBuilder? classBuilder;
+
+  const _Classes({
+    required this.topController,
+    required this.service,
+    this.studyYearBuilder,
+    this.classBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final sc
+            in service.classes?.groupListsBy((c) => c.studyYear!).entries ??
+                <StudyYear, List<Class>>{}.entries)
+          if (sc.value.length > 1)
+            Padding(
+              padding: EdgeInsets.only(right: topController.value * 20),
+              child: studyYearBuilder?.call(
+                    context,
+                    service: service,
+                    studyYear: sc.key,
+                  ) ??
+                  Card(
+                    elevation: 0,
+                    child: ExpansionTile(
+                      key: PageStorageKey(sc.key),
+                      title: Text(sc.key.name),
+                      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+                      maintainState: true,
+                      children: [
+                        for (final c in sc.value)
+                          Padding(
+                            padding: EdgeInsets.only(
+                              right: topController.value * 20,
+                            ),
+                            child: classBuilder?.call(
+                                  context,
+                                  studyYear: sc.key,
+                                  service: service,
+                                  $class: c,
+                                ) ??
+                                ViewableObjectWidget(
+                                  c,
+                                  showSubtitle: false,
+                                  wrapInCard: false,
+                                  isDense: true,
+                                ),
+                          ),
+                      ],
+                    ),
+                  ),
+            )
+          else
+            Padding(
+              padding: EdgeInsets.only(right: topController.value * 20),
+              child: classBuilder?.call(
+                    context,
+                    service: service,
+                    studyYear: sc.key,
+                    $class: sc.value.single,
+                  ) ??
+                  ViewableObjectWidget(
+                    sc.value.single,
+                    showSubtitle: false,
+                    wrapInCard: false,
+                  ),
+            ),
+      ],
+    );
+  }
+}
+
+class _Groups extends StatelessWidget {
+  final Service service;
+  final GroupBuilder? groupBuilder;
+  final AnimationController topController;
+
+  const _Groups({
+    required this.topController,
+    required this.service,
+    this.groupBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final g in service.groups ?? <Group>[])
+          Padding(
+            padding: EdgeInsets.only(right: topController.value * 20),
+            child: groupBuilder?.call(context, group: g, service: service) ??
+                ViewableObjectWidget(
+                  g,
+                  showSubtitle: false,
+                  wrapInCard: false,
+                ),
+          ),
+      ],
+    );
   }
 }

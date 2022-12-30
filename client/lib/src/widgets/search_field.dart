@@ -3,8 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
+  /// The sink to which the search query will be added
   final StreamSink<String?> searchSink;
+
+  /// Whether the search field can be hidden
+  /// and the search query can be null
   final bool canHide;
+
+  /// Passed to the TextField
   final bool autofocus;
 
   const SearchField({
