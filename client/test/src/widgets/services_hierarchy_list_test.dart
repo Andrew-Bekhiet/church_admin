@@ -149,7 +149,7 @@ Future<void> main() async {
               ],
             ),
           ),
-          serviceBuilder: (
+          serviceTrailingBuilder: (
             context,
             service, {
             onLongPress,
@@ -157,8 +157,8 @@ Future<void> main() async {
             subtitle,
             trailing,
           }) =>
-              Text(
-            service.name,
+              Icon(
+            Icons.ac_unit,
             key: ValueKey(service.name),
           ),
           studyYearBuilder: (p0, {required service, required studyYear}) =>

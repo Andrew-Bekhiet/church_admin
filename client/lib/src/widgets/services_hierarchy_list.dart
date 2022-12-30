@@ -12,7 +12,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef ServiceBuilder = Widget Function(
+typedef ServiceTrailingBuilder = Widget Function(
   BuildContext,
   Service, {
   void Function(Service)? onLongPress,
@@ -44,7 +44,7 @@ class ServicesHierarchyList extends StatefulWidget {
   final bool showClasses;
   final bool showGroups;
 
-  final ServiceBuilder? serviceBuilder;
+  final ServiceTrailingBuilder? serviceTrailingBuilder;
 
   final StudyYearBuilder? studyYearBuilder;
 
@@ -60,7 +60,7 @@ class ServicesHierarchyList extends StatefulWidget {
     this.showClasses = true,
     this.showGroups = true,
     this.autoDisposeController = false,
-    this.serviceBuilder,
+    this.serviceTrailingBuilder,
     this.studyYearBuilder,
     this.classBuilder,
     this.groupBuilder,
@@ -119,9 +119,23 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             s,
             circleCrop: false,
           ),
-          trailing: Transform.rotate(
-            angle: _topController.value * pi,
-            child: const Icon(Icons.expand_more),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Transform.rotate(
+                angle: _topController.value * pi,
+                child: const Icon(Icons.expand_more),
+              ),
+              if (widget.serviceTrailingBuilder != null)
+                widget.serviceTrailingBuilder!(
+                  context,
+                  s,
+                  onLongPress: onLongPress,
+                  onTap: onTap,
+                  trailing: trailing,
+                  subtitle: subtitle,
+                ),
+            ],
           ),
           onExpansionChanged: (e) =>
               e ? _topController.forward() : _topController.animateBack(0),
@@ -129,16 +143,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           maintainState: true,
           title: GestureDetector(
             onLongPress: onLongPress != null ? () => onLongPress(s) : null,
-            child: widget.serviceBuilder == null
-                ? Text(s.name)
-                : widget.serviceBuilder!(
-                    context,
-                    s,
-                    onLongPress: onLongPress,
-                    onTap: onTap,
-                    trailing: trailing,
-                    subtitle: subtitle,
-                  ),
+            child: Text(s.name),
           ),
           children: [
             if (widget.showClasses)

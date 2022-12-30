@@ -1691,7 +1691,7 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
             title: Text(group.name),
           ),
         ),
-        serviceBuilder: (
+        serviceTrailingBuilder: (
           context,
           s, {
           onLongPress,

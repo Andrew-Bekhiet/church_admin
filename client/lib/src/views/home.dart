@@ -304,7 +304,7 @@ class _HomeBody extends StatelessWidget {
           key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
           listController: _listsControllers[_typeToIndex[Service]!]
               as ListControllerBase<void, Service>,
-          serviceBuilder: (
+          serviceTrailingBuilder: (
             context,
             s, {
             onLongPress,
