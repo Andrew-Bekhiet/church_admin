@@ -56,6 +56,7 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     }
 
     final themeData = ThemeData(
+      fontFamily: 'Cairo',
       brightness: isDark ? Brightness.dark : Brightness.light,
       primarySwatch: primary,
       colorScheme: ColorScheme.fromSwatch(
