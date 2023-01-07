@@ -2,8 +2,6 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -12,7 +10,7 @@ part 'person.freezed.dart';
 part 'person.g.dart';
 
 @freezed
-class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
+class Person extends ViewableWithIDAndImage with _$Person {
   factory Person({
     required String id,
     required String name,
@@ -105,23 +103,14 @@ class Person extends ViewableWithID with _$Person implements PhotoObjectBase {
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
   @override
-  IconData get defaultIcon => Icons.person;
-
-  @override
-  bool get hasPhoto => photoUpdatedAt != null;
-
-  @override
-  CAStorageReference? get photoRef => hasPhoto
-      ? CAStorageReference(
-          photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () async =>
+  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
+      ? ObjectImageInfo(
+          cacheKey: 'persons/$id',
+          downloadUrlFn: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('persons', id),
-          fullPath: 'persons/$id.jpg',
+          lastUpdatedTime: photoUpdatedAt!,
         )
       : null;
-
-  @override
-  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));

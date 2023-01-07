@@ -154,18 +154,22 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() => _loading = false);
       }
     } catch (err, stack) {
-      setState(() => _loading = false);
+      if (mounted) {
+        setState(() => _loading = false);
+      }
       await GetIt.I<LoggingService>().reportError(
         err as Exception,
         stackTrace: stack,
       );
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('تعذر تسجيل الدخول'),
-          content: Text(err.toString()),
-        ),
-      );
+      if (mounted) {
+        await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('تعذر تسجيل الدخول'),
+            content: Text(err.toString()),
+          ),
+        );
+      }
     }
   }
 

@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide PhotoObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -7,9 +9,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:transparent_pointer/transparent_pointer.dart';
 
-class ViewPerson extends StatelessWidget {
+class ViewPerson extends StatefulWidget {
   static final route = GoRoute(
     name: 'view_person',
     path: 'viewPerson',
@@ -40,10 +41,18 @@ class ViewPerson extends StatelessWidget {
   });
 
   @override
+  State<ViewPerson> createState() => _ViewPersonState();
+}
+
+class _ViewPersonState extends State<ViewPerson> {
+  final scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<Person?>(
-      initialData: person,
-      stream: CADatabaseRepository.I.persons.streamPerson(personId: personId),
+      initialData: widget.person,
+      stream: CADatabaseRepository.I.persons
+          .streamPerson(personId: widget.personId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -89,6 +98,7 @@ class ViewPerson extends StatelessWidget {
         );
         return Scaffold(
           body: CustomScrollView(
+            controller: scrollController,
             slivers: [
               SliverAppBar(
                 backgroundColor: person.color,
@@ -107,72 +117,23 @@ class ViewPerson extends StatelessWidget {
                       tooltip: 'تعديل',
                       onPressed: () => context.goNamed(
                         'edit_person',
-                        queryParams: {'id': personId},
+                        queryParams: {'id': widget.personId},
                         extra: {'person': person},
                       ),
                       icon: const Icon(Icons.edit),
                     ),
                 ],
-                flexibleSpace: SafeArea(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final themeData = Theme.of(context);
-
-                      return FlexibleSpaceBar(
-                        centerTitle: false,
-                        expandedTitleScale: 4,
-                        titlePadding: const EdgeInsetsDirectional.only(
-                          bottom: 16,
-                          start: 72,
-                          end: 10,
-                        ),
-                        title: TransparentPointer(
-                          child: AnimatedOpacity(
-                            duration: const Duration(milliseconds: 300),
-                            opacity:
-                                constraints.biggest.height > kToolbarHeight * 2
-                                    ? 0
-                                    : 1,
-                            child: Text(
-                              person.name,
-                              style: themeData.textTheme.titleLarge?.copyWith(
-                                color: foregroundColor,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        background: ProgressIndicatorTheme(
-                          data: themeData.progressIndicatorTheme.copyWith(
-                            color: themeData.brightness == Brightness.light
-                                ? themeData.colorScheme.onPrimary
-                                : themeData.colorScheme.onSurface,
-                          ),
-                          child: IconTheme(
-                            data: IconTheme.of(context)
-                                .copyWith(color: foregroundColor),
-                            child: PhotoObjectWidget(
-                              person,
-                              circleCrop: false,
-                              heroTag: this.person,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                flexibleSpace: _ViewPersonAppBar(
+                  foregroundColor: foregroundColor,
+                  person: widget.person ?? person,
+                  appBarMaxHeight: 280,
+                  scrollController: scrollController,
+                  duration: const Duration(milliseconds: 450),
                 ),
               ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Text(
-                        person.name,
-                        style: themeData.textTheme.titleLarge,
-                      ),
-                    ),
                     PhoneNumberProperty(
                       'رقم الهاتف',
                       person.mainPhone,
@@ -467,7 +428,7 @@ class ViewPerson extends StatelessWidget {
                           .paginatePersonKodasHistory(personId: person.id),
                       onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastKodas(
-                        personId: personId,
+                        personId: widget.personId,
                         lastKodas: DateTime.now(),
                       ),
                     ),
@@ -479,7 +440,7 @@ class ViewPerson extends StatelessWidget {
                           .paginatePersonConfessionHistory(personId: person.id),
                       onRecordNow: () async => CADatabaseRepository.I.persons
                           .updatePersonLastConfession(
-                        personId: personId,
+                        personId: widget.personId,
                         lastConfession: DateTime.now(),
                       ),
                     ),
@@ -491,7 +452,7 @@ class ViewPerson extends StatelessWidget {
                           .paginatePersonVisitHistory(personId: person.id),
                       onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastVisit(
-                        personId: personId,
+                        personId: widget.personId,
                         lastVisit: DateTime.now(),
                       ),
                     ),
@@ -502,7 +463,7 @@ class ViewPerson extends StatelessWidget {
                           .paginatePersonCallHistory(personId: person.id),
                       onRecordNow: () async =>
                           CADatabaseRepository.I.persons.updatePersonLastCall(
-                        personId: personId,
+                        personId: widget.personId,
                         lastCall: DateTime.now(),
                       ),
                     ),
@@ -588,7 +549,7 @@ class ViewPerson extends StatelessWidget {
       );
       if (recordLastCall == true) {
         await CADatabaseRepository.I.persons.updatePersonLastCall(
-          personId: personId,
+          personId: widget.personId,
           lastCall: DateTime.now(),
         );
         scaffoldMessenger.showSnackBar(
@@ -634,6 +595,11 @@ class ViewPerson extends StatelessWidget {
             ),
           ) ==
           true) {
+        final imageFile = person.hasImage
+            ? await GetIt.I<ImageUrlCacheService>()
+                .getImageFileFromCache(person)
+            : null;
+
         await GetIt.I<ContactsService>().insertContact(
           Contact(
             addresses: [
@@ -643,14 +609,234 @@ class ViewPerson extends StatelessWidget {
                 )
             ],
             name: Name(first: _name.text),
-            photo: person.hasPhoto
-                ? await person.photoRef!.getData(100 * 1024 * 1024)
-                : null,
+            photo:
+                imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
+                    ? await imageFile.readAsBytes()
+                    : null,
             phones: [Phone(phone ?? '')],
           ),
         );
       }
     }
+  }
+}
+
+class _ViewPersonAppBar extends StatefulWidget {
+  const _ViewPersonAppBar({
+    required this.person,
+    required this.foregroundColor,
+    required this.appBarMaxHeight,
+    required this.duration,
+    required this.scrollController,
+  });
+
+  final Color? foregroundColor;
+  final Person person;
+  final double appBarMaxHeight;
+  final Duration duration;
+  final ScrollController scrollController;
+
+  @override
+  State<_ViewPersonAppBar> createState() => _ViewPersonAppBarState();
+}
+
+class _ViewPersonAppBarState extends State<_ViewPersonAppBar> {
+  final _photoAlignTween = AlignmentTween(
+    begin: Alignment.center,
+    end: Alignment.centerRight,
+  );
+
+  final _textAlignTween = TweenSequence(
+    [
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomCenter,
+          end: const Alignment(-0.7, 0),
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: const Alignment(-0.7, 0),
+          end: const Alignment(0.2, 0),
+        ),
+        weight: 1,
+      ),
+    ],
+  );
+
+  final _bgPositionPercentTween = Tween<double>(
+    begin: 0.5,
+    end: 1,
+  ).chain(
+    CurveTween(
+      curve: const Interval(0.5, 1, curve: Curves.elasticOut),
+    ),
+  );
+
+  late final _bgColorTween = ColorTween(
+    begin: Theme.of(context).scaffoldBackgroundColor,
+    end: widget.foregroundColor,
+  ).chain(
+    CurveTween(
+      curve: const Interval(0.5, 1, curve: Curves.elasticOut),
+    ),
+  );
+
+  late final _textStyleTeen = TextStyleTween(
+    begin: Theme.of(context).textTheme.headlineMedium!.copyWith(
+          color: Theme.of(context).textTheme.titleLarge!.color,
+        ),
+    end: Theme.of(context).textTheme.titleLarge!.copyWith(
+          color: widget.foregroundColor,
+          fontSize: Theme.of(context).textTheme.titleLarge!.fontSize! * 0.8,
+        ),
+  );
+
+  final _snapPositions = <double>[0, 0.85, 1];
+
+  @override
+  void initState() {
+    super.initState();
+    widget.scrollController.position.isScrollingNotifier
+        .addListener(_scrollListener);
+  }
+
+  @override
+  void didUpdateWidget(_ViewPersonAppBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.scrollController != widget.scrollController) {
+      oldWidget.scrollController.position.isScrollingNotifier
+          .removeListener(_scrollListener);
+      widget.scrollController.position.isScrollingNotifier
+          .addListener(_scrollListener);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final animationValue = 1 -
+              (constraints.biggest.height - kToolbarHeight) /
+                  (widget.appBarMaxHeight - kToolbarHeight);
+
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                top: _bgPositionPercentTween.transform(animationValue) *
+                    constraints.biggest.height,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: ColoredBox(
+                  color: themeData.scaffoldBackgroundColor,
+                ),
+              ),
+              _AppBarPhoto(
+                foregroundColor: widget.foregroundColor,
+                person: widget.person,
+                height: constraints.biggest.height,
+                photoAlign: _photoAlignTween.lerp(animationValue),
+                bgColor: _bgColorTween.transform(animationValue),
+              ),
+              Align(
+                alignment: _textAlignTween.transform(animationValue),
+                child: Text(
+                  widget.person.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: _textStyleTeen.transform(animationValue),
+                ),
+              )
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _scrollListener() async {
+    if (widget.scrollController.position.isScrollingNotifier.value) return;
+
+    final maxScroll = widget.appBarMaxHeight - kToolbarHeight;
+    final currentScroll = widget.scrollController.offset;
+    final scrollPercent = currentScroll / maxScroll;
+
+    if (scrollPercent < 1) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final nearestSnap = _snapPositions.reduce(
+          (nearest, current) =>
+              (current - scrollPercent).abs() < (nearest - scrollPercent).abs()
+                  ? current
+                  : nearest,
+        );
+
+        widget.scrollController.animateTo(
+          nearestSnap * maxScroll,
+          duration: widget.duration,
+          curve: Curves.easeOutExpo,
+        );
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.scrollController.position.isScrollingNotifier
+        .removeListener(_scrollListener);
+
+    super.dispose();
+  }
+}
+
+class _AppBarPhoto extends StatelessWidget {
+  const _AppBarPhoto({
+    required this.photoAlign,
+    required this.bgColor,
+    required this.height,
+    required this.person,
+    required this.foregroundColor,
+  });
+
+  final Person person;
+
+  final double height;
+  final Alignment photoAlign;
+  final Color? bgColor;
+  final Color? foregroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
+    return Transform.scale(
+      scale: 0.8,
+      child: Align(
+        alignment: photoAlign,
+        child: ProgressIndicatorTheme(
+          data: themeData.progressIndicatorTheme.copyWith(
+            color: themeData.brightness == Brightness.light
+                ? themeData.colorScheme.onPrimary
+                : themeData.colorScheme.onSurface,
+          ),
+          child: IconTheme(
+            data: IconTheme.of(context).copyWith(color: foregroundColor),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: bgColor ?? Colors.transparent,
+                shape: BoxShape.circle,
+              ),
+              child: ImageObjectWidget(person),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -826,8 +1012,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       appBar: AppBar(
         title: const Text('تحليل الحضور في'),
       ),
-      body: StreamBuilder<Map<Service, List<ViewableWithID>>>(
-        initialData: <ViewableWithID>[
+      body: StreamBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
+        initialData: <ViewableWithIDAndImage>[
           ...widget.person.classes ?? [],
           ...widget.person.groups ?? []
         ].groupListsBy(
@@ -841,8 +1027,10 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         stream: CADatabaseRepository.I.persons
             .getPersonClassesAndGroups(personId: widget.person.id)
             .map(
-              (p) => <ViewableWithID>[...p?.classes ?? [], ...p?.groups ?? []]
-                  .groupListsBy(
+              (p) => <ViewableWithIDAndImage>[
+                ...p?.classes ?? [],
+                ...p?.groups ?? []
+              ].groupListsBy(
                 (o) => o is Class ? o.service! : (o as Group).service!,
               ),
             ),
@@ -954,7 +1142,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           }
                         },
                         value: entryChecked.requireData,
-                        secondary: PhotoObjectWidget(entry.key),
+                        secondary: ImageObjectWidget(entry.key),
                         title: Text(entry.key.name),
                       ),
                     ),
@@ -980,8 +1168,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                   }
                                 },
                                 value: checked.requireData,
-                                secondary: PhotoObjectWidget(
-                                  o as PhotoObjectBase,
+                                secondary: ImageObjectWidget(
+                                  o,
                                 ),
                                 title: Text(o.name),
                               ),

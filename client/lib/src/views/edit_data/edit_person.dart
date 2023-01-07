@@ -6,7 +6,6 @@ import 'package:churchdata_core/churchdata_core.dart'
         ContrastingColor,
         ListControllerBase,
         LoggingService,
-        PhotoObjectWidget,
         TappableFormField,
         ViewableObjectWidget;
 import 'package:collection/collection.dart';
@@ -201,17 +200,14 @@ class _EditPersonState extends State<EditPerson> {
                                   .copyWith(color: foregroundColor),
                               child: state.value!.hasChanged
                                   ? state.value!.deletePhoto
-                                      ? PhotoObjectWidget(
-                                          Person(
-                                            id: 'Placeholder',
-                                            name: 'Placeholder',
-                                          ),
+                                      ? ImageObjectWidget(
+                                          Person(id: '', name: ''),
                                           circleCrop: false,
                                         )
                                       : Image.file(
                                           File(state.value!.newPhoto!.path),
                                         )
-                                  : PhotoObjectWidget(
+                                  : ImageObjectWidget(
                                       newPerson,
                                       circleCrop: false,
                                     ),
@@ -1687,7 +1683,7 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
               }
             },
             value: entryChecked.requireData,
-            secondary: PhotoObjectWidget(group),
+            secondary: ImageObjectWidget(group),
             title: Text(group.name),
           ),
         ),

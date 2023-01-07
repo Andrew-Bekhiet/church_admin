@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide StudyYear;
+import 'package:churchdata_core/churchdata_core.dart'
+    hide StudyYear, PhotoObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -296,8 +297,9 @@ class _HomeBody extends StatelessWidget {
             p,
             onLongPress: onLongPress != null ? () => onLongPress(p) : null,
             onTap: onTap != null ? () => onTap(p) : null,
-            photo: PhotoObjectWidget(p, heroTag: p),
+            photo: ImageObjectWidget(p),
             subtitle: subtitle,
+            trailing: trailing,
           ),
         ),
         ServicesHierarchyList(
@@ -325,6 +327,10 @@ class _HomeBody extends StatelessWidget {
           itemBuilder: (a, {onLongPress, onTap, subtitle, trailing}) =>
               ViewableObjectWidget(
             a,
+            photo: ImageObjectWidget(
+              a,
+              circleCrop: false,
+            ),
             showSubtitle: false,
             onLongPress: onLongPress != null ? () => onLongPress(a) : null,
             onTap: onTap != null ? () => onTap(a) : null,

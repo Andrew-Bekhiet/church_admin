@@ -3,11 +3,7 @@ import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show
-        DataObjectListViewBase,
-        ListControllerBase,
-        PhotoObjectWidget,
-        ViewableObjectWidget;
+    show DataObjectListViewBase, ListControllerBase, ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -115,7 +111,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
         elevation: _topController.value * 3,
         child: ExpansionTile(
           key: PageStorageKey(s),
-          leading: PhotoObjectWidget(
+          leading: ImageObjectWidget(
             s,
             circleCrop: false,
           ),
@@ -238,6 +234,10 @@ class _Classes extends StatelessWidget {
                                 ) ??
                                 ViewableObjectWidget(
                                   c,
+                                  photo: ImageObjectWidget(
+                                    c,
+                                    circleCrop: false,
+                                  ),
                                   showSubtitle: false,
                                   wrapInCard: false,
                                   isDense: true,
@@ -258,6 +258,10 @@ class _Classes extends StatelessWidget {
                   ) ??
                   ViewableObjectWidget(
                     sc.value.single,
+                    photo: ImageObjectWidget(
+                      sc.value.single,
+                      circleCrop: false,
+                    ),
                     showSubtitle: false,
                     wrapInCard: false,
                   ),
@@ -289,6 +293,10 @@ class _Groups extends StatelessWidget {
             child: groupBuilder?.call(context, group: g, service: service) ??
                 ViewableObjectWidget(
                   g,
+                  photo: ImageObjectWidget(
+                    g,
+                    circleCrop: false,
+                  ),
                   showSubtitle: false,
                   wrapInCard: false,
                 ),

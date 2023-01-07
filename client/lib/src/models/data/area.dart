@@ -2,7 +2,6 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -11,7 +10,7 @@ part 'area.freezed.dart';
 part 'area.g.dart';
 
 @freezed
-class Area extends ViewableWithID with _$Area implements PhotoObjectBase {
+class Area extends ViewableWithIDAndImage with _$Area {
   factory Area({
     required String id,
     required String name,
@@ -24,21 +23,12 @@ class Area extends ViewableWithID with _$Area implements PhotoObjectBase {
   factory Area.fromJson(Map<String, Object?> json) => _$AreaFromJson(json);
 
   @override
-  IconData get defaultIcon => Icons.pin_drop;
-
-  @override
-  bool get hasPhoto => photoUpdatedAt != null;
-
-  @override
-  CAStorageReference? get photoRef => hasPhoto
-      ? CAStorageReference(
-          photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () async =>
+  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
+      ? ObjectImageInfo(
+          cacheKey: 'areas/$id',
+          downloadUrlFn: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('areas', id),
-          fullPath: 'areas/$id.jpg',
+          lastUpdatedTime: photoUpdatedAt!,
         )
       : null;
-
-  @override
-  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 }

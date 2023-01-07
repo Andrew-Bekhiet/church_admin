@@ -2,8 +2,6 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show AsyncMemoizerCache, PhotoObjectBase, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -12,9 +10,7 @@ part 'class.freezed.dart';
 part 'class.g.dart';
 
 @freezed
-class Class extends ViewableWithID
-    with _$Class, AttendanceAnalyzable
-    implements PhotoObjectBase {
+class Class extends ViewableWithIDAndImage with _$Class, AttendanceAnalyzable {
   factory Class({
     required String id,
     required String name,
@@ -39,21 +35,12 @@ class Class extends ViewableWithID
   factory Class.fromJson(Map<String, Object?> json) => _$ClassFromJson(json);
 
   @override
-  IconData get defaultIcon => Icons.groups_outlined;
-
-  @override
-  bool get hasPhoto => photoUpdatedAt != null;
-
-  @override
-  CAStorageReference? get photoRef => hasPhoto
-      ? CAStorageReference(
-          photoUpdatedAt: photoUpdatedAt!,
-          downloadUrl: () async =>
+  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
+      ? ObjectImageInfo(
+          cacheKey: 'classes/$id',
+          downloadUrlFn: () async =>
               GetIt.I<CAFunctionsService>().getDownloadUrl('classes', id),
-          fullPath: 'classes/$id.jpg',
+          lastUpdatedTime: photoUpdatedAt!,
         )
       : null;
-
-  @override
-  final AsyncMemoizerCache<String> photoUrlCache = AsyncMemoizerCache();
 }

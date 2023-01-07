@@ -118,7 +118,7 @@ class ViewUser extends StatelessWidget {
                           child: IconTheme(
                             data: IconTheme.of(context)
                                 .copyWith(color: foregroundColor),
-                            child: PhotoObjectWidget(
+                            child: ImageObjectWidget(
                               user,
                               circleCrop: false,
                             ),
@@ -629,7 +629,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                               }
                             },
                             value: entryChecked.requireData,
-                            secondary: PhotoObjectWidget(adminData.group!),
+                            secondary: ImageObjectWidget(adminData.group!),
                             title: Text(adminData.group!.name),
                             dense: true,
                           ),
