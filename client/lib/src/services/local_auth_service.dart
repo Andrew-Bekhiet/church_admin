@@ -51,8 +51,10 @@ class LocalAuthService with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed) {
       if (shouldAuthenticate) _refreshUI.add(null);
+      _timer?.cancel();
+      _timer = null;
     } else if (AuthService.instance.isSignedIn && !shouldAuthenticate) {
-      _timer = _createTimer();
+      _timer ??= _createTimer();
     }
   }
 
@@ -76,6 +78,7 @@ class LocalAuthService with WidgetsBindingObserver {
     if (notificationsService.isPaused) {
       notificationsService.resumeListeners();
     }
+    _timer?.cancel();
     _timer = null;
   }
 

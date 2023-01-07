@@ -201,6 +201,38 @@ void main() {
   );
 
   testWidgets(
+    'LocalAuthService => Authentication => cancels timer if '
+    'lifecycle changed in timer duration',
+    (tester) async {
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+
+      LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+      final unit = LocalAuthService(timeToReauth: const Duration(minutes: 1))
+        ..resetAuthState();
+
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+
+      await tester.pump(const Duration(seconds: 30));
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+
+      expect(unit.shouldAuthenticate, isFalse);
+
+      await tester.pump(const Duration(seconds: 32));
+      expect(unit.shouldAuthenticate, isFalse);
+
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+
+      await tester.pump(const Duration(minutes: 1, seconds: 2));
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+
+      expect(unit.shouldAuthenticate, isTrue);
+
+      await unit.dispose();
+    },
+  );
+
+  testWidgets(
     'LocalAuthService => reset',
     (tester) async {
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
