@@ -3,10 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i13;
+import 'dart:io' as _i10;
+import 'dart:ui' as _i15;
 
-import 'package:church_admin/church_admin.dart' as _i4;
-import 'package:churchdata_core/churchdata_core.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i12;
+import 'package:churchdata_core/churchdata_core.dart' as _i11;
+import 'package:flutter/cupertino.dart' as _i3;
+import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i9;
+import 'package:go_router/src/configuration.dart' as _i7;
+import 'package:go_router/src/delegate.dart' as _i4;
+import 'package:go_router/src/information_provider.dart' as _i5;
+import 'package:go_router/src/parser.dart' as _i6;
+import 'package:go_router/src/router.dart' as _i14;
+import 'package:hive_flutter/hive_flutter.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i2;
 
@@ -32,11 +42,97 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
+class _FakeBackButtonDispatcher_1 extends _i1.SmartFake
+    implements _i3.BackButtonDispatcher {
+  _FakeBackButtonDispatcher_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGoRouterDelegate_2 extends _i1.SmartFake
+    implements _i4.GoRouterDelegate {
+  _FakeGoRouterDelegate_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGoRouteInformationProvider_3 extends _i1.SmartFake
+    implements _i5.GoRouteInformationProvider {
+  _FakeGoRouteInformationProvider_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGoRouteInformationParser_4 extends _i1.SmartFake
+    implements _i6.GoRouteInformationParser {
+  _FakeGoRouteInformationParser_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRouteConfiguration_5 extends _i1.SmartFake
+    implements _i7.RouteConfiguration {
+  _FakeRouteConfiguration_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeBox_6<E> extends _i1.SmartFake implements _i8.Box<E> {
+  _FakeBox_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeBaseCacheManager_7 extends _i1.SmartFake
+    implements _i9.BaseCacheManager {
+  _FakeBaseCacheManager_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFile_8 extends _i1.SmartFake implements _i10.File {
+  _FakeFile_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPaginatableStreamBase extends _i1.Mock
-    implements _i3.PaginatableStreamBase<_i4.Service> {
+    implements _i11.PaginatableStreamBase<_i12.Service> {
   @override
   int get limit => (super.noSuchMethod(
         Invocation.getter(#limit),
@@ -68,57 +164,479 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i2.ValueStream<List<_i4.Service>> get stream => (super.noSuchMethod(
+  _i2.ValueStream<List<_i12.Service>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _FakeValueStream_0<List<_i4.Service>>(
+        returnValue: _FakeValueStream_0<List<_i12.Service>>(
           this,
           Invocation.getter(#stream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<List<_i4.Service>>(
+        returnValueForMissingStub: _FakeValueStream_0<List<_i12.Service>>(
           this,
           Invocation.getter(#stream),
         ),
-      ) as _i2.ValueStream<List<_i4.Service>>);
+      ) as _i2.ValueStream<List<_i12.Service>>);
   @override
-  List<_i4.Service> get currentValue => (super.noSuchMethod(
+  List<_i12.Service> get currentValue => (super.noSuchMethod(
         Invocation.getter(#currentValue),
-        returnValue: <_i4.Service>[],
-        returnValueForMissingStub: <_i4.Service>[],
-      ) as List<_i4.Service>);
+        returnValue: <_i12.Service>[],
+        returnValueForMissingStub: <_i12.Service>[],
+      ) as List<_i12.Service>);
   @override
-  _i5.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+  _i13.Future<void> loadPage(int? offset) => (super.noSuchMethod(
         Invocation.method(
           #loadPage,
           [offset],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
   @override
-  _i5.Future<void> loadNextPage() => (super.noSuchMethod(
+  _i13.Future<void> loadNextPage() => (super.noSuchMethod(
         Invocation.method(
           #loadNextPage,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
   @override
-  _i5.Future<void> loadPreviousPage() => (super.noSuchMethod(
+  _i13.Future<void> loadPreviousPage() => (super.noSuchMethod(
         Invocation.method(
           #loadPreviousPage,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
   @override
-  _i5.Future<void> dispose() => (super.noSuchMethod(
+  _i13.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+}
+
+/// A class which mocks [GoRouter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
+  @override
+  _i3.BackButtonDispatcher get backButtonDispatcher => (super.noSuchMethod(
+        Invocation.getter(#backButtonDispatcher),
+        returnValue: _FakeBackButtonDispatcher_1(
+          this,
+          Invocation.getter(#backButtonDispatcher),
+        ),
+        returnValueForMissingStub: _FakeBackButtonDispatcher_1(
+          this,
+          Invocation.getter(#backButtonDispatcher),
+        ),
+      ) as _i3.BackButtonDispatcher);
+  @override
+  _i4.GoRouterDelegate get routerDelegate => (super.noSuchMethod(
+        Invocation.getter(#routerDelegate),
+        returnValue: _FakeGoRouterDelegate_2(
+          this,
+          Invocation.getter(#routerDelegate),
+        ),
+        returnValueForMissingStub: _FakeGoRouterDelegate_2(
+          this,
+          Invocation.getter(#routerDelegate),
+        ),
+      ) as _i4.GoRouterDelegate);
+  @override
+  _i5.GoRouteInformationProvider get routeInformationProvider =>
+      (super.noSuchMethod(
+        Invocation.getter(#routeInformationProvider),
+        returnValue: _FakeGoRouteInformationProvider_3(
+          this,
+          Invocation.getter(#routeInformationProvider),
+        ),
+        returnValueForMissingStub: _FakeGoRouteInformationProvider_3(
+          this,
+          Invocation.getter(#routeInformationProvider),
+        ),
+      ) as _i5.GoRouteInformationProvider);
+  @override
+  _i6.GoRouteInformationParser get routeInformationParser =>
+      (super.noSuchMethod(
+        Invocation.getter(#routeInformationParser),
+        returnValue: _FakeGoRouteInformationParser_4(
+          this,
+          Invocation.getter(#routeInformationParser),
+        ),
+        returnValueForMissingStub: _FakeGoRouteInformationParser_4(
+          this,
+          Invocation.getter(#routeInformationParser),
+        ),
+      ) as _i6.GoRouteInformationParser);
+  @override
+  _i7.RouteConfiguration get routeConfiguration => (super.noSuchMethod(
+        Invocation.getter(#routeConfiguration),
+        returnValue: _FakeRouteConfiguration_5(
+          this,
+          Invocation.getter(#routeConfiguration),
+        ),
+        returnValueForMissingStub: _FakeRouteConfiguration_5(
+          this,
+          Invocation.getter(#routeConfiguration),
+        ),
+      ) as _i7.RouteConfiguration);
+  @override
+  String get location => (super.noSuchMethod(
+        Invocation.getter(#location),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool canPop() => (super.noSuchMethod(
+        Invocation.method(
+          #canPop,
+          [],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  String namedLocation(
+    String? name, {
+    Map<String, String>? params = const {},
+    Map<String, dynamic>? queryParams = const {},
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #namedLocation,
+          [name],
+          {
+            #params: params,
+            #queryParams: queryParams,
+          },
+        ),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  void go(
+    String? location, {
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #go,
+          [location],
+          {#extra: extra},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void goNamed(
+    String? name, {
+    Map<String, String>? params = const {},
+    Map<String, dynamic>? queryParams = const {},
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #goNamed,
+          [name],
+          {
+            #params: params,
+            #queryParams: queryParams,
+            #extra: extra,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void push(
+    String? location, {
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #push,
+          [location],
+          {#extra: extra},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void pushNamed(
+    String? name, {
+    Map<String, String>? params = const {},
+    Map<String, dynamic>? queryParams = const {},
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #pushNamed,
+          [name],
+          {
+            #params: params,
+            #queryParams: queryParams,
+            #extra: extra,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void replace(
+    String? location, {
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #replace,
+          [location],
+          {#extra: extra},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void replaceNamed(
+    String? name, {
+    Map<String, String>? params = const {},
+    Map<String, dynamic>? queryParams = const {},
+    Object? extra,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #replaceNamed,
+          [name],
+          {
+            #params: params,
+            #queryParams: queryParams,
+            #extra: extra,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void pop() => super.noSuchMethod(
+        Invocation.method(
+          #pop,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void refresh() => super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(_i15.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i15.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [ImageUrlCacheService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockImageUrlCacheService extends _i1.Mock
+    implements _i12.ImageUrlCacheService {
+  @override
+  _i8.Box<String> get box => (super.noSuchMethod(
+        Invocation.getter(#box),
+        returnValue: _FakeBox_6<String>(
+          this,
+          Invocation.getter(#box),
+        ),
+        returnValueForMissingStub: _FakeBox_6<String>(
+          this,
+          Invocation.getter(#box),
+        ),
+      ) as _i8.Box<String>);
+  @override
+  _i9.BaseCacheManager get cacheManager => (super.noSuchMethod(
+        Invocation.getter(#cacheManager),
+        returnValue: _FakeBaseCacheManager_7(
+          this,
+          Invocation.getter(#cacheManager),
+        ),
+        returnValueForMissingStub: _FakeBaseCacheManager_7(
+          this,
+          Invocation.getter(#cacheManager),
+        ),
+      ) as _i9.BaseCacheManager);
+  @override
+  _i13.Future<_i10.File> getImageFileFromCache(_i12.IImage? imageObject) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImageFileFromCache,
+          [imageObject],
+        ),
+        returnValue: _i13.Future<_i10.File>.value(_FakeFile_8(
+          this,
+          Invocation.method(
+            #getImageFileFromCache,
+            [imageObject],
+          ),
+        )),
+        returnValueForMissingStub: _i13.Future<_i10.File>.value(_FakeFile_8(
+          this,
+          Invocation.method(
+            #getImageFileFromCache,
+            [imageObject],
+          ),
+        )),
+      ) as _i13.Future<_i10.File>);
+  @override
+  _i13.Future<String> getImageUrl(_i12.IImage? imageObject) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImageUrl,
+          [imageObject],
+        ),
+        returnValue: _i13.Future<String>.value(''),
+        returnValueForMissingStub: _i13.Future<String>.value(''),
+      ) as _i13.Future<String>);
+  @override
+  String? getCachedImageUrl(_i12.IImage? imageObject) => (super.noSuchMethod(
+        Invocation.method(
+          #getCachedImageUrl,
+          [imageObject],
+        ),
+        returnValueForMissingStub: null,
+      ) as String?);
+  @override
+  _i13.Future<bool> isUrlFileCached(String? cachedUrl) => (super.noSuchMethod(
+        Invocation.method(
+          #isUrlFileCached,
+          [cachedUrl],
+        ),
+        returnValue: _i13.Future<bool>.value(false),
+        returnValueForMissingStub: _i13.Future<bool>.value(false),
+      ) as _i13.Future<bool>);
+  @override
+  bool isUrlExpired(String? url) => (super.noSuchMethod(
+        Invocation.method(
+          #isUrlExpired,
+          [url],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+}
+
+/// A class which mocks [UserSettingsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserSettingsService extends _i1.Mock
+    implements _i12.UserSettingsService {
+  @override
+  _i8.Box<dynamic> get box => (super.noSuchMethod(
+        Invocation.getter(#box),
+        returnValue: _FakeBox_6<dynamic>(
+          this,
+          Invocation.getter(#box),
+        ),
+        returnValueForMissingStub: _FakeBox_6<dynamic>(
+          this,
+          Invocation.getter(#box),
+        ),
+      ) as _i8.Box<dynamic>);
+  @override
+  bool get darkTheme => (super.noSuchMethod(
+        Invocation.getter(#darkTheme),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool get greatFeastTheme => (super.noSuchMethod(
+        Invocation.getter(#greatFeastTheme),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i13.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
+        Invocation.method(
+          #setDarkTheme,
+          [value],
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+  @override
+  _i13.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
+        Invocation.method(
+          #setRegisteredFCMToken,
+          [value],
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+  @override
+  _i13.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
+        Invocation.method(
+          #setGreatFeastTheme,
+          [value],
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+  @override
+  String? getSecondLineFor(Type? t) => (super.noSuchMethod(
+        Invocation.method(
+          #getSecondLineFor,
+          [t],
+        ),
+        returnValueForMissingStub: null,
+      ) as String?);
+  @override
+  _i13.Future<void> setSecondLineFor(
+    Type? t,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setSecondLineFor,
+          [
+            t,
+            value,
+          ],
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 }

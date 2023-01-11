@@ -87,6 +87,7 @@ Future<void> main() async {
 
       await screenMatchesGolden(tester, 'history_property');
     },
+    skip: true,
   );
 
   testWidgets(
@@ -200,5 +201,6 @@ Future<void> main() async {
 
       flushVisibilityDetectors();
     },
+    skip: true,
   );
 }

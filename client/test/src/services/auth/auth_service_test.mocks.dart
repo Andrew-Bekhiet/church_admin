@@ -20,9 +20,19 @@ import 'package:rxdart/rxdart.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueStream_0<T> extends _i1.SmartFake
+class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeValueStream_1<T> extends _i1.SmartFake
     implements _i2.ValueStream<T> {
-  _FakeValueStream_0(
+  _FakeValueStream_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -99,6 +109,27 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
         returnValueForMissingStub: false,
       ) as bool);
   @override
+  DateTime tokenExpiry(String? idToken) => (super.noSuchMethod(
+        Invocation.method(
+          #tokenExpiry,
+          [idToken],
+        ),
+        returnValue: _FakeDateTime_0(
+          this,
+          Invocation.method(
+            #tokenExpiry,
+            [idToken],
+          ),
+        ),
+        returnValueForMissingStub: _FakeDateTime_0(
+          this,
+          Invocation.method(
+            #tokenExpiry,
+            [idToken],
+          ),
+        ),
+      ) as DateTime);
+  @override
   _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
@@ -132,11 +163,11 @@ class MockConnectivityService extends _i1.Mock
   @override
   _i2.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _FakeValueStream_0<bool>(
+        returnValue: _FakeValueStream_1<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<bool>(
+        returnValueForMissingStub: _FakeValueStream_1<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),

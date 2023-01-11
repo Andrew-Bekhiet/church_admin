@@ -1,8 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show ListControllerBase, PaginatableStreamBase, ViewableObjectWidget;
+    show ListControllerBase, PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -11,9 +13,21 @@ import 'package:rxdart_ext/single.dart';
 import '../utils.dart';
 import 'services_hierarchy_list_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<PaginatableStreamBase<Service>>()])
+@GenerateNiceMocks(
+  [
+    MockSpec<PaginatableStreamBase<Service>>(),
+    MockSpec<GoRouter>(),
+    MockSpec<ImageUrlCacheService>(),
+    MockSpec<UserSettingsService>(),
+  ],
+)
 Future<void> main() async {
   await loadAppFonts();
+
+  setUp(_setUp);
+
+  tearDown(GetIt.I.reset);
+
   testGoldens(
     'ServicesHierarchyList => Goldens test',
     (tester) async {
@@ -265,4 +279,30 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
     ),
   );
   return mock;
+}
+
+Future<void> _setUp() async {
+  await _setUpImageUrlCacheService();
+  _setUpUserSettingsService();
+  _setUpCAViewableObjectService();
+}
+
+void _setUpUserSettingsService() {
+  final mockUserSettingsService = MockUserSettingsService();
+
+  when(mockUserSettingsService.getSecondLineFor(any)).thenReturn('');
+
+  GetIt.I.registerSingleton<UserSettingsService>(mockUserSettingsService);
+}
+
+void _setUpCAViewableObjectService() {
+  GetIt.I.registerSingleton<CAViewableObjectService>(
+    CAViewableObjectService(MockGoRouter()),
+  );
+}
+
+Future<void> _setUpImageUrlCacheService() async {
+  GetIt.I.registerSingleton<ImageUrlCacheService>(
+    MockImageUrlCacheService(),
+  );
 }
