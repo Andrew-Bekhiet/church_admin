@@ -114,6 +114,11 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         key,
         object.toJson()[key],
       );
+    } else if (object is User) {
+      return getFormattedValue(
+        key,
+        object.toJson()[key],
+      );
     } else if (object is Service) {
       return getFormattedValue(
         key,
@@ -135,7 +140,20 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         object.toJson()[key],
       );
     } else {
-      throw UnimplementedError('Unexpected object:\n' + object.toString());
+      return null;
     }
+  }
+
+  IconData getDefaultIconFor(IImage imageObject) {
+    if (imageObject is Area) return Icons.pin_drop;
+    if (imageObject is Street) return Icons.pin_drop;
+    if (imageObject is Family) return Icons.pin_drop;
+    if (imageObject is Service) return Icons.miscellaneous_services;
+    if (imageObject is Class) return Icons.groups_outlined;
+    if (imageObject is Group) return Icons.groups;
+    if (imageObject is Person) return Icons.person;
+    if (imageObject is User) return Icons.person;
+
+    return Icons.image_not_supported;
   }
 }

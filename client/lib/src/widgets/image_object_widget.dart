@@ -9,13 +9,17 @@ class ImageObjectWidget extends StatelessWidget {
   ImageObjectWidget(
     this.imageObject, {
     ImageUrlCacheService? imageUrlCacheService,
+    CAViewableObjectService? viewableObjectService,
     this.circleCrop = true,
     this.heroTag,
     super.key,
-  }) : photoUrlCacheService =
-            imageUrlCacheService ?? GetIt.I<ImageUrlCacheService>();
+  })  : photoUrlCacheService =
+            imageUrlCacheService ?? GetIt.I<ImageUrlCacheService>(),
+        viewableObjectService =
+            viewableObjectService ?? GetIt.I<CAViewableObjectService>();
 
   final ImageUrlCacheService photoUrlCacheService;
+  final CAViewableObjectService viewableObjectService;
   final IImage imageObject;
   final bool circleCrop;
   // ignore: no-object-declaration
@@ -35,7 +39,7 @@ class ImageObjectWidget extends StatelessWidget {
           final maxHeight = constraints.maxHeight;
 
           final defaultIcon =
-              photoUrlCacheService.getDefaultIconFor(imageObject);
+              viewableObjectService.getDefaultIconFor(imageObject);
 
           if (!imageObject.hasImage) {
             return Icon(

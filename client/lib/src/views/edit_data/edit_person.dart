@@ -6,8 +6,7 @@ import 'package:churchdata_core/churchdata_core.dart'
         ContrastingColor,
         ListControllerBase,
         LoggingService,
-        TappableFormField,
-        ViewableObjectWidget;
+        TappableFormField;
 import 'package:collection/collection.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -533,8 +532,8 @@ class _EditPersonState extends State<EditPerson> {
                                         for (final s in combinedServices) ...[
                                           ViewableObjectWidget(
                                             s,
-                                            isDense: true,
-                                            showSubtitle: false,
+                                            dense: true,
+                                            forceShowSecondLine: false,
                                           ),
                                           for (final g in s.groups ?? <Group>[])
                                             Padding(
@@ -545,8 +544,8 @@ class _EditPersonState extends State<EditPerson> {
                                                 elevation: 0,
                                                 child: ViewableObjectWidget(
                                                   g,
-                                                  isDense: true,
-                                                  showSubtitle: false,
+                                                  dense: true,
+                                                  forceShowSecondLine: false,
                                                   wrapInCard: false,
                                                 ),
                                               ),
@@ -911,8 +910,8 @@ class _EditPersonState extends State<EditPerson> {
                                       child: ViewableObjectWidget(
                                         state.value!,
                                         wrapInCard: false,
-                                        isDense: true,
-                                        showSubtitle: false,
+                                        dense: true,
+                                        forceShowSecondLine: false,
                                         trailing: state.value?.color == null
                                             ? null
                                             : ClipRRect(
@@ -956,11 +955,9 @@ class _EditPersonState extends State<EditPerson> {
                                 ViewableObjectWidget(
                               o,
                               trailing: trailing,
-                              onTap: onTap != null ? () => onTap(o) : null,
-                              onLongPress: onLongPress != null
-                                  ? () => onLongPress(o)
-                                  : null,
-                              showSubtitle: false,
+                              onTap: onTap,
+                              onLongPress: onLongPress,
+                              forceShowSecondLine: false,
                             ),
                             labelText: 'الشارات',
                             builder: (context, state) {
@@ -1066,7 +1063,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ? IgnorePointer(
                                       child: ViewableObjectWidget(
                                         state.value!,
-                                        isDense: true,
+                                        dense: true,
                                       ),
                                     )
                                   : null;
@@ -1077,8 +1074,8 @@ class _EditPersonState extends State<EditPerson> {
                                       title: const Text('داخل متجر'),
                                       subtitle: ViewableObjectWidget<Store>(
                                         person.store!,
-                                        isDense: true,
-                                        showSubtitle: false,
+                                        dense: true,
+                                        forceShowSecondLine: false,
                                       ),
                                     ), */
                           const Divider(thickness: 1),

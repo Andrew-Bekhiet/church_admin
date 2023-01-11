@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:church_admin/graphql/links.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide Notification;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -16,6 +17,8 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -26,7 +29,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/rxdart.dart' hide Notification;
 import 'package:timeago/timeago.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -110,6 +113,8 @@ Future<void> initializeChurchAdmin() async {
 
   _initializeCADatabaseService();
 
+  await _initializeNotificationsService();
+
   _initializeAuthService();
 
   _initializeLocalAuthService();
@@ -119,6 +124,9 @@ Future<void> initializeChurchAdmin() async {
   _initializeGoRouterRefreshStream();
 
   _initializeViewableObjectService();
+
+  _initializeBaseCacheManager();
+  await _initializeImageUrlCacheService();
 
   _initializeImagePickerService();
   _initializeContactsService();
@@ -131,6 +139,32 @@ Future<void> initializeChurchAdmin() async {
   await AuthService.instance.userStream.first;
 
   return _initialization.complete();
+}
+
+Future<void> _initializeImageUrlCacheService() async {
+  GetIt.I.registerSingleton<ImageUrlCacheService>(
+    ImageUrlCacheService(box: await Hive.openBox('ImageUrlsCache')),
+  );
+}
+
+void _initializeBaseCacheManager() {
+  GetIt.I.registerSingleton<BaseCacheManager>(
+    CacheManager(
+      Config(
+        'cachedImages',
+        maxNrOfCacheObjects: 500,
+      ),
+    ),
+  );
+}
+
+Future<void> _initializeNotificationsService() async {
+  final lazyBox = await Hive.openLazyBox<Notification>('Notifications');
+
+  GetIt.I.registerSingleton<CANotificationsService>(
+    CANotificationsService(storage: NotificationsStorageImpl(lazyBox)),
+    dispose: (n) => n.dispose(),
+  );
 }
 
 void _initializeAuthService() {
@@ -154,6 +188,7 @@ void _initializeConnectivityService() {
     ConnectivityService(
       connectivityPlugin: Connectivity(),
     ),
+    dispose: (i) async => i.dispose(),
   );
 }
 
@@ -336,4 +371,133 @@ void _initializeViewableObjectService() {
   GetIt.I.registerSingleton<DefaultViewableObjectService>(
     GetIt.I<CAViewableObjectService>(),
   );
+}
+
+Future<void> initCore({
+  required String sentryDSN,
+  HiveCipher? userBoxCipher,
+  Map<Type, dynamic Function()> overrides = const {},
+}) async {
+  GetIt.I.registerSingleton<LoggingService>(
+    LoggingService(sentryDSN),
+    signalsReady: true,
+  );
+  await GetIt.I.isReady<LoggingService>();
+
+  final cacheRepository = CacheRepository();
+  GetIt.I.registerSingleton<CacheRepository>(
+    cacheRepository,
+    signalsReady: true,
+    dispose: (r) => r.dispose(),
+  );
+
+  await GetIt.I.isReady(instance: cacheRepository);
+
+  if (userBoxCipher == null) {
+    const secureStorage = FlutterSecureStorage();
+    final containsEncryptionKey = await secureStorage.containsKey(key: 'key');
+    if (!containsEncryptionKey) {
+      await secureStorage.write(
+        key: 'key',
+        value: base64Url.encode(
+          GetIt.I<CacheRepository>().generateSecureKey(),
+        ),
+      );
+    }
+    final encryptionKey = base64Url.decode(
+      (await secureStorage.read(key: 'key'))!,
+    );
+    userBoxCipher = HiveAesCipher(encryptionKey);
+  }
+
+  await GetIt.I<CacheRepository>().openBox(
+    'User',
+    encryptionCipher: userBoxCipher,
+  );
+
+  GetIt.I.registerSingleton<FlutterLocalNotificationsPlugin>(
+    FlutterLocalNotificationsPlugin(),
+  );
+
+  await Future.wait(
+    [
+      GetIt.I<CacheRepository>().openBox('Settings'),
+      GetIt.I<CacheRepository>().openBox<bool>('FeatureDiscovery'),
+      GetIt.I<CacheRepository>()
+          .openBox<NotificationSetting>('NotificationsSettings'),
+      GetIt.I<CacheRepository>().openBox<String?>('PhotosURLsCache'),
+      GetIt.I<CacheRepository>().openLazyBox<Notification>('Notifications'),
+    ],
+  );
+
+  final databaseRepository =
+      overrides[DatabaseRepository]?.call() ?? DatabaseRepository();
+  GetIt.I.registerSingleton<DatabaseRepository>(
+    databaseRepository,
+  );
+
+  final storageRepository =
+      overrides[StorageRepository]?.call() ?? StorageRepository();
+  GetIt.I.registerSingleton<StorageRepository>(storageRepository);
+
+  final functionsService =
+      overrides[FunctionsService]?.call() ?? FunctionsService();
+  GetIt.I.registerSingleton<FunctionsService>(
+    functionsService,
+  );
+
+  final launcherService =
+      overrides[LauncherService]?.call() ?? LauncherService();
+  GetIt.I.registerSingleton<LauncherService>(
+    launcherService,
+  );
+
+  //Optional Services:
+
+  final shareService = overrides[ShareService]?.call();
+  if (shareService != null) {
+    GetIt.I.registerSingleton<ShareService>(
+      shareService,
+    );
+  }
+
+  final themingService = overrides[ThemingService]?.call();
+  if (themingService != null) {
+    GetIt.I.registerSingleton<ThemingService>(
+      themingService,
+    );
+  }
+
+  final updatesService = overrides[UpdatesService]?.call();
+  if (updatesService != null) {
+    GetIt.I.registerSingleton<UpdatesService>(
+      updatesService,
+      dispose: (u) => u.dispose(),
+      signalsReady: true,
+    );
+  }
+
+/*   if ((authRepository as AuthRepository).isSignedIn) {
+    final currentUser = authRepository.currentUser;
+    ((overrides[LoggingService]?.call() ?? LoggingService(sentryDSN))
+            as LoggingService)
+        .configureScope(
+      (scope) => scope.setUser(
+        currentUser != null
+            ? SentryUser(
+                id: currentUser.uid,
+                email: currentUser is UserBase ? currentUser.email : null,
+                data: currentUser is UserBase
+                    ? currentUser.toJson().map(
+                          (key, value) => MapEntry(
+                            key,
+                            value is Set ? value.toList() : value,
+                          ),
+                        )
+                    : null,
+              )
+            : null,
+      ),
+    );
+  } */
 }

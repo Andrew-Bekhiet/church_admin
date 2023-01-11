@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide PhotoObjectWidget;
+import 'package:churchdata_core/churchdata_core.dart' hide PhotoObjectWidget,ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -387,8 +387,8 @@ class _ViewPersonState extends State<ViewPerson> {
                           for (final s in person.streets ?? <Street>[])
                             ViewableObjectWidget(
                               s,
-                              isDense: true,
-                              showSubtitle: false,
+                              dense: true,
+                              forceShowSecondLine: false,
                             ),
                         ],
                       ),
@@ -398,8 +398,8 @@ class _ViewPersonState extends State<ViewPerson> {
                         title: const Text('العائلة'),
                         subtitle: ViewableObjectWidget<Family>(
                           person.family!,
-                          isDense: true,
-                          showSubtitle: false,
+                          dense: true,
+                          forceShowSecondLine: false,
                         ),
                       ),
                     /* if (person.store != null)
@@ -407,8 +407,8 @@ class _ViewPersonState extends State<ViewPerson> {
                         title: const Text('داخل متجر'),
                         subtitle: ViewableObjectWidget<Store>(
                           person.store!,
-                          isDense: true,
-                          showSubtitle: false,
+                          dense: true,
+                          forceShowSecondLine: false,
                         ),
                       ), */
                     const Divider(thickness: 1),
@@ -870,8 +870,8 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
               children: [
                 ViewableObjectWidget(
                   o,
-                  isDense: true,
-                  showSubtitle: _hasSubtitle(o),
+                  dense: true,
+                  forceShowSecondLine: _hasSubtitle(o),
                   subtitle: _hasSubtitle(o)
                       ? _ShowMoreSubtitle(
                           viewable: o,
@@ -891,8 +891,8 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                             for (final o in snapshot.requireData)
                               ViewableObjectWidget(
                                 o,
-                                isDense: true,
-                                showSubtitle: _hasSubtitle(o),
+                                dense: true,
+                                forceShowSecondLine: _hasSubtitle(o),
                                 subtitle: _hasSubtitle(o)
                                     ? _ShowMoreSubtitle(
                                         viewable: o,
@@ -908,8 +908,8 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
           else
             ViewableObjectWidget(
               o,
-              isDense: true,
-              showSubtitle: _hasSubtitle(o),
+              dense: true,
+              forceShowSecondLine: _hasSubtitle(o),
               subtitle: _hasSubtitle(o)
                   ? _ShowMoreSubtitle(
                       viewable: o,

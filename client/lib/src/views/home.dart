@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    hide StudyYear, PhotoObjectWidget;
+    hide StudyYear, PhotoObjectWidget, ViewableObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -295,8 +295,8 @@ class _HomeBody extends StatelessWidget {
           itemBuilder: (p, {onLongPress, onTap, subtitle, trailing}) =>
               ViewableObjectWidget(
             p,
-            onLongPress: onLongPress != null ? () => onLongPress(p) : null,
-            onTap: onTap != null ? () => onTap(p) : null,
+            onLongPress: onLongPress,
+            onTap: onTap,
             photo: ImageObjectWidget(p),
             subtitle: subtitle,
             trailing: trailing,
@@ -331,9 +331,9 @@ class _HomeBody extends StatelessWidget {
               a,
               circleCrop: false,
             ),
-            showSubtitle: false,
-            onLongPress: onLongPress != null ? () => onLongPress(a) : null,
-            onTap: onTap != null ? () => onTap(a) : null,
+            forceShowSecondLine: false,
+            onLongPress: onLongPress,
+            onTap: onTap,
             trailing: trailing,
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -209,7 +209,7 @@ class ViewUser extends StatelessWidget {
                                   <AdminOnData>[])
                             ViewableObjectWidget(
                               adminData.area!,
-                              showSubtitle: false,
+                              forceShowSecondLine: false,
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -256,7 +256,7 @@ class ViewUser extends StatelessWidget {
                             Card(
                               child: ViewableObjectWidget(
                                 adminData.group!,
-                                showSubtitle: false,
+                                forceShowSecondLine: false,
                                 wrapInCard: false,
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -343,9 +343,9 @@ class _AdminOnServiceWidget extends StatelessWidget {
       children: [
         ViewableObjectWidget(
           serviceData.key,
-          showSubtitle: false,
+          forceShowSecondLine: false,
           wrapInCard: false,
-          onTap: onTap != null ? () => onTap!(serviceData.key) : null,
+          onTap: onTap,
           trailing: trailingBuilder?.call(context, serviceData.key),
         ),
         if (serviceData.value.any(
@@ -404,10 +404,10 @@ class _AdminOnServiceWidget extends StatelessWidget {
                   elevation: 0,
                   child: ViewableObjectWidget(
                     c,
-                    isDense: true,
-                    showSubtitle: false,
+                    dense: true,
+                    forceShowSecondLine: false,
                     wrapInCard: false,
-                    onTap: onTap != null ? () => onTap!(c) : null,
+                    onTap: onTap,
                     trailing: trailingBuilder == null
                         ? Row(
                             mainAxisSize: MainAxisSize.min,

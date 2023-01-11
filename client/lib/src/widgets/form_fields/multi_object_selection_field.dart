@@ -5,7 +5,6 @@ import 'package:churchdata_core/churchdata_core.dart'
         ItemBuilder,
         ListControllerBase,
         TappableFormField,
-        ViewableObjectWidget,
         ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -92,12 +91,10 @@ class MultiObjectSelectionField<T extends ViewableWithID>
                                 ViewableObjectWidget(
                                   o,
                                   trailing: trailing,
-                                  onTap: onTap != null ? () => onTap(o) : null,
-                                  onLongPress: onLongPress != null
-                                      ? () => onLongPress(o)
-                                      : null,
+                                  onTap: onTap,
+                                  onLongPress: onLongPress,
                                   wrapInCard: false,
-                                  showSubtitle: false,
+                                  forceShowSecondLine: false,
                                 ),
                       ),
                     ),

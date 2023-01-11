@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show DataObjectListViewBase, ListControllerBase, ViewableObjectWidget;
+    show DataObjectListViewBase, ListControllerBase;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -238,9 +238,9 @@ class _Classes extends StatelessWidget {
                                     c,
                                     circleCrop: false,
                                   ),
-                                  showSubtitle: false,
+                                  forceShowSecondLine: false,
                                   wrapInCard: false,
-                                  isDense: true,
+                                  dense: true,
                                 ),
                           ),
                       ],
@@ -262,7 +262,7 @@ class _Classes extends StatelessWidget {
                       sc.value.single,
                       circleCrop: false,
                     ),
-                    showSubtitle: false,
+                    forceShowSecondLine: false,
                     wrapInCard: false,
                   ),
             ),
@@ -297,7 +297,7 @@ class _Groups extends StatelessWidget {
                     g,
                     circleCrop: false,
                   ),
-                  showSubtitle: false,
+                  forceShowSecondLine: false,
                   wrapInCard: false,
                 ),
           ),

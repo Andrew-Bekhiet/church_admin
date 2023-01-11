@@ -4,7 +4,6 @@ import 'package:churchdata_core/churchdata_core.dart'
         DataObjectListViewBase,
         ListControllerBase,
         TappableFormField,
-        ViewableObjectWidget,
         ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -79,9 +78,9 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                         }) =>
                             ViewableObjectWidget(
                           o,
-                          onTap: () => onTap!(o),
+                          onTap: onTap,
                           wrapInCard: false,
-                          showSubtitle: false,
+                          forceShowSecondLine: false,
                         ),
                       ),
                     ),

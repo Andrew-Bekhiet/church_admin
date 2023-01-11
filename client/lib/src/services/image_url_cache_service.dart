@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -91,18 +90,5 @@ class ImageUrlCacheService {
     );
 
     return url;
-  }
-
-  IconData getDefaultIconFor(IImage imageObject) {
-    if (imageObject is Area) return Icons.pin_drop;
-    if (imageObject is Street) return Icons.pin_drop;
-    if (imageObject is Family) return Icons.pin_drop;
-    if (imageObject is Service) return Icons.miscellaneous_services;
-    if (imageObject is Class) return Icons.groups_outlined;
-    if (imageObject is Group) return Icons.group;
-    if (imageObject is Person) return Icons.person;
-    if (imageObject is User) return Icons.person;
-
-    return Icons.image_not_supported;
   }
 }
