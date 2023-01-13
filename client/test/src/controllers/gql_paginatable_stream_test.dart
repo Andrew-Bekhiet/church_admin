@@ -8,7 +8,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'gql_paginatable_stream_test.mocks.dart';
 
@@ -70,7 +69,7 @@ void main() {
       final unit = GQLPaginatableStream<String>(
         subscriptionStreamCallback: (event) =>
             Stream.value(_mockSearchResults(event, expected)),
-        searchQuery: searchController.stream.shareValue(),
+        searchQuery: searchController.stream,
         limit: pageLimit,
       );
 

@@ -164,6 +164,18 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub: 0,
       ) as int);
   @override
+  _i2.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
+        Invocation.getter(#onLoadingChanged),
+        returnValue: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#onLoadingChanged),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#onLoadingChanged),
+        ),
+      ) as _i2.ValueStream<bool>);
+  @override
   _i2.ValueStream<List<_i12.Service>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
         returnValue: _FakeValueStream_0<List<_i12.Service>>(
@@ -500,7 +512,7 @@ class MockImageUrlCacheService extends _i1.Mock
         ),
       ) as _i9.BaseCacheManager);
   @override
-  _i13.Future<_i10.File> getImageFileFromCache(_i12.IImage? imageObject) =>
+  _i13.Future<_i10.File> getImageFile(_i12.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFileFromCache,

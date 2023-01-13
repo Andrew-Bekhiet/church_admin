@@ -2,11 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show
-        ContrastingColor,
-        ListControllerBase,
-        LoggingService,
-        TappableFormField;
+    show ContrastingColor, LoggingService, TappableFormField;
 import 'package:collection/collection.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -592,7 +588,8 @@ class _EditPersonState extends State<EditPerson> {
                           if (newPerson.isStudent) ...[
                             ObjectSelectionField<StudyYear, StudyYear?>(
                               initialValue: newPerson.studyYear,
-                              listController: (s) => ListControllerBase(
+                              listController: (s) =>
+                                  ViewableObjectListController(
                                 objectsPaginatableStream: CADatabaseRepository
                                     .I.metadata.studyYears
                                     .getStudyYearsStream(searchQuery: s),
@@ -629,7 +626,8 @@ class _EditPersonState extends State<EditPerson> {
                                   ), */
                               ObjectSelectionField<College, College?>(
                                 initialValue: newPerson.college,
-                                listController: (s) => ListControllerBase(
+                                listController: (s) =>
+                                    ViewableObjectListController(
                                   objectsPaginatableStream: CADatabaseRepository
                                       .I.metadata.colleges
                                       .getCollegesStream(searchQuery: s),
@@ -653,7 +651,8 @@ class _EditPersonState extends State<EditPerson> {
                             ] else
                               ObjectSelectionField<School, School?>(
                                 initialValue: newPerson.school,
-                                listController: (s) => ListControllerBase(
+                                listController: (s) =>
+                                    ViewableObjectListController(
                                   objectsPaginatableStream: CADatabaseRepository
                                       .I.metadata.schools
                                       .getSchoolsStream(searchQuery: s),
@@ -677,7 +676,8 @@ class _EditPersonState extends State<EditPerson> {
                           ] else ...[
                             ObjectSelectionField<Qualification, Qualification?>(
                               initialValue: newPerson.qualification,
-                              listController: (s) => ListControllerBase(
+                              listController: (s) =>
+                                  ViewableObjectListController(
                                 objectsPaginatableStream: CADatabaseRepository
                                     .I.metadata.qualifications
                                     .getQualificationsStream(searchQuery: s),
@@ -700,7 +700,8 @@ class _EditPersonState extends State<EditPerson> {
                             ),
                             ObjectSelectionField<Job, Job?>(
                               initialValue: newPerson.job,
-                              listController: (s) => ListControllerBase(
+                              listController: (s) =>
+                                  ViewableObjectListController(
                                 objectsPaginatableStream: CADatabaseRepository
                                     .I.metadata.jobs
                                     .getJobsStream(searchQuery: s),
@@ -766,7 +767,7 @@ class _EditPersonState extends State<EditPerson> {
                           ),
                           ObjectSelectionField<PersonType, PersonType?>(
                             initialValue: newPerson.personType,
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.metadata.personTypes
                                   .getPersonTypesStream(searchQuery: s),
@@ -810,7 +811,8 @@ class _EditPersonState extends State<EditPerson> {
                           if (newPerson.gender && newPerson.isShammas)
                             ObjectSelectionField<ShammasLevel, ShammasLevel?>(
                               initialValue: newPerson.shammasLevel,
-                              listController: (s) => ListControllerBase(
+                              listController: (s) =>
+                                  ViewableObjectListController(
                                 objectsPaginatableStream: CADatabaseRepository
                                     .I.metadata.shammasLevels
                                     .getShammasLevelsStream(searchQuery: s),
@@ -832,7 +834,7 @@ class _EditPersonState extends State<EditPerson> {
                             ),
                           ObjectSelectionField<Church, Church?>(
                             initialValue: newPerson.church,
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.metadata.churches
                                   .getChurchesStream(searchQuery: s),
@@ -855,7 +857,7 @@ class _EditPersonState extends State<EditPerson> {
                           ),
                           ObjectSelectionField<Father, Father?>(
                             initialValue: newPerson.father,
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.metadata.fathers
                                   .getFathersStream(searchQuery: s),
@@ -890,7 +892,7 @@ class _EditPersonState extends State<EditPerson> {
                           const Divider(thickness: 1),
                           ObjectSelectionField<PersonState, PersonState?>(
                             initialValue: newPerson.state,
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.metadata.personStates
                                   .getPersonStatesStream(searchQuery: s),
@@ -940,24 +942,10 @@ class _EditPersonState extends State<EditPerson> {
                             onChanged: (s) => newPerson =
                                 newPerson.copyWith(tags: s?.toList()),
                             initialValue: newPerson.tags?.toSet() ?? {},
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.metadata.tags
                                   .getTagsStream(searchQuery: s),
-                            ),
-                            itemBuilder: (
-                              o, {
-                              onLongPress,
-                              onTap,
-                              subtitle,
-                              trailing,
-                            }) =>
-                                ViewableObjectWidget(
-                              o,
-                              trailing: trailing,
-                              onTap: onTap,
-                              onLongPress: onLongPress,
-                              forceShowSecondLine: false,
                             ),
                             labelText: 'الشارات',
                             builder: (context, state) {
@@ -1044,7 +1032,7 @@ class _EditPersonState extends State<EditPerson> {
                             validator: _personGeneralCheckValidator,
                             decoration: const InputDecoration(errorMaxLines: 2),
                             initialValue: newPerson.family,
-                            listController: (s) => ListControllerBase(
+                            listController: (s) => ViewableObjectListController(
                               objectsPaginatableStream: CADatabaseRepository
                                   .I.families
                                   .getFamiliesStream(searchQuery: s),
@@ -1611,7 +1599,7 @@ class _SelectServicesPage extends StatefulWidget {
 class __SelectServicesPageState extends State<_SelectServicesPage>
     with TickerProviderStateMixin {
   final search = BehaviorSubject<String?>.seeded(null);
-  late final listController = ListControllerBase<void, Service>(
+  late final listController = ViewableObjectListController<Service>(
     objectsPaginatableStream: CADatabaseRepository.I.services.getServicesStream(
       searchQuery: search,
     ),
@@ -1643,7 +1631,6 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
         ],
       ),
       body: ServicesHierarchyList(
-        autoDisposeController: true,
         listController: listController,
         showClasses: false,
         groupBuilder: (context, {required service, required group}) =>
@@ -1717,11 +1704,13 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     for (final c in _animationControllers.values) {
       c.dispose();
     }
+    super.dispose();
+
+    await listController.dispose();
+
     await search.close();
     await selected.close();
   }

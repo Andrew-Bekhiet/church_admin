@@ -16,7 +16,7 @@ class ImageUrlCacheService {
   final Box<String> box;
   final BaseCacheManager cacheManager;
 
-  Future<File> getImageFileFromCache(IImage imageObject) async {
+  Future<File> getImageFile(IImage imageObject) async {
     return cacheManager.getSingleFile(await getImageUrl(imageObject));
   }
 
@@ -86,7 +86,7 @@ class ImageUrlCacheService {
   ) async {
     await box.put(
       imageObject.imageInfo!.cacheKey,
-      '${imageObject.imageInfo!.lastUpdatedTime}|$url',
+      imageObject.imageInfo!.lastUpdatedTime.toIso8601String() + '|' + url,
     );
 
     return url;

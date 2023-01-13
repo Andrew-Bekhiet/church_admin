@@ -1,17 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show
-        DataObjectListViewBase,
-        ItemBuilder,
-        ListControllerBase,
-        TappableFormField,
-        ViewableWithID;
+    show TappableFormField, Viewable;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-class MultiObjectSelectionField<T extends ViewableWithID>
-    extends StatelessWidget {
-  final ListControllerBase<void, T> Function(Stream<String?>) listController;
+class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
+  final ViewableObjectListController<T> Function(Stream<String?>)
+      listController;
   final Widget? Function(BuildContext, FormFieldState<Set<T>>) builder;
   final Set<T> initialValue;
   final String labelText;
@@ -54,7 +49,7 @@ class MultiObjectSelectionField<T extends ViewableWithID>
         final focusScope = FocusScope.of(context);
         final search = BehaviorSubject<String?>.seeded(null);
         final controller = listController(search)
-          ..selectAll(state.value?.toList() ?? []);
+          ..selectionController.selectAll(state.value?.toList() ?? []);
 
         final rslt = await showDialog(
           context: state.context,
@@ -64,7 +59,7 @@ class MultiObjectSelectionField<T extends ViewableWithID>
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context)
-                      .pop(controller.currentSelection ?? {}),
+                      .pop(controller.selectionController.currentValue ?? {}),
                   child: const Text('تم'),
                 ),
               ],
@@ -77,25 +72,14 @@ class MultiObjectSelectionField<T extends ViewableWithID>
                       searchSink: search,
                     ),
                     Expanded(
-                      child: DataObjectListViewBase<void, T>(
-                        controller: controller,
-                        autoDisposeController: true,
-                        itemBuilder: itemBuilder ??
-                            (
-                              o, {
-                              onLongPress,
-                              onTap,
-                              subtitle,
-                              trailing,
-                            }) =>
-                                ViewableObjectWidget(
-                                  o,
-                                  trailing: trailing,
-                                  onTap: onTap,
-                                  onLongPress: onLongPress,
-                                  wrapInCard: false,
-                                  forceShowSecondLine: false,
-                                ),
+                      child: ViewableObjectList<T>(
+                        objectsController: controller,
+                        viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                          wrapInCard: false,
+                          forceShowSecondLine: false,
+                          onLongPress: (_) {},
+                        ),
+                        itemBuilder: itemBuilder,
                       ),
                     ),
                   ],
@@ -106,6 +90,7 @@ class MultiObjectSelectionField<T extends ViewableWithID>
         );
 
         await search.close();
+        await controller.dispose();
 
         if (rslt != null && rslt != state.value) {
           state.didChange(rslt);

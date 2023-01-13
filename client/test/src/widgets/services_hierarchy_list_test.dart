@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show ListControllerBase, PaginatableStreamBase;
+    show PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -33,12 +33,14 @@ Future<void> main() async {
     (tester) async {
       final mock = _createPaginatableStreamMock();
 
+      final viewableObjectListController = ViewableObjectListController(
+        objectsPaginatableStream: mock,
+      );
+      addTearDown(viewableObjectListController.dispose);
+
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
-          autoDisposeController: true,
-          listController: ListControllerBase(
-            objectsPaginatableStream: mock,
-          ),
+          listController: viewableObjectListController,
         ),
         wrapper: materialAppWrapper(
           theme: CAThemingService.getDefault(
@@ -79,12 +81,14 @@ Future<void> main() async {
     (tester) async {
       final mock = _createPaginatableStreamMock();
 
+      final viewableObjectListController = ViewableObjectListController(
+        objectsPaginatableStream: mock,
+      );
+      addTearDown(viewableObjectListController.dispose);
+
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
-          autoDisposeController: true,
-          listController: ListControllerBase(
-            objectsPaginatableStream: mock,
-          ),
+          listController: viewableObjectListController,
         ),
       );
 
@@ -132,9 +136,13 @@ Future<void> main() async {
     (tester) async {
       final mock = _createPaginatableStreamMock();
 
+      final viewableObjectListController = ViewableObjectListController(
+        objectsPaginatableStream: mock,
+      );
+      addTearDown(viewableObjectListController.dispose);
+
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
-          autoDisposeController: true,
           classBuilder: (
             context, {
             required $class,
@@ -186,9 +194,7 @@ Future<void> main() async {
               ],
             ),
           ),
-          listController: ListControllerBase(
-            objectsPaginatableStream: mock,
-          ),
+          listController: viewableObjectListController,
         ),
       );
 
@@ -278,6 +284,8 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
       ],
     ),
   );
+  when(mock.onLoadingChanged)
+      .thenAnswer((_) => Stream.value(false).shareValue());
   return mock;
 }
 

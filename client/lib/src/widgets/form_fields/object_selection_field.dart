@@ -1,16 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show
-        DataObjectListViewBase,
-        ListControllerBase,
-        TappableFormField,
-        ViewableWithID;
+    show TappableFormField, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ObjectSelectionField<T extends ViewableWithID, F extends T?>
     extends StatelessWidget {
-  final ListControllerBase<void, T> Function(Stream<String?>) listController;
+  final ViewableObjectListController<T> Function(Stream<String?>)
+      listController;
   final Widget? Function(BuildContext, FormFieldState<F>) builder;
   final F initialValue;
   final String labelText;
@@ -65,20 +62,10 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                       searchSink: search,
                     ),
                     Expanded(
-                      child: DataObjectListViewBase<void, T>(
-                        controller: controller,
-                        autoDisposeController: true,
-                        onTap: Navigator.of(context).pop,
-                        itemBuilder: (
-                          o, {
-                          onLongPress,
-                          onTap,
-                          subtitle,
-                          trailing,
-                        }) =>
-                            ViewableObjectWidget(
-                          o,
-                          onTap: onTap,
+                      child: ViewableObjectList<T>(
+                        objectsController: controller,
+                        viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                          onTap: Navigator.of(context).pop,
                           wrapInCard: false,
                           forceShowSecondLine: false,
                         ),
@@ -90,8 +77,8 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
             );
           },
         );
-
         await search.close();
+        await controller.dispose();
 
         if (rslt != null && rslt != state.value) {
           state.didChange(rslt);

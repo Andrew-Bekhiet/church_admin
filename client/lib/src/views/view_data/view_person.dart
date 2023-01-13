@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide PhotoObjectWidget,ViewableObjectWidget;
+import 'package:churchdata_core/churchdata_core.dart'
+    hide PhotoObjectWidget, ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -596,8 +597,7 @@ class _ViewPersonState extends State<ViewPerson> {
           ) ==
           true) {
         final imageFile = person.hasImage
-            ? await GetIt.I<ImageUrlCacheService>()
-                .getImageFileFromCache(person)
+            ? await GetIt.I<ImageUrlCacheService>().getImageFile(person)
             : null;
 
         await GetIt.I<ContactsService>().insertContact(
@@ -618,6 +618,12 @@ class _ViewPersonState extends State<ViewPerson> {
         );
       }
     }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
 

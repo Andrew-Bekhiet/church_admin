@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show DataObjectListViewBase, ListControllerBase;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -14,7 +12,6 @@ typedef ServiceTrailingBuilder = Widget Function(
   void Function(Service)? onLongPress,
   void Function(Service)? onTap,
   Widget? trailing,
-  Widget? subtitle,
 });
 
 typedef StudyYearBuilder = Widget Function(
@@ -48,14 +45,12 @@ class ServicesHierarchyList extends StatefulWidget {
 
   final ClassBuilder? classBuilder;
 
-  final ListControllerBase<void, Service>? listController;
+  final ViewableObjectListController<Service>? listController;
   final Stream<String?>? search;
-  final bool autoDisposeController;
 
   const ServicesHierarchyList({
     this.showClasses = true,
     this.showGroups = true,
-    this.autoDisposeController = false,
     this.serviceTrailingBuilder,
     this.studyYearBuilder,
     this.classBuilder,
@@ -73,7 +68,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     with TickerProviderStateMixin {
   late final search = widget.search ?? BehaviorSubject<String?>.seeded(null);
   late final listController = widget.listController ??
-      ListControllerBase<void, Service>(
+      ViewableObjectListController<Service>(
         objectsPaginatableStream: CADatabaseRepository.I.services
             .getServicesStream(searchQuery: search),
       );
@@ -82,20 +77,18 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
   @override
   Widget build(BuildContext context) {
-    return DataObjectListViewBase(
-      autoDisposeController: widget.autoDisposeController,
-      controller: listController,
+    return ViewableObjectList(
+      itemsExpandable: true,
+      objectsController: listController,
       itemBuilder: _buildServiceTile,
     );
   }
 
   Widget _buildServiceTile(
-    Service s, {
-    void Function(Service)? onLongPress,
-    void Function(Service)? onTap,
-    Widget? trailing,
-    Widget? subtitle,
-  }) {
+    BuildContext context,
+    Service s,
+    ViewableObjectWidgetConfig? config,
+  ) {
     final _topController = _animationControllers[s] ??= AnimationController(
       duration: const Duration(milliseconds: 225),
       vsync: this,
@@ -126,10 +119,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                 widget.serviceTrailingBuilder!(
                   context,
                   s,
-                  onLongPress: onLongPress,
-                  onTap: onTap,
-                  trailing: trailing,
-                  subtitle: subtitle,
+                  onLongPress: config?.onLongPress,
+                  onTap: config?.onTap,
+                  trailing: config?.trailing,
                 ),
             ],
           ),
@@ -138,7 +130,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           maintainState: true,
           title: GestureDetector(
-            onLongPress: onLongPress != null ? () => onLongPress(s) : null,
+            onLongPress: config?.onLongPress != null
+                ? () => config!.onLongPress!(s)
+                : null,
             child: Text(s.name),
           ),
           children: [
@@ -178,6 +172,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
     if (search is BehaviorSubject) {
       await (search as BehaviorSubject).close();
+    }
+    if (widget.listController == null) {
+      await listController.dispose();
     }
   }
 }

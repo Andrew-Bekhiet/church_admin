@@ -443,7 +443,7 @@ packages:
     source: hosted
     version: "2.0.1"
   file:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: file
       url: "https://pub.dartlang.org"
@@ -1986,7 +1986,7 @@ packages:
     source: hosted
     version: "3.0.2"
   visibility_detector:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: visibility_detector
       url: "https://pub.dartlang.org"

@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
+import '../fakes/fake_box.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -61,21 +62,4 @@ void main() {
       expect(unit.getSecondLineFor(PhoneNumberService), isNull);
     },
   );
-}
-
-class FakeBox<T> extends Fake implements Box<T> {
-  final Map<String, dynamic> _box = {};
-
-  FakeBox();
-
-  @override
-  bool get isOpen => true;
-
-  @override
-  T? get(dynamic key, {T? defaultValue}) => _box[key] ?? defaultValue;
-
-  @override
-  Future<void> put(dynamic key, T? value) async {
-    _box[key] = value;
-  }
 }

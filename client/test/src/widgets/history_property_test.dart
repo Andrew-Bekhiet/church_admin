@@ -174,8 +174,7 @@ Future<void> main() async {
       expect(
         find.descendant(
           of: find.byType(Dialog),
-          matching: find
-              .bySubtype<DataObjectListViewBase<void, LastRecordedByInfo>>(),
+          matching: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
         ),
         findsOneWidget,
       );
@@ -183,16 +182,14 @@ Future<void> main() async {
 
       expect(
         find.descendant(
-          of: find
-              .bySubtype<DataObjectListViewBase<void, LastRecordedByInfo>>(),
+          of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
           matching: find.text(lastRecordedByInfo.user!.name),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find
-              .bySubtype<DataObjectListViewBase<void, LastRecordedByInfo>>(),
+          of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
           matching: find
               .text(historyProperty.dateFormat.format(lastRecordedByInfo.time)),
         ),

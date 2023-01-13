@@ -57,43 +57,44 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   }
 
   void Function() _onHistoryTap(BuildContext context) => () async {
+        final viewableObjectListController = ViewableObjectListController(
+          objectsPaginatableStream: getHistoryStream(),
+        );
         await showDialog(
           context: context,
-          builder: (context) => Dialog(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            child: DataObjectListViewBase<void, T>(
-              controller: ListControllerBase(
-                objectsPaginatableStream: getHistoryStream(),
-              ),
-              autoDisposeController: true,
-              itemBuilder: (
-                o, {
-                onLongPress,
-                onTap,
-                subtitle,
-                trailing,
-              }) =>
-                  ViewableObjectWidget(
-                o.user ??
-                    User(
-                      name: o.name,
-                      uid: o.recordedBy ?? '',
-                    ),
-                photo: ImageObjectWidget(
+          builder: (context) {
+            return Dialog(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              child: ViewableObjectList<T>(
+                objectsController: viewableObjectListController,
+                itemBuilder: (
+                  context,
+                  o,
+                  config,
+                ) =>
+                    ViewableObjectWidget(
                   o.user ??
                       User(
                         name: o.name,
                         uid: o.recordedBy ?? '',
                       ),
+                  photo: ImageObjectWidget(
+                    o.user ??
+                        User(
+                          name: o.name,
+                          uid: o.recordedBy ?? '',
+                        ),
+                  ),
+                  title: Text(dateFormat.format(o.time)),
+                  subtitle: Text(o.user?.name ?? ''),
+                  onLongPress: config?.onLongPress,
+                  onTap: config?.onTap,
+                  trailing: config?.trailing,
                 ),
-                title: Text(dateFormat.format(o.time)),
-                subtitle: Text(o.user?.name ?? ''),
-                onLongPress: (_) => onLongPress?.call(o),
-                onTap: (_) => onTap?.call(o),
-                trailing: trailing,
               ),
-            ),
-          ),
+            );
+          },
         );
+        await viewableObjectListController.dispose();
       };
 }

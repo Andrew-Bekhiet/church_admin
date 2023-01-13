@@ -53,6 +53,18 @@ class MockDelegatingPaginatableStream extends _i1.Mock
                 _i3.DelegatingStreamResult<_i3.LastRecordedByInfo>>.empty(),
       ) as _i3.OnQuery<_i3.LastRecordedByInfo>);
   @override
+  _i2.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
+        Invocation.getter(#onLoadingChanged),
+        returnValue: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#onLoadingChanged),
+        ),
+        returnValueForMissingStub: _FakeValueStream_0<bool>(
+          this,
+          Invocation.getter(#onLoadingChanged),
+        ),
+      ) as _i2.ValueStream<bool>);
+  @override
   bool get isLoading => (super.noSuchMethod(
         Invocation.getter(#isLoading),
         returnValue: false,

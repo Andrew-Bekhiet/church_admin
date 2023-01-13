@@ -1043,10 +1043,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
   }) async {
     final _search = BehaviorSubject<String?>.seeded(null);
 
-    final _controller = ListController<void, T>(
+    final _controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
-      searchStream: _search.map((s) => s ?? ''),
-    )..selectAll(selected);
+      filterStream: _search.map((s) => s ?? ''),
+    )..selectionController.selectAll(selected);
 
     final rslt = await Navigator.of(context).push(
       MaterialPageRoute(
@@ -1094,12 +1094,14 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.select_all),
-                onPressed: _controller.selectAll,
+                onPressed: () => _controller.selectionController.selectAll(
+                  _controller.objectsPaginatableStream.currentValue,
+                ),
                 tooltip: 'تحديد الكل',
               ),
               IconButton(
                 icon: const Icon(Icons.check_box_outline_blank),
-                onPressed: _controller.deselectAll,
+                onPressed: _controller.selectionController.selectNone,
                 tooltip: 'تحديد لا شئ',
               ),
               IconButton(
@@ -1109,10 +1111,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
               ),
             ],
           ),
-          body: DataObjectListViewBase(
-            controller: _controller,
-            autoDisposeController: false,
-          ),
+          body: ViewableObjectList(objectsController: _controller),
         ),
       ),
     );
@@ -1124,7 +1123,9 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
         }),
       );
 
-      return _controller.currentSelection?.whereType<T>().toList();
+      return _controller.selectionController.currentValue
+          ?.whereType<T>()
+          .toList();
     }
     await _controller.dispose().then((_) async {
       if (!_search.isClosed) await _search.close();

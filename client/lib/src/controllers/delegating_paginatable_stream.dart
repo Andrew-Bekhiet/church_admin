@@ -28,7 +28,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
       (r) {
         _canPaginateBackward = r.canPaginateBackward ?? _canPaginateBackward;
         _canPaginateForward = r.canPaginateForward ?? _canPaginateForward;
-        _isLoading = false;
+        _onLoadingChanged.add(false);
 
         return r.result;
       },
@@ -40,12 +40,16 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   final BehaviorSubject<List<T>> _subject = BehaviorSubject();
   final BehaviorSubject<int> _offset = BehaviorSubject.seeded(0);
 
-  bool _isLoading = true;
   bool _canPaginateBackward = false;
   bool _canPaginateForward = false;
 
+  final BehaviorSubject<bool> _onLoadingChanged = BehaviorSubject.seeded(true);
+
   @override
-  bool get isLoading => _isLoading;
+  ValueStream<bool> get onLoadingChanged => _onLoadingChanged.stream;
+
+  @override
+  bool get isLoading => _onLoadingChanged.value;
   @override
   bool get canPaginateBackward => _canPaginateBackward;
   @override
@@ -55,7 +59,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   int get currentOffset => _offset.value;
 
   @override
-  ValueStream<List<T>> get stream => _subject.shareValue();
+  ValueStream<List<T>> get stream => _subject.stream;
 
   @override
   List<T> get currentValue => _subject.value.toList();
@@ -67,7 +71,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   Future<void> loadPage(int offset) async {
     _canPaginateForward = false;
     _canPaginateBackward = false;
-    _isLoading = true;
+    _onLoadingChanged.add(true);
 
     _offset.add(offset);
   }
@@ -76,7 +80,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   Future<void> loadNextPage() async {
     if (canPaginateForward) {
       _canPaginateForward = false;
-      _isLoading = true;
+      _onLoadingChanged.add(true);
       _offset.add(_offset.value + 1);
     } else {
       throw StateError('Cannot paginate forward');
@@ -87,7 +91,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   Future<void> loadPreviousPage() async {
     if (canPaginateBackward) {
       _canPaginateBackward = false;
-      _isLoading = true;
+      _onLoadingChanged.add(true);
       _offset.add(_offset.value - 1);
     } else {
       throw StateError('Cannot paginate backward');
@@ -96,6 +100,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
 
   @override
   Future<void> dispose() async {
+    await _onLoadingChanged.close();
     await _subject.close();
     await _querySubscription.cancel();
     await _offset.close();

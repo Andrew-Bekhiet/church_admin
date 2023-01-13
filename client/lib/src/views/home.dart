@@ -114,20 +114,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _bottomNavBar = StateSubject<Type>(Service);
 
   late final _listsControllers = [
-    ListControllerBase<void, Person>(
+    ViewableObjectListController<Person>(
       objectsPaginatableStream: CADatabaseRepository.I.persons.paginatePersons(
         searchQuery: _getSearchStreamFor<Person>(),
         secondLineFieldName:
             GetIt.I<UserSettingsService>().getSecondLineFor(Person),
       ),
     ),
-    ListControllerBase<void, Service>(
+    ViewableObjectListController<Service>(
       objectsPaginatableStream:
           CADatabaseRepository.I.services.getServicesStream(
         searchQuery: _getSearchStreamFor<Service>(),
       ),
     ),
-    ListControllerBase<void, Area>(
+    ViewableObjectListController<Area>(
       objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(
         searchQuery: _getSearchStreamFor<Area>(),
       ),
@@ -272,72 +272,56 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 class _HomeBody extends StatelessWidget {
   const _HomeBody({
     required TabController tabController,
-    required List<ListControllerBase<void, ViewableWithID>> listsControllers,
+    required List<ViewableObjectListController<Viewable>> listsControllers,
     required Map<Type, int> typeToIndex,
   })  : _tabController = tabController,
         _listsControllers = listsControllers,
         _typeToIndex = typeToIndex;
 
   final TabController _tabController;
-  final List<ListControllerBase<void, ViewableWithID>> _listsControllers;
+  final List<ViewableObjectListController<Viewable>> _listsControllers;
   final Map<Type, int> _typeToIndex;
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      controller: _tabController,
-      children: [
-        DataObjectListViewBase<void, Person>(
-          key: PageStorageKey(_listsControllers[_typeToIndex[Person]!]),
-          controller: _listsControllers[_typeToIndex[Person]!]
-              as ListControllerBase<void, Person>,
-          autoDisposeController: false,
-          itemBuilder: (p, {onLongPress, onTap, subtitle, trailing}) =>
-              ViewableObjectWidget(
-            p,
-            onLongPress: onLongPress,
-            onTap: onTap,
-            photo: ImageObjectWidget(p),
-            subtitle: subtitle,
-            trailing: trailing,
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: TabBarView(
+        controller: _tabController,
+        children: [
+          ViewableObjectList<Person>(
+            key: PageStorageKey(_listsControllers[_typeToIndex[Person]!]),
+            objectsController: _listsControllers[_typeToIndex[Person]!]
+                as ViewableObjectListController<Person>,
           ),
-        ),
-        ServicesHierarchyList(
-          key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
-          listController: _listsControllers[_typeToIndex[Service]!]
-              as ListControllerBase<void, Service>,
-          serviceTrailingBuilder: (
-            context,
-            s, {
-            onLongPress,
-            onTap,
-            subtitle,
-            trailing,
-          }) =>
-              IconButton(
-            onPressed: onTap != null ? () => onTap(s) : null,
-            icon: const Icon(Icons.info),
-          ),
-        ),
-        DataObjectListViewBase<void, Area>(
-          key: PageStorageKey(_listsControllers[_typeToIndex[Area]!]),
-          controller: _listsControllers[_typeToIndex[Area]!]
-              as ListControllerBase<void, Area>,
-          autoDisposeController: false,
-          itemBuilder: (a, {onLongPress, onTap, subtitle, trailing}) =>
-              ViewableObjectWidget(
-            a,
-            photo: ImageObjectWidget(
-              a,
-              circleCrop: false,
+          ServicesHierarchyList(
+            key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
+            listController: _listsControllers[_typeToIndex[Service]!]
+                as ViewableObjectListController<Service>,
+            serviceTrailingBuilder: (
+              context,
+              s, {
+              onLongPress,
+              onTap,
+              subtitle,
+              trailing,
+            }) =>
+                IconButton(
+              onPressed: onTap != null ? () => onTap(s) : null,
+              icon: const Icon(Icons.info),
             ),
-            forceShowSecondLine: false,
-            onLongPress: onLongPress,
-            onTap: onTap,
-            trailing: trailing,
           ),
-        ),
-      ],
+          ViewableObjectList<Area>(
+            viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+              circleCrop: false,
+              forceShowSecondLine: false,
+            ),
+            key: PageStorageKey(_listsControllers[_typeToIndex[Area]!]),
+            objectsController: _listsControllers[_typeToIndex[Area]!]
+                as ViewableObjectListController<Area>,
+          ),
+        ],
+      ),
     );
   }
 }

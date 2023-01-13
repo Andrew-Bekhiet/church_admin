@@ -6,13 +6,13 @@ import 'package:get_it/get_it.dart';
 class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final T object;
 
-  final bool forceShowSecondLine;
-  final bool selected;
-  final bool wrapInCard;
-  final bool isThreeLine;
-  final bool dense;
-  final bool enabled;
-  final bool circleCrop;
+  final bool? selected;
+  final bool? forceShowSecondLine;
+  final bool? wrapInCard;
+  final bool? isThreeLine;
+  final bool? dense;
+  final bool? enabled;
+  final bool? circleCrop;
 
   final Widget? title;
   final Widget? subtitle;
@@ -25,27 +25,30 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final void Function(T)? onLongPress;
 
   final CAViewableObjectService viewableObjectService;
+  final ViewableObjectWidgetConfig config;
 
   ViewableObjectWidget(
     this.object, {
     this.title,
     this.subtitle,
     this.photo,
-    this.wrapInCard = true,
-    this.dense = false,
-    this.enabled = true,
-    this.forceShowSecondLine = true,
-    this.selected = false,
-    this.isThreeLine = false,
-    this.circleCrop = true,
+    this.selected,
+    this.wrapInCard,
+    this.dense,
+    this.enabled,
+    this.forceShowSecondLine,
+    this.isThreeLine,
+    this.circleCrop,
     this.heroTag,
     this.trailing,
     this.onTap,
     this.onLongPress,
+    ViewableObjectWidgetConfig? config,
     CAViewableObjectService? viewableObjectService,
     super.key,
-  }) : viewableObjectService =
-            viewableObjectService ?? GetIt.I<CAViewableObjectService>();
+  })  : viewableObjectService =
+            viewableObjectService ?? GetIt.I<CAViewableObjectService>(),
+        config = config ?? const ViewableObjectWidgetConfig();
 
   @override
   Widget build(BuildContext context) {
@@ -61,32 +64,33 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
       iconColor: foregroundColor,
       textColor: foregroundColor,
       tileColor: object.color,
-      dense: dense,
-      enabled: enabled,
+      dense: dense ?? config.dense,
+      enabled: enabled ?? config.enabled,
       leading: photo ??
+          config.photo ??
           (object is IImage
               ? ImageObjectWidget(
                   object as IImage,
                   heroTag: heroTag,
-                  circleCrop: circleCrop,
+                  circleCrop: circleCrop ?? config.circleCrop,
                 )
               : null),
       title: title ?? Text(object.name),
       subtitle: subtitle ??
           (secondLine != null
               ? Text(secondLine)
-              : forceShowSecondLine
+              : forceShowSecondLine ?? config.forceShowSecondLine
                   ? const SizedBox()
                   : null),
       onTap: _onTap != null ? () => _onTap!(object) : null,
       onLongPress: _onLongPress != null ? () => _onLongPress!(object) : null,
-      selected: selected,
-      isThreeLine: isThreeLine,
-      trailing: trailing,
+      isThreeLine: isThreeLine ?? config.isThreeLine,
+      trailing: trailing ?? config.trailing,
     );
 
-    if (wrapInCard) {
+    if (wrapInCard ?? config.wrapInCard) {
       return Card(
+        elevation: selected ?? config.selected ? 4 : 1,
         color: object.color,
         child: tile,
       );
@@ -95,7 +99,8 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     return tile;
   }
 
-  void Function(T)? get _onTap => onTap ?? viewableObjectService.onTap;
+  void Function(T)? get _onTap =>
+      onTap ?? config.onTap ?? viewableObjectService.onTap;
 
-  void Function(T)? get _onLongPress => onLongPress;
+  void Function(T)? get _onLongPress => onLongPress ?? config.onLongPress;
 }
