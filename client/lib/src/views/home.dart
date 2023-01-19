@@ -113,26 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _search = StateSubject<String?>(null);
   final _bottomNavBar = StateSubject<Type>(Service);
 
-  late final _listsControllers = [
-    ViewableObjectListController<Person>(
-      objectsPaginatableStream: CADatabaseRepository.I.persons.paginatePersons(
-        searchQuery: _getSearchStreamFor<Person>(),
-        secondLineFieldName:
-            GetIt.I<UserSettingsService>().getSecondLineFor(Person),
-      ),
-    ),
-    ViewableObjectListController<Service>(
-      objectsPaginatableStream:
-          CADatabaseRepository.I.services.getServicesStream(
-        searchQuery: _getSearchStreamFor<Service>(),
-      ),
-    ),
-    ViewableObjectListController<Area>(
-      objectsPaginatableStream: CADatabaseRepository.I.areas.getAreasStream(
-        searchQuery: _getSearchStreamFor<Area>(),
-      ),
-    ),
-  ];
+  late final List<ViewableObjectListController<Viewable>> _listsControllers;
 
   late final TabController _tabController = TabController(
     length: 3,
@@ -155,6 +136,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     _tabController.addListener(_tabControllerListener);
     _tabController.animation!.addListener(_tabControllerAnimationListener);
+
+    _initListsControllers();
   }
 
   @override
@@ -254,6 +237,40 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   void _tabControllerAnimationListener() {
     _fabAnimationController.value = _tabController.offset;
+  }
+
+  void _initListsControllers() {
+    _listsControllers = [
+      _createControllerUsing<Person>(
+        ({searchQuery}) => CADatabaseRepository.I.persons.paginatePersons(
+          searchQuery: searchQuery,
+          secondLineFieldName:
+              GetIt.I<UserSettingsService>().getSecondLineFor(Person),
+        ),
+      ),
+      _createControllerUsing<Service>(
+        CADatabaseRepository.I.services.getServicesStream,
+      ),
+      _createControllerUsing<Area>(
+        CADatabaseRepository.I.areas.getAreasStream,
+      ),
+    ];
+  }
+
+  ViewableObjectListController<T> _createControllerUsing<T extends Viewable>(
+    GQLPaginatableStream<T> Function({Stream<String?>? searchQuery})
+        paginatableStreamFactory,
+  ) {
+    final searchStream = _getSearchStreamFor<T>();
+    final paginatableStream =
+        paginatableStreamFactory(searchQuery: searchStream);
+    final filterStream = paginatableStream.onLoadingChanged.switchMap(
+      (isLoading) => isLoading ? searchStream : Stream.value(null),
+    );
+    return ViewableObjectListController<T>(
+      filterStream: filterStream,
+      objectsPaginatableStream: paginatableStream,
+    );
   }
 
   @override

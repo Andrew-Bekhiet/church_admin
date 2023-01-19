@@ -14,6 +14,10 @@ class ViewableObjectListController<T extends Viewable> {
   ValueStream<List<T>> get filteredObjectsStream =>
       _filteredObjectsSubject?.stream ?? objectsPaginatableStream.stream;
 
+  List<T>? get currentFilteredObjectsOrNull =>
+      _filteredObjectsSubject?.valueOrNull ??
+      objectsPaginatableStream.currentValueOrNull;
+
   late final BehaviorSubject<List<T>>? _filteredObjectsSubject;
   late final StreamSubscription<List<T>>? _filteredObjectsStreamSubscription;
 

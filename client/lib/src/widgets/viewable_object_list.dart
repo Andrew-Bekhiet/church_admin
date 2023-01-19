@@ -80,7 +80,7 @@ class _ViewableObjectListState<T extends Viewable>
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<T>>(
-      initialData: objectsPaginatableStream.currentValueOrNull,
+      initialData: objectsController.currentFilteredObjectsOrNull,
       stream: objectsController.filteredObjectsStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -94,8 +94,10 @@ class _ViewableObjectListState<T extends Viewable>
 
         final items = snapshot.requireData;
 
-        if (items.isEmpty) {
+        if (items.isEmpty && !objectsPaginatableStream.isLoading) {
           return const Center(child: Text('لا يوجد بيانات'));
+        } else if (items.isEmpty) {
+          return const Center(child: CircularProgressIndicator());
         }
 
         return ListView.builder(
