@@ -29,7 +29,7 @@ jobs:
           path: ${{ runner.tool_cache }}/flutter
           key: flutter-3.3.10-stable
 
-      - uses: subosito/flutter-action@v
+      - uses: subosito/flutter-action@v2
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           channel: "stable"
