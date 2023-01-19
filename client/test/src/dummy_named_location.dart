@@ -16,6 +16,7 @@ class DummyNamedLocation extends GoRouterState {
     String name, {
     Map<String, String> params = const {},
     Map<String, dynamic> queryParams = const {},
-  }) =>
-      throw UnimplementedError();
+  }) {
+    throw UnimplementedError();
+  }
 }
