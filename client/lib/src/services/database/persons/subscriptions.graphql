@@ -143,6 +143,13 @@ subscription watchPerson($id: uuid!) {
       name
       order
     }
+    hobbies(orderBy: { hobby: { name: ASC } }) {
+      hobby {
+        id
+        name
+        color
+      }
+    }
     tags(orderBy: { tag: { name: ASC } }) {
       tag {
         id

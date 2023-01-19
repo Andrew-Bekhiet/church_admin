@@ -293,6 +293,15 @@ class PersonsQueries {
                     )
                     .toList(),
               ).toJson(),
+              'hobbies': Input$PersonsHobbiesArrRelInsertInput(
+                data: (newPerson.hobbies ?? [])
+                    .map(
+                      (e) => Input$PersonsHobbiesInsertInput(
+                        hobbyId: e.id.toUuid(),
+                      ),
+                    )
+                    .toList(),
+              ).toJson(),
               'tags': Input$PersonsTagsArrRelInsertInput(
                 data: (newPerson.tags ?? [])
                     .map(
@@ -904,6 +913,11 @@ class PersonsQueries {
       EqualitySet<ID>.from(idEquality, newPerson.groups ?? []),
     );
 
+    final hobbiesDiff = diff(
+      EqualitySet<ID>.from(idEquality, oldPerson.hobbies ?? []),
+      EqualitySet<ID>.from(idEquality, newPerson.hobbies ?? []),
+    );
+
     final tagsDiff = diff(
       EqualitySet<ID>.from(idEquality, oldPerson.tags ?? []),
       EqualitySet<ID>.from(idEquality, newPerson.tags ?? []),
@@ -919,6 +933,7 @@ class PersonsQueries {
           ),
         )
         .toList();
+
     final deleteGroups = groupsDiff.item1.map((g) => g.id.toUuid()).toList();
     final newGroups = groupsDiff.item2
         .map(
@@ -928,6 +943,17 @@ class PersonsQueries {
           ),
         )
         .toList();
+
+    final deleteHobbies = hobbiesDiff.item1.map((t) => t.id.toUuid()).toList();
+    final newHobbies = hobbiesDiff.item2
+        .map(
+          (h) => Input$PersonsHobbiesInsertInput(
+            personId: newPerson.id.toUuid(),
+            hobbyId: h.id.toUuid(),
+          ),
+        )
+        .toList();
+
     final deleteTags = tagsDiff.item1.map((t) => t.id.toUuid()).toList();
     final newTags = tagsDiff.item2
         .map(
@@ -942,9 +968,11 @@ class PersonsQueries {
     final fieldsToRemove = {
       if (newGroups.isEmpty) 'insertPersonsGroups',
       if (newServices.isEmpty) 'insertPersonsServices',
+      if (newHobbies.isEmpty) 'insertPersonsHobbies',
       if (newTags.isEmpty) 'insertPersonsTags',
       if (deleteGroups.isEmpty) 'deletePersonsGroups',
       if (deleteServices.isEmpty) 'deletePersonsServices',
+      if (deleteHobbies.isEmpty) 'deletePersonsHobbies',
       if (deleteTags.isEmpty) 'deletePersonsTags',
       if (delta.isEmpty) 'updatePersonsByPk',
       if (delta['lastConfession'] == null) 'insertHistoryConfessionHistoryOne',
@@ -957,8 +985,10 @@ class PersonsQueries {
       if (newGroups.isEmpty) 'newGroups',
       if (newServices.isEmpty) 'newServices',
       if (newTags.isEmpty) 'newTags',
+      if (newHobbies.isEmpty) 'newHobbies',
       if (deleteGroups.isEmpty) 'deleteGroups',
       if (deleteServices.isEmpty) 'deleteServices',
+      if (deleteHobbies.isEmpty) 'deleteHobbies',
       if (deleteTags.isEmpty) 'deleteTags',
       if (delta.isEmpty) 'newPerson',
       if (delta['lastConfession'] == null) 'lastConfession',
@@ -977,6 +1007,8 @@ class PersonsQueries {
       newServices: newServices,
       deleteGroups: deleteGroups,
       newGroups: newGroups,
+      deleteHobbies: deleteHobbies,
+      newHobbies: newHobbies,
       deleteTags: deleteTags,
       newTags: newTags,
       lastCall: delta['lastCall'] != null

@@ -74,6 +74,8 @@ mixin _$Person {
   List<Street>? get streets => throw _privateConstructorUsedError;
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   List<Tag>? get tags => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+  List<Hobby>? get hobbies => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get kodasHistoryAggregate =>
@@ -156,6 +158,8 @@ abstract class $PersonCopyWith<$Res> {
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           List<Tag>? tags,
+      @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+          List<Hobby>? hobbies,
       User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? kodasHistoryAggregate,
@@ -254,6 +258,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? areas = freezed,
     Object? streets = freezed,
     Object? tags = freezed,
+    Object? hobbies = freezed,
     Object? user = freezed,
     Object? kodasHistoryAggregate = freezed,
     Object? confessionHistoryAggregate = freezed,
@@ -458,6 +463,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
+      hobbies: freezed == hobbies
+          ? _value.hobbies
+          : hobbies // ignore: cast_nullable_to_non_nullable
+              as List<Hobby>?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -816,6 +825,8 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           List<Tag>? tags,
+      @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+          List<Hobby>? hobbies,
       User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? kodasHistoryAggregate,
@@ -933,6 +944,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? areas = freezed,
     Object? streets = freezed,
     Object? tags = freezed,
+    Object? hobbies = freezed,
     Object? user = freezed,
     Object? kodasHistoryAggregate = freezed,
     Object? confessionHistoryAggregate = freezed,
@@ -1137,6 +1149,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
+      hobbies: freezed == hobbies
+          ? _value._hobbies
+          : hobbies // ignore: cast_nullable_to_non_nullable
+              as List<Hobby>?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1223,6 +1239,8 @@ class _$_Person extends _Person {
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           final List<Tag>? tags,
+      @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+          final List<Hobby>? hobbies,
       this.user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.kodasHistoryAggregate,
@@ -1241,6 +1259,7 @@ class _$_Person extends _Person {
         _areas = areas,
         _streets = streets,
         _tags = tags,
+        _hobbies = hobbies,
         super._();
 
   factory _$_Person.fromJson(Map<String, dynamic> json) =>
@@ -1408,6 +1427,17 @@ class _$_Person extends _Person {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<Hobby>? _hobbies;
+  @override
+  @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+  List<Hobby>? get hobbies {
+    final value = _hobbies;
+    if (value == null) return null;
+    if (_hobbies is EqualUnmodifiableListView) return _hobbies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final User? user;
   @override
@@ -1428,7 +1458,7 @@ class _$_Person extends _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, user: $user, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 
   @override
@@ -1512,6 +1542,7 @@ class _$_Person extends _Person {
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
+            const DeepCollectionEquality().equals(other._hobbies, _hobbies) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
                 other.kodasHistoryAggregate == kodasHistoryAggregate) &&
@@ -1580,6 +1611,7 @@ class _$_Person extends _Person {
         const DeepCollectionEquality().hash(_areas),
         const DeepCollectionEquality().hash(_streets),
         const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_hobbies),
         user,
         kodasHistoryAggregate,
         confessionHistoryAggregate,
@@ -1658,6 +1690,8 @@ abstract class _Person extends Person {
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
           final List<Tag>? tags,
+      @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+          final List<Hobby>? hobbies,
       final User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           final AnalysisData<DateTime>? kodasHistoryAggregate,
@@ -1776,6 +1810,9 @@ abstract class _Person extends Person {
   @override
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   List<Tag>? get tags;
+  @override
+  @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+  List<Hobby>? get hobbies;
   @override
   User? get user;
   @override

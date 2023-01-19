@@ -26,7 +26,7 @@ class ImageUrlCacheService {
     final cachedImageUrl = getCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
-        (await isUrlFileCached(cachedImageUrl) ||
+        (await isUrlFileCachedAndValid(cachedImageUrl) ||
             !isUrlExpired(cachedImageUrl))) {
       return cachedImageUrl;
     }
@@ -51,8 +51,9 @@ class ImageUrlCacheService {
     return cachedUrl;
   }
 
-  Future<bool> isUrlFileCached(String cachedUrl) async {
-    return await cacheManager.getFileFromCache(cachedUrl) != null;
+  Future<bool> isUrlFileCachedAndValid(String cachedUrl) async {
+    final cacheFile = await cacheManager.getFileFromCache(cachedUrl);
+    return cacheFile != null && cacheFile.validTill.isAfter(DateTime.now());
   }
 
   bool isUrlExpired(String url) {

@@ -71,6 +71,8 @@ class Person extends ViewableWithIDAndImage with _$Person {
     List<Street>? streets,
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
         List<Tag>? tags,
+    @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+        List<Hobby>? hobbies,
     User? user,
     @JsonKey(
       fromJson: analysisDataFromJson,
@@ -140,3 +142,8 @@ List<Tag>? personsTagsFromJson(List? data) =>
     data?.map((e) => Tag.fromJson(e['tag'])).toList();
 List<Json>? personsTagsToJson(List<Tag>? tags) =>
     tags?.map((e) => {'tag': e.toJson()}).toList();
+
+List<Hobby>? personsHobbiesFromJson(List? data) =>
+    data?.map((e) => Hobby.fromJson(e['hobby'])).toList();
+List<Json>? personsHobbiesToJson(List<Hobby>? hobbies) =>
+    hobbies?.map((e) => {'hobby': e.toJson()}).toList();

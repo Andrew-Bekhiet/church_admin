@@ -933,6 +933,72 @@ class _EditPersonState extends State<EditPerson> {
                             },
                             validator: (v) => null,
                           ),
+                          MultiObjectSelectionField<Hobby>(
+                            validator: _personGeneralCheckValidator,
+                            decoration: const InputDecoration(
+                              labelText: 'الهوايات',
+                              errorMaxLines: 2,
+                            ),
+                            onChanged: (s) => newPerson =
+                                newPerson.copyWith(hobbies: s?.toList()),
+                            initialValue: newPerson.hobbies?.toSet() ?? {},
+                            listController: (s) => ViewableObjectListController(
+                              objectsPaginatableStream: CADatabaseRepository
+                                  .I.metadata.hobbies
+                                  .getHobbiesStream(searchQuery: s),
+                            ),
+                            labelText: 'الهوايات',
+                            builder: (context, state) {
+                              return state.value != null &&
+                                      state.value!.isNotEmpty
+                                  ? Wrap(
+                                      spacing: 3,
+                                      children: [
+                                        for (final hobby
+                                            in state.value ?? <Hobby>[])
+                                          Material(
+                                            type: MaterialType.transparency,
+                                            child: Chip(
+                                              side: BorderSide(
+                                                color: Theme.of(context)
+                                                        .textTheme
+                                                        .labelSmall!
+                                                        .color
+                                                        .getContrastingColor(
+                                                          hobby.color ??
+                                                              Colors
+                                                                  .transparent,
+                                                        ) ??
+                                                    Theme.of(context)
+                                                        .textTheme
+                                                        .labelSmall!
+                                                        .color!,
+                                              ),
+                                              label: Text(
+                                                hobby.name,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall!
+                                                    .copyWith(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .color
+                                                          .getContrastingColor(
+                                                            hobby.color ??
+                                                                Colors
+                                                                    .transparent,
+                                                          ),
+                                                    ),
+                                              ),
+                                              backgroundColor: hobby.color,
+                                            ),
+                                          )
+                                      ],
+                                    )
+                                  : const Text('لا يوجد هوايات');
+                            },
+                          ),
                           MultiObjectSelectionField<Tag>(
                             validator: _personGeneralCheckValidator,
                             decoration: const InputDecoration(

@@ -121,6 +121,8 @@ mutation updatePerson(
   $deleteGroups: [uuid!]
   $newServices: [PersonsServicesInsertInput!]! = []
   $deleteServices: [uuid!]
+  $newHobbies: [PersonsHobbiesInsertInput!]! = []
+  $deleteHobbies: [uuid!]
   $newTags: [PersonsTagsInsertInput!]! = []
   $deleteTags: [uuid!]
   $lastConfession: date
@@ -141,12 +143,20 @@ mutation updatePerson(
   insertPersonsGroups(objects: $newGroups) {
     affected_rows
   }
+  insertPersonsHobbies(objects: $newHobbies) {
+    affected_rows
+  }
   insertPersonsTags(objects: $newTags) {
     affected_rows
   }
 
   deletePersonsTags(
     where: { personId: { _eq: $personId }, tagId: { _in: $deleteTags } }
+  ) {
+    affected_rows
+  }
+  deletePersonsHobbies(
+    where: { personId: { _eq: $personId }, hobbyId: { _in: $deleteHobbies } }
   ) {
     affected_rows
   }

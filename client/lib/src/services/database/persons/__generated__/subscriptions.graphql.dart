@@ -1886,6 +1886,72 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'hobbies'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'hobby'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
+                  )
+                ]),
+              )
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'hobby'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'name'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'color'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'tags'),
             alias: null,
             arguments: [
@@ -2045,6 +2111,7 @@ class Subscription$watchPerson$personsByPk {
     this.state,
     this.streets,
     this.studyYear,
+    required this.hobbies,
     required this.tags,
     this.uid,
     this.user,
@@ -2089,6 +2156,7 @@ class Subscription$watchPerson$personsByPk {
     final l$state = json['state'];
     final l$streets = json['streets'];
     final l$studyYear = json['studyYear'];
+    final l$hobbies = json['hobbies'];
     final l$tags = json['tags'];
     final l$uid = json['uid'];
     final l$user = json['user'];
@@ -2179,6 +2247,10 @@ class Subscription$watchPerson$personsByPk {
           ? null
           : Subscription$watchPerson$personsByPk$studyYear.fromJson(
               (l$studyYear as Map<String, dynamic>)),
+      hobbies: (l$hobbies as List<dynamic>)
+          .map((e) => Subscription$watchPerson$personsByPk$hobbies.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
       tags: (l$tags as List<dynamic>)
           .map((e) => Subscription$watchPerson$personsByPk$tags.fromJson(
               (e as Map<String, dynamic>)))
@@ -2264,6 +2336,8 @@ class Subscription$watchPerson$personsByPk {
 
   final Subscription$watchPerson$personsByPk$studyYear? studyYear;
 
+  final List<Subscription$watchPerson$personsByPk$hobbies> hobbies;
+
   final List<Subscription$watchPerson$personsByPk$tags> tags;
 
   final UuidValue? uid;
@@ -2348,6 +2422,8 @@ class Subscription$watchPerson$personsByPk {
     _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
     final l$studyYear = studyYear;
     _resultData['studyYear'] = l$studyYear?.toJson();
+    final l$hobbies = hobbies;
+    _resultData['hobbies'] = l$hobbies.map((e) => e.toJson()).toList();
     final l$tags = tags;
     _resultData['tags'] = l$tags.map((e) => e.toJson()).toList();
     final l$uid = uid;
@@ -2397,6 +2473,7 @@ class Subscription$watchPerson$personsByPk {
     final l$state = state;
     final l$streets = streets;
     final l$studyYear = studyYear;
+    final l$hobbies = hobbies;
     final l$tags = tags;
     final l$uid = uid;
     final l$user = user;
@@ -2438,6 +2515,7 @@ class Subscription$watchPerson$personsByPk {
       l$state,
       l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
       l$studyYear,
+      Object.hashAll(l$hobbies.map((v) => v)),
       Object.hashAll(l$tags.map((v) => v)),
       l$uid,
       l$user,
@@ -2681,6 +2759,18 @@ class Subscription$watchPerson$personsByPk {
     if (l$studyYear != lOther$studyYear) {
       return false;
     }
+    final l$hobbies = hobbies;
+    final lOther$hobbies = other.hobbies;
+    if (l$hobbies.length != lOther$hobbies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$hobbies.length; i++) {
+      final l$hobbies$entry = l$hobbies[i];
+      final lOther$hobbies$entry = lOther$hobbies[i];
+      if (l$hobbies$entry != lOther$hobbies$entry) {
+        return false;
+      }
+    }
     final l$tags = tags;
     final lOther$tags = other.tags;
     if (l$tags.length != lOther$tags.length) {
@@ -2768,6 +2858,7 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk<TRes> {
     Subscription$watchPerson$personsByPk$state? state,
     List<Subscription$watchPerson$personsByPk$streets>? streets,
     Subscription$watchPerson$personsByPk$studyYear? studyYear,
+    List<Subscription$watchPerson$personsByPk$hobbies>? hobbies,
     List<Subscription$watchPerson$personsByPk$tags>? tags,
     UuidValue? uid,
     Subscription$watchPerson$personsByPk$user? user,
@@ -2816,6 +2907,12 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk<TRes> {
                       Subscription$watchPerson$personsByPk$streets>>?)
           _fn);
   CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> get studyYear;
+  TRes hobbies(
+      Iterable<Subscription$watchPerson$personsByPk$hobbies> Function(
+              Iterable<
+                  CopyWith$Subscription$watchPerson$personsByPk$hobbies<
+                      Subscription$watchPerson$personsByPk$hobbies>>)
+          _fn);
   TRes tags(
       Iterable<Subscription$watchPerson$personsByPk$tags> Function(
               Iterable<
@@ -2875,6 +2972,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
     Object? state = _undefined,
     Object? streets = _undefined,
     Object? studyYear = _undefined,
+    Object? hobbies = _undefined,
     Object? tags = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
@@ -2982,6 +3080,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
         studyYear: studyYear == _undefined
             ? _instance.studyYear
             : (studyYear as Subscription$watchPerson$personsByPk$studyYear?),
+        hobbies: hobbies == _undefined || hobbies == null
+            ? _instance.hobbies
+            : (hobbies as List<Subscription$watchPerson$personsByPk$hobbies>),
         tags: tags == _undefined || tags == null
             ? _instance.tags
             : (tags as List<Subscription$watchPerson$personsByPk$tags>),
@@ -3155,6 +3256,18 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
             local$studyYear, (e) => call(studyYear: e));
   }
 
+  TRes hobbies(
+          Iterable<Subscription$watchPerson$personsByPk$hobbies> Function(
+                  Iterable<
+                      CopyWith$Subscription$watchPerson$personsByPk$hobbies<
+                          Subscription$watchPerson$personsByPk$hobbies>>)
+              _fn) =>
+      call(
+          hobbies: _fn(_instance.hobbies
+              .map((e) => CopyWith$Subscription$watchPerson$personsByPk$hobbies(
+                    e,
+                    (i) => i,
+                  ))).toList());
   TRes tags(
           Iterable<Subscription$watchPerson$personsByPk$tags> Function(
                   Iterable<
@@ -3220,6 +3333,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk<TRes>
     Subscription$watchPerson$personsByPk$state? state,
     List<Subscription$watchPerson$personsByPk$streets>? streets,
     Subscription$watchPerson$personsByPk$studyYear? studyYear,
+    List<Subscription$watchPerson$personsByPk$hobbies>? hobbies,
     List<Subscription$watchPerson$personsByPk$tags>? tags,
     UuidValue? uid,
     Subscription$watchPerson$personsByPk$user? user,
@@ -3257,6 +3371,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk<TRes>
   streets(_fn) => _res;
   CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> get studyYear =>
       CopyWith$Subscription$watchPerson$personsByPk$studyYear.stub(_res);
+  hobbies(_fn) => _res;
   tags(_fn) => _res;
   CopyWith$Subscription$watchPerson$personsByPk$user<TRes> get user =>
       CopyWith$Subscription$watchPerson$personsByPk$user.stub(_res);
@@ -7918,6 +8033,311 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
   call({
     String? name,
     int? order,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Subscription$watchPerson$personsByPk$hobbies {
+  Subscription$watchPerson$personsByPk$hobbies({
+    required this.hobby,
+    required this.$__typename,
+  });
+
+  factory Subscription$watchPerson$personsByPk$hobbies.fromJson(
+      Map<String, dynamic> json) {
+    final l$hobby = json['hobby'];
+    final l$$__typename = json['__typename'];
+    return Subscription$watchPerson$personsByPk$hobbies(
+      hobby: Subscription$watchPerson$personsByPk$hobbies$hobby.fromJson(
+          (l$hobby as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription$watchPerson$personsByPk$hobbies$hobby hobby;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$hobby = hobby;
+    _resultData['hobby'] = l$hobby.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$hobby = hobby;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$hobby,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$watchPerson$personsByPk$hobbies) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$hobby = hobby;
+    final lOther$hobby = other.hobby;
+    if (l$hobby != lOther$hobby) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$watchPerson$personsByPk$hobbies
+    on Subscription$watchPerson$personsByPk$hobbies {
+  CopyWith$Subscription$watchPerson$personsByPk$hobbies<
+          Subscription$watchPerson$personsByPk$hobbies>
+      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$hobbies(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
+  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies(
+    Subscription$watchPerson$personsByPk$hobbies instance,
+    TRes Function(Subscription$watchPerson$personsByPk$hobbies) then,
+  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies;
+
+  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies;
+
+  TRes call({
+    Subscription$watchPerson$personsByPk$hobbies$hobby? hobby,
+    String? $__typename,
+  });
+  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby;
+}
+
+class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
+    implements CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
+  _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$watchPerson$personsByPk$hobbies _instance;
+
+  final TRes Function(Subscription$watchPerson$personsByPk$hobbies) _then;
+
+  static const _undefined = {};
+
+  TRes call({
+    Object? hobby = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription$watchPerson$personsByPk$hobbies(
+        hobby: hobby == _undefined || hobby == null
+            ? _instance.hobby
+            : (hobby as Subscription$watchPerson$personsByPk$hobbies$hobby),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby {
+    final local$hobby = _instance.hobby;
+    return CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
+        local$hobby, (e) => call(hobby: e));
+  }
+}
+
+class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
+    implements CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
+  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription$watchPerson$personsByPk$hobbies$hobby? hobby,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby =>
+      CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby.stub(_res);
+}
+
+class Subscription$watchPerson$personsByPk$hobbies$hobby {
+  Subscription$watchPerson$personsByPk$hobbies$hobby({
+    required this.id,
+    required this.name,
+    this.color,
+    required this.$__typename,
+  });
+
+  factory Subscription$watchPerson$personsByPk$hobbies$hobby.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$$__typename = json['__typename'];
+    return Subscription$watchPerson$personsByPk$hobbies$hobby(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      color: (l$color as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final int? color;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$watchPerson$personsByPk$hobbies$hobby) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$watchPerson$personsByPk$hobbies$hobby
+    on Subscription$watchPerson$personsByPk$hobbies$hobby {
+  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<
+          Subscription$watchPerson$personsByPk$hobbies$hobby>
+      get copyWith =>
+          CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<
+    TRes> {
+  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
+    Subscription$watchPerson$personsByPk$hobbies$hobby instance,
+    TRes Function(Subscription$watchPerson$personsByPk$hobbies$hobby) then,
+  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby;
+
+  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby.stub(
+          TRes res) =
+      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
+    implements
+        CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> {
+  _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$watchPerson$personsByPk$hobbies$hobby _instance;
+
+  final TRes Function(Subscription$watchPerson$personsByPk$hobbies$hobby) _then;
+
+  static const _undefined = {};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription$watchPerson$personsByPk$hobbies$hobby(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        color: color == _undefined ? _instance.color : (color as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
+    implements
+        CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> {
+  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby(
+      this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
     String? $__typename,
   }) =>
       _res;

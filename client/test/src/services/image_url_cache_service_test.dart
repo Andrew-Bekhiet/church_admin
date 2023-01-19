@@ -64,8 +64,8 @@ void main() {
         cacheManager: baseCacheManager,
       );
 
-      expect(unit.isUrlFileCached('cachedUrl'), completion(isTrue));
-      expect(unit.isUrlFileCached('uncachedUrl'), completion(isFalse));
+      expect(unit.isUrlFileCachedAndValid('cachedUrl'), completion(isTrue));
+      expect(unit.isUrlFileCachedAndValid('uncachedUrl'), completion(isFalse));
     },
   );
 
@@ -196,8 +196,8 @@ MockBaseCacheManager getMockedCacheManager(
     (_) async => FileInfo(
       MemoryFileSystem().file('path'),
       FileSource.Cache,
-      DateTime.now(),
-      'url1',
+      DateTime.now().add(const Duration(days: 1)),
+      cachedUrl,
     ),
   );
   // ignore: discarded_futures

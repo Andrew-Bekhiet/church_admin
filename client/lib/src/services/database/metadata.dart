@@ -14,4 +14,5 @@ class MetadataQueries {
   ShammasLevelsQueries get shammasLevels => const ShammasLevelsQueries._();
   StudyYearsQueries get studyYears => const StudyYearsQueries._();
   TagsQueries get tags => const TagsQueries._();
+  HobbiesQueries get hobbies => const HobbiesQueries._();
 }

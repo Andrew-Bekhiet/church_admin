@@ -111,6 +111,7 @@ _$_Person _$$_PersonFromJson(Map json) => _$_Person(
           ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       tags: personsTagsFromJson(json['tags'] as List?),
+      hobbies: personsHobbiesFromJson(json['hobbies'] as List?),
       user: json['user'] == null
           ? null
           : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
@@ -176,6 +177,7 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'tags': personsTagsToJson(instance.tags),
+      'hobbies': personsHobbiesToJson(instance.hobbies),
       'user': instance.user?.toJson(),
       'kodasHistoryAggregate':
           analysisDataToJson(instance.kodasHistoryAggregate),

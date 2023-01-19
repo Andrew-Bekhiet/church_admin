@@ -515,20 +515,20 @@ class MockImageUrlCacheService extends _i1.Mock
   _i13.Future<_i10.File> getImageFile(_i12.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getImageFileFromCache,
+          #getImageFile,
           [imageObject],
         ),
         returnValue: _i13.Future<_i10.File>.value(_FakeFile_8(
           this,
           Invocation.method(
-            #getImageFileFromCache,
+            #getImageFile,
             [imageObject],
           ),
         )),
         returnValueForMissingStub: _i13.Future<_i10.File>.value(_FakeFile_8(
           this,
           Invocation.method(
-            #getImageFileFromCache,
+            #getImageFile,
             [imageObject],
           ),
         )),
@@ -552,9 +552,10 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i13.Future<bool> isUrlFileCached(String? cachedUrl) => (super.noSuchMethod(
+  _i13.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #isUrlFileCached,
+          #isUrlFileCachedAndValid,
           [cachedUrl],
         ),
         returnValue: _i13.Future<bool>.value(false),

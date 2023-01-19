@@ -321,6 +321,49 @@ class _ViewPersonState extends State<ViewPerson> {
                             ),
                     ),
                     ListTile(
+                      title: const Text('الهوايات'),
+                      subtitle: Wrap(
+                        spacing: 3,
+                        children: [
+                          for (final hobby in person.hobbies ?? <Tag>[])
+                            Material(
+                              type: MaterialType.transparency,
+                              child: Chip(
+                                side: BorderSide(
+                                  color: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall!
+                                          .color
+                                          .getContrastingColor(
+                                            hobby.color ?? Colors.transparent,
+                                          ) ??
+                                      Theme.of(context)
+                                          .textTheme
+                                          .labelSmall!
+                                          .color!,
+                                ),
+                                label: Text(
+                                  hobby.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall!
+                                            .color
+                                            .getContrastingColor(
+                                              hobby.color ?? Colors.transparent,
+                                            ),
+                                      ),
+                                ),
+                                backgroundColor: hobby.color,
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
+                    ListTile(
                       title: const Text('الشارات'),
                       subtitle: Wrap(
                         spacing: 3,

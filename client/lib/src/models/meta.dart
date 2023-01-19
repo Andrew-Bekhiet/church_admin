@@ -2,6 +2,7 @@ export 'meta/admin_on_data.dart';
 export 'meta/church.dart';
 export 'meta/college.dart';
 export 'meta/father.dart';
+export 'meta/hobby.dart';
 export 'meta/job.dart';
 export 'meta/last_recorded_by_info.dart';
 export 'meta/permissions_set.dart';
