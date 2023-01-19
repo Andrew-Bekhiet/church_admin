@@ -59,7 +59,7 @@ jobs:
         run: flutter test --coverage -r expanded
 
       - name: Upload Test Report
-        uses: dorny/test-reporter@v
+        uses: dorny/test-reporter@v1
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           name: Package Tests
