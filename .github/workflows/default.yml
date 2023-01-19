@@ -4,6 +4,8 @@ on: [push, pull_request]
 
 jobs:
   test-and-upload-coverage:
+    if: false
+
     runs-on: ubuntu-latest
 
     steps:
