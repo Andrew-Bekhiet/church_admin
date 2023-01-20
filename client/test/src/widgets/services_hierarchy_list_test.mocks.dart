@@ -401,20 +401,20 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValueForMissingStub: null,
       );
   @override
-  void replace(
+  void pushReplacement(
     String? location, {
     Object? extra,
   }) =>
       super.noSuchMethod(
         Invocation.method(
-          #replace,
+          #pushReplacement,
           [location],
           {#extra: extra},
         ),
         returnValueForMissingStub: null,
       );
   @override
-  void replaceNamed(
+  void pushReplacementNamed(
     String? name, {
     Map<String, String>? params = const {},
     Map<String, dynamic>? queryParams = const {},
@@ -422,7 +422,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
   }) =>
       super.noSuchMethod(
         Invocation.method(
-          #replaceNamed,
+          #pushReplacementNamed,
           [name],
           {
             #params: params,
@@ -433,10 +433,10 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValueForMissingStub: null,
       );
   @override
-  void pop() => super.noSuchMethod(
+  void pop<T extends Object?>([T? result]) => super.noSuchMethod(
         Invocation.method(
           #pop,
-          [],
+          [result],
         ),
         returnValueForMissingStub: null,
       );

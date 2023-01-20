@@ -6,5 +6,6 @@ export 'widgets/history_property.dart';
 export 'widgets/image_object_widget.dart';
 export 'widgets/search_field.dart';
 export 'widgets/services_hierarchy_list.dart';
+export 'widgets/viewable_object_app_bar.dart';
 export 'widgets/viewable_object_list.dart';
 export 'widgets/viewable_object_widget.dart';

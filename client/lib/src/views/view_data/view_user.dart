@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ViewUser extends StatelessWidget {
+class ViewUser extends StatefulWidget {
   static final route = GoRoute(
     name: 'view_user',
     path: 'viewUser',
@@ -35,10 +35,17 @@ class ViewUser extends StatelessWidget {
   });
 
   @override
+  State<ViewUser> createState() => _ViewUserState();
+}
+
+class _ViewUserState extends State<ViewUser> {
+  final scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      initialData: user,
-      stream: DatabaseService.I.users.watchUser(userId: userId),
+      initialData: widget.user,
+      stream: DatabaseService.I.users.watchUser(userId: widget.userId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -68,9 +75,10 @@ class ViewUser extends StatelessWidget {
         );
         return Scaffold(
           body: CustomScrollView(
+            controller: scrollController,
             slivers: [
               SliverAppBar(
-                backgroundColor: person?.color,
+                backgroundColor: user.color,
                 foregroundColor: foregroundColor,
                 stretch: true,
                 pinned: true,
@@ -80,65 +88,30 @@ class ViewUser extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(8),
                       child: Center(child: CircularProgressIndicator()),
+                    )
+                  else
+                    IconButton(
+                      tooltip: 'تعديل',
+                      onPressed: () => context.goNamed(
+                        'edit_user',
+                        queryParams: {'id': widget.userId},
+                        extra: {'user': user},
+                      ),
+                      icon: const Icon(Icons.edit),
                     ),
                 ],
-                flexibleSpace: SafeArea(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final themeData = Theme.of(context);
-
-                      return FlexibleSpaceBar(
-                        centerTitle: false,
-                        expandedTitleScale: 4,
-                        titlePadding: const EdgeInsetsDirectional.only(
-                          bottom: 16,
-                          start: 72,
-                          end: 10,
-                        ),
-                        title: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 300),
-                          opacity:
-                              constraints.biggest.height > kToolbarHeight * 2
-                                  ? 0
-                                  : 1,
-                          child: Text(
-                            user.name,
-                            style: themeData.textTheme.titleLarge?.copyWith(
-                              color: foregroundColor,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        background: ProgressIndicatorTheme(
-                          data: themeData.progressIndicatorTheme.copyWith(
-                            color: themeData.brightness == Brightness.light
-                                ? themeData.colorScheme.onPrimary
-                                : themeData.colorScheme.onSurface,
-                          ),
-                          child: IconTheme(
-                            data: IconTheme.of(context)
-                                .copyWith(color: foregroundColor),
-                            child: ImageObjectWidget(
-                              user,
-                              circleCrop: false,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                flexibleSpace: ViewableObjectAppBar(
+                  foregroundColor: foregroundColor,
+                  viewable:
+                      widget.user?.hasImage ?? false ? widget.user! : user,
+                  appBarMaxHeight: 280,
+                  scrollController: scrollController,
+                  duration: const Duration(milliseconds: 450),
                 ),
               ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Text(
-                        user.name,
-                        style: themeData.textTheme.titleLarge,
-                      ),
-                    ),
                     CopiablePropertyWidget(
                       'البريد الاكتروني',
                       user.email,
@@ -199,8 +172,14 @@ class ViewUser extends StatelessWidget {
                             ),
                     ),
                     const Divider(thickness: 1),
+                    const SizedBox(height: 10),
                     ListTile(
-                      title: const Text('المناطق المسؤول عنها'),
+                      minVerticalPadding: 0,
+                      title: Text(
+                        'المناطق المسؤول عنها',
+                        style: themeData.textTheme.subtitle1
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -224,8 +203,14 @@ class ViewUser extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     ListTile(
-                      title: const Text('الخدمات المسؤول عنها'),
+                      minVerticalPadding: 0,
+                      title: Text(
+                        'الخدمات المسؤول عنها',
+                        style: themeData.textTheme.subtitle1
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -245,8 +230,14 @@ class ViewUser extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     ListTile(
-                      title: const Text('المجموعات المسؤول عنها'),
+                      minVerticalPadding: 0,
+                      title: Text(
+                        'المجموعات المسؤول عنها',
+                        style: themeData.textTheme.subtitle1
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -258,6 +249,7 @@ class ViewUser extends StatelessWidget {
                                 adminData.group!,
                                 forceShowSecondLine: false,
                                 wrapInCard: false,
+                                // dense: true,
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -322,6 +314,12 @@ class ViewUser extends StatelessWidget {
             ),
       },
     );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
 
@@ -465,6 +463,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('تحليل الحضور كخادم في'),
@@ -556,7 +556,11 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                 ],
               ),
               ListTile(
-                title: const Text('الخدمات المسؤول عنها'),
+                title: Text(
+                  'الخدمات المسؤول عنها',
+                  style: themeData.textTheme.subtitle1
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -603,7 +607,11 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                 ),
               ),
               ListTile(
-                title: const Text('المجموعات المسؤول عنها'),
+                title: Text(
+                  'المجموعات المسؤول عنها',
+                  style: themeData.textTheme.subtitle1
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -668,8 +676,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
 
   @override
   Future<void> dispose() async {
-    await selected.close();
-
     super.dispose();
+    await selected.close();
   }
 }

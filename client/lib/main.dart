@@ -261,8 +261,7 @@ void _initializeFirebaseDependencies() {
 }
 
 Future<void> _initializeFMTC() async {
-  FMTC.initialise(
-    await RootDirectory.normalCache,
+  await FMTC.initialise(
     settings: FMTCSettings(
       defaultTileProviderSettings: FMTCTileProviderSettings(
         cachedValidDuration: const Duration(days: 30),
