@@ -1,9 +1,15 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class ServicesQueries {
-  const ServicesQueries._();
+import 'services/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Service> getServicesStream({
+class ServicesDAO extends DAOBase {
+  const ServicesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Service> paginateServices({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Service>(
@@ -17,7 +23,7 @@ class ServicesQueries {
         final bool nameSearch = search != null && search.isNotEmpty;
         final nameSearchExp = Input$StringComparisonExp($_ilike: '%$search%');
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetServicesStream,
             operationName: 'getServicesStream',
@@ -66,7 +72,7 @@ class ServicesQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Service.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Service.fromJson),
           ),
         );
       },

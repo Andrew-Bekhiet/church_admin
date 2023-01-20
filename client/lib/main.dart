@@ -180,7 +180,9 @@ void _initializeAuthService() {
 }
 
 void _initializeCADatabaseService() {
-  GetIt.I.registerSingleton<CADatabaseRepository>(const CADatabaseRepository());
+  GetIt.I.registerSingleton<DatabaseService>(
+    DatabaseService(GetIt.I<GraphQLClient>()),
+  );
 }
 
 void _initializeConnectivityService() {

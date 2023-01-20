@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class ShammasLevelsQueries {
-  const ShammasLevelsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'shammas_levels/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<ShammasLevel> getShammasLevelsStream({
+class ShammasLevelsDAO extends DAOBase {
+  const ShammasLevelsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<ShammasLevel> paginateShammasLevels({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<ShammasLevel>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetShammasLevelsStream,
             operationName: 'getShammasLevelsStream',
-            variables: Variables$Subscription$getShammasLevelsStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$ShammasLevelsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$ShammasLevelsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getShammasLevelsStream.new,
+              Input$ShammasLevelsBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, ShammasLevel.fromJson),
+            parserFn: (d) => db.parseListOfT(d, ShammasLevel.fromJson),
           ),
         );
       },

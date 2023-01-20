@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class FathersQueries {
-  const FathersQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'fathers/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Father> getFathersStream({
+class FathersDAO extends DAOBase {
+  const FathersDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Father> paginateFathers({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Father>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetFathersStream,
             operationName: 'getFathersStream',
-            variables: Variables$Subscription$getFathersStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$FathersBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$FathersBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getFathersStream.new,
+              Input$FathersBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Father.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Father.fromJson),
           ),
         );
       },

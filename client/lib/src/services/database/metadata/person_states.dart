@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class PersonStatesQueries {
-  const PersonStatesQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'person_states/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<PersonState> getPersonStatesStream({
+class PersonStatesDAO extends DAOBase {
+  const PersonStatesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<PersonState> paginatePersonStates({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<PersonState>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetPersonStatesStream,
             operationName: 'getPersonStatesStream',
-            variables: Variables$Subscription$getPersonStatesStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$PersonStatesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$PersonStatesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getPersonStatesStream.new,
+              Input$PersonStatesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, PersonState.fromJson),
+            parserFn: (d) => db.parseListOfT(d, PersonState.fromJson),
           ),
         );
       },

@@ -242,17 +242,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _initListsControllers() {
     _listsControllers = [
       _createControllerUsing<Person>(
-        ({searchQuery}) => CADatabaseRepository.I.persons.paginatePersons(
+        ({searchQuery}) => DatabaseService.I.persons.paginatePersons(
           searchQuery: searchQuery,
           secondLineFieldName:
               GetIt.I<UserSettingsService>().getSecondLineFor(Person),
         ),
       ),
       _createControllerUsing<Service>(
-        CADatabaseRepository.I.services.getServicesStream,
+        DatabaseService.I.services.paginateServices,
       ),
       _createControllerUsing<Area>(
-        CADatabaseRepository.I.areas.getAreasStream,
+        DatabaseService.I.areas.paginateAreas,
       ),
     ];
   }

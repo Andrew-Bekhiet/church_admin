@@ -524,7 +524,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
   }
 
   Stream<Map<Type, Set<Object>>?> _getPersonsLocations(GeoMapOptions options) =>
-      CADatabaseRepository.I.persons.getPersonsGeolocations(
+      DatabaseService.I.persons.getPersonsGeolocations(
         personId: options.selectedAreas.isEmpty &&
                 options.selectedStreets.isEmpty &&
                 options.selectedFamilies.isEmpty &&
@@ -806,7 +806,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Area>(
-                        stream: CADatabaseRepository.I.areas.getAreasStream(),
+                        stream: DatabaseService.I.areas.paginateAreas(),
                         selected: stagingMapOptions.selectedAreas.toList(),
                         title: 'اختيار المناطق',
                       );
@@ -837,8 +837,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Street>(
-                        stream:
-                            CADatabaseRepository.I.streets.getStreetsStream(),
+                        stream: DatabaseService.I.streets.paginateStreets(),
                         selected: stagingMapOptions.selectedStreets.toList(),
                         title: 'اختيار الشوارع',
                       );
@@ -869,8 +868,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Family>(
-                        stream:
-                            CADatabaseRepository.I.families.getFamiliesStream(),
+                        stream: DatabaseService.I.families.paginateFamilies(),
                         selected: stagingMapOptions.selectedFamilies.toList(),
                         title: 'اختيار العائلات',
                       );
@@ -902,8 +900,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Service>(
-                        stream:
-                            CADatabaseRepository.I.services.getServicesStream(),
+                        stream: DatabaseService.I.services.paginateServices(),
                         selected: stagingMapOptions.selectedServices.toList(),
                         title: 'اختيار الخدمات',
                       );
@@ -934,8 +931,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Class>(
-                        stream:
-                            CADatabaseRepository.I.classes.getClassesStream(),
+                        stream: DatabaseService.I.classes.paginateClasses(),
                         selected: stagingMapOptions.selectedClasses.toList(),
                         title: 'اختيار الفصول',
                       );
@@ -966,7 +962,7 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   trailing: TextButton(
                     onPressed: () async {
                       final rslt = await _select<Group>(
-                        stream: CADatabaseRepository.I.groups.getGroupsStream(),
+                        stream: DatabaseService.I.groups.paginateGroups(),
                         selected: stagingMapOptions.selectedGroups.toList(),
                         title: 'اختيار المجموعات',
                       );

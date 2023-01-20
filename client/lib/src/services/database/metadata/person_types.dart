@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class PersonTypesQueries {
-  const PersonTypesQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'person_types/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<PersonType> getPersonTypesStream({
+class PersonTypesDAO extends DAOBase {
+  const PersonTypesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<PersonType> paginatePersonTypes({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<PersonType>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetPersonTypesStream,
             operationName: 'getPersonTypesStream',
-            variables: Variables$Subscription$getPersonTypesStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$PersonTypesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$PersonTypesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getPersonTypesStream.new,
+              Input$PersonTypesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, PersonType.fromJson),
+            parserFn: (d) => db.parseListOfT(d, PersonType.fromJson),
           ),
         );
       },

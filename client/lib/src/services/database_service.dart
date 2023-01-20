@@ -1,67 +1,28 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/metadata/churches/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/colleges/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/fathers/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/hobbies/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/jobs/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/person_states/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/person_types/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/qualifications/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/schools/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/shammas_levels/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/study_years/__generated__/queries.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/study_years/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/metadata/tags/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/persons/__generated__/mutations.graphql.dart';
-import 'package:church_admin/src/services/database/persons/__generated__/queries.graphql.dart';
-import 'package:church_admin/src/services/database/persons/__generated__/subscriptions.graphql.dart';
-import 'package:church_admin/src/services/database/users/__generated__/queries.graphql.dart';
-import 'package:churchdata_core/churchdata_core.dart' show ID;
-import 'package:collection/collection.dart';
+import 'package:church_admin/graphql/scalars.dart';
+import 'package:churchdata_core/churchdata_core.dart' show Viewable;
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gql/ast.dart';
-import 'package:graphql/client.dart' hide JsonSerializable;
-import 'package:rxdart/rxdart.dart';
+import 'package:graphql/client.dart';
 import 'package:tuple/tuple.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../graphql/__generated__/schema.graphql.dart';
-import 'database/areas/__generated__/subscriptions.graphql.dart';
-import 'database/classes/__generated__/subscriptions.graphql.dart';
-import 'database/families/__generated__/subscriptions.graphql.dart';
-import 'database/groups/__generated__/subscriptions.graphql.dart';
-import 'database/services/__generated__/subscriptions.graphql.dart';
-import 'database/streets/__generated__/subscriptions.graphql.dart';
-import 'database/users/__generated__/subscriptions.graphql.dart';
+import 'database/areas.dart';
+import 'database/classes.dart';
+import 'database/families.dart';
+import 'database/groups.dart';
+import 'database/metadata.dart';
+import 'database/persons.dart';
+import 'database/services.dart';
+import 'database/streets.dart';
+import 'database/users.dart';
 
-part 'database/areas.dart';
-part 'database/classes.dart';
-part 'database/families.dart';
-part 'database/groups.dart';
-part 'database/metadata.dart';
-part 'database/metadata/churches.dart';
-part 'database/metadata/colleges.dart';
-part 'database/metadata/fathers.dart';
-part 'database/metadata/hobbies.dart';
-part 'database/metadata/jobs.dart';
-part 'database/metadata/person_states.dart';
-part 'database/metadata/person_types.dart';
-part 'database/metadata/qualifications.dart';
-part 'database/metadata/schools.dart';
-part 'database/metadata/shammas_levels.dart';
-part 'database/metadata/study_years.dart';
-part 'database/metadata/tags.dart';
-part 'database/persons.dart';
-part 'database/services.dart';
-part 'database/streets.dart';
-part 'database/users.dart';
-
-class CADatabaseRepository {
-  static CADatabaseRepository get instance => GetIt.I<CADatabaseRepository>();
-  static CADatabaseRepository get I => instance;
+class DatabaseService {
+  static DatabaseService get instance => GetIt.I<DatabaseService>();
+  static DatabaseService get I => instance;
 
   static Future<bool> isConnectedToInternet() async {
     try {
@@ -79,22 +40,72 @@ class CADatabaseRepository {
     }
   }
 
-  const CADatabaseRepository();
+  DatabaseService(this.graphQLClient);
 
-  AreasQueries get areas => const AreasQueries._();
-  StreetsQueries get streets => const StreetsQueries._();
-  FamiliesQueries get families => const FamiliesQueries._();
+  final GraphQLClient graphQLClient;
 
-  PersonsQueries get persons => const PersonsQueries._();
+  late final areas = AreasDAO(db: this);
+  late final streets = StreetsDAO(db: this);
+  late final families = FamiliesDAO(db: this);
 
-  ServicesQueries get services => const ServicesQueries._();
-  ClassesQueries get classes => const ClassesQueries._();
-  GroupsQueries get groups => const GroupsQueries._();
+  late final persons = PersonsDAO(db: this);
 
-  UsersQueries get users => const UsersQueries._();
+  late final services = ServicesDAO(db: this);
+  late final classes = ClassesDAO(db: this);
+  late final groups = GroupsDAO(db: this);
 
-  MetadataQueries get metadata => const MetadataQueries._();
+  late final users = UsersDAO(db: this);
+
+  late final metadata = MetadataDAO(db: this);
+
+  Iterable<T> parseListOfT<T>(Json d, T Function(Json) mapper) =>
+      (d.values.first as List).map(
+        (o) => mapper(
+          castAllHashMaps(o),
+        ),
+      );
 }
+
+VarsType getDefaultVariables<VarsType, BoolExp, T extends Viewable>(
+  GQLPaginatableStreamEvent<T> event,
+  VarsConstructor<VarsType, BoolExp> varsConstructor,
+  BoolExpConstructor<BoolExp> boolExpConstructor,
+) {
+  final instance = event.instance;
+  final offset = event.offset;
+  final search = event.search;
+  final lastSearch = event.lastSearch;
+
+  return varsConstructor(
+    limit: instance.limit + 1,
+    where: [
+      if (search != null && search.isNotEmpty)
+        boolExpConstructor(
+          name: Input$StringComparisonExp(
+            $_ilike: '%$search%',
+          ),
+        ),
+      if (lastSearch == search && offset > 0)
+        boolExpConstructor(
+          name: Input$StringComparisonExp(
+            $_gt: instance
+                .currentValue[
+                    (offset - 1) * instance.limit + instance.limit - 1]
+                .name,
+          ),
+        ),
+    ],
+  );
+}
+
+typedef VarsConstructor<T, BoolExp> = T Function({
+  int limit,
+  List<BoolExp> where,
+});
+
+typedef BoolExpConstructor<T> = T Function({
+  Input$StringComparisonExp? name,
+});
 
 DocumentNode removeTopFields(
   Set<String> fieldsToRemove,

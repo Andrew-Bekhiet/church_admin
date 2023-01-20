@@ -1,43 +1,30 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class StreetsQueries {
-  const StreetsQueries._();
+import 'streets/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Street> getStreetsStream({
+class StreetsDAO extends DAOBase {
+  const StreetsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Street> paginateStreets({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Street>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetStreetsStream,
             operationName: 'getStreetsStream',
-            variables: Variables$Subscription$getStreetsStream(
-              limit: instance.limit + 1,
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$StreetsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$StreetsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getStreetsStream.new,
+              Input$StreetsBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Street.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Street.fromJson),
           ),
         );
       },

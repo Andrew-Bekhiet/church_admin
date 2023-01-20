@@ -1,23 +1,37 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:churchdata_core/churchdata_core.dart' show ID;
+import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
+import 'package:gql/ast.dart';
+import 'package:graphql/client.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:uuid/uuid.dart';
 
-class PersonsQueries {
-  const PersonsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'persons/__generated__/mutations.graphql.dart';
+import 'persons/__generated__/queries.graphql.dart';
+import 'persons/__generated__/subscriptions.graphql.dart';
+
+class PersonsDAO extends DAOBase {
+  const PersonsDAO({
+    required super.db,
+  });
 
   Future<FetchPolicy> getFetchPolicy() async =>
-      await CADatabaseRepository.isConnectedToInternet()
+      await DatabaseService.isConnectedToInternet()
           ? FetchPolicy.networkOnly
           : FetchPolicy.cacheAndNetwork;
 
   Future<Person?> deletePerson({
     required String personId,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationdeletePerson,
             operationName: 'deletePerson',
             variables: Variables$Mutation$deletePerson(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
             ).toJson(),
             parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.first)),
           ),
@@ -29,19 +43,19 @@ class PersonsQueries {
   Future<Person> getFullPersonData({
     required String personId,
   }) async {
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         eagerlyFetchResults: true,
         fetchResults: true,
         document: documentNodeQuerygetFullPersonData,
         operationName: 'getFullPersonData',
         variables:
-            Variables$Query$getFullPersonData(id: UuidValue(personId)).toJson(),
+            Variables$Query$getFullPersonData(id: personId.toUuid()).toJson(),
         parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.first)),
       ),
     );
 
-    if (await CADatabaseRepository.isConnectedToInternet()) {
+    if (await DatabaseService.isConnectedToInternet()) {
       return watchQuery.stream
           .map(exceptionsMiddleware)
           .map((value) => value.parsedData)
@@ -63,14 +77,14 @@ class PersonsQueries {
     String? groupsAfter,
     String? servicesAfter,
   }) {
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         eagerlyFetchResults: false,
         fetchResults: true,
         document: documentNodeQuerygetMorePersonData,
         operationName: 'getMorePersonData',
         variables: Variables$Query$getMorePersonData(
-          id: UuidValue(personId),
+          id: personId.toUuid(),
           areasAfter: areasAfter,
           classesAfter: classesAfter,
           groupsAfter: groupsAfter,
@@ -94,14 +108,14 @@ class PersonsQueries {
   Stream<Person?> getPersonClassesAndGroups({
     required String personId,
   }) {
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         eagerlyFetchResults: false,
         fetchResults: true,
         document: documentNodeQuerygetPersonClassesAndGroups,
         operationName: 'getPersonClassesAndGroups',
         variables:
-            Variables$Query$getPersonClassesAndGroups(id: UuidValue(personId))
+            Variables$Query$getPersonClassesAndGroups(id: personId.toUuid())
                 .toJson(),
         parserFn: (d) => Person.fromJson(castAllHashMaps(d.values.first)),
       ),
@@ -267,7 +281,7 @@ class PersonsQueries {
           kv.key: kv.value,
     };
 
-    final mutation = GetIt.I<GraphQLClient>().mutate(
+    final mutation = graphQLClient.mutate(
       MutationOptions(
         document: documentNodeMutationinsertPerson,
         operationName: 'insertPerson',
@@ -331,12 +345,12 @@ class PersonsQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptioncallHistory,
             operationName: 'callHistory',
             variables: Variables$Subscription$callHistory(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -351,7 +365,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -400,12 +414,12 @@ class PersonsQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionconfessionHistory,
             operationName: 'confessionHistory',
             variables: Variables$Subscription$confessionHistory(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -420,7 +434,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -435,12 +449,12 @@ class PersonsQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonEditHistory,
             operationName: 'personEditHistory',
             variables: Variables$Subscription$personEditHistory(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -455,7 +469,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -502,12 +516,12 @@ class PersonsQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionkodasHistory,
             operationName: 'kodasHistory',
             variables: Variables$Subscription$kodasHistory(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -522,7 +536,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -569,12 +583,12 @@ class PersonsQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionvisitHistory,
             operationName: 'visitHistory',
             variables: Variables$Subscription$visitHistory(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -589,7 +603,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -599,14 +613,13 @@ class PersonsQueries {
   Stream<Person?> streamPerson({
     required String personId,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchPerson,
             operationName: 'watchPerson',
-            variables:
-                Variables$Subscription$watchPerson(id: UuidValue(personId))
-                    .toJson(),
+            variables: Variables$Subscription$watchPerson(id: personId.toUuid())
+                .toJson(),
             parserFn: (d) => d.values.first != null
                 ? Person.fromJson(castAllHashMaps(d.values.first))
                 : null,
@@ -620,7 +633,7 @@ class PersonsQueries {
     required String personId,
     required PersonAnalysisOptions options,
   }) {
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         fetchResults: true,
         errorPolicy: ErrorPolicy.all,
@@ -628,14 +641,14 @@ class PersonsQueries {
         document: documentNodeQueryanalyzePerson,
         operationName: 'analyzePerson',
         variables: Variables$Query$analyzePerson(
-          personId: UuidValue(personId),
+          personId: personId.toUuid(),
           dateFrom: options.dateRange.start,
           dateTo: options.dateRange.end,
           timeFrom: options.dateRange.start,
           timeTo: options.dateRange.end,
-          classesIds: options.classes.map((e) => UuidValue(e.id)).toList(),
-          groupsIds: options.groups.map((e) => UuidValue(e.id)).toList(),
-          servicesIds: options.services.map((e) => UuidValue(e.id)).toList(),
+          classesIds: options.classes.map((e) => e.id.toUuid()).toList(),
+          groupsIds: options.groups.map((e) => e.id.toUuid()).toList(),
+          servicesIds: options.services.map((e) => e.id.toUuid()).toList(),
           confessionHistory: options.confessionAnalysis,
           kodasHistory: options.kodasAnalysis,
           callHistory: options.callHistoryAnalysis,
@@ -671,7 +684,7 @@ class PersonsQueries {
         final search = event.search;
         final lastSearch = event.lastSearch;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: secondLineFieldName == null
                 ? documentNodeSubscriptiongetPersonsStream
@@ -703,7 +716,7 @@ class PersonsQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Person.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Person.fromJson),
           ),
         );
       },
@@ -738,7 +751,7 @@ class PersonsQueries {
       'At lease one type should be fetched',
     );
 
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         fetchResults: true,
         eagerlyFetchResults: false,
@@ -773,7 +786,7 @@ class PersonsQueries {
             if (personId != null)
               Input$PersonsBoolExp(
                 id: Input$UuidComparisonExp(
-                  $_eq: UuidValue(personId),
+                  $_eq: personId.toUuid(),
                 ),
               ),
             if (areasIds.isNotEmpty ||
@@ -1025,7 +1038,7 @@ class PersonsQueries {
           : null,
     );
 
-    final mutation = GetIt.I<GraphQLClient>().mutate(
+    final mutation = graphQLClient.mutate(
       MutationOptions(
         document: fieldsToRemove.isEmpty
             ? documentNodeMutationupdatePerson
@@ -1058,13 +1071,13 @@ class PersonsQueries {
     required String personId,
     required DateTime lastCall,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationinsertPersonLastCall,
             operationName: 'insertPersonLastCall',
             variables: Variables$Mutation$insertPersonLastCall(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               lastCall: lastCall,
             ).toJson(),
             parserFn: _parseDeepPersonOrNull,
@@ -1078,13 +1091,13 @@ class PersonsQueries {
     required String personId,
     required DateTime lastConfession,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationinsertPersonLastConfession,
             operationName: 'insertPersonLastConfession',
             variables: Variables$Mutation$insertPersonLastConfession(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               lastConfession: lastConfession,
             ).toJson(),
             parserFn: _parseDeepPersonOrNull,
@@ -1098,13 +1111,13 @@ class PersonsQueries {
     required String personId,
     required DateTime lastKodas,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationinsertPersonLastKodas,
             operationName: 'updatePersonLastKodas',
             variables: Variables$Mutation$insertPersonLastKodas(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               lastKodas: lastKodas,
             ).toJson(),
             parserFn: _parseDeepPersonOrNull,
@@ -1118,13 +1131,13 @@ class PersonsQueries {
     required String personId,
     required DateTime lastVisit,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationinsertPersonLastVisit,
             operationName: 'insertPersonLastVisit',
             variables: Variables$Mutation$insertPersonLastVisit(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               lastVisit: lastVisit,
             ).toJson(),
             parserFn: _parseDeepPersonOrNull,
@@ -1139,13 +1152,13 @@ class PersonsQueries {
     required DateTime lastConfession,
     required DateTime lastKodas,
   }) async {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .mutate(
           MutationOptions(
             document: documentNodeMutationupdatePersonSpiritData,
             operationName: 'updatePersonSpiritData',
             variables: Variables$Mutation$updatePersonSpiritData(
-              personId: UuidValue(personId),
+              personId: personId.toUuid(),
               lastKodas: lastKodas,
               lastConfession: lastConfession,
             ).toJson(),
@@ -1170,7 +1183,7 @@ class PersonsQueries {
     int? limit,
     List<Input$PersonsOrderBy>? orderBy,
   }) async {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .query(
           QueryOptions(
             fetchPolicy: await getFetchPolicy(),
@@ -1181,7 +1194,7 @@ class PersonsQueries {
               limit: limit,
               orderBy: orderBy,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Person.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Person.fromJson),
           ),
         )
         .then(exceptionsMiddleware)
@@ -1199,12 +1212,12 @@ class PersonsQueries {
     return GQLPaginatableStream<LastRecordedByInfo>(
       limit: limit ?? 100,
       subscriptionStreamCallback: (event) {
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonAttendance,
             operationName: 'personAttendance',
             variables: vars(event.offset, event.instance).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },

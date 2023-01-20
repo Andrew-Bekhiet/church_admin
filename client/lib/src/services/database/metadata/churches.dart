@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class ChurchesQueries {
-  const ChurchesQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'churches/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Church> getChurchesStream({
+class ChurchesDAO extends DAOBase {
+  const ChurchesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Church> paginateChurches({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Church>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetChurchesStream,
             operationName: 'getChurchesStream',
-            variables: Variables$Subscription$getChurchesStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$ChurchesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$ChurchesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getChurchesStream.new,
+              Input$ChurchesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Church.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Church.fromJson),
           ),
         );
       },

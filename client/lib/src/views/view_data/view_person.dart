@@ -52,8 +52,7 @@ class _ViewPersonState extends State<ViewPerson> {
   Widget build(BuildContext context) {
     return StreamBuilder<Person?>(
       initialData: widget.person,
-      stream: CADatabaseRepository.I.persons
-          .streamPerson(personId: widget.personId),
+      stream: DatabaseService.I.persons.streamPerson(personId: widget.personId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -194,7 +193,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         person: person,
                         getField: (p) => p?.services,
                         getMore: (p, s) =>
-                            CADatabaseRepository.I.persons.getMorePersonData(
+                            DatabaseService.I.persons.getMorePersonData(
                           personId: person.id,
                           servicesAfter: s.name,
                         ),
@@ -206,7 +205,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         person: person,
                         getField: (p) => p?.classes,
                         getMore: (p, c) =>
-                            CADatabaseRepository.I.persons.getMorePersonData(
+                            DatabaseService.I.persons.getMorePersonData(
                           personId: person.id,
                           classesAfter: c.name,
                         ),
@@ -218,7 +217,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         person: person,
                         getField: (p) => p?.groups,
                         getMore: (p, g) =>
-                            CADatabaseRepository.I.persons.getMorePersonData(
+                            DatabaseService.I.persons.getMorePersonData(
                           personId: person.id,
                           groupsAfter: g.name,
                         ),
@@ -418,7 +417,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         person: person,
                         getField: (p) => p?.areas,
                         getMore: (p, a) =>
-                            CADatabaseRepository.I.persons.getMorePersonData(
+                            DatabaseService.I.persons.getMorePersonData(
                           personId: person.id,
                           areasAfter: a.name,
                         ),
@@ -468,10 +467,10 @@ class _ViewPersonState extends State<ViewPerson> {
                       name: 'أخر تناول',
                       value: person.lastKodas?.time,
                       showTime: false,
-                      getHistoryStream: () => CADatabaseRepository.I.persons
+                      getHistoryStream: () => DatabaseService.I.persons
                           .paginatePersonKodasHistory(personId: person.id),
                       onRecordNow: () async =>
-                          CADatabaseRepository.I.persons.updatePersonLastKodas(
+                          DatabaseService.I.persons.updatePersonLastKodas(
                         personId: widget.personId,
                         lastKodas: DateTime.now(),
                       ),
@@ -480,10 +479,10 @@ class _ViewPersonState extends State<ViewPerson> {
                       name: 'أخر اعتراف',
                       value: person.lastConfession?.time,
                       showTime: false,
-                      getHistoryStream: () => CADatabaseRepository.I.persons
+                      getHistoryStream: () => DatabaseService.I.persons
                           .paginatePersonConfessionHistory(personId: person.id),
-                      onRecordNow: () async => CADatabaseRepository.I.persons
-                          .updatePersonLastConfession(
+                      onRecordNow: () async =>
+                          DatabaseService.I.persons.updatePersonLastConfession(
                         personId: widget.personId,
                         lastConfession: DateTime.now(),
                       ),
@@ -492,10 +491,10 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر افتقاد',
                       value: person.lastVisit?.time,
-                      getHistoryStream: () => CADatabaseRepository.I.persons
+                      getHistoryStream: () => DatabaseService.I.persons
                           .paginatePersonVisitHistory(personId: person.id),
                       onRecordNow: () async =>
-                          CADatabaseRepository.I.persons.updatePersonLastVisit(
+                          DatabaseService.I.persons.updatePersonLastVisit(
                         personId: widget.personId,
                         lastVisit: DateTime.now(),
                       ),
@@ -503,10 +502,10 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر مكالمة',
                       value: person.lastCall?.time,
-                      getHistoryStream: () => CADatabaseRepository.I.persons
+                      getHistoryStream: () => DatabaseService.I.persons
                           .paginatePersonCallHistory(personId: person.id),
                       onRecordNow: () async =>
-                          CADatabaseRepository.I.persons.updatePersonLastCall(
+                          DatabaseService.I.persons.updatePersonLastCall(
                         personId: widget.personId,
                         lastCall: DateTime.now(),
                       ),
@@ -514,7 +513,7 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر تحديث للبيانات',
                       value: person.lastEdit?.time,
-                      getHistoryStream: () => CADatabaseRepository.I.persons
+                      getHistoryStream: () => DatabaseService.I.persons
                           .paginatePersonEditHistory(personId: person.id),
                     ),
                     const SizedBox(height: 50),
@@ -592,7 +591,7 @@ class _ViewPersonState extends State<ViewPerson> {
         ),
       );
       if (recordLastCall == true) {
-        await CADatabaseRepository.I.persons.updatePersonLastCall(
+        await DatabaseService.I.persons.updatePersonLastCall(
           personId: widget.personId,
           lastCall: DateTime.now(),
         );
@@ -1073,7 +1072,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                 name: 'جار التحميل',
               ),
         ),
-        stream: CADatabaseRepository.I.persons
+        stream: DatabaseService.I.persons
             .getPersonClassesAndGroups(personId: widget.person.id)
             .map(
               (p) => <ViewableWithIDAndImage>[

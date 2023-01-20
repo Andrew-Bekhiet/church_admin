@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class SchoolsQueries {
-  const SchoolsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'schools/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<School> getSchoolsStream({
+class SchoolsDAO extends DAOBase {
+  const SchoolsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<School> paginateSchools({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<School>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetSchoolsStream,
             operationName: 'getSchoolsStream',
-            variables: Variables$Subscription$getSchoolsStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$SchoolsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$SchoolsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getSchoolsStream.new,
+              Input$SchoolsBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, School.fromJson),
+            parserFn: (d) => db.parseListOfT(d, School.fromJson),
           ),
         );
       },

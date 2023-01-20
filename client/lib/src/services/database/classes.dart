@@ -1,43 +1,30 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class ClassesQueries {
-  const ClassesQueries._();
+import 'classes/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Class> getClassesStream({
+class ClassesDAO extends DAOBase {
+  const ClassesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Class> paginateClasses({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Class>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetClassesStream,
             operationName: 'getClassesStream',
-            variables: Variables$Subscription$getClassesStream(
-              limit: instance.limit + 1,
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$ClassesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$ClassesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getClassesStream.new,
+              Input$ClassesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Class.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Class.fromJson),
           ),
         );
       },

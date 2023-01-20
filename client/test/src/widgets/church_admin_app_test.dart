@@ -1,6 +1,10 @@
 // ignore_for_file: discarded_futures
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/services/database/areas.dart';
+import 'package:church_admin/src/services/database/persons.dart';
+import 'package:church_admin/src/services/database/services.dart';
+import 'package:church_admin/src/services/database/users.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,11 +19,11 @@ import 'church_admin_app_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<LoggingService>(),
   MockSpec<AuthService>(),
-  MockSpec<CADatabaseRepository>(),
-  MockSpec<UsersQueries>(),
-  MockSpec<PersonsQueries>(),
-  MockSpec<AreasQueries>(),
-  MockSpec<ServicesQueries>(),
+  MockSpec<DatabaseService>(),
+  MockSpec<UsersDAO>(),
+  MockSpec<PersonsDAO>(),
+  MockSpec<AreasDAO>(),
+  MockSpec<ServicesDAO>(),
   MockSpec<LocalAuthService>()
 ])
 @GenerateNiceMocks([MockSpec<ConnectivityService>()])
@@ -147,34 +151,34 @@ void _setUpUserSettings() {
 }
 
 void _setUpDatabaseRepo() {
-  final usersQueries = _setUpUsersQueries();
-  final areasQueries = _setUpAreasQueries();
-  final personsQueries = _setUpPersonsQueries();
-  final servicesQueries = _setUpServiceQueries();
+  final usersDAO = _setUpUsersDAO();
+  final areasDAO = _setUpAreasDAO();
+  final personsDAO = _setUpPersonsDAO();
+  final servicesDAO = _setUpServiceDAO();
 
-  final mockCADatabaseRepository = MockCADatabaseRepository();
-  when(mockCADatabaseRepository.users).thenReturn(usersQueries);
-  when(mockCADatabaseRepository.areas).thenReturn(areasQueries);
-  when(mockCADatabaseRepository.persons).thenReturn(personsQueries);
-  when(mockCADatabaseRepository.services).thenReturn(servicesQueries);
+  final mockCADatabaseRepository = MockDatabaseService();
+  when(mockCADatabaseRepository.users).thenReturn(usersDAO);
+  when(mockCADatabaseRepository.areas).thenReturn(areasDAO);
+  when(mockCADatabaseRepository.persons).thenReturn(personsDAO);
+  when(mockCADatabaseRepository.services).thenReturn(servicesDAO);
 
-  GetIt.I.registerSingleton<CADatabaseRepository>(
+  GetIt.I.registerSingleton<DatabaseService>(
     mockCADatabaseRepository,
   );
 }
 
-MockUsersQueries _setUpUsersQueries() {
-  final usersQueries = MockUsersQueries();
-  when(usersQueries.getUserInfoStream(uid: anyNamed('uid')))
+MockUsersDAO _setUpUsersDAO() {
+  final usersDAO = MockUsersDAO();
+  when(usersDAO.getUserInfoStream(uid: anyNamed('uid')))
       .thenAnswer((_) async* {});
 
-  return usersQueries;
+  return usersDAO;
 }
 
-MockServicesQueries _setUpServiceQueries() {
-  final servicesQueries = MockServicesQueries();
+MockServicesDAO _setUpServiceDAO() {
+  final servicesDAO = MockServicesDAO();
   when(
-    servicesQueries.getServicesStream(
+    servicesDAO.paginateServices(
       searchQuery: anyNamed('searchQuery'),
     ),
   ).thenReturn(
@@ -183,13 +187,13 @@ MockServicesQueries _setUpServiceQueries() {
     ),
   );
 
-  return servicesQueries;
+  return servicesDAO;
 }
 
-MockPersonsQueries _setUpPersonsQueries() {
-  final personsQueries = MockPersonsQueries();
+MockPersonsDAO _setUpPersonsDAO() {
+  final personsDAO = MockPersonsDAO();
   when(
-    personsQueries.paginatePersons(
+    personsDAO.paginatePersons(
       searchQuery: anyNamed('searchQuery'),
     ),
   ).thenReturn(
@@ -198,13 +202,13 @@ MockPersonsQueries _setUpPersonsQueries() {
     ),
   );
 
-  return personsQueries;
+  return personsDAO;
 }
 
-MockAreasQueries _setUpAreasQueries() {
-  final areasQueries = MockAreasQueries();
+MockAreasDAO _setUpAreasDAO() {
+  final areasDAO = MockAreasDAO();
   when(
-    areasQueries.getAreasStream(
+    areasDAO.paginateAreas(
       searchQuery: anyNamed('searchQuery'),
     ),
   ).thenReturn(
@@ -213,7 +217,7 @@ MockAreasQueries _setUpAreasQueries() {
     ),
   );
 
-  return areasQueries;
+  return areasDAO;
 }
 
 void _setUpThemingService() {

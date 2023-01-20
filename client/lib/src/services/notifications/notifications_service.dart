@@ -244,7 +244,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await CADatabaseRepository.I.persons.getPersonsKodasWarning(
+    final persons = await DatabaseService.I.persons.getPersonsKodasWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -299,8 +299,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons =
-        await CADatabaseRepository.I.persons.getPersonsMeetingWarning(
+    final persons = await DatabaseService.I.persons.getPersonsMeetingWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -355,7 +354,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await CADatabaseRepository.I.persons.getPersonsVisitWarning(
+    final persons = await DatabaseService.I.persons.getPersonsVisitWarning(
       date: DateTime.now().subtract(const Duration(days: 20)),
     );
 
@@ -410,8 +409,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons =
-        await CADatabaseRepository.I.persons.getPersonsConfessionWarning(
+    final persons = await DatabaseService.I.persons.getPersonsConfessionWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -466,7 +464,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await CADatabaseRepository.I.persons
+    final persons = await DatabaseService.I.persons
         .getBirthdayPersons(date: DateTime.now());
 
     if (persons.isNotEmpty || !kReleaseMode) {

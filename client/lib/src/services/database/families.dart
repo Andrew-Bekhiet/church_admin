@@ -1,43 +1,30 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class FamiliesQueries {
-  const FamiliesQueries._();
+import 'families/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Family> getFamiliesStream({
+class FamiliesDAO extends DAOBase {
+  const FamiliesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Family> paginateFamilies({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Family>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetFamiliesStream,
             operationName: 'getFamiliesStream',
-            variables: Variables$Subscription$getFamiliesStream(
-              limit: instance.limit + 1,
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$FamiliesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$FamiliesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getFamiliesStream.new,
+              Input$FamiliesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Family.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Family.fromJson),
           ),
         );
       },

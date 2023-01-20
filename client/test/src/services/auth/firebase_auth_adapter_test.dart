@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/services/database/users.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
 import 'package:flutter_test/flutter_test.dart';
@@ -36,8 +37,8 @@ final expectedDomainUser = User(
   MockSpec<FirebaseAuth>(),
   MockSpec<auth.User>(),
   MockSpec<UserCredential>(),
-  MockSpec<CADatabaseRepository>(),
-  MockSpec<UsersQueries>(),
+  MockSpec<DatabaseService>(),
+  MockSpec<UsersDAO>(),
 ])
 void main() {
   setUp(_setUp);
@@ -87,10 +88,9 @@ void main() {
       await unit.signInWithGoogle();
       await unit.signOut();
 
-      final mockUsersQueries =
-          GetIt.I<CADatabaseRepository>().users as MockUsersQueries;
+      final mockUsersDAO = GetIt.I<DatabaseService>().users as MockUsersDAO;
       final captured = verify(
-        mockUsersQueries.getUserInfoStream(uid: captureAnyNamed('uid')),
+        mockUsersDAO.getUserInfoStream(uid: captureAnyNamed('uid')),
       ).captured;
 
       expect(captured.first, expectedDomainUser.uid);
@@ -204,24 +204,24 @@ MockUser _createMockUser({IdTokenResult? idTokenResult$}) {
 Future<void> _setUp() async {
   await _setUpGoogleSignIn();
   await _setUpFirebaseAuth();
-  _setUpCADatabaseRepository();
+  _setUpDatabaseService();
 }
 
-void _setUpCADatabaseRepository() {
-  final dbRepo = MockCADatabaseRepository();
+void _setUpDatabaseService() {
+  final dbRepo = MockDatabaseService();
 
-  final mockUsersQueries = _createMockUsersQueries();
-  when(dbRepo.users).thenReturn(mockUsersQueries);
+  final mockUsersDAO = _createMockUsersDAO();
+  when(dbRepo.users).thenReturn(mockUsersDAO);
 
-  GetIt.I.registerSingleton<CADatabaseRepository>(dbRepo);
+  GetIt.I.registerSingleton<DatabaseService>(dbRepo);
 }
 
-MockUsersQueries _createMockUsersQueries() {
-  final mockUsersQueries = MockUsersQueries();
-  when(mockUsersQueries.getUserInfoStream(uid: anyNamed('uid')))
+MockUsersDAO _createMockUsersDAO() {
+  final mockUsersDAO = MockUsersDAO();
+  when(mockUsersDAO.getUserInfoStream(uid: anyNamed('uid')))
       .thenAnswer((_) => Stream.value(expectedDomainUser));
 
-  return mockUsersQueries;
+  return mockUsersDAO;
 }
 
 Future<void> _setUpFirebaseAuth() async {

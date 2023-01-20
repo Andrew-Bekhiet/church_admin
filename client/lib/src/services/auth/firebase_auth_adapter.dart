@@ -22,15 +22,14 @@ class FirebaseAuthAdapter extends AuthAdapter {
   FirebaseAuthAdapter({
     FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
-    CADatabaseRepository? databaseRepository,
+    DatabaseService? databaseRepository,
   })  : _googleSignIn = googleSignIn ?? GetIt.I<GoogleSignIn>(),
         _firebaseAuth = firebaseAuth ?? GetIt.I<FirebaseAuth>(),
-        _databaseRepository =
-            databaseRepository ?? GetIt.I<CADatabaseRepository>();
+        _databaseRepository = databaseRepository ?? GetIt.I<DatabaseService>();
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final CADatabaseRepository _databaseRepository;
+  final DatabaseService _databaseRepository;
 
   @override
   late final Stream<User?> userStream = _firebaseAuth

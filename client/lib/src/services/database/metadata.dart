@@ -1,18 +1,33 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
 
-class MetadataQueries {
-  const MetadataQueries._();
+import 'metadata/churches.dart';
+import 'metadata/colleges.dart';
+import 'metadata/fathers.dart';
+import 'metadata/hobbies.dart';
+import 'metadata/jobs.dart';
+import 'metadata/person_states.dart';
+import 'metadata/person_types.dart';
+import 'metadata/qualifications.dart';
+import 'metadata/schools.dart';
+import 'metadata/shammas_levels.dart';
+import 'metadata/study_years.dart';
+import 'metadata/tags.dart';
 
-  ChurchesQueries get churches => const ChurchesQueries._();
-  CollegesQueries get colleges => const CollegesQueries._();
-  FathersQueries get fathers => const FathersQueries._();
-  JobsQueries get jobs => const JobsQueries._();
-  PersonStatesQueries get personStates => const PersonStatesQueries._();
-  PersonTypesQueries get personTypes => const PersonTypesQueries._();
-  QualificationsQueries get qualifications => const QualificationsQueries._();
-  SchoolsQueries get schools => const SchoolsQueries._();
-  ShammasLevelsQueries get shammasLevels => const ShammasLevelsQueries._();
-  StudyYearsQueries get studyYears => const StudyYearsQueries._();
-  TagsQueries get tags => const TagsQueries._();
-  HobbiesQueries get hobbies => const HobbiesQueries._();
+class MetadataDAO extends DAOBase {
+  MetadataDAO({
+    required super.db,
+  });
+
+  late final churches = ChurchesDAO(db: db);
+  late final colleges = CollegesDAO(db: db);
+  late final fathers = FathersDAO(db: db);
+  late final jobs = JobsDAO(db: db);
+  late final personStates = PersonStatesDAO(db: db);
+  late final personTypes = PersonTypesDAO(db: db);
+  late final qualifications = QualificationsDAO(db: db);
+  late final schools = SchoolsDAO(db: db);
+  late final shammasLevels = ShammasLevelsDAO(db: db);
+  late final studyYears = StudyYearsDAO(db: db);
+  late final tags = TagsDAO(db: db);
+  late final hobbies = HobbiesDAO(db: db);
 }

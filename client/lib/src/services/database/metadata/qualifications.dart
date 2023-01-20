@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class QualificationsQueries {
-  const QualificationsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'qualifications/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Qualification> getQualificationsStream({
+class QualificationsDAO extends DAOBase {
+  const QualificationsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Qualification> paginateQualifications({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Qualification>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetQualificationsStream,
             operationName: 'getQualificationsStream',
-            variables: Variables$Subscription$getQualificationsStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$QualificationsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$QualificationsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getQualificationsStream.new,
+              Input$QualificationsBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Qualification.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Qualification.fromJson),
           ),
         );
       },

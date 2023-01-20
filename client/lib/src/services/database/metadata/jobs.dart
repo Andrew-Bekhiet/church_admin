@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class JobsQueries {
-  const JobsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'jobs/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Job> getJobsStream({
+class JobsDAO extends DAOBase {
+  const JobsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Job> paginateJobs({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Job>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetJobsStream,
             operationName: 'getJobsStream',
-            variables: Variables$Subscription$getJobsStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$JobsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$JobsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getJobsStream.new,
+              Input$JobsBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Job.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Job.fromJson),
           ),
         );
       },

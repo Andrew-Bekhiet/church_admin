@@ -1,5 +1,8 @@
-subscription getPersonStatesStream($where: [PersonStatesBoolExp!] = {}) {
-  personStates(where: { _and: $where }, orderBy: { name: ASC }) {
+subscription getPersonStatesStream(
+  $where: [PersonStatesBoolExp!] = {}
+  $limit: Int
+) {
+  personStates(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
     id
     name
     color

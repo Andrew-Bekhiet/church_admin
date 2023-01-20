@@ -1,16 +1,23 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class UsersQueries {
-  const UsersQueries._();
+import 'users/__generated__/queries.graphql.dart';
+import 'users/__generated__/subscriptions.graphql.dart';
+
+class UsersDAO extends DAOBase {
+  const UsersDAO({
+    required super.db,
+  });
 
   Stream<User> getUserInfoStream({required String uid}) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetUserInfoStream,
             operationName: 'getUserInfoStream',
             variables:
-                Variables$Subscription$getUserInfoStream(uid: UuidValue(uid))
+                Variables$Subscription$getUserInfoStream(uid: uid.toUuid())
                     .toJson(),
             parserFn: (m) => User.fromJson(m.values.first),
           ),
@@ -22,13 +29,13 @@ class UsersQueries {
   Stream<User?> watchUser({
     required String userId,
   }) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchUser,
             operationName: 'watchUser',
-            variables: Variables$Subscription$watchUser(uid: UuidValue(userId))
-                .toJson(),
+            variables:
+                Variables$Subscription$watchUser(uid: userId.toUuid()).toJson(),
             parserFn: (d) {
               if (d.values.first == null) return null;
 
@@ -50,12 +57,12 @@ class UsersQueries {
         final instance = event.instance;
         final offset = event.offset;
 
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionuserEditHistory,
             operationName: 'userEditHistory',
             variables: Variables$Subscription$userEditHistory(
-              userId: UuidValue(userId),
+              userId: userId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
@@ -70,7 +77,7 @@ class UsersQueries {
                   ),
               ],
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, LastRecordedByInfo.fromJson),
+            parserFn: (d) => db.parseListOfT(d, LastRecordedByInfo.fromJson),
           ),
         );
       },
@@ -82,24 +89,24 @@ class UsersQueries {
     required String userId,
     required DateTime dateFrom,
     required DateTime dateTo,
-    required List<UuidValue> groupsIds,
-    required List<UuidValue> classesIds,
-    required List<UuidValue> servicesIds,
+    required Iterable<String> groupsIds,
+    required Iterable<String> classesIds,
+    required Iterable<String> servicesIds,
   }) {
-    final watchQuery = GetIt.I<GraphQLClient>().watchQuery(
+    final watchQuery = graphQLClient.watchQuery(
       WatchQueryOptions(
         fetchResults: true,
         eagerlyFetchResults: false,
         document: documentNodeQueryanalyzeUserAttendance,
         operationName: 'analyzeUserAttendance',
         variables: Variables$Query$analyzeUserAttendance(
-          userId: UuidValue(userId),
-          personId: UuidValue(personId),
+          userId: userId.toUuid(),
+          personId: personId.toUuid(),
           dateFrom: dateFrom,
           dateTo: dateTo,
-          classesIds: classesIds,
-          groupsIds: groupsIds,
-          servicesIds: servicesIds,
+          classesIds: classesIds.map((e) => e.toUuid()).toList(),
+          groupsIds: groupsIds.map((e) => e.toUuid()).toList(),
+          servicesIds: servicesIds.map((e) => e.toUuid()).toList(),
         ).toJson(),
         parserFn: (d) => User.fromJson(
           castAllHashMaps(d.values.first),

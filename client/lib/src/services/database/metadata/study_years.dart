@@ -1,10 +1,39 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class StudyYearsQueries {
-  const StudyYearsQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'study_years/__generated__/queries.graphql.dart';
+import 'study_years/__generated__/subscriptions.graphql.dart';
+
+class StudyYearsDAO extends DAOBase {
+  const StudyYearsDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<StudyYear> paginateStudyYears({
+    Stream<String?>? searchQuery,
+  }) {
+    return GQLPaginatableStream<StudyYear>(
+      searchQuery: searchQuery,
+      subscriptionStreamCallback: (event) {
+        return graphQLClient.subscribe(
+          SubscriptionOptions(
+            document: documentNodeSubscriptiongetStudyYearsStream,
+            operationName: 'getStudyYearsStream',
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getStudyYearsStream.new,
+              Input$StudyYearsBoolExp.new,
+            ).toJson(),
+            parserFn: (d) => db.parseListOfT(d, StudyYear.fromJson),
+          ),
+        );
+      },
+    );
+  }
 
   Future<StudyYear?> getStudyYearName(int order) {
-    return GetIt.I<GraphQLClient>()
+    return graphQLClient
         .query(
           QueryOptions(
             document: documentNodeQuerygetStudyYearName,
@@ -19,45 +48,5 @@ class StudyYearsQueries {
         )
         .then(exceptionsMiddleware)
         .then((value) => value.parsedData);
-  }
-
-  GQLPaginatableStream<StudyYear> getStudyYearsStream({
-    Stream<String?>? searchQuery,
-  }) {
-    return GQLPaginatableStream<StudyYear>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
-          SubscriptionOptions(
-            document: documentNodeSubscriptiongetStudyYearsStream,
-            operationName: 'getStudyYearsStream',
-            variables: Variables$Subscription$getStudyYearsStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$StudyYearsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$StudyYearsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
-            ).toJson(),
-            parserFn: (d) => _parseListOfT(d, StudyYear.fromJson),
-          ),
-        );
-      },
-    );
   }
 }

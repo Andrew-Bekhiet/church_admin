@@ -18,7 +18,7 @@ import 'login_test.mocks.dart';
   MockSpec<AuthService>(),
   MockSpec<AuthCache>(),
   MockSpec<ConnectivityService>(),
-  MockSpec<CADatabaseRepository>(),
+  MockSpec<DatabaseService>(),
   MockSpec<DummyNamedLocation>(),
   MockSpec<UserSettingsService>(),
   MockSpec<CacheRepository>(),
@@ -162,7 +162,7 @@ void _setUpAuthService({bool mock = true, bool isSignedIn = true}) {
       : AuthService(
           cache: MockAuthCache(),
           adapter: FirebaseAuthAdapter(
-            databaseRepository: MockCADatabaseRepository(),
+            databaseRepository: MockDatabaseService(),
           ),
           connectivityService: MockConnectivityService(),
         );

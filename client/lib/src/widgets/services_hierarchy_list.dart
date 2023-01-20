@@ -69,8 +69,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   late final search = widget.search ?? BehaviorSubject<String?>.seeded(null);
   late final listController = widget.listController ??
       ViewableObjectListController<Service>(
-        objectsPaginatableStream: CADatabaseRepository.I.services
-            .getServicesStream(searchQuery: search),
+        objectsPaginatableStream:
+            DatabaseService.I.services.paginateServices(searchQuery: search),
       );
 
   final _animationControllers = <Object, AnimationController>{};

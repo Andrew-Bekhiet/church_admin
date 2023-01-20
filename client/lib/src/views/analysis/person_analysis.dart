@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uuid/uuid.dart';
 
 class PersonAnalysis extends StatefulWidget {
   static final personRoute = GoRoute(
@@ -116,16 +115,16 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
           StreamBuilder<ViewableWithID?>(
             initialData: widget.person,
             stream: widget.user != null
-                ? CADatabaseRepository.I.users.analyzeUserAttendance(
+                ? DatabaseService.I.users.analyzeUserAttendance(
                     userId: widget.user!.id,
                     personId: widget.user!.person?.id ?? widget.person!.id,
                     dateFrom: dateRange.start,
                     dateTo: dateRange.end,
-                    groupsIds: groupsIds.map(UuidValue.new).toList(),
-                    classesIds: classesIds.map(UuidValue.new).toList(),
-                    servicesIds: servicesIds.map(UuidValue.new).toList(),
+                    groupsIds: groupsIds,
+                    classesIds: classesIds,
+                    servicesIds: servicesIds,
                   )
-                : CADatabaseRepository.I.persons.getPersonAnalysis(
+                : DatabaseService.I.persons.getPersonAnalysis(
                     personId: widget.person!.id,
                     options: options!,
                   ),
@@ -169,8 +168,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: s.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 s.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => CADatabaseRepository
-                                .I.persons
+                            getHistoryStream: () => DatabaseService.I.persons
                                 .paginatePersonServiceAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
@@ -200,8 +198,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: c.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 c.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => CADatabaseRepository
-                                .I.persons
+                            getHistoryStream: () => DatabaseService.I.persons
                                 .paginatePersonClassAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
@@ -229,8 +226,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: g.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 g.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => CADatabaseRepository
-                                .I.persons
+                            getHistoryStream: () => DatabaseService.I.persons
                                 .paginatePersonGroupAttendance(
                               personId:
                                   widget.user?.person?.id ?? widget.person!.id,
@@ -252,8 +248,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.kodasHistoryAggregate!,
-                              getHistoryStream: () => CADatabaseRepository
-                                  .I.persons
+                              getHistoryStream: () => DatabaseService.I.persons
                                   .paginatePersonConfessionHistory(
                                 personId: widget.person!.id,
                               ),
@@ -273,8 +268,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.confessionHistoryAggregate!,
-                              getHistoryStream: () => CADatabaseRepository
-                                  .I.persons
+                              getHistoryStream: () => DatabaseService.I.persons
                                   .paginatePersonKodasHistory(
                                 personId: widget.person!.id,
                               ),
@@ -294,8 +288,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.callHistoryAggregate!,
-                              getHistoryStream: () => CADatabaseRepository
-                                  .I.persons
+                              getHistoryStream: () => DatabaseService.I.persons
                                   .paginatePersonCallHistory(
                                 personId: widget.person!.id,
                               ),
@@ -315,8 +308,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.visitHistoryAggregate!,
-                              getHistoryStream: () => CADatabaseRepository
-                                  .I.persons
+                              getHistoryStream: () => DatabaseService.I.persons
                                   .paginatePersonVisitHistory(
                                 personId: widget.person!.id,
                               ),
@@ -336,8 +328,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.editHistoryAggregate!,
-                              getHistoryStream: () => CADatabaseRepository
-                                  .I.persons
+                              getHistoryStream: () => DatabaseService.I.persons
                                   .paginatePersonEditHistory(
                                 personId: widget.person!.id,
                               ),

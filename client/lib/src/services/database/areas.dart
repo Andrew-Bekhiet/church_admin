@@ -1,45 +1,30 @@
-part of '../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:graphql/client.dart';
 
-class AreasQueries {
-  const AreasQueries._();
+import 'areas/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Area> getAreasStream({
+class AreasDAO extends DAOBase {
+  const AreasDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Area> paginateAreas({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Area>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetAreasStream,
             operationName: 'getAreasStream',
-            variables: Variables$Subscription$getAreasStream(
-              limit: instance.limit + 1,
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$AreasBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_ilike: '%$search%',
-                    ),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$AreasBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getAreasStream.new,
+              Input$AreasBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Area.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Area.fromJson),
           ),
         );
       },

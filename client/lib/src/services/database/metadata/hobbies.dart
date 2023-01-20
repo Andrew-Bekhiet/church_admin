@@ -1,42 +1,30 @@
-part of '../../database_service.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:graphql/client.dart';
 
-class HobbiesQueries {
-  const HobbiesQueries._();
+import '../../../../graphql/__generated__/schema.graphql.dart';
+import 'hobbies/__generated__/subscriptions.graphql.dart';
 
-  GQLPaginatableStream<Hobby> getHobbiesStream({
+class HobbiesDAO extends DAOBase {
+  const HobbiesDAO({
+    required super.db,
+  });
+
+  GQLPaginatableStream<Hobby> paginateHobbies({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Hobby>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
-
-        return GetIt.I<GraphQLClient>().subscribe(
+        return graphQLClient.subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptiongetHobbiesStream,
             operationName: 'getHobbiesStream',
-            variables: Variables$Subscription$getHobbiesStream(
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$HobbiesBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$HobbiesBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
+            variables: getDefaultVariables(
+              event,
+              Variables$Subscription$getHobbiesStream.new,
+              Input$HobbiesBoolExp.new,
             ).toJson(),
-            parserFn: (d) => _parseListOfT(d, Hobby.fromJson),
+            parserFn: (d) => db.parseListOfT(d, Hobby.fromJson),
           ),
         );
       },

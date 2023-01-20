@@ -38,7 +38,7 @@ class ViewUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       initialData: user,
-      stream: CADatabaseRepository.I.users.watchUser(userId: userId),
+      stream: DatabaseService.I.users.watchUser(userId: userId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -285,7 +285,7 @@ class ViewUser extends StatelessWidget {
                     HistoryProperty(
                       name: 'أخر تحديث لبيانات الخادم',
                       value: user.lastEdit?.time,
-                      getHistoryStream: () => CADatabaseRepository.I.users
+                      getHistoryStream: () => DatabaseService.I.users
                           .userEditHistory(userId: user.id),
                     ),
                     const SizedBox(height: 50),

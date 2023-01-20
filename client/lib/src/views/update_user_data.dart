@@ -171,7 +171,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
         ),
       );
 
-      await GetIt.I<CADatabaseRepository>().persons.updatePersonSpiritData(
+      await GetIt.I<DatabaseService>().persons.updatePersonSpiritData(
             personId: _userData.id,
             lastConfession: _userData.lastConfession!.time,
             lastKodas: _userData.lastKodas!.time,
