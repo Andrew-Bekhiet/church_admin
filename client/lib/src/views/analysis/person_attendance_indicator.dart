@@ -70,7 +70,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
 
     final primaryColor = colorScheme.primary;
     final errorColor = colorScheme.error;
-    final bodyText2 = themeData.textTheme.bodyText2!;
+    final bodyText2 = themeData.textTheme.bodyMedium!;
 
     final analysisCount = analysisData.aggregate.count!;
     final percent = analysisCount / totalAnalysisCount;
@@ -122,11 +122,12 @@ class PersonAttendanceIndicator extends StatelessWidget {
                       focusedDay: DateTime.now(),
                       enabledDayPredicate: _totalAnalysisDataNodesSet.contains,
                       selectedDayPredicate: _analysisDataNodesSet.contains,
-                      availableCalendarFormats: const {
+                      availableCalendarFormats: {
                         CalendarFormat.month: 'شهر',
                         CalendarFormat.week: 'أسبوع',
                         CalendarFormat.twoWeeks: 'أسبوعين',
-                      },
+                        // Hacky way to ignore avoid-missing-enum-constant-in-map
+                      }..remove(CalendarFormat.twoWeeks),
                       calendarBuilders: CalendarBuilders(
                         disabledBuilder: (context, day, focusedDay) =>
                             Container(

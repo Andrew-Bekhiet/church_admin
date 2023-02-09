@@ -1,0 +1,41 @@
+fragment EditHistory on HistoryEditHistory {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment AttendanceHistory on HistoryAttendanceHistory {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment CallHistory on HistoryCallHistory {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment VisitHistory on HistoryVisitHistory {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment KodasHistory on HistoryKodasHistory {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment ConfessionHistory on HistoryConfessionHistory {
+  time
+  user {
+    ...User
+  }
+}

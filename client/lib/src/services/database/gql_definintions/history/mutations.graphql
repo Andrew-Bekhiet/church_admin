@@ -1,0 +1,53 @@
+mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) {
+    person {
+      ...Person
+    }
+  }
+}
+
+mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) {
+    person {
+      ...Person
+    }
+  }
+}
+
+mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
+  insertHistoryCallHistoryOne(
+    object: { personId: $personId, time: $lastCall }
+  ) {
+    person {
+      ...Person
+    }
+  }
+}
+
+mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
+  insertHistoryVisitHistoryOne(
+    object: { personId: $personId, time: $lastVisit }
+  ) {
+    person {
+      ...Person
+    }
+  }
+}

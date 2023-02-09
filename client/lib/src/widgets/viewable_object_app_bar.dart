@@ -8,6 +8,7 @@ class ViewableObjectAppBar extends StatefulWidget {
     required this.appBarMaxHeight,
     required this.duration,
     required this.scrollController,
+    this.circleCrop = true,
     super.key,
   });
 
@@ -16,6 +17,7 @@ class ViewableObjectAppBar extends StatefulWidget {
   final double appBarMaxHeight;
   final Duration duration;
   final ScrollController scrollController;
+  final bool circleCrop;
 
   @override
   State<ViewableObjectAppBar> createState() => ViewableObjectAppBarState();
@@ -125,6 +127,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                 height: constraints.biggest.height,
                 photoAlign: _photoAlignTween.lerp(animationValue),
                 bgColor: _bgColorTween.transform(animationValue),
+                circleCrop: widget.circleCrop,
               ),
               Align(
                 alignment: _textAlignTween.transform(animationValue),
@@ -182,6 +185,7 @@ class _AppBarPhoto extends StatelessWidget {
     required this.height,
     required this.viewable,
     required this.foregroundColor,
+    required this.circleCrop,
   });
 
   final ViewableWithIDAndImage viewable;
@@ -190,6 +194,7 @@ class _AppBarPhoto extends StatelessWidget {
   final Alignment photoAlign;
   final Color? bgColor;
   final Color? foregroundColor;
+  final bool circleCrop;
 
   @override
   Widget build(BuildContext context) {
@@ -210,9 +215,12 @@ class _AppBarPhoto extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: bgColor ?? Colors.transparent,
-                shape: BoxShape.circle,
+                shape: circleCrop ? BoxShape.circle : BoxShape.rectangle,
+                borderRadius: circleCrop
+                    ? null
+                    : const BorderRadius.all(Radius.circular(10)),
               ),
-              child: ImageObjectWidget(viewable),
+              child: ImageObjectWidget(viewable, circleCrop: circleCrop),
             ),
           ),
         ),

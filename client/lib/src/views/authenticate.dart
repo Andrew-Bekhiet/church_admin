@@ -74,7 +74,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                     p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,
                 textInputAction: TextInputAction.done,
               ),
-              ElevatedButton(
+              FilledButton(
                 onPressed: () async => _submit(_passwordText.text),
                 child: const Text('تسجيل الدخول'),
               ),
@@ -82,7 +82,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 future: Future.sync(LocalAuthService.I.canCheckBiometrics),
                 builder: (context, canCheckBiometricsData) {
                   if (canCheckBiometricsData.data ?? false) {
-                    return OutlinedButton.icon(
+                    return FilledButton.tonalIcon(
                       icon: const Icon(Icons.fingerprint),
                       label: const Text(
                         'إعادة المحاولة عن طريق بصمة الاصبع/الوجه',
@@ -151,14 +151,16 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       encryptedPassword = null;
       _passwordText.clear();
 
-      await showDialog(
-        context: context,
-        builder: (context) => const AlertDialog(
-          title: Text(
-            'كلمة سر خاطئة!',
+      if (mounted) {
+        await showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text(
+              'كلمة سر خاطئة!',
+            ),
           ),
-        ),
-      );
+        );
+      }
     }
   }
 }

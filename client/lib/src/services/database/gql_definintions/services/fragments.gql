@@ -1,0 +1,10 @@
+fragment Service on Services {
+  ...ServiceNoPhoto
+  photoUpdatedAt
+}
+
+fragment ServiceNoPhoto on Services {
+  id
+  name
+  color
+}

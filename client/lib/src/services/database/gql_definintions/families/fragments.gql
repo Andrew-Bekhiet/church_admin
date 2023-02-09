@@ -1,0 +1,10 @@
+fragment Family on Families {
+  ...FamilyNoPhoto
+  photoUpdatedAt
+}
+
+fragment FamilyNoPhoto on Families {
+  id
+  name
+  color
+}

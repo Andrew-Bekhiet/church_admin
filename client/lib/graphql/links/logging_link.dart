@@ -18,12 +18,10 @@ class LoggingLink extends Link {
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
-    return forward!(request).map((t) {
-      if (isLogging) {
-        log(request);
-      }
+    if (isLogging) {
+      log(request);
+    }
 
-      return t;
-    });
+    return forward!(request);
   }
 }

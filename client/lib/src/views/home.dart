@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    hide StudyYear, PhotoObjectWidget, ViewableObjectWidget;
+    hide PhotoObjectWidget, StudyYear, ViewableObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
       ViewPerson.route,
       EditPerson.newPersonRoute,
       GoRoute(
-        name: 'service_info',
+        name: 'view_service',
         path: 'viewService',
         builder: (context, state) => SafeArea(
           child: Scaffold(
@@ -30,22 +30,10 @@ class HomeScreen extends StatefulWidget {
           ),
         ),
       ),
+      ViewArea.route,
+      // EditArea.newAreaRoute,
       GoRoute(
-        name: 'area_info',
-        path: 'viewArea',
-        builder: (context, state) => SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                Text(state.location),
-                Text(state.extra.toString()),
-              ],
-            ),
-          ),
-        ),
-      ),
-      GoRoute(
-        name: 'group_info',
+        name: 'view_group',
         path: 'viewGroup',
         builder: (context, state) => SafeArea(
           child: Scaffold(
@@ -59,7 +47,7 @@ class HomeScreen extends StatefulWidget {
         ),
       ),
       GoRoute(
-        name: 'class_info',
+        name: 'view_class',
         path: 'viewClass',
         builder: (context, state) => SafeArea(
           child: Scaffold(
@@ -142,9 +130,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: const [
+            DrawerHeader(child: Text('Drawer Header')),
+            Expanded(
+              child: NavigationDrawer(
+                children: [
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('الرئيسية'),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: StreamBuilder<String?>(
           stream: _search,
@@ -186,32 +189,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bottomNavigationBar: AnimatedBuilder(
         animation: _tabController.animation!,
         builder: (context, child) {
-          return BottomNavigationBar(
-            backgroundColor: themeData.colorScheme.primary,
-            selectedItemColor: themeData.colorScheme.primary,
-            unselectedItemColor: themeData.colorScheme.background,
-            landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-            type: BottomNavigationBarType.shifting,
-            onTap: (v) {
+          return NavigationBar(
+            onDestinationSelected: (v) {
               _tabController.animateTo(v);
               _bottomNavBar.add(
                 _typeToIndex.keys.elementAt(_tabController.index),
               );
             },
-            currentIndex:
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            selectedIndex:
                 _tabController.animation?.value.round() ?? _tabController.index,
-            items: const [
-              BottomNavigationBarItem(
+            destinations: const [
+              NavigationDestination(
                 label: 'المخدومين',
-                icon: Icon(Icons.person),
+                selectedIcon: Icon(Icons.person),
+                icon: Icon(Icons.person_outlined),
               ),
-              BottomNavigationBarItem(
+              NavigationDestination(
                 label: 'الخدمات',
-                icon: Icon(Icons.miscellaneous_services),
+                selectedIcon: Icon(Icons.miscellaneous_services),
+                icon: Icon(Icons.miscellaneous_services_outlined),
               ),
-              BottomNavigationBarItem(
+              NavigationDestination(
                 label: 'المناطق',
-                icon: Icon(Icons.pin_drop),
+                selectedIcon: Icon(Icons.pin_drop),
+                icon: Icon(Icons.pin_drop_outlined),
               ),
             ],
           );

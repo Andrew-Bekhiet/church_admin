@@ -1,0 +1,10 @@
+subscription watchAllStreets(
+  $where: [StreetsBoolExp!] = {}
+  $orderBy: [StreetsOrderBy!] = { name: ASC }
+  $limit: Int = 200
+) {
+  streets(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    ...Street
+    line
+  }
+}

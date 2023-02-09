@@ -136,16 +136,32 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
         isScaffoldMessengerMounted) {
       if (connected) {
         scaffoldMessenger.showSnackBar(
-          const SnackBar(
+          SnackBar(
             backgroundColor: Colors.greenAccent,
-            content: Text('تم استرجاع الاتصال بالانترنت'),
+            content: Row(
+              children: [
+                const Expanded(child: Text('تم استرجاع الاتصال بالانترنت')),
+                Icon(
+                  Icons.wifi,
+                  color: Theme.of(context).primaryIconTheme.color,
+                ),
+              ],
+            ),
           ),
         );
       } else {
         scaffoldMessenger.showSnackBar(
-          const SnackBar(
+          SnackBar(
             backgroundColor: Colors.redAccent,
-            content: Text('لا يوجد اتصال بالانترنت!'),
+            content: Row(
+              children: [
+                const Expanded(child: Text('لا يوجد اتصال بالانترنت!')),
+                Icon(
+                  Icons.wifi_off,
+                  color: Theme.of(context).primaryIconTheme.color,
+                ),
+              ],
+            ),
           ),
         );
       }

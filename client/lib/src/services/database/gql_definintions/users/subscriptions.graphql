@@ -1,0 +1,6 @@
+subscription watchUser($uid: uuid!, $fullData: Boolean = false) {
+  authUsersDataByPk(uid: $uid) {
+    ...UserOverview @skip(if: $fullData)
+    ...UserDetails @include(if: $fullData)
+  }
+}

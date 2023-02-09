@@ -1,0 +1,9 @@
+subscription watchAllStudyYears(
+  $where: [StudyYearsBoolExp!] = {}
+  $limit: Int = 25
+) {
+  studyYears(where: { _and: $where }, orderBy: { order: ASC }, limit: $limit) {
+    order
+    name
+  }
+}

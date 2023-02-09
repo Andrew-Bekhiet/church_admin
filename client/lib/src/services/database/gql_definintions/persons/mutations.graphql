@@ -1,0 +1,167 @@
+mutation deletePerson($personId: uuid!) {
+  deletePersonsByPk(id: $personId) {
+    ...Person
+  }
+}
+
+mutation updatePerson(
+  $personId: uuid!
+  $newPerson: PersonsSetInput!
+  $newGroups: [PersonsGroupsInsertInput!]! = []
+  $deleteGroups: [uuid!]
+  $newServices: [PersonsServicesInsertInput!]! = []
+  $deleteServices: [uuid!]
+  $newHobbies: [PersonsHobbiesInsertInput!]! = []
+  $deleteHobbies: [uuid!]
+  $newTags: [PersonsTagsInsertInput!]! = []
+  $deleteTags: [uuid!]
+  $lastConfession: date
+  $lastKodas: date
+  $lastCall: timestamptz
+  $lastVisit: timestamptz
+  $updatePersonsByPk: Boolean! = true
+  $insertPersonsServices: Boolean! = true
+  $insertPersonsGroups: Boolean! = true
+  $insertPersonsHobbies: Boolean! = true
+  $insertPersonsTags: Boolean! = true
+  $deletePersonsTags: Boolean! = true
+  $deletePersonsHobbies: Boolean! = true
+  $deletePersonsGroups: Boolean! = true
+  $deletePersonsServices: Boolean! = true
+  $insertHistoryConfessionHistoryOne: Boolean! = true
+  $insertHistoryKodasHistoryOne: Boolean! = true
+  $insertHistoryCallHistoryOne: Boolean! = true
+  $insertHistoryVisitHistoryOne: Boolean! = true
+) {
+  updatePersonsByPk(pk_columns: { id: $personId }, _set: $newPerson)
+    @include(if: $updatePersonsByPk) {
+    ...Person
+  }
+
+  insertPersonsServices(objects: $newServices)
+    @include(if: $insertPersonsServices) {
+    affected_rows
+  }
+  insertPersonsGroups(objects: $newGroups) @include(if: $insertPersonsGroups) {
+    affected_rows
+  }
+  insertPersonsHobbies(objects: $newHobbies)
+    @include(if: $insertPersonsHobbies) {
+    affected_rows
+  }
+  insertPersonsTags(objects: $newTags) @include(if: $insertPersonsTags) {
+    affected_rows
+  }
+
+  deletePersonsTags(
+    where: { personId: { _eq: $personId }, tagId: { _in: $deleteTags } }
+  ) @include(if: $deletePersonsTags) {
+    affected_rows
+  }
+  deletePersonsHobbies(
+    where: { personId: { _eq: $personId }, hobbyId: { _in: $deleteHobbies } }
+  ) @include(if: $deletePersonsHobbies) {
+    affected_rows
+  }
+  deletePersonsGroups(
+    where: { personId: { _eq: $personId }, groupId: { _in: $deleteGroups } }
+  ) @include(if: $deletePersonsGroups) {
+    affected_rows
+  }
+  deletePersonsServices(
+    where: { personId: { _eq: $personId }, serviceId: { _in: $deleteServices } }
+  ) @include(if: $deletePersonsServices) {
+    affected_rows
+  }
+
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) @include(if: $insertHistoryConfessionHistoryOne) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) @include(if: $insertHistoryKodasHistoryOne) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryCallHistoryOne(object: { personId: $personId, time: $lastCall })
+    @include(if: $insertHistoryCallHistoryOne) {
+    person {
+      id
+      name
+    }
+  }
+
+  insertHistoryVisitHistoryOne(
+    object: { personId: $personId, time: $lastVisit }
+  ) @include(if: $insertHistoryVisitHistoryOne) {
+    person {
+      id
+      name
+    }
+  }
+}
+
+mutation insertPerson($newPerson: PersonsInsertInput!) {
+  insertPersonsOne(object: $newPerson) {
+    ...Person
+  }
+}
+
+
+mutation updatePersonSpiritData(
+  $personId: uuid!
+  $lastConfession: date!
+  $lastKodas: date!
+) {
+  insertHistoryConfessionHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastConfession }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: confession_history_dayID_personID_key }
+  ) {
+    person {
+      ...Person
+    }
+  }
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      day: {
+        data: { day: $lastKodas }
+        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+      }
+    }
+    onConflict: { constraint: kodas_history_dayID_personID_key }
+  ) {
+    person {
+      ...Person
+    }
+  }
+}

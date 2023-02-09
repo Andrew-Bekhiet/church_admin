@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
 
 class ViewPerson extends StatefulWidget {
   static final route = GoRoute(
@@ -48,11 +49,27 @@ class ViewPerson extends StatefulWidget {
 class _ViewPersonState extends State<ViewPerson> {
   final scrollController = ScrollController();
 
+  final _servicesLimit = BehaviorSubject<int?>.seeded(4);
+  final _classesLimit = BehaviorSubject<int?>.seeded(4);
+  final _groupsLimit = BehaviorSubject<int?>.seeded(4);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Person?>(
       initialData: widget.person,
-      stream: DatabaseService.I.persons.streamPerson(personId: widget.personId),
+      stream: Rx.combineLatest3(
+        _servicesLimit.distinct(),
+        _classesLimit.distinct(),
+        _groupsLimit.distinct(),
+        Tuple3.new,
+      ).switchMap(
+        (limits) => DatabaseService.I.persons.watchPerson(
+          personId: widget.personId,
+          servicesLimit: limits.item1,
+          classesLimit: limits.item2,
+          groupsLimit: limits.item3,
+        ),
+      ),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -94,7 +111,7 @@ class _ViewPersonState extends State<ViewPerson> {
         final foregroundColor = person.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
-              themeData.textTheme.subtitle1!.color!,
+              themeData.textTheme.titleMedium!.color!,
         );
         return Scaffold(
           body: CustomScrollView(
@@ -182,7 +199,7 @@ class _ViewPersonState extends State<ViewPerson> {
                                   DateFormat('yyyy/M/d').format(
                                     person.birthdate!,
                                   ),
-                                  style: Theme.of(context).textTheme.overline,
+                                  style: Theme.of(context).textTheme.labelSmall,
                                 ),
                               ],
                             )
@@ -194,11 +211,7 @@ class _ViewPersonState extends State<ViewPerson> {
                       subtitle: _ShowMore<Service>(
                         person: person,
                         getField: (p) => p?.services,
-                        getMore: (p, s) =>
-                            DatabaseService.I.persons.getMorePersonData(
-                          personId: person.id,
-                          servicesAfter: s.name,
-                        ),
+                        loadAll: () => _servicesLimit.add(null),
                       ),
                     ),
                     ListTile(
@@ -206,11 +219,7 @@ class _ViewPersonState extends State<ViewPerson> {
                       subtitle: _ShowMore<Class>(
                         person: person,
                         getField: (p) => p?.classes,
-                        getMore: (p, c) =>
-                            DatabaseService.I.persons.getMorePersonData(
-                          personId: person.id,
-                          classesAfter: c.name,
-                        ),
+                        loadAll: () => _classesLimit.add(null),
                       ),
                     ),
                     ListTile(
@@ -218,11 +227,7 @@ class _ViewPersonState extends State<ViewPerson> {
                       subtitle: _ShowMore<Group>(
                         person: person,
                         getField: (p) => p?.groups,
-                        getMore: (p, g) =>
-                            DatabaseService.I.persons.getMorePersonData(
-                          personId: person.id,
-                          groupsAfter: g.name,
-                        ),
+                        loadAll: () => _groupsLimit.add(null),
                       ),
                     ),
                     if (person.isStudent) ...[
@@ -418,11 +423,6 @@ class _ViewPersonState extends State<ViewPerson> {
                       subtitle: _ShowMore<Area>(
                         person: person,
                         getField: (p) => p?.areas,
-                        getMore: (p, a) =>
-                            DatabaseService.I.persons.getMorePersonData(
-                          personId: person.id,
-                          areasAfter: a.name,
-                        ),
                       ),
                     ),
                     ListTile(
@@ -458,7 +458,7 @@ class _ViewPersonState extends State<ViewPerson> {
                       ), */
                     const Divider(thickness: 1),
                     ListTile(
-                      title: ElevatedButton.icon(
+                      title: FilledButton.tonalIcon(
                         icon: const Icon(Icons.query_stats),
                         label: const Text('احصائيات'),
                         onPressed: () => _analysis(context, person),
@@ -469,10 +469,10 @@ class _ViewPersonState extends State<ViewPerson> {
                       name: 'أخر تناول',
                       value: person.lastKodas?.time,
                       showTime: false,
-                      getHistoryStream: () => DatabaseService.I.persons
+                      getHistoryStream: () => DatabaseService.I.history
                           .paginatePersonKodasHistory(personId: person.id),
                       onRecordNow: () async =>
-                          DatabaseService.I.persons.updatePersonLastKodas(
+                          DatabaseService.I.history.updatePersonLastKodas(
                         personId: widget.personId,
                         lastKodas: DateTime.now(),
                       ),
@@ -481,10 +481,10 @@ class _ViewPersonState extends State<ViewPerson> {
                       name: 'أخر اعتراف',
                       value: person.lastConfession?.time,
                       showTime: false,
-                      getHistoryStream: () => DatabaseService.I.persons
+                      getHistoryStream: () => DatabaseService.I.history
                           .paginatePersonConfessionHistory(personId: person.id),
                       onRecordNow: () async =>
-                          DatabaseService.I.persons.updatePersonLastConfession(
+                          DatabaseService.I.history.updatePersonLastConfession(
                         personId: widget.personId,
                         lastConfession: DateTime.now(),
                       ),
@@ -493,10 +493,10 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر افتقاد',
                       value: person.lastVisit?.time,
-                      getHistoryStream: () => DatabaseService.I.persons
+                      getHistoryStream: () => DatabaseService.I.history
                           .paginatePersonVisitHistory(personId: person.id),
                       onRecordNow: () async =>
-                          DatabaseService.I.persons.updatePersonLastVisit(
+                          DatabaseService.I.history.updatePersonLastVisit(
                         personId: widget.personId,
                         lastVisit: DateTime.now(),
                       ),
@@ -504,10 +504,10 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر مكالمة',
                       value: person.lastCall?.time,
-                      getHistoryStream: () => DatabaseService.I.persons
+                      getHistoryStream: () => DatabaseService.I.history
                           .paginatePersonCallHistory(personId: person.id),
                       onRecordNow: () async =>
-                          DatabaseService.I.persons.updatePersonLastCall(
+                          DatabaseService.I.history.updatePersonLastCall(
                         personId: widget.personId,
                         lastCall: DateTime.now(),
                       ),
@@ -515,8 +515,8 @@ class _ViewPersonState extends State<ViewPerson> {
                     HistoryProperty(
                       name: 'أخر تحديث للبيانات',
                       value: person.lastEdit?.time,
-                      getHistoryStream: () => DatabaseService.I.persons
-                          .paginatePersonEditHistory(personId: person.id),
+                      getHistoryStream: () => DatabaseService.I.history
+                          .paginateEditHistory<Person>(id: person.id),
                     ),
                     const SizedBox(height: 50),
                   ],
@@ -576,6 +576,9 @@ class _ViewPersonState extends State<ViewPerson> {
       await GetIt.I<LauncherService>().launchUrl(
         Uri(scheme: 'tel', path: formatPhone(number ?? '', false)),
       );
+
+      if (!mounted) return;
+
       final recordLastCall = await showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -593,7 +596,7 @@ class _ViewPersonState extends State<ViewPerson> {
         ),
       );
       if (recordLastCall == true) {
-        await DatabaseService.I.persons.updatePersonLastCall(
+        await DatabaseService.I.history.updatePersonLastCall(
           personId: widget.personId,
           lastCall: DateTime.now(),
         );
@@ -618,28 +621,32 @@ class _ViewPersonState extends State<ViewPerson> {
     if ((await Permission.contacts.request()).isGranted) {
       final TextEditingController _name =
           TextEditingController(text: person.name);
-      if (await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('ادخل اسم جهة الاتصال:'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TextFormField(controller: _name),
-                  Container(height: 10),
-                  Text(phone ?? ''),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text('حفظ جهة الاتصال'),
-                )
-              ],
-            ),
-          ) ==
-          true) {
+
+      if (!mounted) return;
+
+      final dialogResult = await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('ادخل اسم جهة الاتصال:'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(controller: _name),
+              Container(height: 10),
+              Text(phone ?? ''),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('حفظ جهة الاتصال'),
+            )
+          ],
+        ),
+      );
+
+      if (dialogResult == true) {
         final imageFile = person.hasImage
             ? await GetIt.I<ImageUrlCacheService>().getImageFile(person)
             : null;
@@ -665,9 +672,13 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     scrollController.dispose();
     super.dispose();
+
+    await _servicesLimit.close();
+    await _classesLimit.close();
+    await _groupsLimit.close();
   }
 }
 
@@ -675,28 +686,34 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   const _ShowMore({
     required this.person,
     required this.getField,
-    required this.getMore,
+    this.loadAll,
     this.showTime = true,
+    this.visibleItemsLimit = 3,
     super.key,
   });
 
   final Person person;
   final List<T>? Function(Person?) getField;
-  final Stream<Person?> Function(Person, T) getMore;
+  final void Function()? loadAll;
   final bool showTime;
+  final int visibleItemsLimit;
 
   DateFormat get dateFormat =>
       DateFormat('yyyy/M/d' + (showTime ? '   h:m a' : ''), 'ar-EG');
 
   @override
   Widget build(BuildContext context) {
-    final field = getField(person) ?? <T>[];
+    final listField = getField(person) ?? <T>[];
 
     return Column(
       children: [
-        for (final o in field)
-          if (field.length >= 6 && o == field[5])
+        for (final o in listField.take(visibleItemsLimit + 1))
+          if (listField.length >= visibleItemsLimit + 1 &&
+              o == listField[visibleItemsLimit])
             ExpansionTile(
+              onExpansionChanged: loadAll != null
+                  ? (expanded) => expanded ? loadAll!() : null
+                  : null,
               title: const Text('اظهار المزيد'),
               children: [
                 ViewableObjectWidget(
@@ -710,36 +727,25 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                         )
                       : null,
                 ),
-                StreamBuilder<List<T>>(
-                  initialData: const [],
-                  stream:
-                      getMore(person, o).map((value) => getField(value) ?? []),
-                  builder: (context, snapshot) => snapshot.data == null
-                      ? const Center(child: CircularProgressIndicator())
-                      : Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            for (final o in snapshot.requireData)
-                              ViewableObjectWidget(
-                                o,
-                                dense: true,
-                                forceShowSecondLine: _hasSubtitle(o),
-                                subtitle: _hasSubtitle(o)
-                                    ? _ShowMoreSubtitle(
-                                        viewable: o,
-                                        dateFormat: dateFormat,
-                                      )
-                                    : null,
-                              ),
-                          ],
-                        ),
-                ),
+                for (final o in listField.skip(visibleItemsLimit + 1))
+                  ViewableObjectWidget(
+                    o,
+                    dense: true,
+                    forceShowSecondLine: _hasSubtitle(o),
+                    subtitle: _hasSubtitle(o)
+                        ? _ShowMoreSubtitle(
+                            viewable: o,
+                            dateFormat: dateFormat,
+                          )
+                        : null,
+                  ),
               ],
             )
           else
             ViewableObjectWidget(
               o,
               dense: true,
+              circleCrop: o is Person || o is User,
               forceShowSecondLine: _hasSubtitle(o),
               subtitle: _hasSubtitle(o)
                   ? _ShowMoreSubtitle(
@@ -787,7 +793,7 @@ class _ShowMoreSubtitle<T extends Viewable> extends StatelessWidget {
                 .aggregate
                 .max!,
           ),
-          style: Theme.of(context).textTheme.overline,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
       ],
     );
@@ -843,7 +849,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       appBar: AppBar(
         title: const Text('تحليل الحضور في'),
       ),
-      body: StreamBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
+      body: FutureBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
         initialData: <ViewableWithIDAndImage>[
           ...widget.person.classes ?? [],
           ...widget.person.groups ?? []
@@ -855,16 +861,23 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                 name: 'جار التحميل',
               ),
         ),
-        stream: DatabaseService.I.persons
-            .getPersonClassesAndGroups(personId: widget.person.id)
-            .map(
-              (p) => <ViewableWithIDAndImage>[
-                ...p?.classes ?? [],
-                ...p?.groups ?? []
-              ].groupListsBy(
-                (o) => o is Class ? o.service! : (o as Group).service!,
-              ),
-            ),
+        future: DatabaseService.I.persons
+            .personServicesClassesGroups(personId: widget.person.id)
+            .then(
+          (p) {
+            final groupedObjects = <ViewableWithIDAndImage>[
+              ...p?.classes ?? [],
+              ...p?.groups ?? []
+            ].groupListsBy(
+              (o) => o is Class ? o.service! : (o as Group).service!,
+            );
+
+            return {
+              for (final s in p?.services ?? []) s: [],
+              ...groupedObjects
+            };
+          },
+        ),
         builder: (context, snapshot) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(8),
@@ -1073,8 +1086,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
 
   @override
   Future<void> dispose() async {
-    await selected.close();
-
     super.dispose();
+    await selected.close();
   }
 }

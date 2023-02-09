@@ -644,7 +644,7 @@ type Classes {
     "A computed field, executes function \"user_allowed_to_write_class\""
     isUserAllowedToWrite: Boolean
     name: String!
-    photoUpdatedAt: time
+    photoUpdatedAt: timestamptz
     "An object relationship"
     service: Services!
     serviceGender: Boolean!
@@ -686,6 +686,7 @@ type ClassesMaxFields {
     color: bigint
     id: uuid
     name: String
+    photoUpdatedAt: timestamptz
     serviceId: uuid
     serviceStudyYear: Int
 }
@@ -695,6 +696,7 @@ type ClassesMinFields {
     color: bigint
     id: uuid
     name: String
+    photoUpdatedAt: timestamptz
     serviceId: uuid
     serviceStudyYear: Int
 }
@@ -835,7 +837,7 @@ type Families {
         "filter the rows returned"
         where: AreasBoolExp
     ): [Areas!]
-    color: Int
+    color: bigint
     "An array relationship"
     families(
         "distinct select on columns"
@@ -1017,7 +1019,7 @@ type FamiliesFamiliesMutationResponse {
 "aggregate max on columns"
 type FamiliesMaxFields {
     address: String
-    color: Int
+    color: bigint
     id: uuid
     name: String
     notes: String
@@ -1027,7 +1029,7 @@ type FamiliesMaxFields {
 "aggregate min on columns"
 type FamiliesMinFields {
     address: String
-    color: Int
+    color: bigint
     id: uuid
     name: String
     notes: String
@@ -1059,7 +1061,7 @@ type FamiliesStddev_sampFields {
 
 "aggregate sum on columns"
 type FamiliesSumFields {
-    color: Int
+    color: bigint
 }
 
 "aggregate var_pop on columns"
@@ -1227,7 +1229,7 @@ type Groups {
         "filter the rows returned"
         where: HistoryAttendanceHistoryBoolExp
     ): HistoryAttendanceHistoryAggregate!
-    color: Int
+    color: bigint
     id: uuid!
     "A computed field, executes function \"user_allowed_to_read_group\""
     isUserAllowedToRead: Boolean
@@ -1300,7 +1302,7 @@ type GroupsAvgFields {
 
 "aggregate max on columns"
 type GroupsMaxFields {
-    color: Int
+    color: bigint
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -1309,7 +1311,7 @@ type GroupsMaxFields {
 
 "aggregate min on columns"
 type GroupsMinFields {
-    color: Int
+    color: bigint
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -1341,7 +1343,7 @@ type GroupsStddev_sampFields {
 
 "aggregate sum on columns"
 type GroupsSumFields {
-    color: Int
+    color: bigint
 }
 
 "aggregate var_pop on columns"
@@ -3331,7 +3333,7 @@ type Services {
         "filter the rows returned"
         where: ClassesBoolExp
     ): ClassesAggregate!
-    color: Int
+    color: bigint
     firestoreId: String
     "An object relationship"
     fromStudyYear: StudyYears
@@ -3464,7 +3466,7 @@ type ServicesAvgFields {
 
 "aggregate max on columns"
 type ServicesMaxFields {
-    color: Int
+    color: bigint
     firestoreId: String
     id: uuid
     name: String
@@ -3476,7 +3478,7 @@ type ServicesMaxFields {
 
 "aggregate min on columns"
 type ServicesMinFields {
-    color: Int
+    color: bigint
     firestoreId: String
     id: uuid
     name: String
@@ -3517,7 +3519,7 @@ type ServicesStddev_sampFields {
 
 "aggregate sum on columns"
 type ServicesSumFields {
-    color: Int
+    color: bigint
     studyYearFrom: smallint
     studyYearTo: smallint
 }
@@ -12150,8 +12152,6 @@ scalar name
 
 scalar smallint
 
-scalar time
-
 scalar timestamp
 
 scalar timestamptz
@@ -12808,7 +12808,7 @@ input ClassesBoolExp {
     isUserAllowedToRead: BooleanComparisonExp
     isUserAllowedToWrite: BooleanComparisonExp
     name: StringComparisonExp
-    photoUpdatedAt: TimeComparisonExp
+    photoUpdatedAt: TimestamptzComparisonExp
     service: ServicesBoolExp
     serviceGender: BooleanComparisonExp
     serviceId: UuidComparisonExp
@@ -12829,7 +12829,7 @@ input ClassesInsertInput {
     color: bigint
     id: uuid
     name: String
-    photoUpdatedAt: time
+    photoUpdatedAt: timestamptz
     service: ServicesObjRelInsertInput
     serviceGender: Boolean
     serviceId: uuid
@@ -12878,7 +12878,7 @@ input ClassesSetInput {
     color: bigint
     id: uuid
     name: String
-    photoUpdatedAt: time
+    photoUpdatedAt: timestamptz
     serviceGender: Boolean
     serviceId: uuid
     serviceStudyYear: Int
@@ -12897,7 +12897,7 @@ input ClassesStreamCursorValueInput {
     color: bigint
     id: uuid
     name: String
-    photoUpdatedAt: time
+    photoUpdatedAt: timestamptz
     serviceGender: Boolean
     serviceId: uuid
     serviceStudyYear: Int
@@ -13053,7 +13053,7 @@ input FamiliesBoolExp {
     _or: [FamiliesBoolExp!]
     address: StringComparisonExp
     areas: AreasBoolExp
-    color: IntComparisonExp
+    color: BigintComparisonExp
     families: FamiliesFamiliesBoolExp
     families_aggregate: families_families_aggregate_bool_exp
     family: FamiliesFamiliesBoolExp
@@ -13161,13 +13161,13 @@ input FamiliesFamiliesUpdates {
 
 "input type for incrementing numeric columns in table \"families\""
 input FamiliesIncInput {
-    color: Int
+    color: bigint
 }
 
 "input type for inserting data into table \"families\""
 input FamiliesInsertInput {
     address: String
-    color: Int
+    color: bigint
     families: FamiliesFamiliesArrRelInsertInput
     family: FamiliesFamiliesObjRelInsertInput
     geolocation: geography
@@ -13221,7 +13221,7 @@ input FamiliesPkColumnsInput {
 "input type for updating data in table \"families\""
 input FamiliesSetInput {
     address: String
-    color: Int
+    color: bigint
     geolocation: geography
     id: uuid
     name: String
@@ -13240,7 +13240,7 @@ input FamiliesStreamCursorInput {
 "Initial value of the column from where the streaming should start"
 input FamiliesStreamCursorValueInput {
     address: String
-    color: Int
+    color: bigint
     geolocation: geography
     id: uuid
     name: String
@@ -13443,7 +13443,7 @@ input GroupsBoolExp {
     attendanceDaysConstraints_aggregate: history_attendance_days_constraints_aggregate_bool_exp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
     attendanceHistory_aggregate: history_attendance_history_aggregate_bool_exp
-    color: IntComparisonExp
+    color: BigintComparisonExp
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
     isUserAllowedToWrite: BooleanComparisonExp
@@ -13459,7 +13459,7 @@ input GroupsBoolExp {
 
 "input type for incrementing numeric columns in table \"groups\""
 input GroupsIncInput {
-    color: Int
+    color: bigint
 }
 
 "input type for inserting data into table \"groups\""
@@ -13467,7 +13467,7 @@ input GroupsInsertInput {
     adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
-    color: Int
+    color: bigint
     id: uuid
     name: String
     persons: PersonsGroupsArrRelInsertInput
@@ -13516,7 +13516,7 @@ input GroupsPkColumnsInput {
 
 "input type for updating data in table \"groups\""
 input GroupsSetInput {
-    color: Int
+    color: bigint
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -13534,7 +13534,7 @@ input GroupsStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input GroupsStreamCursorValueInput {
-    color: Int
+    color: bigint
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -15623,7 +15623,7 @@ input ServicesBoolExp {
     attendanceHistory_aggregate: history_attendance_history_aggregate_bool_exp
     classes: ClassesBoolExp
     classes_aggregate: classes_aggregate_bool_exp
-    color: IntComparisonExp
+    color: BigintComparisonExp
     firestoreId: StringComparisonExp
     fromStudyYear: StudyYearsBoolExp
     groups: GroupsBoolExp
@@ -15647,7 +15647,7 @@ input ServicesBoolExp {
 
 "input type for incrementing numeric columns in table \"services\""
 input ServicesIncInput {
-    color: Int
+    color: bigint
     studyYearFrom: smallint
     studyYearTo: smallint
 }
@@ -15657,7 +15657,7 @@ input ServicesInsertInput {
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
     classes: ClassesArrRelInsertInput
-    color: Int
+    color: bigint
     firestoreId: String
     fromStudyYear: StudyYearsObjRelInsertInput
     groups: GroupsArrRelInsertInput
@@ -15718,7 +15718,7 @@ input ServicesPkColumnsInput {
 
 "input type for updating data in table \"services\""
 input ServicesSetInput {
-    color: Int
+    color: bigint
     firestoreId: String
     id: uuid
     name: String
@@ -15738,7 +15738,7 @@ input ServicesStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input ServicesStreamCursorValueInput {
-    color: Int
+    color: bigint
     firestoreId: String
     id: uuid
     name: String
@@ -16282,19 +16282,6 @@ input TagsUpdates {
     _set: TagsSetInput
     "filter the rows which have to be updated"
     where: TagsBoolExp!
-}
-
-"Boolean expression to compare columns of type \"time\". All fields are combined with logical 'AND'."
-input TimeComparisonExp {
-    _eq: time
-    _gt: time
-    _gte: time
-    _in: [time!]
-    _isNull: Boolean
-    _lt: time
-    _lte: time
-    _neq: time
-    _nin: [time!]
 }
 
 "Boolean expression to compare columns of type \"timestamp\". All fields are combined with logical 'AND'."
@@ -17843,6 +17830,7 @@ input classes_max_order_by {
     color: OrderBy
     id: OrderBy
     name: OrderBy
+    photoUpdatedAt: OrderBy
     serviceId: OrderBy
     serviceStudyYear: OrderBy
 }
@@ -17852,6 +17840,7 @@ input classes_min_order_by {
     color: OrderBy
     id: OrderBy
     name: OrderBy
+    photoUpdatedAt: OrderBy
     serviceId: OrderBy
     serviceStudyYear: OrderBy
 }

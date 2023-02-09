@@ -89,9 +89,14 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     Service s,
     ViewableObjectWidgetConfig? config,
   ) {
+    final value = PageStorage.maybeOf(context)?.readState(
+      context,
+      identifier: 'ServicesAnimationControllers:' + s.id,
+    );
     final _topController = _animationControllers[s] ??= AnimationController(
       duration: const Duration(milliseconds: 225),
       vsync: this,
+      value: value,
     );
 
     return AnimatedBuilder(
@@ -125,8 +130,21 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                 ),
             ],
           ),
-          onExpansionChanged: (e) =>
-              e ? _topController.forward() : _topController.animateBack(0),
+          onExpansionChanged: (e) async {
+            if (e) {
+              await _topController.forward();
+            } else {
+              await _topController.animateBack(0);
+            }
+
+            if (mounted) {
+              PageStorage.maybeOf(context)?.writeState(
+                context,
+                _animationControllers[s]!.value,
+                identifier: 'ServicesAnimationControllers:' + s.id,
+              );
+            }
+          },
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           maintainState: true,
           title: GestureDetector(

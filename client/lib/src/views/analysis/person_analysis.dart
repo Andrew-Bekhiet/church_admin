@@ -112,9 +112,9 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
       ),
       body: ListView(
         children: [
-          StreamBuilder<ViewableWithID?>(
+          FutureBuilder<ViewableWithID?>(
             initialData: widget.person,
-            stream: widget.user != null
+            future: widget.user != null
                 ? DatabaseService.I.users.analyzeUserAttendance(
                     userId: widget.user!.id,
                     personId: widget.user!.person?.id ?? widget.person!.id,
@@ -248,7 +248,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.kodasHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.persons
+                              getHistoryStream: () => DatabaseService.I.history
                                   .paginatePersonConfessionHistory(
                                 personId: widget.person!.id,
                               ),
@@ -268,7 +268,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.confessionHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.persons
+                              getHistoryStream: () => DatabaseService.I.history
                                   .paginatePersonKodasHistory(
                                 personId: widget.person!.id,
                               ),
@@ -288,7 +288,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.callHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.persons
+                              getHistoryStream: () => DatabaseService.I.history
                                   .paginatePersonCallHistory(
                                 personId: widget.person!.id,
                               ),
@@ -308,7 +308,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.visitHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.persons
+                              getHistoryStream: () => DatabaseService.I.history
                                   .paginatePersonVisitHistory(
                                 personId: widget.person!.id,
                               ),
@@ -328,9 +328,9 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.editHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.persons
-                                  .paginatePersonEditHistory(
-                                personId: widget.person!.id,
+                              getHistoryStream: () => DatabaseService.I.history
+                                  .paginateEditHistory<Person>(
+                                id: widget.person!.id,
                               ),
                               title: 'تحديث البيانات',
                               range: dateRange,

@@ -39,10 +39,10 @@ void main() {
         findsOneWidget,
       );
 
-      expect(find.bySubtype<ElevatedButton>(), findsOneWidget);
+      expect(find.bySubtype<FilledButton>(), findsOneWidget);
       expect(
         find.descendant(
-          of: find.bySubtype<ElevatedButton>(),
+          of: find.bySubtype<FilledButton>(),
           matching: find.image(
             const AssetImage('assets/google_logo.png'),
           ),
@@ -51,7 +51,7 @@ void main() {
       );
       expect(
         find.descendant(
-          of: find.bySubtype<ElevatedButton>(),
+          of: find.bySubtype<FilledButton>(),
           matching: find.text('تسجيل الدخول بجوجل'),
         ),
         findsOneWidget,
@@ -78,9 +78,9 @@ void main() {
 
       await tester.pumpWidget(wrapWithMaterialApp(const LoginScreen()));
 
-      expect(find.bySubtype<ElevatedButton>(), findsOneWidget);
+      expect(find.bySubtype<FilledButton>(), findsOneWidget);
 
-      await tester.tap(find.bySubtype<ElevatedButton>());
+      await tester.tap(find.bySubtype<FilledButton>());
 
       verify(GetIt.I<AuthService>().signInWithGoogle());
     },

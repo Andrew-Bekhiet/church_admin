@@ -1,0 +1,148 @@
+fragment FullPersonData on Persons {
+  ...Person
+  address
+  birthdate
+  areas(limit: 6, orderBy: { name: ASC }) {
+    ...Area
+  }
+  classes(limit: 6, orderBy: { name: ASC }) {
+    ...Class
+  }
+  church {
+    id
+    name
+  }
+  college {
+    id
+    name
+  }
+  family {
+    ...Family
+  }
+  father {
+    id
+    name
+    church {
+      id
+      name
+    }
+  }
+  gender
+  geolocation
+  groups(limit: 6, orderBy: { group: { name: ASC } }) {
+    group {
+      ...Group
+    }
+  }
+  isServant
+  isShammas
+  isStudent
+  job {
+    id
+    name
+  }
+  jobDescription
+  lastCall
+  lastConfession
+  lastEdit
+  lastKodas
+  lastVisit
+  mainPhone
+  notes
+  otherPhones
+  personType {
+    id
+    name
+  }
+  qualification {
+    id
+    name
+  }
+  school {
+    id
+    name
+  }
+  services(limit: 6, orderBy: { service: { name: ASC } }) {
+    service {
+      ...Service
+    }
+  }
+  shammasLevel {
+    id
+    name
+    order
+  }
+  state {
+    id
+    color
+    name
+  }
+  streets {
+    ...Street
+  }
+  studyYear {
+    name
+    order
+  }
+  hobbies(orderBy: { hobby: { name: ASC } }) {
+    hobby {
+      id
+      name
+      color
+    }
+  }
+  tags(orderBy: { tag: { name: ASC } }) {
+    tag {
+      id
+      name
+      color
+    }
+  }
+  uid
+  user {
+    uid
+    name
+    email
+  }
+}
+
+fragment FullPersonDataWithAttendance on Persons {
+  ...FullPersonData
+  classes(limit: 6, orderBy: { name: ASC }) {
+    ...Class
+
+    attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
+      aggregate {
+        max {
+          time
+        }
+      }
+    }
+  }
+  groups(limit: 6, orderBy: { group: { name: ASC } }) {
+    group {
+      ...Group
+
+      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
+        aggregate {
+          max {
+            time
+          }
+        }
+      }
+    }
+  }
+  services(limit: 6, orderBy: { service: { name: ASC } }) {
+    service {
+      ...Service
+
+      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
+        aggregate {
+          max {
+            time
+          }
+        }
+      }
+    }
+  }
+}

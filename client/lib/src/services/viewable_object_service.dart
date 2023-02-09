@@ -61,6 +61,18 @@ class CAViewableObjectService implements DefaultViewableObjectService {
           'class': object,
         },
       );
+    } else if (object is User) {
+      router.goNamed(
+        'view_user',
+        queryParams: {'uid': object.uid},
+        extra: {
+          'user': object,
+        },
+      );
+    } else if (object is LastRecordedByInfo) {
+      if (object.user != null) {
+        onTap(object.user!);
+      }
     } else {
       throw UnimplementedError('Unexpected object:\n' + object.toString());
     }

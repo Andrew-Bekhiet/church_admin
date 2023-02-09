@@ -27,6 +27,9 @@ mixin _$Area {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +48,12 @@ abstract class $AreaCopyWith<$Res> {
           Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers});
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -66,6 +74,8 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,7 +98,27 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value.adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value) as $Val);
+    });
   }
 }
 
@@ -105,7 +135,13 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
           Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers});
+
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -122,6 +158,8 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
   }) {
     return _then(_$_Area(
       id: null == id
@@ -144,6 +182,14 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
     ));
   }
 }
@@ -154,10 +200,16 @@ class _$_Area extends _Area {
   _$_Area(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) this.bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      this.photoUpdatedAt})
-      : super._();
+      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
+          this.bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          this.color,
+      this.photoUpdatedAt,
+      this.lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers})
+      : _adminUsers = adminUsers,
+        super._();
 
   factory _$_Area.fromJson(Map<String, dynamic> json) => _$$_AreaFromJson(json);
 
@@ -173,10 +225,22 @@ class _$_Area extends _Area {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final LastRecordedByInfo? lastEdit;
+  final List<User>? _adminUsers;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers {
+    final value = _adminUsers;
+    if (value == null) return null;
+    if (_adminUsers is EqualUnmodifiableListView) return _adminUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, lastEdit: $lastEdit, adminUsers: $adminUsers)';
   }
 
   @override
@@ -189,13 +253,24 @@ class _$_Area extends _Area {
             (identical(other.bounds, bounds) || other.bounds == bounds) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt));
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other._adminUsers, _adminUsers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, bounds, color, photoUpdatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      bounds,
+      color,
+      photoUpdatedAt,
+      lastEdit,
+      const DeepCollectionEquality().hash(_adminUsers));
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +294,10 @@ abstract class _Area extends Area {
           final Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
-      final DateTime? photoUpdatedAt}) = _$_Area;
+      final DateTime? photoUpdatedAt,
+      final LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers}) = _$_Area;
   _Area._() : super._();
 
   factory _Area.fromJson(Map<String, dynamic> json) = _$_Area.fromJson;
@@ -236,6 +314,11 @@ abstract class _Area extends Area {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  LastRecordedByInfo? get lastEdit;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers;
   @override
   @JsonKey(ignore: true)
   _$$_AreaCopyWith<_$_Area> get copyWith => throw _privateConstructorUsedError;

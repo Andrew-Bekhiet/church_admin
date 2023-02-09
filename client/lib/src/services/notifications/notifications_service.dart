@@ -54,7 +54,7 @@ class CANotificationsService {
         _firebaseMessaging = firebaseMessaging ?? GetIt.I<FirebaseMessaging>(),
         _localNotificationsPlugin = localNotificationsPlugin ??
             GetIt.I<FlutterLocalNotificationsPlugin>(),
-        _getAuthService = getAuthService ?? GetIt.I<AuthService>,
+        _getAuthService = getAuthService ?? GetIt.I.call<AuthService>,
         _userSettingsService =
             userSettingsService ?? GetIt.I<UserSettingsService>(),
         _functionsService = functionsService ?? GetIt.I<CAFunctionsService>() {
@@ -244,7 +244,8 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await DatabaseService.I.persons.getPersonsKodasWarning(
+    final persons = await DatabaseService.I.persons.notificationsQueries
+        .getPersonsKodasWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -299,7 +300,8 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await DatabaseService.I.persons.getPersonsMeetingWarning(
+    final persons = await DatabaseService.I.persons.notificationsQueries
+        .getPersonsMeetingWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -354,7 +356,8 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await DatabaseService.I.persons.getPersonsVisitWarning(
+    final persons = await DatabaseService.I.persons.notificationsQueries
+        .getPersonsVisitWarning(
       date: DateTime.now().subtract(const Duration(days: 20)),
     );
 
@@ -409,7 +412,8 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await DatabaseService.I.persons.getPersonsConfessionWarning(
+    final persons = await DatabaseService.I.persons.notificationsQueries
+        .getPersonsConfessionWarning(
       date: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -464,7 +468,7 @@ class NotificationsServiceCallbacks {
 
     if (!AuthService.instance.isSignedIn) return;
 
-    final persons = await DatabaseService.I.persons
+    final persons = await DatabaseService.I.persons.notificationsQueries
         .getBirthdayPersons(date: DateTime.now());
 
     if (persons.isNotEmpty || !kReleaseMode) {

@@ -14,6 +14,11 @@ _$_Area _$$_AreaFromJson(Map json) => _$_Area(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
+      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
     );
 
 Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
@@ -22,4 +27,6 @@ Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
       'bounds': polygonToJson(instance.bounds),
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'adminUsers': adminUsersToJson(instance.adminUsers),
     };

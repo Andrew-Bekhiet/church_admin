@@ -17,6 +17,9 @@ class Area extends ViewableWithIDAndImage with _$Area {
     @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) Polygon? bounds,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+        List<User>? adminUsers,
   }) = _Area;
   Area._() : super();
 
@@ -32,3 +35,8 @@ class Area extends ViewableWithIDAndImage with _$Area {
         )
       : null;
 }
+
+List<User>? adminUsersFromJson(List? data) =>
+    data?.map((e) => User.fromJson(e['user'])).toList();
+List<Json>? adminUsersToJson(List<User>? users) =>
+    users?.map((e) => {'user': e.toJson()}).toList();

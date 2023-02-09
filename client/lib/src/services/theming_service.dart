@@ -1,4 +1,5 @@
 import 'package:churchdata_core/churchdata_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,6 +29,101 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     700: Color(0xFF666666),
   });
 
+  static TextTheme textThemeWith3Fonts(
+    TextTheme base, {
+    String? displayAndHeadline,
+    String? titles,
+    String? others,
+  }) {
+    return base.copyWith(
+      displayLarge: base.displayLarge?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      displayMedium: base.displayMedium?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      displaySmall: base.displaySmall?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      headlineLarge: base.headlineLarge?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      headlineMedium: base.headlineMedium?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      headlineSmall: base.headlineSmall?.copyWith(
+        fontFamily: displayAndHeadline ?? 'Cairo',
+      ),
+      titleLarge: base.titleLarge?.copyWith(
+        fontFamily: titles ?? 'Changa',
+      ),
+      titleMedium: base.titleMedium?.copyWith(
+        fontFamily: titles ?? 'Changa',
+      ),
+      titleSmall: base.titleSmall?.copyWith(
+        fontFamily: titles ?? 'Changa',
+      ),
+      bodyLarge: base.bodyLarge?.copyWith(
+        fontFamily: titles ?? 'Roboto',
+      ),
+      bodyMedium: base.bodyMedium?.copyWith(
+        fontFamily: titles ?? 'Roboto',
+      ),
+      bodySmall: base.bodySmall?.copyWith(
+        fontFamily: others ?? 'Roboto',
+      ),
+      labelLarge: base.labelLarge?.copyWith(
+        fontFamily: others ?? 'Roboto',
+      ),
+      labelMedium: base.labelMedium?.copyWith(
+        fontFamily: others ?? 'Roboto',
+      ),
+      labelSmall: base.labelSmall?.copyWith(
+        fontFamily: others ?? 'Roboto',
+      ),
+    );
+  }
+
+  static Typography typographyWith3Fonts(
+    Typography base, {
+    String? displayAndHeadline,
+    String? titles,
+    String? others,
+  }) {
+    return Typography(
+      englishLike: textThemeWith3Fonts(
+        base.englishLike,
+        displayAndHeadline: displayAndHeadline,
+        titles: titles,
+        others: others,
+      ),
+      dense: textThemeWith3Fonts(
+        base.dense,
+        displayAndHeadline: displayAndHeadline,
+        titles: titles,
+        others: others,
+      ),
+      tall: textThemeWith3Fonts(
+        base.tall,
+        displayAndHeadline: displayAndHeadline,
+        titles: titles,
+        others: others,
+      ),
+      white: textThemeWith3Fonts(
+        base.white,
+        displayAndHeadline: displayAndHeadline,
+        titles: titles,
+        others: others,
+      ),
+      black: textThemeWith3Fonts(
+        base.black,
+        displayAndHeadline: displayAndHeadline,
+        titles: titles,
+        others: others,
+      ),
+    );
+  }
+
   static ThemeData getDefault({
     bool? darkTheme,
     bool? greatFeastThemeOverride,
@@ -38,7 +134,6 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
         GetIt.I<UserSettingsService>().greatFeastTheme;
 
     MaterialColor primary = Colors.teal;
-    Color secondary = Colors.tealAccent;
 
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
@@ -46,7 +141,6 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
             .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
         DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
       primary = black;
-      secondary = blackAccent;
       isDark = true;
     } else if (greatFeastTheme &&
         DateTime.now()
@@ -55,17 +149,25 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
       isDark = false;
     }
 
+    final colorScheme = ColorScheme.fromSeed(
+      brightness: isDark ? Brightness.dark : Brightness.light,
+      seedColor: primary,
+      outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
+    );
+
     final themeData = ThemeData(
-      fontFamily: 'Cairo',
+      typography: typographyWith3Fonts(
+        Typography.material2021(
+          platform: defaultTargetPlatform,
+          colorScheme: colorScheme,
+        ),
+        displayAndHeadline: 'Cairo',
+        titles: 'Changa',
+        others: 'Roboto',
+      ),
       brightness: isDark ? Brightness.dark : Brightness.light,
       primarySwatch: primary,
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: isDark ? Brightness.dark : Brightness.light,
-        primarySwatch: primary,
-        accentColor: secondary,
-      ).copyWith(
-        outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
-      ),
+      colorScheme: colorScheme,
       useMaterial3: true,
     );
 
@@ -79,7 +181,6 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
           borderSide: BorderSide(color: primary),
         ),
       ),
-      useMaterial3: true,
     );
     //TODO: tune theming
     /* .copyWith(
@@ -114,8 +215,8 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
       appBarTheme: AppBarTheme(
         backgroundColor: primary,
         foregroundColor: (isDark
-                ? Typography.material2018().white
-                : Typography.material2018().black)
+                ? Typography.material2021().white
+                : Typography.material2021().black)
             .headline6
             ?.color,
         systemOverlayStyle:

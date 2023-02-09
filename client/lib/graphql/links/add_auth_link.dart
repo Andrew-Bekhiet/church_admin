@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart_ext/operators.dart';
 
 class AddAuthLink extends Link {
   static HttpLink defaultCreateHttpLink(String url) => HttpLink(url);
@@ -25,7 +25,7 @@ class AddAuthLink extends Link {
     this.createHttpLink = defaultCreateHttpLink,
     this.createWSLink = defaultCreateWSLink,
     AuthService Function()? getAuthService,
-  }) : _getAuthService = getAuthService ?? GetIt.I<AuthService>;
+  }) : _getAuthService = getAuthService ?? GetIt.I.call<AuthService>;
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
@@ -64,7 +64,9 @@ class AddAuthLink extends Link {
     return createWSLink(
       _getWebSocketURL(Uri.parse(url)),
       SocketClientConfig(
+        queryAndMutationTimeout: const Duration(seconds: 5),
         inactivityTimeout: null,
+        autoReconnect: false,
         initialPayload: () => {
           'headers': {
             'Authorization': 'Bearer $idToken',

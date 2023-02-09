@@ -56,14 +56,14 @@ void main() {
       expect(find.byType(PasswordFormField), findsOneWidget);
       expect(
         find.descendant(
-          of: find.bySubtype<ElevatedButton>(),
+          of: find.bySubtype<FilledButton>(),
           matching: find.text('تسجيل الدخول'),
         ),
         findsOneWidget,
       );
       expect(
         find.descendant(
-          of: find.bySubtype<OutlinedButton>(),
+          of: find.bySubtype<FilledButton>(),
           matching: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
         ),
         authVariant.currentValue != AuthenticationVariantEnum.password
@@ -74,7 +74,7 @@ void main() {
         find.descendant(
           of: find.ancestor(
             of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-            matching: find.bySubtype<OutlinedButton>(),
+            matching: find.bySubtype<FilledButton>(),
           ),
           matching: find.byIcon(Icons.fingerprint),
         ),
@@ -112,7 +112,7 @@ void main() {
           find.byType(PasswordFormField),
           'wrong password',
         );
-        await tester.tap(find.bySubtype<ElevatedButton>());
+        await tester.tap(find.bySubtype<FilledButton>());
 
         await tester.pumpAndSettle();
 
@@ -131,7 +131,7 @@ void main() {
           find.byType(PasswordFormField),
           r'password\1234',
         );
-        await tester.tap(find.bySubtype<ElevatedButton>());
+        await tester.tap(find.bySubtype<FilledButton>());
 
         await tester.pumpAndSettle();
 
@@ -155,7 +155,7 @@ void main() {
           find.descendant(
             of: find.ancestor(
               of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-              matching: find.bySubtype<OutlinedButton>(),
+              matching: find.bySubtype<FilledButton>(),
             ),
             matching: find.byIcon(Icons.fingerprint),
           ),

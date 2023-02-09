@@ -45,7 +45,10 @@ class _ViewUserState extends State<ViewUser> {
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       initialData: widget.user,
-      stream: DatabaseService.I.users.watchUser(userId: widget.userId),
+      stream: DatabaseService.I.users.watchUser(
+        uid: widget.userId,
+        fullData: true,
+      ),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -71,7 +74,7 @@ class _ViewUserState extends State<ViewUser> {
         final foregroundColor = person?.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
-              themeData.textTheme.subtitle1!.color!,
+              themeData.textTheme.titleMedium!.color!,
         );
         return Scaffold(
           body: CustomScrollView(
@@ -177,7 +180,7 @@ class _ViewUserState extends State<ViewUser> {
                       minVerticalPadding: 0,
                       title: Text(
                         'المناطق المسؤول عنها',
-                        style: themeData.textTheme.subtitle1
+                        style: themeData.textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Column(
@@ -208,7 +211,7 @@ class _ViewUserState extends State<ViewUser> {
                       minVerticalPadding: 0,
                       title: Text(
                         'الخدمات المسؤول عنها',
-                        style: themeData.textTheme.subtitle1
+                        style: themeData.textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Column(
@@ -235,7 +238,7 @@ class _ViewUserState extends State<ViewUser> {
                       minVerticalPadding: 0,
                       title: Text(
                         'المجموعات المسؤول عنها',
-                        style: themeData.textTheme.subtitle1
+                        style: themeData.textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Column(
@@ -267,7 +270,7 @@ class _ViewUserState extends State<ViewUser> {
                     ),
                     const Divider(thickness: 1),
                     ListTile(
-                      title: ElevatedButton.icon(
+                      title: FilledButton.tonalIcon(
                         icon: const Icon(Icons.query_stats),
                         label: const Text('احصائيات الحضور'),
                         onPressed: () => _attendanceAnalysis(context, user),
@@ -277,8 +280,8 @@ class _ViewUserState extends State<ViewUser> {
                     HistoryProperty(
                       name: 'أخر تحديث لبيانات الخادم',
                       value: user.lastEdit?.time,
-                      getHistoryStream: () => DatabaseService.I.users
-                          .userEditHistory(userId: user.id),
+                      getHistoryStream: () => DatabaseService.I.history
+                          .paginateEditHistory<User>(id: user.id),
                     ),
                     const SizedBox(height: 50),
                   ],
@@ -558,7 +561,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
               ListTile(
                 title: Text(
                   'الخدمات المسؤول عنها',
-                  style: themeData.textTheme.subtitle1
+                  style: themeData.textTheme.titleMedium
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
@@ -609,7 +612,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
               ListTile(
                 title: Text(
                   'المجموعات المسؤول عنها',
-                  style: themeData.textTheme.subtitle1
+                  style: themeData.textTheme.titleMedium
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
@@ -631,7 +634,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                               } else {
                                 selected.add(
                                   selected.value.difference(
-                                    <Group?>{adminData.group},
+                                    <Group>{adminData.group!},
                                   ),
                                 );
                               }

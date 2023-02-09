@@ -1,0 +1,10 @@
+fragment User on AuthUsersData {
+  ...UserNoPhoto
+  photoUpdatedAt
+}
+
+fragment UserNoPhoto on AuthUsersData {
+  uid
+  name
+  email
+}

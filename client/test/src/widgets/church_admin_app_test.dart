@@ -1,10 +1,7 @@
 // ignore_for_file: discarded_futures
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/areas.dart';
-import 'package:church_admin/src/services/database/persons.dart';
-import 'package:church_admin/src/services/database/services.dart';
-import 'package:church_admin/src/services/database/users.dart';
+import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -169,8 +166,7 @@ void _setUpDatabaseRepo() {
 
 MockUsersDAO _setUpUsersDAO() {
   final usersDAO = MockUsersDAO();
-  when(usersDAO.getUserInfoStream(uid: anyNamed('uid')))
-      .thenAnswer((_) async* {});
+  when(usersDAO.watchUser(uid: anyNamed('uid'))).thenAnswer((_) async* {});
 
   return usersDAO;
 }

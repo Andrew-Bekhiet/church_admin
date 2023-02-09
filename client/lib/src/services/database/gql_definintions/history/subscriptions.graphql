@@ -1,0 +1,68 @@
+subscription editHistory(
+  $where: [HistoryEditHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyEditHistory(
+    where: { _and: $where }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...EditHistory
+  }
+}
+
+subscription personCallHistory(
+  $personId: uuid!
+  $where: [HistoryCallHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyCallHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...CallHistory
+  }
+}
+
+subscription personVisitHistory(
+  $personId: uuid!
+  $where: [HistoryVisitHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyVisitHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...VisitHistory
+  }
+}
+
+subscription personConfessionHistory(
+  $personId: uuid!
+  $where: [HistoryConfessionHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyConfessionHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...ConfessionHistory
+  }
+}
+
+subscription personKodasHistory(
+  $personId: uuid!
+  $where: [HistoryKodasHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyKodasHistory(
+    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...KodasHistory
+  }
+}

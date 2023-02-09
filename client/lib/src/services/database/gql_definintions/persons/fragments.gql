@@ -1,0 +1,10 @@
+fragment Person on Persons {
+  ...PersonNoPhoto
+  photoUpdatedAt
+}
+
+fragment PersonNoPhoto on Persons {
+  id
+  name
+  color
+}

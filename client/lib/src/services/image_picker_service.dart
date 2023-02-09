@@ -128,6 +128,12 @@ class ImagePickerService {
     bool lockAspectRatio = false,
   }) async {
     final primaryColor = Theme.of(context).colorScheme.primary;
+    final webUiSettings = WebUiSettings(
+      context: context,
+      enableExif: true,
+      enableResize: true,
+      enableZoom: true,
+    );
 
     if (source == ImageSource.camera) {
       final cameraPermission = await Permission.camera.request();
@@ -161,12 +167,7 @@ class ImagePickerService {
           minimumAspectRatio: 1,
           title: 'قص الصورة',
         ),
-        WebUiSettings(
-          context: context,
-          enableExif: true,
-          enableResize: true,
-          enableZoom: true,
-        ),
+        webUiSettings,
       ],
     );
   }

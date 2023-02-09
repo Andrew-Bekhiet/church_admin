@@ -1,0 +1,10 @@
+fragment Class on Classes {
+  ...ClassNoPhoto
+  photoUpdatedAt
+}
+
+fragment ClassNoPhoto on Classes {
+  id
+  name
+  color
+}

@@ -6,4 +6,5 @@ export 'models/meta.dart';
 export 'models/notification.dart';
 export 'models/person_analysis_options.dart';
 export 'models/postgis.dart';
+export 'models/viewables_enum.dart';
 export 'models/widgets.dart';

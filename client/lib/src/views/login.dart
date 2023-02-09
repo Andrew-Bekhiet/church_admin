@@ -72,8 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
+                FilledButton.tonalIcon(
+                  style: FilledButton.styleFrom(
                     elevation: 2,
                   ),
                   icon: Container(

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/users.dart';
+import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
 import 'package:flutter_test/flutter_test.dart';
@@ -90,7 +90,7 @@ void main() {
 
       final mockUsersDAO = GetIt.I<DatabaseService>().users as MockUsersDAO;
       final captured = verify(
-        mockUsersDAO.getUserInfoStream(uid: captureAnyNamed('uid')),
+        mockUsersDAO.watchUser(uid: captureAnyNamed('uid')),
       ).captured;
 
       expect(captured.first, expectedDomainUser.uid);
@@ -218,7 +218,7 @@ void _setUpDatabaseService() {
 
 MockUsersDAO _createMockUsersDAO() {
   final mockUsersDAO = MockUsersDAO();
-  when(mockUsersDAO.getUserInfoStream(uid: anyNamed('uid')))
+  when(mockUsersDAO.watchUser(uid: anyNamed('uid')))
       .thenAnswer((_) => Stream.value(expectedDomainUser));
 
   return mockUsersDAO;

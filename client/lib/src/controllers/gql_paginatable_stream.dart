@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 import 'package:tuple/tuple.dart';
@@ -46,7 +45,7 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
   final Stream<String?>? searchQuery;
 
   @protected
-  final Stream<QueryResult<Iterable<T>>> Function(
+  final Stream<Iterable<T>> Function(
     GQLPaginatableStreamEvent<T>,
   ) subscriptionStreamCallback;
 
@@ -84,13 +83,12 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
             );
 
             return subscriptionStreamCallback(resultEvent)
-                .map(exceptionsMiddleware)
                 .map(
                   (event) => clampResults(
                     lastSearch,
                     search,
                     instance,
-                    event.parsedData!.toList(),
+                    event.toList(),
                   ),
                 )
                 .map(_setLastSearch(search));

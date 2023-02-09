@@ -1,0 +1,171 @@
+fragment UserOverview on AuthUsersData {
+  ...User
+  email
+  ...UserPermissions
+  person {
+    ...Person
+    lastKodas
+    lastConfession
+  }
+}
+
+fragment UserDetails on AuthUsersData {
+  ...UserOverview
+  lastEdit
+  ...UserAdminOn
+}
+
+fragment UserPermissions on AuthUsersData {
+  permissions {
+    permission
+  }
+}
+
+fragment UserAdminOn on AuthUsersData {
+  adminOn(
+    orderBy: [
+      { area: { name: ASC_NULLS_LAST } }
+      { service: { studyYearFrom: ASC, studyYearTo: ASC } }
+      { serviceStudyYear: ASC }
+      { serviceGender: DESC_NULLS_FIRST }
+      { service: { name: ASC_NULLS_LAST } }
+      { group: { name: ASC_NULLS_LAST } }
+    ]
+  ) {
+    permissionId
+    area {
+      ...Area
+    }
+    areaAllowEdit
+    areaAdminOnUsers
+    service {
+      ...Service
+    }
+    serviceStudyYearData {
+      name
+      order
+    }
+    serviceGender
+    serviceAllowEdit
+    serviceAdminOnUsers
+    classes(orderBy: { name: ASC }) {
+      ...Class
+    }
+    group {
+      ...Group
+    }
+    groupAllowEdit
+    groupAdminOnUsers
+  }
+}
+
+fragment AttendanceFields on AuthUsersData {
+  servicesHistory: adminOn(
+    where: { service: { id: { _in: $servicesIds } } }
+    distinctOn: adminOnService
+  ) {
+    permissionId
+    service {
+      ...Service
+      attendanceHistoryAggregate(
+        where: {
+          dayId: { _gte: $dateFrom, _lte: $dateTo }
+          personId: { _eq: $personId }
+          asAdmin: { _eq: true }
+        }
+      ) {
+        aggregate {
+          count
+          max {
+            dayId
+          }
+        }
+        nodes {
+          dayId
+        }
+      }
+      attendanceDaysConstraintsAggregate(
+        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          dayId
+        }
+      }
+    }
+  }
+  classesHistory: adminOn(
+    where: { classes: { id: { _in: $classesIds } } }
+    distinctOn: adminOnService
+  ) {
+    permissionId
+    classes(where: { id: { _in: $classesIds } }, distinctOn: id) {
+      ...Class
+      attendanceHistoryAggregate(
+        where: {
+          dayId: { _gte: $dateFrom, _lte: $dateTo }
+          personId: { _eq: $personId }
+          asAdmin: { _eq: true }
+        }
+      ) {
+        aggregate {
+          count
+          max {
+            dayId
+          }
+        }
+        nodes {
+          dayId
+        }
+      }
+      attendanceDaysConstraintsAggregate(
+        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          dayId
+        }
+      }
+    }
+  }
+  groupsHistory: adminOn(
+    where: { group: { id: { _in: $groupsIds } } }
+    distinctOn: adminOnGroup
+  ) {
+    permissionId
+    group {
+      ...Group
+      attendanceHistoryAggregate(
+        where: {
+          dayId: { _gte: $dateFrom, _lte: $dateTo }
+          personId: { _eq: $personId }
+          asAdmin: { _eq: true }
+        }
+      ) {
+        aggregate {
+          count
+          max {
+            dayId
+          }
+        }
+        nodes {
+          dayId
+        }
+      }
+      attendanceDaysConstraintsAggregate(
+        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          dayId
+        }
+      }
+    }
+  }
+}

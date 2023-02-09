@@ -3,30 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i16;
-import 'dart:ui' as _i22;
+import 'dart:async' as _i9;
+import 'dart:ui' as _i14;
 
-import 'package:church_admin/church_admin.dart' as _i14;
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart' as _i20;
-import 'package:church_admin/graphql/scalars.dart' as _i19;
-import 'package:church_admin/src/services/database/areas.dart' as _i5;
-import 'package:church_admin/src/services/database/classes.dart' as _i10;
-import 'package:church_admin/src/services/database/families.dart' as _i7;
-import 'package:church_admin/src/services/database/groups.dart' as _i11;
-import 'package:church_admin/src/services/database/metadata.dart' as _i13;
-import 'package:church_admin/src/services/database/persons.dart' as _i8;
-import 'package:church_admin/src/services/database/persons/__generated__/subscriptions.graphql.dart'
-    as _i21;
-import 'package:church_admin/src/services/database/services.dart' as _i9;
-import 'package:church_admin/src/services/database/streets.dart' as _i6;
-import 'package:church_admin/src/services/database/users.dart' as _i12;
-import 'package:churchdata_core/churchdata_core.dart' as _i15;
-import 'package:flutter/foundation.dart' as _i18;
+import 'package:church_admin/church_admin.dart' as _i4;
+import 'package:church_admin/src/services/database/gql_definintions.dart'
+    as _i6;
+import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.graphql.dart'
+    as _i13;
+import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart'
+    as _i7;
+import 'package:church_admin/src/services/database/gql_parser.dart' as _i5;
+import 'package:churchdata_core/churchdata_core.dart' as _i8;
+import 'package:flutter/foundation.dart' as _i11;
 import 'package:flutter/material.dart' as _i2;
-import 'package:graphql/client.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
-import 'package:sentry_flutter/sentry_flutter.dart' as _i17;
+import 'package:sentry_flutter/sentry_flutter.dart' as _i10;
+import 'package:uuid/uuid.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -61,8 +55,9 @@ class _FakeValueStream_1<T> extends _i1.SmartFake
         );
 }
 
-class _FakeGraphQLClient_2 extends _i1.SmartFake implements _i4.GraphQLClient {
-  _FakeGraphQLClient_2(
+class _FakeDBGraphQLClient_2 extends _i1.SmartFake
+    implements _i4.DBGraphQLClient {
+  _FakeDBGraphQLClient_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -71,8 +66,8 @@ class _FakeGraphQLClient_2 extends _i1.SmartFake implements _i4.GraphQLClient {
         );
 }
 
-class _FakeAreasDAO_3 extends _i1.SmartFake implements _i5.AreasDAO {
-  _FakeAreasDAO_3(
+class _FakeGQLParser_3 extends _i1.SmartFake implements _i5.GQLParser {
+  _FakeGQLParser_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -81,8 +76,8 @@ class _FakeAreasDAO_3 extends _i1.SmartFake implements _i5.AreasDAO {
         );
 }
 
-class _FakeStreetsDAO_4 extends _i1.SmartFake implements _i6.StreetsDAO {
-  _FakeStreetsDAO_4(
+class _FakeAreasDAO_4 extends _i1.SmartFake implements _i6.AreasDAO {
+  _FakeAreasDAO_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -91,8 +86,8 @@ class _FakeStreetsDAO_4 extends _i1.SmartFake implements _i6.StreetsDAO {
         );
 }
 
-class _FakeFamiliesDAO_5 extends _i1.SmartFake implements _i7.FamiliesDAO {
-  _FakeFamiliesDAO_5(
+class _FakeStreetsDAO_5 extends _i1.SmartFake implements _i6.StreetsDAO {
+  _FakeStreetsDAO_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -101,8 +96,8 @@ class _FakeFamiliesDAO_5 extends _i1.SmartFake implements _i7.FamiliesDAO {
         );
 }
 
-class _FakePersonsDAO_6 extends _i1.SmartFake implements _i8.PersonsDAO {
-  _FakePersonsDAO_6(
+class _FakeFamiliesDAO_6 extends _i1.SmartFake implements _i6.FamiliesDAO {
+  _FakeFamiliesDAO_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -111,8 +106,8 @@ class _FakePersonsDAO_6 extends _i1.SmartFake implements _i8.PersonsDAO {
         );
 }
 
-class _FakeServicesDAO_7 extends _i1.SmartFake implements _i9.ServicesDAO {
-  _FakeServicesDAO_7(
+class _FakePersonsDAO_7 extends _i1.SmartFake implements _i6.PersonsDAO {
+  _FakePersonsDAO_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -121,8 +116,8 @@ class _FakeServicesDAO_7 extends _i1.SmartFake implements _i9.ServicesDAO {
         );
 }
 
-class _FakeClassesDAO_8 extends _i1.SmartFake implements _i10.ClassesDAO {
-  _FakeClassesDAO_8(
+class _FakeServicesDAO_8 extends _i1.SmartFake implements _i6.ServicesDAO {
+  _FakeServicesDAO_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -131,8 +126,8 @@ class _FakeClassesDAO_8 extends _i1.SmartFake implements _i10.ClassesDAO {
         );
 }
 
-class _FakeGroupsDAO_9 extends _i1.SmartFake implements _i11.GroupsDAO {
-  _FakeGroupsDAO_9(
+class _FakeClassesDAO_9 extends _i1.SmartFake implements _i6.ClassesDAO {
+  _FakeClassesDAO_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -141,8 +136,8 @@ class _FakeGroupsDAO_9 extends _i1.SmartFake implements _i11.GroupsDAO {
         );
 }
 
-class _FakeUsersDAO_10 extends _i1.SmartFake implements _i12.UsersDAO {
-  _FakeUsersDAO_10(
+class _FakeGroupsDAO_10 extends _i1.SmartFake implements _i6.GroupsDAO {
+  _FakeGroupsDAO_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -151,8 +146,8 @@ class _FakeUsersDAO_10 extends _i1.SmartFake implements _i12.UsersDAO {
         );
 }
 
-class _FakeMetadataDAO_11 extends _i1.SmartFake implements _i13.MetadataDAO {
-  _FakeMetadataDAO_11(
+class _FakeUsersDAO_11 extends _i1.SmartFake implements _i6.UsersDAO {
+  _FakeUsersDAO_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -161,9 +156,8 @@ class _FakeMetadataDAO_11 extends _i1.SmartFake implements _i13.MetadataDAO {
         );
 }
 
-class _FakeDatabaseService_12 extends _i1.SmartFake
-    implements _i14.DatabaseService {
-  _FakeDatabaseService_12(
+class _FakeMetadataDAO_12 extends _i1.SmartFake implements _i6.MetadataDAO {
+  _FakeMetadataDAO_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -172,9 +166,8 @@ class _FakeDatabaseService_12 extends _i1.SmartFake
         );
 }
 
-class _FakeGQLPaginatableStream_13<T> extends _i1.SmartFake
-    implements _i14.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_13(
+class _FakeHistoryDAO_13 extends _i1.SmartFake implements _i6.HistoryDAO {
+  _FakeHistoryDAO_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -183,8 +176,9 @@ class _FakeGQLPaginatableStream_13<T> extends _i1.SmartFake
         );
 }
 
-class _FakePerson_14 extends _i1.SmartFake implements _i14.Person {
-  _FakePerson_14(
+class _FakeDatabaseService_14 extends _i1.SmartFake
+    implements _i4.DatabaseService {
+  _FakeDatabaseService_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -193,8 +187,40 @@ class _FakePerson_14 extends _i1.SmartFake implements _i14.Person {
         );
 }
 
-class _FakeDuration_15 extends _i1.SmartFake implements Duration {
-  _FakeDuration_15(
+class _FakePersonsNotificationsQueries_15 extends _i1.SmartFake
+    implements _i7.PersonsNotificationsQueries {
+  _FakePersonsNotificationsQueries_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePerson_16 extends _i1.SmartFake implements _i4.Person {
+  _FakePerson_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGQLPaginatableStream_17<T> extends _i1.SmartFake
+    implements _i4.GQLPaginatableStream<T> {
+  _FakeGQLPaginatableStream_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_18 extends _i1.SmartFake implements Duration {
+  _FakeDuration_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -206,7 +232,7 @@ class _FakeDuration_15 extends _i1.SmartFake implements Duration {
 /// A class which mocks [LoggingService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLoggingService extends _i1.Mock implements _i15.LoggingService {
+class MockLoggingService extends _i1.Mock implements _i8.LoggingService {
   @override
   _i2.NavigatorObserver get navigatorObserver => (super.noSuchMethod(
         Invocation.getter(#navigatorObserver),
@@ -220,26 +246,25 @@ class MockLoggingService extends _i1.Mock implements _i15.LoggingService {
         ),
       ) as _i2.NavigatorObserver);
   @override
-  _i16.FutureOr<void> Function(_i16.FutureOr<void> Function(_i17.Scope))
+  _i9.FutureOr<void> Function(_i9.FutureOr<void> Function(_i10.Scope))
       get configureScope => (super.noSuchMethod(
             Invocation.getter(#configureScope),
-            returnValue: (_i16.FutureOr<void> Function(_i17.Scope) __p0) =>
-                null,
+            returnValue: (_i9.FutureOr<void> Function(_i10.Scope) __p0) => null,
             returnValueForMissingStub:
-                (_i16.FutureOr<void> Function(_i17.Scope) __p0) => null,
-          ) as _i16.FutureOr<void> Function(
-              _i16.FutureOr<void> Function(_i17.Scope)));
+                (_i9.FutureOr<void> Function(_i10.Scope) __p0) => null,
+          ) as _i9.FutureOr<void> Function(
+              _i9.FutureOr<void> Function(_i10.Scope)));
   @override
-  _i16.Future<void> log(String? msg) => (super.noSuchMethod(
+  _i9.Future<void> log(String? msg) => (super.noSuchMethod(
         Invocation.method(
           #log,
           [msg],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i16.Future<void> reportError(
+  _i9.Future<void> reportError(
     Exception? error, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extras,
@@ -255,12 +280,12 @@ class MockLoggingService extends _i1.Mock implements _i15.LoggingService {
             #stackTrace: stackTrace,
           },
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i16.Future<void> reportFlutterError(
-    _i18.FlutterErrorDetails? flutterError, {
+  _i9.Future<void> reportFlutterError(
+    _i11.FlutterErrorDetails? flutterError, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extras,
   }) =>
@@ -273,15 +298,15 @@ class MockLoggingService extends _i1.Mock implements _i15.LoggingService {
             #extras: extras,
           },
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i14.AuthService {
+class MockAuthService extends _i1.Mock implements _i4.AuthService {
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
@@ -289,17 +314,17 @@ class MockAuthService extends _i1.Mock implements _i14.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i3.ValueStream<_i14.User?> get userStream => (super.noSuchMethod(
+  _i3.ValueStream<_i4.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _FakeValueStream_1<_i14.User?>(
+        returnValue: _FakeValueStream_1<_i4.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_1<_i14.User?>(
+        returnValueForMissingStub: _FakeValueStream_1<_i4.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-      ) as _i3.ValueStream<_i14.User?>);
+      ) as _i3.ValueStream<_i4.User?>);
   @override
   _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -313,264 +338,240 @@ class MockAuthService extends _i1.Mock implements _i14.AuthService {
         ),
       ) as _i3.ValueStream<String?>);
   @override
-  _i16.Future<_i14.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i9.Future<_i4.User?> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i16.Future<_i14.User?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.User?>.value(),
-      ) as _i16.Future<_i14.User?>);
+        returnValue: _i9.Future<_i4.User?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.User?>.value(),
+      ) as _i9.Future<_i4.User?>);
   @override
-  _i16.Future<void> refreshToken() => (super.noSuchMethod(
+  _i9.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i16.Future<void> signOut() => (super.noSuchMethod(
+  _i9.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i16.Future<void> dispose() => (super.noSuchMethod(
+  _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [DatabaseService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDatabaseService extends _i1.Mock implements _i14.DatabaseService {
+class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
-  _i4.GraphQLClient get graphQLClient => (super.noSuchMethod(
+  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeGraphQLClient_2(
+        returnValue: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeGraphQLClient_2(
+        returnValueForMissingStub: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-      ) as _i4.GraphQLClient);
+      ) as _i4.DBGraphQLClient);
   @override
-  _i5.AreasDAO get areas => (super.noSuchMethod(
+  _i5.GQLParser get parser => (super.noSuchMethod(
+        Invocation.getter(#parser),
+        returnValue: _FakeGQLParser_3(
+          this,
+          Invocation.getter(#parser),
+        ),
+        returnValueForMissingStub: _FakeGQLParser_3(
+          this,
+          Invocation.getter(#parser),
+        ),
+      ) as _i5.GQLParser);
+  @override
+  _i6.AreasDAO get areas => (super.noSuchMethod(
         Invocation.getter(#areas),
-        returnValue: _FakeAreasDAO_3(
+        returnValue: _FakeAreasDAO_4(
           this,
           Invocation.getter(#areas),
         ),
-        returnValueForMissingStub: _FakeAreasDAO_3(
+        returnValueForMissingStub: _FakeAreasDAO_4(
           this,
           Invocation.getter(#areas),
         ),
-      ) as _i5.AreasDAO);
+      ) as _i6.AreasDAO);
   @override
   _i6.StreetsDAO get streets => (super.noSuchMethod(
         Invocation.getter(#streets),
-        returnValue: _FakeStreetsDAO_4(
+        returnValue: _FakeStreetsDAO_5(
           this,
           Invocation.getter(#streets),
         ),
-        returnValueForMissingStub: _FakeStreetsDAO_4(
+        returnValueForMissingStub: _FakeStreetsDAO_5(
           this,
           Invocation.getter(#streets),
         ),
       ) as _i6.StreetsDAO);
   @override
-  _i7.FamiliesDAO get families => (super.noSuchMethod(
+  _i6.FamiliesDAO get families => (super.noSuchMethod(
         Invocation.getter(#families),
-        returnValue: _FakeFamiliesDAO_5(
+        returnValue: _FakeFamiliesDAO_6(
           this,
           Invocation.getter(#families),
         ),
-        returnValueForMissingStub: _FakeFamiliesDAO_5(
+        returnValueForMissingStub: _FakeFamiliesDAO_6(
           this,
           Invocation.getter(#families),
         ),
-      ) as _i7.FamiliesDAO);
+      ) as _i6.FamiliesDAO);
   @override
-  _i8.PersonsDAO get persons => (super.noSuchMethod(
+  _i6.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_6(
+        returnValue: _FakePersonsDAO_7(
           this,
           Invocation.getter(#persons),
         ),
-        returnValueForMissingStub: _FakePersonsDAO_6(
+        returnValueForMissingStub: _FakePersonsDAO_7(
           this,
           Invocation.getter(#persons),
         ),
-      ) as _i8.PersonsDAO);
+      ) as _i6.PersonsDAO);
   @override
-  _i9.ServicesDAO get services => (super.noSuchMethod(
+  _i6.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_7(
+        returnValue: _FakeServicesDAO_8(
           this,
           Invocation.getter(#services),
         ),
-        returnValueForMissingStub: _FakeServicesDAO_7(
+        returnValueForMissingStub: _FakeServicesDAO_8(
           this,
           Invocation.getter(#services),
         ),
-      ) as _i9.ServicesDAO);
+      ) as _i6.ServicesDAO);
   @override
-  _i10.ClassesDAO get classes => (super.noSuchMethod(
+  _i6.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_8(
+        returnValue: _FakeClassesDAO_9(
           this,
           Invocation.getter(#classes),
         ),
-        returnValueForMissingStub: _FakeClassesDAO_8(
+        returnValueForMissingStub: _FakeClassesDAO_9(
           this,
           Invocation.getter(#classes),
         ),
-      ) as _i10.ClassesDAO);
+      ) as _i6.ClassesDAO);
   @override
-  _i11.GroupsDAO get groups => (super.noSuchMethod(
+  _i6.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_9(
+        returnValue: _FakeGroupsDAO_10(
           this,
           Invocation.getter(#groups),
         ),
-        returnValueForMissingStub: _FakeGroupsDAO_9(
+        returnValueForMissingStub: _FakeGroupsDAO_10(
           this,
           Invocation.getter(#groups),
         ),
-      ) as _i11.GroupsDAO);
+      ) as _i6.GroupsDAO);
   @override
-  _i12.UsersDAO get users => (super.noSuchMethod(
+  _i6.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_10(
+        returnValue: _FakeUsersDAO_11(
           this,
           Invocation.getter(#users),
         ),
-        returnValueForMissingStub: _FakeUsersDAO_10(
+        returnValueForMissingStub: _FakeUsersDAO_11(
           this,
           Invocation.getter(#users),
         ),
-      ) as _i12.UsersDAO);
+      ) as _i6.UsersDAO);
   @override
-  _i13.MetadataDAO get metadata => (super.noSuchMethod(
+  _i6.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_11(
+        returnValue: _FakeMetadataDAO_12(
           this,
           Invocation.getter(#metadata),
         ),
-        returnValueForMissingStub: _FakeMetadataDAO_11(
+        returnValueForMissingStub: _FakeMetadataDAO_12(
           this,
           Invocation.getter(#metadata),
         ),
-      ) as _i13.MetadataDAO);
+      ) as _i6.MetadataDAO);
   @override
-  Iterable<T> parseListOfT<T>(
-    Map<String, dynamic>? d,
-    T Function(Map<String, dynamic>)? mapper,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #parseListOfT,
-          [
-            d,
-            mapper,
-          ],
+  _i6.HistoryDAO get history => (super.noSuchMethod(
+        Invocation.getter(#history),
+        returnValue: _FakeHistoryDAO_13(
+          this,
+          Invocation.getter(#history),
         ),
-        returnValue: <T>[],
-        returnValueForMissingStub: <T>[],
-      ) as Iterable<T>);
+        returnValueForMissingStub: _FakeHistoryDAO_13(
+          this,
+          Invocation.getter(#history),
+        ),
+      ) as _i6.HistoryDAO);
 }
 
 /// A class which mocks [UsersDAO].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUsersDAO extends _i1.Mock implements _i12.UsersDAO {
+class MockUsersDAO extends _i1.Mock implements _i6.UsersDAO {
   @override
-  _i14.DatabaseService get db => (super.noSuchMethod(
+  _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_12(
+        returnValue: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_12(
+        returnValueForMissingStub: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-      ) as _i14.DatabaseService);
+      ) as _i4.DatabaseService);
   @override
-  _i4.GraphQLClient get graphQLClient => (super.noSuchMethod(
+  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeGraphQLClient_2(
+        returnValue: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeGraphQLClient_2(
+        returnValueForMissingStub: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-      ) as _i4.GraphQLClient);
+      ) as _i4.DBGraphQLClient);
   @override
-  _i16.Stream<_i14.User> getUserInfoStream({required String? uid}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getUserInfoStream,
-          [],
-          {#uid: uid},
-        ),
-        returnValue: _i16.Stream<_i14.User>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.User>.empty(),
-      ) as _i16.Stream<_i14.User>);
-  @override
-  _i16.Stream<_i14.User?> watchUser({required String? userId}) =>
+  _i9.Stream<_i4.User?> watchUser({
+    required String? uid,
+    bool? fullData = false,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #watchUser,
           [],
-          {#userId: userId},
+          {
+            #uid: uid,
+            #fullData: fullData,
+          },
         ),
-        returnValue: _i16.Stream<_i14.User?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.User?>.empty(),
-      ) as _i16.Stream<_i14.User?>);
+        returnValue: _i9.Stream<_i4.User?>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.User?>.empty(),
+      ) as _i9.Stream<_i4.User?>);
   @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> userEditHistory(
-          {required String? userId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #userEditHistory,
-          [],
-          {#userId: userId},
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #userEditHistory,
-            [],
-            {#userId: userId},
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #userEditHistory,
-            [],
-            {#userId: userId},
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i16.Stream<_i14.User?> analyzeUserAttendance({
+  _i9.Future<_i4.User?> analyzeUserAttendance({
     required String? personId,
     required String? userId,
     required DateTime? dateFrom,
@@ -593,196 +594,61 @@ class MockUsersDAO extends _i1.Mock implements _i12.UsersDAO {
             #servicesIds: servicesIds,
           },
         ),
-        returnValue: _i16.Stream<_i14.User?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.User?>.empty(),
-      ) as _i16.Stream<_i14.User?>);
+        returnValue: _i9.Future<_i4.User?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.User?>.value(),
+      ) as _i9.Future<_i4.User?>);
 }
 
 /// A class which mocks [PersonsDAO].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
+class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
   @override
-  _i14.DatabaseService get db => (super.noSuchMethod(
+  _i7.PersonsNotificationsQueries get notificationsQueries =>
+      (super.noSuchMethod(
+        Invocation.getter(#notificationsQueries),
+        returnValue: _FakePersonsNotificationsQueries_15(
+          this,
+          Invocation.getter(#notificationsQueries),
+        ),
+        returnValueForMissingStub: _FakePersonsNotificationsQueries_15(
+          this,
+          Invocation.getter(#notificationsQueries),
+        ),
+      ) as _i7.PersonsNotificationsQueries);
+  @override
+  _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_12(
+        returnValue: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_12(
+        returnValueForMissingStub: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-      ) as _i14.DatabaseService);
+      ) as _i4.DatabaseService);
   @override
-  _i4.GraphQLClient get graphQLClient => (super.noSuchMethod(
+  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeGraphQLClient_2(
+        returnValue: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeGraphQLClient_2(
+        returnValueForMissingStub: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-      ) as _i4.GraphQLClient);
+      ) as _i4.DBGraphQLClient);
   @override
-  _i16.Future<_i4.FetchPolicy> getFetchPolicy() => (super.noSuchMethod(
-        Invocation.method(
-          #getFetchPolicy,
-          [],
-        ),
-        returnValue:
-            _i16.Future<_i4.FetchPolicy>.value(_i4.FetchPolicy.cacheFirst),
-        returnValueForMissingStub:
-            _i16.Future<_i4.FetchPolicy>.value(_i4.FetchPolicy.cacheFirst),
-      ) as _i16.Future<_i4.FetchPolicy>);
-  @override
-  _i16.Future<_i14.Person?> deletePerson({required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deletePerson,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
-  @override
-  _i16.Future<_i14.Person> getFullPersonData({required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getFullPersonData,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _i16.Future<_i14.Person>.value(_FakePerson_14(
-          this,
-          Invocation.method(
-            #getFullPersonData,
-            [],
-            {#personId: personId},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i16.Future<_i14.Person>.value(_FakePerson_14(
-          this,
-          Invocation.method(
-            #getFullPersonData,
-            [],
-            {#personId: personId},
-          ),
-        )),
-      ) as _i16.Future<_i14.Person>);
-  @override
-  _i16.Stream<_i14.Person?> getMorePersonData({
-    required String? personId,
-    String? areasAfter,
-    String? classesAfter,
-    String? groupsAfter,
-    String? servicesAfter,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMorePersonData,
-          [],
-          {
-            #personId: personId,
-            #areasAfter: areasAfter,
-            #classesAfter: classesAfter,
-            #groupsAfter: groupsAfter,
-            #servicesAfter: servicesAfter,
-          },
-        ),
-        returnValue: _i16.Stream<_i14.Person?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.Person?>.empty(),
-      ) as _i16.Stream<_i14.Person?>);
-  @override
-  _i16.Stream<_i14.Person?> getPersonClassesAndGroups(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonClassesAndGroups,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _i16.Stream<_i14.Person?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.Person?>.empty(),
-      ) as _i16.Stream<_i14.Person?>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getPersonsConfessionWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsConfessionWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getPersonsKodasWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsKodasWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getPersonsMeetingWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsMeetingWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getBirthdayPersons(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getBirthdayPersons,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getPersonsVisitWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsVisitWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i16.Future<_i14.Person> insertPerson({required _i14.Person? newPerson}) =>
+  _i9.Future<_i4.Person> insertPerson({required _i4.Person? newPerson}) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertPerson,
           [],
           {#newPerson: newPerson},
         ),
-        returnValue: _i16.Future<_i14.Person>.value(_FakePerson_14(
+        returnValue: _i9.Future<_i4.Person>.value(_FakePerson_16(
           this,
           Invocation.method(
             #insertPerson,
@@ -790,8 +656,7 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             {#newPerson: newPerson},
           ),
         )),
-        returnValueForMissingStub:
-            _i16.Future<_i14.Person>.value(_FakePerson_14(
+        returnValueForMissingStub: _i9.Future<_i4.Person>.value(_FakePerson_16(
           this,
           Invocation.method(
             #insertPerson,
@@ -799,302 +664,59 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             {#newPerson: newPerson},
           ),
         )),
-      ) as _i16.Future<_i14.Person>);
+      ) as _i9.Future<_i4.Person>);
   @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> paginatePersonCallHistory(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonCallHistory,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonCallHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonCallHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>
-      paginatePersonClassAttendance({
-    required String? personId,
-    required String? classId,
-    bool? asAdmin = false,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonClassAttendance,
-              [],
-              {
-                #personId: personId,
-                #classId: classId,
-                #asAdmin: asAdmin,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonClassAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #classId: classId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonClassAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #classId: classId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-          ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>
-      paginatePersonConfessionHistory({required String? personId}) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonConfessionHistory,
-              [],
-              {#personId: personId},
-            ),
-            returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonConfessionHistory,
-                [],
-                {#personId: personId},
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonConfessionHistory,
-                [],
-                {#personId: personId},
-              ),
-            ),
-          ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> paginatePersonEditHistory(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonEditHistory,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonEditHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonEditHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>
-      paginatePersonGroupAttendance({
-    required String? personId,
-    required String? groupId,
-    bool? asAdmin = false,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonGroupAttendance,
-              [],
-              {
-                #personId: personId,
-                #groupId: groupId,
-                #asAdmin: asAdmin,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonGroupAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #groupId: groupId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonGroupAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #groupId: groupId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-          ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> paginatePersonKodasHistory(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonKodasHistory,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonKodasHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonKodasHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>
-      paginatePersonServiceAttendance({
-    required String? personId,
-    required String? serviceId,
-    bool? asAdmin = false,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonServiceAttendance,
-              [],
-              {
-                #personId: personId,
-                #serviceId: serviceId,
-                #asAdmin: asAdmin,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonServiceAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #serviceId: serviceId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonServiceAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #serviceId: serviceId,
-                  #asAdmin: asAdmin,
-                },
-              ),
-            ),
-          ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> paginatePersonVisitHistory(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonVisitHistory,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonVisitHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonVisitHistory,
-            [],
-            {#personId: personId},
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
-  @override
-  _i16.Stream<_i14.Person?> streamPerson({required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #streamPerson,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _i16.Stream<_i14.Person?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.Person?>.empty(),
-      ) as _i16.Stream<_i14.Person?>);
-  @override
-  _i16.Stream<_i14.Person?> getPersonAnalysis({
-    required String? personId,
-    required _i14.PersonAnalysisOptions? options,
+  _i9.Future<void> updatePerson({
+    required _i4.Person? oldPerson,
+    required _i4.Person? newPerson,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getPersonAnalysis,
+          #updatePerson,
+          [],
+          {
+            #oldPerson: oldPerson,
+            #newPerson: newPerson,
+          },
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<_i4.Person?> deletePerson({required String? personId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deletePerson,
+          [],
+          {#personId: personId},
+        ),
+        returnValue: _i9.Future<_i4.Person?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
+      ) as _i9.Future<_i4.Person?>);
+  @override
+  _i9.Stream<_i4.Person?> watchPerson({
+    required String? personId,
+    int? servicesLimit = 6,
+    int? classesLimit = 6,
+    int? groupsLimit = 6,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #watchPerson,
           [],
           {
             #personId: personId,
-            #options: options,
+            #servicesLimit: servicesLimit,
+            #classesLimit: classesLimit,
+            #groupsLimit: groupsLimit,
           },
         ),
-        returnValue: _i16.Stream<_i14.Person?>.empty(),
-        returnValueForMissingStub: _i16.Stream<_i14.Person?>.empty(),
-      ) as _i16.Stream<_i14.Person?>);
+        returnValue: _i9.Stream<_i4.Person?>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.Person?>.empty(),
+      ) as _i9.Stream<_i4.Person?>);
   @override
-  _i14.GQLPaginatableStream<_i14.Person> paginatePersons({
-    _i16.Stream<String?>? searchQuery,
+  _i4.GQLPaginatableStream<_i4.Person> paginatePersons({
+    _i9.Stream<String?>? searchQuery,
     String? secondLineFieldName,
   }) =>
       (super.noSuchMethod(
@@ -1106,7 +728,7 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             #secondLineFieldName: secondLineFieldName,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.Person>(
+        returnValue: _FakeGQLPaginatableStream_17<_i4.Person>(
           this,
           Invocation.method(
             #paginatePersons,
@@ -1117,7 +739,7 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_13<_i14.Person>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_17<_i4.Person>(
           this,
           Invocation.method(
             #paginatePersons,
@@ -1128,16 +750,28 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             },
           ),
         ),
-      ) as _i14.GQLPaginatableStream<_i14.Person>);
+      ) as _i4.GQLPaginatableStream<_i4.Person>);
   @override
-  _i16.Stream<Map<Type, Set<Object>>?> getPersonsGeolocations({
+  _i9.Future<_i4.Person?> personServicesClassesGroups(
+          {required String? personId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #personServicesClassesGroups,
+          [],
+          {#personId: personId},
+        ),
+        returnValue: _i9.Future<_i4.Person?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
+      ) as _i9.Future<_i4.Person?>);
+  @override
+  _i9.Future<_i4.PersonsGeolocationsResponse?> personsGeolocations({
     String? personId,
-    List<_i19.UuidValue>? areasIds = const [],
-    List<_i19.UuidValue>? streetsIds = const [],
-    List<_i19.UuidValue>? familiesIds = const [],
-    List<_i19.UuidValue>? servicesIds = const [],
-    List<_i19.UuidValue>? classesIds = const [],
-    List<_i19.UuidValue>? groupsIds = const [],
+    List<_i12.UuidValue>? areasIds = const [],
+    List<_i12.UuidValue>? streetsIds = const [],
+    List<_i12.UuidValue>? familiesIds = const [],
+    List<_i12.UuidValue>? servicesIds = const [],
+    List<_i12.UuidValue>? classesIds = const [],
+    List<_i12.UuidValue>? groupsIds = const [],
     bool? getAreas = false,
     bool? getStreets = false,
     bool? getFamilies = false,
@@ -1145,7 +779,7 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getPersonsGeolocations,
+          #personsGeolocations,
           [],
           {
             #personId: personId,
@@ -1161,96 +795,200 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             #getPersons: getPersons,
           },
         ),
-        returnValue: _i16.Stream<Map<Type, Set<Object>>?>.empty(),
-        returnValueForMissingStub: _i16.Stream<Map<Type, Set<Object>>?>.empty(),
-      ) as _i16.Stream<Map<Type, Set<Object>>?>);
+        returnValue: _i9.Future<_i4.PersonsGeolocationsResponse?>.value(),
+        returnValueForMissingStub:
+            _i9.Future<_i4.PersonsGeolocationsResponse?>.value(),
+      ) as _i9.Future<_i4.PersonsGeolocationsResponse?>);
   @override
-  _i16.Future<void> updatePerson({
-    required _i14.Person? oldPerson,
-    required _i14.Person? newPerson,
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
+      paginatePersonClassAttendance({
+    required String? personId,
+    required String? classId,
+    bool? asAdmin = false,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #paginatePersonClassAttendance,
+              [],
+              {
+                #personId: personId,
+                #classId: classId,
+                #asAdmin: asAdmin,
+              },
+            ),
+            returnValue: _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonClassAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #classId: classId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+            returnValueForMissingStub:
+                _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonClassAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #classId: classId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+          ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
+      paginatePersonGroupAttendance({
+    required String? personId,
+    required String? groupId,
+    bool? asAdmin = false,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #paginatePersonGroupAttendance,
+              [],
+              {
+                #personId: personId,
+                #groupId: groupId,
+                #asAdmin: asAdmin,
+              },
+            ),
+            returnValue: _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonGroupAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #groupId: groupId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+            returnValueForMissingStub:
+                _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonGroupAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #groupId: groupId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+          ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
+      paginatePersonServiceAttendance({
+    required String? personId,
+    required String? serviceId,
+    bool? asAdmin = false,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #paginatePersonServiceAttendance,
+              [],
+              {
+                #personId: personId,
+                #serviceId: serviceId,
+                #asAdmin: asAdmin,
+              },
+            ),
+            returnValue: _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonServiceAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #serviceId: serviceId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+            returnValueForMissingStub:
+                _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+              this,
+              Invocation.method(
+                #paginatePersonServiceAttendance,
+                [],
+                {
+                  #personId: personId,
+                  #serviceId: serviceId,
+                  #asAdmin: asAdmin,
+                },
+              ),
+            ),
+          ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+  @override
+  _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> paginatePersonAttendance({
+    required _i13.Variables$Subscription$personAttendance Function(
+      int,
+      _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>,
+    )?
+        vars,
+    int? limit,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updatePerson,
+          #paginatePersonAttendance,
           [],
           {
-            #oldPerson: oldPerson,
-            #newPerson: newPerson,
+            #vars: vars,
+            #limit: limit,
           },
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+          this,
+          Invocation.method(
+            #paginatePersonAttendance,
+            [],
+            {
+              #vars: vars,
+              #limit: limit,
+            },
+          ),
+        ),
+        returnValueForMissingStub:
+            _FakeGQLPaginatableStream_17<_i4.LastRecordedByInfo>(
+          this,
+          Invocation.method(
+            #paginatePersonAttendance,
+            [],
+            {
+              #vars: vars,
+              #limit: limit,
+            },
+          ),
+        ),
+      ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
-  _i16.Future<_i14.Person?> updatePersonLastCall({
+  _i9.Future<_i4.Person?> getPersonAnalysis({
     required String? personId,
-    required DateTime? lastCall,
+    required _i4.PersonAnalysisOptions? options,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updatePersonLastCall,
+          #getPersonAnalysis,
           [],
           {
             #personId: personId,
-            #lastCall: lastCall,
+            #options: options,
           },
         ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
+        returnValue: _i9.Future<_i4.Person?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
+      ) as _i9.Future<_i4.Person?>);
   @override
-  _i16.Future<_i14.Person?> updatePersonLastConfession({
-    required String? personId,
-    required DateTime? lastConfession,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updatePersonLastConfession,
-          [],
-          {
-            #personId: personId,
-            #lastConfession: lastConfession,
-          },
-        ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
-  @override
-  _i16.Future<_i14.Person?> updatePersonLastKodas({
-    required String? personId,
-    required DateTime? lastKodas,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updatePersonLastKodas,
-          [],
-          {
-            #personId: personId,
-            #lastKodas: lastKodas,
-          },
-        ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
-  @override
-  _i16.Future<_i14.Person?> updatePersonLastVisit({
-    required String? personId,
-    required DateTime? lastVisit,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updatePersonLastVisit,
-          [],
-          {
-            #personId: personId,
-            #lastVisit: lastVisit,
-          },
-        ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
-  @override
-  _i16.Future<_i14.Person?> updatePersonSpiritData({
+  _i9.Future<_i4.Person?> updatePersonSpiritData({
     required String? personId,
     required DateTime? lastConfession,
     required DateTime? lastKodas,
@@ -1265,111 +1003,49 @@ class MockPersonsDAO extends _i1.Mock implements _i8.PersonsDAO {
             #lastKodas: lastKodas,
           },
         ),
-        returnValue: _i16.Future<_i14.Person?>.value(),
-        returnValueForMissingStub: _i16.Future<_i14.Person?>.value(),
-      ) as _i16.Future<_i14.Person?>);
-  @override
-  _i16.Future<Iterable<_i14.Person>> getPersonsNames({
-    List<_i20.Input$PersonsBoolExp>? where,
-    int? limit,
-    List<_i20.Input$PersonsOrderBy>? orderBy,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsNames,
-          [],
-          {
-            #where: where,
-            #limit: limit,
-            #orderBy: orderBy,
-          },
-        ),
-        returnValue: _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-        returnValueForMissingStub:
-            _i16.Future<Iterable<_i14.Person>>.value(<_i14.Person>[]),
-      ) as _i16.Future<Iterable<_i14.Person>>);
-  @override
-  _i14.GQLPaginatableStream<_i14.LastRecordedByInfo> paginatePersonAttendance({
-    required _i21.Variables$Subscription$personAttendance Function(
-      int,
-      _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>,
-    )?
-        vars,
-    int? limit,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonAttendance,
-          [],
-          {
-            #vars: vars,
-            #limit: limit,
-          },
-        ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeGQLPaginatableStream_13<_i14.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-      ) as _i14.GQLPaginatableStream<_i14.LastRecordedByInfo>);
+        returnValue: _i9.Future<_i4.Person?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
+      ) as _i9.Future<_i4.Person?>);
 }
 
 /// A class which mocks [AreasDAO].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
+class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
   @override
-  _i14.DatabaseService get db => (super.noSuchMethod(
+  _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_12(
+        returnValue: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_12(
+        returnValueForMissingStub: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-      ) as _i14.DatabaseService);
+      ) as _i4.DatabaseService);
   @override
-  _i4.GraphQLClient get graphQLClient => (super.noSuchMethod(
+  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeGraphQLClient_2(
+        returnValue: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeGraphQLClient_2(
+        returnValueForMissingStub: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-      ) as _i4.GraphQLClient);
+      ) as _i4.DBGraphQLClient);
   @override
-  _i14.GQLPaginatableStream<_i14.Area> paginateAreas(
-          {_i16.Stream<String?>? searchQuery}) =>
+  _i4.GQLPaginatableStream<_i4.Area> paginateAreas(
+          {_i9.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
         Invocation.method(
           #paginateAreas,
           [],
           {#searchQuery: searchQuery},
         ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.Area>(
+        returnValue: _FakeGQLPaginatableStream_17<_i4.Area>(
           this,
           Invocation.method(
             #paginateAreas,
@@ -1377,7 +1053,7 @@ class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_13<_i14.Area>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_17<_i4.Area>(
           this,
           Invocation.method(
             #paginateAreas,
@@ -1385,47 +1061,58 @@ class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-      ) as _i14.GQLPaginatableStream<_i14.Area>);
+      ) as _i4.GQLPaginatableStream<_i4.Area>);
+  @override
+  _i9.Stream<_i4.Area?> watchArea({required String? areaId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #watchArea,
+          [],
+          {#areaId: areaId},
+        ),
+        returnValue: _i9.Stream<_i4.Area?>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.Area?>.empty(),
+      ) as _i9.Stream<_i4.Area?>);
 }
 
 /// A class which mocks [ServicesDAO].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockServicesDAO extends _i1.Mock implements _i9.ServicesDAO {
+class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
   @override
-  _i14.DatabaseService get db => (super.noSuchMethod(
+  _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_12(
+        returnValue: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_12(
+        returnValueForMissingStub: _FakeDatabaseService_14(
           this,
           Invocation.getter(#db),
         ),
-      ) as _i14.DatabaseService);
+      ) as _i4.DatabaseService);
   @override
-  _i4.GraphQLClient get graphQLClient => (super.noSuchMethod(
+  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeGraphQLClient_2(
+        returnValue: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeGraphQLClient_2(
+        returnValueForMissingStub: _FakeDBGraphQLClient_2(
           this,
           Invocation.getter(#graphQLClient),
         ),
-      ) as _i4.GraphQLClient);
+      ) as _i4.DBGraphQLClient);
   @override
-  _i14.GQLPaginatableStream<_i14.Service> paginateServices(
-          {_i16.Stream<String?>? searchQuery}) =>
+  _i4.GQLPaginatableStream<_i4.Service> paginateServices(
+          {_i9.Stream<String?>? searchQuery}) =>
       (super.noSuchMethod(
         Invocation.method(
           #paginateServices,
           [],
           {#searchQuery: searchQuery},
         ),
-        returnValue: _FakeGQLPaginatableStream_13<_i14.Service>(
+        returnValue: _FakeGQLPaginatableStream_17<_i4.Service>(
           this,
           Invocation.method(
             #paginateServices,
@@ -1433,7 +1120,7 @@ class MockServicesDAO extends _i1.Mock implements _i9.ServicesDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_13<_i14.Service>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_17<_i4.Service>(
           this,
           Invocation.method(
             #paginateServices,
@@ -1441,21 +1128,21 @@ class MockServicesDAO extends _i1.Mock implements _i9.ServicesDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-      ) as _i14.GQLPaginatableStream<_i14.Service>);
+      ) as _i4.GQLPaginatableStream<_i4.Service>);
 }
 
 /// A class which mocks [LocalAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalAuthService extends _i1.Mock implements _i14.LocalAuthService {
+class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_15(
+        returnValue: _FakeDuration_18(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_15(
+        returnValueForMissingStub: _FakeDuration_18(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -1467,13 +1154,13 @@ class MockLocalAuthService extends _i1.Mock implements _i14.LocalAuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i16.Stream<void> get refreshUIStream => (super.noSuchMethod(
+  _i9.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
-        returnValue: _i16.Stream<void>.empty(),
-        returnValueForMissingStub: _i16.Stream<void>.empty(),
-      ) as _i16.Stream<void>);
+        returnValue: _i9.Stream<void>.empty(),
+        returnValueForMissingStub: _i9.Stream<void>.empty(),
+      ) as _i9.Stream<void>);
   @override
-  void didChangeAppLifecycleState(_i22.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i14.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -1498,61 +1185,61 @@ class MockLocalAuthService extends _i1.Mock implements _i14.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  _i16.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
+  _i9.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
           #canCheckBiometrics,
           [],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i16.Future<bool> authenticate() => (super.noSuchMethod(
+  _i9.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
           #authenticate,
           [],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i16.Future<void> dispose() => (super.noSuchMethod(
+  _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i16.Future<bool> didPopRoute() => (super.noSuchMethod(
+  _i9.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
           #didPopRoute,
           [],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i16.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
+  _i9.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
           [route],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i16.Future<bool> didPushRouteInformation(
+  _i9.Future<bool> didPushRouteInformation(
           _i2.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
           [routeInformation],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
   void didChangeMetrics() => super.noSuchMethod(
         Invocation.method(
@@ -1578,7 +1265,7 @@ class MockLocalAuthService extends _i1.Mock implements _i14.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void didChangeLocales(List<_i22.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i14.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -1607,7 +1294,7 @@ class MockLocalAuthService extends _i1.Mock implements _i14.LocalAuthService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockConnectivityService extends _i1.Mock
-    implements _i14.ConnectivityService {
+    implements _i4.ConnectivityService {
   @override
   String get urlToPing => (super.noSuchMethod(
         Invocation.getter(#urlToPing),
@@ -1627,21 +1314,21 @@ class MockConnectivityService extends _i1.Mock
         ),
       ) as _i3.ValueStream<bool>);
   @override
-  _i16.Future<bool> isConnected() => (super.noSuchMethod(
+  _i9.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
           #isConnected,
           [],
         ),
-        returnValue: _i16.Future<bool>.value(false),
-        returnValueForMissingStub: _i16.Future<bool>.value(false),
-      ) as _i16.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
-  _i16.Future<void> dispose() => (super.noSuchMethod(
+  _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }

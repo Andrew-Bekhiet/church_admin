@@ -125,7 +125,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                                 '\n',
                             Theme.of(context)
                                 .textTheme
-                                .caption!
+                                .bodySmall!
                                 .copyWith(color: colorScheme.onSurface),
                             children: [
                               TextSpan(
@@ -237,7 +237,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
           title: const Text('الاجمالي'),
           trailing: Text(
             widget.analysisData.aggregate.count.toString(),
-            style: themeData.textTheme.bodyText2!.copyWith(
+            style: themeData.textTheme.bodyMedium!.copyWith(
               color: themeData.brightness == Brightness.light
                   ? colorScheme.onSecondary
                   : colorScheme.onPrimary,

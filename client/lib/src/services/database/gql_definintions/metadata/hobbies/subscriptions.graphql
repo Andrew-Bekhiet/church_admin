@@ -1,0 +1,7 @@
+subscription watchAllHobbies($where: [HobbiesBoolExp!] = {}, $limit: Int = 25) {
+  hobbies(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+    id
+    name
+    color
+  }
+}

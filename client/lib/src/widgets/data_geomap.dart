@@ -50,7 +50,7 @@ class DataGeomap extends StatefulWidget {
       GeoMapLayer.persons,
     },
     this.editPerson = false,
-  })  : assert(
+  }) : assert(
           initialPerson != null ||
               initialArea != null ||
               initialStreet != null ||
@@ -58,8 +58,9 @@ class DataGeomap extends StatefulWidget {
               initialClass != null ||
               initialService != null ||
               initialGroup != null,
-        ),
-        assert(editPerson || initialPerson != null);
+        ) /* ,
+        assert(editPerson || initialPerson != null) */
+  ;
 
   @override
   _DataGeomapState createState() => _DataGeomapState();
@@ -68,14 +69,14 @@ class DataGeomap extends StatefulWidget {
 class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
   //Requests location permission, converts result to stream,
   //then fetches geolocations stream and combine the two results
-  late final Stream<Tuple3<String, Position?, Map<Type, Set<Object>>?>>?
+  late final Stream<Tuple3<String, Position?, PersonsGeolocationsResponse?>>?
       stream = Rx.combineLatest3(
     _locationMemoizer
         .runOnce(_requestLocationPermission)
         .asStream()
         .startWith(null),
     PackageInfo.fromPlatform().asStream(),
-    _mapOptions.switchMap(_getPersonsLocations),
+    _mapOptions.asyncMap(_getPersonsLocations),
     (location, packageInfo, data) =>
         Tuple3(packageInfo.packageName, location, data),
   );
@@ -205,16 +206,14 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                 ),
               )
             : null,
-        child:
-            StreamBuilder<Tuple3<String, Position?, Map<Type, Set<Object>>?>>(
+        child: StreamBuilder<
+            Tuple3<String, Position?, PersonsGeolocationsResponse?>>(
           initialData: Tuple3(
             '',
             null,
             widget.initialPerson != null
-                ? {
-                    Person: {widget.initialPerson!}
-                  }
-                : {},
+                ? PersonsGeolocationsResponse(persons: {widget.initialPerson!})
+                : PersonsGeolocationsResponse(),
           ),
           stream: stream,
           builder: (context, data) {
@@ -227,10 +226,10 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
 
             final locationsData = data.requireData.item3!;
 
-            final areas = locationsData[Area]?.cast<Area>() ?? {};
-            final streets = locationsData[Street]?.cast<Street>() ?? {};
-            final families = locationsData[Family]?.cast<Family>() ?? {};
-            final persons = locationsData[Person]?.cast<Person>() ?? {};
+            final areas = locationsData.areas;
+            final streets = locationsData.streets;
+            final families = locationsData.families;
+            final persons = locationsData.persons;
 
             return FlutterMap(
               mapController: _mapController,
@@ -523,8 +522,10 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
     return null;
   }
 
-  Stream<Map<Type, Set<Object>>?> _getPersonsLocations(GeoMapOptions options) =>
-      DatabaseService.I.persons.getPersonsGeolocations(
+  Future<PersonsGeolocationsResponse?> _getPersonsLocations(
+    GeoMapOptions options,
+  ) =>
+      DatabaseService.I.persons.personsGeolocations(
         personId: options.selectedAreas.isEmpty &&
                 options.selectedStreets.isEmpty &&
                 options.selectedFamilies.isEmpty &&
@@ -1028,7 +1029,8 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                 () => stagingMapOptions = stagingMapOptions.copyWith(
                   layers: v ?? false
                       ? stagingMapOptions.layers.union({value})
-                      : stagingMapOptions.layers.difference({value}),
+                      : stagingMapOptions.layers
+                          .difference(<GeoMapLayer>{value}),
                 ),
               );
 

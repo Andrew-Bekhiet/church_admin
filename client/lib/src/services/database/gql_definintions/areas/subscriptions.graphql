@@ -1,0 +1,23 @@
+subscription watchAllAreas(
+  $limit: Int = 200
+  $orderBy: [AreasOrderBy!] = { name: ASC }
+  $where: [AreasBoolExp!] = {}
+) {
+  areas(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
+    ...Area
+    bounds
+  }
+}
+
+subscription watchArea($id: uuid!) {
+  areasByPk(id: $id) {
+    ...Area
+    bounds
+    lastEdit
+    adminUsers {
+      user {
+        ...User
+      }
+    }
+  }
+}

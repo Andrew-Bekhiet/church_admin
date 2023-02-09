@@ -1,0 +1,10 @@
+fragment Group on Groups {
+  ...GroupNoPhoto
+  photoUpdatedAt
+}
+
+fragment GroupNoPhoto on Groups {
+  id
+  name
+  color
+}

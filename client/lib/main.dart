@@ -181,7 +181,7 @@ void _initializeAuthService() {
 
 void _initializeCADatabaseService() {
   GetIt.I.registerSingleton<DatabaseService>(
-    DatabaseService(GetIt.I<GraphQLClient>()),
+    DatabaseService(GetIt.I<DBGraphQLClient>()),
   );
 }
 
@@ -287,36 +287,40 @@ void _initializeGoRouterRefreshStream() {
 }
 
 Future<void> _initializeGraphQLClient() async {
-  GetIt.I.registerSingleton<GraphQLClient>(
-    GraphQLClient(
-      defaultPolicies: DefaultPolicies(
-        query: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
-        watchQuery: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
-        subscribe: Policies(
-          fetch: FetchPolicy.cacheAndNetwork,
-        ),
+  final dbGraphQLClient = DBGraphQLClient(
+    defaultPolicies: DefaultPolicies(
+      query: Policies(
+        fetch: FetchPolicy.cacheAndNetwork,
       ),
-      link: Link.concat(
-        AddAuthLink(url: SecretsService.I.hasuraServer),
-        const LoggingLink(),
+      watchQuery: Policies(
+        fetch: FetchPolicy.cacheAndNetwork,
       ),
-      cache: GraphQLCache(
-        store: HiveStore(
-          await GetIt.I<HiveInterface>().openBox(
-            'cache',
-            encryptionCipher: await EncryptionService.I.getHiveCipher(
-              boxName: 'cache',
-            ),
+      subscribe: Policies(
+        fetch: FetchPolicy.cacheAndNetwork,
+      ),
+    ),
+    link: Link.concat(
+      const LoggingLink(),
+      AddAuthLink(url: SecretsService.I.hasuraServer),
+    ),
+    cache: GraphQLCache(
+      store: HiveStore(
+        await GetIt.I<HiveInterface>().openBox(
+          'cache',
+          encryptionCipher: await EncryptionService.I.getHiveCipher(
+            boxName: 'cache',
           ),
         ),
       ),
     ),
+  );
+
+  GetIt.I.registerSingleton<DBGraphQLClient>(
+    dbGraphQLClient,
     dispose: (c) => c.link.dispose(),
   );
+
+  GetIt.I.registerSingleton<GraphQLClient>(dbGraphQLClient);
 }
 
 Future<void> _initializeHive() async {

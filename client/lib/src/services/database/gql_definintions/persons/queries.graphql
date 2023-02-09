@@ -1,0 +1,295 @@
+query personsNames(
+  $where: [PersonsBoolExp!] = {}
+  $orderBy: [PersonsOrderBy!] = { name: ASC }
+  $limit: Int = 25
+) {
+  persons(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    name
+  }
+}
+
+query personsGeolocations(
+  $getAreas: Boolean! = true
+  $getStreets: Boolean! = true
+  $getFamilies: Boolean! = true
+  $getPersons: Boolean! = true
+  $areasIds: [uuid!]
+  $streetsIds: [uuid!]
+  $familiesIds: [uuid!]
+  $personsConditions: [PersonsBoolExp!] = {}
+) {
+  areas(
+    where: {
+      _or: [
+        { id: { _in: $areasIds } }
+        { streets: { id: { _in: $streetsIds } } }
+        { families: { id: { _in: $familiesIds } } }
+        { persons: { _and: $personsConditions } }
+      ]
+      bounds: { _isNull: false }
+    }
+  ) @include(if: $getAreas) {
+    ...AreaNoPhoto
+
+    bounds
+  }
+  streets(
+    where: {
+      _or: [
+        { id: { _in: $streetsIds } }
+        { families: { id: { _in: $familiesIds } } }
+        { persons: { _and: $personsConditions } }
+      ]
+      line: { _isNull: false }
+    }
+  ) @include(if: $getStreets) {
+    ...StreetNoPhoto
+
+    line
+  }
+  families(
+    where: {
+      _or: [
+        { id: { _in: $familiesIds } }
+        { persons: { _and: $personsConditions } }
+      ]
+      geolocation: { _isNull: false }
+    }
+  ) @include(if: $getFamilies) {
+    ...FamilyNoPhoto
+
+    geolocation
+  }
+  persons(where: { _and: $personsConditions, geolocation: { _isNull: false } })
+    @include(if: $getPersons) {
+    ...PersonNoPhoto
+
+    geolocation
+  }
+}
+
+query personHistoryAnalysis(
+  $dateFrom: date!
+  $dateTo: date!
+  $timeFrom: timestamptz!
+  $timeTo: timestamptz!
+  $personId: uuid!
+  $groupsIds: [uuid!] = []
+  $classesIds: [uuid!] = []
+  $servicesIds: [uuid!] = []
+  $callHistory: Boolean! = false
+  $visitHistory: Boolean! = false
+  $editHistory: Boolean! = false
+  $confessionHistory: Boolean! = false
+  $kodasHistory: Boolean! = false
+) {
+  personsByPk(id: $personId) {
+    id
+    name
+    callHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $callHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    visitHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $visitHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    editHistoryAggregate(where: { time: { _gte: $timeFrom, _lte: $timeTo } })
+      @include(if: $editHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    kodasHistoryAggregate(where: { dayId: { _gte: $dateFrom, _lte: $dateTo } })
+      @include(if: $kodasHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    confessionHistoryAggregate(
+      where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+    ) @include(if: $confessionHistory) {
+      aggregate {
+        count
+        max {
+          time
+        }
+      }
+      nodes {
+        time
+      }
+    }
+    services(where: { serviceId: { _in: $servicesIds } }) {
+      service {
+        ...ServiceNoPhoto
+        attendanceHistoryAggregate(
+          where: {
+            dayId: { _gte: $dateFrom, _lte: $dateTo }
+            personId: { _eq: $personId }
+            asAdmin: { _eq: false }
+          }
+        ) {
+          aggregate {
+            count
+            max {
+              dayId
+            }
+          }
+          nodes {
+            dayId
+          }
+        }
+        attendanceDaysConstraintsAggregate(
+          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+        ) {
+          aggregate {
+            count
+          }
+          nodes {
+            dayId
+          }
+        }
+      }
+    }
+    classes(where: { id: { _in: $classesIds } }) {
+      ...ClassNoPhoto
+      attendanceHistoryAggregate(
+        where: {
+          dayId: { _gte: $dateFrom, _lte: $dateTo }
+          personId: { _eq: $personId }
+          asAdmin: { _eq: false }
+        }
+      ) {
+        aggregate {
+          count
+          max {
+            dayId
+          }
+        }
+        nodes {
+          dayId
+        }
+      }
+      attendanceDaysConstraintsAggregate(
+        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          dayId
+        }
+      }
+    }
+    groups(where: { groupId: { _in: $groupsIds } }) {
+      group {
+        ...GroupNoPhoto
+        attendanceHistoryAggregate(
+          where: {
+            dayId: { _gte: $dateFrom, _lte: $dateTo }
+            personId: { _eq: $personId }
+            asAdmin: { _eq: false }
+          }
+        ) {
+          aggregate {
+            count
+            max {
+              dayId
+            }
+          }
+          nodes {
+            dayId
+          }
+        }
+        attendanceDaysConstraintsAggregate(
+          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+        ) {
+          aggregate {
+            count
+          }
+          nodes {
+            dayId
+          }
+        }
+      }
+    }
+  }
+}
+
+query personServicesClassesGroups($id: uuid!) {
+  personsByPk(id: $id) {
+    id
+    name
+    services(orderBy: { service: { name: ASC } }) {
+      service {
+        ...Service
+        fromStudyYear {
+          order
+          name
+        }
+        toStudyYear {
+          order
+          name
+        }
+      }
+    }
+    classes(orderBy: { name: ASC }) {
+      ...Class
+      service {
+        ...Service
+        fromStudyYear {
+          order
+          name
+        }
+        toStudyYear {
+          order
+          name
+        }
+      }
+    }
+    groups(orderBy: { group: { name: ASC } }) {
+      group {
+        ...Group
+        service {
+          ...Service
+          fromStudyYear {
+            order
+            name
+          }
+          toStudyYear {
+            order
+            name
+          }
+        }
+      }
+    }
+  }
+}

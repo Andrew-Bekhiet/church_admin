@@ -1,0 +1,9 @@
+subscription watchAllGroups(
+  $limit: Int = 200
+  $orderBy: [GroupsOrderBy!] = { name: ASC }
+  $where: [GroupsBoolExp!] = {}
+) {
+  groups(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
+    ...Group
+  }
+}

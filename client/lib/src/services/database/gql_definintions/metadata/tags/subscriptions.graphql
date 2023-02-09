@@ -1,0 +1,7 @@
+subscription watchAllTags($where: [TagsBoolExp!] = {}, $limit: Int = 25) {
+  tags(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+    id
+    name
+    color
+  }
+}

@@ -61,22 +61,27 @@ class _EditPersonState extends State<EditPerson> {
   String? _suggestedAddress;
   _PersonPhotoState _photoState = _PersonPhotoState(deletePhoto: false);
 
-  bool _fullDataLoaded = false;
+  bool _classesAndGroupsLoaded = false;
 
   @override
   void initState() {
     super.initState();
 
     if (widget.person == null) {
-      _fullDataLoaded = true;
+      _classesAndGroupsLoaded = true;
     } else {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) async {
-          final fullData = await DatabaseService.I.persons
-              .getFullPersonData(personId: initialPerson.id);
+          final classesAndGroupsData = await DatabaseService.I.persons
+              .personServicesClassesGroups(personId: initialPerson.id);
 
-          newPerson = initialPerson = fullData;
-          _fullDataLoaded = true;
+          initialPerson = initialPerson.copyWith(
+            services: classesAndGroupsData?.services ?? initialPerson.services,
+            classes: classesAndGroupsData?.classes ?? initialPerson.classes,
+            groups: classesAndGroupsData?.groups ?? initialPerson.groups,
+          );
+          newPerson = initialPerson;
+          _classesAndGroupsLoaded = true;
 
           if (mounted) {
             setState(() {});
@@ -92,7 +97,7 @@ class _EditPersonState extends State<EditPerson> {
     final foregroundColor = newPerson.color.getContrastingColor(
       ListTileTheme.of(context).textColor ??
           themeData.listTileTheme.textColor ??
-          themeData.textTheme.subtitle1!.color!,
+          themeData.textTheme.titleMedium!.color!,
     );
 
     return Scaffold(
@@ -123,6 +128,8 @@ class _EditPersonState extends State<EditPerson> {
                           ..didChange(_PersonPhotoState(deletePhoto: true))
                           ..save();
                       }
+
+                      if (!mounted) return;
 
                       final newPhoto =
                           await GetIt.I<ImagePickerService>().pickAndCropImage(
@@ -491,7 +498,7 @@ class _EditPersonState extends State<EditPerson> {
                               return _personGeneralCheckValidator();
                             },
                             decoration: (context, state) => InputDecoration(
-                              prefixIcon: !_fullDataLoaded
+                              prefixIcon: !_classesAndGroupsLoaded
                                   ? const Center(
                                       heightFactor: 1,
                                       widthFactor: 1,
@@ -614,7 +621,7 @@ class _EditPersonState extends State<EditPerson> {
                                 newPerson.studyYear!.order > 12) ...[
                               /* ObjectSelectionField<University, University?>(
                                     initialValue: newPerson.college?.university,
-                                    listController: (s)=>ListControllerBase( objectsPaginatableStream:CADatabaseRepository.I.metadata.universities.getUniversitiesStream(searchQuery:s),),
+                                    listController: (s)=>ListControllerBase( objectsPaginatableStream:CADatabaseRepository.I.metadata.universities.watchAllUniversities(searchQuery:s),),
                                     labelText: 'الجامعةpaginate                                    onC: (value) => newPerson =
                                         newPerson.copyWith(universityId: value?.id),
                                     builder: (context, state) {
@@ -1070,6 +1077,7 @@ class _EditPersonState extends State<EditPerson> {
                               title: const Text('اللون'),
                               onTap: () async => _selectColor(state),
                               trailing: ColorIndicator(
+                                hasBorder: true,
                                 width: 50,
                                 height: 50,
                                 borderRadius: 20,
@@ -1237,7 +1245,9 @@ class _EditPersonState extends State<EditPerson> {
 
     if (rslt == true) {
       await DatabaseService.I.persons.deletePerson(personId: initialPerson.id);
-      navigator.pop();
+      navigator
+        ..pop()
+        ..pop();
     }
   }
 
@@ -1298,6 +1308,7 @@ class _EditPersonState extends State<EditPerson> {
     bool importName = false;
     final Set<Tuple2<String, String>> numbersToImport = {};
 
+    if (!mounted) return;
     final rslt = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -1390,7 +1401,7 @@ class _EditPersonState extends State<EditPerson> {
           .expand((e) => e)
           .toSet();
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.didChange(Tuple2(services, groups)),
+        (_) => state.mounted ? state.didChange(Tuple2(services, groups)) : null,
       );
       newPerson = newPerson.copyWith(
         services: services.toList(),
@@ -1403,7 +1414,7 @@ class _EditPersonState extends State<EditPerson> {
   Future<void> _selectColor(FormFieldState<Color?> state) async {
     final Color newColor = await showColorPickerDialog(
       state.context,
-      state.value ?? Colors.transparent,
+      state.value ?? Theme.of(context).primaryColor,
       title: Text(
         'اختيار اللون',
         style: Theme.of(context).textTheme.titleLarge,
@@ -1414,6 +1425,9 @@ class _EditPersonState extends State<EditPerson> {
       wheelDiameter: 165,
       enableOpacity: true,
       enableTonalPalette: true,
+      enableShadesSelection: false,
+      showRecentColors: true,
+      showColorName: true,
       showColorCode: true,
       colorCodeHasColor: true,
       pickersEnabled: <ColorPickerType, bool>{
@@ -1431,7 +1445,6 @@ class _EditPersonState extends State<EditPerson> {
       ),
       barrierColor: Colors.black54,
       constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height * 0.8,
         minWidth: MediaQuery.of(context).size.height * 0.7,
       ),
     );
@@ -1510,6 +1523,7 @@ class _EditPersonState extends State<EditPerson> {
         _form.currentState!.save();
 
         final navigator = Navigator.of(context);
+        final themeData = Theme.of(context);
 
         scaffoldMessenger.showSnackBar(
           SnackBar(
@@ -1580,9 +1594,12 @@ class _EditPersonState extends State<EditPerson> {
           ..showSnackBar(
             SnackBar(
               content: Row(
-                children: const [
-                  Expanded(child: Text('تم بنجاح')),
-                  Icon(Icons.done),
+                children: [
+                  const Expanded(child: Text('تم بنجاح')),
+                  Icon(
+                    Icons.done,
+                    color: themeData.primaryIconTheme.color,
+                  ),
                 ],
               ),
             ),

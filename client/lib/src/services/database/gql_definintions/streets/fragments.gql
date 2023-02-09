@@ -1,0 +1,10 @@
+fragment Street on Streets {
+  ...StreetNoPhoto
+  photoUpdatedAt
+}
+
+fragment StreetNoPhoto on Streets {
+  id
+  name
+  color
+}

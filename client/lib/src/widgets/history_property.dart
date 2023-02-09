@@ -33,7 +33,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
           ),
           Text(
             value != null ? dateFormat.format(value!) : '',
-            style: Theme.of(context).textTheme.overline,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ],
       ),
@@ -72,7 +72,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                   o,
                   config,
                 ) =>
-                    ViewableObjectWidget(
+                    ViewableObjectWidget<User>(
                   o.user ??
                       User(
                         name: o.name,
@@ -87,8 +87,11 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                   ),
                   title: Text(dateFormat.format(o.time)),
                   subtitle: Text(o.user?.name ?? ''),
-                  onLongPress: config?.onLongPress,
-                  onTap: config?.onTap,
+                  onLongPress: config?.onLongPress != null
+                      ? (_) => config!.onLongPress!(o)
+                      : null,
+                  onTap:
+                      config?.onTap != null ? (_) => config!.onTap!(o) : null,
                   trailing: config?.trailing,
                 ),
               ),

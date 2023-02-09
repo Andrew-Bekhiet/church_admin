@@ -1,0 +1,10 @@
+fragment Area on Areas {
+  ...AreaNoPhoto
+  photoUpdatedAt
+}
+
+fragment AreaNoPhoto on Areas {
+  id
+  name
+  color
+}

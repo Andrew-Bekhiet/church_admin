@@ -138,11 +138,3 @@ MockResponse _createMockResponse([int? responseCode = 200]) {
   when(mockResponse.statusCode).thenReturn(responseCode);
   return mockResponse;
 }
-
-extension SinkAdd<T> on Sink<T> {
-  void addMany(Iterable<T> items) {
-    for (final item in items) {
-      add(item);
-    }
-  }
-}

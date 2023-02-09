@@ -55,7 +55,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     final themeData = Theme.of(context);
     final textColor = ListTileTheme.of(context).textColor ??
         themeData.listTileTheme.textColor ??
-        themeData.textTheme.subtitle1!.color!;
+        themeData.textTheme.titleMedium!.color!;
     final foregroundColor = object.color.getContrastingColor(textColor);
 
     final secondLine = viewableObjectService.getSecondLine(object);

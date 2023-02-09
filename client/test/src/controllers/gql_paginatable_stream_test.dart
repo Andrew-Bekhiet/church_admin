@@ -4,16 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mock_data/mock_data.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
-import 'gql_paginatable_stream_test.mocks.dart';
-
-@GenerateNiceMocks([
-  MockSpec<QueryResult>(unsupportedMembers: {#parserFn}),
-])
 void main() {
   test(
     'GQL Paginatable Stream: pagination',
@@ -27,14 +19,10 @@ void main() {
 
       final unit = GQLPaginatableStream<String>(
         subscriptionStreamCallback: (event) {
-          final rslt = MockQueryResult<List<String>>();
-          when(rslt.parsedData).thenReturn(
-            [
-              if (expected.length != event.offset) ...expected[event.offset],
-              'Yes there is more',
-            ],
-          );
-          return Stream.value(rslt);
+          return Stream.value([
+            if (expected.length != event.offset) ...expected[event.offset],
+            'Yes there is more',
+          ]);
         },
         limit: pageLimit,
       );
@@ -99,27 +87,21 @@ void main() {
   );
 }
 
-MockQueryResult<List<String>> _mockSearchResults(
+List<String> _mockSearchResults(
   GQLPaginatableStreamEvent<String> event,
   List<List<String>> expected,
 ) {
-  final rslt = MockQueryResult<List<String>>();
   if (event.search?.isNotEmpty ?? false) {
-    when(rslt.parsedData).thenReturn(
-      [
-        if (expected.length != event.offset)
-          ...expected[event.offset].where((e) => e.contains(event.search!)),
-      ],
-    );
+    return [
+      if (expected.length != event.offset)
+        ...expected[event.offset].where((e) => e.contains(event.search!)),
+    ];
   } else {
-    when(rslt.parsedData).thenReturn(
-      [
-        if (expected.length != event.offset) ...expected[event.offset],
-        'Yes there is more',
-      ],
-    );
+    return [
+      if (expected.length != event.offset) ...expected[event.offset],
+      'Yes there is more',
+    ];
   }
-  return rslt;
 }
 
 List<List<String>> _foldAsPaginated(Iterable<List<String>> expected) {

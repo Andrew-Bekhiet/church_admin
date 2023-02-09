@@ -2,7 +2,7 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get_it/get_it.dart';
 
 export 'package:flutter_contacts/flutter_contacts.dart'
-    show Contact, Address, Name, Phone;
+    show Address, Contact, Name, Phone;
 
 class ContactsService {
   static ContactsService get I => GetIt.I<ContactsService>();

@@ -1,0 +1,14 @@
+query analyzeUserAttendance(
+  $dateFrom: date!
+  $dateTo: date!
+  $personId: uuid!
+  $userId: uuid!
+  $groupsIds: [uuid!]
+  $classesIds: [uuid!]
+  $servicesIds: [uuid!]
+) {
+  authUsersDataByPk(uid: $userId) {
+    ...User
+    ...AttendanceFields
+  }
+}

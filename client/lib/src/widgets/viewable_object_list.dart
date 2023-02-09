@@ -6,8 +6,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     show
         MaxValueLength,
-        Viewable,
         PaginatableStreamBase,
+        Viewable,
         defaultOffsetFromIndex;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -129,11 +129,15 @@ class _ViewableObjectListState<T extends Viewable>
           // ignore: avoid-returning-widgets
           prototypeItem: widget.itemsExpandable
               ? null
-              : ViewableObjectListItem(
-                  item: items.first,
-                  selectionController: objectsController.selectionController,
-                  itemBuilder: widget.itemBuilder,
-                  viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
+              : HeroMode(
+                  enabled: false,
+                  child: ViewableObjectListItem(
+                    item: items.first,
+                    selectionController: objectsController.selectionController,
+                    itemBuilder: widget.itemBuilder,
+                    viewableObjectWidgetConfig:
+                        widget.viewableObjectWidgetConfig,
+                  ),
                 ),
         );
       },
@@ -240,7 +244,11 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
   void _onTap(T item) {
     if (!selectionController.isSelecting) {
-      viewableObjectService.onTap(item);
+      final effectiveOnTap = viewableObjectWidgetConfig?.onTap ??
+          ViewableObjectWidgetConfig<T>().onTap ??
+          viewableObjectService.onTap;
+
+      effectiveOnTap(item);
     } else {
       _onSelect(selectionController.isSelected(item));
     }
@@ -255,10 +263,10 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   }
 }
 
-typedef ItemBuilder<T> = Widget Function(
+typedef ItemBuilder<T extends Viewable> = Widget Function(
   BuildContext context,
   T item,
-  ViewableObjectWidgetConfig? config,
+  ViewableObjectWidgetConfig<T>? config,
 );
 
 typedef OffsetFromIndexFunction = int Function(

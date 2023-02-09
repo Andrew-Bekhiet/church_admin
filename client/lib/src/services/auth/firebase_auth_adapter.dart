@@ -60,9 +60,9 @@ class FirebaseAuthAdapter extends AuthAdapter {
     String token,
   ) {
     return _databaseRepository.users
-        .getUserInfoStream(uid: _getHasuraUID(jwtClaims))
+        .watchUser(uid: _getHasuraUID(jwtClaims))
         .map(
-          (user) => user.copyWith(
+          (user) => user!.copyWith(
             password: _getPassword(jwtClaims),
             idToken: token,
           ),

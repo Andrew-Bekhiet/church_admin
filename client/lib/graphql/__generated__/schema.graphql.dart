@@ -17563,7 +17563,7 @@ class Input$ClassesBoolExp {
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
     Input$StringComparisonExp? name,
-    Input$TimeComparisonExp? photoUpdatedAt,
+    Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
     Input$BooleanComparisonExp? serviceGender,
     Input$UuidComparisonExp? serviceId,
@@ -17692,7 +17692,7 @@ class Input$ClassesBoolExp {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
           ? null
-          : Input$TimeComparisonExp.fromJson(
+          : Input$TimestamptzComparisonExp.fromJson(
               (l$photoUpdatedAt as Map<String, dynamic>));
     }
     if (data.containsKey('service')) {
@@ -17760,8 +17760,8 @@ class Input$ClassesBoolExp {
       (_$data['isUserAllowedToWrite'] as Input$BooleanComparisonExp?);
   Input$StringComparisonExp? get name =>
       (_$data['name'] as Input$StringComparisonExp?);
-  Input$TimeComparisonExp? get photoUpdatedAt =>
-      (_$data['photoUpdatedAt'] as Input$TimeComparisonExp?);
+  Input$TimestamptzComparisonExp? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Input$TimestamptzComparisonExp?);
   Input$ServicesBoolExp? get service =>
       (_$data['service'] as Input$ServicesBoolExp?);
   Input$BooleanComparisonExp? get serviceGender =>
@@ -18136,7 +18136,7 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
     Input$StringComparisonExp? name,
-    Input$TimeComparisonExp? photoUpdatedAt,
+    Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
     Input$BooleanComparisonExp? serviceGender,
     Input$UuidComparisonExp? serviceId,
@@ -18164,7 +18164,7 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToRead;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToWrite;
   CopyWith$Input$StringComparisonExp<TRes> get name;
-  CopyWith$Input$TimeComparisonExp<TRes> get photoUpdatedAt;
+  CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt;
   CopyWith$Input$ServicesBoolExp<TRes> get service;
   CopyWith$Input$BooleanComparisonExp<TRes> get serviceGender;
   CopyWith$Input$UuidComparisonExp<TRes> get serviceId;
@@ -18233,7 +18233,7 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
               (isUserAllowedToWrite as Input$BooleanComparisonExp?),
         if (name != _undefined) 'name': (name as Input$StringComparisonExp?),
         if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Input$TimeComparisonExp?),
+          'photoUpdatedAt': (photoUpdatedAt as Input$TimestamptzComparisonExp?),
         if (service != _undefined)
           'service': (service as Input$ServicesBoolExp?),
         if (serviceGender != _undefined)
@@ -18353,11 +18353,11 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
         : CopyWith$Input$StringComparisonExp(local$name, (e) => call(name: e));
   }
 
-  CopyWith$Input$TimeComparisonExp<TRes> get photoUpdatedAt {
+  CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt {
     final local$photoUpdatedAt = _instance.photoUpdatedAt;
     return local$photoUpdatedAt == null
-        ? CopyWith$Input$TimeComparisonExp.stub(_then(_instance))
-        : CopyWith$Input$TimeComparisonExp(
+        ? CopyWith$Input$TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$TimestamptzComparisonExp(
             local$photoUpdatedAt, (e) => call(photoUpdatedAt: e));
   }
 
@@ -18423,7 +18423,7 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
     Input$StringComparisonExp? name,
-    Input$TimeComparisonExp? photoUpdatedAt,
+    Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
     Input$BooleanComparisonExp? serviceGender,
     Input$UuidComparisonExp? serviceId,
@@ -18458,8 +18458,8 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
       CopyWith$Input$BooleanComparisonExp.stub(_res);
   CopyWith$Input$StringComparisonExp<TRes> get name =>
       CopyWith$Input$StringComparisonExp.stub(_res);
-  CopyWith$Input$TimeComparisonExp<TRes> get photoUpdatedAt =>
-      CopyWith$Input$TimeComparisonExp.stub(_res);
+  CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
+      CopyWith$Input$TimestamptzComparisonExp.stub(_res);
   CopyWith$Input$ServicesBoolExp<TRes> get service =>
       CopyWith$Input$ServicesBoolExp.stub(_res);
   CopyWith$Input$BooleanComparisonExp<TRes> get serviceGender =>
@@ -24597,7 +24597,7 @@ class Input$FamiliesBoolExp {
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$FamiliesFamiliesBoolExp? families,
     Input$families_families_aggregate_bool_exp? families_aggregate,
     Input$FamiliesFamiliesBoolExp? family,
@@ -24684,7 +24684,8 @@ class Input$FamiliesBoolExp {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
-          : Input$IntComparisonExp.fromJson((l$color as Map<String, dynamic>));
+          : Input$BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>));
     }
     if (data.containsKey('families')) {
       final l$families = data['families'];
@@ -24808,8 +24809,8 @@ class Input$FamiliesBoolExp {
   Input$StringComparisonExp? get address =>
       (_$data['address'] as Input$StringComparisonExp?);
   Input$AreasBoolExp? get areas => (_$data['areas'] as Input$AreasBoolExp?);
-  Input$IntComparisonExp? get color =>
-      (_$data['color'] as Input$IntComparisonExp?);
+  Input$BigintComparisonExp? get color =>
+      (_$data['color'] as Input$BigintComparisonExp?);
   Input$FamiliesFamiliesBoolExp? get families =>
       (_$data['families'] as Input$FamiliesFamiliesBoolExp?);
   Input$families_families_aggregate_bool_exp? get families_aggregate =>
@@ -25237,7 +25238,7 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$FamiliesFamiliesBoolExp? families,
     Input$families_families_aggregate_bool_exp? families_aggregate,
     Input$FamiliesFamiliesBoolExp? family,
@@ -25266,7 +25267,7 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
           _fn);
   CopyWith$Input$StringComparisonExp<TRes> get address;
   CopyWith$Input$AreasBoolExp<TRes> get areas;
-  CopyWith$Input$IntComparisonExp<TRes> get color;
+  CopyWith$Input$BigintComparisonExp<TRes> get color;
   CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families;
   CopyWith$Input$families_families_aggregate_bool_exp<TRes>
       get families_aggregate;
@@ -25332,7 +25333,7 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
         if (address != _undefined)
           'address': (address as Input$StringComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input$AreasBoolExp?),
-        if (color != _undefined) 'color': (color as Input$IntComparisonExp?),
+        if (color != _undefined) 'color': (color as Input$BigintComparisonExp?),
         if (families != _undefined)
           'families': (families as Input$FamiliesFamiliesBoolExp?),
         if (families_aggregate != _undefined)
@@ -25409,11 +25410,12 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
         : CopyWith$Input$AreasBoolExp(local$areas, (e) => call(areas: e));
   }
 
-  CopyWith$Input$IntComparisonExp<TRes> get color {
+  CopyWith$Input$BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
-        ? CopyWith$Input$IntComparisonExp.stub(_then(_instance))
-        : CopyWith$Input$IntComparisonExp(local$color, (e) => call(color: e));
+        ? CopyWith$Input$BigintComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$BigintComparisonExp(
+            local$color, (e) => call(color: e));
   }
 
   CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families {
@@ -25554,7 +25556,7 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$FamiliesFamiliesBoolExp? families,
     Input$families_families_aggregate_bool_exp? families_aggregate,
     Input$FamiliesFamiliesBoolExp? family,
@@ -25581,8 +25583,8 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
       CopyWith$Input$StringComparisonExp.stub(_res);
   CopyWith$Input$AreasBoolExp<TRes> get areas =>
       CopyWith$Input$AreasBoolExp.stub(_res);
-  CopyWith$Input$IntComparisonExp<TRes> get color =>
-      CopyWith$Input$IntComparisonExp.stub(_res);
+  CopyWith$Input$BigintComparisonExp<TRes> get color =>
+      CopyWith$Input$BigintComparisonExp.stub(_res);
   CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families =>
       CopyWith$Input$FamiliesFamiliesBoolExp.stub(_res);
   CopyWith$Input$families_families_aggregate_bool_exp<TRes>
@@ -34905,7 +34907,7 @@ class Input$GroupsBoolExp {
     Input$HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input$history_attendance_history_aggregate_bool_exp?
         attendanceHistory_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
@@ -35024,7 +35026,8 @@ class Input$GroupsBoolExp {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
-          : Input$IntComparisonExp.fromJson((l$color as Map<String, dynamic>));
+          : Input$BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -35128,8 +35131,8 @@ class Input$GroupsBoolExp {
   Input$history_attendance_history_aggregate_bool_exp?
       get attendanceHistory_aggregate => (_$data['attendanceHistory_aggregate']
           as Input$history_attendance_history_aggregate_bool_exp?);
-  Input$IntComparisonExp? get color =>
-      (_$data['color'] as Input$IntComparisonExp?);
+  Input$BigintComparisonExp? get color =>
+      (_$data['color'] as Input$BigintComparisonExp?);
   Input$UuidComparisonExp? get id => (_$data['id'] as Input$UuidComparisonExp?);
   Input$BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input$BooleanComparisonExp?);
@@ -35558,7 +35561,7 @@ abstract class CopyWith$Input$GroupsBoolExp<TRes> {
     Input$HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input$history_attendance_history_aggregate_bool_exp?
         attendanceHistory_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
@@ -35590,7 +35593,7 @@ abstract class CopyWith$Input$GroupsBoolExp<TRes> {
   CopyWith$Input$HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
   CopyWith$Input$history_attendance_history_aggregate_bool_exp<TRes>
       get attendanceHistory_aggregate;
-  CopyWith$Input$IntComparisonExp<TRes> get color;
+  CopyWith$Input$BigintComparisonExp<TRes> get color;
   CopyWith$Input$UuidComparisonExp<TRes> get id;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToRead;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToWrite;
@@ -35663,7 +35666,7 @@ class _CopyWithImpl$Input$GroupsBoolExp<TRes>
         if (attendanceHistory_aggregate != _undefined)
           'attendanceHistory_aggregate': (attendanceHistory_aggregate
               as Input$history_attendance_history_aggregate_bool_exp?),
-        if (color != _undefined) 'color': (color as Input$IntComparisonExp?),
+        if (color != _undefined) 'color': (color as Input$BigintComparisonExp?),
         if (id != _undefined) 'id': (id as Input$UuidComparisonExp?),
         if (isUserAllowedToRead != _undefined)
           'isUserAllowedToRead':
@@ -35774,11 +35777,12 @@ class _CopyWithImpl$Input$GroupsBoolExp<TRes>
             (e) => call(attendanceHistory_aggregate: e));
   }
 
-  CopyWith$Input$IntComparisonExp<TRes> get color {
+  CopyWith$Input$BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
-        ? CopyWith$Input$IntComparisonExp.stub(_then(_instance))
-        : CopyWith$Input$IntComparisonExp(local$color, (e) => call(color: e));
+        ? CopyWith$Input$BigintComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$BigintComparisonExp(
+            local$color, (e) => call(color: e));
   }
 
   CopyWith$Input$UuidComparisonExp<TRes> get id {
@@ -35887,7 +35891,7 @@ class _CopyWithStubImpl$Input$GroupsBoolExp<TRes>
     Input$HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input$history_attendance_history_aggregate_bool_exp?
         attendanceHistory_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
@@ -35923,8 +35927,8 @@ class _CopyWithStubImpl$Input$GroupsBoolExp<TRes>
       get attendanceHistory_aggregate =>
           CopyWith$Input$history_attendance_history_aggregate_bool_exp.stub(
               _res);
-  CopyWith$Input$IntComparisonExp<TRes> get color =>
-      CopyWith$Input$IntComparisonExp.stub(_res);
+  CopyWith$Input$BigintComparisonExp<TRes> get color =>
+      CopyWith$Input$BigintComparisonExp.stub(_res);
   CopyWith$Input$UuidComparisonExp<TRes> get id =>
       CopyWith$Input$UuidComparisonExp.stub(_res);
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToRead =>
@@ -66276,7 +66280,6 @@ class _CopyWithStubImpl$Input$JobsUpdates<TRes>
       CopyWith$Input$JobsBoolExp.stub(_res);
 }
 
-
 class Input$JsonbCastExp {
   factory Input$JsonbCastExp({Input$StringComparisonExp? $String}) =>
       Input$JsonbCastExp._({
@@ -66288,11 +66291,11 @@ class Input$JsonbCastExp {
   factory Input$JsonbCastExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('String')) {
-      final l$String = data['String'];
-      result$data['String'] = l$String == null
+      final l$$String = data['String'];
+      result$data['String'] = l$$String == null
           ? null
           : Input$StringComparisonExp.fromJson(
-              (l$String as Map<String, dynamic>));
+              (l$$String as Map<String, dynamic>));
     }
     return Input$JsonbCastExp._(result$data);
   }
@@ -66304,8 +66307,8 @@ class Input$JsonbCastExp {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('String')) {
-      final l$String = $String;
-      result$data['String'] = l$String?.toJson();
+      final l$$String = $String;
+      result$data['String'] = l$$String?.toJson();
     }
     return result$data;
   }
@@ -66323,12 +66326,12 @@ class Input$JsonbCastExp {
     if (!(other is Input$JsonbCastExp) || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$String = $String;
-    final lOther$String = other.$String;
+    final l$$String = $String;
+    final lOther$$String = other.$String;
     if (_$data.containsKey('String') != other._$data.containsKey('String')) {
       return false;
     }
-    if (l$String != lOther$String) {
+    if (l$$String != lOther$$String) {
       return false;
     }
     return true;
@@ -66336,8 +66339,9 @@ class Input$JsonbCastExp {
 
   @override
   int get hashCode {
-    final l$String = $String;
-    return Object.hashAll([_$data.containsKey('String') ? l$String : const {}]);
+    final l$$String = $String;
+    return Object.hashAll(
+        [_$data.containsKey('String') ? l$$String : const {}]);
   }
 }
 
@@ -66373,11 +66377,11 @@ class _CopyWithImpl$Input$JsonbCastExp<TRes>
           'String': ($String as Input$StringComparisonExp?),
       }));
   CopyWith$Input$StringComparisonExp<TRes> get $String {
-    final local$String = _instance.$String;
-    return local$String == null
+    final local$$String = _instance.$String;
+    return local$$String == null
         ? CopyWith$Input$StringComparisonExp.stub(_then(_instance))
         : CopyWith$Input$StringComparisonExp(
-            local$String, (e) => call($String: e));
+            local$$String, (e) => call($String: e));
   }
 }
 
@@ -95581,7 +95585,7 @@ class Input$ServicesBoolExp {
         attendanceHistory_aggregate,
     Input$ClassesBoolExp? classes,
     Input$classes_aggregate_bool_exp? classes_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$StringComparisonExp? firestoreId,
     Input$StudyYearsBoolExp? fromStudyYear,
     Input$GroupsBoolExp? groups,
@@ -95714,7 +95718,8 @@ class Input$ServicesBoolExp {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
-          : Input$IntComparisonExp.fromJson((l$color as Map<String, dynamic>));
+          : Input$BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>));
     }
     if (data.containsKey('firestoreId')) {
       final l$firestoreId = data['firestoreId'];
@@ -95874,8 +95879,8 @@ class Input$ServicesBoolExp {
       (_$data['classes'] as Input$ClassesBoolExp?);
   Input$classes_aggregate_bool_exp? get classes_aggregate =>
       (_$data['classes_aggregate'] as Input$classes_aggregate_bool_exp?);
-  Input$IntComparisonExp? get color =>
-      (_$data['color'] as Input$IntComparisonExp?);
+  Input$BigintComparisonExp? get color =>
+      (_$data['color'] as Input$BigintComparisonExp?);
   Input$StringComparisonExp? get firestoreId =>
       (_$data['firestoreId'] as Input$StringComparisonExp?);
   Input$StudyYearsBoolExp? get fromStudyYear =>
@@ -96437,7 +96442,7 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
         attendanceHistory_aggregate,
     Input$ClassesBoolExp? classes,
     Input$classes_aggregate_bool_exp? classes_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$StringComparisonExp? firestoreId,
     Input$StudyYearsBoolExp? fromStudyYear,
     Input$GroupsBoolExp? groups,
@@ -96476,7 +96481,7 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
       get attendanceHistory_aggregate;
   CopyWith$Input$ClassesBoolExp<TRes> get classes;
   CopyWith$Input$classes_aggregate_bool_exp<TRes> get classes_aggregate;
-  CopyWith$Input$IntComparisonExp<TRes> get color;
+  CopyWith$Input$BigintComparisonExp<TRes> get color;
   CopyWith$Input$StringComparisonExp<TRes> get firestoreId;
   CopyWith$Input$StudyYearsBoolExp<TRes> get fromStudyYear;
   CopyWith$Input$GroupsBoolExp<TRes> get groups;
@@ -96568,7 +96573,7 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
         if (classes_aggregate != _undefined)
           'classes_aggregate':
               (classes_aggregate as Input$classes_aggregate_bool_exp?),
-        if (color != _undefined) 'color': (color as Input$IntComparisonExp?),
+        if (color != _undefined) 'color': (color as Input$BigintComparisonExp?),
         if (firestoreId != _undefined)
           'firestoreId': (firestoreId as Input$StringComparisonExp?),
         if (fromStudyYear != _undefined)
@@ -96695,11 +96700,12 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
             local$classes_aggregate, (e) => call(classes_aggregate: e));
   }
 
-  CopyWith$Input$IntComparisonExp<TRes> get color {
+  CopyWith$Input$BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
-        ? CopyWith$Input$IntComparisonExp.stub(_then(_instance))
-        : CopyWith$Input$IntComparisonExp(local$color, (e) => call(color: e));
+        ? CopyWith$Input$BigintComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$BigintComparisonExp(
+            local$color, (e) => call(color: e));
   }
 
   CopyWith$Input$StringComparisonExp<TRes> get firestoreId {
@@ -96874,7 +96880,7 @@ class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
         attendanceHistory_aggregate,
     Input$ClassesBoolExp? classes,
     Input$classes_aggregate_bool_exp? classes_aggregate,
-    Input$IntComparisonExp? color,
+    Input$BigintComparisonExp? color,
     Input$StringComparisonExp? firestoreId,
     Input$StudyYearsBoolExp? fromStudyYear,
     Input$GroupsBoolExp? groups,
@@ -96917,8 +96923,8 @@ class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
       CopyWith$Input$ClassesBoolExp.stub(_res);
   CopyWith$Input$classes_aggregate_bool_exp<TRes> get classes_aggregate =>
       CopyWith$Input$classes_aggregate_bool_exp.stub(_res);
-  CopyWith$Input$IntComparisonExp<TRes> get color =>
-      CopyWith$Input$IntComparisonExp.stub(_res);
+  CopyWith$Input$BigintComparisonExp<TRes> get color =>
+      CopyWith$Input$BigintComparisonExp.stub(_res);
   CopyWith$Input$StringComparisonExp<TRes> get firestoreId =>
       CopyWith$Input$StringComparisonExp.stub(_res);
   CopyWith$Input$StudyYearsBoolExp<TRes> get fromStudyYear =>
@@ -113757,351 +113763,6 @@ class _CopyWithStubImpl$Input$TagsUpdates<TRes>
       CopyWith$Input$TagsSetInput.stub(_res);
   CopyWith$Input$TagsBoolExp<TRes> get where =>
       CopyWith$Input$TagsBoolExp.stub(_res);
-}
-
-class Input$TimeComparisonExp {
-  factory Input$TimeComparisonExp({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  }) =>
-      Input$TimeComparisonExp._({
-        if ($_eq != null) r'_eq': $_eq,
-        if ($_gt != null) r'_gt': $_gt,
-        if ($_gte != null) r'_gte': $_gte,
-        if ($_in != null) r'_in': $_in,
-        if ($_isNull != null) r'_isNull': $_isNull,
-        if ($_lt != null) r'_lt': $_lt,
-        if ($_lte != null) r'_lte': $_lte,
-        if ($_neq != null) r'_neq': $_neq,
-        if ($_nin != null) r'_nin': $_nin,
-      });
-
-  Input$TimeComparisonExp._(this._$data);
-
-  factory Input$TimeComparisonExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : tstzFromString(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : tstzFromString(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null ? null : tstzFromString(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] =
-          (l$$_in as List<dynamic>?)?.map((e) => tstzFromString(e)).toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : tstzFromString(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null ? null : tstzFromString(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null ? null : tstzFromString(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] =
-          (l$$_nin as List<dynamic>?)?.map((e) => tstzFromString(e)).toList();
-    }
-    return Input$TimeComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  DateTime? get $_eq => (_$data['_eq'] as DateTime?);
-  DateTime? get $_gt => (_$data['_gt'] as DateTime?);
-  DateTime? get $_gte => (_$data['_gte'] as DateTime?);
-  List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-  DateTime? get $_lt => (_$data['_lt'] as DateTime?);
-  DateTime? get $_lte => (_$data['_lte'] as DateTime?);
-  DateTime? get $_neq => (_$data['_neq'] as DateTime?);
-  List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : tstzToString(l$$_eq);
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : tstzToString(l$$_gt);
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : tstzToString(l$$_gte);
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => tstzToString(e)).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : tstzToString(l$$_lt);
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : tstzToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : tstzToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => tstzToString(e)).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith$Input$TimeComparisonExp<Input$TimeComparisonExp> get copyWith =>
-      CopyWith$Input$TimeComparisonExp(
-        this,
-        (i) => i,
-      );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Input$TimeComparisonExp) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-              ? null
-              : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-              ? null
-              : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith$Input$TimeComparisonExp<TRes> {
-  factory CopyWith$Input$TimeComparisonExp(
-    Input$TimeComparisonExp instance,
-    TRes Function(Input$TimeComparisonExp) then,
-  ) = _CopyWithImpl$Input$TimeComparisonExp;
-
-  factory CopyWith$Input$TimeComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl$Input$TimeComparisonExp;
-
-  TRes call({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  });
-}
-
-class _CopyWithImpl$Input$TimeComparisonExp<TRes>
-    implements CopyWith$Input$TimeComparisonExp<TRes> {
-  _CopyWithImpl$Input$TimeComparisonExp(
-    this._instance,
-    this._then,
-  );
-
-  final Input$TimeComparisonExp _instance;
-
-  final TRes Function(Input$TimeComparisonExp) _then;
-
-  static const _undefined = {};
-
-  TRes call({
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) =>
-      _then(Input$TimeComparisonExp._({
-        ..._instance._$data,
-        if ($_eq != _undefined) '_eq': ($_eq as DateTime?),
-        if ($_gt != _undefined) '_gt': ($_gt as DateTime?),
-        if ($_gte != _undefined) '_gte': ($_gte as DateTime?),
-        if ($_in != _undefined) '_in': ($_in as List<DateTime>?),
-        if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-        if ($_lt != _undefined) '_lt': ($_lt as DateTime?),
-        if ($_lte != _undefined) '_lte': ($_lte as DateTime?),
-        if ($_neq != _undefined) '_neq': ($_neq as DateTime?),
-        if ($_nin != _undefined) '_nin': ($_nin as List<DateTime>?),
-      }));
-}
-
-class _CopyWithStubImpl$Input$TimeComparisonExp<TRes>
-    implements CopyWith$Input$TimeComparisonExp<TRes> {
-  _CopyWithStubImpl$Input$TimeComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  }) =>
-      _res;
 }
 
 class Input$TimestampComparisonExp {
@@ -155562,6 +155223,7 @@ class Input$classes_max_order_by {
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   }) =>
@@ -155569,6 +155231,7 @@ class Input$classes_max_order_by {
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
+        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (serviceId != null) r'serviceId': serviceId,
         if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
       });
@@ -155592,6 +155255,12 @@ class Input$classes_max_order_by {
       result$data['name'] =
           l$name == null ? null : fromJson$Enum$OrderBy((l$name as String));
     }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : fromJson$Enum$OrderBy((l$photoUpdatedAt as String));
+    }
     if (data.containsKey('serviceId')) {
       final l$serviceId = data['serviceId'];
       result$data['serviceId'] = l$serviceId == null
@@ -155612,6 +155281,8 @@ class Input$classes_max_order_by {
   Enum$OrderBy? get color => (_$data['color'] as Enum$OrderBy?);
   Enum$OrderBy? get id => (_$data['id'] as Enum$OrderBy?);
   Enum$OrderBy? get name => (_$data['name'] as Enum$OrderBy?);
+  Enum$OrderBy? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Enum$OrderBy?);
   Enum$OrderBy? get serviceId => (_$data['serviceId'] as Enum$OrderBy?);
   Enum$OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum$OrderBy?);
@@ -155629,6 +155300,12 @@ class Input$classes_max_order_by {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name == null ? null : toJson$Enum$OrderBy(l$name);
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : toJson$Enum$OrderBy(l$photoUpdatedAt);
     }
     if (_$data.containsKey('serviceId')) {
       final l$serviceId = serviceId;
@@ -155682,6 +155359,15 @@ class Input$classes_max_order_by {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
     final l$serviceId = serviceId;
     final lOther$serviceId = other.serviceId;
     if (_$data.containsKey('serviceId') !=
@@ -155708,12 +155394,14 @@ class Input$classes_max_order_by {
     final l$color = color;
     final l$id = id;
     final l$name = name;
+    final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
@@ -155733,6 +155421,7 @@ abstract class CopyWith$Input$classes_max_order_by<TRes> {
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   });
@@ -155755,6 +155444,7 @@ class _CopyWithImpl$Input$classes_max_order_by<TRes>
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
   }) =>
@@ -155763,6 +155453,8 @@ class _CopyWithImpl$Input$classes_max_order_by<TRes>
         if (color != _undefined) 'color': (color as Enum$OrderBy?),
         if (id != _undefined) 'id': (id as Enum$OrderBy?),
         if (name != _undefined) 'name': (name as Enum$OrderBy?),
+        if (photoUpdatedAt != _undefined)
+          'photoUpdatedAt': (photoUpdatedAt as Enum$OrderBy?),
         if (serviceId != _undefined) 'serviceId': (serviceId as Enum$OrderBy?),
         if (serviceStudyYear != _undefined)
           'serviceStudyYear': (serviceStudyYear as Enum$OrderBy?),
@@ -155779,6 +155471,7 @@ class _CopyWithStubImpl$Input$classes_max_order_by<TRes>
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   }) =>
@@ -155790,6 +155483,7 @@ class Input$classes_min_order_by {
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   }) =>
@@ -155797,6 +155491,7 @@ class Input$classes_min_order_by {
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
+        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (serviceId != null) r'serviceId': serviceId,
         if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
       });
@@ -155820,6 +155515,12 @@ class Input$classes_min_order_by {
       result$data['name'] =
           l$name == null ? null : fromJson$Enum$OrderBy((l$name as String));
     }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : fromJson$Enum$OrderBy((l$photoUpdatedAt as String));
+    }
     if (data.containsKey('serviceId')) {
       final l$serviceId = data['serviceId'];
       result$data['serviceId'] = l$serviceId == null
@@ -155840,6 +155541,8 @@ class Input$classes_min_order_by {
   Enum$OrderBy? get color => (_$data['color'] as Enum$OrderBy?);
   Enum$OrderBy? get id => (_$data['id'] as Enum$OrderBy?);
   Enum$OrderBy? get name => (_$data['name'] as Enum$OrderBy?);
+  Enum$OrderBy? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Enum$OrderBy?);
   Enum$OrderBy? get serviceId => (_$data['serviceId'] as Enum$OrderBy?);
   Enum$OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum$OrderBy?);
@@ -155857,6 +155560,12 @@ class Input$classes_min_order_by {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name == null ? null : toJson$Enum$OrderBy(l$name);
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : toJson$Enum$OrderBy(l$photoUpdatedAt);
     }
     if (_$data.containsKey('serviceId')) {
       final l$serviceId = serviceId;
@@ -155910,6 +155619,15 @@ class Input$classes_min_order_by {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
     final l$serviceId = serviceId;
     final lOther$serviceId = other.serviceId;
     if (_$data.containsKey('serviceId') !=
@@ -155936,12 +155654,14 @@ class Input$classes_min_order_by {
     final l$color = color;
     final l$id = id;
     final l$name = name;
+    final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
@@ -155961,6 +155681,7 @@ abstract class CopyWith$Input$classes_min_order_by<TRes> {
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   });
@@ -155983,6 +155704,7 @@ class _CopyWithImpl$Input$classes_min_order_by<TRes>
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
   }) =>
@@ -155991,6 +155713,8 @@ class _CopyWithImpl$Input$classes_min_order_by<TRes>
         if (color != _undefined) 'color': (color as Enum$OrderBy?),
         if (id != _undefined) 'id': (id as Enum$OrderBy?),
         if (name != _undefined) 'name': (name as Enum$OrderBy?),
+        if (photoUpdatedAt != _undefined)
+          'photoUpdatedAt': (photoUpdatedAt as Enum$OrderBy?),
         if (serviceId != _undefined) 'serviceId': (serviceId as Enum$OrderBy?),
         if (serviceStudyYear != _undefined)
           'serviceStudyYear': (serviceStudyYear as Enum$OrderBy?),
@@ -156007,6 +155731,7 @@ class _CopyWithStubImpl$Input$classes_min_order_by<TRes>
     Enum$OrderBy? color,
     Enum$OrderBy? id,
     Enum$OrderBy? name,
+    Enum$OrderBy? photoUpdatedAt,
     Enum$OrderBy? serviceId,
     Enum$OrderBy? serviceStudyYear,
   }) =>
