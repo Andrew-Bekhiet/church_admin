@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide ViewableObjectWidget;
 import 'package:flutter/material.dart';
@@ -154,7 +152,7 @@ class _ViewAreaState extends State<ViewArea> {
                     ListTile(
                       title: const Text('الخدام المسؤولين'),
                       subtitle: area.adminUsers?.isNotEmpty ?? false
-                          ? _AreaAdmins(adminUsers: area.adminUsers!)
+                          ? AdminUsers(users: area.adminUsers!)
                           : const Text('لا يوجد خدام محددين للمنطقة'),
                     ),
                     const Placeholder(
@@ -174,132 +172,5 @@ class _ViewAreaState extends State<ViewArea> {
   void dispose() {
     scrollController.dispose();
     super.dispose();
-  }
-}
-
-class _AreaAdmins extends StatelessWidget {
-  const _AreaAdmins({
-    required this.adminUsers,
-  });
-
-  final List<User> adminUsers;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: const BorderRadius.all(Radius.circular(16)),
-      onTap: _onTap(context),
-      child: GridView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 7,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        shrinkWrap: true,
-        itemCount: min(adminUsers.length, 7),
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, i) {
-          final user = adminUsers[i];
-
-          if (adminUsers.length > 6 && i == 6) {
-            return _AreaAdminsRemaining(
-              lastVisibleUser: user,
-              remainingCount: adminUsers.length - 6,
-            );
-          }
-
-          return IgnorePointer(
-            child: ImageObjectWidget(user),
-          );
-        },
-      ),
-    );
-  }
-
-  Future<void> Function() _onTap(BuildContext context) {
-    return () async {
-      await Navigator.of(context).push(
-        PageRouteBuilder(
-          opaque: false,
-          barrierDismissible: true,
-          barrierColor: Colors.black45,
-          pageBuilder: (context, animation, secondaryAnimation) => Dialog(
-            backgroundColor: Colors.transparent,
-            child: const ZoomPageTransitionsBuilder().buildTransitions(
-              null,
-              context,
-              animation,
-              secondaryAnimation,
-              DecoratedBox(
-                decoration: _dialogDecoration(context),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(8),
-                  itemCount: adminUsers.length,
-                  itemBuilder: (context, i) => ViewableObjectWidget(
-                    adminUsers[i],
-                    wrapInCard: false,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    };
-  }
-
-  BoxDecoration _dialogDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: Theme.of(context).dialogBackgroundColor,
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(28),
-        topRight: Radius.circular(28),
-        bottomLeft: Radius.circular(28),
-        bottomRight: Radius.circular(28),
-      ),
-    );
-  }
-}
-
-class _AreaAdminsRemaining extends StatelessWidget {
-  const _AreaAdminsRemaining({
-    required this.lastVisibleUser,
-    required this.remainingCount,
-  });
-
-  final User lastVisibleUser;
-  final int remainingCount;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: ClipOval(
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.black38
-                    : Colors.black54,
-              ),
-              child: Opacity(
-                opacity: 0.55,
-                child: ImageObjectWidget(lastVisibleUser),
-              ),
-            ),
-            Center(
-              child: Text(
-                '+' + remainingCount.toString(),
-                style: Theme.of(context).primaryTextTheme.titleMedium,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
