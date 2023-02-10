@@ -269,6 +269,8 @@ Future<void> _initializeFMTC() async {
     ),
   );
 
+  await FMTC.instance.call('default').manage.createAsync();
+
   GetIt.I.registerSingleton<FMTC>(FMTC.instance);
 }
 

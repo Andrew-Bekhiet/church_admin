@@ -276,7 +276,6 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                           : packageName) +
                       ': ' +
                       _getPlatformName(),
-                  fastReplace: true,
                   maxZoom: 19,
                   retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
                 ),
