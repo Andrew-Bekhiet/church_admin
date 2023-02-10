@@ -333,20 +333,6 @@ MockPaginatableStreamBase<Person> _createMockPaginatableStream(
   return paginatableStream;
 }
 
-MockSelectionController<Person> _createMockSelectionController() {
-  final selectedObjectsStream = BehaviorSubject<Set<Person>>.seeded({});
-  addTearDown(selectedObjectsStream.close);
-
-  final selectionController = MockSelectionController<Person>();
-  when(selectionController.stream)
-      .thenAnswer((_) => selectedObjectsStream.stream);
-  when(selectionController.isSelecting)
-      .thenAnswer((_) => selectedObjectsStream.value.isNotEmpty);
-  when(selectionController.currentValue)
-      .thenAnswer((realInvocation) => selectedObjectsStream.valueOrNull);
-  return selectionController;
-}
-
 void _setUp() {
   _setUpViewableObjectService();
   _setUpImageUrlCacheService();
