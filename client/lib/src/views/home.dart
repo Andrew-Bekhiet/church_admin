@@ -101,12 +101,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _search = StateSubject<String?>(null);
   final _bottomNavBar = StateSubject<Type>(Service);
 
-  late final List<ViewableObjectListController<Viewable>> _listsControllers;
-
   late final TabController _tabController = TabController(
     length: 3,
     initialIndex: 1,
     vsync: this,
+  );
+
+  late final _personsController = _createControllerUsing<Person>(
+    ({searchQuery}) => DatabaseService.I.persons.paginatePersons(
+      searchQuery: searchQuery,
+      secondLineFieldName:
+          GetIt.I<UserSettingsService>().getSecondLineFor(Person),
+    ),
+  );
+  late final _servicesController = _createControllerUsing<Service>(
+    DatabaseService.I.services.paginateServices,
+  );
+  late final _areasController = _createControllerUsing<Area>(
+    DatabaseService.I.areas.paginateAreas,
   );
 
   late final _fabAnimationController = AnimationController(
@@ -124,8 +136,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     _tabController.addListener(_tabControllerListener);
     _tabController.animation!.addListener(_tabControllerAnimationListener);
-
-    _initListsControllers();
   }
 
   @override
@@ -174,8 +184,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       body: _HomeBody(
         tabController: _tabController,
-        listsControllers: _listsControllers,
-        typeToIndex: _typeToIndex,
+        personsController: () => _personsController,
+        servicesController: () => _servicesController,
+        areasController: () => _areasController,
       ),
       floatingActionButton: AnimatedBuilder(
         animation: _fabAnimationController,
@@ -241,24 +252,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _fabAnimationController.value = _tabController.offset;
   }
 
-  void _initListsControllers() {
-    _listsControllers = [
-      _createControllerUsing<Person>(
-        ({searchQuery}) => DatabaseService.I.persons.paginatePersons(
-          searchQuery: searchQuery,
-          secondLineFieldName:
-              GetIt.I<UserSettingsService>().getSecondLineFor(Person),
-        ),
-      ),
-      _createControllerUsing<Service>(
-        DatabaseService.I.services.paginateServices,
-      ),
-      _createControllerUsing<Area>(
-        DatabaseService.I.areas.paginateAreas,
-      ),
-    ];
-  }
-
   ViewableObjectListController<T> _createControllerUsing<T extends Viewable>(
     GQLPaginatableStream<T> Function({Stream<String?>? searchQuery})
         paginatableStreamFactory,
@@ -284,60 +277,76 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     await _search.close();
     await _bottomNavBar.close();
 
-    await Future.wait(_listsControllers.map((c) => c.dispose()));
+    await _personsController.dispose();
+    await _servicesController.dispose();
+    await _areasController.dispose();
   }
 }
 
 class _HomeBody extends StatelessWidget {
   const _HomeBody({
-    required TabController tabController,
-    required List<ViewableObjectListController<Viewable>> listsControllers,
-    required Map<Type, int> typeToIndex,
-  })  : _tabController = tabController,
-        _listsControllers = listsControllers,
-        _typeToIndex = typeToIndex;
+    required this.tabController,
+    required this.areasController,
+    required this.personsController,
+    required this.servicesController,
+  });
 
-  final TabController _tabController;
-  final List<ViewableObjectListController<Viewable>> _listsControllers;
-  final Map<Type, int> _typeToIndex;
+  final TabController tabController;
+
+  final ViewableObjectListController<Person> Function() personsController;
+  final ViewableObjectListController<Service> Function() servicesController;
+  final ViewableObjectListController<Area> Function() areasController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: TabBarView(
-        controller: _tabController,
+        controller: tabController,
         children: [
-          ViewableObjectList<Person>(
-            key: PageStorageKey(_listsControllers[_typeToIndex[Person]!]),
-            objectsController: _listsControllers[_typeToIndex[Person]!]
-                as ViewableObjectListController<Person>,
-          ),
-          ServicesHierarchyList(
-            key: PageStorageKey(_listsControllers[_typeToIndex[Service]!]),
-            listController: _listsControllers[_typeToIndex[Service]!]
-                as ViewableObjectListController<Service>,
-            serviceTrailingBuilder: (
-              context,
-              s, {
-              onLongPress,
-              onTap,
-              subtitle,
-              trailing,
-            }) =>
-                IconButton(
-              onPressed: onTap != null ? () => onTap(s) : null,
-              icon: const Icon(Icons.info),
+          LazyTabPage(
+            index: 0,
+            tabController: tabController,
+            builder: (context) => ViewableObjectList<Person>(
+              key: PageStorageKey(
+                personsController,
+              ),
+              objectsController: personsController(),
             ),
           ),
-          ViewableObjectList<Area>(
-            viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-              circleCrop: false,
-              forceShowSecondLine: false,
+          LazyTabPage(
+            index: 1,
+            tabController: tabController,
+            builder: (context) => ServicesHierarchyList(
+              key: PageStorageKey(
+                servicesController,
+              ),
+              listController: servicesController(),
+              serviceTrailingBuilder: (
+                context,
+                s, {
+                onLongPress,
+                onTap,
+                subtitle,
+                trailing,
+              }) =>
+                  IconButton(
+                onPressed: onTap != null ? () => onTap(s) : null,
+                icon: const Icon(Icons.info),
+              ),
             ),
-            key: PageStorageKey(_listsControllers[_typeToIndex[Area]!]),
-            objectsController: _listsControllers[_typeToIndex[Area]!]
-                as ViewableObjectListController<Area>,
+          ),
+          LazyTabPage(
+            index: 2,
+            tabController: tabController,
+            builder: (context) => ViewableObjectList<Area>(
+              viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+                circleCrop: false,
+                forceShowSecondLine: false,
+              ),
+              key: PageStorageKey(areasController),
+              objectsController: areasController(),
+            ),
           ),
         ],
       ),

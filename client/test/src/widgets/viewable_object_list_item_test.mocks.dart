@@ -3,18 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:io' as _i8;
+import 'dart:async' as _i9;
+import 'dart:io' as _i7;
 
-import 'package:church_admin/church_admin.dart' as _i9;
-import 'package:churchdata_core/churchdata_core.dart' as _i11;
-import 'package:collection/collection.dart' as _i2;
-import 'package:flutter/cupertino.dart' as _i5;
-import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i7;
-import 'package:go_router/go_router.dart' as _i4;
-import 'package:hive_flutter/hive_flutter.dart' as _i6;
+import 'package:church_admin/church_admin.dart' as _i10;
+import 'package:churchdata_core/churchdata_core.dart' as _i8;
+import 'package:flutter/cupertino.dart' as _i4;
+import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i6;
+import 'package:go_router/go_router.dart' as _i3;
+import 'package:hive_flutter/hive_flutter.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart/rxdart.dart' as _i3;
+import 'package:rxdart/rxdart.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,8 +26,9 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeEquality_0<E> extends _i1.SmartFake implements _i2.Equality<E> {
-  _FakeEquality_0(
+class _FakeValueStream_0<T> extends _i1.SmartFake
+    implements _i2.ValueStream<T> {
+  _FakeValueStream_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -37,9 +37,8 @@ class _FakeEquality_0<E> extends _i1.SmartFake implements _i2.Equality<E> {
         );
 }
 
-class _FakeValueStream_1<T> extends _i1.SmartFake
-    implements _i3.ValueStream<T> {
-  _FakeValueStream_1(
+class _FakeGoRouter_1 extends _i1.SmartFake implements _i3.GoRouter {
+  _FakeGoRouter_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -48,19 +47,9 @@ class _FakeValueStream_1<T> extends _i1.SmartFake
         );
 }
 
-class _FakeGoRouter_2 extends _i1.SmartFake implements _i4.GoRouter {
-  _FakeGoRouter_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeNavigatorState_3 extends _i1.SmartFake
-    implements _i5.NavigatorState {
-  _FakeNavigatorState_3(
+class _FakeNavigatorState_2 extends _i1.SmartFake
+    implements _i4.NavigatorState {
+  _FakeNavigatorState_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -69,13 +58,13 @@ class _FakeNavigatorState_3 extends _i1.SmartFake
         );
 
   @override
-  String toString({_i5.DiagnosticLevel? minLevel = _i5.DiagnosticLevel.info}) =>
+  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
       super.toString();
 }
 
-class _FakeGlobalKey_4<T extends _i5.State<_i5.StatefulWidget>>
-    extends _i1.SmartFake implements _i5.GlobalKey<T> {
-  _FakeGlobalKey_4(
+class _FakeGlobalKey_3<T extends _i4.State<_i4.StatefulWidget>>
+    extends _i1.SmartFake implements _i4.GlobalKey<T> {
+  _FakeGlobalKey_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,8 +73,8 @@ class _FakeGlobalKey_4<T extends _i5.State<_i5.StatefulWidget>>
         );
 }
 
-class _FakeIconData_5 extends _i1.SmartFake implements _i5.IconData {
-  _FakeIconData_5(
+class _FakeIconData_4 extends _i1.SmartFake implements _i4.IconData {
+  _FakeIconData_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -94,8 +83,8 @@ class _FakeIconData_5 extends _i1.SmartFake implements _i5.IconData {
         );
 }
 
-class _FakeBox_6<E> extends _i1.SmartFake implements _i6.Box<E> {
-  _FakeBox_6(
+class _FakeBox_5<E> extends _i1.SmartFake implements _i5.Box<E> {
+  _FakeBox_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -104,9 +93,9 @@ class _FakeBox_6<E> extends _i1.SmartFake implements _i6.Box<E> {
         );
 }
 
-class _FakeBaseCacheManager_7 extends _i1.SmartFake
-    implements _i7.BaseCacheManager {
-  _FakeBaseCacheManager_7(
+class _FakeBaseCacheManager_6 extends _i1.SmartFake
+    implements _i6.BaseCacheManager {
+  _FakeBaseCacheManager_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -115,124 +104,21 @@ class _FakeBaseCacheManager_7 extends _i1.SmartFake
         );
 }
 
-class _FakeFile_8 extends _i1.SmartFake implements _i8.File {
-  _FakeFile_8(
+class _FakeFile_7 extends _i1.SmartFake implements _i7.File {
+  _FakeFile_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
           parent,
           parentInvocation,
         );
-}
-
-/// A class which mocks [SelectionController].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSelectionController<T> extends _i1.Mock
-    implements _i9.SelectionController<T> {
-  @override
-  _i2.Equality<T> get equality => (super.noSuchMethod(
-        Invocation.getter(#equality),
-        returnValue: _FakeEquality_0<T>(
-          this,
-          Invocation.getter(#equality),
-        ),
-        returnValueForMissingStub: _FakeEquality_0<T>(
-          this,
-          Invocation.getter(#equality),
-        ),
-      ) as _i2.Equality<T>);
-  @override
-  _i3.ValueStream<Set<T>?> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _FakeValueStream_1<Set<T>?>(
-          this,
-          Invocation.getter(#stream),
-        ),
-        returnValueForMissingStub: _FakeValueStream_1<Set<T>?>(
-          this,
-          Invocation.getter(#stream),
-        ),
-      ) as _i3.ValueStream<Set<T>?>);
-  @override
-  bool get isSelecting => (super.noSuchMethod(
-        Invocation.getter(#isSelecting),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  void toggle(T? item) => super.noSuchMethod(
-        Invocation.method(
-          #toggle,
-          [item],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool isSelected(dynamic item) => (super.noSuchMethod(
-        Invocation.method(
-          #isSelected,
-          [item],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  void select(T? item) => super.noSuchMethod(
-        Invocation.method(
-          #select,
-          [item],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void deselect(T? item) => super.noSuchMethod(
-        Invocation.method(
-          #deselect,
-          [item],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void selectAll(Iterable<T>? items) => super.noSuchMethod(
-        Invocation.method(
-          #selectAll,
-          [items],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void selectNone() => super.noSuchMethod(
-        Invocation.method(
-          #selectNone,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void clear() => super.noSuchMethod(
-        Invocation.method(
-          #clear,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i10.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
 }
 
 /// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPaginatableStreamBase<T> extends _i1.Mock
-    implements _i11.PaginatableStreamBase<T> {
+    implements _i8.PaginatableStreamBase<T> {
   @override
   int get limit => (super.noSuchMethod(
         Invocation.getter(#limit),
@@ -264,29 +150,29 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i3.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
+  _i2.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
         Invocation.getter(#onLoadingChanged),
-        returnValue: _FakeValueStream_1<bool>(
+        returnValue: _FakeValueStream_0<bool>(
           this,
           Invocation.getter(#onLoadingChanged),
         ),
-        returnValueForMissingStub: _FakeValueStream_1<bool>(
+        returnValueForMissingStub: _FakeValueStream_0<bool>(
           this,
           Invocation.getter(#onLoadingChanged),
         ),
-      ) as _i3.ValueStream<bool>);
+      ) as _i2.ValueStream<bool>);
   @override
-  _i3.ValueStream<List<T>> get stream => (super.noSuchMethod(
+  _i2.ValueStream<List<T>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _FakeValueStream_1<List<T>>(
+        returnValue: _FakeValueStream_0<List<T>>(
           this,
           Invocation.getter(#stream),
         ),
-        returnValueForMissingStub: _FakeValueStream_1<List<T>>(
+        returnValueForMissingStub: _FakeValueStream_0<List<T>>(
           this,
           Invocation.getter(#stream),
         ),
-      ) as _i3.ValueStream<List<T>>);
+      ) as _i2.ValueStream<List<T>>);
   @override
   List<T> get currentValue => (super.noSuchMethod(
         Invocation.getter(#currentValue),
@@ -294,86 +180,86 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
         returnValueForMissingStub: <T>[],
       ) as List<T>);
   @override
-  _i10.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+  _i9.Future<void> loadPage(int? offset) => (super.noSuchMethod(
         Invocation.method(
           #loadPage,
           [offset],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> loadNextPage() => (super.noSuchMethod(
+  _i9.Future<void> loadNextPage() => (super.noSuchMethod(
         Invocation.method(
           #loadNextPage,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> loadPreviousPage() => (super.noSuchMethod(
+  _i9.Future<void> loadPreviousPage() => (super.noSuchMethod(
         Invocation.method(
           #loadPreviousPage,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  _i10.Future<void> dispose() => (super.noSuchMethod(
+  _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [CAViewableObjectService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCAViewableObjectService extends _i1.Mock
-    implements _i9.CAViewableObjectService {
+    implements _i10.CAViewableObjectService {
   @override
-  _i4.GoRouter get router => (super.noSuchMethod(
+  _i3.GoRouter get router => (super.noSuchMethod(
         Invocation.getter(#router),
-        returnValue: _FakeGoRouter_2(
+        returnValue: _FakeGoRouter_1(
           this,
           Invocation.getter(#router),
         ),
-        returnValueForMissingStub: _FakeGoRouter_2(
+        returnValueForMissingStub: _FakeGoRouter_1(
           this,
           Invocation.getter(#router),
         ),
-      ) as _i4.GoRouter);
+      ) as _i3.GoRouter);
   @override
-  _i5.NavigatorState get navigator => (super.noSuchMethod(
+  _i4.NavigatorState get navigator => (super.noSuchMethod(
         Invocation.getter(#navigator),
-        returnValue: _FakeNavigatorState_3(
+        returnValue: _FakeNavigatorState_2(
           this,
           Invocation.getter(#navigator),
         ),
-        returnValueForMissingStub: _FakeNavigatorState_3(
+        returnValueForMissingStub: _FakeNavigatorState_2(
           this,
           Invocation.getter(#navigator),
         ),
-      ) as _i5.NavigatorState);
+      ) as _i4.NavigatorState);
   @override
-  _i5.GlobalKey<_i5.NavigatorState> get navigatorKey => (super.noSuchMethod(
+  _i4.GlobalKey<_i4.NavigatorState> get navigatorKey => (super.noSuchMethod(
         Invocation.getter(#navigatorKey),
-        returnValue: _FakeGlobalKey_4<_i5.NavigatorState>(
+        returnValue: _FakeGlobalKey_3<_i4.NavigatorState>(
           this,
           Invocation.getter(#navigatorKey),
         ),
-        returnValueForMissingStub: _FakeGlobalKey_4<_i5.NavigatorState>(
+        returnValueForMissingStub: _FakeGlobalKey_3<_i4.NavigatorState>(
           this,
           Invocation.getter(#navigatorKey),
         ),
-      ) as _i5.GlobalKey<_i5.NavigatorState>);
+      ) as _i4.GlobalKey<_i4.NavigatorState>);
   @override
-  void onTap(_i11.Viewable? object) => super.noSuchMethod(
+  void onTap(_i8.Viewable? object) => super.noSuchMethod(
         Invocation.method(
           #onTap,
           [object],
@@ -381,7 +267,7 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  String? getSecondLine(_i11.Viewable? object) => (super.noSuchMethod(
+  String? getSecondLine(_i8.Viewable? object) => (super.noSuchMethod(
         Invocation.method(
           #getSecondLine,
           [object],
@@ -389,92 +275,92 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i5.IconData getDefaultIconFor(_i9.IImage? imageObject) =>
+  _i4.IconData getDefaultIconFor(_i10.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultIconFor,
           [imageObject],
         ),
-        returnValue: _FakeIconData_5(
+        returnValue: _FakeIconData_4(
           this,
           Invocation.method(
             #getDefaultIconFor,
             [imageObject],
           ),
         ),
-        returnValueForMissingStub: _FakeIconData_5(
+        returnValueForMissingStub: _FakeIconData_4(
           this,
           Invocation.method(
             #getDefaultIconFor,
             [imageObject],
           ),
         ),
-      ) as _i5.IconData);
+      ) as _i4.IconData);
 }
 
 /// A class which mocks [ImageUrlCacheService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockImageUrlCacheService extends _i1.Mock
-    implements _i9.ImageUrlCacheService {
+    implements _i10.ImageUrlCacheService {
   @override
-  _i6.Box<String> get box => (super.noSuchMethod(
+  _i5.Box<String> get box => (super.noSuchMethod(
         Invocation.getter(#box),
-        returnValue: _FakeBox_6<String>(
+        returnValue: _FakeBox_5<String>(
           this,
           Invocation.getter(#box),
         ),
-        returnValueForMissingStub: _FakeBox_6<String>(
+        returnValueForMissingStub: _FakeBox_5<String>(
           this,
           Invocation.getter(#box),
         ),
-      ) as _i6.Box<String>);
+      ) as _i5.Box<String>);
   @override
-  _i7.BaseCacheManager get cacheManager => (super.noSuchMethod(
+  _i6.BaseCacheManager get cacheManager => (super.noSuchMethod(
         Invocation.getter(#cacheManager),
-        returnValue: _FakeBaseCacheManager_7(
+        returnValue: _FakeBaseCacheManager_6(
           this,
           Invocation.getter(#cacheManager),
         ),
-        returnValueForMissingStub: _FakeBaseCacheManager_7(
+        returnValueForMissingStub: _FakeBaseCacheManager_6(
           this,
           Invocation.getter(#cacheManager),
         ),
-      ) as _i7.BaseCacheManager);
+      ) as _i6.BaseCacheManager);
   @override
-  _i10.Future<_i8.File> getImageFile(_i9.IImage? imageObject) =>
+  _i9.Future<_i7.File> getImageFile(_i10.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
           [imageObject],
         ),
-        returnValue: _i10.Future<_i8.File>.value(_FakeFile_8(
+        returnValue: _i9.Future<_i7.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-        returnValueForMissingStub: _i10.Future<_i8.File>.value(_FakeFile_8(
+        returnValueForMissingStub: _i9.Future<_i7.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-      ) as _i10.Future<_i8.File>);
+      ) as _i9.Future<_i7.File>);
   @override
-  _i10.Future<String> getImageUrl(_i9.IImage? imageObject) =>
+  _i9.Future<String> getImageUrl(_i10.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
           [imageObject],
         ),
-        returnValue: _i10.Future<String>.value(''),
-        returnValueForMissingStub: _i10.Future<String>.value(''),
-      ) as _i10.Future<String>);
+        returnValue: _i9.Future<String>.value(''),
+        returnValueForMissingStub: _i9.Future<String>.value(''),
+      ) as _i9.Future<String>);
   @override
-  String? getCachedImageUrl(_i9.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i10.IImage? imageObject) => (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
           [imageObject],
@@ -482,15 +368,15 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i10.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
+  _i9.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
       (super.noSuchMethod(
         Invocation.method(
           #isUrlFileCachedAndValid,
           [cachedUrl],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-        returnValueForMissingStub: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
   bool isUrlExpired(String? url) => (super.noSuchMethod(
         Invocation.method(

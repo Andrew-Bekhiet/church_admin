@@ -7,7 +7,7 @@ class ViewableObjectAppBar extends StatefulWidget {
     required this.foregroundColor,
     required this.appBarMaxHeight,
     required this.duration,
-    required this.scrollController,
+    this.scrollController,
     this.circleCrop = true,
     super.key,
   });
@@ -16,7 +16,7 @@ class ViewableObjectAppBar extends StatefulWidget {
   final ViewableWithIDAndImage viewable;
   final double appBarMaxHeight;
   final Duration duration;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final bool circleCrop;
 
   @override
@@ -81,7 +81,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
   @override
   void initState() {
     super.initState();
-    widget.scrollController.position.isScrollingNotifier
+    widget.scrollController?.position.isScrollingNotifier
         .addListener(_scrollListener);
   }
 
@@ -90,9 +90,9 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.scrollController != widget.scrollController) {
-      oldWidget.scrollController.position.isScrollingNotifier
+      oldWidget.scrollController?.position.isScrollingNotifier
           .removeListener(_scrollListener);
-      widget.scrollController.position.isScrollingNotifier
+      widget.scrollController?.position.isScrollingNotifier
           .addListener(_scrollListener);
     }
   }
@@ -145,10 +145,10 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
   }
 
   Future<void> _scrollListener() async {
-    if (widget.scrollController.position.isScrollingNotifier.value) return;
+    if (widget.scrollController!.position.isScrollingNotifier.value) return;
 
     final maxScroll = widget.appBarMaxHeight - kToolbarHeight;
-    final currentScroll = widget.scrollController.offset;
+    final currentScroll = widget.scrollController!.offset;
     final scrollPercent = currentScroll / maxScroll;
 
     if (scrollPercent < 1) {
@@ -159,19 +159,20 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                   ? current
                   : nearest,
         );
-
-        widget.scrollController.animateTo(
-          nearestSnap * maxScroll,
-          duration: widget.duration,
-          curve: Curves.easeOutExpo,
-        );
+        if (widget.scrollController!.hasClients) {
+          widget.scrollController!.animateTo(
+            nearestSnap * maxScroll,
+            duration: widget.duration,
+            curve: Curves.easeOutExpo,
+          );
+        }
       });
     }
   }
 
   @override
   void dispose() {
-    widget.scrollController.position.isScrollingNotifier
+    widget.scrollController?.position.isScrollingNotifier
         .removeListener(_scrollListener);
 
     super.dispose();

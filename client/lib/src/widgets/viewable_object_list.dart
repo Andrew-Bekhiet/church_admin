@@ -100,6 +100,7 @@ class _ViewableObjectListState<T extends Viewable>
         }
 
         return ListView.builder(
+          padding: const EdgeInsets.all(2),
           controller: scrollController,
           itemBuilder: (context, i) {
             if (i == items.length) {

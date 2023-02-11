@@ -1,0 +1,9 @@
+subscription watchAllStores(
+  $limit: Int = 200
+  $orderBy: [StoresOrderBy!] = { name: ASC }
+  $where: [StoresBoolExp!] = {}
+) {
+  stores(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
+    ...Store
+  }
+}

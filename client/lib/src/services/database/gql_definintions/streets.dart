@@ -11,21 +11,34 @@ class StreetsDAO extends DAOBase {
 
   GQLPaginatableStream<Street> paginateStreets({
     Stream<String?>? searchQuery,
+    Area? area,
   }) {
     return GQLPaginatableStream<Street>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
+        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+          event,
+          Variables$Subscription$watchAllStreets.new,
+          Input$StreetsBoolExp.new,
+        );
+
+        final variables = defaultSearchVars.copyWith(
+          where: [
+            if (area != null)
+              Input$StreetsBoolExp(
+                areas: Input$AreasBoolExp(
+                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                ),
+              ),
+            ...defaultSearchVars.where ?? [],
+          ],
+        );
+
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllStreets,
             operationName: 'watchAllStreets',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables$Subscription$watchAllStreets.new,
-                  Input$StreetsBoolExp.new,
-                )
-                .toJson(),
+            variables: variables.toJson(),
             parserFn: db.parser.singleListParser(Street.fromJson),
           ),
         );

@@ -22,6 +22,7 @@ class DatabaseService {
   late final areas = AreasDAO(db: this);
   late final streets = StreetsDAO(db: this);
   late final families = FamiliesDAO(db: this);
+  late final stores = StoresDAO(db: this);
 
   late final persons = PersonsDAO(db: this);
 

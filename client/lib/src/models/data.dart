@@ -5,6 +5,7 @@ export 'data/group.dart';
 export 'data/person.dart';
 export 'data/persons_geolocations_response.dart';
 export 'data/service.dart';
+export 'data/store.dart';
 export 'data/street.dart';
 export 'data/user.dart';
 export 'data/user_data.dart';

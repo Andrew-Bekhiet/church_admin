@@ -93,8 +93,8 @@ class _FakeFamiliesDAO_5 extends _i1.SmartFake implements _i5.FamiliesDAO {
         );
 }
 
-class _FakePersonsDAO_6 extends _i1.SmartFake implements _i5.PersonsDAO {
-  _FakePersonsDAO_6(
+class _FakeStoresDAO_6 extends _i1.SmartFake implements _i5.StoresDAO {
+  _FakeStoresDAO_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -103,8 +103,8 @@ class _FakePersonsDAO_6 extends _i1.SmartFake implements _i5.PersonsDAO {
         );
 }
 
-class _FakeServicesDAO_7 extends _i1.SmartFake implements _i5.ServicesDAO {
-  _FakeServicesDAO_7(
+class _FakePersonsDAO_7 extends _i1.SmartFake implements _i5.PersonsDAO {
+  _FakePersonsDAO_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -113,8 +113,8 @@ class _FakeServicesDAO_7 extends _i1.SmartFake implements _i5.ServicesDAO {
         );
 }
 
-class _FakeClassesDAO_8 extends _i1.SmartFake implements _i5.ClassesDAO {
-  _FakeClassesDAO_8(
+class _FakeServicesDAO_8 extends _i1.SmartFake implements _i5.ServicesDAO {
+  _FakeServicesDAO_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -123,8 +123,8 @@ class _FakeClassesDAO_8 extends _i1.SmartFake implements _i5.ClassesDAO {
         );
 }
 
-class _FakeGroupsDAO_9 extends _i1.SmartFake implements _i5.GroupsDAO {
-  _FakeGroupsDAO_9(
+class _FakeClassesDAO_9 extends _i1.SmartFake implements _i5.ClassesDAO {
+  _FakeClassesDAO_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -133,8 +133,8 @@ class _FakeGroupsDAO_9 extends _i1.SmartFake implements _i5.GroupsDAO {
         );
 }
 
-class _FakeUsersDAO_10 extends _i1.SmartFake implements _i5.UsersDAO {
-  _FakeUsersDAO_10(
+class _FakeGroupsDAO_10 extends _i1.SmartFake implements _i5.GroupsDAO {
+  _FakeGroupsDAO_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -143,8 +143,8 @@ class _FakeUsersDAO_10 extends _i1.SmartFake implements _i5.UsersDAO {
         );
 }
 
-class _FakeMetadataDAO_11 extends _i1.SmartFake implements _i5.MetadataDAO {
-  _FakeMetadataDAO_11(
+class _FakeUsersDAO_11 extends _i1.SmartFake implements _i5.UsersDAO {
+  _FakeUsersDAO_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -153,8 +153,8 @@ class _FakeMetadataDAO_11 extends _i1.SmartFake implements _i5.MetadataDAO {
         );
 }
 
-class _FakeHistoryDAO_12 extends _i1.SmartFake implements _i5.HistoryDAO {
-  _FakeHistoryDAO_12(
+class _FakeMetadataDAO_12 extends _i1.SmartFake implements _i5.MetadataDAO {
+  _FakeMetadataDAO_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -163,8 +163,8 @@ class _FakeHistoryDAO_12 extends _i1.SmartFake implements _i5.HistoryDAO {
         );
 }
 
-class _FakeValueKey_13<T> extends _i1.SmartFake implements _i6.ValueKey<T> {
-  _FakeValueKey_13(
+class _FakeHistoryDAO_13 extends _i1.SmartFake implements _i5.HistoryDAO {
+  _FakeHistoryDAO_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -173,8 +173,8 @@ class _FakeValueKey_13<T> extends _i1.SmartFake implements _i6.ValueKey<T> {
         );
 }
 
-class _FakeBox_14<E> extends _i1.SmartFake implements _i7.Box<E> {
-  _FakeBox_14(
+class _FakeValueKey_14<T> extends _i1.SmartFake implements _i6.ValueKey<T> {
+  _FakeValueKey_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -183,8 +183,18 @@ class _FakeBox_14<E> extends _i1.SmartFake implements _i7.Box<E> {
         );
 }
 
-class _FakeLazyBox_15<E> extends _i1.SmartFake implements _i7.LazyBox<E> {
-  _FakeLazyBox_15(
+class _FakeBox_15<E> extends _i1.SmartFake implements _i7.Box<E> {
+  _FakeBox_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLazyBox_16<E> extends _i1.SmartFake implements _i7.LazyBox<E> {
+  _FakeLazyBox_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -397,13 +407,25 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
         ),
       ) as _i5.FamiliesDAO);
   @override
+  _i5.StoresDAO get stores => (super.noSuchMethod(
+        Invocation.getter(#stores),
+        returnValue: _FakeStoresDAO_6(
+          this,
+          Invocation.getter(#stores),
+        ),
+        returnValueForMissingStub: _FakeStoresDAO_6(
+          this,
+          Invocation.getter(#stores),
+        ),
+      ) as _i5.StoresDAO);
+  @override
   _i5.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_6(
+        returnValue: _FakePersonsDAO_7(
           this,
           Invocation.getter(#persons),
         ),
-        returnValueForMissingStub: _FakePersonsDAO_6(
+        returnValueForMissingStub: _FakePersonsDAO_7(
           this,
           Invocation.getter(#persons),
         ),
@@ -411,11 +433,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_7(
+        returnValue: _FakeServicesDAO_8(
           this,
           Invocation.getter(#services),
         ),
-        returnValueForMissingStub: _FakeServicesDAO_7(
+        returnValueForMissingStub: _FakeServicesDAO_8(
           this,
           Invocation.getter(#services),
         ),
@@ -423,11 +445,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_8(
+        returnValue: _FakeClassesDAO_9(
           this,
           Invocation.getter(#classes),
         ),
-        returnValueForMissingStub: _FakeClassesDAO_8(
+        returnValueForMissingStub: _FakeClassesDAO_9(
           this,
           Invocation.getter(#classes),
         ),
@@ -435,11 +457,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_9(
+        returnValue: _FakeGroupsDAO_10(
           this,
           Invocation.getter(#groups),
         ),
-        returnValueForMissingStub: _FakeGroupsDAO_9(
+        returnValueForMissingStub: _FakeGroupsDAO_10(
           this,
           Invocation.getter(#groups),
         ),
@@ -447,11 +469,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_10(
+        returnValue: _FakeUsersDAO_11(
           this,
           Invocation.getter(#users),
         ),
-        returnValueForMissingStub: _FakeUsersDAO_10(
+        returnValueForMissingStub: _FakeUsersDAO_11(
           this,
           Invocation.getter(#users),
         ),
@@ -459,11 +481,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_11(
+        returnValue: _FakeMetadataDAO_12(
           this,
           Invocation.getter(#metadata),
         ),
-        returnValueForMissingStub: _FakeMetadataDAO_11(
+        returnValueForMissingStub: _FakeMetadataDAO_12(
           this,
           Invocation.getter(#metadata),
         ),
@@ -471,11 +493,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i5.HistoryDAO get history => (super.noSuchMethod(
         Invocation.getter(#history),
-        returnValue: _FakeHistoryDAO_12(
+        returnValue: _FakeHistoryDAO_13(
           this,
           Invocation.getter(#history),
         ),
-        returnValueForMissingStub: _FakeHistoryDAO_12(
+        returnValueForMissingStub: _FakeHistoryDAO_13(
           this,
           Invocation.getter(#history),
         ),
@@ -521,11 +543,11 @@ class MockDummyNamedLocation extends _i1.Mock
   @override
   _i6.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_13<String>(
+        returnValue: _FakeValueKey_14<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-        returnValueForMissingStub: _FakeValueKey_13<String>(
+        returnValueForMissingStub: _FakeValueKey_14<String>(
           this,
           Invocation.getter(#pageKey),
         ),
@@ -558,11 +580,11 @@ class MockUserSettingsService extends _i1.Mock
   @override
   _i7.Box<dynamic> get box => (super.noSuchMethod(
         Invocation.getter(#box),
-        returnValue: _FakeBox_14<dynamic>(
+        returnValue: _FakeBox_15<dynamic>(
           this,
           Invocation.getter(#box),
         ),
-        returnValueForMissingStub: _FakeBox_14<dynamic>(
+        returnValueForMissingStub: _FakeBox_15<dynamic>(
           this,
           Invocation.getter(#box),
         ),
@@ -642,14 +664,14 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
           #box,
           [name],
         ),
-        returnValue: _FakeBox_14<E>(
+        returnValue: _FakeBox_15<E>(
           this,
           Invocation.method(
             #box,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeBox_14<E>(
+        returnValueForMissingStub: _FakeBox_15<E>(
           this,
           Invocation.method(
             #box,
@@ -758,14 +780,14 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
           #lazyBox,
           [name],
         ),
-        returnValue: _FakeLazyBox_15<E>(
+        returnValue: _FakeLazyBox_16<E>(
           this,
           Invocation.method(
             #lazyBox,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeLazyBox_15<E>(
+        returnValueForMissingStub: _FakeLazyBox_16<E>(
           this,
           Invocation.method(
             #lazyBox,
@@ -800,7 +822,7 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
             #collection: collection,
           },
         ),
-        returnValue: _i8.Future<_i7.Box<E>>.value(_FakeBox_14<E>(
+        returnValue: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
           this,
           Invocation.method(
             #openBox,
@@ -817,7 +839,7 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
             },
           ),
         )),
-        returnValueForMissingStub: _i8.Future<_i7.Box<E>>.value(_FakeBox_14<E>(
+        returnValueForMissingStub: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
           this,
           Invocation.method(
             #openBox,
@@ -860,7 +882,7 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
             #collection: collection,
           },
         ),
-        returnValue: _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_15<E>(
+        returnValue: _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
           this,
           Invocation.method(
             #openLazyBox,
@@ -877,7 +899,7 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_15<E>(
+            _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
           this,
           Invocation.method(
             #openLazyBox,

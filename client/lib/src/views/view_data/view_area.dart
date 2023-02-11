@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide ViewableObjectWidget;
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewArea extends StatefulWidget {
@@ -36,8 +37,6 @@ class ViewArea extends StatefulWidget {
 }
 
 class _ViewAreaState extends State<ViewArea> {
-  final scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Area?>(
@@ -87,9 +86,8 @@ class _ViewAreaState extends State<ViewArea> {
               themeData.textTheme.titleMedium!.color!,
         );
         return Scaffold(
-          body: CustomScrollView(
-            controller: scrollController,
-            slivers: [
+          body: NestedScrollView(
+            headerSliverBuilder: (context, isBodyScrolled) => [
               SliverAppBar(
                 backgroundColor: area.color,
                 foregroundColor: foregroundColor,
@@ -119,7 +117,6 @@ class _ViewAreaState extends State<ViewArea> {
                   viewable:
                       widget.area?.hasImage ?? false ? widget.area! : area,
                   appBarMaxHeight: 280,
-                  scrollController: scrollController,
                   duration: const Duration(milliseconds: 450),
                 ),
               ),
@@ -155,22 +152,129 @@ class _ViewAreaState extends State<ViewArea> {
                           ? AdminUsers(users: area.adminUsers!)
                           : const Text('لا يوجد خدام محددين للمنطقة'),
                     ),
-                    const Placeholder(
-                      fallbackHeight: 1000,
-                    )
                   ],
                 ),
-              )
+              ),
             ],
+            body: _AreaContents(area: area),
           ),
         );
       },
     );
   }
+}
+
+class _AreaContents extends StatefulWidget {
+  const _AreaContents({required this.area});
+
+  final Area area;
 
   @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
+  State<_AreaContents> createState() => _AreaContentsState();
+}
+
+class _AreaContentsState extends State<_AreaContents>
+    with SingleTickerProviderStateMixin {
+  late final _streetsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
+      area: widget.area,
+    ),
+  );
+  late final _familiesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
+      area: widget.area,
+    ),
+  );
+  late final _storesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
+      area: widget.area,
+    ),
+  );
+  late final _personsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
+      area: widget.area,
+    ),
+  );
+
+  late final IconData streetIcon;
+  late final IconData familyIcon;
+  late final IconData storeIcon;
+  late final IconData personIcon;
+
+  late final TabController _tabController = TabController(
+    length: 4,
+    vsync: this,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+
+    final viewableObjectService = GetIt.I<CAViewableObjectService>();
+
+    streetIcon =
+        viewableObjectService.getDefaultIconFor(Street(id: '', name: ''));
+    familyIcon =
+        viewableObjectService.getDefaultIconFor(Family(id: '', name: ''));
+    storeIcon =
+        viewableObjectService.getDefaultIconFor(Store(id: '', name: ''));
+    personIcon =
+        viewableObjectService.getDefaultIconFor(Person(id: '', name: ''));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(text: 'الشوارع', icon: Icon(streetIcon)),
+            Tab(text: 'العائلات', icon: Icon(familyIcon)),
+            Tab(text: 'المتاجر', icon: Icon(storeIcon)),
+            Tab(text: 'الأشخاص', icon: Icon(personIcon)),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              LazyTabPage(
+                index: 0,
+                tabController: _tabController,
+                builder: (context) => ViewableObjectList(
+                  scrollController: PrimaryScrollController.maybeOf(context),
+                  objectsController: _streetsController,
+                ),
+              ),
+              LazyTabPage(
+                index: 1,
+                tabController: _tabController,
+                builder: (context) => ViewableObjectList(
+                  scrollController: PrimaryScrollController.maybeOf(context),
+                  objectsController: _familiesController,
+                ),
+              ),
+              LazyTabPage(
+                index: 2,
+                tabController: _tabController,
+                builder: (context) => ViewableObjectList(
+                  scrollController: PrimaryScrollController.maybeOf(context),
+                  objectsController: _storesController,
+                ),
+              ),
+              LazyTabPage(
+                index: 3,
+                tabController: _tabController,
+                builder: (context) => ViewableObjectList(
+                  scrollController: PrimaryScrollController.maybeOf(context),
+                  objectsController: _personsController,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

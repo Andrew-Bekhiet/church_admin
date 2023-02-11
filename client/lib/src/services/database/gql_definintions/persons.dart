@@ -87,14 +87,28 @@ class PersonsDAO extends DAOBase {
   GQLPaginatableStream<Person> paginatePersons({
     Stream<String?>? searchQuery,
     String? secondLineFieldName,
+    Area? area,
   }) {
     return GQLPaginatableStream<Person>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-        final search = event.search;
-        final lastSearch = event.lastSearch;
+        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+          event,
+          Variables$Subscription$watchAllPersons.new,
+          Input$PersonsBoolExp.new,
+        );
+
+        final variables = defaultSearchVars.copyWith(
+          where: [
+            if (area != null)
+              Input$PersonsBoolExp(
+                areas: Input$AreasBoolExp(
+                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                ),
+              ),
+            ...defaultSearchVars.where ?? [],
+          ],
+        );
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -108,25 +122,7 @@ class PersonsDAO extends DAOBase {
                     },
                   ),
             operationName: 'watchAllPersons',
-            variables: Variables$Subscription$watchAllPersons(
-              limit: instance.limit + 1,
-              where: [
-                if (search != null && search.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    name: Input$StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                if (lastSearch == search && offset > 0)
-                  Input$PersonsBoolExp(
-                    name: Input$StringComparisonExp(
-                      $_gt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .name,
-                    ),
-                  ),
-              ],
-            ).toJson(),
+            variables: variables.toJson(),
             parserFn: db.parser.singleListParser(Person.fromJson),
           ),
         );
@@ -140,8 +136,9 @@ class PersonsDAO extends DAOBase {
     final queryOptions = QueryOptions(
       document: documentNodeQuerypersonServicesClassesGroups,
       operationName: 'personServicesClassesGroups',
-      variables: Variables$Query$personServicesClassesGroups(id: personId.toUuid())
-          .toJson(),
+      variables:
+          Variables$Query$personServicesClassesGroups(id: personId.toUuid())
+              .toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
     );
 

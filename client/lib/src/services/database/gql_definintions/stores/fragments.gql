@@ -1,0 +1,10 @@
+fragment Store on Stores {
+  ...StoreNoPhoto
+  photoUpdatedAt
+}
+
+fragment StoreNoPhoto on Stores {
+  id
+  name
+  color
+}

@@ -159,7 +159,8 @@ class CAViewableObjectService implements DefaultViewableObjectService {
   IconData getDefaultIconFor(IImage imageObject) {
     if (imageObject is Area) return Icons.pin_drop;
     if (imageObject is Street) return Icons.pin_drop;
-    if (imageObject is Family) return Icons.pin_drop;
+    if (imageObject is Family) return Icons.diversity_1;
+    if (imageObject is Store) return Icons.store;
     if (imageObject is Service) return Icons.miscellaneous_services;
     if (imageObject is Class) return Icons.groups_outlined;
     if (imageObject is Group) return Icons.groups;

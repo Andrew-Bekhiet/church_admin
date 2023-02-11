@@ -11,21 +11,34 @@ class FamiliesDAO extends DAOBase {
 
   GQLPaginatableStream<Family> paginateFamilies({
     Stream<String?>? searchQuery,
+    Area? area,
   }) {
     return GQLPaginatableStream<Family>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
+        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+          event,
+          Variables$Subscription$watchAllFamilies.new,
+          Input$FamiliesBoolExp.new,
+        );
+
+        final variables = defaultSearchVars.copyWith(
+          where: [
+            if (area != null)
+              Input$FamiliesBoolExp(
+                areas: Input$AreasBoolExp(
+                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                ),
+              ),
+            ...defaultSearchVars.where ?? [],
+          ],
+        );
+
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllFamilies,
             operationName: 'watchAllFamilies',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables$Subscription$watchAllFamilies.new,
-                  Input$FamiliesBoolExp.new,
-                )
-                .toJson(),
+            variables: variables.toJson(),
             parserFn: db.parser.singleListParser(Family.fromJson),
           ),
         );

@@ -6,5 +6,6 @@ export 'gql_definintions/history.dart';
 export 'gql_definintions/metadata.dart';
 export 'gql_definintions/persons.dart';
 export 'gql_definintions/services.dart';
+export 'gql_definintions/stores.dart';
 export 'gql_definintions/streets.dart';
 export 'gql_definintions/users.dart';
