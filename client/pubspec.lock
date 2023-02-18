@@ -609,7 +609,7 @@ packages:
     source: hosted
     version: "0.2.1+20"
   firebase_dynamic_links:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_dynamic_links
       sha256: "6db5fca5e0013d5c26ef6fa40ba6525253aec14209cdde397acc6db5d2df6bc9"

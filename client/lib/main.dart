@@ -12,7 +12,6 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
@@ -254,8 +253,6 @@ void _initializeFirebaseDependencies() {
     FirebaseFunctions.instanceFor(region: 'europe-west6'),
   );
   GetIt.I.registerSingleton<FirebaseMessaging>(FirebaseMessaging.instance);
-  GetIt.I
-      .registerSingleton<FirebaseDynamicLinks>(FirebaseDynamicLinks.instance);
 }
 
 Future<void> _initializeFMTC() async {
