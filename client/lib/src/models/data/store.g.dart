@@ -14,6 +14,16 @@ _$_Store _$$_StoreFromJson(Map json) => _$_Store(
           : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
       geolocation: pointFromJson(json['geolocation']),
       color: colorFromInt(json['color'] as int?),
+      areas: (json['areas'] as List<dynamic>?)
+          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      streets: (json['streets'] as List<dynamic>?)
+          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
@@ -25,5 +35,8 @@ Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
       'family': instance.family?.toJson(),
       'geolocation': pointToJson(instance.geolocation),
       'color': colorToInt(instance.color),
+      'areas': instance.areas?.map((e) => e.toJson()).toList(),
+      'streets': instance.streets?.map((e) => e.toJson()).toList(),
+      'lastEdit': instance.lastEdit?.toJson(),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
     };

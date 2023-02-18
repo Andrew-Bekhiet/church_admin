@@ -7,3 +7,19 @@ subscription watchAllFamilies(
     ...Family
   }
 }
+
+subscription watchFamily($id: uuid!) {
+  familiesByPk(id: $id) {
+    ...Family
+    areas {
+      ...Area
+    }
+    streets {
+      ...Street
+    }
+    geolocation
+    address
+    notes
+    lastEdit
+  }
+}

@@ -87,7 +87,12 @@ class PersonsDAO extends DAOBase {
   GQLPaginatableStream<Person> paginatePersons({
     Stream<String?>? searchQuery,
     String? secondLineFieldName,
-    Area? area,
+    String? byAreaId,
+    String? byStreetId,
+    String? byFamilyId,
+    String? byServiceId,
+    String? byClassId,
+    String? byGroupId,
   }) {
     return GQLPaginatableStream<Person>(
       searchQuery: searchQuery,
@@ -100,10 +105,41 @@ class PersonsDAO extends DAOBase {
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (area != null)
+            if (byServiceId != null)
+              Input$PersonsBoolExp(
+                services: Input$PersonsServicesBoolExp(
+                  serviceId:
+                      Input$UuidComparisonExp($_eq: byServiceId.toUuid()),
+                ),
+              ),
+            if (byClassId != null)
+              Input$PersonsBoolExp(
+                classes: Input$ClassesBoolExp(
+                  id: Input$UuidComparisonExp($_eq: byClassId.toUuid()),
+                ),
+              ),
+            if (byGroupId != null)
+              Input$PersonsBoolExp(
+                groups: Input$PersonsGroupsBoolExp(
+                  groupId: Input$UuidComparisonExp($_eq: byGroupId.toUuid()),
+                ),
+              ),
+            if (byAreaId != null)
               Input$PersonsBoolExp(
                 areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
+                ),
+              ),
+            if (byStreetId != null)
+              Input$PersonsBoolExp(
+                streets: Input$StreetsBoolExp(
+                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
+                ),
+              ),
+            if (byFamilyId != null)
+              Input$PersonsBoolExp(
+                familyId: Input$UuidComparisonExp(
+                  $_eq: byFamilyId.toUuid(),
                 ),
               ),
             ...defaultSearchVars.where ?? [],
@@ -150,12 +186,14 @@ class PersonsDAO extends DAOBase {
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
     List<UuidValue> familiesIds = const [],
+    List<UuidValue> storesIds = const [],
     List<UuidValue> servicesIds = const [],
     List<UuidValue> classesIds = const [],
     List<UuidValue> groupsIds = const [],
     bool getAreas = false,
     bool getStreets = false,
     bool getFamilies = false,
+    bool getStores = false,
     bool getPersons = false,
   }) {
     assert(
@@ -165,11 +203,12 @@ class PersonsDAO extends DAOBase {
           servicesIds.isNotEmpty ||
           classesIds.isNotEmpty ||
           groupsIds.isNotEmpty ||
-          familiesIds.isNotEmpty,
+          familiesIds.isNotEmpty||
+          storesIds.isNotEmpty,
       'At least one condition should be given',
     );
     assert(
-      getAreas || getStreets || getFamilies || getPersons,
+      getAreas || getStreets || getFamilies ||getStores || getPersons,
       'At lease one type should be fetched',
     );
 
@@ -180,9 +219,11 @@ class PersonsDAO extends DAOBase {
         getAreas: getAreas,
         getStreets: getStreets,
         getFamilies: getFamilies,
+        getStores: getStores,
         getPersons: getPersons,
         areasIds: areasIds,
         familiesIds: familiesIds,
+        storesIds: storesIds,
         streetsIds: streetsIds,
         personsConditions: [
           if (personId != null)

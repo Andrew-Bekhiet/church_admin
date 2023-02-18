@@ -11,7 +11,7 @@ class StreetsDAO extends DAOBase {
 
   GQLPaginatableStream<Street> paginateStreets({
     Stream<String?>? searchQuery,
-    Area? area,
+    String? areaId,
   }) {
     return GQLPaginatableStream<Street>(
       searchQuery: searchQuery,
@@ -24,10 +24,10 @@ class StreetsDAO extends DAOBase {
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (area != null)
+            if (areaId != null)
               Input$StreetsBoolExp(
                 areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                  id: Input$UuidComparisonExp($_eq: areaId.toUuid()),
                 ),
               ),
             ...defaultSearchVars.where ?? [],
@@ -43,6 +43,21 @@ class StreetsDAO extends DAOBase {
           ),
         );
       },
+    );
+  }
+
+  Stream<Street?> watchStreet({
+    required String streetId,
+  }) {
+    return graphQLClient.subscribeAndReturnParsed(
+      SubscriptionOptions(
+        document: documentNodeSubscriptionwatchStreet,
+        operationName: 'watchStreet',
+        variables: Variables$Subscription$watchStreet(
+          id: streetId.toUuid(),
+        ).toJson(),
+        parserFn: db.parser.singleParser(Street.fromJson),
+      ),
     );
   }
 }

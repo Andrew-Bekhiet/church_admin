@@ -27,6 +27,9 @@ mixin _$Store {
   Point? get geolocation => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
+  List<Area>? get areas => throw _privateConstructorUsedError;
+  List<Street>? get streets => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,9 +48,13 @@ abstract class $StoreCopyWith<$Res> {
       Family? family,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      List<Area>? areas,
+      List<Street>? streets,
+      LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt});
 
   $FamilyCopyWith<$Res>? get family;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -68,6 +75,9 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
     Object? family = freezed,
     Object? geolocation = freezed,
     Object? color = freezed,
+    Object? areas = freezed,
+    Object? streets = freezed,
+    Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -91,6 +101,18 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
+      areas: freezed == areas
+          ? _value.areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as List<Area>?,
+      streets: freezed == streets
+          ? _value.streets
+          : streets // ignore: cast_nullable_to_non_nullable
+              as List<Street>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -109,6 +131,18 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
       return _then(_value.copyWith(family: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -123,10 +157,15 @@ abstract class _$$_StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
       Family? family,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      List<Area>? areas,
+      List<Street>? streets,
+      LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt});
 
   @override
   $FamilyCopyWith<$Res>? get family;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -143,6 +182,9 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
     Object? family = freezed,
     Object? geolocation = freezed,
     Object? color = freezed,
+    Object? areas = freezed,
+    Object? streets = freezed,
+    Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
   }) {
     return _then(_$_Store(
@@ -166,6 +208,18 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
+      areas: freezed == areas
+          ? _value._areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as List<Area>?,
+      streets: freezed == streets
+          ? _value._streets
+          : streets // ignore: cast_nullable_to_non_nullable
+              as List<Street>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       photoUpdatedAt: freezed == photoUpdatedAt
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -183,8 +237,13 @@ class _$_Store extends _Store {
       this.family,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
+      final List<Area>? areas,
+      final List<Street>? streets,
+      this.lastEdit,
       this.photoUpdatedAt})
-      : super._();
+      : _areas = areas,
+        _streets = streets,
+        super._();
 
   factory _$_Store.fromJson(Map<String, dynamic> json) =>
       _$$_StoreFromJson(json);
@@ -201,12 +260,34 @@ class _$_Store extends _Store {
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+  final List<Area>? _areas;
+  @override
+  List<Area>? get areas {
+    final value = _areas;
+    if (value == null) return null;
+    if (_areas is EqualUnmodifiableListView) return _areas;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Street>? _streets;
+  @override
+  List<Street>? get streets {
+    final value = _streets;
+    if (value == null) return null;
+    if (_streets is EqualUnmodifiableListView) return _streets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final LastRecordedByInfo? lastEdit;
   @override
   final DateTime? photoUpdatedAt;
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, family: $family, geolocation: $geolocation, color: $color, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Store(id: $id, name: $name, family: $family, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt)';
   }
 
   @override
@@ -220,6 +301,10 @@ class _$_Store extends _Store {
             (identical(other.geolocation, geolocation) ||
                 other.geolocation == geolocation) &&
             (identical(other.color, color) || other.color == color) &&
+            const DeepCollectionEquality().equals(other._areas, _areas) &&
+            const DeepCollectionEquality().equals(other._streets, _streets) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt));
   }
@@ -227,7 +312,16 @@ class _$_Store extends _Store {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, family, geolocation, color, photoUpdatedAt);
+      runtimeType,
+      id,
+      name,
+      family,
+      geolocation,
+      color,
+      const DeepCollectionEquality().hash(_areas),
+      const DeepCollectionEquality().hash(_streets),
+      lastEdit,
+      photoUpdatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -252,6 +346,9 @@ abstract class _Store extends Store {
           final Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
+      final List<Area>? areas,
+      final List<Street>? streets,
+      final LastRecordedByInfo? lastEdit,
       final DateTime? photoUpdatedAt}) = _$_Store;
   _Store._() : super._();
 
@@ -269,6 +366,12 @@ abstract class _Store extends Store {
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
+  @override
+  List<Area>? get areas;
+  @override
+  List<Street>? get streets;
+  @override
+  LastRecordedByInfo? get lastEdit;
   @override
   DateTime? get photoUpdatedAt;
   @override

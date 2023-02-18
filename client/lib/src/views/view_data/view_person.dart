@@ -13,8 +13,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
 class ViewPerson extends StatefulWidget {
-  static final route = GoRoute(
-    name: 'view_person',
+  static final GoRoute route = GoRoute(
     path: 'viewPerson',
     builder: (context, state) {
       if (state.queryParams['id'] == null) {
@@ -27,9 +26,12 @@ class ViewPerson extends StatefulWidget {
       );
     },
     routes: [
-      EditPerson.editPersonRoute,
+      EditPerson.route,
       ViewUser.route,
-      PersonAnalysis.personRoute,
+      PersonAnalysis.route,
+      // ViewService.route,
+      // ViewClass.route,
+      // ViewGroup.route,
     ],
   );
 
@@ -113,341 +115,351 @@ class _ViewPersonState extends State<ViewPerson> {
               themeData.listTileTheme.textColor ??
               themeData.textTheme.titleMedium!.color!,
         );
-        return Scaffold(
-          body: CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SliverAppBar(
-                backgroundColor: person.color,
-                foregroundColor: foregroundColor,
-                stretch: true,
-                pinned: true,
-                expandedHeight: 280,
-                actions: [
-                  if (snapshot.connectionState != ConnectionState.active)
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  else
-                    IconButton(
-                      tooltip: 'تعديل',
-                      onPressed: () => context.goNamed(
-                        'edit_person',
-                        queryParams: {'id': widget.personId},
-                        extra: {'person': person},
-                      ),
-                      icon: const Icon(Icons.edit),
-                    ),
-                ],
-                flexibleSpace: ViewableObjectAppBar(
+        return Theme(
+          data: CAThemingService.getDefault(primaryOverride: person.color),
+          child: Scaffold(
+            body: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: person.color,
                   foregroundColor: foregroundColor,
-                  viewable: widget.person?.hasImage ?? false
-                      ? widget.person!
-                      : person,
-                  appBarMaxHeight: 280,
-                  scrollController: scrollController,
-                  duration: const Duration(milliseconds: 450),
+                  stretch: true,
+                  pinned: true,
+                  expandedHeight: 280,
+                  actions: [
+                    if (snapshot.connectionState != ConnectionState.active)
+                      const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    else
+                      IconButton(
+                        tooltip: 'تعديل',
+                        onPressed: () => context.go(
+                          Uri(
+                            path: '/viewPerson/editPerson',
+                            queryParameters: {'id': widget.personId},
+                          ).toString(),
+                          extra: {'person': person},
+                        ),
+                        icon: const Icon(Icons.edit),
+                      ),
+                  ],
+                  flexibleSpace: ViewableObjectAppBar(
+                    foregroundColor: foregroundColor,
+                    viewable: widget.person?.hasImage ?? false
+                        ? widget.person!
+                        : person,
+                    appBarMaxHeight: 280,
+                    scrollController: scrollController,
+                    duration: const Duration(milliseconds: 450),
+                  ),
                 ),
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    PhoneNumberProperty(
-                      'رقم الهاتف',
-                      person.mainPhone,
-                      (n) async => _phoneCall(context, n),
-                      (n) async => _contactAdd(context, n, person),
-                    ),
-                    ...person.otherPhones.entries.map(
-                      (e) => PhoneNumberProperty(
-                        e.key,
-                        e.value,
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      PhoneNumberProperty(
+                        'رقم الهاتف',
+                        person.mainPhone,
                         (n) async => _phoneCall(context, n),
                         (n) async => _contactAdd(context, n, person),
                       ),
-                    ),
-                    CopiablePropertyWidget(
-                      'العنوان',
-                      person.address,
-                      additionalOptions: [
-                        if (person.geolocation != null)
-                          IconButton(
-                            icon: const Icon(Icons.map),
-                            onPressed: () async => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DataGeomap(initialPerson: person),
-                              ),
-                            ),
-                            tooltip: 'إظهار على الخريطة',
-                          ),
-                      ],
-                    ),
-                    ListTile(
-                      title: const Text('السن'),
-                      subtitle: person.birthdate != null
-                          ? Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    person.birthdate!
-                                        .toDurationString(appendSince: false),
-                                  ),
-                                ),
-                                Text(
-                                  DateFormat('yyyy/M/d').format(
-                                    person.birthdate!,
-                                  ),
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                ),
-                              ],
-                            )
-                          : null,
-                    ),
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: const Text('الخدمات المشارك بها'),
-                      subtitle: _ShowMore<Service>(
-                        person: person,
-                        getField: (p) => p?.services,
-                        loadAll: () => _servicesLimit.add(null),
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('الفصول التي يظهر بها'),
-                      subtitle: _ShowMore<Class>(
-                        person: person,
-                        getField: (p) => p?.classes,
-                        loadAll: () => _classesLimit.add(null),
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('المجموعات المشارك بها'),
-                      subtitle: _ShowMore<Group>(
-                        person: person,
-                        getField: (p) => p?.groups,
-                        loadAll: () => _groupsLimit.add(null),
-                      ),
-                    ),
-                    if (person.isStudent) ...[
-                      ListTile(
-                        title: const Text('السنة الدراسية'),
-                        subtitle: Text(person.studyYear?.name ?? ''),
-                      ),
-                      if ((person.studyYearId ?? person.studyYear?.order) !=
-                              null &&
-                          (person.studyYearId ?? person.studyYear?.order)! > 12)
-                        ListTile(
-                          title: const Text('الكلية'),
-                          subtitle: Text(person.college?.name ?? ''),
-                        )
-                      else
-                        ListTile(
-                          title: const Text('المدرسة'),
-                          subtitle: Text(person.school?.name ?? ''),
+                      ...person.otherPhones.entries.map(
+                        (e) => PhoneNumberProperty(
+                          e.key,
+                          e.value,
+                          (n) async => _phoneCall(context, n),
+                          (n) async => _contactAdd(context, n, person),
                         ),
-                    ] else ...[
-                      ListTile(
-                        title: const Text('المؤهل'),
-                        subtitle: Text(person.qualification?.name ?? ''),
                       ),
-                      ListTile(
-                        title: const Text('الوظيفة'),
-                        subtitle: Text(person.job?.name ?? ''),
-                      ),
-                      ListTile(
-                        title: const Text('تفاصيل الوظيفة'),
-                        subtitle: Text(person.jobDescription ?? ''),
-                      ),
-                    ],
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: const Text('النوع'),
-                      subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
-                    ),
-                    ListTile(
-                      title: const Text('الحالة الاجتماعية'),
-                      subtitle: Text(person.personType?.name ?? ''),
-                    ),
-                    const Divider(thickness: 1),
-                    if (person.gender)
-                      ListTile(
-                        title: const Text('شماس؟'),
-                        subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
-                      ),
-                    if (person.gender && person.isShammas)
-                      ListTile(
-                        title: const Text('رتبة الشموسية'),
-                        subtitle: Text(person.shammasLevel?.name ?? ''),
-                      ),
-                    ListTile(
-                      title: const Text('الكنيسة'),
-                      subtitle: Text(person.church?.name ?? ''),
-                    ),
-                    ListTile(
-                      title: const Text('أب الاعتراف'),
-                      subtitle: Text(person.father?.name ?? ''),
-                    ),
-                    ListTile(
-                      title: const Text('خادم؟'),
-                      subtitle: Text(person.isServant ? 'نعم' : 'لا'),
-                      trailing: person.isServant && person.user?.email != null
-                          ? IconButton(
-                              onPressed: () => context.goNamed(
-                                'view_user',
-                                queryParams: {
-                                  'id': person.id,
-                                  'uid': person.user!.uid,
-                                },
-                                extra: {
-                                  'user': person.user,
-                                  'person': person,
-                                },
-                              ),
-                              icon: const Icon(Icons.manage_accounts),
-                              tooltip: 'عرض بيانات الخادم',
-                            )
-                          : null,
-                    ),
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: const Text('الحالة الروحية'),
-                      subtitle: Text(person.state?.name ?? ''),
-                      trailing: person.state?.color == null
-                          ? null
-                          : ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                color: person.state!.color,
-                              ),
-                            ),
-                    ),
-                    ListTile(
-                      title: const Text('الهوايات'),
-                      subtitle: Wrap(
-                        spacing: 3,
-                        children: [
-                          for (final hobby in person.hobbies ?? <Tag>[])
-                            Material(
-                              type: MaterialType.transparency,
-                              child: Chip(
-                                side: BorderSide(
-                                  color: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall!
-                                          .color
-                                          .getContrastingColor(
-                                            hobby.color ?? Colors.transparent,
-                                          ) ??
-                                      Theme.of(context)
-                                          .textTheme
-                                          .labelSmall!
-                                          .color!,
+                      CopiablePropertyWidget(
+                        'العنوان والموقع',
+                        person.address,
+                        additionalOptions: [
+                          if (person.geolocation != null)
+                            IconButton(
+                              icon: const Icon(Icons.map),
+                              onPressed: () async => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DataGeomap(initialPerson: person),
                                 ),
-                                label: Text(
-                                  hobby.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall!
-                                      .copyWith(
-                                        color: Theme.of(context)
+                              ),
+                              tooltip: 'إظهار على الخريطة',
+                            ),
+                        ],
+                      ),
+                      ListTile(
+                        title: const Text('السن'),
+                        subtitle: person.birthdate != null
+                            ? Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      person.birthdate!
+                                          .toDurationString(appendSince: false),
+                                    ),
+                                  ),
+                                  Text(
+                                    DateFormat('yyyy/M/d').format(
+                                      person.birthdate!,
+                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.labelSmall,
+                                  ),
+                                ],
+                              )
+                            : null,
+                      ),
+                      const Divider(thickness: 1),
+                      ListTile(
+                        title: const Text('الخدمات المشارك بها'),
+                        subtitle: _ShowMore<Service>(
+                          person: person,
+                          getField: (p) => p?.services,
+                          loadAll: () => _servicesLimit.add(null),
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('الفصول التي يظهر بها'),
+                        subtitle: _ShowMore<Class>(
+                          person: person,
+                          getField: (p) => p?.classes,
+                          loadAll: () => _classesLimit.add(null),
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('المجموعات المشارك بها'),
+                        subtitle: _ShowMore<Group>(
+                          person: person,
+                          getField: (p) => p?.groups,
+                          loadAll: () => _groupsLimit.add(null),
+                        ),
+                      ),
+                      if (person.isStudent) ...[
+                        ListTile(
+                          title: const Text('السنة الدراسية'),
+                          subtitle: Text(person.studyYear?.name ?? ''),
+                        ),
+                        if ((person.studyYearId ?? person.studyYear?.order) !=
+                                null &&
+                            (person.studyYearId ?? person.studyYear?.order)! >
+                                12)
+                          ListTile(
+                            title: const Text('الكلية'),
+                            subtitle: Text(person.college?.name ?? ''),
+                          )
+                        else
+                          ListTile(
+                            title: const Text('المدرسة'),
+                            subtitle: Text(person.school?.name ?? ''),
+                          ),
+                      ] else ...[
+                        ListTile(
+                          title: const Text('المؤهل'),
+                          subtitle: Text(person.qualification?.name ?? ''),
+                        ),
+                        ListTile(
+                          title: const Text('الوظيفة'),
+                          subtitle: Text(person.job?.name ?? ''),
+                        ),
+                        ListTile(
+                          title: const Text('تفاصيل الوظيفة'),
+                          subtitle: Text(person.jobDescription ?? ''),
+                        ),
+                      ],
+                      const Divider(thickness: 1),
+                      ListTile(
+                        title: const Text('النوع'),
+                        subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
+                      ),
+                      ListTile(
+                        title: const Text('الحالة الاجتماعية'),
+                        subtitle: Text(person.personType?.name ?? ''),
+                      ),
+                      const Divider(thickness: 1),
+                      if (person.gender)
+                        ListTile(
+                          title: const Text('شماس؟'),
+                          subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
+                        ),
+                      if (person.gender && person.isShammas)
+                        ListTile(
+                          title: const Text('رتبة الشموسية'),
+                          subtitle: Text(person.shammasLevel?.name ?? ''),
+                        ),
+                      ListTile(
+                        title: const Text('الكنيسة'),
+                        subtitle: Text(person.church?.name ?? ''),
+                      ),
+                      ListTile(
+                        title: const Text('أب الاعتراف'),
+                        subtitle: Text(person.father?.name ?? ''),
+                      ),
+                      ListTile(
+                        title: const Text('خادم؟'),
+                        subtitle: Text(person.isServant ? 'نعم' : 'لا'),
+                        trailing: person.isServant && person.user?.email != null
+                            ? IconButton(
+                                onPressed: () => context.go(
+                                  Uri(
+                                    path: '/viewPerson/viewUser',
+                                    queryParameters: {
+                                      'id': person.id,
+                                      'uid': person.user!.uid,
+                                    },
+                                  ).toString(),
+                                  extra: {
+                                    'user': person.user,
+                                    'person': person,
+                                  },
+                                ),
+                                icon: const Icon(Icons.manage_accounts),
+                                tooltip: 'عرض بيانات الخادم',
+                              )
+                            : null,
+                      ),
+                      const Divider(thickness: 1),
+                      ListTile(
+                        title: const Text('الحالة الروحية'),
+                        subtitle: Text(person.state?.name ?? ''),
+                        trailing: person.state?.color == null
+                            ? null
+                            : ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  color: person.state!.color,
+                                ),
+                              ),
+                      ),
+                      ListTile(
+                        title: const Text('الهوايات'),
+                        subtitle: Wrap(
+                          spacing: 3,
+                          children: [
+                            for (final hobby in person.hobbies ?? <Tag>[])
+                              Material(
+                                type: MaterialType.transparency,
+                                child: Chip(
+                                  side: BorderSide(
+                                    color: Theme.of(context)
                                             .textTheme
                                             .labelSmall!
                                             .color
                                             .getContrastingColor(
                                               hobby.color ?? Colors.transparent,
-                                            ),
-                                      ),
+                                            ) ??
+                                        Theme.of(context)
+                                            .textTheme
+                                            .labelSmall!
+                                            .color!,
+                                  ),
+                                  label: Text(
+                                    hobby.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall!
+                                              .color
+                                              .getContrastingColor(
+                                                hobby.color ??
+                                                    Colors.transparent,
+                                              ),
+                                        ),
+                                  ),
+                                  backgroundColor: hobby.color,
                                 ),
-                                backgroundColor: hobby.color,
-                              ),
-                            )
-                        ],
+                              )
+                          ],
+                        ),
                       ),
-                    ),
-                    ListTile(
-                      title: const Text('الشارات'),
-                      subtitle: Wrap(
-                        spacing: 3,
-                        children: [
-                          for (final tag in person.tags ?? <Tag>[])
-                            Material(
-                              type: MaterialType.transparency,
-                              child: Chip(
-                                side: BorderSide(
-                                  color: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall!
-                                          .color
-                                          .getContrastingColor(
-                                            tag.color ?? Colors.transparent,
-                                          ) ??
-                                      Theme.of(context)
-                                          .textTheme
-                                          .labelSmall!
-                                          .color!,
-                                ),
-                                label: Text(
-                                  tag.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall!
-                                      .copyWith(
-                                        color: Theme.of(context)
+                      ListTile(
+                        title: const Text('الشارات'),
+                        subtitle: Wrap(
+                          spacing: 3,
+                          children: [
+                            for (final tag in person.tags ?? <Tag>[])
+                              Material(
+                                type: MaterialType.transparency,
+                                child: Chip(
+                                  side: BorderSide(
+                                    color: Theme.of(context)
                                             .textTheme
                                             .labelSmall!
                                             .color
                                             .getContrastingColor(
                                               tag.color ?? Colors.transparent,
-                                            ),
-                                      ),
+                                            ) ??
+                                        Theme.of(context)
+                                            .textTheme
+                                            .labelSmall!
+                                            .color!,
+                                  ),
+                                  label: Text(
+                                    tag.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall!
+                                              .color
+                                              .getContrastingColor(
+                                                tag.color ?? Colors.transparent,
+                                              ),
+                                        ),
+                                  ),
+                                  backgroundColor: tag.color,
                                 ),
-                                backgroundColor: tag.color,
-                              ),
-                            )
-                        ],
-                      ),
-                    ),
-                    CopiablePropertyWidget(
-                      'ملاحظات',
-                      person.notes,
-                      showErrorIfEmpty: false,
-                    ),
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: const Text('المناطق التي يظهر بها'),
-                      subtitle: _ShowMore<Area>(
-                        person: person,
-                        getField: (p) => p?.areas,
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('الشوارع التي يظهر بها'),
-                      subtitle: Column(
-                        children: [
-                          for (final s in person.streets ?? <Street>[])
-                            ViewableObjectWidget(
-                              s,
-                              dense: true,
-                              forceShowSecondLine: false,
-                            ),
-                        ],
-                      ),
-                    ),
-                    if (person.family != null)
-                      ListTile(
-                        title: const Text('العائلة'),
-                        subtitle: ViewableObjectWidget<Family>(
-                          person.family!,
-                          dense: true,
-                          forceShowSecondLine: false,
+                              )
+                          ],
                         ),
                       ),
-                    /* if (person.store != null)
+                      CopiablePropertyWidget(
+                        'ملاحظات',
+                        person.notes,
+                        showErrorIfEmpty: false,
+                      ),
+                      const Divider(thickness: 1),
+                      ListTile(
+                        title: const Text('المناطق التي يظهر بها'),
+                        subtitle: _ShowMore<Area>(
+                          person: person,
+                          getField: (p) => p?.areas,
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text('الشوارع التي يظهر بها'),
+                        subtitle: Column(
+                          children: [
+                            for (final s in person.streets ?? <Street>[])
+                              ViewableObjectWidget(
+                                s,
+                                dense: true,
+                                forceShowSecondLine: false,
+                                circleCrop: false,
+                              ),
+                          ],
+                        ),
+                      ),
+                      if (person.family != null)
+                        ListTile(
+                          title: const Text('العائلة'),
+                          subtitle: ViewableObjectWidget<Family>(
+                            person.family!,
+                            dense: true,
+                            forceShowSecondLine: false,
+                          ),
+                        ),
+                      /* if (person.store != null)
                       ListTile(
                         title: const Text('داخل متجر'),
                         subtitle: ViewableObjectWidget<Store>(
@@ -456,73 +468,76 @@ class _ViewPersonState extends State<ViewPerson> {
                           forceShowSecondLine: false,
                         ),
                       ), */
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: FilledButton.tonalIcon(
-                        icon: const Icon(Icons.query_stats),
-                        label: const Text('احصائيات'),
-                        onPressed: () => _analysis(context, person),
+                      const Divider(thickness: 1),
+                      ListTile(
+                        title: FilledButton.tonalIcon(
+                          icon: const Icon(Icons.query_stats),
+                          label: const Text('احصائيات'),
+                          onPressed: () => _analysis(context, person),
+                        ),
                       ),
-                    ),
-                    const Divider(thickness: 1),
-                    HistoryProperty(
-                      name: 'أخر تناول',
-                      value: person.lastKodas?.time,
-                      showTime: false,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginatePersonKodasHistory(personId: person.id),
-                      onRecordNow: () async =>
-                          DatabaseService.I.history.updatePersonLastKodas(
-                        personId: widget.personId,
-                        lastKodas: DateTime.now(),
+                      const Divider(thickness: 1),
+                      HistoryProperty(
+                        name: 'أخر تناول',
+                        value: person.lastKodas?.time,
+                        showTime: false,
+                        getHistoryStream: () => DatabaseService.I.history
+                            .paginatePersonKodasHistory(personId: person.id),
+                        onRecordNow: () async =>
+                            DatabaseService.I.history.updatePersonLastKodas(
+                          personId: widget.personId,
+                          lastKodas: DateTime.now(),
+                        ),
                       ),
-                    ),
-                    HistoryProperty(
-                      name: 'أخر اعتراف',
-                      value: person.lastConfession?.time,
-                      showTime: false,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginatePersonConfessionHistory(personId: person.id),
-                      onRecordNow: () async =>
-                          DatabaseService.I.history.updatePersonLastConfession(
-                        personId: widget.personId,
-                        lastConfession: DateTime.now(),
+                      HistoryProperty(
+                        name: 'أخر اعتراف',
+                        value: person.lastConfession?.time,
+                        showTime: false,
+                        getHistoryStream: () => DatabaseService.I.history
+                            .paginatePersonConfessionHistory(
+                          personId: person.id,
+                        ),
+                        onRecordNow: () async => DatabaseService.I.history
+                            .updatePersonLastConfession(
+                          personId: widget.personId,
+                          lastConfession: DateTime.now(),
+                        ),
                       ),
-                    ),
-                    const Divider(thickness: 1),
-                    HistoryProperty(
-                      name: 'أخر افتقاد',
-                      value: person.lastVisit?.time,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginatePersonVisitHistory(personId: person.id),
-                      onRecordNow: () async =>
-                          DatabaseService.I.history.updatePersonLastVisit(
-                        personId: widget.personId,
-                        lastVisit: DateTime.now(),
+                      const Divider(thickness: 1),
+                      HistoryProperty(
+                        name: 'أخر افتقاد',
+                        value: person.lastVisit?.time,
+                        getHistoryStream: () => DatabaseService.I.history
+                            .paginatePersonVisitHistory(personId: person.id),
+                        onRecordNow: () async =>
+                            DatabaseService.I.history.updatePersonLastVisit(
+                          personId: widget.personId,
+                          lastVisit: DateTime.now(),
+                        ),
                       ),
-                    ),
-                    HistoryProperty(
-                      name: 'أخر مكالمة',
-                      value: person.lastCall?.time,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginatePersonCallHistory(personId: person.id),
-                      onRecordNow: () async =>
-                          DatabaseService.I.history.updatePersonLastCall(
-                        personId: widget.personId,
-                        lastCall: DateTime.now(),
+                      HistoryProperty(
+                        name: 'أخر مكالمة',
+                        value: person.lastCall?.time,
+                        getHistoryStream: () => DatabaseService.I.history
+                            .paginatePersonCallHistory(personId: person.id),
+                        onRecordNow: () async =>
+                            DatabaseService.I.history.updatePersonLastCall(
+                          personId: widget.personId,
+                          lastCall: DateTime.now(),
+                        ),
                       ),
-                    ),
-                    HistoryProperty(
-                      name: 'أخر تحديث للبيانات',
-                      value: person.lastEdit?.time,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginateEditHistory<Person>(id: person.id),
-                    ),
-                    const SizedBox(height: 50),
-                  ],
-                ),
-              )
-            ],
+                      HistoryProperty(
+                        name: 'أخر تحديث للبيانات',
+                        value: person.lastEdit?.time,
+                        getHistoryStream: () => DatabaseService.I.history
+                            .paginateEditHistory<Person>(id: person.id),
+                      ),
+                      const SizedBox(height: 50),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
@@ -530,11 +545,13 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   void _analysis(BuildContext context, Person person) {
-    context.goNamed(
-      'person_analysis',
-      queryParams: {
-        'id': person.id,
-      },
+    context.go(
+      Uri(
+        path: '/viewPerson/personAnalysis',
+        queryParameters: {
+          'id': person.id,
+        },
+      ).toString(),
       extra: {
         'person': person,
         'onEditOptions': (

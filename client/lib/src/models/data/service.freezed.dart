@@ -24,11 +24,16 @@ mixin _$Service {
   String get name => throw _privateConstructorUsedError;
   StudyYear? get fromStudyYear => throw _privateConstructorUsedError;
   StudyYear? get toStudyYear => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nextServiceObject')
+  Service? get nextService => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   List<Class>? get classes => throw _privateConstructorUsedError;
   List<Group>? get groups => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers => throw _privateConstructorUsedError;
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate =>
       throw _privateConstructorUsedError;
@@ -51,11 +56,16 @@ abstract class $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
+      @JsonKey(name: 'nextServiceObject')
+          Service? nextService,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
       List<Group>? groups,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -63,6 +73,8 @@ abstract class $ServiceCopyWith<$Res> {
 
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   $StudyYearCopyWith<$Res>? get toStudyYear;
+  $ServiceCopyWith<$Res>? get nextService;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
@@ -84,10 +96,13 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     Object? name = null,
     Object? fromStudyYear = freezed,
     Object? toStudyYear = freezed,
+    Object? nextService = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -108,6 +123,10 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
           ? _value.toStudyYear
           : toStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
+      nextService: freezed == nextService
+          ? _value.nextService
+          : nextService // ignore: cast_nullable_to_non_nullable
+              as Service?,
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -124,6 +143,14 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value.adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -157,6 +184,30 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
 
     return $StudyYearCopyWith<$Res>(_value.toStudyYear!, (value) {
       return _then(_value.copyWith(toStudyYear: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get nextService {
+    if (_value.nextService == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_value.nextService!, (value) {
+      return _then(_value.copyWith(nextService: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value) as $Val);
     });
   }
 
@@ -201,11 +252,16 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
+      @JsonKey(name: 'nextServiceObject')
+          Service? nextService,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
       List<Group>? groups,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -215,6 +271,10 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   @override
   $StudyYearCopyWith<$Res>? get toStudyYear;
+  @override
+  $ServiceCopyWith<$Res>? get nextService;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   @override
@@ -235,10 +295,13 @@ class __$$_ServiceCopyWithImpl<$Res>
     Object? name = null,
     Object? fromStudyYear = freezed,
     Object? toStudyYear = freezed,
+    Object? nextService = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -259,6 +322,10 @@ class __$$_ServiceCopyWithImpl<$Res>
           ? _value.toStudyYear
           : toStudyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
+      nextService: freezed == nextService
+          ? _value.nextService
+          : nextService // ignore: cast_nullable_to_non_nullable
+              as Service?,
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -275,6 +342,14 @@ class __$$_ServiceCopyWithImpl<$Res>
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -296,17 +371,23 @@ class _$_Service extends _Service {
       required this.name,
       this.fromStudyYear,
       this.toStudyYear,
+      @JsonKey(name: 'nextServiceObject')
+          this.nextService,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           this.color,
       this.photoUpdatedAt,
       final List<Class>? classes,
       final List<Group>? groups,
+      this.lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceDaysConstraintsAggregate})
       : _classes = classes,
         _groups = groups,
+        _adminUsers = adminUsers,
         super._();
 
   factory _$_Service.fromJson(Map<String, dynamic> json) =>
@@ -320,6 +401,9 @@ class _$_Service extends _Service {
   final StudyYear? fromStudyYear;
   @override
   final StudyYear? toStudyYear;
+  @override
+  @JsonKey(name: 'nextServiceObject')
+  final Service? nextService;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
@@ -346,6 +430,19 @@ class _$_Service extends _Service {
   }
 
   @override
+  final LastRecordedByInfo? lastEdit;
+  final List<User>? _adminUsers;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers {
+    final value = _adminUsers;
+    if (value == null) return null;
+    if (_adminUsers is EqualUnmodifiableListView) return _adminUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   final AnalysisData<DateTime>? attendanceHistoryAggregate;
   @override
@@ -354,7 +451,7 @@ class _$_Service extends _Service {
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Service(id: $id, name: $name, fromStudyYear: $fromStudyYear, toStudyYear: $toStudyYear, nextService: $nextService, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -368,11 +465,17 @@ class _$_Service extends _Service {
                 other.fromStudyYear == fromStudyYear) &&
             (identical(other.toStudyYear, toStudyYear) ||
                 other.toStudyYear == toStudyYear) &&
+            (identical(other.nextService, nextService) ||
+                other.nextService == nextService) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other._adminUsers, _adminUsers) &&
             (identical(other.attendanceHistoryAggregate,
                     attendanceHistoryAggregate) ||
                 other.attendanceHistoryAggregate ==
@@ -391,10 +494,13 @@ class _$_Service extends _Service {
       name,
       fromStudyYear,
       toStudyYear,
+      nextService,
       color,
       photoUpdatedAt,
       const DeepCollectionEquality().hash(_classes),
       const DeepCollectionEquality().hash(_groups),
+      lastEdit,
+      const DeepCollectionEquality().hash(_adminUsers),
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
@@ -418,11 +524,16 @@ abstract class _Service extends Service {
       required final String name,
       final StudyYear? fromStudyYear,
       final StudyYear? toStudyYear,
+      @JsonKey(name: 'nextServiceObject')
+          final Service? nextService,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
           final Color? color,
       final DateTime? photoUpdatedAt,
       final List<Class>? classes,
       final List<Group>? groups,
+      final LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -441,6 +552,9 @@ abstract class _Service extends Service {
   @override
   StudyYear? get toStudyYear;
   @override
+  @JsonKey(name: 'nextServiceObject')
+  Service? get nextService;
+  @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
   @override
@@ -449,6 +563,11 @@ abstract class _Service extends Service {
   List<Class>? get classes;
   @override
   List<Group>? get groups;
+  @override
+  LastRecordedByInfo? get lastEdit;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers;
   @override
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate;

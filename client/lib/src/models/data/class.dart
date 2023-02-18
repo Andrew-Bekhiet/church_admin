@@ -18,7 +18,11 @@ class Class extends ViewableWithIDAndImage with _$Class, AttendanceAnalyzable {
         Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
+    bool? serviceGender,
     StudyYear? studyYear,
+    LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+        List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,

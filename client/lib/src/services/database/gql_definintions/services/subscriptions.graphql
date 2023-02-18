@@ -35,3 +35,25 @@ subscription watchAllServices(
     }
   }
 }
+subscription watchService($id: uuid!) {
+  servicesByPk(id: $id) {
+    ...Service
+    lastEdit
+    adminUsers(distinctOn: uid) {
+      user {
+        ...User
+      }
+    }
+    fromStudyYear {
+      order
+      name
+    }
+    nextServiceObject {
+      ...Service
+    }
+    toStudyYear {
+      order
+      name
+    }
+  }
+}

@@ -19,6 +19,9 @@ class Family extends ViewableWithIDAndImage with _$Family {
     String? notes,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    List<Area>? areas,
+    List<Street>? streets,
+    LastRecordedByInfo? lastEdit,
   }) = _Family;
   Family._() : super();
 

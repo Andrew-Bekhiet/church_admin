@@ -1,5 +1,9 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../areas/__generated__/fragments.gql.dart';
+import '../../families/__generated__/fragments.gql.dart';
+import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
+import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables$Subscription$watchAllStores {
@@ -409,3 +413,676 @@ const documentNodeSubscriptionwatchAllStores = DocumentNode(definitions: [
   fragmentDefinitionStore,
   fragmentDefinitionStoreNoPhoto,
 ]);
+
+class Variables$Subscription$watchStore {
+  factory Variables$Subscription$watchStore({required UuidValue id}) =>
+      Variables$Subscription$watchStore._({
+        r'id': id,
+      });
+
+  Variables$Subscription$watchStore._(this._$data);
+
+  factory Variables$Subscription$watchStore.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = stringToUuid(l$id);
+    return Variables$Subscription$watchStore._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get id => (_$data['id'] as UuidValue);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = uuidToString(l$id);
+    return result$data;
+  }
+
+  CopyWith$Variables$Subscription$watchStore<Variables$Subscription$watchStore>
+      get copyWith => CopyWith$Variables$Subscription$watchStore(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Subscription$watchStore) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    return Object.hashAll([l$id]);
+  }
+}
+
+abstract class CopyWith$Variables$Subscription$watchStore<TRes> {
+  factory CopyWith$Variables$Subscription$watchStore(
+    Variables$Subscription$watchStore instance,
+    TRes Function(Variables$Subscription$watchStore) then,
+  ) = _CopyWithImpl$Variables$Subscription$watchStore;
+
+  factory CopyWith$Variables$Subscription$watchStore.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Subscription$watchStore;
+
+  TRes call({UuidValue? id});
+}
+
+class _CopyWithImpl$Variables$Subscription$watchStore<TRes>
+    implements CopyWith$Variables$Subscription$watchStore<TRes> {
+  _CopyWithImpl$Variables$Subscription$watchStore(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Subscription$watchStore _instance;
+
+  final TRes Function(Variables$Subscription$watchStore) _then;
+
+  static const _undefined = {};
+
+  TRes call({Object? id = _undefined}) =>
+      _then(Variables$Subscription$watchStore._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as UuidValue),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Subscription$watchStore<TRes>
+    implements CopyWith$Variables$Subscription$watchStore<TRes> {
+  _CopyWithStubImpl$Variables$Subscription$watchStore(this._res);
+
+  TRes _res;
+
+  call({UuidValue? id}) => _res;
+}
+
+class Subscription$watchStore {
+  Subscription$watchStore({this.storesByPk});
+
+  factory Subscription$watchStore.fromJson(Map<String, dynamic> json) {
+    final l$storesByPk = json['storesByPk'];
+    return Subscription$watchStore(
+        storesByPk: l$storesByPk == null
+            ? null
+            : Subscription$watchStore$storesByPk.fromJson(
+                (l$storesByPk as Map<String, dynamic>)));
+  }
+
+  final Subscription$watchStore$storesByPk? storesByPk;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$storesByPk = storesByPk;
+    _resultData['storesByPk'] = l$storesByPk?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$storesByPk = storesByPk;
+    return Object.hashAll([l$storesByPk]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$watchStore) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$storesByPk = storesByPk;
+    final lOther$storesByPk = other.storesByPk;
+    if (l$storesByPk != lOther$storesByPk) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$watchStore on Subscription$watchStore {
+  CopyWith$Subscription$watchStore<Subscription$watchStore> get copyWith =>
+      CopyWith$Subscription$watchStore(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Subscription$watchStore<TRes> {
+  factory CopyWith$Subscription$watchStore(
+    Subscription$watchStore instance,
+    TRes Function(Subscription$watchStore) then,
+  ) = _CopyWithImpl$Subscription$watchStore;
+
+  factory CopyWith$Subscription$watchStore.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$watchStore;
+
+  TRes call({Subscription$watchStore$storesByPk? storesByPk});
+  CopyWith$Subscription$watchStore$storesByPk<TRes> get storesByPk;
+}
+
+class _CopyWithImpl$Subscription$watchStore<TRes>
+    implements CopyWith$Subscription$watchStore<TRes> {
+  _CopyWithImpl$Subscription$watchStore(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$watchStore _instance;
+
+  final TRes Function(Subscription$watchStore) _then;
+
+  static const _undefined = {};
+
+  TRes call({Object? storesByPk = _undefined}) => _then(Subscription$watchStore(
+      storesByPk: storesByPk == _undefined
+          ? _instance.storesByPk
+          : (storesByPk as Subscription$watchStore$storesByPk?)));
+  CopyWith$Subscription$watchStore$storesByPk<TRes> get storesByPk {
+    final local$storesByPk = _instance.storesByPk;
+    return local$storesByPk == null
+        ? CopyWith$Subscription$watchStore$storesByPk.stub(_then(_instance))
+        : CopyWith$Subscription$watchStore$storesByPk(
+            local$storesByPk, (e) => call(storesByPk: e));
+  }
+}
+
+class _CopyWithStubImpl$Subscription$watchStore<TRes>
+    implements CopyWith$Subscription$watchStore<TRes> {
+  _CopyWithStubImpl$Subscription$watchStore(this._res);
+
+  TRes _res;
+
+  call({Subscription$watchStore$storesByPk? storesByPk}) => _res;
+  CopyWith$Subscription$watchStore$storesByPk<TRes> get storesByPk =>
+      CopyWith$Subscription$watchStore$storesByPk.stub(_res);
+}
+
+const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchStore'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'uuid'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'storesByPk'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Store'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: 'areas'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Area'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'streets'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Street'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastEdit'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'geolocation'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'family'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Family'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+  fragmentDefinitionStore,
+  fragmentDefinitionStoreNoPhoto,
+  fragmentDefinitionArea,
+  fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
+  fragmentDefinitionFamily,
+  fragmentDefinitionFamilyNoPhoto,
+]);
+
+class Subscription$watchStore$storesByPk
+    implements Fragment$Store, Fragment$StoreNoPhoto {
+  Subscription$watchStore$storesByPk({
+    required this.id,
+    required this.name,
+    this.color,
+    required this.$__typename,
+    this.photoUpdatedAt,
+    this.areas,
+    this.streets,
+    this.lastEdit,
+    this.geolocation,
+    this.family,
+  });
+
+  factory Subscription$watchStore$storesByPk.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$areas = json['areas'];
+    final l$streets = json['streets'];
+    final l$lastEdit = json['lastEdit'];
+    final l$geolocation = json['geolocation'];
+    final l$family = json['family'];
+    return Subscription$watchStore$storesByPk(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      color: (l$color as int?),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt:
+          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      areas: (l$areas as List<dynamic>?)
+          ?.map((e) => Fragment$Area.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      streets: (l$streets as List<dynamic>?)
+          ?.map((e) => Fragment$Street.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      lastEdit: (l$lastEdit as Json?),
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+      family: l$family == null
+          ? null
+          : Fragment$Family.fromJson((l$family as Map<String, dynamic>)),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final int? color;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final List<Fragment$Area>? areas;
+
+  final List<Fragment$Street>? streets;
+
+  final Json? lastEdit;
+
+  final Map<String, dynamic>? geolocation;
+
+  final Fragment$Family? family;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] =
+        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$areas = areas;
+    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
+    final l$streets = streets;
+    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
+    final l$lastEdit = lastEdit;
+    _resultData['lastEdit'] = l$lastEdit;
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$family = family;
+    _resultData['family'] = l$family?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$areas = areas;
+    final l$streets = streets;
+    final l$lastEdit = lastEdit;
+    final l$geolocation = geolocation;
+    final l$family = family;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
+      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
+      l$lastEdit,
+      l$geolocation,
+      l$family,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$watchStore$storesByPk) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$areas = areas;
+    final lOther$areas = other.areas;
+    if (l$areas != null && lOther$areas != null) {
+      if (l$areas.length != lOther$areas.length) {
+        return false;
+      }
+      for (int i = 0; i < l$areas.length; i++) {
+        final l$areas$entry = l$areas[i];
+        final lOther$areas$entry = lOther$areas[i];
+        if (l$areas$entry != lOther$areas$entry) {
+          return false;
+        }
+      }
+    } else if (l$areas != lOther$areas) {
+      return false;
+    }
+    final l$streets = streets;
+    final lOther$streets = other.streets;
+    if (l$streets != null && lOther$streets != null) {
+      if (l$streets.length != lOther$streets.length) {
+        return false;
+      }
+      for (int i = 0; i < l$streets.length; i++) {
+        final l$streets$entry = l$streets[i];
+        final lOther$streets$entry = lOther$streets[i];
+        if (l$streets$entry != lOther$streets$entry) {
+          return false;
+        }
+      }
+    } else if (l$streets != lOther$streets) {
+      return false;
+    }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$family = family;
+    final lOther$family = other.family;
+    if (l$family != lOther$family) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$watchStore$storesByPk
+    on Subscription$watchStore$storesByPk {
+  CopyWith$Subscription$watchStore$storesByPk<
+          Subscription$watchStore$storesByPk>
+      get copyWith => CopyWith$Subscription$watchStore$storesByPk(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$watchStore$storesByPk<TRes> {
+  factory CopyWith$Subscription$watchStore$storesByPk(
+    Subscription$watchStore$storesByPk instance,
+    TRes Function(Subscription$watchStore$storesByPk) then,
+  ) = _CopyWithImpl$Subscription$watchStore$storesByPk;
+
+  factory CopyWith$Subscription$watchStore$storesByPk.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$watchStore$storesByPk;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    List<Fragment$Area>? areas,
+    List<Fragment$Street>? streets,
+    Json? lastEdit,
+    Map<String, dynamic>? geolocation,
+    Fragment$Family? family,
+  });
+  TRes areas(
+      Iterable<Fragment$Area>? Function(
+              Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+          _fn);
+  TRes streets(
+      Iterable<Fragment$Street>? Function(
+              Iterable<CopyWith$Fragment$Street<Fragment$Street>>?)
+          _fn);
+  CopyWith$Fragment$Family<TRes> get family;
+}
+
+class _CopyWithImpl$Subscription$watchStore$storesByPk<TRes>
+    implements CopyWith$Subscription$watchStore$storesByPk<TRes> {
+  _CopyWithImpl$Subscription$watchStore$storesByPk(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$watchStore$storesByPk _instance;
+
+  final TRes Function(Subscription$watchStore$storesByPk) _then;
+
+  static const _undefined = {};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? areas = _undefined,
+    Object? streets = _undefined,
+    Object? lastEdit = _undefined,
+    Object? geolocation = _undefined,
+    Object? family = _undefined,
+  }) =>
+      _then(Subscription$watchStore$storesByPk(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        color: color == _undefined ? _instance.color : (color as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        photoUpdatedAt: photoUpdatedAt == _undefined
+            ? _instance.photoUpdatedAt
+            : (photoUpdatedAt as DateTime?),
+        areas: areas == _undefined
+            ? _instance.areas
+            : (areas as List<Fragment$Area>?),
+        streets: streets == _undefined
+            ? _instance.streets
+            : (streets as List<Fragment$Street>?),
+        lastEdit:
+            lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+        family: family == _undefined
+            ? _instance.family
+            : (family as Fragment$Family?),
+      ));
+  TRes areas(
+          Iterable<Fragment$Area>? Function(
+                  Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+              _fn) =>
+      call(
+          areas: _fn(_instance.areas?.map((e) => CopyWith$Fragment$Area(
+                e,
+                (i) => i,
+              )))?.toList());
+  TRes streets(
+          Iterable<Fragment$Street>? Function(
+                  Iterable<CopyWith$Fragment$Street<Fragment$Street>>?)
+              _fn) =>
+      call(
+          streets: _fn(_instance.streets?.map((e) => CopyWith$Fragment$Street(
+                e,
+                (i) => i,
+              )))?.toList());
+  CopyWith$Fragment$Family<TRes> get family {
+    final local$family = _instance.family;
+    return local$family == null
+        ? CopyWith$Fragment$Family.stub(_then(_instance))
+        : CopyWith$Fragment$Family(local$family, (e) => call(family: e));
+  }
+}
+
+class _CopyWithStubImpl$Subscription$watchStore$storesByPk<TRes>
+    implements CopyWith$Subscription$watchStore$storesByPk<TRes> {
+  _CopyWithStubImpl$Subscription$watchStore$storesByPk(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    List<Fragment$Area>? areas,
+    List<Fragment$Street>? streets,
+    Json? lastEdit,
+    Map<String, dynamic>? geolocation,
+    Fragment$Family? family,
+  }) =>
+      _res;
+  areas(_fn) => _res;
+  streets(_fn) => _res;
+  CopyWith$Fragment$Family<TRes> get family =>
+      CopyWith$Fragment$Family.stub(_res);
+}

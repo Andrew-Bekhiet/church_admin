@@ -18,6 +18,11 @@ class Group extends ViewableWithIDAndImage with _$Group, AttendanceAnalyzable {
         Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
+    @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+        DateTimeRange? validity,
+    LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+        List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,

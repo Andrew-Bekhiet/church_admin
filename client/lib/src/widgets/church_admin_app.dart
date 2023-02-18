@@ -19,7 +19,6 @@ class ChurchAdminApp extends StatefulWidget {
       LoginScreen.route,
       UpdateUserData.route,
       GoRoute(
-        name: 'register_user_data',
         path: '/registerUserData',
         builder: (context, state) => Scaffold(
           body: Column(

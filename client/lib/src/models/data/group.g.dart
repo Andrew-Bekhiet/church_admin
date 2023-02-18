@@ -16,6 +16,12 @@ _$_Group _$$_GroupFromJson(Map json) => _$_Group(
       service: json['service'] == null
           ? null
           : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+      validity: dateRangeFromString(json['validity']),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
+      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(
@@ -28,6 +34,9 @@ Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'service': instance.service?.toJson(),
+      'validity': dateRangeToString(instance.validity),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'adminUsers': adminUsersToJson(instance.adminUsers),
       'attendanceHistoryAggregate':
           analysisDataToJson(instance.attendanceHistoryAggregate),
       'attendanceDaysConstraintsAggregate':

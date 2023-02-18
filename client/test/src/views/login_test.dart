@@ -98,13 +98,9 @@ void main() {
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
 
           expect(
-            LoginScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
+            LoginScreen.redirect(),
             null,
           );
-          verifyNever(mockGoRouterState.namedLocation('home'));
         },
       );
 
@@ -117,13 +113,9 @@ void main() {
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
 
           expect(
-            LoginScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
+            LoginScreen.redirect(),
             '/',
           );
-          verify(mockGoRouterState.namedLocation('home'));
         },
       );
     },

@@ -125,6 +125,7 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
   }
 
   static ThemeData getDefault({
+    Color? primaryOverride,
     bool? darkTheme,
     bool? greatFeastThemeOverride,
   }) {
@@ -133,7 +134,25 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     final bool greatFeastTheme = greatFeastThemeOverride ??
         GetIt.I<UserSettingsService>().greatFeastTheme;
 
-    MaterialColor primary = Colors.teal;
+    MaterialColor primary =
+        (primaryOverride is! MaterialColor && primaryOverride != null
+                ? MaterialColor(
+                    primaryOverride.value,
+                    {
+                      50: primaryOverride,
+                      100: primaryOverride,
+                      200: primaryOverride,
+                      300: primaryOverride,
+                      400: primaryOverride,
+                      500: primaryOverride,
+                      600: primaryOverride,
+                      700: primaryOverride,
+                      800: primaryOverride,
+                      900: primaryOverride,
+                    },
+                  )
+                : null) ??
+            Colors.teal;
 
     final riseDay = getRiseDay();
     if (greatFeastTheme &&

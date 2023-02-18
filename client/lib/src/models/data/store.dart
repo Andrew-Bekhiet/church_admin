@@ -17,6 +17,9 @@ class Store extends ViewableWithIDAndImage with _$Store {
     Family? family,
     @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    List<Area>? areas,
+    List<Street>? streets,
+    LastRecordedByInfo? lastEdit,
     DateTime? photoUpdatedAt,
   }) = _Store;
   Store._() : super();

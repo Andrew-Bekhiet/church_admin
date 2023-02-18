@@ -4,7 +4,9 @@ import './date.dart' as date;
 
 export 'package:flutter/material.dart' show DateTimeRange;
 
-DateTimeRange dateRangeFromString(dynamic data) {
+DateTimeRange? dateRangeFromString(dynamic data) {
+  if (data == null) return null;
+  
   final stringData = (data as String).split(',');
 
   DateTime start = date.dateFromString(stringData.first.substring(1));
@@ -22,5 +24,6 @@ DateTimeRange dateRangeFromString(dynamic data) {
   return DateTimeRange(start: start, end: end);
 }
 
-String dateRangeToString(DateTimeRange range) =>
+String? dateRangeToString(DateTimeRange? range) =>
+    range == null ? null :
     '[${date.dateToString(range.start)},${date.dateToString(range.end)}]';

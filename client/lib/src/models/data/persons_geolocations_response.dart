@@ -5,12 +5,14 @@ class PersonsGeolocationsResponse with EquatableMixin {
   final Set<Area> areas;
   final Set<Street> streets;
   final Set<Family> families;
+  final Set<Store> stores;
   final Set<Person> persons;
 
   PersonsGeolocationsResponse({
     this.areas = const {},
     this.streets = const {},
     this.families = const {},
+    this.stores = const {},
     this.persons = const {},
   });
 
@@ -29,6 +31,11 @@ class PersonsGeolocationsResponse with EquatableMixin {
             .cast<Map>()
             .map((m) => m.cast<String, dynamic>())
             .map(Family.fromJson)
+            .toSet(),
+        stores = (json['stores'] as List? ?? {})
+            .cast<Map>()
+            .map((m) => m.cast<String, dynamic>())
+            .map(Store.fromJson)
             .toSet(),
         persons = (json['persons'] as List? ?? {})
             .cast<Map>()

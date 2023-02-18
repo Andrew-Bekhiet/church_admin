@@ -26,6 +26,7 @@ class DataGeomap extends StatefulWidget {
   final Area? initialArea;
   final Street? initialStreet;
   final Family? initialFamily;
+  final Store? initialStore;
   final Class? initialClass;
   final Service? initialService;
   final Group? initialGroup;
@@ -40,6 +41,7 @@ class DataGeomap extends StatefulWidget {
     this.initialArea,
     this.initialStreet,
     this.initialFamily,
+    this.initialStore,
     this.initialClass,
     this.initialService,
     this.initialGroup,
@@ -54,6 +56,7 @@ class DataGeomap extends StatefulWidget {
           initialPerson != null ||
               initialArea != null ||
               initialStreet != null ||
+              initialStore != null ||
               initialFamily != null ||
               initialClass != null ||
               initialService != null ||
@@ -103,6 +106,9 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
       },
       selectedFamilies: {
         if (widget.initialFamily != null) widget.initialFamily!,
+      },
+      selectedStores: {
+        if (widget.initialStore != null) widget.initialStore!,
       },
       selectedClasses: {
         if (widget.initialClass != null) widget.initialClass!,
@@ -229,6 +235,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
             final areas = locationsData.areas;
             final streets = locationsData.streets;
             final families = locationsData.families;
+            final stores = locationsData.stores;
             final persons = locationsData.persons;
 
             return FlutterMap(
@@ -252,6 +259,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                   areas: areas,
                   streets: streets,
                   families: families,
+                  stores: stores,
                   persons: persons,
                 ),
               ),
@@ -403,6 +411,40 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                           },
                         ),
                       if (_currentMapOptions.layers
+                          .contains(GeoMapLayer.stores))
+                        ...stores.map(
+                          (s) {
+                            return Marker(
+                              height: 50,
+                              width: 50,
+                              anchorPos: AnchorPos.align(AnchorAlign.top),
+                              builder: (context) => StreamBuilder<Point?>(
+                                stream: _focusedLocation,
+                                builder: (context, snapshot) {
+                                  return _MarkerWidget(
+                                    isFocused: snapshot.data == s.geolocation,
+                                    object: s,
+                                    afterTap: () {
+                                      _focusedLocation.value = s.geolocation;
+                                      _animatedMapMove(
+                                        LatLng(
+                                          s.geolocation!.latitude,
+                                          s.geolocation!.longitude,
+                                        ),
+                                        _mapController.zoom,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              point: LatLng(
+                                s.geolocation!.latitude,
+                                s.geolocation!.longitude,
+                              ),
+                            );
+                          },
+                        ),
+                      if (_currentMapOptions.layers
                           .contains(GeoMapLayer.persons))
                         ...persons.map(
                           (p) => Marker(
@@ -537,11 +579,13 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
         getFamilies: options.layers.contains(GeoMapLayer.families),
         getStreets: options.layers.contains(GeoMapLayer.streets),
         getPersons: options.layers.contains(GeoMapLayer.persons),
+        getStores: options.layers.contains(GeoMapLayer.stores),
         areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
         streetsIds:
             options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
         familiesIds:
             options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
+        storesIds: options.selectedStores.map((e) => UuidValue(e.id)).toList(),
         classesIds:
             options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
         servicesIds:
@@ -590,6 +634,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
     Set<Area> areas = const {},
     Set<Street> streets = const {},
     Set<Family> families = const {},
+    Set<Store> stores = const {},
     Set<Person> persons = const {},
   }) {
     if (location != null) {
@@ -617,6 +662,12 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
       return getCentralGeoCoordinate(
         families.where((o) => o.geolocation != null).map(
               (f) => LatLng(f.geolocation!.latitude, f.geolocation!.longitude),
+            ),
+      );
+    } else if (stores.where((o) => o.geolocation != null).isNotEmpty) {
+      return getCentralGeoCoordinate(
+        stores.where((o) => o.geolocation != null).map(
+              (s) => LatLng(s.geolocation!.latitude, s.geolocation!.longitude),
             ),
       );
     } else if (persons.where((o) => o.geolocation != null).isNotEmpty) {
@@ -886,6 +937,37 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                     child: const Text('اختيار'),
                   ),
                 ),
+                ListTile(
+                  title: const Text('المتاجر'),
+                  subtitle: stagingMapOptions.selectedStores.isEmpty
+                      ? const Text('الكل')
+                      : Text(
+                          stagingMapOptions.selectedStores
+                              .take(10)
+                              .map((e) => e.name)
+                              .join(','),
+                        ),
+                  trailing: TextButton(
+                    onPressed: () async {
+                      final rslt = await _select<Store>(
+                        stream: DatabaseService.I.stores.paginateStores(),
+                        selected: stagingMapOptions.selectedStores.toList(),
+                        title: 'اختيار المتاجر',
+                      );
+
+                      if (rslt != null) {
+                        setState(
+                          () {
+                            stagingMapOptions = stagingMapOptions.copyWith(
+                              selectedStores: rslt.toSet(),
+                            );
+                          },
+                        );
+                      }
+                    },
+                    child: const Text('اختيار'),
+                  ),
+                ),
                 const Divider(thickness: 1),
                 ListTile(
                   title: const Text('الخدمات'),
@@ -1008,7 +1090,12 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                   onChanged: _onChanged(GeoMapLayer.families),
                 ),
                 CheckboxListTile(
-                  title: const Text('الأشخاص'),
+                  title: const Text('المتاجر'),
+                  value: stagingMapOptions.layers.contains(GeoMapLayer.stores),
+                  onChanged: _onChanged(GeoMapLayer.stores),
+                ),
+                CheckboxListTile(
+                  title: const Text('المخدومين'),
                   value: stagingMapOptions.layers.contains(GeoMapLayer.persons),
                   onChanged: _onChanged(GeoMapLayer.persons),
                 ),

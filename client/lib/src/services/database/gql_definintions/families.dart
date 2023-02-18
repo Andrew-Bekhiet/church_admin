@@ -11,8 +11,16 @@ class FamiliesDAO extends DAOBase {
 
   GQLPaginatableStream<Family> paginateFamilies({
     Stream<String?>? searchQuery,
-    Area? area,
+    String? byAreaId,
+    String? byStreetId,
+    String? byParentFamilyId,
+    String? byChildFamilyId,
   }) {
+    assert(
+      byParentFamilyId == null || byChildFamilyId == null,
+      'Cannot filter by both parent and child family',
+    );
+
     return GQLPaginatableStream<Family>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
@@ -24,10 +32,30 @@ class FamiliesDAO extends DAOBase {
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (area != null)
+            if (byAreaId != null)
               Input$FamiliesBoolExp(
                 areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
+                ),
+              ),
+            if (byStreetId != null)
+              Input$FamiliesBoolExp(
+                streets: Input$StreetsBoolExp(
+                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
+                ),
+              ),
+            if (byParentFamilyId != null)
+              Input$FamiliesBoolExp(
+                parents: Input$FamiliesFamiliesBoolExp(
+                  parentFamilyId:
+                      Input$UuidComparisonExp($_eq: byParentFamilyId.toUuid()),
+                ),
+              ),
+            if (byChildFamilyId != null)
+              Input$FamiliesBoolExp(
+                children: Input$FamiliesFamiliesBoolExp(
+                  childFamilyId:
+                      Input$UuidComparisonExp($_eq: byChildFamilyId.toUuid()),
                 ),
               ),
             ...defaultSearchVars.where ?? [],
@@ -43,6 +71,21 @@ class FamiliesDAO extends DAOBase {
           ),
         );
       },
+    );
+  }
+
+  Stream<Family?> watchFamily({
+    required String familyId,
+  }) {
+    return graphQLClient.subscribeAndReturnParsed(
+      SubscriptionOptions(
+        document: documentNodeSubscriptionwatchFamily,
+        operationName: 'watchFamily',
+        variables: Variables$Subscription$watchFamily(
+          id: familyId.toUuid(),
+        ).toJson(),
+        parserFn: db.parser.singleParser(Family.fromJson),
+      ),
     );
   }
 }

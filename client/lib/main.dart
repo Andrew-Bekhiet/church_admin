@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:church_admin/graphql/links.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide Notification;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
@@ -251,7 +250,6 @@ void _initializeFirebaseDependencies() {
 
   GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   GetIt.I.registerSingleton<FirebaseDatabase>(FirebaseDatabase.instance);
-  GetIt.I.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
   GetIt.I.registerSingleton<FirebaseFunctions>(
     FirebaseFunctions.instanceFor(region: 'europe-west6'),
   );

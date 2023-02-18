@@ -275,7 +275,7 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i4.IconData getDefaultIconFor(_i10.IImage? imageObject) =>
+  _i4.IconData getDefaultIconFor<T extends _i10.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultIconFor,

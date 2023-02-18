@@ -276,7 +276,7 @@ void _setUp() {
 
 void _setUpMockObjectService() {
   final mockCAViewableObjectService = MockCAViewableObjectService();
-  when(mockCAViewableObjectService.getDefaultIconFor(any))
+  when(mockCAViewableObjectService.getDefaultIconFor<Person>(any))
       .thenAnswer((_) => Icons.person);
 
   return GetIt.I.registerSingleton<CAViewableObjectService>(

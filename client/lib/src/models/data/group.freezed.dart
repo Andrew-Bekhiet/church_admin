@@ -26,6 +26,11 @@ mixin _$Group {
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+  DateTimeRange? get validity => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers => throw _privateConstructorUsedError;
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate =>
       throw _privateConstructorUsedError;
@@ -50,12 +55,18 @@ abstract class $GroupCopyWith<$Res> {
           Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
+      @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+          DateTimeRange? validity,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
 }
@@ -78,6 +89,9 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
+    Object? validity = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -102,6 +116,18 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
+      validity: freezed == validity
+          ? _value.validity
+          : validity // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value.adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -123,6 +149,18 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
 
     return $ServiceCopyWith<$Res>(_value.service!, (value) {
       return _then(_value.copyWith(service: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value) as $Val);
     });
   }
 
@@ -168,6 +206,11 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
           Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
+      @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+          DateTimeRange? validity,
+      LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -175,6 +218,8 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
 
   @override
   $ServiceCopyWith<$Res>? get service;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
   $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
   @override
@@ -195,6 +240,9 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
+    Object? validity = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
@@ -219,6 +267,18 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
+      validity: freezed == validity
+          ? _value.validity
+          : validity // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _value._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
@@ -242,11 +302,17 @@ class _$_Group extends _Group {
           this.color,
       this.photoUpdatedAt,
       this.service,
+      @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+          this.validity,
+      this.lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           this.attendanceDaysConstraintsAggregate})
-      : super._();
+      : _adminUsers = adminUsers,
+        super._();
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
       _$$_GroupFromJson(json);
@@ -263,6 +329,22 @@ class _$_Group extends _Group {
   @override
   final Service? service;
   @override
+  @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+  final DateTimeRange? validity;
+  @override
+  final LastRecordedByInfo? lastEdit;
+  final List<User>? _adminUsers;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers {
+    final value = _adminUsers;
+    if (value == null) return null;
+    if (_adminUsers is EqualUnmodifiableListView) return _adminUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   final AnalysisData<DateTime>? attendanceHistoryAggregate;
   @override
@@ -271,7 +353,7 @@ class _$_Group extends _Group {
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -285,6 +367,12 @@ class _$_Group extends _Group {
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             (identical(other.service, service) || other.service == service) &&
+            (identical(other.validity, validity) ||
+                other.validity == validity) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other._adminUsers, _adminUsers) &&
             (identical(other.attendanceHistoryAggregate,
                     attendanceHistoryAggregate) ||
                 other.attendanceHistoryAggregate ==
@@ -297,8 +385,18 @@ class _$_Group extends _Group {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, color, photoUpdatedAt,
-      service, attendanceHistoryAggregate, attendanceDaysConstraintsAggregate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      color,
+      photoUpdatedAt,
+      service,
+      validity,
+      lastEdit,
+      const DeepCollectionEquality().hash(_adminUsers),
+      attendanceHistoryAggregate,
+      attendanceDaysConstraintsAggregate);
 
   @JsonKey(ignore: true)
   @override
@@ -322,6 +420,11 @@ abstract class _Group extends Group {
           final Color? color,
       final DateTime? photoUpdatedAt,
       final Service? service,
+      @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+          final DateTimeRange? validity,
+      final LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+          final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
           final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
@@ -342,6 +445,14 @@ abstract class _Group extends Group {
   DateTime? get photoUpdatedAt;
   @override
   Service? get service;
+  @override
+  @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+  DateTimeRange? get validity;
+  @override
+  LastRecordedByInfo? get lastEdit;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  List<User>? get adminUsers;
   @override
   @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
   AnalysisData<DateTime>? get attendanceHistoryAggregate;

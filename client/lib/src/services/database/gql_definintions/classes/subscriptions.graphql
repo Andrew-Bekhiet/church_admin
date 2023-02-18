@@ -7,3 +7,23 @@ subscription watchAllClasses(
     ...Class
   }
 }
+
+subscription watchClass($id: uuid!) {
+  classesByPk(id: $id) {
+    ...Class
+    service {
+      ...Service
+    }
+    lastEdit
+    serviceGender
+    studyYear {
+      order
+      name
+    }
+    adminUsers(distinctOn: uid) {
+      user {
+        ...User
+      }
+    }
+  }
+}

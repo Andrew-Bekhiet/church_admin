@@ -11,10 +11,11 @@ class GeoMapOptions with _$GeoMapOptions {
     @Default({}) Set<Area> selectedAreas,
     @Default({}) Set<Street> selectedStreets,
     @Default({}) Set<Family> selectedFamilies,
+    @Default({}) Set<Store> selectedStores,
     @Default({}) Set<Service> selectedServices,
     @Default({}) Set<Class> selectedClasses,
     @Default({}) Set<Group> selectedGroups,
   }) = _GeoMapOptions;
 }
 
-enum GeoMapLayer { areas, streets, families, persons }
+enum GeoMapLayer { areas, streets, families, stores, persons }

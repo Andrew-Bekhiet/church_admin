@@ -7,3 +7,19 @@ subscription watchAllGroups(
     ...Group
   }
 }
+
+subscription watchGroup($id: uuid!) {
+  groupsByPk(id: $id) {
+    ...Group
+    service {
+      ...Service
+    }
+    lastEdit
+    validity
+    adminUsers(distinctOn: uid) {
+      user {
+        ...User
+      }
+    }
+  }
+}

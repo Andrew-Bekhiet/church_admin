@@ -10,56 +10,20 @@ import 'package:rxdart_ext/rxdart_ext.dart';
 
 class HomeScreen extends StatefulWidget {
   static final GoRoute route = GoRoute(
-    name: 'home',
     path: '/',
     builder: (context, state) => const HomeScreen(),
     routes: [
       ViewPerson.route,
-      EditPerson.newPersonRoute,
-      GoRoute(
-        name: 'view_service',
-        path: 'viewService',
-        builder: (context, state) => SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                Text(state.location),
-                Text(state.extra.toString()),
-              ],
-            ),
-          ),
-        ),
-      ),
+      EditPerson.route,
+      ViewService.route,
       ViewArea.route,
+      ViewUser.route,
       // EditArea.newAreaRoute,
-      GoRoute(
-        name: 'view_group',
-        path: 'viewGroup',
-        builder: (context, state) => SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                Text(state.location),
-                Text(state.extra.toString()),
-              ],
-            ),
-          ),
-        ),
-      ),
-      GoRoute(
-        name: 'view_class',
-        path: 'viewClass',
-        builder: (context, state) => SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                Text(state.location),
-                Text(state.extra.toString()),
-              ],
-            ),
-          ),
-        ),
-      ),
+      ViewGroup.route,
+      ViewClass.route,
+      ViewFamily.route,
+      ViewStreet.route,
+      ViewStore.route,
     ],
     redirect: (context, state) {
       return redirect(
@@ -422,7 +386,7 @@ class _HomeFloatingActionButton extends StatelessWidget {
   void Function() _addItem(BuildContext context) => () {
         final newIndex = getNewIndex();
         if (newIndex == 0) {
-          context.goNamed('new_person');
+          context.go('editPerson');
         }
       };
 }

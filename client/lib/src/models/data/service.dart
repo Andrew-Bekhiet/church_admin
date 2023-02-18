@@ -17,11 +17,16 @@ class Service extends ViewableWithIDAndImage
     required String name,
     StudyYear? fromStudyYear,
     StudyYear? toStudyYear,
+    @JsonKey(name: 'nextServiceObject')
+    Service? nextService,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
         Color? color,
     DateTime? photoUpdatedAt,
     List<Class>? classes,
     List<Group>? groups,
+    LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+        List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,

@@ -874,7 +874,12 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'adminUsers'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'distinctOn'),
+                value: EnumValueNode(name: NameNode(value: 'uid')),
+              )
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(

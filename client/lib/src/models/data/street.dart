@@ -17,6 +17,8 @@ class Street extends ViewableWithIDAndImage with _$Street {
     @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    List<Area>? areas,
+    LastRecordedByInfo? lastEdit,
   }) = _Street;
   Street._() : super();
 

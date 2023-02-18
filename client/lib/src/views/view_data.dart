@@ -1,3 +1,9 @@
 export 'view_data/view_area.dart';
+export 'view_data/view_class.dart';
+export 'view_data/view_family.dart';
+export 'view_data/view_group.dart';
 export 'view_data/view_person.dart';
+export 'view_data/view_service.dart';
+export 'view_data/view_store.dart';
+export 'view_data/view_street.dart';
 export 'view_data/view_user.dart';

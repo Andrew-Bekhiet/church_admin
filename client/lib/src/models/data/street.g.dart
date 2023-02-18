@@ -14,6 +14,13 @@ _$_Street _$$_StreetFromJson(Map json) => _$_Street(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      areas: (json['areas'] as List<dynamic>?)
+          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
 Map<String, dynamic> _$$_StreetToJson(_$_Street instance) => <String, dynamic>{
@@ -22,4 +29,6 @@ Map<String, dynamic> _$$_StreetToJson(_$_Street instance) => <String, dynamic>{
       'line': lineToJson(instance.line),
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'areas': instance.areas?.map((e) => e.toJson()).toList(),
+      'lastEdit': instance.lastEdit?.toJson(),
     };

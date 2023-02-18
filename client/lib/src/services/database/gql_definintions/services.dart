@@ -78,4 +78,21 @@ class ServicesDAO extends DAOBase {
       },
     );
   }
+
+  Stream<Service?> watchService({
+    required String serviceId,
+  }) {
+    return graphQLClient
+        .subscribe(
+          SubscriptionOptions(
+            document: documentNodeSubscriptionwatchService,
+            operationName: 'watchService',
+            variables:
+                Variables$Subscription$watchService(id: serviceId.toUuid())
+                    .toJson(),
+            parserFn: db.parser.singleOrNullParser(Service.fromJson),
+          ),
+        )
+        .map((p) => p.parsedData);
+  }
 }

@@ -8,3 +8,14 @@ subscription watchAllStreets(
     line
   }
 }
+
+subscription watchStreet($id: uuid!) {
+  streetsByPk(id: $id) {
+    ...Street
+    areas {
+      ...Area
+    }
+    line
+    lastEdit
+  }
+}

@@ -22,49 +22,91 @@ class CAViewableObjectService implements DefaultViewableObjectService {
   @override
   void onTap(Viewable object) {
     if (object is Person) {
-      router.goNamed(
-        'view_person',
-        queryParams: {'id': object.id},
+      router.go(
+        Uri(
+          path: '/viewPerson',
+          queryParameters: {'id': object.id},
+        ).toString(),
         extra: {
           'person': object,
         },
       );
     } else if (object is Service) {
-      router.goNamed(
-        'view_service',
-        queryParams: {'id': object.id},
+      router.go(
+        Uri(
+          path: '/viewService',
+          queryParameters: {'id': object.id},
+        ).toString(),
         extra: {
           'service': object,
         },
       );
-    } else if (object is Area) {
-      router.goNamed(
-        'view_area',
-        queryParams: {'id': object.id},
-        extra: {
-          'area': object,
-        },
-      );
     } else if (object is Group) {
-      router.goNamed(
-        'view_group',
-        queryParams: {'id': object.id},
+      router.go(
+        Uri(
+          path: '/viewGroup',
+          queryParameters: {'id': object.id},
+        ).toString(),
         extra: {
           'group': object,
         },
       );
     } else if (object is Class) {
-      router.goNamed(
-        'view_class',
-        queryParams: {'id': object.id},
+      router.go(
+        Uri(
+          path: '/viewClass',
+          queryParameters: {'id': object.id},
+        ).toString(),
         extra: {
           'class': object,
         },
       );
+    } else if (object is Area) {
+      router.go(
+        Uri(
+          path: '/viewArea',
+          queryParameters: {'id': object.id},
+        ).toString(),
+        extra: {
+          'area': object,
+        },
+      );
+    } else if (object is Street) {
+      router.go(
+        Uri(
+          path: '/viewStreet',
+          queryParameters: {'id': object.id},
+        ).toString(),
+        extra: {
+          'street': object,
+        },
+      );
+    } else if (object is Family) {
+      router.go(
+        Uri(
+          path: '/viewFamily',
+          queryParameters: {'id': object.id},
+        ).toString(),
+        extra: {
+          'family': object,
+        },
+      );
+    } else if (object is Store) {
+      router.go(
+        Uri(
+          path: '/viewStore',
+          queryParameters: {'id': object.id},
+        ).toString(),
+        extra: {
+          'store': object,
+        },
+      );
     } else if (object is User) {
-      router.goNamed(
-        'view_user',
-        queryParams: {'uid': object.uid},
+      router.go(
+        Uri(
+          path: '/viewUser',
+          queryParameters: {'uid': object.uid},
+        ).toString(),
         extra: {
           'user': object,
         },
@@ -156,17 +198,25 @@ class CAViewableObjectService implements DefaultViewableObjectService {
     }
   }
 
-  IconData getDefaultIconFor(IImage imageObject) {
-    if (imageObject is Area) return Icons.pin_drop;
-    if (imageObject is Street) return Icons.pin_drop;
-    if (imageObject is Family) return Icons.diversity_1;
-    if (imageObject is Store) return Icons.store;
-    if (imageObject is Service) return Icons.miscellaneous_services;
-    if (imageObject is Class) return Icons.groups_outlined;
-    if (imageObject is Group) return Icons.groups;
-    if (imageObject is Person) return Icons.person;
-    if (imageObject is User) return Icons.person;
+  IconData getDefaultIconFor<T extends IImage>([T? imageObject]) {
+    if (imageObject is Area || _isSubtype<T, Area>()) return Icons.pin_drop;
+    if (imageObject is Street || _isSubtype<T, Street>()) return Icons.pin_drop;
+    if (imageObject is Family || _isSubtype<T, Family>()) {
+      return Icons.diversity_1;
+    }
+    if (imageObject is Store || _isSubtype<T, Store>()) return Icons.store;
+    if (imageObject is Service || _isSubtype<T, Service>()) {
+      return Icons.miscellaneous_services;
+    }
+    if (imageObject is Class || _isSubtype<T, Class>()) {
+      return Icons.groups_outlined;
+    }
+    if (imageObject is Group || _isSubtype<T, Group>()) return Icons.groups;
+    if (imageObject is Person || _isSubtype<T, Person>()) return Icons.person;
+    if (imageObject is User || _isSubtype<T, User>()) return Icons.person;
 
     return Icons.image_not_supported;
   }
+
+  bool _isSubtype<Type, Subtype>() => <Type>[] is List<Subtype>;
 }

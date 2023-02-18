@@ -4,37 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewArea extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'viewArea',
+class ViewService extends StatefulWidget {
+  static final GoRoute route = GoRoute(
+    path: 'viewService',
     builder: (context, state) {
       if (state.queryParams['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
-      return ViewArea(
-        areaId: state.queryParams['id']!,
+      return ViewService(
+        serviceId: state.queryParams['id']!,
+        service: (state.extra as Map?)?['service'] as Service?,
       );
     },
   );
 
-  final Area? area;
-  final String areaId;
-  const ViewArea({
-    required this.areaId,
-    this.area,
+  final Service? service;
+  final String serviceId;
+  const ViewService({
+    required this.serviceId,
+    this.service,
     super.key,
   });
 
   @override
-  State<ViewArea> createState() => _ViewAreaState();
+  State<ViewService> createState() => _ViewServiceState();
 }
 
-class _ViewAreaState extends State<ViewArea>
-    with SingleTickerProviderStateMixin {
-  late final IconData streetIcon;
-  late final IconData familyIcon;
-  late final IconData storeIcon;
+class _ViewServiceState extends State<ViewService> {
+  late final IconData classIcon;
+  late final IconData groupIcon;
   late final IconData personIcon;
 
   @override
@@ -43,17 +42,17 @@ class _ViewAreaState extends State<ViewArea>
 
     final viewableObjectService = GetIt.I<CAViewableObjectService>();
 
-    streetIcon = viewableObjectService.getDefaultIconFor<Street>();
-    familyIcon = viewableObjectService.getDefaultIconFor<Family>();
-    storeIcon = viewableObjectService.getDefaultIconFor<Store>();
+    classIcon = viewableObjectService.getDefaultIconFor<Class>();
+    groupIcon = viewableObjectService.getDefaultIconFor<Group>();
     personIcon = viewableObjectService.getDefaultIconFor<Person>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Area?>(
-      initialData: widget.area,
-      stream: DatabaseService.I.areas.watchArea(areaId: widget.areaId),
+    return StreamBuilder<Service?>(
+      initialData: widget.service,
+      stream:
+          DatabaseService.I.services.watchService(serviceId: widget.serviceId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -83,29 +82,30 @@ class _ViewAreaState extends State<ViewArea>
             ),
             body: Center(
               child: Text(
-                'لم يتم العثور على المنطقة',
+                'لم يتم العثور على الخدمة',
                 style: themeData.textTheme.titleLarge,
               ),
             ),
           );
         }
 
-        final area = snapshot.requireData!;
+        final service = snapshot.requireData!;
 
-        final foregroundColor = area.color.getContrastingColor(
+        final foregroundColor = service.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
               themeData.textTheme.titleMedium!.color!,
         );
+
         return DefaultTabController(
-          length: 4,
+          length: 3,
           child: Theme(
-            data: CAThemingService.getDefault(primaryOverride: area.color),
+            data: CAThemingService.getDefault(primaryOverride: service.color),
             child: Scaffold(
               body: NestedScrollView(
                 headerSliverBuilder: (context, isBodyScrolled) => [
                   SliverAppBar(
-                    backgroundColor: area.color,
+                    backgroundColor: service.color,
                     foregroundColor: foregroundColor,
                     stretch: true,
                     pinned: true,
@@ -121,10 +121,10 @@ class _ViewAreaState extends State<ViewArea>
                           tooltip: 'تعديل',
                           onPressed: () => context.go(
                             Uri(
-                              path: '/viewArea/editArea',
-                              queryParameters: {'id': widget.areaId},
+                              path: 'viewService/editService',
+                              queryParameters: {'id': widget.serviceId},
                             ).toString(),
-                            extra: {'area': area},
+                            extra: {'service': service},
                           ),
                           icon: const Icon(Icons.edit),
                         ),
@@ -132,8 +132,9 @@ class _ViewAreaState extends State<ViewArea>
                     flexibleSpace: ViewableObjectAppBar(
                       circleCrop: false,
                       foregroundColor: foregroundColor,
-                      viewable:
-                          widget.area?.hasImage ?? false ? widget.area! : area,
+                      viewable: widget.service?.hasImage ?? false
+                          ? widget.service!
+                          : service,
                       appBarMaxHeight: 280,
                       duration: const Duration(milliseconds: 450),
                     ),
@@ -141,34 +142,42 @@ class _ViewAreaState extends State<ViewArea>
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        if (area.bounds != null)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            child: FilledButton.tonalIcon(
-                              label: const Text('الموقع على الخريطة'),
-                              icon: const Icon(Icons.map),
-                              onPressed: () async => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DataGeomap(initialArea: area),
-                                ),
-                              ),
-                            ),
+                        ListTile(
+                          title: const Text('الخدمة التالية'),
+                          subtitle: service.nextService != null
+                              ? ViewableObjectWidget(
+                                  service.nextService!,
+                                  dense: true,
+                                  forceShowSecondLine: false,
+                                )
+                              : const Text('لا يوجد'),
+                        ),
+                        ListTile(
+                          title: const Text('السنوات الدراسية'),
+                          subtitle: Text(
+                            'من ${service.fromStudyYear?.name ?? ''} '
+                            'إلى ${service.toStudyYear?.name ?? ''}',
                           ),
+                        ),
+                        ListTile(
+                          title: FilledButton.tonalIcon(
+                            icon: const Icon(Icons.query_stats),
+                            label: const Text('احصائيات'),
+                            // TODO: add service analysis
+                            onPressed: () {},
+                          ),
+                        ),
                         HistoryProperty(
                           name: 'أخر تحديث للبيانات',
-                          value: area.lastEdit?.time,
+                          value: service.lastEdit?.time,
                           getHistoryStream: () => DatabaseService.I.history
-                              .paginateEditHistory<Area>(id: area.id),
+                              .paginateEditHistory<Service>(id: service.id),
                         ),
                         ListTile(
                           title: const Text('الخدام المسؤولين'),
-                          subtitle: area.adminUsers?.isNotEmpty ?? false
-                              ? AdminUsers(users: area.adminUsers!)
-                              : const Text('لا يوجد خدام محددين للمنطقة'),
+                          subtitle: service.adminUsers?.isNotEmpty ?? false
+                              ? AdminUsers(users: service.adminUsers!)
+                              : const Text('لا يوجد خدام محددين للخدمة'),
                         ),
                       ],
                     ),
@@ -178,16 +187,18 @@ class _ViewAreaState extends State<ViewArea>
                     delegate: PreferredSizePersistentHeaderDelegate(
                       child: TabBar(
                         tabs: [
-                          Tab(text: 'الشوارع', icon: Icon(streetIcon)),
-                          Tab(text: 'العائلات', icon: Icon(familyIcon)),
-                          Tab(text: 'المتاجر', icon: Icon(storeIcon)),
+                          Tab(text: 'الفصول', icon: Icon(classIcon)),
+                          Tab(text: 'المجموعات', icon: Icon(groupIcon)),
                           Tab(text: 'المخدومين', icon: Icon(personIcon)),
                         ],
                       ),
                     ),
                   ),
                 ],
-                body: _AreaContents(key: ValueKey(area.id), area: area),
+                body: _ServiceContents(
+                  key: ValueKey(service.id),
+                  service: service,
+                ),
               ),
             ),
           ),
@@ -197,34 +208,30 @@ class _ViewAreaState extends State<ViewArea>
   }
 }
 
-class _AreaContents extends StatefulWidget {
-  const _AreaContents({required this.area, super.key});
+class _ServiceContents extends StatefulWidget {
+  const _ServiceContents({required this.service, super.key});
 
-  final Area area;
+  final Service service;
 
   @override
-  State<_AreaContents> createState() => _AreaContentsState();
+  State<_ServiceContents> createState() => _ServiceContentsState();
 }
 
-class _AreaContentsState extends State<_AreaContents> {
-  late final _streetsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      areaId: widget.area.id,
+class _ServiceContentsState extends State<_ServiceContents>
+    with SingleTickerProviderStateMixin {
+  late final _classesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.classes.paginateClasses(
+      serviceId: widget.service.id,
     ),
   );
-  late final _familiesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byAreaId: widget.area.id,
-    ),
-  );
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byAreaId: widget.area.id,
+  late final _groupsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.groups.paginateGroups(
+      serviceId: widget.service.id,
     ),
   );
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byAreaId: widget.area.id,
+      byServiceId: widget.service.id,
     ),
   );
 
@@ -236,25 +243,18 @@ class _AreaContentsState extends State<_AreaContents> {
           index: 0,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _streetsController,
+            objectsController: _classesController,
           ),
         ),
         LazyTabPage(
           index: 1,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _familiesController,
+            objectsController: _groupsController,
           ),
         ),
         LazyTabPage(
           index: 2,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _storesController,
-          ),
-        ),
-        LazyTabPage(
-          index: 3,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
             objectsController: _personsController,

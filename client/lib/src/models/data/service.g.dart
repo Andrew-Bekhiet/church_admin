@@ -17,6 +17,10 @@ _$_Service _$$_ServiceFromJson(Map json) => _$_Service(
           ? null
           : StudyYear.fromJson(
               Map<String, Object?>.from(json['toStudyYear'] as Map)),
+      nextService: json['nextServiceObject'] == null
+          ? null
+          : Service.fromJson(
+              Map<String, Object?>.from(json['nextServiceObject'] as Map)),
       color: colorFromInt(json['color'] as int?),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
@@ -27,6 +31,11 @@ _$_Service _$$_ServiceFromJson(Map json) => _$_Service(
       groups: (json['groups'] as List<dynamic>?)
           ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
+      lastEdit: json['lastEdit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastEdit'] as Map)),
+      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
       attendanceHistoryAggregate: analysisDataFromJson(
           json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
       attendanceDaysConstraintsAggregate: analysisDataFromJson(
@@ -39,10 +48,13 @@ Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
       'name': instance.name,
       'fromStudyYear': instance.fromStudyYear?.toJson(),
       'toStudyYear': instance.toStudyYear?.toJson(),
+      'nextServiceObject': instance.nextService?.toJson(),
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'classes': instance.classes?.map((e) => e.toJson()).toList(),
       'groups': instance.groups?.map((e) => e.toJson()).toList(),
+      'lastEdit': instance.lastEdit?.toJson(),
+      'adminUsers': adminUsersToJson(instance.adminUsers),
       'attendanceHistoryAggregate':
           analysisDataToJson(instance.attendanceHistoryAggregate),
       'attendanceDaysConstraintsAggregate':

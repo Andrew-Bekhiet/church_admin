@@ -11,7 +11,9 @@ class StoresDAO extends DAOBase {
 
   GQLPaginatableStream<Store> paginateStores({
     Stream<String?>? searchQuery,
-    Area? area,
+    String? byAreaId,
+    String? byStreetId,
+    String? byFamilyId,
   }) {
     return GQLPaginatableStream<Store>(
       searchQuery: searchQuery,
@@ -24,10 +26,22 @@ class StoresDAO extends DAOBase {
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (area != null)
+            if (byAreaId != null)
               Input$StoresBoolExp(
                 areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: area.id.toUuid()),
+                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
+                ),
+              ),
+            if (byStreetId != null)
+              Input$StoresBoolExp(
+                streets: Input$StreetsBoolExp(
+                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
+                ),
+              ),
+            if (byFamilyId != null)
+              Input$StoresBoolExp(
+                adminFamily: Input$UuidComparisonExp(
+                  $_eq: byFamilyId.toUuid(),
                 ),
               ),
             ...defaultSearchVars.where ?? [],
@@ -46,7 +60,7 @@ class StoresDAO extends DAOBase {
     );
   }
 
-  /* Stream<Store?> watchStore({
+  Stream<Store?> watchStore({
     required String storeId,
   }) {
     return graphQLClient
@@ -60,5 +74,5 @@ class StoresDAO extends DAOBase {
           ),
         )
         .map((p) => p.parsedData);
-  } */
+  }
 }

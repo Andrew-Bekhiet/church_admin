@@ -27,6 +27,8 @@ mixin _$Street {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  List<Area>? get areas => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,11 @@ abstract class $StreetCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      List<Area>? areas,
+      LastRecordedByInfo? lastEdit});
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -64,6 +70,8 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? areas = freezed,
+    Object? lastEdit = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -86,7 +94,27 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      areas: freezed == areas
+          ? _value.areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as List<Area>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_value.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
+      return _then(_value.copyWith(lastEdit: value) as $Val);
+    });
   }
 }
 
@@ -101,7 +129,12 @@ abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      List<Area>? areas,
+      LastRecordedByInfo? lastEdit});
+
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -119,6 +152,8 @@ class __$$_StreetCopyWithImpl<$Res>
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? areas = freezed,
+    Object? lastEdit = freezed,
   }) {
     return _then(_$_Street(
       id: null == id
@@ -141,6 +176,14 @@ class __$$_StreetCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      areas: freezed == areas
+          ? _value._areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as List<Area>?,
+      lastEdit: freezed == lastEdit
+          ? _value.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ));
   }
 }
@@ -153,8 +196,11 @@ class _$_Street extends _Street {
       required this.name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) this.line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      this.photoUpdatedAt})
-      : super._();
+      this.photoUpdatedAt,
+      final List<Area>? areas,
+      this.lastEdit})
+      : _areas = areas,
+        super._();
 
   factory _$_Street.fromJson(Map<String, dynamic> json) =>
       _$$_StreetFromJson(json);
@@ -171,10 +217,22 @@ class _$_Street extends _Street {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  final List<Area>? _areas;
+  @override
+  List<Area>? get areas {
+    final value = _areas;
+    if (value == null) return null;
+    if (_areas is EqualUnmodifiableListView) return _areas;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final LastRecordedByInfo? lastEdit;
 
   @override
   String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, areas: $areas, lastEdit: $lastEdit)';
   }
 
   @override
@@ -187,13 +245,16 @@ class _$_Street extends _Street {
             (identical(other.line, line) || other.line == line) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt));
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            const DeepCollectionEquality().equals(other._areas, _areas) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, line, color, photoUpdatedAt);
+  int get hashCode => Object.hash(runtimeType, id, name, line, color,
+      photoUpdatedAt, const DeepCollectionEquality().hash(_areas), lastEdit);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +276,9 @@ abstract class _Street extends Street {
       required final String name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) final Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt}) = _$_Street;
+      final DateTime? photoUpdatedAt,
+      final List<Area>? areas,
+      final LastRecordedByInfo? lastEdit}) = _$_Street;
   _Street._() : super._();
 
   factory _Street.fromJson(Map<String, dynamic> json) = _$_Street.fromJson;
@@ -232,6 +295,10 @@ abstract class _Street extends Street {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  List<Area>? get areas;
+  @override
+  LastRecordedByInfo? get lastEdit;
   @override
   @JsonKey(ignore: true)
   _$$_StreetCopyWith<_$_Street> get copyWith =>

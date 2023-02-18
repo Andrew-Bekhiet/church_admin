@@ -51,7 +51,7 @@ void main() {
 
       expect(
         dateRangeFromString(
-          dateRangeToString(dateTimeRange).replaceAll(']', ')'),
+          dateRangeToString(dateTimeRange)?.replaceAll(']', ')'),
         ),
         expectedDateTimeRange,
       );
@@ -76,7 +76,7 @@ void main() {
 
       expect(
         dateRangeFromString(
-          dateRangeToString(dateTimeRange).replaceAll('[', '('),
+          dateRangeToString(dateTimeRange)?.replaceAll('[', '('),
         ),
         expectedDateTimeRange,
       );
@@ -102,7 +102,7 @@ void main() {
       expect(
         dateRangeFromString(
           dateRangeToString(dateTimeRange)
-              .replaceAll(']', ')')
+              ?.replaceAll(']', ')')
               .replaceAll('[', '('),
         ),
         expectedDateTimeRange,

@@ -740,7 +740,12 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
   _i4.GQLPaginatableStream<_i4.Person> paginatePersons({
     _i9.Stream<String?>? searchQuery,
     String? secondLineFieldName,
-    _i4.Area? area,
+    String? byAreaId,
+    String? byStreetId,
+    String? byFamilyId,
+    String? byServiceId,
+    String? byClassId,
+    String? byGroupId,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -749,7 +754,12 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
           {
             #searchQuery: searchQuery,
             #secondLineFieldName: secondLineFieldName,
-            #area: area,
+            #byAreaId: byAreaId,
+            #byStreetId: byStreetId,
+            #byFamilyId: byFamilyId,
+            #byServiceId: byServiceId,
+            #byClassId: byClassId,
+            #byGroupId: byGroupId,
           },
         ),
         returnValue: _FakeGQLPaginatableStream_18<_i4.Person>(
@@ -760,7 +770,12 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             {
               #searchQuery: searchQuery,
               #secondLineFieldName: secondLineFieldName,
-              #area: area,
+              #byAreaId: byAreaId,
+              #byStreetId: byStreetId,
+              #byFamilyId: byFamilyId,
+              #byServiceId: byServiceId,
+              #byClassId: byClassId,
+              #byGroupId: byGroupId,
             },
           ),
         ),
@@ -772,7 +787,12 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             {
               #searchQuery: searchQuery,
               #secondLineFieldName: secondLineFieldName,
-              #area: area,
+              #byAreaId: byAreaId,
+              #byStreetId: byStreetId,
+              #byFamilyId: byFamilyId,
+              #byServiceId: byServiceId,
+              #byClassId: byClassId,
+              #byGroupId: byGroupId,
             },
           ),
         ),
@@ -795,12 +815,14 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     List<_i12.UuidValue>? areasIds = const [],
     List<_i12.UuidValue>? streetsIds = const [],
     List<_i12.UuidValue>? familiesIds = const [],
+    List<_i12.UuidValue>? storesIds = const [],
     List<_i12.UuidValue>? servicesIds = const [],
     List<_i12.UuidValue>? classesIds = const [],
     List<_i12.UuidValue>? groupsIds = const [],
     bool? getAreas = false,
     bool? getStreets = false,
     bool? getFamilies = false,
+    bool? getStores = false,
     bool? getPersons = false,
   }) =>
       (super.noSuchMethod(
@@ -812,12 +834,14 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             #areasIds: areasIds,
             #streetsIds: streetsIds,
             #familiesIds: familiesIds,
+            #storesIds: storesIds,
             #servicesIds: servicesIds,
             #classesIds: classesIds,
             #groupsIds: groupsIds,
             #getAreas: getAreas,
             #getStreets: getStreets,
             #getFamilies: getFamilies,
+            #getStores: getStores,
             #getPersons: getPersons,
           },
         ),
@@ -1155,6 +1179,17 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Service>);
+  @override
+  _i9.Stream<_i4.Service?> watchService({required String? serviceId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #watchService,
+          [],
+          {#serviceId: serviceId},
+        ),
+        returnValue: _i9.Stream<_i4.Service?>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.Service?>.empty(),
+      ) as _i9.Stream<_i4.Service?>);
 }
 
 /// A class which mocks [LocalAuthService].

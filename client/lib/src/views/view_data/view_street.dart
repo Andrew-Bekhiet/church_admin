@@ -4,35 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewArea extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'viewArea',
+class ViewStreet extends StatefulWidget {
+  static final GoRoute route = GoRoute(
+    path: 'viewStreet',
     builder: (context, state) {
       if (state.queryParams['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
-      return ViewArea(
-        areaId: state.queryParams['id']!,
+      return ViewStreet(
+        streetId: state.queryParams['id']!,
+        street: (state.extra as Map?)?['street'] as Street?,
       );
     },
   );
 
-  final Area? area;
-  final String areaId;
-  const ViewArea({
-    required this.areaId,
-    this.area,
+  final Street? street;
+  final String streetId;
+  const ViewStreet({
+    required this.streetId,
+    this.street,
     super.key,
   });
 
   @override
-  State<ViewArea> createState() => _ViewAreaState();
+  State<ViewStreet> createState() => _ViewStreetState();
 }
 
-class _ViewAreaState extends State<ViewArea>
-    with SingleTickerProviderStateMixin {
-  late final IconData streetIcon;
+class _ViewStreetState extends State<ViewStreet> {
   late final IconData familyIcon;
   late final IconData storeIcon;
   late final IconData personIcon;
@@ -41,19 +40,18 @@ class _ViewAreaState extends State<ViewArea>
   void initState() {
     super.initState();
 
-    final viewableObjectService = GetIt.I<CAViewableObjectService>();
+    final viewableObjectStreet = GetIt.I<CAViewableObjectService>();
 
-    streetIcon = viewableObjectService.getDefaultIconFor<Street>();
-    familyIcon = viewableObjectService.getDefaultIconFor<Family>();
-    storeIcon = viewableObjectService.getDefaultIconFor<Store>();
-    personIcon = viewableObjectService.getDefaultIconFor<Person>();
+    familyIcon = viewableObjectStreet.getDefaultIconFor<Family>();
+    storeIcon = viewableObjectStreet.getDefaultIconFor<Store>();
+    personIcon = viewableObjectStreet.getDefaultIconFor<Person>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Area?>(
-      initialData: widget.area,
-      stream: DatabaseService.I.areas.watchArea(areaId: widget.areaId),
+    return StreamBuilder<Street?>(
+      initialData: widget.street,
+      stream: DatabaseService.I.streets.watchStreet(streetId: widget.streetId),
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -83,29 +81,30 @@ class _ViewAreaState extends State<ViewArea>
             ),
             body: Center(
               child: Text(
-                'لم يتم العثور على المنطقة',
+                'لم يتم العثور على الشارع',
                 style: themeData.textTheme.titleLarge,
               ),
             ),
           );
         }
 
-        final area = snapshot.requireData!;
+        final street = snapshot.requireData!;
 
-        final foregroundColor = area.color.getContrastingColor(
+        final foregroundColor = street.color.getContrastingColor(
           ListTileTheme.of(context).textColor ??
               themeData.listTileTheme.textColor ??
               themeData.textTheme.titleMedium!.color!,
         );
+
         return DefaultTabController(
-          length: 4,
+          length: 3,
           child: Theme(
-            data: CAThemingService.getDefault(primaryOverride: area.color),
+            data: CAThemingService.getDefault(primaryOverride: street.color),
             child: Scaffold(
               body: NestedScrollView(
                 headerSliverBuilder: (context, isBodyScrolled) => [
                   SliverAppBar(
-                    backgroundColor: area.color,
+                    backgroundColor: street.color,
                     foregroundColor: foregroundColor,
                     stretch: true,
                     pinned: true,
@@ -121,10 +120,10 @@ class _ViewAreaState extends State<ViewArea>
                           tooltip: 'تعديل',
                           onPressed: () => context.go(
                             Uri(
-                              path: '/viewArea/editArea',
-                              queryParameters: {'id': widget.areaId},
+                              path: 'viewStreet/editStreet',
+                              queryParameters: {'id': widget.streetId},
                             ).toString(),
-                            extra: {'area': area},
+                            extra: {'street': street},
                           ),
                           icon: const Icon(Icons.edit),
                         ),
@@ -132,8 +131,9 @@ class _ViewAreaState extends State<ViewArea>
                     flexibleSpace: ViewableObjectAppBar(
                       circleCrop: false,
                       foregroundColor: foregroundColor,
-                      viewable:
-                          widget.area?.hasImage ?? false ? widget.area! : area,
+                      viewable: widget.street?.hasImage ?? false
+                          ? widget.street!
+                          : street,
                       appBarMaxHeight: 280,
                       duration: const Duration(milliseconds: 450),
                     ),
@@ -141,7 +141,7 @@ class _ViewAreaState extends State<ViewArea>
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        if (area.bounds != null)
+                        if (street.line != null)
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -153,22 +153,38 @@ class _ViewAreaState extends State<ViewArea>
                               onPressed: () async => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      DataGeomap(initialArea: area),
+                                      DataGeomap(initialStreet: street),
                                 ),
                               ),
                             ),
                           ),
-                        HistoryProperty(
-                          name: 'أخر تحديث للبيانات',
-                          value: area.lastEdit?.time,
-                          getHistoryStream: () => DatabaseService.I.history
-                              .paginateEditHistory<Area>(id: area.id),
+                        ListTile(
+                          title: const Text('المناطق التي يظهر بها'),
+                          subtitle: Column(
+                            children: [
+                              for (final a in street.areas ?? <Area>[])
+                                ViewableObjectWidget(
+                                  a,
+                                  dense: true,
+                                  forceShowSecondLine: false,
+                                  circleCrop: false,
+                                ),
+                            ],
+                          ),
                         ),
                         ListTile(
-                          title: const Text('الخدام المسؤولين'),
-                          subtitle: area.adminUsers?.isNotEmpty ?? false
-                              ? AdminUsers(users: area.adminUsers!)
-                              : const Text('لا يوجد خدام محددين للمنطقة'),
+                          title: FilledButton.tonalIcon(
+                            icon: const Icon(Icons.query_stats),
+                            label: const Text('احصائيات'),
+                            // TODO: add street analysis
+                            onPressed: () {},
+                          ),
+                        ),
+                        HistoryProperty(
+                          name: 'أخر تحديث للبيانات',
+                          value: street.lastEdit?.time,
+                          getHistoryStream: () => DatabaseService.I.history
+                              .paginateEditHistory<Street>(id: street.id),
                         ),
                       ],
                     ),
@@ -178,7 +194,6 @@ class _ViewAreaState extends State<ViewArea>
                     delegate: PreferredSizePersistentHeaderDelegate(
                       child: TabBar(
                         tabs: [
-                          Tab(text: 'الشوارع', icon: Icon(streetIcon)),
                           Tab(text: 'العائلات', icon: Icon(familyIcon)),
                           Tab(text: 'المتاجر', icon: Icon(storeIcon)),
                           Tab(text: 'المخدومين', icon: Icon(personIcon)),
@@ -187,7 +202,7 @@ class _ViewAreaState extends State<ViewArea>
                     ),
                   ),
                 ],
-                body: _AreaContents(key: ValueKey(area.id), area: area),
+                body: _StreetContents(key: ValueKey(street.id), street: street),
               ),
             ),
           ),
@@ -197,34 +212,29 @@ class _ViewAreaState extends State<ViewArea>
   }
 }
 
-class _AreaContents extends StatefulWidget {
-  const _AreaContents({required this.area, super.key});
+class _StreetContents extends StatefulWidget {
+  const _StreetContents({required this.street, super.key});
 
-  final Area area;
+  final Street street;
 
   @override
-  State<_AreaContents> createState() => _AreaContentsState();
+  State<_StreetContents> createState() => _StreetContentsState();
 }
 
-class _AreaContentsState extends State<_AreaContents> {
-  late final _streetsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      areaId: widget.area.id,
-    ),
-  );
+class _StreetContentsState extends State<_StreetContents> {
   late final _familiesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byAreaId: widget.area.id,
+      byStreetId: widget.street.id,
     ),
   );
   late final _storesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byAreaId: widget.area.id,
+      byStreetId: widget.street.id,
     ),
   );
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byAreaId: widget.area.id,
+      byStreetId: widget.street.id,
     ),
   );
 
@@ -236,25 +246,18 @@ class _AreaContentsState extends State<_AreaContents> {
           index: 0,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _streetsController,
+            objectsController: _familiesController,
           ),
         ),
         LazyTabPage(
           index: 1,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _familiesController,
-          ),
-        ),
-        LazyTabPage(
-          index: 2,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
             objectsController: _storesController,
           ),
         ),
         LazyTabPage(
-          index: 3,
+          index: 2,
           builder: (context) => ViewableObjectList(
             scrollController: PrimaryScrollController.maybeOf(context),
             objectsController: _personsController,

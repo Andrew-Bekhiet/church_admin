@@ -11,18 +11,14 @@ class LoginScreen extends StatefulWidget {
     path: '/login',
     builder: (context, state) => const LoginScreen(),
     redirect: (context, state) {
-      return redirect(
-        ChurchAdminApp
-            .router.routeInformationParser.configuration.namedLocation,
-        state,
-      );
+      return redirect();
     },
   );
 
   @visibleForTesting
-  static String? redirect(NamedLocation namedLocation, GoRouterState _) {
+  static String? redirect() {
     if (AuthService.instance.isSignedIn) {
-      return namedLocation('home');
+      return '/';
     }
     return null;
   }

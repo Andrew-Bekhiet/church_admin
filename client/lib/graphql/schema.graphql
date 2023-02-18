@@ -586,6 +586,32 @@ type ChurchesMutationResponse {
 "columns and relationships of \"classes\""
 type Classes {
     "An array relationship"
+    adminUsers(
+        "distinct select on columns"
+        distinctOn: [AuthUsersAdminOnSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [AuthUsersAdminOnOrderBy!],
+        "filter the rows returned"
+        where: AuthUsersAdminOnBoolExp
+    ): [AuthUsersAdminOn!]!
+    "An aggregate relationship"
+    adminUsersAggregate(
+        "distinct select on columns"
+        distinctOn: [AuthUsersAdminOnSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [AuthUsersAdminOnOrderBy!],
+        "filter the rows returned"
+        where: AuthUsersAdminOnBoolExp
+    ): AuthUsersAdminOnAggregate!
+    "An array relationship"
     attendanceDaysConstraints(
         "distinct select on columns"
         distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!],
@@ -643,6 +669,11 @@ type Classes {
     isUserAllowedToRead: Boolean
     "A computed field, executes function \"user_allowed_to_write_class\""
     isUserAllowedToWrite: Boolean
+    "A computed field, executes function \"history.get_class_last_edit\""
+    lastEdit(
+        "JSON select path"
+        path: String
+    ): jsonb
     name: String!
     photoUpdatedAt: timestamptz
     "An object relationship"
@@ -837,9 +868,8 @@ type Families {
         "filter the rows returned"
         where: AreasBoolExp
     ): [Areas!]
-    color: bigint
     "An array relationship"
-    families(
+    children(
         "distinct select on columns"
         distinctOn: [FamiliesFamiliesSelectColumn!],
         "limit the number of rows returned"
@@ -852,7 +882,7 @@ type Families {
         where: FamiliesFamiliesBoolExp
     ): [FamiliesFamilies!]!
     "An aggregate relationship"
-    familiesAggregate(
+    childrenAggregate(
         "distinct select on columns"
         distinctOn: [FamiliesFamiliesSelectColumn!],
         "limit the number of rows returned"
@@ -864,8 +894,7 @@ type Families {
         "filter the rows returned"
         where: FamiliesFamiliesBoolExp
     ): FamiliesFamiliesAggregate!
-    "An object relationship"
-    family: FamiliesFamilies
+    color: bigint
     geolocation: geography
     id: uuid!
     "A computed field, executes function \"user_allowed_to_read_family\""
@@ -879,6 +908,32 @@ type Families {
     ): jsonb
     name: String!
     notes: String
+    "An array relationship"
+    parents(
+        "distinct select on columns"
+        distinctOn: [FamiliesFamiliesSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [FamiliesFamiliesOrderBy!],
+        "filter the rows returned"
+        where: FamiliesFamiliesBoolExp
+    ): [FamiliesFamilies!]!
+    "An aggregate relationship"
+    parentsAggregate(
+        "distinct select on columns"
+        distinctOn: [FamiliesFamiliesSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [FamiliesFamiliesOrderBy!],
+        "filter the rows returned"
+        where: FamiliesFamiliesBoolExp
+    ): FamiliesFamiliesAggregate!
     "An array relationship"
     persons(
         "distinct select on columns"
@@ -976,11 +1031,12 @@ type FamiliesAvgFields {
 "columns and relationships of \"families_families\""
 type FamiliesFamilies {
     "An object relationship"
-    innerFamily: Families!
-    innerFamilyId: uuid!
+    child: Families!
+    childFamilyId: uuid!
     "An object relationship"
-    outerFamily: Families!
-    outerFamilyId: uuid!
+    parent: Families!
+    parentFamilyId: uuid!
+    relId: uuid!
 }
 
 "aggregated selection of \"families_families\""
@@ -998,14 +1054,16 @@ type FamiliesFamiliesAggregateFields {
 
 "aggregate max on columns"
 type FamiliesFamiliesMaxFields {
-    innerFamilyId: uuid
-    outerFamilyId: uuid
+    childFamilyId: uuid
+    parentFamilyId: uuid
+    relId: uuid
 }
 
 "aggregate min on columns"
 type FamiliesFamiliesMinFields {
-    innerFamilyId: uuid
-    outerFamilyId: uuid
+    childFamilyId: uuid
+    parentFamilyId: uuid
+    relId: uuid
 }
 
 "response of any mutation on the table \"families_families\""
@@ -3256,6 +3314,32 @@ type SchoolsMutationResponse {
 "columns and relationships of \"services\""
 type Services {
     "An array relationship"
+    adminUsers(
+        "distinct select on columns"
+        distinctOn: [AuthUsersAdminOnSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [AuthUsersAdminOnOrderBy!],
+        "filter the rows returned"
+        where: AuthUsersAdminOnBoolExp
+    ): [AuthUsersAdminOn!]!
+    "An aggregate relationship"
+    adminUsersAggregate(
+        "distinct select on columns"
+        distinctOn: [AuthUsersAdminOnSelectColumn!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        orderBy: [AuthUsersAdminOnOrderBy!],
+        "filter the rows returned"
+        where: AuthUsersAdminOnBoolExp
+    ): AuthUsersAdminOnAggregate!
+    "An array relationship"
     attendanceDaysConstraints(
         "distinct select on columns"
         distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!],
@@ -3408,32 +3492,6 @@ type Services {
     studyYearTo: smallint
     "An object relationship"
     toStudyYear: StudyYears
-    "An array relationship"
-    users(
-        "distinct select on columns"
-        distinctOn: [AuthUsersAdminOnSelectColumn!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        orderBy: [AuthUsersAdminOnOrderBy!],
-        "filter the rows returned"
-        where: AuthUsersAdminOnBoolExp
-    ): [AuthUsersAdminOn!]!
-    "An aggregate relationship"
-    usersAggregate(
-        "distinct select on columns"
-        distinctOn: [AuthUsersAdminOnSelectColumn!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        orderBy: [AuthUsersAdminOnOrderBy!],
-        "filter the rows returned"
-        where: AuthUsersAdminOnBoolExp
-    ): AuthUsersAdminOnAggregate!
 }
 
 "aggregated selection of \"services\""
@@ -5302,7 +5360,7 @@ type mutation_root {
         where: FamiliesFamiliesBoolExp!
     ): FamiliesFamiliesMutationResponse
     "delete single row from the table: \"families_families\""
-    deleteFamiliesFamiliesByPk(innerFamilyId: uuid!): FamiliesFamilies
+    deleteFamiliesFamiliesByPk(relId: uuid!): FamiliesFamilies
     "delete data from the table: \"fathers\""
     deleteFathers(
         "filter the rows which have to be deleted"
@@ -7635,7 +7693,7 @@ type query_root {
         where: FamiliesFamiliesBoolExp
     ): FamiliesFamiliesAggregate!
     "fetch data from the table: \"families_families\" using primary key columns"
-    familiesFamiliesByPk(innerFamilyId: uuid!): FamiliesFamilies
+    familiesFamiliesByPk(relId: uuid!): FamiliesFamilies
     "An array relationship"
     fathers(
         "distinct select on columns"
@@ -9098,7 +9156,7 @@ type subscription_root {
         where: FamiliesFamiliesBoolExp
     ): FamiliesFamiliesAggregate!
     "fetch data from the table: \"families_families\" using primary key columns"
-    familiesFamiliesByPk(innerFamilyId: uuid!): FamiliesFamilies
+    familiesFamiliesByPk(relId: uuid!): FamiliesFamilies
     "fetch data from the table in a streaming manner: \"families_families\""
     familiesFamiliesStream(
         "maximum number of rows returned in a single batch"
@@ -10506,26 +10564,30 @@ enum FamiliesConstraint {
 
 "unique or primary key constraints on table \"families_families\""
 enum FamiliesFamiliesConstraint {
-    "unique or primary key constraint on columns \"outer_family_id\", \"inner_family_id\""
-    families_families_outerFamilyID_innerFamilyID_key
-    "unique or primary key constraint on columns \"inner_family_id\""
+    "unique or primary key constraint on columns \"rel_id\""
     families_families_pkey
+    "unique or primary key constraint on columns \"rel_id\""
+    families_families_rel_id_key
 }
 
 "select columns of table \"families_families\""
 enum FamiliesFamiliesSelectColumn {
     "column name"
-    innerFamilyId
+    childFamilyId
     "column name"
-    outerFamilyId
+    parentFamilyId
+    "column name"
+    relId
 }
 
 "update columns of table \"families_families\""
 enum FamiliesFamiliesUpdateColumn {
     "column name"
-    innerFamilyId
+    childFamilyId
     "column name"
-    outerFamilyId
+    parentFamilyId
+    "column name"
+    relId
 }
 
 "select columns of table \"families\""
@@ -12799,6 +12861,8 @@ input ClassesBoolExp {
     _and: [ClassesBoolExp!]
     _not: ClassesBoolExp
     _or: [ClassesBoolExp!]
+    adminUsers: AuthUsersAdminOnBoolExp
+    adminUsers_aggregate: auth_users_admin_on_aggregate_bool_exp
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
     attendanceDaysConstraints_aggregate: history_attendance_days_constraints_aggregate_bool_exp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
@@ -12807,6 +12871,7 @@ input ClassesBoolExp {
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
     isUserAllowedToWrite: BooleanComparisonExp
+    lastEdit: JsonbComparisonExp
     name: StringComparisonExp
     photoUpdatedAt: TimestamptzComparisonExp
     service: ServicesBoolExp
@@ -12824,6 +12889,7 @@ input ClassesIncInput {
 
 "input type for inserting data into table \"classes\""
 input ClassesInsertInput {
+    adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
     color: bigint
@@ -12853,12 +12919,14 @@ input ClassesOnConflict {
 
 "Ordering options when selecting data from \"classes\"."
 input ClassesOrderBy {
+    adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
     color: OrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
     isUserAllowedToWrite: OrderBy
+    lastEdit: OrderBy
     name: OrderBy
     photoUpdatedAt: OrderBy
     service: ServicesOrderBy
@@ -13053,10 +13121,9 @@ input FamiliesBoolExp {
     _or: [FamiliesBoolExp!]
     address: StringComparisonExp
     areas: AreasBoolExp
+    children: FamiliesFamiliesBoolExp
+    children_aggregate: families_families_aggregate_bool_exp
     color: BigintComparisonExp
-    families: FamiliesFamiliesBoolExp
-    families_aggregate: families_families_aggregate_bool_exp
-    family: FamiliesFamiliesBoolExp
     geolocation: GeographyComparisonExp
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
@@ -13064,6 +13131,8 @@ input FamiliesBoolExp {
     lastEdit: JsonbComparisonExp
     name: StringComparisonExp
     notes: StringComparisonExp
+    parents: FamiliesFamiliesBoolExp
+    parents_aggregate: families_families_aggregate_bool_exp
     persons: PersonsBoolExp
     persons_aggregate: persons_aggregate_bool_exp
     photoUpdatedAt: TimestamptzComparisonExp
@@ -13091,25 +13160,20 @@ input FamiliesFamiliesBoolExp {
     _and: [FamiliesFamiliesBoolExp!]
     _not: FamiliesFamiliesBoolExp
     _or: [FamiliesFamiliesBoolExp!]
-    innerFamily: FamiliesBoolExp
-    innerFamilyId: UuidComparisonExp
-    outerFamily: FamiliesBoolExp
-    outerFamilyId: UuidComparisonExp
+    child: FamiliesBoolExp
+    childFamilyId: UuidComparisonExp
+    parent: FamiliesBoolExp
+    parentFamilyId: UuidComparisonExp
+    relId: UuidComparisonExp
 }
 
 "input type for inserting data into table \"families_families\""
 input FamiliesFamiliesInsertInput {
-    innerFamily: FamiliesObjRelInsertInput
-    innerFamilyId: uuid
-    outerFamily: FamiliesObjRelInsertInput
-    outerFamilyId: uuid
-}
-
-"input type for inserting object relation for remote table \"families_families\""
-input FamiliesFamiliesObjRelInsertInput {
-    data: FamiliesFamiliesInsertInput!
-    "upsert condition"
-    onConflict: FamiliesFamiliesOnConflict
+    child: FamiliesObjRelInsertInput
+    childFamilyId: uuid
+    parent: FamiliesObjRelInsertInput
+    parentFamilyId: uuid
+    relId: uuid
 }
 
 "on_conflict condition type for table \"families_families\""
@@ -13121,21 +13185,23 @@ input FamiliesFamiliesOnConflict {
 
 "Ordering options when selecting data from \"families_families\"."
 input FamiliesFamiliesOrderBy {
-    innerFamily: FamiliesOrderBy
-    innerFamilyId: OrderBy
-    outerFamily: FamiliesOrderBy
-    outerFamilyId: OrderBy
+    child: FamiliesOrderBy
+    childFamilyId: OrderBy
+    parent: FamiliesOrderBy
+    parentFamilyId: OrderBy
+    relId: OrderBy
 }
 
 "primary key columns input for table: families_families"
 input FamiliesFamiliesPkColumnsInput {
-    innerFamilyId: uuid!
+    relId: uuid!
 }
 
 "input type for updating data in table \"families_families\""
 input FamiliesFamiliesSetInput {
-    innerFamilyId: uuid
-    outerFamilyId: uuid
+    childFamilyId: uuid
+    parentFamilyId: uuid
+    relId: uuid
 }
 
 "Streaming cursor of the table \"families_families\""
@@ -13148,8 +13214,9 @@ input FamiliesFamiliesStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input FamiliesFamiliesStreamCursorValueInput {
-    innerFamilyId: uuid
-    outerFamilyId: uuid
+    childFamilyId: uuid
+    parentFamilyId: uuid
+    relId: uuid
 }
 
 input FamiliesFamiliesUpdates {
@@ -13167,13 +13234,13 @@ input FamiliesIncInput {
 "input type for inserting data into table \"families\""
 input FamiliesInsertInput {
     address: String
+    children: FamiliesFamiliesArrRelInsertInput
     color: bigint
-    families: FamiliesFamiliesArrRelInsertInput
-    family: FamiliesFamiliesObjRelInsertInput
     geolocation: geography
     id: uuid
     name: String
     notes: String
+    parents: FamiliesFamiliesArrRelInsertInput
     persons: PersonsArrRelInsertInput
     photoUpdatedAt: timestamptz
     stores: StoresArrRelInsertInput
@@ -13197,9 +13264,8 @@ input FamiliesOnConflict {
 input FamiliesOrderBy {
     address: OrderBy
     areasAggregate: AreasAggregateOrderBy
+    childrenAggregate: FamiliesFamiliesAggregateOrderBy
     color: OrderBy
-    familiesAggregate: FamiliesFamiliesAggregateOrderBy
-    family: FamiliesFamiliesOrderBy
     geolocation: OrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
@@ -13207,6 +13273,7 @@ input FamiliesOrderBy {
     lastEdit: OrderBy
     name: OrderBy
     notes: OrderBy
+    parentsAggregate: FamiliesFamiliesAggregateOrderBy
     personsAggregate: PersonsAggregateOrderBy
     photoUpdatedAt: OrderBy
     storesAggregate: StoresAggregateOrderBy
@@ -15617,6 +15684,8 @@ input ServicesBoolExp {
     _and: [ServicesBoolExp!]
     _not: ServicesBoolExp
     _or: [ServicesBoolExp!]
+    adminUsers: AuthUsersAdminOnBoolExp
+    adminUsers_aggregate: auth_users_admin_on_aggregate_bool_exp
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
     attendanceDaysConstraints_aggregate: history_attendance_days_constraints_aggregate_bool_exp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
@@ -15641,8 +15710,6 @@ input ServicesBoolExp {
     studyYearFrom: SmallintComparisonExp
     studyYearTo: SmallintComparisonExp
     toStudyYear: StudyYearsBoolExp
-    users: AuthUsersAdminOnBoolExp
-    users_aggregate: auth_users_admin_on_aggregate_bool_exp
 }
 
 "input type for incrementing numeric columns in table \"services\""
@@ -15654,6 +15721,7 @@ input ServicesIncInput {
 
 "input type for inserting data into table \"services\""
 input ServicesInsertInput {
+    adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
     classes: ClassesArrRelInsertInput
@@ -15670,7 +15738,6 @@ input ServicesInsertInput {
     studyYearFrom: smallint
     studyYearTo: smallint
     toStudyYear: StudyYearsObjRelInsertInput
-    users: AuthUsersAdminOnArrRelInsertInput
 }
 
 "input type for inserting object relation for remote table \"services\""
@@ -15689,6 +15756,7 @@ input ServicesOnConflict {
 
 "Ordering options when selecting data from \"services\"."
 input ServicesOrderBy {
+    adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
     classesAggregate: ClassesAggregateOrderBy
@@ -15708,7 +15776,6 @@ input ServicesOrderBy {
     studyYearFrom: OrderBy
     studyYearTo: OrderBy
     toStudyYear: StudyYearsOrderBy
-    usersAggregate: AuthUsersAdminOnAggregateOrderBy
 }
 
 "primary key columns input for table: services"
@@ -17930,14 +17997,16 @@ input families_families_aggregate_bool_exp_count {
 
 "order by max() on columns of table \"families_families\""
 input families_families_max_order_by {
-    innerFamilyId: OrderBy
-    outerFamilyId: OrderBy
+    childFamilyId: OrderBy
+    parentFamilyId: OrderBy
+    relId: OrderBy
 }
 
 "order by min() on columns of table \"families_families\""
 input families_families_min_order_by {
-    innerFamilyId: OrderBy
-    outerFamilyId: OrderBy
+    childFamilyId: OrderBy
+    parentFamilyId: OrderBy
+    relId: OrderBy
 }
 
 "order by max() on columns of table \"families\""

@@ -7,8 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewUser extends StatefulWidget {
-  static final route = GoRoute(
-    name: 'view_user',
+  static final GoRoute route = GoRoute(
     path: 'viewUser',
     builder: (context, state) {
       if (state.queryParams['uid'] == null) {
@@ -21,7 +20,11 @@ class ViewUser extends StatefulWidget {
       );
     },
     routes: [
-      PersonAnalysis.userRoute,
+      PersonAnalysis.route,
+      // ViewArea.route,
+      // ViewService.route,
+      // ViewClass.route,
+      // ViewGroup.route,
     ],
   );
 
@@ -95,9 +98,8 @@ class _ViewUserState extends State<ViewUser> {
                   else
                     IconButton(
                       tooltip: 'تعديل',
-                      onPressed: () => context.goNamed(
-                        'edit_user',
-                        queryParams: {'id': widget.userId},
+                      onPressed: () => context.go(
+                        'editUser?id=' + widget.userId,
                         extra: {'user': user},
                       ),
                       icon: const Icon(Icons.edit),
@@ -295,12 +297,14 @@ class _ViewUserState extends State<ViewUser> {
   }
 
   void _attendanceAnalysis(BuildContext context, User user) {
-    context.goNamed(
-      'user_attendance_analysis',
-      queryParams: {
-        'id': user.person!.id,
-        'uid': user.id,
-      },
+    context.go(
+      Uri(
+        path: '/viewUser/personAnalysis',
+        queryParameters: {
+          'id': user.person!.id,
+          'uid': user.id,
+        },
+      ).toString(),
       extra: {
         'user': user,
         'person': user.person,

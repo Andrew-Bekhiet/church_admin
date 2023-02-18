@@ -17552,6 +17552,8 @@ class Input$ClassesBoolExp {
     List<Input$ClassesBoolExp>? $_and,
     Input$ClassesBoolExp? $_not,
     List<Input$ClassesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -17562,6 +17564,7 @@ class Input$ClassesBoolExp {
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
+    Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
@@ -17574,6 +17577,9 @@ class Input$ClassesBoolExp {
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
+        if (adminUsers != null) r'adminUsers': adminUsers,
+        if (adminUsers_aggregate != null)
+          r'adminUsers_aggregate': adminUsers_aggregate,
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceDaysConstraints_aggregate != null)
@@ -17588,6 +17594,7 @@ class Input$ClassesBoolExp {
           r'isUserAllowedToRead': isUserAllowedToRead,
         if (isUserAllowedToWrite != null)
           r'isUserAllowedToWrite': isUserAllowedToWrite,
+        if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (service != null) r'service': service,
@@ -17620,6 +17627,20 @@ class Input$ClassesBoolExp {
           ?.map(
               (e) => Input$ClassesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
+    }
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input$AuthUsersAdminOnBoolExp.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
+    if (data.containsKey('adminUsers_aggregate')) {
+      final l$adminUsers_aggregate = data['adminUsers_aggregate'];
+      result$data['adminUsers_aggregate'] = l$adminUsers_aggregate == null
+          ? null
+          : Input$auth_users_admin_on_aggregate_bool_exp.fromJson(
+              (l$adminUsers_aggregate as Map<String, dynamic>));
     }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
@@ -17681,6 +17702,13 @@ class Input$ClassesBoolExp {
           : Input$BooleanComparisonExp.fromJson(
               (l$isUserAllowedToWrite as Map<String, dynamic>));
     }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : Input$JsonbComparisonExp.fromJson(
+              (l$lastEdit as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -17739,6 +17767,11 @@ class Input$ClassesBoolExp {
   Input$ClassesBoolExp? get $_not => (_$data['_not'] as Input$ClassesBoolExp?);
   List<Input$ClassesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input$ClassesBoolExp>?);
+  Input$AuthUsersAdminOnBoolExp? get adminUsers =>
+      (_$data['adminUsers'] as Input$AuthUsersAdminOnBoolExp?);
+  Input$auth_users_admin_on_aggregate_bool_exp? get adminUsers_aggregate =>
+      (_$data['adminUsers_aggregate']
+          as Input$auth_users_admin_on_aggregate_bool_exp?);
   Input$HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input$HistoryAttendanceDaysConstraintsBoolExp?);
@@ -17758,6 +17791,8 @@ class Input$ClassesBoolExp {
       (_$data['isUserAllowedToRead'] as Input$BooleanComparisonExp?);
   Input$BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input$BooleanComparisonExp?);
+  Input$JsonbComparisonExp? get lastEdit =>
+      (_$data['lastEdit'] as Input$JsonbComparisonExp?);
   Input$StringComparisonExp? get name =>
       (_$data['name'] as Input$StringComparisonExp?);
   Input$TimestamptzComparisonExp? get photoUpdatedAt =>
@@ -17785,6 +17820,14 @@ class Input$ClassesBoolExp {
     if (_$data.containsKey('_or')) {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
+    if (_$data.containsKey('adminUsers_aggregate')) {
+      final l$adminUsers_aggregate = adminUsers_aggregate;
+      result$data['adminUsers_aggregate'] = l$adminUsers_aggregate?.toJson();
     }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
@@ -17821,6 +17864,10 @@ class Input$ClassesBoolExp {
     if (_$data.containsKey('isUserAllowedToWrite')) {
       final l$isUserAllowedToWrite = isUserAllowedToWrite;
       result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite?.toJson();
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] = l$lastEdit?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -17912,6 +17959,24 @@ class Input$ClassesBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
+      return false;
+    }
+    final l$adminUsers_aggregate = adminUsers_aggregate;
+    final lOther$adminUsers_aggregate = other.adminUsers_aggregate;
+    if (_$data.containsKey('adminUsers_aggregate') !=
+        other._$data.containsKey('adminUsers_aggregate')) {
+      return false;
+    }
+    if (l$adminUsers_aggregate != lOther$adminUsers_aggregate) {
+      return false;
+    }
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
     if (_$data.containsKey('attendanceDaysConstraints') !=
@@ -17986,6 +18051,15 @@ class Input$ClassesBoolExp {
     if (l$isUserAllowedToWrite != lOther$isUserAllowedToWrite) {
       return false;
     }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -18055,6 +18129,8 @@ class Input$ClassesBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
+    final l$adminUsers = adminUsers;
+    final l$adminUsers_aggregate = adminUsers_aggregate;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceDaysConstraints_aggregate =
         attendanceDaysConstraints_aggregate;
@@ -18064,6 +18140,7 @@ class Input$ClassesBoolExp {
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final l$lastEdit = lastEdit;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$service = service;
@@ -18083,6 +18160,10 @@ class Input$ClassesBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
+      _$data.containsKey('adminUsers_aggregate')
+          ? l$adminUsers_aggregate
+          : const {},
       _$data.containsKey('attendanceDaysConstraints')
           ? l$attendanceDaysConstraints
           : const {},
@@ -18101,6 +18182,7 @@ class Input$ClassesBoolExp {
       _$data.containsKey('isUserAllowedToWrite')
           ? l$isUserAllowedToWrite
           : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('service') ? l$service : const {},
@@ -18125,6 +18207,8 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
     List<Input$ClassesBoolExp>? $_and,
     Input$ClassesBoolExp? $_not,
     List<Input$ClassesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -18135,6 +18219,7 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
+    Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
@@ -18152,6 +18237,9 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
       Iterable<Input$ClassesBoolExp>? Function(
               Iterable<CopyWith$Input$ClassesBoolExp<Input$ClassesBoolExp>>?)
           _fn);
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers;
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate;
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints;
   CopyWith$Input$history_attendance_days_constraints_aggregate_bool_exp<TRes>
@@ -18163,6 +18251,7 @@ abstract class CopyWith$Input$ClassesBoolExp<TRes> {
   CopyWith$Input$UuidComparisonExp<TRes> get id;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToRead;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToWrite;
+  CopyWith$Input$JsonbComparisonExp<TRes> get lastEdit;
   CopyWith$Input$StringComparisonExp<TRes> get name;
   CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt;
   CopyWith$Input$ServicesBoolExp<TRes> get service;
@@ -18189,6 +18278,8 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
+    Object? adminUsers = _undefined,
+    Object? adminUsers_aggregate = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceDaysConstraints_aggregate = _undefined,
     Object? attendanceHistory = _undefined,
@@ -18197,6 +18288,7 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
+    Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? service = _undefined,
@@ -18210,6 +18302,11 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
         if ($_and != _undefined) '_and': ($_and as List<Input$ClassesBoolExp>?),
         if ($_not != _undefined) '_not': ($_not as Input$ClassesBoolExp?),
         if ($_or != _undefined) '_or': ($_or as List<Input$ClassesBoolExp>?),
+        if (adminUsers != _undefined)
+          'adminUsers': (adminUsers as Input$AuthUsersAdminOnBoolExp?),
+        if (adminUsers_aggregate != _undefined)
+          'adminUsers_aggregate': (adminUsers_aggregate
+              as Input$auth_users_admin_on_aggregate_bool_exp?),
         if (attendanceDaysConstraints != _undefined)
           'attendanceDaysConstraints': (attendanceDaysConstraints
               as Input$HistoryAttendanceDaysConstraintsBoolExp?),
@@ -18231,6 +18328,8 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
         if (isUserAllowedToWrite != _undefined)
           'isUserAllowedToWrite':
               (isUserAllowedToWrite as Input$BooleanComparisonExp?),
+        if (lastEdit != _undefined)
+          'lastEdit': (lastEdit as Input$JsonbComparisonExp?),
         if (name != _undefined) 'name': (name as Input$StringComparisonExp?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as Input$TimestamptzComparisonExp?),
@@ -18272,6 +18371,24 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnBoolExp(
+            local$adminUsers, (e) => call(adminUsers: e));
+  }
+
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate {
+    final local$adminUsers_aggregate = _instance.adminUsers_aggregate;
+    return local$adminUsers_aggregate == null
+        ? CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(
+            _then(_instance))
+        : CopyWith$Input$auth_users_admin_on_aggregate_bool_exp(
+            local$adminUsers_aggregate, (e) => call(adminUsers_aggregate: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -18346,6 +18463,14 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
             local$isUserAllowedToWrite, (e) => call(isUserAllowedToWrite: e));
   }
 
+  CopyWith$Input$JsonbComparisonExp<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith$Input$JsonbComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$JsonbComparisonExp(
+            local$lastEdit, (e) => call(lastEdit: e));
+  }
+
   CopyWith$Input$StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -18412,6 +18537,8 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
     List<Input$ClassesBoolExp>? $_and,
     Input$ClassesBoolExp? $_not,
     List<Input$ClassesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -18422,6 +18549,7 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
     Input$BooleanComparisonExp? isUserAllowedToWrite,
+    Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
     Input$ServicesBoolExp? service,
@@ -18435,6 +18563,11 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
   CopyWith$Input$ClassesBoolExp<TRes> get $_not =>
       CopyWith$Input$ClassesBoolExp.stub(_res);
   $_or(_fn) => _res;
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
+      CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_res);
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate =>
+          CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
@@ -18456,6 +18589,8 @@ class _CopyWithStubImpl$Input$ClassesBoolExp<TRes>
       CopyWith$Input$BooleanComparisonExp.stub(_res);
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith$Input$BooleanComparisonExp.stub(_res);
+  CopyWith$Input$JsonbComparisonExp<TRes> get lastEdit =>
+      CopyWith$Input$JsonbComparisonExp.stub(_res);
   CopyWith$Input$StringComparisonExp<TRes> get name =>
       CopyWith$Input$StringComparisonExp.stub(_res);
   CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
@@ -18613,6 +18748,7 @@ class _CopyWithStubImpl$Input$ClassesIncInput<TRes>
 
 class Input$ClassesInsertInput {
   factory Input$ClassesInsertInput({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -18627,6 +18763,7 @@ class Input$ClassesInsertInput {
     Input$StudyYearsObjRelInsertInput? studyYear,
   }) =>
       Input$ClassesInsertInput._({
+        if (adminUsers != null) r'adminUsers': adminUsers,
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
@@ -18645,6 +18782,13 @@ class Input$ClassesInsertInput {
 
   factory Input$ClassesInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input$AuthUsersAdminOnArrRelInsertInput.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
       result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints ==
@@ -18709,6 +18853,8 @@ class Input$ClassesInsertInput {
 
   Map<String, dynamic> _$data;
 
+  Input$AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
+      (_$data['adminUsers'] as Input$AuthUsersAdminOnArrRelInsertInput?);
   Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?);
@@ -18728,6 +18874,10 @@ class Input$ClassesInsertInput {
       (_$data['studyYear'] as Input$StudyYearsObjRelInsertInput?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
       result$data['attendanceDaysConstraints'] =
@@ -18790,6 +18940,15 @@ class Input$ClassesInsertInput {
     }
     if (!(other is Input$ClassesInsertInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
       return false;
     }
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
@@ -18892,6 +19051,7 @@ class Input$ClassesInsertInput {
 
   @override
   int get hashCode {
+    final l$adminUsers = adminUsers;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceHistory = attendanceHistory;
     final l$color = color;
@@ -18904,6 +19064,7 @@ class Input$ClassesInsertInput {
     final l$serviceStudyYear = serviceStudyYear;
     final l$studyYear = studyYear;
     return Object.hashAll([
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('attendanceDaysConstraints')
           ? l$attendanceDaysConstraints
           : const {},
@@ -18931,6 +19092,7 @@ abstract class CopyWith$Input$ClassesInsertInput<TRes> {
       _CopyWithStubImpl$Input$ClassesInsertInput;
 
   TRes call({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -18944,6 +19106,7 @@ abstract class CopyWith$Input$ClassesInsertInput<TRes> {
     int? serviceStudyYear,
     Input$StudyYearsObjRelInsertInput? studyYear,
   });
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints;
   CopyWith$Input$HistoryAttendanceHistoryArrRelInsertInput<TRes>
@@ -18966,6 +19129,7 @@ class _CopyWithImpl$Input$ClassesInsertInput<TRes>
   static const _undefined = {};
 
   TRes call({
+    Object? adminUsers = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceHistory = _undefined,
     Object? color = _undefined,
@@ -18980,6 +19144,9 @@ class _CopyWithImpl$Input$ClassesInsertInput<TRes>
   }) =>
       _then(Input$ClassesInsertInput._({
         ..._instance._$data,
+        if (adminUsers != _undefined)
+          'adminUsers':
+              (adminUsers as Input$AuthUsersAdminOnArrRelInsertInput?),
         if (attendanceDaysConstraints != _undefined)
           'attendanceDaysConstraints': (attendanceDaysConstraints
               as Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?),
@@ -19001,6 +19168,15 @@ class _CopyWithImpl$Input$ClassesInsertInput<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input$StudyYearsObjRelInsertInput?),
       }));
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(
+            _then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnArrRelInsertInput(
+            local$adminUsers, (e) => call(adminUsers: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -19046,6 +19222,7 @@ class _CopyWithStubImpl$Input$ClassesInsertInput<TRes>
   TRes _res;
 
   call({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -19060,6 +19237,8 @@ class _CopyWithStubImpl$Input$ClassesInsertInput<TRes>
     Input$StudyYearsObjRelInsertInput? studyYear,
   }) =>
       _res;
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
+      CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
@@ -19409,6 +19588,7 @@ class _CopyWithStubImpl$Input$ClassesOnConflict<TRes>
 
 class Input$ClassesOrderBy {
   factory Input$ClassesOrderBy({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -19416,6 +19596,7 @@ class Input$ClassesOrderBy {
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
     Enum$OrderBy? isUserAllowedToWrite,
+    Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? photoUpdatedAt,
     Input$ServicesOrderBy? service,
@@ -19425,6 +19606,8 @@ class Input$ClassesOrderBy {
     Input$StudyYearsOrderBy? studyYear,
   }) =>
       Input$ClassesOrderBy._({
+        if (adminUsersAggregate != null)
+          r'adminUsersAggregate': adminUsersAggregate,
         if (attendanceDaysConstraintsAggregate != null)
           r'attendanceDaysConstraintsAggregate':
               attendanceDaysConstraintsAggregate,
@@ -19436,6 +19619,7 @@ class Input$ClassesOrderBy {
           r'isUserAllowedToRead': isUserAllowedToRead,
         if (isUserAllowedToWrite != null)
           r'isUserAllowedToWrite': isUserAllowedToWrite,
+        if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (service != null) r'service': service,
@@ -19449,6 +19633,13 @@ class Input$ClassesOrderBy {
 
   factory Input$ClassesOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('adminUsersAggregate')) {
+      final l$adminUsersAggregate = data['adminUsersAggregate'];
+      result$data['adminUsersAggregate'] = l$adminUsersAggregate == null
+          ? null
+          : Input$AuthUsersAdminOnAggregateOrderBy.fromJson(
+              (l$adminUsersAggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
           data['attendanceDaysConstraintsAggregate'];
@@ -19488,6 +19679,12 @@ class Input$ClassesOrderBy {
       result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite == null
           ? null
           : fromJson$Enum$OrderBy((l$isUserAllowedToWrite as String));
+    }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : fromJson$Enum$OrderBy((l$lastEdit as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -19536,6 +19733,9 @@ class Input$ClassesOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Input$AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
+      (_$data['adminUsersAggregate']
+          as Input$AuthUsersAdminOnAggregateOrderBy?);
   Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
@@ -19549,6 +19749,7 @@ class Input$ClassesOrderBy {
       (_$data['isUserAllowedToRead'] as Enum$OrderBy?);
   Enum$OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum$OrderBy?);
+  Enum$OrderBy? get lastEdit => (_$data['lastEdit'] as Enum$OrderBy?);
   Enum$OrderBy? get name => (_$data['name'] as Enum$OrderBy?);
   Enum$OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum$OrderBy?);
@@ -19562,6 +19763,10 @@ class Input$ClassesOrderBy {
       (_$data['studyYear'] as Input$StudyYearsOrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminUsersAggregate')) {
+      final l$adminUsersAggregate = adminUsersAggregate;
+      result$data['adminUsersAggregate'] = l$adminUsersAggregate?.toJson();
+    }
     if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
           attendanceDaysConstraintsAggregate;
@@ -19593,6 +19798,11 @@ class Input$ClassesOrderBy {
       result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite == null
           ? null
           : toJson$Enum$OrderBy(l$isUserAllowedToWrite);
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] =
+          l$lastEdit == null ? null : toJson$Enum$OrderBy(l$lastEdit);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -19642,6 +19852,15 @@ class Input$ClassesOrderBy {
       return true;
     }
     if (!(other is Input$ClassesOrderBy) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminUsersAggregate = adminUsersAggregate;
+    final lOther$adminUsersAggregate = other.adminUsersAggregate;
+    if (_$data.containsKey('adminUsersAggregate') !=
+        other._$data.containsKey('adminUsersAggregate')) {
+      return false;
+    }
+    if (l$adminUsersAggregate != lOther$adminUsersAggregate) {
       return false;
     }
     final l$attendanceDaysConstraintsAggregate =
@@ -19697,6 +19916,15 @@ class Input$ClassesOrderBy {
       return false;
     }
     if (l$isUserAllowedToWrite != lOther$isUserAllowedToWrite) {
+      return false;
+    }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
     final l$name = name;
@@ -19765,6 +19993,7 @@ class Input$ClassesOrderBy {
 
   @override
   int get hashCode {
+    final l$adminUsersAggregate = adminUsersAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -19772,6 +20001,7 @@ class Input$ClassesOrderBy {
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final l$lastEdit = lastEdit;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$service = service;
@@ -19780,6 +20010,9 @@ class Input$ClassesOrderBy {
     final l$serviceStudyYear = serviceStudyYear;
     final l$studyYear = studyYear;
     return Object.hashAll([
+      _$data.containsKey('adminUsersAggregate')
+          ? l$adminUsersAggregate
+          : const {},
       _$data.containsKey('attendanceDaysConstraintsAggregate')
           ? l$attendanceDaysConstraintsAggregate
           : const {},
@@ -19794,6 +20027,7 @@ class Input$ClassesOrderBy {
       _$data.containsKey('isUserAllowedToWrite')
           ? l$isUserAllowedToWrite
           : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('service') ? l$service : const {},
@@ -19815,6 +20049,7 @@ abstract class CopyWith$Input$ClassesOrderBy<TRes> {
       _CopyWithStubImpl$Input$ClassesOrderBy;
 
   TRes call({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -19822,6 +20057,7 @@ abstract class CopyWith$Input$ClassesOrderBy<TRes> {
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
     Enum$OrderBy? isUserAllowedToWrite,
+    Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? photoUpdatedAt,
     Input$ServicesOrderBy? service,
@@ -19830,6 +20066,7 @@ abstract class CopyWith$Input$ClassesOrderBy<TRes> {
     Enum$OrderBy? serviceStudyYear,
     Input$StudyYearsOrderBy? studyYear,
   });
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate;
   CopyWith$Input$HistoryAttendanceHistoryAggregateOrderBy<TRes>
@@ -19852,12 +20089,14 @@ class _CopyWithImpl$Input$ClassesOrderBy<TRes>
   static const _undefined = {};
 
   TRes call({
+    Object? adminUsersAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
+    Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? service = _undefined,
@@ -19868,6 +20107,9 @@ class _CopyWithImpl$Input$ClassesOrderBy<TRes>
   }) =>
       _then(Input$ClassesOrderBy._({
         ..._instance._$data,
+        if (adminUsersAggregate != _undefined)
+          'adminUsersAggregate':
+              (adminUsersAggregate as Input$AuthUsersAdminOnAggregateOrderBy?),
         if (attendanceDaysConstraintsAggregate != _undefined)
           'attendanceDaysConstraintsAggregate':
               (attendanceDaysConstraintsAggregate
@@ -19881,6 +20123,7 @@ class _CopyWithImpl$Input$ClassesOrderBy<TRes>
           'isUserAllowedToRead': (isUserAllowedToRead as Enum$OrderBy?),
         if (isUserAllowedToWrite != _undefined)
           'isUserAllowedToWrite': (isUserAllowedToWrite as Enum$OrderBy?),
+        if (lastEdit != _undefined) 'lastEdit': (lastEdit as Enum$OrderBy?),
         if (name != _undefined) 'name': (name as Enum$OrderBy?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as Enum$OrderBy?),
@@ -19894,6 +20137,15 @@ class _CopyWithImpl$Input$ClassesOrderBy<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input$StudyYearsOrderBy?),
       }));
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes>
+      get adminUsersAggregate {
+    final local$adminUsersAggregate = _instance.adminUsersAggregate;
+    return local$adminUsersAggregate == null
+        ? CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnAggregateOrderBy(
+            local$adminUsersAggregate, (e) => call(adminUsersAggregate: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
@@ -19942,6 +20194,7 @@ class _CopyWithStubImpl$Input$ClassesOrderBy<TRes>
   TRes _res;
 
   call({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -19949,6 +20202,7 @@ class _CopyWithStubImpl$Input$ClassesOrderBy<TRes>
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
     Enum$OrderBy? isUserAllowedToWrite,
+    Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? photoUpdatedAt,
     Input$ServicesOrderBy? service,
@@ -19958,6 +20212,9 @@ class _CopyWithStubImpl$Input$ClassesOrderBy<TRes>
     Input$StudyYearsOrderBy? studyYear,
   }) =>
       _res;
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes>
+      get adminUsersAggregate =>
+          CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
@@ -24597,10 +24854,9 @@ class Input$FamiliesBoolExp {
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
+    Input$FamiliesFamiliesBoolExp? children,
+    Input$families_families_aggregate_bool_exp? children_aggregate,
     Input$BigintComparisonExp? color,
-    Input$FamiliesFamiliesBoolExp? families,
-    Input$families_families_aggregate_bool_exp? families_aggregate,
-    Input$FamiliesFamiliesBoolExp? family,
     Input$GeographyComparisonExp? geolocation,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
@@ -24608,6 +24864,8 @@ class Input$FamiliesBoolExp {
     Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$StringComparisonExp? notes,
+    Input$FamiliesFamiliesBoolExp? parents,
+    Input$families_families_aggregate_bool_exp? parents_aggregate,
     Input$PersonsBoolExp? persons,
     Input$persons_aggregate_bool_exp? persons_aggregate,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
@@ -24621,11 +24879,10 @@ class Input$FamiliesBoolExp {
         if ($_or != null) r'_or': $_or,
         if (address != null) r'address': address,
         if (areas != null) r'areas': areas,
+        if (children != null) r'children': children,
+        if (children_aggregate != null)
+          r'children_aggregate': children_aggregate,
         if (color != null) r'color': color,
-        if (families != null) r'families': families,
-        if (families_aggregate != null)
-          r'families_aggregate': families_aggregate,
-        if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -24635,6 +24892,8 @@ class Input$FamiliesBoolExp {
         if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
+        if (parents != null) r'parents': parents,
+        if (parents_aggregate != null) r'parents_aggregate': parents_aggregate,
         if (persons != null) r'persons': persons,
         if (persons_aggregate != null) r'persons_aggregate': persons_aggregate,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -24680,33 +24939,26 @@ class Input$FamiliesBoolExp {
           ? null
           : Input$AreasBoolExp.fromJson((l$areas as Map<String, dynamic>));
     }
+    if (data.containsKey('children')) {
+      final l$children = data['children'];
+      result$data['children'] = l$children == null
+          ? null
+          : Input$FamiliesFamiliesBoolExp.fromJson(
+              (l$children as Map<String, dynamic>));
+    }
+    if (data.containsKey('children_aggregate')) {
+      final l$children_aggregate = data['children_aggregate'];
+      result$data['children_aggregate'] = l$children_aggregate == null
+          ? null
+          : Input$families_families_aggregate_bool_exp.fromJson(
+              (l$children_aggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
           : Input$BigintComparisonExp.fromJson(
               (l$color as Map<String, dynamic>));
-    }
-    if (data.containsKey('families')) {
-      final l$families = data['families'];
-      result$data['families'] = l$families == null
-          ? null
-          : Input$FamiliesFamiliesBoolExp.fromJson(
-              (l$families as Map<String, dynamic>));
-    }
-    if (data.containsKey('families_aggregate')) {
-      final l$families_aggregate = data['families_aggregate'];
-      result$data['families_aggregate'] = l$families_aggregate == null
-          ? null
-          : Input$families_families_aggregate_bool_exp.fromJson(
-              (l$families_aggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input$FamiliesFamiliesBoolExp.fromJson(
-              (l$family as Map<String, dynamic>));
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -24755,6 +25007,20 @@ class Input$FamiliesBoolExp {
           ? null
           : Input$StringComparisonExp.fromJson(
               (l$notes as Map<String, dynamic>));
+    }
+    if (data.containsKey('parents')) {
+      final l$parents = data['parents'];
+      result$data['parents'] = l$parents == null
+          ? null
+          : Input$FamiliesFamiliesBoolExp.fromJson(
+              (l$parents as Map<String, dynamic>));
+    }
+    if (data.containsKey('parents_aggregate')) {
+      final l$parents_aggregate = data['parents_aggregate'];
+      result$data['parents_aggregate'] = l$parents_aggregate == null
+          ? null
+          : Input$families_families_aggregate_bool_exp.fromJson(
+              (l$parents_aggregate as Map<String, dynamic>));
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
@@ -24809,15 +25075,13 @@ class Input$FamiliesBoolExp {
   Input$StringComparisonExp? get address =>
       (_$data['address'] as Input$StringComparisonExp?);
   Input$AreasBoolExp? get areas => (_$data['areas'] as Input$AreasBoolExp?);
+  Input$FamiliesFamiliesBoolExp? get children =>
+      (_$data['children'] as Input$FamiliesFamiliesBoolExp?);
+  Input$families_families_aggregate_bool_exp? get children_aggregate =>
+      (_$data['children_aggregate']
+          as Input$families_families_aggregate_bool_exp?);
   Input$BigintComparisonExp? get color =>
       (_$data['color'] as Input$BigintComparisonExp?);
-  Input$FamiliesFamiliesBoolExp? get families =>
-      (_$data['families'] as Input$FamiliesFamiliesBoolExp?);
-  Input$families_families_aggregate_bool_exp? get families_aggregate =>
-      (_$data['families_aggregate']
-          as Input$families_families_aggregate_bool_exp?);
-  Input$FamiliesFamiliesBoolExp? get family =>
-      (_$data['family'] as Input$FamiliesFamiliesBoolExp?);
   Input$GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input$GeographyComparisonExp?);
   Input$UuidComparisonExp? get id => (_$data['id'] as Input$UuidComparisonExp?);
@@ -24831,6 +25095,11 @@ class Input$FamiliesBoolExp {
       (_$data['name'] as Input$StringComparisonExp?);
   Input$StringComparisonExp? get notes =>
       (_$data['notes'] as Input$StringComparisonExp?);
+  Input$FamiliesFamiliesBoolExp? get parents =>
+      (_$data['parents'] as Input$FamiliesFamiliesBoolExp?);
+  Input$families_families_aggregate_bool_exp? get parents_aggregate =>
+      (_$data['parents_aggregate']
+          as Input$families_families_aggregate_bool_exp?);
   Input$PersonsBoolExp? get persons =>
       (_$data['persons'] as Input$PersonsBoolExp?);
   Input$persons_aggregate_bool_exp? get persons_aggregate =>
@@ -24864,21 +25133,17 @@ class Input$FamiliesBoolExp {
       final l$areas = areas;
       result$data['areas'] = l$areas?.toJson();
     }
+    if (_$data.containsKey('children')) {
+      final l$children = children;
+      result$data['children'] = l$children?.toJson();
+    }
+    if (_$data.containsKey('children_aggregate')) {
+      final l$children_aggregate = children_aggregate;
+      result$data['children_aggregate'] = l$children_aggregate?.toJson();
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color?.toJson();
-    }
-    if (_$data.containsKey('families')) {
-      final l$families = families;
-      result$data['families'] = l$families?.toJson();
-    }
-    if (_$data.containsKey('families_aggregate')) {
-      final l$families_aggregate = families_aggregate;
-      result$data['families_aggregate'] = l$families_aggregate?.toJson();
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -24907,6 +25172,14 @@ class Input$FamiliesBoolExp {
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes?.toJson();
+    }
+    if (_$data.containsKey('parents')) {
+      final l$parents = parents;
+      result$data['parents'] = l$parents?.toJson();
+    }
+    if (_$data.containsKey('parents_aggregate')) {
+      final l$parents_aggregate = parents_aggregate;
+      result$data['parents_aggregate'] = l$parents_aggregate?.toJson();
     }
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
@@ -25010,38 +25283,30 @@ class Input$FamiliesBoolExp {
     if (l$areas != lOther$areas) {
       return false;
     }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (_$data.containsKey('children') !=
+        other._$data.containsKey('children')) {
+      return false;
+    }
+    if (l$children != lOther$children) {
+      return false;
+    }
+    final l$children_aggregate = children_aggregate;
+    final lOther$children_aggregate = other.children_aggregate;
+    if (_$data.containsKey('children_aggregate') !=
+        other._$data.containsKey('children_aggregate')) {
+      return false;
+    }
+    if (l$children_aggregate != lOther$children_aggregate) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$families = families;
-    final lOther$families = other.families;
-    if (_$data.containsKey('families') !=
-        other._$data.containsKey('families')) {
-      return false;
-    }
-    if (l$families != lOther$families) {
-      return false;
-    }
-    final l$families_aggregate = families_aggregate;
-    final lOther$families_aggregate = other.families_aggregate;
-    if (_$data.containsKey('families_aggregate') !=
-        other._$data.containsKey('families_aggregate')) {
-      return false;
-    }
-    if (l$families_aggregate != lOther$families_aggregate) {
-      return false;
-    }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -25102,6 +25367,23 @@ class Input$FamiliesBoolExp {
       return false;
     }
     if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$parents = parents;
+    final lOther$parents = other.parents;
+    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
+      return false;
+    }
+    if (l$parents != lOther$parents) {
+      return false;
+    }
+    final l$parents_aggregate = parents_aggregate;
+    final lOther$parents_aggregate = other.parents_aggregate;
+    if (_$data.containsKey('parents_aggregate') !=
+        other._$data.containsKey('parents_aggregate')) {
+      return false;
+    }
+    if (l$parents_aggregate != lOther$parents_aggregate) {
       return false;
     }
     final l$persons = persons;
@@ -25165,10 +25447,9 @@ class Input$FamiliesBoolExp {
     final l$$_or = $_or;
     final l$address = address;
     final l$areas = areas;
+    final l$children = children;
+    final l$children_aggregate = children_aggregate;
     final l$color = color;
-    final l$families = families;
-    final l$families_aggregate = families_aggregate;
-    final l$family = family;
     final l$geolocation = geolocation;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -25176,6 +25457,8 @@ class Input$FamiliesBoolExp {
     final l$lastEdit = lastEdit;
     final l$name = name;
     final l$notes = notes;
+    final l$parents = parents;
+    final l$parents_aggregate = parents_aggregate;
     final l$persons = persons;
     final l$persons_aggregate = persons_aggregate;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -25196,12 +25479,11 @@ class Input$FamiliesBoolExp {
           : const {},
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('areas') ? l$areas : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('families') ? l$families : const {},
-      _$data.containsKey('families_aggregate')
-          ? l$families_aggregate
+      _$data.containsKey('children') ? l$children : const {},
+      _$data.containsKey('children_aggregate')
+          ? l$children_aggregate
           : const {},
-      _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -25213,6 +25495,8 @@ class Input$FamiliesBoolExp {
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('parents') ? l$parents : const {},
+      _$data.containsKey('parents_aggregate') ? l$parents_aggregate : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('persons_aggregate') ? l$persons_aggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -25238,10 +25522,9 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
+    Input$FamiliesFamiliesBoolExp? children,
+    Input$families_families_aggregate_bool_exp? children_aggregate,
     Input$BigintComparisonExp? color,
-    Input$FamiliesFamiliesBoolExp? families,
-    Input$families_families_aggregate_bool_exp? families_aggregate,
-    Input$FamiliesFamiliesBoolExp? family,
     Input$GeographyComparisonExp? geolocation,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
@@ -25249,6 +25532,8 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
     Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$StringComparisonExp? notes,
+    Input$FamiliesFamiliesBoolExp? parents,
+    Input$families_families_aggregate_bool_exp? parents_aggregate,
     Input$PersonsBoolExp? persons,
     Input$persons_aggregate_bool_exp? persons_aggregate,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
@@ -25267,11 +25552,10 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
           _fn);
   CopyWith$Input$StringComparisonExp<TRes> get address;
   CopyWith$Input$AreasBoolExp<TRes> get areas;
-  CopyWith$Input$BigintComparisonExp<TRes> get color;
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families;
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get children;
   CopyWith$Input$families_families_aggregate_bool_exp<TRes>
-      get families_aggregate;
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get family;
+      get children_aggregate;
+  CopyWith$Input$BigintComparisonExp<TRes> get color;
   CopyWith$Input$GeographyComparisonExp<TRes> get geolocation;
   CopyWith$Input$UuidComparisonExp<TRes> get id;
   CopyWith$Input$BooleanComparisonExp<TRes> get isUserAllowedToRead;
@@ -25279,6 +25563,9 @@ abstract class CopyWith$Input$FamiliesBoolExp<TRes> {
   CopyWith$Input$JsonbComparisonExp<TRes> get lastEdit;
   CopyWith$Input$StringComparisonExp<TRes> get name;
   CopyWith$Input$StringComparisonExp<TRes> get notes;
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get parents;
+  CopyWith$Input$families_families_aggregate_bool_exp<TRes>
+      get parents_aggregate;
   CopyWith$Input$PersonsBoolExp<TRes> get persons;
   CopyWith$Input$persons_aggregate_bool_exp<TRes> get persons_aggregate;
   CopyWith$Input$TimestamptzComparisonExp<TRes> get photoUpdatedAt;
@@ -25306,10 +25593,9 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
     Object? $_or = _undefined,
     Object? address = _undefined,
     Object? areas = _undefined,
+    Object? children = _undefined,
+    Object? children_aggregate = _undefined,
     Object? color = _undefined,
-    Object? families = _undefined,
-    Object? families_aggregate = _undefined,
-    Object? family = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -25317,6 +25603,8 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
     Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
+    Object? parents = _undefined,
+    Object? parents_aggregate = _undefined,
     Object? persons = _undefined,
     Object? persons_aggregate = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -25333,14 +25621,12 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
         if (address != _undefined)
           'address': (address as Input$StringComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input$AreasBoolExp?),
-        if (color != _undefined) 'color': (color as Input$BigintComparisonExp?),
-        if (families != _undefined)
-          'families': (families as Input$FamiliesFamiliesBoolExp?),
-        if (families_aggregate != _undefined)
-          'families_aggregate': (families_aggregate
+        if (children != _undefined)
+          'children': (children as Input$FamiliesFamiliesBoolExp?),
+        if (children_aggregate != _undefined)
+          'children_aggregate': (children_aggregate
               as Input$families_families_aggregate_bool_exp?),
-        if (family != _undefined)
-          'family': (family as Input$FamiliesFamiliesBoolExp?),
+        if (color != _undefined) 'color': (color as Input$BigintComparisonExp?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Input$GeographyComparisonExp?),
         if (id != _undefined) 'id': (id as Input$UuidComparisonExp?),
@@ -25354,6 +25640,11 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
           'lastEdit': (lastEdit as Input$JsonbComparisonExp?),
         if (name != _undefined) 'name': (name as Input$StringComparisonExp?),
         if (notes != _undefined) 'notes': (notes as Input$StringComparisonExp?),
+        if (parents != _undefined)
+          'parents': (parents as Input$FamiliesFamiliesBoolExp?),
+        if (parents_aggregate != _undefined)
+          'parents_aggregate': (parents_aggregate
+              as Input$families_families_aggregate_bool_exp?),
         if (persons != _undefined)
           'persons': (persons as Input$PersonsBoolExp?),
         if (persons_aggregate != _undefined)
@@ -25410,38 +25701,30 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
         : CopyWith$Input$AreasBoolExp(local$areas, (e) => call(areas: e));
   }
 
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get children {
+    final local$children = _instance.children;
+    return local$children == null
+        ? CopyWith$Input$FamiliesFamiliesBoolExp.stub(_then(_instance))
+        : CopyWith$Input$FamiliesFamiliesBoolExp(
+            local$children, (e) => call(children: e));
+  }
+
+  CopyWith$Input$families_families_aggregate_bool_exp<TRes>
+      get children_aggregate {
+    final local$children_aggregate = _instance.children_aggregate;
+    return local$children_aggregate == null
+        ? CopyWith$Input$families_families_aggregate_bool_exp.stub(
+            _then(_instance))
+        : CopyWith$Input$families_families_aggregate_bool_exp(
+            local$children_aggregate, (e) => call(children_aggregate: e));
+  }
+
   CopyWith$Input$BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
         ? CopyWith$Input$BigintComparisonExp.stub(_then(_instance))
         : CopyWith$Input$BigintComparisonExp(
             local$color, (e) => call(color: e));
-  }
-
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families {
-    final local$families = _instance.families;
-    return local$families == null
-        ? CopyWith$Input$FamiliesFamiliesBoolExp.stub(_then(_instance))
-        : CopyWith$Input$FamiliesFamiliesBoolExp(
-            local$families, (e) => call(families: e));
-  }
-
-  CopyWith$Input$families_families_aggregate_bool_exp<TRes>
-      get families_aggregate {
-    final local$families_aggregate = _instance.families_aggregate;
-    return local$families_aggregate == null
-        ? CopyWith$Input$families_families_aggregate_bool_exp.stub(
-            _then(_instance))
-        : CopyWith$Input$families_families_aggregate_bool_exp(
-            local$families_aggregate, (e) => call(families_aggregate: e));
-  }
-
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith$Input$FamiliesFamiliesBoolExp.stub(_then(_instance))
-        : CopyWith$Input$FamiliesFamiliesBoolExp(
-            local$family, (e) => call(family: e));
   }
 
   CopyWith$Input$GeographyComparisonExp<TRes> get geolocation {
@@ -25496,6 +25779,24 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
         ? CopyWith$Input$StringComparisonExp.stub(_then(_instance))
         : CopyWith$Input$StringComparisonExp(
             local$notes, (e) => call(notes: e));
+  }
+
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get parents {
+    final local$parents = _instance.parents;
+    return local$parents == null
+        ? CopyWith$Input$FamiliesFamiliesBoolExp.stub(_then(_instance))
+        : CopyWith$Input$FamiliesFamiliesBoolExp(
+            local$parents, (e) => call(parents: e));
+  }
+
+  CopyWith$Input$families_families_aggregate_bool_exp<TRes>
+      get parents_aggregate {
+    final local$parents_aggregate = _instance.parents_aggregate;
+    return local$parents_aggregate == null
+        ? CopyWith$Input$families_families_aggregate_bool_exp.stub(
+            _then(_instance))
+        : CopyWith$Input$families_families_aggregate_bool_exp(
+            local$parents_aggregate, (e) => call(parents_aggregate: e));
   }
 
   CopyWith$Input$PersonsBoolExp<TRes> get persons {
@@ -25556,10 +25857,9 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
     List<Input$FamiliesBoolExp>? $_or,
     Input$StringComparisonExp? address,
     Input$AreasBoolExp? areas,
+    Input$FamiliesFamiliesBoolExp? children,
+    Input$families_families_aggregate_bool_exp? children_aggregate,
     Input$BigintComparisonExp? color,
-    Input$FamiliesFamiliesBoolExp? families,
-    Input$families_families_aggregate_bool_exp? families_aggregate,
-    Input$FamiliesFamiliesBoolExp? family,
     Input$GeographyComparisonExp? geolocation,
     Input$UuidComparisonExp? id,
     Input$BooleanComparisonExp? isUserAllowedToRead,
@@ -25567,6 +25867,8 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
     Input$JsonbComparisonExp? lastEdit,
     Input$StringComparisonExp? name,
     Input$StringComparisonExp? notes,
+    Input$FamiliesFamiliesBoolExp? parents,
+    Input$families_families_aggregate_bool_exp? parents_aggregate,
     Input$PersonsBoolExp? persons,
     Input$persons_aggregate_bool_exp? persons_aggregate,
     Input$TimestamptzComparisonExp? photoUpdatedAt,
@@ -25583,15 +25885,13 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
       CopyWith$Input$StringComparisonExp.stub(_res);
   CopyWith$Input$AreasBoolExp<TRes> get areas =>
       CopyWith$Input$AreasBoolExp.stub(_res);
-  CopyWith$Input$BigintComparisonExp<TRes> get color =>
-      CopyWith$Input$BigintComparisonExp.stub(_res);
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get families =>
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get children =>
       CopyWith$Input$FamiliesFamiliesBoolExp.stub(_res);
   CopyWith$Input$families_families_aggregate_bool_exp<TRes>
-      get families_aggregate =>
+      get children_aggregate =>
           CopyWith$Input$families_families_aggregate_bool_exp.stub(_res);
-  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get family =>
-      CopyWith$Input$FamiliesFamiliesBoolExp.stub(_res);
+  CopyWith$Input$BigintComparisonExp<TRes> get color =>
+      CopyWith$Input$BigintComparisonExp.stub(_res);
   CopyWith$Input$GeographyComparisonExp<TRes> get geolocation =>
       CopyWith$Input$GeographyComparisonExp.stub(_res);
   CopyWith$Input$UuidComparisonExp<TRes> get id =>
@@ -25606,6 +25906,11 @@ class _CopyWithStubImpl$Input$FamiliesBoolExp<TRes>
       CopyWith$Input$StringComparisonExp.stub(_res);
   CopyWith$Input$StringComparisonExp<TRes> get notes =>
       CopyWith$Input$StringComparisonExp.stub(_res);
+  CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get parents =>
+      CopyWith$Input$FamiliesFamiliesBoolExp.stub(_res);
+  CopyWith$Input$families_families_aggregate_bool_exp<TRes>
+      get parents_aggregate =>
+          CopyWith$Input$families_families_aggregate_bool_exp.stub(_res);
   CopyWith$Input$PersonsBoolExp<TRes> get persons =>
       CopyWith$Input$PersonsBoolExp.stub(_res);
   CopyWith$Input$persons_aggregate_bool_exp<TRes> get persons_aggregate =>
@@ -26003,19 +26308,21 @@ class Input$FamiliesFamiliesBoolExp {
     List<Input$FamiliesFamiliesBoolExp>? $_and,
     Input$FamiliesFamiliesBoolExp? $_not,
     List<Input$FamiliesFamiliesBoolExp>? $_or,
-    Input$FamiliesBoolExp? innerFamily,
-    Input$UuidComparisonExp? innerFamilyId,
-    Input$FamiliesBoolExp? outerFamily,
-    Input$UuidComparisonExp? outerFamilyId,
+    Input$FamiliesBoolExp? child,
+    Input$UuidComparisonExp? childFamilyId,
+    Input$FamiliesBoolExp? parent,
+    Input$UuidComparisonExp? parentFamilyId,
+    Input$UuidComparisonExp? relId,
   }) =>
       Input$FamiliesFamiliesBoolExp._({
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
-        if (innerFamily != null) r'innerFamily': innerFamily,
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamily != null) r'outerFamily': outerFamily,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (child != null) r'child': child,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parent != null) r'parent': parent,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$FamiliesFamiliesBoolExp._(this._$data);
@@ -26043,33 +26350,37 @@ class Input$FamiliesFamiliesBoolExp {
               (e as Map<String, dynamic>)))
           .toList();
     }
-    if (data.containsKey('innerFamily')) {
-      final l$innerFamily = data['innerFamily'];
-      result$data['innerFamily'] = l$innerFamily == null
+    if (data.containsKey('child')) {
+      final l$child = data['child'];
+      result$data['child'] = l$child == null
           ? null
-          : Input$FamiliesBoolExp.fromJson(
-              (l$innerFamily as Map<String, dynamic>));
+          : Input$FamiliesBoolExp.fromJson((l$child as Map<String, dynamic>));
     }
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] = l$innerFamilyId == null
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] = l$childFamilyId == null
           ? null
           : Input$UuidComparisonExp.fromJson(
-              (l$innerFamilyId as Map<String, dynamic>));
+              (l$childFamilyId as Map<String, dynamic>));
     }
-    if (data.containsKey('outerFamily')) {
-      final l$outerFamily = data['outerFamily'];
-      result$data['outerFamily'] = l$outerFamily == null
+    if (data.containsKey('parent')) {
+      final l$parent = data['parent'];
+      result$data['parent'] = l$parent == null
           ? null
-          : Input$FamiliesBoolExp.fromJson(
-              (l$outerFamily as Map<String, dynamic>));
+          : Input$FamiliesBoolExp.fromJson((l$parent as Map<String, dynamic>));
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] = l$outerFamilyId == null
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] = l$parentFamilyId == null
           ? null
           : Input$UuidComparisonExp.fromJson(
-              (l$outerFamilyId as Map<String, dynamic>));
+              (l$parentFamilyId as Map<String, dynamic>));
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] = l$relId == null
+          ? null
+          : Input$UuidComparisonExp.fromJson((l$relId as Map<String, dynamic>));
     }
     return Input$FamiliesFamiliesBoolExp._(result$data);
   }
@@ -26082,14 +26393,16 @@ class Input$FamiliesFamiliesBoolExp {
       (_$data['_not'] as Input$FamiliesFamiliesBoolExp?);
   List<Input$FamiliesFamiliesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input$FamiliesFamiliesBoolExp>?);
-  Input$FamiliesBoolExp? get innerFamily =>
-      (_$data['innerFamily'] as Input$FamiliesBoolExp?);
-  Input$UuidComparisonExp? get innerFamilyId =>
-      (_$data['innerFamilyId'] as Input$UuidComparisonExp?);
-  Input$FamiliesBoolExp? get outerFamily =>
-      (_$data['outerFamily'] as Input$FamiliesBoolExp?);
-  Input$UuidComparisonExp? get outerFamilyId =>
-      (_$data['outerFamilyId'] as Input$UuidComparisonExp?);
+  Input$FamiliesBoolExp? get child =>
+      (_$data['child'] as Input$FamiliesBoolExp?);
+  Input$UuidComparisonExp? get childFamilyId =>
+      (_$data['childFamilyId'] as Input$UuidComparisonExp?);
+  Input$FamiliesBoolExp? get parent =>
+      (_$data['parent'] as Input$FamiliesBoolExp?);
+  Input$UuidComparisonExp? get parentFamilyId =>
+      (_$data['parentFamilyId'] as Input$UuidComparisonExp?);
+  Input$UuidComparisonExp? get relId =>
+      (_$data['relId'] as Input$UuidComparisonExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -26104,21 +26417,25 @@ class Input$FamiliesFamiliesBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('innerFamily')) {
-      final l$innerFamily = innerFamily;
-      result$data['innerFamily'] = l$innerFamily?.toJson();
+    if (_$data.containsKey('child')) {
+      final l$child = child;
+      result$data['child'] = l$child?.toJson();
     }
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] = l$innerFamilyId?.toJson();
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] = l$childFamilyId?.toJson();
     }
-    if (_$data.containsKey('outerFamily')) {
-      final l$outerFamily = outerFamily;
-      result$data['outerFamily'] = l$outerFamily?.toJson();
+    if (_$data.containsKey('parent')) {
+      final l$parent = parent;
+      result$data['parent'] = l$parent?.toJson();
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] = l$outerFamilyId?.toJson();
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] = l$parentFamilyId?.toJson();
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] = l$relId?.toJson();
     }
     return result$data;
   }
@@ -26183,40 +26500,46 @@ class Input$FamiliesFamiliesBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$innerFamily = innerFamily;
-    final lOther$innerFamily = other.innerFamily;
-    if (_$data.containsKey('innerFamily') !=
-        other._$data.containsKey('innerFamily')) {
+    final l$child = child;
+    final lOther$child = other.child;
+    if (_$data.containsKey('child') != other._$data.containsKey('child')) {
       return false;
     }
-    if (l$innerFamily != lOther$innerFamily) {
+    if (l$child != lOther$child) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamily = outerFamily;
-    final lOther$outerFamily = other.outerFamily;
-    if (_$data.containsKey('outerFamily') !=
-        other._$data.containsKey('outerFamily')) {
+    final l$parent = parent;
+    final lOther$parent = other.parent;
+    if (_$data.containsKey('parent') != other._$data.containsKey('parent')) {
       return false;
     }
-    if (l$outerFamily != lOther$outerFamily) {
+    if (l$parent != lOther$parent) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -26227,10 +26550,11 @@ class Input$FamiliesFamiliesBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$innerFamily = innerFamily;
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamily = outerFamily;
-    final l$outerFamilyId = outerFamilyId;
+    final l$child = child;
+    final l$childFamilyId = childFamilyId;
+    final l$parent = parent;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -26243,10 +26567,11 @@ class Input$FamiliesFamiliesBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('innerFamily') ? l$innerFamily : const {},
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamily') ? l$outerFamily : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('child') ? l$child : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parent') ? l$parent : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -26264,10 +26589,11 @@ abstract class CopyWith$Input$FamiliesFamiliesBoolExp<TRes> {
     List<Input$FamiliesFamiliesBoolExp>? $_and,
     Input$FamiliesFamiliesBoolExp? $_not,
     List<Input$FamiliesFamiliesBoolExp>? $_or,
-    Input$FamiliesBoolExp? innerFamily,
-    Input$UuidComparisonExp? innerFamilyId,
-    Input$FamiliesBoolExp? outerFamily,
-    Input$UuidComparisonExp? outerFamilyId,
+    Input$FamiliesBoolExp? child,
+    Input$UuidComparisonExp? childFamilyId,
+    Input$FamiliesBoolExp? parent,
+    Input$UuidComparisonExp? parentFamilyId,
+    Input$UuidComparisonExp? relId,
   });
   TRes $_and(
       Iterable<Input$FamiliesFamiliesBoolExp>? Function(
@@ -26282,10 +26608,11 @@ abstract class CopyWith$Input$FamiliesFamiliesBoolExp<TRes> {
                   CopyWith$Input$FamiliesFamiliesBoolExp<
                       Input$FamiliesFamiliesBoolExp>>?)
           _fn);
-  CopyWith$Input$FamiliesBoolExp<TRes> get innerFamily;
-  CopyWith$Input$UuidComparisonExp<TRes> get innerFamilyId;
-  CopyWith$Input$FamiliesBoolExp<TRes> get outerFamily;
-  CopyWith$Input$UuidComparisonExp<TRes> get outerFamilyId;
+  CopyWith$Input$FamiliesBoolExp<TRes> get child;
+  CopyWith$Input$UuidComparisonExp<TRes> get childFamilyId;
+  CopyWith$Input$FamiliesBoolExp<TRes> get parent;
+  CopyWith$Input$UuidComparisonExp<TRes> get parentFamilyId;
+  CopyWith$Input$UuidComparisonExp<TRes> get relId;
 }
 
 class _CopyWithImpl$Input$FamiliesFamiliesBoolExp<TRes>
@@ -26305,10 +26632,11 @@ class _CopyWithImpl$Input$FamiliesFamiliesBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
-    Object? innerFamily = _undefined,
-    Object? innerFamilyId = _undefined,
-    Object? outerFamily = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? child = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parent = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$FamiliesFamiliesBoolExp._({
         ..._instance._$data,
@@ -26318,14 +26646,13 @@ class _CopyWithImpl$Input$FamiliesFamiliesBoolExp<TRes>
           '_not': ($_not as Input$FamiliesFamiliesBoolExp?),
         if ($_or != _undefined)
           '_or': ($_or as List<Input$FamiliesFamiliesBoolExp>?),
-        if (innerFamily != _undefined)
-          'innerFamily': (innerFamily as Input$FamiliesBoolExp?),
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as Input$UuidComparisonExp?),
-        if (outerFamily != _undefined)
-          'outerFamily': (outerFamily as Input$FamiliesBoolExp?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as Input$UuidComparisonExp?),
+        if (child != _undefined) 'child': (child as Input$FamiliesBoolExp?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as Input$UuidComparisonExp?),
+        if (parent != _undefined) 'parent': (parent as Input$FamiliesBoolExp?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as Input$UuidComparisonExp?),
+        if (relId != _undefined) 'relId': (relId as Input$UuidComparisonExp?),
       }));
   TRes $_and(
           Iterable<Input$FamiliesFamiliesBoolExp>? Function(
@@ -26359,36 +26686,41 @@ class _CopyWithImpl$Input$FamiliesFamiliesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-  CopyWith$Input$FamiliesBoolExp<TRes> get innerFamily {
-    final local$innerFamily = _instance.innerFamily;
-    return local$innerFamily == null
+  CopyWith$Input$FamiliesBoolExp<TRes> get child {
+    final local$child = _instance.child;
+    return local$child == null
         ? CopyWith$Input$FamiliesBoolExp.stub(_then(_instance))
-        : CopyWith$Input$FamiliesBoolExp(
-            local$innerFamily, (e) => call(innerFamily: e));
+        : CopyWith$Input$FamiliesBoolExp(local$child, (e) => call(child: e));
   }
 
-  CopyWith$Input$UuidComparisonExp<TRes> get innerFamilyId {
-    final local$innerFamilyId = _instance.innerFamilyId;
-    return local$innerFamilyId == null
+  CopyWith$Input$UuidComparisonExp<TRes> get childFamilyId {
+    final local$childFamilyId = _instance.childFamilyId;
+    return local$childFamilyId == null
         ? CopyWith$Input$UuidComparisonExp.stub(_then(_instance))
         : CopyWith$Input$UuidComparisonExp(
-            local$innerFamilyId, (e) => call(innerFamilyId: e));
+            local$childFamilyId, (e) => call(childFamilyId: e));
   }
 
-  CopyWith$Input$FamiliesBoolExp<TRes> get outerFamily {
-    final local$outerFamily = _instance.outerFamily;
-    return local$outerFamily == null
+  CopyWith$Input$FamiliesBoolExp<TRes> get parent {
+    final local$parent = _instance.parent;
+    return local$parent == null
         ? CopyWith$Input$FamiliesBoolExp.stub(_then(_instance))
-        : CopyWith$Input$FamiliesBoolExp(
-            local$outerFamily, (e) => call(outerFamily: e));
+        : CopyWith$Input$FamiliesBoolExp(local$parent, (e) => call(parent: e));
   }
 
-  CopyWith$Input$UuidComparisonExp<TRes> get outerFamilyId {
-    final local$outerFamilyId = _instance.outerFamilyId;
-    return local$outerFamilyId == null
+  CopyWith$Input$UuidComparisonExp<TRes> get parentFamilyId {
+    final local$parentFamilyId = _instance.parentFamilyId;
+    return local$parentFamilyId == null
         ? CopyWith$Input$UuidComparisonExp.stub(_then(_instance))
         : CopyWith$Input$UuidComparisonExp(
-            local$outerFamilyId, (e) => call(outerFamilyId: e));
+            local$parentFamilyId, (e) => call(parentFamilyId: e));
+  }
+
+  CopyWith$Input$UuidComparisonExp<TRes> get relId {
+    final local$relId = _instance.relId;
+    return local$relId == null
+        ? CopyWith$Input$UuidComparisonExp.stub(_then(_instance))
+        : CopyWith$Input$UuidComparisonExp(local$relId, (e) => call(relId: e));
   }
 }
 
@@ -26402,38 +26734,43 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesBoolExp<TRes>
     List<Input$FamiliesFamiliesBoolExp>? $_and,
     Input$FamiliesFamiliesBoolExp? $_not,
     List<Input$FamiliesFamiliesBoolExp>? $_or,
-    Input$FamiliesBoolExp? innerFamily,
-    Input$UuidComparisonExp? innerFamilyId,
-    Input$FamiliesBoolExp? outerFamily,
-    Input$UuidComparisonExp? outerFamilyId,
+    Input$FamiliesBoolExp? child,
+    Input$UuidComparisonExp? childFamilyId,
+    Input$FamiliesBoolExp? parent,
+    Input$UuidComparisonExp? parentFamilyId,
+    Input$UuidComparisonExp? relId,
   }) =>
       _res;
   $_and(_fn) => _res;
   CopyWith$Input$FamiliesFamiliesBoolExp<TRes> get $_not =>
       CopyWith$Input$FamiliesFamiliesBoolExp.stub(_res);
   $_or(_fn) => _res;
-  CopyWith$Input$FamiliesBoolExp<TRes> get innerFamily =>
+  CopyWith$Input$FamiliesBoolExp<TRes> get child =>
       CopyWith$Input$FamiliesBoolExp.stub(_res);
-  CopyWith$Input$UuidComparisonExp<TRes> get innerFamilyId =>
+  CopyWith$Input$UuidComparisonExp<TRes> get childFamilyId =>
       CopyWith$Input$UuidComparisonExp.stub(_res);
-  CopyWith$Input$FamiliesBoolExp<TRes> get outerFamily =>
+  CopyWith$Input$FamiliesBoolExp<TRes> get parent =>
       CopyWith$Input$FamiliesBoolExp.stub(_res);
-  CopyWith$Input$UuidComparisonExp<TRes> get outerFamilyId =>
+  CopyWith$Input$UuidComparisonExp<TRes> get parentFamilyId =>
+      CopyWith$Input$UuidComparisonExp.stub(_res);
+  CopyWith$Input$UuidComparisonExp<TRes> get relId =>
       CopyWith$Input$UuidComparisonExp.stub(_res);
 }
 
 class Input$FamiliesFamiliesInsertInput {
   factory Input$FamiliesFamiliesInsertInput({
-    Input$FamiliesObjRelInsertInput? innerFamily,
-    UuidValue? innerFamilyId,
-    Input$FamiliesObjRelInsertInput? outerFamily,
-    UuidValue? outerFamilyId,
+    Input$FamiliesObjRelInsertInput? child,
+    UuidValue? childFamilyId,
+    Input$FamiliesObjRelInsertInput? parent,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       Input$FamiliesFamiliesInsertInput._({
-        if (innerFamily != null) r'innerFamily': innerFamily,
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamily != null) r'outerFamily': outerFamily,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (child != null) r'child': child,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parent != null) r'parent': parent,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$FamiliesFamiliesInsertInput._(this._$data);
@@ -26441,60 +26778,69 @@ class Input$FamiliesFamiliesInsertInput {
   factory Input$FamiliesFamiliesInsertInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamily')) {
-      final l$innerFamily = data['innerFamily'];
-      result$data['innerFamily'] = l$innerFamily == null
+    if (data.containsKey('child')) {
+      final l$child = data['child'];
+      result$data['child'] = l$child == null
           ? null
           : Input$FamiliesObjRelInsertInput.fromJson(
-              (l$innerFamily as Map<String, dynamic>));
+              (l$child as Map<String, dynamic>));
     }
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : stringToUuid(l$innerFamilyId);
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : stringToUuid(l$childFamilyId);
     }
-    if (data.containsKey('outerFamily')) {
-      final l$outerFamily = data['outerFamily'];
-      result$data['outerFamily'] = l$outerFamily == null
+    if (data.containsKey('parent')) {
+      final l$parent = data['parent'];
+      result$data['parent'] = l$parent == null
           ? null
           : Input$FamiliesObjRelInsertInput.fromJson(
-              (l$outerFamily as Map<String, dynamic>));
+              (l$parent as Map<String, dynamic>));
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : stringToUuid(l$outerFamilyId);
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : stringToUuid(l$parentFamilyId);
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] = l$relId == null ? null : stringToUuid(l$relId);
     }
     return Input$FamiliesFamiliesInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$FamiliesObjRelInsertInput? get innerFamily =>
-      (_$data['innerFamily'] as Input$FamiliesObjRelInsertInput?);
-  UuidValue? get innerFamilyId => (_$data['innerFamilyId'] as UuidValue?);
-  Input$FamiliesObjRelInsertInput? get outerFamily =>
-      (_$data['outerFamily'] as Input$FamiliesObjRelInsertInput?);
-  UuidValue? get outerFamilyId => (_$data['outerFamilyId'] as UuidValue?);
+  Input$FamiliesObjRelInsertInput? get child =>
+      (_$data['child'] as Input$FamiliesObjRelInsertInput?);
+  UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+  Input$FamiliesObjRelInsertInput? get parent =>
+      (_$data['parent'] as Input$FamiliesObjRelInsertInput?);
+  UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+  UuidValue? get relId => (_$data['relId'] as UuidValue?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamily')) {
-      final l$innerFamily = innerFamily;
-      result$data['innerFamily'] = l$innerFamily?.toJson();
+    if (_$data.containsKey('child')) {
+      final l$child = child;
+      result$data['child'] = l$child?.toJson();
     }
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : uuidToString(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : uuidToString(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamily')) {
-      final l$outerFamily = outerFamily;
-      result$data['outerFamily'] = l$outerFamily?.toJson();
+    if (_$data.containsKey('parent')) {
+      final l$parent = parent;
+      result$data['parent'] = l$parent?.toJson();
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : uuidToString(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : uuidToString(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] = l$relId == null ? null : uuidToString(l$relId);
     }
     return result$data;
   }
@@ -26513,40 +26859,46 @@ class Input$FamiliesFamiliesInsertInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamily = innerFamily;
-    final lOther$innerFamily = other.innerFamily;
-    if (_$data.containsKey('innerFamily') !=
-        other._$data.containsKey('innerFamily')) {
+    final l$child = child;
+    final lOther$child = other.child;
+    if (_$data.containsKey('child') != other._$data.containsKey('child')) {
       return false;
     }
-    if (l$innerFamily != lOther$innerFamily) {
+    if (l$child != lOther$child) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamily = outerFamily;
-    final lOther$outerFamily = other.outerFamily;
-    if (_$data.containsKey('outerFamily') !=
-        other._$data.containsKey('outerFamily')) {
+    final l$parent = parent;
+    final lOther$parent = other.parent;
+    if (_$data.containsKey('parent') != other._$data.containsKey('parent')) {
       return false;
     }
-    if (l$outerFamily != lOther$outerFamily) {
+    if (l$parent != lOther$parent) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -26554,15 +26906,17 @@ class Input$FamiliesFamiliesInsertInput {
 
   @override
   int get hashCode {
-    final l$innerFamily = innerFamily;
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamily = outerFamily;
-    final l$outerFamilyId = outerFamilyId;
+    final l$child = child;
+    final l$childFamilyId = childFamilyId;
+    final l$parent = parent;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamily') ? l$innerFamily : const {},
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamily') ? l$outerFamily : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('child') ? l$child : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parent') ? l$parent : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -26577,13 +26931,14 @@ abstract class CopyWith$Input$FamiliesFamiliesInsertInput<TRes> {
       _CopyWithStubImpl$Input$FamiliesFamiliesInsertInput;
 
   TRes call({
-    Input$FamiliesObjRelInsertInput? innerFamily,
-    UuidValue? innerFamilyId,
-    Input$FamiliesObjRelInsertInput? outerFamily,
-    UuidValue? outerFamilyId,
+    Input$FamiliesObjRelInsertInput? child,
+    UuidValue? childFamilyId,
+    Input$FamiliesObjRelInsertInput? parent,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   });
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get innerFamily;
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get outerFamily;
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get child;
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get parent;
 }
 
 class _CopyWithImpl$Input$FamiliesFamiliesInsertInput<TRes>
@@ -26600,36 +26955,38 @@ class _CopyWithImpl$Input$FamiliesFamiliesInsertInput<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamily = _undefined,
-    Object? innerFamilyId = _undefined,
-    Object? outerFamily = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? child = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parent = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$FamiliesFamiliesInsertInput._({
         ..._instance._$data,
-        if (innerFamily != _undefined)
-          'innerFamily': (innerFamily as Input$FamiliesObjRelInsertInput?),
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as UuidValue?),
-        if (outerFamily != _undefined)
-          'outerFamily': (outerFamily as Input$FamiliesObjRelInsertInput?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as UuidValue?),
+        if (child != _undefined)
+          'child': (child as Input$FamiliesObjRelInsertInput?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as UuidValue?),
+        if (parent != _undefined)
+          'parent': (parent as Input$FamiliesObjRelInsertInput?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as UuidValue?),
+        if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get innerFamily {
-    final local$innerFamily = _instance.innerFamily;
-    return local$innerFamily == null
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get child {
+    final local$child = _instance.child;
+    return local$child == null
         ? CopyWith$Input$FamiliesObjRelInsertInput.stub(_then(_instance))
         : CopyWith$Input$FamiliesObjRelInsertInput(
-            local$innerFamily, (e) => call(innerFamily: e));
+            local$child, (e) => call(child: e));
   }
 
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get outerFamily {
-    final local$outerFamily = _instance.outerFamily;
-    return local$outerFamily == null
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get parent {
+    final local$parent = _instance.parent;
+    return local$parent == null
         ? CopyWith$Input$FamiliesObjRelInsertInput.stub(_then(_instance))
         : CopyWith$Input$FamiliesObjRelInsertInput(
-            local$outerFamily, (e) => call(outerFamily: e));
+            local$parent, (e) => call(parent: e));
   }
 }
 
@@ -26640,177 +26997,17 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesInsertInput<TRes>
   TRes _res;
 
   call({
-    Input$FamiliesObjRelInsertInput? innerFamily,
-    UuidValue? innerFamilyId,
-    Input$FamiliesObjRelInsertInput? outerFamily,
-    UuidValue? outerFamilyId,
+    Input$FamiliesObjRelInsertInput? child,
+    UuidValue? childFamilyId,
+    Input$FamiliesObjRelInsertInput? parent,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       _res;
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get innerFamily =>
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get child =>
       CopyWith$Input$FamiliesObjRelInsertInput.stub(_res);
-  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get outerFamily =>
+  CopyWith$Input$FamiliesObjRelInsertInput<TRes> get parent =>
       CopyWith$Input$FamiliesObjRelInsertInput.stub(_res);
-}
-
-class Input$FamiliesFamiliesObjRelInsertInput {
-  factory Input$FamiliesFamiliesObjRelInsertInput({
-    required Input$FamiliesFamiliesInsertInput data,
-    Input$FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      Input$FamiliesFamiliesObjRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
-
-  Input$FamiliesFamiliesObjRelInsertInput._(this._$data);
-
-  factory Input$FamiliesFamiliesObjRelInsertInput.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input$FamiliesFamiliesInsertInput.fromJson(
-        (l$data as Map<String, dynamic>));
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input$FamiliesFamiliesOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
-    }
-    return Input$FamiliesFamiliesObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input$FamiliesFamiliesInsertInput get data =>
-      (_$data['data'] as Input$FamiliesFamiliesInsertInput);
-  Input$FamiliesFamiliesOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input$FamiliesFamiliesOnConflict?);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith$Input$FamiliesFamiliesObjRelInsertInput<
-          Input$FamiliesFamiliesObjRelInsertInput>
-      get copyWith => CopyWith$Input$FamiliesFamiliesObjRelInsertInput(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Input$FamiliesFamiliesObjRelInsertInput) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> {
-  factory CopyWith$Input$FamiliesFamiliesObjRelInsertInput(
-    Input$FamiliesFamiliesObjRelInsertInput instance,
-    TRes Function(Input$FamiliesFamiliesObjRelInsertInput) then,
-  ) = _CopyWithImpl$Input$FamiliesFamiliesObjRelInsertInput;
-
-  factory CopyWith$Input$FamiliesFamiliesObjRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$FamiliesFamiliesObjRelInsertInput;
-
-  TRes call({
-    Input$FamiliesFamiliesInsertInput? data,
-    Input$FamiliesFamiliesOnConflict? onConflict,
-  });
-  CopyWith$Input$FamiliesFamiliesInsertInput<TRes> get data;
-  CopyWith$Input$FamiliesFamiliesOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl$Input$FamiliesFamiliesObjRelInsertInput<TRes>
-    implements CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> {
-  _CopyWithImpl$Input$FamiliesFamiliesObjRelInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input$FamiliesFamiliesObjRelInsertInput _instance;
-
-  final TRes Function(Input$FamiliesFamiliesObjRelInsertInput) _then;
-
-  static const _undefined = {};
-
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input$FamiliesFamiliesObjRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as Input$FamiliesFamiliesInsertInput),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input$FamiliesFamiliesOnConflict?),
-      }));
-  CopyWith$Input$FamiliesFamiliesInsertInput<TRes> get data {
-    final local$data = _instance.data;
-    return CopyWith$Input$FamiliesFamiliesInsertInput(
-        local$data, (e) => call(data: e));
-  }
-
-  CopyWith$Input$FamiliesFamiliesOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith$Input$FamiliesFamiliesOnConflict.stub(_then(_instance))
-        : CopyWith$Input$FamiliesFamiliesOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
-  }
-}
-
-class _CopyWithStubImpl$Input$FamiliesFamiliesObjRelInsertInput<TRes>
-    implements CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> {
-  _CopyWithStubImpl$Input$FamiliesFamiliesObjRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input$FamiliesFamiliesInsertInput? data,
-    Input$FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      _res;
-  CopyWith$Input$FamiliesFamiliesInsertInput<TRes> get data =>
-      CopyWith$Input$FamiliesFamiliesInsertInput.stub(_res);
-  CopyWith$Input$FamiliesFamiliesOnConflict<TRes> get onConflict =>
-      CopyWith$Input$FamiliesFamiliesOnConflict.stub(_res);
 }
 
 class Input$FamiliesFamiliesOnConflict {
@@ -26997,78 +27194,91 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesOnConflict<TRes>
 
 class Input$FamiliesFamiliesOrderBy {
   factory Input$FamiliesFamiliesOrderBy({
-    Input$FamiliesOrderBy? innerFamily,
-    Enum$OrderBy? innerFamilyId,
-    Input$FamiliesOrderBy? outerFamily,
-    Enum$OrderBy? outerFamilyId,
+    Input$FamiliesOrderBy? child,
+    Enum$OrderBy? childFamilyId,
+    Input$FamiliesOrderBy? parent,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       Input$FamiliesFamiliesOrderBy._({
-        if (innerFamily != null) r'innerFamily': innerFamily,
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamily != null) r'outerFamily': outerFamily,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (child != null) r'child': child,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parent != null) r'parent': parent,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$FamiliesFamiliesOrderBy._(this._$data);
 
   factory Input$FamiliesFamiliesOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamily')) {
-      final l$innerFamily = data['innerFamily'];
-      result$data['innerFamily'] = l$innerFamily == null
+    if (data.containsKey('child')) {
+      final l$child = data['child'];
+      result$data['child'] = l$child == null
           ? null
-          : Input$FamiliesOrderBy.fromJson(
-              (l$innerFamily as Map<String, dynamic>));
+          : Input$FamiliesOrderBy.fromJson((l$child as Map<String, dynamic>));
     }
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] = l$innerFamilyId == null
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] = l$childFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$innerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$childFamilyId as String));
     }
-    if (data.containsKey('outerFamily')) {
-      final l$outerFamily = data['outerFamily'];
-      result$data['outerFamily'] = l$outerFamily == null
+    if (data.containsKey('parent')) {
+      final l$parent = data['parent'];
+      result$data['parent'] = l$parent == null
           ? null
-          : Input$FamiliesOrderBy.fromJson(
-              (l$outerFamily as Map<String, dynamic>));
+          : Input$FamiliesOrderBy.fromJson((l$parent as Map<String, dynamic>));
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] = l$outerFamilyId == null
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] = l$parentFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$outerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$parentFamilyId as String));
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] =
+          l$relId == null ? null : fromJson$Enum$OrderBy((l$relId as String));
     }
     return Input$FamiliesFamiliesOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$FamiliesOrderBy? get innerFamily =>
-      (_$data['innerFamily'] as Input$FamiliesOrderBy?);
-  Enum$OrderBy? get innerFamilyId => (_$data['innerFamilyId'] as Enum$OrderBy?);
-  Input$FamiliesOrderBy? get outerFamily =>
-      (_$data['outerFamily'] as Input$FamiliesOrderBy?);
-  Enum$OrderBy? get outerFamilyId => (_$data['outerFamilyId'] as Enum$OrderBy?);
+  Input$FamiliesOrderBy? get child =>
+      (_$data['child'] as Input$FamiliesOrderBy?);
+  Enum$OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum$OrderBy?);
+  Input$FamiliesOrderBy? get parent =>
+      (_$data['parent'] as Input$FamiliesOrderBy?);
+  Enum$OrderBy? get parentFamilyId =>
+      (_$data['parentFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get relId => (_$data['relId'] as Enum$OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamily')) {
-      final l$innerFamily = innerFamily;
-      result$data['innerFamily'] = l$innerFamily?.toJson();
+    if (_$data.containsKey('child')) {
+      final l$child = child;
+      result$data['child'] = l$child?.toJson();
     }
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : toJson$Enum$OrderBy(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : toJson$Enum$OrderBy(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamily')) {
-      final l$outerFamily = outerFamily;
-      result$data['outerFamily'] = l$outerFamily?.toJson();
+    if (_$data.containsKey('parent')) {
+      final l$parent = parent;
+      result$data['parent'] = l$parent?.toJson();
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : toJson$Enum$OrderBy(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : toJson$Enum$OrderBy(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] =
+          l$relId == null ? null : toJson$Enum$OrderBy(l$relId);
     }
     return result$data;
   }
@@ -27087,40 +27297,46 @@ class Input$FamiliesFamiliesOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamily = innerFamily;
-    final lOther$innerFamily = other.innerFamily;
-    if (_$data.containsKey('innerFamily') !=
-        other._$data.containsKey('innerFamily')) {
+    final l$child = child;
+    final lOther$child = other.child;
+    if (_$data.containsKey('child') != other._$data.containsKey('child')) {
       return false;
     }
-    if (l$innerFamily != lOther$innerFamily) {
+    if (l$child != lOther$child) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamily = outerFamily;
-    final lOther$outerFamily = other.outerFamily;
-    if (_$data.containsKey('outerFamily') !=
-        other._$data.containsKey('outerFamily')) {
+    final l$parent = parent;
+    final lOther$parent = other.parent;
+    if (_$data.containsKey('parent') != other._$data.containsKey('parent')) {
       return false;
     }
-    if (l$outerFamily != lOther$outerFamily) {
+    if (l$parent != lOther$parent) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -27128,15 +27344,17 @@ class Input$FamiliesFamiliesOrderBy {
 
   @override
   int get hashCode {
-    final l$innerFamily = innerFamily;
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamily = outerFamily;
-    final l$outerFamilyId = outerFamilyId;
+    final l$child = child;
+    final l$childFamilyId = childFamilyId;
+    final l$parent = parent;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamily') ? l$innerFamily : const {},
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamily') ? l$outerFamily : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('child') ? l$child : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parent') ? l$parent : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -27151,13 +27369,14 @@ abstract class CopyWith$Input$FamiliesFamiliesOrderBy<TRes> {
       _CopyWithStubImpl$Input$FamiliesFamiliesOrderBy;
 
   TRes call({
-    Input$FamiliesOrderBy? innerFamily,
-    Enum$OrderBy? innerFamilyId,
-    Input$FamiliesOrderBy? outerFamily,
-    Enum$OrderBy? outerFamilyId,
+    Input$FamiliesOrderBy? child,
+    Enum$OrderBy? childFamilyId,
+    Input$FamiliesOrderBy? parent,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   });
-  CopyWith$Input$FamiliesOrderBy<TRes> get innerFamily;
-  CopyWith$Input$FamiliesOrderBy<TRes> get outerFamily;
+  CopyWith$Input$FamiliesOrderBy<TRes> get child;
+  CopyWith$Input$FamiliesOrderBy<TRes> get parent;
 }
 
 class _CopyWithImpl$Input$FamiliesFamiliesOrderBy<TRes>
@@ -27174,36 +27393,34 @@ class _CopyWithImpl$Input$FamiliesFamiliesOrderBy<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamily = _undefined,
-    Object? innerFamilyId = _undefined,
-    Object? outerFamily = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? child = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parent = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$FamiliesFamiliesOrderBy._({
         ..._instance._$data,
-        if (innerFamily != _undefined)
-          'innerFamily': (innerFamily as Input$FamiliesOrderBy?),
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as Enum$OrderBy?),
-        if (outerFamily != _undefined)
-          'outerFamily': (outerFamily as Input$FamiliesOrderBy?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as Enum$OrderBy?),
+        if (child != _undefined) 'child': (child as Input$FamiliesOrderBy?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as Enum$OrderBy?),
+        if (parent != _undefined) 'parent': (parent as Input$FamiliesOrderBy?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as Enum$OrderBy?),
+        if (relId != _undefined) 'relId': (relId as Enum$OrderBy?),
       }));
-  CopyWith$Input$FamiliesOrderBy<TRes> get innerFamily {
-    final local$innerFamily = _instance.innerFamily;
-    return local$innerFamily == null
+  CopyWith$Input$FamiliesOrderBy<TRes> get child {
+    final local$child = _instance.child;
+    return local$child == null
         ? CopyWith$Input$FamiliesOrderBy.stub(_then(_instance))
-        : CopyWith$Input$FamiliesOrderBy(
-            local$innerFamily, (e) => call(innerFamily: e));
+        : CopyWith$Input$FamiliesOrderBy(local$child, (e) => call(child: e));
   }
 
-  CopyWith$Input$FamiliesOrderBy<TRes> get outerFamily {
-    final local$outerFamily = _instance.outerFamily;
-    return local$outerFamily == null
+  CopyWith$Input$FamiliesOrderBy<TRes> get parent {
+    final local$parent = _instance.parent;
+    return local$parent == null
         ? CopyWith$Input$FamiliesOrderBy.stub(_then(_instance))
-        : CopyWith$Input$FamiliesOrderBy(
-            local$outerFamily, (e) => call(outerFamily: e));
+        : CopyWith$Input$FamiliesOrderBy(local$parent, (e) => call(parent: e));
   }
 }
 
@@ -27214,23 +27431,23 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesOrderBy<TRes>
   TRes _res;
 
   call({
-    Input$FamiliesOrderBy? innerFamily,
-    Enum$OrderBy? innerFamilyId,
-    Input$FamiliesOrderBy? outerFamily,
-    Enum$OrderBy? outerFamilyId,
+    Input$FamiliesOrderBy? child,
+    Enum$OrderBy? childFamilyId,
+    Input$FamiliesOrderBy? parent,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       _res;
-  CopyWith$Input$FamiliesOrderBy<TRes> get innerFamily =>
+  CopyWith$Input$FamiliesOrderBy<TRes> get child =>
       CopyWith$Input$FamiliesOrderBy.stub(_res);
-  CopyWith$Input$FamiliesOrderBy<TRes> get outerFamily =>
+  CopyWith$Input$FamiliesOrderBy<TRes> get parent =>
       CopyWith$Input$FamiliesOrderBy.stub(_res);
 }
 
 class Input$FamiliesFamiliesPkColumnsInput {
-  factory Input$FamiliesFamiliesPkColumnsInput(
-          {required UuidValue innerFamilyId}) =>
+  factory Input$FamiliesFamiliesPkColumnsInput({required UuidValue relId}) =>
       Input$FamiliesFamiliesPkColumnsInput._({
-        r'innerFamilyId': innerFamilyId,
+        r'relId': relId,
       });
 
   Input$FamiliesFamiliesPkColumnsInput._(this._$data);
@@ -27238,18 +27455,18 @@ class Input$FamiliesFamiliesPkColumnsInput {
   factory Input$FamiliesFamiliesPkColumnsInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$innerFamilyId = data['innerFamilyId'];
-    result$data['innerFamilyId'] = stringToUuid(l$innerFamilyId);
+    final l$relId = data['relId'];
+    result$data['relId'] = stringToUuid(l$relId);
     return Input$FamiliesFamiliesPkColumnsInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue get innerFamilyId => (_$data['innerFamilyId'] as UuidValue);
+  UuidValue get relId => (_$data['relId'] as UuidValue);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$innerFamilyId = innerFamilyId;
-    result$data['innerFamilyId'] = uuidToString(l$innerFamilyId);
+    final l$relId = relId;
+    result$data['relId'] = uuidToString(l$relId);
     return result$data;
   }
 
@@ -27268,9 +27485,9 @@ class Input$FamiliesFamiliesPkColumnsInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -27278,8 +27495,8 @@ class Input$FamiliesFamiliesPkColumnsInput {
 
   @override
   int get hashCode {
-    final l$innerFamilyId = innerFamilyId;
-    return Object.hashAll([l$innerFamilyId]);
+    final l$relId = relId;
+    return Object.hashAll([l$relId]);
   }
 }
 
@@ -27292,7 +27509,7 @@ abstract class CopyWith$Input$FamiliesFamiliesPkColumnsInput<TRes> {
   factory CopyWith$Input$FamiliesFamiliesPkColumnsInput.stub(TRes res) =
       _CopyWithStubImpl$Input$FamiliesFamiliesPkColumnsInput;
 
-  TRes call({UuidValue? innerFamilyId});
+  TRes call({UuidValue? relId});
 }
 
 class _CopyWithImpl$Input$FamiliesFamiliesPkColumnsInput<TRes>
@@ -27308,11 +27525,10 @@ class _CopyWithImpl$Input$FamiliesFamiliesPkColumnsInput<TRes>
 
   static const _undefined = {};
 
-  TRes call({Object? innerFamilyId = _undefined}) =>
+  TRes call({Object? relId = _undefined}) =>
       _then(Input$FamiliesFamiliesPkColumnsInput._({
         ..._instance._$data,
-        if (innerFamilyId != _undefined && innerFamilyId != null)
-          'innerFamilyId': (innerFamilyId as UuidValue),
+        if (relId != _undefined && relId != null) 'relId': (relId as UuidValue),
       }));
 }
 
@@ -27322,51 +27538,62 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesPkColumnsInput<TRes>
 
   TRes _res;
 
-  call({UuidValue? innerFamilyId}) => _res;
+  call({UuidValue? relId}) => _res;
 }
 
 class Input$FamiliesFamiliesSetInput {
   factory Input$FamiliesFamiliesSetInput({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       Input$FamiliesFamiliesSetInput._({
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$FamiliesFamiliesSetInput._(this._$data);
 
   factory Input$FamiliesFamiliesSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : stringToUuid(l$innerFamilyId);
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : stringToUuid(l$childFamilyId);
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : stringToUuid(l$outerFamilyId);
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : stringToUuid(l$parentFamilyId);
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] = l$relId == null ? null : stringToUuid(l$relId);
     }
     return Input$FamiliesFamiliesSetInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get innerFamilyId => (_$data['innerFamilyId'] as UuidValue?);
-  UuidValue? get outerFamilyId => (_$data['outerFamilyId'] as UuidValue?);
+  UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+  UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+  UuidValue? get relId => (_$data['relId'] as UuidValue?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : uuidToString(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : uuidToString(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : uuidToString(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : uuidToString(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] = l$relId == null ? null : uuidToString(l$relId);
     }
     return result$data;
   }
@@ -27385,22 +27612,30 @@ class Input$FamiliesFamiliesSetInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -27408,11 +27643,13 @@ class Input$FamiliesFamiliesSetInput {
 
   @override
   int get hashCode {
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamilyId = outerFamilyId;
+    final l$childFamilyId = childFamilyId;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -27427,8 +27664,9 @@ abstract class CopyWith$Input$FamiliesFamiliesSetInput<TRes> {
       _CopyWithStubImpl$Input$FamiliesFamiliesSetInput;
 
   TRes call({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   });
 }
 
@@ -27446,15 +27684,17 @@ class _CopyWithImpl$Input$FamiliesFamiliesSetInput<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamilyId = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$FamiliesFamiliesSetInput._({
         ..._instance._$data,
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as UuidValue?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as UuidValue?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as UuidValue?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as UuidValue?),
+        if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
 }
 
@@ -27465,8 +27705,9 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesSetInput<TRes>
   TRes _res;
 
   call({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       _res;
 }
@@ -27626,12 +27867,14 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesStreamCursorInput<TRes>
 
 class Input$FamiliesFamiliesStreamCursorValueInput {
   factory Input$FamiliesFamiliesStreamCursorValueInput({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       Input$FamiliesFamiliesStreamCursorValueInput._({
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$FamiliesFamiliesStreamCursorValueInput._(this._$data);
@@ -27639,34 +27882,43 @@ class Input$FamiliesFamiliesStreamCursorValueInput {
   factory Input$FamiliesFamiliesStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : stringToUuid(l$innerFamilyId);
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : stringToUuid(l$childFamilyId);
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : stringToUuid(l$outerFamilyId);
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : stringToUuid(l$parentFamilyId);
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] = l$relId == null ? null : stringToUuid(l$relId);
     }
     return Input$FamiliesFamiliesStreamCursorValueInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get innerFamilyId => (_$data['innerFamilyId'] as UuidValue?);
-  UuidValue? get outerFamilyId => (_$data['outerFamilyId'] as UuidValue?);
+  UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+  UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+  UuidValue? get relId => (_$data['relId'] as UuidValue?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : uuidToString(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : uuidToString(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : uuidToString(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] =
+          l$parentFamilyId == null ? null : uuidToString(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] = l$relId == null ? null : uuidToString(l$relId);
     }
     return result$data;
   }
@@ -27686,22 +27938,30 @@ class Input$FamiliesFamiliesStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -27709,11 +27969,13 @@ class Input$FamiliesFamiliesStreamCursorValueInput {
 
   @override
   int get hashCode {
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamilyId = outerFamilyId;
+    final l$childFamilyId = childFamilyId;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -27728,8 +27990,9 @@ abstract class CopyWith$Input$FamiliesFamiliesStreamCursorValueInput<TRes> {
       _CopyWithStubImpl$Input$FamiliesFamiliesStreamCursorValueInput;
 
   TRes call({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   });
 }
 
@@ -27747,15 +28010,17 @@ class _CopyWithImpl$Input$FamiliesFamiliesStreamCursorValueInput<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamilyId = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$FamiliesFamiliesStreamCursorValueInput._({
         ..._instance._$data,
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as UuidValue?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as UuidValue?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as UuidValue?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as UuidValue?),
+        if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
 }
 
@@ -27766,8 +28031,9 @@ class _CopyWithStubImpl$Input$FamiliesFamiliesStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
-    UuidValue? innerFamilyId,
-    UuidValue? outerFamilyId,
+    UuidValue? childFamilyId,
+    UuidValue? parentFamilyId,
+    UuidValue? relId,
   }) =>
       _res;
 }
@@ -28033,26 +28299,26 @@ class _CopyWithStubImpl$Input$FamiliesIncInput<TRes>
 class Input$FamiliesInsertInput {
   factory Input$FamiliesInsertInput({
     String? address,
+    Input$FamiliesFamiliesArrRelInsertInput? children,
     int? color,
-    Input$FamiliesFamiliesArrRelInsertInput? families,
-    Input$FamiliesFamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
     String? name,
     String? notes,
+    Input$FamiliesFamiliesArrRelInsertInput? parents,
     Input$PersonsArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
     Input$StoresArrRelInsertInput? stores,
   }) =>
       Input$FamiliesInsertInput._({
         if (address != null) r'address': address,
+        if (children != null) r'children': children,
         if (color != null) r'color': color,
-        if (families != null) r'families': families,
-        if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
+        if (parents != null) r'parents': parents,
         if (persons != null) r'persons': persons,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (stores != null) r'stores': stores,
@@ -28066,23 +28332,16 @@ class Input$FamiliesInsertInput {
       final l$address = data['address'];
       result$data['address'] = (l$address as String?);
     }
+    if (data.containsKey('children')) {
+      final l$children = data['children'];
+      result$data['children'] = l$children == null
+          ? null
+          : Input$FamiliesFamiliesArrRelInsertInput.fromJson(
+              (l$children as Map<String, dynamic>));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('families')) {
-      final l$families = data['families'];
-      result$data['families'] = l$families == null
-          ? null
-          : Input$FamiliesFamiliesArrRelInsertInput.fromJson(
-              (l$families as Map<String, dynamic>));
-    }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input$FamiliesFamiliesObjRelInsertInput.fromJson(
-              (l$family as Map<String, dynamic>));
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -28099,6 +28358,13 @@ class Input$FamiliesInsertInput {
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] = (l$notes as String?);
+    }
+    if (data.containsKey('parents')) {
+      final l$parents = data['parents'];
+      result$data['parents'] = l$parents == null
+          ? null
+          : Input$FamiliesFamiliesArrRelInsertInput.fromJson(
+              (l$parents as Map<String, dynamic>));
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
@@ -28125,16 +28391,16 @@ class Input$FamiliesInsertInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+  Input$FamiliesFamiliesArrRelInsertInput? get children =>
+      (_$data['children'] as Input$FamiliesFamiliesArrRelInsertInput?);
   int? get color => (_$data['color'] as int?);
-  Input$FamiliesFamiliesArrRelInsertInput? get families =>
-      (_$data['families'] as Input$FamiliesFamiliesArrRelInsertInput?);
-  Input$FamiliesFamiliesObjRelInsertInput? get family =>
-      (_$data['family'] as Input$FamiliesFamiliesObjRelInsertInput?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   String? get notes => (_$data['notes'] as String?);
+  Input$FamiliesFamiliesArrRelInsertInput? get parents =>
+      (_$data['parents'] as Input$FamiliesFamiliesArrRelInsertInput?);
   Input$PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input$PersonsArrRelInsertInput?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
@@ -28146,17 +28412,13 @@ class Input$FamiliesInsertInput {
       final l$address = address;
       result$data['address'] = l$address;
     }
+    if (_$data.containsKey('children')) {
+      final l$children = children;
+      result$data['children'] = l$children?.toJson();
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('families')) {
-      final l$families = families;
-      result$data['families'] = l$families?.toJson();
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -28173,6 +28435,10 @@ class Input$FamiliesInsertInput {
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes;
+    }
+    if (_$data.containsKey('parents')) {
+      final l$parents = parents;
+      result$data['parents'] = l$parents?.toJson();
     }
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
@@ -28212,29 +28478,21 @@ class Input$FamiliesInsertInput {
     if (l$address != lOther$address) {
       return false;
     }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (_$data.containsKey('children') !=
+        other._$data.containsKey('children')) {
+      return false;
+    }
+    if (l$children != lOther$children) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$families = families;
-    final lOther$families = other.families;
-    if (_$data.containsKey('families') !=
-        other._$data.containsKey('families')) {
-      return false;
-    }
-    if (l$families != lOther$families) {
-      return false;
-    }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -28270,6 +28528,14 @@ class Input$FamiliesInsertInput {
     if (l$notes != lOther$notes) {
       return false;
     }
+    final l$parents = parents;
+    final lOther$parents = other.parents;
+    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
+      return false;
+    }
+    if (l$parents != lOther$parents) {
+      return false;
+    }
     final l$persons = persons;
     final lOther$persons = other.persons;
     if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
@@ -28301,25 +28567,25 @@ class Input$FamiliesInsertInput {
   @override
   int get hashCode {
     final l$address = address;
+    final l$children = children;
     final l$color = color;
-    final l$families = families;
-    final l$family = family;
     final l$geolocation = geolocation;
     final l$id = id;
     final l$name = name;
     final l$notes = notes;
+    final l$parents = parents;
     final l$persons = persons;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$stores = stores;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('children') ? l$children : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('families') ? l$families : const {},
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('parents') ? l$parents : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('stores') ? l$stores : const {},
@@ -28338,19 +28604,19 @@ abstract class CopyWith$Input$FamiliesInsertInput<TRes> {
 
   TRes call({
     String? address,
+    Input$FamiliesFamiliesArrRelInsertInput? children,
     int? color,
-    Input$FamiliesFamiliesArrRelInsertInput? families,
-    Input$FamiliesFamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
     String? name,
     String? notes,
+    Input$FamiliesFamiliesArrRelInsertInput? parents,
     Input$PersonsArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
     Input$StoresArrRelInsertInput? stores,
   });
-  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get families;
-  CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> get family;
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get children;
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get parents;
   CopyWith$Input$PersonsArrRelInsertInput<TRes> get persons;
   CopyWith$Input$StoresArrRelInsertInput<TRes> get stores;
 }
@@ -28370,13 +28636,13 @@ class _CopyWithImpl$Input$FamiliesInsertInput<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? children = _undefined,
     Object? color = _undefined,
-    Object? families = _undefined,
-    Object? family = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
+    Object? parents = _undefined,
     Object? persons = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? stores = _undefined,
@@ -28384,16 +28650,16 @@ class _CopyWithImpl$Input$FamiliesInsertInput<TRes>
       _then(Input$FamiliesInsertInput._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
+        if (children != _undefined)
+          'children': (children as Input$FamiliesFamiliesArrRelInsertInput?),
         if (color != _undefined) 'color': (color as int?),
-        if (families != _undefined)
-          'families': (families as Input$FamiliesFamiliesArrRelInsertInput?),
-        if (family != _undefined)
-          'family': (family as Input$FamiliesFamiliesObjRelInsertInput?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (notes != _undefined) 'notes': (notes as String?),
+        if (parents != _undefined)
+          'parents': (parents as Input$FamiliesFamiliesArrRelInsertInput?),
         if (persons != _undefined)
           'persons': (persons as Input$PersonsArrRelInsertInput?),
         if (photoUpdatedAt != _undefined)
@@ -28401,22 +28667,22 @@ class _CopyWithImpl$Input$FamiliesInsertInput<TRes>
         if (stores != _undefined)
           'stores': (stores as Input$StoresArrRelInsertInput?),
       }));
-  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get families {
-    final local$families = _instance.families;
-    return local$families == null
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get children {
+    final local$children = _instance.children;
+    return local$children == null
         ? CopyWith$Input$FamiliesFamiliesArrRelInsertInput.stub(
             _then(_instance))
         : CopyWith$Input$FamiliesFamiliesArrRelInsertInput(
-            local$families, (e) => call(families: e));
+            local$children, (e) => call(children: e));
   }
 
-  CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith$Input$FamiliesFamiliesObjRelInsertInput.stub(
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get parents {
+    final local$parents = _instance.parents;
+    return local$parents == null
+        ? CopyWith$Input$FamiliesFamiliesArrRelInsertInput.stub(
             _then(_instance))
-        : CopyWith$Input$FamiliesFamiliesObjRelInsertInput(
-            local$family, (e) => call(family: e));
+        : CopyWith$Input$FamiliesFamiliesArrRelInsertInput(
+            local$parents, (e) => call(parents: e));
   }
 
   CopyWith$Input$PersonsArrRelInsertInput<TRes> get persons {
@@ -28444,22 +28710,22 @@ class _CopyWithStubImpl$Input$FamiliesInsertInput<TRes>
 
   call({
     String? address,
+    Input$FamiliesFamiliesArrRelInsertInput? children,
     int? color,
-    Input$FamiliesFamiliesArrRelInsertInput? families,
-    Input$FamiliesFamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
     String? name,
     String? notes,
+    Input$FamiliesFamiliesArrRelInsertInput? parents,
     Input$PersonsArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
     Input$StoresArrRelInsertInput? stores,
   }) =>
       _res;
-  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get families =>
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get children =>
       CopyWith$Input$FamiliesFamiliesArrRelInsertInput.stub(_res);
-  CopyWith$Input$FamiliesFamiliesObjRelInsertInput<TRes> get family =>
-      CopyWith$Input$FamiliesFamiliesObjRelInsertInput.stub(_res);
+  CopyWith$Input$FamiliesFamiliesArrRelInsertInput<TRes> get parents =>
+      CopyWith$Input$FamiliesFamiliesArrRelInsertInput.stub(_res);
   CopyWith$Input$PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith$Input$PersonsArrRelInsertInput.stub(_res);
   CopyWith$Input$StoresArrRelInsertInput<TRes> get stores =>
@@ -28805,9 +29071,8 @@ class Input$FamiliesOrderBy {
   factory Input$FamiliesOrderBy({
     Enum$OrderBy? address,
     Input$AreasAggregateOrderBy? areasAggregate,
+    Input$FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum$OrderBy? color,
-    Input$FamiliesFamiliesAggregateOrderBy? familiesAggregate,
-    Input$FamiliesFamiliesOrderBy? family,
     Enum$OrderBy? geolocation,
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
@@ -28815,6 +29080,7 @@ class Input$FamiliesOrderBy {
     Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? notes,
+    Input$FamiliesFamiliesAggregateOrderBy? parentsAggregate,
     Input$PersonsAggregateOrderBy? personsAggregate,
     Enum$OrderBy? photoUpdatedAt,
     Input$StoresAggregateOrderBy? storesAggregate,
@@ -28823,9 +29089,8 @@ class Input$FamiliesOrderBy {
       Input$FamiliesOrderBy._({
         if (address != null) r'address': address,
         if (areasAggregate != null) r'areasAggregate': areasAggregate,
+        if (childrenAggregate != null) r'childrenAggregate': childrenAggregate,
         if (color != null) r'color': color,
-        if (familiesAggregate != null) r'familiesAggregate': familiesAggregate,
-        if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -28835,6 +29100,7 @@ class Input$FamiliesOrderBy {
         if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
+        if (parentsAggregate != null) r'parentsAggregate': parentsAggregate,
         if (personsAggregate != null) r'personsAggregate': personsAggregate,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (storesAggregate != null) r'storesAggregate': storesAggregate,
@@ -28858,24 +29124,17 @@ class Input$FamiliesOrderBy {
           : Input$AreasAggregateOrderBy.fromJson(
               (l$areasAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('childrenAggregate')) {
+      final l$childrenAggregate = data['childrenAggregate'];
+      result$data['childrenAggregate'] = l$childrenAggregate == null
+          ? null
+          : Input$FamiliesFamiliesAggregateOrderBy.fromJson(
+              (l$childrenAggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson$Enum$OrderBy((l$color as String));
-    }
-    if (data.containsKey('familiesAggregate')) {
-      final l$familiesAggregate = data['familiesAggregate'];
-      result$data['familiesAggregate'] = l$familiesAggregate == null
-          ? null
-          : Input$FamiliesFamiliesAggregateOrderBy.fromJson(
-              (l$familiesAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input$FamiliesFamiliesOrderBy.fromJson(
-              (l$family as Map<String, dynamic>));
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -28916,6 +29175,13 @@ class Input$FamiliesOrderBy {
       result$data['notes'] =
           l$notes == null ? null : fromJson$Enum$OrderBy((l$notes as String));
     }
+    if (data.containsKey('parentsAggregate')) {
+      final l$parentsAggregate = data['parentsAggregate'];
+      result$data['parentsAggregate'] = l$parentsAggregate == null
+          ? null
+          : Input$FamiliesFamiliesAggregateOrderBy.fromJson(
+              (l$parentsAggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('personsAggregate')) {
       final l$personsAggregate = data['personsAggregate'];
       result$data['personsAggregate'] = l$personsAggregate == null
@@ -28951,11 +29217,9 @@ class Input$FamiliesOrderBy {
   Enum$OrderBy? get address => (_$data['address'] as Enum$OrderBy?);
   Input$AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input$AreasAggregateOrderBy?);
+  Input$FamiliesFamiliesAggregateOrderBy? get childrenAggregate =>
+      (_$data['childrenAggregate'] as Input$FamiliesFamiliesAggregateOrderBy?);
   Enum$OrderBy? get color => (_$data['color'] as Enum$OrderBy?);
-  Input$FamiliesFamiliesAggregateOrderBy? get familiesAggregate =>
-      (_$data['familiesAggregate'] as Input$FamiliesFamiliesAggregateOrderBy?);
-  Input$FamiliesFamiliesOrderBy? get family =>
-      (_$data['family'] as Input$FamiliesFamiliesOrderBy?);
   Enum$OrderBy? get geolocation => (_$data['geolocation'] as Enum$OrderBy?);
   Enum$OrderBy? get id => (_$data['id'] as Enum$OrderBy?);
   Enum$OrderBy? get isUserAllowedToRead =>
@@ -28965,6 +29229,8 @@ class Input$FamiliesOrderBy {
   Enum$OrderBy? get lastEdit => (_$data['lastEdit'] as Enum$OrderBy?);
   Enum$OrderBy? get name => (_$data['name'] as Enum$OrderBy?);
   Enum$OrderBy? get notes => (_$data['notes'] as Enum$OrderBy?);
+  Input$FamiliesFamiliesAggregateOrderBy? get parentsAggregate =>
+      (_$data['parentsAggregate'] as Input$FamiliesFamiliesAggregateOrderBy?);
   Input$PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input$PersonsAggregateOrderBy?);
   Enum$OrderBy? get photoUpdatedAt =>
@@ -28984,18 +29250,14 @@ class Input$FamiliesOrderBy {
       final l$areasAggregate = areasAggregate;
       result$data['areasAggregate'] = l$areasAggregate?.toJson();
     }
+    if (_$data.containsKey('childrenAggregate')) {
+      final l$childrenAggregate = childrenAggregate;
+      result$data['childrenAggregate'] = l$childrenAggregate?.toJson();
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson$Enum$OrderBy(l$color);
-    }
-    if (_$data.containsKey('familiesAggregate')) {
-      final l$familiesAggregate = familiesAggregate;
-      result$data['familiesAggregate'] = l$familiesAggregate?.toJson();
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -29031,6 +29293,10 @@ class Input$FamiliesOrderBy {
       final l$notes = notes;
       result$data['notes'] =
           l$notes == null ? null : toJson$Enum$OrderBy(l$notes);
+    }
+    if (_$data.containsKey('parentsAggregate')) {
+      final l$parentsAggregate = parentsAggregate;
+      result$data['parentsAggregate'] = l$parentsAggregate?.toJson();
     }
     if (_$data.containsKey('personsAggregate')) {
       final l$personsAggregate = personsAggregate;
@@ -29083,29 +29349,21 @@ class Input$FamiliesOrderBy {
     if (l$areasAggregate != lOther$areasAggregate) {
       return false;
     }
+    final l$childrenAggregate = childrenAggregate;
+    final lOther$childrenAggregate = other.childrenAggregate;
+    if (_$data.containsKey('childrenAggregate') !=
+        other._$data.containsKey('childrenAggregate')) {
+      return false;
+    }
+    if (l$childrenAggregate != lOther$childrenAggregate) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$familiesAggregate = familiesAggregate;
-    final lOther$familiesAggregate = other.familiesAggregate;
-    if (_$data.containsKey('familiesAggregate') !=
-        other._$data.containsKey('familiesAggregate')) {
-      return false;
-    }
-    if (l$familiesAggregate != lOther$familiesAggregate) {
-      return false;
-    }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -29168,6 +29426,15 @@ class Input$FamiliesOrderBy {
     if (l$notes != lOther$notes) {
       return false;
     }
+    final l$parentsAggregate = parentsAggregate;
+    final lOther$parentsAggregate = other.parentsAggregate;
+    if (_$data.containsKey('parentsAggregate') !=
+        other._$data.containsKey('parentsAggregate')) {
+      return false;
+    }
+    if (l$parentsAggregate != lOther$parentsAggregate) {
+      return false;
+    }
     final l$personsAggregate = personsAggregate;
     final lOther$personsAggregate = other.personsAggregate;
     if (_$data.containsKey('personsAggregate') !=
@@ -29211,9 +29478,8 @@ class Input$FamiliesOrderBy {
   int get hashCode {
     final l$address = address;
     final l$areasAggregate = areasAggregate;
+    final l$childrenAggregate = childrenAggregate;
     final l$color = color;
-    final l$familiesAggregate = familiesAggregate;
-    final l$family = family;
     final l$geolocation = geolocation;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -29221,6 +29487,7 @@ class Input$FamiliesOrderBy {
     final l$lastEdit = lastEdit;
     final l$name = name;
     final l$notes = notes;
+    final l$parentsAggregate = parentsAggregate;
     final l$personsAggregate = personsAggregate;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$storesAggregate = storesAggregate;
@@ -29228,9 +29495,8 @@ class Input$FamiliesOrderBy {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('areasAggregate') ? l$areasAggregate : const {},
+      _$data.containsKey('childrenAggregate') ? l$childrenAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('familiesAggregate') ? l$familiesAggregate : const {},
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -29242,6 +29508,7 @@ class Input$FamiliesOrderBy {
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('parentsAggregate') ? l$parentsAggregate : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('storesAggregate') ? l$storesAggregate : const {},
@@ -29262,9 +29529,8 @@ abstract class CopyWith$Input$FamiliesOrderBy<TRes> {
   TRes call({
     Enum$OrderBy? address,
     Input$AreasAggregateOrderBy? areasAggregate,
+    Input$FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum$OrderBy? color,
-    Input$FamiliesFamiliesAggregateOrderBy? familiesAggregate,
-    Input$FamiliesFamiliesOrderBy? family,
     Enum$OrderBy? geolocation,
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
@@ -29272,14 +29538,15 @@ abstract class CopyWith$Input$FamiliesOrderBy<TRes> {
     Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? notes,
+    Input$FamiliesFamiliesAggregateOrderBy? parentsAggregate,
     Input$PersonsAggregateOrderBy? personsAggregate,
     Enum$OrderBy? photoUpdatedAt,
     Input$StoresAggregateOrderBy? storesAggregate,
     Input$StreetsAggregateOrderBy? streetsAggregate,
   });
   CopyWith$Input$AreasAggregateOrderBy<TRes> get areasAggregate;
-  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get familiesAggregate;
-  CopyWith$Input$FamiliesFamiliesOrderBy<TRes> get family;
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate;
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate;
   CopyWith$Input$PersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith$Input$StoresAggregateOrderBy<TRes> get storesAggregate;
   CopyWith$Input$StreetsAggregateOrderBy<TRes> get streetsAggregate;
@@ -29301,9 +29568,8 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
   TRes call({
     Object? address = _undefined,
     Object? areasAggregate = _undefined,
+    Object? childrenAggregate = _undefined,
     Object? color = _undefined,
-    Object? familiesAggregate = _undefined,
-    Object? family = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -29311,6 +29577,7 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
     Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
+    Object? parentsAggregate = _undefined,
     Object? personsAggregate = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? storesAggregate = _undefined,
@@ -29321,12 +29588,10 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
         if (address != _undefined) 'address': (address as Enum$OrderBy?),
         if (areasAggregate != _undefined)
           'areasAggregate': (areasAggregate as Input$AreasAggregateOrderBy?),
+        if (childrenAggregate != _undefined)
+          'childrenAggregate':
+              (childrenAggregate as Input$FamiliesFamiliesAggregateOrderBy?),
         if (color != _undefined) 'color': (color as Enum$OrderBy?),
-        if (familiesAggregate != _undefined)
-          'familiesAggregate':
-              (familiesAggregate as Input$FamiliesFamiliesAggregateOrderBy?),
-        if (family != _undefined)
-          'family': (family as Input$FamiliesFamiliesOrderBy?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Enum$OrderBy?),
         if (id != _undefined) 'id': (id as Enum$OrderBy?),
@@ -29337,6 +29602,9 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
         if (lastEdit != _undefined) 'lastEdit': (lastEdit as Enum$OrderBy?),
         if (name != _undefined) 'name': (name as Enum$OrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum$OrderBy?),
+        if (parentsAggregate != _undefined)
+          'parentsAggregate':
+              (parentsAggregate as Input$FamiliesFamiliesAggregateOrderBy?),
         if (personsAggregate != _undefined)
           'personsAggregate':
               (personsAggregate as Input$PersonsAggregateOrderBy?),
@@ -29356,20 +29624,20 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
             local$areasAggregate, (e) => call(areasAggregate: e));
   }
 
-  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get familiesAggregate {
-    final local$familiesAggregate = _instance.familiesAggregate;
-    return local$familiesAggregate == null
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate {
+    final local$childrenAggregate = _instance.childrenAggregate;
+    return local$childrenAggregate == null
         ? CopyWith$Input$FamiliesFamiliesAggregateOrderBy.stub(_then(_instance))
         : CopyWith$Input$FamiliesFamiliesAggregateOrderBy(
-            local$familiesAggregate, (e) => call(familiesAggregate: e));
+            local$childrenAggregate, (e) => call(childrenAggregate: e));
   }
 
-  CopyWith$Input$FamiliesFamiliesOrderBy<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith$Input$FamiliesFamiliesOrderBy.stub(_then(_instance))
-        : CopyWith$Input$FamiliesFamiliesOrderBy(
-            local$family, (e) => call(family: e));
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate {
+    final local$parentsAggregate = _instance.parentsAggregate;
+    return local$parentsAggregate == null
+        ? CopyWith$Input$FamiliesFamiliesAggregateOrderBy.stub(_then(_instance))
+        : CopyWith$Input$FamiliesFamiliesAggregateOrderBy(
+            local$parentsAggregate, (e) => call(parentsAggregate: e));
   }
 
   CopyWith$Input$PersonsAggregateOrderBy<TRes> get personsAggregate {
@@ -29406,9 +29674,8 @@ class _CopyWithStubImpl$Input$FamiliesOrderBy<TRes>
   call({
     Enum$OrderBy? address,
     Input$AreasAggregateOrderBy? areasAggregate,
+    Input$FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum$OrderBy? color,
-    Input$FamiliesFamiliesAggregateOrderBy? familiesAggregate,
-    Input$FamiliesFamiliesOrderBy? family,
     Enum$OrderBy? geolocation,
     Enum$OrderBy? id,
     Enum$OrderBy? isUserAllowedToRead,
@@ -29416,6 +29683,7 @@ class _CopyWithStubImpl$Input$FamiliesOrderBy<TRes>
     Enum$OrderBy? lastEdit,
     Enum$OrderBy? name,
     Enum$OrderBy? notes,
+    Input$FamiliesFamiliesAggregateOrderBy? parentsAggregate,
     Input$PersonsAggregateOrderBy? personsAggregate,
     Enum$OrderBy? photoUpdatedAt,
     Input$StoresAggregateOrderBy? storesAggregate,
@@ -29424,10 +29692,10 @@ class _CopyWithStubImpl$Input$FamiliesOrderBy<TRes>
       _res;
   CopyWith$Input$AreasAggregateOrderBy<TRes> get areasAggregate =>
       CopyWith$Input$AreasAggregateOrderBy.stub(_res);
-  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get familiesAggregate =>
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate =>
       CopyWith$Input$FamiliesFamiliesAggregateOrderBy.stub(_res);
-  CopyWith$Input$FamiliesFamiliesOrderBy<TRes> get family =>
-      CopyWith$Input$FamiliesFamiliesOrderBy.stub(_res);
+  CopyWith$Input$FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate =>
+      CopyWith$Input$FamiliesFamiliesAggregateOrderBy.stub(_res);
   CopyWith$Input$PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith$Input$PersonsAggregateOrderBy.stub(_res);
   CopyWith$Input$StoresAggregateOrderBy<TRes> get storesAggregate =>
@@ -95577,6 +95845,8 @@ class Input$ServicesBoolExp {
     List<Input$ServicesBoolExp>? $_and,
     Input$ServicesBoolExp? $_not,
     List<Input$ServicesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -95603,13 +95873,14 @@ class Input$ServicesBoolExp {
     Input$SmallintComparisonExp? studyYearFrom,
     Input$SmallintComparisonExp? studyYearTo,
     Input$StudyYearsBoolExp? toStudyYear,
-    Input$AuthUsersAdminOnBoolExp? users,
-    Input$auth_users_admin_on_aggregate_bool_exp? users_aggregate,
   }) =>
       Input$ServicesBoolExp._({
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
+        if (adminUsers != null) r'adminUsers': adminUsers,
+        if (adminUsers_aggregate != null)
+          r'adminUsers_aggregate': adminUsers_aggregate,
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceDaysConstraints_aggregate != null)
@@ -95640,8 +95911,6 @@ class Input$ServicesBoolExp {
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
         if (toStudyYear != null) r'toStudyYear': toStudyYear,
-        if (users != null) r'users': users,
-        if (users_aggregate != null) r'users_aggregate': users_aggregate,
       });
 
   Input$ServicesBoolExp._(this._$data);
@@ -95667,6 +95936,20 @@ class Input$ServicesBoolExp {
           ?.map((e) =>
               Input$ServicesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
+    }
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input$AuthUsersAdminOnBoolExp.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
+    if (data.containsKey('adminUsers_aggregate')) {
+      final l$adminUsers_aggregate = data['adminUsers_aggregate'];
+      result$data['adminUsers_aggregate'] = l$adminUsers_aggregate == null
+          ? null
+          : Input$auth_users_admin_on_aggregate_bool_exp.fromJson(
+              (l$adminUsers_aggregate as Map<String, dynamic>));
     }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
@@ -95838,20 +96121,6 @@ class Input$ServicesBoolExp {
           : Input$StudyYearsBoolExp.fromJson(
               (l$toStudyYear as Map<String, dynamic>));
     }
-    if (data.containsKey('users')) {
-      final l$users = data['users'];
-      result$data['users'] = l$users == null
-          ? null
-          : Input$AuthUsersAdminOnBoolExp.fromJson(
-              (l$users as Map<String, dynamic>));
-    }
-    if (data.containsKey('users_aggregate')) {
-      final l$users_aggregate = data['users_aggregate'];
-      result$data['users_aggregate'] = l$users_aggregate == null
-          ? null
-          : Input$auth_users_admin_on_aggregate_bool_exp.fromJson(
-              (l$users_aggregate as Map<String, dynamic>));
-    }
     return Input$ServicesBoolExp._(result$data);
   }
 
@@ -95863,6 +96132,11 @@ class Input$ServicesBoolExp {
       (_$data['_not'] as Input$ServicesBoolExp?);
   List<Input$ServicesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input$ServicesBoolExp>?);
+  Input$AuthUsersAdminOnBoolExp? get adminUsers =>
+      (_$data['adminUsers'] as Input$AuthUsersAdminOnBoolExp?);
+  Input$auth_users_admin_on_aggregate_bool_exp? get adminUsers_aggregate =>
+      (_$data['adminUsers_aggregate']
+          as Input$auth_users_admin_on_aggregate_bool_exp?);
   Input$HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input$HistoryAttendanceDaysConstraintsBoolExp?);
@@ -95914,11 +96188,6 @@ class Input$ServicesBoolExp {
       (_$data['studyYearTo'] as Input$SmallintComparisonExp?);
   Input$StudyYearsBoolExp? get toStudyYear =>
       (_$data['toStudyYear'] as Input$StudyYearsBoolExp?);
-  Input$AuthUsersAdminOnBoolExp? get users =>
-      (_$data['users'] as Input$AuthUsersAdminOnBoolExp?);
-  Input$auth_users_admin_on_aggregate_bool_exp? get users_aggregate =>
-      (_$data['users_aggregate']
-          as Input$auth_users_admin_on_aggregate_bool_exp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -95932,6 +96201,14 @@ class Input$ServicesBoolExp {
     if (_$data.containsKey('_or')) {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
+    if (_$data.containsKey('adminUsers_aggregate')) {
+      final l$adminUsers_aggregate = adminUsers_aggregate;
+      result$data['adminUsers_aggregate'] = l$adminUsers_aggregate?.toJson();
     }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
@@ -96033,14 +96310,6 @@ class Input$ServicesBoolExp {
       final l$toStudyYear = toStudyYear;
       result$data['toStudyYear'] = l$toStudyYear?.toJson();
     }
-    if (_$data.containsKey('users')) {
-      final l$users = users;
-      result$data['users'] = l$users?.toJson();
-    }
-    if (_$data.containsKey('users_aggregate')) {
-      final l$users_aggregate = users_aggregate;
-      result$data['users_aggregate'] = l$users_aggregate?.toJson();
-    }
     return result$data;
   }
 
@@ -96101,6 +96370,24 @@ class Input$ServicesBoolExp {
         }
       }
     } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
+      return false;
+    }
+    final l$adminUsers_aggregate = adminUsers_aggregate;
+    final lOther$adminUsers_aggregate = other.adminUsers_aggregate;
+    if (_$data.containsKey('adminUsers_aggregate') !=
+        other._$data.containsKey('adminUsers_aggregate')) {
+      return false;
+    }
+    if (l$adminUsers_aggregate != lOther$adminUsers_aggregate) {
       return false;
     }
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
@@ -96317,23 +96604,6 @@ class Input$ServicesBoolExp {
     if (l$toStudyYear != lOther$toStudyYear) {
       return false;
     }
-    final l$users = users;
-    final lOther$users = other.users;
-    if (_$data.containsKey('users') != other._$data.containsKey('users')) {
-      return false;
-    }
-    if (l$users != lOther$users) {
-      return false;
-    }
-    final l$users_aggregate = users_aggregate;
-    final lOther$users_aggregate = other.users_aggregate;
-    if (_$data.containsKey('users_aggregate') !=
-        other._$data.containsKey('users_aggregate')) {
-      return false;
-    }
-    if (l$users_aggregate != lOther$users_aggregate) {
-      return false;
-    }
     return true;
   }
 
@@ -96342,6 +96612,8 @@ class Input$ServicesBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
+    final l$adminUsers = adminUsers;
+    final l$adminUsers_aggregate = adminUsers_aggregate;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceDaysConstraints_aggregate =
         attendanceDaysConstraints_aggregate;
@@ -96367,8 +96639,6 @@ class Input$ServicesBoolExp {
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$toStudyYear = toStudyYear;
-    final l$users = users;
-    final l$users_aggregate = users_aggregate;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -96380,6 +96650,10 @@ class Input$ServicesBoolExp {
           ? l$$_or == null
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
+      _$data.containsKey('adminUsers_aggregate')
+          ? l$adminUsers_aggregate
           : const {},
       _$data.containsKey('attendanceDaysConstraints')
           ? l$attendanceDaysConstraints
@@ -96415,8 +96689,6 @@ class Input$ServicesBoolExp {
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
       _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
-      _$data.containsKey('users') ? l$users : const {},
-      _$data.containsKey('users_aggregate') ? l$users_aggregate : const {},
     ]);
   }
 }
@@ -96434,6 +96706,8 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
     List<Input$ServicesBoolExp>? $_and,
     Input$ServicesBoolExp? $_not,
     List<Input$ServicesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -96460,8 +96734,6 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
     Input$SmallintComparisonExp? studyYearFrom,
     Input$SmallintComparisonExp? studyYearTo,
     Input$StudyYearsBoolExp? toStudyYear,
-    Input$AuthUsersAdminOnBoolExp? users,
-    Input$auth_users_admin_on_aggregate_bool_exp? users_aggregate,
   });
   TRes $_and(
       Iterable<Input$ServicesBoolExp>? Function(
@@ -96472,6 +96744,9 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
       Iterable<Input$ServicesBoolExp>? Function(
               Iterable<CopyWith$Input$ServicesBoolExp<Input$ServicesBoolExp>>?)
           _fn);
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers;
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate;
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints;
   CopyWith$Input$history_attendance_days_constraints_aggregate_bool_exp<TRes>
@@ -96500,9 +96775,6 @@ abstract class CopyWith$Input$ServicesBoolExp<TRes> {
   CopyWith$Input$SmallintComparisonExp<TRes> get studyYearFrom;
   CopyWith$Input$SmallintComparisonExp<TRes> get studyYearTo;
   CopyWith$Input$StudyYearsBoolExp<TRes> get toStudyYear;
-  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get users;
-  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
-      get users_aggregate;
 }
 
 class _CopyWithImpl$Input$ServicesBoolExp<TRes>
@@ -96522,6 +96794,8 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
+    Object? adminUsers = _undefined,
+    Object? adminUsers_aggregate = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceDaysConstraints_aggregate = _undefined,
     Object? attendanceHistory = _undefined,
@@ -96546,8 +96820,6 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? toStudyYear = _undefined,
-    Object? users = _undefined,
-    Object? users_aggregate = _undefined,
   }) =>
       _then(Input$ServicesBoolExp._({
         ..._instance._$data,
@@ -96555,6 +96827,11 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
           '_and': ($_and as List<Input$ServicesBoolExp>?),
         if ($_not != _undefined) '_not': ($_not as Input$ServicesBoolExp?),
         if ($_or != _undefined) '_or': ($_or as List<Input$ServicesBoolExp>?),
+        if (adminUsers != _undefined)
+          'adminUsers': (adminUsers as Input$AuthUsersAdminOnBoolExp?),
+        if (adminUsers_aggregate != _undefined)
+          'adminUsers_aggregate': (adminUsers_aggregate
+              as Input$auth_users_admin_on_aggregate_bool_exp?),
         if (attendanceDaysConstraints != _undefined)
           'attendanceDaysConstraints': (attendanceDaysConstraints
               as Input$HistoryAttendanceDaysConstraintsBoolExp?),
@@ -96609,11 +96886,6 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
           'studyYearTo': (studyYearTo as Input$SmallintComparisonExp?),
         if (toStudyYear != _undefined)
           'toStudyYear': (toStudyYear as Input$StudyYearsBoolExp?),
-        if (users != _undefined)
-          'users': (users as Input$AuthUsersAdminOnBoolExp?),
-        if (users_aggregate != _undefined)
-          'users_aggregate': (users_aggregate
-              as Input$auth_users_admin_on_aggregate_bool_exp?),
       }));
   TRes $_and(
           Iterable<Input$ServicesBoolExp>? Function(
@@ -96642,6 +96914,24 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnBoolExp(
+            local$adminUsers, (e) => call(adminUsers: e));
+  }
+
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate {
+    final local$adminUsers_aggregate = _instance.adminUsers_aggregate;
+    return local$adminUsers_aggregate == null
+        ? CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(
+            _then(_instance))
+        : CopyWith$Input$auth_users_admin_on_aggregate_bool_exp(
+            local$adminUsers_aggregate, (e) => call(adminUsers_aggregate: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -96842,24 +97132,6 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
         : CopyWith$Input$StudyYearsBoolExp(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
-
-  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get users {
-    final local$users = _instance.users;
-    return local$users == null
-        ? CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_then(_instance))
-        : CopyWith$Input$AuthUsersAdminOnBoolExp(
-            local$users, (e) => call(users: e));
-  }
-
-  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
-      get users_aggregate {
-    final local$users_aggregate = _instance.users_aggregate;
-    return local$users_aggregate == null
-        ? CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(
-            _then(_instance))
-        : CopyWith$Input$auth_users_admin_on_aggregate_bool_exp(
-            local$users_aggregate, (e) => call(users_aggregate: e));
-  }
 }
 
 class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
@@ -96872,6 +97144,8 @@ class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
     List<Input$ServicesBoolExp>? $_and,
     Input$ServicesBoolExp? $_not,
     List<Input$ServicesBoolExp>? $_or,
+    Input$AuthUsersAdminOnBoolExp? adminUsers,
+    Input$auth_users_admin_on_aggregate_bool_exp? adminUsers_aggregate,
     Input$HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input$history_attendance_days_constraints_aggregate_bool_exp?
         attendanceDaysConstraints_aggregate,
@@ -96898,14 +97172,17 @@ class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
     Input$SmallintComparisonExp? studyYearFrom,
     Input$SmallintComparisonExp? studyYearTo,
     Input$StudyYearsBoolExp? toStudyYear,
-    Input$AuthUsersAdminOnBoolExp? users,
-    Input$auth_users_admin_on_aggregate_bool_exp? users_aggregate,
   }) =>
       _res;
   $_and(_fn) => _res;
   CopyWith$Input$ServicesBoolExp<TRes> get $_not =>
       CopyWith$Input$ServicesBoolExp.stub(_res);
   $_or(_fn) => _res;
+  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
+      CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_res);
+  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
+      get adminUsers_aggregate =>
+          CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
@@ -96960,11 +97237,6 @@ class _CopyWithStubImpl$Input$ServicesBoolExp<TRes>
       CopyWith$Input$SmallintComparisonExp.stub(_res);
   CopyWith$Input$StudyYearsBoolExp<TRes> get toStudyYear =>
       CopyWith$Input$StudyYearsBoolExp.stub(_res);
-  CopyWith$Input$AuthUsersAdminOnBoolExp<TRes> get users =>
-      CopyWith$Input$AuthUsersAdminOnBoolExp.stub(_res);
-  CopyWith$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
-      get users_aggregate =>
-          CopyWith$Input$auth_users_admin_on_aggregate_bool_exp.stub(_res);
 }
 
 class Input$ServicesIncInput {
@@ -97135,6 +97407,7 @@ class _CopyWithStubImpl$Input$ServicesIncInput<TRes>
 
 class Input$ServicesInsertInput {
   factory Input$ServicesInsertInput({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -97152,9 +97425,9 @@ class Input$ServicesInsertInput {
     int? studyYearFrom,
     int? studyYearTo,
     Input$StudyYearsObjRelInsertInput? toStudyYear,
-    Input$AuthUsersAdminOnArrRelInsertInput? users,
   }) =>
       Input$ServicesInsertInput._({
+        if (adminUsers != null) r'adminUsers': adminUsers,
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
@@ -97172,13 +97445,19 @@ class Input$ServicesInsertInput {
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
         if (toStudyYear != null) r'toStudyYear': toStudyYear,
-        if (users != null) r'users': users,
       });
 
   Input$ServicesInsertInput._(this._$data);
 
   factory Input$ServicesInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input$AuthUsersAdminOnArrRelInsertInput.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
       result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints ==
@@ -97270,18 +97549,13 @@ class Input$ServicesInsertInput {
           : Input$StudyYearsObjRelInsertInput.fromJson(
               (l$toStudyYear as Map<String, dynamic>));
     }
-    if (data.containsKey('users')) {
-      final l$users = data['users'];
-      result$data['users'] = l$users == null
-          ? null
-          : Input$AuthUsersAdminOnArrRelInsertInput.fromJson(
-              (l$users as Map<String, dynamic>));
-    }
     return Input$ServicesInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
+  Input$AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
+      (_$data['adminUsers'] as Input$AuthUsersAdminOnArrRelInsertInput?);
   Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?);
@@ -97308,10 +97582,12 @@ class Input$ServicesInsertInput {
   int? get studyYearTo => (_$data['studyYearTo'] as int?);
   Input$StudyYearsObjRelInsertInput? get toStudyYear =>
       (_$data['toStudyYear'] as Input$StudyYearsObjRelInsertInput?);
-  Input$AuthUsersAdminOnArrRelInsertInput? get users =>
-      (_$data['users'] as Input$AuthUsersAdminOnArrRelInsertInput?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
       result$data['attendanceDaysConstraints'] =
@@ -97379,10 +97655,6 @@ class Input$ServicesInsertInput {
       final l$toStudyYear = toStudyYear;
       result$data['toStudyYear'] = l$toStudyYear?.toJson();
     }
-    if (_$data.containsKey('users')) {
-      final l$users = users;
-      result$data['users'] = l$users?.toJson();
-    }
     return result$data;
   }
 
@@ -97398,6 +97670,15 @@ class Input$ServicesInsertInput {
     }
     if (!(other is Input$ServicesInsertInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
       return false;
     }
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
@@ -97538,19 +97819,12 @@ class Input$ServicesInsertInput {
     if (l$toStudyYear != lOther$toStudyYear) {
       return false;
     }
-    final l$users = users;
-    final lOther$users = other.users;
-    if (_$data.containsKey('users') != other._$data.containsKey('users')) {
-      return false;
-    }
-    if (l$users != lOther$users) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
+    final l$adminUsers = adminUsers;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceHistory = attendanceHistory;
     final l$classes = classes;
@@ -97567,8 +97841,8 @@ class Input$ServicesInsertInput {
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$toStudyYear = toStudyYear;
-    final l$users = users;
     return Object.hashAll([
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('attendanceDaysConstraints')
           ? l$attendanceDaysConstraints
           : const {},
@@ -97587,7 +97861,6 @@ class Input$ServicesInsertInput {
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
       _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
-      _$data.containsKey('users') ? l$users : const {},
     ]);
   }
 }
@@ -97602,6 +97875,7 @@ abstract class CopyWith$Input$ServicesInsertInput<TRes> {
       _CopyWithStubImpl$Input$ServicesInsertInput;
 
   TRes call({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -97619,8 +97893,8 @@ abstract class CopyWith$Input$ServicesInsertInput<TRes> {
     int? studyYearFrom,
     int? studyYearTo,
     Input$StudyYearsObjRelInsertInput? toStudyYear,
-    Input$AuthUsersAdminOnArrRelInsertInput? users,
   });
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints;
   CopyWith$Input$HistoryAttendanceHistoryArrRelInsertInput<TRes>
@@ -97631,7 +97905,6 @@ abstract class CopyWith$Input$ServicesInsertInput<TRes> {
   CopyWith$Input$ServicesObjRelInsertInput<TRes> get nextServiceObject;
   CopyWith$Input$PersonsServicesArrRelInsertInput<TRes> get persons;
   CopyWith$Input$StudyYearsObjRelInsertInput<TRes> get toStudyYear;
-  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get users;
 }
 
 class _CopyWithImpl$Input$ServicesInsertInput<TRes>
@@ -97648,6 +97921,7 @@ class _CopyWithImpl$Input$ServicesInsertInput<TRes>
   static const _undefined = {};
 
   TRes call({
+    Object? adminUsers = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceHistory = _undefined,
     Object? classes = _undefined,
@@ -97664,10 +97938,12 @@ class _CopyWithImpl$Input$ServicesInsertInput<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? toStudyYear = _undefined,
-    Object? users = _undefined,
   }) =>
       _then(Input$ServicesInsertInput._({
         ..._instance._$data,
+        if (adminUsers != _undefined)
+          'adminUsers':
+              (adminUsers as Input$AuthUsersAdminOnArrRelInsertInput?),
         if (attendanceDaysConstraints != _undefined)
           'attendanceDaysConstraints': (attendanceDaysConstraints
               as Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?),
@@ -97699,9 +97975,16 @@ class _CopyWithImpl$Input$ServicesInsertInput<TRes>
         if (studyYearTo != _undefined) 'studyYearTo': (studyYearTo as int?),
         if (toStudyYear != _undefined)
           'toStudyYear': (toStudyYear as Input$StudyYearsObjRelInsertInput?),
-        if (users != _undefined)
-          'users': (users as Input$AuthUsersAdminOnArrRelInsertInput?),
       }));
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(
+            _then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnArrRelInsertInput(
+            local$adminUsers, (e) => call(adminUsers: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -97770,15 +98053,6 @@ class _CopyWithImpl$Input$ServicesInsertInput<TRes>
         : CopyWith$Input$StudyYearsObjRelInsertInput(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
-
-  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get users {
-    final local$users = _instance.users;
-    return local$users == null
-        ? CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(
-            _then(_instance))
-        : CopyWith$Input$AuthUsersAdminOnArrRelInsertInput(
-            local$users, (e) => call(users: e));
-  }
 }
 
 class _CopyWithStubImpl$Input$ServicesInsertInput<TRes>
@@ -97788,6 +98062,7 @@ class _CopyWithStubImpl$Input$ServicesInsertInput<TRes>
   TRes _res;
 
   call({
+    Input$AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input$HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input$HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
@@ -97805,9 +98080,10 @@ class _CopyWithStubImpl$Input$ServicesInsertInput<TRes>
     int? studyYearFrom,
     int? studyYearTo,
     Input$StudyYearsObjRelInsertInput? toStudyYear,
-    Input$AuthUsersAdminOnArrRelInsertInput? users,
   }) =>
       _res;
+  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
+      CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
@@ -97827,8 +98103,6 @@ class _CopyWithStubImpl$Input$ServicesInsertInput<TRes>
       CopyWith$Input$PersonsServicesArrRelInsertInput.stub(_res);
   CopyWith$Input$StudyYearsObjRelInsertInput<TRes> get toStudyYear =>
       CopyWith$Input$StudyYearsObjRelInsertInput.stub(_res);
-  CopyWith$Input$AuthUsersAdminOnArrRelInsertInput<TRes> get users =>
-      CopyWith$Input$AuthUsersAdminOnArrRelInsertInput.stub(_res);
 }
 
 class Input$ServicesObjRelInsertInput {
@@ -98168,6 +98442,7 @@ class _CopyWithStubImpl$Input$ServicesOnConflict<TRes>
 
 class Input$ServicesOrderBy {
   factory Input$ServicesOrderBy({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -98188,9 +98463,10 @@ class Input$ServicesOrderBy {
     Enum$OrderBy? studyYearFrom,
     Enum$OrderBy? studyYearTo,
     Input$StudyYearsOrderBy? toStudyYear,
-    Input$AuthUsersAdminOnAggregateOrderBy? usersAggregate,
   }) =>
       Input$ServicesOrderBy._({
+        if (adminUsersAggregate != null)
+          r'adminUsersAggregate': adminUsersAggregate,
         if (attendanceDaysConstraintsAggregate != null)
           r'attendanceDaysConstraintsAggregate':
               attendanceDaysConstraintsAggregate,
@@ -98215,13 +98491,19 @@ class Input$ServicesOrderBy {
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
         if (toStudyYear != null) r'toStudyYear': toStudyYear,
-        if (usersAggregate != null) r'usersAggregate': usersAggregate,
       });
 
   Input$ServicesOrderBy._(this._$data);
 
   factory Input$ServicesOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('adminUsersAggregate')) {
+      final l$adminUsersAggregate = data['adminUsersAggregate'];
+      result$data['adminUsersAggregate'] = l$adminUsersAggregate == null
+          ? null
+          : Input$AuthUsersAdminOnAggregateOrderBy.fromJson(
+              (l$adminUsersAggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
           data['attendanceDaysConstraintsAggregate'];
@@ -98345,18 +98627,14 @@ class Input$ServicesOrderBy {
           : Input$StudyYearsOrderBy.fromJson(
               (l$toStudyYear as Map<String, dynamic>));
     }
-    if (data.containsKey('usersAggregate')) {
-      final l$usersAggregate = data['usersAggregate'];
-      result$data['usersAggregate'] = l$usersAggregate == null
-          ? null
-          : Input$AuthUsersAdminOnAggregateOrderBy.fromJson(
-              (l$usersAggregate as Map<String, dynamic>));
-    }
     return Input$ServicesOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
+  Input$AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
+      (_$data['adminUsersAggregate']
+          as Input$AuthUsersAdminOnAggregateOrderBy?);
   Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
@@ -98390,10 +98668,12 @@ class Input$ServicesOrderBy {
   Enum$OrderBy? get studyYearTo => (_$data['studyYearTo'] as Enum$OrderBy?);
   Input$StudyYearsOrderBy? get toStudyYear =>
       (_$data['toStudyYear'] as Input$StudyYearsOrderBy?);
-  Input$AuthUsersAdminOnAggregateOrderBy? get usersAggregate =>
-      (_$data['usersAggregate'] as Input$AuthUsersAdminOnAggregateOrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminUsersAggregate')) {
+      final l$adminUsersAggregate = adminUsersAggregate;
+      result$data['adminUsersAggregate'] = l$adminUsersAggregate?.toJson();
+    }
     if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
           attendanceDaysConstraintsAggregate;
@@ -98485,10 +98765,6 @@ class Input$ServicesOrderBy {
       final l$toStudyYear = toStudyYear;
       result$data['toStudyYear'] = l$toStudyYear?.toJson();
     }
-    if (_$data.containsKey('usersAggregate')) {
-      final l$usersAggregate = usersAggregate;
-      result$data['usersAggregate'] = l$usersAggregate?.toJson();
-    }
     return result$data;
   }
 
@@ -98503,6 +98779,15 @@ class Input$ServicesOrderBy {
       return true;
     }
     if (!(other is Input$ServicesOrderBy) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminUsersAggregate = adminUsersAggregate;
+    final lOther$adminUsersAggregate = other.adminUsersAggregate;
+    if (_$data.containsKey('adminUsersAggregate') !=
+        other._$data.containsKey('adminUsersAggregate')) {
+      return false;
+    }
+    if (l$adminUsersAggregate != lOther$adminUsersAggregate) {
       return false;
     }
     final l$attendanceDaysConstraintsAggregate =
@@ -98676,20 +98961,12 @@ class Input$ServicesOrderBy {
     if (l$toStudyYear != lOther$toStudyYear) {
       return false;
     }
-    final l$usersAggregate = usersAggregate;
-    final lOther$usersAggregate = other.usersAggregate;
-    if (_$data.containsKey('usersAggregate') !=
-        other._$data.containsKey('usersAggregate')) {
-      return false;
-    }
-    if (l$usersAggregate != lOther$usersAggregate) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
+    final l$adminUsersAggregate = adminUsersAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -98710,8 +98987,10 @@ class Input$ServicesOrderBy {
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$toStudyYear = toStudyYear;
-    final l$usersAggregate = usersAggregate;
     return Object.hashAll([
+      _$data.containsKey('adminUsersAggregate')
+          ? l$adminUsersAggregate
+          : const {},
       _$data.containsKey('attendanceDaysConstraintsAggregate')
           ? l$attendanceDaysConstraintsAggregate
           : const {},
@@ -98739,7 +99018,6 @@ class Input$ServicesOrderBy {
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
       _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
-      _$data.containsKey('usersAggregate') ? l$usersAggregate : const {},
     ]);
   }
 }
@@ -98754,6 +99032,7 @@ abstract class CopyWith$Input$ServicesOrderBy<TRes> {
       _CopyWithStubImpl$Input$ServicesOrderBy;
 
   TRes call({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -98774,8 +99053,8 @@ abstract class CopyWith$Input$ServicesOrderBy<TRes> {
     Enum$OrderBy? studyYearFrom,
     Enum$OrderBy? studyYearTo,
     Input$StudyYearsOrderBy? toStudyYear,
-    Input$AuthUsersAdminOnAggregateOrderBy? usersAggregate,
   });
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate;
   CopyWith$Input$HistoryAttendanceHistoryAggregateOrderBy<TRes>
@@ -98786,7 +99065,6 @@ abstract class CopyWith$Input$ServicesOrderBy<TRes> {
   CopyWith$Input$ServicesOrderBy<TRes> get nextServiceObject;
   CopyWith$Input$PersonsServicesAggregateOrderBy<TRes> get personsAggregate;
   CopyWith$Input$StudyYearsOrderBy<TRes> get toStudyYear;
-  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes> get usersAggregate;
 }
 
 class _CopyWithImpl$Input$ServicesOrderBy<TRes>
@@ -98803,6 +99081,7 @@ class _CopyWithImpl$Input$ServicesOrderBy<TRes>
   static const _undefined = {};
 
   TRes call({
+    Object? adminUsersAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? classesAggregate = _undefined,
@@ -98822,10 +99101,12 @@ class _CopyWithImpl$Input$ServicesOrderBy<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? toStudyYear = _undefined,
-    Object? usersAggregate = _undefined,
   }) =>
       _then(Input$ServicesOrderBy._({
         ..._instance._$data,
+        if (adminUsersAggregate != _undefined)
+          'adminUsersAggregate':
+              (adminUsersAggregate as Input$AuthUsersAdminOnAggregateOrderBy?),
         if (attendanceDaysConstraintsAggregate != _undefined)
           'attendanceDaysConstraintsAggregate':
               (attendanceDaysConstraintsAggregate
@@ -98865,10 +99146,16 @@ class _CopyWithImpl$Input$ServicesOrderBy<TRes>
           'studyYearTo': (studyYearTo as Enum$OrderBy?),
         if (toStudyYear != _undefined)
           'toStudyYear': (toStudyYear as Input$StudyYearsOrderBy?),
-        if (usersAggregate != _undefined)
-          'usersAggregate':
-              (usersAggregate as Input$AuthUsersAdminOnAggregateOrderBy?),
       }));
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes>
+      get adminUsersAggregate {
+    final local$adminUsersAggregate = _instance.adminUsersAggregate;
+    return local$adminUsersAggregate == null
+        ? CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
+        : CopyWith$Input$AuthUsersAdminOnAggregateOrderBy(
+            local$adminUsersAggregate, (e) => call(adminUsersAggregate: e));
+  }
+
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
@@ -98940,14 +99227,6 @@ class _CopyWithImpl$Input$ServicesOrderBy<TRes>
         : CopyWith$Input$StudyYearsOrderBy(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
-
-  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes> get usersAggregate {
-    final local$usersAggregate = _instance.usersAggregate;
-    return local$usersAggregate == null
-        ? CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
-        : CopyWith$Input$AuthUsersAdminOnAggregateOrderBy(
-            local$usersAggregate, (e) => call(usersAggregate: e));
-  }
 }
 
 class _CopyWithStubImpl$Input$ServicesOrderBy<TRes>
@@ -98957,6 +99236,7 @@ class _CopyWithStubImpl$Input$ServicesOrderBy<TRes>
   TRes _res;
 
   call({
+    Input$AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Input$HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input$HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
@@ -98977,9 +99257,11 @@ class _CopyWithStubImpl$Input$ServicesOrderBy<TRes>
     Enum$OrderBy? studyYearFrom,
     Enum$OrderBy? studyYearTo,
     Input$StudyYearsOrderBy? toStudyYear,
-    Input$AuthUsersAdminOnAggregateOrderBy? usersAggregate,
   }) =>
       _res;
+  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes>
+      get adminUsersAggregate =>
+          CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_res);
   CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
@@ -98999,8 +99281,6 @@ class _CopyWithStubImpl$Input$ServicesOrderBy<TRes>
       CopyWith$Input$PersonsServicesAggregateOrderBy.stub(_res);
   CopyWith$Input$StudyYearsOrderBy<TRes> get toStudyYear =>
       CopyWith$Input$StudyYearsOrderBy.stub(_res);
-  CopyWith$Input$AuthUsersAdminOnAggregateOrderBy<TRes> get usersAggregate =>
-      CopyWith$Input$AuthUsersAdminOnAggregateOrderBy.stub(_res);
 }
 
 class Input$ServicesPkColumnsInput {
@@ -157921,12 +158201,14 @@ class _CopyWithStubImpl$Input$families_families_aggregate_bool_exp_count<TRes>
 
 class Input$families_families_max_order_by {
   factory Input$families_families_max_order_by({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       Input$families_families_max_order_by._({
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$families_families_max_order_by._(this._$data);
@@ -157934,36 +158216,49 @@ class Input$families_families_max_order_by {
   factory Input$families_families_max_order_by.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] = l$innerFamilyId == null
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] = l$childFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$innerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$childFamilyId as String));
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] = l$outerFamilyId == null
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] = l$parentFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$outerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$parentFamilyId as String));
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] =
+          l$relId == null ? null : fromJson$Enum$OrderBy((l$relId as String));
     }
     return Input$families_families_max_order_by._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum$OrderBy? get innerFamilyId => (_$data['innerFamilyId'] as Enum$OrderBy?);
-  Enum$OrderBy? get outerFamilyId => (_$data['outerFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get parentFamilyId =>
+      (_$data['parentFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get relId => (_$data['relId'] as Enum$OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : toJson$Enum$OrderBy(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : toJson$Enum$OrderBy(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : toJson$Enum$OrderBy(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : toJson$Enum$OrderBy(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] =
+          l$relId == null ? null : toJson$Enum$OrderBy(l$relId);
     }
     return result$data;
   }
@@ -157983,22 +158278,30 @@ class Input$families_families_max_order_by {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -158006,11 +158309,13 @@ class Input$families_families_max_order_by {
 
   @override
   int get hashCode {
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamilyId = outerFamilyId;
+    final l$childFamilyId = childFamilyId;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -158025,8 +158330,9 @@ abstract class CopyWith$Input$families_families_max_order_by<TRes> {
       _CopyWithStubImpl$Input$families_families_max_order_by;
 
   TRes call({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   });
 }
 
@@ -158044,15 +158350,17 @@ class _CopyWithImpl$Input$families_families_max_order_by<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamilyId = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$families_families_max_order_by._({
         ..._instance._$data,
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as Enum$OrderBy?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as Enum$OrderBy?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as Enum$OrderBy?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as Enum$OrderBy?),
+        if (relId != _undefined) 'relId': (relId as Enum$OrderBy?),
       }));
 }
 
@@ -158063,20 +158371,23 @@ class _CopyWithStubImpl$Input$families_families_max_order_by<TRes>
   TRes _res;
 
   call({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       _res;
 }
 
 class Input$families_families_min_order_by {
   factory Input$families_families_min_order_by({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       Input$families_families_min_order_by._({
-        if (innerFamilyId != null) r'innerFamilyId': innerFamilyId,
-        if (outerFamilyId != null) r'outerFamilyId': outerFamilyId,
+        if (childFamilyId != null) r'childFamilyId': childFamilyId,
+        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+        if (relId != null) r'relId': relId,
       });
 
   Input$families_families_min_order_by._(this._$data);
@@ -158084,36 +158395,49 @@ class Input$families_families_min_order_by {
   factory Input$families_families_min_order_by.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = data['innerFamilyId'];
-      result$data['innerFamilyId'] = l$innerFamilyId == null
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] = l$childFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$innerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$childFamilyId as String));
     }
-    if (data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = data['outerFamilyId'];
-      result$data['outerFamilyId'] = l$outerFamilyId == null
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] = l$parentFamilyId == null
           ? null
-          : fromJson$Enum$OrderBy((l$outerFamilyId as String));
+          : fromJson$Enum$OrderBy((l$parentFamilyId as String));
+    }
+    if (data.containsKey('relId')) {
+      final l$relId = data['relId'];
+      result$data['relId'] =
+          l$relId == null ? null : fromJson$Enum$OrderBy((l$relId as String));
     }
     return Input$families_families_min_order_by._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum$OrderBy? get innerFamilyId => (_$data['innerFamilyId'] as Enum$OrderBy?);
-  Enum$OrderBy? get outerFamilyId => (_$data['outerFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get parentFamilyId =>
+      (_$data['parentFamilyId'] as Enum$OrderBy?);
+  Enum$OrderBy? get relId => (_$data['relId'] as Enum$OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('innerFamilyId')) {
-      final l$innerFamilyId = innerFamilyId;
-      result$data['innerFamilyId'] =
-          l$innerFamilyId == null ? null : toJson$Enum$OrderBy(l$innerFamilyId);
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] =
+          l$childFamilyId == null ? null : toJson$Enum$OrderBy(l$childFamilyId);
     }
-    if (_$data.containsKey('outerFamilyId')) {
-      final l$outerFamilyId = outerFamilyId;
-      result$data['outerFamilyId'] =
-          l$outerFamilyId == null ? null : toJson$Enum$OrderBy(l$outerFamilyId);
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : toJson$Enum$OrderBy(l$parentFamilyId);
+    }
+    if (_$data.containsKey('relId')) {
+      final l$relId = relId;
+      result$data['relId'] =
+          l$relId == null ? null : toJson$Enum$OrderBy(l$relId);
     }
     return result$data;
   }
@@ -158133,22 +158457,30 @@ class Input$families_families_min_order_by {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$innerFamilyId = innerFamilyId;
-    final lOther$innerFamilyId = other.innerFamilyId;
-    if (_$data.containsKey('innerFamilyId') !=
-        other._$data.containsKey('innerFamilyId')) {
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
       return false;
     }
-    if (l$innerFamilyId != lOther$innerFamilyId) {
+    if (l$childFamilyId != lOther$childFamilyId) {
       return false;
     }
-    final l$outerFamilyId = outerFamilyId;
-    final lOther$outerFamilyId = other.outerFamilyId;
-    if (_$data.containsKey('outerFamilyId') !=
-        other._$data.containsKey('outerFamilyId')) {
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
       return false;
     }
-    if (l$outerFamilyId != lOther$outerFamilyId) {
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$relId = relId;
+    final lOther$relId = other.relId;
+    if (_$data.containsKey('relId') != other._$data.containsKey('relId')) {
+      return false;
+    }
+    if (l$relId != lOther$relId) {
       return false;
     }
     return true;
@@ -158156,11 +158488,13 @@ class Input$families_families_min_order_by {
 
   @override
   int get hashCode {
-    final l$innerFamilyId = innerFamilyId;
-    final l$outerFamilyId = outerFamilyId;
+    final l$childFamilyId = childFamilyId;
+    final l$parentFamilyId = parentFamilyId;
+    final l$relId = relId;
     return Object.hashAll([
-      _$data.containsKey('innerFamilyId') ? l$innerFamilyId : const {},
-      _$data.containsKey('outerFamilyId') ? l$outerFamilyId : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('relId') ? l$relId : const {},
     ]);
   }
 }
@@ -158175,8 +158509,9 @@ abstract class CopyWith$Input$families_families_min_order_by<TRes> {
       _CopyWithStubImpl$Input$families_families_min_order_by;
 
   TRes call({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   });
 }
 
@@ -158194,15 +158529,17 @@ class _CopyWithImpl$Input$families_families_min_order_by<TRes>
   static const _undefined = {};
 
   TRes call({
-    Object? innerFamilyId = _undefined,
-    Object? outerFamilyId = _undefined,
+    Object? childFamilyId = _undefined,
+    Object? parentFamilyId = _undefined,
+    Object? relId = _undefined,
   }) =>
       _then(Input$families_families_min_order_by._({
         ..._instance._$data,
-        if (innerFamilyId != _undefined)
-          'innerFamilyId': (innerFamilyId as Enum$OrderBy?),
-        if (outerFamilyId != _undefined)
-          'outerFamilyId': (outerFamilyId as Enum$OrderBy?),
+        if (childFamilyId != _undefined)
+          'childFamilyId': (childFamilyId as Enum$OrderBy?),
+        if (parentFamilyId != _undefined)
+          'parentFamilyId': (parentFamilyId as Enum$OrderBy?),
+        if (relId != _undefined) 'relId': (relId as Enum$OrderBy?),
       }));
 }
 
@@ -158213,8 +158550,9 @@ class _CopyWithStubImpl$Input$families_families_min_order_by<TRes>
   TRes _res;
 
   call({
-    Enum$OrderBy? innerFamilyId,
-    Enum$OrderBy? outerFamilyId,
+    Enum$OrderBy? childFamilyId,
+    Enum$OrderBy? parentFamilyId,
+    Enum$OrderBy? relId,
   }) =>
       _res;
 }
@@ -187133,19 +187471,18 @@ Enum$FamiliesConstraint fromJson$Enum$FamiliesConstraint(String value) {
 }
 
 enum Enum$FamiliesFamiliesConstraint {
-  families_families_outerFamilyID_innerFamilyID_key,
   families_families_pkey,
+  families_families_rel_id_key,
   $unknown
 }
 
 String toJson$Enum$FamiliesFamiliesConstraint(
     Enum$FamiliesFamiliesConstraint e) {
   switch (e) {
-    case Enum$FamiliesFamiliesConstraint
-        .families_families_outerFamilyID_innerFamilyID_key:
-      return r'families_families_outerFamilyID_innerFamilyID_key';
     case Enum$FamiliesFamiliesConstraint.families_families_pkey:
       return r'families_families_pkey';
+    case Enum$FamiliesFamiliesConstraint.families_families_rel_id_key:
+      return r'families_families_rel_id_key';
     case Enum$FamiliesFamiliesConstraint.$unknown:
       return r'$unknown';
   }
@@ -187154,29 +187491,31 @@ String toJson$Enum$FamiliesFamiliesConstraint(
 Enum$FamiliesFamiliesConstraint fromJson$Enum$FamiliesFamiliesConstraint(
     String value) {
   switch (value) {
-    case r'families_families_outerFamilyID_innerFamilyID_key':
-      return Enum$FamiliesFamiliesConstraint
-          .families_families_outerFamilyID_innerFamilyID_key;
     case r'families_families_pkey':
       return Enum$FamiliesFamiliesConstraint.families_families_pkey;
+    case r'families_families_rel_id_key':
+      return Enum$FamiliesFamiliesConstraint.families_families_rel_id_key;
     default:
       return Enum$FamiliesFamiliesConstraint.$unknown;
   }
 }
 
 enum Enum$FamiliesFamiliesSelectColumn {
-  innerFamilyId,
-  outerFamilyId,
+  childFamilyId,
+  parentFamilyId,
+  relId,
   $unknown
 }
 
 String toJson$Enum$FamiliesFamiliesSelectColumn(
     Enum$FamiliesFamiliesSelectColumn e) {
   switch (e) {
-    case Enum$FamiliesFamiliesSelectColumn.innerFamilyId:
-      return r'innerFamilyId';
-    case Enum$FamiliesFamiliesSelectColumn.outerFamilyId:
-      return r'outerFamilyId';
+    case Enum$FamiliesFamiliesSelectColumn.childFamilyId:
+      return r'childFamilyId';
+    case Enum$FamiliesFamiliesSelectColumn.parentFamilyId:
+      return r'parentFamilyId';
+    case Enum$FamiliesFamiliesSelectColumn.relId:
+      return r'relId';
     case Enum$FamiliesFamiliesSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -187185,28 +187524,33 @@ String toJson$Enum$FamiliesFamiliesSelectColumn(
 Enum$FamiliesFamiliesSelectColumn fromJson$Enum$FamiliesFamiliesSelectColumn(
     String value) {
   switch (value) {
-    case r'innerFamilyId':
-      return Enum$FamiliesFamiliesSelectColumn.innerFamilyId;
-    case r'outerFamilyId':
-      return Enum$FamiliesFamiliesSelectColumn.outerFamilyId;
+    case r'childFamilyId':
+      return Enum$FamiliesFamiliesSelectColumn.childFamilyId;
+    case r'parentFamilyId':
+      return Enum$FamiliesFamiliesSelectColumn.parentFamilyId;
+    case r'relId':
+      return Enum$FamiliesFamiliesSelectColumn.relId;
     default:
       return Enum$FamiliesFamiliesSelectColumn.$unknown;
   }
 }
 
 enum Enum$FamiliesFamiliesUpdateColumn {
-  innerFamilyId,
-  outerFamilyId,
+  childFamilyId,
+  parentFamilyId,
+  relId,
   $unknown
 }
 
 String toJson$Enum$FamiliesFamiliesUpdateColumn(
     Enum$FamiliesFamiliesUpdateColumn e) {
   switch (e) {
-    case Enum$FamiliesFamiliesUpdateColumn.innerFamilyId:
-      return r'innerFamilyId';
-    case Enum$FamiliesFamiliesUpdateColumn.outerFamilyId:
-      return r'outerFamilyId';
+    case Enum$FamiliesFamiliesUpdateColumn.childFamilyId:
+      return r'childFamilyId';
+    case Enum$FamiliesFamiliesUpdateColumn.parentFamilyId:
+      return r'parentFamilyId';
+    case Enum$FamiliesFamiliesUpdateColumn.relId:
+      return r'relId';
     case Enum$FamiliesFamiliesUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -187215,10 +187559,12 @@ String toJson$Enum$FamiliesFamiliesUpdateColumn(
 Enum$FamiliesFamiliesUpdateColumn fromJson$Enum$FamiliesFamiliesUpdateColumn(
     String value) {
   switch (value) {
-    case r'innerFamilyId':
-      return Enum$FamiliesFamiliesUpdateColumn.innerFamilyId;
-    case r'outerFamilyId':
-      return Enum$FamiliesFamiliesUpdateColumn.outerFamilyId;
+    case r'childFamilyId':
+      return Enum$FamiliesFamiliesUpdateColumn.childFamilyId;
+    case r'parentFamilyId':
+      return Enum$FamiliesFamiliesUpdateColumn.parentFamilyId;
+    case r'relId':
+      return Enum$FamiliesFamiliesUpdateColumn.relId;
     default:
       return Enum$FamiliesFamiliesUpdateColumn.$unknown;
   }

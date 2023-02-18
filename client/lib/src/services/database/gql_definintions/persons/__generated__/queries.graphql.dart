@@ -4,6 +4,7 @@ import '../../classes/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
+import '../../stores/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
@@ -592,20 +593,24 @@ class Variables$Query$personsGeolocations {
     required bool getAreas,
     required bool getStreets,
     required bool getFamilies,
+    required bool getStores,
     required bool getPersons,
     List<UuidValue>? areasIds,
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
+    List<UuidValue>? storesIds,
     List<Input$PersonsBoolExp>? personsConditions,
   }) =>
       Variables$Query$personsGeolocations._({
         r'getAreas': getAreas,
         r'getStreets': getStreets,
         r'getFamilies': getFamilies,
+        r'getStores': getStores,
         r'getPersons': getPersons,
         if (areasIds != null) r'areasIds': areasIds,
         if (streetsIds != null) r'streetsIds': streetsIds,
         if (familiesIds != null) r'familiesIds': familiesIds,
+        if (storesIds != null) r'storesIds': storesIds,
         if (personsConditions != null) r'personsConditions': personsConditions,
       });
 
@@ -620,6 +625,8 @@ class Variables$Query$personsGeolocations {
     result$data['getStreets'] = (l$getStreets as bool);
     final l$getFamilies = data['getFamilies'];
     result$data['getFamilies'] = (l$getFamilies as bool);
+    final l$getStores = data['getStores'];
+    result$data['getStores'] = (l$getStores as bool);
     final l$getPersons = data['getPersons'];
     result$data['getPersons'] = (l$getPersons as bool);
     if (data.containsKey('areasIds')) {
@@ -639,6 +646,11 @@ class Variables$Query$personsGeolocations {
           ?.map((e) => stringToUuid(e))
           .toList();
     }
+    if (data.containsKey('storesIds')) {
+      final l$storesIds = data['storesIds'];
+      result$data['storesIds'] =
+          (l$storesIds as List<dynamic>?)?.map((e) => stringToUuid(e)).toList();
+    }
     if (data.containsKey('personsConditions')) {
       final l$personsConditions = data['personsConditions'];
       result$data['personsConditions'] = (l$personsConditions as List<dynamic>?)
@@ -654,11 +666,13 @@ class Variables$Query$personsGeolocations {
   bool get getAreas => (_$data['getAreas'] as bool);
   bool get getStreets => (_$data['getStreets'] as bool);
   bool get getFamilies => (_$data['getFamilies'] as bool);
+  bool get getStores => (_$data['getStores'] as bool);
   bool get getPersons => (_$data['getPersons'] as bool);
   List<UuidValue>? get areasIds => (_$data['areasIds'] as List<UuidValue>?);
   List<UuidValue>? get streetsIds => (_$data['streetsIds'] as List<UuidValue>?);
   List<UuidValue>? get familiesIds =>
       (_$data['familiesIds'] as List<UuidValue>?);
+  List<UuidValue>? get storesIds => (_$data['storesIds'] as List<UuidValue>?);
   List<Input$PersonsBoolExp>? get personsConditions =>
       (_$data['personsConditions'] as List<Input$PersonsBoolExp>?);
   Map<String, dynamic> toJson() {
@@ -669,6 +683,8 @@ class Variables$Query$personsGeolocations {
     result$data['getStreets'] = l$getStreets;
     final l$getFamilies = getFamilies;
     result$data['getFamilies'] = l$getFamilies;
+    final l$getStores = getStores;
+    result$data['getStores'] = l$getStores;
     final l$getPersons = getPersons;
     result$data['getPersons'] = l$getPersons;
     if (_$data.containsKey('areasIds')) {
@@ -685,6 +701,11 @@ class Variables$Query$personsGeolocations {
       final l$familiesIds = familiesIds;
       result$data['familiesIds'] =
           l$familiesIds?.map((e) => uuidToString(e)).toList();
+    }
+    if (_$data.containsKey('storesIds')) {
+      final l$storesIds = storesIds;
+      result$data['storesIds'] =
+          l$storesIds?.map((e) => uuidToString(e)).toList();
     }
     if (_$data.containsKey('personsConditions')) {
       final l$personsConditions = personsConditions;
@@ -722,6 +743,11 @@ class Variables$Query$personsGeolocations {
     final l$getFamilies = getFamilies;
     final lOther$getFamilies = other.getFamilies;
     if (l$getFamilies != lOther$getFamilies) {
+      return false;
+    }
+    final l$getStores = getStores;
+    final lOther$getStores = other.getStores;
+    if (l$getStores != lOther$getStores) {
       return false;
     }
     final l$getPersons = getPersons;
@@ -789,6 +815,26 @@ class Variables$Query$personsGeolocations {
     } else if (l$familiesIds != lOther$familiesIds) {
       return false;
     }
+    final l$storesIds = storesIds;
+    final lOther$storesIds = other.storesIds;
+    if (_$data.containsKey('storesIds') !=
+        other._$data.containsKey('storesIds')) {
+      return false;
+    }
+    if (l$storesIds != null && lOther$storesIds != null) {
+      if (l$storesIds.length != lOther$storesIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$storesIds.length; i++) {
+        final l$storesIds$entry = l$storesIds[i];
+        final lOther$storesIds$entry = lOther$storesIds[i];
+        if (l$storesIds$entry != lOther$storesIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$storesIds != lOther$storesIds) {
+      return false;
+    }
     final l$personsConditions = personsConditions;
     final lOther$personsConditions = other.personsConditions;
     if (_$data.containsKey('personsConditions') !=
@@ -817,15 +863,18 @@ class Variables$Query$personsGeolocations {
     final l$getAreas = getAreas;
     final l$getStreets = getStreets;
     final l$getFamilies = getFamilies;
+    final l$getStores = getStores;
     final l$getPersons = getPersons;
     final l$areasIds = areasIds;
     final l$streetsIds = streetsIds;
     final l$familiesIds = familiesIds;
+    final l$storesIds = storesIds;
     final l$personsConditions = personsConditions;
     return Object.hashAll([
       l$getAreas,
       l$getStreets,
       l$getFamilies,
+      l$getStores,
       l$getPersons,
       _$data.containsKey('areasIds')
           ? l$areasIds == null
@@ -841,6 +890,11 @@ class Variables$Query$personsGeolocations {
           ? l$familiesIds == null
               ? null
               : Object.hashAll(l$familiesIds.map((v) => v))
+          : const {},
+      _$data.containsKey('storesIds')
+          ? l$storesIds == null
+              ? null
+              : Object.hashAll(l$storesIds.map((v) => v))
           : const {},
       _$data.containsKey('personsConditions')
           ? l$personsConditions == null
@@ -864,10 +918,12 @@ abstract class CopyWith$Variables$Query$personsGeolocations<TRes> {
     bool? getAreas,
     bool? getStreets,
     bool? getFamilies,
+    bool? getStores,
     bool? getPersons,
     List<UuidValue>? areasIds,
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
+    List<UuidValue>? storesIds,
     List<Input$PersonsBoolExp>? personsConditions,
   });
 }
@@ -889,10 +945,12 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
     Object? getAreas = _undefined,
     Object? getStreets = _undefined,
     Object? getFamilies = _undefined,
+    Object? getStores = _undefined,
     Object? getPersons = _undefined,
     Object? areasIds = _undefined,
     Object? streetsIds = _undefined,
     Object? familiesIds = _undefined,
+    Object? storesIds = _undefined,
     Object? personsConditions = _undefined,
   }) =>
       _then(Variables$Query$personsGeolocations._({
@@ -903,6 +961,8 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
           'getStreets': (getStreets as bool),
         if (getFamilies != _undefined && getFamilies != null)
           'getFamilies': (getFamilies as bool),
+        if (getStores != _undefined && getStores != null)
+          'getStores': (getStores as bool),
         if (getPersons != _undefined && getPersons != null)
           'getPersons': (getPersons as bool),
         if (areasIds != _undefined) 'areasIds': (areasIds as List<UuidValue>?),
@@ -910,6 +970,8 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
           'streetsIds': (streetsIds as List<UuidValue>?),
         if (familiesIds != _undefined)
           'familiesIds': (familiesIds as List<UuidValue>?),
+        if (storesIds != _undefined)
+          'storesIds': (storesIds as List<UuidValue>?),
         if (personsConditions != _undefined)
           'personsConditions':
               (personsConditions as List<Input$PersonsBoolExp>?),
@@ -926,10 +988,12 @@ class _CopyWithStubImpl$Variables$Query$personsGeolocations<TRes>
     bool? getAreas,
     bool? getStreets,
     bool? getFamilies,
+    bool? getStores,
     bool? getPersons,
     List<UuidValue>? areasIds,
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
+    List<UuidValue>? storesIds,
     List<Input$PersonsBoolExp>? personsConditions,
   }) =>
       _res;
@@ -940,6 +1004,7 @@ class Query$personsGeolocations {
     required this.areas,
     required this.streets,
     required this.families,
+    required this.stores,
     required this.persons,
     required this.$__typename,
   });
@@ -948,6 +1013,7 @@ class Query$personsGeolocations {
     final l$areas = json['areas'];
     final l$streets = json['streets'];
     final l$families = json['families'];
+    final l$stores = json['stores'];
     final l$persons = json['persons'];
     final l$$__typename = json['__typename'];
     return Query$personsGeolocations(
@@ -961,6 +1027,10 @@ class Query$personsGeolocations {
           .toList(),
       families: (l$families as List<dynamic>)
           .map((e) => Query$personsGeolocations$families.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      stores: (l$stores as List<dynamic>)
+          .map((e) => Query$personsGeolocations$stores.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       persons: (l$persons as List<dynamic>)
@@ -977,6 +1047,8 @@ class Query$personsGeolocations {
 
   final List<Query$personsGeolocations$families> families;
 
+  final List<Query$personsGeolocations$stores> stores;
+
   final List<Query$personsGeolocations$persons> persons;
 
   final String $__typename;
@@ -989,6 +1061,8 @@ class Query$personsGeolocations {
     _resultData['streets'] = l$streets.map((e) => e.toJson()).toList();
     final l$families = families;
     _resultData['families'] = l$families.map((e) => e.toJson()).toList();
+    final l$stores = stores;
+    _resultData['stores'] = l$stores.map((e) => e.toJson()).toList();
     final l$persons = persons;
     _resultData['persons'] = l$persons.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -1001,12 +1075,14 @@ class Query$personsGeolocations {
     final l$areas = areas;
     final l$streets = streets;
     final l$families = families;
+    final l$stores = stores;
     final l$persons = persons;
     final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$areas.map((v) => v)),
       Object.hashAll(l$streets.map((v) => v)),
       Object.hashAll(l$families.map((v) => v)),
+      Object.hashAll(l$stores.map((v) => v)),
       Object.hashAll(l$persons.map((v) => v)),
       l$$__typename,
     ]);
@@ -1057,6 +1133,18 @@ class Query$personsGeolocations {
         return false;
       }
     }
+    final l$stores = stores;
+    final lOther$stores = other.stores;
+    if (l$stores.length != lOther$stores.length) {
+      return false;
+    }
+    for (int i = 0; i < l$stores.length; i++) {
+      final l$stores$entry = l$stores[i];
+      final lOther$stores$entry = lOther$stores[i];
+      if (l$stores$entry != lOther$stores$entry) {
+        return false;
+      }
+    }
     final l$persons = persons;
     final lOther$persons = other.persons;
     if (l$persons.length != lOther$persons.length) {
@@ -1100,6 +1188,7 @@ abstract class CopyWith$Query$personsGeolocations<TRes> {
     List<Query$personsGeolocations$areas>? areas,
     List<Query$personsGeolocations$streets>? streets,
     List<Query$personsGeolocations$families>? families,
+    List<Query$personsGeolocations$stores>? stores,
     List<Query$personsGeolocations$persons>? persons,
     String? $__typename,
   });
@@ -1120,6 +1209,12 @@ abstract class CopyWith$Query$personsGeolocations<TRes> {
               Iterable<
                   CopyWith$Query$personsGeolocations$families<
                       Query$personsGeolocations$families>>)
+          _fn);
+  TRes stores(
+      Iterable<Query$personsGeolocations$stores> Function(
+              Iterable<
+                  CopyWith$Query$personsGeolocations$stores<
+                      Query$personsGeolocations$stores>>)
           _fn);
   TRes persons(
       Iterable<Query$personsGeolocations$persons> Function(
@@ -1146,6 +1241,7 @@ class _CopyWithImpl$Query$personsGeolocations<TRes>
     Object? areas = _undefined,
     Object? streets = _undefined,
     Object? families = _undefined,
+    Object? stores = _undefined,
     Object? persons = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -1159,6 +1255,9 @@ class _CopyWithImpl$Query$personsGeolocations<TRes>
         families: families == _undefined || families == null
             ? _instance.families
             : (families as List<Query$personsGeolocations$families>),
+        stores: stores == _undefined || stores == null
+            ? _instance.stores
+            : (stores as List<Query$personsGeolocations$stores>),
         persons: persons == _undefined || persons == null
             ? _instance.persons
             : (persons as List<Query$personsGeolocations$persons>),
@@ -1202,6 +1301,18 @@ class _CopyWithImpl$Query$personsGeolocations<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+  TRes stores(
+          Iterable<Query$personsGeolocations$stores> Function(
+                  Iterable<
+                      CopyWith$Query$personsGeolocations$stores<
+                          Query$personsGeolocations$stores>>)
+              _fn) =>
+      call(
+          stores: _fn(_instance.stores
+              .map((e) => CopyWith$Query$personsGeolocations$stores(
+                    e,
+                    (i) => i,
+                  ))).toList());
   TRes persons(
           Iterable<Query$personsGeolocations$persons> Function(
                   Iterable<
@@ -1226,6 +1337,7 @@ class _CopyWithStubImpl$Query$personsGeolocations<TRes>
     List<Query$personsGeolocations$areas>? areas,
     List<Query$personsGeolocations$streets>? streets,
     List<Query$personsGeolocations$families>? families,
+    List<Query$personsGeolocations$stores>? stores,
     List<Query$personsGeolocations$persons>? persons,
     String? $__typename,
   }) =>
@@ -1233,6 +1345,7 @@ class _CopyWithStubImpl$Query$personsGeolocations<TRes>
   areas(_fn) => _res;
   streets(_fn) => _res;
   families(_fn) => _res;
+  stores(_fn) => _res;
   persons(_fn) => _res;
 }
 
@@ -1261,6 +1374,15 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
       ),
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'getFamilies')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'getStores')),
         type: NamedTypeNode(
           name: NameNode(value: 'Boolean'),
           isNonNull: true,
@@ -1303,6 +1425,18 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
       ),
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'familiesIds')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'uuid'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'storesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
             name: NameNode(value: 'uuid'),
@@ -1466,6 +1600,23 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
+                      name: NameNode(value: 'areas'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'areasIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
                       name: NameNode(value: 'families'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
@@ -1563,12 +1714,80 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
+                      name: NameNode(value: 'areas'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'areasIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'streets'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'streetsIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
                       name: NameNode(value: 'persons'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
                           name: NameNode(value: '_and'),
                           value: VariableNode(
                               name: NameNode(value: 'personsConditions')),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'parents'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'parentFamilyId'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'familiesIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'children'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'childFamilyId'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'familiesIds')),
+                            )
+                          ]),
                         )
                       ]),
                     )
@@ -1601,6 +1820,120 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         selectionSet: SelectionSetNode(selections: [
           FragmentSpreadNode(
             name: NameNode(value: 'FamilyNoPhoto'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: 'geolocation'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'stores'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_or'),
+                value: ListValueNode(values: [
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_in'),
+                          value:
+                              VariableNode(name: NameNode(value: 'storesIds')),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'streets'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'streetsIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'areas'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: 'id'),
+                          value: ObjectValueNode(fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                  name: NameNode(value: 'areasIds')),
+                            )
+                          ]),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'adminFamily'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_in'),
+                          value: VariableNode(
+                              name: NameNode(value: 'familiesIds')),
+                        )
+                      ]),
+                    )
+                  ]),
+                ]),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'geolocation'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_isNull'),
+                    value: BooleanValueNode(value: false),
+                  )
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'getStores')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'StoreNoPhoto'),
             directives: [],
           ),
           FieldNode(
@@ -1686,6 +2019,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
   fragmentDefinitionStreetNoPhoto,
   fragmentDefinitionFamilyNoPhoto,
+  fragmentDefinitionStoreNoPhoto,
   fragmentDefinitionPersonNoPhoto,
 ]);
 
@@ -2222,6 +2556,187 @@ class _CopyWithImpl$Query$personsGeolocations$families<TRes>
 class _CopyWithStubImpl$Query$personsGeolocations$families<TRes>
     implements CopyWith$Query$personsGeolocations$families<TRes> {
   _CopyWithStubImpl$Query$personsGeolocations$families(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    String? $__typename,
+    Map<String, dynamic>? geolocation,
+  }) =>
+      _res;
+}
+
+class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
+  Query$personsGeolocations$stores({
+    required this.id,
+    required this.name,
+    this.color,
+    required this.$__typename,
+    this.geolocation,
+  });
+
+  factory Query$personsGeolocations$stores.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$$__typename = json['__typename'];
+    final l$geolocation = json['geolocation'];
+    return Query$personsGeolocations$stores(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      color: (l$color as int?),
+      $__typename: (l$$__typename as String),
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final int? color;
+
+  final String $__typename;
+
+  final Map<String, dynamic>? geolocation;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$$__typename = $__typename;
+    final l$geolocation = geolocation;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$$__typename,
+      l$geolocation,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$personsGeolocations$stores) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$personsGeolocations$stores
+    on Query$personsGeolocations$stores {
+  CopyWith$Query$personsGeolocations$stores<Query$personsGeolocations$stores>
+      get copyWith => CopyWith$Query$personsGeolocations$stores(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$personsGeolocations$stores<TRes> {
+  factory CopyWith$Query$personsGeolocations$stores(
+    Query$personsGeolocations$stores instance,
+    TRes Function(Query$personsGeolocations$stores) then,
+  ) = _CopyWithImpl$Query$personsGeolocations$stores;
+
+  factory CopyWith$Query$personsGeolocations$stores.stub(TRes res) =
+      _CopyWithStubImpl$Query$personsGeolocations$stores;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    String? $__typename,
+    Map<String, dynamic>? geolocation,
+  });
+}
+
+class _CopyWithImpl$Query$personsGeolocations$stores<TRes>
+    implements CopyWith$Query$personsGeolocations$stores<TRes> {
+  _CopyWithImpl$Query$personsGeolocations$stores(
+    this._instance,
+    this._then,
+  );
+
+  final Query$personsGeolocations$stores _instance;
+
+  final TRes Function(Query$personsGeolocations$stores) _then;
+
+  static const _undefined = {};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? $__typename = _undefined,
+    Object? geolocation = _undefined,
+  }) =>
+      _then(Query$personsGeolocations$stores(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        color: color == _undefined ? _instance.color : (color as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+      ));
+}
+
+class _CopyWithStubImpl$Query$personsGeolocations$stores<TRes>
+    implements CopyWith$Query$personsGeolocations$stores<TRes> {
+  _CopyWithStubImpl$Query$personsGeolocations$stores(this._res);
 
   TRes _res;
 

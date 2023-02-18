@@ -12,10 +12,12 @@ query personsGeolocations(
   $getAreas: Boolean! = true
   $getStreets: Boolean! = true
   $getFamilies: Boolean! = true
+  $getStores: Boolean! = true
   $getPersons: Boolean! = true
   $areasIds: [uuid!]
   $streetsIds: [uuid!]
   $familiesIds: [uuid!]
+  $storesIds: [uuid!]
   $personsConditions: [PersonsBoolExp!] = {}
 ) {
   areas(
@@ -37,6 +39,7 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $streetsIds } }
+        { areas: { id: { _in: $areasIds } } }
         { families: { id: { _in: $familiesIds } } }
         { persons: { _and: $personsConditions } }
       ]
@@ -51,12 +54,31 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $familiesIds } }
+        { areas: { id: { _in: $areasIds } } }
+        { streets: { id: { _in: $streetsIds } } }
         { persons: { _and: $personsConditions } }
+        { parents: { parentFamilyId: { _in: $familiesIds } } }
+        { children: { childFamilyId: { _in: $familiesIds } } }
       ]
       geolocation: { _isNull: false }
     }
   ) @include(if: $getFamilies) {
     ...FamilyNoPhoto
+
+    geolocation
+  }
+  stores(
+    where: {
+      _or: [
+        { id: { _in: $storesIds } }
+        { streets: { id: { _in: $streetsIds } } }
+        { areas: { id: { _in: $areasIds } } }
+        { adminFamily: { _in: $familiesIds } }
+      ]
+      geolocation: { _isNull: false }
+    }
+  ) @include(if: $getStores) {
+    ...StoreNoPhoto
 
     geolocation
   }

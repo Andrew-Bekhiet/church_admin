@@ -7,3 +7,20 @@ subscription watchAllStores(
     ...Store
   }
 }
+
+subscription watchStore($id: uuid!) {
+  storesByPk(id: $id) {
+    ...Store
+    areas {
+      ...Area
+    }
+    streets{
+      ...Street
+    }
+    lastEdit
+    geolocation
+    family {
+      ...Family
+    }
+  }
+}

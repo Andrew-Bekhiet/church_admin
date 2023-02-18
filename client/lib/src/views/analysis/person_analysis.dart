@@ -4,38 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class PersonAnalysis extends StatefulWidget {
-  static final personRoute = GoRoute(
-    name: 'person_analysis',
+  static final route = GoRoute(
     path: 'personAnalysis',
-    builder: _routeBuilder,
-  );
+    builder: (_, state) {
+      if (state.extra == null) {
+        throw ArgumentError.notNull('state.extra');
+      } else if (state.extra is! Map<String, dynamic>) {
+        throw ArgumentError.value(
+          state.extra,
+          'state.extra',
+          'expected a Map but got ' + state.extra.runtimeType.toString(),
+        );
+      }
 
-  static final userRoute = GoRoute(
-    name: 'user_attendance_analysis',
-    path: 'userAttendanceAnalysis',
-    builder: _routeBuilder,
-  );
+      final extra = state.extra! as Map<String, dynamic>;
 
-  static Widget _routeBuilder(BuildContext _, GoRouterState state) {
-    if (state.extra == null) {
-      throw ArgumentError.notNull('state.extra');
-    } else if (state.extra is! Map<String, dynamic>) {
-      throw ArgumentError.value(
-        state.extra,
-        'state.extra',
-        'expected a Map but got ' + state.extra.runtimeType.toString(),
+      return PersonAnalysis(
+        person: extra['person'],
+        user: extra['user'],
+        onEditOptions: extra['onEditOptions'],
+        options: extra['options'],
       );
-    }
-
-    final extra = state.extra! as Map<String, dynamic>;
-
-    return PersonAnalysis(
-      person: extra['person'],
-      user: extra['user'],
-      onEditOptions: extra['onEditOptions'],
-      options: extra['options'],
-    );
-  }
+    },
+  );
 
   final Person? person;
   final User? user;

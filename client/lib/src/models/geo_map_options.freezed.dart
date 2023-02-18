@@ -20,6 +20,7 @@ mixin _$GeoMapOptions {
   Set<Area> get selectedAreas => throw _privateConstructorUsedError;
   Set<Street> get selectedStreets => throw _privateConstructorUsedError;
   Set<Family> get selectedFamilies => throw _privateConstructorUsedError;
+  Set<Store> get selectedStores => throw _privateConstructorUsedError;
   Set<Service> get selectedServices => throw _privateConstructorUsedError;
   Set<Class> get selectedClasses => throw _privateConstructorUsedError;
   Set<Group> get selectedGroups => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $GeoMapOptionsCopyWith<$Res> {
       Set<Area> selectedAreas,
       Set<Street> selectedStreets,
       Set<Family> selectedFamilies,
+      Set<Store> selectedStores,
       Set<Service> selectedServices,
       Set<Class> selectedClasses,
       Set<Group> selectedGroups});
@@ -62,6 +64,7 @@ class _$GeoMapOptionsCopyWithImpl<$Res, $Val extends GeoMapOptions>
     Object? selectedAreas = null,
     Object? selectedStreets = null,
     Object? selectedFamilies = null,
+    Object? selectedStores = null,
     Object? selectedServices = null,
     Object? selectedClasses = null,
     Object? selectedGroups = null,
@@ -83,6 +86,10 @@ class _$GeoMapOptionsCopyWithImpl<$Res, $Val extends GeoMapOptions>
           ? _value.selectedFamilies
           : selectedFamilies // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
+      selectedStores: null == selectedStores
+          ? _value.selectedStores
+          : selectedStores // ignore: cast_nullable_to_non_nullable
+              as Set<Store>,
       selectedServices: null == selectedServices
           ? _value.selectedServices
           : selectedServices // ignore: cast_nullable_to_non_nullable
@@ -112,6 +119,7 @@ abstract class _$$_GeoMapOptionsCopyWith<$Res>
       Set<Area> selectedAreas,
       Set<Street> selectedStreets,
       Set<Family> selectedFamilies,
+      Set<Store> selectedStores,
       Set<Service> selectedServices,
       Set<Class> selectedClasses,
       Set<Group> selectedGroups});
@@ -132,6 +140,7 @@ class __$$_GeoMapOptionsCopyWithImpl<$Res>
     Object? selectedAreas = null,
     Object? selectedStreets = null,
     Object? selectedFamilies = null,
+    Object? selectedStores = null,
     Object? selectedServices = null,
     Object? selectedClasses = null,
     Object? selectedGroups = null,
@@ -153,6 +162,10 @@ class __$$_GeoMapOptionsCopyWithImpl<$Res>
           ? _value._selectedFamilies
           : selectedFamilies // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
+      selectedStores: null == selectedStores
+          ? _value._selectedStores
+          : selectedStores // ignore: cast_nullable_to_non_nullable
+              as Set<Store>,
       selectedServices: null == selectedServices
           ? _value._selectedServices
           : selectedServices // ignore: cast_nullable_to_non_nullable
@@ -177,6 +190,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
       final Set<Area> selectedAreas = const {},
       final Set<Street> selectedStreets = const {},
       final Set<Family> selectedFamilies = const {},
+      final Set<Store> selectedStores = const {},
       final Set<Service> selectedServices = const {},
       final Set<Class> selectedClasses = const {},
       final Set<Group> selectedGroups = const {}})
@@ -185,6 +199,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
         _selectedAreas = selectedAreas,
         _selectedStreets = selectedStreets,
         _selectedFamilies = selectedFamilies,
+        _selectedStores = selectedStores,
         _selectedServices = selectedServices,
         _selectedClasses = selectedClasses,
         _selectedGroups = selectedGroups;
@@ -225,6 +240,15 @@ class _$_GeoMapOptions implements _GeoMapOptions {
     return EqualUnmodifiableSetView(_selectedFamilies);
   }
 
+  final Set<Store> _selectedStores;
+  @override
+  @JsonKey()
+  Set<Store> get selectedStores {
+    if (_selectedStores is EqualUnmodifiableSetView) return _selectedStores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_selectedStores);
+  }
+
   final Set<Service> _selectedServices;
   @override
   @JsonKey()
@@ -254,7 +278,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
 
   @override
   String toString() {
-    return 'GeoMapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
+    return 'GeoMapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
   }
 
   @override
@@ -270,6 +294,8 @@ class _$_GeoMapOptions implements _GeoMapOptions {
             const DeepCollectionEquality()
                 .equals(other._selectedFamilies, _selectedFamilies) &&
             const DeepCollectionEquality()
+                .equals(other._selectedStores, _selectedStores) &&
+            const DeepCollectionEquality()
                 .equals(other._selectedServices, _selectedServices) &&
             const DeepCollectionEquality()
                 .equals(other._selectedClasses, _selectedClasses) &&
@@ -284,6 +310,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
       const DeepCollectionEquality().hash(_selectedAreas),
       const DeepCollectionEquality().hash(_selectedStreets),
       const DeepCollectionEquality().hash(_selectedFamilies),
+      const DeepCollectionEquality().hash(_selectedStores),
       const DeepCollectionEquality().hash(_selectedServices),
       const DeepCollectionEquality().hash(_selectedClasses),
       const DeepCollectionEquality().hash(_selectedGroups));
@@ -301,6 +328,7 @@ abstract class _GeoMapOptions implements GeoMapOptions {
       final Set<Area> selectedAreas,
       final Set<Street> selectedStreets,
       final Set<Family> selectedFamilies,
+      final Set<Store> selectedStores,
       final Set<Service> selectedServices,
       final Set<Class> selectedClasses,
       final Set<Group> selectedGroups}) = _$_GeoMapOptions;
@@ -313,6 +341,8 @@ abstract class _GeoMapOptions implements GeoMapOptions {
   Set<Street> get selectedStreets;
   @override
   Set<Family> get selectedFamilies;
+  @override
+  Set<Store> get selectedStores;
   @override
   Set<Service> get selectedServices;
   @override
