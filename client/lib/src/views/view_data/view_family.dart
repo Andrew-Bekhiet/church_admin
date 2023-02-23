@@ -172,9 +172,9 @@ class ViewFamily extends StatelessWidget {
       ),
       editButtonBuilder: (context, family) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
-            path: 'viewFamily/editFamily',
+            path: '/viewFamily/editFamily',
             queryParameters: {'id': familyId},
           ).toString(),
           extra: {'family': family},

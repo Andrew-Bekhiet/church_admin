@@ -41,6 +41,7 @@ class _ViewClassState extends State<ViewClass> {
   Widget build(BuildContext context) {
     return ViewObjectDetails(
       objectId: widget.classId,
+      object: widget.$class,
       objectStream:
           DatabaseService.I.classes.watchClass(classId: widget.classId),
       childrenTypes: const [Person],
@@ -58,9 +59,9 @@ class _ViewClassState extends State<ViewClass> {
       ),
       editButtonBuilder: (context, $class) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
-            path: 'viewClass/editClass',
+            path: '/viewClass/editClass',
             queryParameters: {'id': widget.classId},
           ).toString(),
           extra: {'class': $class},

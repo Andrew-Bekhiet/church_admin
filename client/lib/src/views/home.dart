@@ -386,7 +386,7 @@ class _HomeFloatingActionButton extends StatelessWidget {
   void Function() _addItem(BuildContext context) => () {
         final newIndex = getNewIndex();
         if (newIndex == 0) {
-          context.go('editPerson');
+          context.push('/editPerson');
         }
       };
 }

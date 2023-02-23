@@ -108,9 +108,9 @@ class ViewGroup extends StatelessWidget {
       ),
       editButtonBuilder: (context, group) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
-            path: 'viewGroup/editGroup',
+            path: '/viewGroup/editGroup',
             queryParameters: {'id': groupId},
           ).toString(),
           extra: {'group': group},

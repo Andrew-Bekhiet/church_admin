@@ -102,9 +102,9 @@ class _ViewStoreState extends State<ViewStore> {
                       else
                         IconButton(
                           tooltip: 'تعديل',
-                          onPressed: () => context.go(
+                          onPressed: () => context.push(
                             Uri(
-                              path: 'viewStore/editStore',
+                              path: '/viewStore/editStore',
                               queryParameters: {'id': widget.storeId},
                             ).toString(),
                             extra: {'store': store},

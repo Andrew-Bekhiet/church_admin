@@ -98,8 +98,8 @@ class _ViewUserState extends State<ViewUser> {
                   else
                     IconButton(
                       tooltip: 'تعديل',
-                      onPressed: () => context.go(
-                        'editUser?id=' + widget.userId,
+                      onPressed: () => context.push(
+                        '/viewUser/editUser?id=' + widget.userId,
                         extra: {'user': user},
                       ),
                       icon: const Icon(Icons.edit),
@@ -297,7 +297,7 @@ class _ViewUserState extends State<ViewUser> {
   }
 
   void _attendanceAnalysis(BuildContext context, User user) {
-    context.go(
+    context.push(
       Uri(
         path: '/viewUser/personAnalysis',
         queryParameters: {

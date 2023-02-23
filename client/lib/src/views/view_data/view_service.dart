@@ -135,9 +135,9 @@ class ViewService extends StatelessWidget {
       ),
       editButtonBuilder: (context, service) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
-            path: 'viewService/editService',
+            path: '/viewService/editService',
             queryParameters: {'id': serviceId},
           ).toString(),
           extra: {'service': service},

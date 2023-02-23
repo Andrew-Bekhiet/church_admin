@@ -134,7 +134,7 @@ class ViewArea extends StatelessWidget {
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
             path: '/viewArea/editArea',
             queryParameters: {'id': areaId},

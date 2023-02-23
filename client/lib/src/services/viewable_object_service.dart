@@ -22,7 +22,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
   @override
   void onTap(Viewable object) {
     if (object is Person) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewPerson',
           queryParameters: {'id': object.id},
@@ -32,7 +32,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Service) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewService',
           queryParameters: {'id': object.id},
@@ -42,7 +42,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Group) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewGroup',
           queryParameters: {'id': object.id},
@@ -52,7 +52,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Class) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewClass',
           queryParameters: {'id': object.id},
@@ -62,7 +62,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Area) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewArea',
           queryParameters: {'id': object.id},
@@ -72,7 +72,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Street) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewStreet',
           queryParameters: {'id': object.id},
@@ -82,7 +82,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Family) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewFamily',
           queryParameters: {'id': object.id},
@@ -92,7 +92,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is Store) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewStore',
           queryParameters: {'id': object.id},
@@ -102,7 +102,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         },
       );
     } else if (object is User) {
-      router.go(
+      router.push(
         Uri(
           path: '/viewUser',
           queryParameters: {'uid': object.uid},

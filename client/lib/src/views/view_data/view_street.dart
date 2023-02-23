@@ -134,9 +134,9 @@ class ViewStreet extends StatelessWidget {
       ),
       editButtonBuilder: (context, street) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.go(
+        onPressed: () => context.push(
           Uri(
-            path: 'viewStreet/editStreet',
+            path: '/viewStreet/editStreet',
             queryParameters: {'id': streetId},
           ).toString(),
           extra: {'street': street},

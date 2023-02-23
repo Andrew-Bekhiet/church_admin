@@ -136,7 +136,7 @@ class _ViewPersonState extends State<ViewPerson> {
                     else
                       IconButton(
                         tooltip: 'تعديل',
-                        onPressed: () => context.go(
+                        onPressed: () => context.push(
                           Uri(
                             path: '/viewPerson/editPerson',
                             queryParameters: {'id': widget.personId},
@@ -302,7 +302,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         subtitle: Text(person.isServant ? 'نعم' : 'لا'),
                         trailing: person.isServant && person.user?.email != null
                             ? IconButton(
-                                onPressed: () => context.go(
+                                onPressed: () => context.push(
                                   Uri(
                                     path: '/viewPerson/viewUser',
                                     queryParameters: {
@@ -545,7 +545,7 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   void _analysis(BuildContext context, Person person) {
-    context.go(
+    context.push(
       Uri(
         path: '/viewPerson/personAnalysis',
         queryParameters: {
