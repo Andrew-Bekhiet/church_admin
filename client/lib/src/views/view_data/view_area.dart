@@ -1,10 +1,9 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide ViewableObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewArea extends StatefulWidget {
+class ViewArea extends StatelessWidget {
   static final route = GoRoute(
     path: 'viewArea',
     builder: (context, state) {
@@ -14,253 +13,142 @@ class ViewArea extends StatefulWidget {
 
       return ViewArea(
         areaId: state.queryParams['id']!,
+        area: (state.extra as Map?)?['area'] as Area?,
       );
     },
   );
 
   final Area? area;
   final String areaId;
-  const ViewArea({
+
+  ViewArea({
     required this.areaId,
     this.area,
     super.key,
   });
 
-  @override
-  State<ViewArea> createState() => _ViewAreaState();
-}
-
-class _ViewAreaState extends State<ViewArea>
-    with SingleTickerProviderStateMixin {
-  late final IconData streetIcon;
-  late final IconData familyIcon;
-  late final IconData storeIcon;
-  late final IconData personIcon;
-
-  @override
-  void initState() {
-    super.initState();
-
-    final viewableObjectService = GetIt.I<CAViewableObjectService>();
-
-    streetIcon = viewableObjectService.getDefaultIconFor<Street>();
-    familyIcon = viewableObjectService.getDefaultIconFor<Family>();
-    storeIcon = viewableObjectService.getDefaultIconFor<Store>();
-    personIcon = viewableObjectService.getDefaultIconFor<Person>();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<Area?>(
-      initialData: widget.area,
-      stream: DatabaseService.I.areas.watchArea(areaId: widget.areaId),
-      builder: (context, snapshot) {
-        final themeData = Theme.of(context);
-
-        if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: ErrorWidget.builder(
-              FlutterErrorDetails(exception: snapshot.error!),
-            ),
-          );
-        } else if (!snapshot.hasData &&
-            snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else if (!snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: Center(
-              child: Text(
-                'لم يتم العثور على المنطقة',
-                style: themeData.textTheme.titleLarge,
-              ),
-            ),
-          );
-        }
-
-        final area = snapshot.requireData!;
-
-        final foregroundColor = area.color.getContrastingColor(
-          ListTileTheme.of(context).textColor ??
-              themeData.listTileTheme.textColor ??
-              themeData.textTheme.titleMedium!.color!,
-        );
-        return DefaultTabController(
-          length: 4,
-          child: Theme(
-            data: CAThemingService.getDefault(primaryOverride: area.color),
-            child: Scaffold(
-              body: NestedScrollView(
-                headerSliverBuilder: (context, isBodyScrolled) => [
-                  SliverAppBar(
-                    backgroundColor: area.color,
-                    foregroundColor: foregroundColor,
-                    stretch: true,
-                    pinned: true,
-                    expandedHeight: 280,
-                    actions: [
-                      if (snapshot.connectionState != ConnectionState.active)
-                        const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else
-                        IconButton(
-                          tooltip: 'تعديل',
-                          onPressed: () => context.go(
-                            Uri(
-                              path: '/viewArea/editArea',
-                              queryParameters: {'id': widget.areaId},
-                            ).toString(),
-                            extra: {'area': area},
-                          ),
-                          icon: const Icon(Icons.edit),
-                        ),
-                    ],
-                    flexibleSpace: ViewableObjectAppBar(
-                      circleCrop: false,
-                      foregroundColor: foregroundColor,
-                      viewable:
-                          widget.area?.hasImage ?? false ? widget.area! : area,
-                      appBarMaxHeight: 280,
-                      duration: const Duration(milliseconds: 450),
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        if (area.bounds != null)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            child: FilledButton.tonalIcon(
-                              label: const Text('الموقع على الخريطة'),
-                              icon: const Icon(Icons.map),
-                              onPressed: () async => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DataGeomap(initialArea: area),
-                                ),
-                              ),
-                            ),
-                          ),
-                        HistoryProperty(
-                          name: 'أخر تحديث للبيانات',
-                          value: area.lastEdit?.time,
-                          getHistoryStream: () => DatabaseService.I.history
-                              .paginateEditHistory<Area>(id: area.id),
-                        ),
-                        ListTile(
-                          title: const Text('الخدام المسؤولين'),
-                          subtitle: area.adminUsers?.isNotEmpty ?? false
-                              ? AdminUsers(users: area.adminUsers!)
-                              : const Text('لا يوجد خدام محددين للمنطقة'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: PreferredSizePersistentHeaderDelegate(
-                      child: TabBar(
-                        tabs: [
-                          Tab(text: 'الشوارع', icon: Icon(streetIcon)),
-                          Tab(text: 'العائلات', icon: Icon(familyIcon)),
-                          Tab(text: 'المتاجر', icon: Icon(storeIcon)),
-                          Tab(text: 'المخدومين', icon: Icon(personIcon)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-                body: _AreaContents(key: ValueKey(area.id), area: area),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _AreaContents extends StatefulWidget {
-  const _AreaContents({required this.area, super.key});
-
-  final Area area;
-
-  @override
-  State<_AreaContents> createState() => _AreaContentsState();
-}
-
-class _AreaContentsState extends State<_AreaContents> {
   late final _streetsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      areaId: widget.area.id,
+      areaId: areaId,
     ),
   );
   late final _familiesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byAreaId: widget.area.id,
+      byAreaId: areaId,
     ),
   );
   late final _storesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byAreaId: widget.area.id,
+      byAreaId: areaId,
     ),
   );
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byAreaId: widget.area.id,
+      byAreaId: areaId,
     ),
   );
 
+  late final Stream<Area?> objectStream =
+      DatabaseService.I.areas.watchArea(areaId: areaId);
+
+  late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      children: [
-        LazyTabPage(
-          index: 0,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _streetsController,
+    return ViewObjectDetails<Area>(
+      objectId: areaId,
+      object: area,
+      objectStream: objectStream,
+      childrenTypes: const [Street, Family, Store, Person],
+      tabsContentBuilders: {
+        Street: (context) => ViewableObjectList(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _streetsController,
+            ),
+        Family: (context) => ViewableObjectList(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _familiesController,
+            ),
+        Store: (context) => ViewableObjectList(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _storesController,
+            ),
+        Person: (context) => ViewableObjectList(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _personsController,
+            ),
+      },
+      tabsHeaderBuilder: (context, area) => TabBar(
+        tabs: [
+          Tab(
+            text: 'الشوارع',
+            icon: Icon(viewableObjectService.getDefaultIconFor<Street>()),
           ),
-        ),
-        LazyTabPage(
-          index: 1,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _familiesController,
+          Tab(
+            text: 'العائلات',
+            icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
           ),
-        ),
-        LazyTabPage(
-          index: 2,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _storesController,
+          Tab(
+            text: 'المتاجر',
+            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
           ),
-        ),
-        LazyTabPage(
-          index: 3,
-          builder: (context) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            objectsController: _personsController,
+          Tab(
+            text: 'المخدومين',
+            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
           ),
+        ],
+      ),
+      detailsBuilder: (context, area) => SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            if (area.bounds != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: FilledButton.tonalIcon(
+                  label: const Text('الموقع على الخريطة'),
+                  icon: const Icon(Icons.map),
+                  onPressed: () async => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DataGeomap(initialArea: area),
+                    ),
+                  ),
+                ),
+              ),
+            HistoryProperty(
+              name: 'أخر تحديث للبيانات',
+              value: area.lastEdit?.time,
+              getHistoryStream: () => DatabaseService.I.history
+                  .paginateEditHistory<Area>(id: area.id),
+            ),
+            ListTile(
+              title: const Text('الخدام المسؤولين'),
+              subtitle: area.adminUsers?.isNotEmpty ?? false
+                  ? AdminUsers(users: area.adminUsers!)
+                  : const Text('لا يوجد خدام محددين للمنطقة'),
+            ),
+          ],
         ),
-      ],
+      ),
+      editButtonBuilder: (context, area) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () => context.go(
+          Uri(
+            path: '/viewArea/editArea',
+            queryParameters: {'id': areaId},
+          ).toString(),
+          extra: {'area': area},
+        ),
+        icon: const Icon(Icons.edit),
+      ),
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على المنطقة',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
     );
   }
 }
