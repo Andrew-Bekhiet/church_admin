@@ -29,7 +29,7 @@ class ViewArea extends StatelessWidget {
 
   late final _streetsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      areaId: areaId,
+      byAreaId: areaId,
     ),
   );
   late final _familiesController = ViewableObjectListController(

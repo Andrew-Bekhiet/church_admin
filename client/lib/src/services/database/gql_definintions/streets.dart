@@ -11,7 +11,7 @@ class StreetsDAO extends DAOBase {
 
   GQLPaginatableStream<Street> paginateStreets({
     Stream<String?>? searchQuery,
-    String? areaId,
+    String? byAreaId,
   }) {
     return GQLPaginatableStream<Street>(
       searchQuery: searchQuery,
@@ -24,10 +24,10 @@ class StreetsDAO extends DAOBase {
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (areaId != null)
+            if (byAreaId != null)
               Input$StreetsBoolExp(
                 areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: areaId.toUuid()),
+                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
                 ),
               ),
             ...defaultSearchVars.where ?? [],
