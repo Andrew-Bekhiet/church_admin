@@ -31,11 +31,14 @@ class ViewStore extends StatefulWidget {
 }
 
 class _ViewStoreState extends State<ViewStore> {
+  late final stream =
+      DatabaseService.I.stores.watchStore(storeId: widget.storeId);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Store?>(
       initialData: widget.store,
-      stream: DatabaseService.I.stores.watchStore(storeId: widget.storeId),
+      stream: stream,
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 

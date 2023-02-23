@@ -55,23 +55,25 @@ class _ViewPersonState extends State<ViewPerson> {
   final _classesLimit = BehaviorSubject<int?>.seeded(4);
   final _groupsLimit = BehaviorSubject<int?>.seeded(4);
 
+  late final stream = Rx.combineLatest3(
+    _servicesLimit.distinct(),
+    _classesLimit.distinct(),
+    _groupsLimit.distinct(),
+    Tuple3.new,
+  ).switchMap(
+    (limits) => DatabaseService.I.persons.watchPerson(
+      personId: widget.personId,
+      servicesLimit: limits.item1,
+      classesLimit: limits.item2,
+      groupsLimit: limits.item3,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Person?>(
       initialData: widget.person,
-      stream: Rx.combineLatest3(
-        _servicesLimit.distinct(),
-        _classesLimit.distinct(),
-        _groupsLimit.distinct(),
-        Tuple3.new,
-      ).switchMap(
-        (limits) => DatabaseService.I.persons.watchPerson(
-          personId: widget.personId,
-          servicesLimit: limits.item1,
-          classesLimit: limits.item2,
-          groupsLimit: limits.item3,
-        ),
-      ),
+      stream: stream,
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
@@ -689,13 +691,14 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     scrollController.dispose();
-    super.dispose();
 
-    await _servicesLimit.close();
-    await _classesLimit.close();
-    await _groupsLimit.close();
+    _servicesLimit.close();
+    _classesLimit.close();
+    _groupsLimit.close();
+
+    super.dispose();
   }
 }
 

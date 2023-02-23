@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewArea extends StatelessWidget {
+class ViewArea extends StatefulWidget {
   static final route = GoRoute(
     path: 'viewArea',
     builder: (context, state) {
@@ -21,61 +21,71 @@ class ViewArea extends StatelessWidget {
   final Area? area;
   final String areaId;
 
-  ViewArea({
+  const ViewArea({
     required this.areaId,
     this.area,
     super.key,
   });
 
+  @override
+  State<ViewArea> createState() => _ViewAreaState();
+}
+
+class _ViewAreaState extends State<ViewArea> {
   late final _streetsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      byAreaId: areaId,
-    ),
-  );
-  late final _familiesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byAreaId: areaId,
-    ),
-  );
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byAreaId: areaId,
-    ),
-  );
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byAreaId: areaId,
+      byAreaId: widget.areaId,
     ),
   );
 
-  late final Stream<Area?> objectStream =
-      DatabaseService.I.areas.watchArea(areaId: areaId);
+  late final _familiesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
+      byAreaId: widget.areaId,
+    ),
+  );
+
+  late final _storesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
+      byAreaId: widget.areaId,
+    ),
+  );
+
+  late final _personsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
+      byAreaId: widget.areaId,
+    ),
+  );
+
+  final Set<ViewableObjectListController> _controllersToDispose = {};
+
+  late final Stream<Area?> stream =
+      DatabaseService.I.areas.watchArea(areaId: widget.areaId);
 
   late final viewableObjectService = GetIt.I<CAViewableObjectService>();
 
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails<Area>(
-      objectId: areaId,
-      object: area,
-      objectStream: objectStream,
+      objectId: widget.areaId,
+      object: widget.area,
+      objectStream: stream,
       childrenTypes: const [Street, Family, Store, Person],
       tabsContentBuilders: {
         Street: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _streetsController,
+              objectsController: _ensureWillDispose(_streetsController),
             ),
         Family: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _familiesController,
+              objectsController: _ensureWillDispose(_familiesController),
             ),
         Store: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+              objectsController: _ensureWillDispose(_storesController),
             ),
         Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+              objectsController: _ensureWillDispose(_personsController),
             ),
       },
       tabsHeaderBuilder: (context, area) => TabBar(
@@ -137,7 +147,7 @@ class ViewArea extends StatelessWidget {
         onPressed: () => context.push(
           Uri(
             path: '/viewArea/editArea',
-            queryParameters: {'id': areaId},
+            queryParameters: {'id': widget.areaId},
           ).toString(),
           extra: {'area': area},
         ),
@@ -150,5 +160,20 @@ class ViewArea extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ViewableObjectListController<T>
+      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+    ViewableObjectListController<T> controller,
+  ) {
+    _controllersToDispose.add(controller);
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+
+    super.dispose();
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewStreet extends StatelessWidget {
+class ViewStreet extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewStreet',
     builder: (context, state) {
@@ -21,49 +21,61 @@ class ViewStreet extends StatelessWidget {
   final Street? street;
   final String streetId;
 
-  ViewStreet({
+  const ViewStreet({
     required this.streetId,
     this.street,
     super.key,
   });
 
+  @override
+  State<ViewStreet> createState() => _ViewStreetState();
+}
+
+class _ViewStreetState extends State<ViewStreet> {
   late final _familiesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byStreetId: streetId,
-    ),
-  );
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byStreetId: streetId,
-    ),
-  );
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byStreetId: streetId,
+      byStreetId: widget.streetId,
     ),
   );
 
+  late final _storesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
+      byStreetId: widget.streetId,
+    ),
+  );
+
+  late final _personsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
+      byStreetId: widget.streetId,
+    ),
+  );
+
+  final Set<ViewableObjectListController> _controllersToDispose = {};
+
   late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+
+  late final stream =
+      DatabaseService.I.streets.watchStreet(streetId: widget.streetId);
 
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails(
-      objectId: streetId,
-      object: street,
-      objectStream: DatabaseService.I.streets.watchStreet(streetId: streetId),
+      objectId: widget.streetId,
+      object: widget.street,
+      objectStream: stream,
       childrenTypes: const [Family, Store, Person],
       tabsContentBuilders: {
         Family: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _familiesController,
+              objectsController: _ensureWillDispose(_familiesController),
             ),
         Store: (context) => ViewableObjectList<Store>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+              objectsController: _ensureWillDispose(_storesController),
             ),
         Person: (context) => ViewableObjectList<Person>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+              objectsController: _ensureWillDispose(_personsController),
             ),
       },
       tabsHeaderBuilder: (context, family) => TabBar(
@@ -137,7 +149,7 @@ class ViewStreet extends StatelessWidget {
         onPressed: () => context.push(
           Uri(
             path: '/viewStreet/editStreet',
-            queryParameters: {'id': streetId},
+            queryParameters: {'id': widget.streetId},
           ).toString(),
           extra: {'street': street},
         ),
@@ -150,5 +162,20 @@ class ViewStreet extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ViewableObjectListController<T>
+      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+    ViewableObjectListController<T> controller,
+  ) {
+    _controllersToDispose.add(controller);
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+
+    super.dispose();
   }
 }

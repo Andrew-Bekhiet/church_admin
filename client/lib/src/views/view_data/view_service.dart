@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewService extends StatelessWidget {
+class ViewService extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewService',
     builder: (context, state) {
@@ -21,38 +21,49 @@ class ViewService extends StatelessWidget {
   final Service? service;
   final String serviceId;
 
-  ViewService({
+  const ViewService({
     required this.serviceId,
     this.service,
     super.key,
   });
 
+  @override
+  State<ViewService> createState() => _ViewServiceState();
+}
+
+class _ViewServiceState extends State<ViewService> {
   late final _classesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.classes.paginateClasses(
-      serviceId: serviceId,
-    ),
-  );
-  late final _groupsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.groups.paginateGroups(
-      serviceId: serviceId,
-    ),
-  );
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byServiceId: serviceId,
+      serviceId: widget.serviceId,
     ),
   );
 
+  late final _groupsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.groups.paginateGroups(
+      serviceId: widget.serviceId,
+    ),
+  );
+
+  late final _personsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
+      byServiceId: widget.serviceId,
+    ),
+  );
+
+  final Set<ViewableObjectListController> _controllersToDispose = {};
+
   late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+
+  late final stream = DatabaseService.I.services.watchService(
+    serviceId: widget.serviceId,
+  );
 
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails(
-      objectId: serviceId,
-      object: service,
-      objectStream: DatabaseService.I.services.watchService(
-        serviceId: serviceId,
-      ),
+      objectId: widget.serviceId,
+      object: widget.service,
+      objectStream: stream,
       childrenTypes: const [Class, Group, Person],
       detailsBuilder: (context, service) => SliverList(
         delegate: SliverChildListDelegate(
@@ -116,15 +127,15 @@ class ViewService extends StatelessWidget {
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _classesController,
+              objectsController: _ensureWillDispose(_classesController),
             ),
         Group: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _groupsController,
+              objectsController: _ensureWillDispose(_groupsController),
             ),
         Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+              objectsController: _ensureWillDispose(_personsController),
             ),
       },
       notFoundBuilder: (context) => Center(
@@ -138,12 +149,27 @@ class ViewService extends StatelessWidget {
         onPressed: () => context.push(
           Uri(
             path: '/viewService/editService',
-            queryParameters: {'id': serviceId},
+            queryParameters: {'id': widget.serviceId},
           ).toString(),
           extra: {'service': service},
         ),
         icon: const Icon(Icons.edit),
       ),
     );
+  }
+
+  ViewableObjectListController<T>
+      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+    ViewableObjectListController<T> controller,
+  ) {
+    _controllersToDispose.add(controller);
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+
+    super.dispose();
   }
 }

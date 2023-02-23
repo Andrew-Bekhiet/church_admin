@@ -37,13 +37,15 @@ class _ViewClassState extends State<ViewClass> {
     ),
   );
 
+  late final stream =
+      DatabaseService.I.classes.watchClass(classId: widget.classId);
+
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails(
       objectId: widget.classId,
       object: widget.$class,
-      objectStream:
-          DatabaseService.I.classes.watchClass(classId: widget.classId),
+      objectStream: stream,
       childrenTypes: const [Person],
       tabsContentBuilders: {
         Person: (context) => ViewableObjectList(
@@ -115,5 +117,12 @@ class _ViewClassState extends State<ViewClass> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _personsController.dispose();
+
+    super.dispose();
   }
 }

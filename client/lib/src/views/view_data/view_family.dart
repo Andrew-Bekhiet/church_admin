@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewFamily extends StatelessWidget {
+class ViewFamily extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewFamily',
     builder: (context, state) {
@@ -22,59 +22,71 @@ class ViewFamily extends StatelessWidget {
   final Family? family;
   final String familyId;
 
-  ViewFamily({
+  const ViewFamily({
     required this.familyId,
     this.family,
     super.key,
   });
 
+  @override
+  State<ViewFamily> createState() => _ViewFamilyState();
+}
+
+class _ViewFamilyState extends State<ViewFamily> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byFamilyId: familyId,
-    ),
-  );
-  late final _childrenFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byParentFamilyId: familyId,
-    ),
-  );
-  late final _parentFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byChildFamilyId: familyId,
-    ),
-  );
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byFamilyId: familyId,
+      byFamilyId: widget.familyId,
     ),
   );
 
+  late final _childrenFamiliesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
+      byParentFamilyId: widget.familyId,
+    ),
+  );
+
+  late final _parentFamiliesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
+      byChildFamilyId: widget.familyId,
+    ),
+  );
+
+  late final _storesController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
+      byFamilyId: widget.familyId,
+    ),
+  );
+
+  final Set<ViewableObjectListController> _controllersToDispose = {};
+
   late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+
+  late final stream =
+      DatabaseService.I.families.watchFamily(familyId: widget.familyId);
 
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails<Family>(
-      objectId: familyId,
-      objectStream: DatabaseService.I.families.watchFamily(
-        familyId: familyId,
-      ),
+      objectId: widget.familyId,
+      objectStream: stream,
       childrenTypes: const [Person, _ChildrenFamily, _ParentFamily, Store],
       tabsContentBuilders: {
         Person: (context) => ViewableObjectList<Person>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+              objectsController: _ensureWillDispose(_personsController),
             ),
         _ChildrenFamily: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _childrenFamiliesController,
+              objectsController:
+                  _ensureWillDispose(_childrenFamiliesController),
             ),
         _ParentFamily: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _parentFamiliesController,
+              objectsController: _ensureWillDispose(_parentFamiliesController),
             ),
         Store: (context) => ViewableObjectList<Store>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+              objectsController: _ensureWillDispose(_storesController),
             ),
       },
       tabsHeaderBuilder: (context, family) => TabBar(
@@ -175,13 +187,28 @@ class ViewFamily extends StatelessWidget {
         onPressed: () => context.push(
           Uri(
             path: '/viewFamily/editFamily',
-            queryParameters: {'id': familyId},
+            queryParameters: {'id': widget.familyId},
           ).toString(),
           extra: {'family': family},
         ),
         icon: const Icon(Icons.edit),
       ),
     );
+  }
+
+  ViewableObjectListController<T>
+      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+    ViewableObjectListController<T> controller,
+  ) {
+    _controllersToDispose.add(controller);
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+
+    super.dispose();
   }
 }
 

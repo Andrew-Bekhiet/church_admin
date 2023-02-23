@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class ViewGroup extends StatelessWidget {
+class ViewGroup extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewGroup',
     builder: (context, state) {
@@ -22,26 +22,34 @@ class ViewGroup extends StatelessWidget {
   final Group? group;
   final String groupId;
 
-  ViewGroup({
+  const ViewGroup({
     required this.groupId,
     this.group,
     super.key,
   });
 
+  @override
+  State<ViewGroup> createState() => _ViewGroupState();
+}
+
+class _ViewGroupState extends State<ViewGroup> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byGroupId: groupId,
+      byGroupId: widget.groupId,
     ),
   );
 
   late final viewableObjectService = GetIt.I<CAViewableObjectService>();
 
+  late final stream =
+      DatabaseService.I.groups.watchGroup(groupId: widget.groupId);
+
   @override
   Widget build(BuildContext context) {
     return ViewObjectDetails(
-      object: group,
-      objectId: groupId,
-      objectStream: DatabaseService.I.groups.watchGroup(groupId: groupId),
+      object: widget.group,
+      objectId: widget.groupId,
+      objectStream: stream,
       childrenTypes: const [Group],
       tabsHeaderBuilder: (context, group) => Tab(
         text: 'المخدومين',
@@ -111,12 +119,18 @@ class ViewGroup extends StatelessWidget {
         onPressed: () => context.push(
           Uri(
             path: '/viewGroup/editGroup',
-            queryParameters: {'id': groupId},
+            queryParameters: {'id': widget.groupId},
           ).toString(),
           extra: {'group': group},
         ),
         icon: const Icon(Icons.edit),
       ),
     );
+  }
+
+  void dispose() {
+    _personsController.dispose();
+
+    super.dispose();
   }
 }

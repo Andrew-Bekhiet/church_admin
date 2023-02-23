@@ -44,14 +44,16 @@ class ViewUser extends StatefulWidget {
 class _ViewUserState extends State<ViewUser> {
   final scrollController = ScrollController();
 
+  late final stream = DatabaseService.I.users.watchUser(
+    uid: widget.userId,
+    fullData: true,
+  );
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       initialData: widget.user,
-      stream: DatabaseService.I.users.watchUser(
-        uid: widget.userId,
-        fullData: true,
-      ),
+      stream: stream,
       builder: (context, snapshot) {
         final themeData = Theme.of(context);
 
