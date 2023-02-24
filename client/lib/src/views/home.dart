@@ -94,6 +94,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
 
+  final Set<ViewableObjectListController> _controllersToDispose = {};
+
   @override
   void initState() {
     super.initState();
@@ -105,22 +107,58 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: const [
-            DrawerHeader(child: Text('Drawer Header')),
-            Expanded(
-              child: NavigationDrawer(
-                children: [
-                  NavigationDrawerDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('الرئيسية'),
-                  )
-                ],
-              ),
+      drawer: Builder(
+        builder: (context) {
+          return Drawer(
+            child: Column(
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    image:
+                        DecorationImage(image: AssetImage('assets/Logo.png')),
+                  ),
+                  child: SizedBox.expand(),
+                ),
+                const Expanded(
+                  child: NavigationDrawer(
+                    children: [
+                      NavigationDrawerDestination(
+                        icon: Icon(Icons.home),
+                        label: Text('الرئيسية'),
+                      ),
+                      NavigationDrawerDestination(
+                        icon: Icon(Icons.manage_accounts),
+                        label: Text('إدارة المستخدمين'),
+                      ),
+                      NavigationDrawerDestination(
+                        icon: Icon(Icons.settings),
+                        label: Text('الإعدادات'),
+                      ),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.info_outline),
+                  title: const Text('حول'),
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                    GetIt.I<AboutAppService>().showAboutDialog(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('تسجيل الخروج'),
+                  onTap: () async {
+                    Scaffold.of(context).openEndDrawer();
+
+                    LocalAuthService.I.scheduleReauth();
+                    await AuthService.instance.signOut();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
       appBar: AppBar(
         title: StreamBuilder<String?>(
@@ -148,9 +186,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       body: _HomeBody(
         tabController: _tabController,
-        personsController: () => _personsController,
-        servicesController: () => _servicesController,
-        areasController: () => _areasController,
+        personsController: () => _ensureWillDispose(_personsController),
+        servicesController: () => _ensureWillDispose(_servicesController),
+        areasController: () => _ensureWillDispose(_areasController),
       ),
       floatingActionButton: AnimatedBuilder(
         animation: _fabAnimationController,
@@ -232,18 +270,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  ViewableObjectListController<T>
+      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+    ViewableObjectListController<T> controller,
+  ) {
+    _controllersToDispose.add(controller);
+    return controller;
+  }
+
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     _tabController.dispose();
     _fabAnimationController.dispose();
+
+    super.dispose();
+
     await _search.close();
     await _bottomNavBar.close();
 
-    await _personsController.dispose();
-    await _servicesController.dispose();
-    await _areasController.dispose();
+    await Future.wait(_controllersToDispose.map((e) => e.dispose()));
   }
 }
 

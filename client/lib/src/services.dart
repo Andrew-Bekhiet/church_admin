@@ -1,3 +1,4 @@
+export 'services/about_app_service.dart';
 export 'services/auth.dart';
 export 'services/connectivity_service.dart';
 export 'services/contacts_service.dart';

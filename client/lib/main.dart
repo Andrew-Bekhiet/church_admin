@@ -27,6 +27,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
 import 'package:timeago/timeago.dart';
 import 'package:universal_platform/universal_platform.dart';
@@ -129,6 +130,7 @@ Future<void> initializeChurchAdmin() async {
   _initializeImagePickerService();
   _initializeContactsService();
   _initializePhoneNumberService();
+  await _initializeAboutAppService();
 
   await _initializeFMTC();
 
@@ -366,12 +368,27 @@ Future<void> _initializeUserSettings() async {
 
 void _initializeViewableObjectService() {
   GetIt.I.registerSingleton<CAViewableObjectService>(
-    CAViewableObjectService(
-      ChurchAdminApp.router,
-    ),
+    CAViewableObjectService(ChurchAdminApp.router),
   );
   GetIt.I.registerSingleton<DefaultViewableObjectService>(
     GetIt.I<CAViewableObjectService>(),
+  );
+}
+
+Future<void> _initializeAboutAppService() async {
+  GetIt.I.registerSingleton<AboutAppService>(
+    AboutAppService(
+      version: (await PackageInfo.fromPlatform()).version,
+      appIcon: Image.asset('assets/Logo.png', width: 50, height: 50),
+      urlLauncher: GetIt.I<LauncherService>().launchUrl,
+      privacyPolicyUrl: Uri(),
+      termsOfServiceUrl: Uri(),
+      githubUrl: Uri(
+        scheme: 'https',
+        host: 'github.com',
+        path: 'Andrew-Bekhiet/church_admin',
+      ),
+    ),
   );
 }
 
