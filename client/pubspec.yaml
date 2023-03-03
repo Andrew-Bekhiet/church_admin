@@ -11,6 +11,12 @@ environment:
 dependency_overrides:
   churchdata_core:
     path: ../churchdata_core
+
+  firebase_core_desktop:
+    git:
+      url: https://github.com/NirmalAriyathilake/flutterfire_desktop
+      ref: main
+      path: packages/firebase_core/firebase_core_desktop
   normalize: ^0.8.0
 
 dependencies:
@@ -20,15 +26,31 @@ dependencies:
   churchdata_core:
     path: ../churchdata_core
   cloud_functions: ^4.0.3
+  firebase_functions_desktop:
+    git:
+      url: https://github.com/NirmalAriyathilake/flutterfire_desktop
+      ref: main
+      path: packages/firebase_functions/firebase_functions_desktop
   collection: ^1.16.0
   connectivity_plus: ^3.0.2
   cupertino_icons: ^1.0.5
+  desktop_webview_auth: ^0.0.11
   device_info_plus: ^8.0.0
   dio: ^4.0.6
   equatable: ^2.0.5
   firebase_app_check: ^0.1.1+1
   firebase_auth: ^4.1.1
+  firebase_auth_desktop:
+    git:
+      url: https://github.com/NirmalAriyathilake/flutterfire_desktop
+      ref: main
+      path: packages/firebase_auth/firebase_auth_desktop
   firebase_core: ^2.1.0
+  firebase_core_desktop:
+    git:
+      url: https://github.com/NirmalAriyathilake/flutterfire_desktop
+      ref: main
+      path: packages/firebase_core/firebase_core_desktop
   firebase_database: ^10.0.2
   firebase_messaging: ^14.0.2
   fl_chart: ^0.60.0

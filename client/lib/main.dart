@@ -92,7 +92,7 @@ Future<void> _initializeHive(ProviderContainer ref) async {
 Future<void> _initializeFirebase(ProviderContainer ref) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  if (!UniversalPlatform.isWindows) {
+  if (!UniversalPlatform.isDesktop) {
     await FirebaseAppCheck.instance.activate(
       webRecaptchaSiteKey: SecretsService.I.webRecaptchaSiteKey,
     );

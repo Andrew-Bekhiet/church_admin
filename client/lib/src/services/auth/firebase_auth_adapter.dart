@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:desktop_webview_auth/desktop_webview_auth.dart';
+import 'package:desktop_webview_auth/google.dart';
 import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, GoogleAuthProvider, IdTokenResult;
+    show FirebaseAuth, GoogleAuthProvider, IdTokenResult, OAuthCredential;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];
@@ -72,18 +75,39 @@ class FirebaseAuthAdapter extends AuthAdapter {
   }
 
   Future<User?> _signInForNative() async {
-    final googleUser = await _googleSignIn.signIn();
-    if (googleUser != null) {
-      final googleAuth = await googleUser.authentication;
-
-      if (googleAuth.accessToken != null) {
-        final credential = GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
+    if (UniversalPlatform.isDesktop) {
+      final credential = await DesktopWebviewAuth.signIn(
+        GoogleSignInArgs(
+          redirectUri: SecretsService.I.webAuthHandler,
+          clientId: SecretsService.I.desktopClientId,
+        ),
+      );
+      if (credential != null) {
+        await _firebaseAuth.signInWithCredential(
+          OAuthCredential(
+            accessToken: credential.accessToken,
+            idToken: credential.idToken,
+            secret: credential.tokenSecret,
+            providerId: 'google.com',
+            signInMethod: 'google.com',
+          ),
         );
-
-        await _firebaseAuth.signInWithCredential(credential);
       }
+    } else {
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+
+        if (googleAuth.accessToken != null) {
+          final credential = GoogleAuthProvider.credential(
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          );
+
+          await _firebaseAuth.signInWithCredential(credential);
+        }
+      }
+      return null;
     }
     return null;
   }
