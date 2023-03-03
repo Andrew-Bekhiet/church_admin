@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get_it/get_it.dart';
 
 class AuthCache {
   AuthCache({
-    FlutterSecureStorage? secureStorage,
-  }) : _secureStorage = secureStorage ?? GetIt.I<FlutterSecureStorage>();
+    required FlutterSecureStorage secureStorage,
+  }) : _secureStorage = secureStorage;
 
   final FlutterSecureStorage _secureStorage;
 

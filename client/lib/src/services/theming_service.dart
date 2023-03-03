@@ -1,12 +1,11 @@
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-
-import 'user_settings_service.dart';
 
 class CAThemingService extends ThemingService with WidgetsBindingObserver {
-  static CAThemingService get I => GetIt.I<CAThemingService>();
+  static CAThemingService get I =>
+      globalProviderContainer.read(themingServiceProvider);
 
   static const MaterialColor black = MaterialColor(0xFF000000, <int, Color>{
     50: Color(0xFFE0E0E0),
@@ -128,11 +127,15 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     Color? primaryOverride,
     bool? darkTheme,
     bool? greatFeastThemeOverride,
+    UserSettingsService? userSettingsService,
   }) {
-    bool isDark = darkTheme ?? GetIt.I<UserSettingsService>().darkTheme;
+    late final _userSettingsService =
+        userSettingsService ?? UserSettingsService.I;
 
-    final bool greatFeastTheme = greatFeastThemeOverride ??
-        GetIt.I<UserSettingsService>().greatFeastTheme;
+    bool isDark = darkTheme ?? _userSettingsService.darkTheme;
+
+    final bool greatFeastTheme =
+        greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
 
     MaterialColor primary =
         (primaryOverride is! MaterialColor && primaryOverride != null
@@ -248,17 +251,27 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     ); */
   }
 
-  factory CAThemingService() =>
-      CAThemingService.withInitialThemeata(getDefault());
+  final UserSettingsService _userSettingsService;
 
-  CAThemingService.withInitialThemeata(super.initialTheme)
-      : super.withInitialThemeata() {
+  factory CAThemingService({
+    required UserSettingsService userSettingsService,
+  }) =>
+      CAThemingService.withInitialThemeata(
+        userSettingsService: userSettingsService,
+        initialTheme: getDefault(userSettingsService: userSettingsService),
+      );
+
+  CAThemingService.withInitialThemeata({
+    required UserSettingsService userSettingsService,
+    required ThemeData initialTheme,
+  })  : _userSettingsService = userSettingsService,
+        super.withInitialThemeata(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didChangePlatformBrightness() {
-    switchTheme(GetIt.I<UserSettingsService>().darkTheme);
+    switchTheme(_userSettingsService.darkTheme);
   }
 
   @override

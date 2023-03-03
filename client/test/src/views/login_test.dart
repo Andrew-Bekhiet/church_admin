@@ -1,14 +1,15 @@
 // ignore_for_file: discarded_futures
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
-import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart' show Box;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart' hide Box;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 
 import '../dummy_named_location.dart';
@@ -21,11 +22,11 @@ import 'login_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<DummyNamedLocation>(),
   MockSpec<UserSettingsService>(),
-  MockSpec<CacheRepository>(),
+  MockSpec<HiveInterface>(),
   MockSpec<CANotificationsService>()
 ])
 void main() {
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testWidgets(
     'Login Screen => Key elements',
@@ -68,13 +69,14 @@ void main() {
 
       // final firebaseAuth = _setUpFirebaseAuth();
 
-      _setUpNotificationsService();
+      final overrides = [
+        await _setUpHive(),
+        _setUpNotificationsService(),
+        _setUpUserSettings(),
+        _setUpAuthService(),
+      ];
 
-      _setUpUserSettings();
-
-      await _setUpCacheRepo();
-
-      _setUpAuthService();
+      initGlobalProviderContainer(overrides);
 
       await tester.pumpWidget(wrapWithMaterialApp(const LoginScreen()));
 
@@ -82,7 +84,7 @@ void main() {
 
       await tester.tap(find.bySubtype<FilledButton>());
 
-      verify(GetIt.I<AuthService>().signInWithGoogle());
+      verify(AuthService.I.signInWithGoogle());
     },
   );
 
@@ -92,7 +94,9 @@ void main() {
       test(
         'No Signed In User',
         () async {
-          _setUpAuthService(isSignedIn: false);
+          final overrides = [_setUpAuthService(isSignedIn: false)];
+
+          initGlobalProviderContainer(overrides);
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
@@ -107,7 +111,9 @@ void main() {
       test(
         'Signed In User',
         () async {
-          _setUpAuthService();
+          final overrides = [_setUpAuthService()];
+
+          initGlobalProviderContainer(overrides);
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
@@ -122,19 +128,16 @@ void main() {
   );
 }
 
-Future<void> _setUpCacheRepo({bool mock = true}) async {
-  final cacheRepository = mock ? MockCacheRepository() : FakeCacheRepo();
+Future<Override> _setUpHive() async {
+  final hiveMock = MockHiveInterface();
 
-  if (mock) {
-    when((cacheRepository as MockCacheRepository).openBox(captureAny))
-        .thenAnswer((_) async => Box<NotificationSetting>('name'));
-  } else {
-    await cacheRepository.openBox('User');
-  }
-  GetIt.I.registerSingleton<CacheRepository>(cacheRepository);
+  when(hiveMock.openBox(captureAny))
+      .thenAnswer((_) async => Box<NotificationSetting>('name'));
+
+  return hiveProvider.overrideWithValue(hiveMock);
 }
 
-void _setUpUserSettings() {
+Override _setUpUserSettings() {
   final userSettings = MockUserSettingsService();
   when(userSettings.setSecondLineFor(Area, captureAny))
       .thenAnswer((_) async {});
@@ -145,44 +148,35 @@ void _setUpUserSettings() {
   when(userSettings.setSecondLineFor(Person, captureAny))
       .thenAnswer((_) async {});
 
-  GetIt.I.registerSingleton<UserSettingsService>(userSettings);
+  return userSettingsServiceProvider.overrideWithValue(userSettings);
 }
 
-void _setUpAuthService({bool mock = true, bool isSignedIn = true}) {
-  final authRepo = mock
-      ? MockAuthService()
-      : AuthService(
-          cache: MockAuthCache(),
-          adapter: FirebaseAuthAdapter(
-            databaseRepository: MockDatabaseService(),
-          ),
-          connectivityService: MockConnectivityService(),
-        );
-  if (mock) {
-    if (isSignedIn) {
-      final user = User(
-        uid: 'uid',
-        name: '',
-        password: '',
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        authId: 'firebaseAuthUID',
-      );
-      when(authRepo.userStream).thenAnswer(
-        (_) => BehaviorSubject.seeded(
-          user,
-        ),
-      );
-      when(authRepo.currentUser).thenReturn(
+Override _setUpAuthService({bool isSignedIn = true}) {
+  final authRepo = MockAuthService();
+  if (isSignedIn) {
+    final user = User(
+      uid: 'uid',
+      name: '',
+      password: '',
+      permissions: CAPermissionsSet.fromSet(const {}),
+      email: 'email',
+      authId: 'firebaseAuthUID',
+    );
+    when(authRepo.userStream).thenAnswer(
+      (_) => BehaviorSubject.seeded(
         user,
-      );
-    }
-    when(authRepo.isSignedIn).thenReturn(isSignedIn);
+      ),
+    );
+    when(authRepo.currentUser).thenReturn(
+      user,
+    );
   }
-  GetIt.I.registerSingleton<AuthService>(authRepo, signalsReady: !mock);
+  when(authRepo.isSignedIn).thenReturn(isSignedIn);
+
+  return authServiceProvider.overrideWithValue(authRepo);
 }
 
-void _setUpNotificationsService() {
+Override _setUpNotificationsService() {
   final notifications = MockCANotificationsService();
   when(
     notifications.schedulePeriodic(
@@ -196,5 +190,6 @@ void _setUpNotificationsService() {
       wakeup: anyNamed('wakeup'),
     ),
   ).thenAnswer((_) async => true);
-  GetIt.I.registerSingleton<CANotificationsService>(notifications);
+
+  return notificationsServiceProvider.overrideWithValue(notifications);
 }

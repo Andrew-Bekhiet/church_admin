@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewClass extends StatefulWidget {
@@ -113,7 +112,7 @@ class _ViewClassState extends State<ViewClass> {
       tabsHeaderBuilder: (context, $class) => Tab(
         text: 'المخدومين',
         icon: Icon(
-          GetIt.I<CAViewableObjectService>().getDefaultIconFor<Person>(),
+          CAViewableObjectService.I.getDefaultIconFor<Person>(),
         ),
       ),
     );

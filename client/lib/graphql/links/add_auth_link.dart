@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:get_it/get_it.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart_ext/operators.dart';
@@ -22,10 +21,10 @@ class AddAuthLink extends Link {
 
   AddAuthLink({
     required this.url,
+    AuthService Function()? getAuthService,
     this.createHttpLink = defaultCreateHttpLink,
     this.createWSLink = defaultCreateWSLink,
-    AuthService Function()? getAuthService,
-  }) : _getAuthService = getAuthService ?? GetIt.I.call<AuthService>;
+  }) : _getAuthService = getAuthService ?? (() => AuthService.I);
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {

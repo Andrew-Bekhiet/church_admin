@@ -1,17 +1,17 @@
 import 'dart:async';
 
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserSettingsService {
-  static UserSettingsService get I => GetIt.I<UserSettingsService>();
+  static UserSettingsService get I =>
+      globalProviderContainer.read(userSettingsServiceProvider);
 
   final Box box;
 
-  UserSettingsService({Box? box})
-      : box = box ?? GetIt.I<HiveInterface>().box('Settings') {
-    assert(this.box.isOpen);
+  UserSettingsService({required this.box}) {
+    assert(box.isOpen);
   }
 
   bool get darkTheme => box.get(

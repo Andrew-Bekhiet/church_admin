@@ -1,12 +1,32 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/foundation.dart';
+import 'package:universal_file/universal_file.dart';
 
 class FakeDeviceInfoPlatform extends DeviceInfoPlatform {
   @override
   Future<BaseDeviceInfo> deviceInfo() async {
-    return BaseDeviceInfo({
-      ...WindowsDeviceInfo(
+    if (kIsWeb) {
+      WebBrowserInfo(
+        appCodeName: 'appCodeName',
+        appName: 'appName',
+        appVersion: 'appVersion',
+        deviceMemory: 8 * 1024,
+        language: 'language',
+        languages: [],
+        platform: 'platform',
+        product: 'product',
+        productSub: 'productSub',
+        userAgent: 'userAgent',
+        vendor: 'vendor',
+        vendorSub: 'vendorSub',
+        maxTouchPoints: 4,
+        hardwareConcurrency: 8,
+      );
+    }
+
+    if (Platform.isWindows) {
+      return WindowsDeviceInfo(
         numberOfCores: 8,
         systemMemoryInMegabytes: 8 * 1024,
         userName: 'userName',
@@ -32,30 +52,18 @@ class FakeDeviceInfoPlatform extends DeviceInfoPlatform {
         registeredOwner: 'registeredOwner',
         releaseId: 'releaseId',
         deviceId: 'deviceId',
-      ).data,
-      ...LinuxDeviceInfo(
+      );
+    }
+    if (Platform.isLinux) {
+      return LinuxDeviceInfo(
         id: 'id',
         prettyName: 'prettyName',
         name: 'name',
         machineId: 'machineId',
-      ).data,
-      ...WebBrowserInfo(
-        appCodeName: 'appCodeName',
-        appName: 'appName',
-        appVersion: 'appVersion',
-        deviceMemory: 8 * 1024,
-        language: 'language',
-        languages: [],
-        platform: 'platform',
-        product: 'product',
-        productSub: 'productSub',
-        userAgent: 'userAgent',
-        vendor: 'vendor',
-        vendorSub: 'vendorSub',
-        maxTouchPoints: 4,
-        hardwareConcurrency: 8,
-      ).data
-    });
+      );
+    }
+
+    throw UnimplementedError();
   }
 }
 

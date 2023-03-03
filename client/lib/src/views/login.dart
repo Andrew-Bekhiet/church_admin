@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
   @visibleForTesting
   static String? redirect() {
-    if (AuthService.instance.isSignedIn) {
+    if (AuthService.I.isSignedIn) {
       return '/';
     }
     return null;
@@ -141,9 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginWithGoogle() async {
     setState(() => _loading = true);
     try {
-      await AuthService.instance.signInWithGoogle();
+      await AuthService.I.signInWithGoogle();
 
-      await AuthService.instance.userStream.nextNonNullStrict;
+      await AuthService.I.userStream.nextNonNullStrict;
       await setupSettings();
 
       if (mounted) {
@@ -153,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) {
         setState(() => _loading = false);
       }
-      await GetIt.I<LoggingService>().reportError(
+      await LoggingService.I.reportError(
         err as Exception,
         stackTrace: stack,
       );
@@ -170,17 +169,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> setupSettings() async {
-    final getIt = GetIt.I;
-
     try {
-      final settings = getIt<UserSettingsService>();
+      final settings = UserSettingsService.I;
 
       // await settings.setSecondLineFor(Area, 'lastVisit');
       // await settings.setSecondLineFor(Street, 'lastVisit');
       // await settings.setSecondLineFor(Family, 'lastVisit');
       await settings.setSecondLineFor(Person, 'birthdate');
 
-      final notificationsSettings = await getIt<CacheRepository>()
+      final notificationsSettings = await globalProviderContainer
+          .read(hiveProvider)
           .openBox<NotificationSetting>('NotificationsSettings');
 
       await notificationsSettings.put(
@@ -188,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 1),
       );
 
-      await getIt<CANotificationsService>().schedulePeriodic(
+      await CANotificationsService.I.schedulePeriodic(
         const Duration(days: 1),
         'BirthDay'.hashCode,
         NotificationsServiceCallbacks.showBirthDayNotification,
@@ -205,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await getIt<CANotificationsService>().schedulePeriodic(
+      await CANotificationsService.I.schedulePeriodic(
         const Duration(days: 7),
         'Kodas'.hashCode,
         NotificationsServiceCallbacks.showKodasNotification,
@@ -221,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await getIt<CANotificationsService>().schedulePeriodic(
+      await CANotificationsService.I.schedulePeriodic(
         const Duration(days: 7),
         'Meeting'.hashCode,
         NotificationsServiceCallbacks.showMeetingNotification,
@@ -237,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const NotificationSetting(11, 0, 7),
       );
 
-      await getIt<CANotificationsService>().schedulePeriodic(
+      await CANotificationsService.I.schedulePeriodic(
         const Duration(days: 7),
         'Confessions'.hashCode,
         NotificationsServiceCallbacks.showConfessionNotification,
@@ -248,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
         rescheduleOnReboot: true,
       );
     } catch (err, stack) {
-      await getIt<LoggingService>().reportError(
+      await LoggingService.I.reportError(
         err as Exception,
         stackTrace: stack,
       );

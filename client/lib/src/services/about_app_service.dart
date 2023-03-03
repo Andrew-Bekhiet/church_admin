@@ -1,8 +1,12 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' as m show showAboutDialog;
 import 'package:flutter/material.dart';
 
 class AboutAppService {
+  static AboutAppService get I =>
+      globalProviderContainer.read(aboutAppServiceProvider);
+
   String version;
 
   Widget appIcon;

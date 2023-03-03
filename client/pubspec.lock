@@ -215,6 +215,14 @@ packages:
       relative: true
     source: path
     version: "0.4.0"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      sha256: "66f86e916d285c1a93d3b79587d94bd71984a66aac4ff74e524cfa7877f1395c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -359,6 +367,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  custom_lint:
+    dependency: transitive
+    description:
+      name: custom_lint
+      sha256: "29b7e51b5e75fcd5ffce8fc12af87b71cbde7a59d080467b187630231aeb42c0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5"
+  custom_lint_core:
+    dependency: transitive
+    description:
+      name: custom_lint_core
+      sha256: "4592ac37e7cf4c9410268765f1c8ca3520309bbd0a340f3dfd047d18e5351962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.10"
   dart_code_metrics:
     dependency: "direct dev"
     description:
@@ -842,6 +866,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  flutter_riverpod:
+    dependency: "direct main"
+    description:
+      name: flutter_riverpod
+      sha256: "46a27b7a11dc13738054093076f2dc65692ddcd463979b15092accf5681aea20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -1885,6 +1917,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  riverpod:
+    dependency: "direct main"
+    description:
+      name: riverpod
+      sha256: "59a48de9c757aa61aa28e9fd625ffb360d43b6b54606f12536622c55be9e8c4b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  riverpod_analyzer_utils:
+    dependency: transitive
+    description:
+      name: riverpod_analyzer_utils
+      sha256: "4f0d8f5887186f5fad5377a003beabc36f21f48098828e61be11c03578a8f03a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  riverpod_annotation:
+    dependency: "direct main"
+    description:
+      name: riverpod_annotation
+      sha256: "4726dfa853880e64a8a9f7232eb10a69d6d1df5a45d5847fd0b9ecf6807e57b7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
+  riverpod_generator:
+    dependency: "direct dev"
+    description:
+      name: riverpod_generator
+      sha256: de002980e1b47d8a8275a465e7c955cbe4722ea97cab76d93af90dad920eac05
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   rx:
     dependency: transitive
     description:
@@ -1934,7 +1998,7 @@ packages:
     source: hosted
     version: "6.20.1"
   sentry_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sentry_flutter
       sha256: "5ca2c8d86c220f7ad3109bedceb2c51b0e90bac5218e732be98ea2cba8006461"
@@ -2042,6 +2106,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2+1"
   stock:
     dependency: "direct main"
     description:

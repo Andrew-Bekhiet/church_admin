@@ -4,16 +4,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:typed_data' as _i11;
+import 'dart:typed_data' as _i12;
 
 import 'package:church_admin/church_admin.dart' as _i3;
 import 'package:church_admin/src/services/database/gql_definintions.dart'
     as _i5;
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i4;
-import 'package:churchdata_core/churchdata_core.dart' as _i10;
 import 'package:flutter/widgets.dart' as _i6;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    as _i12;
+    as _i13;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i11;
+import 'package:hive/src/box/default_key_comparator.dart' as _i10;
 import 'package:hive_flutter/hive_flutter.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
@@ -654,10 +655,145 @@ class MockUserSettingsService extends _i1.Mock
       ) as _i8.Future<void>);
 }
 
-/// A class which mocks [CacheRepository].
+/// A class which mocks [HiveInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
+class MockHiveInterface extends _i1.Mock implements _i7.HiveInterface {
+  @override
+  void init(
+    String? path, {
+    _i7.HiveStorageBackendPreference? backendPreference =
+        _i7.HiveStorageBackendPreference.native,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [path],
+          {#backendPreference: backendPreference},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i8.Future<_i7.Box<E>> openBox<E>(
+    String? name, {
+    _i7.HiveCipher? encryptionCipher,
+    _i7.KeyComparator? keyComparator = _i10.defaultKeyComparator,
+    _i7.CompactionStrategy? compactionStrategy = _i11.defaultCompactionStrategy,
+    bool? crashRecovery = true,
+    String? path,
+    _i12.Uint8List? bytes,
+    String? collection,
+    List<int>? encryptionKey,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openBox,
+          [name],
+          {
+            #encryptionCipher: encryptionCipher,
+            #keyComparator: keyComparator,
+            #compactionStrategy: compactionStrategy,
+            #crashRecovery: crashRecovery,
+            #path: path,
+            #bytes: bytes,
+            #collection: collection,
+            #encryptionKey: encryptionKey,
+          },
+        ),
+        returnValue: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
+          this,
+          Invocation.method(
+            #openBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #bytes: bytes,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
+          this,
+          Invocation.method(
+            #openBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #bytes: bytes,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i7.Box<E>>);
+  @override
+  _i8.Future<_i7.LazyBox<E>> openLazyBox<E>(
+    String? name, {
+    _i7.HiveCipher? encryptionCipher,
+    _i7.KeyComparator? keyComparator = _i10.defaultKeyComparator,
+    _i7.CompactionStrategy? compactionStrategy = _i11.defaultCompactionStrategy,
+    bool? crashRecovery = true,
+    String? path,
+    String? collection,
+    List<int>? encryptionKey,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openLazyBox,
+          [name],
+          {
+            #encryptionCipher: encryptionCipher,
+            #keyComparator: keyComparator,
+            #compactionStrategy: compactionStrategy,
+            #crashRecovery: crashRecovery,
+            #path: path,
+            #collection: collection,
+            #encryptionKey: encryptionKey,
+          },
+        ),
+        returnValue: _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
+          this,
+          Invocation.method(
+            #openLazyBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
+          this,
+          Invocation.method(
+            #openLazyBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i7.LazyBox<E>>);
   @override
   _i7.Box<E> box<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -680,19 +816,35 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
         ),
       ) as _i7.Box<E>);
   @override
-  _i8.Future<bool> boxExists(
-    String? name, {
-    String? path,
-  }) =>
-      (super.noSuchMethod(
+  _i7.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
-          #boxExists,
+          #lazyBox,
           [name],
-          {#path: path},
         ),
-        returnValue: _i8.Future<bool>.value(false),
-        returnValueForMissingStub: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+        returnValue: _FakeLazyBox_16<E>(
+          this,
+          Invocation.method(
+            #lazyBox,
+            [name],
+          ),
+        ),
+        returnValueForMissingStub: _FakeLazyBox_16<E>(
+          this,
+          Invocation.method(
+            #lazyBox,
+            [name],
+          ),
+        ),
+      ) as _i7.LazyBox<E>);
+  @override
+  bool isBoxOpen(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #isBoxOpen,
+          [name],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
   @override
   _i8.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
@@ -735,187 +887,27 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
         returnValueForMissingStub: <int>[],
       ) as List<int>);
   @override
-  void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
-        Invocation.method(
-          #ignoreTypeId,
-          [typeId],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void init(
-    String? path, {
-    _i7.HiveStorageBackendPreference? backendPreference =
-        _i7.HiveStorageBackendPreference.native,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [path],
-          {#backendPreference: backendPreference},
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
-        Invocation.method(
-          #isAdapterRegistered,
-          [typeId],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  bool isBoxOpen(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #isBoxOpen,
-          [name],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i7.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #lazyBox,
-          [name],
-        ),
-        returnValue: _FakeLazyBox_16<E>(
-          this,
-          Invocation.method(
-            #lazyBox,
-            [name],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLazyBox_16<E>(
-          this,
-          Invocation.method(
-            #lazyBox,
-            [name],
-          ),
-        ),
-      ) as _i7.LazyBox<E>);
-  @override
-  _i8.Future<_i7.Box<E>> openBox<E>(
+  _i8.Future<bool> boxExists(
     String? name, {
-    _i7.HiveCipher? encryptionCipher,
-    _i7.KeyComparator? keyComparator = _i10.defaultKeyComparator,
-    _i7.CompactionStrategy? compactionStrategy = _i10.defaultCompactionStrategy,
-    bool? crashRecovery = true,
     String? path,
-    _i11.Uint8List? bytes,
-    List<int>? encryptionKey,
-    String? collection,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #openBox,
+          #boxExists,
           [name],
-          {
-            #encryptionCipher: encryptionCipher,
-            #keyComparator: keyComparator,
-            #compactionStrategy: compactionStrategy,
-            #crashRecovery: crashRecovery,
-            #path: path,
-            #bytes: bytes,
-            #encryptionKey: encryptionKey,
-            #collection: collection,
-          },
+          {#path: path},
         ),
-        returnValue: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
-          this,
-          Invocation.method(
-            #openBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #bytes: bytes,
-              #encryptionKey: encryptionKey,
-              #collection: collection,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i7.Box<E>>.value(_FakeBox_15<E>(
-          this,
-          Invocation.method(
-            #openBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #bytes: bytes,
-              #encryptionKey: encryptionKey,
-              #collection: collection,
-            },
-          ),
-        )),
-      ) as _i8.Future<_i7.Box<E>>);
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
   @override
-  _i8.Future<_i7.LazyBox<E>> openLazyBox<E>(
-    String? name, {
-    _i7.HiveCipher? encryptionCipher,
-    _i7.KeyComparator? keyComparator = _i10.defaultKeyComparator,
-    _i7.CompactionStrategy? compactionStrategy = _i10.defaultCompactionStrategy,
-    bool? crashRecovery = true,
-    String? path,
-    List<int>? encryptionKey,
-    String? collection,
-  }) =>
-      (super.noSuchMethod(
+  void resetAdapters() => super.noSuchMethod(
         Invocation.method(
-          #openLazyBox,
-          [name],
-          {
-            #encryptionCipher: encryptionCipher,
-            #keyComparator: keyComparator,
-            #compactionStrategy: compactionStrategy,
-            #crashRecovery: crashRecovery,
-            #path: path,
-            #encryptionKey: encryptionKey,
-            #collection: collection,
-          },
+          #resetAdapters,
+          [],
         ),
-        returnValue: _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
-          this,
-          Invocation.method(
-            #openLazyBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #encryptionKey: encryptionKey,
-              #collection: collection,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i7.LazyBox<E>>.value(_FakeLazyBox_16<E>(
-          this,
-          Invocation.method(
-            #openLazyBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #encryptionKey: encryptionKey,
-              #collection: collection,
-            },
-          ),
-        )),
-      ) as _i8.Future<_i7.LazyBox<E>>);
+        returnValueForMissingStub: null,
+      );
   @override
   void registerAdapter<T>(
     _i7.TypeAdapter<T>? adapter, {
@@ -934,19 +926,19 @@ class MockCacheRepository extends _i1.Mock implements _i10.CacheRepository {
         returnValueForMissingStub: null,
       );
   @override
-  _i8.Future<void> dispose() => (super.noSuchMethod(
+  bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
         Invocation.method(
-          #dispose,
-          [],
+          #isAdapterRegistered,
+          [typeId],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
   @override
-  void resetAdapters() => super.noSuchMethod(
+  void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
         Invocation.method(
-          #resetAdapters,
-          [],
+          #ignoreTypeId,
+          [typeId],
         ),
         returnValueForMissingStub: null,
       );
@@ -1039,7 +1031,7 @@ class MockCANotificationsService extends _i1.Mock
   _i8.Future<void> show(
     _i3.Notification? notification, {
     int? id,
-    _i12.NotificationDetails? notificationDetails,
+    _i13.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

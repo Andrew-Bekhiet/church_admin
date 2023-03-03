@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, GoogleAuthProvider, IdTokenResult;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,16 +19,16 @@ class FirebaseAuthAdapter extends AuthAdapter {
   }
 
   FirebaseAuthAdapter({
-    FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
-    DatabaseService? databaseRepository,
-  })  : _googleSignIn = googleSignIn ?? GetIt.I<GoogleSignIn>(),
-        _firebaseAuth = firebaseAuth ?? GetIt.I<FirebaseAuth>(),
-        _databaseRepository = databaseRepository ?? GetIt.I<DatabaseService>();
+    required FirebaseAuth firebaseAuth,
+    required GoogleSignIn googleSignIn,
+    DatabaseService? databaseService,
+  })  : _googleSignIn = googleSignIn,
+        _firebaseAuth = firebaseAuth,
+        _databaseService = databaseService ?? DatabaseService.I;
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final DatabaseService _databaseRepository;
+  final DatabaseService _databaseService;
 
   @override
   late final Stream<User?> userStream = _firebaseAuth
@@ -59,9 +58,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
     Json jwtClaims,
     String token,
   ) {
-    return _databaseRepository.users
-        .watchUser(uid: _getHasuraUID(jwtClaims))
-        .map(
+    return _databaseService.users.watchUser(uid: _getHasuraUID(jwtClaims)).map(
           (user) => user!.copyWith(
             password: _getPassword(jwtClaims),
             idToken: token,

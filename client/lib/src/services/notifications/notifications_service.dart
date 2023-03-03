@@ -7,14 +7,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
 
 import 'notifications_storage.dart';
 
 class CANotificationsService {
-  static CANotificationsService get I => GetIt.I<CANotificationsService>();
+  static CANotificationsService get I =>
+      globalProviderContainer.read(notificationsServiceProvider);
 
   static const String localNotificationSenderUID =
       'LOCAL_NOTIFICATION_SENDER_UID';
@@ -42,29 +42,25 @@ class CANotificationsService {
   }
 
   CANotificationsService({
-    FirebaseMessaging? firebaseMessaging,
-    FlutterLocalNotificationsPlugin? localNotificationsPlugin,
+    required FirebaseMessaging firebaseMessaging,
+    required FlutterLocalNotificationsPlugin localNotificationsPlugin,
+    required Stream<RemoteMessage> onForegroundMessageStream,
+    required Stream<RemoteMessage> onMessageOpenedAppStream,
     AuthService Function()? getAuthService,
     UserSettingsService? userSettingsService,
     CAFunctionsService? functionsService,
     NotificationsStorage? storage,
-    Stream<RemoteMessage>? onForegroundMessageStream,
-    Stream<RemoteMessage>? onMessageOpenedAppStream,
-  })  : _storage = storage ?? GetIt.I<NotificationsStorage>(),
-        _firebaseMessaging = firebaseMessaging ?? GetIt.I<FirebaseMessaging>(),
-        _localNotificationsPlugin = localNotificationsPlugin ??
-            GetIt.I<FlutterLocalNotificationsPlugin>(),
-        _getAuthService = getAuthService ?? GetIt.I.call<AuthService>,
-        _userSettingsService =
-            userSettingsService ?? GetIt.I<UserSettingsService>(),
-        _functionsService = functionsService ?? GetIt.I<CAFunctionsService>() {
+  })  : _storage = storage ?? NotificationsStorage.I,
+        _firebaseMessaging = firebaseMessaging,
+        _localNotificationsPlugin = localNotificationsPlugin,
+        _getAuthService = getAuthService ?? (() => AuthService.I),
+        _userSettingsService = userSettingsService ?? UserSettingsService.I,
+        _functionsService = functionsService ?? CAFunctionsService.I {
     _onForegroundMessageSubscription =
-        (onForegroundMessageStream ?? FirebaseMessaging.onMessage)
-            .listen(_onForegroundMessage);
+        onForegroundMessageStream.listen(_onForegroundMessage);
 
     _onMessageOpenedAppSubscription =
-        (onMessageOpenedAppStream ?? FirebaseMessaging.onMessageOpenedApp)
-            .listen(_onMessageOpenedApp);
+        onMessageOpenedAppStream.listen(_onMessageOpenedApp);
   }
 
   final NotificationsStorage _storage;
@@ -231,7 +227,6 @@ class NotificationsServiceCallbacks {
     String? notificationId,
   ) async {
     if (WidgetsBinding.instance.renderViewElement != null &&
-        GetIt.I.isRegistered<CANotificationsService>() &&
         notificationId != null) {
       return NotificationsStorage.I.readNotification(notificationId);
     }
@@ -242,7 +237,7 @@ class NotificationsServiceCallbacks {
   static Future<void> showKodasNotification() async {
     await initializeChurchAdmin();
 
-    if (!AuthService.instance.isSignedIn) return;
+    if (!AuthService.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.persons.notificationsQueries
         .getPersonsKodasWarning(
@@ -298,7 +293,7 @@ class NotificationsServiceCallbacks {
   static Future<void> showMeetingNotification() async {
     await initializeChurchAdmin();
 
-    if (!AuthService.instance.isSignedIn) return;
+    if (!AuthService.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.persons.notificationsQueries
         .getPersonsMeetingWarning(
@@ -354,7 +349,7 @@ class NotificationsServiceCallbacks {
   static Future<void> showVisitNotification() async {
     await initializeChurchAdmin();
 
-    if (!AuthService.instance.isSignedIn) return;
+    if (!AuthService.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.persons.notificationsQueries
         .getPersonsVisitWarning(
@@ -410,7 +405,7 @@ class NotificationsServiceCallbacks {
   static Future<void> showConfessionNotification() async {
     await initializeChurchAdmin();
 
-    if (!AuthService.instance.isSignedIn) return;
+    if (!AuthService.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.persons.notificationsQueries
         .getPersonsConfessionWarning(
@@ -466,7 +461,7 @@ class NotificationsServiceCallbacks {
   static Future<void> showBirthDayNotification() async {
     await initializeChurchAdmin();
 
-    if (!AuthService.instance.isSignedIn) return;
+    if (!AuthService.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.persons.notificationsQueries
         .getBirthdayPersons(date: DateTime.now());

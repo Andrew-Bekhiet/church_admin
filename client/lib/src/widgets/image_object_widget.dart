@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:get_it/get_it.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageObjectWidget extends StatelessWidget {
@@ -13,10 +12,9 @@ class ImageObjectWidget extends StatelessWidget {
     this.circleCrop = true,
     this.heroTag,
     super.key,
-  })  : photoUrlCacheService =
-            imageUrlCacheService ?? GetIt.I<ImageUrlCacheService>(),
+  })  : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
         viewableObjectService =
-            viewableObjectService ?? GetIt.I<CAViewableObjectService>();
+            viewableObjectService ?? CAViewableObjectService.I;
 
   final ImageUrlCacheService photoUrlCacheService;
   final CAViewableObjectService viewableObjectService;
@@ -158,7 +156,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
           ? null
           : (MediaQuery.of(context).devicePixelRatio * constraints.maxHeight)
               .floor(),
-      cacheManager: GetIt.I<BaseCacheManager>(),
+      cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
       errorWidget: (context, url, error) => Icon(
         defaultIcon,
         size: constraints.maxHeight,

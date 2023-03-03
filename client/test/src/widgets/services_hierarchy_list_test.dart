@@ -3,11 +3,11 @@ import 'package:churchdata_core/churchdata_core.dart'
     show PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:rxdart_ext/single.dart';
 
 import '../utils.dart';
@@ -26,7 +26,7 @@ Future<void> main() async {
 
   setUp(_setUp);
 
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testGoldens(
     'ServicesHierarchyList => Goldens test',
@@ -290,27 +290,34 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
 }
 
 Future<void> _setUp() async {
-  await _setUpImageUrlCacheService();
-  _setUpUserSettingsService();
-  _setUpCAViewableObjectService();
+  final overrides = [
+    await _setUpImageUrlCacheService(),
+    _setUpUserSettingsService(),
+    _setUpCAViewableObjectService(),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpUserSettingsService() {
+Override _setUpUserSettingsService() {
   final mockUserSettingsService = MockUserSettingsService();
 
   when(mockUserSettingsService.getSecondLineFor(any)).thenReturn('');
 
-  GetIt.I.registerSingleton<UserSettingsService>(mockUserSettingsService);
+  return userSettingsServiceProvider.overrideWithValue(mockUserSettingsService);
 }
 
-void _setUpCAViewableObjectService() {
-  GetIt.I.registerSingleton<CAViewableObjectService>(
-    CAViewableObjectService(MockGoRouter()),
+Override _setUpCAViewableObjectService() {
+  return viewableObjectServiceProvider.overrideWith(
+    (ref) => CAViewableObjectService(
+      router: MockGoRouter(),
+      userSettingsService: ref.read(userSettingsServiceProvider),
+    ),
   );
 }
 
-Future<void> _setUpImageUrlCacheService() async {
-  GetIt.I.registerSingleton<ImageUrlCacheService>(
+Future<Override> _setUpImageUrlCacheService() async {
+  return imageUrlCacheServiceProvider.overrideWithValue(
     MockImageUrlCacheService(),
   );
 }

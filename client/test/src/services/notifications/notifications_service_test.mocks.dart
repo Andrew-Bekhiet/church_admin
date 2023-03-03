@@ -86,9 +86,19 @@ class _FakeBox_3<E> extends _i1.SmartFake implements _i5.Box<E> {
         );
 }
 
-class _FakeHttpsCallableResult_4<T> extends _i1.SmartFake
+class _FakeHttpsCallable_4 extends _i1.SmartFake implements _i6.HttpsCallable {
+  _FakeHttpsCallable_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeHttpsCallableResult_5<T> extends _i1.SmartFake
     implements _i6.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_4(
+  _FakeHttpsCallableResult_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -97,18 +107,8 @@ class _FakeHttpsCallableResult_4<T> extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_5<T> extends _i1.SmartFake implements _i7.Response<T> {
-  _FakeResponse_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeHttpsCallable_6 extends _i1.SmartFake implements _i6.HttpsCallable {
-  _FakeHttpsCallable_6(
+class _FakeResponse_6<T> extends _i1.SmartFake implements _i7.Response<T> {
+  _FakeResponse_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -923,6 +923,34 @@ class MockUserSettingsService extends _i1.Mock
 class MockCAFunctionsService extends _i1.Mock
     implements _i18.CAFunctionsService {
   @override
+  _i6.HttpsCallable httpsCallable(
+    String? functionName, {
+    _i6.HttpsCallableOptions? options,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #httpsCallable,
+          [functionName],
+          {#options: options},
+        ),
+        returnValue: _FakeHttpsCallable_4(
+          this,
+          Invocation.method(
+            #httpsCallable,
+            [functionName],
+            {#options: options},
+          ),
+        ),
+        returnValueForMissingStub: _FakeHttpsCallable_4(
+          this,
+          Invocation.method(
+            #httpsCallable,
+            [functionName],
+            {#options: options},
+          ),
+        ),
+      ) as _i6.HttpsCallable);
+  @override
   _i9.Future<String> getDownloadUrl(
     String? table,
     String? id, {
@@ -974,7 +1002,7 @@ class MockCAFunctionsService extends _i1.Mock
           },
         ),
         returnValue: _i9.Future<_i6.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_4<dynamic>(
+            _FakeHttpsCallableResult_5<dynamic>(
           this,
           Invocation.method(
             #recoverDocument,
@@ -987,7 +1015,7 @@ class MockCAFunctionsService extends _i1.Mock
         )),
         returnValueForMissingStub:
             _i9.Future<_i6.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_4<dynamic>(
+                _FakeHttpsCallableResult_5<dynamic>(
           this,
           Invocation.method(
             #recoverDocument,
@@ -1034,7 +1062,7 @@ class MockCAFunctionsService extends _i1.Mock
           },
         ),
         returnValue:
-            _i9.Future<_i7.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i7.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -1049,7 +1077,7 @@ class MockCAFunctionsService extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i7.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i7.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -1074,34 +1102,6 @@ class MockCAFunctionsService extends _i1.Mock
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
   @override
-  _i6.HttpsCallable httpsCallable(
-    String? functionName, {
-    _i6.HttpsCallableOptions? options,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #httpsCallable,
-          [functionName],
-          {#options: options},
-        ),
-        returnValue: _FakeHttpsCallable_6(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-        returnValueForMissingStub: _FakeHttpsCallable_6(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-      ) as _i6.HttpsCallable);
-  @override
   _i9.Future<_i6.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
       (super.noSuchMethod(
@@ -1110,7 +1110,7 @@ class MockCAFunctionsService extends _i1.Mock
           [token],
         ),
         returnValue: _i9.Future<_i6.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_4<dynamic>(
+            _FakeHttpsCallableResult_5<dynamic>(
           this,
           Invocation.method(
             #registerFCMToken,
@@ -1119,7 +1119,7 @@ class MockCAFunctionsService extends _i1.Mock
         )),
         returnValueForMissingStub:
             _i9.Future<_i6.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_4<dynamic>(
+                _FakeHttpsCallableResult_5<dynamic>(
           this,
           Invocation.method(
             #registerFCMToken,

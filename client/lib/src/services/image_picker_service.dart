@@ -1,5 +1,5 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,15 +9,16 @@ export 'package:image_cropper/image_cropper.dart'
 export 'package:image_picker/image_picker.dart' show ImageSource;
 
 class ImagePickerService {
-  static ImagePickerService get I => GetIt.I<ImagePickerService>();
+  static ImagePickerService get I =>
+      globalProviderContainer.read(imagePickerServiceProvider);
 
   static const deleteImage = _DeleteImage();
 
   ImagePickerService({
-    ImagePicker? imagePicker,
-    ImageCropper? imageCropper,
-  })  : _imagePicker = imagePicker ?? GetIt.I<ImagePicker>(),
-        _imageCropper = imageCropper ?? GetIt.I<ImageCropper>();
+    required ImagePicker imagePicker,
+    required ImageCropper imageCropper,
+  })  : _imagePicker = imagePicker,
+        _imageCropper = imageCropper;
 
   final ImagePicker _imagePicker;
   final ImageCropper _imageCropper;

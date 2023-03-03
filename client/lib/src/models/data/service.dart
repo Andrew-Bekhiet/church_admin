@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'service.freezed.dart';
 part 'service.g.dart';
@@ -18,7 +17,7 @@ class Service extends ViewableWithIDAndImage
     StudyYear? fromStudyYear,
     StudyYear? toStudyYear,
     @JsonKey(name: 'nextServiceObject')
-    Service? nextService,
+        Service? nextService,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
         Color? color,
     DateTime? photoUpdatedAt,
@@ -48,7 +47,7 @@ class Service extends ViewableWithIDAndImage
       ? ObjectImageInfo(
           cacheKey: 'services/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('services', id),
+              CAFunctionsService.I.getDownloadUrl('services', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

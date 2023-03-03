@@ -3,10 +3,10 @@ import 'package:churchdata_core/churchdata_core.dart'
     show PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/src/framework.dart';
 
 import 'viewable_object_list_item_test.mocks.dart';
 
@@ -17,7 +17,7 @@ import 'viewable_object_list_item_test.mocks.dart';
 ])
 void main() async {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   await loadAppFonts();
 
@@ -252,40 +252,41 @@ void main() async {
       );
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(GetIt.I<CAViewableObjectService>().onTap(item)).called(1);
+      verify(CAViewableObjectService.I.onTap(item)).called(1);
 
       await tester.longPress(find.byType(ViewableObjectWidget<Person>));
       expect(onLongPressCalled, 1);
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(GetIt.I<CAViewableObjectService>().onTap(item)).called(1);
+      verify(CAViewableObjectService.I.onTap(item)).called(1);
 
       await tester.longPress(find.byType(ViewableObjectWidget<Person>));
       expect(onLongPressCalled, 2);
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(GetIt.I<CAViewableObjectService>().onTap(item)).called(1);
+      verify(CAViewableObjectService.I.onTap(item)).called(1);
     },
   );
 }
 
 void _setUp() {
-  _setUpMockObjectService();
-  _setUpMockImageUrlService();
+  final overrides = [_setUpMockObjectService(), _setUpMockImageUrlService()];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpMockObjectService() {
+Override _setUpMockObjectService() {
   final mockCAViewableObjectService = MockCAViewableObjectService();
   when(mockCAViewableObjectService.getDefaultIconFor<Person>(any))
       .thenAnswer((_) => Icons.person);
 
-  return GetIt.I.registerSingleton<CAViewableObjectService>(
+  return viewableObjectServiceProvider.overrideWithValue(
     mockCAViewableObjectService,
   );
 }
 
-void _setUpMockImageUrlService() {
-  GetIt.I.registerSingleton<ImageUrlCacheService>(
+Override _setUpMockImageUrlService() {
+  return imageUrlCacheServiceProvider.overrideWithValue(
     MockImageUrlCacheService(),
   );
 }

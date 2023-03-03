@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 

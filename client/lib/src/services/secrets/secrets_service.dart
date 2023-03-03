@@ -1,8 +1,9 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:get_it/get_it.dart';
 
 abstract class SecretsService extends DelegatingMap with UnmodifiableMapMixin {
-  static SecretsService get I => GetIt.I<SecretsService>();
+  static SecretsService get I =>
+      globalProviderContainer.read(secretsServiceProvider);
 
   const SecretsService(super.base);
 

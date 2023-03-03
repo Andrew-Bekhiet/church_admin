@@ -2,9 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_service_test.mocks.dart';
@@ -17,30 +17,36 @@ import 'connectivity_service_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Connectivity Service => internet connection => connected',
     () async {
-      when(GetIt.I<Connectivity>().checkConnectivity())
-          .thenAnswer((_) async => ConnectivityResult.wifi);
+      when(
+        globalProviderContainer
+            .read(connectivityPluginProvider)
+            .checkConnectivity(),
+      ).thenAnswer((_) async => ConnectivityResult.wifi);
 
-      final unit = ConnectivityService();
+      final unit = globalProviderContainer.read(connectivityServiceProvider);
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isTrue));
 
       final captured = verifyInOrder(
         [
-          GetIt.I<Connectivity>().checkConnectivity(),
-          (GetIt.I<Dio>() as MockDio).get(captureAny)
+          globalProviderContainer
+              .read(connectivityPluginProvider)
+              .checkConnectivity(),
+          (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny)
         ],
       ).captured;
 
       expect(
         captured[1].first,
-        Uri.parse(GetIt.I<SecretsService>().hasuraServer)
-            .replace(pathSegments: ['healthz']).toString(),
+        Uri.parse(
+          globalProviderContainer.read(secretsServiceProvider).hasuraServer,
+        ).replace(pathSegments: ['healthz']).toString(),
       );
     },
   );
@@ -48,20 +54,25 @@ void main() {
   test(
     'Connectivity Service => internet connection => disconnected',
     () async {
-      when(GetIt.I<Connectivity>().checkConnectivity())
-          .thenAnswer((_) async => ConnectivityResult.none);
+      when(
+        globalProviderContainer
+            .read(connectivityPluginProvider)
+            .checkConnectivity(),
+      ).thenAnswer((_) async => ConnectivityResult.none);
 
-      final unit = ConnectivityService();
+      final unit = globalProviderContainer.read(connectivityServiceProvider);
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isFalse));
 
       verify(
-        GetIt.I<Connectivity>().checkConnectivity(),
+        globalProviderContainer
+            .read(connectivityPluginProvider)
+            .checkConnectivity(),
       );
 
       verifyNever(
-        (GetIt.I<Dio>() as MockDio).get(captureAny),
+        (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny),
       );
     },
   );
@@ -72,8 +83,11 @@ void main() {
       final connectivityController = BehaviorSubject<ConnectivityResult>();
       addTearDown(connectivityController.close);
 
-      when(GetIt.I<Connectivity>().onConnectivityChanged)
-          .thenAnswer((_) => connectivityController);
+      when(
+        globalProviderContainer
+            .read(connectivityPluginProvider)
+            .onConnectivityChanged,
+      ).thenAnswer((_) => connectivityController);
 
       final responses = {
         ConnectivityResult.wifi: true,
@@ -84,7 +98,7 @@ void main() {
         ConnectivityResult.mobile: false
       };
 
-      final unit = ConnectivityService();
+      final unit = globalProviderContainer.read(connectivityServiceProvider);
       addTearDown(unit.dispose);
 
       expect(
@@ -93,7 +107,8 @@ void main() {
       );
 
       for (final response in responses.keys) {
-        when((GetIt.I<Dio>() as MockDio).get(any)).thenAnswer(
+        when((globalProviderContainer.read(dioProvider) as MockDio).get(any))
+            .thenAnswer(
           (_) async =>
               _createMockResponse(responses[response] ?? false ? 200 : 500),
         );
@@ -106,30 +121,34 @@ void main() {
 }
 
 Future<void> _setUp() async {
-  _setUpMockConnectivity();
-  _setUpMockSecretsRepo();
-  await _setUpMockDio();
+  final overrides = [
+    _setUpMockConnectivity(),
+    _setUpMockSecretsRepo(),
+    _setUpMockDio(),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpMockConnectivity() {
+Override _setUpMockConnectivity() {
   final mockConnectivity = MockConnectivity();
 
-  GetIt.I.registerSingleton<Connectivity>(mockConnectivity);
+  return connectivityPluginProvider.overrideWithValue(mockConnectivity);
 }
 
-void _setUpMockSecretsRepo() {
+Override _setUpMockSecretsRepo() {
   final mockSecrets = MockSecretsService();
   when(mockSecrets.hasuraServer).thenReturn('https://hasura.server.mock.com/');
 
-  GetIt.I.registerSingleton<SecretsService>(mockSecrets);
+  return secretsServiceProvider.overrideWithValue(mockSecrets);
 }
 
-Future<void> _setUpMockDio() async {
+Override _setUpMockDio() {
   final mockDio = MockDio();
 
   when(mockDio.get(any)).thenAnswer((_) async => _createMockResponse());
 
-  GetIt.I.registerSingleton<Dio>(mockDio);
+  return dioProvider.overrideWithValue(mockDio);
 }
 
 MockResponse _createMockResponse([int? responseCode = 200]) {

@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final T object;
@@ -47,7 +46,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     CAViewableObjectService? viewableObjectService,
     super.key,
   })  : viewableObjectService =
-            viewableObjectService ?? GetIt.I<CAViewableObjectService>(),
+            viewableObjectService ?? CAViewableObjectService.I,
         config = config ?? const ViewableObjectWidgetConfig();
 
   @override

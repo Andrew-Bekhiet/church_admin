@@ -1,16 +1,20 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/main.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:universal_file/universal_file.dart';
 
 class ImageUrlCacheService {
-  ImageUrlCacheService({Box<String>? box, BaseCacheManager? cacheManager})
-      : box = box ?? GetIt.I<HiveInterface>().box('ImageUrlsCache'),
-        cacheManager = cacheManager ?? GetIt.I<BaseCacheManager>() {
-    assert(this.box.isOpen);
+  static ImageUrlCacheService get I =>
+      globalProviderContainer.read(imageUrlCacheServiceProvider);
+
+  ImageUrlCacheService({
+    required this.box,
+    required this.cacheManager,
+  }) {
+    assert(box.isOpen);
   }
 
   final Box<String> box;

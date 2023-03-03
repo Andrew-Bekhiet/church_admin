@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/links/add_auth_link.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import './add_auth_link_test.mocks.dart';
@@ -22,7 +22,7 @@ void main() {
   Stream<Response> forward(Request r) => const Stream.empty();
 
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Add Auth Link => defaultCreateHttpLink',
@@ -71,7 +71,7 @@ void main() {
       );
 
       verifyInOrder([
-        AuthService.instance.idTokenStream,
+        AuthService.I.idTokenStream,
         mockWebSocketLink.request(mockRequest, forward),
       ]);
       verifyNever(mockHttpLink.request(mockRequest, forward));
@@ -99,7 +99,7 @@ void main() {
       );
 
       verifyInOrder([
-        AuthService.instance.idTokenStream,
+        AuthService.I.idTokenStream,
         mockHttpLink.request(mockRequest, forward),
       ]);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
@@ -125,7 +125,7 @@ void main() {
               'headers',
               containsPair(
                 'Authorization',
-                'Bearer ${AuthService.instance.currentUser!.idToken}',
+                'Bearer ${AuthService.I.currentUser!.idToken}',
               ),
             ),
           );
@@ -141,7 +141,7 @@ void main() {
       );
 
       verify(mockWebSocketLink.request(mockRequest, forward));
-      verifyNever(AuthService.instance.userStream);
+      verifyNever(AuthService.I.userStream);
       verifyNever(mockHttpLink.request(mockRequest, forward));
     },
   );
@@ -183,14 +183,14 @@ void main() {
             return containsPair('foo', 'bar').matches(returnedHeaders, {}) &&
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthService.instance.currentUser!.idToken}',
+                  'Bearer ${AuthService.I.currentUser!.idToken}',
                 ).matches(returnedHeaders, {});
           }),
         ),
       );
 
       verify(mockHttpLink.request(mockRequest, forward));
-      verifyNever(AuthService.instance.userStream);
+      verifyNever(AuthService.I.userStream);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
   );
@@ -237,21 +237,23 @@ MockOperation _createMockOperation(bool isSubscription) {
 }
 
 void _setUp() {
-  _setUpAuthRepo();
+  final overrides = [_setUpAuthService()];
+
+  globalProviderContainer = ProviderContainer(overrides: overrides);
 }
 
-void _setUpAuthRepo() {
-  final repo = MockAuthService();
-  when(repo.userStream).thenAnswer(
+Override _setUpAuthService() {
+  final mock = MockAuthService();
+  when(mock.userStream).thenAnswer(
     (_) => BehaviorSubject.seeded(
       User(uid: 'uid', name: 'name', idToken: 'idToken'),
     ),
   );
-  when(repo.idTokenStream).thenAnswer(
+  when(mock.idTokenStream).thenAnswer(
     (_) => BehaviorSubject.seeded('idToken'),
   );
-  when(repo.currentUser)
+  when(mock.currentUser)
       .thenReturn(User(uid: 'uid', name: 'name', idToken: 'idToken'));
 
-  GetIt.I.registerSingleton<AuthService>(repo);
+  return authServiceProvider.overrideWithValue(mock);
 }

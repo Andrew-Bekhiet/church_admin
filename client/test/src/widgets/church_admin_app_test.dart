@@ -2,10 +2,9 @@
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
-import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -29,7 +28,7 @@ void main() {
 
   setUp(_setUp);
 
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testWidgets(
     'Church Admin App => First Screen',
@@ -38,7 +37,7 @@ void main() {
 
       if (firstScreenVariant.currentValue ==
           FirstScreenVariantEnum.values.first) {
-        verify(GetIt.I<LoggingService>().navigatorObserver);
+        verify(LoggingService.I.navigatorObserver);
       }
 
       // await tester.pumpAndSettle();
@@ -52,7 +51,7 @@ void main() {
         firstScreenVariant.expectedLocation(),
       );
 
-      await _disposeLocalAuthService();
+      // await _disposeLocalAuthService();
     },
     variant: firstScreenVariant,
   );
@@ -60,21 +59,19 @@ void main() {
   testWidgets(
     'Church Admin App => Observes ThemingService',
     (tester) async {
-      _setUpAuthService();
-
       await tester.pumpWidget(const ChurchAdminApp());
 
       expect(
         tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        GetIt.I<ThemingService>().theme,
+        CAThemingService.I.theme,
       );
 
-      GetIt.I<ThemingService>().theme = ThemeData.dark();
+      CAThemingService.I.theme = ThemeData.dark();
       await tester.pumpAndSettle();
 
       expect(
         tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        GetIt.I<ThemingService>().theme,
+        CAThemingService.I.theme,
       );
     },
   );
@@ -82,12 +79,10 @@ void main() {
   testWidgets(
     'Church Admin App => Shows SnackBar on connectivity changed',
     (tester) async {
-      _setUpAuthService();
-
       final _connectivityController = BehaviorSubject.seeded(true);
       addTearDown(_connectivityController.close);
 
-      when(GetIt.I<ConnectivityService>().connectivityStream)
+      when(ConnectivityService.I.connectivityStream)
           .thenAnswer((_) => _connectivityController);
 
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
@@ -105,49 +100,41 @@ void main() {
   );
 }
 
-void _setUpAuthService() {
+Override _setUpAuthService() {
   final mock = MockAuthService();
 
   when(mock.isSignedIn).thenReturn(false);
   when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(null));
 
-  GetIt.I.registerSingleton<AuthService>(mock);
+  return authServiceProvider.overrideWithValue(mock);
 }
 
-Future<void> _disposeLocalAuthService() async {
-  if (GetIt.I.isRegistered<LocalAuthService>()) {
-    await GetIt.I<LocalAuthService>().dispose();
-  }
+List<Override> _setUp() {
+  final overrides = [
+    _setUpAuthService(),
+    _setUpLoggingService(),
+    userSettingsServiceProvider.overrideWithValue(FakeUserSettings()),
+    _setUpGoRouterRefreshStream(),
+    _setUpThemingService(FakeUserSettings()),
+    _setUpDatabaseRepo(),
+    _setUpConnectivityService(),
+  ];
+
+  initGlobalProviderContainer(overrides);
+
+  return overrides;
 }
 
-void _setUp() {
-  _setUpLoggingService();
-
-  _setUpUserSettings();
-
-  _setUpGoRouterRefreshStream();
-
-  _setUpThemingService();
-
-  _setUpDatabaseRepo();
-
-  _setUpConnectivityService();
-}
-
-void _setUpConnectivityService() {
+Override _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
   when(mock.connectivityStream)
       .thenAnswer((_) => BehaviorSubject.seeded(false));
 
-  GetIt.I.registerSingleton<ConnectivityService>(mock);
+  return connectivityServiceProvider.overrideWithValue(mock);
 }
 
-void _setUpUserSettings() {
-  GetIt.I.registerSingleton<UserSettingsService>(FakeUserSettings());
-}
-
-void _setUpDatabaseRepo() {
+Override _setUpDatabaseRepo() {
   final usersDAO = _setUpUsersDAO();
   final areasDAO = _setUpAreasDAO();
   final personsDAO = _setUpPersonsDAO();
@@ -159,9 +146,7 @@ void _setUpDatabaseRepo() {
   when(mockCADatabaseRepository.persons).thenReturn(personsDAO);
   when(mockCADatabaseRepository.services).thenReturn(servicesDAO);
 
-  GetIt.I.registerSingleton<DatabaseService>(
-    mockCADatabaseRepository,
-  );
+  return databaseServiceProvider.overrideWithValue(mockCADatabaseRepository);
 }
 
 MockUsersDAO _setUpUsersDAO() {
@@ -216,29 +201,28 @@ MockAreasDAO _setUpAreasDAO() {
   return areasDAO;
 }
 
-void _setUpThemingService() {
-  GetIt.I.registerSingleton<ThemingService>(
-    ThemingService.withInitialThemeata(
-      ThemeData.light(),
+Override _setUpThemingService(UserSettingsService userSettingsService) {
+  return themingServiceProvider.overrideWithValue(
+    CAThemingService.withInitialThemeata(
+      initialTheme: ThemeData.light(),
+      userSettingsService: userSettingsService,
     ),
-    dispose: (t) => t.dispose(),
   );
 }
 
-void _setUpGoRouterRefreshStream() {
-  GetIt.I.registerSingleton<GoRouterRefreshStream>(
+Override _setUpGoRouterRefreshStream() {
+  return goRouterRefreshStreamProvider.overrideWithValue(
     GoRouterRefreshStream(
       const Stream.empty(),
     ),
-    dispose: (g) => g.dispose(),
   );
 }
 
-void _setUpLoggingService() {
+Override _setUpLoggingService() {
   final mockLoggingService = MockLoggingService();
   when(mockLoggingService.navigatorObserver).thenReturn(NavigatorObserver());
 
-  GetIt.I.registerSingleton<LoggingService>(mockLoggingService);
+  return loggingServiceProvider.overrideWithValue(mockLoggingService);
 }
 
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
@@ -248,16 +232,21 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    _setUpAuthService(value);
+    final overrides = [
+      ..._setUp(),
+      _setUpAuthService(value),
+    ];
 
     if (value != FirstScreenVariantEnum.login) {
-      _setUpLocalAuthService(value);
+      overrides.add(_setUpLocalAuthService(value));
     }
+
+    initGlobalProviderContainer(overrides);
 
     return value;
   }
 
-  void _setUpLocalAuthService(FirstScreenVariantEnum value) {
+  Override _setUpLocalAuthService(FirstScreenVariantEnum value) {
     final mockLocalAuthService = MockLocalAuthService();
 
     when(mockLocalAuthService.shouldAuthenticate)
@@ -265,24 +254,13 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mockLocalAuthService.canCheckBiometrics())
         .thenAnswer((_) async => false);
 
-    GetIt.I.registerSingleton<LocalAuthService>(
-      mockLocalAuthService,
-    );
+    return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
 
-  void _setUpAuthService(FirstScreenVariantEnum value) {
+  Override _setUpAuthService(FirstScreenVariantEnum value) {
     final mock = MockAuthService();
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
-    when(mock.currentUser).thenReturn(
-      User(
-        uid: 'uid',
-        name: '',
-        password: '',
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        authId: 'firebaseAuthUID',
-      ),
-    );
+
     final user = User(
       uid: 'uid',
       name: 'name',
@@ -307,9 +285,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
 
     when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
 
-    GetIt.I.allowReassignment = true;
-    GetIt.I.registerSingleton<AuthService>(mock);
-    GetIt.I.allowReassignment = false;
+    return authServiceProvider.overrideWithValue(mock);
   }
 
   String expectedLocation() {
@@ -330,12 +306,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     FirstScreenVariantEnum memento,
   ) async {
     await super.tearDown(value, memento);
-
-    await GetIt.I.unregister<AuthService>();
-
-    if (GetIt.I.isRegistered<LocalAuthService>()) {
-      await GetIt.I.unregister<LocalAuthService>();
-    }
   }
 }
 

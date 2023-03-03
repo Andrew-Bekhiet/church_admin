@@ -1,8 +1,8 @@
-import 'package:church_admin/src/models/notification.dart';
-import 'package:get_it/get_it.dart';
+import 'package:church_admin/church_admin.dart';
 
 abstract class NotificationsStorage {
-  static NotificationsStorage get I => GetIt.I<NotificationsStorage>();
+  static NotificationsStorage get I =>
+      globalProviderContainer.read(notificationsStorageProvider);
 
   Future<void> writeNotification(Notification notification);
 

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 

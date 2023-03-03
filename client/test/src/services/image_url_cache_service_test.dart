@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:file/memory.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -16,7 +15,7 @@ import 'image_url_cache_service_test.mocks.dart';
   ],
 )
 void main() {
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Image Url Cache Service: isUrlExpired',
@@ -218,7 +217,9 @@ MockBaseCacheManager getMockedCacheManager(
 }
 
 void registerFunctionsService(MockCAFunctionsService mockFunctionsService) {
-  GetIt.I.registerSingleton<CAFunctionsService>(mockFunctionsService);
+  initGlobalProviderContainer(
+    [functionsServiceProvider.overrideWithValue(mockFunctionsService)],
+  );
 }
 
 MockCAFunctionsService getMockedFunctionsSrvc(

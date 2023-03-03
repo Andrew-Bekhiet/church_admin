@@ -3,7 +3,7 @@
 import 'dart:ui';
 
 import 'package:church_admin/graphql/scalars.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'hobby.freezed.dart';

@@ -1,30 +1,27 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 class AuthService {
-  static AuthService get instance => GetIt.I<AuthService>();
+  static AuthService get I => globalProviderContainer.read(authServiceProvider);
 
   AuthService({
-    AuthCache? cache,
-    AuthAdapter? adapter,
+    required AuthCache cache,
+    required AuthAdapter adapter,
     ConnectivityService? connectivityService,
-  })  : _cache = cache ?? GetIt.I<AuthCache>(),
-        _adapter = adapter ?? GetIt.I<AuthAdapter>(),
-        _connectivityService =
-            connectivityService ?? GetIt.I<ConnectivityService>() {
+  })  : _cache = cache,
+        _adapter = adapter,
+        _connectivityService = connectivityService ?? ConnectivityService.I {
     _init();
   }
   AuthService.noCachedUser({
-    AuthCache? cache,
-    AuthAdapter? adapter,
+    required AuthCache cache,
+    required AuthAdapter adapter,
     ConnectivityService? connectivityService,
-  })  : _cache = cache ?? GetIt.I<AuthCache>(),
-        _adapter = adapter ?? GetIt.I<AuthAdapter>(),
-        _connectivityService =
-            connectivityService ?? GetIt.I<ConnectivityService>() {
+  })  : _cache = cache,
+        _adapter = adapter,
+        _connectivityService = connectivityService ?? ConnectivityService.I {
     _init(cachedUser: false);
   }
 

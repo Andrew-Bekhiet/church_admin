@@ -4,13 +4,29 @@ import 'dart:async';
 //TODO: support web
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
 
 class CAFunctionsService extends FunctionsService {
+  static CAFunctionsService get I =>
+      globalProviderContainer.read(functionsServiceProvider);
+
+  final Dio _dio;
+
+  CAFunctionsService({required Dio dio}) : _dio = dio;
+
   final _pendingDownloadUrls = <int, Future<String>>{};
+
+  @override
+  HttpsCallable httpsCallable(
+    String functionName, {
+    HttpsCallableOptions? options,
+  }) {
+    return globalProviderContainer
+        .read(firebaseFunctionsProvider)
+        .httpsCallable(functionName, options: options);
+  }
 
   Future<String> getDownloadUrl(
     String table,
@@ -58,7 +74,7 @@ class CAFunctionsService extends FunctionsService {
   }
 
   Future<String?> getAddressFromLocation(Point location) async {
-    final response = await GetIt.I<Dio>().getUri(
+    final response = await _dio.getUri(
       Uri(
         scheme: 'https',
         host: 'nominatim.openstreetmap.org',
@@ -81,7 +97,7 @@ class CAFunctionsService extends FunctionsService {
     int? fileLength,
     void Function(int, int)? onSendProgress,
   }) {
-    return GetIt.I<Dio>().put(
+    return _dio.put(
       url,
       data: fileStream,
       options: Options(
@@ -95,7 +111,7 @@ class CAFunctionsService extends FunctionsService {
   }
 
   Future<bool> checkHasuraHealth() async {
-    final res = await GetIt.I<Dio>()
+    final res = await _dio
         .getUri(
           Uri.parse(SecretsService.I.hasuraServer)
               .replace(pathSegments: ['healthz']),

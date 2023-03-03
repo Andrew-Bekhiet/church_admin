@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/src/controllers/selection_controller.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:rxdart_ext/single.dart';
 
 class ViewableObjectListController<T extends Viewable> {

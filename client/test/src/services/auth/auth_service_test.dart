@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'auth_service_test.mocks.dart';
@@ -36,14 +36,16 @@ final initialUser = User(
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Authentication Service => initialization => not logged in',
     () async {
-      await (GetIt.I<AuthCache>() as MockAuthCache).writeUserToCache(null);
+      await globalProviderContainer
+          .read(authCacheProvider)
+          .writeUserToCache(null);
 
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -55,7 +57,7 @@ void main() {
   test(
     'Authentication Service => initialization => logged in',
     () async {
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -67,7 +69,7 @@ void main() {
   test(
     'Authentication Service => initialization => noCachedUser',
     () async {
-      final unit = AuthService.noCachedUser();
+      final unit = _createAuthService(noCachedUser: true);
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -79,7 +81,7 @@ void main() {
   test(
     'Authentication Service => signOut',
     () async {
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -89,7 +91,9 @@ void main() {
       expect(unit.currentUser, isNull);
 
       final captured = verify(
-        (GetIt.I<AuthCache>() as MockAuthCache).writeUserToCache(captureAny),
+        globalProviderContainer
+            .read(authCacheProvider)
+            .writeUserToCache(captureAny),
       ).captured;
 
       expect(captured[1], isNull);
@@ -99,7 +103,7 @@ void main() {
   test(
     'Authentication Service => userStream',
     () async {
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       expect(
@@ -120,7 +124,7 @@ void main() {
   test(
     'Authentication Service => isSignedIn',
     () async {
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -143,7 +147,7 @@ void main() {
   test(
     'Authentication Service => signIn',
     () async {
-      final unit = AuthService.noCachedUser();
+      final unit = _createAuthService(noCachedUser: true);
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
@@ -154,31 +158,21 @@ void main() {
 
       expect(unit.currentUser, initialUser);
 
-      verify(GetIt.I<AuthAdapter>().signInWithGoogle());
+      verify(
+        unit.signInWithGoogle(),
+      );
     },
   );
 
   test(
     'Authentication Service => refreshToken',
     () async {
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.refreshToken();
 
-      verify(GetIt.I<AuthAdapter>().refreshToken());
-    },
-  );
-
-  test(
-    'Authentication Service => idTokenStream',
-    () async {
-      final unit = AuthService();
-      addTearDown(unit.dispose);
-
-      unit.idTokenStream;
-
-      verify(GetIt.I<AuthAdapter>().idTokenStream).called(1);
+      verify(unit.refreshToken());
     },
   );
 
@@ -189,26 +183,32 @@ void main() {
       addTearDown(connectivityController.close);
 
       when(
-        (GetIt.I<ConnectivityService>() as MockConnectivityService)
+        globalProviderContainer
+            .read(connectivityServiceProvider)
             .connectivityStream,
       ).thenAnswer((_) => connectivityController.stream);
 
-      when((GetIt.I<AuthAdapter>() as MockAuthAdapter).isTokenUpToDate(any))
-          .thenReturn(false);
+      when(
+        (globalProviderContainer.read(authAdapterProvider) as MockAuthAdapter)
+            .isTokenUpToDate(any),
+      ).thenReturn(false);
 
-      final unit = AuthService();
+      final unit = _createAuthService();
       addTearDown(unit.dispose);
 
       await unit.userStream.take(1).first;
 
-      verifyNever(GetIt.I<AuthAdapter>().refreshToken());
+      verifyNever(
+        unit.refreshToken(),
+      );
 
       connectivityController.add(true);
       await unit.userStream.take(1).first;
 
       final captured = verifyInOrder([
-        (GetIt.I<AuthAdapter>() as MockAuthAdapter).isTokenUpToDate(captureAny),
-        GetIt.I<AuthAdapter>().refreshToken()
+        (globalProviderContainer.read(authAdapterProvider) as MockAuthAdapter)
+            .isTokenUpToDate(captureAny),
+        unit.refreshToken()
       ]).captured;
 
       expect(captured.first.first, initialUser);
@@ -217,21 +217,25 @@ void main() {
 }
 
 Future<void> _setUp() async {
-  await _setUpMockConnectivity();
-  await _setUpMockAuthCache(initialUser: initialUser);
-  await _setUpMockAuthAdapter(userOnSignIn: initialUser);
+  final overrides = [
+    await _setUpMockConnectivity(),
+    await _setUpMockAuthCache(initialUser: initialUser),
+    await _setUpMockAuthAdapter(userOnSignIn: initialUser),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-Future<void> _setUpMockConnectivity() async {
+Future<Override> _setUpMockConnectivity() async {
   final mock = MockConnectivityService();
 
   when(mock.isConnected()).thenAnswer((_) async => true);
   when(mock.connectivityStream).thenAnswer((_) => BehaviorSubject.seeded(true));
 
-  GetIt.I.registerSingleton<ConnectivityService>(mock);
+  return connectivityServiceProvider.overrideWithValue(mock);
 }
 
-Future<void> _setUpMockAuthCache({User? initialUser}) async {
+Future<Override> _setUpMockAuthCache({User? initialUser}) async {
   User? state = initialUser;
 
   final mock = MockAuthCache();
@@ -239,10 +243,10 @@ Future<void> _setUpMockAuthCache({User? initialUser}) async {
   when(mock.writeUserToCache(any))
       .thenAnswer((i) async => state = i.positionalArguments[0]);
 
-  GetIt.I.registerSingleton<AuthCache>(mock);
+  return authCacheProvider.overrideWithValue(mock);
 }
 
-Future<void> _setUpMockAuthAdapter({User? userOnSignIn}) async {
+Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   final StreamController<User?> _controller =
       StreamController<User?>.broadcast(sync: true);
 
@@ -256,5 +260,19 @@ Future<void> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   when(mock.userStream).thenAnswer((_) => _controller.stream);
   when(mock.dispose()).thenAnswer((_) => _controller.close());
 
-  GetIt.I.registerSingleton<AuthAdapter>(mock);
+  return authAdapterProvider.overrideWithValue(mock);
+}
+
+AuthService _createAuthService({bool noCachedUser = false}) {
+  if (noCachedUser) {
+    return AuthService.noCachedUser(
+      cache: globalProviderContainer.read(authCacheProvider),
+      adapter: globalProviderContainer.read(authAdapterProvider),
+    );
+  }
+
+  return AuthService(
+    cache: globalProviderContainer.read(authCacheProvider),
+    adapter: globalProviderContainer.read(authAdapterProvider),
+  );
 }

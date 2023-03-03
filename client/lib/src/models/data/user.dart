@@ -1,9 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -42,7 +41,7 @@ class User extends ViewableWithIDAndImage with _$User, UID {
       ? ObjectImageInfo(
           cacheKey: 'users/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('users', id),
+              CAFunctionsService.I.getDownloadUrl('users', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'group.freezed.dart';
 part 'group.g.dart';
@@ -43,7 +42,7 @@ class Group extends ViewableWithIDAndImage with _$Group, AttendanceAnalyzable {
       ? ObjectImageInfo(
           cacheKey: 'groups/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('groups', id),
+              CAFunctionsService.I.getDownloadUrl('groups', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -39,7 +38,7 @@ class _ViewGroupState extends State<ViewGroup> {
     ),
   );
 
-  late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+  late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream =
       DatabaseService.I.groups.watchGroup(groupId: widget.groupId);
@@ -128,6 +127,7 @@ class _ViewGroupState extends State<ViewGroup> {
     );
   }
 
+  @override
   void dispose() {
     _personsController.dispose();
 

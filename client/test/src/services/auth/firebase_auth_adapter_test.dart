@@ -6,11 +6,11 @@ import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';
@@ -42,18 +42,19 @@ final expectedDomainUser = User(
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Firebase Auth Adapter => signInWithGoogle',
     () async {
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
       await unit.signInWithGoogle();
 
       verifyInOrder([
-        GetIt.I<GoogleSignIn>().signIn(),
-        (GetIt.I<FirebaseAuth>() as MockFirebaseAuth).signInWithCredential(
+        globalProviderContainer.read(googleSignInProvider).signIn(),
+        (globalProviderContainer.read(firebaseAuthProvider) as MockFirebaseAuth)
+            .signInWithCredential(
           argThat(
             predicate<GoogleAuthCredential>(
               (c) => c.idToken == 'idToken' && c.accessToken == 'accessToken',
@@ -67,13 +68,13 @@ void main() {
   test(
     'Firebase Auth Adapter => signOut',
     () async {
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
       await unit.signOut();
 
       verifyInOrder([
-        GetIt.I<GoogleSignIn>().signOut(),
-        GetIt.I<FirebaseAuth>().signOut(),
+        globalProviderContainer.read(googleSignInProvider).signOut(),
+        globalProviderContainer.read(firebaseAuthProvider).signOut(),
       ]);
     },
   );
@@ -81,14 +82,16 @@ void main() {
   test(
     'Firebase Auth Adapter => userStream',
     () async {
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
       expect(unit.userStream, emitsInOrder([expectedDomainUser, isNull]));
 
       await unit.signInWithGoogle();
       await unit.signOut();
 
-      final mockUsersDAO = GetIt.I<DatabaseService>().users as MockUsersDAO;
+      final mockUsersDAO = globalProviderContainer
+          .read(databaseServiceProvider)
+          .users as MockUsersDAO;
       final captured = verify(
         mockUsersDAO.watchUser(uid: captureAnyNamed('uid')),
       ).captured;
@@ -100,16 +103,18 @@ void main() {
   test(
     'Firebase Auth Adapter => refreshToken',
     () async {
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
       final _mockUser = _createMockUser();
-      when(GetIt.I<FirebaseAuth>().currentUser).thenReturn(_mockUser);
+      when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+          .thenReturn(_mockUser);
 
       await unit.refreshToken();
 
       verify(_mockUser.getIdToken(true));
 
-      when(GetIt.I<FirebaseAuth>().currentUser).thenReturn(null);
+      when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+          .thenReturn(null);
 
       expect(unit.refreshToken(), throwsStateError);
     },
@@ -121,9 +126,9 @@ void main() {
       final idTokenController = StreamController<auth.User?>();
       addTearDown(idTokenController.close);
 
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
-      when(GetIt.I<FirebaseAuth>().userChanges())
+      when(globalProviderContainer.read(firebaseAuthProvider).userChanges())
           .thenAnswer((_) => idTokenController.stream);
 
       final tokens = [
@@ -154,7 +159,7 @@ void main() {
   test(
     'Firebase Auth Adapter => isTokenUpToDate',
     () async {
-      final unit = FirebaseAuthAdapter();
+      final unit = globalProviderContainer.read(authAdapterProvider);
 
       final _domainUser1 = User(
         name: 'name',
@@ -202,18 +207,22 @@ MockUser _createMockUser({IdTokenResult? idTokenResult$}) {
 }
 
 Future<void> _setUp() async {
-  await _setUpGoogleSignIn();
-  await _setUpFirebaseAuth();
-  _setUpDatabaseService();
+  final overrides = [
+    _setUpGoogleSignIn(),
+    _setUpFirebaseAuth(),
+    _setUpDatabaseService(),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpDatabaseService() {
+Override _setUpDatabaseService() {
   final dbRepo = MockDatabaseService();
 
   final mockUsersDAO = _createMockUsersDAO();
   when(dbRepo.users).thenReturn(mockUsersDAO);
 
-  GetIt.I.registerSingleton<DatabaseService>(dbRepo);
+  return databaseServiceProvider.overrideWithValue(dbRepo);
 }
 
 MockUsersDAO _createMockUsersDAO() {
@@ -224,7 +233,7 @@ MockUsersDAO _createMockUsersDAO() {
   return mockUsersDAO;
 }
 
-Future<void> _setUpFirebaseAuth() async {
+Override _setUpFirebaseAuth() {
   final stateController = BehaviorSubject<auth.User?>();
 
   final mockFirebaseAuth = MockFirebaseAuth();
@@ -239,13 +248,10 @@ Future<void> _setUpFirebaseAuth() async {
   when(mockFirebaseAuth.userChanges())
       .thenAnswer((_) => stateController.stream);
 
-  GetIt.I.registerSingleton<FirebaseAuth>(
-    mockFirebaseAuth,
-    dispose: (_) => stateController.close(),
-  );
+  return firebaseAuthProvider.overrideWithValue(mockFirebaseAuth);
 }
 
-Future<void> _setUpGoogleSignIn() async {
+Override _setUpGoogleSignIn() {
   final mockAccount = _setUpMockGAccount();
 
   final mockGoogleSignIn = MockGoogleSignIn();
@@ -253,7 +259,7 @@ Future<void> _setUpGoogleSignIn() async {
   when(mockGoogleSignIn.signIn()).thenAnswer((_) async => mockAccount);
   when(mockGoogleSignIn.signOut()).thenAnswer((_) async => null);
 
-  GetIt.I.registerSingleton<GoogleSignIn>(mockGoogleSignIn);
+  return googleSignInProvider.overrideWithValue(mockGoogleSignIn);
 }
 
 MockGoogleSignInAccount _setUpMockGAccount() {

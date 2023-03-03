@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'auth_cache_test.mocks.dart';
 
@@ -41,12 +41,13 @@ void main() {
 
   setUp(_setUp);
 
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
   test(
     'Auth Cache => getUserFromCache',
     () async {
-      final mockSecureStorage = GetIt.I<FlutterSecureStorage>();
-      final unit = AuthCache();
+      final mockSecureStorage =
+          globalProviderContainer.read(secureStorageProvider);
+      final unit = AuthCache(secureStorage: mockSecureStorage);
 
       when(mockSecureStorage.read(key: 'User'))
           .thenAnswer((_) async => jsonEncode(user.toJson()));
@@ -62,8 +63,9 @@ void main() {
   test(
     'Auth Cache => writeUserToCache',
     () async {
-      final mockSecureStorage = GetIt.I<FlutterSecureStorage>();
-      final unit = AuthCache();
+      final mockSecureStorage =
+          globalProviderContainer.read(secureStorageProvider);
+      final unit = AuthCache(secureStorage: mockSecureStorage);
 
       await unit.writeUserToCache(user);
       verify(
@@ -80,8 +82,9 @@ void main() {
   test(
     'Auth Cache => serialization consistency',
     () async {
-      final mockSecureStorage = GetIt.I<FlutterSecureStorage>();
-      final unit = AuthCache();
+      final mockSecureStorage =
+          globalProviderContainer.read(secureStorageProvider);
+      final unit = AuthCache(secureStorage: mockSecureStorage);
 
       when(mockSecureStorage.read(key: 'User')).thenAnswer(
         (_) async => jsonEncode(user.toJson()).replaceFirst('{', '{ '),
@@ -99,9 +102,10 @@ void main() {
 }
 
 Future<void> _setUp() async {
-  _setUpMockFlutterSecureStorage();
+  final overrides = [_setUpMockFlutterSecureStorage()];
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpMockFlutterSecureStorage() {
-  GetIt.I.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
+Override _setUpMockFlutterSecureStorage() {
+  return secureStorageProvider.overrideWithValue(MockFlutterSecureStorage());
 }

@@ -1,20 +1,18 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
-import 'package:churchdata_core/churchdata_core.dart';
-import 'package:get_it/get_it.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DBGraphQLClient extends GraphQLClient {
   DBGraphQLClient({
+    required ValueStream<bool> connectivityStream,
     required super.link,
     required super.cache,
     this.autoChangeFetchPolicy = true,
-    ValueStream<bool>? connectivityStream,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _fetchPolicyStream = (connectivityStream ??
-                GetIt.I<ConnectivityService>().connectivityStream)
+  }) : _fetchPolicyStream = connectivityStream
             .map(
               (connected) =>
                   connected ? FetchPolicy.networkOnly : FetchPolicy.cacheFirst,

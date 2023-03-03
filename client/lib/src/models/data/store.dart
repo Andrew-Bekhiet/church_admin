@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'store.freezed.dart';
 part 'store.g.dart';
@@ -31,7 +30,7 @@ class Store extends ViewableWithIDAndImage with _$Store {
       ? ObjectImageInfo(
           cacheKey: 'stores/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('stores', id),
+              CAFunctionsService.I.getDownloadUrl('stores', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

@@ -8,10 +8,10 @@ import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:riverpod/src/framework.dart';
 
 import 'image_object_widget_test.mocks.dart';
 
@@ -22,7 +22,7 @@ import 'image_object_widget_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testWidgets(
     'Image Object Widget => no image',
@@ -73,7 +73,8 @@ void main() {
                 (p.image as ResizeImage).imageProvider ==
                     CachedNetworkImageProvider(
                       'cachedImageUrl',
-                      cacheManager: GetIt.I<BaseCacheManager>(),
+                      cacheManager: globalProviderContainer
+                          .read(baseCacheManagerProvider),
                     ),
           ),
           matching: find.byType(ImageObjectWidget),
@@ -92,7 +93,8 @@ void main() {
                 (p.image as ResizeImage).imageProvider ==
                     CachedNetworkImageProvider(
                       'imageUrl',
-                      cacheManager: GetIt.I<BaseCacheManager>(),
+                      cacheManager: globalProviderContainer
+                          .read(baseCacheManagerProvider),
                     ),
           ),
           matching: find.byType(ImageObjectWidget),
@@ -238,12 +240,16 @@ void main() {
 }
 
 void _setUp() {
-  _setUpCacheManager();
-  _setUpImageUrlCacheService();
-  _setUpViewableObjectService();
+  final overrides = [
+    _setUpCacheManager(),
+    _setUpImageUrlCacheService(),
+    _setUpViewableObjectService()
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpCacheManager() {
+Override _setUpCacheManager() {
   final mockBaseCacheManager = MockBaseCacheManager();
 
   when(mockBaseCacheManager.getFileStream(any)).thenAnswer((_) async* {
@@ -261,26 +267,27 @@ void _setUpCacheManager() {
 
     yield DownloadProgress(url, length, length);
   });
-  GetIt.I.registerSingleton<BaseCacheManager>(mockBaseCacheManager);
+
+  return baseCacheManagerProvider.overrideWithValue(mockBaseCacheManager);
 }
 
-void _setUpImageUrlCacheService() {
+Override _setUpImageUrlCacheService() {
   final imageUrlCacheService = MockImageUrlCacheService();
   when(imageUrlCacheService.getCachedImageUrl(any))
       .thenReturn('cachedImageUrl');
   when(imageUrlCacheService.getImageUrl(any))
       .thenAnswer((_) => Future.value('imageUrl'));
 
-  GetIt.I.registerSingleton<ImageUrlCacheService>(imageUrlCacheService);
+  return imageUrlCacheServiceProvider.overrideWithValue(imageUrlCacheService);
 }
 
-void _setUpViewableObjectService() {
+Override _setUpViewableObjectService() {
   final viewableObjectService = MockCAViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);
 
-  GetIt.I.registerSingleton<CAViewableObjectService>(viewableObjectService);
+  return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }
 
 class MockFile extends Fake implements File {

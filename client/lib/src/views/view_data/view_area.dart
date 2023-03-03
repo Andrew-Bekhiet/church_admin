@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewArea extends StatefulWidget {
@@ -61,7 +60,7 @@ class _ViewAreaState extends State<ViewArea> {
   late final Stream<Area?> stream =
       DatabaseService.I.areas.watchArea(areaId: widget.areaId);
 
-  late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+  late final viewableObjectService = CAViewableObjectService.I;
 
   @override
   Widget build(BuildContext context) {

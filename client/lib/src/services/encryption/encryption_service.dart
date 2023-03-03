@@ -1,12 +1,11 @@
 // coverage:ignore-file
 
-import 'package:get_it/get_it.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class EncryptionService {
-  static EncryptionService get I => GetIt.I<EncryptionService>();
-
-  Future<void> init();
+  static EncryptionService get I =>
+      globalProviderContainer.read(encryptionServiceProvider);
 
   Future<String> encryptPassword(String password);
 

@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' show Viewable;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   ViewableObjectListItem({
@@ -12,7 +11,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     CAViewableObjectService? viewableObjectService,
     super.key,
   }) : viewableObjectService =
-            viewableObjectService ?? GetIt.I<CAViewableObjectService>();
+            viewableObjectService ?? CAViewableObjectService.I;
 
   final T item;
   final SelectionController<T> selectionController;

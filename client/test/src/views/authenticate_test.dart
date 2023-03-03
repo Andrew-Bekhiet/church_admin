@@ -3,15 +3,15 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../dummy_named_location.dart';
 import '../fakes/fake_device_info.dart';
@@ -27,7 +27,7 @@ void main() {
 
   setUp(_setUp);
 
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testWidgets(
     'Authenticate Screen => Key elements',
@@ -177,7 +177,7 @@ void main() {
       test(
         'No Signed In User',
         () async {
-          _setUpAuthService();
+          initGlobalProviderContainer([_setUpAuthService()]);
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny))
@@ -197,9 +197,10 @@ void main() {
       test(
         'Signed In User => No Password',
         () async {
-          _setUpAuthService(currentUser: _fakeUser.copyWith(password: null));
-
-          _setUpLocalAuth();
+          initGlobalProviderContainer([
+            _setUpAuthService(currentUser: _fakeUser.copyWith(password: null)),
+            _setUpLocalAuth(),
+          ]);
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny))
@@ -219,9 +220,9 @@ void main() {
       test(
         'Signed In User => Should Authenticate',
         () async {
-          _setUpAuthService(currentUser: _fakeUser);
-
-          _setUpLocalAuth();
+          initGlobalProviderContainer(
+            [_setUpAuthService(currentUser: _fakeUser), _setUpLocalAuth()],
+          );
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
@@ -240,9 +241,10 @@ void main() {
       test(
         'Signed In User => Should not Authenticate (with redirection)',
         () async {
-          _setUpAuthService(currentUser: _fakeUser);
-
-          _setUpLocalAuth(shouldAuthenticate: false);
+          initGlobalProviderContainer([
+            _setUpAuthService(currentUser: _fakeUser),
+            _setUpLocalAuth(shouldAuthenticate: false),
+          ]);
 
           final mockGoRouterState = MockDummyNamedLocation();
           when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
@@ -262,9 +264,10 @@ void main() {
       test(
         'Signed In User => Should not Authenticate (without redirection)',
         () async {
-          _setUpAuthService(currentUser: _fakeUser);
-
-          _setUpLocalAuth(shouldAuthenticate: false);
+          initGlobalProviderContainer([
+            _setUpAuthService(currentUser: _fakeUser),
+            _setUpLocalAuth(shouldAuthenticate: false),
+          ]);
 
           final mockGoRouterState2 = MockDummyNamedLocation();
           when(mockGoRouterState2.namedLocation(captureAny)).thenReturn('/');
@@ -284,11 +287,11 @@ void main() {
   );
 }
 
-void _setUpLocalAuth({bool shouldAuthenticate = true}) {
+Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
   final mockLocalAuthService = MockLocalAuthService();
   when(mockLocalAuthService.shouldAuthenticate).thenReturn(shouldAuthenticate);
 
-  GetIt.I.registerSingleton<LocalAuthService>(mockLocalAuthService);
+  return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
 }
 
 final User _fakeUser = User(
@@ -300,7 +303,7 @@ final User _fakeUser = User(
   authId: 'firebaseAuthUID',
 );
 
-MockAuthService _setUpAuthService({
+Override _setUpAuthService({
   User? currentUser,
 }) {
   final mockAuthService = MockAuthService();
@@ -310,9 +313,7 @@ MockAuthService _setUpAuthService({
     when(mockAuthService.currentUser).thenReturn(currentUser);
   }
 
-  GetIt.I.registerSingleton<AuthService>(mockAuthService);
-
-  return mockAuthService;
+  return authServiceProvider.overrideWithValue(mockAuthService);
 }
 
 class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
@@ -324,54 +325,45 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
   ) async {
     await super.setUp(value);
 
-    _setUpEncryptionService();
+    final encryptionService = FakeEncryptionService();
 
-    await _setUpAuthService();
+    final overrides = [
+      encryptionServiceProvider.overrideWithValue(encryptionService),
+      await _setUpAuthService(encryptionService),
+      _setUpLocalAuthService(value),
+    ];
 
-    _setUpLocalAuthService(value);
+    initGlobalProviderContainer(overrides);
 
     return value;
   }
 
-  Future<void> _setUpAuthService() async {
+  Future<Override> _setUpAuthService(
+      EncryptionService encryptionService) async {
     final mock = MockAuthService();
+
     when(mock.currentUser).thenReturn(
       User(
         uid: 'uid',
         name: '',
-        password: '',
+        password: await encryptionService.encryptPassword(r'password\1234'),
         permissions: CAPermissionsSet.fromSet(const {}),
         email: 'email',
         authId: 'firebaseAuthUID',
       ),
     );
 
-    GetIt.I.registerSingleton<AuthService>(mock);
-
-    when(mock.currentUser).thenReturn(
-      User(
-        uid: 'uid',
-        name: '',
-        password: await EncryptionService.I.encryptPassword(r'password\1234'),
-        permissions: CAPermissionsSet.fromSet(const {}),
-        email: 'email',
-        authId: 'firebaseAuthUID',
-      ),
-    );
+    return authServiceProvider.overrideWithValue(mock);
   }
 
-  void _setUpLocalAuthService(AuthenticationVariantEnum value) {
+  Override _setUpLocalAuthService(AuthenticationVariantEnum value) {
     final mockLocalAuthService = MockLocalAuthService();
 
     when(mockLocalAuthService.canCheckBiometrics())
         .thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
     when(mockLocalAuthService.authenticate()).thenAnswer((_) async => true);
 
-    GetIt.I.registerSingleton<LocalAuthService>(mockLocalAuthService);
-  }
-
-  void _setUpEncryptionService() {
-    GetIt.I.registerSingleton<EncryptionService>(FakeEncryptionService());
+    return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
 }
 
@@ -394,7 +386,4 @@ class FakeEncryptionService implements EncryptionService {
   Future<HiveCipher> getHiveCipher({String? boxName}) {
     throw UnimplementedError();
   }
-
-  @override
-  Future<void> init() async {}
 }

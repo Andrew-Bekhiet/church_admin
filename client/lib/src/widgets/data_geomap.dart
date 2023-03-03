@@ -3,13 +3,12 @@ import 'dart:math' as math;
 
 import 'package:async/async.dart';
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart' hide Coords;
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get_it/get_it.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -267,15 +266,14 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                 AttributionWidget.defaultWidget(
                   alignment: Alignment.topLeft,
                   source: 'OpenStreetMap',
-                  onSourceTapped: () async =>
-                      GetIt.I<LauncherService>().launchUrl(
+                  onSourceTapped: () async => LauncherService.I.launchUrl(
                     Uri.parse('https://openstreetmap.org/copyright'),
                   ),
                 ),
               ],
               children: [
                 TileLayer(
-                  tileProvider: GetIt.I<FMTC>()['default'].getTileProvider(),
+                  tileProvider: FMTC.instance['default'].getTileProvider(),
                   urlTemplate:
                       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                   subdomains: const ['a', 'b', 'c'],
@@ -512,7 +510,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                       title: '',
                     );
                   } else {
-                    await GetIt.I<LauncherService>().launchUrl(
+                    await LauncherService.I.launchUrl(
                       Uri(
                         scheme: 'https',
                         host: 'google.com',
@@ -529,7 +527,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                   launched = true;
                 } finally {
                   if (!launched) {
-                    await GetIt.I<LauncherService>().launchUrl(
+                    await LauncherService.I.launchUrl(
                       Uri(
                         scheme: 'https',
                         host: 'google.com',
@@ -781,7 +779,7 @@ class _MarkerWidget extends StatelessWidget {
                 object.color == Colors.transparent ? null : object.color,
             action: SnackBarAction(
               label: 'فتح',
-              onPressed: () => GetIt.I<CAViewableObjectService>().onTap(object),
+              onPressed: () => CAViewableObjectService.I.onTap(object),
             ),
           ),
         );

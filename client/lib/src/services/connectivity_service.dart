@@ -3,20 +3,22 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ConnectivityService {
-  static ConnectivityService get I => GetIt.I<ConnectivityService>();
+  static ConnectivityService get I =>
+      globalProviderContainer.read(connectivityServiceProvider);
 
   ConnectivityService({
+    required Connectivity connectivityPlugin,
+    required Dio dio,
+    SecretsService? secretsService,
     String? urlToPing,
-    Connectivity? connectivityPlugin,
-    Dio? dio,
-  })  : _connectivityPlugin = connectivityPlugin ?? GetIt.I<Connectivity>(),
-        _dio = dio ?? GetIt.I<Dio>(),
+  })  : assert((secretsService == null) != (urlToPing == null)),
+        _connectivityPlugin = connectivityPlugin,
+        _dio = dio,
         urlToPing = urlToPing ??
-            Uri.parse(GetIt.I<SecretsService>().hasuraServer)
+            Uri.parse(secretsService!.hasuraServer)
                 .replace(pathSegments: ['healthz']).toString() {
     _connectivityStreamSubscription = _createConnectivityStreamSubscription();
   }

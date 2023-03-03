@@ -5,7 +5,6 @@ import 'package:churchdata_core/churchdata_core.dart'
     hide PhotoObjectWidget, ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -592,7 +591,7 @@ class _ViewPersonState extends State<ViewPerson> {
     if (result == null) return;
     if (result) {
       await Permission.phone.request();
-      await GetIt.I<LauncherService>().launchUrl(
+      await LauncherService.I.launchUrl(
         Uri(scheme: 'tel', path: formatPhone(number ?? '', false)),
       );
 
@@ -626,7 +625,7 @@ class _ViewPersonState extends State<ViewPerson> {
         );
       }
     } else {
-      await GetIt.I<LauncherService>().launchUrl(
+      await LauncherService.I.launchUrl(
         Uri(scheme: 'tel', path: formatPhone(number ?? '', false)),
       );
     }
@@ -667,10 +666,10 @@ class _ViewPersonState extends State<ViewPerson> {
 
       if (dialogResult == true) {
         final imageFile = person.hasImage
-            ? await GetIt.I<ImageUrlCacheService>().getImageFile(person)
+            ? await ImageUrlCacheService.I.getImageFile(person)
             : null;
 
-        await GetIt.I<ContactsService>().insertContact(
+        await ContactsService.I.insertContact(
           Contact(
             addresses: [
               if (person.address != null)

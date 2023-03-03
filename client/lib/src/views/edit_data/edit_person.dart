@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
-    show ContrastingColor, LoggingService, TappableFormField;
+    show ContrastingColor, TappableFormField;
 import 'package:collection/collection.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -110,7 +109,7 @@ class _EditPersonState extends State<EditPerson> {
                   actions: [
                     IconButton(
                       onPressed: () async {
-                        final source = await GetIt.I<ImagePickerService>()
+                        final source = await ImagePickerService.I
                             .showSourceSheet(context: context);
 
                         if (source == null) {
@@ -123,8 +122,8 @@ class _EditPersonState extends State<EditPerson> {
 
                         if (!mounted) return;
 
-                        final newPhoto = await GetIt.I<ImagePickerService>()
-                            .pickAndCropImage(
+                        final newPhoto =
+                            await ImagePickerService.I.pickAndCropImage(
                           context: context,
                           source: source as ImageSource,
                           cropStyle: CropStyle.circle,
@@ -278,7 +277,7 @@ class _EditPersonState extends State<EditPerson> {
                                 textInputAction: TextInputAction.next,
                                 onChanged: (value) =>
                                     newPerson = newPerson.copyWith(
-                                  mainPhone: GetIt.I<PhoneNumberService>()
+                                  mainPhone: PhoneNumberService.I
                                       .formatInternational(value)
                                       .replaceAll('+20', '0'),
                                 ),
@@ -363,12 +362,11 @@ class _EditPersonState extends State<EditPerson> {
                                               newPerson = newPerson.copyWith(
                                             otherPhones: {
                                               ...newPerson.otherPhones,
-                                              e.key:
-                                                  GetIt.I<PhoneNumberService>()
-                                                      .formatInternational(
-                                                        value,
-                                                      )
-                                                      .replaceAll('+20', '0'),
+                                              e.key: PhoneNumberService.I
+                                                  .formatInternational(
+                                                    value,
+                                                  )
+                                                  .replaceAll('+20', '0'),
                                             },
                                           ),
                                           validator: _validatePhoneField,
@@ -1158,7 +1156,7 @@ class _EditPersonState extends State<EditPerson> {
                                     lastKodas: LastRecordedByInfo(
                                       time: v,
                                       recordedBy:
-                                          AuthService.instance.currentUser?.uid,
+                                          AuthService.I.currentUser?.uid,
                                     ),
                                   );
                                 }
@@ -1174,7 +1172,7 @@ class _EditPersonState extends State<EditPerson> {
                                     lastConfession: LastRecordedByInfo(
                                       time: v,
                                       recordedBy:
-                                          AuthService.instance.currentUser?.uid,
+                                          AuthService.I.currentUser?.uid,
                                     ),
                                   );
                                 }
@@ -1191,7 +1189,7 @@ class _EditPersonState extends State<EditPerson> {
                                     lastVisit: LastRecordedByInfo(
                                       time: v,
                                       recordedBy:
-                                          AuthService.instance.currentUser?.uid,
+                                          AuthService.I.currentUser?.uid,
                                     ),
                                   );
                                 }
@@ -1207,7 +1205,7 @@ class _EditPersonState extends State<EditPerson> {
                                     lastCall: LastRecordedByInfo(
                                       time: v,
                                       recordedBy:
-                                          AuthService.instance.currentUser?.uid,
+                                          AuthService.I.currentUser?.uid,
                                     ),
                                   );
                                 }
@@ -1281,7 +1279,7 @@ class _EditPersonState extends State<EditPerson> {
             ),
             validator: (v) => v == null || v.isEmpty
                 ? 'برجاء ادخال اسم رقم الهاتف'
-                : GetIt.I<PhoneNumberService>().validate(v)
+                : PhoneNumberService.I.validate(v)
                     ? 'لا يجب ادخال رقم الهاتف هنا'
                     : null,
           ),
@@ -1312,7 +1310,7 @@ class _EditPersonState extends State<EditPerson> {
       return;
     }
 
-    final contact = await GetIt.I<ContactsService>().pickContact();
+    final contact = await ContactsService.I.pickContact();
     if (contact == null) return;
 
     bool importName = false;
@@ -1480,7 +1478,7 @@ class _EditPersonState extends State<EditPerson> {
     );
     if (result != null) {
       newPerson = result;
-      final address = await GetIt.I<CAFunctionsService>()
+      final address = await CAFunctionsService.I
           .getAddressFromLocation(result.geolocation!);
 
       if (address != null) setState(() => _suggestedAddress = address);
@@ -1498,7 +1496,7 @@ class _EditPersonState extends State<EditPerson> {
   }
 
   String? _validatePhoneField(v) =>
-      v != null && !GetIt.I<PhoneNumberService>().validate(v)
+      v != null && !PhoneNumberService.I.validate(v)
           ? 'برجاء ادخال رقم هاتف صالح'
           : null;
 
@@ -1582,13 +1580,13 @@ class _EditPersonState extends State<EditPerson> {
 
           final mimeType =
               MimeTypeResolver().lookup(_photoState.newPhoto!.path);
-          final uploadUrl = await GetIt.I<CAFunctionsService>().getUploadUrl(
+          final uploadUrl = await CAFunctionsService.I.getUploadUrl(
             'persons',
             newPerson.id,
             contentType: mimeType,
           );
 
-          await GetIt.I<CAFunctionsService>().uploadPhoto(
+          await CAFunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
             fileStream: _photoState.newPhoto!.openRead(),
@@ -1627,7 +1625,7 @@ class _EditPersonState extends State<EditPerson> {
       );
 
       unawaited(
-        GetIt.I<LoggingService>().reportError(
+        LoggingService.I.reportError(
           e,
           stackTrace: stackTrace,
           data: newPerson.toJson(),

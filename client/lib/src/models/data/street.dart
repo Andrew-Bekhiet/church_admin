@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'street.freezed.dart';
 part 'street.g.dart';
@@ -29,7 +28,7 @@ class Street extends ViewableWithIDAndImage with _$Street {
       ? ObjectImageInfo(
           cacheKey: 'streets/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('streets', id),
+              CAFunctionsService.I.getDownloadUrl('streets', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

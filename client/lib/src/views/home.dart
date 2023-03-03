@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     hide PhotoObjectWidget, StudyYear, ViewableObjectWidget;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
@@ -36,12 +35,11 @@ class HomeScreen extends StatefulWidget {
 
   @visibleForTesting
   static String? redirect(NamedLocation namedLocation, GoRouterState state) {
-    if (!AuthService.instance.isSignedIn) {
+    if (!AuthService.I.isSignedIn) {
       return namedLocation('login');
-    } else if (AuthService.instance.currentUser?.person == null) {
+    } else if (AuthService.I.currentUser?.person == null) {
       return namedLocation('register_user_data');
-    } else if (!AuthService.instance.currentUser!.person!
-        .spiritDataUpToDate()) {
+    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
       return namedLocation(
         'update_user_data',
         queryParams: {'forced': 'true'},
@@ -74,8 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late final _personsController = _createControllerUsing<Person>(
     ({searchQuery}) => DatabaseService.I.persons.paginatePersons(
       searchQuery: searchQuery,
-      secondLineFieldName:
-          GetIt.I<UserSettingsService>().getSecondLineFor(Person),
+      secondLineFieldName: UserSettingsService.I.getSecondLineFor(Person),
     ),
   );
   late final _servicesController = _createControllerUsing<Service>(
@@ -142,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   title: const Text('حول'),
                   onTap: () {
                     Scaffold.of(context).openEndDrawer();
-                    GetIt.I<AboutAppService>().showAboutDialog(context);
+                    AboutAppService.I.showAboutDialog(context);
                   },
                 ),
                 ListTile(
@@ -152,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     Scaffold.of(context).openEndDrawer();
 
                     LocalAuthService.I.scheduleReauth();
-                    await AuthService.instance.signOut();
+                    await AuthService.I.signOut();
                   },
                 ),
               ],

@@ -1,16 +1,20 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide Json;
+import 'package:churchdata_core/churchdata_core.dart' hide Json, LoggingService;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class CAViewableObjectService implements DefaultViewableObjectService {
-  static CAViewableObjectService get I => GetIt.I<CAViewableObjectService>();
+  static CAViewableObjectService get I =>
+      globalProviderContainer.read(viewableObjectServiceProvider);
 
-  CAViewableObjectService(this.router);
+  CAViewableObjectService({
+    required this.router,
+    required UserSettingsService userSettingsService,
+  }) : _userSettingsService = userSettingsService;
 
   final GoRouter router;
+  final UserSettingsService _userSettingsService;
 
   @override
   NavigatorState get navigator =>
@@ -160,8 +164,7 @@ class CAViewableObjectService implements DefaultViewableObjectService {
 
   @override
   String? getSecondLine(Viewable object) {
-    final key =
-        GetIt.I<UserSettingsService>().getSecondLineFor(object.runtimeType);
+    final key = _userSettingsService.getSecondLineFor(object.runtimeType);
 
     if (object is Person) {
       return getFormattedValue(

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_cropper_platform_interface/image_cropper_platform_interface.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:riverpod/src/framework.dart';
 
 import './image_picker_service_test.mocks.dart';
 
@@ -28,7 +28,7 @@ import './image_picker_service_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   group(
     'ImagePickerService => showSourceSheet =>',
@@ -38,7 +38,7 @@ void main() {
         (tester) async {
           final capturedContext = await _captureBuildContext(tester);
 
-          final unit = ImagePickerService();
+          final unit = globalProviderContainer.read(imagePickerServiceProvider);
 
           expect(
             unit.showSourceSheet(context: capturedContext),
@@ -109,7 +109,7 @@ void main() {
         (tester) async {
           final capturedContext = await _captureBuildContext(tester);
 
-          final unit = ImagePickerService();
+          final unit = globalProviderContainer.read(imagePickerServiceProvider);
 
           expect(
             unit.showSourceSheet(context: capturedContext),
@@ -132,7 +132,7 @@ void main() {
         (tester) async {
           final capturedContext = await _captureBuildContext(tester);
 
-          final unit = ImagePickerService();
+          final unit = globalProviderContainer.read(imagePickerServiceProvider);
 
           expect(
             unit.showSourceSheet(context: capturedContext),
@@ -158,7 +158,8 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit = ImagePickerService();
+              final unit =
+                  globalProviderContainer.read(imagePickerServiceProvider);
 
               unawaited(unit.showSourceSheet(context: capturedContext));
 
@@ -201,7 +202,8 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit = ImagePickerService();
+              final unit =
+                  globalProviderContainer.read(imagePickerServiceProvider);
 
               expect(
                 unit.showSourceSheet(context: capturedContext),
@@ -232,7 +234,8 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit = ImagePickerService();
+              final unit =
+                  globalProviderContainer.read(imagePickerServiceProvider);
 
               expect(
                 unit.showSourceSheet(context: capturedContext),
@@ -274,7 +277,7 @@ void main() {
         (tester) async {
           final capturedContext = await _captureBuildContext(tester);
 
-          final unit = ImagePickerService();
+          final unit = globalProviderContainer.read(imagePickerServiceProvider);
 
           await expectLater(
             unit.pickAndCropImage(
@@ -386,14 +389,18 @@ class MockImageCropperPlatform extends ImageCropperPlatform_
     with MockPlatformInterfaceMixin {}
 
 void _setUp() {
-  _registerImagePicker();
-  _registerImageCropper();
+  final overrides = [
+    _registerImagePicker(),
+    _registerImageCropper(),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _registerImageCropper() {
-  GetIt.I.registerSingleton(ImageCropper());
+Override _registerImageCropper() {
+  return imageCropperPluginProvider.overrideWithValue(ImageCropper());
 }
 
-void _registerImagePicker() {
-  GetIt.I.registerSingleton(ImagePicker());
+Override _registerImagePicker() {
+  return imagePickerPluginProvider.overrideWithValue(ImagePicker());
 }

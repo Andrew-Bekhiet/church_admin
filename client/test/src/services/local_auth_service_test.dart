@@ -5,12 +5,11 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:riverpod/src/framework.dart';
 
 import 'local_auth_service_test.mocks.dart';
 
@@ -23,18 +22,20 @@ import 'local_auth_service_test.mocks.dart';
 void main() {
   setUp(_setUp);
 
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'LocalAuthService => Initial State (noInitialAuth)',
     () async {
-      final unit = LocalAuthService.noInitialAuth();
+      final unit = LocalAuthService.noInitialAuth(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+      );
 
       addTearDown(unit.dispose);
 
       expect(unit.shouldAuthenticate, isFalse);
       expect(
-        GetIt.I<CANotificationsService>().isPaused,
+        globalProviderContainer.read(notificationsServiceProvider).isPaused,
         isFalse,
       );
     },
@@ -43,12 +44,12 @@ void main() {
   test(
     'LocalAuthService => Initial State (default constructor)',
     () async {
-      final unit = LocalAuthService();
+      final unit = globalProviderContainer.read(localAuthServiceProvider);
       addTearDown(unit.dispose);
 
       expect(unit.shouldAuthenticate, isTrue);
       expect(
-        GetIt.I<CANotificationsService>().isPaused,
+        globalProviderContainer.read(notificationsServiceProvider).isPaused,
         isTrue,
       );
     },
@@ -59,7 +60,9 @@ void main() {
     (tester) async {
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-      final unit = LocalAuthService.noInitialAuth();
+      final unit = LocalAuthService.noInitialAuth(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+      );
 
       addTearDown(unit.dispose);
 
@@ -75,7 +78,7 @@ void main() {
       );
 
       expect(
-        GetIt.I<CANotificationsService>().isPaused,
+        globalProviderContainer.read(notificationsServiceProvider).isPaused,
         isTrue,
       );
     },
@@ -84,7 +87,9 @@ void main() {
   test(
     'LocalAuthService => canCheckBiometrics',
     () async {
-      final unit = LocalAuthService.noInitialAuth();
+      final unit = LocalAuthService.noInitialAuth(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+      );
 
       addTearDown(unit.dispose);
 
@@ -137,7 +142,9 @@ void main() {
     () async {
       final _authCompleter = Completer<bool>();
 
-      final unit = LocalAuthService.noInitialAuth();
+      final unit = LocalAuthService.noInitialAuth(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+      );
 
       addTearDown(unit.dispose);
 
@@ -171,7 +178,9 @@ void main() {
     (tester) async {
       final _authCompleter = Completer<bool>();
 
-      final unit = LocalAuthService.noInitialAuth();
+      final unit = LocalAuthService.noInitialAuth(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+      );
 
       LocalAuthPlatform.instance = MockLocalAuthPlatform();
 
@@ -208,8 +217,10 @@ void main() {
 
       LocalAuthPlatform.instance = MockLocalAuthPlatform();
 
-      final unit = LocalAuthService(timeToReauth: const Duration(minutes: 1))
-        ..resetAuthState();
+      final unit = LocalAuthService(
+        localAuthPlugin: globalProviderContainer.read(localAuthPluginProvider),
+        timeToReauth: const Duration(minutes: 1),
+      )..resetAuthState();
 
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
 
@@ -237,7 +248,7 @@ void main() {
     (tester) async {
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-      final unit = LocalAuthService();
+      final unit = globalProviderContainer.read(localAuthServiceProvider);
 
       addTearDown(unit.dispose);
 
@@ -259,7 +270,7 @@ void main() {
       expect(unit.shouldAuthenticate, isFalse);
 
       expect(
-        GetIt.I<CANotificationsService>().isPaused,
+        globalProviderContainer.read(notificationsServiceProvider).isPaused,
         isFalse,
       );
     },
@@ -267,18 +278,15 @@ void main() {
 }
 
 void _setUp() {
-  _setUpCANotificationsService();
+  final overrides = [
+    _setUpCANotificationsService(),
+    _setUpAuthService(),
+  ];
 
-  _setUpAuthService();
-
-  _registerLocalAuthPlugin();
+  initGlobalProviderContainer(overrides);
 }
 
-void _registerLocalAuthPlugin() {
-  GetIt.I.registerSingleton(LocalAuthentication());
-}
-
-void _setUpCANotificationsService() {
+Override _setUpCANotificationsService() {
   bool isPaused = false;
 
   final mockCANotificationsService = MockCANotificationsService();
@@ -294,17 +302,16 @@ void _setUpCANotificationsService() {
     mockCANotificationsService.isPaused,
   ).thenAnswer((_) => isPaused);
 
-  GetIt.I.registerSingleton<CANotificationsService>(
-    mockCANotificationsService,
-  );
+  return notificationsServiceProvider
+      .overrideWithValue(mockCANotificationsService);
 }
 
-void _setUpAuthService() {
+Override _setUpAuthService() {
   final auth = MockAuthService();
 
   when(auth.isSignedIn).thenReturn(true);
 
-  GetIt.I.registerSingleton<AuthService>(auth);
+  return authServiceProvider.overrideWithValue(auth);
 }
 
 class MockLocalAuthPlatform extends LocalAuthPlatformMock

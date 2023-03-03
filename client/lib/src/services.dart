@@ -8,6 +8,7 @@ export 'services/functions_service.dart';
 export 'services/image_picker_service.dart';
 export 'services/image_url_cache_service.dart';
 export 'services/local_auth_service.dart';
+export 'services/logging_service.dart';
 export 'services/notifications/notifications_service.dart';
 export 'services/notifications/notifications_storage_impl.dart';
 export 'services/phone_number_service.dart';

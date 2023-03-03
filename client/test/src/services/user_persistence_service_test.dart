@@ -1,9 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'user_persistence_service_test.mocks.dart';
@@ -17,17 +17,21 @@ import 'user_persistence_service_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Persistence Service => recordActive',
     () async {
-      final unit = UserPersistenceService();
+      final unit = UserPersistenceService(
+        firebaseDatabase:
+            globalProviderContainer.read(firebaseDatabaseProvider),
+      );
       addTearDown(unit.dispose);
 
       await unit.recordActive();
 
-      final mockRef = GetIt.I<FirebaseDatabase>().ref();
+      final mockRef =
+          globalProviderContainer.read(firebaseDatabaseProvider).ref();
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
@@ -40,12 +44,16 @@ void main() {
   test(
     'Persistence Service => scheduleOnDisconnect',
     () async {
-      final unit = UserPersistenceService();
+      final unit = UserPersistenceService(
+        firebaseDatabase:
+            globalProviderContainer.read(firebaseDatabaseProvider),
+      );
       addTearDown(unit.dispose);
 
       await unit.scheduleOnDisconnect();
 
-      final mockRef = GetIt.I<FirebaseDatabase>().ref();
+      final mockRef =
+          globalProviderContainer.read(firebaseDatabaseProvider).ref();
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
@@ -61,15 +69,19 @@ void main() {
   test(
     'Persistence Service => connectivity listener',
     () async {
-      when(GetIt.I<ConnectivityService>().connectivityStream)
+      when(ConnectivityService.I.connectivityStream)
           .thenAnswer((_) => BehaviorSubject.seeded(true));
 
-      final unit = UserPersistenceService();
+      final unit = UserPersistenceService(
+        firebaseDatabase:
+            globalProviderContainer.read(firebaseDatabaseProvider),
+      );
       addTearDown(unit.dispose);
 
       await Future.delayed(Duration.zero);
 
-      final mockRef = GetIt.I<FirebaseDatabase>().ref();
+      final mockRef =
+          globalProviderContainer.read(firebaseDatabaseProvider).ref();
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
@@ -85,19 +97,23 @@ void main() {
 }
 
 Future<void> _setUp() async {
-  await _setUpFirebaseDatabase();
-  _setUpAuthService();
-  _setUpConnectivityService();
+  final overrides = [
+    await _setUpFirebaseDatabase(),
+    _setUpAuthService(),
+    _setUpConnectivityService(),
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-Future<void> _setUpFirebaseDatabase() async {
+Future<Override> _setUpFirebaseDatabase() async {
   final mock = MockFirebaseDatabase();
 
   final mockDatabaseReference = await _setUpMockDBReference();
 
   when(mock.ref()).thenReturn(mockDatabaseReference);
 
-  GetIt.I.registerSingleton<FirebaseDatabase>(mock);
+  return firebaseDatabaseProvider.overrideWithValue(mock);
 }
 
 Future<MockDatabaseReference> _setUpMockDBReference() async {
@@ -120,20 +136,20 @@ Future<MockOnDisconnect> _setUpMockOnDisconnect() async {
   return mock;
 }
 
-void _setUpAuthService() {
+Override _setUpAuthService() {
   final mock = MockAuthService();
 
   when(mock.isSignedIn).thenReturn(true);
   when(mock.currentUser).thenReturn(User(uid: 'uid', name: 'name'));
 
-  GetIt.I.registerSingleton<AuthService>(mock);
+  return authServiceProvider.overrideWithValue(mock);
 }
 
-void _setUpConnectivityService() {
+Override _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
   when(mock.connectivityStream)
       .thenAnswer((_) => ValueStreamController(false).stream);
 
-  GetIt.I.registerSingleton<ConnectivityService>(mock);
+  return connectivityServiceProvider.overrideWithValue(mock);
 }

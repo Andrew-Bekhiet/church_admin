@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,9 +21,9 @@ class AuthenticateScreen extends StatefulWidget {
 
   @visibleForTesting
   static String? redirect(NamedLocation namedLocation, GoRouterState state) {
-    if (!AuthService.instance.isSignedIn) {
+    if (!AuthService.I.isSignedIn) {
       return namedLocation('login');
-    } else if (AuthService.instance.currentUser?.password == null) {
+    } else if (AuthService.I.currentUser?.password == null) {
       return namedLocation('register_user_data');
     } else if (LocalAuthService.I.shouldAuthenticate) {
       return null;
@@ -144,7 +144,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     String? encryptedPassword =
         await EncryptionService.I.encryptPassword(password);
 
-    if (AuthService.instance.currentUser?.password == encryptedPassword) {
+    if (AuthService.I.currentUser?.password == encryptedPassword) {
       encryptedPassword = null;
       LocalAuthService.I.resetAuthState();
     } else {

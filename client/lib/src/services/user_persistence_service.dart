@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
 class UserPersistenceService {
-  static UserPersistenceService get I => GetIt.I<UserPersistenceService>();
+  static UserPersistenceService get I =>
+      globalProviderContainer.read(userPersistenceServiceProvider);
 
   bool recordPersistence = true;
 
@@ -17,12 +17,12 @@ class UserPersistenceService {
   late final StreamSubscription<bool> _connectivitySubscription;
 
   UserPersistenceService({
+    required FirebaseDatabase firebaseDatabase,
     ConnectivityService? connectivityService,
     AuthService? auth,
-    FirebaseDatabase? firebaseDatabase,
-  })  : _connectivity = connectivityService ?? GetIt.I<ConnectivityService>(),
-        _auth = auth ?? GetIt.I<AuthService>(),
-        _firebaseDatabase = firebaseDatabase ?? GetIt.I<FirebaseDatabase>() {
+  })  : _connectivity = connectivityService ?? ConnectivityService.I,
+        _auth = auth ?? AuthService.I,
+        _firebaseDatabase = firebaseDatabase {
     _connectivitySubscription =
         _connectivity.connectivityStream.listen(_onConnectivityChanged);
   }

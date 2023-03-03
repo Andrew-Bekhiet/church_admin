@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,9 +10,9 @@ import 'package:go_router/go_router.dart';
 class ChurchAdminApp extends StatefulWidget {
   static final GoRouter router = GoRouter(
     observers: [
-      GetIt.I<LoggingService>().navigatorObserver,
+      LoggingService.I.navigatorObserver,
     ],
-    refreshListenable: GetIt.I<GoRouterRefreshStream>(),
+    refreshListenable: GoRouterRefreshStream.I,
     routes: [
       HomeScreen.route,
       LoginScreen.route,
@@ -40,11 +39,11 @@ class ChurchAdminApp extends StatefulWidget {
           ),
         ) /* UpdateUserDataScreen() */,
         redirect: (context, state) {
-          if (!AuthService.instance.isSignedIn) {
+          if (!AuthService.I.isSignedIn) {
             return ChurchAdminApp.router.routeInformationParser.configuration
                 .namedLocation('login');
-          } else if (AuthService.instance.currentUser?.password != null &&
-              AuthService.instance.currentUser?.person != null) {
+          } else if (AuthService.I.currentUser?.password != null &&
+              AuthService.I.currentUser?.person != null) {
             return '/';
           }
           return null;
@@ -54,7 +53,7 @@ class ChurchAdminApp extends StatefulWidget {
     ],
     errorBuilder: (context, state) {
       if (kReleaseMode) {
-        GetIt.I<LoggingService>().reportError(
+        LoggingService.I.reportError(
           state.error!,
           extras: {'location': state.location},
         );
@@ -88,8 +87,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
   @override
   void initState() {
-    _connectivityListener = GetIt.I<ConnectivityService>()
-        .connectivityStream
+    _connectivityListener = ConnectivityService.I.connectivityStream
         .distinct()
         .skip(1)
         .listen(_onConnectivityChanged);
@@ -100,8 +98,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ThemeData>(
-      stream: GetIt.I<ThemingService>().stream,
-      initialData: GetIt.I<ThemingService>().theme,
+      stream: CAThemingService.I.stream,
+      initialData: CAThemingService.I.theme,
       builder: (context, themeData) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
@@ -174,6 +172,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     await _connectivityListener.cancel();
 
     if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.detached) {
+      // Dispose churchdata_core dependencies that use GetIt:
       await GetIt.I.reset();
     }
   }

@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide ViewableObjectWidget;
+import 'package:churchdata_core/churchdata_core.dart'
+    hide LoggingService, ViewableObjectWidget;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewFamily extends StatefulWidget {
@@ -59,7 +59,7 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+  late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream =
       DatabaseService.I.families.watchFamily(familyId: widget.familyId);

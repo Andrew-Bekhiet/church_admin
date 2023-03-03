@@ -3,16 +3,18 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
-  static LocalAuthService get I => GetIt.I<LocalAuthService>();
+  static LocalAuthService get I =>
+      globalProviderContainer.read(localAuthServiceProvider);
 
   final Duration timeToReauth;
 
   final LocalAuthentication _localAuthPlugin;
+
+  final CANotificationsService _notificationsService;
 
   bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
@@ -25,9 +27,12 @@ class LocalAuthService with WidgetsBindingObserver {
     ..add(null);
 
   LocalAuthService({
-    LocalAuthentication? localAuthPlugin,
+    required LocalAuthentication localAuthPlugin,
+    CANotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  }) : _localAuthPlugin = localAuthPlugin ?? GetIt.I<LocalAuthentication>() {
+  })  : _localAuthPlugin = localAuthPlugin,
+        _notificationsService =
+            notificationService ?? CANotificationsService.I {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -36,9 +41,12 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   LocalAuthService.noInitialAuth({
-    LocalAuthentication? localAuthPlugin,
+    required LocalAuthentication localAuthPlugin,
+    CANotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  }) : _localAuthPlugin = localAuthPlugin ?? GetIt.I<LocalAuthentication>() {
+  })  : _localAuthPlugin = localAuthPlugin,
+        _notificationsService =
+            notificationService ?? CANotificationsService.I {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
@@ -53,7 +61,7 @@ class LocalAuthService with WidgetsBindingObserver {
       if (shouldAuthenticate) _refreshUI.add(null);
       _timer?.cancel();
       _timer = null;
-    } else if (AuthService.instance.isSignedIn && !shouldAuthenticate) {
+    } else if (AuthService.I.isSignedIn && !shouldAuthenticate) {
       _timer ??= _createTimer();
     }
   }
@@ -61,7 +69,7 @@ class LocalAuthService with WidgetsBindingObserver {
   void scheduleReauth() {
     _shouldAuthenticate = true;
 
-    final notificationsService = GetIt.I<CANotificationsService>();
+    final notificationsService = _notificationsService;
 
     if (!notificationsService.isPaused) {
       notificationsService.pauseListeners();
@@ -73,7 +81,7 @@ class LocalAuthService with WidgetsBindingObserver {
 
     _refreshUI.add(null);
 
-    final notificationsService = GetIt.I<CANotificationsService>();
+    final notificationsService = _notificationsService;
 
     if (notificationsService.isPaused) {
       notificationsService.resumeListeners();

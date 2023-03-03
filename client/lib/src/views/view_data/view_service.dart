@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewService extends StatefulWidget {
@@ -52,7 +51,7 @@ class _ViewServiceState extends State<ViewService> {
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final viewableObjectService = GetIt.I<CAViewableObjectService>();
+  late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream = DatabaseService.I.services.watchService(
     serviceId: widget.serviceId,

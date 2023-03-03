@@ -6,11 +6,11 @@ import 'package:church_admin/src/services/notifications/notifications_storage.da
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:riverpod/src/framework.dart';
 
 import 'notifications_service_test.mocks.dart';
 
@@ -28,7 +28,7 @@ import 'notifications_service_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   test(
     'Notifications Service => requestNotificationsPermission (true)',
@@ -44,7 +44,9 @@ void main() {
       verifyInOrder([
         PermissionHandlerPlatform.instance
             .requestPermissions([Permission.notification]),
-        GetIt.I<FirebaseMessaging>().requestPermission(),
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .requestPermission(),
       ]);
     },
   );
@@ -72,7 +74,11 @@ void main() {
         PermissionHandlerPlatform.instance
             .requestPermissions([Permission.notification]),
       );
-      verifyNever(GetIt.I<FirebaseMessaging>().requestPermission());
+      verifyNever(
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .requestPermission(),
+      );
     },
   );
 
@@ -87,7 +93,11 @@ void main() {
       when(notificationSettings.authorizationStatus)
           .thenReturn(AuthorizationStatus.denied);
 
-      when(GetIt.I<FirebaseMessaging>().requestPermission()).thenAnswer(
+      when(
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .requestPermission(),
+      ).thenAnswer(
         (_) async => notificationSettings,
       );
 
@@ -99,7 +109,9 @@ void main() {
       verifyInOrder([
         PermissionHandlerPlatform.instance
             .requestPermissions([Permission.notification]),
-        GetIt.I<FirebaseMessaging>().requestPermission(),
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .requestPermission(),
       ]);
     },
   );
@@ -128,13 +140,13 @@ void main() {
       );
 
       verify(
-        GetIt.I<FlutterLocalNotificationsPlugin>().show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          notificationDetails,
-          payload: notification.id,
-        ),
+        globalProviderContainer.read(localNotificationsPluginProvider).show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              notificationDetails,
+              payload: notification.id,
+            ),
       );
 
       await unit.show(
@@ -144,13 +156,13 @@ void main() {
       );
 
       verify(
-        GetIt.I<FlutterLocalNotificationsPlugin>().show(
-          1234,
-          notification.title,
-          notification.body,
-          notificationDetails,
-          payload: 'id2',
-        ),
+        globalProviderContainer.read(localNotificationsPluginProvider).show(
+              1234,
+              notification.title,
+              notification.body,
+              notificationDetails,
+              payload: 'id2',
+            ),
       );
     },
   );
@@ -184,17 +196,25 @@ void main() {
         sentTime: DateTime.now(),
       );
 
-      when(GetIt.I<FirebaseMessaging>().getInitialMessage())
-          .thenAnswer((_) async => initialRemoteMessage);
+      when(
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .getInitialMessage(),
+      ).thenAnswer((_) async => initialRemoteMessage);
 
       await expectLater(
         unit.getInitialNotification(),
         completion(Notification.fromRemoteMessage(initialRemoteMessage)),
       );
 
-      verify(GetIt.I<FirebaseMessaging>().getInitialMessage());
+      verify(
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .getInitialMessage(),
+      );
       verifyNever(
-        GetIt.I<FlutterLocalNotificationsPlugin>()
+        globalProviderContainer
+            .read(localNotificationsPluginProvider)
             .getNotificationAppLaunchDetails(),
       );
     },
@@ -217,7 +237,8 @@ void main() {
       );
 
       when(
-        GetIt.I<FlutterLocalNotificationsPlugin>()
+        globalProviderContainer
+            .read(localNotificationsPluginProvider)
             .getNotificationAppLaunchDetails(),
       ).thenAnswer(
         (_) async => const NotificationAppLaunchDetails(
@@ -230,8 +251,11 @@ void main() {
         ),
       );
 
-      when(GetIt.I<NotificationsStorage>().readNotification(notificationId))
-          .thenAnswer((_) async => expectedNotification);
+      when(
+        globalProviderContainer
+            .read(notificationsStorageProvider)
+            .readNotification(notificationId),
+      ).thenAnswer((_) async => expectedNotification);
 
       await expectLater(
         unit.getInitialNotification(),
@@ -239,10 +263,15 @@ void main() {
       );
 
       verifyInOrder([
-        GetIt.I<FirebaseMessaging>().getInitialMessage(),
-        GetIt.I<FlutterLocalNotificationsPlugin>()
+        globalProviderContainer
+            .read(firebaseMessagingProvider)
+            .getInitialMessage(),
+        globalProviderContainer
+            .read(localNotificationsPluginProvider)
             .getNotificationAppLaunchDetails(),
-        GetIt.I<NotificationsStorage>().readNotification(notificationId),
+        globalProviderContainer
+            .read(notificationsStorageProvider)
+            .readNotification(notificationId),
       ]);
     },
   );
@@ -254,6 +283,10 @@ void main() {
       final onForegroundMessageStream = StreamController<RemoteMessage>();
 
       final unit = CANotificationsService(
+        localNotificationsPlugin:
+            globalProviderContainer.read(localNotificationsPluginProvider),
+        firebaseMessaging:
+            globalProviderContainer.read(firebaseMessagingProvider),
         onMessageOpenedAppStream: onMessageOpenedAppStream.stream,
         onForegroundMessageStream: onForegroundMessageStream.stream,
       );
@@ -342,13 +375,17 @@ void main() {
 
       const expectedToken = '_token_';
 
-      when(GetIt.I<FirebaseMessaging>().isSupported())
-          .thenAnswer((_) async => true);
-      when(GetIt.I<FirebaseMessaging>().getToken())
+      when(
+        globalProviderContainer.read(firebaseMessagingProvider).isSupported(),
+      ).thenAnswer((_) async => true);
+      when(globalProviderContainer.read(firebaseMessagingProvider).getToken())
           .thenAnswer((_) async => expectedToken);
 
-      when(GetIt.I<UserSettingsService>().registeredFCMToken)
-          .thenReturn(expectedToken + 'something else');
+      when(
+        globalProviderContainer
+            .read(userSettingsServiceProvider)
+            .registeredFCMToken,
+      ).thenReturn(expectedToken + 'something else');
 
       await expectLater(
         unit.registerFCMTokenAndListenForChanges(),
@@ -357,8 +394,10 @@ void main() {
 
       verifyInOrder(
         [
-          GetIt.I<CAFunctionsService>().registerFCMToken(expectedToken),
-          GetIt.I<UserSettingsService>().setRegisteredFCMToken(expectedToken),
+          CAFunctionsService.I.registerFCMToken(expectedToken),
+          globalProviderContainer
+              .read(userSettingsServiceProvider)
+              .setRegisteredFCMToken(expectedToken),
         ],
       );
     },
@@ -367,6 +406,9 @@ void main() {
 
 CANotificationsService _createNewUnit() {
   return CANotificationsService(
+    localNotificationsPlugin:
+        globalProviderContainer.read(localNotificationsPluginProvider),
+    firebaseMessaging: globalProviderContainer.read(firebaseMessagingProvider),
     onForegroundMessageStream: const Stream.empty(),
     onMessageOpenedAppStream: const Stream.empty(),
   );
@@ -375,46 +417,47 @@ CANotificationsService _createNewUnit() {
 Future<void> _setUp() async {
   await _setUpPermissionHandler();
 
-  await _setUpFirebaseMessaging();
+  final overrides = [
+    await _setUpFirebaseMessaging(),
+    _setUpLocalNotificationsPlugin(),
+    _setUpAuthService(),
+    _setUpUserSettingsService(),
+    _setUpFunctionsService(),
+    _setUpStorage(),
+  ];
 
-  _setUpLocalNotificationsPlugin();
-
-  _setUpAuthService();
-
-  _setUpUserSettingsService();
-
-  _setUpFunctionsService();
-
-  _setUpStorage();
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpStorage() {
-  GetIt.I.registerSingleton<NotificationsStorage>(MockNotificationsStorage());
+Override _setUpStorage() {
+  return notificationsStorageProvider
+      .overrideWithValue(MockNotificationsStorage());
 }
 
-void _setUpFunctionsService() {
-  GetIt.I.registerSingleton<CAFunctionsService>(MockCAFunctionsService());
+Override _setUpFunctionsService() {
+  return functionsServiceProvider.overrideWithValue(MockCAFunctionsService());
 }
 
-void _setUpUserSettingsService() {
-  GetIt.I.registerSingleton<UserSettingsService>(MockUserSettingsService());
+Override _setUpUserSettingsService() {
+  return userSettingsServiceProvider
+      .overrideWithValue(MockUserSettingsService());
 }
 
-void _setUpAuthService() {
+Override _setUpAuthService() {
   final mockAuthService = MockAuthService();
 
   when(mockAuthService.isSignedIn).thenReturn(true);
 
-  GetIt.I.registerSingleton<AuthService>(mockAuthService);
+  return authServiceProvider.overrideWithValue(mockAuthService);
 }
 
-void _setUpLocalNotificationsPlugin() {
-  GetIt.I.registerSingleton<FlutterLocalNotificationsPlugin>(
+Override _setUpLocalNotificationsPlugin() {
+  return localNotificationsPluginProvider.overrideWithValue(
     MockFlutterLocalNotificationsPlugin(),
   );
 }
 
-Future<void> _setUpFirebaseMessaging() async {
+Future<Override> _setUpFirebaseMessaging() async {
   final notificationSettings = MockNotificationSettings();
   when(notificationSettings.authorizationStatus)
       .thenReturn(AuthorizationStatus.authorized);
@@ -424,7 +467,7 @@ Future<void> _setUpFirebaseMessaging() async {
     (_) async => notificationSettings,
   );
 
-  GetIt.I.registerSingleton<FirebaseMessaging>(mockFirebaseMessaging);
+  return firebaseMessagingProvider.overrideWithValue(mockFirebaseMessaging);
 }
 
 Future<void> _setUpPermissionHandler() async {

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'class.freezed.dart';
 part 'class.g.dart';
@@ -43,7 +42,7 @@ class Class extends ViewableWithIDAndImage with _$Class, AttendanceAnalyzable {
       ? ObjectImageInfo(
           cacheKey: 'classes/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('classes', id),
+              CAFunctionsService.I.getDownloadUrl('classes', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

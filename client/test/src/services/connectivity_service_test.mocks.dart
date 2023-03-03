@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
 
-import 'package:church_admin/src/services/secrets/secrets_service.dart' as _i14;
+import 'package:church_admin/church_admin.dart' as _i14;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i8;
 import 'package:connectivity_plus_platform_interface/connectivity_plus_platform_interface.dart'
     as _i10;

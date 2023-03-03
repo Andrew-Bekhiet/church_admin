@@ -1,12 +1,12 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../utils.dart';
@@ -19,7 +19,7 @@ import 'viewable_object_list_test.mocks.dart';
 ])
 void main() {
   setUp(_setUp);
-  tearDown(GetIt.I.reset);
+  tearDown(resetGlobalProviderContainer);
 
   testWidgets(
     'Viewable Object List => Loading items',
@@ -334,19 +334,24 @@ MockPaginatableStreamBase<Person> _createMockPaginatableStream(
 }
 
 void _setUp() {
-  _setUpViewableObjectService();
-  _setUpImageUrlCacheService();
+  final overrides = [
+    _setUpViewableObjectService(),
+    _setUpImageUrlCacheService()
+  ];
+
+  initGlobalProviderContainer(overrides);
 }
 
-void _setUpViewableObjectService() {
+Override _setUpViewableObjectService() {
   final viewableObjectService = MockCAViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);
 
-  GetIt.I.registerSingleton<CAViewableObjectService>(viewableObjectService);
+  return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }
 
-void _setUpImageUrlCacheService() {
-  GetIt.I.registerSingleton<ImageUrlCacheService>(MockImageUrlCacheService());
+Override _setUpImageUrlCacheService() {
+  return imageUrlCacheServiceProvider
+      .overrideWithValue(MockImageUrlCacheService());
 }

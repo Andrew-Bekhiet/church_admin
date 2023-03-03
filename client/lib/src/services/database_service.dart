@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:get_it/get_it.dart';
 
 import 'database/gql_definintions.dart';
 import 'database/gql_parser.dart';
@@ -8,8 +7,8 @@ export 'database/db_gql_client.dart';
 export 'database/utils.dart';
 
 class DatabaseService {
-  static DatabaseService get instance => GetIt.I<DatabaseService>();
-  static DatabaseService get I => instance;
+  static DatabaseService get I =>
+      globalProviderContainer.read(databaseServiceProvider);
 
   DatabaseService(
     this.graphQLClient, {

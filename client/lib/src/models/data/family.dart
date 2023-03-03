@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
 
 part 'family.freezed.dart';
 part 'family.g.dart';
@@ -32,7 +31,7 @@ class Family extends ViewableWithIDAndImage with _$Family {
       ? ObjectImageInfo(
           cacheKey: 'families/$id',
           downloadUrlFn: () async =>
-              GetIt.I<CAFunctionsService>().getDownloadUrl('families', id),
+              CAFunctionsService.I.getDownloadUrl('families', id),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

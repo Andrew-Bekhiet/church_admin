@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -13,11 +12,10 @@ class UpdateUserData extends StatefulWidget {
     path: '/updateUserData',
     builder: (context, state) => const UpdateUserData(),
     redirect: (context, state) {
-      if (!AuthService.instance.isSignedIn) {
+      if (!AuthService.I.isSignedIn) {
         return ChurchAdminApp.router.routeInformationParser.configuration
             .namedLocation('login');
-      } else if (AuthService.instance.currentUser!.person!
-          .spiritDataUpToDate()) {
+      } else if (AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
         return '/';
       } else if (LocalAuthService.I.shouldAuthenticate) {
         return ChurchAdminApp.router.routeInformationParser.configuration
@@ -38,8 +36,7 @@ class UpdateUserData extends StatefulWidget {
 }
 
 class _UpdateUserDataState extends State<UpdateUserData> {
-  late Person _userData =
-      widget.userData ?? AuthService.instance.currentUser!.person!;
+  late Person _userData = widget.userData ?? AuthService.I.currentUser!.person!;
   final _formKey = GlobalKey<FormState>();
   bool _isSaving = false;
 
@@ -92,7 +89,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.instance.currentUser!.uid,
+                    recordedBy: AuthService.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
@@ -133,7 +130,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.instance.currentUser!.uid,
+                    recordedBy: AuthService.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
@@ -171,11 +168,11 @@ class _UpdateUserDataState extends State<UpdateUserData> {
         ),
       );
 
-      await GetIt.I<DatabaseService>().persons.updatePersonSpiritData(
-            personId: _userData.id,
-            lastConfession: _userData.lastConfession!.time,
-            lastKodas: _userData.lastKodas!.time,
-          );
+      await DatabaseService.I.persons.updatePersonSpiritData(
+        personId: _userData.id,
+        lastConfession: _userData.lastConfession!.time,
+        lastKodas: _userData.lastKodas!.time,
+      );
 
       if (mounted) {
         scaffoldMessenger
@@ -196,7 +193,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
         ),
       );
 
-      await GetIt.I<LoggingService>().reportError(
+      await LoggingService.I.reportError(
         err,
         stackTrace: stack,
         data: _userData.toJson(),
