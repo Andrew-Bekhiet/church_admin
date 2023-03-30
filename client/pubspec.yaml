@@ -47,11 +47,6 @@ dependencies:
       ref: main
       path: packages/firebase_core/firebase_core_desktop
   firebase_database: ^10.0.2
-  firebase_functions_desktop:
-    git:
-      url: https://github.com/NirmalAriyathilake/flutterfire_desktop
-      ref: main
-      path: packages/firebase_functions/firebase_functions_desktop
   firebase_messaging: ^14.0.2
   fl_chart: ^0.61.0
   flex_color_picker: ^3.0.0
@@ -110,6 +105,8 @@ dependencies:
   universal_platform: ^1.0.0+1
   uuid: ^3.0.6
   visibility_detector: ^0.4.0+2
+  flutter_map_line_editor: ^4.0.2
+  clock: ^1.1.1
 
 dev_dependencies:
   build_runner: ^2.3.2

@@ -18,18 +18,16 @@ class LoggingService {
   void _init() {
     FlutterError.onError = (flutterError) {
       Sentry.captureException(
-        flutterError.exception,
+        flutterError,
         stackTrace: flutterError.stack,
-        hint: flutterError,
       );
     };
 
     ErrorWidget.builder = (error) {
       if (kReleaseMode) {
         Sentry.captureException(
-          error.exception,
+          error,
           stackTrace: error.stack,
-          hint: error,
         );
       }
       return Material(
@@ -62,20 +60,22 @@ class LoggingService {
       withScope: (scope) {
         final currentUser = AuthService.I.currentUser;
 
-        scope
-          ..setUser(
-            SentryUser(
-              data: currentUser?.toJson().map(
-                    (key, value) => MapEntry(
-                      key,
-                      value is Set ? value.toList() : value,
-                    ),
+        scope.setUser(
+          SentryUser(
+            data: currentUser?.toJson().map(
+                  (key, value) => MapEntry(
+                    key,
+                    value is Set ? value.toList() : value,
                   ),
-              email: currentUser?.email,
-              id: currentUser?.uid,
-            ),
-          )
-          ..setContexts('Data', data);
+                ),
+            email: currentUser?.email,
+            id: currentUser?.uid,
+          ),
+        );
+
+        if (data != null) {
+          scope.setContexts('Data', data);
+        }
 
         if (extras != null) {
           for (final entry in extras.entries) {
@@ -94,20 +94,20 @@ class LoggingService {
     await Sentry.captureException(
       flutterError,
       stackTrace: flutterError.stack,
-      hint: flutterError.toString(),
       withScope: (scope) {
         final currentUser = AuthService.I.currentUser;
         scope
           ..setUser(
             SentryUser(
+              id: currentUser?.uid,
+              email: currentUser?.email,
+              name: currentUser?.name,
               data: currentUser?.toJson().map(
                     (key, value) => MapEntry(
                       key,
                       value is Set ? value.toList() : value,
                     ),
                   ),
-              email: currentUser?.email,
-              id: currentUser?.uid,
             ),
           )
           ..setContexts('Data', data);

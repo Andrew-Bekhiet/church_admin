@@ -4,13 +4,14 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
   static LocalAuthService get I =>
       globalProviderContainer.read(localAuthServiceProvider);
 
   final Duration timeToReauth;
+
+  final CurrentPlatformService _currentPlatformService;
 
   final LocalAuthentication _localAuthPlugin;
 
@@ -28,11 +29,13 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService({
     required LocalAuthentication localAuthPlugin,
+    CurrentPlatformService? currentPlatformService,
     CANotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService =
-            notificationService ?? CANotificationsService.I {
+        _notificationsService = notificationService ?? CANotificationsService.I,
+        _currentPlatformService =
+            currentPlatformService ?? CurrentPlatformService.I {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -42,11 +45,13 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService.noInitialAuth({
     required LocalAuthentication localAuthPlugin,
+    CurrentPlatformService? currentPlatformService,
     CANotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService =
-            notificationService ?? CANotificationsService.I {
+        _notificationsService = notificationService ?? CANotificationsService.I,
+        _currentPlatformService =
+            currentPlatformService ?? CurrentPlatformService.I {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
@@ -107,7 +112,7 @@ class LocalAuthService with WidgetsBindingObserver {
           .authenticate(
         localizedReason: 'برجاء التحقق للمتابعة',
         options: AuthenticationOptions(
-          biometricOnly: !UniversalPlatform.isWindows,
+          biometricOnly: !_currentPlatformService.isWindows,
           useErrorDialogs: false,
         ),
       )

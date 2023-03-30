@@ -211,9 +211,16 @@ Future<void> _setUp() async {
     _setUpGoogleSignIn(),
     _setUpFirebaseAuth(),
     _setUpDatabaseService(),
+    _setUpCurrentPlatformService(),
   ];
 
   initGlobalProviderContainer(overrides);
+}
+
+Override _setUpCurrentPlatformService() {
+  return currentPlatformServiceProvider.overrideWithValue(
+    const CurrentPlatformService(PlatformValue.android),
+  );
 }
 
 Override _setUpDatabaseService() {

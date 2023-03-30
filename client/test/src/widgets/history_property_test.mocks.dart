@@ -3,9 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i10;
+import 'dart:io' as _i8;
 
-import 'package:church_admin/church_admin.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i9;
+import 'package:churchdata_core/churchdata_core.dart' as _i11;
+import 'package:flutter/foundation.dart' as _i5;
+import 'package:flutter/material.dart' as _i4;
+import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i7;
+import 'package:go_router/go_router.dart' as _i3;
+import 'package:hive_flutter/hive_flutter.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i2;
 
@@ -31,27 +38,104 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
+class _FakeGoRouter_1 extends _i1.SmartFake implements _i3.GoRouter {
+  _FakeGoRouter_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNavigatorState_2 extends _i1.SmartFake
+    implements _i4.NavigatorState {
+  _FakeNavigatorState_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({_i5.DiagnosticLevel? minLevel = _i5.DiagnosticLevel.info}) =>
+      super.toString();
+}
+
+class _FakeGlobalKey_3<T extends _i4.State<_i4.StatefulWidget>>
+    extends _i1.SmartFake implements _i4.GlobalKey<T> {
+  _FakeGlobalKey_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeIconData_4 extends _i1.SmartFake implements _i4.IconData {
+  _FakeIconData_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeBox_5<E> extends _i1.SmartFake implements _i6.Box<E> {
+  _FakeBox_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeBaseCacheManager_6 extends _i1.SmartFake
+    implements _i7.BaseCacheManager {
+  _FakeBaseCacheManager_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFile_7 extends _i1.SmartFake implements _i8.File {
+  _FakeFile_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [DelegatingPaginatableStream].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDelegatingPaginatableStream extends _i1.Mock
-    implements _i3.DelegatingPaginatableStream<_i3.LastRecordedByInfo> {
+    implements _i9.DelegatingPaginatableStream<_i9.LastRecordedByInfo> {
   @override
-  _i3.OnQuery<_i3.LastRecordedByInfo> get streamDelegate => (super.noSuchMethod(
+  _i9.OnQuery<_i9.LastRecordedByInfo> get streamDelegate => (super.noSuchMethod(
         Invocation.getter(#streamDelegate),
         returnValue: (
-          _i3.DelegatingPaginatableStream<_i3.LastRecordedByInfo> instance,
-          _i4.Stream<int> offset,
+          _i9.DelegatingPaginatableStream<_i9.LastRecordedByInfo> instance,
+          _i10.Stream<int> offset,
         ) =>
-            _i4.Stream<
-                _i3.DelegatingStreamResult<_i3.LastRecordedByInfo>>.empty(),
+            _i10.Stream<
+                _i9.DelegatingStreamResult<_i9.LastRecordedByInfo>>.empty(),
         returnValueForMissingStub: (
-          _i3.DelegatingPaginatableStream<_i3.LastRecordedByInfo> instance,
-          _i4.Stream<int> offset,
+          _i9.DelegatingPaginatableStream<_i9.LastRecordedByInfo> instance,
+          _i10.Stream<int> offset,
         ) =>
-            _i4.Stream<
-                _i3.DelegatingStreamResult<_i3.LastRecordedByInfo>>.empty(),
-      ) as _i3.OnQuery<_i3.LastRecordedByInfo>);
+            _i10.Stream<
+                _i9.DelegatingStreamResult<_i9.LastRecordedByInfo>>.empty(),
+      ) as _i9.OnQuery<_i9.LastRecordedByInfo>);
   @override
   _i2.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
         Invocation.getter(#onLoadingChanged),
@@ -89,25 +173,25 @@ class MockDelegatingPaginatableStream extends _i1.Mock
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i2.ValueStream<List<_i3.LastRecordedByInfo>> get stream =>
+  _i2.ValueStream<List<_i9.LastRecordedByInfo>> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _FakeValueStream_0<List<_i3.LastRecordedByInfo>>(
+        returnValue: _FakeValueStream_0<List<_i9.LastRecordedByInfo>>(
           this,
           Invocation.getter(#stream),
         ),
         returnValueForMissingStub:
-            _FakeValueStream_0<List<_i3.LastRecordedByInfo>>(
+            _FakeValueStream_0<List<_i9.LastRecordedByInfo>>(
           this,
           Invocation.getter(#stream),
         ),
-      ) as _i2.ValueStream<List<_i3.LastRecordedByInfo>>);
+      ) as _i2.ValueStream<List<_i9.LastRecordedByInfo>>);
   @override
-  List<_i3.LastRecordedByInfo> get currentValue => (super.noSuchMethod(
+  List<_i9.LastRecordedByInfo> get currentValue => (super.noSuchMethod(
         Invocation.getter(#currentValue),
-        returnValue: <_i3.LastRecordedByInfo>[],
-        returnValueForMissingStub: <_i3.LastRecordedByInfo>[],
-      ) as List<_i3.LastRecordedByInfo>);
+        returnValue: <_i9.LastRecordedByInfo>[],
+        returnValueForMissingStub: <_i9.LastRecordedByInfo>[],
+      ) as List<_i9.LastRecordedByInfo>);
   @override
   int get limit => (super.noSuchMethod(
         Invocation.getter(#limit),
@@ -115,39 +199,210 @@ class MockDelegatingPaginatableStream extends _i1.Mock
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i4.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+  _i10.Future<void> loadPage(int? offset) => (super.noSuchMethod(
         Invocation.method(
           #loadPage,
           [offset],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
   @override
-  _i4.Future<void> loadNextPage() => (super.noSuchMethod(
+  _i10.Future<void> loadNextPage() => (super.noSuchMethod(
         Invocation.method(
           #loadNextPage,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
   @override
-  _i4.Future<void> loadPreviousPage() => (super.noSuchMethod(
+  _i10.Future<void> loadPreviousPage() => (super.noSuchMethod(
         Invocation.method(
           #loadPreviousPage,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
+  _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+}
+
+/// A class which mocks [CAViewableObjectService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCAViewableObjectService extends _i1.Mock
+    implements _i9.CAViewableObjectService {
+  @override
+  _i3.GoRouter get router => (super.noSuchMethod(
+        Invocation.getter(#router),
+        returnValue: _FakeGoRouter_1(
+          this,
+          Invocation.getter(#router),
+        ),
+        returnValueForMissingStub: _FakeGoRouter_1(
+          this,
+          Invocation.getter(#router),
+        ),
+      ) as _i3.GoRouter);
+  @override
+  _i4.NavigatorState get navigator => (super.noSuchMethod(
+        Invocation.getter(#navigator),
+        returnValue: _FakeNavigatorState_2(
+          this,
+          Invocation.getter(#navigator),
+        ),
+        returnValueForMissingStub: _FakeNavigatorState_2(
+          this,
+          Invocation.getter(#navigator),
+        ),
+      ) as _i4.NavigatorState);
+  @override
+  _i4.GlobalKey<_i4.NavigatorState> get navigatorKey => (super.noSuchMethod(
+        Invocation.getter(#navigatorKey),
+        returnValue: _FakeGlobalKey_3<_i4.NavigatorState>(
+          this,
+          Invocation.getter(#navigatorKey),
+        ),
+        returnValueForMissingStub: _FakeGlobalKey_3<_i4.NavigatorState>(
+          this,
+          Invocation.getter(#navigatorKey),
+        ),
+      ) as _i4.GlobalKey<_i4.NavigatorState>);
+  @override
+  void onTap(_i11.Viewable? object) => super.noSuchMethod(
+        Invocation.method(
+          #onTap,
+          [object],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  String? getSecondLine(_i11.Viewable? object) => (super.noSuchMethod(
+        Invocation.method(
+          #getSecondLine,
+          [object],
+        ),
+        returnValueForMissingStub: null,
+      ) as String?);
+  @override
+  _i4.IconData getDefaultIconFor<T extends _i9.IImage>([T? imageObject]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDefaultIconFor,
+          [imageObject],
+        ),
+        returnValue: _FakeIconData_4(
+          this,
+          Invocation.method(
+            #getDefaultIconFor,
+            [imageObject],
+          ),
+        ),
+        returnValueForMissingStub: _FakeIconData_4(
+          this,
+          Invocation.method(
+            #getDefaultIconFor,
+            [imageObject],
+          ),
+        ),
+      ) as _i4.IconData);
+}
+
+/// A class which mocks [ImageUrlCacheService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockImageUrlCacheService extends _i1.Mock
+    implements _i9.ImageUrlCacheService {
+  @override
+  _i6.Box<String> get box => (super.noSuchMethod(
+        Invocation.getter(#box),
+        returnValue: _FakeBox_5<String>(
+          this,
+          Invocation.getter(#box),
+        ),
+        returnValueForMissingStub: _FakeBox_5<String>(
+          this,
+          Invocation.getter(#box),
+        ),
+      ) as _i6.Box<String>);
+  @override
+  _i7.BaseCacheManager get cacheManager => (super.noSuchMethod(
+        Invocation.getter(#cacheManager),
+        returnValue: _FakeBaseCacheManager_6(
+          this,
+          Invocation.getter(#cacheManager),
+        ),
+        returnValueForMissingStub: _FakeBaseCacheManager_6(
+          this,
+          Invocation.getter(#cacheManager),
+        ),
+      ) as _i7.BaseCacheManager);
+  @override
+  _i10.Future<_i8.File> getImageFile(_i9.IImage? imageObject) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImageFile,
+          [imageObject],
+        ),
+        returnValue: _i10.Future<_i8.File>.value(_FakeFile_7(
+          this,
+          Invocation.method(
+            #getImageFile,
+            [imageObject],
+          ),
+        )),
+        returnValueForMissingStub: _i10.Future<_i8.File>.value(_FakeFile_7(
+          this,
+          Invocation.method(
+            #getImageFile,
+            [imageObject],
+          ),
+        )),
+      ) as _i10.Future<_i8.File>);
+  @override
+  _i10.Future<String> getImageUrl(_i9.IImage? imageObject) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImageUrl,
+          [imageObject],
+        ),
+        returnValue: _i10.Future<String>.value(''),
+        returnValueForMissingStub: _i10.Future<String>.value(''),
+      ) as _i10.Future<String>);
+  @override
+  String? getCachedImageUrl(_i9.IImage? imageObject) => (super.noSuchMethod(
+        Invocation.method(
+          #getCachedImageUrl,
+          [imageObject],
+        ),
+        returnValueForMissingStub: null,
+      ) as String?);
+  @override
+  _i10.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #isUrlFileCachedAndValid,
+          [cachedUrl],
+        ),
+        returnValue: _i10.Future<bool>.value(false),
+        returnValueForMissingStub: _i10.Future<bool>.value(false),
+      ) as _i10.Future<bool>);
+  @override
+  bool isUrlExpired(String? url) => (super.noSuchMethod(
+        Invocation.method(
+          #isUrlExpired,
+          [url],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 }

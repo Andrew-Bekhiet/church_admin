@@ -224,7 +224,7 @@ packages:
     source: path
     version: "0.4.0"
   clock:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: clock
       sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
@@ -673,23 +673,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.4"
-  firebase_functions_dart:
-    dependency: transitive
-    description:
-      name: firebase_functions_dart
-      sha256: a7484986326078fe9901a89ee11cb1270d0fae3a71e86ca4f96866b5f0a65b98
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.1+2"
-  firebase_functions_desktop:
-    dependency: "direct main"
-    description:
-      path: "packages/firebase_functions/firebase_functions_desktop"
-      ref: main
-      resolved-ref: baf44f5c5e5e1bb6bcfd15d21dd2a96abf3e9b68
-      url: "https://github.com/NirmalAriyathilake/flutterfire_desktop"
-    source: git
-    version: "0.2.0+3"
   firebase_messaging:
     dependency: "direct main"
     description:

@@ -26,7 +26,11 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       parent: globalProviderContainer,
-      child: const ChurchAdminApp(),
+      child: SentryScreenshotWidget(
+        child: SentryUserInteractionWidget(
+          child: const ChurchAdminApp(),
+        ),
+      ),
     ),
   );
 }
@@ -68,7 +72,11 @@ Future<void> _initializeSentry() async {
     (options) => options
       ..dsn = globalProviderContainer.read(secretsServiceProvider).sentryDSN
       ..diagnosticLevel = SentryLevel.warning
-      ..environment = kReleaseMode ? 'Production' : 'Debug',
+      ..environment = kReleaseMode ? 'Production' : 'Debug'
+      ..attachScreenshot = true
+      ..attachViewHierarchy = true
+      ..screenshotQuality = SentryScreenshotQuality.medium
+      ..enableUserInteractionTracing = true,
   );
 }
 

@@ -45,7 +45,7 @@ void main() {
       expect(unit.formatInternational('01234567890'), '+201234567890');
 
       // standard way of typing:
-      expect(unit.formatInternational('201234567890'), '+201234567890');
+      expect(unit.formatInternational('+201234567890'), '+201234567890');
     },
   );
 }

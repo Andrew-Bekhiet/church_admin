@@ -1,7 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/utils.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -13,81 +15,85 @@ import 'package:timeago/timeago.dart';
 import '../utils.dart';
 import 'history_property_test.mocks.dart';
 
-@GenerateNiceMocks(
-  [
-    MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
-  ],
-)
+@GenerateNiceMocks([
+  MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<CAViewableObjectService>(),
+  MockSpec<ImageUrlCacheService>(),
+])
 Future<void> main() async {
   await initializeDateFormatting();
   setLocaleMessages('ar', ArMessages());
   await loadAppFonts();
 
+  setUp(_setUp);
+  tearDown(resetGlobalProviderContainer);
+
   testGoldens(
     'HistoryProperty => Goldens test',
     (tester) async {
-      final value = DateTime.now().subtract(const Duration(days: 5));
+      await withClock(Clock.fixed(DateTime(2050)), () async {
+        final value = clock.now().subtract(const Duration(days: 5));
 
-      final historyProperty = HistoryProperty(
-        name: 'name',
-        value: value,
-        getHistoryStream: MockDelegatingPaginatableStream.new,
-        onRecordNow: () {},
-      );
+        final historyProperty = HistoryProperty(
+          name: 'name',
+          value: value,
+          getHistoryStream: MockDelegatingPaginatableStream.new,
+          onRecordNow: () {},
+        );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: historyProperty,
-        ),
-        wrapper: materialAppWrapper(
-          theme: ThemeData(
-            fontFamily: 'Cairo',
+        await tester.pumpWidgetBuilder(
+          Scaffold(
+            body: historyProperty,
           ),
-        ),
-      );
+          wrapper: materialAppWrapper(
+            theme: ThemeData(
+              fontFamily: 'Cairo',
+            ),
+          ),
+        );
 
-      expect(
-        find.descendant(
-          of: find.byType(ListTile),
-          matching: find.text('name'),
-        ),
-        findsOneWidget,
-      );
+        expect(
+          find.descendant(
+            of: find.byType(ListTile),
+            matching: find.text('name'),
+          ),
+          findsOneWidget,
+        );
 
-      expect(
-        find.descendant(
-          of: find.byType(ListTile),
-          matching: find.text(value.toDurationString()),
-        ),
-        findsOneWidget,
-      );
-      expect(
-        find.descendant(
-          of: find.byType(ListTile),
-          matching: find.text(historyProperty.dateFormat.format(value)),
-        ),
-        findsOneWidget,
-      );
+        expect(
+          find.descendant(
+            of: find.byType(ListTile),
+            matching: find.text(value.toDurationString()),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ListTile),
+            matching: find.text(historyProperty.dateFormat.format(value)),
+          ),
+          findsOneWidget,
+        );
 
-      expect(
-        find.descendant(
-          of: find.byType(IconButton),
-          matching: find.byIcon(Icons.history),
-        ),
-        findsOneWidget,
-      );
+        expect(
+          find.descendant(
+            of: find.byType(IconButton),
+            matching: find.byIcon(Icons.history),
+          ),
+          findsOneWidget,
+        );
 
-      expect(
-        find.descendant(
-          of: find.byType(IconButton),
-          matching: find.byIcon(Icons.task_alt),
-        ),
-        findsOneWidget,
-      );
+        expect(
+          find.descendant(
+            of: find.byType(IconButton),
+            matching: find.byIcon(Icons.task_alt),
+          ),
+          findsOneWidget,
+        );
+      });
 
       await screenMatchesGolden(tester, 'history_property');
     },
-    skip: true,
   );
 
   testWidgets(
@@ -97,7 +103,7 @@ Future<void> main() async {
 
       final historyProperty = HistoryProperty(
         name: 'name',
-        value: DateTime.now(),
+        value: clock.now(),
         getHistoryStream: MockDelegatingPaginatableStream.new,
         onRecordNow: () => called = true,
       );
@@ -123,81 +129,109 @@ Future<void> main() async {
   testWidgets(
     'HistoryProperty => getHistoryStream',
     (tester) async {
-      bool called = false;
-      final lastRecordedByInfo = LastRecordedByInfo(
-        time: DateTime.now(),
-        recordedBy: 'id',
-        user: User(
-          uid: 'id',
-          name: 'user',
-          email: 'email',
-        ),
-      );
-
-      final historyProperty = HistoryProperty(
-        name: 'name',
-        value: DateTime.now(),
-        getHistoryStream: () {
-          called = true;
-
-          final mock = MockDelegatingPaginatableStream();
-
-          when(mock.stream).thenAnswer(
-            (_) => BehaviorSubject.seeded([lastRecordedByInfo]),
-          );
-
-          when(mock.canPaginateForward).thenReturn(false);
-          when(mock.limit).thenReturn(1);
-          return mock;
-        },
-        onRecordNow: () {},
-      );
-
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: historyProperty,
+      await withClock(Clock.fixed(DateTime(2050)), () async {
+        bool called = false;
+        final lastRecordedByInfo = LastRecordedByInfo(
+          time: clock.now(),
+          recordedBy: 'id',
+          user: User(
+            uid: 'id',
+            name: 'user',
+            email: 'email',
           ),
-        ),
-      );
+        );
 
-      await tester.tap(
-        find.descendant(
-          of: find.byType(IconButton),
-          matching: find.byIcon(Icons.history),
-        ),
-      );
+        final historyProperty = HistoryProperty(
+          name: 'name',
+          value: clock.now(),
+          getHistoryStream: () {
+            called = true;
 
-      await tester.pumpAndSettle();
+            final mock = MockDelegatingPaginatableStream();
 
-      expect(find.byType(Dialog, skipOffstage: false), findsOneWidget);
-      expect(
-        find.descendant(
-          of: find.byType(Dialog),
-          matching: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
-        ),
-        findsOneWidget,
-      );
-      expect(called, isTrue);
+            when(mock.stream).thenAnswer(
+              (_) => BehaviorSubject.seeded([lastRecordedByInfo]),
+            );
 
-      expect(
-        find.descendant(
-          of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
-          matching: find.text(lastRecordedByInfo.user!.name),
-        ),
-        findsOneWidget,
-      );
-      expect(
-        find.descendant(
-          of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
-          matching: find
-              .text(historyProperty.dateFormat.format(lastRecordedByInfo.time)),
-        ),
-        findsOneWidget,
-      );
+            when(mock.canPaginateForward).thenReturn(false);
+            when(mock.limit).thenReturn(1);
+            when(mock.onLoadingChanged)
+                .thenAnswer((_) => BehaviorSubject.seeded(false));
+            return mock;
+          },
+          onRecordNow: () {},
+        );
 
-      flushVisibilityDetectors();
+        await tester.pumpWidget(
+          wrapWithMaterialApp(
+            Scaffold(
+              body: historyProperty,
+            ),
+          ),
+        );
+
+        await tester.tap(
+          find.descendant(
+            of: find.byType(IconButton),
+            matching: find.byIcon(Icons.history),
+          ),
+        );
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(Dialog, skipOffstage: false), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byType(Dialog),
+            matching: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
+          ),
+          findsOneWidget,
+        );
+        expect(called, isTrue);
+
+        expect(
+          find.descendant(
+            of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
+            matching: find.text(lastRecordedByInfo.user!.name),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),
+            matching: find.text(
+              historyProperty.dateFormat.format(lastRecordedByInfo.time),
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        flushVisibilityDetectors();
+      });
     },
-    skip: true,
+  );
+}
+
+void _setUp() {
+  final overrides = [
+    _setUpViewableObjectService(),
+    _setUpMockImageUrlService(),
+  ];
+
+  initGlobalProviderContainer(overrides);
+}
+
+Override _setUpViewableObjectService() {
+  final viewableObjectService = MockCAViewableObjectService();
+
+  when(viewableObjectService.getDefaultIconFor<Person>(any))
+      .thenReturn(Icons.person);
+
+  return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
+}
+
+Override _setUpMockImageUrlService() {
+  return imageUrlCacheServiceProvider.overrideWithValue(
+    MockImageUrlCacheService(),
   );
 }

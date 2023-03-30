@@ -296,3 +296,7 @@ final authAdapterProvider = Provider<AuthAdapter>(
 final authCacheProvider = Provider<AuthCache>(
   (ref) => AuthCache(secureStorage: ref.watch(secureStorageProvider)),
 );
+
+final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
+  (ref) => const CurrentPlatformService(),
+);

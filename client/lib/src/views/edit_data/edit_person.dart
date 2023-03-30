@@ -14,7 +14,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:tuple/tuple.dart';
 import 'package:universal_file/universal_file.dart';
-import 'package:universal_platform/universal_platform.dart';
 import 'package:uuid/uuid.dart';
 
 import 'photo_field_state.dart';
@@ -256,14 +255,15 @@ class _EditPersonState extends State<EditPerson> {
                                 key: ValueKey(newPerson.mainPhone),
                                 decoration: InputDecoration(
                                   labelText: 'رقم الهاتف',
-                                  suffixIcon: UniversalPlatform.isAndroid ||
-                                          UniversalPlatform.isIOS
-                                      ? IconButton(
-                                          tooltip: 'اختيار من جهات الاتصال',
-                                          onPressed: _importFromContacts,
-                                          icon: const Icon(Icons.contacts),
-                                        )
-                                      : null,
+                                  suffixIcon:
+                                      CurrentPlatformService.I.isAndroid ||
+                                              CurrentPlatformService.I.isIOS
+                                          ? IconButton(
+                                              tooltip: 'اختيار من جهات الاتصال',
+                                              onPressed: _importFromContacts,
+                                              icon: const Icon(Icons.contacts),
+                                            )
+                                          : null,
                                 ),
                                 onFieldSubmitted: (_) {
                                   FocusScope.of(context).nextFocus();

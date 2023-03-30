@@ -7,10 +7,8 @@ import 'package:desktop_webview_auth/google.dart';
 import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, GoogleAuthProvider, IdTokenResult, OAuthCredential;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];
@@ -25,13 +23,17 @@ class FirebaseAuthAdapter extends AuthAdapter {
     required FirebaseAuth firebaseAuth,
     required GoogleSignIn googleSignIn,
     DatabaseService? databaseService,
+    CurrentPlatformService? currentPlatformService,
   })  : _googleSignIn = googleSignIn,
         _firebaseAuth = firebaseAuth,
-        _databaseService = databaseService ?? DatabaseService.I;
+        _databaseService = databaseService ?? DatabaseService.I,
+        _currentPlatformService =
+            currentPlatformService ?? CurrentPlatformService.I;
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final DatabaseService _databaseService;
+  final CurrentPlatformService _currentPlatformService;
 
   @override
   late final Stream<User?> userStream = _firebaseAuth
@@ -71,11 +73,11 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   @override
   Future<User?> signInWithGoogle() {
-    return kIsWeb ? _signInForWeb() : _signInForNative();
+    return _currentPlatformService.isWeb ? _signInForWeb() : _signInForNative();
   }
 
   Future<User?> _signInForNative() async {
-    if (UniversalPlatform.isDesktop) {
+    if (_currentPlatformService.isDesktop) {
       final credential = await DesktopWebviewAuth.signIn(
         GoogleSignInArgs(
           redirectUri: SecretsService.I.webAuthHandler,

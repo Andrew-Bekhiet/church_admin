@@ -18,7 +18,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 import 'package:tuple/tuple.dart';
-import 'package:universal_platform/universal_platform.dart';
 import 'package:uuid/uuid.dart';
 
 class DataGeomap extends StatefulWidget {
@@ -281,7 +280,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                           ? 'com.AndroidQuartz.church_admin'
                           : packageName) +
                       ': ' +
-                      _getPlatformName(),
+                      CurrentPlatformService.I.effectiveValue.name,
                   maxZoom: 19,
                   retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
                 ),
@@ -677,24 +676,6 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
     } else {
       return LatLng(30.60109, 32.27371);
     }
-  }
-
-  String _getPlatformName() {
-    if (UniversalPlatform.isWeb) return 'web';
-    if (UniversalPlatform.isAndroid) {
-      return 'android';
-    } else if (UniversalPlatform.isIOS) {
-      return 'ios';
-    } else if (UniversalPlatform.isWindows) {
-      return 'windows';
-    } else if (UniversalPlatform.isLinux) {
-      return 'linux';
-    } else if (UniversalPlatform.isMacOS) {
-      return 'macos';
-    } else if (UniversalPlatform.isFuchsia) {
-      return 'fuchsia';
-    }
-    return 'unknown';
   }
 
   @override
