@@ -6,16 +6,16 @@ class ViewableObjectAppBar extends StatefulWidget {
     required this.viewable,
     required this.foregroundColor,
     required this.appBarMaxHeight,
-    required this.duration,
+    this.duration,
     this.scrollController,
     this.circleCrop = true,
     super.key,
-  });
+  }) : assert(scrollController == null || duration != null);
 
   final Color? foregroundColor;
   final ViewableWithIDAndImage viewable;
   final double appBarMaxHeight;
-  final Duration duration;
+  final Duration? duration;
   final ScrollController? scrollController;
   final bool circleCrop;
 
@@ -162,7 +162,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
         if (widget.scrollController!.hasClients) {
           widget.scrollController!.animateTo(
             nearestSnap * maxScroll,
-            duration: widget.duration,
+            duration: widget.duration!,
             curve: Curves.easeOutExpo,
           );
         }

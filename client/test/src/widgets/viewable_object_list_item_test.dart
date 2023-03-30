@@ -57,7 +57,7 @@ void main() async {
         findsNothing,
       );
 
-      await screenMatchesGolden(tester, 'viewable_object_list_item');
+      await screenMatchesGolden(tester, 'viewable_object_list_item/default');
 
       selectionController.selectNone();
       await tester.pumpAndSettle();
@@ -79,7 +79,7 @@ void main() async {
 
       await screenMatchesGolden(
         tester,
-        'viewable_object_list_item_selection_mode',
+        'viewable_object_list_item/selection_mode',
       );
 
       selectionController.select(item);
@@ -102,7 +102,7 @@ void main() async {
 
       await screenMatchesGolden(
         tester,
-        'viewable_object_list_item_selection_mode_selected',
+        'viewable_object_list_item/selection_mode_selected',
       );
     },
   );

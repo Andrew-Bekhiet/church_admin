@@ -50,24 +50,24 @@ Future<void> main() async {
         ),
       );
 
-      await screenMatchesGolden(tester, 'services_hierarchy_list_collapsed');
+      await screenMatchesGolden(tester, 'services_hierarchy_list/collapsed');
 
       await tester.tap(find.text('Service 1'));
       await screenMatchesGolden(
         tester,
-        'services_hierarchy_list_service_1_expanded',
+        'services_hierarchy_list/service_1_expanded',
       );
 
       await tester.tap(find.text('First Primary'));
       await screenMatchesGolden(
         tester,
-        'services_hierarchy_list_study_year_expanded',
+        'services_hierarchy_list/study_year_expanded',
       );
 
       await tester.tap(find.text('Service 2'));
       await screenMatchesGolden(
         tester,
-        'services_hierarchy_list_service_2_expanded',
+        'services_hierarchy_list/service_2_expanded',
       );
 
       // Dispose the main widget:
