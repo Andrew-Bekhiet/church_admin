@@ -137,7 +137,7 @@ class _CopyWithImpl$Variables$Subscription$editHistory<TRes>
 
   final TRes Function(Variables$Subscription$editHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -253,7 +253,7 @@ class _CopyWithImpl$Subscription$editHistory<TRes>
 
   final TRes Function(Subscription$editHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyEditHistory = _undefined}) =>
       _then(Subscription$editHistory(
@@ -509,7 +509,7 @@ class _CopyWithImpl$Variables$Subscription$personCallHistory<TRes>
 
   final TRes Function(Variables$Subscription$personCallHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -629,7 +629,7 @@ class _CopyWithImpl$Subscription$personCallHistory<TRes>
 
   final TRes Function(Subscription$personCallHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyCallHistory = _undefined}) =>
       _then(Subscription$personCallHistory(
@@ -913,7 +913,7 @@ class _CopyWithImpl$Variables$Subscription$personVisitHistory<TRes>
 
   final TRes Function(Variables$Subscription$personVisitHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1034,7 +1034,7 @@ class _CopyWithImpl$Subscription$personVisitHistory<TRes>
 
   final TRes Function(Subscription$personVisitHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyVisitHistory = _undefined}) =>
       _then(Subscription$personVisitHistory(
@@ -1320,7 +1320,7 @@ class _CopyWithImpl$Variables$Subscription$personConfessionHistory<TRes>
 
   final TRes Function(Variables$Subscription$personConfessionHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1449,7 +1449,7 @@ class _CopyWithImpl$Subscription$personConfessionHistory<TRes>
 
   final TRes Function(Subscription$personConfessionHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyConfessionHistory = _undefined}) =>
       _then(Subscription$personConfessionHistory(
@@ -1737,7 +1737,7 @@ class _CopyWithImpl$Variables$Subscription$personKodasHistory<TRes>
 
   final TRes Function(Variables$Subscription$personKodasHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1858,7 +1858,7 @@ class _CopyWithImpl$Subscription$personKodasHistory<TRes>
 
   final TRes Function(Subscription$personKodasHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyKodasHistory = _undefined}) =>
       _then(Subscription$personKodasHistory(

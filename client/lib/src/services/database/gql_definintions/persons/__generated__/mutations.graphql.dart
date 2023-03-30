@@ -80,7 +80,7 @@ class _CopyWithImpl$Variables$Mutation$deletePerson<TRes>
 
   final TRes Function(Variables$Mutation$deletePerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personId = _undefined}) =>
       _then(Variables$Mutation$deletePerson._({
@@ -102,7 +102,7 @@ class _CopyWithStubImpl$Variables$Mutation$deletePerson<TRes>
 class Mutation$deletePerson {
   Mutation$deletePerson({
     this.deletePersonsByPk,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$deletePerson.fromJson(Map<String, dynamic> json) {
@@ -197,7 +197,7 @@ class _CopyWithImpl$Mutation$deletePerson<TRes>
 
   final TRes Function(Mutation$deletePerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? deletePersonsByPk = _undefined,
@@ -975,7 +975,7 @@ class _CopyWithImpl$Variables$Mutation$updatePerson<TRes>
 
   final TRes Function(Variables$Mutation$updatePerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1125,7 +1125,7 @@ class Mutation$updatePerson {
     this.insertHistoryKodasHistoryOne,
     this.insertHistoryCallHistoryOne,
     this.insertHistoryVisitHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$updatePerson.fromJson(Map<String, dynamic> json) {
@@ -1468,7 +1468,7 @@ class _CopyWithImpl$Mutation$updatePerson<TRes>
 
   final TRes Function(Mutation$updatePerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? updatePersonsByPk = _undefined,
@@ -2809,7 +2809,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
 class Mutation$updatePerson$insertPersonsServices {
   Mutation$updatePerson$insertPersonsServices({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsServicesMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsServices.fromJson(
@@ -2904,7 +2904,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsServices<TRes>
 
   final TRes Function(Mutation$updatePerson$insertPersonsServices) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -2936,7 +2936,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices<TRes>
 class Mutation$updatePerson$insertPersonsGroups {
   Mutation$updatePerson$insertPersonsGroups({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsGroups.fromJson(
@@ -3031,7 +3031,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
 
   final TRes Function(Mutation$updatePerson$insertPersonsGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3063,7 +3063,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
 class Mutation$updatePerson$insertPersonsHobbies {
   Mutation$updatePerson$insertPersonsHobbies({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsHobbies.fromJson(
@@ -3158,7 +3158,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
 
   final TRes Function(Mutation$updatePerson$insertPersonsHobbies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3190,7 +3190,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
 class Mutation$updatePerson$insertPersonsTags {
   Mutation$updatePerson$insertPersonsTags({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsTagsMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsTags.fromJson(
@@ -3285,7 +3285,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsTags<TRes>
 
   final TRes Function(Mutation$updatePerson$insertPersonsTags) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3317,7 +3317,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags<TRes>
 class Mutation$updatePerson$deletePersonsTags {
   Mutation$updatePerson$deletePersonsTags({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsTagsMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsTags.fromJson(
@@ -3412,7 +3412,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsTags<TRes>
 
   final TRes Function(Mutation$updatePerson$deletePersonsTags) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3444,7 +3444,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags<TRes>
 class Mutation$updatePerson$deletePersonsHobbies {
   Mutation$updatePerson$deletePersonsHobbies({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsHobbies.fromJson(
@@ -3539,7 +3539,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
 
   final TRes Function(Mutation$updatePerson$deletePersonsHobbies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3571,7 +3571,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
 class Mutation$updatePerson$deletePersonsGroups {
   Mutation$updatePerson$deletePersonsGroups({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsGroups.fromJson(
@@ -3666,7 +3666,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
 
   final TRes Function(Mutation$updatePerson$deletePersonsGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3698,7 +3698,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
 class Mutation$updatePerson$deletePersonsServices {
   Mutation$updatePerson$deletePersonsServices({
     required this.affected_rows,
-    required this.$__typename,
+    this.$__typename = 'PersonsServicesMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsServices.fromJson(
@@ -3793,7 +3793,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsServices<TRes>
 
   final TRes Function(Mutation$updatePerson$deletePersonsServices) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? affected_rows = _undefined,
@@ -3825,7 +3825,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices<TRes>
 class Mutation$updatePerson$insertHistoryConfessionHistoryOne {
   Mutation$updatePerson$insertHistoryConfessionHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Mutation$updatePerson$insertHistoryConfessionHistoryOne.fromJson(
@@ -3929,7 +3929,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
   final TRes Function(Mutation$updatePerson$insertHistoryConfessionHistoryOne)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -3976,7 +3976,7 @@ class Mutation$updatePerson$insertHistoryConfessionHistoryOne$person {
   Mutation$updatePerson$insertHistoryConfessionHistoryOne$person({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Mutation$updatePerson$insertHistoryConfessionHistoryOne$person.fromJson(
@@ -4096,7 +4096,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$pers
   final TRes Function(
       Mutation$updatePerson$insertHistoryConfessionHistoryOne$person) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4135,7 +4135,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$
 class Mutation$updatePerson$insertHistoryKodasHistoryOne {
   Mutation$updatePerson$insertHistoryKodasHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Mutation$updatePerson$insertHistoryKodasHistoryOne.fromJson(
@@ -4238,7 +4238,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
 
   final TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -4284,7 +4284,7 @@ class Mutation$updatePerson$insertHistoryKodasHistoryOne$person {
   Mutation$updatePerson$insertHistoryKodasHistoryOne$person({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Mutation$updatePerson$insertHistoryKodasHistoryOne$person.fromJson(
@@ -4401,7 +4401,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
   final TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne$person)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4440,7 +4440,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$perso
 class Mutation$updatePerson$insertHistoryCallHistoryOne {
   Mutation$updatePerson$insertHistoryCallHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistory',
   });
 
   factory Mutation$updatePerson$insertHistoryCallHistoryOne.fromJson(
@@ -4542,7 +4542,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
 
   final TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -4588,7 +4588,7 @@ class Mutation$updatePerson$insertHistoryCallHistoryOne$person {
   Mutation$updatePerson$insertHistoryCallHistoryOne$person({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Mutation$updatePerson$insertHistoryCallHistoryOne$person.fromJson(
@@ -4705,7 +4705,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
   final TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne$person)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4744,7 +4744,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person
 class Mutation$updatePerson$insertHistoryVisitHistoryOne {
   Mutation$updatePerson$insertHistoryVisitHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistory',
   });
 
   factory Mutation$updatePerson$insertHistoryVisitHistoryOne.fromJson(
@@ -4847,7 +4847,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
 
   final TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -4893,7 +4893,7 @@ class Mutation$updatePerson$insertHistoryVisitHistoryOne$person {
   Mutation$updatePerson$insertHistoryVisitHistoryOne$person({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Mutation$updatePerson$insertHistoryVisitHistoryOne$person.fromJson(
@@ -5010,7 +5010,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
   final TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne$person)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5126,7 +5126,7 @@ class _CopyWithImpl$Variables$Mutation$insertPerson<TRes>
 
   final TRes Function(Variables$Mutation$insertPerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? newPerson = _undefined}) =>
       _then(Variables$Mutation$insertPerson._({
@@ -5148,7 +5148,7 @@ class _CopyWithStubImpl$Variables$Mutation$insertPerson<TRes>
 class Mutation$insertPerson {
   Mutation$insertPerson({
     this.insertPersonsOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$insertPerson.fromJson(Map<String, dynamic> json) {
@@ -5243,7 +5243,7 @@ class _CopyWithImpl$Mutation$insertPerson<TRes>
 
   final TRes Function(Mutation$insertPerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertPersonsOne = _undefined,
@@ -5450,7 +5450,7 @@ class _CopyWithImpl$Variables$Mutation$updatePersonSpiritData<TRes>
 
   final TRes Function(Variables$Mutation$updatePersonSpiritData) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -5486,7 +5486,7 @@ class Mutation$updatePersonSpiritData {
   Mutation$updatePersonSpiritData({
     this.insertHistoryConfessionHistoryOne,
     this.insertHistoryKodasHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
@@ -5619,7 +5619,7 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData<TRes>
 
   final TRes Function(Mutation$updatePersonSpiritData) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertHistoryConfessionHistoryOne = _undefined,
@@ -5907,7 +5907,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
 class Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne {
   Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne.fromJson(
@@ -6014,7 +6014,7 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHisto
   final TRes Function(
       Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -6056,7 +6056,7 @@ class _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionH
 class Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne {
   Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne.fromJson(
@@ -6161,7 +6161,7 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
   final TRes Function(
       Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,

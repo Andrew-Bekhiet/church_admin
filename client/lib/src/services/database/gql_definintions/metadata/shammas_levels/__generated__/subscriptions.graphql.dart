@@ -135,7 +135,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllShammasLevels<TRes>
 
   final TRes Function(Variables$Subscription$watchAllShammasLevels) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -257,7 +257,7 @@ class _CopyWithImpl$Subscription$watchAllShammasLevels<TRes>
 
   final TRes Function(Subscription$watchAllShammasLevels) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? shammasLevels = _undefined}) =>
       _then(Subscription$watchAllShammasLevels(
@@ -390,7 +390,7 @@ class Subscription$watchAllShammasLevels$shammasLevels {
     required this.id,
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'ShammasLevels',
   });
 
   factory Subscription$watchAllShammasLevels$shammasLevels.fromJson(
@@ -514,7 +514,7 @@ class _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels<TRes>
 
   final TRes Function(Subscription$watchAllShammasLevels$shammasLevels) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

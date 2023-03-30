@@ -176,7 +176,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllAreas<TRes>
 
   final TRes Function(Variables$Subscription$watchAllAreas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? limit = _undefined,
@@ -296,7 +296,7 @@ class _CopyWithImpl$Subscription$watchAllAreas<TRes>
 
   final TRes Function(Subscription$watchAllAreas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? areas = _undefined}) => _then(Subscription$watchAllAreas(
       areas: areas == _undefined || areas == null
@@ -429,7 +429,7 @@ class Subscription$watchAllAreas$areas
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Areas',
     this.photoUpdatedAt,
     this.bounds,
   });
@@ -582,7 +582,7 @@ class _CopyWithImpl$Subscription$watchAllAreas$areas<TRes>
 
   final TRes Function(Subscription$watchAllAreas$areas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -704,7 +704,7 @@ class _CopyWithImpl$Variables$Subscription$watchArea<TRes>
 
   final TRes Function(Variables$Subscription$watchArea) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchArea._({
@@ -799,7 +799,7 @@ class _CopyWithImpl$Subscription$watchArea<TRes>
 
   final TRes Function(Subscription$watchArea) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? areasByPk = _undefined}) => _then(Subscription$watchArea(
       areasByPk: areasByPk == _undefined
@@ -933,7 +933,7 @@ class Subscription$watchArea$areasByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Areas',
     this.photoUpdatedAt,
     this.bounds,
     this.lastEdit,
@@ -1132,7 +1132,7 @@ class _CopyWithImpl$Subscription$watchArea$areasByPk<TRes>
 
   final TRes Function(Subscription$watchArea$areasByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -1202,7 +1202,7 @@ class _CopyWithStubImpl$Subscription$watchArea$areasByPk<TRes>
 class Subscription$watchArea$areasByPk$adminUsers {
   Subscription$watchArea$areasByPk$adminUsers({
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersAdminOn',
   });
 
   factory Subscription$watchArea$areasByPk$adminUsers.fromJson(
@@ -1298,7 +1298,7 @@ class _CopyWithImpl$Subscription$watchArea$areasByPk$adminUsers<TRes>
 
   final TRes Function(Subscription$watchArea$areasByPk$adminUsers) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? user = _undefined,

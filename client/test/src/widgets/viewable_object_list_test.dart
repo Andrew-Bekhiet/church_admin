@@ -3,10 +3,10 @@ import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../utils.dart';

@@ -77,7 +77,7 @@ class _CopyWithImpl$Variables$Query$getStudyYearName<TRes>
 
   final TRes Function(Variables$Query$getStudyYearName) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) =>
       _then(Variables$Query$getStudyYearName._({
@@ -98,7 +98,7 @@ class _CopyWithStubImpl$Variables$Query$getStudyYearName<TRes>
 class Query$getStudyYearName {
   Query$getStudyYearName({
     this.studyYearsByPk,
-    required this.$__typename,
+    this.$__typename = 'query_root',
   });
 
   factory Query$getStudyYearName.fromJson(Map<String, dynamic> json) {
@@ -194,7 +194,7 @@ class _CopyWithImpl$Query$getStudyYearName<TRes>
 
   final TRes Function(Query$getStudyYearName) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? studyYearsByPk = _undefined,
@@ -298,7 +298,7 @@ class Query$getStudyYearName$studyYearsByPk {
   Query$getStudyYearName$studyYearsByPk({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$getStudyYearName$studyYearsByPk.fromJson(
@@ -407,7 +407,7 @@ class _CopyWithImpl$Query$getStudyYearName$studyYearsByPk<TRes>
 
   final TRes Function(Query$getStudyYearName$studyYearsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,

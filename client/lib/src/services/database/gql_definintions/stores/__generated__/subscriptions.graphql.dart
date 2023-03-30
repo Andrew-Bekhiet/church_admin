@@ -180,7 +180,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllStores<TRes>
 
   final TRes Function(Variables$Subscription$watchAllStores) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? limit = _undefined,
@@ -297,7 +297,7 @@ class _CopyWithImpl$Subscription$watchAllStores<TRes>
 
   final TRes Function(Subscription$watchAllStores) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? stores = _undefined}) => _then(Subscription$watchAllStores(
       stores: stores == _undefined || stores == null
@@ -492,7 +492,7 @@ class _CopyWithImpl$Variables$Subscription$watchStore<TRes>
 
   final TRes Function(Variables$Subscription$watchStore) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchStore._({
@@ -587,7 +587,7 @@ class _CopyWithImpl$Subscription$watchStore<TRes>
 
   final TRes Function(Subscription$watchStore) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? storesByPk = _undefined}) => _then(Subscription$watchStore(
       storesByPk: storesByPk == _undefined
@@ -743,7 +743,7 @@ class Subscription$watchStore$storesByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Stores',
     this.photoUpdatedAt,
     this.areas,
     this.streets,
@@ -995,7 +995,7 @@ class _CopyWithImpl$Subscription$watchStore$storesByPk<TRes>
 
   final TRes Function(Subscription$watchStore$storesByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

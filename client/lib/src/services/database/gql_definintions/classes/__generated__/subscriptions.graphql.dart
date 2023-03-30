@@ -179,7 +179,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllClasses<TRes>
 
   final TRes Function(Variables$Subscription$watchAllClasses) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? limit = _undefined,
@@ -297,7 +297,7 @@ class _CopyWithImpl$Subscription$watchAllClasses<TRes>
 
   final TRes Function(Subscription$watchAllClasses) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? classes = _undefined}) =>
       _then(Subscription$watchAllClasses(
@@ -493,7 +493,7 @@ class _CopyWithImpl$Variables$Subscription$watchClass<TRes>
 
   final TRes Function(Variables$Subscription$watchClass) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchClass._({
@@ -588,7 +588,7 @@ class _CopyWithImpl$Subscription$watchClass<TRes>
 
   final TRes Function(Subscription$watchClass) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? classesByPk = _undefined}) =>
       _then(Subscription$watchClass(
@@ -773,7 +773,7 @@ class Subscription$watchClass$classesByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Classes',
     this.photoUpdatedAt,
     required this.service,
     this.lastEdit,
@@ -1007,7 +1007,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk<TRes>
 
   final TRes Function(Subscription$watchClass$classesByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -1104,7 +1104,7 @@ class Subscription$watchClass$classesByPk$studyYear {
   Subscription$watchClass$classesByPk$studyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Subscription$watchClass$classesByPk$studyYear.fromJson(
@@ -1214,7 +1214,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
 
   final TRes Function(Subscription$watchClass$classesByPk$studyYear) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -1251,7 +1251,7 @@ class _CopyWithStubImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
 class Subscription$watchClass$classesByPk$adminUsers {
   Subscription$watchClass$classesByPk$adminUsers({
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersAdminOn',
   });
 
   factory Subscription$watchClass$classesByPk$adminUsers.fromJson(
@@ -1348,7 +1348,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk$adminUsers<TRes>
 
   final TRes Function(Subscription$watchClass$classesByPk$adminUsers) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? user = _undefined,

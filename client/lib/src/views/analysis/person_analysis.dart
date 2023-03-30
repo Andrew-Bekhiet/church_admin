@@ -85,7 +85,10 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
               );
 
               if (staged != null && staged != options) {
-                setState(() => options = staged);
+                options = staged;
+                if (mounted) {
+                  setState(() {});
+                }
               }
             },
             icon: const Icon(Icons.edit),

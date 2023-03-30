@@ -7,11 +7,11 @@ import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 
 import '../dummy_named_location.dart';
 import '../fakes/fake_device_info.dart';
@@ -339,7 +339,8 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
   }
 
   Future<Override> _setUpAuthService(
-      EncryptionService encryptionService) async {
+    EncryptionService encryptionService,
+  ) async {
     final mock = MockAuthService();
 
     when(mock.currentUser).thenReturn(

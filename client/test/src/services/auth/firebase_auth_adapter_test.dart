@@ -5,12 +5,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';

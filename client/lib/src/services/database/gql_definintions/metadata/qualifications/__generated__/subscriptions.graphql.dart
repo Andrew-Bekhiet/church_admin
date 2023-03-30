@@ -136,7 +136,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllQualifications<TRes>
 
   final TRes Function(Variables$Subscription$watchAllQualifications) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -259,7 +259,7 @@ class _CopyWithImpl$Subscription$watchAllQualifications<TRes>
 
   final TRes Function(Subscription$watchAllQualifications) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? qualifications = _undefined}) =>
       _then(Subscription$watchAllQualifications(
@@ -384,7 +384,7 @@ class Subscription$watchAllQualifications$qualifications {
   Subscription$watchAllQualifications$qualifications({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Qualifications',
   });
 
   factory Subscription$watchAllQualifications$qualifications.fromJson(
@@ -497,7 +497,7 @@ class _CopyWithImpl$Subscription$watchAllQualifications$qualifications<TRes>
 
   final TRes Function(Subscription$watchAllQualifications$qualifications) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

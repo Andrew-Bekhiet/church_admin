@@ -6,7 +6,7 @@ class Fragment$Person implements Fragment$PersonNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.photoUpdatedAt,
   });
 
@@ -142,7 +142,7 @@ class _CopyWithImpl$Fragment$Person<TRes>
 
   final TRes Function(Fragment$Person) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -221,7 +221,7 @@ class Fragment$PersonNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Fragment$PersonNoPhoto.fromJson(Map<String, dynamic> json) {
@@ -341,7 +341,7 @@ class _CopyWithImpl$Fragment$PersonNoPhoto<TRes>
 
   final TRes Function(Fragment$PersonNoPhoto) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

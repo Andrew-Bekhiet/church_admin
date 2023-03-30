@@ -6,7 +6,7 @@ class Fragment$User implements Fragment$UserNoPhoto {
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
   });
 
@@ -141,7 +141,7 @@ class _CopyWithImpl$Fragment$User<TRes>
 
   final TRes Function(Fragment$User) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -224,7 +224,7 @@ class Fragment$UserNoPhoto {
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
   });
 
   factory Fragment$UserNoPhoto.fromJson(Map<String, dynamic> json) {
@@ -343,7 +343,7 @@ class _CopyWithImpl$Fragment$UserNoPhoto<TRes>
 
   final TRes Function(Fragment$UserNoPhoto) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,

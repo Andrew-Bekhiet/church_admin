@@ -5,11 +5,11 @@ import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart' show Box;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Family;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart' hide Box;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 
 import '../dummy_named_location.dart';

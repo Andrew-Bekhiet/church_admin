@@ -17,6 +17,8 @@ import 'package:universal_file/universal_file.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:uuid/uuid.dart';
 
+import 'photo_field_state.dart';
+
 class EditPerson extends StatefulWidget {
   static final route = GoRoute(
     path: 'editPerson',
@@ -47,7 +49,7 @@ class _EditPersonState extends State<EditPerson> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   String? _suggestedAddress;
-  _PersonPhotoState _photoState = _PersonPhotoState(deletePhoto: false);
+  PhotoFieldState _photoState = PhotoFieldState(deletePhoto: false);
 
   bool _classesAndGroupsLoaded = false;
 
@@ -96,7 +98,7 @@ class _EditPersonState extends State<EditPerson> {
           onWillPop: _confirmExit,
           child: CustomScrollView(
             slivers: [
-              FormField<_PersonPhotoState>(
+              FormField<PhotoFieldState>(
                 initialValue: _photoState,
                 onSaved: (v) =>
                     v?.hasChanged ?? false ? _photoState = v! : null,
@@ -116,7 +118,7 @@ class _EditPersonState extends State<EditPerson> {
                           return;
                         } else if (source == ImagePickerService.deleteImage) {
                           state
-                            ..didChange(_PersonPhotoState(deletePhoto: true))
+                            ..didChange(PhotoFieldState(deletePhoto: true))
                             ..save();
                         }
 
@@ -132,7 +134,7 @@ class _EditPersonState extends State<EditPerson> {
                         if (newPhoto != null) {
                           state
                             ..didChange(
-                              _PersonPhotoState(
+                              PhotoFieldState(
                                 deletePhoto: false,
                                 newPhoto: newPhoto,
                               ),
@@ -325,8 +327,7 @@ class _EditPersonState extends State<EditPerson> {
                                                           p.key: p.value
                                                     },
                                                   );
-
-                                                  setState(() {});
+                                                  if (mounted) setState(() {});
                                                 } else if (name is String) {
                                                   newPerson =
                                                       newPerson.copyWith(
@@ -400,7 +401,8 @@ class _EditPersonState extends State<EditPerson> {
                                             name: '',
                                           },
                                         );
-                                        setState(() {});
+
+                                        if (mounted) setState(() {});
                                       }
                                     },
                                   ),
@@ -1070,7 +1072,7 @@ class _EditPersonState extends State<EditPerson> {
                                                 ),
                                                 backgroundColor: tag.color,
                                               ),
-                                            )
+                                            ),
                                         ],
                                       )
                                     : const Text('لا يوجد شارات');
@@ -1381,7 +1383,7 @@ class _EditPersonState extends State<EditPerson> {
           for (final n in numbersToImport) n.item1: n.item2,
         },
       );
-      setState(() {});
+      if (mounted) setState(() {});
     }
   }
 
@@ -1456,10 +1458,12 @@ class _EditPersonState extends State<EditPerson> {
         minWidth: MediaQuery.of(context).size.height * 0.7,
       ),
     );
-    state.didChange(newColor);
-    setState(
-      () => newPerson = newPerson.copyWith(color: newColor),
-    );
+    if (mounted) {
+      state.didChange(newColor);
+      setState(
+        () => newPerson = newPerson.copyWith(color: newColor),
+      );
+    }
   }
 
   Future<void> _editGeoLocation(BuildContext context) async {
@@ -1481,7 +1485,10 @@ class _EditPersonState extends State<EditPerson> {
       final address = await CAFunctionsService.I
           .getAddressFromLocation(result.geolocation!);
 
-      if (address != null) setState(() => _suggestedAddress = address);
+      if (address != null) {
+        _suggestedAddress = address;
+        if (mounted) setState(() {});
+      }
     }
   }
 
@@ -1649,15 +1656,6 @@ class _EditPersonState extends State<EditPerson> {
           .map((e) => e.key.copyWith(groups: e.value)),
     ).union(services.toSet()).toList();
   }
-}
-
-class _PersonPhotoState {
-  final bool deletePhoto;
-  final CroppedFile? newPhoto;
-
-  _PersonPhotoState({required this.deletePhoto, this.newPhoto});
-
-  bool get hasChanged => deletePhoto || newPhoto != null;
 }
 
 class _FieldWrapper extends StatelessWidget {

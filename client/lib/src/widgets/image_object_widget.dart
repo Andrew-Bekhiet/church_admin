@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

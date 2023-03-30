@@ -365,7 +365,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                                 resultPerson!.value.geolocation!.latitude,
                                 resultPerson!.value.geolocation!.longitude,
                               ),
-                            )
+                            ),
                         ],
                       );
                     },
@@ -519,7 +519,7 @@ class _DataGeomapState extends State<DataGeomap> with TickerProviderStateMixin {
                           'api': '1',
                           'query': location.latitude.toString() +
                               ',' +
-                              location.longitude.toString()
+                              location.longitude.toString(),
                         },
                       ),
                     );
@@ -861,13 +861,14 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedAreas: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedAreas: rslt.toSet(),
                         );
+                        if (mounted) {
+                          setState(
+                            () {},
+                          );
+                        }
                       }
                     },
                     child: const Text('اختيار'),
@@ -892,13 +893,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedStreets: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedStreets: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),
@@ -923,13 +921,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedFamilies: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedFamilies: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),
@@ -954,13 +949,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedStores: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedStores: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),
@@ -986,13 +978,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedServices: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedServices: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),
@@ -1017,13 +1006,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedClasses: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedClasses: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),
@@ -1048,13 +1034,10 @@ class _MapOptionsWidgetState extends State<_MapOptionsWidget> {
                       );
 
                       if (rslt != null) {
-                        setState(
-                          () {
-                            stagingMapOptions = stagingMapOptions.copyWith(
-                              selectedGroups: rslt.toSet(),
-                            );
-                          },
+                        stagingMapOptions = stagingMapOptions.copyWith(
+                          selectedGroups: rslt.toSet(),
                         );
+                        if (mounted) setState(() {});
                       }
                     },
                     child: const Text('اختيار'),

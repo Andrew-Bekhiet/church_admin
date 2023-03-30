@@ -6,7 +6,7 @@ class Fragment$Group implements Fragment$GroupNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     this.photoUpdatedAt,
   });
 
@@ -142,7 +142,7 @@ class _CopyWithImpl$Fragment$Group<TRes>
 
   final TRes Function(Fragment$Group) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -221,7 +221,7 @@ class Fragment$GroupNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
   });
 
   factory Fragment$GroupNoPhoto.fromJson(Map<String, dynamic> json) {
@@ -340,7 +340,7 @@ class _CopyWithImpl$Fragment$GroupNoPhoto<TRes>
 
   final TRes Function(Fragment$GroupNoPhoto) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

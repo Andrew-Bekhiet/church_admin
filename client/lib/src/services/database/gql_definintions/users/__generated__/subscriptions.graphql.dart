@@ -114,7 +114,7 @@ class _CopyWithImpl$Variables$Subscription$watchUser<TRes>
 
   final TRes Function(Variables$Subscription$watchUser) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -217,7 +217,7 @@ class _CopyWithImpl$Subscription$watchUser<TRes>
 
   final TRes Function(Subscription$watchUser) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? authUsersDataByPk = _undefined}) =>
       _then(Subscription$watchUser(
@@ -354,7 +354,7 @@ class Subscription$watchUser$authUsersDataByPk
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     required this.permissions,
     this.person,
@@ -591,7 +591,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk<TRes>
 
   final TRes Function(Subscription$watchUser$authUsersDataByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -700,7 +700,7 @@ class Subscription$watchUser$authUsersDataByPk$permissions
         Fragment$UserDetails$permissions {
   Subscription$watchUser$authUsersDataByPk$permissions({
     required this.permission,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersPermissions',
   });
 
   factory Subscription$watchUser$authUsersDataByPk$permissions.fromJson(
@@ -800,7 +800,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions<TRes>
   final TRes Function(Subscription$watchUser$authUsersDataByPk$permissions)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -842,7 +842,7 @@ class Subscription$watchUser$authUsersDataByPk$person
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.lastKodas,
     this.lastConfession,
@@ -1013,7 +1013,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
 
   final TRes Function(Subscription$watchUser$authUsersDataByPk$person) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -1079,7 +1079,7 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
     this.group,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersAdminOn',
   });
 
   factory Subscription$watchUser$authUsersDataByPk$adminOn.fromJson(
@@ -1372,7 +1372,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
 
   final TRes Function(Subscription$watchUser$authUsersDataByPk$adminOn) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permissionId = _undefined,
@@ -1516,7 +1516,7 @@ class Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
   Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData({
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData.fromJson(
@@ -1638,7 +1638,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStud
           Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,

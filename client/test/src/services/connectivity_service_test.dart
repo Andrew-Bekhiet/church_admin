@@ -1,10 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/src/framework.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_service_test.mocks.dart';

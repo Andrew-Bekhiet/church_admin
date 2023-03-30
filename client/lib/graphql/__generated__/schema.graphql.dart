@@ -362,7 +362,7 @@ class _CopyWithImpl$Input$AreasAggregateOrderBy<TRes>
 
   final TRes Function(Input$AreasAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -1114,7 +1114,7 @@ class _CopyWithImpl$Input$AreasBoolExp<TRes>
 
   final TRes Function(Input$AreasBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -1460,7 +1460,7 @@ class _CopyWithImpl$Input$AreasIncInput<TRes>
 
   final TRes Function(Input$AreasIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$AreasIncInput._({
         ..._instance._$data,
@@ -1710,7 +1710,7 @@ class _CopyWithImpl$Input$AreasInsertInput<TRes>
 
   final TRes Function(Input$AreasInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsers = _undefined,
@@ -1877,7 +1877,7 @@ class _CopyWithImpl$Input$AreasObjRelInsertInput<TRes>
 
   final TRes Function(Input$AreasObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -2056,7 +2056,7 @@ class _CopyWithImpl$Input$AreasOnConflict<TRes>
 
   final TRes Function(Input$AreasOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -2542,7 +2542,7 @@ class _CopyWithImpl$Input$AreasOrderBy<TRes>
 
   final TRes Function(Input$AreasOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsersAggregate = _undefined,
@@ -2745,7 +2745,7 @@ class _CopyWithImpl$Input$AreasPkColumnsInput<TRes>
 
   final TRes Function(Input$AreasPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$AreasPkColumnsInput._({
         ..._instance._$data,
@@ -2966,7 +2966,7 @@ class _CopyWithImpl$Input$AreasSetInput<TRes>
 
   final TRes Function(Input$AreasSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bounds = _undefined,
@@ -3118,7 +3118,7 @@ class _CopyWithImpl$Input$AreasStreamCursorInput<TRes>
 
   final TRes Function(Input$AreasStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -3359,7 +3359,7 @@ class _CopyWithImpl$Input$AreasStreamCursorValueInput<TRes>
 
   final TRes Function(Input$AreasStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bounds = _undefined,
@@ -3532,7 +3532,7 @@ class _CopyWithImpl$Input$AreasUpdates<TRes>
 
   final TRes Function(Input$AreasUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -3955,7 +3955,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnAggregateOrderBy<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -4259,7 +4259,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnArrRelInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -5051,7 +5051,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnBoolExp<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -5481,7 +5481,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnIncInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$AuthUsersAdminOnIncInput._({
@@ -6044,7 +6044,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -6338,7 +6338,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnOnConflict<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -6962,7 +6962,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnOrderBy<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -7192,7 +7192,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnPkColumnsInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? permissionId = _undefined}) =>
       _then(Input$AuthUsersAdminOnPkColumnsInput._({
@@ -7588,7 +7588,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnSetInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -7775,7 +7775,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnStreamCursorInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -8191,7 +8191,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnStreamCursorValueInput<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -8402,7 +8402,7 @@ class _CopyWithImpl$Input$AuthUsersAdminOnUpdates<TRes>
 
   final TRes Function(Input$AuthUsersAdminOnUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -9019,7 +9019,7 @@ class _CopyWithImpl$Input$AuthUsersDataBoolExp<TRes>
 
   final TRes Function(Input$AuthUsersDataBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -9533,7 +9533,7 @@ class _CopyWithImpl$Input$AuthUsersDataInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersDataInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOn = _undefined,
@@ -9729,7 +9729,7 @@ class _CopyWithImpl$Input$AuthUsersDataObjRelInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersDataObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -9914,7 +9914,7 @@ class _CopyWithImpl$Input$AuthUsersDataOnConflict<TRes>
 
   final TRes Function(Input$AuthUsersDataOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -10321,7 +10321,7 @@ class _CopyWithImpl$Input$AuthUsersDataOrderBy<TRes>
 
   final TRes Function(Input$AuthUsersDataOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnAggregate = _undefined,
@@ -10490,7 +10490,7 @@ class _CopyWithImpl$Input$AuthUsersDataPkColumnsInput<TRes>
 
   final TRes Function(Input$AuthUsersDataPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? uid = _undefined}) =>
       _then(Input$AuthUsersDataPkColumnsInput._({
@@ -10689,7 +10689,7 @@ class _CopyWithImpl$Input$AuthUsersDataSetInput<TRes>
 
   final TRes Function(Input$AuthUsersDataSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? authId = _undefined,
@@ -10841,7 +10841,7 @@ class _CopyWithImpl$Input$AuthUsersDataStreamCursorInput<TRes>
 
   final TRes Function(Input$AuthUsersDataStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -11060,7 +11060,7 @@ class _CopyWithImpl$Input$AuthUsersDataStreamCursorValueInput<TRes>
 
   final TRes Function(Input$AuthUsersDataStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? authId = _undefined,
@@ -11209,7 +11209,7 @@ class _CopyWithImpl$Input$AuthUsersDataUpdates<TRes>
 
   final TRes Function(Input$AuthUsersDataUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -11402,7 +11402,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsAggregateOrderBy<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -11584,7 +11584,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsArrRelInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -11905,7 +11905,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsBoolExp<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -12152,7 +12152,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsInsertInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -12334,7 +12334,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsOnConflict<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -12521,7 +12521,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsOrderBy<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -12659,7 +12659,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsPkColumnsInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -12801,7 +12801,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsSetInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -12945,7 +12945,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsStreamCursorInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -13099,7 +13099,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -13239,7 +13239,7 @@ class _CopyWithImpl$Input$AuthUsersPermissionsUpdates<TRes>
 
   final TRes Function(Input$AuthUsersPermissionsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -13582,7 +13582,7 @@ class _CopyWithImpl$Input$BigintComparisonExp<TRes>
 
   final TRes Function(Input$BigintComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -13927,7 +13927,7 @@ class _CopyWithImpl$Input$BooleanComparisonExp<TRes>
 
   final TRes Function(Input$BooleanComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -14272,7 +14272,7 @@ class _CopyWithImpl$Input$ByteaComparisonExp<TRes>
 
   final TRes Function(Input$ByteaComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -14662,7 +14662,7 @@ class _CopyWithImpl$Input$ChurchesBoolExp<TRes>
 
   final TRes Function(Input$ChurchesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -14968,7 +14968,7 @@ class _CopyWithImpl$Input$ChurchesInsertInput<TRes>
 
   final TRes Function(Input$ChurchesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? fathers = _undefined,
@@ -15135,7 +15135,7 @@ class _CopyWithImpl$Input$ChurchesObjRelInsertInput<TRes>
 
   final TRes Function(Input$ChurchesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -15317,7 +15317,7 @@ class _CopyWithImpl$Input$ChurchesOnConflict<TRes>
 
   final TRes Function(Input$ChurchesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -15525,7 +15525,7 @@ class _CopyWithImpl$Input$ChurchesOrderBy<TRes>
 
   final TRes Function(Input$ChurchesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? fathersAggregate = _undefined,
@@ -15657,7 +15657,7 @@ class _CopyWithImpl$Input$ChurchesPkColumnsInput<TRes>
 
   final TRes Function(Input$ChurchesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$ChurchesPkColumnsInput._({
         ..._instance._$data,
@@ -15786,7 +15786,7 @@ class _CopyWithImpl$Input$ChurchesSetInput<TRes>
 
   final TRes Function(Input$ChurchesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -15925,7 +15925,7 @@ class _CopyWithImpl$Input$ChurchesStreamCursorInput<TRes>
 
   final TRes Function(Input$ChurchesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -16075,7 +16075,7 @@ class _CopyWithImpl$Input$ChurchesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$ChurchesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -16211,7 +16211,7 @@ class _CopyWithImpl$Input$ChurchesUpdates<TRes>
 
   final TRes Function(Input$ChurchesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -16774,7 +16774,7 @@ class _CopyWithImpl$Input$CitextComparisonExp<TRes>
 
   final TRes Function(Input$CitextComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -17217,7 +17217,7 @@ class _CopyWithImpl$Input$ClassesAggregateOrderBy<TRes>
 
   final TRes Function(Input$ClassesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -17498,7 +17498,7 @@ class _CopyWithImpl$Input$ClassesArrRelInsertInput<TRes>
 
   final TRes Function(Input$ClassesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -18272,7 +18272,7 @@ class _CopyWithImpl$Input$ClassesBoolExp<TRes>
 
   final TRes Function(Input$ClassesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -18719,7 +18719,7 @@ class _CopyWithImpl$Input$ClassesIncInput<TRes>
 
   final TRes Function(Input$ClassesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -19126,7 +19126,7 @@ class _CopyWithImpl$Input$ClassesInsertInput<TRes>
 
   final TRes Function(Input$ClassesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsers = _undefined,
@@ -19366,7 +19366,7 @@ class _CopyWithImpl$Input$ClassesObjRelInsertInput<TRes>
 
   final TRes Function(Input$ClassesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -19547,7 +19547,7 @@ class _CopyWithImpl$Input$ClassesOnConflict<TRes>
 
   final TRes Function(Input$ClassesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -20086,7 +20086,7 @@ class _CopyWithImpl$Input$ClassesOrderBy<TRes>
 
   final TRes Function(Input$ClassesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsersAggregate = _undefined,
@@ -20305,7 +20305,7 @@ class _CopyWithImpl$Input$ClassesPkColumnsInput<TRes>
 
   final TRes Function(Input$ClassesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$ClassesPkColumnsInput._({
         ..._instance._$data,
@@ -20551,7 +20551,7 @@ class _CopyWithImpl$Input$ClassesSetInput<TRes>
 
   final TRes Function(Input$ClassesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -20708,7 +20708,7 @@ class _CopyWithImpl$Input$ClassesStreamCursorInput<TRes>
 
   final TRes Function(Input$ClassesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -20975,7 +20975,7 @@ class _CopyWithImpl$Input$ClassesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$ClassesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -21155,7 +21155,7 @@ class _CopyWithImpl$Input$ClassesUpdates<TRes>
 
   final TRes Function(Input$ClassesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -21355,7 +21355,7 @@ class _CopyWithImpl$Input$CollegesAggregateOrderBy<TRes>
 
   final TRes Function(Input$CollegesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -21529,7 +21529,7 @@ class _CopyWithImpl$Input$CollegesArrRelInsertInput<TRes>
 
   final TRes Function(Input$CollegesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -21924,7 +21924,7 @@ class _CopyWithImpl$Input$CollegesBoolExp<TRes>
 
   final TRes Function(Input$CollegesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -22256,7 +22256,7 @@ class _CopyWithImpl$Input$CollegesInsertInput<TRes>
 
   final TRes Function(Input$CollegesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -22427,7 +22427,7 @@ class _CopyWithImpl$Input$CollegesObjRelInsertInput<TRes>
 
   final TRes Function(Input$CollegesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -22609,7 +22609,7 @@ class _CopyWithImpl$Input$CollegesOnConflict<TRes>
 
   final TRes Function(Input$CollegesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -22843,7 +22843,7 @@ class _CopyWithImpl$Input$CollegesOrderBy<TRes>
 
   final TRes Function(Input$CollegesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -22978,7 +22978,7 @@ class _CopyWithImpl$Input$CollegesPkColumnsInput<TRes>
 
   final TRes Function(Input$CollegesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$CollegesPkColumnsInput._({
         ..._instance._$data,
@@ -23132,7 +23132,7 @@ class _CopyWithImpl$Input$CollegesSetInput<TRes>
 
   final TRes Function(Input$CollegesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -23275,7 +23275,7 @@ class _CopyWithImpl$Input$CollegesStreamCursorInput<TRes>
 
   final TRes Function(Input$CollegesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -23450,7 +23450,7 @@ class _CopyWithImpl$Input$CollegesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$CollegesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -23590,7 +23590,7 @@ class _CopyWithImpl$Input$CollegesUpdates<TRes>
 
   final TRes Function(Input$CollegesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -23930,7 +23930,7 @@ class _CopyWithImpl$Input$DateComparisonExp<TRes>
 
   final TRes Function(Input$DateComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -24280,7 +24280,7 @@ class _CopyWithImpl$Input$DaterangeComparisonExp<TRes>
 
   final TRes Function(Input$DaterangeComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -24693,7 +24693,7 @@ class _CopyWithImpl$Input$FamiliesAggregateOrderBy<TRes>
 
   final TRes Function(Input$FamiliesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -25585,7 +25585,7 @@ class _CopyWithImpl$Input$FamiliesBoolExp<TRes>
 
   final TRes Function(Input$FamiliesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -26073,7 +26073,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesAggregateOrderBy<TRes>
 
   final TRes Function(Input$FamiliesFamiliesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -26253,7 +26253,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesArrRelInsertInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -26626,7 +26626,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesBoolExp<TRes>
 
   final TRes Function(Input$FamiliesFamiliesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -26952,7 +26952,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesInsertInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? child = _undefined,
@@ -27150,7 +27150,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesOnConflict<TRes>
 
   final TRes Function(Input$FamiliesFamiliesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -27390,7 +27390,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesOrderBy<TRes>
 
   final TRes Function(Input$FamiliesFamiliesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? child = _undefined,
@@ -27523,7 +27523,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesPkColumnsInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? relId = _undefined}) =>
       _then(Input$FamiliesFamiliesPkColumnsInput._({
@@ -27681,7 +27681,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesSetInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? childFamilyId = _undefined,
@@ -27828,7 +27828,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesStreamCursorInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -28007,7 +28007,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$FamiliesFamiliesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? childFamilyId = _undefined,
@@ -28151,7 +28151,7 @@ class _CopyWithImpl$Input$FamiliesFamiliesUpdates<TRes>
 
   final TRes Function(Input$FamiliesFamiliesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -28279,7 +28279,7 @@ class _CopyWithImpl$Input$FamiliesIncInput<TRes>
 
   final TRes Function(Input$FamiliesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$FamiliesIncInput._({
         ..._instance._$data,
@@ -28632,7 +28632,7 @@ class _CopyWithImpl$Input$FamiliesInsertInput<TRes>
 
   final TRes Function(Input$FamiliesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -28846,7 +28846,7 @@ class _CopyWithImpl$Input$FamiliesObjRelInsertInput<TRes>
 
   final TRes Function(Input$FamiliesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -29028,7 +29028,7 @@ class _CopyWithImpl$Input$FamiliesOnConflict<TRes>
 
   final TRes Function(Input$FamiliesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -29563,7 +29563,7 @@ class _CopyWithImpl$Input$FamiliesOrderBy<TRes>
 
   final TRes Function(Input$FamiliesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -29781,7 +29781,7 @@ class _CopyWithImpl$Input$FamiliesPkColumnsInput<TRes>
 
   final TRes Function(Input$FamiliesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$FamiliesPkColumnsInput._({
         ..._instance._$data,
@@ -30025,7 +30025,7 @@ class _CopyWithImpl$Input$FamiliesSetInput<TRes>
 
   final TRes Function(Input$FamiliesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -30181,7 +30181,7 @@ class _CopyWithImpl$Input$FamiliesStreamCursorInput<TRes>
 
   final TRes Function(Input$FamiliesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -30446,7 +30446,7 @@ class _CopyWithImpl$Input$FamiliesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$FamiliesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -30625,7 +30625,7 @@ class _CopyWithImpl$Input$FamiliesUpdates<TRes>
 
   final TRes Function(Input$FamiliesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -30825,7 +30825,7 @@ class _CopyWithImpl$Input$FathersAggregateOrderBy<TRes>
 
   final TRes Function(Input$FathersAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -30998,7 +30998,7 @@ class _CopyWithImpl$Input$FathersArrRelInsertInput<TRes>
 
   final TRes Function(Input$FathersArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -31389,7 +31389,7 @@ class _CopyWithImpl$Input$FathersBoolExp<TRes>
 
   final TRes Function(Input$FathersBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -31717,7 +31717,7 @@ class _CopyWithImpl$Input$FathersInsertInput<TRes>
 
   final TRes Function(Input$FathersInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? church = _undefined,
@@ -31887,7 +31887,7 @@ class _CopyWithImpl$Input$FathersObjRelInsertInput<TRes>
 
   final TRes Function(Input$FathersObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -32068,7 +32068,7 @@ class _CopyWithImpl$Input$FathersOnConflict<TRes>
 
   final TRes Function(Input$FathersOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -32300,7 +32300,7 @@ class _CopyWithImpl$Input$FathersOrderBy<TRes>
 
   final TRes Function(Input$FathersOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? church = _undefined,
@@ -32432,7 +32432,7 @@ class _CopyWithImpl$Input$FathersPkColumnsInput<TRes>
 
   final TRes Function(Input$FathersPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$FathersPkColumnsInput._({
         ..._instance._$data,
@@ -32585,7 +32585,7 @@ class _CopyWithImpl$Input$FathersSetInput<TRes>
 
   final TRes Function(Input$FathersSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? churchId = _undefined,
@@ -32727,7 +32727,7 @@ class _CopyWithImpl$Input$FathersStreamCursorInput<TRes>
 
   final TRes Function(Input$FathersStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -32901,7 +32901,7 @@ class _CopyWithImpl$Input$FathersStreamCursorValueInput<TRes>
 
   final TRes Function(Input$FathersStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? churchId = _undefined,
@@ -33040,7 +33040,7 @@ class _CopyWithImpl$Input$FathersUpdates<TRes>
 
   final TRes Function(Input$FathersUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -33173,7 +33173,7 @@ class _CopyWithImpl$Input$GeographyCastExp<TRes>
 
   final TRes Function(Input$GeographyCastExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? geometry = _undefined}) => _then(Input$GeographyCastExp._({
         ..._instance._$data,
@@ -33581,7 +33581,7 @@ class _CopyWithImpl$Input$GeographyComparisonExp<TRes>
 
   final TRes Function(Input$GeographyComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_cast = _undefined,
@@ -33747,7 +33747,7 @@ class _CopyWithImpl$Input$GeometryCastExp<TRes>
 
   final TRes Function(Input$GeometryCastExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? geography = _undefined}) => _then(Input$GeometryCastExp._({
         ..._instance._$data,
@@ -34352,7 +34352,7 @@ class _CopyWithImpl$Input$GeometryComparisonExp<TRes>
 
   final TRes Function(Input$GeometryComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_cast = _undefined,
@@ -34832,7 +34832,7 @@ class _CopyWithImpl$Input$GroupsAggregateOrderBy<TRes>
 
   final TRes Function(Input$GroupsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -35113,7 +35113,7 @@ class _CopyWithImpl$Input$GroupsArrRelInsertInput<TRes>
 
   final TRes Function(Input$GroupsArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -35886,7 +35886,7 @@ class _CopyWithImpl$Input$GroupsBoolExp<TRes>
 
   final TRes Function(Input$GroupsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -36304,7 +36304,7 @@ class _CopyWithImpl$Input$GroupsIncInput<TRes>
 
   final TRes Function(Input$GroupsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$GroupsIncInput._({
         ..._instance._$data,
@@ -36679,7 +36679,7 @@ class _CopyWithImpl$Input$GroupsInsertInput<TRes>
 
   final TRes Function(Input$GroupsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsers = _undefined,
@@ -36914,7 +36914,7 @@ class _CopyWithImpl$Input$GroupsObjRelInsertInput<TRes>
 
   final TRes Function(Input$GroupsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -37094,7 +37094,7 @@ class _CopyWithImpl$Input$GroupsOnConflict<TRes>
 
   final TRes Function(Input$GroupsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -37605,7 +37605,7 @@ class _CopyWithImpl$Input$GroupsOrderBy<TRes>
 
   final TRes Function(Input$GroupsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsersAggregate = _undefined,
@@ -37820,7 +37820,7 @@ class _CopyWithImpl$Input$GroupsPkColumnsInput<TRes>
 
   final TRes Function(Input$GroupsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$GroupsPkColumnsInput._({
         ..._instance._$data,
@@ -38045,7 +38045,7 @@ class _CopyWithImpl$Input$GroupsSetInput<TRes>
 
   final TRes Function(Input$GroupsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -38197,7 +38197,7 @@ class _CopyWithImpl$Input$GroupsStreamCursorInput<TRes>
 
   final TRes Function(Input$GroupsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -38443,7 +38443,7 @@ class _CopyWithImpl$Input$GroupsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$GroupsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -38616,7 +38616,7 @@ class _CopyWithImpl$Input$GroupsUpdates<TRes>
 
   final TRes Function(Input$GroupsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -39202,7 +39202,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysBoolExp<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -39843,7 +39843,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
   final TRes Function(Input$HistoryAttendanceDaysConstraintsAggregateOrderBy)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -40198,7 +40198,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsArrRelInsertInput<
   final TRes Function(Input$HistoryAttendanceDaysConstraintsArrRelInsertInput)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -40778,7 +40778,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsBoolExp<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -41102,7 +41102,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsIncInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$HistoryAttendanceDaysConstraintsIncInput._({
@@ -41443,7 +41443,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsInsertInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -41688,7 +41688,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsOnConflict<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -42123,7 +42123,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsOrderBy<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -42309,7 +42309,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsPkColumnsInput<TRes>
   final TRes Function(Input$HistoryAttendanceDaysConstraintsPkColumnsInput)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$HistoryAttendanceDaysConstraintsPkColumnsInput._({
@@ -42540,7 +42540,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsSetInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -42706,7 +42706,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsStreamCursorInput<
   final TRes Function(Input$HistoryAttendanceDaysConstraintsStreamCursorInput)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -42967,7 +42967,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsStreamCursorValueInput
   final TRes Function(
       Input$HistoryAttendanceDaysConstraintsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -43155,7 +43155,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysConstraintsUpdates<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysConstraintsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -43448,7 +43448,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysInsertInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? attendanceHistory = _undefined,
@@ -43660,7 +43660,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysObjRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -43849,7 +43849,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysOnConflict<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -44177,7 +44177,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysOrderBy<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? attendanceHistoryAggregate = _undefined,
@@ -44363,7 +44363,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? day = _undefined}) =>
       _then(Input$HistoryAttendanceDaysPkColumnsInput._({
@@ -44495,7 +44495,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysSetInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -44639,7 +44639,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -44795,7 +44795,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -44938,7 +44938,7 @@ class _CopyWithImpl$Input$HistoryAttendanceDaysUpdates<TRes>
 
   final TRes Function(Input$HistoryAttendanceDaysUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -45360,7 +45360,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -45682,7 +45682,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -46444,7 +46444,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -46855,7 +46855,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryIncInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$HistoryAttendanceHistoryIncInput._({
@@ -47367,7 +47367,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? asAdmin = _undefined,
@@ -47662,7 +47662,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -48273,7 +48273,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? asAdmin = _undefined,
@@ -48503,7 +48503,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$HistoryAttendanceHistoryPkColumnsInput._({
@@ -48824,7 +48824,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? asAdmin = _undefined,
@@ -48995,7 +48995,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -49342,7 +49342,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryStreamCursorValueInput<TRes>
   final TRes Function(Input$HistoryAttendanceHistoryStreamCursorValueInput)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? asAdmin = _undefined,
@@ -49539,7 +49539,7 @@ class _CopyWithImpl$Input$HistoryAttendanceHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryAttendanceHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -49746,7 +49746,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryCallHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -49928,7 +49928,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryCallHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -50331,7 +50331,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryCallHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -50697,7 +50697,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryCallHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -50898,7 +50898,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryCallHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -51162,7 +51162,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryCallHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -51297,7 +51297,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryCallHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? time = _undefined}) =>
       _then(Input$HistoryCallHistoryPkColumnsInput._({
@@ -51478,7 +51478,7 @@ class _CopyWithImpl$Input$HistoryCallHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryCallHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -51628,7 +51628,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryCallHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -51832,7 +51832,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HistoryCallHistoryStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -51977,7 +51977,7 @@ class _CopyWithImpl$Input$HistoryCallHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryCallHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -52171,7 +52171,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -52354,7 +52354,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -52810,7 +52810,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -53224,7 +53224,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -53443,7 +53443,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -53757,7 +53757,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -53910,7 +53910,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$HistoryConfessionHistoryPkColumnsInput._({
@@ -54092,7 +54092,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryConfessionHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -54243,7 +54243,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -54473,7 +54473,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryStreamCursorValueInput<TRes>
   final TRes Function(Input$HistoryConfessionHistoryStreamCursorValueInput)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -54626,7 +54626,7 @@ class _CopyWithImpl$Input$HistoryConfessionHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryConfessionHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -54819,7 +54819,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryEditHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -55001,7 +55001,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryEditHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -55462,7 +55462,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryEditHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -55876,7 +55876,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryEditHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -56069,7 +56069,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryEditHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -56387,7 +56387,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryEditHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -56521,7 +56521,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryEditHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? auditId = _undefined}) =>
       _then(Input$HistoryEditHistoryPkColumnsInput._({
@@ -56749,7 +56749,7 @@ class _CopyWithImpl$Input$HistoryEditHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryEditHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -56905,7 +56905,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryEditHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -57155,7 +57155,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HistoryEditHistoryStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -57306,7 +57306,7 @@ class _CopyWithImpl$Input$HistoryEditHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryEditHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -57499,7 +57499,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -57681,7 +57681,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -58133,7 +58133,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -58547,7 +58547,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -58764,7 +58764,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -59076,7 +59076,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? day = _undefined,
@@ -59228,7 +59228,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$HistoryKodasHistoryPkColumnsInput._({
@@ -59409,7 +59409,7 @@ class _CopyWithImpl$Input$HistoryKodasHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -59559,7 +59559,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -59784,7 +59784,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -59932,7 +59932,7 @@ class _CopyWithImpl$Input$HistoryKodasHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryKodasHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -60125,7 +60125,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryAggregateOrderBy<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -60307,7 +60307,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryArrRelInsertInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -60710,7 +60710,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryBoolExp<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -61076,7 +61076,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryInsertInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -61278,7 +61278,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryOnConflict<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -61542,7 +61542,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryOrderBy<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -61677,7 +61677,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryPkColumnsInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? time = _undefined}) =>
       _then(Input$HistoryVisitHistoryPkColumnsInput._({
@@ -61859,7 +61859,7 @@ class _CopyWithImpl$Input$HistoryVisitHistorySetInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistorySetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -62009,7 +62009,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryStreamCursorInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -62213,7 +62213,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -62358,7 +62358,7 @@ class _CopyWithImpl$Input$HistoryVisitHistoryUpdates<TRes>
 
   final TRes Function(Input$HistoryVisitHistoryUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -62720,7 +62720,7 @@ class _CopyWithImpl$Input$HobbiesBoolExp<TRes>
 
   final TRes Function(Input$HobbiesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -62930,7 +62930,7 @@ class _CopyWithImpl$Input$HobbiesIncInput<TRes>
 
   final TRes Function(Input$HobbiesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$HobbiesIncInput._({
         ..._instance._$data,
@@ -63108,7 +63108,7 @@ class _CopyWithImpl$Input$HobbiesInsertInput<TRes>
 
   final TRes Function(Input$HobbiesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -63264,7 +63264,7 @@ class _CopyWithImpl$Input$HobbiesObjRelInsertInput<TRes>
 
   final TRes Function(Input$HobbiesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -63445,7 +63445,7 @@ class _CopyWithImpl$Input$HobbiesOnConflict<TRes>
 
   final TRes Function(Input$HobbiesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -63649,7 +63649,7 @@ class _CopyWithImpl$Input$HobbiesOrderBy<TRes>
 
   final TRes Function(Input$HobbiesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -63769,7 +63769,7 @@ class _CopyWithImpl$Input$HobbiesPkColumnsInput<TRes>
 
   final TRes Function(Input$HobbiesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$HobbiesPkColumnsInput._({
         ..._instance._$data,
@@ -63919,7 +63919,7 @@ class _CopyWithImpl$Input$HobbiesSetInput<TRes>
 
   final TRes Function(Input$HobbiesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -64061,7 +64061,7 @@ class _CopyWithImpl$Input$HobbiesStreamCursorInput<TRes>
 
   final TRes Function(Input$HobbiesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -64232,7 +64232,7 @@ class _CopyWithImpl$Input$HobbiesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$HobbiesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -64397,7 +64397,7 @@ class _CopyWithImpl$Input$HobbiesUpdates<TRes>
 
   final TRes Function(Input$HobbiesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -64749,7 +64749,7 @@ class _CopyWithImpl$Input$IntComparisonExp<TRes>
 
   final TRes Function(Input$IntComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -65082,7 +65082,7 @@ class _CopyWithImpl$Input$JobsBoolExp<TRes>
 
   final TRes Function(Input$JobsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -65329,7 +65329,7 @@ class _CopyWithImpl$Input$JobsInsertInput<TRes>
 
   final TRes Function(Input$JobsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -65481,7 +65481,7 @@ class _CopyWithImpl$Input$JobsObjRelInsertInput<TRes>
 
   final TRes Function(Input$JobsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -65660,7 +65660,7 @@ class _CopyWithImpl$Input$JobsOnConflict<TRes>
 
   final TRes Function(Input$JobsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -65840,7 +65840,7 @@ class _CopyWithImpl$Input$JobsOrderBy<TRes>
 
   final TRes Function(Input$JobsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -65957,7 +65957,7 @@ class _CopyWithImpl$Input$JobsPkColumnsInput<TRes>
 
   final TRes Function(Input$JobsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$JobsPkColumnsInput._({
         ..._instance._$data,
@@ -66085,7 +66085,7 @@ class _CopyWithImpl$Input$JobsSetInput<TRes>
 
   final TRes Function(Input$JobsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -66224,7 +66224,7 @@ class _CopyWithImpl$Input$JobsStreamCursorInput<TRes>
 
   final TRes Function(Input$JobsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -66371,7 +66371,7 @@ class _CopyWithImpl$Input$JobsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$JobsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -66506,7 +66506,7 @@ class _CopyWithImpl$Input$JobsUpdates<TRes>
 
   final TRes Function(Input$JobsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -66637,7 +66637,7 @@ class _CopyWithImpl$Input$JsonbCastExp<TRes>
 
   final TRes Function(Input$JsonbCastExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? $String = _undefined}) => _then(Input$JsonbCastExp._({
         ..._instance._$data,
@@ -67135,7 +67135,7 @@ class _CopyWithImpl$Input$JsonbComparisonExp<TRes>
 
   final TRes Function(Input$JsonbComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_cast = _undefined,
@@ -67329,7 +67329,7 @@ class _CopyWithImpl$Input$LastAttendancePersonsArgs<TRes>
 
   final TRes Function(Input$LastAttendancePersonsArgs) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group_id = _undefined,
@@ -67653,7 +67653,7 @@ class _CopyWithImpl$Input$NameComparisonExp<TRes>
 
   final TRes Function(Input$NameComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -68022,7 +68022,7 @@ class _CopyWithImpl$Input$PersonStatesBoolExp<TRes>
 
   final TRes Function(Input$PersonStatesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -68237,7 +68237,7 @@ class _CopyWithImpl$Input$PersonStatesIncInput<TRes>
 
   final TRes Function(Input$PersonStatesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$PersonStatesIncInput._({
@@ -68416,7 +68416,7 @@ class _CopyWithImpl$Input$PersonStatesInsertInput<TRes>
 
   final TRes Function(Input$PersonStatesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -68574,7 +68574,7 @@ class _CopyWithImpl$Input$PersonStatesObjRelInsertInput<TRes>
 
   final TRes Function(Input$PersonStatesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -68759,7 +68759,7 @@ class _CopyWithImpl$Input$PersonStatesOnConflict<TRes>
 
   final TRes Function(Input$PersonStatesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -68966,7 +68966,7 @@ class _CopyWithImpl$Input$PersonStatesOrderBy<TRes>
 
   final TRes Function(Input$PersonStatesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -69086,7 +69086,7 @@ class _CopyWithImpl$Input$PersonStatesPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonStatesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$PersonStatesPkColumnsInput._({
@@ -69238,7 +69238,7 @@ class _CopyWithImpl$Input$PersonStatesSetInput<TRes>
 
   final TRes Function(Input$PersonStatesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -69383,7 +69383,7 @@ class _CopyWithImpl$Input$PersonStatesStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonStatesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -69555,7 +69555,7 @@ class _CopyWithImpl$Input$PersonStatesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonStatesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -69724,7 +69724,7 @@ class _CopyWithImpl$Input$PersonStatesUpdates<TRes>
 
   final TRes Function(Input$PersonStatesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -70100,7 +70100,7 @@ class _CopyWithImpl$Input$PersonTypesBoolExp<TRes>
 
   final TRes Function(Input$PersonTypesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -70313,7 +70313,7 @@ class _CopyWithImpl$Input$PersonTypesIncInput<TRes>
 
   final TRes Function(Input$PersonTypesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) => _then(Input$PersonTypesIncInput._({
         ..._instance._$data,
@@ -70491,7 +70491,7 @@ class _CopyWithImpl$Input$PersonTypesInsertInput<TRes>
 
   final TRes Function(Input$PersonTypesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -70649,7 +70649,7 @@ class _CopyWithImpl$Input$PersonTypesObjRelInsertInput<TRes>
 
   final TRes Function(Input$PersonTypesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -70833,7 +70833,7 @@ class _CopyWithImpl$Input$PersonTypesOnConflict<TRes>
 
   final TRes Function(Input$PersonTypesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -71039,7 +71039,7 @@ class _CopyWithImpl$Input$PersonTypesOrderBy<TRes>
 
   final TRes Function(Input$PersonTypesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -71159,7 +71159,7 @@ class _CopyWithImpl$Input$PersonTypesPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonTypesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$PersonTypesPkColumnsInput._({
@@ -71311,7 +71311,7 @@ class _CopyWithImpl$Input$PersonTypesSetInput<TRes>
 
   final TRes Function(Input$PersonTypesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -71456,7 +71456,7 @@ class _CopyWithImpl$Input$PersonTypesStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonTypesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -71628,7 +71628,7 @@ class _CopyWithImpl$Input$PersonTypesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonTypesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -71797,7 +71797,7 @@ class _CopyWithImpl$Input$PersonTypesUpdates<TRes>
 
   final TRes Function(Input$PersonTypesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -72220,7 +72220,7 @@ class _CopyWithImpl$Input$PersonsAggregateOrderBy<TRes>
 
   final TRes Function(Input$PersonsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -72460,7 +72460,7 @@ class _CopyWithImpl$Input$PersonsAppendInput<TRes>
 
   final TRes Function(Input$PersonsAppendInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? otherPhones = _undefined}) =>
       _then(Input$PersonsAppendInput._({
@@ -72605,7 +72605,7 @@ class _CopyWithImpl$Input$PersonsArrRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -74866,7 +74866,7 @@ class _CopyWithImpl$Input$PersonsBoolExp<TRes>
 
   final TRes Function(Input$PersonsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -76056,7 +76056,7 @@ class _CopyWithImpl$Input$PersonsDeleteAtPathInput<TRes>
 
   final TRes Function(Input$PersonsDeleteAtPathInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? otherPhones = _undefined}) =>
       _then(Input$PersonsDeleteAtPathInput._({
@@ -76161,7 +76161,7 @@ class _CopyWithImpl$Input$PersonsDeleteElemInput<TRes>
 
   final TRes Function(Input$PersonsDeleteElemInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? otherPhones = _undefined}) =>
       _then(Input$PersonsDeleteElemInput._({
@@ -76265,7 +76265,7 @@ class _CopyWithImpl$Input$PersonsDeleteKeyInput<TRes>
 
   final TRes Function(Input$PersonsDeleteKeyInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? otherPhones = _undefined}) =>
       _then(Input$PersonsDeleteKeyInput._({
@@ -76431,7 +76431,7 @@ class _CopyWithImpl$Input$PersonsGroupsAggregateOrderBy<TRes>
 
   final TRes Function(Input$PersonsGroupsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -76611,7 +76611,7 @@ class _CopyWithImpl$Input$PersonsGroupsArrRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsGroupsArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -76982,7 +76982,7 @@ class _CopyWithImpl$Input$PersonsGroupsBoolExp<TRes>
 
   final TRes Function(Input$PersonsGroupsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -77305,7 +77305,7 @@ class _CopyWithImpl$Input$PersonsGroupsInsertInput<TRes>
 
   final TRes Function(Input$PersonsGroupsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -77501,7 +77501,7 @@ class _CopyWithImpl$Input$PersonsGroupsOnConflict<TRes>
 
   final TRes Function(Input$PersonsGroupsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -77737,7 +77737,7 @@ class _CopyWithImpl$Input$PersonsGroupsOrderBy<TRes>
 
   final TRes Function(Input$PersonsGroupsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -77867,7 +77867,7 @@ class _CopyWithImpl$Input$PersonsGroupsPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonsGroupsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? relId = _undefined}) =>
       _then(Input$PersonsGroupsPkColumnsInput._({
@@ -78024,7 +78024,7 @@ class _CopyWithImpl$Input$PersonsGroupsSetInput<TRes>
 
   final TRes Function(Input$PersonsGroupsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? groupId = _undefined,
@@ -78169,7 +78169,7 @@ class _CopyWithImpl$Input$PersonsGroupsStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonsGroupsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -78346,7 +78346,7 @@ class _CopyWithImpl$Input$PersonsGroupsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonsGroupsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? groupId = _undefined,
@@ -78488,7 +78488,7 @@ class _CopyWithImpl$Input$PersonsGroupsUpdates<TRes>
 
   final TRes Function(Input$PersonsGroupsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -78681,7 +78681,7 @@ class _CopyWithImpl$Input$PersonsHobbiesAggregateOrderBy<TRes>
 
   final TRes Function(Input$PersonsHobbiesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -78861,7 +78861,7 @@ class _CopyWithImpl$Input$PersonsHobbiesArrRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -79232,7 +79232,7 @@ class _CopyWithImpl$Input$PersonsHobbiesBoolExp<TRes>
 
   final TRes Function(Input$PersonsHobbiesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -79556,7 +79556,7 @@ class _CopyWithImpl$Input$PersonsHobbiesInsertInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobby = _undefined,
@@ -79752,7 +79752,7 @@ class _CopyWithImpl$Input$PersonsHobbiesOnConflict<TRes>
 
   final TRes Function(Input$PersonsHobbiesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -79988,7 +79988,7 @@ class _CopyWithImpl$Input$PersonsHobbiesOrderBy<TRes>
 
   final TRes Function(Input$PersonsHobbiesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobby = _undefined,
@@ -80119,7 +80119,7 @@ class _CopyWithImpl$Input$PersonsHobbiesPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? relId = _undefined}) =>
       _then(Input$PersonsHobbiesPkColumnsInput._({
@@ -80276,7 +80276,7 @@ class _CopyWithImpl$Input$PersonsHobbiesSetInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobbyId = _undefined,
@@ -80421,7 +80421,7 @@ class _CopyWithImpl$Input$PersonsHobbiesStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -80598,7 +80598,7 @@ class _CopyWithImpl$Input$PersonsHobbiesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonsHobbiesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobbyId = _undefined,
@@ -80740,7 +80740,7 @@ class _CopyWithImpl$Input$PersonsHobbiesUpdates<TRes>
 
   final TRes Function(Input$PersonsHobbiesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -80897,7 +80897,7 @@ class _CopyWithImpl$Input$PersonsIncInput<TRes>
 
   final TRes Function(Input$PersonsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -82282,7 +82282,7 @@ class _CopyWithImpl$Input$PersonsInsertInput<TRes>
 
   final TRes Function(Input$PersonsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -82832,7 +82832,7 @@ class _CopyWithImpl$Input$PersonsObjRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -83013,7 +83013,7 @@ class _CopyWithImpl$Input$PersonsOnConflict<TRes>
 
   final TRes Function(Input$PersonsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -84800,7 +84800,7 @@ class _CopyWithImpl$Input$PersonsOrderBy<TRes>
 
   final TRes Function(Input$PersonsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -85390,7 +85390,7 @@ class _CopyWithImpl$Input$PersonsPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$PersonsPkColumnsInput._({
         ..._instance._$data,
@@ -85493,7 +85493,7 @@ class _CopyWithImpl$Input$PersonsPrependInput<TRes>
 
   final TRes Function(Input$PersonsPrependInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? otherPhones = _undefined}) =>
       _then(Input$PersonsPrependInput._({
@@ -85659,7 +85659,7 @@ class _CopyWithImpl$Input$PersonsServicesAggregateOrderBy<TRes>
 
   final TRes Function(Input$PersonsServicesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -85839,7 +85839,7 @@ class _CopyWithImpl$Input$PersonsServicesArrRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsServicesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -86212,7 +86212,7 @@ class _CopyWithImpl$Input$PersonsServicesBoolExp<TRes>
 
   final TRes Function(Input$PersonsServicesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -86539,7 +86539,7 @@ class _CopyWithImpl$Input$PersonsServicesInsertInput<TRes>
 
   final TRes Function(Input$PersonsServicesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -86735,7 +86735,7 @@ class _CopyWithImpl$Input$PersonsServicesOnConflict<TRes>
 
   final TRes Function(Input$PersonsServicesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -86973,7 +86973,7 @@ class _CopyWithImpl$Input$PersonsServicesOrderBy<TRes>
 
   final TRes Function(Input$PersonsServicesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -87106,7 +87106,7 @@ class _CopyWithImpl$Input$PersonsServicesPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonsServicesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? relId = _undefined}) =>
       _then(Input$PersonsServicesPkColumnsInput._({
@@ -87264,7 +87264,7 @@ class _CopyWithImpl$Input$PersonsServicesSetInput<TRes>
 
   final TRes Function(Input$PersonsServicesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -87409,7 +87409,7 @@ class _CopyWithImpl$Input$PersonsServicesStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonsServicesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -87587,7 +87587,7 @@ class _CopyWithImpl$Input$PersonsServicesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonsServicesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -87729,7 +87729,7 @@ class _CopyWithImpl$Input$PersonsServicesUpdates<TRes>
 
   final TRes Function(Input$PersonsServicesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -88523,7 +88523,7 @@ class _CopyWithImpl$Input$PersonsSetInput<TRes>
 
   final TRes Function(Input$PersonsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -88749,7 +88749,7 @@ class _CopyWithImpl$Input$PersonsStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -89536,7 +89536,7 @@ class _CopyWithImpl$Input$PersonsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -89796,7 +89796,7 @@ class _CopyWithImpl$Input$PersonsTagsAggregateOrderBy<TRes>
 
   final TRes Function(Input$PersonsTagsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -89974,7 +89974,7 @@ class _CopyWithImpl$Input$PersonsTagsArrRelInsertInput<TRes>
 
   final TRes Function(Input$PersonsTagsArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -90342,7 +90342,7 @@ class _CopyWithImpl$Input$PersonsTagsBoolExp<TRes>
 
   final TRes Function(Input$PersonsTagsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -90660,7 +90660,7 @@ class _CopyWithImpl$Input$PersonsTagsInsertInput<TRes>
 
   final TRes Function(Input$PersonsTagsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -90853,7 +90853,7 @@ class _CopyWithImpl$Input$PersonsTagsOnConflict<TRes>
 
   final TRes Function(Input$PersonsTagsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -91086,7 +91086,7 @@ class _CopyWithImpl$Input$PersonsTagsOrderBy<TRes>
 
   final TRes Function(Input$PersonsTagsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -91215,7 +91215,7 @@ class _CopyWithImpl$Input$PersonsTagsPkColumnsInput<TRes>
 
   final TRes Function(Input$PersonsTagsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? relId = _undefined}) =>
       _then(Input$PersonsTagsPkColumnsInput._({
@@ -91370,7 +91370,7 @@ class _CopyWithImpl$Input$PersonsTagsSetInput<TRes>
 
   final TRes Function(Input$PersonsTagsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -91515,7 +91515,7 @@ class _CopyWithImpl$Input$PersonsTagsStreamCursorInput<TRes>
 
   final TRes Function(Input$PersonsTagsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -91690,7 +91690,7 @@ class _CopyWithImpl$Input$PersonsTagsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$PersonsTagsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -91832,7 +91832,7 @@ class _CopyWithImpl$Input$PersonsTagsUpdates<TRes>
 
   final TRes Function(Input$PersonsTagsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -92151,7 +92151,7 @@ class _CopyWithImpl$Input$PersonsUpdates<TRes>
 
   final TRes Function(Input$PersonsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_append = _undefined,
@@ -92570,7 +92570,7 @@ class _CopyWithImpl$Input$QualificationsBoolExp<TRes>
 
   final TRes Function(Input$QualificationsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -92828,7 +92828,7 @@ class _CopyWithImpl$Input$QualificationsInsertInput<TRes>
 
   final TRes Function(Input$QualificationsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -92983,7 +92983,7 @@ class _CopyWithImpl$Input$QualificationsObjRelInsertInput<TRes>
 
   final TRes Function(Input$QualificationsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -93168,7 +93168,7 @@ class _CopyWithImpl$Input$QualificationsOnConflict<TRes>
 
   final TRes Function(Input$QualificationsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -93352,7 +93352,7 @@ class _CopyWithImpl$Input$QualificationsOrderBy<TRes>
 
   final TRes Function(Input$QualificationsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -93471,7 +93471,7 @@ class _CopyWithImpl$Input$QualificationsPkColumnsInput<TRes>
 
   final TRes Function(Input$QualificationsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$QualificationsPkColumnsInput._({
@@ -93601,7 +93601,7 @@ class _CopyWithImpl$Input$QualificationsSetInput<TRes>
 
   final TRes Function(Input$QualificationsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -93743,7 +93743,7 @@ class _CopyWithImpl$Input$QualificationsStreamCursorInput<TRes>
 
   final TRes Function(Input$QualificationsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -93893,7 +93893,7 @@ class _CopyWithImpl$Input$QualificationsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$QualificationsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -94032,7 +94032,7 @@ class _CopyWithImpl$Input$QualificationsUpdates<TRes>
 
   final TRes Function(Input$QualificationsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -94365,7 +94365,7 @@ class _CopyWithImpl$Input$SchoolsBoolExp<TRes>
 
   final TRes Function(Input$SchoolsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -94615,7 +94615,7 @@ class _CopyWithImpl$Input$SchoolsInsertInput<TRes>
 
   final TRes Function(Input$SchoolsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -94768,7 +94768,7 @@ class _CopyWithImpl$Input$SchoolsObjRelInsertInput<TRes>
 
   final TRes Function(Input$SchoolsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -94949,7 +94949,7 @@ class _CopyWithImpl$Input$SchoolsOnConflict<TRes>
 
   final TRes Function(Input$SchoolsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -95129,7 +95129,7 @@ class _CopyWithImpl$Input$SchoolsOrderBy<TRes>
 
   final TRes Function(Input$SchoolsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -95246,7 +95246,7 @@ class _CopyWithImpl$Input$SchoolsPkColumnsInput<TRes>
 
   final TRes Function(Input$SchoolsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$SchoolsPkColumnsInput._({
         ..._instance._$data,
@@ -95374,7 +95374,7 @@ class _CopyWithImpl$Input$SchoolsSetInput<TRes>
 
   final TRes Function(Input$SchoolsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -95513,7 +95513,7 @@ class _CopyWithImpl$Input$SchoolsStreamCursorInput<TRes>
 
   final TRes Function(Input$SchoolsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -95662,7 +95662,7 @@ class _CopyWithImpl$Input$SchoolsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$SchoolsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -95798,7 +95798,7 @@ class _CopyWithImpl$Input$SchoolsUpdates<TRes>
 
   final TRes Function(Input$SchoolsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -96788,7 +96788,7 @@ class _CopyWithImpl$Input$ServicesBoolExp<TRes>
 
   final TRes Function(Input$ServicesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -97375,7 +97375,7 @@ class _CopyWithImpl$Input$ServicesIncInput<TRes>
 
   final TRes Function(Input$ServicesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -97918,7 +97918,7 @@ class _CopyWithImpl$Input$ServicesInsertInput<TRes>
 
   final TRes Function(Input$ServicesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsers = _undefined,
@@ -98219,7 +98219,7 @@ class _CopyWithImpl$Input$ServicesObjRelInsertInput<TRes>
 
   final TRes Function(Input$ServicesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -98401,7 +98401,7 @@ class _CopyWithImpl$Input$ServicesOnConflict<TRes>
 
   final TRes Function(Input$ServicesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -99078,7 +99078,7 @@ class _CopyWithImpl$Input$ServicesOrderBy<TRes>
 
   final TRes Function(Input$ServicesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminUsersAggregate = _undefined,
@@ -99360,7 +99360,7 @@ class _CopyWithImpl$Input$ServicesPkColumnsInput<TRes>
 
   final TRes Function(Input$ServicesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$ServicesPkColumnsInput._({
         ..._instance._$data,
@@ -99630,7 +99630,7 @@ class _CopyWithImpl$Input$ServicesSetInput<TRes>
 
   final TRes Function(Input$ServicesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -99790,7 +99790,7 @@ class _CopyWithImpl$Input$ServicesStreamCursorInput<TRes>
 
   final TRes Function(Input$ServicesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -100081,7 +100081,7 @@ class _CopyWithImpl$Input$ServicesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$ServicesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -100264,7 +100264,7 @@ class _CopyWithImpl$Input$ServicesUpdates<TRes>
 
   final TRes Function(Input$ServicesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -100585,7 +100585,7 @@ class _CopyWithImpl$Input$ShammasLevelsBoolExp<TRes>
 
   final TRes Function(Input$ShammasLevelsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -100771,7 +100771,7 @@ class _CopyWithImpl$Input$ShammasLevelsIncInput<TRes>
 
   final TRes Function(Input$ShammasLevelsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) =>
       _then(Input$ShammasLevelsIncInput._({
@@ -100923,7 +100923,7 @@ class _CopyWithImpl$Input$ShammasLevelsInsertInput<TRes>
 
   final TRes Function(Input$ShammasLevelsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -101068,7 +101068,7 @@ class _CopyWithImpl$Input$ShammasLevelsObjRelInsertInput<TRes>
 
   final TRes Function(Input$ShammasLevelsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -101253,7 +101253,7 @@ class _CopyWithImpl$Input$ShammasLevelsOnConflict<TRes>
 
   final TRes Function(Input$ShammasLevelsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -101433,7 +101433,7 @@ class _CopyWithImpl$Input$ShammasLevelsOrderBy<TRes>
 
   final TRes Function(Input$ShammasLevelsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -101540,7 +101540,7 @@ class _CopyWithImpl$Input$ShammasLevelsPkColumnsInput<TRes>
 
   final TRes Function(Input$ShammasLevelsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$ShammasLevelsPkColumnsInput._({
@@ -101692,7 +101692,7 @@ class _CopyWithImpl$Input$ShammasLevelsSetInput<TRes>
 
   final TRes Function(Input$ShammasLevelsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -101837,7 +101837,7 @@ class _CopyWithImpl$Input$ShammasLevelsStreamCursorInput<TRes>
 
   final TRes Function(Input$ShammasLevelsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -102009,7 +102009,7 @@ class _CopyWithImpl$Input$ShammasLevelsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$ShammasLevelsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -102178,7 +102178,7 @@ class _CopyWithImpl$Input$ShammasLevelsUpdates<TRes>
 
   final TRes Function(Input$ShammasLevelsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -102535,7 +102535,7 @@ class _CopyWithImpl$Input$SmallintComparisonExp<TRes>
 
   final TRes Function(Input$SmallintComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -102944,7 +102944,7 @@ class _CopyWithImpl$Input$StoresAggregateOrderBy<TRes>
 
   final TRes Function(Input$StoresAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -103225,7 +103225,7 @@ class _CopyWithImpl$Input$StoresArrRelInsertInput<TRes>
 
   final TRes Function(Input$StoresArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -103785,7 +103785,7 @@ class _CopyWithImpl$Input$StoresBoolExp<TRes>
 
   final TRes Function(Input$StoresBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -104083,7 +104083,7 @@ class _CopyWithImpl$Input$StoresIncInput<TRes>
 
   final TRes Function(Input$StoresIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$StoresIncInput._({
         ..._instance._$data,
@@ -104335,7 +104335,7 @@ class _CopyWithImpl$Input$StoresInsertInput<TRes>
 
   final TRes Function(Input$StoresInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -104525,7 +104525,7 @@ class _CopyWithImpl$Input$StoresOnConflict<TRes>
 
   final TRes Function(Input$StoresOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -104951,7 +104951,7 @@ class _CopyWithImpl$Input$StoresOrderBy<TRes>
 
   final TRes Function(Input$StoresOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -105120,7 +105120,7 @@ class _CopyWithImpl$Input$StoresPkColumnsInput<TRes>
 
   final TRes Function(Input$StoresPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$StoresPkColumnsInput._({
         ..._instance._$data,
@@ -105344,7 +105344,7 @@ class _CopyWithImpl$Input$StoresSetInput<TRes>
 
   final TRes Function(Input$StoresSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -105498,7 +105498,7 @@ class _CopyWithImpl$Input$StoresStreamCursorInput<TRes>
 
   final TRes Function(Input$StoresStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -105743,7 +105743,7 @@ class _CopyWithImpl$Input$StoresStreamCursorValueInput<TRes>
 
   final TRes Function(Input$StoresStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -105918,7 +105918,7 @@ class _CopyWithImpl$Input$StoresUpdates<TRes>
 
   final TRes Function(Input$StoresUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -106338,7 +106338,7 @@ class _CopyWithImpl$Input$StreetsAggregateOrderBy<TRes>
 
   final TRes Function(Input$StreetsAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -107002,7 +107002,7 @@ class _CopyWithImpl$Input$StreetsBoolExp<TRes>
 
   final TRes Function(Input$StreetsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -107302,7 +107302,7 @@ class _CopyWithImpl$Input$StreetsIncInput<TRes>
 
   final TRes Function(Input$StreetsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$StreetsIncInput._({
         ..._instance._$data,
@@ -107500,7 +107500,7 @@ class _CopyWithImpl$Input$StreetsInsertInput<TRes>
 
   final TRes Function(Input$StreetsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -107673,7 +107673,7 @@ class _CopyWithImpl$Input$StreetsOnConflict<TRes>
 
   final TRes Function(Input$StreetsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -108100,7 +108100,7 @@ class _CopyWithImpl$Input$StreetsOrderBy<TRes>
 
   final TRes Function(Input$StreetsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? areasAggregate = _undefined,
@@ -108281,7 +108281,7 @@ class _CopyWithImpl$Input$StreetsPkColumnsInput<TRes>
 
   final TRes Function(Input$StreetsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$StreetsPkColumnsInput._({
         ..._instance._$data,
@@ -108478,7 +108478,7 @@ class _CopyWithImpl$Input$StreetsSetInput<TRes>
 
   final TRes Function(Input$StreetsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -108627,7 +108627,7 @@ class _CopyWithImpl$Input$StreetsStreamCursorInput<TRes>
 
   final TRes Function(Input$StreetsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -108845,7 +108845,7 @@ class _CopyWithImpl$Input$StreetsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$StreetsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -109017,7 +109017,7 @@ class _CopyWithImpl$Input$StreetsUpdates<TRes>
 
   final TRes Function(Input$StreetsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -109592,7 +109592,7 @@ class _CopyWithImpl$Input$StringComparisonExp<TRes>
 
   final TRes Function(Input$StringComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -110098,7 +110098,7 @@ class _CopyWithImpl$Input$StudyYearsBoolExp<TRes>
 
   final TRes Function(Input$StudyYearsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -110368,7 +110368,7 @@ class _CopyWithImpl$Input$StudyYearsIncInput<TRes>
 
   final TRes Function(Input$StudyYearsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) => _then(Input$StudyYearsIncInput._({
         ..._instance._$data,
@@ -110588,7 +110588,7 @@ class _CopyWithImpl$Input$StudyYearsInsertInput<TRes>
 
   final TRes Function(Input$StudyYearsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? attendanceDaysConstraints = _undefined,
@@ -110777,7 +110777,7 @@ class _CopyWithImpl$Input$StudyYearsObjRelInsertInput<TRes>
 
   final TRes Function(Input$StudyYearsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -110960,7 +110960,7 @@ class _CopyWithImpl$Input$StudyYearsOnConflict<TRes>
 
   final TRes Function(Input$StudyYearsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -111217,7 +111217,7 @@ class _CopyWithImpl$Input$StudyYearsOrderBy<TRes>
 
   final TRes Function(Input$StudyYearsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? attendanceDaysConstraintsAggregate = _undefined,
@@ -111372,7 +111372,7 @@ class _CopyWithImpl$Input$StudyYearsPkColumnsInput<TRes>
 
   final TRes Function(Input$StudyYearsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) =>
       _then(Input$StudyYearsPkColumnsInput._({
@@ -111502,7 +111502,7 @@ class _CopyWithImpl$Input$StudyYearsSetInput<TRes>
 
   final TRes Function(Input$StudyYearsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -111643,7 +111643,7 @@ class _CopyWithImpl$Input$StudyYearsStreamCursorInput<TRes>
 
   final TRes Function(Input$StudyYearsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -111793,7 +111793,7 @@ class _CopyWithImpl$Input$StudyYearsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$StudyYearsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -111959,7 +111959,7 @@ class _CopyWithImpl$Input$StudyYearsUpdates<TRes>
 
   final TRes Function(Input$StudyYearsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -112327,7 +112327,7 @@ class _CopyWithImpl$Input$TagsBoolExp<TRes>
 
   final TRes Function(Input$TagsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -112532,7 +112532,7 @@ class _CopyWithImpl$Input$TagsIncInput<TRes>
 
   final TRes Function(Input$TagsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$TagsIncInput._({
         ..._instance._$data,
@@ -112709,7 +112709,7 @@ class _CopyWithImpl$Input$TagsInsertInput<TRes>
 
   final TRes Function(Input$TagsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -112864,7 +112864,7 @@ class _CopyWithImpl$Input$TagsObjRelInsertInput<TRes>
 
   final TRes Function(Input$TagsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -113043,7 +113043,7 @@ class _CopyWithImpl$Input$TagsOnConflict<TRes>
 
   final TRes Function(Input$TagsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -113247,7 +113247,7 @@ class _CopyWithImpl$Input$TagsOrderBy<TRes>
 
   final TRes Function(Input$TagsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -113367,7 +113367,7 @@ class _CopyWithImpl$Input$TagsPkColumnsInput<TRes>
 
   final TRes Function(Input$TagsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$TagsPkColumnsInput._({
         ..._instance._$data,
@@ -113517,7 +113517,7 @@ class _CopyWithImpl$Input$TagsSetInput<TRes>
 
   final TRes Function(Input$TagsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -113659,7 +113659,7 @@ class _CopyWithImpl$Input$TagsStreamCursorInput<TRes>
 
   final TRes Function(Input$TagsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -113828,7 +113828,7 @@ class _CopyWithImpl$Input$TagsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$TagsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -113991,7 +113991,7 @@ class _CopyWithImpl$Input$TagsUpdates<TRes>
 
   final TRes Function(Input$TagsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -114343,7 +114343,7 @@ class _CopyWithImpl$Input$TimestampComparisonExp<TRes>
 
   final TRes Function(Input$TimestampComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -114688,7 +114688,7 @@ class _CopyWithImpl$Input$TimestamptzComparisonExp<TRes>
 
   final TRes Function(Input$TimestamptzComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -115035,7 +115035,7 @@ class _CopyWithImpl$Input$UniversitiesBoolExp<TRes>
 
   final TRes Function(Input$UniversitiesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -115294,7 +115294,7 @@ class _CopyWithImpl$Input$UniversitiesInsertInput<TRes>
 
   final TRes Function(Input$UniversitiesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? colleges = _undefined,
@@ -115449,7 +115449,7 @@ class _CopyWithImpl$Input$UniversitiesObjRelInsertInput<TRes>
 
   final TRes Function(Input$UniversitiesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -115634,7 +115634,7 @@ class _CopyWithImpl$Input$UniversitiesOnConflict<TRes>
 
   final TRes Function(Input$UniversitiesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -115817,7 +115817,7 @@ class _CopyWithImpl$Input$UniversitiesOrderBy<TRes>
 
   final TRes Function(Input$UniversitiesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? collegesAggregate = _undefined,
@@ -115934,7 +115934,7 @@ class _CopyWithImpl$Input$UniversitiesPkColumnsInput<TRes>
 
   final TRes Function(Input$UniversitiesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$UniversitiesPkColumnsInput._({
@@ -116064,7 +116064,7 @@ class _CopyWithImpl$Input$UniversitiesSetInput<TRes>
 
   final TRes Function(Input$UniversitiesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -116206,7 +116206,7 @@ class _CopyWithImpl$Input$UniversitiesStreamCursorInput<TRes>
 
   final TRes Function(Input$UniversitiesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -116356,7 +116356,7 @@ class _CopyWithImpl$Input$UniversitiesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$UniversitiesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -116495,7 +116495,7 @@ class _CopyWithImpl$Input$UniversitiesUpdates<TRes>
 
   final TRes Function(Input$UniversitiesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -116837,7 +116837,7 @@ class _CopyWithImpl$Input$UuidComparisonExp<TRes>
 
   final TRes Function(Input$UuidComparisonExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_eq = _undefined,
@@ -116970,7 +116970,7 @@ class _CopyWithImpl$Input$areas_avg_order_by<TRes>
 
   final TRes Function(Input$areas_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$areas_avg_order_by._({
         ..._instance._$data,
@@ -117179,7 +117179,7 @@ class _CopyWithImpl$Input$areas_max_order_by<TRes>
 
   final TRes Function(Input$areas_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -117408,7 +117408,7 @@ class _CopyWithImpl$Input$areas_min_order_by<TRes>
 
   final TRes Function(Input$areas_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -117531,7 +117531,7 @@ class _CopyWithImpl$Input$areas_stddev_order_by<TRes>
 
   final TRes Function(Input$areas_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_stddev_order_by._({
@@ -117635,7 +117635,7 @@ class _CopyWithImpl$Input$areas_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$areas_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_stddev_pop_order_by._({
@@ -117739,7 +117739,7 @@ class _CopyWithImpl$Input$areas_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$areas_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_stddev_samp_order_by._({
@@ -117843,7 +117843,7 @@ class _CopyWithImpl$Input$areas_sum_order_by<TRes>
 
   final TRes Function(Input$areas_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$areas_sum_order_by._({
         ..._instance._$data,
@@ -117946,7 +117946,7 @@ class _CopyWithImpl$Input$areas_var_pop_order_by<TRes>
 
   final TRes Function(Input$areas_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_var_pop_order_by._({
@@ -118050,7 +118050,7 @@ class _CopyWithImpl$Input$areas_var_samp_order_by<TRes>
 
   final TRes Function(Input$areas_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_var_samp_order_by._({
@@ -118154,7 +118154,7 @@ class _CopyWithImpl$Input$areas_variance_order_by<TRes>
 
   final TRes Function(Input$areas_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$areas_variance_order_by._({
@@ -118259,7 +118259,7 @@ class _CopyWithImpl$Input$authProviderRequestsAppendInput<TRes>
 
   final TRes Function(Input$authProviderRequestsAppendInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? options = _undefined}) =>
       _then(Input$authProviderRequestsAppendInput._({
@@ -118519,7 +118519,7 @@ class _CopyWithImpl$Input$authProviderRequestsBoolExp<TRes>
 
   final TRes Function(Input$authProviderRequestsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -118717,7 +118717,7 @@ class _CopyWithImpl$Input$authProviderRequestsDeleteAtPathInput<TRes>
 
   final TRes Function(Input$authProviderRequestsDeleteAtPathInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? options = _undefined}) =>
       _then(Input$authProviderRequestsDeleteAtPathInput._({
@@ -118822,7 +118822,7 @@ class _CopyWithImpl$Input$authProviderRequestsDeleteElemInput<TRes>
 
   final TRes Function(Input$authProviderRequestsDeleteElemInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? options = _undefined}) =>
       _then(Input$authProviderRequestsDeleteElemInput._({
@@ -118927,7 +118927,7 @@ class _CopyWithImpl$Input$authProviderRequestsDeleteKeyInput<TRes>
 
   final TRes Function(Input$authProviderRequestsDeleteKeyInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? options = _undefined}) =>
       _then(Input$authProviderRequestsDeleteKeyInput._({
@@ -119059,7 +119059,7 @@ class _CopyWithImpl$Input$authProviderRequestsInsertInput<TRes>
 
   final TRes Function(Input$authProviderRequestsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -119228,7 +119228,7 @@ class _CopyWithImpl$Input$authProviderRequestsOnConflict<TRes>
 
   final TRes Function(Input$authProviderRequestsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -119387,7 +119387,7 @@ class _CopyWithImpl$Input$authProviderRequestsOrderBy<TRes>
 
   final TRes Function(Input$authProviderRequestsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -119492,7 +119492,7 @@ class _CopyWithImpl$Input$authProviderRequestsPkColumnsInput<TRes>
 
   final TRes Function(Input$authProviderRequestsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authProviderRequestsPkColumnsInput._({
@@ -119597,7 +119597,7 @@ class _CopyWithImpl$Input$authProviderRequestsPrependInput<TRes>
 
   final TRes Function(Input$authProviderRequestsPrependInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? options = _undefined}) =>
       _then(Input$authProviderRequestsPrependInput._({
@@ -119729,7 +119729,7 @@ class _CopyWithImpl$Input$authProviderRequestsSetInput<TRes>
 
   final TRes Function(Input$authProviderRequestsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -119873,7 +119873,7 @@ class _CopyWithImpl$Input$authProviderRequestsStreamCursorInput<TRes>
 
   final TRes Function(Input$authProviderRequestsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -120026,7 +120026,7 @@ class _CopyWithImpl$Input$authProviderRequestsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authProviderRequestsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -120305,7 +120305,7 @@ class _CopyWithImpl$Input$authProviderRequestsUpdates<TRes>
 
   final TRes Function(Input$authProviderRequestsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_append = _undefined,
@@ -120705,7 +120705,7 @@ class _CopyWithImpl$Input$authProvidersBoolExp<TRes>
 
   final TRes Function(Input$authProvidersBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -120934,7 +120934,7 @@ class _CopyWithImpl$Input$authProvidersInsertInput<TRes>
 
   final TRes Function(Input$authProvidersInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -121088,7 +121088,7 @@ class _CopyWithImpl$Input$authProvidersObjRelInsertInput<TRes>
 
   final TRes Function(Input$authProvidersObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -121273,7 +121273,7 @@ class _CopyWithImpl$Input$authProvidersOnConflict<TRes>
 
   final TRes Function(Input$authProvidersOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -121440,7 +121440,7 @@ class _CopyWithImpl$Input$authProvidersOrderBy<TRes>
 
   final TRes Function(Input$authProvidersOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -121559,7 +121559,7 @@ class _CopyWithImpl$Input$authProvidersPkColumnsInput<TRes>
 
   final TRes Function(Input$authProvidersPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authProvidersPkColumnsInput._({
@@ -121661,7 +121661,7 @@ class _CopyWithImpl$Input$authProvidersSetInput<TRes>
 
   final TRes Function(Input$authProvidersSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$authProvidersSetInput._({
         ..._instance._$data,
@@ -121794,7 +121794,7 @@ class _CopyWithImpl$Input$authProvidersStreamCursorInput<TRes>
 
   final TRes Function(Input$authProvidersStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -121916,7 +121916,7 @@ class _CopyWithImpl$Input$authProvidersStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authProvidersStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authProvidersStreamCursorValueInput._({
@@ -122047,7 +122047,7 @@ class _CopyWithImpl$Input$authProvidersUpdates<TRes>
 
   final TRes Function(Input$authProvidersUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -122240,7 +122240,7 @@ class _CopyWithImpl$Input$authRefreshTokensAggregateOrderBy<TRes>
 
   final TRes Function(Input$authRefreshTokensAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -122420,7 +122420,7 @@ class _CopyWithImpl$Input$authRefreshTokensArrRelInsertInput<TRes>
 
   final TRes Function(Input$authRefreshTokensArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -122796,7 +122796,7 @@ class _CopyWithImpl$Input$authRefreshTokensBoolExp<TRes>
 
   final TRes Function(Input$authRefreshTokensBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -123125,7 +123125,7 @@ class _CopyWithImpl$Input$authRefreshTokensInsertInput<TRes>
 
   final TRes Function(Input$authRefreshTokensInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -123312,7 +123312,7 @@ class _CopyWithImpl$Input$authRefreshTokensOnConflict<TRes>
 
   final TRes Function(Input$authRefreshTokensOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -123550,7 +123550,7 @@ class _CopyWithImpl$Input$authRefreshTokensOrderBy<TRes>
 
   final TRes Function(Input$authRefreshTokensOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -123674,7 +123674,7 @@ class _CopyWithImpl$Input$authRefreshTokensPkColumnsInput<TRes>
 
   final TRes Function(Input$authRefreshTokensPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? refreshToken = _undefined}) =>
       _then(Input$authRefreshTokensPkColumnsInput._({
@@ -123858,7 +123858,7 @@ class _CopyWithImpl$Input$authRefreshTokensSetInput<TRes>
 
   final TRes Function(Input$authRefreshTokensSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -124007,7 +124007,7 @@ class _CopyWithImpl$Input$authRefreshTokensStreamCursorInput<TRes>
 
   final TRes Function(Input$authRefreshTokensStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -124213,7 +124213,7 @@ class _CopyWithImpl$Input$authRefreshTokensStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authRefreshTokensStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -124359,7 +124359,7 @@ class _CopyWithImpl$Input$authRefreshTokensUpdates<TRes>
 
   final TRes Function(Input$authRefreshTokensUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -124496,7 +124496,7 @@ class _CopyWithImpl$Input$authRefreshTokens_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$authRefreshTokens_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$authRefreshTokens_aggregate_bool_exp._({
@@ -124708,7 +124708,7 @@ class _CopyWithImpl$Input$authRefreshTokens_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$authRefreshTokens_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -124932,7 +124932,7 @@ class _CopyWithImpl$Input$authRefreshTokens_max_order_by<TRes>
 
   final TRes Function(Input$authRefreshTokens_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -125137,7 +125137,7 @@ class _CopyWithImpl$Input$authRefreshTokens_min_order_by<TRes>
 
   final TRes Function(Input$authRefreshTokens_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -125511,7 +125511,7 @@ class _CopyWithImpl$Input$authRolesBoolExp<TRes>
 
   final TRes Function(Input$authRolesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -125797,7 +125797,7 @@ class _CopyWithImpl$Input$authRolesInsertInput<TRes>
 
   final TRes Function(Input$authRolesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? role = _undefined,
@@ -125962,7 +125962,7 @@ class _CopyWithImpl$Input$authRolesObjRelInsertInput<TRes>
 
   final TRes Function(Input$authRolesObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -126145,7 +126145,7 @@ class _CopyWithImpl$Input$authRolesOnConflict<TRes>
 
   final TRes Function(Input$authRolesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -126343,7 +126343,7 @@ class _CopyWithImpl$Input$authRolesOrderBy<TRes>
 
   final TRes Function(Input$authRolesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? role = _undefined,
@@ -126476,7 +126476,7 @@ class _CopyWithImpl$Input$authRolesPkColumnsInput<TRes>
 
   final TRes Function(Input$authRolesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? role = _undefined}) =>
       _then(Input$authRolesPkColumnsInput._({
@@ -126577,7 +126577,7 @@ class _CopyWithImpl$Input$authRolesSetInput<TRes>
 
   final TRes Function(Input$authRolesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? role = _undefined}) => _then(Input$authRolesSetInput._({
         ..._instance._$data,
@@ -126708,7 +126708,7 @@ class _CopyWithImpl$Input$authRolesStreamCursorInput<TRes>
 
   final TRes Function(Input$authRolesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -126830,7 +126830,7 @@ class _CopyWithImpl$Input$authRolesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authRolesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? role = _undefined}) =>
       _then(Input$authRolesStreamCursorValueInput._({
@@ -126960,7 +126960,7 @@ class _CopyWithImpl$Input$authRolesUpdates<TRes>
 
   final TRes Function(Input$authRolesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -127150,7 +127150,7 @@ class _CopyWithImpl$Input$authUserProvidersAggregateOrderBy<TRes>
 
   final TRes Function(Input$authUserProvidersAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -127330,7 +127330,7 @@ class _CopyWithImpl$Input$authUserProvidersArrRelInsertInput<TRes>
 
   final TRes Function(Input$authUserProvidersArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -127843,7 +127843,7 @@ class _CopyWithImpl$Input$authUserProvidersBoolExp<TRes>
 
   final TRes Function(Input$authUserProvidersBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -128357,7 +128357,7 @@ class _CopyWithImpl$Input$authUserProvidersInsertInput<TRes>
 
   final TRes Function(Input$authUserProvidersInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -128571,7 +128571,7 @@ class _CopyWithImpl$Input$authUserProvidersOnConflict<TRes>
 
   final TRes Function(Input$authUserProvidersOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -128940,7 +128940,7 @@ class _CopyWithImpl$Input$authUserProvidersOrderBy<TRes>
 
   final TRes Function(Input$authUserProvidersOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -129092,7 +129092,7 @@ class _CopyWithImpl$Input$authUserProvidersPkColumnsInput<TRes>
 
   final TRes Function(Input$authUserProvidersPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authUserProvidersPkColumnsInput._({
@@ -129364,7 +129364,7 @@ class _CopyWithImpl$Input$authUserProvidersSetInput<TRes>
 
   final TRes Function(Input$authUserProvidersSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -129526,7 +129526,7 @@ class _CopyWithImpl$Input$authUserProvidersStreamCursorInput<TRes>
 
   final TRes Function(Input$authUserProvidersStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -129821,7 +129821,7 @@ class _CopyWithImpl$Input$authUserProvidersStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authUserProvidersStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -129980,7 +129980,7 @@ class _CopyWithImpl$Input$authUserProvidersUpdates<TRes>
 
   final TRes Function(Input$authUserProvidersUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -130117,7 +130117,7 @@ class _CopyWithImpl$Input$authUserProviders_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$authUserProviders_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$authUserProviders_aggregate_bool_exp._({
@@ -130329,7 +130329,7 @@ class _CopyWithImpl$Input$authUserProviders_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$authUserProviders_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -130656,7 +130656,7 @@ class _CopyWithImpl$Input$authUserProviders_max_order_by<TRes>
 
   final TRes Function(Input$authUserProviders_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -130979,7 +130979,7 @@ class _CopyWithImpl$Input$authUserProviders_min_order_by<TRes>
 
   final TRes Function(Input$authUserProviders_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? accessToken = _undefined,
@@ -131175,7 +131175,7 @@ class _CopyWithImpl$Input$authUserRolesAggregateOrderBy<TRes>
 
   final TRes Function(Input$authUserRolesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -131355,7 +131355,7 @@ class _CopyWithImpl$Input$authUserRolesArrRelInsertInput<TRes>
 
   final TRes Function(Input$authUserRolesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -131755,7 +131755,7 @@ class _CopyWithImpl$Input$authUserRolesBoolExp<TRes>
 
   final TRes Function(Input$authUserRolesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -132113,7 +132113,7 @@ class _CopyWithImpl$Input$authUserRolesInsertInput<TRes>
 
   final TRes Function(Input$authUserRolesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -132312,7 +132312,7 @@ class _CopyWithImpl$Input$authUserRolesOnConflict<TRes>
 
   final TRes Function(Input$authUserRolesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -132572,7 +132572,7 @@ class _CopyWithImpl$Input$authUserRolesOrderBy<TRes>
 
   final TRes Function(Input$authUserRolesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -132707,7 +132707,7 @@ class _CopyWithImpl$Input$authUserRolesPkColumnsInput<TRes>
 
   final TRes Function(Input$authUserRolesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authUserRolesPkColumnsInput._({
@@ -132884,7 +132884,7 @@ class _CopyWithImpl$Input$authUserRolesSetInput<TRes>
 
   final TRes Function(Input$authUserRolesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -133032,7 +133032,7 @@ class _CopyWithImpl$Input$authUserRolesStreamCursorInput<TRes>
 
   final TRes Function(Input$authUserRolesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -133229,7 +133229,7 @@ class _CopyWithImpl$Input$authUserRolesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authUserRolesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -133374,7 +133374,7 @@ class _CopyWithImpl$Input$authUserRolesUpdates<TRes>
 
   final TRes Function(Input$authUserRolesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_set = _undefined,
@@ -133511,7 +133511,7 @@ class _CopyWithImpl$Input$authUserRoles_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$authUserRoles_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$authUserRoles_aggregate_bool_exp._({
@@ -133721,7 +133721,7 @@ class _CopyWithImpl$Input$authUserRoles_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$authUserRoles_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -133937,7 +133937,7 @@ class _CopyWithImpl$Input$authUserRoles_max_order_by<TRes>
 
   final TRes Function(Input$authUserRoles_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -134133,7 +134133,7 @@ class _CopyWithImpl$Input$authUserRoles_min_order_by<TRes>
 
   final TRes Function(Input$authUserRoles_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? createdAt = _undefined,
@@ -134535,7 +134535,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysAggregateOrderBy<TRes>
 
   final TRes Function(Input$authUserSecurityKeysAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -134844,7 +134844,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysArrRelInsertInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -135304,7 +135304,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysBoolExp<TRes>
 
   final TRes Function(Input$authUserSecurityKeysBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -135567,7 +135567,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysIncInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeysIncInput._({
@@ -135843,7 +135843,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysInsertInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -136042,7 +136042,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysOnConflict<TRes>
 
   final TRes Function(Input$authUserSecurityKeysOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -136360,7 +136360,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysOrderBy<TRes>
 
   final TRes Function(Input$authUserSecurityKeysOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -136494,7 +136494,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysPkColumnsInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authUserSecurityKeysPkColumnsInput._({
@@ -136743,7 +136743,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysSetInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -136904,7 +136904,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysStreamCursorInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -137174,7 +137174,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authUserSecurityKeysStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -137358,7 +137358,7 @@ class _CopyWithImpl$Input$authUserSecurityKeysUpdates<TRes>
 
   final TRes Function(Input$authUserSecurityKeysUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -137510,7 +137510,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$authUserSecurityKeys_aggregate_bool_exp._({
@@ -137729,7 +137729,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$authUserSecurityKeys_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -137875,7 +137875,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_avg_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_avg_order_by._({
@@ -138113,7 +138113,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_max_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -138373,7 +138373,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_min_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? counter = _undefined,
@@ -138503,7 +138503,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_stddev_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_stddev_order_by._({
@@ -138613,7 +138613,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_stddev_pop_order_by._({
@@ -138723,7 +138723,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_stddev_samp_order_by._({
@@ -138831,7 +138831,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_sum_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_sum_order_by._({
@@ -138940,7 +138940,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_var_pop_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_var_pop_order_by._({
@@ -139049,7 +139049,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_var_samp_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_var_samp_order_by._({
@@ -139158,7 +139158,7 @@ class _CopyWithImpl$Input$authUserSecurityKeys_variance_order_by<TRes>
 
   final TRes Function(Input$authUserSecurityKeys_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? counter = _undefined}) =>
       _then(Input$authUserSecurityKeys_variance_order_by._({
@@ -139322,7 +139322,7 @@ class _CopyWithImpl$Input$authUsersAggregateOrderBy<TRes>
 
   final TRes Function(Input$authUsersAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -139454,7 +139454,7 @@ class _CopyWithImpl$Input$authUsersAppendInput<TRes>
 
   final TRes Function(Input$authUsersAppendInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? metadata = _undefined}) =>
       _then(Input$authUsersAppendInput._({
@@ -139600,7 +139600,7 @@ class _CopyWithImpl$Input$authUsersArrRelInsertInput<TRes>
 
   final TRes Function(Input$authUsersArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -140801,7 +140801,7 @@ class _CopyWithImpl$Input$authUsersBoolExp<TRes>
 
   final TRes Function(Input$authUsersBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -141458,7 +141458,7 @@ class _CopyWithImpl$Input$authUsersDeleteAtPathInput<TRes>
 
   final TRes Function(Input$authUsersDeleteAtPathInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? metadata = _undefined}) =>
       _then(Input$authUsersDeleteAtPathInput._({
@@ -141562,7 +141562,7 @@ class _CopyWithImpl$Input$authUsersDeleteElemInput<TRes>
 
   final TRes Function(Input$authUsersDeleteElemInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? metadata = _undefined}) =>
       _then(Input$authUsersDeleteElemInput._({
@@ -141666,7 +141666,7 @@ class _CopyWithImpl$Input$authUsersDeleteKeyInput<TRes>
 
   final TRes Function(Input$authUsersDeleteKeyInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? metadata = _undefined}) =>
       _then(Input$authUsersDeleteKeyInput._({
@@ -142475,7 +142475,7 @@ class _CopyWithImpl$Input$authUsersInsertInput<TRes>
 
   final TRes Function(Input$authUsersInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -142768,7 +142768,7 @@ class _CopyWithImpl$Input$authUsersObjRelInsertInput<TRes>
 
   final TRes Function(Input$authUsersObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -142951,7 +142951,7 @@ class _CopyWithImpl$Input$authUsersOnConflict<TRes>
 
   final TRes Function(Input$authUsersOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -143869,7 +143869,7 @@ class _CopyWithImpl$Input$authUsersOrderBy<TRes>
 
   final TRes Function(Input$authUsersOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -144138,7 +144138,7 @@ class _CopyWithImpl$Input$authUsersPkColumnsInput<TRes>
 
   final TRes Function(Input$authUsersPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Input$authUsersPkColumnsInput._({
@@ -144242,7 +144242,7 @@ class _CopyWithImpl$Input$authUsersPrependInput<TRes>
 
   final TRes Function(Input$authUsersPrependInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? metadata = _undefined}) =>
       _then(Input$authUsersPrependInput._({
@@ -144912,7 +144912,7 @@ class _CopyWithImpl$Input$authUsersSetInput<TRes>
 
   final TRes Function(Input$authUsersSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -145129,7 +145129,7 @@ class _CopyWithImpl$Input$authUsersStreamCursorInput<TRes>
 
   final TRes Function(Input$authUsersStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -145819,7 +145819,7 @@ class _CopyWithImpl$Input$authUsersStreamCursorValueInput<TRes>
 
   final TRes Function(Input$authUsersStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -146173,7 +146173,7 @@ class _CopyWithImpl$Input$authUsersUpdates<TRes>
 
   final TRes Function(Input$authUsersUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_append = _undefined,
@@ -146438,7 +146438,7 @@ class _CopyWithImpl$Input$authUsers_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$authUsers_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -146663,7 +146663,7 @@ class _CopyWithImpl$Input$authUsers_aggregate_bool_exp_bool_and<TRes>
 
   final TRes Function(Input$authUsers_aggregate_bool_exp_bool_and) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -146875,7 +146875,7 @@ class _CopyWithImpl$Input$authUsers_aggregate_bool_exp_bool_or<TRes>
 
   final TRes Function(Input$authUsers_aggregate_bool_exp_bool_or) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -147107,7 +147107,7 @@ class _CopyWithImpl$Input$authUsers_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$authUsers_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -147743,7 +147743,7 @@ class _CopyWithImpl$Input$authUsers_max_order_by<TRes>
 
   final TRes Function(Input$authUsers_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -148419,7 +148419,7 @@ class _CopyWithImpl$Input$authUsers_min_order_by<TRes>
 
   final TRes Function(Input$authUsers_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? activeMfaType = _undefined,
@@ -148665,7 +148665,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$auth_users_admin_on_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -148904,7 +148904,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_aggregate_bool_exp_bool_and<TRes>
   final TRes Function(Input$auth_users_admin_on_aggregate_bool_exp_bool_and)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -149127,7 +149127,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_aggregate_bool_exp_bool_or<TRes>
   final TRes Function(Input$auth_users_admin_on_aggregate_bool_exp_bool_or)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -149370,7 +149370,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$auth_users_admin_on_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -149519,7 +149519,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_avg_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_avg_order_by._({
@@ -149765,7 +149765,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_max_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -150035,7 +150035,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_min_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminOnArea = _undefined,
@@ -150173,7 +150173,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_stddev_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_stddev_order_by._({
@@ -150288,7 +150288,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_stddev_pop_order_by._({
@@ -150403,7 +150403,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_stddev_samp_order_by._({
@@ -150517,7 +150517,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_sum_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_sum_order_by._({
@@ -150631,7 +150631,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_var_pop_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_var_pop_order_by._({
@@ -150745,7 +150745,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_var_samp_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_var_samp_order_by._({
@@ -150859,7 +150859,7 @@ class _CopyWithImpl$Input$auth_users_admin_on_variance_order_by<TRes>
 
   final TRes Function(Input$auth_users_admin_on_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$auth_users_admin_on_variance_order_by._({
@@ -150973,7 +150973,7 @@ class _CopyWithImpl$Input$auth_users_permissions_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$auth_users_permissions_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$auth_users_permissions_aggregate_bool_exp._({
@@ -151193,7 +151193,7 @@ class _CopyWithImpl$Input$auth_users_permissions_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$auth_users_permissions_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -151368,7 +151368,7 @@ class _CopyWithImpl$Input$auth_users_permissions_max_order_by<TRes>
 
   final TRes Function(Input$auth_users_permissions_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -151514,7 +151514,7 @@ class _CopyWithImpl$Input$auth_users_permissions_min_order_by<TRes>
 
   final TRes Function(Input$auth_users_permissions_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? permission = _undefined,
@@ -152004,7 +152004,7 @@ class _CopyWithImpl$Input$bucketsBoolExp<TRes>
 
   final TRes Function(Input$bucketsBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -152340,7 +152340,7 @@ class _CopyWithImpl$Input$bucketsIncInput<TRes>
 
   final TRes Function(Input$bucketsIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? downloadExpiration = _undefined,
@@ -152660,7 +152660,7 @@ class _CopyWithImpl$Input$bucketsInsertInput<TRes>
 
   final TRes Function(Input$bucketsInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? cacheControl = _undefined,
@@ -152836,7 +152836,7 @@ class _CopyWithImpl$Input$bucketsObjRelInsertInput<TRes>
 
   final TRes Function(Input$bucketsObjRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -153017,7 +153017,7 @@ class _CopyWithImpl$Input$bucketsOnConflict<TRes>
 
   final TRes Function(Input$bucketsOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -153370,7 +153370,7 @@ class _CopyWithImpl$Input$bucketsOrderBy<TRes>
 
   final TRes Function(Input$bucketsOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? cacheControl = _undefined,
@@ -153509,7 +153509,7 @@ class _CopyWithImpl$Input$bucketsPkColumnsInput<TRes>
 
   final TRes Function(Input$bucketsPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$bucketsPkColumnsInput._({
         ..._instance._$data,
@@ -153786,7 +153786,7 @@ class _CopyWithImpl$Input$bucketsSetInput<TRes>
 
   final TRes Function(Input$bucketsSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? cacheControl = _undefined,
@@ -153948,7 +153948,7 @@ class _CopyWithImpl$Input$bucketsStreamCursorInput<TRes>
 
   final TRes Function(Input$bucketsStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -154246,7 +154246,7 @@ class _CopyWithImpl$Input$bucketsStreamCursorValueInput<TRes>
 
   final TRes Function(Input$bucketsStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? cacheControl = _undefined,
@@ -154431,7 +154431,7 @@ class _CopyWithImpl$Input$bucketsUpdates<TRes>
 
   final TRes Function(Input$bucketsUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -154635,7 +154635,7 @@ class _CopyWithImpl$Input$classes_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$classes_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -154858,7 +154858,7 @@ class _CopyWithImpl$Input$classes_aggregate_bool_exp_bool_and<TRes>
 
   final TRes Function(Input$classes_aggregate_bool_exp_bool_and) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -155070,7 +155070,7 @@ class _CopyWithImpl$Input$classes_aggregate_bool_exp_bool_or<TRes>
 
   final TRes Function(Input$classes_aggregate_bool_exp_bool_or) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -155301,7 +155301,7 @@ class _CopyWithImpl$Input$classes_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$classes_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -155471,7 +155471,7 @@ class _CopyWithImpl$Input$classes_avg_order_by<TRes>
 
   final TRes Function(Input$classes_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -155718,7 +155718,7 @@ class _CopyWithImpl$Input$classes_max_order_by<TRes>
 
   final TRes Function(Input$classes_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -155978,7 +155978,7 @@ class _CopyWithImpl$Input$classes_min_order_by<TRes>
 
   final TRes Function(Input$classes_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156138,7 +156138,7 @@ class _CopyWithImpl$Input$classes_stddev_order_by<TRes>
 
   final TRes Function(Input$classes_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156286,7 +156286,7 @@ class _CopyWithImpl$Input$classes_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$classes_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156435,7 +156435,7 @@ class _CopyWithImpl$Input$classes_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$classes_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156582,7 +156582,7 @@ class _CopyWithImpl$Input$classes_sum_order_by<TRes>
 
   final TRes Function(Input$classes_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156729,7 +156729,7 @@ class _CopyWithImpl$Input$classes_var_pop_order_by<TRes>
 
   final TRes Function(Input$classes_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -156876,7 +156876,7 @@ class _CopyWithImpl$Input$classes_var_samp_order_by<TRes>
 
   final TRes Function(Input$classes_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -157023,7 +157023,7 @@ class _CopyWithImpl$Input$classes_variance_order_by<TRes>
 
   final TRes Function(Input$classes_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -157141,7 +157141,7 @@ class _CopyWithImpl$Input$colleges_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$colleges_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$colleges_aggregate_bool_exp._({
@@ -157349,7 +157349,7 @@ class _CopyWithImpl$Input$colleges_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$colleges_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -157539,7 +157539,7 @@ class _CopyWithImpl$Input$colleges_max_order_by<TRes>
 
   final TRes Function(Input$colleges_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -157709,7 +157709,7 @@ class _CopyWithImpl$Input$colleges_min_order_by<TRes>
 
   final TRes Function(Input$colleges_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -157825,7 +157825,7 @@ class _CopyWithImpl$Input$families_avg_order_by<TRes>
 
   final TRes Function(Input$families_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_avg_order_by._({
@@ -157935,7 +157935,7 @@ class _CopyWithImpl$Input$families_families_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$families_families_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$families_families_aggregate_bool_exp._({
@@ -158147,7 +158147,7 @@ class _CopyWithImpl$Input$families_families_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$families_families_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -158347,7 +158347,7 @@ class _CopyWithImpl$Input$families_families_max_order_by<TRes>
 
   final TRes Function(Input$families_families_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? childFamilyId = _undefined,
@@ -158526,7 +158526,7 @@ class _CopyWithImpl$Input$families_families_min_order_by<TRes>
 
   final TRes Function(Input$families_families_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? childFamilyId = _undefined,
@@ -158772,7 +158772,7 @@ class _CopyWithImpl$Input$families_max_order_by<TRes>
 
   final TRes Function(Input$families_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -159026,7 +159026,7 @@ class _CopyWithImpl$Input$families_min_order_by<TRes>
 
   final TRes Function(Input$families_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -159151,7 +159151,7 @@ class _CopyWithImpl$Input$families_stddev_order_by<TRes>
 
   final TRes Function(Input$families_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_stddev_order_by._({
@@ -159257,7 +159257,7 @@ class _CopyWithImpl$Input$families_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$families_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_stddev_pop_order_by._({
@@ -159363,7 +159363,7 @@ class _CopyWithImpl$Input$families_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$families_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_stddev_samp_order_by._({
@@ -159467,7 +159467,7 @@ class _CopyWithImpl$Input$families_sum_order_by<TRes>
 
   final TRes Function(Input$families_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_sum_order_by._({
@@ -159571,7 +159571,7 @@ class _CopyWithImpl$Input$families_var_pop_order_by<TRes>
 
   final TRes Function(Input$families_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_var_pop_order_by._({
@@ -159675,7 +159675,7 @@ class _CopyWithImpl$Input$families_var_samp_order_by<TRes>
 
   final TRes Function(Input$families_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_var_samp_order_by._({
@@ -159779,7 +159779,7 @@ class _CopyWithImpl$Input$families_variance_order_by<TRes>
 
   final TRes Function(Input$families_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$families_variance_order_by._({
@@ -159887,7 +159887,7 @@ class _CopyWithImpl$Input$fathers_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$fathers_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$fathers_aggregate_bool_exp._({
@@ -160094,7 +160094,7 @@ class _CopyWithImpl$Input$fathers_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$fathers_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -160284,7 +160284,7 @@ class _CopyWithImpl$Input$fathers_max_order_by<TRes>
 
   final TRes Function(Input$fathers_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? churchId = _undefined,
@@ -160453,7 +160453,7 @@ class _CopyWithImpl$Input$fathers_min_order_by<TRes>
 
   final TRes Function(Input$fathers_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? churchId = _undefined,
@@ -160844,7 +160844,7 @@ class _CopyWithImpl$Input$filesAggregateOrderBy<TRes>
 
   final TRes Function(Input$filesAggregateOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? avg = _undefined,
@@ -161124,7 +161124,7 @@ class _CopyWithImpl$Input$filesArrRelInsertInput<TRes>
 
   final TRes Function(Input$filesArrRelInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? data = _undefined,
@@ -161651,7 +161651,7 @@ class _CopyWithImpl$Input$filesBoolExp<TRes>
 
   final TRes Function(Input$filesBoolExp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_and = _undefined,
@@ -161934,7 +161934,7 @@ class _CopyWithImpl$Input$filesIncInput<TRes>
 
   final TRes Function(Input$filesIncInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) => _then(Input$filesIncInput._({
         ..._instance._$data,
@@ -162278,7 +162278,7 @@ class _CopyWithImpl$Input$filesInsertInput<TRes>
 
   final TRes Function(Input$filesInsertInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucket = _undefined,
@@ -162477,7 +162477,7 @@ class _CopyWithImpl$Input$filesOnConflict<TRes>
 
   final TRes Function(Input$filesOnConflict) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? constraint = _undefined,
@@ -162859,7 +162859,7 @@ class _CopyWithImpl$Input$filesOrderBy<TRes>
 
   final TRes Function(Input$filesOrderBy) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucket = _undefined,
@@ -162999,7 +162999,7 @@ class _CopyWithImpl$Input$filesPkColumnsInput<TRes>
 
   final TRes Function(Input$filesPkColumnsInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) => _then(Input$filesPkColumnsInput._({
         ..._instance._$data,
@@ -163315,7 +163315,7 @@ class _CopyWithImpl$Input$filesSetInput<TRes>
 
   final TRes Function(Input$filesSetInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucketId = _undefined,
@@ -163479,7 +163479,7 @@ class _CopyWithImpl$Input$filesStreamCursorInput<TRes>
 
   final TRes Function(Input$filesStreamCursorInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? initialValue = _undefined,
@@ -163815,7 +163815,7 @@ class _CopyWithImpl$Input$filesStreamCursorValueInput<TRes>
 
   final TRes Function(Input$filesStreamCursorValueInput) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucketId = _undefined,
@@ -164000,7 +164000,7 @@ class _CopyWithImpl$Input$filesUpdates<TRes>
 
   final TRes Function(Input$filesUpdates) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? $_inc = _undefined,
@@ -164204,7 +164204,7 @@ class _CopyWithImpl$Input$files_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$files_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -164425,7 +164425,7 @@ class _CopyWithImpl$Input$files_aggregate_bool_exp_bool_and<TRes>
 
   final TRes Function(Input$files_aggregate_bool_exp_bool_and) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -164636,7 +164636,7 @@ class _CopyWithImpl$Input$files_aggregate_bool_exp_bool_or<TRes>
 
   final TRes Function(Input$files_aggregate_bool_exp_bool_or) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -164866,7 +164866,7 @@ class _CopyWithImpl$Input$files_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$files_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -165001,7 +165001,7 @@ class _CopyWithImpl$Input$files_avg_order_by<TRes>
 
   final TRes Function(Input$files_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) => _then(Input$files_avg_order_by._({
         ..._instance._$data,
@@ -165310,7 +165310,7 @@ class _CopyWithImpl$Input$files_max_order_by<TRes>
 
   final TRes Function(Input$files_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucketId = _undefined,
@@ -165650,7 +165650,7 @@ class _CopyWithImpl$Input$files_min_order_by<TRes>
 
   final TRes Function(Input$files_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bucketId = _undefined,
@@ -165783,7 +165783,7 @@ class _CopyWithImpl$Input$files_stddev_order_by<TRes>
 
   final TRes Function(Input$files_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_stddev_order_by._({
@@ -165886,7 +165886,7 @@ class _CopyWithImpl$Input$files_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$files_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_stddev_pop_order_by._({
@@ -165989,7 +165989,7 @@ class _CopyWithImpl$Input$files_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$files_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_stddev_samp_order_by._({
@@ -166092,7 +166092,7 @@ class _CopyWithImpl$Input$files_sum_order_by<TRes>
 
   final TRes Function(Input$files_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) => _then(Input$files_sum_order_by._({
         ..._instance._$data,
@@ -166194,7 +166194,7 @@ class _CopyWithImpl$Input$files_var_pop_order_by<TRes>
 
   final TRes Function(Input$files_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_var_pop_order_by._({
@@ -166297,7 +166297,7 @@ class _CopyWithImpl$Input$files_var_samp_order_by<TRes>
 
   final TRes Function(Input$files_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_var_samp_order_by._({
@@ -166400,7 +166400,7 @@ class _CopyWithImpl$Input$files_variance_order_by<TRes>
 
   final TRes Function(Input$files_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? size = _undefined}) =>
       _then(Input$files_variance_order_by._({
@@ -166508,7 +166508,7 @@ class _CopyWithImpl$Input$groups_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$groups_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$groups_aggregate_bool_exp._({
@@ -166714,7 +166714,7 @@ class _CopyWithImpl$Input$groups_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$groups_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -166850,7 +166850,7 @@ class _CopyWithImpl$Input$groups_avg_order_by<TRes>
 
   final TRes Function(Input$groups_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$groups_avg_order_by._({
         ..._instance._$data,
@@ -167059,7 +167059,7 @@ class _CopyWithImpl$Input$groups_max_order_by<TRes>
 
   final TRes Function(Input$groups_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -167287,7 +167287,7 @@ class _CopyWithImpl$Input$groups_min_order_by<TRes>
 
   final TRes Function(Input$groups_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -167409,7 +167409,7 @@ class _CopyWithImpl$Input$groups_stddev_order_by<TRes>
 
   final TRes Function(Input$groups_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_stddev_order_by._({
@@ -167513,7 +167513,7 @@ class _CopyWithImpl$Input$groups_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$groups_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_stddev_pop_order_by._({
@@ -167618,7 +167618,7 @@ class _CopyWithImpl$Input$groups_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$groups_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_stddev_samp_order_by._({
@@ -167722,7 +167722,7 @@ class _CopyWithImpl$Input$groups_sum_order_by<TRes>
 
   final TRes Function(Input$groups_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$groups_sum_order_by._({
         ..._instance._$data,
@@ -167825,7 +167825,7 @@ class _CopyWithImpl$Input$groups_var_pop_order_by<TRes>
 
   final TRes Function(Input$groups_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_var_pop_order_by._({
@@ -167929,7 +167929,7 @@ class _CopyWithImpl$Input$groups_var_samp_order_by<TRes>
 
   final TRes Function(Input$groups_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_var_samp_order_by._({
@@ -168033,7 +168033,7 @@ class _CopyWithImpl$Input$groups_variance_order_by<TRes>
 
   final TRes Function(Input$groups_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$groups_variance_order_by._({
@@ -168223,7 +168223,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_aggregate_bool_exp
   final TRes Function(
       Input$history_attendance_days_constraints_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -168484,7 +168484,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_aggregate_bool_exp
           Input$history_attendance_days_constraints_aggregate_bool_exp_bool_and)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -168721,7 +168721,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_aggregate_bool_exp
           Input$history_attendance_days_constraints_aggregate_bool_exp_bool_or)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -168979,7 +168979,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_aggregate_bool_exp
   final TRes Function(
       Input$history_attendance_days_constraints_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -169139,7 +169139,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_avg_order_by<TRes>
   final TRes Function(Input$history_attendance_days_constraints_avg_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_avg_order_by._({
@@ -169363,7 +169363,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_max_order_by<TRes>
   final TRes Function(Input$history_attendance_days_constraints_max_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -169604,7 +169604,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_min_order_by<TRes>
   final TRes Function(Input$history_attendance_days_constraints_min_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -169747,7 +169747,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_stddev_order_by<
   final TRes Function(Input$history_attendance_days_constraints_stddev_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_stddev_order_by._({
@@ -169875,7 +169875,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_stddev_pop_order_b
   final TRes Function(
       Input$history_attendance_days_constraints_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_stddev_pop_order_by._({
@@ -170005,7 +170005,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_stddev_samp_order_
   final TRes Function(
       Input$history_attendance_days_constraints_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_stddev_samp_order_by._({
@@ -170129,7 +170129,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_sum_order_by<TRes>
   final TRes Function(Input$history_attendance_days_constraints_sum_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_sum_order_by._({
@@ -170256,7 +170256,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_var_pop_order_by<
   final TRes Function(
       Input$history_attendance_days_constraints_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_var_pop_order_by._({
@@ -170384,7 +170384,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_var_samp_order_by<
   final TRes Function(
       Input$history_attendance_days_constraints_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_var_samp_order_by._({
@@ -170512,7 +170512,7 @@ class _CopyWithImpl$Input$history_attendance_days_constraints_variance_order_by<
   final TRes Function(
       Input$history_attendance_days_constraints_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_days_constraints_variance_order_by._({
@@ -170698,7 +170698,7 @@ class _CopyWithImpl$Input$history_attendance_history_aggregate_bool_exp<TRes>
   final TRes Function(Input$history_attendance_history_aggregate_bool_exp)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -170948,7 +170948,7 @@ class _CopyWithImpl$Input$history_attendance_history_aggregate_bool_exp_bool_and
   final TRes Function(
       Input$history_attendance_history_aggregate_bool_exp_bool_and) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -171177,7 +171177,7 @@ class _CopyWithImpl$Input$history_attendance_history_aggregate_bool_exp_bool_or<
   final TRes Function(
       Input$history_attendance_history_aggregate_bool_exp_bool_or) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -171426,7 +171426,7 @@ class _CopyWithImpl$Input$history_attendance_history_aggregate_bool_exp_count<
   final TRes Function(Input$history_attendance_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -171579,7 +171579,7 @@ class _CopyWithImpl$Input$history_attendance_history_avg_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_avg_order_by._({
@@ -171870,7 +171870,7 @@ class _CopyWithImpl$Input$history_attendance_history_max_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -172188,7 +172188,7 @@ class _CopyWithImpl$Input$history_attendance_history_min_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -172330,7 +172330,7 @@ class _CopyWithImpl$Input$history_attendance_history_stddev_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_stddev_order_by._({
@@ -172449,7 +172449,7 @@ class _CopyWithImpl$Input$history_attendance_history_stddev_pop_order_by<TRes>
   final TRes Function(Input$history_attendance_history_stddev_pop_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_stddev_pop_order_by._({
@@ -172571,7 +172571,7 @@ class _CopyWithImpl$Input$history_attendance_history_stddev_samp_order_by<TRes>
   final TRes Function(Input$history_attendance_history_stddev_samp_order_by)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_stddev_samp_order_by._({
@@ -172689,7 +172689,7 @@ class _CopyWithImpl$Input$history_attendance_history_sum_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_sum_order_by._({
@@ -172807,7 +172807,7 @@ class _CopyWithImpl$Input$history_attendance_history_var_pop_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_var_pop_order_by._({
@@ -172927,7 +172927,7 @@ class _CopyWithImpl$Input$history_attendance_history_var_samp_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_var_samp_order_by._({
@@ -173047,7 +173047,7 @@ class _CopyWithImpl$Input$history_attendance_history_variance_order_by<TRes>
 
   final TRes Function(Input$history_attendance_history_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? serviceStudyYear = _undefined}) =>
       _then(Input$history_attendance_history_variance_order_by._({
@@ -173161,7 +173161,7 @@ class _CopyWithImpl$Input$history_call_history_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$history_call_history_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$history_call_history_aggregate_bool_exp._({
@@ -173380,7 +173380,7 @@ class _CopyWithImpl$Input$history_call_history_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$history_call_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -173607,7 +173607,7 @@ class _CopyWithImpl$Input$history_call_history_max_order_by<TRes>
 
   final TRes Function(Input$history_call_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -173811,7 +173811,7 @@ class _CopyWithImpl$Input$history_call_history_min_order_by<TRes>
 
   final TRes Function(Input$history_call_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -173943,7 +173943,7 @@ class _CopyWithImpl$Input$history_confession_history_aggregate_bool_exp<TRes>
   final TRes Function(Input$history_confession_history_aggregate_bool_exp)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$history_confession_history_aggregate_bool_exp._({
@@ -174171,7 +174171,7 @@ class _CopyWithImpl$Input$history_confession_history_aggregate_bool_exp_count<
   final TRes Function(Input$history_confession_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -174421,7 +174421,7 @@ class _CopyWithImpl$Input$history_confession_history_max_order_by<TRes>
 
   final TRes Function(Input$history_confession_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -174650,7 +174650,7 @@ class _CopyWithImpl$Input$history_confession_history_min_order_by<TRes>
 
   final TRes Function(Input$history_confession_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -174779,7 +174779,7 @@ class _CopyWithImpl$Input$history_edit_history_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$history_edit_history_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$history_edit_history_aggregate_bool_exp._({
@@ -174998,7 +174998,7 @@ class _CopyWithImpl$Input$history_edit_history_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$history_edit_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -175250,7 +175250,7 @@ class _CopyWithImpl$Input$history_edit_history_max_order_by<TRes>
 
   final TRes Function(Input$history_edit_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -175482,7 +175482,7 @@ class _CopyWithImpl$Input$history_edit_history_min_order_by<TRes>
 
   final TRes Function(Input$history_edit_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? auditId = _undefined,
@@ -175612,7 +175612,7 @@ class _CopyWithImpl$Input$history_kodas_history_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$history_kodas_history_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$history_kodas_history_aggregate_bool_exp._({
@@ -175832,7 +175832,7 @@ class _CopyWithImpl$Input$history_kodas_history_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$history_kodas_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -176080,7 +176080,7 @@ class _CopyWithImpl$Input$history_kodas_history_max_order_by<TRes>
 
   final TRes Function(Input$history_kodas_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -176308,7 +176308,7 @@ class _CopyWithImpl$Input$history_kodas_history_min_order_by<TRes>
 
   final TRes Function(Input$history_kodas_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -176438,7 +176438,7 @@ class _CopyWithImpl$Input$history_visit_history_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$history_visit_history_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$history_visit_history_aggregate_bool_exp._({
@@ -176658,7 +176658,7 @@ class _CopyWithImpl$Input$history_visit_history_aggregate_bool_exp_count<TRes>
   final TRes Function(Input$history_visit_history_aggregate_bool_exp_count)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -176885,7 +176885,7 @@ class _CopyWithImpl$Input$history_visit_history_max_order_by<TRes>
 
   final TRes Function(Input$history_visit_history_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -177089,7 +177089,7 @@ class _CopyWithImpl$Input$history_visit_history_min_order_by<TRes>
 
   final TRes Function(Input$history_visit_history_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -177272,7 +177272,7 @@ class _CopyWithImpl$Input$persons_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$persons_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? bool_and = _undefined,
@@ -177495,7 +177495,7 @@ class _CopyWithImpl$Input$persons_aggregate_bool_exp_bool_and<TRes>
 
   final TRes Function(Input$persons_aggregate_bool_exp_bool_and) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -177707,7 +177707,7 @@ class _CopyWithImpl$Input$persons_aggregate_bool_exp_bool_or<TRes>
 
   final TRes Function(Input$persons_aggregate_bool_exp_bool_or) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -177938,7 +177938,7 @@ class _CopyWithImpl$Input$persons_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$persons_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -178106,7 +178106,7 @@ class _CopyWithImpl$Input$persons_avg_order_by<TRes>
 
   final TRes Function(Input$persons_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -178225,7 +178225,7 @@ class _CopyWithImpl$Input$persons_groups_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$persons_groups_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$persons_groups_aggregate_bool_exp._({
@@ -178436,7 +178436,7 @@ class _CopyWithImpl$Input$persons_groups_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$persons_groups_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -178632,7 +178632,7 @@ class _CopyWithImpl$Input$persons_groups_max_order_by<TRes>
 
   final TRes Function(Input$persons_groups_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? groupId = _undefined,
@@ -178805,7 +178805,7 @@ class _CopyWithImpl$Input$persons_groups_min_order_by<TRes>
 
   final TRes Function(Input$persons_groups_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? groupId = _undefined,
@@ -178926,7 +178926,7 @@ class _CopyWithImpl$Input$persons_hobbies_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$persons_hobbies_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$persons_hobbies_aggregate_bool_exp._({
@@ -179137,7 +179137,7 @@ class _CopyWithImpl$Input$persons_hobbies_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$persons_hobbies_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -179334,7 +179334,7 @@ class _CopyWithImpl$Input$persons_hobbies_max_order_by<TRes>
 
   final TRes Function(Input$persons_hobbies_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobbyId = _undefined,
@@ -179508,7 +179508,7 @@ class _CopyWithImpl$Input$persons_hobbies_min_order_by<TRes>
 
   final TRes Function(Input$persons_hobbies_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobbyId = _undefined,
@@ -180193,7 +180193,7 @@ class _CopyWithImpl$Input$persons_max_order_by<TRes>
 
   final TRes Function(Input$persons_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -180945,7 +180945,7 @@ class _CopyWithImpl$Input$persons_min_order_by<TRes>
 
   final TRes Function(Input$persons_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? address = _undefined,
@@ -181133,7 +181133,7 @@ class _CopyWithImpl$Input$persons_services_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$persons_services_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$persons_services_aggregate_bool_exp._({
@@ -181344,7 +181344,7 @@ class _CopyWithImpl$Input$persons_services_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$persons_services_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -181542,7 +181542,7 @@ class _CopyWithImpl$Input$persons_services_max_order_by<TRes>
 
   final TRes Function(Input$persons_services_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -181717,7 +181717,7 @@ class _CopyWithImpl$Input$persons_services_min_order_by<TRes>
 
   final TRes Function(Input$persons_services_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -181864,7 +181864,7 @@ class _CopyWithImpl$Input$persons_stddev_order_by<TRes>
 
   final TRes Function(Input$persons_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -182010,7 +182010,7 @@ class _CopyWithImpl$Input$persons_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$persons_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -182157,7 +182157,7 @@ class _CopyWithImpl$Input$persons_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$persons_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -182302,7 +182302,7 @@ class _CopyWithImpl$Input$persons_sum_order_by<TRes>
 
   final TRes Function(Input$persons_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -182421,7 +182421,7 @@ class _CopyWithImpl$Input$persons_tags_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$persons_tags_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$persons_tags_aggregate_bool_exp._({
@@ -182631,7 +182631,7 @@ class _CopyWithImpl$Input$persons_tags_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$persons_tags_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -182825,7 +182825,7 @@ class _CopyWithImpl$Input$persons_tags_max_order_by<TRes>
 
   final TRes Function(Input$persons_tags_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -182996,7 +182996,7 @@ class _CopyWithImpl$Input$persons_tags_min_order_by<TRes>
 
   final TRes Function(Input$persons_tags_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -183143,7 +183143,7 @@ class _CopyWithImpl$Input$persons_var_pop_order_by<TRes>
 
   final TRes Function(Input$persons_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -183288,7 +183288,7 @@ class _CopyWithImpl$Input$persons_var_samp_order_by<TRes>
 
   final TRes Function(Input$persons_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -183433,7 +183433,7 @@ class _CopyWithImpl$Input$persons_variance_order_by<TRes>
 
   final TRes Function(Input$persons_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -183582,7 +183582,7 @@ class _CopyWithImpl$Input$st_d_within_geography_input<TRes>
 
   final TRes Function(Input$st_d_within_geography_input) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? distance = _undefined,
@@ -183711,7 +183711,7 @@ class _CopyWithImpl$Input$st_d_within_input<TRes>
 
   final TRes Function(Input$st_d_within_input) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? distance = _undefined,
@@ -183829,7 +183829,7 @@ class _CopyWithImpl$Input$stores_aggregate_bool_exp<TRes>
 
   final TRes Function(Input$stores_aggregate_bool_exp) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? count = _undefined}) =>
       _then(Input$stores_aggregate_bool_exp._({
@@ -184035,7 +184035,7 @@ class _CopyWithImpl$Input$stores_aggregate_bool_exp_count<TRes>
 
   final TRes Function(Input$stores_aggregate_bool_exp_count) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? arguments = _undefined,
@@ -184171,7 +184171,7 @@ class _CopyWithImpl$Input$stores_avg_order_by<TRes>
 
   final TRes Function(Input$stores_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$stores_avg_order_by._({
         ..._instance._$data,
@@ -184380,7 +184380,7 @@ class _CopyWithImpl$Input$stores_max_order_by<TRes>
 
   final TRes Function(Input$stores_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -184609,7 +184609,7 @@ class _CopyWithImpl$Input$stores_min_order_by<TRes>
 
   final TRes Function(Input$stores_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? adminFamily = _undefined,
@@ -184732,7 +184732,7 @@ class _CopyWithImpl$Input$stores_stddev_order_by<TRes>
 
   final TRes Function(Input$stores_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_stddev_order_by._({
@@ -184836,7 +184836,7 @@ class _CopyWithImpl$Input$stores_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$stores_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_stddev_pop_order_by._({
@@ -184941,7 +184941,7 @@ class _CopyWithImpl$Input$stores_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$stores_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_stddev_samp_order_by._({
@@ -185045,7 +185045,7 @@ class _CopyWithImpl$Input$stores_sum_order_by<TRes>
 
   final TRes Function(Input$stores_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) => _then(Input$stores_sum_order_by._({
         ..._instance._$data,
@@ -185148,7 +185148,7 @@ class _CopyWithImpl$Input$stores_var_pop_order_by<TRes>
 
   final TRes Function(Input$stores_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_var_pop_order_by._({
@@ -185252,7 +185252,7 @@ class _CopyWithImpl$Input$stores_var_samp_order_by<TRes>
 
   final TRes Function(Input$stores_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_var_samp_order_by._({
@@ -185356,7 +185356,7 @@ class _CopyWithImpl$Input$stores_variance_order_by<TRes>
 
   final TRes Function(Input$stores_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$stores_variance_order_by._({
@@ -185460,7 +185460,7 @@ class _CopyWithImpl$Input$streets_avg_order_by<TRes>
 
   final TRes Function(Input$streets_avg_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_avg_order_by._({
@@ -185644,7 +185644,7 @@ class _CopyWithImpl$Input$streets_max_order_by<TRes>
 
   final TRes Function(Input$streets_max_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -185843,7 +185843,7 @@ class _CopyWithImpl$Input$streets_min_order_by<TRes>
 
   final TRes Function(Input$streets_min_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? color = _undefined,
@@ -185962,7 +185962,7 @@ class _CopyWithImpl$Input$streets_stddev_order_by<TRes>
 
   final TRes Function(Input$streets_stddev_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_stddev_order_by._({
@@ -186067,7 +186067,7 @@ class _CopyWithImpl$Input$streets_stddev_pop_order_by<TRes>
 
   final TRes Function(Input$streets_stddev_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_stddev_pop_order_by._({
@@ -186173,7 +186173,7 @@ class _CopyWithImpl$Input$streets_stddev_samp_order_by<TRes>
 
   final TRes Function(Input$streets_stddev_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_stddev_samp_order_by._({
@@ -186277,7 +186277,7 @@ class _CopyWithImpl$Input$streets_sum_order_by<TRes>
 
   final TRes Function(Input$streets_sum_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_sum_order_by._({
@@ -186381,7 +186381,7 @@ class _CopyWithImpl$Input$streets_var_pop_order_by<TRes>
 
   final TRes Function(Input$streets_var_pop_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_var_pop_order_by._({
@@ -186485,7 +186485,7 @@ class _CopyWithImpl$Input$streets_var_samp_order_by<TRes>
 
   final TRes Function(Input$streets_var_samp_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_var_samp_order_by._({
@@ -186589,7 +186589,7 @@ class _CopyWithImpl$Input$streets_variance_order_by<TRes>
 
   final TRes Function(Input$streets_variance_order_by) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? color = _undefined}) =>
       _then(Input$streets_variance_order_by._({
@@ -187076,7 +187076,7 @@ String toJson$Enum$AuthUsersPermissionsConstraint(
     case Enum$AuthUsersPermissionsConstraint.users_permissions_pkey:
       return r'users_permissions_pkey';
     case Enum$AuthUsersPermissionsConstraint
-        .users_permissions_uid_permission_key:
+          .users_permissions_uid_permission_key:
       return r'users_permissions_uid_permission_key';
     case Enum$AuthUsersPermissionsConstraint.$unknown:
       return r'$unknown';
@@ -187904,10 +187904,10 @@ String toJson$Enum$HistoryAttendanceDaysConstraintsConstraint(
     Enum$HistoryAttendanceDaysConstraintsConstraint e) {
   switch (e) {
     case Enum$HistoryAttendanceDaysConstraintsConstraint
-        .attendance_days_constraints_day_service_service_studyYear_s_key:
+          .attendance_days_constraints_day_service_service_studyYear_s_key:
       return r'attendance_days_constraints_day_service_service_studyYear_s_key';
     case Enum$HistoryAttendanceDaysConstraintsConstraint
-        .attendance_days_constraints_pkey:
+          .attendance_days_constraints_pkey:
       return r'attendance_days_constraints_pkey';
     case Enum$HistoryAttendanceDaysConstraintsConstraint.$unknown:
       return r'$unknown';
@@ -188090,7 +188090,7 @@ String toJson$Enum$HistoryAttendanceHistoryConstraint(
     Enum$HistoryAttendanceHistoryConstraint e) {
   switch (e) {
     case Enum$HistoryAttendanceHistoryConstraint
-        .attendance_history_dayID_serviceID_groupID_personID_key:
+          .attendance_history_dayID_serviceID_groupID_personID_key:
       return r'attendance_history_dayID_serviceID_groupID_personID_key';
     case Enum$HistoryAttendanceHistoryConstraint.attendance_history_pkey:
       return r'attendance_history_pkey';
@@ -188364,7 +188364,7 @@ String toJson$Enum$HistoryConfessionHistoryConstraint(
     Enum$HistoryConfessionHistoryConstraint e) {
   switch (e) {
     case Enum$HistoryConfessionHistoryConstraint
-        .confession_history_dayID_personID_key:
+          .confession_history_dayID_personID_key:
       return r'confession_history_dayID_personID_key';
     case Enum$HistoryConfessionHistoryConstraint.confession_history_pkey:
       return r'confession_history_pkey';
@@ -191060,10 +191060,10 @@ String toJson$Enum$authUserProvidersConstraint(
     case Enum$authUserProvidersConstraint.user_providers_pkey:
       return r'user_providers_pkey';
     case Enum$authUserProvidersConstraint
-        .user_providers_provider_id_provider_user_id_key:
+          .user_providers_provider_id_provider_user_id_key:
       return r'user_providers_provider_id_provider_user_id_key';
     case Enum$authUserProvidersConstraint
-        .user_providers_user_id_provider_id_key:
+          .user_providers_user_id_provider_id_key:
       return r'user_providers_user_id_provider_id_key';
     case Enum$authUserProvidersConstraint.$unknown:
       return r'$unknown';
@@ -191311,7 +191311,7 @@ String toJson$Enum$authUserSecurityKeysConstraint(
     Enum$authUserSecurityKeysConstraint e) {
   switch (e) {
     case Enum$authUserSecurityKeysConstraint
-        .user_security_key_credential_id_key:
+          .user_security_key_credential_id_key:
       return r'user_security_key_credential_id_key';
     case Enum$authUserSecurityKeysConstraint.user_security_keys_pkey:
       return r'user_security_keys_pkey';
@@ -191775,19 +191775,19 @@ String toJson$Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and
         e) {
   switch (e) {
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and_arguments_columns
-        .disabled:
+          .disabled:
       return r'disabled';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and_arguments_columns
-        .emailVerified:
+          .emailVerified:
       return r'emailVerified';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and_arguments_columns
-        .isAnonymous:
+          .isAnonymous:
       return r'isAnonymous';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and_arguments_columns
-        .phoneNumberVerified:
+          .phoneNumberVerified:
       return r'phoneNumberVerified';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -191827,19 +191827,19 @@ String toJson$Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_
         e) {
   switch (e) {
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_arguments_columns
-        .disabled:
+          .disabled:
       return r'disabled';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_arguments_columns
-        .emailVerified:
+          .emailVerified:
       return r'emailVerified';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_arguments_columns
-        .isAnonymous:
+          .isAnonymous:
       return r'isAnonymous';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_arguments_columns
-        .phoneNumberVerified:
+          .phoneNumberVerified:
       return r'phoneNumberVerified';
     case Enum$authUsers_select_column_authUsers_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -191882,28 +191882,28 @@ String toJson$Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggrega
         e) {
   switch (e) {
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .areaAdminOnUsers:
+          .areaAdminOnUsers:
       return r'areaAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .areaAllowEdit:
+          .areaAllowEdit:
       return r'areaAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .groupAdminOnUsers:
+          .groupAdminOnUsers:
       return r'groupAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .groupAllowEdit:
+          .groupAllowEdit:
       return r'groupAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceAdminOnUsers:
+          .serviceAdminOnUsers:
       return r'serviceAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceAllowEdit:
+          .serviceAllowEdit:
       return r'serviceAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -191955,28 +191955,28 @@ String toJson$Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggrega
         e) {
   switch (e) {
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .areaAdminOnUsers:
+          .areaAdminOnUsers:
       return r'areaAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .areaAllowEdit:
+          .areaAllowEdit:
       return r'areaAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .groupAdminOnUsers:
+          .groupAdminOnUsers:
       return r'groupAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .groupAllowEdit:
+          .groupAllowEdit:
       return r'groupAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceAdminOnUsers:
+          .serviceAdminOnUsers:
       return r'serviceAdminOnUsers';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceAllowEdit:
+          .serviceAllowEdit:
       return r'serviceAllowEdit';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$auth_users_admin_on_select_column_auth_users_admin_on_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192158,10 +192158,10 @@ String toJson$Enum$classes_select_column_classes_aggregate_bool_exp_bool_and_arg
         e) {
   switch (e) {
     case Enum$classes_select_column_classes_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$classes_select_column_classes_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192189,10 +192189,10 @@ String toJson$Enum$classes_select_column_classes_aggregate_bool_exp_bool_or_argu
         e) {
   switch (e) {
     case Enum$classes_select_column_classes_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$classes_select_column_classes_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192376,10 +192376,10 @@ String toJson$Enum$files_select_column_files_aggregate_bool_exp_bool_and_argumen
         e) {
   switch (e) {
     case Enum$files_select_column_files_aggregate_bool_exp_bool_and_arguments_columns
-        .isUploaded:
+          .isUploaded:
       return r'isUploaded';
     case Enum$files_select_column_files_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192407,10 +192407,10 @@ String toJson$Enum$files_select_column_files_aggregate_bool_exp_bool_or_argument
         e) {
   switch (e) {
     case Enum$files_select_column_files_aggregate_bool_exp_bool_or_arguments_columns
-        .isUploaded:
+          .isUploaded:
       return r'isUploaded';
     case Enum$files_select_column_files_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192438,10 +192438,10 @@ String toJson$Enum$history_attendance_days_constraints_select_column_history_att
         e) {
   switch (e) {
     case Enum$history_attendance_days_constraints_select_column_history_attendance_days_constraints_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$history_attendance_days_constraints_select_column_history_attendance_days_constraints_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192469,10 +192469,10 @@ String toJson$Enum$history_attendance_days_constraints_select_column_history_att
         e) {
   switch (e) {
     case Enum$history_attendance_days_constraints_select_column_history_attendance_days_constraints_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$history_attendance_days_constraints_select_column_history_attendance_days_constraints_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192501,13 +192501,13 @@ String toJson$Enum$history_attendance_history_select_column_history_attendance_h
         e) {
   switch (e) {
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_and_arguments_columns
-        .asAdmin:
+          .asAdmin:
       return r'asAdmin';
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_and_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192539,13 +192539,13 @@ String toJson$Enum$history_attendance_history_select_column_history_attendance_h
         e) {
   switch (e) {
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_or_arguments_columns
-        .asAdmin:
+          .asAdmin:
       return r'asAdmin';
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_or_arguments_columns
-        .serviceGender:
+          .serviceGender:
       return r'serviceGender';
     case Enum$history_attendance_history_select_column_history_attendance_history_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192579,19 +192579,19 @@ String toJson$Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arg
         e) {
   switch (e) {
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arguments_columns
-        .gender:
+          .gender:
       return r'gender';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arguments_columns
-        .isServant:
+          .isServant:
       return r'isServant';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arguments_columns
-        .isShammas:
+          .isShammas:
       return r'isShammas';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arguments_columns
-        .isStudent:
+          .isStudent:
       return r'isStudent';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_and_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192631,19 +192631,19 @@ String toJson$Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_argu
         e) {
   switch (e) {
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
-        .gender:
+          .gender:
       return r'gender';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
-        .isServant:
+          .isServant:
       return r'isServant';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
-        .isShammas:
+          .isShammas:
       return r'isShammas';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
-        .isStudent:
+          .isStudent:
       return r'isStudent';
     case Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
-        .$unknown:
+          .$unknown:
       return r'$unknown';
   }
 }
@@ -192670,4 +192670,4 @@ Enum$persons_select_column_persons_aggregate_bool_exp_bool_or_arguments_columns
   }
 }
 
-const possibleTypesMap = {};
+const possibleTypesMap = <String, Set<String>>{};

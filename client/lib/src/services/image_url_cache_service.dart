@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/main.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:universal_file/universal_file.dart';

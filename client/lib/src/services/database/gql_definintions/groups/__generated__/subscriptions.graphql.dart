@@ -179,7 +179,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllGroups<TRes>
 
   final TRes Function(Variables$Subscription$watchAllGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? limit = _undefined,
@@ -296,7 +296,7 @@ class _CopyWithImpl$Subscription$watchAllGroups<TRes>
 
   final TRes Function(Subscription$watchAllGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? groups = _undefined}) => _then(Subscription$watchAllGroups(
       groups: groups == _undefined || groups == null
@@ -491,7 +491,7 @@ class _CopyWithImpl$Variables$Subscription$watchGroup<TRes>
 
   final TRes Function(Variables$Subscription$watchGroup) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchGroup._({
@@ -586,7 +586,7 @@ class _CopyWithImpl$Subscription$watchGroup<TRes>
 
   final TRes Function(Subscription$watchGroup) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? groupsByPk = _undefined}) => _then(Subscription$watchGroup(
       groupsByPk: groupsByPk == _undefined
@@ -741,7 +741,7 @@ class Subscription$watchGroup$groupsByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     this.photoUpdatedAt,
     required this.service,
     this.lastEdit,
@@ -959,7 +959,7 @@ class _CopyWithImpl$Subscription$watchGroup$groupsByPk<TRes>
 
   final TRes Function(Subscription$watchGroup$groupsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -1042,7 +1042,7 @@ class _CopyWithStubImpl$Subscription$watchGroup$groupsByPk<TRes>
 class Subscription$watchGroup$groupsByPk$adminUsers {
   Subscription$watchGroup$groupsByPk$adminUsers({
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersAdminOn',
   });
 
   factory Subscription$watchGroup$groupsByPk$adminUsers.fromJson(
@@ -1139,7 +1139,7 @@ class _CopyWithImpl$Subscription$watchGroup$groupsByPk$adminUsers<TRes>
 
   final TRes Function(Subscription$watchGroup$groupsByPk$adminUsers) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? user = _undefined,

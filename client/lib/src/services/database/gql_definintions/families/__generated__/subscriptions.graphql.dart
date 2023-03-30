@@ -179,7 +179,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllFamilies<TRes>
 
   final TRes Function(Variables$Subscription$watchAllFamilies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? limit = _undefined,
@@ -297,7 +297,7 @@ class _CopyWithImpl$Subscription$watchAllFamilies<TRes>
 
   final TRes Function(Subscription$watchAllFamilies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? families = _undefined}) => _then(
       Subscription$watchAllFamilies(
@@ -494,7 +494,7 @@ class _CopyWithImpl$Variables$Subscription$watchFamily<TRes>
 
   final TRes Function(Variables$Subscription$watchFamily) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchFamily._({
@@ -590,7 +590,7 @@ class _CopyWithImpl$Subscription$watchFamily<TRes>
 
   final TRes Function(Subscription$watchFamily) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? familiesByPk = _undefined}) =>
       _then(Subscription$watchFamily(
@@ -740,7 +740,7 @@ class Subscription$watchFamily$familiesByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.areas,
     this.streets,
@@ -1004,7 +1004,7 @@ class _CopyWithImpl$Subscription$watchFamily$familiesByPk<TRes>
 
   final TRes Function(Subscription$watchFamily$familiesByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

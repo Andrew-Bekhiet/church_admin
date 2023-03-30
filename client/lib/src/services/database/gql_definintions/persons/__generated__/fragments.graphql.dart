@@ -14,7 +14,7 @@ class Fragment$FullPersonData
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.address,
     this.birthdate,
@@ -854,7 +854,7 @@ class _CopyWithImpl$Fragment$FullPersonData<TRes>
 
   final TRes Function(Fragment$FullPersonData) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2140,7 +2140,7 @@ class Fragment$FullPersonData$church {
   Fragment$FullPersonData$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Fragment$FullPersonData$church.fromJson(Map<String, dynamic> json) {
@@ -2247,7 +2247,7 @@ class _CopyWithImpl$Fragment$FullPersonData$church<TRes>
 
   final TRes Function(Fragment$FullPersonData$church) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2283,7 +2283,7 @@ class Fragment$FullPersonData$college {
   Fragment$FullPersonData$college({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Colleges',
   });
 
   factory Fragment$FullPersonData$college.fromJson(Map<String, dynamic> json) {
@@ -2390,7 +2390,7 @@ class _CopyWithImpl$Fragment$FullPersonData$college<TRes>
 
   final TRes Function(Fragment$FullPersonData$college) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2427,7 +2427,7 @@ class Fragment$FullPersonData$father {
     required this.id,
     required this.name,
     this.church,
-    required this.$__typename,
+    this.$__typename = 'Fathers',
   });
 
   factory Fragment$FullPersonData$father.fromJson(Map<String, dynamic> json) {
@@ -2552,7 +2552,7 @@ class _CopyWithImpl$Fragment$FullPersonData$father<TRes>
 
   final TRes Function(Fragment$FullPersonData$father) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2602,7 +2602,7 @@ class Fragment$FullPersonData$father$church {
   Fragment$FullPersonData$father$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Fragment$FullPersonData$father$church.fromJson(
@@ -2711,7 +2711,7 @@ class _CopyWithImpl$Fragment$FullPersonData$father$church<TRes>
 
   final TRes Function(Fragment$FullPersonData$father$church) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2746,7 +2746,7 @@ class _CopyWithStubImpl$Fragment$FullPersonData$father$church<TRes>
 class Fragment$FullPersonData$groups {
   Fragment$FullPersonData$groups({
     required this.group,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroups',
   });
 
   factory Fragment$FullPersonData$groups.fromJson(Map<String, dynamic> json) {
@@ -2840,7 +2840,7 @@ class _CopyWithImpl$Fragment$FullPersonData$groups<TRes>
 
   final TRes Function(Fragment$FullPersonData$groups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -2878,7 +2878,7 @@ class Fragment$FullPersonData$job {
   Fragment$FullPersonData$job({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Jobs',
   });
 
   factory Fragment$FullPersonData$job.fromJson(Map<String, dynamic> json) {
@@ -2985,7 +2985,7 @@ class _CopyWithImpl$Fragment$FullPersonData$job<TRes>
 
   final TRes Function(Fragment$FullPersonData$job) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3021,7 +3021,7 @@ class Fragment$FullPersonData$personType {
   Fragment$FullPersonData$personType({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonTypes',
   });
 
   factory Fragment$FullPersonData$personType.fromJson(
@@ -3130,7 +3130,7 @@ class _CopyWithImpl$Fragment$FullPersonData$personType<TRes>
 
   final TRes Function(Fragment$FullPersonData$personType) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3166,7 +3166,7 @@ class Fragment$FullPersonData$qualification {
   Fragment$FullPersonData$qualification({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Qualifications',
   });
 
   factory Fragment$FullPersonData$qualification.fromJson(
@@ -3275,7 +3275,7 @@ class _CopyWithImpl$Fragment$FullPersonData$qualification<TRes>
 
   final TRes Function(Fragment$FullPersonData$qualification) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3311,7 +3311,7 @@ class Fragment$FullPersonData$school {
   Fragment$FullPersonData$school({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Schools',
   });
 
   factory Fragment$FullPersonData$school.fromJson(Map<String, dynamic> json) {
@@ -3418,7 +3418,7 @@ class _CopyWithImpl$Fragment$FullPersonData$school<TRes>
 
   final TRes Function(Fragment$FullPersonData$school) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3453,7 +3453,7 @@ class _CopyWithStubImpl$Fragment$FullPersonData$school<TRes>
 class Fragment$FullPersonData$services {
   Fragment$FullPersonData$services({
     required this.service,
-    required this.$__typename,
+    this.$__typename = 'PersonsServices',
   });
 
   factory Fragment$FullPersonData$services.fromJson(Map<String, dynamic> json) {
@@ -3547,7 +3547,7 @@ class _CopyWithImpl$Fragment$FullPersonData$services<TRes>
 
   final TRes Function(Fragment$FullPersonData$services) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? service = _undefined,
@@ -3587,7 +3587,7 @@ class Fragment$FullPersonData$shammasLevel {
     required this.id,
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'ShammasLevels',
   });
 
   factory Fragment$FullPersonData$shammasLevel.fromJson(
@@ -3710,7 +3710,7 @@ class _CopyWithImpl$Fragment$FullPersonData$shammasLevel<TRes>
 
   final TRes Function(Fragment$FullPersonData$shammasLevel) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3752,7 +3752,7 @@ class Fragment$FullPersonData$state {
     required this.id,
     required this.color,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonStates',
   });
 
   factory Fragment$FullPersonData$state.fromJson(Map<String, dynamic> json) {
@@ -3873,7 +3873,7 @@ class _CopyWithImpl$Fragment$FullPersonData$state<TRes>
 
   final TRes Function(Fragment$FullPersonData$state) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3914,7 +3914,7 @@ class Fragment$FullPersonData$studyYear {
   Fragment$FullPersonData$studyYear({
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Fragment$FullPersonData$studyYear.fromJson(
@@ -4022,7 +4022,7 @@ class _CopyWithImpl$Fragment$FullPersonData$studyYear<TRes>
 
   final TRes Function(Fragment$FullPersonData$studyYear) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -4059,7 +4059,7 @@ class _CopyWithStubImpl$Fragment$FullPersonData$studyYear<TRes>
 class Fragment$FullPersonData$hobbies {
   Fragment$FullPersonData$hobbies({
     required this.hobby,
-    required this.$__typename,
+    this.$__typename = 'PersonsHobbies',
   });
 
   factory Fragment$FullPersonData$hobbies.fromJson(Map<String, dynamic> json) {
@@ -4154,7 +4154,7 @@ class _CopyWithImpl$Fragment$FullPersonData$hobbies<TRes>
 
   final TRes Function(Fragment$FullPersonData$hobbies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobby = _undefined,
@@ -4195,7 +4195,7 @@ class Fragment$FullPersonData$hobbies$hobby {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Hobbies',
   });
 
   factory Fragment$FullPersonData$hobbies$hobby.fromJson(
@@ -4318,7 +4318,7 @@ class _CopyWithImpl$Fragment$FullPersonData$hobbies$hobby<TRes>
 
   final TRes Function(Fragment$FullPersonData$hobbies$hobby) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4356,7 +4356,7 @@ class _CopyWithStubImpl$Fragment$FullPersonData$hobbies$hobby<TRes>
 class Fragment$FullPersonData$tags {
   Fragment$FullPersonData$tags({
     required this.tag,
-    required this.$__typename,
+    this.$__typename = 'PersonsTags',
   });
 
   factory Fragment$FullPersonData$tags.fromJson(Map<String, dynamic> json) {
@@ -4451,7 +4451,7 @@ class _CopyWithImpl$Fragment$FullPersonData$tags<TRes>
 
   final TRes Function(Fragment$FullPersonData$tags) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? tag = _undefined,
@@ -4492,7 +4492,7 @@ class Fragment$FullPersonData$tags$tag {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Tags',
   });
 
   factory Fragment$FullPersonData$tags$tag.fromJson(Map<String, dynamic> json) {
@@ -4613,7 +4613,7 @@ class _CopyWithImpl$Fragment$FullPersonData$tags$tag<TRes>
 
   final TRes Function(Fragment$FullPersonData$tags$tag) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4653,7 +4653,7 @@ class Fragment$FullPersonData$user {
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
   });
 
   factory Fragment$FullPersonData$user.fromJson(Map<String, dynamic> json) {
@@ -4774,7 +4774,7 @@ class _CopyWithImpl$Fragment$FullPersonData$user<TRes>
 
   final TRes Function(Fragment$FullPersonData$user) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -4905,7 +4905,7 @@ class _CopyWithImpl$Variables$Fragment$FullPersonDataWithAttendance<TRes>
 
   final TRes Function(Variables$Fragment$FullPersonDataWithAttendance) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personId = _undefined}) =>
       _then(Variables$Fragment$FullPersonDataWithAttendance._({
@@ -4932,7 +4932,7 @@ class Fragment$FullPersonDataWithAttendance
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.address,
     this.birthdate,
@@ -5781,7 +5781,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -6610,7 +6610,7 @@ class Fragment$FullPersonDataWithAttendance$classes
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Classes',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -6773,7 +6773,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$classes<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$classes) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -6839,7 +6839,7 @@ class Fragment$FullPersonDataWithAttendance$church
   Fragment$FullPersonDataWithAttendance$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Fragment$FullPersonDataWithAttendance$church.fromJson(
@@ -6948,7 +6948,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$church<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$church) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -6985,7 +6985,7 @@ class Fragment$FullPersonDataWithAttendance$college
   Fragment$FullPersonDataWithAttendance$college({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Colleges',
   });
 
   factory Fragment$FullPersonDataWithAttendance$college.fromJson(
@@ -7095,7 +7095,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$college<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$college) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7133,7 +7133,7 @@ class Fragment$FullPersonDataWithAttendance$father
     required this.id,
     required this.name,
     this.church,
-    required this.$__typename,
+    this.$__typename = 'Fathers',
   });
 
   factory Fragment$FullPersonDataWithAttendance$father.fromJson(
@@ -7260,7 +7260,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$father<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$father) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7315,7 +7315,7 @@ class Fragment$FullPersonDataWithAttendance$father$church
   Fragment$FullPersonDataWithAttendance$father$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Fragment$FullPersonDataWithAttendance$father$church.fromJson(
@@ -7429,7 +7429,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$father$church<TRes>
   final TRes Function(Fragment$FullPersonDataWithAttendance$father$church)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7468,7 +7468,7 @@ class Fragment$FullPersonDataWithAttendance$groups
     implements Fragment$FullPersonData$groups {
   Fragment$FullPersonDataWithAttendance$groups({
     required this.group,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroups',
   });
 
   factory Fragment$FullPersonDataWithAttendance$groups.fromJson(
@@ -7565,7 +7565,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$groups<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$groups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -7607,7 +7607,7 @@ class Fragment$FullPersonDataWithAttendance$groups$group
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -7773,7 +7773,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$groups$group<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$groups$group) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7841,7 +7841,7 @@ class Fragment$FullPersonDataWithAttendance$job
   Fragment$FullPersonDataWithAttendance$job({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Jobs',
   });
 
   factory Fragment$FullPersonDataWithAttendance$job.fromJson(
@@ -7950,7 +7950,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$job<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$job) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7987,7 +7987,7 @@ class Fragment$FullPersonDataWithAttendance$personType
   Fragment$FullPersonDataWithAttendance$personType({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonTypes',
   });
 
   factory Fragment$FullPersonDataWithAttendance$personType.fromJson(
@@ -8097,7 +8097,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$personType<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$personType) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -8134,7 +8134,7 @@ class Fragment$FullPersonDataWithAttendance$qualification
   Fragment$FullPersonDataWithAttendance$qualification({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Qualifications',
   });
 
   factory Fragment$FullPersonDataWithAttendance$qualification.fromJson(
@@ -8248,7 +8248,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$qualification<TRes>
   final TRes Function(Fragment$FullPersonDataWithAttendance$qualification)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -8288,7 +8288,7 @@ class Fragment$FullPersonDataWithAttendance$school
   Fragment$FullPersonDataWithAttendance$school({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Schools',
   });
 
   factory Fragment$FullPersonDataWithAttendance$school.fromJson(
@@ -8397,7 +8397,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$school<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$school) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -8433,7 +8433,7 @@ class Fragment$FullPersonDataWithAttendance$services
     implements Fragment$FullPersonData$services {
   Fragment$FullPersonDataWithAttendance$services({
     required this.service,
-    required this.$__typename,
+    this.$__typename = 'PersonsServices',
   });
 
   factory Fragment$FullPersonDataWithAttendance$services.fromJson(
@@ -8532,7 +8532,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$services<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$services) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? service = _undefined,
@@ -8578,7 +8578,7 @@ class Fragment$FullPersonDataWithAttendance$services$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -8745,7 +8745,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$services$service<TRes>
   final TRes Function(Fragment$FullPersonDataWithAttendance$services$service)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -8815,7 +8815,7 @@ class Fragment$FullPersonDataWithAttendance$shammasLevel
     required this.id,
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'ShammasLevels',
   });
 
   factory Fragment$FullPersonDataWithAttendance$shammasLevel.fromJson(
@@ -8942,7 +8942,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$shammasLevel<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$shammasLevel) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -8987,7 +8987,7 @@ class Fragment$FullPersonDataWithAttendance$state
     required this.id,
     required this.color,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonStates',
   });
 
   factory Fragment$FullPersonDataWithAttendance$state.fromJson(
@@ -9110,7 +9110,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$state<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$state) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -9152,7 +9152,7 @@ class Fragment$FullPersonDataWithAttendance$studyYear
   Fragment$FullPersonDataWithAttendance$studyYear({
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Fragment$FullPersonDataWithAttendance$studyYear.fromJson(
@@ -9262,7 +9262,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$studyYear<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$studyYear) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -9300,7 +9300,7 @@ class Fragment$FullPersonDataWithAttendance$hobbies
     implements Fragment$FullPersonData$hobbies {
   Fragment$FullPersonDataWithAttendance$hobbies({
     required this.hobby,
-    required this.$__typename,
+    this.$__typename = 'PersonsHobbies',
   });
 
   factory Fragment$FullPersonDataWithAttendance$hobbies.fromJson(
@@ -9398,7 +9398,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$hobbies<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$hobbies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobby = _undefined,
@@ -9442,7 +9442,7 @@ class Fragment$FullPersonDataWithAttendance$hobbies$hobby
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Hobbies',
   });
 
   factory Fragment$FullPersonDataWithAttendance$hobbies$hobby.fromJson(
@@ -9570,7 +9570,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$hobbies$hobby<TRes>
   final TRes Function(Fragment$FullPersonDataWithAttendance$hobbies$hobby)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -9612,7 +9612,7 @@ class Fragment$FullPersonDataWithAttendance$tags
     implements Fragment$FullPersonData$tags {
   Fragment$FullPersonDataWithAttendance$tags({
     required this.tag,
-    required this.$__typename,
+    this.$__typename = 'PersonsTags',
   });
 
   factory Fragment$FullPersonDataWithAttendance$tags.fromJson(
@@ -9709,7 +9709,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$tags<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$tags) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? tag = _undefined,
@@ -9751,7 +9751,7 @@ class Fragment$FullPersonDataWithAttendance$tags$tag
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Tags',
   });
 
   factory Fragment$FullPersonDataWithAttendance$tags$tag.fromJson(
@@ -9875,7 +9875,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$tags$tag<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$tags$tag) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -9916,7 +9916,7 @@ class Fragment$FullPersonDataWithAttendance$user
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
   });
 
   factory Fragment$FullPersonDataWithAttendance$user.fromJson(
@@ -10039,7 +10039,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$user<TRes>
 
   final TRes Function(Fragment$FullPersonDataWithAttendance$user) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -10081,7 +10081,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$user<TRes>
 class Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate {
   Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate.fromJson(
@@ -10196,7 +10196,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$classes$attendanceHist
           Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -10249,7 +10249,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$classes$attendance
 class Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate {
   Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate.fromJson(
@@ -10364,7 +10364,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$classes$attendanceHist
           Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -10417,7 +10417,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$classes$attendance
 class Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate$max {
   Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -10525,7 +10525,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$classes$attendanceHist
           Fragment$FullPersonDataWithAttendance$classes$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -10560,7 +10560,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$classes$attendance
 class Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate {
   Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate.fromJson(
@@ -10675,7 +10675,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$groups$group$attendanc
           Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -10728,7 +10728,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$groups$group$atten
 class Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate {
   Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate.fromJson(
@@ -10843,7 +10843,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$groups$group$attendanc
           Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -10896,7 +10896,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$groups$group$atten
 class Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate$max {
   Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -11004,7 +11004,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$groups$group$attendanc
           Fragment$FullPersonDataWithAttendance$groups$group$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -11039,7 +11039,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$groups$group$atten
 class Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate {
   Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate.fromJson(
@@ -11154,7 +11154,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$services$service$atten
           Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -11207,7 +11207,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$services$service$a
 class Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate {
   Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate.fromJson(
@@ -11322,7 +11322,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$services$service$atten
           Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -11375,7 +11375,7 @@ class _CopyWithStubImpl$Fragment$FullPersonDataWithAttendance$services$service$a
 class Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate$max {
   Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -11483,7 +11483,7 @@ class _CopyWithImpl$Fragment$FullPersonDataWithAttendance$services$service$atten
           Fragment$FullPersonDataWithAttendance$services$service$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,

@@ -178,7 +178,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllStreets<TRes>
 
   final TRes Function(Variables$Subscription$watchAllStreets) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -299,7 +299,7 @@ class _CopyWithImpl$Subscription$watchAllStreets<TRes>
 
   final TRes Function(Subscription$watchAllStreets) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? streets = _undefined}) =>
       _then(Subscription$watchAllStreets(
@@ -433,7 +433,7 @@ class Subscription$watchAllStreets$streets
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Streets',
     this.photoUpdatedAt,
     this.line,
   });
@@ -588,7 +588,7 @@ class _CopyWithImpl$Subscription$watchAllStreets$streets<TRes>
 
   final TRes Function(Subscription$watchAllStreets$streets) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -712,7 +712,7 @@ class _CopyWithImpl$Variables$Subscription$watchStreet<TRes>
 
   final TRes Function(Variables$Subscription$watchStreet) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Subscription$watchStreet._({
@@ -808,7 +808,7 @@ class _CopyWithImpl$Subscription$watchStreet<TRes>
 
   final TRes Function(Subscription$watchStreet) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? streetsByPk = _undefined}) =>
       _then(Subscription$watchStreet(
@@ -923,7 +923,7 @@ class Subscription$watchStreet$streetsByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Streets',
     this.photoUpdatedAt,
     this.areas,
     this.line,
@@ -1125,7 +1125,7 @@ class _CopyWithImpl$Subscription$watchStreet$streetsByPk<TRes>
 
   final TRes Function(Subscription$watchStreet$streetsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,

@@ -6,7 +6,7 @@ class Fragment$EditHistory {
   Fragment$EditHistory({
     required this.time,
     this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryEditHistory',
   });
 
   factory Fragment$EditHistory.fromJson(Map<String, dynamic> json) {
@@ -114,7 +114,7 @@ class _CopyWithImpl$Fragment$EditHistory<TRes>
 
   final TRes Function(Fragment$EditHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -207,7 +207,7 @@ class Fragment$AttendanceHistory {
   Fragment$AttendanceHistory({
     required this.time,
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Fragment$AttendanceHistory.fromJson(Map<String, dynamic> json) {
@@ -315,7 +315,7 @@ class _CopyWithImpl$Fragment$AttendanceHistory<TRes>
 
   final TRes Function(Fragment$AttendanceHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -408,7 +408,7 @@ class Fragment$CallHistory {
   Fragment$CallHistory({
     required this.time,
     this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistory',
   });
 
   factory Fragment$CallHistory.fromJson(Map<String, dynamic> json) {
@@ -516,7 +516,7 @@ class _CopyWithImpl$Fragment$CallHistory<TRes>
 
   final TRes Function(Fragment$CallHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -609,7 +609,7 @@ class Fragment$VisitHistory {
   Fragment$VisitHistory({
     required this.time,
     this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistory',
   });
 
   factory Fragment$VisitHistory.fromJson(Map<String, dynamic> json) {
@@ -717,7 +717,7 @@ class _CopyWithImpl$Fragment$VisitHistory<TRes>
 
   final TRes Function(Fragment$VisitHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -810,7 +810,7 @@ class Fragment$KodasHistory {
   Fragment$KodasHistory({
     this.time,
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Fragment$KodasHistory.fromJson(Map<String, dynamic> json) {
@@ -916,7 +916,7 @@ class _CopyWithImpl$Fragment$KodasHistory<TRes>
 
   final TRes Function(Fragment$KodasHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -1007,7 +1007,7 @@ class Fragment$ConfessionHistory {
   Fragment$ConfessionHistory({
     this.time,
     required this.user,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Fragment$ConfessionHistory.fromJson(Map<String, dynamic> json) {
@@ -1115,7 +1115,7 @@ class _CopyWithImpl$Fragment$ConfessionHistory<TRes>
 
   final TRes Function(Fragment$ConfessionHistory) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,

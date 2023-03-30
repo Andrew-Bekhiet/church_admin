@@ -103,7 +103,7 @@ class _CopyWithImpl$Variables$Mutation$insertPersonLastConfession<TRes>
 
   final TRes Function(Variables$Mutation$insertPersonLastConfession) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -134,7 +134,7 @@ class _CopyWithStubImpl$Variables$Mutation$insertPersonLastConfession<TRes>
 class Mutation$insertPersonLastConfession {
   Mutation$insertPersonLastConfession({
     this.insertHistoryConfessionHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$insertPersonLastConfession.fromJson(
@@ -245,7 +245,7 @@ class _CopyWithImpl$Mutation$insertPersonLastConfession<TRes>
 
   final TRes Function(Mutation$insertPersonLastConfession) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertHistoryConfessionHistoryOne = _undefined,
@@ -420,7 +420,7 @@ const documentNodeMutationinsertPersonLastConfession =
 class Mutation$insertPersonLastConfession$insertHistoryConfessionHistoryOne {
   Mutation$insertPersonLastConfession$insertHistoryConfessionHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Mutation$insertPersonLastConfession$insertHistoryConfessionHistoryOne.fromJson(
@@ -529,7 +529,7 @@ class _CopyWithImpl$Mutation$insertPersonLastConfession$insertHistoryConfessionH
           Mutation$insertPersonLastConfession$insertHistoryConfessionHistoryOne)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -669,7 +669,7 @@ class _CopyWithImpl$Variables$Mutation$insertPersonLastKodas<TRes>
 
   final TRes Function(Variables$Mutation$insertPersonLastKodas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -700,7 +700,7 @@ class _CopyWithStubImpl$Variables$Mutation$insertPersonLastKodas<TRes>
 class Mutation$insertPersonLastKodas {
   Mutation$insertPersonLastKodas({
     this.insertHistoryKodasHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$insertPersonLastKodas.fromJson(Map<String, dynamic> json) {
@@ -803,7 +803,7 @@ class _CopyWithImpl$Mutation$insertPersonLastKodas<TRes>
 
   final TRes Function(Mutation$insertPersonLastKodas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertHistoryKodasHistoryOne = _undefined,
@@ -973,7 +973,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
 class Mutation$insertPersonLastKodas$insertHistoryKodasHistoryOne {
   Mutation$insertPersonLastKodas$insertHistoryKodasHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Mutation$insertPersonLastKodas$insertHistoryKodasHistoryOne.fromJson(
@@ -1078,7 +1078,7 @@ class _CopyWithImpl$Mutation$insertPersonLastKodas$insertHistoryKodasHistoryOne<
   final TRes Function(
       Mutation$insertPersonLastKodas$insertHistoryKodasHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -1217,7 +1217,7 @@ class _CopyWithImpl$Variables$Mutation$insertPersonLastCall<TRes>
 
   final TRes Function(Variables$Mutation$insertPersonLastCall) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1248,7 +1248,7 @@ class _CopyWithStubImpl$Variables$Mutation$insertPersonLastCall<TRes>
 class Mutation$insertPersonLastCall {
   Mutation$insertPersonLastCall({
     this.insertHistoryCallHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$insertPersonLastCall.fromJson(Map<String, dynamic> json) {
@@ -1350,7 +1350,7 @@ class _CopyWithImpl$Mutation$insertPersonLastCall<TRes>
 
   final TRes Function(Mutation$insertPersonLastCall) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertHistoryCallHistoryOne = _undefined,
@@ -1486,7 +1486,7 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(definitions: [
 class Mutation$insertPersonLastCall$insertHistoryCallHistoryOne {
   Mutation$insertPersonLastCall$insertHistoryCallHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistory',
   });
 
   factory Mutation$insertPersonLastCall$insertHistoryCallHistoryOne.fromJson(
@@ -1590,7 +1590,7 @@ class _CopyWithImpl$Mutation$insertPersonLastCall$insertHistoryCallHistoryOne<
   final TRes Function(Mutation$insertPersonLastCall$insertHistoryCallHistoryOne)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
@@ -1729,7 +1729,7 @@ class _CopyWithImpl$Variables$Mutation$insertPersonLastVisit<TRes>
 
   final TRes Function(Variables$Mutation$insertPersonLastVisit) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personId = _undefined,
@@ -1760,7 +1760,7 @@ class _CopyWithStubImpl$Variables$Mutation$insertPersonLastVisit<TRes>
 class Mutation$insertPersonLastVisit {
   Mutation$insertPersonLastVisit({
     this.insertHistoryVisitHistoryOne,
-    required this.$__typename,
+    this.$__typename = 'mutation_root',
   });
 
   factory Mutation$insertPersonLastVisit.fromJson(Map<String, dynamic> json) {
@@ -1863,7 +1863,7 @@ class _CopyWithImpl$Mutation$insertPersonLastVisit<TRes>
 
   final TRes Function(Mutation$insertPersonLastVisit) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? insertHistoryVisitHistoryOne = _undefined,
@@ -1999,7 +1999,7 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
 class Mutation$insertPersonLastVisit$insertHistoryVisitHistoryOne {
   Mutation$insertPersonLastVisit$insertHistoryVisitHistoryOne({
     required this.person,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistory',
   });
 
   factory Mutation$insertPersonLastVisit$insertHistoryVisitHistoryOne.fromJson(
@@ -2104,7 +2104,7 @@ class _CopyWithImpl$Mutation$insertPersonLastVisit$insertHistoryVisitHistoryOne<
   final TRes Function(
       Mutation$insertPersonLastVisit$insertHistoryVisitHistoryOne) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,

@@ -185,7 +185,7 @@ class _CopyWithImpl$Variables$Subscription$watchAllPersons<TRes>
 
   final TRes Function(Variables$Subscription$watchAllPersons) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -303,7 +303,7 @@ class _CopyWithImpl$Subscription$watchAllPersons<TRes>
 
   final TRes Function(Subscription$watchAllPersons) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? persons = _undefined}) =>
       _then(Subscription$watchAllPersons(
@@ -575,7 +575,7 @@ class _CopyWithImpl$Variables$Subscription$watchPerson<TRes>
 
   final TRes Function(Variables$Subscription$watchPerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -686,7 +686,7 @@ class _CopyWithImpl$Subscription$watchPerson<TRes>
 
   final TRes Function(Subscription$watchPerson) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personsByPk = _undefined}) =>
       _then(Subscription$watchPerson(
@@ -1834,7 +1834,7 @@ class Subscription$watchPerson$personsByPk
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.address,
     this.birthdate,
@@ -2682,7 +2682,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3124,7 +3124,7 @@ class Subscription$watchPerson$personsByPk$classes
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Classes',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -3286,7 +3286,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$classes) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3350,7 +3350,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes<TRes>
 class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate {
   Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate.fromJson(
@@ -3465,7 +3465,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
           Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -3518,7 +3518,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceH
 class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate {
   Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate.fromJson(
@@ -3633,7 +3633,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
           Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -3686,7 +3686,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceH
 class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
   Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -3794,7 +3794,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
           Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -3830,7 +3830,7 @@ class Subscription$watchPerson$personsByPk$church {
   Subscription$watchPerson$personsByPk$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Subscription$watchPerson$personsByPk$church.fromJson(
@@ -3939,7 +3939,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$church<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$church) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3975,7 +3975,7 @@ class Subscription$watchPerson$personsByPk$college {
   Subscription$watchPerson$personsByPk$college({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Colleges',
   });
 
   factory Subscription$watchPerson$personsByPk$college.fromJson(
@@ -4084,7 +4084,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$college<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$college) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4121,7 +4121,7 @@ class Subscription$watchPerson$personsByPk$father {
     required this.id,
     required this.name,
     this.church,
-    required this.$__typename,
+    this.$__typename = 'Fathers',
   });
 
   factory Subscription$watchPerson$personsByPk$father.fromJson(
@@ -4248,7 +4248,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$father<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$father) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4301,7 +4301,7 @@ class Subscription$watchPerson$personsByPk$father$church {
   Subscription$watchPerson$personsByPk$father$church({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Churches',
   });
 
   factory Subscription$watchPerson$personsByPk$father$church.fromJson(
@@ -4414,7 +4414,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$father$church) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4451,7 +4451,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
 class Subscription$watchPerson$personsByPk$groups {
   Subscription$watchPerson$personsByPk$groups({
     required this.group,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroups',
   });
 
   factory Subscription$watchPerson$personsByPk$groups.fromJson(
@@ -4548,7 +4548,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$groups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -4590,7 +4590,7 @@ class Subscription$watchPerson$personsByPk$groups$group
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -4756,7 +4756,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$groups$group) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -4822,7 +4822,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
 class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate {
   Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate.fromJson(
@@ -4937,7 +4937,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
           Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -4990,7 +4990,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attend
 class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate {
   Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.fromJson(
@@ -5105,7 +5105,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
           Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -5158,7 +5158,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attend
 class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
   Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -5266,7 +5266,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
           Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -5302,7 +5302,7 @@ class Subscription$watchPerson$personsByPk$job {
   Subscription$watchPerson$personsByPk$job({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Jobs',
   });
 
   factory Subscription$watchPerson$personsByPk$job.fromJson(
@@ -5411,7 +5411,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$job<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$job) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5447,7 +5447,7 @@ class Subscription$watchPerson$personsByPk$personType {
   Subscription$watchPerson$personsByPk$personType({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonTypes',
   });
 
   factory Subscription$watchPerson$personsByPk$personType.fromJson(
@@ -5557,7 +5557,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$personType<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$personType) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5593,7 +5593,7 @@ class Subscription$watchPerson$personsByPk$qualification {
   Subscription$watchPerson$personsByPk$qualification({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Qualifications',
   });
 
   factory Subscription$watchPerson$personsByPk$qualification.fromJson(
@@ -5706,7 +5706,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$qualification) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5744,7 +5744,7 @@ class Subscription$watchPerson$personsByPk$school {
   Subscription$watchPerson$personsByPk$school({
     required this.id,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Schools',
   });
 
   factory Subscription$watchPerson$personsByPk$school.fromJson(
@@ -5853,7 +5853,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$school<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$school) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5888,7 +5888,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$school<TRes>
 class Subscription$watchPerson$personsByPk$services {
   Subscription$watchPerson$personsByPk$services({
     required this.service,
-    required this.$__typename,
+    this.$__typename = 'PersonsServices',
   });
 
   factory Subscription$watchPerson$personsByPk$services.fromJson(
@@ -5987,7 +5987,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$services) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? service = _undefined,
@@ -6033,7 +6033,7 @@ class Subscription$watchPerson$personsByPk$services$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -6200,7 +6200,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service<TRes>
   final TRes Function(Subscription$watchPerson$personsByPk$services$service)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -6267,7 +6267,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service<
 class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate {
   Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate({
     this.aggregate,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate.fromJson(
@@ -6382,7 +6382,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
           Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -6435,7 +6435,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$at
 class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate {
   Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate({
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate.fromJson(
@@ -6550,7 +6550,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
           Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? max = _undefined,
@@ -6603,7 +6603,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$at
 class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
   Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -6711,7 +6711,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
           Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -6748,7 +6748,7 @@ class Subscription$watchPerson$personsByPk$shammasLevel {
     required this.id,
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'ShammasLevels',
   });
 
   factory Subscription$watchPerson$personsByPk$shammasLevel.fromJson(
@@ -6875,7 +6875,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$shammasLevel) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -6919,7 +6919,7 @@ class Subscription$watchPerson$personsByPk$state {
     required this.id,
     required this.color,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'PersonStates',
   });
 
   factory Subscription$watchPerson$personsByPk$state.fromJson(
@@ -7042,7 +7042,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$state<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$state) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7083,7 +7083,7 @@ class Subscription$watchPerson$personsByPk$studyYear {
   Subscription$watchPerson$personsByPk$studyYear({
     required this.name,
     required this.order,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Subscription$watchPerson$personsByPk$studyYear.fromJson(
@@ -7193,7 +7193,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$studyYear) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -7230,7 +7230,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
 class Subscription$watchPerson$personsByPk$hobbies {
   Subscription$watchPerson$personsByPk$hobbies({
     required this.hobby,
-    required this.$__typename,
+    this.$__typename = 'PersonsHobbies',
   });
 
   factory Subscription$watchPerson$personsByPk$hobbies.fromJson(
@@ -7327,7 +7327,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$hobbies) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? hobby = _undefined,
@@ -7368,7 +7368,7 @@ class Subscription$watchPerson$personsByPk$hobbies$hobby {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Hobbies',
   });
 
   factory Subscription$watchPerson$personsByPk$hobbies$hobby.fromJson(
@@ -7495,7 +7495,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$hobbies$hobby) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7535,7 +7535,7 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
 class Subscription$watchPerson$personsByPk$tags {
   Subscription$watchPerson$personsByPk$tags({
     required this.tag,
-    required this.$__typename,
+    this.$__typename = 'PersonsTags',
   });
 
   factory Subscription$watchPerson$personsByPk$tags.fromJson(
@@ -7632,7 +7632,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$tags) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? tag = _undefined,
@@ -7673,7 +7673,7 @@ class Subscription$watchPerson$personsByPk$tags$tag {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Tags',
   });
 
   factory Subscription$watchPerson$personsByPk$tags$tag.fromJson(
@@ -7797,7 +7797,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$tags$tag) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -7837,7 +7837,7 @@ class Subscription$watchPerson$personsByPk$user {
     required this.uid,
     required this.name,
     required this.email,
-    required this.$__typename,
+    this.$__typename = 'AuthUsersData',
   });
 
   factory Subscription$watchPerson$personsByPk$user.fromJson(
@@ -7960,7 +7960,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$user<TRes>
 
   final TRes Function(Subscription$watchPerson$personsByPk$user) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? uid = _undefined,
@@ -8166,7 +8166,7 @@ class _CopyWithImpl$Variables$Subscription$personAttendance<TRes>
 
   final TRes Function(Variables$Subscription$personAttendance) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -8292,7 +8292,7 @@ class _CopyWithImpl$Subscription$personAttendance<TRes>
 
   final TRes Function(Subscription$personAttendance) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyAttendanceHistory = _undefined}) =>
       _then(Subscription$personAttendance(

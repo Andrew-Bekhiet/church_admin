@@ -182,7 +182,7 @@ class _CopyWithImpl$Variables$Query$personsNames<TRes>
 
   final TRes Function(Variables$Query$personsNames) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? where = _undefined,
@@ -216,7 +216,7 @@ class _CopyWithStubImpl$Variables$Query$personsNames<TRes>
 class Query$personsNames {
   Query$personsNames({
     required this.persons,
-    required this.$__typename,
+    this.$__typename = 'query_root',
   });
 
   factory Query$personsNames.fromJson(Map<String, dynamic> json) {
@@ -323,7 +323,7 @@ class _CopyWithImpl$Query$personsNames<TRes>
 
   final TRes Function(Query$personsNames) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? persons = _undefined,
@@ -466,7 +466,7 @@ const documentNodeQuerypersonsNames = DocumentNode(definitions: [
 class Query$personsNames$persons {
   Query$personsNames$persons({
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Query$personsNames$persons.fromJson(Map<String, dynamic> json) {
@@ -559,7 +559,7 @@ class _CopyWithImpl$Query$personsNames$persons<TRes>
 
   final TRes Function(Query$personsNames$persons) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? name = _undefined,
@@ -939,7 +939,7 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
 
   final TRes Function(Variables$Query$personsGeolocations) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? getAreas = _undefined,
@@ -1006,7 +1006,7 @@ class Query$personsGeolocations {
     required this.families,
     required this.stores,
     required this.persons,
-    required this.$__typename,
+    this.$__typename = 'query_root',
   });
 
   factory Query$personsGeolocations.fromJson(Map<String, dynamic> json) {
@@ -1235,7 +1235,7 @@ class _CopyWithImpl$Query$personsGeolocations<TRes>
 
   final TRes Function(Query$personsGeolocations) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? areas = _undefined,
@@ -2028,7 +2028,7 @@ class Query$personsGeolocations$areas implements Fragment$AreaNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Areas',
     this.bounds,
   });
 
@@ -2164,7 +2164,7 @@ class _CopyWithImpl$Query$personsGeolocations$areas<TRes>
 
   final TRes Function(Query$personsGeolocations$areas) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2209,7 +2209,7 @@ class Query$personsGeolocations$streets implements Fragment$StreetNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Streets',
     this.line,
   });
 
@@ -2346,7 +2346,7 @@ class _CopyWithImpl$Query$personsGeolocations$streets<TRes>
 
   final TRes Function(Query$personsGeolocations$streets) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2391,7 +2391,7 @@ class Query$personsGeolocations$families implements Fragment$FamilyNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Families',
     this.geolocation,
   });
 
@@ -2529,7 +2529,7 @@ class _CopyWithImpl$Query$personsGeolocations$families<TRes>
 
   final TRes Function(Query$personsGeolocations$families) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2574,7 +2574,7 @@ class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Stores',
     this.geolocation,
   });
 
@@ -2710,7 +2710,7 @@ class _CopyWithImpl$Query$personsGeolocations$stores<TRes>
 
   final TRes Function(Query$personsGeolocations$stores) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -2755,7 +2755,7 @@ class Query$personsGeolocations$persons implements Fragment$PersonNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Persons',
     this.geolocation,
   });
 
@@ -2892,7 +2892,7 @@ class _CopyWithImpl$Query$personsGeolocations$persons<TRes>
 
   final TRes Function(Query$personsGeolocations$persons) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -3275,7 +3275,7 @@ class _CopyWithImpl$Variables$Query$personHistoryAnalysis<TRes>
 
   final TRes Function(Variables$Query$personHistoryAnalysis) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dateFrom = _undefined,
@@ -3350,7 +3350,7 @@ class _CopyWithStubImpl$Variables$Query$personHistoryAnalysis<TRes>
 class Query$personHistoryAnalysis {
   Query$personHistoryAnalysis({
     this.personsByPk,
-    required this.$__typename,
+    this.$__typename = 'query_root',
   });
 
   factory Query$personHistoryAnalysis.fromJson(Map<String, dynamic> json) {
@@ -3447,7 +3447,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis<TRes>
 
   final TRes Function(Query$personHistoryAnalysis) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personsByPk = _undefined,
@@ -4968,7 +4968,7 @@ class Query$personHistoryAnalysis$personsByPk {
     required this.services,
     this.classes,
     required this.groups,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Query$personHistoryAnalysis$personsByPk.fromJson(
@@ -5272,7 +5272,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk<TRes>
 
   final TRes Function(Query$personHistoryAnalysis$personsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -5462,7 +5462,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate {
   Query$personHistoryAnalysis$personsByPk$callHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate.fromJson(
@@ -5606,7 +5606,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$callHistoryAggregate) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -5680,7 +5680,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate.fromJson(
@@ -5809,7 +5809,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
           Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -5867,7 +5867,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
 class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max.fromJson(
@@ -5975,7 +5975,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
           Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -6010,7 +6010,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
 class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes({
     required this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryCallHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes.fromJson(
@@ -6116,7 +6116,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -6153,7 +6153,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate {
   Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate.fromJson(
@@ -6298,7 +6298,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -6372,7 +6372,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate.fromJson(
@@ -6501,7 +6501,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -6559,7 +6559,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
 class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max.fromJson(
@@ -6667,7 +6667,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -6702,7 +6702,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
 class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes({
     required this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryVisitHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes.fromJson(
@@ -6810,7 +6810,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -6847,7 +6847,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate {
   Query$personHistoryAnalysis$personsByPk$editHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryEditHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate.fromJson(
@@ -6991,7 +6991,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$editHistoryAggregate) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -7065,7 +7065,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryEditHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate.fromJson(
@@ -7194,7 +7194,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
           Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -7252,7 +7252,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
 class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryEditHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max.fromJson(
@@ -7360,7 +7360,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
           Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -7395,7 +7395,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
 class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes({
     required this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryEditHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes.fromJson(
@@ -7501,7 +7501,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -7538,7 +7538,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate {
   Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate.fromJson(
@@ -7683,7 +7683,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -7757,7 +7757,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate.fromJson(
@@ -7886,7 +7886,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -7944,7 +7944,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
 class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max.fromJson(
@@ -8052,7 +8052,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -8087,7 +8087,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
 class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes.fromJson(
@@ -8195,7 +8195,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
           Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -8230,7 +8230,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate {
   Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate.fromJson(
@@ -8377,7 +8377,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
   final TRes Function(
       Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -8451,7 +8451,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
   Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate.fromJson(
@@ -8580,7 +8580,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
           Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -8638,7 +8638,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistor
 class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max.fromJson(
@@ -8746,7 +8746,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
           Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -8781,7 +8781,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistor
 class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes({
     this.time,
-    required this.$__typename,
+    this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes.fromJson(
@@ -8889,7 +8889,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
           Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? time = _undefined,
@@ -8924,7 +8924,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistor
 class Query$personHistoryAnalysis$personsByPk$services {
   Query$personHistoryAnalysis$personsByPk$services({
     required this.service,
-    required this.$__typename,
+    this.$__typename = 'PersonsServices',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services.fromJson(
@@ -9024,7 +9024,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services<TRes>
 
   final TRes Function(Query$personHistoryAnalysis$personsByPk$services) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? service = _undefined,
@@ -9070,7 +9070,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -9252,7 +9252,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service<
   final TRes Function(Query$personHistoryAnalysis$personsByPk$services$service)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -9339,7 +9339,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate.fromJson(
@@ -9488,7 +9488,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -9563,7 +9563,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate.fromJson(
@@ -9692,7 +9692,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -9750,7 +9750,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
 class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max({
     this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -9858,7 +9858,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -9893,7 +9893,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
 class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes.fromJson(
@@ -10001,7 +10001,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -10039,7 +10039,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate.fromJson(
@@ -10188,7 +10188,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -10262,7 +10262,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
 class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate({
     required this.count,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate.fromJson(
@@ -10370,7 +10370,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -10407,7 +10407,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
 class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes.fromJson(
@@ -10515,7 +10515,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
           Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -10555,7 +10555,7 @@ class Query$personHistoryAnalysis$personsByPk$classes
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Classes',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -10730,7 +10730,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
 
   final TRes Function(Query$personHistoryAnalysis$personsByPk$classes) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -10813,7 +10813,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate.fromJson(
@@ -10962,7 +10962,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
           Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -11037,7 +11037,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate.fromJson(
@@ -11166,7 +11166,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
           Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -11224,7 +11224,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
 class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max({
     this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -11332,7 +11332,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
           Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -11367,7 +11367,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
 class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes.fromJson(
@@ -11475,7 +11475,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
           Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -11513,7 +11513,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
   Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate.fromJson(
@@ -11662,7 +11662,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
           Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -11736,7 +11736,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
 class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate({
     required this.count,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate.fromJson(
@@ -11844,7 +11844,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
           Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -11881,7 +11881,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
 class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes.fromJson(
@@ -11989,7 +11989,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
           Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -12026,7 +12026,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
 class Query$personHistoryAnalysis$personsByPk$groups {
   Query$personHistoryAnalysis$personsByPk$groups({
     required this.group,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroups',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups.fromJson(
@@ -12124,7 +12124,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups<TRes>
 
   final TRes Function(Query$personHistoryAnalysis$personsByPk$groups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -12169,7 +12169,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -12348,7 +12348,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
   final TRes Function(Query$personHistoryAnalysis$personsByPk$groups$group)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -12434,7 +12434,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate.fromJson(
@@ -12583,7 +12583,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -12658,7 +12658,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate({
     required this.count,
     this.max,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.fromJson(
@@ -12787,7 +12787,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -12845,7 +12845,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
 class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max({
     this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.fromJson(
@@ -12953,7 +12953,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -12988,7 +12988,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
 class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes.fromJson(
@@ -13096,7 +13096,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -13134,7 +13134,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate.fromJson(
@@ -13283,7 +13283,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? aggregate = _undefined,
@@ -13357,7 +13357,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
 class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate {
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate({
     required this.count,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate.fromJson(
@@ -13465,7 +13465,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
@@ -13502,7 +13502,7 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
 class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes {
   Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes({
     required this.dayId,
-    required this.$__typename,
+    this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
   factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes.fromJson(
@@ -13610,7 +13610,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
           Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
@@ -13724,7 +13724,7 @@ class _CopyWithImpl$Variables$Query$personServicesClassesGroups<TRes>
 
   final TRes Function(Variables$Query$personServicesClassesGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Query$personServicesClassesGroups._({
@@ -13745,7 +13745,7 @@ class _CopyWithStubImpl$Variables$Query$personServicesClassesGroups<TRes>
 class Query$personServicesClassesGroups {
   Query$personServicesClassesGroups({
     this.personsByPk,
-    required this.$__typename,
+    this.$__typename = 'query_root',
   });
 
   factory Query$personServicesClassesGroups.fromJson(
@@ -13843,7 +13843,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups<TRes>
 
   final TRes Function(Query$personServicesClassesGroups) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? personsByPk = _undefined,
@@ -14297,7 +14297,7 @@ class Query$personServicesClassesGroups$personsByPk {
     required this.services,
     this.classes,
     required this.groups,
-    required this.$__typename,
+    this.$__typename = 'Persons',
   });
 
   factory Query$personServicesClassesGroups$personsByPk.fromJson(
@@ -14504,7 +14504,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk<TRes>
 
   final TRes Function(Query$personServicesClassesGroups$personsByPk) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -14596,7 +14596,7 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk<TRes>
 class Query$personServicesClassesGroups$personsByPk$services {
   Query$personServicesClassesGroups$personsByPk$services({
     required this.service,
-    required this.$__typename,
+    this.$__typename = 'PersonsServices',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$services.fromJson(
@@ -14699,7 +14699,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services<TRes>
   final TRes Function(Query$personServicesClassesGroups$personsByPk$services)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? service = _undefined,
@@ -14748,7 +14748,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     this.photoUpdatedAt,
     this.fromStudyYear,
     this.toStudyYear,
@@ -14943,7 +14943,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
   final TRes Function(
       Query$personServicesClassesGroups$personsByPk$services$service) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -15034,7 +15034,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYe
   Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear.fromJson(
@@ -15156,7 +15156,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
           Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -15199,7 +15199,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
   Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear.fromJson(
@@ -15321,7 +15321,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
           Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -15366,7 +15366,7 @@ class Query$personServicesClassesGroups$personsByPk$classes
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Classes',
     this.photoUpdatedAt,
     required this.service,
   });
@@ -15529,7 +15529,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes<TRes>
   final TRes Function(Query$personServicesClassesGroups$personsByPk$classes)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -15594,7 +15594,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     this.photoUpdatedAt,
     this.fromStudyYear,
     this.toStudyYear,
@@ -15787,7 +15787,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
   final TRes Function(
       Query$personServicesClassesGroups$personsByPk$classes$service) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -15878,7 +15878,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYea
   Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear.fromJson(
@@ -16000,7 +16000,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
           Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -16043,7 +16043,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear 
   Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear.fromJson(
@@ -16165,7 +16165,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
           Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -16207,7 +16207,7 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$se
 class Query$personServicesClassesGroups$personsByPk$groups {
   Query$personServicesClassesGroups$personsByPk$groups({
     required this.group,
-    required this.$__typename,
+    this.$__typename = 'PersonsGroups',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$groups.fromJson(
@@ -16311,7 +16311,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups<TRes>
   final TRes Function(Query$personServicesClassesGroups$personsByPk$groups)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? group = _undefined,
@@ -16360,7 +16360,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Groups',
     this.photoUpdatedAt,
     required this.service,
   });
@@ -16529,7 +16529,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group<
   final TRes Function(
       Query$personServicesClassesGroups$personsByPk$groups$group) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -16596,7 +16596,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
     required this.id,
     required this.name,
     this.color,
-    required this.$__typename,
+    this.$__typename = 'Services',
     this.photoUpdatedAt,
     this.fromStudyYear,
     this.toStudyYear,
@@ -16791,7 +16791,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
   final TRes Function(
       Query$personServicesClassesGroups$personsByPk$groups$group$service) _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
@@ -16882,7 +16882,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStu
   Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear.fromJson(
@@ -17004,7 +17004,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
           Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,
@@ -17047,7 +17047,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudy
   Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear({
     required this.order,
     required this.name,
-    required this.$__typename,
+    this.$__typename = 'StudyYears',
   });
 
   factory Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear.fromJson(
@@ -17169,7 +17169,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
           Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear)
       _then;
 
-  static const _undefined = {};
+  static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? order = _undefined,

@@ -203,12 +203,12 @@ class PersonsDAO extends DAOBase {
           servicesIds.isNotEmpty ||
           classesIds.isNotEmpty ||
           groupsIds.isNotEmpty ||
-          familiesIds.isNotEmpty||
+          familiesIds.isNotEmpty ||
           storesIds.isNotEmpty,
       'At least one condition should be given',
     );
     assert(
-      getAreas || getStreets || getFamilies ||getStores || getPersons,
+      getAreas || getStreets || getFamilies || getStores || getPersons,
       'At lease one type should be fetched',
     );
 

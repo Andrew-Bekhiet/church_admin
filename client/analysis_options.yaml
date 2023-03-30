@@ -18,7 +18,7 @@ dart_code_metrics:
     - avoid-missing-enum-constant-in-map
     # - avoid-nested-conditional-expressions
     # - avoid-redundant-async
-    # - avoid-unnecessary-conditionals
+    - avoid-unnecessary-conditionals
     - avoid-unnecessary-type-assertions
     - avoid-unnecessary-type-casts
     - avoid-unrelated-type-assertions
@@ -67,6 +67,7 @@ dart_code_metrics:
     # - prefer-moving-to-variable:
     #     allowed-duplicated-chains: 5
     # - prefer-trailing-comma
+    - use-setstate-synchronously
     - always-remove-listener
     - avoid-border-all
     - avoid-returning-widgets

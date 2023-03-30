@@ -40,7 +40,7 @@ extension AddSelectionFields on DocumentNode {
                                       span: f.selectionSet?.span,
                                       selections: [
                                         ...f.selectionSet?.selections ?? [],
-                                        ...fieldsToAdd[f.name.value] ?? []
+                                        ...fieldsToAdd[f.name.value] ?? [],
                                       ],
                                     ),
                                   )
