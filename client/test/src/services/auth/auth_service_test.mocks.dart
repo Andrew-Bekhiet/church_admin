@@ -82,14 +82,14 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
         returnValueForMissingStub: _i4.Stream<String?>.empty(),
       ) as _i4.Stream<String?>);
   @override
-  _i4.Future<_i3.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i4.Future<bool> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i4.Future<_i3.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i3.User?>.value(),
-      ) as _i4.Future<_i3.User?>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
   _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(

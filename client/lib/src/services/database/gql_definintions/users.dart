@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'users/__generated__/queries.graphql.dart';
@@ -8,6 +9,30 @@ class UsersDAO extends DAOBase {
   const UsersDAO({
     required super.db,
   });
+
+  GQLPaginatableStream<User> paginateUsers({
+    Stream<String?>? searchQuery,
+  }) {
+    return GQLPaginatableStream<User>(
+      searchQuery: searchQuery,
+      subscriptionStreamCallback: (event) {
+        return graphQLClient.subscribeAndReturnParsed(
+          SubscriptionOptions(
+            document: documentNodeSubscriptionwatchAllUsers,
+            operationName: 'watchAllUsers',
+            variables: graphQLClient
+                .getDefaultSearchVars(
+                  event,
+                  Variables$Subscription$watchAllUsers.new,
+                  Input$AuthUsersDataBoolExp.new,
+                )
+                .toJson(),
+            parserFn: db.parser.singleListParser(User.fromJson),
+          ),
+        );
+      },
+    );
+  }
 
   Stream<User?> watchUser({
     required String uid,

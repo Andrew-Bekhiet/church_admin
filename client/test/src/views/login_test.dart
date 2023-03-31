@@ -1,7 +1,7 @@
 // ignore_for_file: discarded_futures
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService,PermissionsSet;
 import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart' show Box;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../dummy_named_location.dart';
 import 'login_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -20,7 +19,6 @@ import 'login_test.mocks.dart';
   MockSpec<AuthCache>(),
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
-  MockSpec<DummyNamedLocation>(),
   MockSpec<UserSettingsService>(),
   MockSpec<HiveInterface>(),
   MockSpec<CANotificationsService>()
@@ -98,9 +96,6 @@ void main() {
 
           initGlobalProviderContainer(overrides);
 
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
-
           expect(
             LoginScreen.redirect(),
             null,
@@ -114,9 +109,6 @@ void main() {
           final overrides = [_setUpAuthService()];
 
           initGlobalProviderContainer(overrides);
-
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
 
           expect(
             LoginScreen.redirect(),
@@ -158,7 +150,7 @@ Override _setUpAuthService({bool isSignedIn = true}) {
       uid: 'uid',
       name: '',
       password: '',
-      permissions: CAPermissionsSet.fromSet(const {}),
+      permissions: PermissionsSet.fromSet(const {}),
       email: 'email',
       authId: 'firebaseAuthUID',
     );

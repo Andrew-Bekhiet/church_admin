@@ -1,3 +1,4 @@
+import '../../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
@@ -1676,3 +1677,421 @@ class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn$service
   }) =>
       _res;
 }
+
+class Variables$Subscription$watchAllUsers {
+  factory Variables$Subscription$watchAllUsers({
+    List<Input$AuthUsersDataBoolExp>? where,
+    List<Input$AuthUsersDataOrderBy>? orderBy,
+    int? limit,
+  }) =>
+      Variables$Subscription$watchAllUsers._({
+        if (where != null) r'where': where,
+        if (orderBy != null) r'orderBy': orderBy,
+        if (limit != null) r'limit': limit,
+      });
+
+  Variables$Subscription$watchAllUsers._(this._$data);
+
+  factory Variables$Subscription$watchAllUsers.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map((e) =>
+              Input$AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('orderBy')) {
+      final l$orderBy = data['orderBy'];
+      result$data['orderBy'] = (l$orderBy as List<dynamic>?)
+          ?.map((e) =>
+              Input$AuthUsersDataOrderBy.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int?);
+    }
+    return Variables$Subscription$watchAllUsers._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input$AuthUsersDataBoolExp>? get where =>
+      (_$data['where'] as List<Input$AuthUsersDataBoolExp>?);
+  List<Input$AuthUsersDataOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input$AuthUsersDataOrderBy>?);
+  int? get limit => (_$data['limit'] as int?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('orderBy')) {
+      final l$orderBy = orderBy;
+      result$data['orderBy'] = l$orderBy?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = l$limit;
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Subscription$watchAllUsers<
+          Variables$Subscription$watchAllUsers>
+      get copyWith => CopyWith$Variables$Subscription$watchAllUsers(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Subscription$watchAllUsers) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    final l$orderBy = orderBy;
+    final lOther$orderBy = other.orderBy;
+    if (_$data.containsKey('orderBy') != other._$data.containsKey('orderBy')) {
+      return false;
+    }
+    if (l$orderBy != null && lOther$orderBy != null) {
+      if (l$orderBy.length != lOther$orderBy.length) {
+        return false;
+      }
+      for (int i = 0; i < l$orderBy.length; i++) {
+        final l$orderBy$entry = l$orderBy[i];
+        final lOther$orderBy$entry = lOther$orderBy[i];
+        if (l$orderBy$entry != lOther$orderBy$entry) {
+          return false;
+        }
+      }
+    } else if (l$orderBy != lOther$orderBy) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    final l$orderBy = orderBy;
+    final l$limit = limit;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {},
+      _$data.containsKey('orderBy')
+          ? l$orderBy == null
+              ? null
+              : Object.hashAll(l$orderBy.map((v) => v))
+          : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Subscription$watchAllUsers<TRes> {
+  factory CopyWith$Variables$Subscription$watchAllUsers(
+    Variables$Subscription$watchAllUsers instance,
+    TRes Function(Variables$Subscription$watchAllUsers) then,
+  ) = _CopyWithImpl$Variables$Subscription$watchAllUsers;
+
+  factory CopyWith$Variables$Subscription$watchAllUsers.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Subscription$watchAllUsers;
+
+  TRes call({
+    List<Input$AuthUsersDataBoolExp>? where,
+    List<Input$AuthUsersDataOrderBy>? orderBy,
+    int? limit,
+  });
+}
+
+class _CopyWithImpl$Variables$Subscription$watchAllUsers<TRes>
+    implements CopyWith$Variables$Subscription$watchAllUsers<TRes> {
+  _CopyWithImpl$Variables$Subscription$watchAllUsers(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Subscription$watchAllUsers _instance;
+
+  final TRes Function(Variables$Subscription$watchAllUsers) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? where = _undefined,
+    Object? orderBy = _undefined,
+    Object? limit = _undefined,
+  }) =>
+      _then(Variables$Subscription$watchAllUsers._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input$AuthUsersDataBoolExp>?),
+        if (orderBy != _undefined)
+          'orderBy': (orderBy as List<Input$AuthUsersDataOrderBy>?),
+        if (limit != _undefined) 'limit': (limit as int?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Subscription$watchAllUsers<TRes>
+    implements CopyWith$Variables$Subscription$watchAllUsers<TRes> {
+  _CopyWithStubImpl$Variables$Subscription$watchAllUsers(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input$AuthUsersDataBoolExp>? where,
+    List<Input$AuthUsersDataOrderBy>? orderBy,
+    int? limit,
+  }) =>
+      _res;
+}
+
+class Subscription$watchAllUsers {
+  Subscription$watchAllUsers({required this.authUsersData});
+
+  factory Subscription$watchAllUsers.fromJson(Map<String, dynamic> json) {
+    final l$authUsersData = json['authUsersData'];
+    return Subscription$watchAllUsers(
+        authUsersData: (l$authUsersData as List<dynamic>)
+            .map((e) =>
+                Fragment$UserOverview.fromJson((e as Map<String, dynamic>)))
+            .toList());
+  }
+
+  final List<Fragment$UserOverview> authUsersData;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$authUsersData = authUsersData;
+    _resultData['authUsersData'] =
+        l$authUsersData.map((e) => e.toJson()).toList();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$authUsersData = authUsersData;
+    return Object.hashAll([Object.hashAll(l$authUsersData.map((v) => v))]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$watchAllUsers) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$authUsersData = authUsersData;
+    final lOther$authUsersData = other.authUsersData;
+    if (l$authUsersData.length != lOther$authUsersData.length) {
+      return false;
+    }
+    for (int i = 0; i < l$authUsersData.length; i++) {
+      final l$authUsersData$entry = l$authUsersData[i];
+      final lOther$authUsersData$entry = lOther$authUsersData[i];
+      if (l$authUsersData$entry != lOther$authUsersData$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$watchAllUsers
+    on Subscription$watchAllUsers {
+  CopyWith$Subscription$watchAllUsers<Subscription$watchAllUsers>
+      get copyWith => CopyWith$Subscription$watchAllUsers(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$watchAllUsers<TRes> {
+  factory CopyWith$Subscription$watchAllUsers(
+    Subscription$watchAllUsers instance,
+    TRes Function(Subscription$watchAllUsers) then,
+  ) = _CopyWithImpl$Subscription$watchAllUsers;
+
+  factory CopyWith$Subscription$watchAllUsers.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$watchAllUsers;
+
+  TRes call({List<Fragment$UserOverview>? authUsersData});
+  TRes authUsersData(
+      Iterable<Fragment$UserOverview> Function(
+              Iterable<CopyWith$Fragment$UserOverview<Fragment$UserOverview>>)
+          _fn);
+}
+
+class _CopyWithImpl$Subscription$watchAllUsers<TRes>
+    implements CopyWith$Subscription$watchAllUsers<TRes> {
+  _CopyWithImpl$Subscription$watchAllUsers(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$watchAllUsers _instance;
+
+  final TRes Function(Subscription$watchAllUsers) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? authUsersData = _undefined}) =>
+      _then(Subscription$watchAllUsers(
+          authUsersData: authUsersData == _undefined || authUsersData == null
+              ? _instance.authUsersData
+              : (authUsersData as List<Fragment$UserOverview>)));
+  TRes authUsersData(
+          Iterable<Fragment$UserOverview> Function(
+                  Iterable<
+                      CopyWith$Fragment$UserOverview<Fragment$UserOverview>>)
+              _fn) =>
+      call(
+          authUsersData: _fn(
+              _instance.authUsersData.map((e) => CopyWith$Fragment$UserOverview(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Subscription$watchAllUsers<TRes>
+    implements CopyWith$Subscription$watchAllUsers<TRes> {
+  _CopyWithStubImpl$Subscription$watchAllUsers(this._res);
+
+  TRes _res;
+
+  call({List<Fragment$UserOverview>? authUsersData}) => _res;
+  authUsersData(_fn) => _res;
+}
+
+const documentNodeSubscriptionwatchAllUsers = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchAllUsers'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'AuthUsersDataBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'orderBy')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'AuthUsersDataOrderBy'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(
+            value: ObjectValueNode(fields: [
+          ObjectFieldNode(
+            name: NameNode(value: 'name'),
+            value: EnumValueNode(name: NameNode(value: 'ASC')),
+          )
+        ])),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'limit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'authUsersData'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'orderBy'),
+            value: VariableNode(name: NameNode(value: 'orderBy')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'limit'),
+            value: VariableNode(name: NameNode(value: 'limit')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'UserOverview'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+  fragmentDefinitionUserOverview,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+  fragmentDefinitionUserPermissions,
+  fragmentDefinitionPerson,
+  fragmentDefinitionPersonNoPhoto,
+]);

@@ -1,49 +1,71 @@
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-class CAPermissionsSet extends PermissionsSet {
-  const CAPermissionsSet.empty() : super.fromSet(const {});
+import 'user_permission.dart';
 
-  CAPermissionsSet.fromSet(Set<String> permissions)
-      : super.fromSet(
-          EqualitySet<String>.from(const PermissionEquality(), permissions),
-        );
+class PermissionsSet extends Equatable {
+  final Set<UserPermission> permissions;
 
-  bool get approved => permissions.contains('approved');
+  const PermissionsSet.empty() : permissions = const {};
 
-  bool get manageAllUsers => permissions.contains('manageAllUsers');
-  bool get readAllData => permissions.contains('readAllData');
-  bool get writeAllData => permissions.contains('writeAllData');
+  PermissionsSet.fromSet(Set<String> permissions)
+      : permissions = permissions.map(UserPermission.values.byName).toSet();
 
-  bool get recordHistory => permissions.contains('recordHistory');
-  bool get changeOldHistory => permissions.contains('changeOldHistory');
-  bool get recoverDeleted => permissions.contains('recoverDeleted');
-  bool get exportData => permissions.contains('exportData');
-}
+  bool get approved => permissions.contains(UserPermission.approved);
 
-class PermissionEquality implements Equality<String> {
-  const PermissionEquality();
+  bool get manageAllUsers =>
+      permissions.contains(UserPermission.manageAllUsers);
+  bool get readAllData => permissions.contains(UserPermission.readAllData);
+  bool get writeAllData => permissions.contains(UserPermission.writeAllData);
 
-  @override
-  bool equals(String string1, String string2) => equalsIgnoreAsciiCase(
-        string1.removeQuotes(),
-        string2.removeQuotes(),
-      );
+  bool get recordHistory => permissions.contains(UserPermission.recordHistory);
+  bool get changeOldHistory =>
+      permissions.contains(UserPermission.changeOldHistory);
+  bool get recoverDeleted =>
+      permissions.contains(UserPermission.recoverDeleted);
+  bool get exportData => permissions.contains(UserPermission.exportData);
 
   @override
-  int hash(String string) => hashIgnoreAsciiCase(string.removeQuotes());
+  List<Object?> get props => permissions.toList();
 
-  @override
-  bool isValidKey(Object? object) => object is String;
+  String toHumanReadableString() {
+    if (!approved) {
+      return 'حساب غير مفعل';
+    } else if (permissions.length == 1) {
+      // Only approved
+      return 'لا يوجد صلاحيات';
+    }
+
+    return permissions
+        .where((e) => e != UserPermission.approved)
+        .sorted((p1, p2) => p1.index.compareTo(p2.index))
+        .map((e) => e.humanReadableName)
+        .join('، ');
+  }
+
+  Set<IconData> toIcons() {
+    if (!approved) {
+      return {Icons.person_off};
+    } else if (permissions.length == 1) {
+      return {};
+    }
+
+    return permissions
+        .where((e) => e != UserPermission.approved)
+        .sorted((p1, p2) => p1.index.compareTo(p2.index))
+        .map((e) => e.icon)
+        .toSet();
+  }
 }
 
 extension RemoveQuotes on String {
   String removeQuotes() => replaceAll('"', '').replaceAll("'", '');
 }
 
-List<Json> permissionsSetToJson(CAPermissionsSet data) =>
-    data.permissions.map((e) => {'permission': e}).toList();
-CAPermissionsSet permissionsSetFromJson(dynamic data) =>
-    CAPermissionsSet.fromSet(
+List<Json> permissionsSetToJson(PermissionsSet data) =>
+    data.permissions.map((e) => {'permission': e.name}).toList();
+PermissionsSet permissionsSetFromJson(dynamic data) => PermissionsSet.fromSet(
       (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
     );

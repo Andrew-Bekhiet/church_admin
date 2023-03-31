@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
@@ -19,6 +20,8 @@ class LocalAuthService with WidgetsBindingObserver {
 
   bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
+
+  final Map<String, bool> _oneTimeAuthForPath = {};
 
   Timer? _timer;
   Completer<bool>? _localAuthCompleter;
@@ -58,6 +61,20 @@ class LocalAuthService with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
+  bool requestOneTimeAuthForPath(String path) {
+    final auth = _oneTimeAuthForPath[path];
+    if (auth == null) {
+      _oneTimeAuthForPath[path] = false;
+      return false;
+    } else {
+      _oneTimeAuthForPath.remove(path);
+      return auth;
+    }
+  }
+
+  bool shouldAuthenticateForPath(String path) =>
+      !(_oneTimeAuthForPath[path] ?? false);
+
   Timer _createTimer() => Timer(timeToReauth, scheduleReauth);
 
   @override
@@ -81,8 +98,9 @@ class LocalAuthService with WidgetsBindingObserver {
     }
   }
 
-  void resetAuthState() {
+  void resetAuthState({String? path}) {
     _shouldAuthenticate = false;
+    if (path != null) _oneTimeAuthForPath[path] = true;
 
     _refreshUI.add(null);
 
@@ -96,9 +114,13 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   Future<bool> canCheckBiometrics() async {
-    return !kIsWeb &&
-        await _localAuthPlugin.canCheckBiometrics &&
-        await _localAuthPlugin.isDeviceSupported();
+    try {
+      return !kIsWeb &&
+          await _localAuthPlugin.canCheckBiometrics &&
+          await _localAuthPlugin.isDeviceSupported();
+    } on MissingPluginException {
+      return false;
+    }
   }
 
   Future<bool> authenticate() async {

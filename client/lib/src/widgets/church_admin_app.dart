@@ -40,8 +40,7 @@ class ChurchAdminApp extends StatefulWidget {
         ) /* UpdateUserDataScreen() */,
         redirect: (context, state) {
           if (!AuthService.I.isSignedIn) {
-            return ChurchAdminApp.router.routeInformationParser.configuration
-                .namedLocation('login');
+            return '/login';
           } else if (AuthService.I.currentUser?.password != null &&
               AuthService.I.currentUser?.person != null) {
             return '/';
@@ -61,6 +60,9 @@ class ChurchAdminApp extends StatefulWidget {
 
       return Scaffold(
         appBar: AppBar(
+          leading: BackButton(
+            onPressed: () => context.go('/'),
+          ),
           title: Text(
             'حدث خطأ',
             style: TextStyle(

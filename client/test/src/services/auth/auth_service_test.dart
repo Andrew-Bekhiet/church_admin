@@ -17,7 +17,7 @@ final initialUser = User(
   password: 'password',
   idToken: 'idToken',
   photoUpdatedAt: DateTime.now(),
-  permissions: CAPermissionsSet.fromSet(const {
+  permissions: PermissionsSet.fromSet(const {
     'approved',
     'manageAllUsers',
     'readAllData',
@@ -153,7 +153,7 @@ void main() {
       await unit.userStream.take(1).first;
       expect(unit.currentUser, isNull);
 
-      expect(unit.signInWithGoogle(), completion(initialUser));
+      expect(unit.signInWithGoogle(), completion(isTrue));
       await unit.userStream.take(1).first;
 
       expect(unit.currentUser, initialUser);
@@ -254,7 +254,7 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
 
   when(mock.signInWithGoogle()).thenAnswer((_) async {
     _controller.add(userOnSignIn);
-    return userOnSignIn;
+    return true;
   });
   when(mock.signOut()).thenAnswer((_) async => _controller..add(null));
   when(mock.userStream).thenAnswer((_) => _controller.stream);

@@ -3,24 +3,24 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:churchdata_core/churchdata_core.dart' hide LoggingService,PermissionsSet;
 import 'package:churchdata_core_mocks/utils.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../dummy_named_location.dart';
 import '../fakes/fake_device_info.dart';
 import 'authenticate_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthService>(),
-  MockSpec<DummyNamedLocation>(),
-  MockSpec<LocalAuthService>()
+  MockSpec<LocalAuthService>(),
+  MockSpec<GoRouterState>(),
 ])
 void main() {
   final authVariant = AuthenticationVariant();
@@ -179,108 +179,117 @@ void main() {
         () async {
           initGlobalProviderContainer([_setUpAuthService()]);
 
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny))
-              .thenReturn('/login');
-
           expect(
-            AuthenticateScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
+            AuthenticateScreen.redirect(MockGoRouterState()),
             '/login',
           );
-          verify(mockGoRouterState.namedLocation('login'));
         },
       );
+      group(
+        'Signed In User =>',
+        () {
+          test(
+            'No Password',
+            () async {
+              initGlobalProviderContainer([
+                _setUpAuthService(
+                  currentUser: _fakeUser.copyWith(password: null),
+                ),
+                _setUpLocalAuth(),
+              ]);
 
-      test(
-        'Signed In User => No Password',
-        () async {
-          initGlobalProviderContainer([
-            _setUpAuthService(currentUser: _fakeUser.copyWith(password: null)),
-            _setUpLocalAuth(),
-          ]);
-
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny))
-              .thenReturn('/register');
-
-          expect(
-            AuthenticateScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
-            '/register',
-          );
-          verify(mockGoRouterState.namedLocation('register_user_data'));
-        },
-      );
-
-      test(
-        'Signed In User => Should Authenticate',
-        () async {
-          initGlobalProviderContainer(
-            [_setUpAuthService(currentUser: _fakeUser), _setUpLocalAuth()],
+              expect(
+                AuthenticateScreen.redirect(MockGoRouterState()),
+                '/registerUserData',
+              );
+            },
           );
 
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
+          test(
+            'Should Authenticate',
+            () async {
+              initGlobalProviderContainer(
+                [_setUpAuthService(currentUser: _fakeUser), _setUpLocalAuth()],
+              );
 
-          expect(
-            AuthenticateScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
-            null,
+              expect(
+                AuthenticateScreen.redirect(MockGoRouterState()),
+                null,
+              );
+            },
           );
-          verifyNever(mockGoRouterState.namedLocation('login'));
-        },
-      );
 
-      test(
-        'Signed In User => Should not Authenticate (with redirection)',
-        () async {
-          initGlobalProviderContainer([
-            _setUpAuthService(currentUser: _fakeUser),
-            _setUpLocalAuth(shouldAuthenticate: false),
-          ]);
+          test(
+            'Should not Authenticate (with redirection)',
+            () async {
+              initGlobalProviderContainer([
+                _setUpAuthService(currentUser: _fakeUser),
+                _setUpLocalAuth(shouldAuthenticate: false),
+              ]);
 
-          final mockGoRouterState = MockDummyNamedLocation();
-          when(mockGoRouterState.namedLocation(captureAny)).thenReturn('/');
-          when(mockGoRouterState.queryParams).thenReturn({'next': '/next'});
+              final mockGoRouterState = MockGoRouterState();
+              when(mockGoRouterState.queryParams).thenReturn({'next': '/next'});
 
-          expect(
-            AuthenticateScreen.redirect(
-              mockGoRouterState.namedLocation,
-              mockGoRouterState,
-            ),
-            '/next',
+              expect(
+                AuthenticateScreen.redirect(mockGoRouterState),
+                '/next',
+              );
+            },
           );
-          verifyNever(mockGoRouterState.namedLocation('login'));
-        },
-      );
 
-      test(
-        'Signed In User => Should not Authenticate (without redirection)',
-        () async {
-          initGlobalProviderContainer([
-            _setUpAuthService(currentUser: _fakeUser),
-            _setUpLocalAuth(shouldAuthenticate: false),
-          ]);
+          test(
+            'Should not Authenticate (without redirection)',
+            () async {
+              initGlobalProviderContainer([
+                _setUpAuthService(currentUser: _fakeUser),
+                _setUpLocalAuth(shouldAuthenticate: false),
+              ]);
 
-          final mockGoRouterState2 = MockDummyNamedLocation();
-          when(mockGoRouterState2.namedLocation(captureAny)).thenReturn('/');
-          when(mockGoRouterState2.queryParams).thenReturn({});
+              final mockGoRouterState = MockGoRouterState();
+              when(mockGoRouterState.queryParams).thenReturn({});
 
-          expect(
-            AuthenticateScreen.redirect(
-              mockGoRouterState2.namedLocation,
-              mockGoRouterState2,
-            ),
-            '/',
+              expect(
+                AuthenticateScreen.redirect(mockGoRouterState),
+                '/',
+              );
+            },
           );
-          verifyNever(mockGoRouterState2.namedLocation('login'));
+
+          test(
+            'Should authenticate for path',
+            () async {
+              initGlobalProviderContainer([
+                _setUpAuthService(currentUser: _fakeUser),
+                _setUpLocalAuth(shouldAuthenticate: false),
+              ]);
+
+              final mockGoRouterState = MockGoRouterState();
+              when(mockGoRouterState.queryParams).thenReturn({'next': '/test'});
+
+              expect(
+                AuthenticateScreen.redirect(mockGoRouterState),
+                '/test',
+              );
+
+              final mockGoRouterState2 = MockGoRouterState();
+              when(mockGoRouterState2.queryParams)
+                  .thenReturn({'next': '/test'});
+              when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
+                  .thenReturn(true);
+
+              expect(
+                AuthenticateScreen.redirect(mockGoRouterState),
+                null,
+              );
+              when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
+                  .thenReturn(false);
+
+              expect(
+                AuthenticateScreen.redirect(mockGoRouterState),
+                '/test',
+              );
+            },
+          );
         },
       );
     },
@@ -298,7 +307,7 @@ final User _fakeUser = User(
   uid: 'uid',
   name: '',
   password: '',
-  permissions: CAPermissionsSet.fromSet(const {}),
+  permissions: PermissionsSet.fromSet(const {}),
   email: 'email',
   authId: 'firebaseAuthUID',
 );
@@ -348,7 +357,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
         uid: 'uid',
         name: '',
         password: await encryptionService.encryptPassword(r'password\1234'),
-        permissions: CAPermissionsSet.fromSet(const {}),
+        permissions: PermissionsSet.fromSet(const {}),
         email: 'email',
         authId: 'firebaseAuthUID',
       ),

@@ -47,7 +47,7 @@ class AuthService {
 
   late final StreamSubscription<bool> _connectivitySubscription;
 
-  Future<User?> signInWithGoogle() => _adapter.signInWithGoogle();
+  Future<bool> signInWithGoogle() => _adapter.signInWithGoogle();
 
   Future<void> refreshToken() => _adapter.refreshToken();
 

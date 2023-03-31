@@ -13,3 +13,4 @@ export 'meta/school.dart';
 export 'meta/shammas_level.dart';
 export 'meta/study_year.dart';
 export 'meta/tag.dart';
+export 'meta/user_permission.dart';

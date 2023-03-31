@@ -22,7 +22,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 mixin _$UserData {
   String get uid => throw _privateConstructorUsedError;
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions => throw _privateConstructorUsedError;
+  PermissionsSet get permissions => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get firebaseAuthUid => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +43,7 @@ abstract class $UserDataCopyWith<$Res> {
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
+          PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
       @JsonKey(ignore: true)
@@ -81,7 +81,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
+              as PermissionsSet,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
+          PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
       @JsonKey(ignore: true)
@@ -161,7 +161,7 @@ class __$$_UserDataCopyWithImpl<$Res>
       permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
+              as PermissionsSet,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -202,7 +202,7 @@ class _$_UserData implements _UserData {
   final String uid;
   @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  final CAPermissionsSet permissions;
+  final PermissionsSet permissions;
   @override
   final String email;
   @override
@@ -258,7 +258,7 @@ abstract class _UserData implements UserData {
   const factory _UserData(
       {required final String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          required final CAPermissionsSet permissions,
+          required final PermissionsSet permissions,
       required final String email,
       required final String? firebaseAuthUid,
       @JsonKey(ignore: true)
@@ -271,7 +271,7 @@ abstract class _UserData implements UserData {
   String get uid;
   @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions;
+  PermissionsSet get permissions;
   @override
   String get email;
   @override

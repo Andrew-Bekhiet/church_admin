@@ -9,30 +9,36 @@ class AuthenticateScreen extends StatefulWidget {
   static final route = GoRoute(
     name: 'authenticate',
     path: '/authenticate',
-    builder: (context, state) => const AuthenticateScreen(),
+    builder: (context, state) => AuthenticateScreen(
+      next: _hasRedirect(state.queryParams) ? state.queryParams['next'] : null,
+    ),
     redirect: (context, state) {
-      return redirect(
-        ChurchAdminApp
-            .router.routeInformationParser.configuration.namedLocation,
-        state,
-      );
+      return redirect(state);
     },
   );
 
   @visibleForTesting
-  static String? redirect(NamedLocation namedLocation, GoRouterState state) {
+  static String? redirect(GoRouterState state) {
     if (!AuthService.I.isSignedIn) {
-      return namedLocation('login');
+      return '/login';
     } else if (AuthService.I.currentUser?.password == null) {
-      return namedLocation('register_user_data');
-    } else if (LocalAuthService.I.shouldAuthenticate) {
+      return '/registerUserData';
+    } else if (LocalAuthService.I.shouldAuthenticate ||
+        (_hasRedirect(state.queryParams) &&
+            LocalAuthService.I
+                .shouldAuthenticateForPath(state.queryParams['next']!))) {
       return null;
     } else {
       return state.queryParams['next'] ?? '/';
     }
   }
 
-  const AuthenticateScreen({super.key});
+  static bool _hasRedirect(Map<String, dynamic> queryParams) =>
+      (queryParams['next'] ?? '/') != '/';
+
+  final String? next;
+
+  const AuthenticateScreen({this.next, super.key});
 
   @override
   State<AuthenticateScreen> createState() => _AuthenticateScreenState();
@@ -52,6 +58,12 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.next != null
+          ? AppBar(
+              leading: const BackButton(),
+              backgroundColor: Colors.transparent,
+            )
+          : null,
       body: SafeArea(
         child: Form(
           key: _form,
@@ -118,7 +130,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   Future<void> _authenticate() async {
     if (await LocalAuthService.I.canCheckBiometrics() &&
         await LocalAuthService.I.authenticate()) {
-      LocalAuthService.I.resetAuthState();
+      LocalAuthService.I.resetAuthState(path: widget.next);
     }
   }
 
@@ -146,7 +158,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
     if (AuthService.I.currentUser?.password == encryptedPassword) {
       encryptedPassword = null;
-      LocalAuthService.I.resetAuthState();
+      LocalAuthService.I.resetAuthState(path: widget.next);
     } else {
       encryptedPassword = null;
       _passwordText.clear();

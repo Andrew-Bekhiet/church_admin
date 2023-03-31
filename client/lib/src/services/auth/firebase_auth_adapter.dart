@@ -72,11 +72,11 @@ class FirebaseAuthAdapter extends AuthAdapter {
   }
 
   @override
-  Future<User?> signInWithGoogle() {
+  Future<bool> signInWithGoogle() {
     return _currentPlatformService.isWeb ? _signInForWeb() : _signInForNative();
   }
 
-  Future<User?> _signInForNative() async {
+  Future<bool> _signInForNative() async {
     if (_currentPlatformService.isDesktop) {
       final credential = await DesktopWebviewAuth.signIn(
         GoogleSignInArgs(
@@ -94,6 +94,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
             signInMethod: 'google.com',
           ),
         );
+        return true;
       }
     } else {
       final googleUser = await _googleSignIn.signIn();
@@ -107,14 +108,14 @@ class FirebaseAuthAdapter extends AuthAdapter {
           );
 
           await _firebaseAuth.signInWithCredential(credential);
+          return true;
         }
       }
-      return null;
     }
-    return null;
+    return false;
   }
 
-  Future<User?> _signInForWeb() async {
+  Future<bool> _signInForWeb() async {
     final signInResult = await _firebaseAuth.signInWithPopup(
       GoogleAuthProvider(),
     );
@@ -122,8 +123,9 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
     if (credential != null) {
       await _firebaseAuth.signInWithCredential(credential);
+      return true;
     }
-    return null;
+    return false;
   }
 
   @override
@@ -156,7 +158,9 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   @override
   Future<void> signOut() async {
-    await _googleSignIn.signOut();
+    if (!_currentPlatformService.isDesktop) {
+      await _googleSignIn.signOut();
+    }
     await _firebaseAuth.signOut();
   }
 

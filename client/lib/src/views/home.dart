@@ -23,32 +23,26 @@ class HomeScreen extends StatefulWidget {
       ViewFamily.route,
       ViewStreet.route,
       ViewStore.route,
+      ManageUsersScreen.route,
     ],
     redirect: (context, state) {
-      return redirect(
-        ChurchAdminApp
-            .router.routeInformationParser.configuration.namedLocation,
-        state,
-      );
+      return redirect(state);
     },
   );
 
   @visibleForTesting
-  static String? redirect(NamedLocation namedLocation, GoRouterState state) {
+  static String? redirect(GoRouterState state) {
     if (!AuthService.I.isSignedIn) {
-      return namedLocation('login');
+      return '/login';
     } else if (AuthService.I.currentUser?.person == null) {
-      return namedLocation('register_user_data');
+      return '/registerUserData';
     } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
-      return namedLocation(
-        'update_user_data',
-        queryParams: {'forced': 'true'},
-      );
+      return '/updateUserData?forced=true';
     } else if (LocalAuthService.I.shouldAuthenticate) {
-      return namedLocation(
-        'authenticate',
-        queryParams: {'next': state.location},
-      );
+      return Uri(
+        path: '/authenticate',
+        queryParameters: {'next': state.location},
+      ).toString();
     }
     return null;
   }
@@ -116,9 +110,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   child: SizedBox.expand(),
                 ),
-                const Expanded(
+                Expanded(
                   child: NavigationDrawer(
-                    children: [
+                    onDestinationSelected: (i) {
+                      Scaffold.of(context).openEndDrawer();
+                      switch (i) {
+                        case 0:
+                          break;
+                        case 1:
+                          context.push('/manage_users');
+                          break;
+                        case 2:
+                          break;
+                      }
+                    },
+                    children: const [
                       NavigationDrawerDestination(
                         icon: Icon(Icons.home),
                         label: Text('الرئيسية'),

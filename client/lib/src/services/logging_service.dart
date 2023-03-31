@@ -49,7 +49,7 @@ class LoggingService {
   }
 
   Future<void> reportError(
-    Exception error, {
+    dynamic error, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extras,
     StackTrace? stackTrace,

@@ -4,14 +4,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:ui' as _i7;
+import 'dart:ui' as _i6;
 
 import 'package:church_admin/church_admin.dart' as _i4;
-import 'package:flutter/widgets.dart' as _i3;
+import 'package:flutter/foundation.dart' as _i3;
+import 'package:flutter/material.dart' as _i7;
+import 'package:go_router/src/configuration.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
-
-import '../dummy_named_location.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -35,8 +35,8 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeValueKey_1<T> extends _i1.SmartFake implements _i3.ValueKey<T> {
-  _FakeValueKey_1(
+class _FakeDuration_1 extends _i1.SmartFake implements Duration {
+  _FakeDuration_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -45,8 +45,8 @@ class _FakeValueKey_1<T> extends _i1.SmartFake implements _i3.ValueKey<T> {
         );
 }
 
-class _FakeDuration_2 extends _i1.SmartFake implements Duration {
-  _FakeDuration_2(
+class _FakeValueKey_2<T> extends _i1.SmartFake implements _i3.ValueKey<T> {
+  _FakeValueKey_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -90,14 +90,14 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         ),
       ) as _i2.ValueStream<String?>);
   @override
-  _i5.Future<_i4.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i5.Future<bool> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i5.Future<_i4.User?>.value(),
-        returnValueForMissingStub: _i5.Future<_i4.User?>.value(),
-      ) as _i5.Future<_i4.User?>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
   _i5.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -127,74 +127,6 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
       ) as _i5.Future<void>);
 }
 
-/// A class which mocks [DummyNamedLocation].
-///
-/// See the documentation for Mockito's code generation for more information.
-// ignore: must_be_immutable
-class MockDummyNamedLocation extends _i1.Mock
-    implements _i6.DummyNamedLocation {
-  @override
-  String get location => (super.noSuchMethod(
-        Invocation.getter(#location),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-  @override
-  String get subloc => (super.noSuchMethod(
-        Invocation.getter(#subloc),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-  @override
-  Map<String, String> get params => (super.noSuchMethod(
-        Invocation.getter(#params),
-        returnValue: <String, String>{},
-        returnValueForMissingStub: <String, String>{},
-      ) as Map<String, String>);
-  @override
-  Map<String, String> get queryParams => (super.noSuchMethod(
-        Invocation.getter(#queryParams),
-        returnValue: <String, String>{},
-        returnValueForMissingStub: <String, String>{},
-      ) as Map<String, String>);
-  @override
-  Map<String, List<String>> get queryParametersAll => (super.noSuchMethod(
-        Invocation.getter(#queryParametersAll),
-        returnValue: <String, List<String>>{},
-        returnValueForMissingStub: <String, List<String>>{},
-      ) as Map<String, List<String>>);
-  @override
-  _i3.ValueKey<String> get pageKey => (super.noSuchMethod(
-        Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_1<String>(
-          this,
-          Invocation.getter(#pageKey),
-        ),
-        returnValueForMissingStub: _FakeValueKey_1<String>(
-          this,
-          Invocation.getter(#pageKey),
-        ),
-      ) as _i3.ValueKey<String>);
-  @override
-  String namedLocation(
-    String? name, {
-    Map<String, String>? params = const {},
-    Map<String, dynamic>? queryParams = const {},
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #namedLocation,
-          [name],
-          {
-            #params: params,
-            #queryParams: queryParams,
-          },
-        ),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-}
-
 /// A class which mocks [LocalAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -202,11 +134,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_2(
+        returnValue: _FakeDuration_1(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_2(
+        returnValueForMissingStub: _FakeDuration_1(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -224,7 +156,25 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: _i5.Stream<void>.empty(),
       ) as _i5.Stream<void>);
   @override
-  void didChangeAppLifecycleState(_i7.AppLifecycleState? state) =>
+  bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #requestOneTimeAuthForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #shouldAuthenticateForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -241,10 +191,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void resetAuthState() => super.noSuchMethod(
+  void resetAuthState({String? path}) => super.noSuchMethod(
         Invocation.method(
           #resetAuthState,
           [],
+          {#path: path},
         ),
         returnValueForMissingStub: null,
       );
@@ -295,7 +246,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
       ) as _i5.Future<bool>);
   @override
   _i5.Future<bool> didPushRouteInformation(
-          _i3.RouteInformation? routeInformation) =>
+          _i7.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
@@ -329,7 +280,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void didChangeLocales(List<_i7.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -352,4 +303,71 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [GoRouterState].
+///
+/// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
+class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
+  @override
+  String get location => (super.noSuchMethod(
+        Invocation.getter(#location),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  String get subloc => (super.noSuchMethod(
+        Invocation.getter(#subloc),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  Map<String, String> get params => (super.noSuchMethod(
+        Invocation.getter(#params),
+        returnValue: <String, String>{},
+        returnValueForMissingStub: <String, String>{},
+      ) as Map<String, String>);
+  @override
+  Map<String, String> get queryParams => (super.noSuchMethod(
+        Invocation.getter(#queryParams),
+        returnValue: <String, String>{},
+        returnValueForMissingStub: <String, String>{},
+      ) as Map<String, String>);
+  @override
+  Map<String, List<String>> get queryParametersAll => (super.noSuchMethod(
+        Invocation.getter(#queryParametersAll),
+        returnValue: <String, List<String>>{},
+        returnValueForMissingStub: <String, List<String>>{},
+      ) as Map<String, List<String>>);
+  @override
+  _i3.ValueKey<String> get pageKey => (super.noSuchMethod(
+        Invocation.getter(#pageKey),
+        returnValue: _FakeValueKey_2<String>(
+          this,
+          Invocation.getter(#pageKey),
+        ),
+        returnValueForMissingStub: _FakeValueKey_2<String>(
+          this,
+          Invocation.getter(#pageKey),
+        ),
+      ) as _i3.ValueKey<String>);
+  @override
+  String namedLocation(
+    String? name, {
+    Map<String, String>? params = const {},
+    Map<String, String>? queryParams = const {},
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #namedLocation,
+          [name],
+          {
+            #params: params,
+            #queryParams: queryParams,
+          },
+        ),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
 }

@@ -25,7 +25,7 @@ void main() {
       time: DateTime.now(),
       recordedBy: 'recordedBy',
     ),
-    permissions: CAPermissionsSet.fromSet(const {
+    permissions: PermissionsSet.fromSet(const {
       'approved',
       'manageAllUsers',
       'readAllData',

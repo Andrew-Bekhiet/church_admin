@@ -4,7 +4,7 @@ abstract class AuthAdapter {
   Stream<User?> get userStream;
   Stream<String?> get idTokenStream;
 
-  Future<User?> signInWithGoogle();
+  Future<bool> signInWithGoogle();
 
   Future<void> refreshToken();
 

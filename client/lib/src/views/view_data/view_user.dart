@@ -134,19 +134,32 @@ class _ViewUserState extends State<ViewUser> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 if (user.permissions.manageAllUsers)
-                                  const ListTile(
-                                    leading: Icon(Icons.manage_accounts),
-                                    title: Text('إدارة جميع المستخدمين'),
+                                  ListTile(
+                                    leading: Icon(
+                                      UserPermission.manageAllUsers.icon,
+                                    ),
+                                    title: Text(
+                                      UserPermission
+                                          .manageAllUsers.humanReadableName,
+                                    ),
                                   ),
                                 if (user.permissions.readAllData)
-                                  const ListTile(
-                                    leading: Icon(Icons.visibility),
-                                    title: Text('رؤية جميع البيانات'),
+                                  ListTile(
+                                    leading:
+                                        Icon(UserPermission.readAllData.icon),
+                                    title: Text(
+                                      UserPermission
+                                          .readAllData.humanReadableName,
+                                    ),
                                   ),
                                 if (user.permissions.writeAllData)
-                                  const ListTile(
-                                    leading: Icon(Icons.edit),
-                                    title: Text('تعديل جميع البيانات'),
+                                  ListTile(
+                                    leading:
+                                        Icon(UserPermission.writeAllData.icon),
+                                    title: Text(
+                                      UserPermission
+                                          .writeAllData.humanReadableName,
+                                    ),
                                   ),
                                 if ((user.permissions.manageAllUsers ||
                                         user.permissions.readAllData ||
@@ -157,24 +170,42 @@ class _ViewUserState extends State<ViewUser> {
                                         user.permissions.exportData))
                                   const Divider(),
                                 if (user.permissions.recordHistory)
-                                  const ListTile(
-                                    leading: Icon(Icons.history),
-                                    title: Text('تسجيل الحضور لليوم الحالي'),
+                                  ListTile(
+                                    leading:
+                                        Icon(UserPermission.recordHistory.icon),
+                                    title: Text(
+                                      UserPermission
+                                          .recordHistory.humanReadableName,
+                                    ),
                                   ),
                                 if (user.permissions.changeOldHistory)
-                                  const ListTile(
-                                    leading: Icon(Icons.history),
-                                    title: Text('تغيير الحضور لأي يوم'),
+                                  ListTile(
+                                    leading: Icon(
+                                      UserPermission.changeOldHistory.icon,
+                                    ),
+                                    title: Text(
+                                      UserPermission
+                                          .changeOldHistory.humanReadableName,
+                                    ),
                                   ),
                                 if (user.permissions.recoverDeleted)
-                                  const ListTile(
-                                    leading: Icon(Icons.restore_from_trash),
-                                    title: Text('استرجاع المحذوفات'),
+                                  ListTile(
+                                    leading: Icon(
+                                      UserPermission.recoverDeleted.icon,
+                                    ),
+                                    title: Text(
+                                      UserPermission
+                                          .recoverDeleted.humanReadableName,
+                                    ),
                                   ),
                                 if (user.permissions.exportData)
-                                  const ListTile(
-                                    leading: Icon(Icons.file_upload),
-                                    title: Text('تصدير البيانات'),
+                                  ListTile(
+                                    leading:
+                                        Icon(UserPermission.exportData.icon),
+                                    title: Text(
+                                      UserPermission
+                                          .exportData.humanReadableName,
+                                    ),
                                   ),
                               ],
                             ),
@@ -201,10 +232,10 @@ class _ViewUserState extends State<ViewUser> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   if (adminData.areaAdminOnUsers ?? false)
-                                    const Icon(Icons.manage_accounts),
+                                    Icon(UserPermission.manageAllUsers.icon),
                                   if (adminData.areaAllowEdit ?? false)
-                                    const Icon(Icons.edit),
-                                  const Icon(Icons.visibility),
+                                    Icon(UserPermission.readAllData.icon),
+                                  Icon(UserPermission.writeAllData.icon),
                                 ],
                               ),
                             ),
@@ -262,10 +293,10 @@ class _ViewUserState extends State<ViewUser> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     if (adminData.groupAdminOnUsers ?? false)
-                                      const Icon(Icons.manage_accounts),
+                                      Icon(UserPermission.manageAllUsers.icon),
                                     if (adminData.groupAllowEdit ?? false)
-                                      const Icon(Icons.edit),
-                                    const Icon(Icons.visibility),
+                                      Icon(UserPermission.readAllData.icon),
+                                    Icon(UserPermission.writeAllData.icon),
                                   ],
                                 ),
                               ),
@@ -396,9 +427,10 @@ class _AdminOnServiceWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (p.serviceAdminOnUsers ?? false)
-                        const Icon(Icons.manage_accounts),
-                      if (p.serviceAllowEdit ?? false) const Icon(Icons.edit),
-                      const Icon(Icons.visibility),
+                        Icon(UserPermission.manageAllUsers.icon),
+                      if (p.serviceAllowEdit ?? false)
+                        Icon(UserPermission.readAllData.icon),
+                      Icon(UserPermission.writeAllData.icon),
                     ],
                   ),
                 ),
@@ -421,10 +453,10 @@ class _AdminOnServiceWidget extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               if (p.serviceAdminOnUsers ?? false)
-                                const Icon(Icons.manage_accounts),
+                                Icon(UserPermission.manageAllUsers.icon),
                               if (p.serviceAllowEdit ?? false)
-                                const Icon(Icons.edit),
-                              const Icon(Icons.visibility),
+                                Icon(UserPermission.readAllData.icon),
+                              Icon(UserPermission.writeAllData.icon),
                             ],
                           )
                         : trailingBuilder!(context, c),

@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide Json, LoggingService;
+import 'package:churchdata_core/churchdata_core.dart' hide Json, LoggingService,PermissionsSet;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -127,7 +127,9 @@ class CAViewableObjectService implements DefaultViewableObjectService {
   String? getFormattedValue(String? key, Object? value) {
     if (key == null || value == null) return null;
 
-    if (value is Json) {
+    if (value is PermissionsSet) {
+      return value.toHumanReadableString();
+    } else if (value is Json) {
       return value['name'];
     } else if (value is List) {
       return value.map((o) => getFormattedValue(key, o)).join(',');
@@ -172,10 +174,17 @@ class CAViewableObjectService implements DefaultViewableObjectService {
         object.toJson()[key],
       );
     } else if (object is User) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
+      if (key == 'permissions') {
+        return getFormattedValue(
+          key,
+          object.permissions,
+        );
+      } else {
+        return getFormattedValue(
+          key,
+          object.toJson()[key],
+        );
+      }
     } else if (object is Service) {
       return getFormattedValue(
         key,

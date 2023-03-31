@@ -798,14 +798,14 @@ class MockAuthService extends _i1.Mock implements _i18.AuthService {
         ),
       ) as _i4.ValueStream<String?>);
   @override
-  _i9.Future<_i18.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i9.Future<bool> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i9.Future<_i18.User?>.value(),
-        returnValueForMissingStub: _i9.Future<_i18.User?>.value(),
-      ) as _i9.Future<_i18.User?>);
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
   @override
   _i9.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(

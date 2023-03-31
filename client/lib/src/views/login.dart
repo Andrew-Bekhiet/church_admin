@@ -140,11 +140,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginWithGoogle() async {
     setState(() => _loading = true);
     try {
-      await AuthService.I.signInWithGoogle();
-
-      await AuthService.I.userStream.nextNonNullStrict;
-      await setupSettings();
-
+      if (await AuthService.I.signInWithGoogle()) {
+        await AuthService.I.userStream.nextNonNullStrict;
+        await setupSettings();
+      }
       if (mounted) {
         setState(() => _loading = false);
       }
@@ -153,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() => _loading = false);
       }
       await LoggingService.I.reportError(
-        err as Exception,
+        err,
         stackTrace: stack,
       );
       if (mounted) {
@@ -176,6 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // await settings.setSecondLineFor(Street, 'lastVisit');
       // await settings.setSecondLineFor(Family, 'lastVisit');
       await settings.setSecondLineFor(Person, 'birthdate');
+      await settings.setSecondLineFor(User, 'permissions');
 
       final notificationsSettings = await globalProviderContainer
           .read(hiveProvider)

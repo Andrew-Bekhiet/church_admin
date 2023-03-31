@@ -4,3 +4,13 @@ subscription watchUser($uid: uuid!, $fullData: Boolean = false) {
     ...UserDetails @include(if: $fullData)
   }
 }
+
+subscription watchAllUsers(
+  $where: [AuthUsersDataBoolExp!] = {}
+  $orderBy: [AuthUsersDataOrderBy!] = { name: ASC }
+  $limit: Int = 200
+) {
+  authUsersData(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    ...UserOverview
+  }
+}

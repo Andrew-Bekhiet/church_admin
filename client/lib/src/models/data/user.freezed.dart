@@ -26,7 +26,7 @@ mixin _$User {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   List<AdminOnData>? get adminOn => throw _privateConstructorUsedError;
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions => throw _privateConstructorUsedError;
+  PermissionsSet get permissions => throw _privateConstructorUsedError;
   String? get authId => throw _privateConstructorUsedError;
   @JsonKey(includeIfNull: false)
   String? get password => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
+          PermissionsSet permissions,
       String? authId,
       @JsonKey(includeIfNull: false)
           String? password,
@@ -123,7 +123,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
+              as PermissionsSet,
       authId: freezed == authId
           ? _value.authId
           : authId // ignore: cast_nullable_to_non_nullable
@@ -197,7 +197,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          CAPermissionsSet permissions,
+          PermissionsSet permissions,
       String? authId,
       @JsonKey(includeIfNull: false)
           String? password,
@@ -263,7 +263,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       permissions: null == permissions
           ? _value.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
-              as CAPermissionsSet,
+              as PermissionsSet,
       authId: freezed == authId
           ? _value.authId
           : authId // ignore: cast_nullable_to_non_nullable
@@ -310,7 +310,7 @@ class _$_User extends _User {
       this.photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          this.permissions = const CAPermissionsSet.empty(),
+          this.permissions = const PermissionsSet.empty(),
       this.authId,
       @JsonKey(includeIfNull: false)
           this.password,
@@ -349,7 +349,7 @@ class _$_User extends _User {
 
   @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  final CAPermissionsSet permissions;
+  final PermissionsSet permissions;
   @override
   final String? authId;
   @override
@@ -466,7 +466,7 @@ abstract class _User extends User {
       final DateTime? photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          final CAPermissionsSet permissions,
+          final PermissionsSet permissions,
       final String? authId,
       @JsonKey(includeIfNull: false)
           final String? password,
@@ -493,7 +493,7 @@ abstract class _User extends User {
   List<AdminOnData>? get adminOn;
   @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  CAPermissionsSet get permissions;
+  PermissionsSet get permissions;
   @override
   String? get authId;
   @override

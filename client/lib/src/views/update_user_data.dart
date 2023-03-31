@@ -13,16 +13,14 @@ class UpdateUserData extends StatefulWidget {
     builder: (context, state) => const UpdateUserData(),
     redirect: (context, state) {
       if (!AuthService.I.isSignedIn) {
-        return ChurchAdminApp.router.routeInformationParser.configuration
-            .namedLocation('login');
+        return '/login';
       } else if (AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
         return '/';
       } else if (LocalAuthService.I.shouldAuthenticate) {
-        return ChurchAdminApp.router.routeInformationParser.configuration
-            .namedLocation(
-          'authenticate',
-          queryParams: {'next': state.location},
-        );
+        return Uri(
+          path: 'authenticate',
+          queryParameters: {'next': state.location},
+        ).toString();
       }
       return null;
     },

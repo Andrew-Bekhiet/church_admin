@@ -196,30 +196,30 @@ class _FakeDatabaseService_15 extends _i1.SmartFake
         );
 }
 
-class _FakePersonsNotificationsQueries_16 extends _i1.SmartFake
-    implements _i7.PersonsNotificationsQueries {
-  _FakePersonsNotificationsQueries_16(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakePerson_17 extends _i1.SmartFake implements _i4.Person {
-  _FakePerson_17(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeGQLPaginatableStream_18<T> extends _i1.SmartFake
+class _FakeGQLPaginatableStream_16<T> extends _i1.SmartFake
     implements _i4.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_18(
+  _FakeGQLPaginatableStream_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePersonsNotificationsQueries_17 extends _i1.SmartFake
+    implements _i7.PersonsNotificationsQueries {
+  _FakePersonsNotificationsQueries_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePerson_18 extends _i1.SmartFake implements _i4.Person {
+  _FakePerson_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -274,7 +274,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
       ) as _i8.Future<void>);
   @override
   _i8.Future<void> reportError(
-    Exception? error, {
+    dynamic error, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extras,
     StackTrace? stackTrace,
@@ -347,14 +347,14 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         ),
       ) as _i3.ValueStream<String?>);
   @override
-  _i8.Future<_i4.User?> signInWithGoogle() => (super.noSuchMethod(
+  _i8.Future<bool> signInWithGoogle() => (super.noSuchMethod(
         Invocation.method(
           #signInWithGoogle,
           [],
         ),
-        returnValue: _i8.Future<_i4.User?>.value(),
-        returnValueForMissingStub: _i8.Future<_i4.User?>.value(),
-      ) as _i8.Future<_i4.User?>);
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
   @override
   _i8.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -575,6 +575,32 @@ class MockUsersDAO extends _i1.Mock implements _i6.UsersDAO {
         ),
       ) as _i4.DBGraphQLClient);
   @override
+  _i4.GQLPaginatableStream<_i4.User> paginateUsers(
+          {_i8.Stream<String?>? searchQuery}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #paginateUsers,
+          [],
+          {#searchQuery: searchQuery},
+        ),
+        returnValue: _FakeGQLPaginatableStream_16<_i4.User>(
+          this,
+          Invocation.method(
+            #paginateUsers,
+            [],
+            {#searchQuery: searchQuery},
+          ),
+        ),
+        returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.User>(
+          this,
+          Invocation.method(
+            #paginateUsers,
+            [],
+            {#searchQuery: searchQuery},
+          ),
+        ),
+      ) as _i4.GQLPaginatableStream<_i4.User>);
+  @override
   _i8.Stream<_i4.User?> watchUser({
     required String? uid,
     bool? fullData = false,
@@ -628,11 +654,11 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
   _i7.PersonsNotificationsQueries get notificationsQueries =>
       (super.noSuchMethod(
         Invocation.getter(#notificationsQueries),
-        returnValue: _FakePersonsNotificationsQueries_16(
+        returnValue: _FakePersonsNotificationsQueries_17(
           this,
           Invocation.getter(#notificationsQueries),
         ),
-        returnValueForMissingStub: _FakePersonsNotificationsQueries_16(
+        returnValueForMissingStub: _FakePersonsNotificationsQueries_17(
           this,
           Invocation.getter(#notificationsQueries),
         ),
@@ -669,7 +695,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
           [],
           {#newPerson: newPerson},
         ),
-        returnValue: _i8.Future<_i4.Person>.value(_FakePerson_17(
+        returnValue: _i8.Future<_i4.Person>.value(_FakePerson_18(
           this,
           Invocation.method(
             #insertPerson,
@@ -677,7 +703,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             {#newPerson: newPerson},
           ),
         )),
-        returnValueForMissingStub: _i8.Future<_i4.Person>.value(_FakePerson_17(
+        returnValueForMissingStub: _i8.Future<_i4.Person>.value(_FakePerson_18(
           this,
           Invocation.method(
             #insertPerson,
@@ -761,7 +787,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             #byGroupId: byGroupId,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_18<_i4.Person>(
+        returnValue: _FakeGQLPaginatableStream_16<_i4.Person>(
           this,
           Invocation.method(
             #paginatePersons,
@@ -778,7 +804,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_18<_i4.Person>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Person>(
           this,
           Invocation.method(
             #paginatePersons,
@@ -865,7 +891,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #asAdmin: asAdmin,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+            returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonClassAttendance,
@@ -878,7 +904,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+                _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonClassAttendance,
@@ -908,7 +934,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #asAdmin: asAdmin,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+            returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonGroupAttendance,
@@ -921,7 +947,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+                _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonGroupAttendance,
@@ -951,7 +977,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #asAdmin: asAdmin,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+            returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonServiceAttendance,
@@ -964,7 +990,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+                _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonServiceAttendance,
@@ -994,7 +1020,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             #limit: limit,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+        returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
           this,
           Invocation.method(
             #paginatePersonAttendance,
@@ -1006,7 +1032,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
           ),
         ),
         returnValueForMissingStub:
-            _FakeGQLPaginatableStream_18<_i4.LastRecordedByInfo>(
+            _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
           this,
           Invocation.method(
             #paginatePersonAttendance,
@@ -1093,7 +1119,7 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
           [],
           {#searchQuery: searchQuery},
         ),
-        returnValue: _FakeGQLPaginatableStream_18<_i4.Area>(
+        returnValue: _FakeGQLPaginatableStream_16<_i4.Area>(
           this,
           Invocation.method(
             #paginateAreas,
@@ -1101,7 +1127,7 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_18<_i4.Area>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Area>(
           this,
           Invocation.method(
             #paginateAreas,
@@ -1160,7 +1186,7 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
           [],
           {#searchQuery: searchQuery},
         ),
-        returnValue: _FakeGQLPaginatableStream_18<_i4.Service>(
+        returnValue: _FakeGQLPaginatableStream_16<_i4.Service>(
           this,
           Invocation.method(
             #paginateServices,
@@ -1168,7 +1194,7 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
             {#searchQuery: searchQuery},
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_18<_i4.Service>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Service>(
           this,
           Invocation.method(
             #paginateServices,
@@ -1219,6 +1245,24 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: _i8.Stream<void>.empty(),
       ) as _i8.Stream<void>);
   @override
+  bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #requestOneTimeAuthForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #shouldAuthenticateForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
   void didChangeAppLifecycleState(_i13.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1236,10 +1280,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void resetAuthState() => super.noSuchMethod(
+  void resetAuthState({String? path}) => super.noSuchMethod(
         Invocation.method(
           #resetAuthState,
           [],
+          {#path: path},
         ),
         returnValueForMissingStub: null,
       );

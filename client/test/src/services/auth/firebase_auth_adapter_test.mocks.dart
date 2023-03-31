@@ -265,6 +265,17 @@ class _FakeDatabaseService_22 extends _i1.SmartFake
         );
 }
 
+class _FakeGQLPaginatableStream_23<T> extends _i1.SmartFake
+    implements _i6.GQLPaginatableStream<T> {
+  _FakeGQLPaginatableStream_23(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [GoogleSignInAuthentication].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1639,6 +1650,32 @@ class MockUsersDAO extends _i1.Mock implements _i8.UsersDAO {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i6.DBGraphQLClient);
+  @override
+  _i6.GQLPaginatableStream<_i6.User> paginateUsers(
+          {_i9.Stream<String?>? searchQuery}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #paginateUsers,
+          [],
+          {#searchQuery: searchQuery},
+        ),
+        returnValue: _FakeGQLPaginatableStream_23<_i6.User>(
+          this,
+          Invocation.method(
+            #paginateUsers,
+            [],
+            {#searchQuery: searchQuery},
+          ),
+        ),
+        returnValueForMissingStub: _FakeGQLPaginatableStream_23<_i6.User>(
+          this,
+          Invocation.method(
+            #paginateUsers,
+            [],
+            {#searchQuery: searchQuery},
+          ),
+        ),
+      ) as _i6.GQLPaginatableStream<_i6.User>);
   @override
   _i9.Stream<_i6.User?> watchUser({
     required String? uid,

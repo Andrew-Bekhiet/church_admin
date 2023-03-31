@@ -18,7 +18,7 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
               (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
       permissions: json['permissions'] == null
-          ? const CAPermissionsSet.empty()
+          ? const PermissionsSet.empty()
           : permissionsSetFromJson(json['permissions']),
       authId: json['authId'] as String?,
       password: json['password'] as String?,
