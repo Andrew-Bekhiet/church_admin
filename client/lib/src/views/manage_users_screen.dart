@@ -41,26 +41,9 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StreamBuilder<String?>(
-          stream: _search,
-          builder: (context, searchData) {
-            if (searchData.hasData) {
-              return SearchField(
-                searchSink: _search,
-                canHide: true,
-              );
-            }
-
-            return Row(
-              children: [
-                const Expanded(child: Text('إدارة المستخدمين')),
-                IconButton(
-                  onPressed: () => _search.add(''),
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-            );
-          },
+        title: TitleSearchField(
+          searchStream: _search,
+          title: const Text('إدارة المستخدمين'),
         ),
       ),
       body: ViewableObjectList(

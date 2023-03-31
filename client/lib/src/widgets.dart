@@ -9,6 +9,7 @@ export 'widgets/lazy_tab_page.dart';
 export 'widgets/preferred_size_persistent_header_delegate.dart';
 export 'widgets/search_field.dart';
 export 'widgets/services_hierarchy_list.dart';
+export 'widgets/title_search_field.dart';
 export 'widgets/viewable_object_app_bar.dart';
 export 'widgets/viewable_object_list.dart';
 export 'widgets/viewable_object_list_item.dart';

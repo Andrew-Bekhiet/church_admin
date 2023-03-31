@@ -164,27 +164,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
       ),
       appBar: AppBar(
-        title: StreamBuilder<String?>(
-          stream: _search,
-          builder: (context, searchData) {
-            if (searchData.hasData) {
-              //TODO: data filters
-              return SearchField(
-                searchSink: _search,
-                canHide: true,
-              );
-            }
-
-            return Row(
-              children: [
-                const Expanded(child: Text('كنيسة السيدة العذراء مريم')),
-                IconButton(
-                  onPressed: () => _search.add(''),
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-            );
-          },
+        title: TitleSearchField(
+          searchStream: _search,
+          title: const Text('كنيسة السيدة العذراء مريم'),
         ),
       ),
       body: _HomeBody(
