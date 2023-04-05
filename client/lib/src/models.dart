@@ -1,7 +1,7 @@
 export 'models/analysis.dart';
 export 'models/bases.dart';
 export 'models/data.dart';
-export 'models/geo_map_options.dart';
+export 'models/geomap_options.dart';
 export 'models/meta.dart';
 export 'models/notification.dart';
 export 'models/person_analysis_options.dart';

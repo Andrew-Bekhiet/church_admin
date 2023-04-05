@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'geo_map_options.dart';
+part of 'geomap_options.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$GeoMapOptions {
+mixin _$GeomapOptions {
   Set<GeoMapLayer> get layers => throw _privateConstructorUsedError;
   Set<Area> get selectedAreas => throw _privateConstructorUsedError;
   Set<Street> get selectedStreets => throw _privateConstructorUsedError;
@@ -26,15 +26,15 @@ mixin _$GeoMapOptions {
   Set<Group> get selectedGroups => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GeoMapOptionsCopyWith<GeoMapOptions> get copyWith =>
+  $GeomapOptionsCopyWith<GeomapOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GeoMapOptionsCopyWith<$Res> {
-  factory $GeoMapOptionsCopyWith(
-          GeoMapOptions value, $Res Function(GeoMapOptions) then) =
-      _$GeoMapOptionsCopyWithImpl<$Res, GeoMapOptions>;
+abstract class $GeomapOptionsCopyWith<$Res> {
+  factory $GeomapOptionsCopyWith(
+          GeomapOptions value, $Res Function(GeomapOptions) then) =
+      _$GeomapOptionsCopyWithImpl<$Res, GeomapOptions>;
   @useResult
   $Res call(
       {Set<GeoMapLayer> layers,
@@ -48,9 +48,9 @@ abstract class $GeoMapOptionsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GeoMapOptionsCopyWithImpl<$Res, $Val extends GeoMapOptions>
-    implements $GeoMapOptionsCopyWith<$Res> {
-  _$GeoMapOptionsCopyWithImpl(this._value, this._then);
+class _$GeomapOptionsCopyWithImpl<$Res, $Val extends GeomapOptions>
+    implements $GeomapOptionsCopyWith<$Res> {
+  _$GeomapOptionsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -108,7 +108,7 @@ class _$GeoMapOptionsCopyWithImpl<$Res, $Val extends GeoMapOptions>
 
 /// @nodoc
 abstract class _$$_GeoMapOptionsCopyWith<$Res>
-    implements $GeoMapOptionsCopyWith<$Res> {
+    implements $GeomapOptionsCopyWith<$Res> {
   factory _$$_GeoMapOptionsCopyWith(
           _$_GeoMapOptions value, $Res Function(_$_GeoMapOptions) then) =
       __$$_GeoMapOptionsCopyWithImpl<$Res>;
@@ -127,7 +127,7 @@ abstract class _$$_GeoMapOptionsCopyWith<$Res>
 
 /// @nodoc
 class __$$_GeoMapOptionsCopyWithImpl<$Res>
-    extends _$GeoMapOptionsCopyWithImpl<$Res, _$_GeoMapOptions>
+    extends _$GeomapOptionsCopyWithImpl<$Res, _$_GeoMapOptions>
     implements _$$_GeoMapOptionsCopyWith<$Res> {
   __$$_GeoMapOptionsCopyWithImpl(
       _$_GeoMapOptions _value, $Res Function(_$_GeoMapOptions) _then)
@@ -186,7 +186,12 @@ class __$$_GeoMapOptionsCopyWithImpl<$Res>
 
 class _$_GeoMapOptions implements _GeoMapOptions {
   _$_GeoMapOptions(
-      {final Set<GeoMapLayer> layers = const {},
+      {final Set<GeoMapLayer> layers = const {
+        GeoMapLayer.areas,
+        GeoMapLayer.streets,
+        GeoMapLayer.families,
+        GeoMapLayer.persons
+      },
       final Set<Area> selectedAreas = const {},
       final Set<Street> selectedStreets = const {},
       final Set<Family> selectedFamilies = const {},
@@ -278,7 +283,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
 
   @override
   String toString() {
-    return 'GeoMapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
+    return 'GeomapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
   }
 
   @override
@@ -322,7 +327,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
       __$$_GeoMapOptionsCopyWithImpl<_$_GeoMapOptions>(this, _$identity);
 }
 
-abstract class _GeoMapOptions implements GeoMapOptions {
+abstract class _GeoMapOptions implements GeomapOptions {
   factory _GeoMapOptions(
       {final Set<GeoMapLayer> layers,
       final Set<Area> selectedAreas,

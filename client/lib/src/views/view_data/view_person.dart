@@ -183,8 +183,10 @@ class _ViewPersonState extends State<ViewPerson> {
                               icon: const Icon(Icons.map),
                               onPressed: () async => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      DataGeomap(initialPerson: person),
+                                  builder: (context) => ViewGeodataMap(
+                                    initialPerson: person,
+                                    initialGeomapOptions: GeomapOptions(),
+                                  ),
                                 ),
                               ),
                               tooltip: 'إظهار على الخريطة',

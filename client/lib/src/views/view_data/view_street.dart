@@ -107,7 +107,10 @@ class _ViewStreetState extends State<ViewStreet> {
                   icon: const Icon(Icons.map),
                   onPressed: () async => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => DataGeomap(initialStreet: street),
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions:
+                            GeomapOptions(selectedStreets: {street}),
+                      ),
                     ),
                   ),
                 ),

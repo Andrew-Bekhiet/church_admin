@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/widgets/data_geomap.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     show ContrastingColor, TappableFormField;
 import 'package:collection/collection.dart';
@@ -1469,14 +1470,9 @@ class _EditPersonState extends State<EditPerson> {
   Future<void> _editGeoLocation(BuildContext context) async {
     final Person? result = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DataGeomap(
-          editPerson: true,
+        builder: (context) => EditPersonLocationMap(
+          onSaved: Navigator.of(context).pop,
           initialPerson: newPerson,
-          initialLayers: const {
-            GeoMapLayer.areas,
-            GeoMapLayer.families,
-            GeoMapLayer.streets,
-          },
         ),
       ),
     );

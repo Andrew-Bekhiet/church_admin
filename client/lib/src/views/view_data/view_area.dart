@@ -121,7 +121,10 @@ class _ViewAreaState extends State<ViewArea> {
                   icon: const Icon(Icons.map),
                   onPressed: () async => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => DataGeomap(initialArea: area),
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions:
+                            GeomapOptions(selectedAreas: {area}),
+                      ),
                     ),
                   ),
                 ),

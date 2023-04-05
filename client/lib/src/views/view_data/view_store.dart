@@ -140,8 +140,10 @@ class _ViewStoreState extends State<ViewStore> {
                               icon: const Icon(Icons.map),
                               onPressed: () async => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      DataGeomap(initialStore: store),
+                                  builder: (context) => ViewGeodataMap(
+                                    initialGeomapOptions:
+                                        GeomapOptions(selectedStores: {store}),
+                                  ),
                                 ),
                               ),
                             ),

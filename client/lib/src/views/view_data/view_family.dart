@@ -121,7 +121,11 @@ class _ViewFamilyState extends State<ViewFamily> {
                     icon: const Icon(Icons.map),
                     onPressed: () async => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => DataGeomap(initialFamily: family),
+                        builder: (context) => ViewGeodataMap(
+                          initialGeomapOptions: GeomapOptions(
+                            selectedFamilies: {family},
+                          ),
+                        ),
                       ),
                     ),
                     tooltip: 'إظهار على الخريطة',
