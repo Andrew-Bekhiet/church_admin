@@ -1,0 +1,19 @@
+mutation deleteStreet($streetId: uuid!) {
+  deleteStreets(where: { id: { _eq: $streetId } }) {
+    returning {
+      ...Street
+    }
+  }
+}
+
+mutation insertStreet($newStreet: StreetsInsertInput!) {
+  insertStreetsOne(object: $newStreet) {
+    ...Street
+  }
+}
+
+mutation updateStreet($streetId: uuid!, $newStreet: StreetsSetInput!) {
+  updateStreetsByPk(pk_columns: { id: $streetId }, _set: $newStreet) {
+    ...Street
+  }
+}

@@ -15,6 +15,9 @@ class ViewStreet extends StatefulWidget {
         street: (state.extra as Map?)?['street'] as Street?,
       );
     },
+    routes: [
+      EditStreet.route,
+    ],
   );
 
   final Street? street;

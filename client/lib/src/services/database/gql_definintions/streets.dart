@@ -2,6 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
+import 'helpers.dart';
+import 'streets/__generated__/mutations.gql.dart';
 import 'streets/__generated__/subscriptions.graphql.dart';
 
 class StreetsDAO extends DAOBase {
@@ -55,6 +57,60 @@ class StreetsDAO extends DAOBase {
         operationName: 'watchStreet',
         variables: Variables$Subscription$watchStreet(
           id: streetId.toUuid(),
+        ).toJson(),
+        parserFn: db.parser.singleParser(Street.fromJson),
+      ),
+    );
+  }
+
+  Future<Street?> deleteStreet({
+    required String streetId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteStreet,
+      variables: Variables$Mutation$deleteStreet(
+        streetId: streetId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Street.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Street> insertStreet({
+    required Street newStreet,
+  }) {
+    final delta = computeObjectDelta(
+      newStreet.toJson(),
+      Street(id: '', name: '').toJson(),
+    )..remove('id');
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertStreet,
+        operationName: 'insertStreet',
+        variables: {'newStreet': delta},
+        parserFn: db.parser.singleParser(Street.fromJson),
+      ),
+    );
+  }
+
+  Future<Street> updateStreet({
+    required Street newStreet,
+    required Street oldStreet,
+  }) {
+    final delta = computeObjectDelta(
+      newStreet.toJson(),
+      oldStreet.toJson(),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationupdateStreet,
+        operationName: 'updateStreet',
+        variables: Variables$Mutation$updateStreet(
+          streetId: newStreet.id.toUuid(),
+          newStreet: Input$StreetsSetInput.fromJson(delta),
         ).toJson(),
         parserFn: db.parser.singleParser(Street.fromJson),
       ),
