@@ -5,21 +5,8 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../iterable_difference_result.dart';
+import '../helpers.dart';
 import '__generated__/mutations.graphql.dart';
-
-final _idEquality = EqualityBy<ID, String>((o) => o.id);
-final _collectionEquality =
-    DeepCollectionEquality.unordered(EqualityBy((o) => o is ID ? o.id : o));
-
-Map<String, dynamic> _computePersonDelta(Person newPerson, Person oldPerson) =>
-    {
-      for (final kv in newPerson.toJson().entries)
-        if (!_collectionEquality.equals(
-          kv.value,
-          oldPerson.toJson()[kv.key],
-        ))
-          kv.key: kv.value,
-    };
 
 class PersonInsertHelper {
   static final _mutationNonExistentVars = {
@@ -44,9 +31,9 @@ class PersonInsertHelper {
   PersonInsertHelper({
     required this.newPerson,
     Person? oldPerson,
-  }) : _personDelta = _computePersonDelta(
-          newPerson,
-          oldPerson ?? Person(id: '', name: ''),
+  }) : _personDelta = computeObjectDelta(
+          newPerson.toJson(),
+          (oldPerson ?? Person(id: '', name: '')).toJson(),
         )..removeWhere((k, v) => _mutationNonExistentVars.contains(k));
 
   List<Input$PersonsServicesInsertInput> get _newServices =>
@@ -116,7 +103,8 @@ class PersonUpdateHelper {
   PersonUpdateHelper({
     required this.newPerson,
     required this.oldPerson,
-  }) : _personDelta = _computePersonDelta(newPerson, oldPerson) {
+  }) : _personDelta =
+            computeObjectDelta(newPerson.toJson(), oldPerson.toJson()) {
     _servicesDiff = _getDifferenceUsing((p) => p.services);
     _groupsDiff = _getDifferenceUsing((p) => p.groups);
     _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);
@@ -127,8 +115,8 @@ class PersonUpdateHelper {
     Iterable<ID>? Function(Person) selector,
   ) {
     return diff(
-      EqualitySet<ID>.from(_idEquality, selector(oldPerson) ?? []),
-      EqualitySet<ID>.from(_idEquality, selector(newPerson) ?? []),
+      EqualitySet<ID>.from(idEquality, selector(oldPerson) ?? []),
+      EqualitySet<ID>.from(idEquality, selector(newPerson) ?? []),
     );
   }
 

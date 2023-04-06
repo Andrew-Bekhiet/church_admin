@@ -228,8 +228,18 @@ class _FakePerson_18 extends _i1.SmartFake implements _i4.Person {
         );
 }
 
-class _FakeDuration_19 extends _i1.SmartFake implements Duration {
-  _FakeDuration_19(
+class _FakeArea_19 extends _i1.SmartFake implements _i4.Area {
+  _FakeArea_19(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_20 extends _i1.SmartFake implements Duration {
+  _FakeDuration_20(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1147,6 +1157,79 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
         returnValue: _i8.Stream<_i4.Area?>.empty(),
         returnValueForMissingStub: _i8.Stream<_i4.Area?>.empty(),
       ) as _i8.Stream<_i4.Area?>);
+  @override
+  _i8.Future<_i4.Area?> deleteArea({required String? areaId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteArea,
+          [],
+          {#areaId: areaId},
+        ),
+        returnValue: _i8.Future<_i4.Area?>.value(),
+        returnValueForMissingStub: _i8.Future<_i4.Area?>.value(),
+      ) as _i8.Future<_i4.Area?>);
+  @override
+  _i8.Future<_i4.Area> insertArea({required _i4.Area? newArea}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #insertArea,
+          [],
+          {#newArea: newArea},
+        ),
+        returnValue: _i8.Future<_i4.Area>.value(_FakeArea_19(
+          this,
+          Invocation.method(
+            #insertArea,
+            [],
+            {#newArea: newArea},
+          ),
+        )),
+        returnValueForMissingStub: _i8.Future<_i4.Area>.value(_FakeArea_19(
+          this,
+          Invocation.method(
+            #insertArea,
+            [],
+            {#newArea: newArea},
+          ),
+        )),
+      ) as _i8.Future<_i4.Area>);
+  @override
+  _i8.Future<_i4.Area> updateArea({
+    required _i4.Area? newArea,
+    required _i4.Area? oldArea,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateArea,
+          [],
+          {
+            #newArea: newArea,
+            #oldArea: oldArea,
+          },
+        ),
+        returnValue: _i8.Future<_i4.Area>.value(_FakeArea_19(
+          this,
+          Invocation.method(
+            #updateArea,
+            [],
+            {
+              #newArea: newArea,
+              #oldArea: oldArea,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i8.Future<_i4.Area>.value(_FakeArea_19(
+          this,
+          Invocation.method(
+            #updateArea,
+            [],
+            {
+              #newArea: newArea,
+              #oldArea: oldArea,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i4.Area>);
 }
 
 /// A class which mocks [ServicesDAO].
@@ -1223,11 +1306,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_19(
+        returnValue: _FakeDuration_20(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_19(
+        returnValueForMissingStub: _FakeDuration_20(
           this,
           Invocation.getter(#timeToReauth),
         ),

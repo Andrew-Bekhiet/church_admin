@@ -2,7 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
+import 'areas/__generated__/mutations.gql.dart';
 import 'areas/__generated__/subscriptions.graphql.dart';
+import 'helpers.dart';
 
 class AreasDAO extends DAOBase {
   const AreasDAO({
@@ -47,5 +49,59 @@ class AreasDAO extends DAOBase {
           ),
         )
         .map((p) => p.parsedData);
+  }
+
+  Future<Area?> deleteArea({
+    required String areaId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteArea,
+      variables: Variables$Mutation$deleteArea(
+        areaId: areaId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Area.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Area> insertArea({
+    required Area newArea,
+  }) {
+    final delta = computeObjectDelta(
+      newArea.toJson(),
+      Area(id: '', name: '').toJson(),
+    )..remove('id');
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertArea,
+        operationName: 'insertArea',
+        variables: {'newArea': delta},
+        parserFn: db.parser.singleParser(Area.fromJson),
+      ),
+    );
+  }
+
+  Future<Area> updateArea({
+    required Area newArea,
+    required Area oldArea,
+  }) {
+    final delta = computeObjectDelta(
+      newArea.toJson(),
+      oldArea.toJson(),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationupdateArea,
+        operationName: 'updateArea',
+        variables: Variables$Mutation$updateArea(
+          areaId: newArea.id.toUuid(),
+          newArea: Input$AreasSetInput.fromJson(delta),
+        ).toJson(),
+        parserFn: db.parser.singleParser(Area.fromJson),
+      ),
+    );
   }
 }

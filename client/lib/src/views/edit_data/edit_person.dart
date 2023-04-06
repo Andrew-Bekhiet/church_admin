@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/widgets/data_geomap.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     show ContrastingColor, TappableFormField;
 import 'package:collection/collection.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -244,7 +242,7 @@ class _EditPersonState extends State<EditPerson> {
                                 textInputAction: TextInputAction.next,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
-                                  if (value?.isEmpty ?? true) {
+                                  if (value?.trim().isEmpty ?? true) {
                                     return 'يجب ملئ الاسم';
                                   }
                                   return null;
@@ -1079,20 +1077,14 @@ class _EditPersonState extends State<EditPerson> {
                                     : const Text('لا يوجد شارات');
                               },
                             ),
-                            FormField<Color?>(
+                            ColorField(
                               initialValue: newPerson.color,
-                              builder: (state) => ListTile(
-                                title: const Text('اللون'),
-                                onTap: () async => _selectColor(state),
-                                trailing: ColorIndicator(
-                                  hasBorder: true,
-                                  width: 50,
-                                  height: 50,
-                                  borderRadius: 20,
-                                  color: state.value ?? Colors.transparent,
-                                ),
+                              onChanged: (value) => setState(
+                                () => newPerson =
+                                    newPerson.copyWith(color: value),
                               ),
                             ),
+
                             _FieldWrapper(
                               builder: (context) => TextFormField(
                                 decoration: const InputDecoration(
@@ -1419,51 +1411,6 @@ class _EditPersonState extends State<EditPerson> {
         groups: groups.toList(),
       );
       focusScope.nextFocus();
-    }
-  }
-
-  Future<void> _selectColor(FormFieldState<Color?> state) async {
-    final Color newColor = await showColorPickerDialog(
-      state.context,
-      state.value ?? Theme.of(context).primaryColor,
-      title: Text(
-        'اختيار اللون',
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      spacing: 10,
-      runSpacing: 10,
-      borderRadius: 20,
-      wheelDiameter: 165,
-      enableOpacity: true,
-      enableTonalPalette: true,
-      enableShadesSelection: false,
-      showRecentColors: true,
-      showColorName: true,
-      showColorCode: true,
-      colorCodeHasColor: true,
-      pickersEnabled: <ColorPickerType, bool>{
-        ColorPickerType.wheel: true,
-        ColorPickerType.primary: false,
-        ColorPickerType.accent: false,
-        ColorPickerType.both: false,
-        ColorPickerType.bw: false,
-        ColorPickerType.custom: false,
-      },
-      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-        copyButton: true,
-        pasteButton: true,
-        longPressMenu: true,
-      ),
-      barrierColor: Colors.black54,
-      constraints: BoxConstraints(
-        minWidth: MediaQuery.of(context).size.height * 0.7,
-      ),
-    );
-    if (mounted) {
-      state.didChange(newColor);
-      setState(
-        () => newPerson = newPerson.copyWith(color: newColor),
-      );
     }
   }
 

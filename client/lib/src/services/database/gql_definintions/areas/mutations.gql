@@ -1,0 +1,19 @@
+mutation deleteArea($areaId: uuid!) {
+  deleteAreas(where: { id: { _eq: $areaId } }) {
+    returning {
+      ...Area
+    }
+  }
+}
+
+mutation insertArea($newArea: AreasInsertInput!) {
+  insertAreasOne(object: $newArea) {
+    ...Area
+  }
+}
+
+mutation updateArea($areaId: uuid!, $newArea: AreasSetInput!) {
+  updateAreasByPk(pk_columns: { id: $areaId }, _set: $newArea) {
+    ...Area
+  }
+}

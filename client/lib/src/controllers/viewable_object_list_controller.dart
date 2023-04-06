@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/src/controllers/selection_controller.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:collection/collection.dart';
 import 'package:rxdart_ext/single.dart';
 
 class ViewableObjectListController<T extends Viewable> {
@@ -25,7 +26,12 @@ class ViewableObjectListController<T extends Viewable> {
     required this.objectsPaginatableStream,
     this.filterStream,
     SelectionController<T>? selectionController,
-  }) : selectionController = selectionController ?? SelectionController<T>() {
+  }) : selectionController = selectionController ??
+            SelectionController<T>(
+              equality: EqualityBy(
+                (o) => (o is ID) ? (o as ID).id : o,
+              ),
+            ) {
     if (filterStream != null) {
       _filteredObjectsSubject = BehaviorSubject<List<T>>();
 

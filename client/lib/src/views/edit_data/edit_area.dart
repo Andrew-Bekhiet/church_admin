@@ -1,9 +1,8 @@
-/* import 'dart:async';
+import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     show ContrastingColor, TappableFormField;
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
@@ -12,7 +11,7 @@ import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:universal_file/universal_file.dart';
 import 'package:uuid/uuid.dart';
 
-import 'photo_state.dart';
+import 'photo_field_state.dart';
 
 class EditArea extends StatefulWidget {
   static final route = GoRoute(
@@ -43,8 +42,7 @@ class _EditAreaState extends State<EditArea> {
   bool _saveLock = false;
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
-  String? _suggestedAddress;
-  PhotoState _photoState = PhotoState(deletePhoto: false);
+  PhotoFieldState _photoFieldState = PhotoFieldState(deletePhoto: false);
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +61,10 @@ class _EditAreaState extends State<EditArea> {
           onWillPop: _confirmExit,
           child: CustomScrollView(
             slivers: [
-              FormField<PhotoState>(
-                initialValue: _photoState,
+              FormField<PhotoFieldState>(
+                initialValue: _photoFieldState,
                 onSaved: (v) =>
-                    v?.hasChanged ?? false ? _photoState = v! : null,
+                    v?.hasChanged ?? false ? _photoFieldState = v! : null,
                 builder: (state) => SliverAppBar(
                   backgroundColor: newArea.color,
                   foregroundColor: foregroundColor,
@@ -83,7 +81,7 @@ class _EditAreaState extends State<EditArea> {
                           return;
                         } else if (source == ImagePickerService.deleteImage) {
                           state
-                            ..didChange(PhotoState(deletePhoto: true))
+                            ..didChange(PhotoFieldState(deletePhoto: true))
                             ..save();
                         }
 
@@ -93,13 +91,12 @@ class _EditAreaState extends State<EditArea> {
                             await ImagePickerService.I.pickAndCropImage(
                           context: context,
                           source: source as ImageSource,
-                          cropStyle: CropStyle.circle,
                           lockAspectRatio: true,
                         );
                         if (newPhoto != null) {
                           state
                             ..didChange(
-                              PhotoState(
+                              PhotoFieldState(
                                 deletePhoto: false,
                                 newPhoto: newPhoto,
                               ),
@@ -206,25 +203,22 @@ class _EditAreaState extends State<EditArea> {
                                 textInputAction: TextInputAction.next,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
-                                  if (value?.isEmpty ?? true) {
+                                  if (value?.trim().isEmpty ?? true) {
                                     return 'يجب ملئ الاسم';
                                   }
                                   return null;
                                 },
                               ),
                             ),
-                            FormField<Color?>(
+                            FilledButton.tonalIcon(
+                              onPressed: _editGeolocation(context),
+                              icon: const Icon(Icons.edit_location),
+                              label: const Text('المكان على الخريطة'),
+                            ),
+                            ColorField(
                               initialValue: newArea.color,
-                              builder: (state) => ListTile(
-                                title: const Text('اللون'),
-                                onTap: () async => _selectColor(state),
-                                trailing: ColorIndicator(
-                                  hasBorder: true,
-                                  width: 50,
-                                  height: 50,
-                                  borderRadius: 20,
-                                  color: state.value ?? Colors.transparent,
-                                ),
+                              onChanged: (value) => setState(
+                                () => newArea = newArea.copyWith(color: value),
                               ),
                             ),
                             const SizedBox(height: 80),
@@ -246,6 +240,26 @@ class _EditAreaState extends State<EditArea> {
       ),
     );
   }
+
+  void Function() _editGeolocation(BuildContext context) => () async {
+        final Area? result = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EditAreaPolygonMap(
+              onSaved: Navigator.of(context).pop,
+              initialArea: newArea,
+              geomapOptions: GeomapOptions(
+                layers: const {
+                  GeoMapLayer.areas,
+                },
+                selectedAreas: {newArea},
+              ),
+            ),
+          ),
+        );
+        if (result != null) {
+          newArea = result;
+        }
+      };
 
   Future<void> _delete() async {
     final navigator = Navigator.of(context);
@@ -271,64 +285,6 @@ class _EditAreaState extends State<EditArea> {
       navigator
         ..pop()
         ..pop();
-    }
-  }
-
-  Future<void> _selectColor(FormFieldState<Color?> state) async {
-    final Color newColor = await showColorPickerDialog(
-      state.context,
-      state.value ?? Theme.of(context).primaryColor,
-      title: Text(
-        'اختيار اللون',
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      spacing: 10,
-      runSpacing: 10,
-      borderRadius: 20,
-      wheelDiameter: 165,
-      enableOpacity: true,
-      enableTonalPalette: true,
-      enableShadesSelection: false,
-      showRecentColors: true,
-      showColorName: true,
-      showColorCode: true,
-      colorCodeHasColor: true,
-      pickersEnabled: <ColorPickerType, bool>{
-        ColorPickerType.wheel: true,
-        ColorPickerType.primary: false,
-        ColorPickerType.accent: false,
-        ColorPickerType.both: false,
-        ColorPickerType.bw: false,
-        ColorPickerType.custom: false,
-      },
-      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-        copyButton: true,
-        pasteButton: true,
-        longPressMenu: true,
-      ),
-      barrierColor: Colors.black54,
-      constraints: BoxConstraints(
-        minWidth: MediaQuery.of(context).size.height * 0.7,
-      ),
-    );
-    state.didChange(newColor);
-    setState(
-      () => newArea = newArea.copyWith(color: newColor),
-    );
-  }
-
-  Future<void> _editGeoLocation(BuildContext context) async {
-    final Area? result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => DataGeomap(
-          editArea: true,
-          initialArea: newArea,
-          initialLayers: const {GeoMapLayer.areas},
-        ),
-      ),
-    );
-    if (result != null) {
-      newArea = result;
     }
   }
 
@@ -388,7 +344,7 @@ class _EditAreaState extends State<EditArea> {
           );
         }
 
-        if (_photoState.hasChanged) {
+        if (_photoFieldState.hasChanged) {
           scaffoldMessenger.hideCurrentSnackBar();
 
           final uploadProgress = BehaviorSubject<double?>();
@@ -411,7 +367,7 @@ class _EditAreaState extends State<EditArea> {
           );
 
           final mimeType =
-              MimeTypeResolver().lookup(_photoState.newPhoto!.path);
+              MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
           final uploadUrl = await CAFunctionsService.I.getUploadUrl(
             'areas',
             newArea.id,
@@ -421,8 +377,8 @@ class _EditAreaState extends State<EditArea> {
           await CAFunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
-            fileStream: _photoState.newPhoto!.openRead(),
-            fileLength: File(_photoState.newPhoto!.path).lengthSync(),
+            fileStream: _photoFieldState.newPhoto!.openRead(),
+            fileLength: File(_photoFieldState.newPhoto!.path).lengthSync(),
             onSendProgress: (sent, total) => uploadProgress.add(sent / total),
           );
 
@@ -482,4 +438,3 @@ class _FieldWrapper extends StatelessWidget {
     );
   }
 }
- */

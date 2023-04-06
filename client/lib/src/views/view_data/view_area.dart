@@ -15,6 +15,9 @@ class ViewArea extends StatefulWidget {
         area: (state.extra as Map?)?['area'] as Area?,
       );
     },
+    routes: [
+      EditArea.route,
+    ],
   );
 
   final Area? area;
