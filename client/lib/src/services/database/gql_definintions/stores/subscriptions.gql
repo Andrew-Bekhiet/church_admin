@@ -11,10 +11,10 @@ subscription watchAllStores(
 subscription watchStore($id: uuid!) {
   storesByPk(id: $id) {
     ...Store
-    areas {
+    areas(orderBy: { name: ASC }) {
       ...Area
     }
-    streets {
+    streets(orderBy: { name: ASC }) {
       ...Street
     }
     lastEdit

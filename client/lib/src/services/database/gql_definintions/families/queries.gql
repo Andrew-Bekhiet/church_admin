@@ -1,12 +1,12 @@
 query getFamilyRelatedFamilies($familyId: uuid!) {
   familiesByPk(id: $familyId) {
     ...Family
-    children {
+    children(orderBy: { child: { name: ASC } }) {
       child {
         ...Family
       }
     }
-    parents {
+    parents(orderBy: { parent: { name: ASC } }) {
       parent {
         ...Family
       }

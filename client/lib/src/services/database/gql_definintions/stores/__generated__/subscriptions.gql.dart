@@ -648,7 +648,17 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'areas'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'name'),
+                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                  )
+                ]),
+              )
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
@@ -667,7 +677,17 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'streets'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'name'),
+                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                  )
+                ]),
+              )
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(

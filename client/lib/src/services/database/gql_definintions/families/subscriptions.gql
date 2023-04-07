@@ -11,10 +11,10 @@ subscription watchAllFamilies(
 subscription watchFamily($id: uuid!) {
   familiesByPk(id: $id) {
     ...Family
-    areas {
+    areas(orderBy: { name: ASC }) {
       ...Area
     }
-    streets {
+    streets(orderBy: { name: ASC }) {
       ...Street
     }
     geolocation

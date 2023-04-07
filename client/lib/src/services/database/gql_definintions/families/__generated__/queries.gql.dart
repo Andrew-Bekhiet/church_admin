@@ -275,7 +275,22 @@ const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'children'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'child'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
+                  )
+                ]),
+              )
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
@@ -309,7 +324,22 @@ const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'parents'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'parent'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
+                  )
+                ]),
+              )
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
