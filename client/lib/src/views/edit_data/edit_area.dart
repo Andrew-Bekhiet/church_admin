@@ -6,11 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:universal_file/universal_file.dart';
 import 'package:uuid/uuid.dart';
-
-import 'photo_field_state.dart';
 
 class EditArea extends StatefulWidget {
   static final route = GoRoute(
@@ -60,120 +57,23 @@ class _EditAreaState extends State<EditArea> {
           onWillPop: _confirmExit,
           child: CustomScrollView(
             slivers: [
-              FormField<PhotoFieldState>(
+              PhotoField(
+                object: newArea,
                 initialValue: _photoFieldState,
+                objectOnEmpty: Area(id: '', name: ''),
+                canDelete: widget.area != null,
+                backgroundColor: newArea.color,
+                foregroundColor: foregroundColor,
+                addActions: [
+                  if (widget.area != null)
+                    IconButton(
+                      onPressed: _delete,
+                      icon: const Icon(Icons.delete),
+                      tooltip: 'حذف',
+                    ),
+                ],
                 onSaved: (v) =>
                     v?.hasChanged ?? false ? _photoFieldState = v! : null,
-                builder: (state) => SliverAppBar(
-                  backgroundColor: newArea.color,
-                  foregroundColor: foregroundColor,
-                  stretch: true,
-                  pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                  actions: [
-                    IconButton(
-                      onPressed: () async {
-                        final source = await ImagePickerService.I
-                            .showSourceSheet(context: context);
-
-                        if (source == null) {
-                          return;
-                        } else if (source == ImagePickerService.deleteImage) {
-                          state
-                            ..didChange(PhotoFieldState(deletePhoto: true))
-                            ..save();
-                        }
-
-                        if (!mounted) return;
-
-                        final newPhoto =
-                            await ImagePickerService.I.pickAndCropImage(
-                          context: context,
-                          source: source as ImageSource,
-                          lockAspectRatio: true,
-                        );
-                        if (newPhoto != null) {
-                          state
-                            ..didChange(
-                              PhotoFieldState(
-                                deletePhoto: false,
-                                newPhoto: newPhoto,
-                              ),
-                            )
-                            ..save();
-                        }
-                      },
-                      icon: const Icon(Icons.photo_camera),
-                      tooltip: 'اختيار صورة',
-                    ),
-                    if (widget.area != null)
-                      IconButton(
-                        onPressed: _delete,
-                        icon: const Icon(Icons.delete),
-                        tooltip: 'حذف',
-                      ),
-                  ],
-                  flexibleSpace: SafeArea(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final themeData = Theme.of(context);
-
-                        return FlexibleSpaceBar(
-                          centerTitle: false,
-                          expandedTitleScale: 4,
-                          titlePadding: const EdgeInsetsDirectional.only(
-                            bottom: 16,
-                            start: 72,
-                            end: 10,
-                          ),
-                          title: TransparentPointer(
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: constraints.biggest.height >
-                                      kToolbarHeight * 2
-                                  ? 0
-                                  : 1,
-                              child: Text(
-                                widget.area?.name ?? newArea.name,
-                                style: themeData.textTheme.titleLarge?.copyWith(
-                                  color: foregroundColor,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                          background: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            child: ProgressIndicatorTheme(
-                              data: themeData.progressIndicatorTheme.copyWith(
-                                color: themeData.brightness == Brightness.light
-                                    ? themeData.colorScheme.onPrimary
-                                    : themeData.colorScheme.onSurface,
-                              ),
-                              child: IconTheme(
-                                data: IconTheme.of(context)
-                                    .copyWith(color: foregroundColor),
-                                child: state.value!.hasChanged
-                                    ? state.value!.deletePhoto
-                                        ? ImageObjectWidget(
-                                            Area(id: '', name: ''),
-                                            circleCrop: false,
-                                          )
-                                        : Image.file(
-                                            File(state.value!.newPhoto!.path),
-                                          )
-                                    : ImageObjectWidget(
-                                        newArea,
-                                        circleCrop: false,
-                                      ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
               ),
               SliverFillRemaining(
                 hasScrollBody: false,

@@ -10,12 +10,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:tuple/tuple.dart';
 import 'package:universal_file/universal_file.dart';
 import 'package:uuid/uuid.dart';
-
-import 'photo_field_state.dart';
 
 class EditPerson extends StatefulWidget {
   static final route = GoRoute(
@@ -47,7 +44,7 @@ class _EditPersonState extends State<EditPerson> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   String? _suggestedAddress;
-  PhotoFieldState _photoState = PhotoFieldState(deletePhoto: false);
+  PhotoFieldState _photoFieldState = PhotoFieldState(deletePhoto: false);
 
   bool _classesAndGroupsLoaded = false;
 
@@ -96,122 +93,24 @@ class _EditPersonState extends State<EditPerson> {
           onWillPop: _confirmExit,
           child: CustomScrollView(
             slivers: [
-              FormField<PhotoFieldState>(
-                initialValue: _photoState,
-                onSaved: (v) =>
-                    v?.hasChanged ?? false ? _photoState = v! : null,
-                builder: (state) => SliverAppBar(
-                  backgroundColor: newPerson.color,
-                  foregroundColor: foregroundColor,
-                  stretch: true,
-                  pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                  actions: [
+              PhotoField(
+                object: newPerson,
+                initialValue: _photoFieldState,
+                objectOnEmpty: Person(id: '', name: ''),
+                canDelete: widget.person != null,
+                backgroundColor: newPerson.color,
+                foregroundColor: foregroundColor,
+                addActions: [
+                  if (widget.person != null &&
+                      widget.person?.user?.email == null)
                     IconButton(
-                      onPressed: () async {
-                        final source = await ImagePickerService.I
-                            .showSourceSheet(context: context);
-
-                        if (source == null) {
-                          return;
-                        } else if (source == ImagePickerService.deleteImage) {
-                          state
-                            ..didChange(PhotoFieldState(deletePhoto: true))
-                            ..save();
-                        }
-
-                        if (!mounted) return;
-
-                        final newPhoto =
-                            await ImagePickerService.I.pickAndCropImage(
-                          context: context,
-                          source: source as ImageSource,
-                          cropStyle: CropStyle.circle,
-                          lockAspectRatio: true,
-                        );
-                        if (newPhoto != null) {
-                          state
-                            ..didChange(
-                              PhotoFieldState(
-                                deletePhoto: false,
-                                newPhoto: newPhoto,
-                              ),
-                            )
-                            ..save();
-                        }
-                      },
-                      icon: const Icon(Icons.photo_camera),
-                      tooltip: 'اختيار صورة',
+                      onPressed: _delete,
+                      icon: const Icon(Icons.delete),
+                      tooltip: 'حذف',
                     ),
-                    if (widget.person != null &&
-                        widget.person?.user?.email == null)
-                      IconButton(
-                        onPressed: _delete,
-                        icon: const Icon(Icons.delete),
-                        tooltip: 'حذف',
-                      ),
-                  ],
-                  flexibleSpace: SafeArea(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final themeData = Theme.of(context);
-
-                        return FlexibleSpaceBar(
-                          centerTitle: false,
-                          expandedTitleScale: 4,
-                          titlePadding: const EdgeInsetsDirectional.only(
-                            bottom: 16,
-                            start: 72,
-                            end: 10,
-                          ),
-                          title: TransparentPointer(
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: constraints.biggest.height >
-                                      kToolbarHeight * 2
-                                  ? 0
-                                  : 1,
-                              child: Text(
-                                widget.person?.name ?? newPerson.name,
-                                style: themeData.textTheme.titleLarge?.copyWith(
-                                  color: foregroundColor,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                          background: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            child: ProgressIndicatorTheme(
-                              data: themeData.progressIndicatorTheme.copyWith(
-                                color: themeData.brightness == Brightness.light
-                                    ? themeData.colorScheme.onPrimary
-                                    : themeData.colorScheme.onSurface,
-                              ),
-                              child: IconTheme(
-                                data: IconTheme.of(context)
-                                    .copyWith(color: foregroundColor),
-                                child: state.value!.hasChanged
-                                    ? state.value!.deletePhoto
-                                        ? ImageObjectWidget(
-                                            Person(id: '', name: ''),
-                                            circleCrop: false,
-                                          )
-                                        : Image.file(
-                                            File(state.value!.newPhoto!.path),
-                                          )
-                                    : ImageObjectWidget(
-                                        newPerson,
-                                        circleCrop: false,
-                                      ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                ],
+                onSaved: (v) =>
+                    v?.hasChanged ?? false ? _photoFieldState = v! : null,
               ),
               SliverFillRemaining(
                 hasScrollBody: false,
@@ -299,49 +198,18 @@ class _EditPersonState extends State<EditPerson> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 ...newPerson.otherPhones.entries.mapIndexed(
-                                  (i, e) {
+                                  (i, phone) {
                                     return _FieldWrapper(
                                       builder: (context) {
                                         return TextFormField(
                                           decoration: InputDecoration(
-                                            labelText: e.key,
+                                            labelText: phone.key,
                                             hintText: 'مثال: 01234...',
                                             suffixIcon: IconButton(
                                               icon: const Icon(Icons.edit),
                                               tooltip: 'تعديل اسم الهاتف',
-                                              onPressed: () async {
-                                                final name =
-                                                    await _getPhoneFieldName(
-                                                  true,
-                                                  e.key,
-                                                );
-
-                                                if (name == true) {
-                                                  newPerson =
-                                                      newPerson.copyWith(
-                                                    otherPhones: {
-                                                      for (final p in newPerson
-                                                          .otherPhones.entries)
-                                                        if (p.key != e.key)
-                                                          p.key: p.value
-                                                    },
-                                                  );
-                                                  if (mounted) setState(() {});
-                                                } else if (name is String) {
-                                                  newPerson =
-                                                      newPerson.copyWith(
-                                                    otherPhones: {
-                                                      for (final p in newPerson
-                                                          .otherPhones.entries)
-                                                        if (p.key != e.key)
-                                                          p.key: p.value,
-                                                      name: e.value
-                                                    },
-                                                  );
-
-                                                  setState(() {});
-                                                }
-                                              },
+                                              onPressed:
+                                                  _onEditPhoneFieldName(phone),
                                             ),
                                           ),
                                           onFieldSubmitted: (_) {
@@ -357,12 +225,12 @@ class _EditPersonState extends State<EditPerson> {
                                           autofillHints: const [
                                             AutofillHints.telephoneNumber
                                           ],
-                                          initialValue: e.value,
+                                          initialValue: phone.value,
                                           onChanged: (value) =>
                                               newPerson = newPerson.copyWith(
                                             otherPhones: {
                                               ...newPerson.otherPhones,
-                                              e.key: PhoneNumberService.I
+                                              phone.key: PhoneNumberService.I
                                                   .formatInternational(
                                                     value,
                                                   )
@@ -392,7 +260,8 @@ class _EditPersonState extends State<EditPerson> {
                                     icon: const Icon(Icons.add),
                                     label: const Text('اضافة رقم هاتف أخر'),
                                     onPressed: () async {
-                                      final name = await _getPhoneFieldName();
+                                      final name =
+                                          await _renamePhoneFieldName();
                                       if (name is String) {
                                         newPerson = newPerson.copyWith(
                                           otherPhones: {
@@ -960,6 +829,8 @@ class _EditPersonState extends State<EditPerson> {
                               ),
                               labelText: 'الهوايات',
                               builder: (context, state) {
+                                final labelStyle =
+                                    Theme.of(context).textTheme.labelSmall!;
                                 return state.value != null &&
                                         state.value!.isNotEmpty
                                     ? Wrap(
@@ -971,36 +842,22 @@ class _EditPersonState extends State<EditPerson> {
                                               type: MaterialType.transparency,
                                               child: Chip(
                                                 side: BorderSide(
-                                                  color: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .color
+                                                  color: labelStyle.color
                                                           .getContrastingColor(
-                                                            hobby.color ??
-                                                                Colors
-                                                                    .transparent,
-                                                          ) ??
-                                                      Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .color!,
+                                                        hobby.color ??
+                                                            Colors.transparent,
+                                                      ) ??
+                                                      labelStyle.color!,
                                                 ),
                                                 label: Text(
                                                   hobby.name,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelSmall!
-                                                      .copyWith(
-                                                        color: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .color
-                                                            .getContrastingColor(
-                                                              hobby.color ??
-                                                                  Colors
-                                                                      .transparent,
-                                                            ),
-                                                      ),
+                                                  style: labelStyle.copyWith(
+                                                    color: labelStyle.color
+                                                        .getContrastingColor(
+                                                      hobby.color ??
+                                                          Colors.transparent,
+                                                    ),
+                                                  ),
                                                 ),
                                                 backgroundColor: hobby.color,
                                               ),
@@ -1027,6 +884,8 @@ class _EditPersonState extends State<EditPerson> {
                               ),
                               labelText: 'الشارات',
                               builder: (context, state) {
+                                final labelStyle =
+                                    Theme.of(context).textTheme.labelSmall!;
                                 return state.value != null &&
                                         state.value!.isNotEmpty
                                     ? Wrap(
@@ -1038,36 +897,22 @@ class _EditPersonState extends State<EditPerson> {
                                               type: MaterialType.transparency,
                                               child: Chip(
                                                 side: BorderSide(
-                                                  color: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .color
+                                                  color: labelStyle.color
                                                           .getContrastingColor(
-                                                            tag.color ??
-                                                                Colors
-                                                                    .transparent,
-                                                          ) ??
-                                                      Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .color!,
+                                                        tag.color ??
+                                                            Colors.transparent,
+                                                      ) ??
+                                                      labelStyle.color!,
                                                 ),
                                                 label: Text(
                                                   tag.name,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelSmall!
-                                                      .copyWith(
-                                                        color: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .color
-                                                            .getContrastingColor(
-                                                              tag.color ??
-                                                                  Colors
-                                                                      .transparent,
-                                                            ),
-                                                      ),
+                                                  style: labelStyle.copyWith(
+                                                    color: labelStyle.color
+                                                        .getContrastingColor(
+                                                      tag.color ??
+                                                          Colors.transparent,
+                                                    ),
+                                                  ),
                                                 ),
                                                 backgroundColor: tag.color,
                                               ),
@@ -1227,6 +1072,34 @@ class _EditPersonState extends State<EditPerson> {
     );
   }
 
+  void Function() _onEditPhoneFieldName(MapEntry<String, dynamic> phone) =>
+      () async {
+        final name = await _renamePhoneFieldName(
+          true,
+          phone.key,
+        );
+
+        if (name == true) {
+          newPerson = newPerson.copyWith(
+            otherPhones: {
+              for (final p in newPerson.otherPhones.entries)
+                if (p.key != phone.key) p.key: p.value
+            },
+          );
+          if (mounted) setState(() {});
+        } else if (name is String) {
+          newPerson = newPerson.copyWith(
+            otherPhones: {
+              for (final p in newPerson.otherPhones.entries)
+                if (p.key != phone.key) p.key: p.value,
+              name: phone.value
+            },
+          );
+
+          setState(() {});
+        }
+      };
+
   Future<void> _delete() async {
     final navigator = Navigator.of(context);
     final rslt = await showDialog(
@@ -1254,7 +1127,7 @@ class _EditPersonState extends State<EditPerson> {
     }
   }
 
-  Future<Object?> _getPhoneFieldName([
+  Future<Object?> _renamePhoneFieldName([
     bool canDelete = false,
     String? initialName,
   ]) {
@@ -1506,7 +1379,7 @@ class _EditPersonState extends State<EditPerson> {
           );
         }
 
-        if (_photoState.hasChanged) {
+        if (_photoFieldState.hasChanged) {
           scaffoldMessenger.hideCurrentSnackBar();
 
           final uploadProgress = BehaviorSubject<double?>();
@@ -1529,7 +1402,7 @@ class _EditPersonState extends State<EditPerson> {
           );
 
           final mimeType =
-              MimeTypeResolver().lookup(_photoState.newPhoto!.path);
+              MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
           final uploadUrl = await CAFunctionsService.I.getUploadUrl(
             'persons',
             newPerson.id,
@@ -1539,8 +1412,8 @@ class _EditPersonState extends State<EditPerson> {
           await CAFunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
-            fileStream: _photoState.newPhoto!.openRead(),
-            fileLength: File(_photoState.newPhoto!.path).lengthSync(),
+            fileStream: _photoFieldState.newPhoto!.openRead(),
+            fileLength: File(_photoFieldState.newPhoto!.path).lengthSync(),
             onSendProgress: (sent, total) => uploadProgress.add(sent / total),
           );
 
