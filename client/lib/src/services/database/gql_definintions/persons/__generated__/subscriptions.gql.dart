@@ -2,7 +2,7 @@ import '../../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
-import '../../gql/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';

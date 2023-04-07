@@ -1,5 +1,5 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
-import '../../gql/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';

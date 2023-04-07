@@ -3,7 +3,7 @@ import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
-import 'areas/__generated__/subscriptions.graphql.dart';
+import 'areas/__generated__/subscriptions.gql.dart';
 import 'helpers.dart';
 
 class AreasDAO extends DAOBase {

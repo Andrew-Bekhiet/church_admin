@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
-import 'colleges/__generated__/subscriptions.graphql.dart';
+import 'colleges/__generated__/subscriptions.gql.dart';
 
 class CollegesDAO extends DAOBase {
   const CollegesDAO({

@@ -5,9 +5,9 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 import 'package:uuid/uuid.dart';
 
-import 'persons/__generated__/mutations.graphql.dart';
-import 'persons/__generated__/queries.graphql.dart';
-import 'persons/__generated__/subscriptions.graphql.dart';
+import 'persons/__generated__/mutations.gql.dart';
+import 'persons/__generated__/queries.gql.dart';
+import 'persons/__generated__/subscriptions.gql.dart';
 import 'persons/helpers.dart';
 
 class PersonsDAO extends DAOBase {

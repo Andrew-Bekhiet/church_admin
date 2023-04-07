@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../iterable_difference_result.dart';
 import '../helpers.dart';
-import '__generated__/mutations.graphql.dart';
+import '__generated__/mutations.gql.dart';
 
 class PersonInsertHelper {
   static final _mutationNonExistentVars = {

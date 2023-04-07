@@ -13,7 +13,7 @@ mutation insertArea($newArea: AreasInsertInput!) {
 }
 
 mutation updateArea($areaId: uuid!, $newArea: AreasSetInput!) {
-  updateAreasByPk(pk_columns: { id: $areaId }, _set: $newArea) {
+  updateAreasByPk(pkColumns: { id: $areaId }, _set: $newArea) {
     ...Area
   }
 }

@@ -4,7 +4,7 @@ import 'package:graphql/client.dart';
 
 import 'helpers.dart';
 import 'streets/__generated__/mutations.gql.dart';
-import 'streets/__generated__/subscriptions.graphql.dart';
+import 'streets/__generated__/subscriptions.gql.dart';
 
 class StreetsDAO extends DAOBase {
   const StreetsDAO({

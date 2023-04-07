@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
-import '__generated__/queries.graphql.dart';
+import '__generated__/queries.gql.dart';
 
 class PersonsNotificationsQueries extends DAOBase {
   const PersonsNotificationsQueries({required super.db});
@@ -32,9 +32,9 @@ class PersonsNotificationsQueries extends DAOBase {
     return _getPersonsNames(
       where: [
         Input$PersonsBoolExp(
-          confessionHistory_aggregate:
-              Input$history_confession_history_aggregate_bool_exp(
-            count: Input$history_confession_history_aggregate_bool_exp_count(
+          confessionHistoryAggregate:
+              Input$HistoryConfessionHistoryAggregateBoolExp(
+            count: Input$historyConfessionHistoryAggregateBoolExpCount(
               predicate: Input$IntComparisonExp(
                 $_neq: 0,
               ),
@@ -58,9 +58,8 @@ class PersonsNotificationsQueries extends DAOBase {
     return _getPersonsNames(
       where: [
         Input$PersonsBoolExp(
-          kodasHistory_aggregate:
-              Input$history_kodas_history_aggregate_bool_exp(
-            count: Input$history_kodas_history_aggregate_bool_exp_count(
+          kodasHistoryAggregate: Input$HistoryKodasHistoryAggregateBoolExp(
+            count: Input$historyKodasHistoryAggregateBoolExpCount(
               predicate: Input$IntComparisonExp(
                 $_neq: 0,
               ),
@@ -84,9 +83,9 @@ class PersonsNotificationsQueries extends DAOBase {
     return _getPersonsNames(
       where: [
         Input$PersonsBoolExp(
-          attendanceHistory_aggregate:
-              Input$history_attendance_history_aggregate_bool_exp(
-            count: Input$history_attendance_history_aggregate_bool_exp_count(
+          attendanceHistoryAggregate:
+              Input$HistoryAttendanceHistoryAggregateBoolExp(
+            count: Input$historyAttendanceHistoryAggregateBoolExpCount(
               predicate: Input$IntComparisonExp(
                 $_neq: 0,
               ),
@@ -110,9 +109,8 @@ class PersonsNotificationsQueries extends DAOBase {
     return _getPersonsNames(
       where: [
         Input$PersonsBoolExp(
-          visitHistory_aggregate:
-              Input$history_visit_history_aggregate_bool_exp(
-            count: Input$history_visit_history_aggregate_bool_exp_count(
+          visitHistoryAggregate: Input$HistoryVisitHistoryAggregateBoolExp(
+            count: Input$historyVisitHistoryAggregateBoolExpCount(
               predicate: Input$IntComparisonExp(
                 $_neq: 0,
               ),

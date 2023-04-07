@@ -3,8 +3,8 @@ import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 
-import 'history/__generated__/mutations.graphql.dart';
-import 'history/__generated__/subscriptions.graphql.dart';
+import 'history/__generated__/mutations.gql.dart';
+import 'history/__generated__/subscriptions.gql.dart';
 
 class HistoryDAO extends DAOBase {
   const HistoryDAO({

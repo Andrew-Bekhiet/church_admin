@@ -2030,7 +2030,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'pk_columns'),
+            name: NameNode(value: 'pkColumns'),
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
                 name: NameNode(value: 'id'),
@@ -2091,7 +2091,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2129,7 +2129,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2167,7 +2167,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2204,7 +2204,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2260,7 +2260,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2317,7 +2317,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2374,7 +2374,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2432,7 +2432,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'affected_rows'),
+            name: NameNode(value: 'affectedRows'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2480,7 +2480,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),
@@ -2584,7 +2584,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),
@@ -2808,28 +2808,28 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
 
 class Mutation$updatePerson$insertPersonsServices {
   Mutation$updatePerson$insertPersonsServices({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsServicesMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsServices.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$insertPersonsServices(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2837,10 +2837,10 @@ class Mutation$updatePerson$insertPersonsServices {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -2854,9 +2854,9 @@ class Mutation$updatePerson$insertPersonsServices {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2888,7 +2888,7 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsServices<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -2907,13 +2907,13 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsServices<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$insertPersonsServices(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2927,7 +2927,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -2935,28 +2935,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices<TRes>
 
 class Mutation$updatePerson$insertPersonsGroups {
   Mutation$updatePerson$insertPersonsGroups({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsGroups.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$insertPersonsGroups(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2964,10 +2964,10 @@ class Mutation$updatePerson$insertPersonsGroups {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -2981,9 +2981,9 @@ class Mutation$updatePerson$insertPersonsGroups {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3015,7 +3015,7 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3034,13 +3034,13 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$insertPersonsGroups(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3054,7 +3054,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3062,28 +3062,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
 
 class Mutation$updatePerson$insertPersonsHobbies {
   Mutation$updatePerson$insertPersonsHobbies({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsHobbies.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$insertPersonsHobbies(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3091,10 +3091,10 @@ class Mutation$updatePerson$insertPersonsHobbies {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3108,9 +3108,9 @@ class Mutation$updatePerson$insertPersonsHobbies {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3142,7 +3142,7 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3161,13 +3161,13 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$insertPersonsHobbies(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3181,7 +3181,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3189,28 +3189,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
 
 class Mutation$updatePerson$insertPersonsTags {
   Mutation$updatePerson$insertPersonsTags({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsTagsMutationResponse',
   });
 
   factory Mutation$updatePerson$insertPersonsTags.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$insertPersonsTags(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3218,10 +3218,10 @@ class Mutation$updatePerson$insertPersonsTags {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3235,9 +3235,9 @@ class Mutation$updatePerson$insertPersonsTags {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3269,7 +3269,7 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3288,13 +3288,13 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsTags<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$insertPersonsTags(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3308,7 +3308,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3316,28 +3316,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags<TRes>
 
 class Mutation$updatePerson$deletePersonsTags {
   Mutation$updatePerson$deletePersonsTags({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsTagsMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsTags.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$deletePersonsTags(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3345,10 +3345,10 @@ class Mutation$updatePerson$deletePersonsTags {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3362,9 +3362,9 @@ class Mutation$updatePerson$deletePersonsTags {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3396,7 +3396,7 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3415,13 +3415,13 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsTags<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$deletePersonsTags(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3435,7 +3435,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3443,28 +3443,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags<TRes>
 
 class Mutation$updatePerson$deletePersonsHobbies {
   Mutation$updatePerson$deletePersonsHobbies({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsHobbies.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$deletePersonsHobbies(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3472,10 +3472,10 @@ class Mutation$updatePerson$deletePersonsHobbies {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3489,9 +3489,9 @@ class Mutation$updatePerson$deletePersonsHobbies {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3523,7 +3523,7 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3542,13 +3542,13 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$deletePersonsHobbies(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3562,7 +3562,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3570,28 +3570,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
 
 class Mutation$updatePerson$deletePersonsGroups {
   Mutation$updatePerson$deletePersonsGroups({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsGroups.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$deletePersonsGroups(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3599,10 +3599,10 @@ class Mutation$updatePerson$deletePersonsGroups {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3616,9 +3616,9 @@ class Mutation$updatePerson$deletePersonsGroups {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3650,7 +3650,7 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3669,13 +3669,13 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$deletePersonsGroups(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3689,7 +3689,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -3697,28 +3697,28 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
 
 class Mutation$updatePerson$deletePersonsServices {
   Mutation$updatePerson$deletePersonsServices({
-    required this.affected_rows,
+    required this.affectedRows,
     this.$__typename = 'PersonsServicesMutationResponse',
   });
 
   factory Mutation$updatePerson$deletePersonsServices.fromJson(
       Map<String, dynamic> json) {
-    final l$affected_rows = json['affected_rows'];
+    final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation$updatePerson$deletePersonsServices(
-      affected_rows: (l$affected_rows as int),
+      affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int affected_rows;
+  final int affectedRows;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$affected_rows = affected_rows;
-    _resultData['affected_rows'] = l$affected_rows;
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3726,10 +3726,10 @@ class Mutation$updatePerson$deletePersonsServices {
 
   @override
   int get hashCode {
-    final l$affected_rows = affected_rows;
+    final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$affected_rows,
+      l$affectedRows,
       l$$__typename,
     ]);
   }
@@ -3743,9 +3743,9 @@ class Mutation$updatePerson$deletePersonsServices {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$affected_rows = affected_rows;
-    final lOther$affected_rows = other.affected_rows;
-    if (l$affected_rows != lOther$affected_rows) {
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3777,7 +3777,7 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsServices<TRes> {
       _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices;
 
   TRes call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   });
 }
@@ -3796,13 +3796,13 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsServices<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? affected_rows = _undefined,
+    Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$updatePerson$deletePersonsServices(
-        affected_rows: affected_rows == _undefined || affected_rows == null
-            ? _instance.affected_rows
-            : (affected_rows as int),
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3816,7 +3816,7 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices<TRes>
   TRes _res;
 
   call({
-    int? affected_rows,
+    int? affectedRows,
     String? $__typename,
   }) =>
       _res;
@@ -5758,7 +5758,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),
@@ -5841,7 +5841,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),

@@ -9,7 +9,7 @@ import 'dart:ui' as _i13;
 import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:church_admin/src/services/database/gql_definintions.dart'
     as _i6;
-import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.graphql.dart'
+import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
     as _i12;
 import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i7;

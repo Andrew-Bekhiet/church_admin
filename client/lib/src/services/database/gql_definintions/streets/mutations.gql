@@ -13,7 +13,7 @@ mutation insertStreet($newStreet: StreetsInsertInput!) {
 }
 
 mutation updateStreet($streetId: uuid!, $newStreet: StreetsSetInput!) {
-  updateStreetsByPk(pk_columns: { id: $streetId }, _set: $newStreet) {
+  updateStreetsByPk(pkColumns: { id: $streetId }, _set: $newStreet) {
     ...Street
   }
 }

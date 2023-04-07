@@ -1043,7 +1043,7 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'pk_columns'),
+            name: NameNode(value: 'pkColumns'),
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
                 name: NameNode(value: 'id'),

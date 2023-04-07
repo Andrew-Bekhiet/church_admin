@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show ContrastingColor, TappableFormField;
+import 'package:churchdata_core/churchdata_core.dart' show ContrastingColor;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
