@@ -252,15 +252,15 @@ export async function updatePhotoTime(
       process.env["HASURA_SERVER"]!,
       JSON.stringify({
         query: `
-            mutation updatePhotoTime($id: uuid!, $photo_updated_at: timestamptz) {
-              ${op_name}(pk_columns: {id: $id}, _set: {photoUpdatedAt: $photo_updated_at}) {
+            mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
+              ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
           `,
         variables: {
           id,
-          photo_updated_at: time?.toISOString(),
+          photoUpdatedAt: time?.toISOString(),
         },
         operationName: "updatePhotoTime",
       }),
