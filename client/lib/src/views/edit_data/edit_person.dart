@@ -43,7 +43,6 @@ class _EditPersonState extends State<EditPerson> {
   bool _saveLock = false;
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
-  String? _suggestedAddress;
   PhotoFieldState _photoFieldState = PhotoFieldState(deletePhoto: false);
 
   bool _classesAndGroupsLoaded = false;
@@ -278,49 +277,14 @@ class _EditPersonState extends State<EditPerson> {
                               ],
                             ),
                             const Divider(thickness: 1),
-                            //TODO: address fields (eg block number, Street, Area ...)
-                            _FieldWrapper(
-                              builder: (context) => TextFormField(
-                                key: ValueKey(newPerson.address),
-                                decoration: InputDecoration(
-                                  labelText: 'العنوان والموقع',
-                                  suffixIcon: IconButton(
-                                    onPressed: () async =>
-                                        _editGeoLocation(context),
-                                    icon: const Icon(Icons.edit_location),
-                                  ),
-                                ),
-                                initialValue: newPerson.address,
-                                onChanged: (value) =>
-                                    newPerson = newPerson.copyWith(
-                                  address: value.trim(),
-                                ),
-                                textInputAction: TextInputAction.next,
-                                textCapitalization: TextCapitalization.words,
-                                validator: (value) => null,
+                            AddressWithLocationField(
+                              initialAddress: newPerson.address,
+                              onAddressChanged: (value) =>
+                                  newPerson = newPerson.copyWith(
+                                address: value.trim(),
                               ),
+                              onEditLocation: _editGeoLocation,
                             ),
-                            if (_suggestedAddress != null)
-                              Card(
-                                elevation: 5,
-                                child: ListTile(
-                                  title: const Text('تم ايجاد عنوان مقترح:'),
-                                  subtitle: Text(_suggestedAddress!),
-                                  trailing: TextButton.icon(
-                                    onPressed: () => setState(
-                                      () {
-                                        newPerson = newPerson.copyWith(
-                                          address: _suggestedAddress,
-                                        );
-                                        _suggestedAddress = null;
-                                      },
-                                    ),
-                                    icon: const Icon(Icons.done),
-                                    label:
-                                        const Text('استخدام العنوان المقترح'),
-                                  ),
-                                ),
-                              ),
                             const Divider(thickness: 1),
                             DateTimeField(
                               label: 'تاريخ الميلاد',
@@ -929,7 +893,6 @@ class _EditPersonState extends State<EditPerson> {
                                     newPerson.copyWith(color: value),
                               ),
                             ),
-
                             _FieldWrapper(
                               builder: (context) => TextFormField(
                                 decoration: const InputDecoration(
@@ -1287,7 +1250,7 @@ class _EditPersonState extends State<EditPerson> {
     }
   }
 
-  Future<void> _editGeoLocation(BuildContext context) async {
+  Future<Point?> _editGeoLocation(BuildContext context) async {
     final Person? result = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EditPersonLocationMap(
@@ -1298,14 +1261,9 @@ class _EditPersonState extends State<EditPerson> {
     );
     if (result != null) {
       newPerson = result;
-      final address = await CAFunctionsService.I
-          .getAddressFromLocation(result.geolocation!);
-
-      if (address != null) {
-        _suggestedAddress = address;
-        if (mounted) setState(() {});
-      }
     }
+
+    return result?.geolocation;
   }
 
   String? _personGeneralCheckValidator([_]) {

@@ -76,13 +76,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     DatabaseService.I.areas.paginateAreas,
   );
 
-  late final _fabAnimationController = AnimationController(
-    value: 0,
-    lowerBound: -1,
-    duration: _tabController.animationDuration,
-    vsync: this,
-  );
-
   final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
@@ -92,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
 
     _tabController.addListener(_tabControllerListener);
-    _tabController.animation!.addListener(_tabControllerAnimationListener);
   }
 
   @override
@@ -176,10 +168,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         areasController: () => _ensureWillDispose(_areasController),
       ),
       floatingActionButton: AnimatedBuilder(
-        animation: _fabAnimationController,
+        animation: _tabController.animation!,
         builder: (context, child) {
           return _HomeFloatingActionButton(
-            offset: _fabAnimationController.value,
+            offset: _tabController.offset,
             currentIdex: _tabController.index,
           );
         },
@@ -235,10 +227,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
-  void _tabControllerAnimationListener() {
-    _fabAnimationController.value = _tabController.offset;
-  }
-
   ViewableObjectListController<T> _createControllerUsing<T extends Viewable>(
     GQLPaginatableStream<T> Function({Stream<String?>? searchQuery})
         paginatableStreamFactory,
@@ -266,7 +254,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Future<void> dispose() async {
     _tabController.dispose();
-    _fabAnimationController.dispose();
 
     super.dispose();
 
@@ -365,13 +352,9 @@ class _HomeFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final newIndex = getNewIndex();
 
-    final fgAnimatiedWidget = Transform.scale(
-      alignment: Alignment(
-        offset.isNegative ? 1 - offset : offset - 1,
-        0,
-      ),
-      scale: offset.abs(),
-      child: FloatingActionButton(
+    return AnimatedFloatingActionButton(
+      offset: offset,
+      newFAB: FloatingActionButton(
         onPressed: _addItem(context),
         child: newIndex == 0
             ? _addPerson
@@ -379,15 +362,7 @@ class _HomeFloatingActionButton extends StatelessWidget {
                 ? _add
                 : _addLocation,
       ),
-    );
-
-    final bgAnimatiedWidget = Transform.scale(
-      alignment: Alignment(
-        offset.isNegative ? offset - 1 : offset + 1,
-        0,
-      ),
-      scale: 1 - offset.abs(),
-      child: FloatingActionButton(
+      oldFAB: FloatingActionButton(
         heroTag: null,
         onPressed: _addItem(context),
         child: currentIdex == 0
@@ -396,14 +371,6 @@ class _HomeFloatingActionButton extends StatelessWidget {
                 ? _add
                 : _addLocation,
       ),
-    );
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        bgAnimatiedWidget,
-        fgAnimatiedWidget,
-      ],
     );
   }
 

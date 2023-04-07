@@ -1,7 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
+import 'package:church_admin/src/services/database/gql_definintions/families/helpers.dart';
 import 'package:graphql/client.dart';
 
+import 'families/__generated__/mutations.gql.dart';
+import 'families/__generated__/queries.gql.dart';
 import 'families/__generated__/subscriptions.gql.dart';
 
 class FamiliesDAO extends DAOBase {
@@ -87,5 +90,66 @@ class FamiliesDAO extends DAOBase {
         parserFn: db.parser.singleParser(Family.fromJson),
       ),
     );
+  }
+
+  Future<Family?> deleteFamily({
+    required String familyId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteFamily,
+      variables: Variables$Mutation$deleteFamily(
+        familyId: familyId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Family.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Family> insertFamily({
+    required Family newFamily,
+  }) {
+    final helper = FamilyInsertHelper(newFamily: newFamily);
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertFamily,
+        operationName: 'insertFamily',
+        variables: helper.variables.toJson(),
+        parserFn: db.parser.singleParser(Family.fromJson),
+      ),
+    );
+  }
+
+  Future<Family?> updateFamily({
+    required Family newFamily,
+    required Family oldFamily,
+  }) {
+    final helper =
+        FamilyUpdateHelper(newFamily: newFamily, oldFamily: oldFamily);
+
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationupdateFamily,
+        operationName: 'updateFamily',
+        variables: helper.variables.toJson(),
+        parserFn: db.parser.singleOrNullParser(Family.fromJson),
+      ),
+    );
+  }
+
+  Future<Family?> getFamilyRelatedFamilies({
+    required String familyId,
+  }) {
+    final queryOptions = QueryOptions(
+      document: documentNodeQuerygetFamilyRelatedFamilies,
+      operationName: 'getFamilyRelatedFamilies',
+      variables:
+          Variables$Query$getFamilyRelatedFamilies(familyId: familyId.toUuid())
+              .toJson(),
+      parserFn: db.parser.singleOrNullParser(Family.fromJson),
+    );
+
+    return graphQLClient.queryAndReturnParsed(queryOptions);
   }
 }

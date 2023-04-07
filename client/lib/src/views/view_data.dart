@@ -30,6 +30,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final Stream<T?> objectStream;
   final List<Type> childrenTypes;
   final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
+  final Widget Function(BuildContext, TabController)?
+      floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
@@ -45,6 +47,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.editButtonBuilder,
     required this.detailsBuilder,
     required this.tabsHeaderBuilder,
+    this.floatingActionButtonBuilder,
     this.object,
     super.key,
   }) : assert(childrenTypes.length == tabsContentBuilders.length);
@@ -144,6 +147,16 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                       .toList(),
                 ),
               ),
+              floatingActionButton: floatingActionButtonBuilder != null
+                  ? Builder(
+                      builder: (context) {
+                        return floatingActionButtonBuilder!(
+                          context,
+                          DefaultTabController.of(context),
+                        );
+                      },
+                    )
+                  : null,
             ),
           ),
         );

@@ -723,7 +723,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
         )),
       ) as _i8.Future<_i4.Person>);
   @override
-  _i8.Future<void> updatePerson({
+  _i8.Future<_i4.Person?> updatePerson({
     required _i4.Person? oldPerson,
     required _i4.Person? newPerson,
   }) =>
@@ -736,9 +736,9 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
             #newPerson: newPerson,
           },
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i8.Future<_i4.Person?>.value(),
+        returnValueForMissingStub: _i8.Future<_i4.Person?>.value(),
+      ) as _i8.Future<_i4.Person?>);
   @override
   _i8.Future<_i4.Person?> deletePerson({required String? personId}) =>
       (super.noSuchMethod(
@@ -1194,7 +1194,7 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
         )),
       ) as _i8.Future<_i4.Area>);
   @override
-  _i8.Future<_i4.Area> updateArea({
+  _i8.Future<_i4.Area?> updateArea({
     required _i4.Area? newArea,
     required _i4.Area? oldArea,
   }) =>
@@ -1207,29 +1207,9 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
             #oldArea: oldArea,
           },
         ),
-        returnValue: _i8.Future<_i4.Area>.value(_FakeArea_19(
-          this,
-          Invocation.method(
-            #updateArea,
-            [],
-            {
-              #newArea: newArea,
-              #oldArea: oldArea,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.Area>.value(_FakeArea_19(
-          this,
-          Invocation.method(
-            #updateArea,
-            [],
-            {
-              #newArea: newArea,
-              #oldArea: oldArea,
-            },
-          ),
-        )),
-      ) as _i8.Future<_i4.Area>);
+        returnValue: _i8.Future<_i4.Area?>.value(),
+        returnValueForMissingStub: _i8.Future<_i4.Area?>.value(),
+      ) as _i8.Future<_i4.Area?>);
 }
 
 /// A class which mocks [ServicesDAO].

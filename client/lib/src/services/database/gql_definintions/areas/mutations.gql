@@ -1,8 +1,6 @@
 mutation deleteArea($areaId: uuid!) {
-  deleteAreas(where: { id: { _eq: $areaId } }) {
-    returning {
-      ...Area
-    }
+  deleteAreasByPk(id: $areaId) {
+    ...Area
   }
 }
 

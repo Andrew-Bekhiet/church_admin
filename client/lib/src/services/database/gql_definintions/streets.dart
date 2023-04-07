@@ -95,7 +95,7 @@ class StreetsDAO extends DAOBase {
     );
   }
 
-  Future<Street> updateStreet({
+  Future<Street?> updateStreet({
     required Street newStreet,
     required Street oldStreet,
   }) {
@@ -104,7 +104,7 @@ class StreetsDAO extends DAOBase {
       oldStreet.toJson(),
     );
 
-    return graphQLClient.mutateAndReturnParsed(
+    return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdateStreet,
         operationName: 'updateStreet',
@@ -112,7 +112,7 @@ class StreetsDAO extends DAOBase {
           streetId: newStreet.id.toUuid(),
           newStreet: Input$StreetsSetInput.fromJson(delta),
         ).toJson(),
-        parserFn: db.parser.singleParser(Street.fromJson),
+        parserFn: db.parser.singleOrNullParser(Street.fromJson),
       ),
     );
   }

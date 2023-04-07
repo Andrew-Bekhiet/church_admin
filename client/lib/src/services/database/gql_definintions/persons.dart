@@ -32,7 +32,7 @@ class PersonsDAO extends DAOBase {
     );
   }
 
-  Future<void> updatePerson({
+  Future<Person?> updatePerson({
     required Person oldPerson,
     required Person newPerson,
   }) {
@@ -44,7 +44,7 @@ class PersonsDAO extends DAOBase {
         document: documentNodeMutationupdatePerson,
         operationName: 'updatePerson',
         variables: updateHelper.variables.toJson(),
-        parserFn: (d) => null,
+        parserFn: db.parser.singleOrNullParser(Person.fromJson),
       ),
     );
   }

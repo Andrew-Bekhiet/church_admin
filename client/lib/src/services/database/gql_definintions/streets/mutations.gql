@@ -1,8 +1,6 @@
 mutation deleteStreet($streetId: uuid!) {
-  deleteStreets(where: { id: { _eq: $streetId } }) {
-    returning {
-      ...Street
-    }
+  deleteStreetsByPk(id: $streetId) {
+    ...Street
   }
 }
 

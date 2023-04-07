@@ -20,6 +20,10 @@ class Family extends ViewableWithIDAndImage with _$Family {
     DateTime? photoUpdatedAt,
     List<Area>? areas,
     List<Street>? streets,
+    @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+        List<Family>? children,
+    @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+        List<Family>? parents,
     LastRecordedByInfo? lastEdit,
   }) = _Family;
   Family._() : super();
@@ -36,3 +40,13 @@ class Family extends ViewableWithIDAndImage with _$Family {
         )
       : null;
 }
+
+List<Family>? familyChildrenFromJson(List? data) =>
+    data?.map((e) => Family.fromJson(e['child'])).toList();
+List<Json>? familyChildrenToJson(List<Family>? hobbies) =>
+    hobbies?.map((e) => {'child': e.toJson()}).toList();
+
+List<Family>? familyParentsFromJson(List? data) =>
+    data?.map((e) => Family.fromJson(e['parent'])).toList();
+List<Json>? familyParentsToJson(List<Family>? hobbies) =>
+    hobbies?.map((e) => {'parent': e.toJson()}).toList();

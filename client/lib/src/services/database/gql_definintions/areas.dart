@@ -83,7 +83,7 @@ class AreasDAO extends DAOBase {
     );
   }
 
-  Future<Area> updateArea({
+  Future<Area?> updateArea({
     required Area newArea,
     required Area oldArea,
   }) {
@@ -92,7 +92,7 @@ class AreasDAO extends DAOBase {
       oldArea.toJson(),
     );
 
-    return graphQLClient.mutateAndReturnParsed(
+    return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdateArea,
         operationName: 'updateArea',
@@ -100,7 +100,7 @@ class AreasDAO extends DAOBase {
           areaId: newArea.id.toUuid(),
           newArea: Input$AreasSetInput.fromJson(delta),
         ).toJson(),
-        parserFn: db.parser.singleParser(Area.fromJson),
+        parserFn: db.parser.singleOrNullParser(Area.fromJson),
       ),
     );
   }

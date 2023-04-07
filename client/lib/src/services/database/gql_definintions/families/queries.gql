@@ -1,0 +1,15 @@
+query getFamilyRelatedFamilies($familyId: uuid!) {
+  familiesByPk(id: $familyId) {
+    ...Family
+    children {
+      child {
+        ...Family
+      }
+    }
+    parents {
+      parent {
+        ...Family
+      }
+    }
+  }
+}

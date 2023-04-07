@@ -29,24 +29,24 @@ class _LocationsLayerState extends State<_LocationsLayer>
       rotate: true,
       markers: [
         if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.families))
-          ...widget.families.map(
-            (f) => _buildMarkerWith(f, f.geolocation),
-          ),
+          ...widget.families.where((f) => f.geolocation != null).map(
+                (f) => _buildMarkerWith(f, f.geolocation!),
+              ),
         if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.stores))
-          ...widget.stores.map(
-            (s) => _buildMarkerWith(s, s.geolocation),
-          ),
+          ...widget.stores.where((f) => f.geolocation != null).map(
+                (s) => _buildMarkerWith(s, s.geolocation!),
+              ),
         if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.persons))
-          ...widget.persons.map(
-            (p) => _buildMarkerWith(p, p.geolocation),
-          ),
+          ...widget.persons.where((f) => f.geolocation != null).map(
+                (p) => _buildMarkerWith(p, p.geolocation!),
+              ),
       ],
     );
   }
 
-  Marker _buildMarkerWith(Viewable object, Point? geolocation) {
+  Marker _buildMarkerWith(Viewable object, Point geolocation) {
     return markerFromPoint(
-      geolocation!,
+      geolocation,
       (context) => StreamBuilder<Point?>(
         stream: widget.focusedLocationStream,
         builder: (context, snapshot) {

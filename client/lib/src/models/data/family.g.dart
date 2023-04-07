@@ -22,6 +22,8 @@ _$_Family _$$_FamilyFromJson(Map json) => _$_Family(
       streets: (json['streets'] as List<dynamic>?)
           ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
+      children: familyChildrenFromJson(json['children'] as List?),
+      parents: familyParentsFromJson(json['parents'] as List?),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -38,5 +40,7 @@ Map<String, dynamic> _$$_FamilyToJson(_$_Family instance) => <String, dynamic>{
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
+      'children': familyChildrenToJson(instance.children),
+      'parents': familyParentsToJson(instance.parents),
       'lastEdit': instance.lastEdit?.toJson(),
     };

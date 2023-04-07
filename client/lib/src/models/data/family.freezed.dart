@@ -31,6 +31,10 @@ mixin _$Family {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
   List<Street>? get streets => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+  List<Family>? get children => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+  List<Family>? get parents => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,12 +51,18 @@ abstract class $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
       List<Area>? areas,
       List<Street>? streets,
+      @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+          List<Family>? children,
+      @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+          List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -80,6 +90,8 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
     Object? photoUpdatedAt = freezed,
     Object? areas = freezed,
     Object? streets = freezed,
+    Object? children = freezed,
+    Object? parents = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_value.copyWith(
@@ -119,6 +131,14 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
           ? _value.streets
           : streets // ignore: cast_nullable_to_non_nullable
               as List<Street>?,
+      children: freezed == children
+          ? _value.children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<Family>?,
+      parents: freezed == parents
+          ? _value.parents
+          : parents // ignore: cast_nullable_to_non_nullable
+              as List<Family>?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -149,12 +169,18 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          Color? color,
       DateTime? photoUpdatedAt,
       List<Area>? areas,
       List<Street>? streets,
+      @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+          List<Family>? children,
+      @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+          List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
   @override
@@ -180,6 +206,8 @@ class __$$_FamilyCopyWithImpl<$Res>
     Object? photoUpdatedAt = freezed,
     Object? areas = freezed,
     Object? streets = freezed,
+    Object? children = freezed,
+    Object? parents = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_$_Family(
@@ -219,6 +247,14 @@ class __$$_FamilyCopyWithImpl<$Res>
           ? _value._streets
           : streets // ignore: cast_nullable_to_non_nullable
               as List<Street>?,
+      children: freezed == children
+          ? _value._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<Family>?,
+      parents: freezed == parents
+          ? _value._parents
+          : parents // ignore: cast_nullable_to_non_nullable
+              as List<Family>?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -234,15 +270,23 @@ class _$_Family extends _Family {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+          this.geolocation,
       this.notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+          this.color,
       this.photoUpdatedAt,
       final List<Area>? areas,
       final List<Street>? streets,
+      @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+          final List<Family>? children,
+      @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+          final List<Family>? parents,
       this.lastEdit})
       : _areas = areas,
         _streets = streets,
+        _children = children,
+        _parents = parents,
         super._();
 
   factory _$_Family.fromJson(Map<String, dynamic> json) =>
@@ -284,12 +328,34 @@ class _$_Family extends _Family {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<Family>? _children;
+  @override
+  @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+  List<Family>? get children {
+    final value = _children;
+    if (value == null) return null;
+    if (_children is EqualUnmodifiableListView) return _children;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Family>? _parents;
+  @override
+  @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+  List<Family>? get parents {
+    final value = _parents;
+    if (value == null) return null;
+    if (_parents is EqualUnmodifiableListView) return _parents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final LastRecordedByInfo? lastEdit;
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, geolocation: $geolocation, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, areas: $areas, streets: $streets, lastEdit: $lastEdit)';
+    return 'Family(id: $id, name: $name, address: $address, geolocation: $geolocation, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, areas: $areas, streets: $streets, children: $children, parents: $parents, lastEdit: $lastEdit)';
   }
 
   @override
@@ -308,6 +374,8 @@ class _$_Family extends _Family {
                 other.photoUpdatedAt == photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
+            const DeepCollectionEquality().equals(other._children, _children) &&
+            const DeepCollectionEquality().equals(other._parents, _parents) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit));
   }
@@ -325,6 +393,8 @@ class _$_Family extends _Family {
       photoUpdatedAt,
       const DeepCollectionEquality().hash(_areas),
       const DeepCollectionEquality().hash(_streets),
+      const DeepCollectionEquality().hash(_children),
+      const DeepCollectionEquality().hash(_parents),
       lastEdit);
 
   @JsonKey(ignore: true)
@@ -354,6 +424,10 @@ abstract class _Family extends Family {
       final DateTime? photoUpdatedAt,
       final List<Area>? areas,
       final List<Street>? streets,
+      @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+          final List<Family>? children,
+      @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+          final List<Family>? parents,
       final LastRecordedByInfo? lastEdit}) = _$_Family;
   _Family._() : super._();
 
@@ -379,6 +453,12 @@ abstract class _Family extends Family {
   List<Area>? get areas;
   @override
   List<Street>? get streets;
+  @override
+  @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+  List<Family>? get children;
+  @override
+  @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+  List<Family>? get parents;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

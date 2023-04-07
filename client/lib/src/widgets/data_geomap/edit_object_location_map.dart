@@ -5,9 +5,12 @@ import 'package:churchdata_core/churchdata_core.dart' show ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'data_geomap.dart';
+import 'edit_geomap_options_widget.dart';
 import 'object_marker_widget.dart';
+import 'snapping_sheet.dart';
 import 'utils.dart';
 
 class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
@@ -35,6 +38,9 @@ class _EditObjectLocationMap<T extends ViewableWithID>
   late final BehaviorSubject<T> resultObject =
       BehaviorSubject.seeded(widget.initialObject);
 
+  late final _mapOptionsStream = BehaviorSubject.seeded(widget.geomapOptions);
+  final _sheetScrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,47 +54,64 @@ class _EditObjectLocationMap<T extends ViewableWithID>
         ],
         title: Text('تعديل ${widget.initialObject.name}'),
       ),
-      body: DataGeomap(
-        initialPerson: widget.initialObject is Person
-            ? widget.initialObject as Person
-            : null,
-        geomapOptionsStream: BehaviorSubject.seeded(widget.geomapOptions),
-        addLayers: [
-          StreamBuilder<T>(
-            initialData: resultObject.value,
-            stream: resultObject,
+      body: MapSnappingSheet(
+        sheetBelow: SnappingSheetContent(
+          draggable: true,
+          childScrollController: _sheetScrollController,
+          child: StreamBuilder<GeomapOptions>(
+            initialData: _mapOptionsStream.value,
+            stream: _mapOptionsStream,
             builder: (context, snapshot) {
-              final geolocation = widget.getLocation(snapshot.requireData);
-
-              return MarkerLayer(
-                rotate: true,
-                markers: [
-                  if (geolocation != null)
-                    markerFromPoint(
-                      geolocation,
-                      (context) => ObjectMarkerWidget(
-                        object: snapshot.requireData,
-                        isFocused: true,
-                        enableTap: false,
-                      ),
-                    ),
-                ],
+              return EditGeomapOptionsWidget(
+                mapOptions: snapshot.requireData,
+                sheetScrollController: _sheetScrollController,
+                apply: _mapOptionsStream.add,
               );
             },
           ),
-        ],
-        createMapOptions: (center) => MapOptions(
-          onTap: (pos, point) {
-            resultObject.value = widget.copyWithNewLocation(
-              resultObject.value,
-              Point(point.latitude, point.longitude),
-            );
-          },
-          maxZoom: 18,
-          zoom: 14,
-          interactiveFlags:
-              InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-          center: center,
+        ),
+        child: DataGeomap(
+          initialPerson: widget.initialObject is Person
+              ? widget.initialObject as Person
+              : null,
+          geomapOptionsStream: _mapOptionsStream,
+          addLayers: [
+            StreamBuilder<T>(
+              initialData: resultObject.value,
+              stream: resultObject,
+              builder: (context, snapshot) {
+                final geolocation = widget.getLocation(snapshot.requireData);
+
+                return MarkerLayer(
+                  rotate: true,
+                  markers: [
+                    if (geolocation != null)
+                      markerFromPoint(
+                        geolocation,
+                        (context) => ObjectMarkerWidget(
+                          object: snapshot.requireData,
+                          isFocused: true,
+                          enableTap: false,
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ],
+          createMapOptions: (center) => MapOptions(
+            onTap: (pos, point) {
+              resultObject.value = widget.copyWithNewLocation(
+                resultObject.value,
+                Point(point.latitude, point.longitude),
+              );
+            },
+            maxZoom: 18,
+            zoom: 14,
+            interactiveFlags:
+                InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+            center: center,
+          ),
         ),
       ),
     );
@@ -98,6 +121,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
   Future<void> dispose() async {
     super.dispose();
 
+    await _mapOptionsStream.close();
     await resultObject.close();
   }
 }

@@ -22,12 +22,7 @@ class EditStoreLocationMap extends StatelessWidget {
       initialObject: initialStore,
       getLocation: (s) => s.geolocation,
       copyWithNewLocation: (s, l) => s.copyWith(geolocation: l),
-      geomapOptions: GeomapOptions(
-        layers: const {
-          GeoMapLayer.areas,
-          GeoMapLayer.streets,
-        },
-      ),
+      geomapOptions: geomapOptions,
     );
   }
 }

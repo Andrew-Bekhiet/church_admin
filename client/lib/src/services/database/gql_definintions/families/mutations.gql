@@ -1,0 +1,50 @@
+mutation deleteFamily($familyId: uuid!) {
+  deleteFamiliesByPk(id: $familyId) {
+    ...Family
+  }
+}
+
+mutation insertFamily(
+  $newFamily: FamiliesInsertInput!
+) {
+  insertFamiliesOne(object: $newFamily) {
+    ...Family
+  }
+}
+
+mutation updateFamily(
+  $familyId: uuid!
+  $newFamily: FamiliesSetInput!
+  $deleteParents: [uuid!]!
+  $deleteChildren: [uuid!]!
+  $addRelatedFamilies: [FamiliesFamiliesInsertInput!]!
+  $updateFamily: Boolean!
+  $deleteRelatedFamilies: Boolean!
+  $insertRelatedFamilies: Boolean!
+) {
+  updateFamiliesByPk(pkColumns: { id: $familyId }, _set: $newFamily)
+    @include(if: $updateFamily) {
+    ...Family
+  }
+
+  deleteFamiliesFamilies(
+    where: {
+      _or: [
+        {
+          childFamilyId: { _eq: $familyId }
+          parentFamilyId: { _in: $deleteParents }
+        }
+        {
+          parentFamilyId: { _eq: $familyId }
+          childFamilyId: { _in: $deleteChildren }
+        }
+      ]
+    }
+  ) @include(if: $deleteRelatedFamilies) {
+    affectedRows
+  }
+  insertFamiliesFamilies(objects: $addRelatedFamilies)
+    @include(if: $insertRelatedFamilies) {
+    affectedRows
+  }
+}

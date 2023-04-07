@@ -101,30 +101,29 @@ class _CopyWithStubImpl$Variables$Mutation$deleteArea<TRes>
 
 class Mutation$deleteArea {
   Mutation$deleteArea({
-    this.deleteAreas,
+    this.deleteAreasByPk,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation$deleteArea.fromJson(Map<String, dynamic> json) {
-    final l$deleteAreas = json['deleteAreas'];
+    final l$deleteAreasByPk = json['deleteAreasByPk'];
     final l$$__typename = json['__typename'];
     return Mutation$deleteArea(
-      deleteAreas: l$deleteAreas == null
+      deleteAreasByPk: l$deleteAreasByPk == null
           ? null
-          : Mutation$deleteArea$deleteAreas.fromJson(
-              (l$deleteAreas as Map<String, dynamic>)),
+          : Fragment$Area.fromJson((l$deleteAreasByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$deleteArea$deleteAreas? deleteAreas;
+  final Fragment$Area? deleteAreasByPk;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$deleteAreas = deleteAreas;
-    _resultData['deleteAreas'] = l$deleteAreas?.toJson();
+    final l$deleteAreasByPk = deleteAreasByPk;
+    _resultData['deleteAreasByPk'] = l$deleteAreasByPk?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -132,10 +131,10 @@ class Mutation$deleteArea {
 
   @override
   int get hashCode {
-    final l$deleteAreas = deleteAreas;
+    final l$deleteAreasByPk = deleteAreasByPk;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$deleteAreas,
+      l$deleteAreasByPk,
       l$$__typename,
     ]);
   }
@@ -148,9 +147,9 @@ class Mutation$deleteArea {
     if (!(other is Mutation$deleteArea) || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$deleteAreas = deleteAreas;
-    final lOther$deleteAreas = other.deleteAreas;
-    if (l$deleteAreas != lOther$deleteAreas) {
+    final l$deleteAreasByPk = deleteAreasByPk;
+    final lOther$deleteAreasByPk = other.deleteAreasByPk;
+    if (l$deleteAreasByPk != lOther$deleteAreasByPk) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -180,10 +179,10 @@ abstract class CopyWith$Mutation$deleteArea<TRes> {
       _CopyWithStubImpl$Mutation$deleteArea;
 
   TRes call({
-    Mutation$deleteArea$deleteAreas? deleteAreas,
+    Fragment$Area? deleteAreasByPk,
     String? $__typename,
   });
-  CopyWith$Mutation$deleteArea$deleteAreas<TRes> get deleteAreas;
+  CopyWith$Fragment$Area<TRes> get deleteAreasByPk;
 }
 
 class _CopyWithImpl$Mutation$deleteArea<TRes>
@@ -200,23 +199,23 @@ class _CopyWithImpl$Mutation$deleteArea<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? deleteAreas = _undefined,
+    Object? deleteAreasByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$deleteArea(
-        deleteAreas: deleteAreas == _undefined
-            ? _instance.deleteAreas
-            : (deleteAreas as Mutation$deleteArea$deleteAreas?),
+        deleteAreasByPk: deleteAreasByPk == _undefined
+            ? _instance.deleteAreasByPk
+            : (deleteAreasByPk as Fragment$Area?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$deleteArea$deleteAreas<TRes> get deleteAreas {
-    final local$deleteAreas = _instance.deleteAreas;
-    return local$deleteAreas == null
-        ? CopyWith$Mutation$deleteArea$deleteAreas.stub(_then(_instance))
-        : CopyWith$Mutation$deleteArea$deleteAreas(
-            local$deleteAreas, (e) => call(deleteAreas: e));
+  CopyWith$Fragment$Area<TRes> get deleteAreasByPk {
+    final local$deleteAreasByPk = _instance.deleteAreasByPk;
+    return local$deleteAreasByPk == null
+        ? CopyWith$Fragment$Area.stub(_then(_instance))
+        : CopyWith$Fragment$Area(
+            local$deleteAreasByPk, (e) => call(deleteAreasByPk: e));
   }
 }
 
@@ -227,12 +226,12 @@ class _CopyWithStubImpl$Mutation$deleteArea<TRes>
   TRes _res;
 
   call({
-    Mutation$deleteArea$deleteAreas? deleteAreas,
+    Fragment$Area? deleteAreasByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$deleteArea$deleteAreas<TRes> get deleteAreas =>
-      CopyWith$Mutation$deleteArea$deleteAreas.stub(_res);
+  CopyWith$Fragment$Area<TRes> get deleteAreasByPk =>
+      CopyWith$Fragment$Area.stub(_res);
 }
 
 const documentNodeMutationdeleteArea = DocumentNode(definitions: [
@@ -253,44 +252,19 @@ const documentNodeMutationdeleteArea = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'deleteAreas'),
+        name: NameNode(value: 'deleteAreasByPk'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'areaId')),
-                  )
-                ]),
-              )
-            ]),
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'areaId')),
           )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'returning'),
-            alias: null,
-            arguments: [],
+          FragmentSpreadNode(
+            name: NameNode(value: 'Area'),
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Area'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -313,154 +287,6 @@ const documentNodeMutationdeleteArea = DocumentNode(definitions: [
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
 ]);
-
-class Mutation$deleteArea$deleteAreas {
-  Mutation$deleteArea$deleteAreas({
-    required this.returning,
-    this.$__typename = 'AreasMutationResponse',
-  });
-
-  factory Mutation$deleteArea$deleteAreas.fromJson(Map<String, dynamic> json) {
-    final l$returning = json['returning'];
-    final l$$__typename = json['__typename'];
-    return Mutation$deleteArea$deleteAreas(
-      returning: (l$returning as List<dynamic>)
-          .map((e) => Fragment$Area.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Fragment$Area> returning;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$returning = returning;
-    _resultData['returning'] = l$returning.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$returning = returning;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      Object.hashAll(l$returning.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Mutation$deleteArea$deleteAreas) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$returning = returning;
-    final lOther$returning = other.returning;
-    if (l$returning.length != lOther$returning.length) {
-      return false;
-    }
-    for (int i = 0; i < l$returning.length; i++) {
-      final l$returning$entry = l$returning[i];
-      final lOther$returning$entry = lOther$returning[i];
-      if (l$returning$entry != lOther$returning$entry) {
-        return false;
-      }
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Mutation$deleteArea$deleteAreas
-    on Mutation$deleteArea$deleteAreas {
-  CopyWith$Mutation$deleteArea$deleteAreas<Mutation$deleteArea$deleteAreas>
-      get copyWith => CopyWith$Mutation$deleteArea$deleteAreas(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Mutation$deleteArea$deleteAreas<TRes> {
-  factory CopyWith$Mutation$deleteArea$deleteAreas(
-    Mutation$deleteArea$deleteAreas instance,
-    TRes Function(Mutation$deleteArea$deleteAreas) then,
-  ) = _CopyWithImpl$Mutation$deleteArea$deleteAreas;
-
-  factory CopyWith$Mutation$deleteArea$deleteAreas.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deleteArea$deleteAreas;
-
-  TRes call({
-    List<Fragment$Area>? returning,
-    String? $__typename,
-  });
-  TRes returning(
-      Iterable<Fragment$Area> Function(
-              Iterable<CopyWith$Fragment$Area<Fragment$Area>>)
-          _fn);
-}
-
-class _CopyWithImpl$Mutation$deleteArea$deleteAreas<TRes>
-    implements CopyWith$Mutation$deleteArea$deleteAreas<TRes> {
-  _CopyWithImpl$Mutation$deleteArea$deleteAreas(
-    this._instance,
-    this._then,
-  );
-
-  final Mutation$deleteArea$deleteAreas _instance;
-
-  final TRes Function(Mutation$deleteArea$deleteAreas) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? returning = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation$deleteArea$deleteAreas(
-        returning: returning == _undefined || returning == null
-            ? _instance.returning
-            : (returning as List<Fragment$Area>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes returning(
-          Iterable<Fragment$Area> Function(
-                  Iterable<CopyWith$Fragment$Area<Fragment$Area>>)
-              _fn) =>
-      call(
-          returning: _fn(_instance.returning.map((e) => CopyWith$Fragment$Area(
-                e,
-                (i) => i,
-              ))).toList());
-}
-
-class _CopyWithStubImpl$Mutation$deleteArea$deleteAreas<TRes>
-    implements CopyWith$Mutation$deleteArea$deleteAreas<TRes> {
-  _CopyWithStubImpl$Mutation$deleteArea$deleteAreas(this._res);
-
-  TRes _res;
-
-  call({
-    List<Fragment$Area>? returning,
-    String? $__typename,
-  }) =>
-      _res;
-  returning(_fn) => _res;
-}
 
 class Variables$Mutation$insertArea {
   factory Variables$Mutation$insertArea(

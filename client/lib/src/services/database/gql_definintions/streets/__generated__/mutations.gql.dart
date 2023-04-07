@@ -101,30 +101,30 @@ class _CopyWithStubImpl$Variables$Mutation$deleteStreet<TRes>
 
 class Mutation$deleteStreet {
   Mutation$deleteStreet({
-    this.deleteStreets,
+    this.deleteStreetsByPk,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation$deleteStreet.fromJson(Map<String, dynamic> json) {
-    final l$deleteStreets = json['deleteStreets'];
+    final l$deleteStreetsByPk = json['deleteStreetsByPk'];
     final l$$__typename = json['__typename'];
     return Mutation$deleteStreet(
-      deleteStreets: l$deleteStreets == null
+      deleteStreetsByPk: l$deleteStreetsByPk == null
           ? null
-          : Mutation$deleteStreet$deleteStreets.fromJson(
-              (l$deleteStreets as Map<String, dynamic>)),
+          : Fragment$Street.fromJson(
+              (l$deleteStreetsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$deleteStreet$deleteStreets? deleteStreets;
+  final Fragment$Street? deleteStreetsByPk;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$deleteStreets = deleteStreets;
-    _resultData['deleteStreets'] = l$deleteStreets?.toJson();
+    final l$deleteStreetsByPk = deleteStreetsByPk;
+    _resultData['deleteStreetsByPk'] = l$deleteStreetsByPk?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -132,10 +132,10 @@ class Mutation$deleteStreet {
 
   @override
   int get hashCode {
-    final l$deleteStreets = deleteStreets;
+    final l$deleteStreetsByPk = deleteStreetsByPk;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$deleteStreets,
+      l$deleteStreetsByPk,
       l$$__typename,
     ]);
   }
@@ -148,9 +148,9 @@ class Mutation$deleteStreet {
     if (!(other is Mutation$deleteStreet) || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$deleteStreets = deleteStreets;
-    final lOther$deleteStreets = other.deleteStreets;
-    if (l$deleteStreets != lOther$deleteStreets) {
+    final l$deleteStreetsByPk = deleteStreetsByPk;
+    final lOther$deleteStreetsByPk = other.deleteStreetsByPk;
+    if (l$deleteStreetsByPk != lOther$deleteStreetsByPk) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -180,10 +180,10 @@ abstract class CopyWith$Mutation$deleteStreet<TRes> {
       _CopyWithStubImpl$Mutation$deleteStreet;
 
   TRes call({
-    Mutation$deleteStreet$deleteStreets? deleteStreets,
+    Fragment$Street? deleteStreetsByPk,
     String? $__typename,
   });
-  CopyWith$Mutation$deleteStreet$deleteStreets<TRes> get deleteStreets;
+  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk;
 }
 
 class _CopyWithImpl$Mutation$deleteStreet<TRes>
@@ -200,23 +200,23 @@ class _CopyWithImpl$Mutation$deleteStreet<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? deleteStreets = _undefined,
+    Object? deleteStreetsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$deleteStreet(
-        deleteStreets: deleteStreets == _undefined
-            ? _instance.deleteStreets
-            : (deleteStreets as Mutation$deleteStreet$deleteStreets?),
+        deleteStreetsByPk: deleteStreetsByPk == _undefined
+            ? _instance.deleteStreetsByPk
+            : (deleteStreetsByPk as Fragment$Street?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$deleteStreet$deleteStreets<TRes> get deleteStreets {
-    final local$deleteStreets = _instance.deleteStreets;
-    return local$deleteStreets == null
-        ? CopyWith$Mutation$deleteStreet$deleteStreets.stub(_then(_instance))
-        : CopyWith$Mutation$deleteStreet$deleteStreets(
-            local$deleteStreets, (e) => call(deleteStreets: e));
+  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk {
+    final local$deleteStreetsByPk = _instance.deleteStreetsByPk;
+    return local$deleteStreetsByPk == null
+        ? CopyWith$Fragment$Street.stub(_then(_instance))
+        : CopyWith$Fragment$Street(
+            local$deleteStreetsByPk, (e) => call(deleteStreetsByPk: e));
   }
 }
 
@@ -227,12 +227,12 @@ class _CopyWithStubImpl$Mutation$deleteStreet<TRes>
   TRes _res;
 
   call({
-    Mutation$deleteStreet$deleteStreets? deleteStreets,
+    Fragment$Street? deleteStreetsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$deleteStreet$deleteStreets<TRes> get deleteStreets =>
-      CopyWith$Mutation$deleteStreet$deleteStreets.stub(_res);
+  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk =>
+      CopyWith$Fragment$Street.stub(_res);
 }
 
 const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
@@ -253,44 +253,19 @@ const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'deleteStreets'),
+        name: NameNode(value: 'deleteStreetsByPk'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'streetId')),
-                  )
-                ]),
-              )
-            ]),
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'streetId')),
           )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'returning'),
-            alias: null,
-            arguments: [],
+          FragmentSpreadNode(
+            name: NameNode(value: 'Street'),
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Street'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -313,157 +288,6 @@ const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
   fragmentDefinitionStreet,
   fragmentDefinitionStreetNoPhoto,
 ]);
-
-class Mutation$deleteStreet$deleteStreets {
-  Mutation$deleteStreet$deleteStreets({
-    required this.returning,
-    this.$__typename = 'StreetsMutationResponse',
-  });
-
-  factory Mutation$deleteStreet$deleteStreets.fromJson(
-      Map<String, dynamic> json) {
-    final l$returning = json['returning'];
-    final l$$__typename = json['__typename'];
-    return Mutation$deleteStreet$deleteStreets(
-      returning: (l$returning as List<dynamic>)
-          .map((e) => Fragment$Street.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Fragment$Street> returning;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$returning = returning;
-    _resultData['returning'] = l$returning.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$returning = returning;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      Object.hashAll(l$returning.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Mutation$deleteStreet$deleteStreets) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$returning = returning;
-    final lOther$returning = other.returning;
-    if (l$returning.length != lOther$returning.length) {
-      return false;
-    }
-    for (int i = 0; i < l$returning.length; i++) {
-      final l$returning$entry = l$returning[i];
-      final lOther$returning$entry = lOther$returning[i];
-      if (l$returning$entry != lOther$returning$entry) {
-        return false;
-      }
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Mutation$deleteStreet$deleteStreets
-    on Mutation$deleteStreet$deleteStreets {
-  CopyWith$Mutation$deleteStreet$deleteStreets<
-          Mutation$deleteStreet$deleteStreets>
-      get copyWith => CopyWith$Mutation$deleteStreet$deleteStreets(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Mutation$deleteStreet$deleteStreets<TRes> {
-  factory CopyWith$Mutation$deleteStreet$deleteStreets(
-    Mutation$deleteStreet$deleteStreets instance,
-    TRes Function(Mutation$deleteStreet$deleteStreets) then,
-  ) = _CopyWithImpl$Mutation$deleteStreet$deleteStreets;
-
-  factory CopyWith$Mutation$deleteStreet$deleteStreets.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deleteStreet$deleteStreets;
-
-  TRes call({
-    List<Fragment$Street>? returning,
-    String? $__typename,
-  });
-  TRes returning(
-      Iterable<Fragment$Street> Function(
-              Iterable<CopyWith$Fragment$Street<Fragment$Street>>)
-          _fn);
-}
-
-class _CopyWithImpl$Mutation$deleteStreet$deleteStreets<TRes>
-    implements CopyWith$Mutation$deleteStreet$deleteStreets<TRes> {
-  _CopyWithImpl$Mutation$deleteStreet$deleteStreets(
-    this._instance,
-    this._then,
-  );
-
-  final Mutation$deleteStreet$deleteStreets _instance;
-
-  final TRes Function(Mutation$deleteStreet$deleteStreets) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? returning = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation$deleteStreet$deleteStreets(
-        returning: returning == _undefined || returning == null
-            ? _instance.returning
-            : (returning as List<Fragment$Street>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes returning(
-          Iterable<Fragment$Street> Function(
-                  Iterable<CopyWith$Fragment$Street<Fragment$Street>>)
-              _fn) =>
-      call(
-          returning:
-              _fn(_instance.returning.map((e) => CopyWith$Fragment$Street(
-                    e,
-                    (i) => i,
-                  ))).toList());
-}
-
-class _CopyWithStubImpl$Mutation$deleteStreet$deleteStreets<TRes>
-    implements CopyWith$Mutation$deleteStreet$deleteStreets<TRes> {
-  _CopyWithStubImpl$Mutation$deleteStreet$deleteStreets(this._res);
-
-  TRes _res;
-
-  call({
-    List<Fragment$Street>? returning,
-    String? $__typename,
-  }) =>
-      _res;
-  returning(_fn) => _res;
-}
 
 class Variables$Mutation$insertStreet {
   factory Variables$Mutation$insertStreet(

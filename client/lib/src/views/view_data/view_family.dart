@@ -17,6 +17,9 @@ class ViewFamily extends StatefulWidget {
         family: (state.extra as Map?)?['family'] as Family?,
       );
     },
+    routes: [
+      EditFamily.route,
+    ],
   );
 
   final Family? family;

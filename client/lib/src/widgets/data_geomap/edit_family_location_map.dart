@@ -22,12 +22,7 @@ class EditFamilyLocationMap extends StatelessWidget {
       initialObject: initialFamily,
       getLocation: (f) => f.geolocation,
       copyWithNewLocation: (f, l) => f.copyWith(geolocation: l),
-      geomapOptions: GeomapOptions(
-        layers: const {
-          GeoMapLayer.areas,
-          GeoMapLayer.streets,
-        },
-      ),
+      geomapOptions: geomapOptions,
     );
   }
 }
