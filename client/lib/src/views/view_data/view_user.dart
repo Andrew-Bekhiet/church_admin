@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     hide LoggingService, ViewableObjectWidget;
 import 'package:collection/collection.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -77,11 +78,7 @@ class _ViewUserState extends State<ViewUser> {
         final user = snapshot.requireData!;
         final person = user.person;
 
-        final foregroundColor = person?.color.getContrastingColor(
-          ListTileTheme.of(context).textColor ??
-              themeData.listTileTheme.textColor ??
-              themeData.textTheme.titleMedium!.color!,
-        );
+        final foregroundColor = person?.color?.findInvert();
         return Scaffold(
           body: CustomScrollView(
             controller: scrollController,
@@ -109,6 +106,7 @@ class _ViewUserState extends State<ViewUser> {
                     ),
                 ],
                 flexibleSpace: ViewableObjectAppBar(
+                  backgroundColor: user.color,
                   foregroundColor: foregroundColor,
                   viewable:
                       widget.user?.hasImage ?? false ? widget.user! : user,

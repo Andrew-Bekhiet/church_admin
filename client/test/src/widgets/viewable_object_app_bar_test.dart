@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,9 +24,7 @@ Future<void> main() async {
     'ViewableObjectAppBar => Goldens =>',
     () {
       final viewable = Person(id: 'id', name: 'name', color: Colors.green);
-      final foregroundColor = viewable.color.getContrastingColor(
-        Colors.black,
-      );
+      final foregroundColor = viewable.color?.findInvert();
       testGoldens(
         'Snapping',
         (tester) async {
@@ -49,6 +47,7 @@ Future<void> main() async {
                       flexibleSpace: ViewableObjectAppBar(
                         viewable: viewable,
                         appBarMaxHeight: expandedHeight,
+                        backgroundColor: viewable.color,
                         foregroundColor: foregroundColor,
                         scrollController: scrollController,
                         duration: const Duration(milliseconds: 100),
@@ -129,6 +128,7 @@ Future<void> main() async {
                       flexibleSpace: ViewableObjectAppBar(
                         viewable: viewable,
                         appBarMaxHeight: expandedHeight,
+                        backgroundColor: viewable.color,
                         foregroundColor: foregroundColor,
                       ),
                     ),
@@ -206,6 +206,7 @@ Future<void> main() async {
                       flexibleSpace: ViewableObjectAppBar(
                         viewable: viewable,
                         appBarMaxHeight: expandedHeight,
+                        backgroundColor: viewable.color,
                         foregroundColor: foregroundColor,
                         circleCrop: false,
                       ),

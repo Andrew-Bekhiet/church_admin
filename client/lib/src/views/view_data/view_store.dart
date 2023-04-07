@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide LoggingService, ViewableObjectWidget;
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,11 +77,7 @@ class _ViewStoreState extends State<ViewStore> {
 
         final store = snapshot.requireData!;
 
-        final foregroundColor = store.color.getContrastingColor(
-          ListTileTheme.of(context).textColor ??
-              themeData.listTileTheme.textColor ??
-              themeData.textTheme.titleMedium!.color!,
-        );
+        final foregroundColor = store.color?.findInvert();
 
         return DefaultTabController(
           length: 3,
@@ -118,6 +113,7 @@ class _ViewStoreState extends State<ViewStore> {
                     ],
                     flexibleSpace: ViewableObjectAppBar(
                       circleCrop: false,
+                      backgroundColor: store.color,
                       foregroundColor: foregroundColor,
                       viewable: widget.store?.hasImage ?? false
                           ? widget.store!

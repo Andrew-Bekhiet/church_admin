@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show ContrastingColor, TappableFormField;
+import 'package:churchdata_core/churchdata_core.dart' show TappableFormField;
 import 'package:collection/collection.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -85,11 +85,7 @@ class _EditPersonState extends State<EditPerson> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final foregroundColor = newPerson.color.getContrastingColor(
-      ListTileTheme.of(context).textColor ??
-          themeData.listTileTheme.textColor ??
-          themeData.textTheme.titleMedium!.color!,
-    );
+    final foregroundColor = newPerson.color?.findInvert();
 
     return Theme(
       data: CAThemingService.getDefault(primaryOverride: newPerson.color),
@@ -801,7 +797,7 @@ class _EditPersonState extends State<EditPerson> {
                               labelText: 'الهوايات',
                               builder: (context, state) {
                                 final labelStyle =
-                                    Theme.of(context).textTheme.labelSmall!;
+                                    themeData.textTheme.labelSmall!;
                                 return state.value != null &&
                                         state.value!.isNotEmpty
                                     ? Wrap(
@@ -813,21 +809,15 @@ class _EditPersonState extends State<EditPerson> {
                                               type: MaterialType.transparency,
                                               child: Chip(
                                                 side: BorderSide(
-                                                  color: labelStyle.color
-                                                          .getContrastingColor(
-                                                        hobby.color ??
-                                                            Colors.transparent,
-                                                      ) ??
+                                                  color: hobby.color
+                                                          ?.findInvert() ??
                                                       labelStyle.color!,
                                                 ),
                                                 label: Text(
                                                   hobby.name,
                                                   style: labelStyle.copyWith(
-                                                    color: labelStyle.color
-                                                        .getContrastingColor(
-                                                      hobby.color ??
-                                                          Colors.transparent,
-                                                    ),
+                                                    color: hobby.color
+                                                        ?.findInvert(),
                                                   ),
                                                 ),
                                                 backgroundColor: hobby.color,
@@ -856,7 +846,7 @@ class _EditPersonState extends State<EditPerson> {
                               labelText: 'الشارات',
                               builder: (context, state) {
                                 final labelStyle =
-                                    Theme.of(context).textTheme.labelSmall!;
+                                    themeData.textTheme.labelSmall!;
                                 return state.value != null &&
                                         state.value!.isNotEmpty
                                     ? Wrap(
@@ -868,21 +858,15 @@ class _EditPersonState extends State<EditPerson> {
                                               type: MaterialType.transparency,
                                               child: Chip(
                                                 side: BorderSide(
-                                                  color: labelStyle.color
-                                                          .getContrastingColor(
-                                                        tag.color ??
-                                                            Colors.transparent,
-                                                      ) ??
-                                                      labelStyle.color!,
+                                                  color:
+                                                      tag.color?.findInvert() ??
+                                                          labelStyle.color!,
                                                 ),
                                                 label: Text(
                                                   tag.name,
                                                   style: labelStyle.copyWith(
-                                                    color: labelStyle.color
-                                                        .getContrastingColor(
-                                                      tag.color ??
-                                                          Colors.transparent,
-                                                    ),
+                                                    color:
+                                                        tag.color?.findInvert(),
                                                   ),
                                                 ),
                                                 backgroundColor: tag.color,

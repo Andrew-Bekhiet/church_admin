@@ -1,8 +1,7 @@
 // ignore_for_file: avoid-returning-widgets
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide LoggingService, ViewableObjectWidget;
 import 'package:collection/collection.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 
 export 'view_data/view_area.dart';
@@ -86,15 +85,9 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
           );
         }
 
-        final themeData = Theme.of(context);
-
         final objectData = snapshot.requireData!;
 
-        final foregroundColor = objectData.color.getContrastingColor(
-          ListTileTheme.of(context).textColor ??
-              themeData.listTileTheme.textColor ??
-              themeData.textTheme.titleMedium!.color!,
-        );
+        final foregroundColor = objectData.color?.findInvert();
 
         return Theme(
           data: CAThemingService.getDefault(primaryOverride: objectData.color),
@@ -120,6 +113,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                     ],
                     flexibleSpace: ViewableObjectAppBar(
                       circleCrop: false,
+                      backgroundColor: objectData.color,
                       foregroundColor: foregroundColor,
                       viewable:
                           object?.hasImage ?? false ? object! : objectData,

@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 
 class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
@@ -51,11 +52,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final textColor = ListTileTheme.of(context).textColor ??
-        themeData.listTileTheme.textColor ??
-        themeData.textTheme.titleMedium!.color!;
-    final foregroundColor = object.color.getContrastingColor(textColor);
+    final foregroundColor = object.color?.findInvert();
 
     final secondLine = viewableObjectService.getSecondLine(object);
 

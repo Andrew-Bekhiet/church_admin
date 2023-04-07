@@ -30,6 +30,7 @@ dependencies:
   collection: ^1.16.0
   connectivity_plus: ^3.0.2
   cupertino_icons: ^1.0.5
+  derived_colors: ^0.4.0
   desktop_webview_auth: ^0.0.11
   device_info_plus: ^8.0.0
   dio: ^5.1.1

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' show ContrastingColor;
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mime/mime.dart';
@@ -42,12 +42,7 @@ class _EditAreaState extends State<EditArea> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final foregroundColor = newArea.color.getContrastingColor(
-      ListTileTheme.of(context).textColor ??
-          themeData.listTileTheme.textColor ??
-          themeData.textTheme.titleMedium!.color!,
-    );
+    final foregroundColor = newArea.color?.findInvert();
 
     return Theme(
       data: CAThemingService.getDefault(primaryOverride: newArea.color),

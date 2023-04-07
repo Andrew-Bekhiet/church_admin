@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:churchdata_core/churchdata_core.dart'
     hide PhotoObjectWidget, ViewableObjectWidget;
 import 'package:collection/collection.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -70,6 +71,7 @@ class _ViewPersonState extends State<ViewPerson> {
 
   @override
   Widget build(BuildContext context) {
+    final labelSmall = Theme.of(context).textTheme.labelSmall!;
     return StreamBuilder<Person?>(
       initialData: widget.person,
       stream: stream,
@@ -111,11 +113,7 @@ class _ViewPersonState extends State<ViewPerson> {
 
         final person = snapshot.requireData!;
 
-        final foregroundColor = person.color.getContrastingColor(
-          ListTileTheme.of(context).textColor ??
-              themeData.listTileTheme.textColor ??
-              themeData.textTheme.titleMedium!.color!,
-        );
+        final foregroundColor = person.color?.findInvert();
         return Theme(
           data: CAThemingService.getDefault(primaryOverride: person.color),
           child: Scaffold(
@@ -149,6 +147,7 @@ class _ViewPersonState extends State<ViewPerson> {
                   ],
                   flexibleSpace: ViewableObjectAppBar(
                     foregroundColor: foregroundColor,
+                    backgroundColor: person.color,
                     viewable: widget.person?.hasImage ?? false
                         ? widget.person!
                         : person,
@@ -208,8 +207,7 @@ class _ViewPersonState extends State<ViewPerson> {
                                     DateFormat('yyyy/M/d').format(
                                       person.birthdate!,
                                     ),
-                                    style:
-                                        Theme.of(context).textTheme.labelSmall,
+                                    style: labelSmall,
                                   ),
                                 ],
                               )
@@ -349,33 +347,14 @@ class _ViewPersonState extends State<ViewPerson> {
                                 type: MaterialType.transparency,
                                 child: Chip(
                                   side: BorderSide(
-                                    color: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
-                                            .color
-                                            .getContrastingColor(
-                                              hobby.color ?? Colors.transparent,
-                                            ) ??
-                                        Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
-                                            .color!,
+                                    color: hobby.color?.findInvert() ??
+                                        labelSmall.color!,
                                   ),
                                   label: Text(
                                     hobby.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .color
-                                              .getContrastingColor(
-                                                hobby.color ??
-                                                    Colors.transparent,
-                                              ),
-                                        ),
+                                    style: labelSmall.copyWith(
+                                      color: hobby.color?.findInvert(),
+                                    ),
                                   ),
                                   backgroundColor: hobby.color,
                                 ),
@@ -393,32 +372,14 @@ class _ViewPersonState extends State<ViewPerson> {
                                 type: MaterialType.transparency,
                                 child: Chip(
                                   side: BorderSide(
-                                    color: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
-                                            .color
-                                            .getContrastingColor(
-                                              tag.color ?? Colors.transparent,
-                                            ) ??
-                                        Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
-                                            .color!,
+                                    color: tag.color?.findInvert() ??
+                                        labelSmall.color!,
                                   ),
                                   label: Text(
                                     tag.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .color
-                                              .getContrastingColor(
-                                                tag.color ?? Colors.transparent,
-                                              ),
-                                        ),
+                                    style: labelSmall.copyWith(
+                                      color: tag.color?.findInvert(),
+                                    ),
                                   ),
                                   backgroundColor: tag.color,
                                 ),

@@ -423,6 +423,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.8"
+  derived_colors:
+    dependency: "direct main"
+    description:
+      name: derived_colors
+      sha256: b34b8287fa0cd668e9de6bb93a1c3eae98ea210804b6c85d28ca2e15f2a5d4f8
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   desktop_webview_auth:
     dependency: "direct main"
     description:

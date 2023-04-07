@@ -77,6 +77,7 @@ class _ViewFamilyState extends State<ViewFamily> {
   Widget build(BuildContext context) {
     return ViewObjectDetails<Family>(
       objectId: widget.familyId,
+      object: widget.family,
       objectStream: stream,
       childrenTypes: const [Person, _ChildrenFamily, _ParentFamily, Store],
       tabsContentBuilders: {

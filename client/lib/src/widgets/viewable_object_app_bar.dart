@@ -5,6 +5,7 @@ class ViewableObjectAppBar extends StatefulWidget {
   const ViewableObjectAppBar({
     required this.viewable,
     required this.foregroundColor,
+    required this.backgroundColor,
     required this.appBarMaxHeight,
     this.duration,
     this.scrollController,
@@ -13,6 +14,7 @@ class ViewableObjectAppBar extends StatefulWidget {
   }) : assert(scrollController == null || duration != null);
 
   final Color? foregroundColor;
+  final Color? backgroundColor;
   final ViewableWithIDAndImage viewable;
   final double appBarMaxHeight;
   final Duration? duration;
@@ -59,14 +61,14 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
 
   late final _bgColorTween = ColorTween(
     begin: Theme.of(context).scaffoldBackgroundColor,
-    end: widget.foregroundColor,
+    end: widget.backgroundColor,
   ).chain(
     CurveTween(
       curve: const Interval(0.5, 1, curve: Curves.elasticOut),
     ),
   );
 
-  late final _textStyleTeen = TextStyleTween(
+  late final _textStyleTween = TextStyleTween(
     begin: Theme.of(context).textTheme.headlineMedium!.copyWith(
           color: Theme.of(context).textTheme.titleLarge!.color,
         ),
@@ -74,6 +76,11 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
           color: widget.foregroundColor,
           fontSize: Theme.of(context).textTheme.titleLarge!.fontSize! * 0.8,
         ),
+  );
+
+  late final _foregroundColorTween = ColorTween(
+    begin: Theme.of(context).textTheme.titleLarge!.color,
+    end: widget.foregroundColor,
   );
 
   final _snapPositions = <double>[0, 0.85, 1];
@@ -122,7 +129,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                 ),
               ),
               _AppBarPhoto(
-                foregroundColor: widget.foregroundColor,
+                foregroundColor: _foregroundColorTween.lerp(animationValue),
                 viewable: widget.viewable,
                 height: constraints.biggest.height,
                 photoAlign: _photoAlignTween.lerp(animationValue),
@@ -134,7 +141,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                 child: Text(
                   widget.viewable.name,
                   overflow: TextOverflow.ellipsis,
-                  style: _textStyleTeen.transform(animationValue),
+                  style: _textStyleTween.transform(animationValue),
                 ),
               )
             ],
