@@ -19,6 +19,8 @@ class ViewFamily extends StatefulWidget {
     },
     routes: [
       EditFamily.route,
+      // EditStore.route,
+      EditPerson.route,
     ],
   );
 
@@ -36,6 +38,10 @@ class ViewFamily extends StatefulWidget {
 }
 
 class _ViewFamilyState extends State<ViewFamily> {
+  static const _addFamily = Icon(Icons.group_add);
+  static const _addStore = Icon(Icons.add_business);
+  static const _addPerson = Icon(Icons.person_add_alt_1);
+
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
       byFamilyId: widget.familyId,
@@ -200,7 +206,64 @@ class _ViewFamilyState extends State<ViewFamily> {
         ),
         icon: const Icon(Icons.edit),
       ),
+      floatingActionButtonBuilder: (context, tabController, family) =>
+          AnimatedBuilder(
+        animation: tabController.animation!,
+        builder: (context, child) {
+          final currentIndex = tabController.index;
+          final offset = tabController.offset;
+
+          final newIndex = offset.isNegative
+              ? (currentIndex + offset).floor()
+              : (currentIndex + offset).ceil();
+
+          return AnimatedFloatingActionButton(
+            offset: offset,
+            newFAB: FloatingActionButton(
+              onPressed: _onFABPressed(family, newIndex),
+              child: newIndex == 0
+                  ? _addPerson
+                  : newIndex == 3
+                      ? _addStore
+                      : _addFamily,
+            ),
+            oldFAB: FloatingActionButton(
+              heroTag: null,
+              onPressed: _onFABPressed(family, currentIndex),
+              child: currentIndex == 0
+                  ? _addPerson
+                  : currentIndex == 3
+                      ? _addStore
+                      : _addFamily,
+            ),
+          );
+        },
+      ),
     );
+  }
+
+  void Function() _onFABPressed(Family family, int newIndex) {
+    return () {
+      if (newIndex == 0) {
+        context.push('/viewArea/editPerson', extra: {'family': family});
+      } else if (newIndex == 1) {
+        context.push(
+          '/viewArea/editFamily',
+          extra: {
+            'parents': {family},
+          },
+        );
+      } else if (newIndex == 2) {
+        context.push(
+          '/viewArea/editFamily',
+          extra: {
+            'children': {family},
+          },
+        );
+      } else if (newIndex == 3) {
+        context.push('/viewArea/editStore', extra: {'family': family});
+      }
+    };
   }
 
   ViewableObjectListController<T>

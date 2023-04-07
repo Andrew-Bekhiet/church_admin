@@ -30,7 +30,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final Stream<T?> objectStream;
   final List<Type> childrenTypes;
   final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
-  final Widget Function(BuildContext, TabController)?
+  final Widget Function(BuildContext, TabController, T)?
       floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
@@ -153,6 +153,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                         return floatingActionButtonBuilder!(
                           context,
                           DefaultTabController.of(context),
+                          objectData,
                         );
                       },
                     )

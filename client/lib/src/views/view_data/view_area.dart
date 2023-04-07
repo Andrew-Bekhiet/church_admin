@@ -17,7 +17,10 @@ class ViewArea extends StatefulWidget {
     },
     routes: [
       EditArea.route,
+      EditStreet.route,
       EditFamily.route,
+      // EditStore.route,
+      EditPerson.route,
     ],
   );
 
@@ -170,7 +173,8 @@ class _ViewAreaState extends State<ViewArea> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      floatingActionButtonBuilder: (context, tabController) => AnimatedBuilder(
+      floatingActionButtonBuilder: (context, tabController, area) =>
+          AnimatedBuilder(
         animation: tabController.animation!,
         builder: (context, child) {
           final currentIndex = tabController.index;
@@ -212,10 +216,14 @@ class _ViewAreaState extends State<ViewArea> {
   void Function() _onFABPressed(int newIndex) {
     return () {
       if (newIndex == 0) {
+        context.push('/viewArea/editStreet');
       } else if (newIndex == 1) {
         context.push('/viewArea/editFamily');
       } else if (newIndex == 2) {
-      } else if (newIndex == 3) {}
+        context.push('/viewArea/editStore');
+      } else if (newIndex == 3) {
+        context.push('/viewArea/editPerson');
+      }
     };
   }
 

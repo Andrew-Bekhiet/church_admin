@@ -16,14 +16,20 @@ class EditFamily extends StatefulWidget {
     builder: (context, state) {
       return EditFamily(
         family: (state.extra as Map?)?['family'] as Family?,
+        children: (state.extra as Map?)?['children'] as Set<Family>?,
+        parents: (state.extra as Map?)?['parents'] as Set<Family>?,
       );
     },
   );
 
   final Family? family;
+  final Set<Family>? children;
+  final Set<Family>? parents;
 
   const EditFamily({
     required this.family,
+    this.children,
+    this.parents,
     super.key,
   });
 
@@ -32,8 +38,13 @@ class EditFamily extends StatefulWidget {
 }
 
 class _EditFamilyState extends State<EditFamily> {
-  late Family initialFamily =
-      widget.family ?? Family(id: const Uuid().v4(), name: 'عائلة جديدة');
+  late Family initialFamily = widget.family ??
+      Family(
+        id: const Uuid().v4(),
+        name: 'عائلة جديدة',
+        children: widget.children?.toList() ?? [],
+        parents: widget.parents?.toList() ?? [],
+      );
   late Family newFamily = initialFamily;
 
   bool _saveLock = false;

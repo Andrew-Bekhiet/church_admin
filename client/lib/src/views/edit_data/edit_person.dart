@@ -20,14 +20,17 @@ class EditPerson extends StatefulWidget {
     builder: (context, state) {
       return EditPerson(
         person: (state.extra as Map?)?['person'] as Person?,
+        family: (state.extra as Map?)?['family'] as Family?,
       );
     },
   );
 
   final Person? person;
+  final Family? family;
 
   const EditPerson({
     required this.person,
+    this.family,
     super.key,
   });
 
@@ -36,8 +39,12 @@ class EditPerson extends StatefulWidget {
 }
 
 class _EditPersonState extends State<EditPerson> {
-  late Person initialPerson =
-      widget.person ?? Person(id: const Uuid().v4(), name: 'مخدوم جديد');
+  late Person initialPerson = widget.person ??
+      Person(
+        id: const Uuid().v4(),
+        name: 'مخدوم جديد',
+        family: widget.family,
+      );
   late Person newPerson = initialPerson;
 
   bool _saveLock = false;
