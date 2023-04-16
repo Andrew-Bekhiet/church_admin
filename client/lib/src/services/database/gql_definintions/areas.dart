@@ -92,6 +92,8 @@ class AreasDAO extends DAOBase {
       oldArea.toJson(),
     );
 
+    if (delta.isEmpty) return Future.value(newArea);
+
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdateArea,

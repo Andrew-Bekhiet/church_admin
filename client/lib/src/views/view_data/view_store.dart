@@ -16,6 +16,9 @@ class ViewStore extends StatefulWidget {
         store: (state.extra as Map?)?['store'] as Store?,
       );
     },
+    routes: [
+      EditStore.route,
+    ],
   );
 
   final Store? store;

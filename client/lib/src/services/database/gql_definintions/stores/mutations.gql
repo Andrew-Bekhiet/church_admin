@@ -1,0 +1,17 @@
+mutation deleteStore($storeId: uuid!) {
+  deleteStoresByPk(id: $storeId) {
+    ...Store
+  }
+}
+
+mutation insertStore($newStore: StoresInsertInput!) {
+  insertStoresOne(object: $newStore) {
+    ...Store
+  }
+}
+
+mutation updateStore($storeId: uuid!, $newStore: StoresSetInput!) {
+  updateStoresByPk(pkColumns: { id: $storeId }, _set: $newStore) {
+    ...Store
+  }
+}

@@ -18,7 +18,7 @@ class ViewStreet extends StatefulWidget {
     routes: [
       EditStreet.route,
       EditFamily.route,
-      // EditStore.route,
+      EditStore.route,
       EditPerson.route,
     ],
   );

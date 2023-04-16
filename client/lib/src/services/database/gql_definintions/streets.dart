@@ -104,6 +104,8 @@ class StreetsDAO extends DAOBase {
       oldStreet.toJson(),
     );
 
+    if (delta.isEmpty) return Future.value(newStreet);
+
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdateStreet,

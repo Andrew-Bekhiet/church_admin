@@ -12,6 +12,7 @@ _$_Store _$$_StoreFromJson(Map json) => _$_Store(
       family: json['family'] == null
           ? null
           : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+      familyId: json['adminFamily'] as String?,
       geolocation: pointFromJson(json['geolocation']),
       color: colorFromInt(json['color'] as int?),
       areas: (json['areas'] as List<dynamic>?)
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'family': instance.family?.toJson(),
+      'adminFamily': instance.familyId,
       'geolocation': pointToJson(instance.geolocation),
       'color': colorToInt(instance.color),
       'areas': instance.areas?.map((e) => e.toJson()).toList(),

@@ -14,6 +14,7 @@ class Store extends ViewableWithIDAndImage with _$Store {
     required String id,
     required String name,
     Family? family,
+    @JsonKey(name: 'adminFamily') String? familyId,
     @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     List<Area>? areas,

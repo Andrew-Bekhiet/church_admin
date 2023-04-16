@@ -23,6 +23,8 @@ mixin _$Store {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Family? get family => throw _privateConstructorUsedError;
+  @JsonKey(name: 'adminFamily')
+  String? get familyId => throw _privateConstructorUsedError;
   @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
   Point? get geolocation => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -46,6 +48,7 @@ abstract class $StoreCopyWith<$Res> {
       {String id,
       String name,
       Family? family,
+      @JsonKey(name: 'adminFamily') String? familyId,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       List<Area>? areas,
@@ -73,6 +76,7 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
     Object? id = null,
     Object? name = null,
     Object? family = freezed,
+    Object? familyId = freezed,
     Object? geolocation = freezed,
     Object? color = freezed,
     Object? areas = freezed,
@@ -93,6 +97,10 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
+      familyId: freezed == familyId
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
+              as String?,
       geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
@@ -155,6 +163,7 @@ abstract class _$$_StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
       {String id,
       String name,
       Family? family,
+      @JsonKey(name: 'adminFamily') String? familyId,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       List<Area>? areas,
@@ -180,6 +189,7 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
     Object? id = null,
     Object? name = null,
     Object? family = freezed,
+    Object? familyId = freezed,
     Object? geolocation = freezed,
     Object? color = freezed,
     Object? areas = freezed,
@@ -200,6 +210,10 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
+      familyId: freezed == familyId
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
+              as String?,
       geolocation: freezed == geolocation
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
@@ -235,6 +249,7 @@ class _$_Store extends _Store {
       {required this.id,
       required this.name,
       this.family,
+      @JsonKey(name: 'adminFamily') this.familyId,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       final List<Area>? areas,
@@ -254,6 +269,9 @@ class _$_Store extends _Store {
   final String name;
   @override
   final Family? family;
+  @override
+  @JsonKey(name: 'adminFamily')
+  final String? familyId;
   @override
   @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
   final Point? geolocation;
@@ -287,7 +305,7 @@ class _$_Store extends _Store {
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, family: $family, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Store(id: $id, name: $name, family: $family, familyId: $familyId, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt)';
   }
 
   @override
@@ -298,6 +316,8 @@ class _$_Store extends _Store {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.family, family) || other.family == family) &&
+            (identical(other.familyId, familyId) ||
+                other.familyId == familyId) &&
             (identical(other.geolocation, geolocation) ||
                 other.geolocation == geolocation) &&
             (identical(other.color, color) || other.color == color) &&
@@ -316,6 +336,7 @@ class _$_Store extends _Store {
       id,
       name,
       family,
+      familyId,
       geolocation,
       color,
       const DeepCollectionEquality().hash(_areas),
@@ -342,6 +363,8 @@ abstract class _Store extends Store {
       {required final String id,
       required final String name,
       final Family? family,
+      @JsonKey(name: 'adminFamily')
+          final String? familyId,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
           final Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -360,6 +383,9 @@ abstract class _Store extends Store {
   String get name;
   @override
   Family? get family;
+  @override
+  @JsonKey(name: 'adminFamily')
+  String? get familyId;
   @override
   @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
   Point? get geolocation;

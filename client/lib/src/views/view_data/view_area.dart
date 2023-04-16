@@ -19,7 +19,7 @@ class ViewArea extends StatefulWidget {
       EditArea.route,
       EditStreet.route,
       EditFamily.route,
-      // EditStore.route,
+      EditStore.route,
       EditPerson.route,
     ],
   );

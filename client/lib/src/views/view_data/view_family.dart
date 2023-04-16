@@ -19,7 +19,7 @@ class ViewFamily extends StatefulWidget {
     },
     routes: [
       EditFamily.route,
-      // EditStore.route,
+      EditStore.route,
       EditPerson.route,
     ],
   );
