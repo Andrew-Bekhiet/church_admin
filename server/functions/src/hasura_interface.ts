@@ -7,10 +7,8 @@ const axios = (Axios as any).create({}) as Axios.AxiosInstance;
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             query checkApproved($uid: uuid!) {
               authUsersData(where: { uid: { _eq: $uid } }, limit: 1) {
                 permissions{
@@ -19,18 +17,9 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
               }
             }
           `,
-        variables: { uid },
-        operationName: "checkApproved",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-          "x-hasura-role": "admin",
-        },
-      }
-    );
+      variables: { uid },
+      operationName: "checkApproved",
+    });
     const permissions: Record<string, string>[] =
       hasura_request.data?.["data"]?.["authUsersData"]?.[0]?.["permissions"];
 
@@ -50,28 +39,17 @@ export async function getHasuraUID(
   firebase_auth_uid: string
 ): Promise<string | null> {
   try {
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             query getUserByFirebaseUID($firebase_auth_uid: String) {
               authUsersData(where: {authId: {_eq: $firebase_auth_uid}}, limit: 1) {
                 uid
               }
             }
           `,
-        variables: { firebase_auth_uid },
-        operationName: "getUserByFirebaseUID",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-          "x-hasura-role": "admin",
-        },
-      }
-    );
+      variables: { firebase_auth_uid },
+      operationName: "getUserByFirebaseUID",
+    });
     const hasura_uid: string =
       hasura_request.data?.["data"]?.["authUsersData"]?.[0]?.["uid"] ?? null;
 
@@ -87,10 +65,8 @@ export async function getPersonIdFromUser(
   hasuraUID: string
 ): Promise<string | null> {
   try {
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             query getPersonIdFromUser($hasuraUID: uuid = "") {
               authUsersData(where: {uid: {_eq: $hasuraUID}}) {
                 person {
@@ -99,18 +75,9 @@ export async function getPersonIdFromUser(
               }
             }
           `,
-        variables: { hasuraUID },
-        operationName: "getPersonIdFromUser",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-          "x-hasura-role": "admin",
-        },
-      }
-    );
+      variables: { hasuraUID },
+      operationName: "getPersonIdFromUser",
+    });
     const hasura_uid: string =
       hasura_request.data?.["data"]?.["authUsersData"]?.[0]?.["person"]?.[
         "id"
@@ -138,31 +105,25 @@ export async function checkUserAccess(
       permission.at(0)!.toUpperCase() +
       permission.substring(1);
 
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             query checkPermissions($id: uuid!) {
                 ${table == "users" ? "authUsersData" : table}(where: {${
-          table == "users" ? "uid" : "id"
-        }: {_eq: $id}}, limit: 1) {
+        table == "users" ? "uid" : "id"
+      }: {_eq: $id}}, limit: 1) {
                     ${field}
                 }
             }
           `,
-        variables: { id },
-        operationName: "checkPermissions",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-user-id": hasura_uid,
-          "x-hasura-role": "admin",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-        },
-      }
-    );
+      variables: { id },
+      operationName: "checkPermissions",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-user-id": hasura_uid,
+        "x-hasura-role": "admin",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+      },
+    });
 
     return (
       hasura_request.data?.["data"]?.[
@@ -182,10 +143,8 @@ export async function insertUser(user: {
   uid: string;
 }): Promise<string | null> {
   try {
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             mutation addUser(
               $email: String
               $name: String
@@ -207,23 +166,14 @@ export async function insertUser(user: {
               }
             }
           `,
-        variables: {
-          name: user.name,
-          email: user.email,
-          firebase_auth_uid: user.uid,
-          permissions: "{}",
-        },
-        operationName: "addUser",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-          "x-hasura-role": "admin",
-        },
-      }
-    );
+      variables: {
+        name: user.name,
+        email: user.email,
+        firebase_auth_uid: user.uid,
+        permissions: "{}",
+      },
+      operationName: "addUser",
+    });
 
     return (
       hasura_request.data?.["data"]?.["insertAuthUsersData"]?.[
@@ -248,31 +198,20 @@ export async function updatePhotoTime(
         ? "AuthUsersData"
         : table.replace(RegExp("^[a-z]"), (s) => s.toUpperCase())
     }ByPk`;
-    const hasura_request = await axios.post(
-      process.env["HASURA_SERVER"]!,
-      JSON.stringify({
-        query: `
+    const hasura_request = await _makeGraphqlRequest({
+      query: `
             mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
               ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
           `,
-        variables: {
-          id,
-          photoUpdatedAt: time?.toISOString(),
-        },
-        operationName: "updatePhotoTime",
-      }),
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-          "x-hasura-role": "admin",
-        },
-      }
-    );
+      variables: {
+        id,
+        photoUpdatedAt: time?.toISOString(),
+      },
+      operationName: "updatePhotoTime",
+    });
 
     if (
       hasura_request.data?.["data"]?.[op_name]?.[
@@ -302,3 +241,32 @@ export const photoTables = [
   "users",
 ] as const;
 export type PhotoTable = typeof photoTables[number];
+
+async function _makeGraphqlRequest({
+  query,
+  variables,
+  operationName,
+  headers,
+}: {
+  query: string;
+  variables: object;
+  operationName?: string;
+  headers?: object;
+}): Promise<Axios.AxiosResponse> {
+  return axios.post(
+    process.env["HASURA_SERVER"]!,
+    JSON.stringify({
+      query,
+      variables,
+      operationName,
+    }),
+    {
+      method: "POST",
+      headers: headers ?? {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-role": "admin",
+      },
+    }
+  );
+}
