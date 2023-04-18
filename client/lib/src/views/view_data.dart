@@ -35,21 +35,22 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final WidgetBuilder notFoundBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
-  final WBuilderWithObject<T, PreferredSizeWidget> tabsHeaderBuilder;
+  final WBuilderWithObject<T, PreferredSizeWidget>? tabsHeaderBuilder;
 
   const ViewObjectDetails({
     required this.objectId,
     required this.objectStream,
-    required this.childrenTypes,
-    required this.tabsContentBuilders,
     required this.notFoundBuilder,
     required this.editButtonBuilder,
     required this.detailsBuilder,
-    required this.tabsHeaderBuilder,
+    this.childrenTypes = const [],
+    this.tabsHeaderBuilder,
+    this.tabsContentBuilders = const {},
     this.floatingActionButtonBuilder,
     this.object,
     super.key,
-  }) : assert(childrenTypes.length == tabsContentBuilders.length);
+  })  : assert(childrenTypes.length == 0 || tabsHeaderBuilder != null),
+        assert(childrenTypes.length == tabsContentBuilders.length);
 
   @override
   Widget build(BuildContext context) {
@@ -89,46 +90,45 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
         final foregroundColor = objectData.color?.findInvert();
 
-        return Theme(
-          data: CAThemingService.getDefault(primaryOverride: objectData.color),
-          child: DefaultTabController(
-            length: childrenTypes.length,
-            child: Scaffold(
-              body: NestedScrollView(
-                headerSliverBuilder: (context, isBodyScrolled) => [
-                  SliverAppBar(
-                    backgroundColor: objectData.color,
-                    foregroundColor: foregroundColor,
-                    stretch: true,
-                    pinned: true,
-                    expandedHeight: 280,
-                    actions: [
-                      if (snapshot.connectionState != ConnectionState.active)
-                        const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else
-                        editButtonBuilder(context, objectData),
-                    ],
-                    flexibleSpace: ViewableObjectAppBar(
-                      circleCrop: false,
-                      backgroundColor: objectData.color,
-                      foregroundColor: foregroundColor,
-                      viewable:
-                          object?.hasImage ?? false ? object! : objectData,
-                      appBarMaxHeight: 280,
-                      duration: const Duration(milliseconds: 450),
-                    ),
-                  ),
-                  detailsBuilder(context, objectData),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: PreferredSizePersistentHeaderDelegate(
-                      child: tabsHeaderBuilder(context, objectData),
-                    ),
-                  ),
-                ],
+        final slivers = [
+          SliverAppBar(
+            backgroundColor: objectData.color,
+            foregroundColor: foregroundColor,
+            stretch: true,
+            pinned: true,
+            expandedHeight: 280,
+            actions: [
+              if (snapshot.connectionState != ConnectionState.active)
+                const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              else
+                editButtonBuilder(context, objectData),
+            ],
+            flexibleSpace: ViewableObjectAppBar(
+              circleCrop: false,
+              backgroundColor: objectData.color,
+              foregroundColor: foregroundColor,
+              viewable: object?.hasImage ?? false ? object! : objectData,
+              appBarMaxHeight: 280,
+              duration: const Duration(milliseconds: 450),
+            ),
+          ),
+          detailsBuilder(context, objectData),
+          if (tabsHeaderBuilder != null)
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: PreferredSizePersistentHeaderDelegate(
+                child: tabsHeaderBuilder!(context, objectData),
+              ),
+            ),
+        ];
+
+        final body = childrenTypes.isEmpty
+            ? CustomScrollView(slivers: slivers)
+            : NestedScrollView(
+                headerSliverBuilder: (context, isBodyScrolled) => slivers,
                 body: TabBarView(
                   key: ValueKey(objectData.id),
                   children: childrenTypes
@@ -140,7 +140,14 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                       )
                       .toList(),
                 ),
-              ),
+              );
+
+        return Theme(
+          data: CAThemingService.getDefault(primaryOverride: objectData.color),
+          child: DefaultTabController(
+            length: childrenTypes.length,
+            child: Scaffold(
+              body: body,
               floatingActionButton: floatingActionButtonBuilder != null
                   ? Builder(
                       builder: (context) {

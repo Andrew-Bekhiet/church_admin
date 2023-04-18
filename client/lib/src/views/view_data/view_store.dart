@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,175 +38,104 @@ class _ViewStoreState extends State<ViewStore> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Store?>(
-      initialData: widget.store,
-      stream: stream,
-      builder: (context, snapshot) {
-        final themeData = Theme.of(context);
-
-        if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: ErrorWidget.builder(
-              FlutterErrorDetails(exception: snapshot.error!),
-            ),
-          );
-        } else if (!snapshot.hasData &&
-            snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else if (!snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            body: Center(
-              child: Text(
-                'لم يتم العثور على المتجر',
-                style: themeData.textTheme.titleLarge,
+    return ViewObjectDetails(
+      objectId: widget.storeId,
+      object: widget.store,
+      objectStream: stream,
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على المتجر',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      editButtonBuilder: (context, store) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () => context.push(
+          Uri(
+            path: '/viewStore/editStore',
+            queryParameters: {'id': widget.storeId},
+          ).toString(),
+          extra: {'store': store},
+        ),
+        icon: const Icon(Icons.edit),
+      ),
+      detailsBuilder: (context, store) => SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            if (store.geolocation != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: FilledButton.tonalIcon(
+                  label: const Text('الموقع على الخريطة'),
+                  icon: const Icon(Icons.map),
+                  onPressed: () async => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions:
+                            GeomapOptions(selectedStores: {store}),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          );
-        }
-
-        final store = snapshot.requireData!;
-
-        final foregroundColor = store.color?.findInvert();
-
-        return DefaultTabController(
-          length: 3,
-          child: Theme(
-            data: CAThemingService.getDefault(primaryOverride: store.color),
-            child: Scaffold(
-              body: CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    backgroundColor: store.color,
-                    foregroundColor: foregroundColor,
-                    stretch: true,
-                    pinned: true,
-                    expandedHeight: 280,
-                    actions: [
-                      if (snapshot.connectionState != ConnectionState.active)
-                        const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else
-                        IconButton(
-                          tooltip: 'تعديل',
-                          onPressed: () => context.push(
-                            Uri(
-                              path: '/viewStore/editStore',
-                              queryParameters: {'id': widget.storeId},
-                            ).toString(),
-                            extra: {'store': store},
-                          ),
-                          icon: const Icon(Icons.edit),
-                        ),
-                    ],
-                    flexibleSpace: ViewableObjectAppBar(
+            ListTile(
+              title: const Text('المناطق التي يظهر بها'),
+              subtitle: Column(
+                children: [
+                  for (final a in store.areas ?? <Area>[])
+                    ViewableObjectWidget(
+                      a,
+                      dense: true,
+                      forceShowSecondLine: false,
                       circleCrop: false,
-                      backgroundColor: store.color,
-                      foregroundColor: foregroundColor,
-                      viewable: widget.store?.hasImage ?? false
-                          ? widget.store!
-                          : store,
-                      appBarMaxHeight: 280,
-                      duration: const Duration(milliseconds: 450),
                     ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        if (store.geolocation != null)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            child: FilledButton.tonalIcon(
-                              label: const Text('الموقع على الخريطة'),
-                              icon: const Icon(Icons.map),
-                              onPressed: () async => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => ViewGeodataMap(
-                                    initialGeomapOptions:
-                                        GeomapOptions(selectedStores: {store}),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ListTile(
-                          title: const Text('المناطق التي يظهر بها'),
-                          subtitle: Column(
-                            children: [
-                              for (final a in store.areas ?? <Area>[])
-                                ViewableObjectWidget(
-                                  a,
-                                  dense: true,
-                                  forceShowSecondLine: false,
-                                  circleCrop: false,
-                                ),
-                            ],
-                          ),
-                        ),
-                        ListTile(
-                          title: const Text('الشوارع التي يظهر بها'),
-                          subtitle: Column(
-                            children: [
-                              for (final s in store.streets ?? <Street>[])
-                                ViewableObjectWidget(
-                                  s,
-                                  dense: true,
-                                  forceShowSecondLine: false,
-                                  circleCrop: false,
-                                ),
-                            ],
-                          ),
-                        ),
-                        ListTile(
-                          title: const Text('العائلة المسؤولة'),
-                          subtitle: store.family != null
-                              ? ViewableObjectWidget(
-                                  store.family!,
-                                  dense: true,
-                                  forceShowSecondLine: false,
-                                )
-                              : const Text('لا يوجد'),
-                        ),
-                        ListTile(
-                          title: FilledButton.tonalIcon(
-                            icon: const Icon(Icons.query_stats),
-                            label: const Text('احصائيات'),
-                            // TODO: add store analysis
-                            onPressed: () {},
-                          ),
-                        ),
-                        HistoryProperty(
-                          name: 'أخر تحديث للبيانات',
-                          value: store.lastEdit?.time,
-                          getHistoryStream: () => DatabaseService.I.history
-                              .paginateEditHistory<Store>(id: store.id),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+            ListTile(
+              title: const Text('الشوارع التي يظهر بها'),
+              subtitle: Column(
+                children: [
+                  for (final s in store.streets ?? <Street>[])
+                    ViewableObjectWidget(
+                      s,
+                      dense: true,
+                      forceShowSecondLine: false,
+                      circleCrop: false,
+                    ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: const Text('العائلة المسؤولة'),
+              subtitle: store.family != null
+                  ? ViewableObjectWidget(
+                      store.family!,
+                      dense: true,
+                      forceShowSecondLine: false,
+                    )
+                  : const Text('لا يوجد'),
+            ),
+            ListTile(
+              title: FilledButton.tonalIcon(
+                icon: const Icon(Icons.query_stats),
+                label: const Text('احصائيات'),
+                // TODO: add store analysis
+                onPressed: () {},
+              ),
+            ),
+            HistoryProperty(
+              name: 'أخر تحديث للبيانات',
+              value: store.lastEdit?.time,
+              getHistoryStream: () => DatabaseService.I.history
+                  .paginateEditHistory<Store>(id: store.id),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
