@@ -18,7 +18,7 @@ class UpdateUserData extends StatefulWidget {
         return '/';
       } else if (LocalAuthService.I.shouldAuthenticate) {
         return Uri(
-          path: 'authenticate',
+          path: '/authenticate',
           queryParameters: {'next': state.location},
         ).toString();
       }
