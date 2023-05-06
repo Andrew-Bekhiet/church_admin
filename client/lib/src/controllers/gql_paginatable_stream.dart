@@ -8,8 +8,7 @@ import 'package:tuple/tuple.dart';
 class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
   @visibleForTesting
   static DelegatingStreamResult<T> clampResults<T>(
-    String? lastSearch,
-    String? search,
+    bool searchTextChanged,
     DelegatingPaginatableStream<T> instance,
     List<T> result,
   ) {
@@ -19,7 +18,7 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
     final start = instance.currentOffset * instance.limit;
     final int end = start + min(instance.limit, current.length);
 
-    return lastSearch == search
+    return searchTextChanged
         ? DelegatingStreamResult(
             result: start < current.length
                 ? (current
@@ -60,39 +59,37 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
         ).switchMap(_mapEvents(instance as GQLPaginatableStream<T>));
       };
 
-  Stream<DelegatingStreamResult<T>> Function(Tuple2<int, String?> event)
-      _mapEvents(
+  Stream<DelegatingStreamResult<T>> Function(Tuple2<int, String?>) _mapEvents(
     GQLPaginatableStream<T> instance,
   ) =>
-          (event) {
-            final offset = event.item1;
-            final search = event.item2;
+      (event) {
+        final offset = event.item1;
+        final search = event.item2;
 
-            if (search != null &&
-                search.isNotEmpty &&
-                lastSearch != search &&
-                offset != 0) {
-              return _loadFirstPage();
-            }
+        if (search != null &&
+            search.isNotEmpty &&
+            lastSearch != search &&
+            offset != 0) {
+          return _loadFirstPage();
+        }
 
-            final resultEvent = GQLPaginatableStreamEvent(
-              instance: instance,
-              offset: offset,
-              search: search,
-              lastSearch: lastSearch,
-            );
+        final resultEvent = GQLPaginatableStreamEvent(
+          instance: instance,
+          offset: offset,
+          search: search,
+          lastSearch: lastSearch,
+        );
 
-            return subscriptionStreamCallback(resultEvent)
-                .map(
-                  (event) => clampResults(
-                    lastSearch,
-                    search,
-                    instance,
-                    event.toList(),
-                  ),
-                )
-                .map(_setLastSearch(search));
-          };
+        return subscriptionStreamCallback(resultEvent)
+            .map(
+              (event) => clampResults(
+                lastSearch == search,
+                instance,
+                event.toList(),
+              ),
+            )
+            .map(_setLastSearch(search));
+      };
 
   Stream<String?> _transformSearchQuery() {
     return (searchQuery ?? Stream.value(null)).startWith(null).distinct(
