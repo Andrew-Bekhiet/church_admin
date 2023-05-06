@@ -8,19 +8,19 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchUser {
-  factory Variables$Subscription$watchUser({
+class Variables_Subscription_watchUser {
+  factory Variables_Subscription_watchUser({
     required UuidValue uid,
     bool? fullData,
   }) =>
-      Variables$Subscription$watchUser._({
+      Variables_Subscription_watchUser._({
         r'uid': uid,
         if (fullData != null) r'fullData': fullData,
       });
 
-  Variables$Subscription$watchUser._(this._$data);
+  Variables_Subscription_watchUser._(this._$data);
 
-  factory Variables$Subscription$watchUser.fromJson(Map<String, dynamic> data) {
+  factory Variables_Subscription_watchUser.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$uid = data['uid'];
     result$data['uid'] = stringToUuid(l$uid);
@@ -28,7 +28,7 @@ class Variables$Subscription$watchUser {
       final l$fullData = data['fullData'];
       result$data['fullData'] = (l$fullData as bool?);
     }
-    return Variables$Subscription$watchUser._(result$data);
+    return Variables_Subscription_watchUser._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -46,8 +46,8 @@ class Variables$Subscription$watchUser {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchUser<Variables$Subscription$watchUser>
-      get copyWith => CopyWith$Variables$Subscription$watchUser(
+  CopyWith_Variables_Subscription_watchUser<Variables_Subscription_watchUser>
+      get copyWith => CopyWith_Variables_Subscription_watchUser(
             this,
             (i) => i,
           );
@@ -56,7 +56,7 @@ class Variables$Subscription$watchUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchUser) ||
+    if (!(other is Variables_Subscription_watchUser) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88,14 +88,14 @@ class Variables$Subscription$watchUser {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchUser<TRes> {
-  factory CopyWith$Variables$Subscription$watchUser(
-    Variables$Subscription$watchUser instance,
-    TRes Function(Variables$Subscription$watchUser) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchUser;
+abstract class CopyWith_Variables_Subscription_watchUser<TRes> {
+  factory CopyWith_Variables_Subscription_watchUser(
+    Variables_Subscription_watchUser instance,
+    TRes Function(Variables_Subscription_watchUser) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchUser;
 
-  factory CopyWith$Variables$Subscription$watchUser.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchUser;
+  factory CopyWith_Variables_Subscription_watchUser.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchUser;
 
   TRes call({
     UuidValue? uid,
@@ -103,16 +103,16 @@ abstract class CopyWith$Variables$Subscription$watchUser<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchUser<TRes>
-    implements CopyWith$Variables$Subscription$watchUser<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchUser(
+class _CopyWithImpl_Variables_Subscription_watchUser<TRes>
+    implements CopyWith_Variables_Subscription_watchUser<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchUser(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchUser _instance;
+  final Variables_Subscription_watchUser _instance;
 
-  final TRes Function(Variables$Subscription$watchUser) _then;
+  final TRes Function(Variables_Subscription_watchUser) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -120,16 +120,16 @@ class _CopyWithImpl$Variables$Subscription$watchUser<TRes>
     Object? uid = _undefined,
     Object? fullData = _undefined,
   }) =>
-      _then(Variables$Subscription$watchUser._({
+      _then(Variables_Subscription_watchUser._({
         ..._instance._$data,
         if (uid != _undefined && uid != null) 'uid': (uid as UuidValue),
         if (fullData != _undefined) 'fullData': (fullData as bool?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchUser<TRes>
-    implements CopyWith$Variables$Subscription$watchUser<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchUser(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchUser<TRes>
+    implements CopyWith_Variables_Subscription_watchUser<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchUser(this._res);
 
   TRes _res;
 
@@ -140,19 +140,19 @@ class _CopyWithStubImpl$Variables$Subscription$watchUser<TRes>
       _res;
 }
 
-class Subscription$watchUser {
-  Subscription$watchUser({this.authUsersDataByPk});
+class Subscription_watchUser {
+  Subscription_watchUser({this.authUsersDataByPk});
 
-  factory Subscription$watchUser.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchUser.fromJson(Map<String, dynamic> json) {
     final l$authUsersDataByPk = json['authUsersDataByPk'];
-    return Subscription$watchUser(
+    return Subscription_watchUser(
         authUsersDataByPk: l$authUsersDataByPk == null
             ? null
-            : Subscription$watchUser$authUsersDataByPk.fromJson(
+            : Subscription_watchUser_authUsersDataByPk.fromJson(
                 (l$authUsersDataByPk as Map<String, dynamic>)));
   }
 
-  final Subscription$watchUser$authUsersDataByPk? authUsersDataByPk;
+  final Subscription_watchUser_authUsersDataByPk? authUsersDataByPk;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -172,7 +172,7 @@ class Subscription$watchUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchUser) ||
+    if (!(other is Subscription_watchUser) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -185,67 +185,67 @@ class Subscription$watchUser {
   }
 }
 
-extension UtilityExtension$Subscription$watchUser on Subscription$watchUser {
-  CopyWith$Subscription$watchUser<Subscription$watchUser> get copyWith =>
-      CopyWith$Subscription$watchUser(
+extension UtilityExtension_Subscription_watchUser on Subscription_watchUser {
+  CopyWith_Subscription_watchUser<Subscription_watchUser> get copyWith =>
+      CopyWith_Subscription_watchUser(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchUser<TRes> {
-  factory CopyWith$Subscription$watchUser(
-    Subscription$watchUser instance,
-    TRes Function(Subscription$watchUser) then,
-  ) = _CopyWithImpl$Subscription$watchUser;
+abstract class CopyWith_Subscription_watchUser<TRes> {
+  factory CopyWith_Subscription_watchUser(
+    Subscription_watchUser instance,
+    TRes Function(Subscription_watchUser) then,
+  ) = _CopyWithImpl_Subscription_watchUser;
 
-  factory CopyWith$Subscription$watchUser.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser;
+  factory CopyWith_Subscription_watchUser.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchUser;
 
-  TRes call({Subscription$watchUser$authUsersDataByPk? authUsersDataByPk});
-  CopyWith$Subscription$watchUser$authUsersDataByPk<TRes> get authUsersDataByPk;
+  TRes call({Subscription_watchUser_authUsersDataByPk? authUsersDataByPk});
+  CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> get authUsersDataByPk;
 }
 
-class _CopyWithImpl$Subscription$watchUser<TRes>
-    implements CopyWith$Subscription$watchUser<TRes> {
-  _CopyWithImpl$Subscription$watchUser(
+class _CopyWithImpl_Subscription_watchUser<TRes>
+    implements CopyWith_Subscription_watchUser<TRes> {
+  _CopyWithImpl_Subscription_watchUser(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser _instance;
+  final Subscription_watchUser _instance;
 
-  final TRes Function(Subscription$watchUser) _then;
+  final TRes Function(Subscription_watchUser) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? authUsersDataByPk = _undefined}) =>
-      _then(Subscription$watchUser(
+      _then(Subscription_watchUser(
           authUsersDataByPk: authUsersDataByPk == _undefined
               ? _instance.authUsersDataByPk
               : (authUsersDataByPk
-                  as Subscription$watchUser$authUsersDataByPk?)));
-  CopyWith$Subscription$watchUser$authUsersDataByPk<TRes>
+                  as Subscription_watchUser_authUsersDataByPk?)));
+  CopyWith_Subscription_watchUser_authUsersDataByPk<TRes>
       get authUsersDataByPk {
     final local$authUsersDataByPk = _instance.authUsersDataByPk;
     return local$authUsersDataByPk == null
-        ? CopyWith$Subscription$watchUser$authUsersDataByPk.stub(
+        ? CopyWith_Subscription_watchUser_authUsersDataByPk.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchUser$authUsersDataByPk(
+        : CopyWith_Subscription_watchUser_authUsersDataByPk(
             local$authUsersDataByPk, (e) => call(authUsersDataByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchUser<TRes>
-    implements CopyWith$Subscription$watchUser<TRes> {
-  _CopyWithStubImpl$Subscription$watchUser(this._res);
+class _CopyWithStubImpl_Subscription_watchUser<TRes>
+    implements CopyWith_Subscription_watchUser<TRes> {
+  _CopyWithStubImpl_Subscription_watchUser(this._res);
 
   TRes _res;
 
-  call({Subscription$watchUser$authUsersDataByPk? authUsersDataByPk}) => _res;
-  CopyWith$Subscription$watchUser$authUsersDataByPk<TRes>
+  call({Subscription_watchUser_authUsersDataByPk? authUsersDataByPk}) => _res;
+  CopyWith_Subscription_watchUser_authUsersDataByPk<TRes>
       get authUsersDataByPk =>
-          CopyWith$Subscription$watchUser$authUsersDataByPk.stub(_res);
+          CopyWith_Subscription_watchUser_authUsersDataByPk.stub(_res);
 }
 
 const documentNodeSubscriptionwatchUser = DocumentNode(definitions: [
@@ -342,15 +342,15 @@ const documentNodeSubscriptionwatchUser = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Subscription$watchUser$authUsersDataByPk
+class Subscription_watchUser_authUsersDataByPk
     implements
-        Fragment$UserOverview,
-        Fragment$User,
-        Fragment$UserNoPhoto,
-        Fragment$UserPermissions,
-        Fragment$UserDetails,
-        Fragment$UserAdminOn {
-  Subscription$watchUser$authUsersDataByPk({
+        Fragment_UserOverview,
+        Fragment_User,
+        Fragment_UserNoPhoto,
+        Fragment_UserPermissions,
+        Fragment_UserDetails,
+        Fragment_UserAdminOn {
+  Subscription_watchUser_authUsersDataByPk({
     required this.uid,
     required this.name,
     required this.email,
@@ -362,7 +362,7 @@ class Subscription$watchUser$authUsersDataByPk
     required this.adminOn,
   });
 
-  factory Subscription$watchUser$authUsersDataByPk.fromJson(
+  factory Subscription_watchUser_authUsersDataByPk.fromJson(
       Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
@@ -373,7 +373,7 @@ class Subscription$watchUser$authUsersDataByPk
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
     final l$adminOn = json['adminOn'];
-    return Subscription$watchUser$authUsersDataByPk(
+    return Subscription_watchUser_authUsersDataByPk(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -382,16 +382,16 @@ class Subscription$watchUser$authUsersDataByPk
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       permissions: (l$permissions as List<dynamic>)
           .map((e) =>
-              Subscription$watchUser$authUsersDataByPk$permissions.fromJson(
+              Subscription_watchUser_authUsersDataByPk_permissions.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       person: l$person == null
           ? null
-          : Subscription$watchUser$authUsersDataByPk$person.fromJson(
+          : Subscription_watchUser_authUsersDataByPk_person.fromJson(
               (l$person as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
       adminOn: (l$adminOn as List<dynamic>)
-          .map((e) => Subscription$watchUser$authUsersDataByPk$adminOn.fromJson(
+          .map((e) => Subscription_watchUser_authUsersDataByPk_adminOn.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
     );
@@ -407,13 +407,13 @@ class Subscription$watchUser$authUsersDataByPk
 
   final DateTime? photoUpdatedAt;
 
-  final List<Subscription$watchUser$authUsersDataByPk$permissions> permissions;
+  final List<Subscription_watchUser_authUsersDataByPk_permissions> permissions;
 
-  final Subscription$watchUser$authUsersDataByPk$person? person;
+  final Subscription_watchUser_authUsersDataByPk_person? person;
 
   final Json? lastEdit;
 
-  final List<Subscription$watchUser$authUsersDataByPk$adminOn> adminOn;
+  final List<Subscription_watchUser_authUsersDataByPk_adminOn> adminOn;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -468,7 +468,7 @@ class Subscription$watchUser$authUsersDataByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchUser$authUsersDataByPk) ||
+    if (!(other is Subscription_watchUser_authUsersDataByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -535,24 +535,24 @@ class Subscription$watchUser$authUsersDataByPk
   }
 }
 
-extension UtilityExtension$Subscription$watchUser$authUsersDataByPk
-    on Subscription$watchUser$authUsersDataByPk {
-  CopyWith$Subscription$watchUser$authUsersDataByPk<
-          Subscription$watchUser$authUsersDataByPk>
-      get copyWith => CopyWith$Subscription$watchUser$authUsersDataByPk(
+extension UtilityExtension_Subscription_watchUser_authUsersDataByPk
+    on Subscription_watchUser_authUsersDataByPk {
+  CopyWith_Subscription_watchUser_authUsersDataByPk<
+          Subscription_watchUser_authUsersDataByPk>
+      get copyWith => CopyWith_Subscription_watchUser_authUsersDataByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchUser$authUsersDataByPk<TRes> {
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk(
-    Subscription$watchUser$authUsersDataByPk instance,
-    TRes Function(Subscription$watchUser$authUsersDataByPk) then,
-  ) = _CopyWithImpl$Subscription$watchUser$authUsersDataByPk;
+abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk(
+    Subscription_watchUser_authUsersDataByPk instance,
+    TRes Function(Subscription_watchUser_authUsersDataByPk) then,
+  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk;
 
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk;
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk;
 
   TRes call({
     UuidValue? uid,
@@ -560,36 +560,36 @@ abstract class CopyWith$Subscription$watchUser$authUsersDataByPk<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Subscription$watchUser$authUsersDataByPk$permissions>? permissions,
-    Subscription$watchUser$authUsersDataByPk$person? person,
+    List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
+    Subscription_watchUser_authUsersDataByPk_person? person,
     Json? lastEdit,
-    List<Subscription$watchUser$authUsersDataByPk$adminOn>? adminOn,
+    List<Subscription_watchUser_authUsersDataByPk_adminOn>? adminOn,
   });
   TRes permissions(
-      Iterable<Subscription$watchUser$authUsersDataByPk$permissions> Function(
+      Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
               Iterable<
-                  CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<
-                      Subscription$watchUser$authUsersDataByPk$permissions>>)
+                  CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<
+                      Subscription_watchUser_authUsersDataByPk_permissions>>)
           _fn);
-  CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> get person;
+  CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> get person;
   TRes adminOn(
-      Iterable<Subscription$watchUser$authUsersDataByPk$adminOn> Function(
+      Iterable<Subscription_watchUser_authUsersDataByPk_adminOn> Function(
               Iterable<
-                  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<
-                      Subscription$watchUser$authUsersDataByPk$adminOn>>)
+                  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<
+                      Subscription_watchUser_authUsersDataByPk_adminOn>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk<TRes> {
-  _CopyWithImpl$Subscription$watchUser$authUsersDataByPk(
+class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
+  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser$authUsersDataByPk _instance;
+  final Subscription_watchUser_authUsersDataByPk _instance;
 
-  final TRes Function(Subscription$watchUser$authUsersDataByPk) _then;
+  final TRes Function(Subscription_watchUser_authUsersDataByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -604,7 +604,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk<TRes>
     Object? lastEdit = _undefined,
     Object? adminOn = _undefined,
   }) =>
-      _then(Subscription$watchUser$authUsersDataByPk(
+      _then(Subscription_watchUser_authUsersDataByPk(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -623,55 +623,55 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk<TRes>
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
             : (permissions
-                as List<Subscription$watchUser$authUsersDataByPk$permissions>),
+                as List<Subscription_watchUser_authUsersDataByPk_permissions>),
         person: person == _undefined
             ? _instance.person
-            : (person as Subscription$watchUser$authUsersDataByPk$person?),
+            : (person as Subscription_watchUser_authUsersDataByPk_person?),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         adminOn: adminOn == _undefined || adminOn == null
             ? _instance.adminOn
             : (adminOn
-                as List<Subscription$watchUser$authUsersDataByPk$adminOn>),
+                as List<Subscription_watchUser_authUsersDataByPk_adminOn>),
       ));
   TRes permissions(
-          Iterable<Subscription$watchUser$authUsersDataByPk$permissions> Function(
+          Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
                   Iterable<
-                      CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<
-                          Subscription$watchUser$authUsersDataByPk$permissions>>)
+                      CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<
+                          Subscription_watchUser_authUsersDataByPk_permissions>>)
               _fn) =>
       call(
           permissions: _fn(_instance.permissions.map((e) =>
-              CopyWith$Subscription$watchUser$authUsersDataByPk$permissions(
+              CopyWith_Subscription_watchUser_authUsersDataByPk_permissions(
                 e,
                 (i) => i,
               ))).toList());
-  CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> get person {
+  CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
-        ? CopyWith$Subscription$watchUser$authUsersDataByPk$person.stub(
+        ? CopyWith_Subscription_watchUser_authUsersDataByPk_person.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchUser$authUsersDataByPk$person(
+        : CopyWith_Subscription_watchUser_authUsersDataByPk_person(
             local$person, (e) => call(person: e));
   }
 
   TRes adminOn(
-          Iterable<Subscription$watchUser$authUsersDataByPk$adminOn> Function(
+          Iterable<Subscription_watchUser_authUsersDataByPk_adminOn> Function(
                   Iterable<
-                      CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<
-                          Subscription$watchUser$authUsersDataByPk$adminOn>>)
+                      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<
+                          Subscription_watchUser_authUsersDataByPk_adminOn>>)
               _fn) =>
       call(
           adminOn: _fn(_instance.adminOn.map(
-              (e) => CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn(
+              (e) => CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk<TRes> {
-  _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk(this._res);
+class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
+  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk(this._res);
 
   TRes _res;
 
@@ -681,33 +681,33 @@ class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Subscription$watchUser$authUsersDataByPk$permissions>? permissions,
-    Subscription$watchUser$authUsersDataByPk$person? person,
+    List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
+    Subscription_watchUser_authUsersDataByPk_person? person,
     Json? lastEdit,
-    List<Subscription$watchUser$authUsersDataByPk$adminOn>? adminOn,
+    List<Subscription_watchUser_authUsersDataByPk_adminOn>? adminOn,
   }) =>
       _res;
   permissions(_fn) => _res;
-  CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> get person =>
-      CopyWith$Subscription$watchUser$authUsersDataByPk$person.stub(_res);
+  CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> get person =>
+      CopyWith_Subscription_watchUser_authUsersDataByPk_person.stub(_res);
   adminOn(_fn) => _res;
 }
 
-class Subscription$watchUser$authUsersDataByPk$permissions
+class Subscription_watchUser_authUsersDataByPk_permissions
     implements
-        Fragment$UserOverview$permissions,
-        Fragment$UserPermissions$permissions,
-        Fragment$UserDetails$permissions {
-  Subscription$watchUser$authUsersDataByPk$permissions({
+        Fragment_UserOverview_permissions,
+        Fragment_UserPermissions_permissions,
+        Fragment_UserDetails_permissions {
+  Subscription_watchUser_authUsersDataByPk_permissions({
     required this.permission,
     this.$__typename = 'AuthUsersPermissions',
   });
 
-  factory Subscription$watchUser$authUsersDataByPk$permissions.fromJson(
+  factory Subscription_watchUser_authUsersDataByPk_permissions.fromJson(
       Map<String, dynamic> json) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchUser$authUsersDataByPk$permissions(
+    return Subscription_watchUser_authUsersDataByPk_permissions(
       permission: (l$permission as String),
       $__typename: (l$$__typename as String),
     );
@@ -741,7 +741,7 @@ class Subscription$watchUser$authUsersDataByPk$permissions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchUser$authUsersDataByPk$permissions) ||
+    if (!(other is Subscription_watchUser_authUsersDataByPk_permissions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -759,27 +759,27 @@ class Subscription$watchUser$authUsersDataByPk$permissions
   }
 }
 
-extension UtilityExtension$Subscription$watchUser$authUsersDataByPk$permissions
-    on Subscription$watchUser$authUsersDataByPk$permissions {
-  CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<
-          Subscription$watchUser$authUsersDataByPk$permissions>
+extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_permissions
+    on Subscription_watchUser_authUsersDataByPk_permissions {
+  CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<
+          Subscription_watchUser_authUsersDataByPk_permissions>
       get copyWith =>
-          CopyWith$Subscription$watchUser$authUsersDataByPk$permissions(
+          CopyWith_Subscription_watchUser_authUsersDataByPk_permissions(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<
+abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<
     TRes> {
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$permissions(
-    Subscription$watchUser$authUsersDataByPk$permissions instance,
-    TRes Function(Subscription$watchUser$authUsersDataByPk$permissions) then,
-  ) = _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions;
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_permissions(
+    Subscription_watchUser_authUsersDataByPk_permissions instance,
+    TRes Function(Subscription_watchUser_authUsersDataByPk_permissions) then,
+  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_permissions;
 
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$permissions.stub(
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_permissions.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$permissions;
+      _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_permissions;
 
   TRes call({
     String? permission,
@@ -787,17 +787,17 @@ abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<
   });
 }
 
-class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions<TRes>
+class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_permissions<TRes>
     implements
-        CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<TRes> {
-  _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions(
+        CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<TRes> {
+  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_permissions(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser$authUsersDataByPk$permissions _instance;
+  final Subscription_watchUser_authUsersDataByPk_permissions _instance;
 
-  final TRes Function(Subscription$watchUser$authUsersDataByPk$permissions)
+  final TRes Function(Subscription_watchUser_authUsersDataByPk_permissions)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -806,7 +806,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions<TRes>
     Object? permission = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchUser$authUsersDataByPk$permissions(
+      _then(Subscription_watchUser_authUsersDataByPk_permissions(
         permission: permission == _undefined || permission == null
             ? _instance.permission
             : (permission as String),
@@ -816,11 +816,11 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$permissions<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$permissions<
+class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_permissions<
         TRes>
     implements
-        CopyWith$Subscription$watchUser$authUsersDataByPk$permissions<TRes> {
-  _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$permissions(
+        CopyWith_Subscription_watchUser_authUsersDataByPk_permissions<TRes> {
+  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_permissions(
       this._res);
 
   TRes _res;
@@ -832,13 +832,13 @@ class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$permissions<
       _res;
 }
 
-class Subscription$watchUser$authUsersDataByPk$person
+class Subscription_watchUser_authUsersDataByPk_person
     implements
-        Fragment$UserOverview$person,
-        Fragment$Person,
-        Fragment$PersonNoPhoto,
-        Fragment$UserDetails$person {
-  Subscription$watchUser$authUsersDataByPk$person({
+        Fragment_UserOverview_person,
+        Fragment_Person,
+        Fragment_PersonNoPhoto,
+        Fragment_UserDetails_person {
+  Subscription_watchUser_authUsersDataByPk_person({
     required this.id,
     required this.name,
     this.color,
@@ -848,7 +848,7 @@ class Subscription$watchUser$authUsersDataByPk$person
     this.lastConfession,
   });
 
-  factory Subscription$watchUser$authUsersDataByPk$person.fromJson(
+  factory Subscription_watchUser_authUsersDataByPk_person.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -857,7 +857,7 @@ class Subscription$watchUser$authUsersDataByPk$person
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
-    return Subscription$watchUser$authUsersDataByPk$person(
+    return Subscription_watchUser_authUsersDataByPk_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -928,7 +928,7 @@ class Subscription$watchUser$authUsersDataByPk$person
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchUser$authUsersDataByPk$person) ||
+    if (!(other is Subscription_watchUser_authUsersDataByPk_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -971,25 +971,25 @@ class Subscription$watchUser$authUsersDataByPk$person
   }
 }
 
-extension UtilityExtension$Subscription$watchUser$authUsersDataByPk$person
-    on Subscription$watchUser$authUsersDataByPk$person {
-  CopyWith$Subscription$watchUser$authUsersDataByPk$person<
-          Subscription$watchUser$authUsersDataByPk$person>
-      get copyWith => CopyWith$Subscription$watchUser$authUsersDataByPk$person(
+extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_person
+    on Subscription_watchUser_authUsersDataByPk_person {
+  CopyWith_Subscription_watchUser_authUsersDataByPk_person<
+          Subscription_watchUser_authUsersDataByPk_person>
+      get copyWith => CopyWith_Subscription_watchUser_authUsersDataByPk_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> {
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$person(
-    Subscription$watchUser$authUsersDataByPk$person instance,
-    TRes Function(Subscription$watchUser$authUsersDataByPk$person) then,
-  ) = _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person;
+abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> {
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_person(
+    Subscription_watchUser_authUsersDataByPk_person instance,
+    TRes Function(Subscription_watchUser_authUsersDataByPk_person) then,
+  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person;
 
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$person.stub(
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_person.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$person;
+      _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person;
 
   TRes call({
     UuidValue? id,
@@ -1002,16 +1002,16 @@ abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> {
-  _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person(
+class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> {
+  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser$authUsersDataByPk$person _instance;
+  final Subscription_watchUser_authUsersDataByPk_person _instance;
 
-  final TRes Function(Subscription$watchUser$authUsersDataByPk$person) _then;
+  final TRes Function(Subscription_watchUser_authUsersDataByPk_person) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1024,7 +1024,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
-      _then(Subscription$watchUser$authUsersDataByPk$person(
+      _then(Subscription_watchUser_authUsersDataByPk_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1045,9 +1045,9 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk$person<TRes> {
-  _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$person(this._res);
+class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> {
+  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person(this._res);
 
   TRes _res;
 
@@ -1063,9 +1063,9 @@ class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$person<TRes>
       _res;
 }
 
-class Subscription$watchUser$authUsersDataByPk$adminOn
-    implements Fragment$UserDetails$adminOn, Fragment$UserAdminOn$adminOn {
-  Subscription$watchUser$authUsersDataByPk$adminOn({
+class Subscription_watchUser_authUsersDataByPk_adminOn
+    implements Fragment_UserDetails_adminOn, Fragment_UserAdminOn_adminOn {
+  Subscription_watchUser_authUsersDataByPk_adminOn({
     required this.permissionId,
     this.area,
     this.areaAllowEdit,
@@ -1082,7 +1082,7 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Subscription$watchUser$authUsersDataByPk$adminOn.fromJson(
+  factory Subscription_watchUser_authUsersDataByPk_adminOn.fromJson(
       Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
@@ -1098,29 +1098,29 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchUser$authUsersDataByPk$adminOn(
+    return Subscription_watchUser_authUsersDataByPk_adminOn(
       permissionId: stringToUuid(l$permissionId),
       area: l$area == null
           ? null
-          : Fragment$Area.fromJson((l$area as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
       areaAllowEdit: (l$areaAllowEdit as bool?),
       areaAdminOnUsers: (l$areaAdminOnUsers as bool?),
       service: l$service == null
           ? null
-          : Fragment$Service.fromJson((l$service as Map<String, dynamic>)),
+          : Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
-          : Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+          : Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
               .fromJson((l$serviceStudyYearData as Map<String, dynamic>)),
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       classes: (l$classes as List<dynamic>)
-          .map((e) => Fragment$Class.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
       group: l$group == null
           ? null
-          : Fragment$Group.fromJson((l$group as Map<String, dynamic>)),
+          : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       $__typename: (l$$__typename as String),
@@ -1129,15 +1129,15 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
 
   final UuidValue permissionId;
 
-  final Fragment$Area? area;
+  final Fragment_Area? area;
 
   final bool? areaAllowEdit;
 
   final bool? areaAdminOnUsers;
 
-  final Fragment$Service? service;
+  final Fragment_Service? service;
 
-  final Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData?
+  final Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
       serviceStudyYearData;
 
   final bool? serviceGender;
@@ -1146,9 +1146,9 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
 
   final bool? serviceAdminOnUsers;
 
-  final List<Fragment$Class> classes;
+  final List<Fragment_Class> classes;
 
-  final Fragment$Group? group;
+  final Fragment_Group? group;
 
   final bool? groupAllowEdit;
 
@@ -1228,7 +1228,7 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchUser$authUsersDataByPk$adminOn) ||
+    if (!(other is Subscription_watchUser_authUsersDataByPk_adminOn) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1313,64 +1313,64 @@ class Subscription$watchUser$authUsersDataByPk$adminOn
   }
 }
 
-extension UtilityExtension$Subscription$watchUser$authUsersDataByPk$adminOn
-    on Subscription$watchUser$authUsersDataByPk$adminOn {
-  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<
-          Subscription$watchUser$authUsersDataByPk$adminOn>
-      get copyWith => CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn(
+extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_adminOn
+    on Subscription_watchUser_authUsersDataByPk_adminOn {
+  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<
+          Subscription_watchUser_authUsersDataByPk_adminOn>
+      get copyWith => CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<TRes> {
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn(
-    Subscription$watchUser$authUsersDataByPk$adminOn instance,
-    TRes Function(Subscription$watchUser$authUsersDataByPk$adminOn) then,
-  ) = _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn;
+abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn(
+    Subscription_watchUser_authUsersDataByPk_adminOn instance,
+    TRes Function(Subscription_watchUser_authUsersDataByPk_adminOn) then,
+  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn;
 
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn.stub(
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn;
+      _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn;
 
   TRes call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData?
+    Fragment_Service? service,
+    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
         serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get area;
-  CopyWith$Fragment$Service<TRes> get service;
-  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+  CopyWith_Fragment_Area<TRes> get area;
+  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
       TRes> get serviceStudyYearData;
   TRes classes(
-      Iterable<Fragment$Class> Function(
-              Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+      Iterable<Fragment_Class> Function(
+              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
           _fn);
-  CopyWith$Fragment$Group<TRes> get group;
+  CopyWith_Fragment_Group<TRes> get group;
 }
 
-class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<TRes> {
-  _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn(
+class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
+  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser$authUsersDataByPk$adminOn _instance;
+  final Subscription_watchUser_authUsersDataByPk_adminOn _instance;
 
-  final TRes Function(Subscription$watchUser$authUsersDataByPk$adminOn) _then;
+  final TRes Function(Subscription_watchUser_authUsersDataByPk_adminOn) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1390,11 +1390,11 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
     Object? groupAdminOnUsers = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchUser$authUsersDataByPk$adminOn(
+      _then(Subscription_watchUser_authUsersDataByPk_adminOn(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
-        area: area == _undefined ? _instance.area : (area as Fragment$Area?),
+        area: area == _undefined ? _instance.area : (area as Fragment_Area?),
         areaAllowEdit: areaAllowEdit == _undefined
             ? _instance.areaAllowEdit
             : (areaAllowEdit as bool?),
@@ -1403,11 +1403,11 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
             : (areaAdminOnUsers as bool?),
         service: service == _undefined
             ? _instance.service
-            : (service as Fragment$Service?),
+            : (service as Fragment_Service?),
         serviceStudyYearData: serviceStudyYearData == _undefined
             ? _instance.serviceStudyYearData
             : (serviceStudyYearData
-                as Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData?),
+                as Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?),
         serviceGender: serviceGender == _undefined
             ? _instance.serviceGender
             : (serviceGender as bool?),
@@ -1419,9 +1419,9 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
             : (serviceAdminOnUsers as bool?),
         classes: classes == _undefined || classes == null
             ? _instance.classes
-            : (classes as List<Fragment$Class>),
+            : (classes as List<Fragment_Class>),
         group:
-            group == _undefined ? _instance.group : (group as Fragment$Group?),
+            group == _undefined ? _instance.group : (group as Fragment_Group?),
         groupAllowEdit: groupAllowEdit == _undefined
             ? _instance.groupAllowEdit
             : (groupAllowEdit as bool?),
@@ -1432,99 +1432,99 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get area {
+  CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(local$area, (e) => call(area: e));
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
   }
 
-  CopyWith$Fragment$Service<TRes> get service {
+  CopyWith_Fragment_Service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
-        ? CopyWith$Fragment$Service.stub(_then(_instance))
-        : CopyWith$Fragment$Service(local$service, (e) => call(service: e));
+        ? CopyWith_Fragment_Service.stub(_then(_instance))
+        : CopyWith_Fragment_Service(local$service, (e) => call(service: e));
   }
 
-  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
       TRes> get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
-        ? CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+        ? CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+        : CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
             local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
   }
 
   TRes classes(
-          Iterable<Fragment$Class> Function(
-                  Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+          Iterable<Fragment_Class> Function(
+                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes.map((e) => CopyWith$Fragment$Class(
+          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
                 e,
                 (i) => i,
               ))).toList());
-  CopyWith$Fragment$Group<TRes> get group {
+  CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
-        ? CopyWith$Fragment$Group.stub(_then(_instance))
-        : CopyWith$Fragment$Group(local$group, (e) => call(group: e));
+        ? CopyWith_Fragment_Group.stub(_then(_instance))
+        : CopyWith_Fragment_Group(local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn<TRes>
-    implements CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn<TRes> {
-  _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn(this._res);
+class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
+    implements CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
+  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData?
+    Fragment_Service? service,
+    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
         serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get area => CopyWith$Fragment$Area.stub(_res);
-  CopyWith$Fragment$Service<TRes> get service =>
-      CopyWith$Fragment$Service.stub(_res);
-  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+  CopyWith_Fragment_Service<TRes> get service =>
+      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
           TRes>
       get serviceStudyYearData =>
-          CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+          CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
               .stub(_res);
   classes(_fn) => _res;
-  CopyWith$Fragment$Group<TRes> get group => CopyWith$Fragment$Group.stub(_res);
+  CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
-class Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+class Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
     implements
-        Fragment$UserDetails$adminOn$serviceStudyYearData,
-        Fragment$UserAdminOn$adminOn$serviceStudyYearData {
-  Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData({
+        Fragment_UserDetails_adminOn_serviceStudyYearData,
+        Fragment_UserAdminOn_adminOn_serviceStudyYearData {
+  Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData({
     required this.name,
     required this.order,
     this.$__typename = 'StudyYears',
   });
 
-  factory Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData.fromJson(
+  factory Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.fromJson(
       Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+    return Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
       name: (l$name as String),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
@@ -1566,7 +1566,7 @@ class Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
       return true;
     }
     if (!(other
-            is Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData) ||
+            is Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1589,30 +1589,30 @@ class Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
   }
 }
 
-extension UtilityExtension$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
-    on Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData {
-  CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
-          Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData>
+extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
+    on Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData {
+  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
+          Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData>
       get copyWith =>
-          CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+          CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
     TRes> {
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
-    Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
+    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
         instance,
     TRes Function(
-            Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData)
+            Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData)
         then,
-  ) = _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData;
+  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData;
 
-  factory CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData.stub(
+  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData;
+      _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData;
 
   TRes call({
     String? name,
@@ -1621,21 +1621,21 @@ abstract class CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$service
   });
 }
 
-class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
         TRes>
     implements
-        CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
             TRes> {
-  _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData
+  final Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
       _instance;
 
   final TRes Function(
-          Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData)
+          Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -1646,7 +1646,7 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStud
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+          Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -1659,12 +1659,12 @@ class _CopyWithImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStud
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
         TRes>
     implements
-        CopyWith$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData<
+        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn$serviceStudyYearData(
+  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
       this._res);
 
   TRes _res;
@@ -1677,50 +1677,50 @@ class _CopyWithStubImpl$Subscription$watchUser$authUsersDataByPk$adminOn$service
       _res;
 }
 
-class Variables$Subscription$watchAllUsers {
-  factory Variables$Subscription$watchAllUsers({
-    List<Input$AuthUsersDataBoolExp>? where,
-    List<Input$AuthUsersDataOrderBy>? orderBy,
+class Variables_Subscription_watchAllUsers {
+  factory Variables_Subscription_watchAllUsers({
+    List<Input_AuthUsersDataBoolExp>? where,
+    List<Input_AuthUsersDataOrderBy>? orderBy,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllUsers._({
+      Variables_Subscription_watchAllUsers._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllUsers._(this._$data);
+  Variables_Subscription_watchAllUsers._(this._$data);
 
-  factory Variables$Subscription$watchAllUsers.fromJson(
+  factory Variables_Subscription_watchAllUsers.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map((e) =>
-              Input$AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
+              Input_AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map((e) =>
-              Input$AuthUsersDataOrderBy.fromJson((e as Map<String, dynamic>)))
+              Input_AuthUsersDataOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllUsers._(result$data);
+    return Variables_Subscription_watchAllUsers._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$AuthUsersDataBoolExp>? get where =>
-      (_$data['where'] as List<Input$AuthUsersDataBoolExp>?);
-  List<Input$AuthUsersDataOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$AuthUsersDataOrderBy>?);
+  List<Input_AuthUsersDataBoolExp>? get where =>
+      (_$data['where'] as List<Input_AuthUsersDataBoolExp>?);
+  List<Input_AuthUsersDataOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_AuthUsersDataOrderBy>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1739,9 +1739,9 @@ class Variables$Subscription$watchAllUsers {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllUsers<
-          Variables$Subscription$watchAllUsers>
-      get copyWith => CopyWith$Variables$Subscription$watchAllUsers(
+  CopyWith_Variables_Subscription_watchAllUsers<
+          Variables_Subscription_watchAllUsers>
+      get copyWith => CopyWith_Variables_Subscription_watchAllUsers(
             this,
             (i) => i,
           );
@@ -1750,7 +1750,7 @@ class Variables$Subscription$watchAllUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllUsers) ||
+    if (!(other is Variables_Subscription_watchAllUsers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1824,32 +1824,32 @@ class Variables$Subscription$watchAllUsers {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllUsers<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllUsers(
-    Variables$Subscription$watchAllUsers instance,
-    TRes Function(Variables$Subscription$watchAllUsers) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllUsers;
+abstract class CopyWith_Variables_Subscription_watchAllUsers<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllUsers(
+    Variables_Subscription_watchAllUsers instance,
+    TRes Function(Variables_Subscription_watchAllUsers) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllUsers;
 
-  factory CopyWith$Variables$Subscription$watchAllUsers.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllUsers;
+  factory CopyWith_Variables_Subscription_watchAllUsers.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllUsers;
 
   TRes call({
-    List<Input$AuthUsersDataBoolExp>? where,
-    List<Input$AuthUsersDataOrderBy>? orderBy,
+    List<Input_AuthUsersDataBoolExp>? where,
+    List<Input_AuthUsersDataOrderBy>? orderBy,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllUsers<TRes>
-    implements CopyWith$Variables$Subscription$watchAllUsers<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllUsers(
+class _CopyWithImpl_Variables_Subscription_watchAllUsers<TRes>
+    implements CopyWith_Variables_Subscription_watchAllUsers<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllUsers(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllUsers _instance;
+  final Variables_Subscription_watchAllUsers _instance;
 
-  final TRes Function(Variables$Subscription$watchAllUsers) _then;
+  final TRes Function(Variables_Subscription_watchAllUsers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1858,43 +1858,43 @@ class _CopyWithImpl$Variables$Subscription$watchAllUsers<TRes>
     Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllUsers._({
+      _then(Variables_Subscription_watchAllUsers._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$AuthUsersDataBoolExp>?),
+          'where': (where as List<Input_AuthUsersDataBoolExp>?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$AuthUsersDataOrderBy>?),
+          'orderBy': (orderBy as List<Input_AuthUsersDataOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllUsers<TRes>
-    implements CopyWith$Variables$Subscription$watchAllUsers<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllUsers(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllUsers<TRes>
+    implements CopyWith_Variables_Subscription_watchAllUsers<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllUsers(this._res);
 
   TRes _res;
 
   call({
-    List<Input$AuthUsersDataBoolExp>? where,
-    List<Input$AuthUsersDataOrderBy>? orderBy,
+    List<Input_AuthUsersDataBoolExp>? where,
+    List<Input_AuthUsersDataOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllUsers {
-  Subscription$watchAllUsers({required this.authUsersData});
+class Subscription_watchAllUsers {
+  Subscription_watchAllUsers({required this.authUsersData});
 
-  factory Subscription$watchAllUsers.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllUsers.fromJson(Map<String, dynamic> json) {
     final l$authUsersData = json['authUsersData'];
-    return Subscription$watchAllUsers(
+    return Subscription_watchAllUsers(
         authUsersData: (l$authUsersData as List<dynamic>)
             .map((e) =>
-                Fragment$UserOverview.fromJson((e as Map<String, dynamic>)))
+                Fragment_UserOverview.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$UserOverview> authUsersData;
+  final List<Fragment_UserOverview> authUsersData;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1915,7 +1915,7 @@ class Subscription$watchAllUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllUsers) ||
+    if (!(other is Subscription_watchAllUsers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1935,69 +1935,69 @@ class Subscription$watchAllUsers {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllUsers
-    on Subscription$watchAllUsers {
-  CopyWith$Subscription$watchAllUsers<Subscription$watchAllUsers>
-      get copyWith => CopyWith$Subscription$watchAllUsers(
+extension UtilityExtension_Subscription_watchAllUsers
+    on Subscription_watchAllUsers {
+  CopyWith_Subscription_watchAllUsers<Subscription_watchAllUsers>
+      get copyWith => CopyWith_Subscription_watchAllUsers(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllUsers<TRes> {
-  factory CopyWith$Subscription$watchAllUsers(
-    Subscription$watchAllUsers instance,
-    TRes Function(Subscription$watchAllUsers) then,
-  ) = _CopyWithImpl$Subscription$watchAllUsers;
+abstract class CopyWith_Subscription_watchAllUsers<TRes> {
+  factory CopyWith_Subscription_watchAllUsers(
+    Subscription_watchAllUsers instance,
+    TRes Function(Subscription_watchAllUsers) then,
+  ) = _CopyWithImpl_Subscription_watchAllUsers;
 
-  factory CopyWith$Subscription$watchAllUsers.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllUsers;
+  factory CopyWith_Subscription_watchAllUsers.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllUsers;
 
-  TRes call({List<Fragment$UserOverview>? authUsersData});
+  TRes call({List<Fragment_UserOverview>? authUsersData});
   TRes authUsersData(
-      Iterable<Fragment$UserOverview> Function(
-              Iterable<CopyWith$Fragment$UserOverview<Fragment$UserOverview>>)
+      Iterable<Fragment_UserOverview> Function(
+              Iterable<CopyWith_Fragment_UserOverview<Fragment_UserOverview>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllUsers<TRes>
-    implements CopyWith$Subscription$watchAllUsers<TRes> {
-  _CopyWithImpl$Subscription$watchAllUsers(
+class _CopyWithImpl_Subscription_watchAllUsers<TRes>
+    implements CopyWith_Subscription_watchAllUsers<TRes> {
+  _CopyWithImpl_Subscription_watchAllUsers(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllUsers _instance;
+  final Subscription_watchAllUsers _instance;
 
-  final TRes Function(Subscription$watchAllUsers) _then;
+  final TRes Function(Subscription_watchAllUsers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? authUsersData = _undefined}) =>
-      _then(Subscription$watchAllUsers(
+      _then(Subscription_watchAllUsers(
           authUsersData: authUsersData == _undefined || authUsersData == null
               ? _instance.authUsersData
-              : (authUsersData as List<Fragment$UserOverview>)));
+              : (authUsersData as List<Fragment_UserOverview>)));
   TRes authUsersData(
-          Iterable<Fragment$UserOverview> Function(
+          Iterable<Fragment_UserOverview> Function(
                   Iterable<
-                      CopyWith$Fragment$UserOverview<Fragment$UserOverview>>)
+                      CopyWith_Fragment_UserOverview<Fragment_UserOverview>>)
               _fn) =>
       call(
           authUsersData: _fn(
-              _instance.authUsersData.map((e) => CopyWith$Fragment$UserOverview(
+              _instance.authUsersData.map((e) => CopyWith_Fragment_UserOverview(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllUsers<TRes>
-    implements CopyWith$Subscription$watchAllUsers<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllUsers(this._res);
+class _CopyWithStubImpl_Subscription_watchAllUsers<TRes>
+    implements CopyWith_Subscription_watchAllUsers<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllUsers(this._res);
 
   TRes _res;
 
-  call({List<Fragment$UserOverview>? authUsersData}) => _res;
+  call({List<Fragment_UserOverview>? authUsersData}) => _res;
   authUsersData(_fn) => _res;
 }
 

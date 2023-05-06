@@ -32,20 +32,34 @@ class ViewService extends StatefulWidget {
 
 class _ViewServiceState extends State<ViewService> {
   late final _classesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.classes.paginateClasses(
-      serviceId: widget.serviceId,
+    objectsPaginatableStream: DatabaseService.I.classes.streamAll(
+      where: [
+        Input_ClassesBoolExp(
+          serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+        ),
+      ],
     ),
   );
 
   late final _groupsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.groups.paginateGroups(
-      serviceId: widget.serviceId,
+    objectsPaginatableStream: DatabaseService.I.groups.streamAll(
+      where: [
+        Input_GroupsBoolExp(
+          serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+        ),
+      ],
     ),
   );
 
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byServiceId: widget.serviceId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          classes: Input_ClassesBoolExp(
+            serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
@@ -53,8 +67,8 @@ class _ViewServiceState extends State<ViewService> {
 
   late final viewableObjectService = CAViewableObjectService.I;
 
-  late final stream = DatabaseService.I.services.watchService(
-    serviceId: widget.serviceId,
+  late final stream = DatabaseService.I.services.streamSingleById(
+    id: widget.serviceId,
   );
 
   @override

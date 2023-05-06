@@ -93,7 +93,7 @@ void main() {
           .read(databaseServiceProvider)
           .users as MockUsersDAO;
       final captured = verify(
-        mockUsersDAO.watchUser(uid: captureAnyNamed('uid')),
+        mockUsersDAO.streamSingleById(uid: captureAnyNamed('uid')),
       ).captured;
 
       expect(captured.first, expectedDomainUser.uid);
@@ -234,7 +234,7 @@ Override _setUpDatabaseService() {
 
 MockUsersDAO _createMockUsersDAO() {
   final mockUsersDAO = MockUsersDAO();
-  when(mockUsersDAO.watchUser(uid: anyNamed('uid')))
+  when(mockUsersDAO.streamSingleById(uid: anyNamed('uid')))
       .thenAnswer((_) => Stream.value(expectedDomainUser));
 
   return mockUsersDAO;

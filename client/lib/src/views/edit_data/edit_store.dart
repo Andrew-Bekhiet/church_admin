@@ -117,7 +117,7 @@ class _EditStoreState extends State<EditStore> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.families
-                                    .paginateFamilies(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'العائلة المسؤولة',
                               onChanged: (value) =>

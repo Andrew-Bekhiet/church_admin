@@ -1,53 +1,52 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'classes/__generated__/subscriptions.gql.dart';
 
-class ClassesDAO extends DAOBase {
+class ClassesDAO extends DAOBase<Class> {
   const ClassesDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Class> paginateClasses({
+  @override
+  GQLPaginatableStream<Class> streamAll({
     Stream<String?>? searchQuery,
-    String? serviceId,
+    List<Input_ClassesBoolExp>? where,
   }) {
     return GQLPaginatableStream<Class>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
         final defaultSearchVars = graphQLClient.getDefaultSearchVars(
           event,
-          Variables$Subscription$watchAllClasses.new,
-          Input$ClassesBoolExp.new,
+          Variables_Subscription_watchAllClasses.new,
+          Input_ClassesBoolExp.new,
         );
 
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (serviceId != null)
-              Input$ClassesBoolExp(
-                serviceId: Input$UuidComparisonExp($_eq: serviceId.toUuid()),
+        final variables = {
+          ...defaultSearchVars.copyWith(
+            where: [
+              if (where != null) ...where,
+              if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+            ],
+            orderBy: [
+              Input_ClassesOrderBy(
+                serviceStudyYear: Enum_OrderBy.ASC,
               ),
-            ...defaultSearchVars.where ?? [],
-          ],
-          orderBy: [
-            Input$ClassesOrderBy(
-              serviceStudyYear: Enum$OrderBy.ASC,
-            ),
-            Input$ClassesOrderBy(
-              serviceGender: Enum$OrderBy.DESC_NULLS_FIRST,
-            ),
-            Input$ClassesOrderBy(
-              name: Enum$OrderBy.ASC,
-            ),
-          ],
-        );
+              Input_ClassesOrderBy(
+                serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
+              ),
+              Input_ClassesOrderBy(
+                name: Enum_OrderBy.ASC,
+              ),
+            ],
+          ).toJson(),
+        };
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllClasses,
             operationName: 'watchAllClasses',
-            variables: variables.toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Class.fromJson),
           ),
         );
@@ -55,16 +54,16 @@ class ClassesDAO extends DAOBase {
     );
   }
 
-  Stream<Class?> watchClass({
-    required String classId,
+  Stream<Class?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient
         .subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchClass,
             operationName: 'watchClass',
-            variables: Variables$Subscription$watchClass(id: classId.toUuid())
-                .toJson(),
+            variables:
+                Variables_Subscription_watchClass(id: id.toUuid()).toJson(),
             parserFn: db.parser.singleOrNullParser(Class.fromJson),
           ),
         )

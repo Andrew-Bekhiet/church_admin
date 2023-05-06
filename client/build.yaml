@@ -11,6 +11,7 @@ targets:
           # generatedFileHeader: "// ignore_for_file: directives_ordering, prefer_is_not_operator, prefer_if_elements_to_conditional_expressions, annotate_overrides, prefer_final_fields, always_declare_return_types, avoid_redundant_argument_values"
           addTypenameExcludedPaths: ["subscription"]
           outputDirectory: "__generated__"
+          namingSeparator: "_"
           scalars:
             uuid:
               type: UuidValue

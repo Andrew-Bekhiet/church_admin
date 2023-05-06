@@ -3,19 +3,19 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Mutation$deletePerson {
-  factory Variables$Mutation$deletePerson({required UuidValue personId}) =>
-      Variables$Mutation$deletePerson._({
+class Variables_Mutation_deletePerson {
+  factory Variables_Mutation_deletePerson({required UuidValue personId}) =>
+      Variables_Mutation_deletePerson._({
         r'personId': personId,
       });
 
-  Variables$Mutation$deletePerson._(this._$data);
+  Variables_Mutation_deletePerson._(this._$data);
 
-  factory Variables$Mutation$deletePerson.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_deletePerson.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
-    return Variables$Mutation$deletePerson._(result$data);
+    return Variables_Mutation_deletePerson._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -28,8 +28,8 @@ class Variables$Mutation$deletePerson {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$deletePerson<Variables$Mutation$deletePerson>
-      get copyWith => CopyWith$Variables$Mutation$deletePerson(
+  CopyWith_Variables_Mutation_deletePerson<Variables_Mutation_deletePerson>
+      get copyWith => CopyWith_Variables_Mutation_deletePerson(
             this,
             (i) => i,
           );
@@ -38,7 +38,7 @@ class Variables$Mutation$deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$deletePerson) ||
+    if (!(other is Variables_Mutation_deletePerson) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57,67 +57,67 @@ class Variables$Mutation$deletePerson {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$deletePerson<TRes> {
-  factory CopyWith$Variables$Mutation$deletePerson(
-    Variables$Mutation$deletePerson instance,
-    TRes Function(Variables$Mutation$deletePerson) then,
-  ) = _CopyWithImpl$Variables$Mutation$deletePerson;
+abstract class CopyWith_Variables_Mutation_deletePerson<TRes> {
+  factory CopyWith_Variables_Mutation_deletePerson(
+    Variables_Mutation_deletePerson instance,
+    TRes Function(Variables_Mutation_deletePerson) then,
+  ) = _CopyWithImpl_Variables_Mutation_deletePerson;
 
-  factory CopyWith$Variables$Mutation$deletePerson.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$deletePerson;
+  factory CopyWith_Variables_Mutation_deletePerson.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_deletePerson;
 
   TRes call({UuidValue? personId});
 }
 
-class _CopyWithImpl$Variables$Mutation$deletePerson<TRes>
-    implements CopyWith$Variables$Mutation$deletePerson<TRes> {
-  _CopyWithImpl$Variables$Mutation$deletePerson(
+class _CopyWithImpl_Variables_Mutation_deletePerson<TRes>
+    implements CopyWith_Variables_Mutation_deletePerson<TRes> {
+  _CopyWithImpl_Variables_Mutation_deletePerson(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$deletePerson _instance;
+  final Variables_Mutation_deletePerson _instance;
 
-  final TRes Function(Variables$Mutation$deletePerson) _then;
+  final TRes Function(Variables_Mutation_deletePerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personId = _undefined}) =>
-      _then(Variables$Mutation$deletePerson._({
+      _then(Variables_Mutation_deletePerson._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$deletePerson<TRes>
-    implements CopyWith$Variables$Mutation$deletePerson<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$deletePerson(this._res);
+class _CopyWithStubImpl_Variables_Mutation_deletePerson<TRes>
+    implements CopyWith_Variables_Mutation_deletePerson<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_deletePerson(this._res);
 
   TRes _res;
 
   call({UuidValue? personId}) => _res;
 }
 
-class Mutation$deletePerson {
-  Mutation$deletePerson({
+class Mutation_deletePerson {
+  Mutation_deletePerson({
     this.deletePersonsByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$deletePerson.fromJson(Map<String, dynamic> json) {
+  factory Mutation_deletePerson.fromJson(Map<String, dynamic> json) {
     final l$deletePersonsByPk = json['deletePersonsByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$deletePerson(
+    return Mutation_deletePerson(
       deletePersonsByPk: l$deletePersonsByPk == null
           ? null
-          : Fragment$Person.fromJson(
+          : Fragment_Person.fromJson(
               (l$deletePersonsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Person? deletePersonsByPk;
+  final Fragment_Person? deletePersonsByPk;
 
   final String $__typename;
 
@@ -145,7 +145,7 @@ class Mutation$deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$deletePerson) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_deletePerson) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deletePersonsByPk = deletePersonsByPk;
@@ -162,40 +162,40 @@ class Mutation$deletePerson {
   }
 }
 
-extension UtilityExtension$Mutation$deletePerson on Mutation$deletePerson {
-  CopyWith$Mutation$deletePerson<Mutation$deletePerson> get copyWith =>
-      CopyWith$Mutation$deletePerson(
+extension UtilityExtension_Mutation_deletePerson on Mutation_deletePerson {
+  CopyWith_Mutation_deletePerson<Mutation_deletePerson> get copyWith =>
+      CopyWith_Mutation_deletePerson(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$deletePerson<TRes> {
-  factory CopyWith$Mutation$deletePerson(
-    Mutation$deletePerson instance,
-    TRes Function(Mutation$deletePerson) then,
-  ) = _CopyWithImpl$Mutation$deletePerson;
+abstract class CopyWith_Mutation_deletePerson<TRes> {
+  factory CopyWith_Mutation_deletePerson(
+    Mutation_deletePerson instance,
+    TRes Function(Mutation_deletePerson) then,
+  ) = _CopyWithImpl_Mutation_deletePerson;
 
-  factory CopyWith$Mutation$deletePerson.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deletePerson;
+  factory CopyWith_Mutation_deletePerson.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_deletePerson;
 
   TRes call({
-    Fragment$Person? deletePersonsByPk,
+    Fragment_Person? deletePersonsByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Person<TRes> get deletePersonsByPk;
+  CopyWith_Fragment_Person<TRes> get deletePersonsByPk;
 }
 
-class _CopyWithImpl$Mutation$deletePerson<TRes>
-    implements CopyWith$Mutation$deletePerson<TRes> {
-  _CopyWithImpl$Mutation$deletePerson(
+class _CopyWithImpl_Mutation_deletePerson<TRes>
+    implements CopyWith_Mutation_deletePerson<TRes> {
+  _CopyWithImpl_Mutation_deletePerson(
     this._instance,
     this._then,
   );
 
-  final Mutation$deletePerson _instance;
+  final Mutation_deletePerson _instance;
 
-  final TRes Function(Mutation$deletePerson) _then;
+  final TRes Function(Mutation_deletePerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -203,36 +203,36 @@ class _CopyWithImpl$Mutation$deletePerson<TRes>
     Object? deletePersonsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$deletePerson(
+      _then(Mutation_deletePerson(
         deletePersonsByPk: deletePersonsByPk == _undefined
             ? _instance.deletePersonsByPk
-            : (deletePersonsByPk as Fragment$Person?),
+            : (deletePersonsByPk as Fragment_Person?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Person<TRes> get deletePersonsByPk {
+  CopyWith_Fragment_Person<TRes> get deletePersonsByPk {
     final local$deletePersonsByPk = _instance.deletePersonsByPk;
     return local$deletePersonsByPk == null
-        ? CopyWith$Fragment$Person.stub(_then(_instance))
-        : CopyWith$Fragment$Person(
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(
             local$deletePersonsByPk, (e) => call(deletePersonsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$deletePerson<TRes>
-    implements CopyWith$Mutation$deletePerson<TRes> {
-  _CopyWithStubImpl$Mutation$deletePerson(this._res);
+class _CopyWithStubImpl_Mutation_deletePerson<TRes>
+    implements CopyWith_Mutation_deletePerson<TRes> {
+  _CopyWithStubImpl_Mutation_deletePerson(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Person? deletePersonsByPk,
+    Fragment_Person? deletePersonsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Person<TRes> get deletePersonsByPk =>
-      CopyWith$Fragment$Person.stub(_res);
+  CopyWith_Fragment_Person<TRes> get deletePersonsByPk =>
+      CopyWith_Fragment_Person.stub(_res);
 }
 
 const documentNodeMutationdeletePerson = DocumentNode(definitions: [
@@ -289,17 +289,17 @@ const documentNodeMutationdeletePerson = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Variables$Mutation$updatePerson {
-  factory Variables$Mutation$updatePerson({
+class Variables_Mutation_updatePerson {
+  factory Variables_Mutation_updatePerson({
     required UuidValue personId,
-    required Input$PersonsSetInput newPerson,
-    required List<Input$PersonsGroupsInsertInput> newGroups,
+    required Input_PersonsSetInput newPerson,
+    required List<Input_PersonsGroupsInsertInput> newGroups,
     List<UuidValue>? deleteGroups,
-    required List<Input$PersonsServicesInsertInput> newServices,
+    required List<Input_PersonsServicesInsertInput> newServices,
     List<UuidValue>? deleteServices,
-    required List<Input$PersonsHobbiesInsertInput> newHobbies,
+    required List<Input_PersonsHobbiesInsertInput> newHobbies,
     List<UuidValue>? deleteHobbies,
-    required List<Input$PersonsTagsInsertInput> newTags,
+    required List<Input_PersonsTagsInsertInput> newTags,
     List<UuidValue>? deleteTags,
     DateTime? lastConfession,
     DateTime? lastKodas,
@@ -319,7 +319,7 @@ class Variables$Mutation$updatePerson {
     required bool insertHistoryCallHistoryOne,
     required bool insertHistoryVisitHistoryOne,
   }) =>
-      Variables$Mutation$updatePerson._({
+      Variables_Mutation_updatePerson._({
         r'personId': personId,
         r'newPerson': newPerson,
         r'newGroups': newGroups,
@@ -349,18 +349,18 @@ class Variables$Mutation$updatePerson {
         r'insertHistoryVisitHistoryOne': insertHistoryVisitHistoryOne,
       });
 
-  Variables$Mutation$updatePerson._(this._$data);
+  Variables_Mutation_updatePerson._(this._$data);
 
-  factory Variables$Mutation$updatePerson.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_updatePerson.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     final l$newPerson = data['newPerson'];
     result$data['newPerson'] =
-        Input$PersonsSetInput.fromJson((l$newPerson as Map<String, dynamic>));
+        Input_PersonsSetInput.fromJson((l$newPerson as Map<String, dynamic>));
     final l$newGroups = data['newGroups'];
     result$data['newGroups'] = (l$newGroups as List<dynamic>)
-        .map((e) => Input$PersonsGroupsInsertInput.fromJson(
+        .map((e) => Input_PersonsGroupsInsertInput.fromJson(
             (e as Map<String, dynamic>)))
         .toList();
     if (data.containsKey('deleteGroups')) {
@@ -371,7 +371,7 @@ class Variables$Mutation$updatePerson {
     }
     final l$newServices = data['newServices'];
     result$data['newServices'] = (l$newServices as List<dynamic>)
-        .map((e) => Input$PersonsServicesInsertInput.fromJson(
+        .map((e) => Input_PersonsServicesInsertInput.fromJson(
             (e as Map<String, dynamic>)))
         .toList();
     if (data.containsKey('deleteServices')) {
@@ -382,7 +382,7 @@ class Variables$Mutation$updatePerson {
     }
     final l$newHobbies = data['newHobbies'];
     result$data['newHobbies'] = (l$newHobbies as List<dynamic>)
-        .map((e) => Input$PersonsHobbiesInsertInput.fromJson(
+        .map((e) => Input_PersonsHobbiesInsertInput.fromJson(
             (e as Map<String, dynamic>)))
         .toList();
     if (data.containsKey('deleteHobbies')) {
@@ -394,7 +394,7 @@ class Variables$Mutation$updatePerson {
     final l$newTags = data['newTags'];
     result$data['newTags'] = (l$newTags as List<dynamic>)
         .map((e) =>
-            Input$PersonsTagsInsertInput.fromJson((e as Map<String, dynamic>)))
+            Input_PersonsTagsInsertInput.fromJson((e as Map<String, dynamic>)))
         .toList();
     if (data.containsKey('deleteTags')) {
       final l$deleteTags = data['deleteTags'];
@@ -453,28 +453,28 @@ class Variables$Mutation$updatePerson {
     final l$insertHistoryVisitHistoryOne = data['insertHistoryVisitHistoryOne'];
     result$data['insertHistoryVisitHistoryOne'] =
         (l$insertHistoryVisitHistoryOne as bool);
-    return Variables$Mutation$updatePerson._(result$data);
+    return Variables_Mutation_updatePerson._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-  Input$PersonsSetInput get newPerson =>
-      (_$data['newPerson'] as Input$PersonsSetInput);
-  List<Input$PersonsGroupsInsertInput> get newGroups =>
-      (_$data['newGroups'] as List<Input$PersonsGroupsInsertInput>);
+  Input_PersonsSetInput get newPerson =>
+      (_$data['newPerson'] as Input_PersonsSetInput);
+  List<Input_PersonsGroupsInsertInput> get newGroups =>
+      (_$data['newGroups'] as List<Input_PersonsGroupsInsertInput>);
   List<UuidValue>? get deleteGroups =>
       (_$data['deleteGroups'] as List<UuidValue>?);
-  List<Input$PersonsServicesInsertInput> get newServices =>
-      (_$data['newServices'] as List<Input$PersonsServicesInsertInput>);
+  List<Input_PersonsServicesInsertInput> get newServices =>
+      (_$data['newServices'] as List<Input_PersonsServicesInsertInput>);
   List<UuidValue>? get deleteServices =>
       (_$data['deleteServices'] as List<UuidValue>?);
-  List<Input$PersonsHobbiesInsertInput> get newHobbies =>
-      (_$data['newHobbies'] as List<Input$PersonsHobbiesInsertInput>);
+  List<Input_PersonsHobbiesInsertInput> get newHobbies =>
+      (_$data['newHobbies'] as List<Input_PersonsHobbiesInsertInput>);
   List<UuidValue>? get deleteHobbies =>
       (_$data['deleteHobbies'] as List<UuidValue>?);
-  List<Input$PersonsTagsInsertInput> get newTags =>
-      (_$data['newTags'] as List<Input$PersonsTagsInsertInput>);
+  List<Input_PersonsTagsInsertInput> get newTags =>
+      (_$data['newTags'] as List<Input_PersonsTagsInsertInput>);
   List<UuidValue>? get deleteTags => (_$data['deleteTags'] as List<UuidValue>?);
   DateTime? get lastConfession => (_$data['lastConfession'] as DateTime?);
   DateTime? get lastKodas => (_$data['lastKodas'] as DateTime?);
@@ -584,8 +584,8 @@ class Variables$Mutation$updatePerson {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$updatePerson<Variables$Mutation$updatePerson>
-      get copyWith => CopyWith$Variables$Mutation$updatePerson(
+  CopyWith_Variables_Mutation_updatePerson<Variables_Mutation_updatePerson>
+      get copyWith => CopyWith_Variables_Mutation_updatePerson(
             this,
             (i) => i,
           );
@@ -594,7 +594,7 @@ class Variables$Mutation$updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$updatePerson) ||
+    if (!(other is Variables_Mutation_updatePerson) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -924,25 +924,25 @@ class Variables$Mutation$updatePerson {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$updatePerson<TRes> {
-  factory CopyWith$Variables$Mutation$updatePerson(
-    Variables$Mutation$updatePerson instance,
-    TRes Function(Variables$Mutation$updatePerson) then,
-  ) = _CopyWithImpl$Variables$Mutation$updatePerson;
+abstract class CopyWith_Variables_Mutation_updatePerson<TRes> {
+  factory CopyWith_Variables_Mutation_updatePerson(
+    Variables_Mutation_updatePerson instance,
+    TRes Function(Variables_Mutation_updatePerson) then,
+  ) = _CopyWithImpl_Variables_Mutation_updatePerson;
 
-  factory CopyWith$Variables$Mutation$updatePerson.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$updatePerson;
+  factory CopyWith_Variables_Mutation_updatePerson.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updatePerson;
 
   TRes call({
     UuidValue? personId,
-    Input$PersonsSetInput? newPerson,
-    List<Input$PersonsGroupsInsertInput>? newGroups,
+    Input_PersonsSetInput? newPerson,
+    List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
-    List<Input$PersonsServicesInsertInput>? newServices,
+    List<Input_PersonsServicesInsertInput>? newServices,
     List<UuidValue>? deleteServices,
-    List<Input$PersonsHobbiesInsertInput>? newHobbies,
+    List<Input_PersonsHobbiesInsertInput>? newHobbies,
     List<UuidValue>? deleteHobbies,
-    List<Input$PersonsTagsInsertInput>? newTags,
+    List<Input_PersonsTagsInsertInput>? newTags,
     List<UuidValue>? deleteTags,
     DateTime? lastConfession,
     DateTime? lastKodas,
@@ -964,16 +964,16 @@ abstract class CopyWith$Variables$Mutation$updatePerson<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Mutation$updatePerson<TRes>
-    implements CopyWith$Variables$Mutation$updatePerson<TRes> {
-  _CopyWithImpl$Variables$Mutation$updatePerson(
+class _CopyWithImpl_Variables_Mutation_updatePerson<TRes>
+    implements CopyWith_Variables_Mutation_updatePerson<TRes> {
+  _CopyWithImpl_Variables_Mutation_updatePerson(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$updatePerson _instance;
+  final Variables_Mutation_updatePerson _instance;
 
-  final TRes Function(Variables$Mutation$updatePerson) _then;
+  final TRes Function(Variables_Mutation_updatePerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1006,27 +1006,27 @@ class _CopyWithImpl$Variables$Mutation$updatePerson<TRes>
     Object? insertHistoryCallHistoryOne = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
   }) =>
-      _then(Variables$Mutation$updatePerson._({
+      _then(Variables_Mutation_updatePerson._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
         if (newPerson != _undefined && newPerson != null)
-          'newPerson': (newPerson as Input$PersonsSetInput),
+          'newPerson': (newPerson as Input_PersonsSetInput),
         if (newGroups != _undefined && newGroups != null)
-          'newGroups': (newGroups as List<Input$PersonsGroupsInsertInput>),
+          'newGroups': (newGroups as List<Input_PersonsGroupsInsertInput>),
         if (deleteGroups != _undefined)
           'deleteGroups': (deleteGroups as List<UuidValue>?),
         if (newServices != _undefined && newServices != null)
           'newServices':
-              (newServices as List<Input$PersonsServicesInsertInput>),
+              (newServices as List<Input_PersonsServicesInsertInput>),
         if (deleteServices != _undefined)
           'deleteServices': (deleteServices as List<UuidValue>?),
         if (newHobbies != _undefined && newHobbies != null)
-          'newHobbies': (newHobbies as List<Input$PersonsHobbiesInsertInput>),
+          'newHobbies': (newHobbies as List<Input_PersonsHobbiesInsertInput>),
         if (deleteHobbies != _undefined)
           'deleteHobbies': (deleteHobbies as List<UuidValue>?),
         if (newTags != _undefined && newTags != null)
-          'newTags': (newTags as List<Input$PersonsTagsInsertInput>),
+          'newTags': (newTags as List<Input_PersonsTagsInsertInput>),
         if (deleteTags != _undefined)
           'deleteTags': (deleteTags as List<UuidValue>?),
         if (lastConfession != _undefined)
@@ -1072,22 +1072,22 @@ class _CopyWithImpl$Variables$Mutation$updatePerson<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$updatePerson<TRes>
-    implements CopyWith$Variables$Mutation$updatePerson<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$updatePerson(this._res);
+class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
+    implements CopyWith_Variables_Mutation_updatePerson<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updatePerson(this._res);
 
   TRes _res;
 
   call({
     UuidValue? personId,
-    Input$PersonsSetInput? newPerson,
-    List<Input$PersonsGroupsInsertInput>? newGroups,
+    Input_PersonsSetInput? newPerson,
+    List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
-    List<Input$PersonsServicesInsertInput>? newServices,
+    List<Input_PersonsServicesInsertInput>? newServices,
     List<UuidValue>? deleteServices,
-    List<Input$PersonsHobbiesInsertInput>? newHobbies,
+    List<Input_PersonsHobbiesInsertInput>? newHobbies,
     List<UuidValue>? deleteHobbies,
-    List<Input$PersonsTagsInsertInput>? newTags,
+    List<Input_PersonsTagsInsertInput>? newTags,
     List<UuidValue>? deleteTags,
     DateTime? lastConfession,
     DateTime? lastKodas,
@@ -1110,8 +1110,8 @@ class _CopyWithStubImpl$Variables$Mutation$updatePerson<TRes>
       _res;
 }
 
-class Mutation$updatePerson {
-  Mutation$updatePerson({
+class Mutation_updatePerson {
+  Mutation_updatePerson({
     this.updatePersonsByPk,
     this.insertPersonsServices,
     this.insertPersonsGroups,
@@ -1128,7 +1128,7 @@ class Mutation$updatePerson {
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$updatePerson.fromJson(Map<String, dynamic> json) {
+  factory Mutation_updatePerson.fromJson(Map<String, dynamic> json) {
     final l$updatePersonsByPk = json['updatePersonsByPk'];
     final l$insertPersonsServices = json['insertPersonsServices'];
     final l$insertPersonsGroups = json['insertPersonsGroups'];
@@ -1144,92 +1144,92 @@ class Mutation$updatePerson {
     final l$insertHistoryCallHistoryOne = json['insertHistoryCallHistoryOne'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson(
+    return Mutation_updatePerson(
       updatePersonsByPk: l$updatePersonsByPk == null
           ? null
-          : Fragment$Person.fromJson(
+          : Fragment_Person.fromJson(
               (l$updatePersonsByPk as Map<String, dynamic>)),
       insertPersonsServices: l$insertPersonsServices == null
           ? null
-          : Mutation$updatePerson$insertPersonsServices.fromJson(
+          : Mutation_updatePerson_insertPersonsServices.fromJson(
               (l$insertPersonsServices as Map<String, dynamic>)),
       insertPersonsGroups: l$insertPersonsGroups == null
           ? null
-          : Mutation$updatePerson$insertPersonsGroups.fromJson(
+          : Mutation_updatePerson_insertPersonsGroups.fromJson(
               (l$insertPersonsGroups as Map<String, dynamic>)),
       insertPersonsHobbies: l$insertPersonsHobbies == null
           ? null
-          : Mutation$updatePerson$insertPersonsHobbies.fromJson(
+          : Mutation_updatePerson_insertPersonsHobbies.fromJson(
               (l$insertPersonsHobbies as Map<String, dynamic>)),
       insertPersonsTags: l$insertPersonsTags == null
           ? null
-          : Mutation$updatePerson$insertPersonsTags.fromJson(
+          : Mutation_updatePerson_insertPersonsTags.fromJson(
               (l$insertPersonsTags as Map<String, dynamic>)),
       deletePersonsTags: l$deletePersonsTags == null
           ? null
-          : Mutation$updatePerson$deletePersonsTags.fromJson(
+          : Mutation_updatePerson_deletePersonsTags.fromJson(
               (l$deletePersonsTags as Map<String, dynamic>)),
       deletePersonsHobbies: l$deletePersonsHobbies == null
           ? null
-          : Mutation$updatePerson$deletePersonsHobbies.fromJson(
+          : Mutation_updatePerson_deletePersonsHobbies.fromJson(
               (l$deletePersonsHobbies as Map<String, dynamic>)),
       deletePersonsGroups: l$deletePersonsGroups == null
           ? null
-          : Mutation$updatePerson$deletePersonsGroups.fromJson(
+          : Mutation_updatePerson_deletePersonsGroups.fromJson(
               (l$deletePersonsGroups as Map<String, dynamic>)),
       deletePersonsServices: l$deletePersonsServices == null
           ? null
-          : Mutation$updatePerson$deletePersonsServices.fromJson(
+          : Mutation_updatePerson_deletePersonsServices.fromJson(
               (l$deletePersonsServices as Map<String, dynamic>)),
       insertHistoryConfessionHistoryOne: l$insertHistoryConfessionHistoryOne ==
               null
           ? null
-          : Mutation$updatePerson$insertHistoryConfessionHistoryOne.fromJson(
+          : Mutation_updatePerson_insertHistoryConfessionHistoryOne.fromJson(
               (l$insertHistoryConfessionHistoryOne as Map<String, dynamic>)),
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
-          : Mutation$updatePerson$insertHistoryKodasHistoryOne.fromJson(
+          : Mutation_updatePerson_insertHistoryKodasHistoryOne.fromJson(
               (l$insertHistoryKodasHistoryOne as Map<String, dynamic>)),
       insertHistoryCallHistoryOne: l$insertHistoryCallHistoryOne == null
           ? null
-          : Mutation$updatePerson$insertHistoryCallHistoryOne.fromJson(
+          : Mutation_updatePerson_insertHistoryCallHistoryOne.fromJson(
               (l$insertHistoryCallHistoryOne as Map<String, dynamic>)),
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
-          : Mutation$updatePerson$insertHistoryVisitHistoryOne.fromJson(
+          : Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Person? updatePersonsByPk;
+  final Fragment_Person? updatePersonsByPk;
 
-  final Mutation$updatePerson$insertPersonsServices? insertPersonsServices;
+  final Mutation_updatePerson_insertPersonsServices? insertPersonsServices;
 
-  final Mutation$updatePerson$insertPersonsGroups? insertPersonsGroups;
+  final Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups;
 
-  final Mutation$updatePerson$insertPersonsHobbies? insertPersonsHobbies;
+  final Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies;
 
-  final Mutation$updatePerson$insertPersonsTags? insertPersonsTags;
+  final Mutation_updatePerson_insertPersonsTags? insertPersonsTags;
 
-  final Mutation$updatePerson$deletePersonsTags? deletePersonsTags;
+  final Mutation_updatePerson_deletePersonsTags? deletePersonsTags;
 
-  final Mutation$updatePerson$deletePersonsHobbies? deletePersonsHobbies;
+  final Mutation_updatePerson_deletePersonsHobbies? deletePersonsHobbies;
 
-  final Mutation$updatePerson$deletePersonsGroups? deletePersonsGroups;
+  final Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups;
 
-  final Mutation$updatePerson$deletePersonsServices? deletePersonsServices;
+  final Mutation_updatePerson_deletePersonsServices? deletePersonsServices;
 
-  final Mutation$updatePerson$insertHistoryConfessionHistoryOne?
+  final Mutation_updatePerson_insertHistoryConfessionHistoryOne?
       insertHistoryConfessionHistoryOne;
 
-  final Mutation$updatePerson$insertHistoryKodasHistoryOne?
+  final Mutation_updatePerson_insertHistoryKodasHistoryOne?
       insertHistoryKodasHistoryOne;
 
-  final Mutation$updatePerson$insertHistoryCallHistoryOne?
+  final Mutation_updatePerson_insertHistoryCallHistoryOne?
       insertHistoryCallHistoryOne;
 
-  final Mutation$updatePerson$insertHistoryVisitHistoryOne?
+  final Mutation_updatePerson_insertHistoryVisitHistoryOne?
       insertHistoryVisitHistoryOne;
 
   final String $__typename;
@@ -1312,7 +1312,7 @@ class Mutation$updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_updatePerson) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updatePersonsByPk = updatePersonsByPk;
@@ -1395,78 +1395,78 @@ class Mutation$updatePerson {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson on Mutation$updatePerson {
-  CopyWith$Mutation$updatePerson<Mutation$updatePerson> get copyWith =>
-      CopyWith$Mutation$updatePerson(
+extension UtilityExtension_Mutation_updatePerson on Mutation_updatePerson {
+  CopyWith_Mutation_updatePerson<Mutation_updatePerson> get copyWith =>
+      CopyWith_Mutation_updatePerson(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$updatePerson<TRes> {
-  factory CopyWith$Mutation$updatePerson(
-    Mutation$updatePerson instance,
-    TRes Function(Mutation$updatePerson) then,
-  ) = _CopyWithImpl$Mutation$updatePerson;
+abstract class CopyWith_Mutation_updatePerson<TRes> {
+  factory CopyWith_Mutation_updatePerson(
+    Mutation_updatePerson instance,
+    TRes Function(Mutation_updatePerson) then,
+  ) = _CopyWithImpl_Mutation_updatePerson;
 
-  factory CopyWith$Mutation$updatePerson.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson;
+  factory CopyWith_Mutation_updatePerson.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson;
 
   TRes call({
-    Fragment$Person? updatePersonsByPk,
-    Mutation$updatePerson$insertPersonsServices? insertPersonsServices,
-    Mutation$updatePerson$insertPersonsGroups? insertPersonsGroups,
-    Mutation$updatePerson$insertPersonsHobbies? insertPersonsHobbies,
-    Mutation$updatePerson$insertPersonsTags? insertPersonsTags,
-    Mutation$updatePerson$deletePersonsTags? deletePersonsTags,
-    Mutation$updatePerson$deletePersonsHobbies? deletePersonsHobbies,
-    Mutation$updatePerson$deletePersonsGroups? deletePersonsGroups,
-    Mutation$updatePerson$deletePersonsServices? deletePersonsServices,
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne?
+    Fragment_Person? updatePersonsByPk,
+    Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
+    Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
+    Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
+    Mutation_updatePerson_insertPersonsTags? insertPersonsTags,
+    Mutation_updatePerson_deletePersonsTags? deletePersonsTags,
+    Mutation_updatePerson_deletePersonsHobbies? deletePersonsHobbies,
+    Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
+    Mutation_updatePerson_deletePersonsServices? deletePersonsServices,
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
-    Mutation$updatePerson$insertHistoryKodasHistoryOne?
+    Mutation_updatePerson_insertHistoryKodasHistoryOne?
         insertHistoryKodasHistoryOne,
-    Mutation$updatePerson$insertHistoryCallHistoryOne?
+    Mutation_updatePerson_insertHistoryCallHistoryOne?
         insertHistoryCallHistoryOne,
-    Mutation$updatePerson$insertHistoryVisitHistoryOne?
+    Mutation_updatePerson_insertHistoryVisitHistoryOne?
         insertHistoryVisitHistoryOne,
     String? $__typename,
   });
-  CopyWith$Fragment$Person<TRes> get updatePersonsByPk;
-  CopyWith$Mutation$updatePerson$insertPersonsServices<TRes>
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk;
+  CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices;
-  CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
       get insertPersonsGroups;
-  CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
       get insertPersonsHobbies;
-  CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> get insertPersonsTags;
-  CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> get deletePersonsTags;
-  CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> get insertPersonsTags;
+  CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> get deletePersonsTags;
+  CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
       get deletePersonsHobbies;
-  CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes>
+  CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
       get deletePersonsGroups;
-  CopyWith$Mutation$updatePerson$deletePersonsServices<TRes>
+  CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
       get deletePersonsServices;
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
       get insertHistoryConfessionHistoryOne;
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne;
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne;
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne;
 }
 
-class _CopyWithImpl$Mutation$updatePerson<TRes>
-    implements CopyWith$Mutation$updatePerson<TRes> {
-  _CopyWithImpl$Mutation$updatePerson(
+class _CopyWithImpl_Mutation_updatePerson<TRes>
+    implements CopyWith_Mutation_updatePerson<TRes> {
+  _CopyWithImpl_Mutation_updatePerson(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson _instance;
+  final Mutation_updatePerson _instance;
 
-  final TRes Function(Mutation$updatePerson) _then;
+  final TRes Function(Mutation_updatePerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1486,263 +1486,263 @@ class _CopyWithImpl$Mutation$updatePerson<TRes>
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson(
+      _then(Mutation_updatePerson(
         updatePersonsByPk: updatePersonsByPk == _undefined
             ? _instance.updatePersonsByPk
-            : (updatePersonsByPk as Fragment$Person?),
+            : (updatePersonsByPk as Fragment_Person?),
         insertPersonsServices: insertPersonsServices == _undefined
             ? _instance.insertPersonsServices
             : (insertPersonsServices
-                as Mutation$updatePerson$insertPersonsServices?),
+                as Mutation_updatePerson_insertPersonsServices?),
         insertPersonsGroups: insertPersonsGroups == _undefined
             ? _instance.insertPersonsGroups
             : (insertPersonsGroups
-                as Mutation$updatePerson$insertPersonsGroups?),
+                as Mutation_updatePerson_insertPersonsGroups?),
         insertPersonsHobbies: insertPersonsHobbies == _undefined
             ? _instance.insertPersonsHobbies
             : (insertPersonsHobbies
-                as Mutation$updatePerson$insertPersonsHobbies?),
+                as Mutation_updatePerson_insertPersonsHobbies?),
         insertPersonsTags: insertPersonsTags == _undefined
             ? _instance.insertPersonsTags
-            : (insertPersonsTags as Mutation$updatePerson$insertPersonsTags?),
+            : (insertPersonsTags as Mutation_updatePerson_insertPersonsTags?),
         deletePersonsTags: deletePersonsTags == _undefined
             ? _instance.deletePersonsTags
-            : (deletePersonsTags as Mutation$updatePerson$deletePersonsTags?),
+            : (deletePersonsTags as Mutation_updatePerson_deletePersonsTags?),
         deletePersonsHobbies: deletePersonsHobbies == _undefined
             ? _instance.deletePersonsHobbies
             : (deletePersonsHobbies
-                as Mutation$updatePerson$deletePersonsHobbies?),
+                as Mutation_updatePerson_deletePersonsHobbies?),
         deletePersonsGroups: deletePersonsGroups == _undefined
             ? _instance.deletePersonsGroups
             : (deletePersonsGroups
-                as Mutation$updatePerson$deletePersonsGroups?),
+                as Mutation_updatePerson_deletePersonsGroups?),
         deletePersonsServices: deletePersonsServices == _undefined
             ? _instance.deletePersonsServices
             : (deletePersonsServices
-                as Mutation$updatePerson$deletePersonsServices?),
+                as Mutation_updatePerson_deletePersonsServices?),
         insertHistoryConfessionHistoryOne: insertHistoryConfessionHistoryOne ==
                 _undefined
             ? _instance.insertHistoryConfessionHistoryOne
             : (insertHistoryConfessionHistoryOne
-                as Mutation$updatePerson$insertHistoryConfessionHistoryOne?),
+                as Mutation_updatePerson_insertHistoryConfessionHistoryOne?),
         insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
             ? _instance.insertHistoryKodasHistoryOne
             : (insertHistoryKodasHistoryOne
-                as Mutation$updatePerson$insertHistoryKodasHistoryOne?),
+                as Mutation_updatePerson_insertHistoryKodasHistoryOne?),
         insertHistoryCallHistoryOne: insertHistoryCallHistoryOne == _undefined
             ? _instance.insertHistoryCallHistoryOne
             : (insertHistoryCallHistoryOne
-                as Mutation$updatePerson$insertHistoryCallHistoryOne?),
+                as Mutation_updatePerson_insertHistoryCallHistoryOne?),
         insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
             ? _instance.insertHistoryVisitHistoryOne
             : (insertHistoryVisitHistoryOne
-                as Mutation$updatePerson$insertHistoryVisitHistoryOne?),
+                as Mutation_updatePerson_insertHistoryVisitHistoryOne?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Person<TRes> get updatePersonsByPk {
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk {
     final local$updatePersonsByPk = _instance.updatePersonsByPk;
     return local$updatePersonsByPk == null
-        ? CopyWith$Fragment$Person.stub(_then(_instance))
-        : CopyWith$Fragment$Person(
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(
             local$updatePersonsByPk, (e) => call(updatePersonsByPk: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertPersonsServices<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices {
     final local$insertPersonsServices = _instance.insertPersonsServices;
     return local$insertPersonsServices == null
-        ? CopyWith$Mutation$updatePerson$insertPersonsServices.stub(
+        ? CopyWith_Mutation_updatePerson_insertPersonsServices.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertPersonsServices(
+        : CopyWith_Mutation_updatePerson_insertPersonsServices(
             local$insertPersonsServices, (e) => call(insertPersonsServices: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
       get insertPersonsGroups {
     final local$insertPersonsGroups = _instance.insertPersonsGroups;
     return local$insertPersonsGroups == null
-        ? CopyWith$Mutation$updatePerson$insertPersonsGroups.stub(
+        ? CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertPersonsGroups(
+        : CopyWith_Mutation_updatePerson_insertPersonsGroups(
             local$insertPersonsGroups, (e) => call(insertPersonsGroups: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes>
+  CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
       get insertPersonsHobbies {
     final local$insertPersonsHobbies = _instance.insertPersonsHobbies;
     return local$insertPersonsHobbies == null
-        ? CopyWith$Mutation$updatePerson$insertPersonsHobbies.stub(
+        ? CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertPersonsHobbies(
+        : CopyWith_Mutation_updatePerson_insertPersonsHobbies(
             local$insertPersonsHobbies, (e) => call(insertPersonsHobbies: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> get insertPersonsTags {
+  CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> get insertPersonsTags {
     final local$insertPersonsTags = _instance.insertPersonsTags;
     return local$insertPersonsTags == null
-        ? CopyWith$Mutation$updatePerson$insertPersonsTags.stub(
+        ? CopyWith_Mutation_updatePerson_insertPersonsTags.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertPersonsTags(
+        : CopyWith_Mutation_updatePerson_insertPersonsTags(
             local$insertPersonsTags, (e) => call(insertPersonsTags: e));
   }
 
-  CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> get deletePersonsTags {
+  CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> get deletePersonsTags {
     final local$deletePersonsTags = _instance.deletePersonsTags;
     return local$deletePersonsTags == null
-        ? CopyWith$Mutation$updatePerson$deletePersonsTags.stub(
+        ? CopyWith_Mutation_updatePerson_deletePersonsTags.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$deletePersonsTags(
+        : CopyWith_Mutation_updatePerson_deletePersonsTags(
             local$deletePersonsTags, (e) => call(deletePersonsTags: e));
   }
 
-  CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes>
+  CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
       get deletePersonsHobbies {
     final local$deletePersonsHobbies = _instance.deletePersonsHobbies;
     return local$deletePersonsHobbies == null
-        ? CopyWith$Mutation$updatePerson$deletePersonsHobbies.stub(
+        ? CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$deletePersonsHobbies(
+        : CopyWith_Mutation_updatePerson_deletePersonsHobbies(
             local$deletePersonsHobbies, (e) => call(deletePersonsHobbies: e));
   }
 
-  CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes>
+  CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
       get deletePersonsGroups {
     final local$deletePersonsGroups = _instance.deletePersonsGroups;
     return local$deletePersonsGroups == null
-        ? CopyWith$Mutation$updatePerson$deletePersonsGroups.stub(
+        ? CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$deletePersonsGroups(
+        : CopyWith_Mutation_updatePerson_deletePersonsGroups(
             local$deletePersonsGroups, (e) => call(deletePersonsGroups: e));
   }
 
-  CopyWith$Mutation$updatePerson$deletePersonsServices<TRes>
+  CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
       get deletePersonsServices {
     final local$deletePersonsServices = _instance.deletePersonsServices;
     return local$deletePersonsServices == null
-        ? CopyWith$Mutation$updatePerson$deletePersonsServices.stub(
+        ? CopyWith_Mutation_updatePerson_deletePersonsServices.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$deletePersonsServices(
+        : CopyWith_Mutation_updatePerson_deletePersonsServices(
             local$deletePersonsServices, (e) => call(deletePersonsServices: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
       get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
         _instance.insertHistoryConfessionHistoryOne;
     return local$insertHistoryConfessionHistoryOne == null
-        ? CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne.stub(
+        ? CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne(
+        : CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
             local$insertHistoryConfessionHistoryOne,
             (e) => call(insertHistoryConfessionHistoryOne: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne {
     final local$insertHistoryKodasHistoryOne =
         _instance.insertHistoryKodasHistoryOne;
     return local$insertHistoryKodasHistoryOne == null
-        ? CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne.stub(
+        ? CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne(
+        : CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
             local$insertHistoryKodasHistoryOne,
             (e) => call(insertHistoryKodasHistoryOne: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne {
     final local$insertHistoryCallHistoryOne =
         _instance.insertHistoryCallHistoryOne;
     return local$insertHistoryCallHistoryOne == null
-        ? CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne.stub(
+        ? CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne(
+        : CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
             local$insertHistoryCallHistoryOne,
             (e) => call(insertHistoryCallHistoryOne: e));
   }
 
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne {
     final local$insertHistoryVisitHistoryOne =
         _instance.insertHistoryVisitHistoryOne;
     return local$insertHistoryVisitHistoryOne == null
-        ? CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne.stub(
+        ? CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
             _then(_instance))
-        : CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne(
+        : CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
             local$insertHistoryVisitHistoryOne,
             (e) => call(insertHistoryVisitHistoryOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson<TRes>
-    implements CopyWith$Mutation$updatePerson<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson<TRes>
+    implements CopyWith_Mutation_updatePerson<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Person? updatePersonsByPk,
-    Mutation$updatePerson$insertPersonsServices? insertPersonsServices,
-    Mutation$updatePerson$insertPersonsGroups? insertPersonsGroups,
-    Mutation$updatePerson$insertPersonsHobbies? insertPersonsHobbies,
-    Mutation$updatePerson$insertPersonsTags? insertPersonsTags,
-    Mutation$updatePerson$deletePersonsTags? deletePersonsTags,
-    Mutation$updatePerson$deletePersonsHobbies? deletePersonsHobbies,
-    Mutation$updatePerson$deletePersonsGroups? deletePersonsGroups,
-    Mutation$updatePerson$deletePersonsServices? deletePersonsServices,
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne?
+    Fragment_Person? updatePersonsByPk,
+    Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
+    Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
+    Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
+    Mutation_updatePerson_insertPersonsTags? insertPersonsTags,
+    Mutation_updatePerson_deletePersonsTags? deletePersonsTags,
+    Mutation_updatePerson_deletePersonsHobbies? deletePersonsHobbies,
+    Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
+    Mutation_updatePerson_deletePersonsServices? deletePersonsServices,
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
-    Mutation$updatePerson$insertHistoryKodasHistoryOne?
+    Mutation_updatePerson_insertHistoryKodasHistoryOne?
         insertHistoryKodasHistoryOne,
-    Mutation$updatePerson$insertHistoryCallHistoryOne?
+    Mutation_updatePerson_insertHistoryCallHistoryOne?
         insertHistoryCallHistoryOne,
-    Mutation$updatePerson$insertHistoryVisitHistoryOne?
+    Mutation_updatePerson_insertHistoryVisitHistoryOne?
         insertHistoryVisitHistoryOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Person<TRes> get updatePersonsByPk =>
-      CopyWith$Fragment$Person.stub(_res);
-  CopyWith$Mutation$updatePerson$insertPersonsServices<TRes>
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
+      CopyWith_Fragment_Person.stub(_res);
+  CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices =>
-          CopyWith$Mutation$updatePerson$insertPersonsServices.stub(_res);
-  CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes>
+          CopyWith_Mutation_updatePerson_insertPersonsServices.stub(_res);
+  CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
       get insertPersonsGroups =>
-          CopyWith$Mutation$updatePerson$insertPersonsGroups.stub(_res);
-  CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes>
+          CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(_res);
+  CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
       get insertPersonsHobbies =>
-          CopyWith$Mutation$updatePerson$insertPersonsHobbies.stub(_res);
-  CopyWith$Mutation$updatePerson$insertPersonsTags<TRes>
+          CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(_res);
+  CopyWith_Mutation_updatePerson_insertPersonsTags<TRes>
       get insertPersonsTags =>
-          CopyWith$Mutation$updatePerson$insertPersonsTags.stub(_res);
-  CopyWith$Mutation$updatePerson$deletePersonsTags<TRes>
+          CopyWith_Mutation_updatePerson_insertPersonsTags.stub(_res);
+  CopyWith_Mutation_updatePerson_deletePersonsTags<TRes>
       get deletePersonsTags =>
-          CopyWith$Mutation$updatePerson$deletePersonsTags.stub(_res);
-  CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes>
+          CopyWith_Mutation_updatePerson_deletePersonsTags.stub(_res);
+  CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
       get deletePersonsHobbies =>
-          CopyWith$Mutation$updatePerson$deletePersonsHobbies.stub(_res);
-  CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes>
+          CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(_res);
+  CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
       get deletePersonsGroups =>
-          CopyWith$Mutation$updatePerson$deletePersonsGroups.stub(_res);
-  CopyWith$Mutation$updatePerson$deletePersonsServices<TRes>
+          CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(_res);
+  CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
       get deletePersonsServices =>
-          CopyWith$Mutation$updatePerson$deletePersonsServices.stub(_res);
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<TRes>
+          CopyWith_Mutation_updatePerson_deletePersonsServices.stub(_res);
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
       get insertHistoryConfessionHistoryOne =>
-          CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne.stub(
+          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
               _res);
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne =>
-          CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne.stub(
+          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
               _res);
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne =>
-          CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne.stub(_res);
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
+          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(_res);
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne =>
-          CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne.stub(
+          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
               _res);
 }
 
@@ -2806,17 +2806,17 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Mutation$updatePerson$insertPersonsServices {
-  Mutation$updatePerson$insertPersonsServices({
+class Mutation_updatePerson_insertPersonsServices {
+  Mutation_updatePerson_insertPersonsServices({
     required this.affectedRows,
     this.$__typename = 'PersonsServicesMutationResponse',
   });
 
-  factory Mutation$updatePerson$insertPersonsServices.fromJson(
+  factory Mutation_updatePerson_insertPersonsServices.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertPersonsServices(
+    return Mutation_updatePerson_insertPersonsServices(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -2850,7 +2850,7 @@ class Mutation$updatePerson$insertPersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertPersonsServices) ||
+    if (!(other is Mutation_updatePerson_insertPersonsServices) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2868,24 +2868,24 @@ class Mutation$updatePerson$insertPersonsServices {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertPersonsServices
-    on Mutation$updatePerson$insertPersonsServices {
-  CopyWith$Mutation$updatePerson$insertPersonsServices<
-          Mutation$updatePerson$insertPersonsServices>
-      get copyWith => CopyWith$Mutation$updatePerson$insertPersonsServices(
+extension UtilityExtension_Mutation_updatePerson_insertPersonsServices
+    on Mutation_updatePerson_insertPersonsServices {
+  CopyWith_Mutation_updatePerson_insertPersonsServices<
+          Mutation_updatePerson_insertPersonsServices>
+      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsServices(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertPersonsServices<TRes> {
-  factory CopyWith$Mutation$updatePerson$insertPersonsServices(
-    Mutation$updatePerson$insertPersonsServices instance,
-    TRes Function(Mutation$updatePerson$insertPersonsServices) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertPersonsServices;
+abstract class CopyWith_Mutation_updatePerson_insertPersonsServices<TRes> {
+  factory CopyWith_Mutation_updatePerson_insertPersonsServices(
+    Mutation_updatePerson_insertPersonsServices instance,
+    TRes Function(Mutation_updatePerson_insertPersonsServices) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertPersonsServices;
 
-  factory CopyWith$Mutation$updatePerson$insertPersonsServices.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices;
+  factory CopyWith_Mutation_updatePerson_insertPersonsServices.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices;
 
   TRes call({
     int? affectedRows,
@@ -2893,16 +2893,16 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsServices<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertPersonsServices<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsServices<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertPersonsServices(
+class _CopyWithImpl_Mutation_updatePerson_insertPersonsServices<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsServices<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertPersonsServices(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertPersonsServices _instance;
+  final Mutation_updatePerson_insertPersonsServices _instance;
 
-  final TRes Function(Mutation$updatePerson$insertPersonsServices) _then;
+  final TRes Function(Mutation_updatePerson_insertPersonsServices) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2910,7 +2910,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsServices<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertPersonsServices(
+      _then(Mutation_updatePerson_insertPersonsServices(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -2920,9 +2920,9 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsServices<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsServices<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsServices<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices(this._res);
 
   TRes _res;
 
@@ -2933,17 +2933,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsServices<TRes>
       _res;
 }
 
-class Mutation$updatePerson$insertPersonsGroups {
-  Mutation$updatePerson$insertPersonsGroups({
+class Mutation_updatePerson_insertPersonsGroups {
+  Mutation_updatePerson_insertPersonsGroups({
     required this.affectedRows,
     this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
-  factory Mutation$updatePerson$insertPersonsGroups.fromJson(
+  factory Mutation_updatePerson_insertPersonsGroups.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertPersonsGroups(
+    return Mutation_updatePerson_insertPersonsGroups(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -2977,7 +2977,7 @@ class Mutation$updatePerson$insertPersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertPersonsGroups) ||
+    if (!(other is Mutation_updatePerson_insertPersonsGroups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2995,24 +2995,24 @@ class Mutation$updatePerson$insertPersonsGroups {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertPersonsGroups
-    on Mutation$updatePerson$insertPersonsGroups {
-  CopyWith$Mutation$updatePerson$insertPersonsGroups<
-          Mutation$updatePerson$insertPersonsGroups>
-      get copyWith => CopyWith$Mutation$updatePerson$insertPersonsGroups(
+extension UtilityExtension_Mutation_updatePerson_insertPersonsGroups
+    on Mutation_updatePerson_insertPersonsGroups {
+  CopyWith_Mutation_updatePerson_insertPersonsGroups<
+          Mutation_updatePerson_insertPersonsGroups>
+      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsGroups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes> {
-  factory CopyWith$Mutation$updatePerson$insertPersonsGroups(
-    Mutation$updatePerson$insertPersonsGroups instance,
-    TRes Function(Mutation$updatePerson$insertPersonsGroups) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups;
+abstract class CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes> {
+  factory CopyWith_Mutation_updatePerson_insertPersonsGroups(
+    Mutation_updatePerson_insertPersonsGroups instance,
+    TRes Function(Mutation_updatePerson_insertPersonsGroups) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertPersonsGroups;
 
-  factory CopyWith$Mutation$updatePerson$insertPersonsGroups.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups;
+  factory CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups;
 
   TRes call({
     int? affectedRows,
@@ -3020,16 +3020,16 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups(
+class _CopyWithImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertPersonsGroups(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertPersonsGroups _instance;
+  final Mutation_updatePerson_insertPersonsGroups _instance;
 
-  final TRes Function(Mutation$updatePerson$insertPersonsGroups) _then;
+  final TRes Function(Mutation_updatePerson_insertPersonsGroups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3037,7 +3037,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertPersonsGroups(
+      _then(Mutation_updatePerson_insertPersonsGroups(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3047,9 +3047,9 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsGroups<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups(this._res);
 
   TRes _res;
 
@@ -3060,17 +3060,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsGroups<TRes>
       _res;
 }
 
-class Mutation$updatePerson$insertPersonsHobbies {
-  Mutation$updatePerson$insertPersonsHobbies({
+class Mutation_updatePerson_insertPersonsHobbies {
+  Mutation_updatePerson_insertPersonsHobbies({
     required this.affectedRows,
     this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
-  factory Mutation$updatePerson$insertPersonsHobbies.fromJson(
+  factory Mutation_updatePerson_insertPersonsHobbies.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertPersonsHobbies(
+    return Mutation_updatePerson_insertPersonsHobbies(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3104,7 +3104,7 @@ class Mutation$updatePerson$insertPersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertPersonsHobbies) ||
+    if (!(other is Mutation_updatePerson_insertPersonsHobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3122,24 +3122,24 @@ class Mutation$updatePerson$insertPersonsHobbies {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertPersonsHobbies
-    on Mutation$updatePerson$insertPersonsHobbies {
-  CopyWith$Mutation$updatePerson$insertPersonsHobbies<
-          Mutation$updatePerson$insertPersonsHobbies>
-      get copyWith => CopyWith$Mutation$updatePerson$insertPersonsHobbies(
+extension UtilityExtension_Mutation_updatePerson_insertPersonsHobbies
+    on Mutation_updatePerson_insertPersonsHobbies {
+  CopyWith_Mutation_updatePerson_insertPersonsHobbies<
+          Mutation_updatePerson_insertPersonsHobbies>
+      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsHobbies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes> {
-  factory CopyWith$Mutation$updatePerson$insertPersonsHobbies(
-    Mutation$updatePerson$insertPersonsHobbies instance,
-    TRes Function(Mutation$updatePerson$insertPersonsHobbies) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies;
+abstract class CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes> {
+  factory CopyWith_Mutation_updatePerson_insertPersonsHobbies(
+    Mutation_updatePerson_insertPersonsHobbies instance,
+    TRes Function(Mutation_updatePerson_insertPersonsHobbies) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertPersonsHobbies;
 
-  factory CopyWith$Mutation$updatePerson$insertPersonsHobbies.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies;
+  factory CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies;
 
   TRes call({
     int? affectedRows,
@@ -3147,16 +3147,16 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies(
+class _CopyWithImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertPersonsHobbies(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertPersonsHobbies _instance;
+  final Mutation_updatePerson_insertPersonsHobbies _instance;
 
-  final TRes Function(Mutation$updatePerson$insertPersonsHobbies) _then;
+  final TRes Function(Mutation_updatePerson_insertPersonsHobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3164,7 +3164,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertPersonsHobbies(
+      _then(Mutation_updatePerson_insertPersonsHobbies(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3174,9 +3174,9 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsHobbies<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies(this._res);
 
   TRes _res;
 
@@ -3187,17 +3187,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsHobbies<TRes>
       _res;
 }
 
-class Mutation$updatePerson$insertPersonsTags {
-  Mutation$updatePerson$insertPersonsTags({
+class Mutation_updatePerson_insertPersonsTags {
+  Mutation_updatePerson_insertPersonsTags({
     required this.affectedRows,
     this.$__typename = 'PersonsTagsMutationResponse',
   });
 
-  factory Mutation$updatePerson$insertPersonsTags.fromJson(
+  factory Mutation_updatePerson_insertPersonsTags.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertPersonsTags(
+    return Mutation_updatePerson_insertPersonsTags(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3231,7 +3231,7 @@ class Mutation$updatePerson$insertPersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertPersonsTags) ||
+    if (!(other is Mutation_updatePerson_insertPersonsTags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3249,24 +3249,24 @@ class Mutation$updatePerson$insertPersonsTags {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertPersonsTags
-    on Mutation$updatePerson$insertPersonsTags {
-  CopyWith$Mutation$updatePerson$insertPersonsTags<
-          Mutation$updatePerson$insertPersonsTags>
-      get copyWith => CopyWith$Mutation$updatePerson$insertPersonsTags(
+extension UtilityExtension_Mutation_updatePerson_insertPersonsTags
+    on Mutation_updatePerson_insertPersonsTags {
+  CopyWith_Mutation_updatePerson_insertPersonsTags<
+          Mutation_updatePerson_insertPersonsTags>
+      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsTags(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> {
-  factory CopyWith$Mutation$updatePerson$insertPersonsTags(
-    Mutation$updatePerson$insertPersonsTags instance,
-    TRes Function(Mutation$updatePerson$insertPersonsTags) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertPersonsTags;
+abstract class CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> {
+  factory CopyWith_Mutation_updatePerson_insertPersonsTags(
+    Mutation_updatePerson_insertPersonsTags instance,
+    TRes Function(Mutation_updatePerson_insertPersonsTags) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertPersonsTags;
 
-  factory CopyWith$Mutation$updatePerson$insertPersonsTags.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags;
+  factory CopyWith_Mutation_updatePerson_insertPersonsTags.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags;
 
   TRes call({
     int? affectedRows,
@@ -3274,16 +3274,16 @@ abstract class CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertPersonsTags<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertPersonsTags(
+class _CopyWithImpl_Mutation_updatePerson_insertPersonsTags<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertPersonsTags(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertPersonsTags _instance;
+  final Mutation_updatePerson_insertPersonsTags _instance;
 
-  final TRes Function(Mutation$updatePerson$insertPersonsTags) _then;
+  final TRes Function(Mutation_updatePerson_insertPersonsTags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3291,7 +3291,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsTags<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertPersonsTags(
+      _then(Mutation_updatePerson_insertPersonsTags(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3301,9 +3301,9 @@ class _CopyWithImpl$Mutation$updatePerson$insertPersonsTags<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags<TRes>
-    implements CopyWith$Mutation$updatePerson$insertPersonsTags<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags<TRes>
+    implements CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags(this._res);
 
   TRes _res;
 
@@ -3314,17 +3314,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertPersonsTags<TRes>
       _res;
 }
 
-class Mutation$updatePerson$deletePersonsTags {
-  Mutation$updatePerson$deletePersonsTags({
+class Mutation_updatePerson_deletePersonsTags {
+  Mutation_updatePerson_deletePersonsTags({
     required this.affectedRows,
     this.$__typename = 'PersonsTagsMutationResponse',
   });
 
-  factory Mutation$updatePerson$deletePersonsTags.fromJson(
+  factory Mutation_updatePerson_deletePersonsTags.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$deletePersonsTags(
+    return Mutation_updatePerson_deletePersonsTags(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3358,7 +3358,7 @@ class Mutation$updatePerson$deletePersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$deletePersonsTags) ||
+    if (!(other is Mutation_updatePerson_deletePersonsTags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3376,24 +3376,24 @@ class Mutation$updatePerson$deletePersonsTags {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$deletePersonsTags
-    on Mutation$updatePerson$deletePersonsTags {
-  CopyWith$Mutation$updatePerson$deletePersonsTags<
-          Mutation$updatePerson$deletePersonsTags>
-      get copyWith => CopyWith$Mutation$updatePerson$deletePersonsTags(
+extension UtilityExtension_Mutation_updatePerson_deletePersonsTags
+    on Mutation_updatePerson_deletePersonsTags {
+  CopyWith_Mutation_updatePerson_deletePersonsTags<
+          Mutation_updatePerson_deletePersonsTags>
+      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsTags(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> {
-  factory CopyWith$Mutation$updatePerson$deletePersonsTags(
-    Mutation$updatePerson$deletePersonsTags instance,
-    TRes Function(Mutation$updatePerson$deletePersonsTags) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$deletePersonsTags;
+abstract class CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> {
+  factory CopyWith_Mutation_updatePerson_deletePersonsTags(
+    Mutation_updatePerson_deletePersonsTags instance,
+    TRes Function(Mutation_updatePerson_deletePersonsTags) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_deletePersonsTags;
 
-  factory CopyWith$Mutation$updatePerson$deletePersonsTags.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags;
+  factory CopyWith_Mutation_updatePerson_deletePersonsTags.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags;
 
   TRes call({
     int? affectedRows,
@@ -3401,16 +3401,16 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$deletePersonsTags<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$deletePersonsTags(
+class _CopyWithImpl_Mutation_updatePerson_deletePersonsTags<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_deletePersonsTags(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$deletePersonsTags _instance;
+  final Mutation_updatePerson_deletePersonsTags _instance;
 
-  final TRes Function(Mutation$updatePerson$deletePersonsTags) _then;
+  final TRes Function(Mutation_updatePerson_deletePersonsTags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3418,7 +3418,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsTags<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$deletePersonsTags(
+      _then(Mutation_updatePerson_deletePersonsTags(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3428,9 +3428,9 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsTags<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsTags<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags(this._res);
 
   TRes _res;
 
@@ -3441,17 +3441,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsTags<TRes>
       _res;
 }
 
-class Mutation$updatePerson$deletePersonsHobbies {
-  Mutation$updatePerson$deletePersonsHobbies({
+class Mutation_updatePerson_deletePersonsHobbies {
+  Mutation_updatePerson_deletePersonsHobbies({
     required this.affectedRows,
     this.$__typename = 'PersonsHobbiesMutationResponse',
   });
 
-  factory Mutation$updatePerson$deletePersonsHobbies.fromJson(
+  factory Mutation_updatePerson_deletePersonsHobbies.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$deletePersonsHobbies(
+    return Mutation_updatePerson_deletePersonsHobbies(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3485,7 +3485,7 @@ class Mutation$updatePerson$deletePersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$deletePersonsHobbies) ||
+    if (!(other is Mutation_updatePerson_deletePersonsHobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3503,24 +3503,24 @@ class Mutation$updatePerson$deletePersonsHobbies {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$deletePersonsHobbies
-    on Mutation$updatePerson$deletePersonsHobbies {
-  CopyWith$Mutation$updatePerson$deletePersonsHobbies<
-          Mutation$updatePerson$deletePersonsHobbies>
-      get copyWith => CopyWith$Mutation$updatePerson$deletePersonsHobbies(
+extension UtilityExtension_Mutation_updatePerson_deletePersonsHobbies
+    on Mutation_updatePerson_deletePersonsHobbies {
+  CopyWith_Mutation_updatePerson_deletePersonsHobbies<
+          Mutation_updatePerson_deletePersonsHobbies>
+      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsHobbies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes> {
-  factory CopyWith$Mutation$updatePerson$deletePersonsHobbies(
-    Mutation$updatePerson$deletePersonsHobbies instance,
-    TRes Function(Mutation$updatePerson$deletePersonsHobbies) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies;
+abstract class CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes> {
+  factory CopyWith_Mutation_updatePerson_deletePersonsHobbies(
+    Mutation_updatePerson_deletePersonsHobbies instance,
+    TRes Function(Mutation_updatePerson_deletePersonsHobbies) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_deletePersonsHobbies;
 
-  factory CopyWith$Mutation$updatePerson$deletePersonsHobbies.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies;
+  factory CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies;
 
   TRes call({
     int? affectedRows,
@@ -3528,16 +3528,16 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies(
+class _CopyWithImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_deletePersonsHobbies(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$deletePersonsHobbies _instance;
+  final Mutation_updatePerson_deletePersonsHobbies _instance;
 
-  final TRes Function(Mutation$updatePerson$deletePersonsHobbies) _then;
+  final TRes Function(Mutation_updatePerson_deletePersonsHobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3545,7 +3545,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$deletePersonsHobbies(
+      _then(Mutation_updatePerson_deletePersonsHobbies(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3555,9 +3555,9 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsHobbies<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies(this._res);
 
   TRes _res;
 
@@ -3568,17 +3568,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsHobbies<TRes>
       _res;
 }
 
-class Mutation$updatePerson$deletePersonsGroups {
-  Mutation$updatePerson$deletePersonsGroups({
+class Mutation_updatePerson_deletePersonsGroups {
+  Mutation_updatePerson_deletePersonsGroups({
     required this.affectedRows,
     this.$__typename = 'PersonsGroupsMutationResponse',
   });
 
-  factory Mutation$updatePerson$deletePersonsGroups.fromJson(
+  factory Mutation_updatePerson_deletePersonsGroups.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$deletePersonsGroups(
+    return Mutation_updatePerson_deletePersonsGroups(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3612,7 +3612,7 @@ class Mutation$updatePerson$deletePersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$deletePersonsGroups) ||
+    if (!(other is Mutation_updatePerson_deletePersonsGroups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3630,24 +3630,24 @@ class Mutation$updatePerson$deletePersonsGroups {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$deletePersonsGroups
-    on Mutation$updatePerson$deletePersonsGroups {
-  CopyWith$Mutation$updatePerson$deletePersonsGroups<
-          Mutation$updatePerson$deletePersonsGroups>
-      get copyWith => CopyWith$Mutation$updatePerson$deletePersonsGroups(
+extension UtilityExtension_Mutation_updatePerson_deletePersonsGroups
+    on Mutation_updatePerson_deletePersonsGroups {
+  CopyWith_Mutation_updatePerson_deletePersonsGroups<
+          Mutation_updatePerson_deletePersonsGroups>
+      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsGroups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes> {
-  factory CopyWith$Mutation$updatePerson$deletePersonsGroups(
-    Mutation$updatePerson$deletePersonsGroups instance,
-    TRes Function(Mutation$updatePerson$deletePersonsGroups) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups;
+abstract class CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes> {
+  factory CopyWith_Mutation_updatePerson_deletePersonsGroups(
+    Mutation_updatePerson_deletePersonsGroups instance,
+    TRes Function(Mutation_updatePerson_deletePersonsGroups) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_deletePersonsGroups;
 
-  factory CopyWith$Mutation$updatePerson$deletePersonsGroups.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups;
+  factory CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups;
 
   TRes call({
     int? affectedRows,
@@ -3655,16 +3655,16 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups(
+class _CopyWithImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_deletePersonsGroups(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$deletePersonsGroups _instance;
+  final Mutation_updatePerson_deletePersonsGroups _instance;
 
-  final TRes Function(Mutation$updatePerson$deletePersonsGroups) _then;
+  final TRes Function(Mutation_updatePerson_deletePersonsGroups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3672,7 +3672,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$deletePersonsGroups(
+      _then(Mutation_updatePerson_deletePersonsGroups(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3682,9 +3682,9 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsGroups<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups(this._res);
 
   TRes _res;
 
@@ -3695,17 +3695,17 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsGroups<TRes>
       _res;
 }
 
-class Mutation$updatePerson$deletePersonsServices {
-  Mutation$updatePerson$deletePersonsServices({
+class Mutation_updatePerson_deletePersonsServices {
+  Mutation_updatePerson_deletePersonsServices({
     required this.affectedRows,
     this.$__typename = 'PersonsServicesMutationResponse',
   });
 
-  factory Mutation$updatePerson$deletePersonsServices.fromJson(
+  factory Mutation_updatePerson_deletePersonsServices.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$deletePersonsServices(
+    return Mutation_updatePerson_deletePersonsServices(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -3739,7 +3739,7 @@ class Mutation$updatePerson$deletePersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$deletePersonsServices) ||
+    if (!(other is Mutation_updatePerson_deletePersonsServices) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3757,24 +3757,24 @@ class Mutation$updatePerson$deletePersonsServices {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$deletePersonsServices
-    on Mutation$updatePerson$deletePersonsServices {
-  CopyWith$Mutation$updatePerson$deletePersonsServices<
-          Mutation$updatePerson$deletePersonsServices>
-      get copyWith => CopyWith$Mutation$updatePerson$deletePersonsServices(
+extension UtilityExtension_Mutation_updatePerson_deletePersonsServices
+    on Mutation_updatePerson_deletePersonsServices {
+  CopyWith_Mutation_updatePerson_deletePersonsServices<
+          Mutation_updatePerson_deletePersonsServices>
+      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsServices(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$deletePersonsServices<TRes> {
-  factory CopyWith$Mutation$updatePerson$deletePersonsServices(
-    Mutation$updatePerson$deletePersonsServices instance,
-    TRes Function(Mutation$updatePerson$deletePersonsServices) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$deletePersonsServices;
+abstract class CopyWith_Mutation_updatePerson_deletePersonsServices<TRes> {
+  factory CopyWith_Mutation_updatePerson_deletePersonsServices(
+    Mutation_updatePerson_deletePersonsServices instance,
+    TRes Function(Mutation_updatePerson_deletePersonsServices) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_deletePersonsServices;
 
-  factory CopyWith$Mutation$updatePerson$deletePersonsServices.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices;
+  factory CopyWith_Mutation_updatePerson_deletePersonsServices.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices;
 
   TRes call({
     int? affectedRows,
@@ -3782,16 +3782,16 @@ abstract class CopyWith$Mutation$updatePerson$deletePersonsServices<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$deletePersonsServices<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsServices<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$deletePersonsServices(
+class _CopyWithImpl_Mutation_updatePerson_deletePersonsServices<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsServices<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_deletePersonsServices(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$deletePersonsServices _instance;
+  final Mutation_updatePerson_deletePersonsServices _instance;
 
-  final TRes Function(Mutation$updatePerson$deletePersonsServices) _then;
+  final TRes Function(Mutation_updatePerson_deletePersonsServices) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3799,7 +3799,7 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsServices<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$deletePersonsServices(
+      _then(Mutation_updatePerson_deletePersonsServices(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -3809,9 +3809,9 @@ class _CopyWithImpl$Mutation$updatePerson$deletePersonsServices<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices<TRes>
-    implements CopyWith$Mutation$updatePerson$deletePersonsServices<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices(this._res);
+class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices<TRes>
+    implements CopyWith_Mutation_updatePerson_deletePersonsServices<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices(this._res);
 
   TRes _res;
 
@@ -3822,24 +3822,24 @@ class _CopyWithStubImpl$Mutation$updatePerson$deletePersonsServices<TRes>
       _res;
 }
 
-class Mutation$updatePerson$insertHistoryConfessionHistoryOne {
-  Mutation$updatePerson$insertHistoryConfessionHistoryOne({
+class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
+  Mutation_updatePerson_insertHistoryConfessionHistoryOne({
     required this.person,
     this.$__typename = 'HistoryConfessionHistory',
   });
 
-  factory Mutation$updatePerson$insertHistoryConfessionHistoryOne.fromJson(
+  factory Mutation_updatePerson_insertHistoryConfessionHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryConfessionHistoryOne(
-      person: Mutation$updatePerson$insertHistoryConfessionHistoryOne$person
+    return Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+      person: Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
           .fromJson((l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$updatePerson$insertHistoryConfessionHistoryOne$person person;
+  final Mutation_updatePerson_insertHistoryConfessionHistoryOne_person person;
 
   final String $__typename;
 
@@ -3867,7 +3867,7 @@ class Mutation$updatePerson$insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryConfessionHistoryOne) ||
+    if (!(other is Mutation_updatePerson_insertHistoryConfessionHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3885,48 +3885,48 @@ class Mutation$updatePerson$insertHistoryConfessionHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryConfessionHistoryOne
-    on Mutation$updatePerson$insertHistoryConfessionHistoryOne {
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
-          Mutation$updatePerson$insertHistoryConfessionHistoryOne>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryConfessionHistoryOne
+    on Mutation_updatePerson_insertHistoryConfessionHistoryOne {
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
+          Mutation_updatePerson_insertHistoryConfessionHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne(
+          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne(
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne instance,
-    TRes Function(Mutation$updatePerson$insertHistoryConfessionHistoryOne) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne;
+  factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne instance,
+    TRes Function(Mutation_updatePerson_insertHistoryConfessionHistoryOne) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
 
   TRes call({
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
   });
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
       get person;
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryConfessionHistoryOne _instance;
+  final Mutation_updatePerson_insertHistoryConfessionHistoryOne _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryConfessionHistoryOne)
+  final TRes Function(Mutation_updatePerson_insertHistoryConfessionHistoryOne)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3935,56 +3935,56 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryConfessionHistoryOne(
+      _then(Mutation_updatePerson_insertHistoryConfessionHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
             : (person
-                as Mutation$updatePerson$insertHistoryConfessionHistoryOne$person),
+                as Mutation_updatePerson_insertHistoryConfessionHistoryOne_person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
-    return CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+    return CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
         local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne<
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
       get person =>
-          CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person
+          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
               .stub(_res);
 }
 
-class Mutation$updatePerson$insertHistoryConfessionHistoryOne$person {
-  Mutation$updatePerson$insertHistoryConfessionHistoryOne$person({
+class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
+  Mutation_updatePerson_insertHistoryConfessionHistoryOne_person({
     required this.id,
     required this.name,
     this.$__typename = 'Persons',
   });
 
-  factory Mutation$updatePerson$insertHistoryConfessionHistoryOne$person.fromJson(
+  factory Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+    return Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4026,7 +4026,7 @@ class Mutation$updatePerson$insertHistoryConfessionHistoryOne$person {
       return true;
     }
     if (!(other
-            is Mutation$updatePerson$insertHistoryConfessionHistoryOne$person) ||
+            is Mutation_updatePerson_insertHistoryConfessionHistoryOne_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4049,29 +4049,29 @@ class Mutation$updatePerson$insertHistoryConfessionHistoryOne$person {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person
-    on Mutation$updatePerson$insertHistoryConfessionHistoryOne$person {
-  CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
-          Mutation$updatePerson$insertHistoryConfessionHistoryOne$person>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
+    on Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
+  CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
+          Mutation_updatePerson_insertHistoryConfessionHistoryOne_person>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
-    Mutation$updatePerson$insertHistoryConfessionHistoryOne$person instance,
+  factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person instance,
     TRes Function(
-            Mutation$updatePerson$insertHistoryConfessionHistoryOne$person)
+            Mutation_updatePerson_insertHistoryConfessionHistoryOne_person)
         then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person;
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person;
 
   TRes call({
     UuidValue? id,
@@ -4080,21 +4080,21 @@ abstract class CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
             TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryConfessionHistoryOne$person
+  final Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
       _instance;
 
   final TRes Function(
-      Mutation$updatePerson$insertHistoryConfessionHistoryOne$person) _then;
+      Mutation_updatePerson_insertHistoryConfessionHistoryOne_person) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4103,7 +4103,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$pers
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+      _then(Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4114,12 +4114,12 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$pers
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$person(
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
       this._res);
 
   TRes _res;
@@ -4132,25 +4132,25 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryConfessionHistoryOne$
       _res;
 }
 
-class Mutation$updatePerson$insertHistoryKodasHistoryOne {
-  Mutation$updatePerson$insertHistoryKodasHistoryOne({
+class Mutation_updatePerson_insertHistoryKodasHistoryOne {
+  Mutation_updatePerson_insertHistoryKodasHistoryOne({
     required this.person,
     this.$__typename = 'HistoryKodasHistory',
   });
 
-  factory Mutation$updatePerson$insertHistoryKodasHistoryOne.fromJson(
+  factory Mutation_updatePerson_insertHistoryKodasHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryKodasHistoryOne(
+    return Mutation_updatePerson_insertHistoryKodasHistoryOne(
       person:
-          Mutation$updatePerson$insertHistoryKodasHistoryOne$person.fromJson(
+          Mutation_updatePerson_insertHistoryKodasHistoryOne_person.fromJson(
               (l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$updatePerson$insertHistoryKodasHistoryOne$person person;
+  final Mutation_updatePerson_insertHistoryKodasHistoryOne_person person;
 
   final String $__typename;
 
@@ -4178,7 +4178,7 @@ class Mutation$updatePerson$insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryKodasHistoryOne) ||
+    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4196,47 +4196,47 @@ class Mutation$updatePerson$insertHistoryKodasHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryKodasHistoryOne
-    on Mutation$updatePerson$insertHistoryKodasHistoryOne {
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<
-          Mutation$updatePerson$insertHistoryKodasHistoryOne>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryKodasHistoryOne
+    on Mutation_updatePerson_insertHistoryKodasHistoryOne {
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<
+          Mutation_updatePerson_insertHistoryKodasHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne(
+          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne(
-    Mutation$updatePerson$insertHistoryKodasHistoryOne instance,
-    TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne;
+  factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
+    Mutation_updatePerson_insertHistoryKodasHistoryOne instance,
+    TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
 
   TRes call({
-    Mutation$updatePerson$insertHistoryKodasHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
   });
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
       get person;
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryKodasHistoryOne _instance;
+  final Mutation_updatePerson_insertHistoryKodasHistoryOne _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne) _then;
+  final TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4244,55 +4244,55 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryKodasHistoryOne(
+      _then(Mutation_updatePerson_insertHistoryKodasHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
             : (person
-                as Mutation$updatePerson$insertHistoryKodasHistoryOne$person),
+                as Mutation_updatePerson_insertHistoryKodasHistoryOne_person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
-    return CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+    return CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
         local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes>
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Mutation$updatePerson$insertHistoryKodasHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
       get person =>
-          CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person
+          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person
               .stub(_res);
 }
 
-class Mutation$updatePerson$insertHistoryKodasHistoryOne$person {
-  Mutation$updatePerson$insertHistoryKodasHistoryOne$person({
+class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
+  Mutation_updatePerson_insertHistoryKodasHistoryOne_person({
     required this.id,
     required this.name,
     this.$__typename = 'Persons',
   });
 
-  factory Mutation$updatePerson$insertHistoryKodasHistoryOne$person.fromJson(
+  factory Mutation_updatePerson_insertHistoryKodasHistoryOne_person.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+    return Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4333,7 +4333,7 @@ class Mutation$updatePerson$insertHistoryKodasHistoryOne$person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryKodasHistoryOne$person) ||
+    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4356,28 +4356,28 @@ class Mutation$updatePerson$insertHistoryKodasHistoryOne$person {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryKodasHistoryOne$person
-    on Mutation$updatePerson$insertHistoryKodasHistoryOne$person {
-  CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
-          Mutation$updatePerson$insertHistoryKodasHistoryOne$person>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryKodasHistoryOne_person
+    on Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
+  CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
+          Mutation_updatePerson_insertHistoryKodasHistoryOne_person>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
-    Mutation$updatePerson$insertHistoryKodasHistoryOne$person instance,
-    TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne$person)
+  factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
+    Mutation_updatePerson_insertHistoryKodasHistoryOne_person instance,
+    TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne_person)
         then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person;
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person;
 
   TRes call({
     UuidValue? id,
@@ -4386,19 +4386,19 @@ abstract class CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$perso
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
             TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryKodasHistoryOne$person _instance;
+  final Mutation_updatePerson_insertHistoryKodasHistoryOne_person _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryKodasHistoryOne$person)
+  final TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne_person)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -4408,7 +4408,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+      _then(Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4419,12 +4419,12 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryKodasHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$person(
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
       this._res);
 
   TRes _res;
@@ -4437,24 +4437,24 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryKodasHistoryOne$perso
       _res;
 }
 
-class Mutation$updatePerson$insertHistoryCallHistoryOne {
-  Mutation$updatePerson$insertHistoryCallHistoryOne({
+class Mutation_updatePerson_insertHistoryCallHistoryOne {
+  Mutation_updatePerson_insertHistoryCallHistoryOne({
     required this.person,
     this.$__typename = 'HistoryCallHistory',
   });
 
-  factory Mutation$updatePerson$insertHistoryCallHistoryOne.fromJson(
+  factory Mutation_updatePerson_insertHistoryCallHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryCallHistoryOne(
-      person: Mutation$updatePerson$insertHistoryCallHistoryOne$person.fromJson(
+    return Mutation_updatePerson_insertHistoryCallHistoryOne(
+      person: Mutation_updatePerson_insertHistoryCallHistoryOne_person.fromJson(
           (l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$updatePerson$insertHistoryCallHistoryOne$person person;
+  final Mutation_updatePerson_insertHistoryCallHistoryOne_person person;
 
   final String $__typename;
 
@@ -4482,7 +4482,7 @@ class Mutation$updatePerson$insertHistoryCallHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryCallHistoryOne) ||
+    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4500,47 +4500,47 @@ class Mutation$updatePerson$insertHistoryCallHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryCallHistoryOne
-    on Mutation$updatePerson$insertHistoryCallHistoryOne {
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<
-          Mutation$updatePerson$insertHistoryCallHistoryOne>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryCallHistoryOne
+    on Mutation_updatePerson_insertHistoryCallHistoryOne {
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<
+          Mutation_updatePerson_insertHistoryCallHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne(
+          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne(
-    Mutation$updatePerson$insertHistoryCallHistoryOne instance,
-    TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne;
+  factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
+    Mutation_updatePerson_insertHistoryCallHistoryOne instance,
+    TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne;
 
   TRes call({
-    Mutation$updatePerson$insertHistoryCallHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryCallHistoryOne_person? person,
     String? $__typename,
   });
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
       get person;
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryCallHistoryOne _instance;
+  final Mutation_updatePerson_insertHistoryCallHistoryOne _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne) _then;
+  final TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4548,55 +4548,55 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryCallHistoryOne(
+      _then(Mutation_updatePerson_insertHistoryCallHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
             : (person
-                as Mutation$updatePerson$insertHistoryCallHistoryOne$person),
+                as Mutation_updatePerson_insertHistoryCallHistoryOne_person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
-    return CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+    return CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
         local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes>
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Mutation$updatePerson$insertHistoryCallHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryCallHistoryOne_person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
       get person =>
-          CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person
+          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person
               .stub(_res);
 }
 
-class Mutation$updatePerson$insertHistoryCallHistoryOne$person {
-  Mutation$updatePerson$insertHistoryCallHistoryOne$person({
+class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
+  Mutation_updatePerson_insertHistoryCallHistoryOne_person({
     required this.id,
     required this.name,
     this.$__typename = 'Persons',
   });
 
-  factory Mutation$updatePerson$insertHistoryCallHistoryOne$person.fromJson(
+  factory Mutation_updatePerson_insertHistoryCallHistoryOne_person.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+    return Mutation_updatePerson_insertHistoryCallHistoryOne_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4637,7 +4637,7 @@ class Mutation$updatePerson$insertHistoryCallHistoryOne$person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryCallHistoryOne$person) ||
+    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4660,28 +4660,28 @@ class Mutation$updatePerson$insertHistoryCallHistoryOne$person {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryCallHistoryOne$person
-    on Mutation$updatePerson$insertHistoryCallHistoryOne$person {
-  CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
-          Mutation$updatePerson$insertHistoryCallHistoryOne$person>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryCallHistoryOne_person
+    on Mutation_updatePerson_insertHistoryCallHistoryOne_person {
+  CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
+          Mutation_updatePerson_insertHistoryCallHistoryOne_person>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person(
-    Mutation$updatePerson$insertHistoryCallHistoryOne$person instance,
-    TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne$person)
+  factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
+    Mutation_updatePerson_insertHistoryCallHistoryOne_person instance,
+    TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne_person)
         then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person;
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person;
 
   TRes call({
     UuidValue? id,
@@ -4690,19 +4690,19 @@ abstract class CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
             TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryCallHistoryOne$person _instance;
+  final Mutation_updatePerson_insertHistoryCallHistoryOne_person _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryCallHistoryOne$person)
+  final TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne_person)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -4712,7 +4712,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+      _then(Mutation_updatePerson_insertHistoryCallHistoryOne_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4723,12 +4723,12 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryCallHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person(
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
       this._res);
 
   TRes _res;
@@ -4741,25 +4741,25 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryCallHistoryOne$person
       _res;
 }
 
-class Mutation$updatePerson$insertHistoryVisitHistoryOne {
-  Mutation$updatePerson$insertHistoryVisitHistoryOne({
+class Mutation_updatePerson_insertHistoryVisitHistoryOne {
+  Mutation_updatePerson_insertHistoryVisitHistoryOne({
     required this.person,
     this.$__typename = 'HistoryVisitHistory',
   });
 
-  factory Mutation$updatePerson$insertHistoryVisitHistoryOne.fromJson(
+  factory Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryVisitHistoryOne(
+    return Mutation_updatePerson_insertHistoryVisitHistoryOne(
       person:
-          Mutation$updatePerson$insertHistoryVisitHistoryOne$person.fromJson(
+          Mutation_updatePerson_insertHistoryVisitHistoryOne_person.fromJson(
               (l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$updatePerson$insertHistoryVisitHistoryOne$person person;
+  final Mutation_updatePerson_insertHistoryVisitHistoryOne_person person;
 
   final String $__typename;
 
@@ -4787,7 +4787,7 @@ class Mutation$updatePerson$insertHistoryVisitHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryVisitHistoryOne) ||
+    if (!(other is Mutation_updatePerson_insertHistoryVisitHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4805,47 +4805,47 @@ class Mutation$updatePerson$insertHistoryVisitHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryVisitHistoryOne
-    on Mutation$updatePerson$insertHistoryVisitHistoryOne {
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<
-          Mutation$updatePerson$insertHistoryVisitHistoryOne>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryVisitHistoryOne
+    on Mutation_updatePerson_insertHistoryVisitHistoryOne {
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<
+          Mutation_updatePerson_insertHistoryVisitHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne(
+          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne(
-    Mutation$updatePerson$insertHistoryVisitHistoryOne instance,
-    TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne) then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne;
+  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
+    Mutation_updatePerson_insertHistoryVisitHistoryOne instance,
+    TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne) then,
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
 
   TRes call({
-    Mutation$updatePerson$insertHistoryVisitHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryVisitHistoryOne_person? person,
     String? $__typename,
   });
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
       get person;
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes> {
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryVisitHistoryOne _instance;
+  final Mutation_updatePerson_insertHistoryVisitHistoryOne _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne) _then;
+  final TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4853,55 +4853,55 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryVisitHistoryOne(
+      _then(Mutation_updatePerson_insertHistoryVisitHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
             : (person
-                as Mutation$updatePerson$insertHistoryVisitHistoryOne$person),
+                as Mutation_updatePerson_insertHistoryVisitHistoryOne_person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
-    return CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+    return CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
         local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes>
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne<TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne(
+        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes> {
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Mutation$updatePerson$insertHistoryVisitHistoryOne$person? person,
+    Mutation_updatePerson_insertHistoryVisitHistoryOne_person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<TRes>
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
       get person =>
-          CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person
+          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person
               .stub(_res);
 }
 
-class Mutation$updatePerson$insertHistoryVisitHistoryOne$person {
-  Mutation$updatePerson$insertHistoryVisitHistoryOne$person({
+class Mutation_updatePerson_insertHistoryVisitHistoryOne_person {
+  Mutation_updatePerson_insertHistoryVisitHistoryOne_person({
     required this.id,
     required this.name,
     this.$__typename = 'Persons',
   });
 
-  factory Mutation$updatePerson$insertHistoryVisitHistoryOne$person.fromJson(
+  factory Mutation_updatePerson_insertHistoryVisitHistoryOne_person.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+    return Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4942,7 +4942,7 @@ class Mutation$updatePerson$insertHistoryVisitHistoryOne$person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePerson$insertHistoryVisitHistoryOne$person) ||
+    if (!(other is Mutation_updatePerson_insertHistoryVisitHistoryOne_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4965,28 +4965,28 @@ class Mutation$updatePerson$insertHistoryVisitHistoryOne$person {
   }
 }
 
-extension UtilityExtension$Mutation$updatePerson$insertHistoryVisitHistoryOne$person
-    on Mutation$updatePerson$insertHistoryVisitHistoryOne$person {
-  CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
-          Mutation$updatePerson$insertHistoryVisitHistoryOne$person>
+extension UtilityExtension_Mutation_updatePerson_insertHistoryVisitHistoryOne_person
+    on Mutation_updatePerson_insertHistoryVisitHistoryOne_person {
+  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
+          Mutation_updatePerson_insertHistoryVisitHistoryOne_person>
       get copyWith =>
-          CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
+abstract class CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
     TRes> {
-  factory CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
-    Mutation$updatePerson$insertHistoryVisitHistoryOne$person instance,
-    TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne$person)
+  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
+    Mutation_updatePerson_insertHistoryVisitHistoryOne_person instance,
+    TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne_person)
         then,
-  ) = _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person;
+  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person;
 
-  factory CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person.stub(
+  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person;
+      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person;
 
   TRes call({
     UuidValue? id,
@@ -4995,19 +4995,19 @@ abstract class CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$perso
   });
 }
 
-class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
+class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
             TRes> {
-  _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+  _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePerson$insertHistoryVisitHistoryOne$person _instance;
+  final Mutation_updatePerson_insertHistoryVisitHistoryOne_person _instance;
 
-  final TRes Function(Mutation$updatePerson$insertHistoryVisitHistoryOne$person)
+  final TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne_person)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5017,7 +5017,7 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+      _then(Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5028,12 +5028,12 @@ class _CopyWithImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
+class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
         TRes>
     implements
-        CopyWith$Mutation$updatePerson$insertHistoryVisitHistoryOne$person<
+        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$person(
+  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
       this._res);
 
   TRes _res;
@@ -5046,27 +5046,27 @@ class _CopyWithStubImpl$Mutation$updatePerson$insertHistoryVisitHistoryOne$perso
       _res;
 }
 
-class Variables$Mutation$insertPerson {
-  factory Variables$Mutation$insertPerson(
-          {required Input$PersonsInsertInput newPerson}) =>
-      Variables$Mutation$insertPerson._({
+class Variables_Mutation_insertPerson {
+  factory Variables_Mutation_insertPerson(
+          {required Input_PersonsInsertInput newPerson}) =>
+      Variables_Mutation_insertPerson._({
         r'newPerson': newPerson,
       });
 
-  Variables$Mutation$insertPerson._(this._$data);
+  Variables_Mutation_insertPerson._(this._$data);
 
-  factory Variables$Mutation$insertPerson.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_insertPerson.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newPerson = data['newPerson'];
-    result$data['newPerson'] = Input$PersonsInsertInput.fromJson(
+    result$data['newPerson'] = Input_PersonsInsertInput.fromJson(
         (l$newPerson as Map<String, dynamic>));
-    return Variables$Mutation$insertPerson._(result$data);
+    return Variables_Mutation_insertPerson._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$PersonsInsertInput get newPerson =>
-      (_$data['newPerson'] as Input$PersonsInsertInput);
+  Input_PersonsInsertInput get newPerson =>
+      (_$data['newPerson'] as Input_PersonsInsertInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newPerson = newPerson;
@@ -5074,8 +5074,8 @@ class Variables$Mutation$insertPerson {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$insertPerson<Variables$Mutation$insertPerson>
-      get copyWith => CopyWith$Variables$Mutation$insertPerson(
+  CopyWith_Variables_Mutation_insertPerson<Variables_Mutation_insertPerson>
+      get copyWith => CopyWith_Variables_Mutation_insertPerson(
             this,
             (i) => i,
           );
@@ -5084,7 +5084,7 @@ class Variables$Mutation$insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$insertPerson) ||
+    if (!(other is Variables_Mutation_insertPerson) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5103,67 +5103,67 @@ class Variables$Mutation$insertPerson {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$insertPerson<TRes> {
-  factory CopyWith$Variables$Mutation$insertPerson(
-    Variables$Mutation$insertPerson instance,
-    TRes Function(Variables$Mutation$insertPerson) then,
-  ) = _CopyWithImpl$Variables$Mutation$insertPerson;
+abstract class CopyWith_Variables_Mutation_insertPerson<TRes> {
+  factory CopyWith_Variables_Mutation_insertPerson(
+    Variables_Mutation_insertPerson instance,
+    TRes Function(Variables_Mutation_insertPerson) then,
+  ) = _CopyWithImpl_Variables_Mutation_insertPerson;
 
-  factory CopyWith$Variables$Mutation$insertPerson.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$insertPerson;
+  factory CopyWith_Variables_Mutation_insertPerson.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_insertPerson;
 
-  TRes call({Input$PersonsInsertInput? newPerson});
+  TRes call({Input_PersonsInsertInput? newPerson});
 }
 
-class _CopyWithImpl$Variables$Mutation$insertPerson<TRes>
-    implements CopyWith$Variables$Mutation$insertPerson<TRes> {
-  _CopyWithImpl$Variables$Mutation$insertPerson(
+class _CopyWithImpl_Variables_Mutation_insertPerson<TRes>
+    implements CopyWith_Variables_Mutation_insertPerson<TRes> {
+  _CopyWithImpl_Variables_Mutation_insertPerson(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$insertPerson _instance;
+  final Variables_Mutation_insertPerson _instance;
 
-  final TRes Function(Variables$Mutation$insertPerson) _then;
+  final TRes Function(Variables_Mutation_insertPerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? newPerson = _undefined}) =>
-      _then(Variables$Mutation$insertPerson._({
+      _then(Variables_Mutation_insertPerson._({
         ..._instance._$data,
         if (newPerson != _undefined && newPerson != null)
-          'newPerson': (newPerson as Input$PersonsInsertInput),
+          'newPerson': (newPerson as Input_PersonsInsertInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$insertPerson<TRes>
-    implements CopyWith$Variables$Mutation$insertPerson<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$insertPerson(this._res);
+class _CopyWithStubImpl_Variables_Mutation_insertPerson<TRes>
+    implements CopyWith_Variables_Mutation_insertPerson<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_insertPerson(this._res);
 
   TRes _res;
 
-  call({Input$PersonsInsertInput? newPerson}) => _res;
+  call({Input_PersonsInsertInput? newPerson}) => _res;
 }
 
-class Mutation$insertPerson {
-  Mutation$insertPerson({
+class Mutation_insertPerson {
+  Mutation_insertPerson({
     this.insertPersonsOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$insertPerson.fromJson(Map<String, dynamic> json) {
+  factory Mutation_insertPerson.fromJson(Map<String, dynamic> json) {
     final l$insertPersonsOne = json['insertPersonsOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$insertPerson(
+    return Mutation_insertPerson(
       insertPersonsOne: l$insertPersonsOne == null
           ? null
-          : Fragment$Person.fromJson(
+          : Fragment_Person.fromJson(
               (l$insertPersonsOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Person? insertPersonsOne;
+  final Fragment_Person? insertPersonsOne;
 
   final String $__typename;
 
@@ -5191,7 +5191,7 @@ class Mutation$insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$insertPerson) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_insertPerson) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertPersonsOne = insertPersonsOne;
@@ -5208,40 +5208,40 @@ class Mutation$insertPerson {
   }
 }
 
-extension UtilityExtension$Mutation$insertPerson on Mutation$insertPerson {
-  CopyWith$Mutation$insertPerson<Mutation$insertPerson> get copyWith =>
-      CopyWith$Mutation$insertPerson(
+extension UtilityExtension_Mutation_insertPerson on Mutation_insertPerson {
+  CopyWith_Mutation_insertPerson<Mutation_insertPerson> get copyWith =>
+      CopyWith_Mutation_insertPerson(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$insertPerson<TRes> {
-  factory CopyWith$Mutation$insertPerson(
-    Mutation$insertPerson instance,
-    TRes Function(Mutation$insertPerson) then,
-  ) = _CopyWithImpl$Mutation$insertPerson;
+abstract class CopyWith_Mutation_insertPerson<TRes> {
+  factory CopyWith_Mutation_insertPerson(
+    Mutation_insertPerson instance,
+    TRes Function(Mutation_insertPerson) then,
+  ) = _CopyWithImpl_Mutation_insertPerson;
 
-  factory CopyWith$Mutation$insertPerson.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$insertPerson;
+  factory CopyWith_Mutation_insertPerson.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertPerson;
 
   TRes call({
-    Fragment$Person? insertPersonsOne,
+    Fragment_Person? insertPersonsOne,
     String? $__typename,
   });
-  CopyWith$Fragment$Person<TRes> get insertPersonsOne;
+  CopyWith_Fragment_Person<TRes> get insertPersonsOne;
 }
 
-class _CopyWithImpl$Mutation$insertPerson<TRes>
-    implements CopyWith$Mutation$insertPerson<TRes> {
-  _CopyWithImpl$Mutation$insertPerson(
+class _CopyWithImpl_Mutation_insertPerson<TRes>
+    implements CopyWith_Mutation_insertPerson<TRes> {
+  _CopyWithImpl_Mutation_insertPerson(
     this._instance,
     this._then,
   );
 
-  final Mutation$insertPerson _instance;
+  final Mutation_insertPerson _instance;
 
-  final TRes Function(Mutation$insertPerson) _then;
+  final TRes Function(Mutation_insertPerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5249,36 +5249,36 @@ class _CopyWithImpl$Mutation$insertPerson<TRes>
     Object? insertPersonsOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$insertPerson(
+      _then(Mutation_insertPerson(
         insertPersonsOne: insertPersonsOne == _undefined
             ? _instance.insertPersonsOne
-            : (insertPersonsOne as Fragment$Person?),
+            : (insertPersonsOne as Fragment_Person?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Person<TRes> get insertPersonsOne {
+  CopyWith_Fragment_Person<TRes> get insertPersonsOne {
     final local$insertPersonsOne = _instance.insertPersonsOne;
     return local$insertPersonsOne == null
-        ? CopyWith$Fragment$Person.stub(_then(_instance))
-        : CopyWith$Fragment$Person(
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(
             local$insertPersonsOne, (e) => call(insertPersonsOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$insertPerson<TRes>
-    implements CopyWith$Mutation$insertPerson<TRes> {
-  _CopyWithStubImpl$Mutation$insertPerson(this._res);
+class _CopyWithStubImpl_Mutation_insertPerson<TRes>
+    implements CopyWith_Mutation_insertPerson<TRes> {
+  _CopyWithStubImpl_Mutation_insertPerson(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Person? insertPersonsOne,
+    Fragment_Person? insertPersonsOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Person<TRes> get insertPersonsOne =>
-      CopyWith$Fragment$Person.stub(_res);
+  CopyWith_Fragment_Person<TRes> get insertPersonsOne =>
+      CopyWith_Fragment_Person.stub(_res);
 }
 
 const documentNodeMutationinsertPerson = DocumentNode(definitions: [
@@ -5335,21 +5335,21 @@ const documentNodeMutationinsertPerson = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Variables$Mutation$updatePersonSpiritData {
-  factory Variables$Mutation$updatePersonSpiritData({
+class Variables_Mutation_updatePersonSpiritData {
+  factory Variables_Mutation_updatePersonSpiritData({
     required UuidValue personId,
     required DateTime lastConfession,
     required DateTime lastKodas,
   }) =>
-      Variables$Mutation$updatePersonSpiritData._({
+      Variables_Mutation_updatePersonSpiritData._({
         r'personId': personId,
         r'lastConfession': lastConfession,
         r'lastKodas': lastKodas,
       });
 
-  Variables$Mutation$updatePersonSpiritData._(this._$data);
+  Variables_Mutation_updatePersonSpiritData._(this._$data);
 
-  factory Variables$Mutation$updatePersonSpiritData.fromJson(
+  factory Variables_Mutation_updatePersonSpiritData.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
@@ -5358,7 +5358,7 @@ class Variables$Mutation$updatePersonSpiritData {
     result$data['lastConfession'] = dateFromString(l$lastConfession);
     final l$lastKodas = data['lastKodas'];
     result$data['lastKodas'] = dateFromString(l$lastKodas);
-    return Variables$Mutation$updatePersonSpiritData._(result$data);
+    return Variables_Mutation_updatePersonSpiritData._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -5377,9 +5377,9 @@ class Variables$Mutation$updatePersonSpiritData {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$updatePersonSpiritData<
-          Variables$Mutation$updatePersonSpiritData>
-      get copyWith => CopyWith$Variables$Mutation$updatePersonSpiritData(
+  CopyWith_Variables_Mutation_updatePersonSpiritData<
+          Variables_Mutation_updatePersonSpiritData>
+      get copyWith => CopyWith_Variables_Mutation_updatePersonSpiritData(
             this,
             (i) => i,
           );
@@ -5388,7 +5388,7 @@ class Variables$Mutation$updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$updatePersonSpiritData) ||
+    if (!(other is Variables_Mutation_updatePersonSpiritData) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5423,14 +5423,14 @@ class Variables$Mutation$updatePersonSpiritData {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$updatePersonSpiritData<TRes> {
-  factory CopyWith$Variables$Mutation$updatePersonSpiritData(
-    Variables$Mutation$updatePersonSpiritData instance,
-    TRes Function(Variables$Mutation$updatePersonSpiritData) then,
-  ) = _CopyWithImpl$Variables$Mutation$updatePersonSpiritData;
+abstract class CopyWith_Variables_Mutation_updatePersonSpiritData<TRes> {
+  factory CopyWith_Variables_Mutation_updatePersonSpiritData(
+    Variables_Mutation_updatePersonSpiritData instance,
+    TRes Function(Variables_Mutation_updatePersonSpiritData) then,
+  ) = _CopyWithImpl_Variables_Mutation_updatePersonSpiritData;
 
-  factory CopyWith$Variables$Mutation$updatePersonSpiritData.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$updatePersonSpiritData;
+  factory CopyWith_Variables_Mutation_updatePersonSpiritData.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData;
 
   TRes call({
     UuidValue? personId,
@@ -5439,16 +5439,16 @@ abstract class CopyWith$Variables$Mutation$updatePersonSpiritData<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Mutation$updatePersonSpiritData<TRes>
-    implements CopyWith$Variables$Mutation$updatePersonSpiritData<TRes> {
-  _CopyWithImpl$Variables$Mutation$updatePersonSpiritData(
+class _CopyWithImpl_Variables_Mutation_updatePersonSpiritData<TRes>
+    implements CopyWith_Variables_Mutation_updatePersonSpiritData<TRes> {
+  _CopyWithImpl_Variables_Mutation_updatePersonSpiritData(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$updatePersonSpiritData _instance;
+  final Variables_Mutation_updatePersonSpiritData _instance;
 
-  final TRes Function(Variables$Mutation$updatePersonSpiritData) _then;
+  final TRes Function(Variables_Mutation_updatePersonSpiritData) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5457,7 +5457,7 @@ class _CopyWithImpl$Variables$Mutation$updatePersonSpiritData<TRes>
     Object? lastConfession = _undefined,
     Object? lastKodas = _undefined,
   }) =>
-      _then(Variables$Mutation$updatePersonSpiritData._({
+      _then(Variables_Mutation_updatePersonSpiritData._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
@@ -5468,9 +5468,9 @@ class _CopyWithImpl$Variables$Mutation$updatePersonSpiritData<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$updatePersonSpiritData<TRes>
-    implements CopyWith$Variables$Mutation$updatePersonSpiritData<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$updatePersonSpiritData(this._res);
+class _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData<TRes>
+    implements CopyWith_Variables_Mutation_updatePersonSpiritData<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData(this._res);
 
   TRes _res;
 
@@ -5482,38 +5482,38 @@ class _CopyWithStubImpl$Variables$Mutation$updatePersonSpiritData<TRes>
       _res;
 }
 
-class Mutation$updatePersonSpiritData {
-  Mutation$updatePersonSpiritData({
+class Mutation_updatePersonSpiritData {
+  Mutation_updatePersonSpiritData({
     this.insertHistoryConfessionHistoryOne,
     this.insertHistoryKodasHistoryOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
+  factory Mutation_updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryConfessionHistoryOne =
         json['insertHistoryConfessionHistoryOne'];
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePersonSpiritData(
+    return Mutation_updatePersonSpiritData(
       insertHistoryConfessionHistoryOne: l$insertHistoryConfessionHistoryOne ==
               null
           ? null
-          : Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne
+          : Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
               .fromJson((l$insertHistoryConfessionHistoryOne
                   as Map<String, dynamic>)),
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
-          : Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
+          : Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
               .fromJson(
                   (l$insertHistoryKodasHistoryOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne?
+  final Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
       insertHistoryConfessionHistoryOne;
 
-  final Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne?
+  final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
       insertHistoryKodasHistoryOne;
 
   final String $__typename;
@@ -5550,7 +5550,7 @@ class Mutation$updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updatePersonSpiritData) ||
+    if (!(other is Mutation_updatePersonSpiritData) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5577,47 +5577,47 @@ class Mutation$updatePersonSpiritData {
   }
 }
 
-extension UtilityExtension$Mutation$updatePersonSpiritData
-    on Mutation$updatePersonSpiritData {
-  CopyWith$Mutation$updatePersonSpiritData<Mutation$updatePersonSpiritData>
-      get copyWith => CopyWith$Mutation$updatePersonSpiritData(
+extension UtilityExtension_Mutation_updatePersonSpiritData
+    on Mutation_updatePersonSpiritData {
+  CopyWith_Mutation_updatePersonSpiritData<Mutation_updatePersonSpiritData>
+      get copyWith => CopyWith_Mutation_updatePersonSpiritData(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePersonSpiritData<TRes> {
-  factory CopyWith$Mutation$updatePersonSpiritData(
-    Mutation$updatePersonSpiritData instance,
-    TRes Function(Mutation$updatePersonSpiritData) then,
-  ) = _CopyWithImpl$Mutation$updatePersonSpiritData;
+abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
+  factory CopyWith_Mutation_updatePersonSpiritData(
+    Mutation_updatePersonSpiritData instance,
+    TRes Function(Mutation_updatePersonSpiritData) then,
+  ) = _CopyWithImpl_Mutation_updatePersonSpiritData;
 
-  factory CopyWith$Mutation$updatePersonSpiritData.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updatePersonSpiritData;
+  factory CopyWith_Mutation_updatePersonSpiritData.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePersonSpiritData;
 
   TRes call({
-    Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne?
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
-    Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne?
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
         insertHistoryKodasHistoryOne,
     String? $__typename,
   });
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne;
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne;
 }
 
-class _CopyWithImpl$Mutation$updatePersonSpiritData<TRes>
-    implements CopyWith$Mutation$updatePersonSpiritData<TRes> {
-  _CopyWithImpl$Mutation$updatePersonSpiritData(
+class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData<TRes> {
+  _CopyWithImpl_Mutation_updatePersonSpiritData(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePersonSpiritData _instance;
+  final Mutation_updatePersonSpiritData _instance;
 
-  final TRes Function(Mutation$updatePersonSpiritData) _then;
+  final TRes Function(Mutation_updatePersonSpiritData) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5626,67 +5626,67 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData<TRes>
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePersonSpiritData(
+      _then(Mutation_updatePersonSpiritData(
         insertHistoryConfessionHistoryOne: insertHistoryConfessionHistoryOne ==
                 _undefined
             ? _instance.insertHistoryConfessionHistoryOne
             : (insertHistoryConfessionHistoryOne
-                as Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne?),
+                as Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?),
         insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
             ? _instance.insertHistoryKodasHistoryOne
             : (insertHistoryKodasHistoryOne
-                as Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne?),
+                as Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
         _instance.insertHistoryConfessionHistoryOne;
     return local$insertHistoryConfessionHistoryOne == null
-        ? CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne
+        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
             .stub(_then(_instance))
-        : CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
+        : CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
             local$insertHistoryConfessionHistoryOne,
             (e) => call(insertHistoryConfessionHistoryOne: e));
   }
 
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne {
     final local$insertHistoryKodasHistoryOne =
         _instance.insertHistoryKodasHistoryOne;
     return local$insertHistoryKodasHistoryOne == null
-        ? CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
+        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
             .stub(_then(_instance))
-        : CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
+        : CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
             local$insertHistoryKodasHistoryOne,
             (e) => call(insertHistoryKodasHistoryOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePersonSpiritData<TRes>
-    implements CopyWith$Mutation$updatePersonSpiritData<TRes> {
-  _CopyWithStubImpl$Mutation$updatePersonSpiritData(this._res);
+class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData<TRes> {
+  _CopyWithStubImpl_Mutation_updatePersonSpiritData(this._res);
 
   TRes _res;
 
   call({
-    Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne?
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
-    Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne?
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
         insertHistoryKodasHistoryOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
           TRes>
       get insertHistoryConfessionHistoryOne =>
-          CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne
+          CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
               .stub(_res);
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<TRes>
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne =>
-          CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
+          CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
               .stub(_res);
 }
 
@@ -5904,23 +5904,23 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne {
-  Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne({
+class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
+  Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne({
     required this.person,
     this.$__typename = 'HistoryConfessionHistory',
   });
 
-  factory Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne.fromJson(
+  factory Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
-      person: Fragment$Person.fromJson((l$person as Map<String, dynamic>)),
+    return Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+      person: Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Person person;
+  final Fragment_Person person;
 
   final String $__typename;
 
@@ -5949,7 +5949,7 @@ class Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne {
       return true;
     }
     if (!(other
-            is Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne) ||
+            is Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5967,52 +5967,52 @@ class Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne
-    on Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne {
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
-          Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne>
+extension UtilityExtension_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
+    on Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
+          Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
+          CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
-    Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne instance,
+  factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne instance,
     TRes Function(
-            Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne)
+            Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne)
         then,
-  ) = _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne;
+  ) = _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
 
-  factory CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne.stub(
+  factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
 
   TRes call({
-    Fragment$Person? person,
+    Fragment_Person? person,
     String? $__typename,
   });
-  CopyWith$Fragment$Person<TRes> get person;
+  CopyWith_Fragment_Person<TRes> get person;
 }
 
-class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+        CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
             TRes> {
-  _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
+  _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne
+  final Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
       _instance;
 
   final TRes Function(
-      Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne) _then;
+      Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6020,56 +6020,56 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHisto
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
+      _then(Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
-            : (person as Fragment$Person),
+            : (person as Fragment_Person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Person<TRes> get person {
+  CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
-    return CopyWith$Fragment$Person(local$person, (e) => call(person: e));
+    return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne<
+        CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryConfessionHistoryOne(
+  _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$Person? person,
+    Fragment_Person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Person<TRes> get person =>
-      CopyWith$Fragment$Person.stub(_res);
+  CopyWith_Fragment_Person<TRes> get person =>
+      CopyWith_Fragment_Person.stub(_res);
 }
 
-class Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne {
-  Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne({
+class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
+  Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne({
     required this.person,
     this.$__typename = 'HistoryKodasHistory',
   });
 
-  factory Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne.fromJson(
+  factory Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
       Map<String, dynamic> json) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
-    return Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
-      person: Fragment$Person.fromJson((l$person as Map<String, dynamic>)),
+    return Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+      person: Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Person person;
+  final Fragment_Person person;
 
   final String $__typename;
 
@@ -6098,7 +6098,7 @@ class Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne {
       return true;
     }
     if (!(other
-            is Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne) ||
+            is Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6116,50 +6116,50 @@ class Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne {
   }
 }
 
-extension UtilityExtension$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
-    on Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne {
-  CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
-          Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne>
+extension UtilityExtension_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
+    on Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
+  CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
+          Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne>
       get copyWith =>
-          CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
+          CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
+abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
     TRes> {
-  factory CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
-    Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne instance,
-    TRes Function(Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne)
+  factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne instance,
+    TRes Function(Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne)
         then,
-  ) = _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne;
+  ) = _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
 
-  factory CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne.stub(
+  factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.stub(
           TRes res) =
-      _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne;
+      _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
 
   TRes call({
-    Fragment$Person? person,
+    Fragment_Person? person,
     String? $__typename,
   });
-  CopyWith$Fragment$Person<TRes> get person;
+  CopyWith_Fragment_Person<TRes> get person;
 }
 
-class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
+class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
+        CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
             TRes> {
-  _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
+  _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
     this._instance,
     this._then,
   );
 
-  final Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne _instance;
+  final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne _instance;
 
   final TRes Function(
-      Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne) _then;
+      Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6167,35 +6167,35 @@ class _CopyWithImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
+      _then(Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
         person: person == _undefined || person == null
             ? _instance.person
-            : (person as Fragment$Person),
+            : (person as Fragment_Person),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Person<TRes> get person {
+  CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
-    return CopyWith$Fragment$Person(local$person, (e) => call(person: e));
+    return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
+class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
         TRes>
     implements
-        CopyWith$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne<
+        CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
             TRes> {
-  _CopyWithStubImpl$Mutation$updatePersonSpiritData$insertHistoryKodasHistoryOne(
+  _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$Person? person,
+    Fragment_Person? person,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Person<TRes> get person =>
-      CopyWith$Fragment$Person.stub(_res);
+  CopyWith_Fragment_Person<TRes> get person =>
+      CopyWith_Fragment_Person.stub(_res);
 }

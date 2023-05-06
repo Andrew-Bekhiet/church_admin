@@ -43,26 +43,48 @@ class _ViewFamilyState extends State<ViewFamily> {
   static const _addPerson = Icon(Icons.person_add_alt_1);
 
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byFamilyId: widget.familyId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+        )
+      ],
     ),
   );
 
   late final _childrenFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byParentFamilyId: widget.familyId,
+    objectsPaginatableStream: DatabaseService.I.families.streamAll(
+      where: [
+        Input_FamiliesBoolExp(
+          parents: Input_FamiliesFamiliesBoolExp(
+            parentFamilyId:
+                Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
   late final _parentFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byChildFamilyId: widget.familyId,
+    objectsPaginatableStream: DatabaseService.I.families.streamAll(
+      where: [
+        Input_FamiliesBoolExp(
+          children: Input_FamiliesFamiliesBoolExp(
+            childFamilyId:
+                Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byFamilyId: widget.familyId,
+    objectsPaginatableStream: DatabaseService.I.stores.streamAll(
+      where: [
+        Input_StoresBoolExp(
+          adminFamily: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+        )
+      ],
     ),
   );
 
@@ -71,7 +93,7 @@ class _ViewFamilyState extends State<ViewFamily> {
   late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream =
-      DatabaseService.I.families.watchFamily(familyId: widget.familyId);
+      DatabaseService.I.families.streamSingleById(id: widget.familyId);
 
   @override
   Widget build(BuildContext context) {

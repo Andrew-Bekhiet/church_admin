@@ -33,15 +33,21 @@ class ViewGroup extends StatefulWidget {
 
 class _ViewGroupState extends State<ViewGroup> {
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byGroupId: widget.groupId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          classes: Input_ClassesBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
   late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream =
-      DatabaseService.I.groups.watchGroup(groupId: widget.groupId);
+      DatabaseService.I.groups.streamSingleById(id: widget.groupId);
 
   @override
   Widget build(BuildContext context) {

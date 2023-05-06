@@ -585,39 +585,50 @@ class MockUsersDAO extends _i1.Mock implements _i6.UsersDAO {
         ),
       ) as _i4.DBGraphQLClient);
   @override
-  _i4.GQLPaginatableStream<_i4.User> paginateUsers(
-          {_i8.Stream<String?>? searchQuery}) =>
+  _i4.GQLPaginatableStream<_i4.User> streamAll({
+    _i8.Stream<String?>? searchQuery,
+    List<_i4.Input_AuthUsersDataBoolExp>? where,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #paginateUsers,
+          #streamAll,
           [],
-          {#searchQuery: searchQuery},
+          {
+            #searchQuery: searchQuery,
+            #where: where,
+          },
         ),
         returnValue: _FakeGQLPaginatableStream_16<_i4.User>(
           this,
           Invocation.method(
-            #paginateUsers,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
         returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.User>(
           this,
           Invocation.method(
-            #paginateUsers,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.User>);
   @override
-  _i8.Stream<_i4.User?> watchUser({
+  _i8.Stream<_i4.User?> streamSingleById({
     required String? uid,
     bool? fullData = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchUser,
+          #streamSingleById,
           [],
           {
             #uid: uid,
@@ -751,18 +762,18 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
         returnValueForMissingStub: _i8.Future<_i4.Person?>.value(),
       ) as _i8.Future<_i4.Person?>);
   @override
-  _i8.Stream<_i4.Person?> watchPerson({
-    required String? personId,
+  _i8.Stream<_i4.Person?> streamSingleById({
+    required String? id,
     int? servicesLimit = 6,
     int? classesLimit = 6,
     int? groupsLimit = 6,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchPerson,
+          #streamSingleById,
           [],
           {
-            #personId: personId,
+            #id: id,
             #servicesLimit: servicesLimit,
             #classesLimit: classesLimit,
             #groupsLimit: groupsLimit,
@@ -772,62 +783,42 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
         returnValueForMissingStub: _i8.Stream<_i4.Person?>.empty(),
       ) as _i8.Stream<_i4.Person?>);
   @override
-  _i4.GQLPaginatableStream<_i4.Person> paginatePersons({
+  _i4.GQLPaginatableStream<_i4.Person> streamAll({
     _i8.Stream<String?>? searchQuery,
     String? secondLineFieldName,
-    String? byAreaId,
-    String? byStreetId,
-    String? byFamilyId,
-    String? byServiceId,
-    String? byClassId,
-    String? byGroupId,
+    List<_i4.Input_PersonsBoolExp>? where,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #paginatePersons,
+          #streamAll,
           [],
           {
             #searchQuery: searchQuery,
             #secondLineFieldName: secondLineFieldName,
-            #byAreaId: byAreaId,
-            #byStreetId: byStreetId,
-            #byFamilyId: byFamilyId,
-            #byServiceId: byServiceId,
-            #byClassId: byClassId,
-            #byGroupId: byGroupId,
+            #where: where,
           },
         ),
         returnValue: _FakeGQLPaginatableStream_16<_i4.Person>(
           this,
           Invocation.method(
-            #paginatePersons,
+            #streamAll,
             [],
             {
               #searchQuery: searchQuery,
               #secondLineFieldName: secondLineFieldName,
-              #byAreaId: byAreaId,
-              #byStreetId: byStreetId,
-              #byFamilyId: byFamilyId,
-              #byServiceId: byServiceId,
-              #byClassId: byClassId,
-              #byGroupId: byGroupId,
+              #where: where,
             },
           ),
         ),
         returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Person>(
           this,
           Invocation.method(
-            #paginatePersons,
+            #streamAll,
             [],
             {
               #searchQuery: searchQuery,
               #secondLineFieldName: secondLineFieldName,
-              #byAreaId: byAreaId,
-              #byStreetId: byStreetId,
-              #byFamilyId: byFamilyId,
-              #byServiceId: byServiceId,
-              #byClassId: byClassId,
-              #byGroupId: byGroupId,
+              #where: where,
             },
           ),
         ),
@@ -890,6 +881,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? classId,
     bool? asAdmin = false,
+    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -899,6 +891,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #personId: personId,
                 #classId: classId,
                 #asAdmin: asAdmin,
+                #where: where,
               },
             ),
             returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
@@ -910,6 +903,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #classId: classId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
@@ -923,6 +917,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #classId: classId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
@@ -933,6 +928,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? groupId,
     bool? asAdmin = false,
+    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -942,6 +938,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #personId: personId,
                 #groupId: groupId,
                 #asAdmin: asAdmin,
+                #where: where,
               },
             ),
             returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
@@ -953,6 +950,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #groupId: groupId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
@@ -966,6 +964,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #groupId: groupId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
@@ -976,6 +975,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? serviceId,
     bool? asAdmin = false,
+    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -985,6 +985,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                 #personId: personId,
                 #serviceId: serviceId,
                 #asAdmin: asAdmin,
+                #where: where,
               },
             ),
             returnValue: _FakeGQLPaginatableStream_16<_i4.LastRecordedByInfo>(
@@ -996,6 +997,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #serviceId: serviceId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
@@ -1009,13 +1011,14 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
                   #personId: personId,
                   #serviceId: serviceId,
                   #asAdmin: asAdmin,
+                  #where: where,
                 },
               ),
             ),
           ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> paginatePersonAttendance({
-    required _i12.Variables$Subscription$personAttendance Function(
+    required _i12.Variables_Subscription_personAttendance Function(
       int,
       _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>,
     )? vars,
@@ -1121,38 +1124,49 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
         ),
       ) as _i4.DBGraphQLClient);
   @override
-  _i4.GQLPaginatableStream<_i4.Area> paginateAreas(
-          {_i8.Stream<String?>? searchQuery}) =>
+  _i4.GQLPaginatableStream<_i4.Area> streamAll({
+    _i8.Stream<String?>? searchQuery,
+    List<_i4.Input_AreasBoolExp>? where,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #paginateAreas,
+          #streamAll,
           [],
-          {#searchQuery: searchQuery},
+          {
+            #searchQuery: searchQuery,
+            #where: where,
+          },
         ),
         returnValue: _FakeGQLPaginatableStream_16<_i4.Area>(
           this,
           Invocation.method(
-            #paginateAreas,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
         returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Area>(
           this,
           Invocation.method(
-            #paginateAreas,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Area>);
   @override
-  _i8.Stream<_i4.Area?> watchArea({required String? areaId}) =>
+  _i8.Stream<_i4.Area?> streamSingleById({required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchArea,
+          #streamSingleById,
           [],
-          {#areaId: areaId},
+          {#id: id},
         ),
         returnValue: _i8.Stream<_i4.Area?>.empty(),
         returnValueForMissingStub: _i8.Stream<_i4.Area?>.empty(),
@@ -1241,38 +1255,57 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
         ),
       ) as _i4.DBGraphQLClient);
   @override
-  _i4.GQLPaginatableStream<_i4.Service> paginateServices(
-          {_i8.Stream<String?>? searchQuery}) =>
+  _i4.GQLPaginatableStream<_i4.Service> streamAll({
+    _i8.Stream<String?>? searchQuery,
+    List<_i4.Input_ServicesBoolExp>? where,
+    List<_i4.Input_GroupsBoolExp>? groupsWhere,
+    List<_i4.Input_ClassesBoolExp>? classesWhere,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #paginateServices,
+          #streamAll,
           [],
-          {#searchQuery: searchQuery},
+          {
+            #searchQuery: searchQuery,
+            #where: where,
+            #groupsWhere: groupsWhere,
+            #classesWhere: classesWhere,
+          },
         ),
         returnValue: _FakeGQLPaginatableStream_16<_i4.Service>(
           this,
           Invocation.method(
-            #paginateServices,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+              #groupsWhere: groupsWhere,
+              #classesWhere: classesWhere,
+            },
           ),
         ),
         returnValueForMissingStub: _FakeGQLPaginatableStream_16<_i4.Service>(
           this,
           Invocation.method(
-            #paginateServices,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+              #groupsWhere: groupsWhere,
+              #classesWhere: classesWhere,
+            },
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Service>);
   @override
-  _i8.Stream<_i4.Service?> watchService({required String? serviceId}) =>
+  _i8.Stream<_i4.Service?> streamSingleById({required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchService,
+          #streamSingleById,
           [],
-          {#serviceId: serviceId},
+          {#id: id},
         ),
         returnValue: _i8.Stream<_i4.Service?>.empty(),
         returnValueForMissingStub: _i8.Stream<_i4.Service?>.empty(),

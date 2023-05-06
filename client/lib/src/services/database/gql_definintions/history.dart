@@ -1,12 +1,11 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 
 import 'history/__generated__/mutations.gql.dart';
 import 'history/__generated__/subscriptions.gql.dart';
 
-class HistoryDAO extends DAOBase {
+class HistoryDAO extends DAOBase<LastRecordedByInfo> {
   const HistoryDAO({
     required super.db,
   });
@@ -24,22 +23,22 @@ class HistoryDAO extends DAOBase {
           SubscriptionOptions(
             document: documentNodeSubscriptioneditHistory,
             operationName: 'editHistory',
-            variables: Variables$Subscription$editHistory(
+            variables: Variables_Subscription_editHistory(
               limit: instance.limit + 1,
               where: [
-                Input$HistoryEditHistoryBoolExp(
-                  table: Input$NameComparisonExp(
+                Input_HistoryEditHistoryBoolExp(
+                  table: Input_NameComparisonExp(
                     $_eq: ViewablesEnum.from<T>().toPluralString(),
                   ),
                 ),
-                Input$HistoryEditHistoryBoolExp(
-                  recordId: Input$UuidComparisonExp(
+                Input_HistoryEditHistoryBoolExp(
+                  recordId: Input_UuidComparisonExp(
                     $_eq: id.toUuid(),
                   ),
                 ),
                 if (offset > 0)
-                  Input$HistoryEditHistoryBoolExp(
-                    time: Input$TimestamptzComparisonExp(
+                  Input_HistoryEditHistoryBoolExp(
+                    time: Input_TimestamptzComparisonExp(
                       $_lt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -68,13 +67,13 @@ class HistoryDAO extends DAOBase {
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonCallHistory,
             operationName: 'personCallHistory',
-            variables: Variables$Subscription$personCallHistory(
+            variables: Variables_Subscription_personCallHistory(
               personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
-                  Input$HistoryCallHistoryBoolExp(
-                    time: Input$TimestamptzComparisonExp(
+                  Input_HistoryCallHistoryBoolExp(
+                    time: Input_TimestamptzComparisonExp(
                       $_lt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -103,13 +102,13 @@ class HistoryDAO extends DAOBase {
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonConfessionHistory,
             operationName: 'personConfessionHistory',
-            variables: Variables$Subscription$personConfessionHistory(
+            variables: Variables_Subscription_personConfessionHistory(
               personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
-                  Input$HistoryConfessionHistoryBoolExp(
-                    dayId: Input$DateComparisonExp(
+                  Input_HistoryConfessionHistoryBoolExp(
+                    dayId: Input_DateComparisonExp(
                       $_lt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -138,13 +137,13 @@ class HistoryDAO extends DAOBase {
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonKodasHistory,
             operationName: 'personKodasHistory',
-            variables: Variables$Subscription$personKodasHistory(
+            variables: Variables_Subscription_personKodasHistory(
               personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
-                  Input$HistoryKodasHistoryBoolExp(
-                    dayId: Input$DateComparisonExp(
+                  Input_HistoryKodasHistoryBoolExp(
+                    dayId: Input_DateComparisonExp(
                       $_lt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -173,13 +172,13 @@ class HistoryDAO extends DAOBase {
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonVisitHistory,
             operationName: 'personVisitHistory',
-            variables: Variables$Subscription$personVisitHistory(
+            variables: Variables_Subscription_personVisitHistory(
               personId: personId.toUuid(),
               limit: instance.limit + 1,
               where: [
                 if (offset > 0)
-                  Input$HistoryVisitHistoryBoolExp(
-                    time: Input$TimestamptzComparisonExp(
+                  Input_HistoryVisitHistoryBoolExp(
+                    time: Input_TimestamptzComparisonExp(
                       $_lt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -204,7 +203,7 @@ class HistoryDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationinsertPersonLastCall,
         operationName: 'insertPersonLastCall',
-        variables: Variables$Mutation$insertPersonLastCall(
+        variables: Variables_Mutation_insertPersonLastCall(
           personId: personId.toUuid(),
           lastCall: lastCall,
         ).toJson(),
@@ -222,7 +221,7 @@ class HistoryDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationinsertPersonLastConfession,
         operationName: 'insertPersonLastConfession',
-        variables: Variables$Mutation$insertPersonLastConfession(
+        variables: Variables_Mutation_insertPersonLastConfession(
           personId: personId.toUuid(),
           lastConfession: lastConfession,
         ).toJson(),
@@ -240,7 +239,7 @@ class HistoryDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationinsertPersonLastKodas,
         operationName: 'updatePersonLastKodas',
-        variables: Variables$Mutation$insertPersonLastKodas(
+        variables: Variables_Mutation_insertPersonLastKodas(
           personId: personId.toUuid(),
           lastKodas: lastKodas,
         ).toJson(),
@@ -258,7 +257,7 @@ class HistoryDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationinsertPersonLastVisit,
         operationName: 'insertPersonLastVisit',
-        variables: Variables$Mutation$insertPersonLastVisit(
+        variables: Variables_Mutation_insertPersonLastVisit(
           personId: personId.toUuid(),
           lastVisit: lastVisit,
         ).toJson(),
@@ -266,5 +265,11 @@ class HistoryDAO extends DAOBase {
             .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
       ),
     );
+  }
+
+  @override
+  Stream<List<LastRecordedByInfo>> streamAll({Stream<String?>? searchQuery}) {
+    // TODO: split this class into 3 different classes
+    throw UnimplementedError();
   }
 }

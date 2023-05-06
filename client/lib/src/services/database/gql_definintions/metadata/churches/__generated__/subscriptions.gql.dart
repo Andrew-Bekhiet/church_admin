@@ -2,39 +2,39 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllChurches {
-  factory Variables$Subscription$watchAllChurches({
-    List<Input$ChurchesBoolExp>? where,
+class Variables_Subscription_watchAllChurches {
+  factory Variables_Subscription_watchAllChurches({
+    List<Input_ChurchesBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllChurches._({
+      Variables_Subscription_watchAllChurches._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllChurches._(this._$data);
+  Variables_Subscription_watchAllChurches._(this._$data);
 
-  factory Variables$Subscription$watchAllChurches.fromJson(
+  factory Variables_Subscription_watchAllChurches.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map((e) =>
-              Input$ChurchesBoolExp.fromJson((e as Map<String, dynamic>)))
+              Input_ChurchesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllChurches._(result$data);
+    return Variables_Subscription_watchAllChurches._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$ChurchesBoolExp>? get where =>
-      (_$data['where'] as List<Input$ChurchesBoolExp>?);
+  List<Input_ChurchesBoolExp>? get where =>
+      (_$data['where'] as List<Input_ChurchesBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -49,9 +49,9 @@ class Variables$Subscription$watchAllChurches {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllChurches<
-          Variables$Subscription$watchAllChurches>
-      get copyWith => CopyWith$Variables$Subscription$watchAllChurches(
+  CopyWith_Variables_Subscription_watchAllChurches<
+          Variables_Subscription_watchAllChurches>
+      get copyWith => CopyWith_Variables_Subscription_watchAllChurches(
             this,
             (i) => i,
           );
@@ -60,7 +60,7 @@ class Variables$Subscription$watchAllChurches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllChurches) ||
+    if (!(other is Variables_Subscription_watchAllChurches) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109,31 +109,31 @@ class Variables$Subscription$watchAllChurches {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllChurches<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllChurches(
-    Variables$Subscription$watchAllChurches instance,
-    TRes Function(Variables$Subscription$watchAllChurches) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllChurches;
+abstract class CopyWith_Variables_Subscription_watchAllChurches<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllChurches(
+    Variables_Subscription_watchAllChurches instance,
+    TRes Function(Variables_Subscription_watchAllChurches) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllChurches;
 
-  factory CopyWith$Variables$Subscription$watchAllChurches.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllChurches;
+  factory CopyWith_Variables_Subscription_watchAllChurches.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllChurches;
 
   TRes call({
-    List<Input$ChurchesBoolExp>? where,
+    List<Input_ChurchesBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllChurches<TRes>
-    implements CopyWith$Variables$Subscription$watchAllChurches<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllChurches(
+class _CopyWithImpl_Variables_Subscription_watchAllChurches<TRes>
+    implements CopyWith_Variables_Subscription_watchAllChurches<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllChurches(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllChurches _instance;
+  final Variables_Subscription_watchAllChurches _instance;
 
-  final TRes Function(Variables$Subscription$watchAllChurches) _then;
+  final TRes Function(Variables_Subscription_watchAllChurches) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -141,40 +141,40 @@ class _CopyWithImpl$Variables$Subscription$watchAllChurches<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllChurches._({
+      _then(Variables_Subscription_watchAllChurches._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$ChurchesBoolExp>?),
+          'where': (where as List<Input_ChurchesBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllChurches<TRes>
-    implements CopyWith$Variables$Subscription$watchAllChurches<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllChurches(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllChurches<TRes>
+    implements CopyWith_Variables_Subscription_watchAllChurches<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllChurches(this._res);
 
   TRes _res;
 
   call({
-    List<Input$ChurchesBoolExp>? where,
+    List<Input_ChurchesBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllChurches {
-  Subscription$watchAllChurches({required this.churches});
+class Subscription_watchAllChurches {
+  Subscription_watchAllChurches({required this.churches});
 
-  factory Subscription$watchAllChurches.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllChurches.fromJson(Map<String, dynamic> json) {
     final l$churches = json['churches'];
-    return Subscription$watchAllChurches(
+    return Subscription_watchAllChurches(
         churches: (l$churches as List<dynamic>)
-            .map((e) => Subscription$watchAllChurches$churches.fromJson(
+            .map((e) => Subscription_watchAllChurches_churches.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllChurches$churches> churches;
+  final List<Subscription_watchAllChurches_churches> churches;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -194,7 +194,7 @@ class Subscription$watchAllChurches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllChurches) ||
+    if (!(other is Subscription_watchAllChurches) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -214,72 +214,72 @@ class Subscription$watchAllChurches {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllChurches
-    on Subscription$watchAllChurches {
-  CopyWith$Subscription$watchAllChurches<Subscription$watchAllChurches>
-      get copyWith => CopyWith$Subscription$watchAllChurches(
+extension UtilityExtension_Subscription_watchAllChurches
+    on Subscription_watchAllChurches {
+  CopyWith_Subscription_watchAllChurches<Subscription_watchAllChurches>
+      get copyWith => CopyWith_Subscription_watchAllChurches(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllChurches<TRes> {
-  factory CopyWith$Subscription$watchAllChurches(
-    Subscription$watchAllChurches instance,
-    TRes Function(Subscription$watchAllChurches) then,
-  ) = _CopyWithImpl$Subscription$watchAllChurches;
+abstract class CopyWith_Subscription_watchAllChurches<TRes> {
+  factory CopyWith_Subscription_watchAllChurches(
+    Subscription_watchAllChurches instance,
+    TRes Function(Subscription_watchAllChurches) then,
+  ) = _CopyWithImpl_Subscription_watchAllChurches;
 
-  factory CopyWith$Subscription$watchAllChurches.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllChurches;
+  factory CopyWith_Subscription_watchAllChurches.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllChurches;
 
-  TRes call({List<Subscription$watchAllChurches$churches>? churches});
+  TRes call({List<Subscription_watchAllChurches_churches>? churches});
   TRes churches(
-      Iterable<Subscription$watchAllChurches$churches> Function(
+      Iterable<Subscription_watchAllChurches_churches> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllChurches$churches<
-                      Subscription$watchAllChurches$churches>>)
+                  CopyWith_Subscription_watchAllChurches_churches<
+                      Subscription_watchAllChurches_churches>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllChurches<TRes>
-    implements CopyWith$Subscription$watchAllChurches<TRes> {
-  _CopyWithImpl$Subscription$watchAllChurches(
+class _CopyWithImpl_Subscription_watchAllChurches<TRes>
+    implements CopyWith_Subscription_watchAllChurches<TRes> {
+  _CopyWithImpl_Subscription_watchAllChurches(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllChurches _instance;
+  final Subscription_watchAllChurches _instance;
 
-  final TRes Function(Subscription$watchAllChurches) _then;
+  final TRes Function(Subscription_watchAllChurches) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? churches = _undefined}) => _then(
-      Subscription$watchAllChurches(
+      Subscription_watchAllChurches(
           churches: churches == _undefined || churches == null
               ? _instance.churches
-              : (churches as List<Subscription$watchAllChurches$churches>)));
+              : (churches as List<Subscription_watchAllChurches_churches>)));
   TRes churches(
-          Iterable<Subscription$watchAllChurches$churches> Function(
+          Iterable<Subscription_watchAllChurches_churches> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllChurches$churches<
-                          Subscription$watchAllChurches$churches>>)
+                      CopyWith_Subscription_watchAllChurches_churches<
+                          Subscription_watchAllChurches_churches>>)
               _fn) =>
       call(
           churches: _fn(_instance.churches
-              .map((e) => CopyWith$Subscription$watchAllChurches$churches(
+              .map((e) => CopyWith_Subscription_watchAllChurches_churches(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllChurches<TRes>
-    implements CopyWith$Subscription$watchAllChurches<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllChurches(this._res);
+class _CopyWithStubImpl_Subscription_watchAllChurches<TRes>
+    implements CopyWith_Subscription_watchAllChurches<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllChurches(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllChurches$churches>? churches}) => _res;
+  call({List<Subscription_watchAllChurches_churches>? churches}) => _res;
   churches(_fn) => _res;
 }
 
@@ -368,19 +368,19 @@ const documentNodeSubscriptionwatchAllChurches = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$watchAllChurches$churches {
-  Subscription$watchAllChurches$churches({
+class Subscription_watchAllChurches_churches {
+  Subscription_watchAllChurches_churches({
     required this.id,
     required this.name,
     this.$__typename = 'Churches',
   });
 
-  factory Subscription$watchAllChurches$churches.fromJson(
+  factory Subscription_watchAllChurches_churches.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllChurches$churches(
+    return Subscription_watchAllChurches_churches(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -421,7 +421,7 @@ class Subscription$watchAllChurches$churches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllChurches$churches) ||
+    if (!(other is Subscription_watchAllChurches_churches) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -444,24 +444,24 @@ class Subscription$watchAllChurches$churches {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllChurches$churches
-    on Subscription$watchAllChurches$churches {
-  CopyWith$Subscription$watchAllChurches$churches<
-          Subscription$watchAllChurches$churches>
-      get copyWith => CopyWith$Subscription$watchAllChurches$churches(
+extension UtilityExtension_Subscription_watchAllChurches_churches
+    on Subscription_watchAllChurches_churches {
+  CopyWith_Subscription_watchAllChurches_churches<
+          Subscription_watchAllChurches_churches>
+      get copyWith => CopyWith_Subscription_watchAllChurches_churches(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllChurches$churches<TRes> {
-  factory CopyWith$Subscription$watchAllChurches$churches(
-    Subscription$watchAllChurches$churches instance,
-    TRes Function(Subscription$watchAllChurches$churches) then,
-  ) = _CopyWithImpl$Subscription$watchAllChurches$churches;
+abstract class CopyWith_Subscription_watchAllChurches_churches<TRes> {
+  factory CopyWith_Subscription_watchAllChurches_churches(
+    Subscription_watchAllChurches_churches instance,
+    TRes Function(Subscription_watchAllChurches_churches) then,
+  ) = _CopyWithImpl_Subscription_watchAllChurches_churches;
 
-  factory CopyWith$Subscription$watchAllChurches$churches.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllChurches$churches;
+  factory CopyWith_Subscription_watchAllChurches_churches.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllChurches_churches;
 
   TRes call({
     UuidValue? id,
@@ -470,16 +470,16 @@ abstract class CopyWith$Subscription$watchAllChurches$churches<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllChurches$churches<TRes>
-    implements CopyWith$Subscription$watchAllChurches$churches<TRes> {
-  _CopyWithImpl$Subscription$watchAllChurches$churches(
+class _CopyWithImpl_Subscription_watchAllChurches_churches<TRes>
+    implements CopyWith_Subscription_watchAllChurches_churches<TRes> {
+  _CopyWithImpl_Subscription_watchAllChurches_churches(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllChurches$churches _instance;
+  final Subscription_watchAllChurches_churches _instance;
 
-  final TRes Function(Subscription$watchAllChurches$churches) _then;
+  final TRes Function(Subscription_watchAllChurches_churches) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -488,7 +488,7 @@ class _CopyWithImpl$Subscription$watchAllChurches$churches<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllChurches$churches(
+      _then(Subscription_watchAllChurches_churches(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -499,9 +499,9 @@ class _CopyWithImpl$Subscription$watchAllChurches$churches<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllChurches$churches<TRes>
-    implements CopyWith$Subscription$watchAllChurches$churches<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllChurches$churches(this._res);
+class _CopyWithStubImpl_Subscription_watchAllChurches_churches<TRes>
+    implements CopyWith_Subscription_watchAllChurches_churches<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllChurches_churches(this._res);
 
   TRes _res;
 

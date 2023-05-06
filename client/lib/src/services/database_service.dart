@@ -3,6 +3,7 @@ import 'package:church_admin/church_admin.dart';
 import 'database/gql_definintions.dart';
 import 'database/gql_parser.dart';
 
+export '../../graphql/__generated__/schema.graphql.dart';
 export 'database/db_gql_client.dart';
 export 'database/utils.dart';
 

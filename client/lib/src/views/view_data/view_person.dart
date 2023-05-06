@@ -61,8 +61,8 @@ class _ViewPersonState extends State<ViewPerson> {
     _groupsLimit.distinct(),
     Tuple3.new,
   ).switchMap(
-    (limits) => DatabaseService.I.persons.watchPerson(
-      personId: widget.personId,
+    (limits) => DatabaseService.I.persons.streamSingleById(
+      id: widget.personId,
       servicesLimit: limits.item1,
       classesLimit: limits.item2,
       groupsLimit: limits.item3,

@@ -70,7 +70,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   late final listController = widget.listController ??
       ViewableObjectListController<Service>(
         objectsPaginatableStream:
-            DatabaseService.I.services.paginateServices(searchQuery: search),
+            DatabaseService.I.services.streamAll(searchQuery: search),
       );
 
   final _animationControllers = <Object, AnimationController>{};

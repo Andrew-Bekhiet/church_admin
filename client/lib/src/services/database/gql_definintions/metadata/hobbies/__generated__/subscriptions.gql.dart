@@ -2,39 +2,39 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllHobbies {
-  factory Variables$Subscription$watchAllHobbies({
-    List<Input$HobbiesBoolExp>? where,
+class Variables_Subscription_watchAllHobbies {
+  factory Variables_Subscription_watchAllHobbies({
+    List<Input_HobbiesBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllHobbies._({
+      Variables_Subscription_watchAllHobbies._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllHobbies._(this._$data);
+  Variables_Subscription_watchAllHobbies._(this._$data);
 
-  factory Variables$Subscription$watchAllHobbies.fromJson(
+  factory Variables_Subscription_watchAllHobbies.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$HobbiesBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_HobbiesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllHobbies._(result$data);
+    return Variables_Subscription_watchAllHobbies._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$HobbiesBoolExp>? get where =>
-      (_$data['where'] as List<Input$HobbiesBoolExp>?);
+  List<Input_HobbiesBoolExp>? get where =>
+      (_$data['where'] as List<Input_HobbiesBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -49,9 +49,9 @@ class Variables$Subscription$watchAllHobbies {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllHobbies<
-          Variables$Subscription$watchAllHobbies>
-      get copyWith => CopyWith$Variables$Subscription$watchAllHobbies(
+  CopyWith_Variables_Subscription_watchAllHobbies<
+          Variables_Subscription_watchAllHobbies>
+      get copyWith => CopyWith_Variables_Subscription_watchAllHobbies(
             this,
             (i) => i,
           );
@@ -60,7 +60,7 @@ class Variables$Subscription$watchAllHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllHobbies) ||
+    if (!(other is Variables_Subscription_watchAllHobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109,31 +109,31 @@ class Variables$Subscription$watchAllHobbies {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllHobbies<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllHobbies(
-    Variables$Subscription$watchAllHobbies instance,
-    TRes Function(Variables$Subscription$watchAllHobbies) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllHobbies;
+abstract class CopyWith_Variables_Subscription_watchAllHobbies<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllHobbies(
+    Variables_Subscription_watchAllHobbies instance,
+    TRes Function(Variables_Subscription_watchAllHobbies) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllHobbies;
 
-  factory CopyWith$Variables$Subscription$watchAllHobbies.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllHobbies;
+  factory CopyWith_Variables_Subscription_watchAllHobbies.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllHobbies;
 
   TRes call({
-    List<Input$HobbiesBoolExp>? where,
+    List<Input_HobbiesBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllHobbies<TRes>
-    implements CopyWith$Variables$Subscription$watchAllHobbies<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllHobbies(
+class _CopyWithImpl_Variables_Subscription_watchAllHobbies<TRes>
+    implements CopyWith_Variables_Subscription_watchAllHobbies<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllHobbies(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllHobbies _instance;
+  final Variables_Subscription_watchAllHobbies _instance;
 
-  final TRes Function(Variables$Subscription$watchAllHobbies) _then;
+  final TRes Function(Variables_Subscription_watchAllHobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -141,40 +141,40 @@ class _CopyWithImpl$Variables$Subscription$watchAllHobbies<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllHobbies._({
+      _then(Variables_Subscription_watchAllHobbies._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$HobbiesBoolExp>?),
+          'where': (where as List<Input_HobbiesBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllHobbies<TRes>
-    implements CopyWith$Variables$Subscription$watchAllHobbies<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllHobbies(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllHobbies<TRes>
+    implements CopyWith_Variables_Subscription_watchAllHobbies<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllHobbies(this._res);
 
   TRes _res;
 
   call({
-    List<Input$HobbiesBoolExp>? where,
+    List<Input_HobbiesBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllHobbies {
-  Subscription$watchAllHobbies({required this.hobbies});
+class Subscription_watchAllHobbies {
+  Subscription_watchAllHobbies({required this.hobbies});
 
-  factory Subscription$watchAllHobbies.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllHobbies.fromJson(Map<String, dynamic> json) {
     final l$hobbies = json['hobbies'];
-    return Subscription$watchAllHobbies(
+    return Subscription_watchAllHobbies(
         hobbies: (l$hobbies as List<dynamic>)
-            .map((e) => Subscription$watchAllHobbies$hobbies.fromJson(
+            .map((e) => Subscription_watchAllHobbies_hobbies.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllHobbies$hobbies> hobbies;
+  final List<Subscription_watchAllHobbies_hobbies> hobbies;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -194,7 +194,7 @@ class Subscription$watchAllHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllHobbies) ||
+    if (!(other is Subscription_watchAllHobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -214,72 +214,72 @@ class Subscription$watchAllHobbies {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllHobbies
-    on Subscription$watchAllHobbies {
-  CopyWith$Subscription$watchAllHobbies<Subscription$watchAllHobbies>
-      get copyWith => CopyWith$Subscription$watchAllHobbies(
+extension UtilityExtension_Subscription_watchAllHobbies
+    on Subscription_watchAllHobbies {
+  CopyWith_Subscription_watchAllHobbies<Subscription_watchAllHobbies>
+      get copyWith => CopyWith_Subscription_watchAllHobbies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllHobbies<TRes> {
-  factory CopyWith$Subscription$watchAllHobbies(
-    Subscription$watchAllHobbies instance,
-    TRes Function(Subscription$watchAllHobbies) then,
-  ) = _CopyWithImpl$Subscription$watchAllHobbies;
+abstract class CopyWith_Subscription_watchAllHobbies<TRes> {
+  factory CopyWith_Subscription_watchAllHobbies(
+    Subscription_watchAllHobbies instance,
+    TRes Function(Subscription_watchAllHobbies) then,
+  ) = _CopyWithImpl_Subscription_watchAllHobbies;
 
-  factory CopyWith$Subscription$watchAllHobbies.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllHobbies;
+  factory CopyWith_Subscription_watchAllHobbies.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllHobbies;
 
-  TRes call({List<Subscription$watchAllHobbies$hobbies>? hobbies});
+  TRes call({List<Subscription_watchAllHobbies_hobbies>? hobbies});
   TRes hobbies(
-      Iterable<Subscription$watchAllHobbies$hobbies> Function(
+      Iterable<Subscription_watchAllHobbies_hobbies> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllHobbies$hobbies<
-                      Subscription$watchAllHobbies$hobbies>>)
+                  CopyWith_Subscription_watchAllHobbies_hobbies<
+                      Subscription_watchAllHobbies_hobbies>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllHobbies<TRes>
-    implements CopyWith$Subscription$watchAllHobbies<TRes> {
-  _CopyWithImpl$Subscription$watchAllHobbies(
+class _CopyWithImpl_Subscription_watchAllHobbies<TRes>
+    implements CopyWith_Subscription_watchAllHobbies<TRes> {
+  _CopyWithImpl_Subscription_watchAllHobbies(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllHobbies _instance;
+  final Subscription_watchAllHobbies _instance;
 
-  final TRes Function(Subscription$watchAllHobbies) _then;
+  final TRes Function(Subscription_watchAllHobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? hobbies = _undefined}) =>
-      _then(Subscription$watchAllHobbies(
+      _then(Subscription_watchAllHobbies(
           hobbies: hobbies == _undefined || hobbies == null
               ? _instance.hobbies
-              : (hobbies as List<Subscription$watchAllHobbies$hobbies>)));
+              : (hobbies as List<Subscription_watchAllHobbies_hobbies>)));
   TRes hobbies(
-          Iterable<Subscription$watchAllHobbies$hobbies> Function(
+          Iterable<Subscription_watchAllHobbies_hobbies> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllHobbies$hobbies<
-                          Subscription$watchAllHobbies$hobbies>>)
+                      CopyWith_Subscription_watchAllHobbies_hobbies<
+                          Subscription_watchAllHobbies_hobbies>>)
               _fn) =>
       call(
           hobbies: _fn(_instance.hobbies
-              .map((e) => CopyWith$Subscription$watchAllHobbies$hobbies(
+              .map((e) => CopyWith_Subscription_watchAllHobbies_hobbies(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllHobbies<TRes>
-    implements CopyWith$Subscription$watchAllHobbies<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllHobbies(this._res);
+class _CopyWithStubImpl_Subscription_watchAllHobbies<TRes>
+    implements CopyWith_Subscription_watchAllHobbies<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllHobbies(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllHobbies$hobbies>? hobbies}) => _res;
+  call({List<Subscription_watchAllHobbies_hobbies>? hobbies}) => _res;
   hobbies(_fn) => _res;
 }
 
@@ -375,21 +375,21 @@ const documentNodeSubscriptionwatchAllHobbies = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$watchAllHobbies$hobbies {
-  Subscription$watchAllHobbies$hobbies({
+class Subscription_watchAllHobbies_hobbies {
+  Subscription_watchAllHobbies_hobbies({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Hobbies',
   });
 
-  factory Subscription$watchAllHobbies$hobbies.fromJson(
+  factory Subscription_watchAllHobbies_hobbies.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllHobbies$hobbies(
+    return Subscription_watchAllHobbies_hobbies(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -437,7 +437,7 @@ class Subscription$watchAllHobbies$hobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllHobbies$hobbies) ||
+    if (!(other is Subscription_watchAllHobbies_hobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -465,24 +465,24 @@ class Subscription$watchAllHobbies$hobbies {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllHobbies$hobbies
-    on Subscription$watchAllHobbies$hobbies {
-  CopyWith$Subscription$watchAllHobbies$hobbies<
-          Subscription$watchAllHobbies$hobbies>
-      get copyWith => CopyWith$Subscription$watchAllHobbies$hobbies(
+extension UtilityExtension_Subscription_watchAllHobbies_hobbies
+    on Subscription_watchAllHobbies_hobbies {
+  CopyWith_Subscription_watchAllHobbies_hobbies<
+          Subscription_watchAllHobbies_hobbies>
+      get copyWith => CopyWith_Subscription_watchAllHobbies_hobbies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllHobbies$hobbies<TRes> {
-  factory CopyWith$Subscription$watchAllHobbies$hobbies(
-    Subscription$watchAllHobbies$hobbies instance,
-    TRes Function(Subscription$watchAllHobbies$hobbies) then,
-  ) = _CopyWithImpl$Subscription$watchAllHobbies$hobbies;
+abstract class CopyWith_Subscription_watchAllHobbies_hobbies<TRes> {
+  factory CopyWith_Subscription_watchAllHobbies_hobbies(
+    Subscription_watchAllHobbies_hobbies instance,
+    TRes Function(Subscription_watchAllHobbies_hobbies) then,
+  ) = _CopyWithImpl_Subscription_watchAllHobbies_hobbies;
 
-  factory CopyWith$Subscription$watchAllHobbies$hobbies.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllHobbies$hobbies;
+  factory CopyWith_Subscription_watchAllHobbies_hobbies.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllHobbies_hobbies;
 
   TRes call({
     UuidValue? id,
@@ -492,16 +492,16 @@ abstract class CopyWith$Subscription$watchAllHobbies$hobbies<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllHobbies$hobbies<TRes>
-    implements CopyWith$Subscription$watchAllHobbies$hobbies<TRes> {
-  _CopyWithImpl$Subscription$watchAllHobbies$hobbies(
+class _CopyWithImpl_Subscription_watchAllHobbies_hobbies<TRes>
+    implements CopyWith_Subscription_watchAllHobbies_hobbies<TRes> {
+  _CopyWithImpl_Subscription_watchAllHobbies_hobbies(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllHobbies$hobbies _instance;
+  final Subscription_watchAllHobbies_hobbies _instance;
 
-  final TRes Function(Subscription$watchAllHobbies$hobbies) _then;
+  final TRes Function(Subscription_watchAllHobbies_hobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -511,7 +511,7 @@ class _CopyWithImpl$Subscription$watchAllHobbies$hobbies<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllHobbies$hobbies(
+      _then(Subscription_watchAllHobbies_hobbies(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -523,9 +523,9 @@ class _CopyWithImpl$Subscription$watchAllHobbies$hobbies<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllHobbies$hobbies<TRes>
-    implements CopyWith$Subscription$watchAllHobbies$hobbies<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllHobbies$hobbies(this._res);
+class _CopyWithStubImpl_Subscription_watchAllHobbies_hobbies<TRes>
+    implements CopyWith_Subscription_watchAllHobbies_hobbies<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllHobbies_hobbies(this._res);
 
   TRes _res;
 

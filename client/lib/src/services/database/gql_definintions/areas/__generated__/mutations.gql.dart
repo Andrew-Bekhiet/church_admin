@@ -3,19 +3,19 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Mutation$deleteArea {
-  factory Variables$Mutation$deleteArea({required UuidValue areaId}) =>
-      Variables$Mutation$deleteArea._({
+class Variables_Mutation_deleteArea {
+  factory Variables_Mutation_deleteArea({required UuidValue areaId}) =>
+      Variables_Mutation_deleteArea._({
         r'areaId': areaId,
       });
 
-  Variables$Mutation$deleteArea._(this._$data);
+  Variables_Mutation_deleteArea._(this._$data);
 
-  factory Variables$Mutation$deleteArea.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_deleteArea.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$areaId = data['areaId'];
     result$data['areaId'] = stringToUuid(l$areaId);
-    return Variables$Mutation$deleteArea._(result$data);
+    return Variables_Mutation_deleteArea._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -28,8 +28,8 @@ class Variables$Mutation$deleteArea {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$deleteArea<Variables$Mutation$deleteArea>
-      get copyWith => CopyWith$Variables$Mutation$deleteArea(
+  CopyWith_Variables_Mutation_deleteArea<Variables_Mutation_deleteArea>
+      get copyWith => CopyWith_Variables_Mutation_deleteArea(
             this,
             (i) => i,
           );
@@ -38,7 +38,7 @@ class Variables$Mutation$deleteArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$deleteArea) ||
+    if (!(other is Variables_Mutation_deleteArea) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57,66 +57,66 @@ class Variables$Mutation$deleteArea {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$deleteArea<TRes> {
-  factory CopyWith$Variables$Mutation$deleteArea(
-    Variables$Mutation$deleteArea instance,
-    TRes Function(Variables$Mutation$deleteArea) then,
-  ) = _CopyWithImpl$Variables$Mutation$deleteArea;
+abstract class CopyWith_Variables_Mutation_deleteArea<TRes> {
+  factory CopyWith_Variables_Mutation_deleteArea(
+    Variables_Mutation_deleteArea instance,
+    TRes Function(Variables_Mutation_deleteArea) then,
+  ) = _CopyWithImpl_Variables_Mutation_deleteArea;
 
-  factory CopyWith$Variables$Mutation$deleteArea.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$deleteArea;
+  factory CopyWith_Variables_Mutation_deleteArea.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_deleteArea;
 
   TRes call({UuidValue? areaId});
 }
 
-class _CopyWithImpl$Variables$Mutation$deleteArea<TRes>
-    implements CopyWith$Variables$Mutation$deleteArea<TRes> {
-  _CopyWithImpl$Variables$Mutation$deleteArea(
+class _CopyWithImpl_Variables_Mutation_deleteArea<TRes>
+    implements CopyWith_Variables_Mutation_deleteArea<TRes> {
+  _CopyWithImpl_Variables_Mutation_deleteArea(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$deleteArea _instance;
+  final Variables_Mutation_deleteArea _instance;
 
-  final TRes Function(Variables$Mutation$deleteArea) _then;
+  final TRes Function(Variables_Mutation_deleteArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? areaId = _undefined}) =>
-      _then(Variables$Mutation$deleteArea._({
+      _then(Variables_Mutation_deleteArea._({
         ..._instance._$data,
         if (areaId != _undefined && areaId != null)
           'areaId': (areaId as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$deleteArea<TRes>
-    implements CopyWith$Variables$Mutation$deleteArea<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$deleteArea(this._res);
+class _CopyWithStubImpl_Variables_Mutation_deleteArea<TRes>
+    implements CopyWith_Variables_Mutation_deleteArea<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_deleteArea(this._res);
 
   TRes _res;
 
   call({UuidValue? areaId}) => _res;
 }
 
-class Mutation$deleteArea {
-  Mutation$deleteArea({
+class Mutation_deleteArea {
+  Mutation_deleteArea({
     this.deleteAreasByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$deleteArea.fromJson(Map<String, dynamic> json) {
+  factory Mutation_deleteArea.fromJson(Map<String, dynamic> json) {
     final l$deleteAreasByPk = json['deleteAreasByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$deleteArea(
+    return Mutation_deleteArea(
       deleteAreasByPk: l$deleteAreasByPk == null
           ? null
-          : Fragment$Area.fromJson((l$deleteAreasByPk as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$deleteAreasByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Area? deleteAreasByPk;
+  final Fragment_Area? deleteAreasByPk;
 
   final String $__typename;
 
@@ -144,7 +144,7 @@ class Mutation$deleteArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$deleteArea) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_deleteArea) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteAreasByPk = deleteAreasByPk;
@@ -161,40 +161,40 @@ class Mutation$deleteArea {
   }
 }
 
-extension UtilityExtension$Mutation$deleteArea on Mutation$deleteArea {
-  CopyWith$Mutation$deleteArea<Mutation$deleteArea> get copyWith =>
-      CopyWith$Mutation$deleteArea(
+extension UtilityExtension_Mutation_deleteArea on Mutation_deleteArea {
+  CopyWith_Mutation_deleteArea<Mutation_deleteArea> get copyWith =>
+      CopyWith_Mutation_deleteArea(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$deleteArea<TRes> {
-  factory CopyWith$Mutation$deleteArea(
-    Mutation$deleteArea instance,
-    TRes Function(Mutation$deleteArea) then,
-  ) = _CopyWithImpl$Mutation$deleteArea;
+abstract class CopyWith_Mutation_deleteArea<TRes> {
+  factory CopyWith_Mutation_deleteArea(
+    Mutation_deleteArea instance,
+    TRes Function(Mutation_deleteArea) then,
+  ) = _CopyWithImpl_Mutation_deleteArea;
 
-  factory CopyWith$Mutation$deleteArea.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deleteArea;
+  factory CopyWith_Mutation_deleteArea.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_deleteArea;
 
   TRes call({
-    Fragment$Area? deleteAreasByPk,
+    Fragment_Area? deleteAreasByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get deleteAreasByPk;
+  CopyWith_Fragment_Area<TRes> get deleteAreasByPk;
 }
 
-class _CopyWithImpl$Mutation$deleteArea<TRes>
-    implements CopyWith$Mutation$deleteArea<TRes> {
-  _CopyWithImpl$Mutation$deleteArea(
+class _CopyWithImpl_Mutation_deleteArea<TRes>
+    implements CopyWith_Mutation_deleteArea<TRes> {
+  _CopyWithImpl_Mutation_deleteArea(
     this._instance,
     this._then,
   );
 
-  final Mutation$deleteArea _instance;
+  final Mutation_deleteArea _instance;
 
-  final TRes Function(Mutation$deleteArea) _then;
+  final TRes Function(Mutation_deleteArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -202,36 +202,36 @@ class _CopyWithImpl$Mutation$deleteArea<TRes>
     Object? deleteAreasByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$deleteArea(
+      _then(Mutation_deleteArea(
         deleteAreasByPk: deleteAreasByPk == _undefined
             ? _instance.deleteAreasByPk
-            : (deleteAreasByPk as Fragment$Area?),
+            : (deleteAreasByPk as Fragment_Area?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get deleteAreasByPk {
+  CopyWith_Fragment_Area<TRes> get deleteAreasByPk {
     final local$deleteAreasByPk = _instance.deleteAreasByPk;
     return local$deleteAreasByPk == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(
             local$deleteAreasByPk, (e) => call(deleteAreasByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$deleteArea<TRes>
-    implements CopyWith$Mutation$deleteArea<TRes> {
-  _CopyWithStubImpl$Mutation$deleteArea(this._res);
+class _CopyWithStubImpl_Mutation_deleteArea<TRes>
+    implements CopyWith_Mutation_deleteArea<TRes> {
+  _CopyWithStubImpl_Mutation_deleteArea(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Area? deleteAreasByPk,
+    Fragment_Area? deleteAreasByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get deleteAreasByPk =>
-      CopyWith$Fragment$Area.stub(_res);
+  CopyWith_Fragment_Area<TRes> get deleteAreasByPk =>
+      CopyWith_Fragment_Area.stub(_res);
 }
 
 const documentNodeMutationdeleteArea = DocumentNode(definitions: [
@@ -288,27 +288,27 @@ const documentNodeMutationdeleteArea = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
 ]);
 
-class Variables$Mutation$insertArea {
-  factory Variables$Mutation$insertArea(
-          {required Input$AreasInsertInput newArea}) =>
-      Variables$Mutation$insertArea._({
+class Variables_Mutation_insertArea {
+  factory Variables_Mutation_insertArea(
+          {required Input_AreasInsertInput newArea}) =>
+      Variables_Mutation_insertArea._({
         r'newArea': newArea,
       });
 
-  Variables$Mutation$insertArea._(this._$data);
+  Variables_Mutation_insertArea._(this._$data);
 
-  factory Variables$Mutation$insertArea.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_insertArea.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newArea = data['newArea'];
     result$data['newArea'] =
-        Input$AreasInsertInput.fromJson((l$newArea as Map<String, dynamic>));
-    return Variables$Mutation$insertArea._(result$data);
+        Input_AreasInsertInput.fromJson((l$newArea as Map<String, dynamic>));
+    return Variables_Mutation_insertArea._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$AreasInsertInput get newArea =>
-      (_$data['newArea'] as Input$AreasInsertInput);
+  Input_AreasInsertInput get newArea =>
+      (_$data['newArea'] as Input_AreasInsertInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newArea = newArea;
@@ -316,8 +316,8 @@ class Variables$Mutation$insertArea {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$insertArea<Variables$Mutation$insertArea>
-      get copyWith => CopyWith$Variables$Mutation$insertArea(
+  CopyWith_Variables_Mutation_insertArea<Variables_Mutation_insertArea>
+      get copyWith => CopyWith_Variables_Mutation_insertArea(
             this,
             (i) => i,
           );
@@ -326,7 +326,7 @@ class Variables$Mutation$insertArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$insertArea) ||
+    if (!(other is Variables_Mutation_insertArea) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -345,66 +345,66 @@ class Variables$Mutation$insertArea {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$insertArea<TRes> {
-  factory CopyWith$Variables$Mutation$insertArea(
-    Variables$Mutation$insertArea instance,
-    TRes Function(Variables$Mutation$insertArea) then,
-  ) = _CopyWithImpl$Variables$Mutation$insertArea;
+abstract class CopyWith_Variables_Mutation_insertArea<TRes> {
+  factory CopyWith_Variables_Mutation_insertArea(
+    Variables_Mutation_insertArea instance,
+    TRes Function(Variables_Mutation_insertArea) then,
+  ) = _CopyWithImpl_Variables_Mutation_insertArea;
 
-  factory CopyWith$Variables$Mutation$insertArea.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$insertArea;
+  factory CopyWith_Variables_Mutation_insertArea.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_insertArea;
 
-  TRes call({Input$AreasInsertInput? newArea});
+  TRes call({Input_AreasInsertInput? newArea});
 }
 
-class _CopyWithImpl$Variables$Mutation$insertArea<TRes>
-    implements CopyWith$Variables$Mutation$insertArea<TRes> {
-  _CopyWithImpl$Variables$Mutation$insertArea(
+class _CopyWithImpl_Variables_Mutation_insertArea<TRes>
+    implements CopyWith_Variables_Mutation_insertArea<TRes> {
+  _CopyWithImpl_Variables_Mutation_insertArea(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$insertArea _instance;
+  final Variables_Mutation_insertArea _instance;
 
-  final TRes Function(Variables$Mutation$insertArea) _then;
+  final TRes Function(Variables_Mutation_insertArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? newArea = _undefined}) =>
-      _then(Variables$Mutation$insertArea._({
+      _then(Variables_Mutation_insertArea._({
         ..._instance._$data,
         if (newArea != _undefined && newArea != null)
-          'newArea': (newArea as Input$AreasInsertInput),
+          'newArea': (newArea as Input_AreasInsertInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$insertArea<TRes>
-    implements CopyWith$Variables$Mutation$insertArea<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$insertArea(this._res);
+class _CopyWithStubImpl_Variables_Mutation_insertArea<TRes>
+    implements CopyWith_Variables_Mutation_insertArea<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_insertArea(this._res);
 
   TRes _res;
 
-  call({Input$AreasInsertInput? newArea}) => _res;
+  call({Input_AreasInsertInput? newArea}) => _res;
 }
 
-class Mutation$insertArea {
-  Mutation$insertArea({
+class Mutation_insertArea {
+  Mutation_insertArea({
     this.insertAreasOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$insertArea.fromJson(Map<String, dynamic> json) {
+  factory Mutation_insertArea.fromJson(Map<String, dynamic> json) {
     final l$insertAreasOne = json['insertAreasOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$insertArea(
+    return Mutation_insertArea(
       insertAreasOne: l$insertAreasOne == null
           ? null
-          : Fragment$Area.fromJson((l$insertAreasOne as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$insertAreasOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Area? insertAreasOne;
+  final Fragment_Area? insertAreasOne;
 
   final String $__typename;
 
@@ -432,7 +432,7 @@ class Mutation$insertArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$insertArea) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_insertArea) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertAreasOne = insertAreasOne;
@@ -449,40 +449,40 @@ class Mutation$insertArea {
   }
 }
 
-extension UtilityExtension$Mutation$insertArea on Mutation$insertArea {
-  CopyWith$Mutation$insertArea<Mutation$insertArea> get copyWith =>
-      CopyWith$Mutation$insertArea(
+extension UtilityExtension_Mutation_insertArea on Mutation_insertArea {
+  CopyWith_Mutation_insertArea<Mutation_insertArea> get copyWith =>
+      CopyWith_Mutation_insertArea(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$insertArea<TRes> {
-  factory CopyWith$Mutation$insertArea(
-    Mutation$insertArea instance,
-    TRes Function(Mutation$insertArea) then,
-  ) = _CopyWithImpl$Mutation$insertArea;
+abstract class CopyWith_Mutation_insertArea<TRes> {
+  factory CopyWith_Mutation_insertArea(
+    Mutation_insertArea instance,
+    TRes Function(Mutation_insertArea) then,
+  ) = _CopyWithImpl_Mutation_insertArea;
 
-  factory CopyWith$Mutation$insertArea.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$insertArea;
+  factory CopyWith_Mutation_insertArea.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertArea;
 
   TRes call({
-    Fragment$Area? insertAreasOne,
+    Fragment_Area? insertAreasOne,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get insertAreasOne;
+  CopyWith_Fragment_Area<TRes> get insertAreasOne;
 }
 
-class _CopyWithImpl$Mutation$insertArea<TRes>
-    implements CopyWith$Mutation$insertArea<TRes> {
-  _CopyWithImpl$Mutation$insertArea(
+class _CopyWithImpl_Mutation_insertArea<TRes>
+    implements CopyWith_Mutation_insertArea<TRes> {
+  _CopyWithImpl_Mutation_insertArea(
     this._instance,
     this._then,
   );
 
-  final Mutation$insertArea _instance;
+  final Mutation_insertArea _instance;
 
-  final TRes Function(Mutation$insertArea) _then;
+  final TRes Function(Mutation_insertArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -490,36 +490,36 @@ class _CopyWithImpl$Mutation$insertArea<TRes>
     Object? insertAreasOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$insertArea(
+      _then(Mutation_insertArea(
         insertAreasOne: insertAreasOne == _undefined
             ? _instance.insertAreasOne
-            : (insertAreasOne as Fragment$Area?),
+            : (insertAreasOne as Fragment_Area?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get insertAreasOne {
+  CopyWith_Fragment_Area<TRes> get insertAreasOne {
     final local$insertAreasOne = _instance.insertAreasOne;
     return local$insertAreasOne == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(
             local$insertAreasOne, (e) => call(insertAreasOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$insertArea<TRes>
-    implements CopyWith$Mutation$insertArea<TRes> {
-  _CopyWithStubImpl$Mutation$insertArea(this._res);
+class _CopyWithStubImpl_Mutation_insertArea<TRes>
+    implements CopyWith_Mutation_insertArea<TRes> {
+  _CopyWithStubImpl_Mutation_insertArea(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Area? insertAreasOne,
+    Fragment_Area? insertAreasOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get insertAreasOne =>
-      CopyWith$Fragment$Area.stub(_res);
+  CopyWith_Fragment_Area<TRes> get insertAreasOne =>
+      CopyWith_Fragment_Area.stub(_res);
 }
 
 const documentNodeMutationinsertArea = DocumentNode(definitions: [
@@ -576,32 +576,32 @@ const documentNodeMutationinsertArea = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
 ]);
 
-class Variables$Mutation$updateArea {
-  factory Variables$Mutation$updateArea({
+class Variables_Mutation_updateArea {
+  factory Variables_Mutation_updateArea({
     required UuidValue areaId,
-    required Input$AreasSetInput newArea,
+    required Input_AreasSetInput newArea,
   }) =>
-      Variables$Mutation$updateArea._({
+      Variables_Mutation_updateArea._({
         r'areaId': areaId,
         r'newArea': newArea,
       });
 
-  Variables$Mutation$updateArea._(this._$data);
+  Variables_Mutation_updateArea._(this._$data);
 
-  factory Variables$Mutation$updateArea.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_updateArea.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$areaId = data['areaId'];
     result$data['areaId'] = stringToUuid(l$areaId);
     final l$newArea = data['newArea'];
     result$data['newArea'] =
-        Input$AreasSetInput.fromJson((l$newArea as Map<String, dynamic>));
-    return Variables$Mutation$updateArea._(result$data);
+        Input_AreasSetInput.fromJson((l$newArea as Map<String, dynamic>));
+    return Variables_Mutation_updateArea._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get areaId => (_$data['areaId'] as UuidValue);
-  Input$AreasSetInput get newArea => (_$data['newArea'] as Input$AreasSetInput);
+  Input_AreasSetInput get newArea => (_$data['newArea'] as Input_AreasSetInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$areaId = areaId;
@@ -611,8 +611,8 @@ class Variables$Mutation$updateArea {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$updateArea<Variables$Mutation$updateArea>
-      get copyWith => CopyWith$Variables$Mutation$updateArea(
+  CopyWith_Variables_Mutation_updateArea<Variables_Mutation_updateArea>
+      get copyWith => CopyWith_Variables_Mutation_updateArea(
             this,
             (i) => i,
           );
@@ -621,7 +621,7 @@ class Variables$Mutation$updateArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$updateArea) ||
+    if (!(other is Variables_Mutation_updateArea) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -649,31 +649,31 @@ class Variables$Mutation$updateArea {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$updateArea<TRes> {
-  factory CopyWith$Variables$Mutation$updateArea(
-    Variables$Mutation$updateArea instance,
-    TRes Function(Variables$Mutation$updateArea) then,
-  ) = _CopyWithImpl$Variables$Mutation$updateArea;
+abstract class CopyWith_Variables_Mutation_updateArea<TRes> {
+  factory CopyWith_Variables_Mutation_updateArea(
+    Variables_Mutation_updateArea instance,
+    TRes Function(Variables_Mutation_updateArea) then,
+  ) = _CopyWithImpl_Variables_Mutation_updateArea;
 
-  factory CopyWith$Variables$Mutation$updateArea.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$updateArea;
+  factory CopyWith_Variables_Mutation_updateArea.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updateArea;
 
   TRes call({
     UuidValue? areaId,
-    Input$AreasSetInput? newArea,
+    Input_AreasSetInput? newArea,
   });
 }
 
-class _CopyWithImpl$Variables$Mutation$updateArea<TRes>
-    implements CopyWith$Variables$Mutation$updateArea<TRes> {
-  _CopyWithImpl$Variables$Mutation$updateArea(
+class _CopyWithImpl_Variables_Mutation_updateArea<TRes>
+    implements CopyWith_Variables_Mutation_updateArea<TRes> {
+  _CopyWithImpl_Variables_Mutation_updateArea(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$updateArea _instance;
+  final Variables_Mutation_updateArea _instance;
 
-  final TRes Function(Variables$Mutation$updateArea) _then;
+  final TRes Function(Variables_Mutation_updateArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -681,46 +681,46 @@ class _CopyWithImpl$Variables$Mutation$updateArea<TRes>
     Object? areaId = _undefined,
     Object? newArea = _undefined,
   }) =>
-      _then(Variables$Mutation$updateArea._({
+      _then(Variables_Mutation_updateArea._({
         ..._instance._$data,
         if (areaId != _undefined && areaId != null)
           'areaId': (areaId as UuidValue),
         if (newArea != _undefined && newArea != null)
-          'newArea': (newArea as Input$AreasSetInput),
+          'newArea': (newArea as Input_AreasSetInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$updateArea<TRes>
-    implements CopyWith$Variables$Mutation$updateArea<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$updateArea(this._res);
+class _CopyWithStubImpl_Variables_Mutation_updateArea<TRes>
+    implements CopyWith_Variables_Mutation_updateArea<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updateArea(this._res);
 
   TRes _res;
 
   call({
     UuidValue? areaId,
-    Input$AreasSetInput? newArea,
+    Input_AreasSetInput? newArea,
   }) =>
       _res;
 }
 
-class Mutation$updateArea {
-  Mutation$updateArea({
+class Mutation_updateArea {
+  Mutation_updateArea({
     this.updateAreasByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$updateArea.fromJson(Map<String, dynamic> json) {
+  factory Mutation_updateArea.fromJson(Map<String, dynamic> json) {
     final l$updateAreasByPk = json['updateAreasByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$updateArea(
+    return Mutation_updateArea(
       updateAreasByPk: l$updateAreasByPk == null
           ? null
-          : Fragment$Area.fromJson((l$updateAreasByPk as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$updateAreasByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Area? updateAreasByPk;
+  final Fragment_Area? updateAreasByPk;
 
   final String $__typename;
 
@@ -748,7 +748,7 @@ class Mutation$updateArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updateArea) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_updateArea) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateAreasByPk = updateAreasByPk;
@@ -765,40 +765,40 @@ class Mutation$updateArea {
   }
 }
 
-extension UtilityExtension$Mutation$updateArea on Mutation$updateArea {
-  CopyWith$Mutation$updateArea<Mutation$updateArea> get copyWith =>
-      CopyWith$Mutation$updateArea(
+extension UtilityExtension_Mutation_updateArea on Mutation_updateArea {
+  CopyWith_Mutation_updateArea<Mutation_updateArea> get copyWith =>
+      CopyWith_Mutation_updateArea(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$updateArea<TRes> {
-  factory CopyWith$Mutation$updateArea(
-    Mutation$updateArea instance,
-    TRes Function(Mutation$updateArea) then,
-  ) = _CopyWithImpl$Mutation$updateArea;
+abstract class CopyWith_Mutation_updateArea<TRes> {
+  factory CopyWith_Mutation_updateArea(
+    Mutation_updateArea instance,
+    TRes Function(Mutation_updateArea) then,
+  ) = _CopyWithImpl_Mutation_updateArea;
 
-  factory CopyWith$Mutation$updateArea.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updateArea;
+  factory CopyWith_Mutation_updateArea.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateArea;
 
   TRes call({
-    Fragment$Area? updateAreasByPk,
+    Fragment_Area? updateAreasByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get updateAreasByPk;
+  CopyWith_Fragment_Area<TRes> get updateAreasByPk;
 }
 
-class _CopyWithImpl$Mutation$updateArea<TRes>
-    implements CopyWith$Mutation$updateArea<TRes> {
-  _CopyWithImpl$Mutation$updateArea(
+class _CopyWithImpl_Mutation_updateArea<TRes>
+    implements CopyWith_Mutation_updateArea<TRes> {
+  _CopyWithImpl_Mutation_updateArea(
     this._instance,
     this._then,
   );
 
-  final Mutation$updateArea _instance;
+  final Mutation_updateArea _instance;
 
-  final TRes Function(Mutation$updateArea) _then;
+  final TRes Function(Mutation_updateArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -806,36 +806,36 @@ class _CopyWithImpl$Mutation$updateArea<TRes>
     Object? updateAreasByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updateArea(
+      _then(Mutation_updateArea(
         updateAreasByPk: updateAreasByPk == _undefined
             ? _instance.updateAreasByPk
-            : (updateAreasByPk as Fragment$Area?),
+            : (updateAreasByPk as Fragment_Area?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get updateAreasByPk {
+  CopyWith_Fragment_Area<TRes> get updateAreasByPk {
     final local$updateAreasByPk = _instance.updateAreasByPk;
     return local$updateAreasByPk == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(
             local$updateAreasByPk, (e) => call(updateAreasByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updateArea<TRes>
-    implements CopyWith$Mutation$updateArea<TRes> {
-  _CopyWithStubImpl$Mutation$updateArea(this._res);
+class _CopyWithStubImpl_Mutation_updateArea<TRes>
+    implements CopyWith_Mutation_updateArea<TRes> {
+  _CopyWithStubImpl_Mutation_updateArea(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Area? updateAreasByPk,
+    Fragment_Area? updateAreasByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get updateAreasByPk =>
-      CopyWith$Fragment$Area.stub(_res);
+  CopyWith_Fragment_Area<TRes> get updateAreasByPk =>
+      CopyWith_Fragment_Area.stub(_res);
 }
 
 const documentNodeMutationupdateArea = DocumentNode(definitions: [

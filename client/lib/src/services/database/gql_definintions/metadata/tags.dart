@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'tags/__generated__/subscriptions.gql.dart';
 
-class TagsDAO extends DAOBase {
+class TagsDAO extends DAOBase<Tag> {
   const TagsDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Tag> paginateTags({
+  @override
+  GQLPaginatableStream<Tag> streamAll({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Tag>(
@@ -22,8 +22,8 @@ class TagsDAO extends DAOBase {
             variables: graphQLClient
                 .getDefaultSearchVars(
                   event,
-                  Variables$Subscription$watchAllTags.new,
-                  Input$TagsBoolExp.new,
+                  Variables_Subscription_watchAllTags.new,
+                  Input_TagsBoolExp.new,
                 )
                 .toJson(),
             parserFn: db.parser.singleListParser(Tag.fromJson),

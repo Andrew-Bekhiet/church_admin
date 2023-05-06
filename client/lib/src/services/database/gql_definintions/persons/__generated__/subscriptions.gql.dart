@@ -11,50 +11,50 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllPersons {
-  factory Variables$Subscription$watchAllPersons({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+class Variables_Subscription_watchAllPersons {
+  factory Variables_Subscription_watchAllPersons({
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllPersons._({
+      Variables_Subscription_watchAllPersons._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllPersons._(this._$data);
+  Variables_Subscription_watchAllPersons._(this._$data);
 
-  factory Variables$Subscription$watchAllPersons.fromJson(
+  factory Variables_Subscription_watchAllPersons.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input$PersonsOrderBy.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_PersonsOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllPersons._(result$data);
+    return Variables_Subscription_watchAllPersons._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$PersonsBoolExp>? get where =>
-      (_$data['where'] as List<Input$PersonsBoolExp>?);
-  List<Input$PersonsOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$PersonsOrderBy>?);
+  List<Input_PersonsBoolExp>? get where =>
+      (_$data['where'] as List<Input_PersonsBoolExp>?);
+  List<Input_PersonsOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_PersonsOrderBy>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -73,9 +73,9 @@ class Variables$Subscription$watchAllPersons {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllPersons<
-          Variables$Subscription$watchAllPersons>
-      get copyWith => CopyWith$Variables$Subscription$watchAllPersons(
+  CopyWith_Variables_Subscription_watchAllPersons<
+          Variables_Subscription_watchAllPersons>
+      get copyWith => CopyWith_Variables_Subscription_watchAllPersons(
             this,
             (i) => i,
           );
@@ -84,7 +84,7 @@ class Variables$Subscription$watchAllPersons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllPersons) ||
+    if (!(other is Variables_Subscription_watchAllPersons) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158,32 +158,32 @@ class Variables$Subscription$watchAllPersons {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllPersons<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllPersons(
-    Variables$Subscription$watchAllPersons instance,
-    TRes Function(Variables$Subscription$watchAllPersons) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllPersons;
+abstract class CopyWith_Variables_Subscription_watchAllPersons<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllPersons(
+    Variables_Subscription_watchAllPersons instance,
+    TRes Function(Variables_Subscription_watchAllPersons) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllPersons;
 
-  factory CopyWith$Variables$Subscription$watchAllPersons.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllPersons;
+  factory CopyWith_Variables_Subscription_watchAllPersons.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllPersons;
 
   TRes call({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllPersons<TRes>
-    implements CopyWith$Variables$Subscription$watchAllPersons<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllPersons(
+class _CopyWithImpl_Variables_Subscription_watchAllPersons<TRes>
+    implements CopyWith_Variables_Subscription_watchAllPersons<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllPersons(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllPersons _instance;
+  final Variables_Subscription_watchAllPersons _instance;
 
-  final TRes Function(Variables$Subscription$watchAllPersons) _then;
+  final TRes Function(Variables_Subscription_watchAllPersons) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -192,42 +192,42 @@ class _CopyWithImpl$Variables$Subscription$watchAllPersons<TRes>
     Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllPersons._({
+      _then(Variables_Subscription_watchAllPersons._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$PersonsBoolExp>?),
+          'where': (where as List<Input_PersonsBoolExp>?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$PersonsOrderBy>?),
+          'orderBy': (orderBy as List<Input_PersonsOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllPersons<TRes>
-    implements CopyWith$Variables$Subscription$watchAllPersons<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllPersons(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllPersons<TRes>
+    implements CopyWith_Variables_Subscription_watchAllPersons<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllPersons(this._res);
 
   TRes _res;
 
   call({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllPersons {
-  Subscription$watchAllPersons({required this.persons});
+class Subscription_watchAllPersons {
+  Subscription_watchAllPersons({required this.persons});
 
-  factory Subscription$watchAllPersons.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllPersons.fromJson(Map<String, dynamic> json) {
     final l$persons = json['persons'];
-    return Subscription$watchAllPersons(
+    return Subscription_watchAllPersons(
         persons: (l$persons as List<dynamic>)
-            .map((e) => Fragment$Person.fromJson((e as Map<String, dynamic>)))
+            .map((e) => Fragment_Person.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$Person> persons;
+  final List<Fragment_Person> persons;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -247,7 +247,7 @@ class Subscription$watchAllPersons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllPersons) ||
+    if (!(other is Subscription_watchAllPersons) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -267,67 +267,67 @@ class Subscription$watchAllPersons {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllPersons
-    on Subscription$watchAllPersons {
-  CopyWith$Subscription$watchAllPersons<Subscription$watchAllPersons>
-      get copyWith => CopyWith$Subscription$watchAllPersons(
+extension UtilityExtension_Subscription_watchAllPersons
+    on Subscription_watchAllPersons {
+  CopyWith_Subscription_watchAllPersons<Subscription_watchAllPersons>
+      get copyWith => CopyWith_Subscription_watchAllPersons(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllPersons<TRes> {
-  factory CopyWith$Subscription$watchAllPersons(
-    Subscription$watchAllPersons instance,
-    TRes Function(Subscription$watchAllPersons) then,
-  ) = _CopyWithImpl$Subscription$watchAllPersons;
+abstract class CopyWith_Subscription_watchAllPersons<TRes> {
+  factory CopyWith_Subscription_watchAllPersons(
+    Subscription_watchAllPersons instance,
+    TRes Function(Subscription_watchAllPersons) then,
+  ) = _CopyWithImpl_Subscription_watchAllPersons;
 
-  factory CopyWith$Subscription$watchAllPersons.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllPersons;
+  factory CopyWith_Subscription_watchAllPersons.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllPersons;
 
-  TRes call({List<Fragment$Person>? persons});
+  TRes call({List<Fragment_Person>? persons});
   TRes persons(
-      Iterable<Fragment$Person> Function(
-              Iterable<CopyWith$Fragment$Person<Fragment$Person>>)
+      Iterable<Fragment_Person> Function(
+              Iterable<CopyWith_Fragment_Person<Fragment_Person>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllPersons<TRes>
-    implements CopyWith$Subscription$watchAllPersons<TRes> {
-  _CopyWithImpl$Subscription$watchAllPersons(
+class _CopyWithImpl_Subscription_watchAllPersons<TRes>
+    implements CopyWith_Subscription_watchAllPersons<TRes> {
+  _CopyWithImpl_Subscription_watchAllPersons(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllPersons _instance;
+  final Subscription_watchAllPersons _instance;
 
-  final TRes Function(Subscription$watchAllPersons) _then;
+  final TRes Function(Subscription_watchAllPersons) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? persons = _undefined}) =>
-      _then(Subscription$watchAllPersons(
+      _then(Subscription_watchAllPersons(
           persons: persons == _undefined || persons == null
               ? _instance.persons
-              : (persons as List<Fragment$Person>)));
+              : (persons as List<Fragment_Person>)));
   TRes persons(
-          Iterable<Fragment$Person> Function(
-                  Iterable<CopyWith$Fragment$Person<Fragment$Person>>)
+          Iterable<Fragment_Person> Function(
+                  Iterable<CopyWith_Fragment_Person<Fragment_Person>>)
               _fn) =>
       call(
-          persons: _fn(_instance.persons.map((e) => CopyWith$Fragment$Person(
+          persons: _fn(_instance.persons.map((e) => CopyWith_Fragment_Person(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllPersons<TRes>
-    implements CopyWith$Subscription$watchAllPersons<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllPersons(this._res);
+class _CopyWithStubImpl_Subscription_watchAllPersons<TRes>
+    implements CopyWith_Subscription_watchAllPersons<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllPersons(this._res);
 
   TRes _res;
 
-  call({List<Fragment$Person>? persons}) => _res;
+  call({List<Fragment_Person>? persons}) => _res;
   persons(_fn) => _res;
 }
 
@@ -421,23 +421,23 @@ const documentNodeSubscriptionwatchAllPersons = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Variables$Subscription$watchPerson {
-  factory Variables$Subscription$watchPerson({
+class Variables_Subscription_watchPerson {
+  factory Variables_Subscription_watchPerson({
     required UuidValue id,
     int? classesLimit,
     int? groupsLimit,
     int? servicesLimit,
   }) =>
-      Variables$Subscription$watchPerson._({
+      Variables_Subscription_watchPerson._({
         r'id': id,
         if (classesLimit != null) r'classesLimit': classesLimit,
         if (groupsLimit != null) r'groupsLimit': groupsLimit,
         if (servicesLimit != null) r'servicesLimit': servicesLimit,
       });
 
-  Variables$Subscription$watchPerson._(this._$data);
+  Variables_Subscription_watchPerson._(this._$data);
 
-  factory Variables$Subscription$watchPerson.fromJson(
+  factory Variables_Subscription_watchPerson.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
@@ -454,7 +454,7 @@ class Variables$Subscription$watchPerson {
       final l$servicesLimit = data['servicesLimit'];
       result$data['servicesLimit'] = (l$servicesLimit as int?);
     }
-    return Variables$Subscription$watchPerson._(result$data);
+    return Variables_Subscription_watchPerson._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -482,9 +482,9 @@ class Variables$Subscription$watchPerson {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchPerson<
-          Variables$Subscription$watchPerson>
-      get copyWith => CopyWith$Variables$Subscription$watchPerson(
+  CopyWith_Variables_Subscription_watchPerson<
+          Variables_Subscription_watchPerson>
+      get copyWith => CopyWith_Variables_Subscription_watchPerson(
             this,
             (i) => i,
           );
@@ -493,7 +493,7 @@ class Variables$Subscription$watchPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchPerson) ||
+    if (!(other is Variables_Subscription_watchPerson) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -547,14 +547,14 @@ class Variables$Subscription$watchPerson {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchPerson<TRes> {
-  factory CopyWith$Variables$Subscription$watchPerson(
-    Variables$Subscription$watchPerson instance,
-    TRes Function(Variables$Subscription$watchPerson) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchPerson;
+abstract class CopyWith_Variables_Subscription_watchPerson<TRes> {
+  factory CopyWith_Variables_Subscription_watchPerson(
+    Variables_Subscription_watchPerson instance,
+    TRes Function(Variables_Subscription_watchPerson) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchPerson;
 
-  factory CopyWith$Variables$Subscription$watchPerson.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchPerson;
+  factory CopyWith_Variables_Subscription_watchPerson.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchPerson;
 
   TRes call({
     UuidValue? id,
@@ -564,16 +564,16 @@ abstract class CopyWith$Variables$Subscription$watchPerson<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchPerson<TRes>
-    implements CopyWith$Variables$Subscription$watchPerson<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchPerson(
+class _CopyWithImpl_Variables_Subscription_watchPerson<TRes>
+    implements CopyWith_Variables_Subscription_watchPerson<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchPerson(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchPerson _instance;
+  final Variables_Subscription_watchPerson _instance;
 
-  final TRes Function(Variables$Subscription$watchPerson) _then;
+  final TRes Function(Variables_Subscription_watchPerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -583,7 +583,7 @@ class _CopyWithImpl$Variables$Subscription$watchPerson<TRes>
     Object? groupsLimit = _undefined,
     Object? servicesLimit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchPerson._({
+      _then(Variables_Subscription_watchPerson._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as UuidValue),
         if (classesLimit != _undefined) 'classesLimit': (classesLimit as int?),
@@ -593,9 +593,9 @@ class _CopyWithImpl$Variables$Subscription$watchPerson<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchPerson<TRes>
-    implements CopyWith$Variables$Subscription$watchPerson<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchPerson(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchPerson<TRes>
+    implements CopyWith_Variables_Subscription_watchPerson<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchPerson(this._res);
 
   TRes _res;
 
@@ -608,19 +608,19 @@ class _CopyWithStubImpl$Variables$Subscription$watchPerson<TRes>
       _res;
 }
 
-class Subscription$watchPerson {
-  Subscription$watchPerson({this.personsByPk});
+class Subscription_watchPerson {
+  Subscription_watchPerson({this.personsByPk});
 
-  factory Subscription$watchPerson.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchPerson.fromJson(Map<String, dynamic> json) {
     final l$personsByPk = json['personsByPk'];
-    return Subscription$watchPerson(
+    return Subscription_watchPerson(
         personsByPk: l$personsByPk == null
             ? null
-            : Subscription$watchPerson$personsByPk.fromJson(
+            : Subscription_watchPerson_personsByPk.fromJson(
                 (l$personsByPk as Map<String, dynamic>)));
   }
 
-  final Subscription$watchPerson$personsByPk? personsByPk;
+  final Subscription_watchPerson_personsByPk? personsByPk;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -640,7 +640,7 @@ class Subscription$watchPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson) ||
+    if (!(other is Subscription_watchPerson) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -653,64 +653,64 @@ class Subscription$watchPerson {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson
-    on Subscription$watchPerson {
-  CopyWith$Subscription$watchPerson<Subscription$watchPerson> get copyWith =>
-      CopyWith$Subscription$watchPerson(
+extension UtilityExtension_Subscription_watchPerson
+    on Subscription_watchPerson {
+  CopyWith_Subscription_watchPerson<Subscription_watchPerson> get copyWith =>
+      CopyWith_Subscription_watchPerson(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchPerson<TRes> {
-  factory CopyWith$Subscription$watchPerson(
-    Subscription$watchPerson instance,
-    TRes Function(Subscription$watchPerson) then,
-  ) = _CopyWithImpl$Subscription$watchPerson;
+abstract class CopyWith_Subscription_watchPerson<TRes> {
+  factory CopyWith_Subscription_watchPerson(
+    Subscription_watchPerson instance,
+    TRes Function(Subscription_watchPerson) then,
+  ) = _CopyWithImpl_Subscription_watchPerson;
 
-  factory CopyWith$Subscription$watchPerson.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson;
+  factory CopyWith_Subscription_watchPerson.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson;
 
-  TRes call({Subscription$watchPerson$personsByPk? personsByPk});
-  CopyWith$Subscription$watchPerson$personsByPk<TRes> get personsByPk;
+  TRes call({Subscription_watchPerson_personsByPk? personsByPk});
+  CopyWith_Subscription_watchPerson_personsByPk<TRes> get personsByPk;
 }
 
-class _CopyWithImpl$Subscription$watchPerson<TRes>
-    implements CopyWith$Subscription$watchPerson<TRes> {
-  _CopyWithImpl$Subscription$watchPerson(
+class _CopyWithImpl_Subscription_watchPerson<TRes>
+    implements CopyWith_Subscription_watchPerson<TRes> {
+  _CopyWithImpl_Subscription_watchPerson(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson _instance;
+  final Subscription_watchPerson _instance;
 
-  final TRes Function(Subscription$watchPerson) _then;
+  final TRes Function(Subscription_watchPerson) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personsByPk = _undefined}) =>
-      _then(Subscription$watchPerson(
+      _then(Subscription_watchPerson(
           personsByPk: personsByPk == _undefined
               ? _instance.personsByPk
-              : (personsByPk as Subscription$watchPerson$personsByPk?)));
-  CopyWith$Subscription$watchPerson$personsByPk<TRes> get personsByPk {
+              : (personsByPk as Subscription_watchPerson_personsByPk?)));
+  CopyWith_Subscription_watchPerson_personsByPk<TRes> get personsByPk {
     final local$personsByPk = _instance.personsByPk;
     return local$personsByPk == null
-        ? CopyWith$Subscription$watchPerson$personsByPk.stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk(
+        ? CopyWith_Subscription_watchPerson_personsByPk.stub(_then(_instance))
+        : CopyWith_Subscription_watchPerson_personsByPk(
             local$personsByPk, (e) => call(personsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson<TRes>
-    implements CopyWith$Subscription$watchPerson<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson<TRes>
+    implements CopyWith_Subscription_watchPerson<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson(this._res);
 
   TRes _res;
 
-  call({Subscription$watchPerson$personsByPk? personsByPk}) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk<TRes> get personsByPk =>
-      CopyWith$Subscription$watchPerson$personsByPk.stub(_res);
+  call({Subscription_watchPerson_personsByPk? personsByPk}) => _res;
+  CopyWith_Subscription_watchPerson_personsByPk<TRes> get personsByPk =>
+      CopyWith_Subscription_watchPerson_personsByPk.stub(_res);
 }
 
 const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
@@ -1828,9 +1828,9 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   fragmentDefinitionStreetNoPhoto,
 ]);
 
-class Subscription$watchPerson$personsByPk
-    implements Fragment$Person, Fragment$PersonNoPhoto {
-  Subscription$watchPerson$personsByPk({
+class Subscription_watchPerson_personsByPk
+    implements Fragment_Person, Fragment_PersonNoPhoto {
+  Subscription_watchPerson_personsByPk({
     required this.id,
     required this.name,
     this.color,
@@ -1874,7 +1874,7 @@ class Subscription$watchPerson$personsByPk
     this.user,
   });
 
-  factory Subscription$watchPerson$personsByPk.fromJson(
+  factory Subscription_watchPerson_personsByPk.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -1917,7 +1917,7 @@ class Subscription$watchPerson$personsByPk
     final l$tags = json['tags'];
     final l$uid = json['uid'];
     final l$user = json['user'];
-    return Subscription$watchPerson$personsByPk(
+    return Subscription_watchPerson_personsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -1927,31 +1927,31 @@ class Subscription$watchPerson$personsByPk
       address: (l$address as String?),
       birthdate: l$birthdate == null ? null : dateFromString(l$birthdate),
       areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment$Area.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
       classes: (l$classes as List<dynamic>?)
-          ?.map((e) => Subscription$watchPerson$personsByPk$classes.fromJson(
+          ?.map((e) => Subscription_watchPerson_personsByPk_classes.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       church: l$church == null
           ? null
-          : Subscription$watchPerson$personsByPk$church.fromJson(
+          : Subscription_watchPerson_personsByPk_church.fromJson(
               (l$church as Map<String, dynamic>)),
       college: l$college == null
           ? null
-          : Subscription$watchPerson$personsByPk$college.fromJson(
+          : Subscription_watchPerson_personsByPk_college.fromJson(
               (l$college as Map<String, dynamic>)),
       family: l$family == null
           ? null
-          : Fragment$Family.fromJson((l$family as Map<String, dynamic>)),
+          : Fragment_Family.fromJson((l$family as Map<String, dynamic>)),
       father: l$father == null
           ? null
-          : Subscription$watchPerson$personsByPk$father.fromJson(
+          : Subscription_watchPerson_personsByPk_father.fromJson(
               (l$father as Map<String, dynamic>)),
       gender: (l$gender as bool),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       groups: (l$groups as List<dynamic>)
-          .map((e) => Subscription$watchPerson$personsByPk$groups.fromJson(
+          .map((e) => Subscription_watchPerson_personsByPk_groups.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       isServant: (l$isServant as bool),
@@ -1959,7 +1959,7 @@ class Subscription$watchPerson$personsByPk
       isStudent: (l$isStudent as bool?),
       job: l$job == null
           ? null
-          : Subscription$watchPerson$personsByPk$job.fromJson(
+          : Subscription_watchPerson_personsByPk_job.fromJson(
               (l$job as Map<String, dynamic>)),
       jobDescription: (l$jobDescription as String?),
       lastCall: (l$lastCall as Json?),
@@ -1972,47 +1972,47 @@ class Subscription$watchPerson$personsByPk
       otherPhones: (l$otherPhones as Json),
       personType: l$personType == null
           ? null
-          : Subscription$watchPerson$personsByPk$personType.fromJson(
+          : Subscription_watchPerson_personsByPk_personType.fromJson(
               (l$personType as Map<String, dynamic>)),
       qualification: l$qualification == null
           ? null
-          : Subscription$watchPerson$personsByPk$qualification.fromJson(
+          : Subscription_watchPerson_personsByPk_qualification.fromJson(
               (l$qualification as Map<String, dynamic>)),
       school: l$school == null
           ? null
-          : Subscription$watchPerson$personsByPk$school.fromJson(
+          : Subscription_watchPerson_personsByPk_school.fromJson(
               (l$school as Map<String, dynamic>)),
       services: (l$services as List<dynamic>)
-          .map((e) => Subscription$watchPerson$personsByPk$services.fromJson(
+          .map((e) => Subscription_watchPerson_personsByPk_services.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       shammasLevel: l$shammasLevel == null
           ? null
-          : Subscription$watchPerson$personsByPk$shammasLevel.fromJson(
+          : Subscription_watchPerson_personsByPk_shammasLevel.fromJson(
               (l$shammasLevel as Map<String, dynamic>)),
       state: l$state == null
           ? null
-          : Subscription$watchPerson$personsByPk$state.fromJson(
+          : Subscription_watchPerson_personsByPk_state.fromJson(
               (l$state as Map<String, dynamic>)),
       streets: (l$streets as List<dynamic>?)
-          ?.map((e) => Fragment$Street.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
           .toList(),
       studyYear: l$studyYear == null
           ? null
-          : Subscription$watchPerson$personsByPk$studyYear.fromJson(
+          : Subscription_watchPerson_personsByPk_studyYear.fromJson(
               (l$studyYear as Map<String, dynamic>)),
       hobbies: (l$hobbies as List<dynamic>)
-          .map((e) => Subscription$watchPerson$personsByPk$hobbies.fromJson(
+          .map((e) => Subscription_watchPerson_personsByPk_hobbies.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       tags: (l$tags as List<dynamic>)
-          .map((e) => Subscription$watchPerson$personsByPk$tags.fromJson(
+          .map((e) => Subscription_watchPerson_personsByPk_tags.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       uid: l$uid == null ? null : stringToUuid(l$uid),
       user: l$user == null
           ? null
-          : Subscription$watchPerson$personsByPk$user.fromJson(
+          : Subscription_watchPerson_personsByPk_user.fromJson(
               (l$user as Map<String, dynamic>)),
     );
   }
@@ -2031,23 +2031,23 @@ class Subscription$watchPerson$personsByPk
 
   final DateTime? birthdate;
 
-  final List<Fragment$Area>? areas;
+  final List<Fragment_Area>? areas;
 
-  final List<Subscription$watchPerson$personsByPk$classes>? classes;
+  final List<Subscription_watchPerson_personsByPk_classes>? classes;
 
-  final Subscription$watchPerson$personsByPk$church? church;
+  final Subscription_watchPerson_personsByPk_church? church;
 
-  final Subscription$watchPerson$personsByPk$college? college;
+  final Subscription_watchPerson_personsByPk_college? college;
 
-  final Fragment$Family? family;
+  final Fragment_Family? family;
 
-  final Subscription$watchPerson$personsByPk$father? father;
+  final Subscription_watchPerson_personsByPk_father? father;
 
   final bool gender;
 
   final Map<String, dynamic>? geolocation;
 
-  final List<Subscription$watchPerson$personsByPk$groups> groups;
+  final List<Subscription_watchPerson_personsByPk_groups> groups;
 
   final bool isServant;
 
@@ -2055,7 +2055,7 @@ class Subscription$watchPerson$personsByPk
 
   final bool? isStudent;
 
-  final Subscription$watchPerson$personsByPk$job? job;
+  final Subscription_watchPerson_personsByPk_job? job;
 
   final String? jobDescription;
 
@@ -2075,29 +2075,29 @@ class Subscription$watchPerson$personsByPk
 
   final Json otherPhones;
 
-  final Subscription$watchPerson$personsByPk$personType? personType;
+  final Subscription_watchPerson_personsByPk_personType? personType;
 
-  final Subscription$watchPerson$personsByPk$qualification? qualification;
+  final Subscription_watchPerson_personsByPk_qualification? qualification;
 
-  final Subscription$watchPerson$personsByPk$school? school;
+  final Subscription_watchPerson_personsByPk_school? school;
 
-  final List<Subscription$watchPerson$personsByPk$services> services;
+  final List<Subscription_watchPerson_personsByPk_services> services;
 
-  final Subscription$watchPerson$personsByPk$shammasLevel? shammasLevel;
+  final Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel;
 
-  final Subscription$watchPerson$personsByPk$state? state;
+  final Subscription_watchPerson_personsByPk_state? state;
 
-  final List<Fragment$Street>? streets;
+  final List<Fragment_Street>? streets;
 
-  final Subscription$watchPerson$personsByPk$studyYear? studyYear;
+  final Subscription_watchPerson_personsByPk_studyYear? studyYear;
 
-  final List<Subscription$watchPerson$personsByPk$hobbies> hobbies;
+  final List<Subscription_watchPerson_personsByPk_hobbies> hobbies;
 
-  final List<Subscription$watchPerson$personsByPk$tags> tags;
+  final List<Subscription_watchPerson_personsByPk_tags> tags;
 
   final UuidValue? uid;
 
-  final Subscription$watchPerson$personsByPk$user? user;
+  final Subscription_watchPerson_personsByPk_user? user;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2281,7 +2281,7 @@ class Subscription$watchPerson$personsByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk) ||
+    if (!(other is Subscription_watchPerson_personsByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2555,24 +2555,24 @@ class Subscription$watchPerson$personsByPk
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk
-    on Subscription$watchPerson$personsByPk {
-  CopyWith$Subscription$watchPerson$personsByPk<
-          Subscription$watchPerson$personsByPk>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk(
+extension UtilityExtension_Subscription_watchPerson_personsByPk
+    on Subscription_watchPerson_personsByPk {
+  CopyWith_Subscription_watchPerson_personsByPk<
+          Subscription_watchPerson_personsByPk>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk(
-    Subscription$watchPerson$personsByPk instance,
-    TRes Function(Subscription$watchPerson$personsByPk) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk;
+abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk(
+    Subscription_watchPerson_personsByPk instance,
+    TRes Function(Subscription_watchPerson_personsByPk) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk;
+  factory CopyWith_Subscription_watchPerson_personsByPk.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk;
 
   TRes call({
     UuidValue? id,
@@ -2582,19 +2582,19 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk<TRes> {
     DateTime? photoUpdatedAt,
     String? address,
     DateTime? birthdate,
-    List<Fragment$Area>? areas,
-    List<Subscription$watchPerson$personsByPk$classes>? classes,
-    Subscription$watchPerson$personsByPk$church? church,
-    Subscription$watchPerson$personsByPk$college? college,
-    Fragment$Family? family,
-    Subscription$watchPerson$personsByPk$father? father,
+    List<Fragment_Area>? areas,
+    List<Subscription_watchPerson_personsByPk_classes>? classes,
+    Subscription_watchPerson_personsByPk_church? church,
+    Subscription_watchPerson_personsByPk_college? college,
+    Fragment_Family? family,
+    Subscription_watchPerson_personsByPk_father? father,
     bool? gender,
     Map<String, dynamic>? geolocation,
-    List<Subscription$watchPerson$personsByPk$groups>? groups,
+    List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
     bool? isStudent,
-    Subscription$watchPerson$personsByPk$job? job,
+    Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
     Json? lastCall,
     Json? lastConfession,
@@ -2604,83 +2604,83 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk<TRes> {
     String? mainPhone,
     String? notes,
     Json? otherPhones,
-    Subscription$watchPerson$personsByPk$personType? personType,
-    Subscription$watchPerson$personsByPk$qualification? qualification,
-    Subscription$watchPerson$personsByPk$school? school,
-    List<Subscription$watchPerson$personsByPk$services>? services,
-    Subscription$watchPerson$personsByPk$shammasLevel? shammasLevel,
-    Subscription$watchPerson$personsByPk$state? state,
-    List<Fragment$Street>? streets,
-    Subscription$watchPerson$personsByPk$studyYear? studyYear,
-    List<Subscription$watchPerson$personsByPk$hobbies>? hobbies,
-    List<Subscription$watchPerson$personsByPk$tags>? tags,
+    Subscription_watchPerson_personsByPk_personType? personType,
+    Subscription_watchPerson_personsByPk_qualification? qualification,
+    Subscription_watchPerson_personsByPk_school? school,
+    List<Subscription_watchPerson_personsByPk_services>? services,
+    Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
+    Subscription_watchPerson_personsByPk_state? state,
+    List<Fragment_Street>? streets,
+    Subscription_watchPerson_personsByPk_studyYear? studyYear,
+    List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
+    List<Subscription_watchPerson_personsByPk_tags>? tags,
     UuidValue? uid,
-    Subscription$watchPerson$personsByPk$user? user,
+    Subscription_watchPerson_personsByPk_user? user,
   });
   TRes areas(
-      Iterable<Fragment$Area>? Function(
-              Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+      Iterable<Fragment_Area>? Function(
+              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
           _fn);
   TRes classes(
-      Iterable<Subscription$watchPerson$personsByPk$classes>? Function(
+      Iterable<Subscription_watchPerson_personsByPk_classes>? Function(
               Iterable<
-                  CopyWith$Subscription$watchPerson$personsByPk$classes<
-                      Subscription$watchPerson$personsByPk$classes>>?)
+                  CopyWith_Subscription_watchPerson_personsByPk_classes<
+                      Subscription_watchPerson_personsByPk_classes>>?)
           _fn);
-  CopyWith$Subscription$watchPerson$personsByPk$church<TRes> get church;
-  CopyWith$Subscription$watchPerson$personsByPk$college<TRes> get college;
-  CopyWith$Fragment$Family<TRes> get family;
-  CopyWith$Subscription$watchPerson$personsByPk$father<TRes> get father;
+  CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church;
+  CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college;
+  CopyWith_Fragment_Family<TRes> get family;
+  CopyWith_Subscription_watchPerson_personsByPk_father<TRes> get father;
   TRes groups(
-      Iterable<Subscription$watchPerson$personsByPk$groups> Function(
+      Iterable<Subscription_watchPerson_personsByPk_groups> Function(
               Iterable<
-                  CopyWith$Subscription$watchPerson$personsByPk$groups<
-                      Subscription$watchPerson$personsByPk$groups>>)
+                  CopyWith_Subscription_watchPerson_personsByPk_groups<
+                      Subscription_watchPerson_personsByPk_groups>>)
           _fn);
-  CopyWith$Subscription$watchPerson$personsByPk$job<TRes> get job;
-  CopyWith$Subscription$watchPerson$personsByPk$personType<TRes> get personType;
-  CopyWith$Subscription$watchPerson$personsByPk$qualification<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job;
+  CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> get personType;
+  CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes>
       get qualification;
-  CopyWith$Subscription$watchPerson$personsByPk$school<TRes> get school;
+  CopyWith_Subscription_watchPerson_personsByPk_school<TRes> get school;
   TRes services(
-      Iterable<Subscription$watchPerson$personsByPk$services> Function(
+      Iterable<Subscription_watchPerson_personsByPk_services> Function(
               Iterable<
-                  CopyWith$Subscription$watchPerson$personsByPk$services<
-                      Subscription$watchPerson$personsByPk$services>>)
+                  CopyWith_Subscription_watchPerson_personsByPk_services<
+                      Subscription_watchPerson_personsByPk_services>>)
           _fn);
-  CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
       get shammasLevel;
-  CopyWith$Subscription$watchPerson$personsByPk$state<TRes> get state;
+  CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state;
   TRes streets(
-      Iterable<Fragment$Street>? Function(
-              Iterable<CopyWith$Fragment$Street<Fragment$Street>>?)
+      Iterable<Fragment_Street>? Function(
+              Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
           _fn);
-  CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> get studyYear;
+  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear;
   TRes hobbies(
-      Iterable<Subscription$watchPerson$personsByPk$hobbies> Function(
+      Iterable<Subscription_watchPerson_personsByPk_hobbies> Function(
               Iterable<
-                  CopyWith$Subscription$watchPerson$personsByPk$hobbies<
-                      Subscription$watchPerson$personsByPk$hobbies>>)
+                  CopyWith_Subscription_watchPerson_personsByPk_hobbies<
+                      Subscription_watchPerson_personsByPk_hobbies>>)
           _fn);
   TRes tags(
-      Iterable<Subscription$watchPerson$personsByPk$tags> Function(
+      Iterable<Subscription_watchPerson_personsByPk_tags> Function(
               Iterable<
-                  CopyWith$Subscription$watchPerson$personsByPk$tags<
-                      Subscription$watchPerson$personsByPk$tags>>)
+                  CopyWith_Subscription_watchPerson_personsByPk_tags<
+                      Subscription_watchPerson_personsByPk_tags>>)
           _fn);
-  CopyWith$Subscription$watchPerson$personsByPk$user<TRes> get user;
+  CopyWith_Subscription_watchPerson_personsByPk_user<TRes> get user;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk _instance;
+  final Subscription_watchPerson_personsByPk _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2727,7 +2727,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
     Object? uid = _undefined,
     Object? user = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk(
+      _then(Subscription_watchPerson_personsByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2746,22 +2746,22 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
             : (birthdate as DateTime?),
         areas: areas == _undefined
             ? _instance.areas
-            : (areas as List<Fragment$Area>?),
+            : (areas as List<Fragment_Area>?),
         classes: classes == _undefined
             ? _instance.classes
-            : (classes as List<Subscription$watchPerson$personsByPk$classes>?),
+            : (classes as List<Subscription_watchPerson_personsByPk_classes>?),
         church: church == _undefined
             ? _instance.church
-            : (church as Subscription$watchPerson$personsByPk$church?),
+            : (church as Subscription_watchPerson_personsByPk_church?),
         college: college == _undefined
             ? _instance.college
-            : (college as Subscription$watchPerson$personsByPk$college?),
+            : (college as Subscription_watchPerson_personsByPk_college?),
         family: family == _undefined
             ? _instance.family
-            : (family as Fragment$Family?),
+            : (family as Fragment_Family?),
         father: father == _undefined
             ? _instance.father
-            : (father as Subscription$watchPerson$personsByPk$father?),
+            : (father as Subscription_watchPerson_personsByPk_father?),
         gender: gender == _undefined || gender == null
             ? _instance.gender
             : (gender as bool),
@@ -2770,7 +2770,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
             : (geolocation as Map<String, dynamic>?),
         groups: groups == _undefined || groups == null
             ? _instance.groups
-            : (groups as List<Subscription$watchPerson$personsByPk$groups>),
+            : (groups as List<Subscription_watchPerson_personsByPk_groups>),
         isServant: isServant == _undefined || isServant == null
             ? _instance.isServant
             : (isServant as bool),
@@ -2782,7 +2782,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
             : (isStudent as bool?),
         job: job == _undefined
             ? _instance.job
-            : (job as Subscription$watchPerson$personsByPk$job?),
+            : (job as Subscription_watchPerson_personsByPk_job?),
         jobDescription: jobDescription == _undefined
             ? _instance.jobDescription
             : (jobDescription as String?),
@@ -2808,232 +2808,232 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk<TRes>
             : (otherPhones as Json),
         personType: personType == _undefined
             ? _instance.personType
-            : (personType as Subscription$watchPerson$personsByPk$personType?),
+            : (personType as Subscription_watchPerson_personsByPk_personType?),
         qualification: qualification == _undefined
             ? _instance.qualification
             : (qualification
-                as Subscription$watchPerson$personsByPk$qualification?),
+                as Subscription_watchPerson_personsByPk_qualification?),
         school: school == _undefined
             ? _instance.school
-            : (school as Subscription$watchPerson$personsByPk$school?),
+            : (school as Subscription_watchPerson_personsByPk_school?),
         services: services == _undefined || services == null
             ? _instance.services
-            : (services as List<Subscription$watchPerson$personsByPk$services>),
+            : (services as List<Subscription_watchPerson_personsByPk_services>),
         shammasLevel: shammasLevel == _undefined
             ? _instance.shammasLevel
             : (shammasLevel
-                as Subscription$watchPerson$personsByPk$shammasLevel?),
+                as Subscription_watchPerson_personsByPk_shammasLevel?),
         state: state == _undefined
             ? _instance.state
-            : (state as Subscription$watchPerson$personsByPk$state?),
+            : (state as Subscription_watchPerson_personsByPk_state?),
         streets: streets == _undefined
             ? _instance.streets
-            : (streets as List<Fragment$Street>?),
+            : (streets as List<Fragment_Street>?),
         studyYear: studyYear == _undefined
             ? _instance.studyYear
-            : (studyYear as Subscription$watchPerson$personsByPk$studyYear?),
+            : (studyYear as Subscription_watchPerson_personsByPk_studyYear?),
         hobbies: hobbies == _undefined || hobbies == null
             ? _instance.hobbies
-            : (hobbies as List<Subscription$watchPerson$personsByPk$hobbies>),
+            : (hobbies as List<Subscription_watchPerson_personsByPk_hobbies>),
         tags: tags == _undefined || tags == null
             ? _instance.tags
-            : (tags as List<Subscription$watchPerson$personsByPk$tags>),
+            : (tags as List<Subscription_watchPerson_personsByPk_tags>),
         uid: uid == _undefined ? _instance.uid : (uid as UuidValue?),
         user: user == _undefined
             ? _instance.user
-            : (user as Subscription$watchPerson$personsByPk$user?),
+            : (user as Subscription_watchPerson_personsByPk_user?),
       ));
   TRes areas(
-          Iterable<Fragment$Area>? Function(
-                  Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+          Iterable<Fragment_Area>? Function(
+                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
               _fn) =>
       call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith$Fragment$Area(
+          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
                 e,
                 (i) => i,
               )))?.toList());
   TRes classes(
-          Iterable<Subscription$watchPerson$personsByPk$classes>? Function(
+          Iterable<Subscription_watchPerson_personsByPk_classes>? Function(
                   Iterable<
-                      CopyWith$Subscription$watchPerson$personsByPk$classes<
-                          Subscription$watchPerson$personsByPk$classes>>?)
+                      CopyWith_Subscription_watchPerson_personsByPk_classes<
+                          Subscription_watchPerson_personsByPk_classes>>?)
               _fn) =>
       call(
           classes: _fn(_instance.classes?.map(
-              (e) => CopyWith$Subscription$watchPerson$personsByPk$classes(
+              (e) => CopyWith_Subscription_watchPerson_personsByPk_classes(
                     e,
                     (i) => i,
                   )))?.toList());
-  CopyWith$Subscription$watchPerson$personsByPk$church<TRes> get church {
+  CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$church.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_church.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$church(
+        : CopyWith_Subscription_watchPerson_personsByPk_church(
             local$church, (e) => call(church: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$college<TRes> get college {
+  CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college {
     final local$college = _instance.college;
     return local$college == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$college.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_college.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$college(
+        : CopyWith_Subscription_watchPerson_personsByPk_college(
             local$college, (e) => call(college: e));
   }
 
-  CopyWith$Fragment$Family<TRes> get family {
+  CopyWith_Fragment_Family<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
-        ? CopyWith$Fragment$Family.stub(_then(_instance))
-        : CopyWith$Fragment$Family(local$family, (e) => call(family: e));
+        ? CopyWith_Fragment_Family.stub(_then(_instance))
+        : CopyWith_Fragment_Family(local$family, (e) => call(family: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$father<TRes> get father {
+  CopyWith_Subscription_watchPerson_personsByPk_father<TRes> get father {
     final local$father = _instance.father;
     return local$father == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$father.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_father.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$father(
+        : CopyWith_Subscription_watchPerson_personsByPk_father(
             local$father, (e) => call(father: e));
   }
 
   TRes groups(
-          Iterable<Subscription$watchPerson$personsByPk$groups> Function(
+          Iterable<Subscription_watchPerson_personsByPk_groups> Function(
                   Iterable<
-                      CopyWith$Subscription$watchPerson$personsByPk$groups<
-                          Subscription$watchPerson$personsByPk$groups>>)
+                      CopyWith_Subscription_watchPerson_personsByPk_groups<
+                          Subscription_watchPerson_personsByPk_groups>>)
               _fn) =>
       call(
           groups: _fn(_instance.groups
-              .map((e) => CopyWith$Subscription$watchPerson$personsByPk$groups(
+              .map((e) => CopyWith_Subscription_watchPerson_personsByPk_groups(
                     e,
                     (i) => i,
                   ))).toList());
-  CopyWith$Subscription$watchPerson$personsByPk$job<TRes> get job {
+  CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job {
     final local$job = _instance.job;
     return local$job == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$job.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_job.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$job(
+        : CopyWith_Subscription_watchPerson_personsByPk_job(
             local$job, (e) => call(job: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$personType<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_personType<TRes>
       get personType {
     final local$personType = _instance.personType;
     return local$personType == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$personType.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_personType.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$personType(
+        : CopyWith_Subscription_watchPerson_personsByPk_personType(
             local$personType, (e) => call(personType: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$qualification<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes>
       get qualification {
     final local$qualification = _instance.qualification;
     return local$qualification == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$qualification.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_qualification.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$qualification(
+        : CopyWith_Subscription_watchPerson_personsByPk_qualification(
             local$qualification, (e) => call(qualification: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$school<TRes> get school {
+  CopyWith_Subscription_watchPerson_personsByPk_school<TRes> get school {
     final local$school = _instance.school;
     return local$school == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$school.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_school.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$school(
+        : CopyWith_Subscription_watchPerson_personsByPk_school(
             local$school, (e) => call(school: e));
   }
 
   TRes services(
-          Iterable<Subscription$watchPerson$personsByPk$services> Function(
+          Iterable<Subscription_watchPerson_personsByPk_services> Function(
                   Iterable<
-                      CopyWith$Subscription$watchPerson$personsByPk$services<
-                          Subscription$watchPerson$personsByPk$services>>)
+                      CopyWith_Subscription_watchPerson_personsByPk_services<
+                          Subscription_watchPerson_personsByPk_services>>)
               _fn) =>
       call(
           services: _fn(_instance.services.map(
-              (e) => CopyWith$Subscription$watchPerson$personsByPk$services(
+              (e) => CopyWith_Subscription_watchPerson_personsByPk_services(
                     e,
                     (i) => i,
                   ))).toList());
-  CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
       get shammasLevel {
     final local$shammasLevel = _instance.shammasLevel;
     return local$shammasLevel == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$shammasLevel.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_shammasLevel.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$shammasLevel(
+        : CopyWith_Subscription_watchPerson_personsByPk_shammasLevel(
             local$shammasLevel, (e) => call(shammasLevel: e));
   }
 
-  CopyWith$Subscription$watchPerson$personsByPk$state<TRes> get state {
+  CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state {
     final local$state = _instance.state;
     return local$state == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$state.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_state.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$state(
+        : CopyWith_Subscription_watchPerson_personsByPk_state(
             local$state, (e) => call(state: e));
   }
 
   TRes streets(
-          Iterable<Fragment$Street>? Function(
-                  Iterable<CopyWith$Fragment$Street<Fragment$Street>>?)
+          Iterable<Fragment_Street>? Function(
+                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
               _fn) =>
       call(
-          streets: _fn(_instance.streets?.map((e) => CopyWith$Fragment$Street(
+          streets: _fn(_instance.streets?.map((e) => CopyWith_Fragment_Street(
                 e,
                 (i) => i,
               )))?.toList());
-  CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> get studyYear {
+  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$studyYear.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$studyYear(
+        : CopyWith_Subscription_watchPerson_personsByPk_studyYear(
             local$studyYear, (e) => call(studyYear: e));
   }
 
   TRes hobbies(
-          Iterable<Subscription$watchPerson$personsByPk$hobbies> Function(
+          Iterable<Subscription_watchPerson_personsByPk_hobbies> Function(
                   Iterable<
-                      CopyWith$Subscription$watchPerson$personsByPk$hobbies<
-                          Subscription$watchPerson$personsByPk$hobbies>>)
+                      CopyWith_Subscription_watchPerson_personsByPk_hobbies<
+                          Subscription_watchPerson_personsByPk_hobbies>>)
               _fn) =>
       call(
           hobbies: _fn(_instance.hobbies
-              .map((e) => CopyWith$Subscription$watchPerson$personsByPk$hobbies(
+              .map((e) => CopyWith_Subscription_watchPerson_personsByPk_hobbies(
                     e,
                     (i) => i,
                   ))).toList());
   TRes tags(
-          Iterable<Subscription$watchPerson$personsByPk$tags> Function(
+          Iterable<Subscription_watchPerson_personsByPk_tags> Function(
                   Iterable<
-                      CopyWith$Subscription$watchPerson$personsByPk$tags<
-                          Subscription$watchPerson$personsByPk$tags>>)
+                      CopyWith_Subscription_watchPerson_personsByPk_tags<
+                          Subscription_watchPerson_personsByPk_tags>>)
               _fn) =>
       call(
           tags: _fn(_instance.tags
-              .map((e) => CopyWith$Subscription$watchPerson$personsByPk$tags(
+              .map((e) => CopyWith_Subscription_watchPerson_personsByPk_tags(
                     e,
                     (i) => i,
                   ))).toList());
-  CopyWith$Subscription$watchPerson$personsByPk$user<TRes> get user {
+  CopyWith_Subscription_watchPerson_personsByPk_user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$user.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_user.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$user(
+        : CopyWith_Subscription_watchPerson_personsByPk_user(
             local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk(this._res);
 
   TRes _res;
 
@@ -3045,19 +3045,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk<TRes>
     DateTime? photoUpdatedAt,
     String? address,
     DateTime? birthdate,
-    List<Fragment$Area>? areas,
-    List<Subscription$watchPerson$personsByPk$classes>? classes,
-    Subscription$watchPerson$personsByPk$church? church,
-    Subscription$watchPerson$personsByPk$college? college,
-    Fragment$Family? family,
-    Subscription$watchPerson$personsByPk$father? father,
+    List<Fragment_Area>? areas,
+    List<Subscription_watchPerson_personsByPk_classes>? classes,
+    Subscription_watchPerson_personsByPk_church? church,
+    Subscription_watchPerson_personsByPk_college? college,
+    Fragment_Family? family,
+    Subscription_watchPerson_personsByPk_father? father,
     bool? gender,
     Map<String, dynamic>? geolocation,
-    List<Subscription$watchPerson$personsByPk$groups>? groups,
+    List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
     bool? isStudent,
-    Subscription$watchPerson$personsByPk$job? job,
+    Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
     Json? lastCall,
     Json? lastConfession,
@@ -3067,60 +3067,60 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk<TRes>
     String? mainPhone,
     String? notes,
     Json? otherPhones,
-    Subscription$watchPerson$personsByPk$personType? personType,
-    Subscription$watchPerson$personsByPk$qualification? qualification,
-    Subscription$watchPerson$personsByPk$school? school,
-    List<Subscription$watchPerson$personsByPk$services>? services,
-    Subscription$watchPerson$personsByPk$shammasLevel? shammasLevel,
-    Subscription$watchPerson$personsByPk$state? state,
-    List<Fragment$Street>? streets,
-    Subscription$watchPerson$personsByPk$studyYear? studyYear,
-    List<Subscription$watchPerson$personsByPk$hobbies>? hobbies,
-    List<Subscription$watchPerson$personsByPk$tags>? tags,
+    Subscription_watchPerson_personsByPk_personType? personType,
+    Subscription_watchPerson_personsByPk_qualification? qualification,
+    Subscription_watchPerson_personsByPk_school? school,
+    List<Subscription_watchPerson_personsByPk_services>? services,
+    Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
+    Subscription_watchPerson_personsByPk_state? state,
+    List<Fragment_Street>? streets,
+    Subscription_watchPerson_personsByPk_studyYear? studyYear,
+    List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
+    List<Subscription_watchPerson_personsByPk_tags>? tags,
     UuidValue? uid,
-    Subscription$watchPerson$personsByPk$user? user,
+    Subscription_watchPerson_personsByPk_user? user,
   }) =>
       _res;
   areas(_fn) => _res;
   classes(_fn) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk$church<TRes> get church =>
-      CopyWith$Subscription$watchPerson$personsByPk$church.stub(_res);
-  CopyWith$Subscription$watchPerson$personsByPk$college<TRes> get college =>
-      CopyWith$Subscription$watchPerson$personsByPk$college.stub(_res);
-  CopyWith$Fragment$Family<TRes> get family =>
-      CopyWith$Fragment$Family.stub(_res);
-  CopyWith$Subscription$watchPerson$personsByPk$father<TRes> get father =>
-      CopyWith$Subscription$watchPerson$personsByPk$father.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church =>
+      CopyWith_Subscription_watchPerson_personsByPk_church.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college =>
+      CopyWith_Subscription_watchPerson_personsByPk_college.stub(_res);
+  CopyWith_Fragment_Family<TRes> get family =>
+      CopyWith_Fragment_Family.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_father<TRes> get father =>
+      CopyWith_Subscription_watchPerson_personsByPk_father.stub(_res);
   groups(_fn) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk$job<TRes> get job =>
-      CopyWith$Subscription$watchPerson$personsByPk$job.stub(_res);
-  CopyWith$Subscription$watchPerson$personsByPk$personType<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job =>
+      CopyWith_Subscription_watchPerson_personsByPk_job.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_personType<TRes>
       get personType =>
-          CopyWith$Subscription$watchPerson$personsByPk$personType.stub(_res);
-  CopyWith$Subscription$watchPerson$personsByPk$qualification<TRes>
+          CopyWith_Subscription_watchPerson_personsByPk_personType.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes>
       get qualification =>
-          CopyWith$Subscription$watchPerson$personsByPk$qualification.stub(
+          CopyWith_Subscription_watchPerson_personsByPk_qualification.stub(
               _res);
-  CopyWith$Subscription$watchPerson$personsByPk$school<TRes> get school =>
-      CopyWith$Subscription$watchPerson$personsByPk$school.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_school<TRes> get school =>
+      CopyWith_Subscription_watchPerson_personsByPk_school.stub(_res);
   services(_fn) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
       get shammasLevel =>
-          CopyWith$Subscription$watchPerson$personsByPk$shammasLevel.stub(_res);
-  CopyWith$Subscription$watchPerson$personsByPk$state<TRes> get state =>
-      CopyWith$Subscription$watchPerson$personsByPk$state.stub(_res);
+          CopyWith_Subscription_watchPerson_personsByPk_shammasLevel.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state =>
+      CopyWith_Subscription_watchPerson_personsByPk_state.stub(_res);
   streets(_fn) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> get studyYear =>
-      CopyWith$Subscription$watchPerson$personsByPk$studyYear.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear =>
+      CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(_res);
   hobbies(_fn) => _res;
   tags(_fn) => _res;
-  CopyWith$Subscription$watchPerson$personsByPk$user<TRes> get user =>
-      CopyWith$Subscription$watchPerson$personsByPk$user.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_user<TRes> get user =>
+      CopyWith_Subscription_watchPerson_personsByPk_user.stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$classes
-    implements Fragment$Class, Fragment$ClassNoPhoto {
-  Subscription$watchPerson$personsByPk$classes({
+class Subscription_watchPerson_personsByPk_classes
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Subscription_watchPerson_personsByPk_classes({
     required this.id,
     required this.name,
     this.color,
@@ -3129,7 +3129,7 @@ class Subscription$watchPerson$personsByPk$classes
     required this.attendanceHistoryAggregate,
   });
 
-  factory Subscription$watchPerson$personsByPk$classes.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -3137,7 +3137,7 @@ class Subscription$watchPerson$personsByPk$classes
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
-    return Subscription$watchPerson$personsByPk$classes(
+    return Subscription_watchPerson_personsByPk_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -3145,7 +3145,7 @@ class Subscription$watchPerson$personsByPk$classes
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
     );
   }
@@ -3160,7 +3160,7 @@ class Subscription$watchPerson$personsByPk$classes
 
   final DateTime? photoUpdatedAt;
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
   Map<String, dynamic> toJson() {
@@ -3205,7 +3205,7 @@ class Subscription$watchPerson$personsByPk$classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$classes) ||
+    if (!(other is Subscription_watchPerson_personsByPk_classes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3243,24 +3243,24 @@ class Subscription$watchPerson$personsByPk$classes
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$classes
-    on Subscription$watchPerson$personsByPk$classes {
-  CopyWith$Subscription$watchPerson$personsByPk$classes<
-          Subscription$watchPerson$personsByPk$classes>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$classes(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes
+    on Subscription_watchPerson_personsByPk_classes {
+  CopyWith_Subscription_watchPerson_personsByPk_classes<
+          Subscription_watchPerson_personsByPk_classes>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_classes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$classes<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes(
-    Subscription$watchPerson$personsByPk$classes instance,
-    TRes Function(Subscription$watchPerson$personsByPk$classes) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$classes;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes(
+    Subscription_watchPerson_personsByPk_classes instance,
+    TRes Function(Subscription_watchPerson_personsByPk_classes) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes;
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes;
 
   TRes call({
     UuidValue? id,
@@ -3268,23 +3268,23 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$classes<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$classes<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$classes(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$classes _instance;
+  final Subscription_watchPerson_personsByPk_classes _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$classes) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_classes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3296,7 +3296,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$classes(
+      _then(Subscription_watchPerson_personsByPk_classes(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -3312,21 +3312,21 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate),
+                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+    return CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$classes<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes(this._res);
 
   TRes _res;
 
@@ -3336,37 +3336,37 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate {
-  Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate({
+class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
+  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate({
     this.aggregate,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
+          : Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final String $__typename;
@@ -3396,7 +3396,7 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate {
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate) ||
+            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3414,55 +3414,55 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
-    on Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate)
+            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate)
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3472,69 +3472,69 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate?),
+                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate {
-  Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate({
+class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate {
+  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate({
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
       max: l$max == null
           ? null
-          : Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+          : Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -3564,7 +3564,7 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$ag
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate) ||
+            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3582,55 +3582,55 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$ag
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
-    on Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate)
+            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate)
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3640,60 +3640,60 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
         max: max == _undefined
             ? _instance.max
             : (max
-                as Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?),
+                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
-  Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max({
+class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
+  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -3728,7 +3728,7 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$ag
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max) ||
+            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3746,30 +3746,30 @@ class Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$ag
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
-    on Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
-    Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
+            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -3777,21 +3777,21 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceH
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3801,7 +3801,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -3809,12 +3809,12 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$classes$attendanceHisto
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -3826,19 +3826,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$classes$attendanceH
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$church {
-  Subscription$watchPerson$personsByPk$church({
+class Subscription_watchPerson_personsByPk_church {
+  Subscription_watchPerson_personsByPk_church({
     required this.id,
     required this.name,
     this.$__typename = 'Churches',
   });
 
-  factory Subscription$watchPerson$personsByPk$church.fromJson(
+  factory Subscription_watchPerson_personsByPk_church.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$church(
+    return Subscription_watchPerson_personsByPk_church(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -3879,7 +3879,7 @@ class Subscription$watchPerson$personsByPk$church {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$church) ||
+    if (!(other is Subscription_watchPerson_personsByPk_church) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3902,24 +3902,24 @@ class Subscription$watchPerson$personsByPk$church {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$church
-    on Subscription$watchPerson$personsByPk$church {
-  CopyWith$Subscription$watchPerson$personsByPk$church<
-          Subscription$watchPerson$personsByPk$church>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$church(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_church
+    on Subscription_watchPerson_personsByPk_church {
+  CopyWith_Subscription_watchPerson_personsByPk_church<
+          Subscription_watchPerson_personsByPk_church>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_church(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$church<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$church(
-    Subscription$watchPerson$personsByPk$church instance,
-    TRes Function(Subscription$watchPerson$personsByPk$church) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$church;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_church<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_church(
+    Subscription_watchPerson_personsByPk_church instance,
+    TRes Function(Subscription_watchPerson_personsByPk_church) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_church;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$church.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$church;
+  factory CopyWith_Subscription_watchPerson_personsByPk_church.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_church;
 
   TRes call({
     UuidValue? id,
@@ -3928,16 +3928,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$church<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$church<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$church<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$church(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_church<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_church<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_church(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$church _instance;
+  final Subscription_watchPerson_personsByPk_church _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$church) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_church) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3946,7 +3946,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$church<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$church(
+      _then(Subscription_watchPerson_personsByPk_church(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -3957,9 +3957,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$church<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$church<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$church<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$church(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_church<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_church<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_church(this._res);
 
   TRes _res;
 
@@ -3971,19 +3971,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$church<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$college {
-  Subscription$watchPerson$personsByPk$college({
+class Subscription_watchPerson_personsByPk_college {
+  Subscription_watchPerson_personsByPk_college({
     required this.id,
     required this.name,
     this.$__typename = 'Colleges',
   });
 
-  factory Subscription$watchPerson$personsByPk$college.fromJson(
+  factory Subscription_watchPerson_personsByPk_college.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$college(
+    return Subscription_watchPerson_personsByPk_college(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4024,7 +4024,7 @@ class Subscription$watchPerson$personsByPk$college {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$college) ||
+    if (!(other is Subscription_watchPerson_personsByPk_college) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4047,24 +4047,24 @@ class Subscription$watchPerson$personsByPk$college {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$college
-    on Subscription$watchPerson$personsByPk$college {
-  CopyWith$Subscription$watchPerson$personsByPk$college<
-          Subscription$watchPerson$personsByPk$college>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$college(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_college
+    on Subscription_watchPerson_personsByPk_college {
+  CopyWith_Subscription_watchPerson_personsByPk_college<
+          Subscription_watchPerson_personsByPk_college>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_college(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$college<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$college(
-    Subscription$watchPerson$personsByPk$college instance,
-    TRes Function(Subscription$watchPerson$personsByPk$college) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$college;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_college<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_college(
+    Subscription_watchPerson_personsByPk_college instance,
+    TRes Function(Subscription_watchPerson_personsByPk_college) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_college;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$college.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$college;
+  factory CopyWith_Subscription_watchPerson_personsByPk_college.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_college;
 
   TRes call({
     UuidValue? id,
@@ -4073,16 +4073,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$college<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$college<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$college<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$college(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_college<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_college<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_college(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$college _instance;
+  final Subscription_watchPerson_personsByPk_college _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$college) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_college) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4091,7 +4091,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$college<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$college(
+      _then(Subscription_watchPerson_personsByPk_college(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4102,9 +4102,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$college<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$college<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$college<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$college(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_college<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_college<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_college(this._res);
 
   TRes _res;
 
@@ -4116,26 +4116,26 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$college<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$father {
-  Subscription$watchPerson$personsByPk$father({
+class Subscription_watchPerson_personsByPk_father {
+  Subscription_watchPerson_personsByPk_father({
     required this.id,
     required this.name,
     this.church,
     this.$__typename = 'Fathers',
   });
 
-  factory Subscription$watchPerson$personsByPk$father.fromJson(
+  factory Subscription_watchPerson_personsByPk_father.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$church = json['church'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$father(
+    return Subscription_watchPerson_personsByPk_father(
       id: stringToUuid(l$id),
       name: (l$name as String),
       church: l$church == null
           ? null
-          : Subscription$watchPerson$personsByPk$father$church.fromJson(
+          : Subscription_watchPerson_personsByPk_father_church.fromJson(
               (l$church as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -4145,7 +4145,7 @@ class Subscription$watchPerson$personsByPk$father {
 
   final String name;
 
-  final Subscription$watchPerson$personsByPk$father$church? church;
+  final Subscription_watchPerson_personsByPk_father_church? church;
 
   final String $__typename;
 
@@ -4181,7 +4181,7 @@ class Subscription$watchPerson$personsByPk$father {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$father) ||
+    if (!(other is Subscription_watchPerson_personsByPk_father) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4209,44 +4209,44 @@ class Subscription$watchPerson$personsByPk$father {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$father
-    on Subscription$watchPerson$personsByPk$father {
-  CopyWith$Subscription$watchPerson$personsByPk$father<
-          Subscription$watchPerson$personsByPk$father>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$father(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_father
+    on Subscription_watchPerson_personsByPk_father {
+  CopyWith_Subscription_watchPerson_personsByPk_father<
+          Subscription_watchPerson_personsByPk_father>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_father(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$father<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$father(
-    Subscription$watchPerson$personsByPk$father instance,
-    TRes Function(Subscription$watchPerson$personsByPk$father) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$father;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_father<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_father(
+    Subscription_watchPerson_personsByPk_father instance,
+    TRes Function(Subscription_watchPerson_personsByPk_father) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_father;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$father.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father;
+  factory CopyWith_Subscription_watchPerson_personsByPk_father.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father;
 
   TRes call({
     UuidValue? id,
     String? name,
-    Subscription$watchPerson$personsByPk$father$church? church,
+    Subscription_watchPerson_personsByPk_father_church? church,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$father$church<TRes> get church;
+  CopyWith_Subscription_watchPerson_personsByPk_father_church<TRes> get church;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$father<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$father<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$father(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_father<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_father<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_father(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$father _instance;
+  final Subscription_watchPerson_personsByPk_father _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$father) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_father) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4256,60 +4256,60 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$father<TRes>
     Object? church = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$father(
+      _then(Subscription_watchPerson_personsByPk_father(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
         church: church == _undefined
             ? _instance.church
-            : (church as Subscription$watchPerson$personsByPk$father$church?),
+            : (church as Subscription_watchPerson_personsByPk_father_church?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$father$church<TRes> get church {
+  CopyWith_Subscription_watchPerson_personsByPk_father_church<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$father$church.stub(
+        ? CopyWith_Subscription_watchPerson_personsByPk_father_church.stub(
             _then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$father$church(
+        : CopyWith_Subscription_watchPerson_personsByPk_father_church(
             local$church, (e) => call(church: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$father<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_father<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father(this._res);
 
   TRes _res;
 
   call({
     UuidValue? id,
     String? name,
-    Subscription$watchPerson$personsByPk$father$church? church,
+    Subscription_watchPerson_personsByPk_father_church? church,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$father$church<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_father_church<TRes>
       get church =>
-          CopyWith$Subscription$watchPerson$personsByPk$father$church.stub(
+          CopyWith_Subscription_watchPerson_personsByPk_father_church.stub(
               _res);
 }
 
-class Subscription$watchPerson$personsByPk$father$church {
-  Subscription$watchPerson$personsByPk$father$church({
+class Subscription_watchPerson_personsByPk_father_church {
+  Subscription_watchPerson_personsByPk_father_church({
     required this.id,
     required this.name,
     this.$__typename = 'Churches',
   });
 
-  factory Subscription$watchPerson$personsByPk$father$church.fromJson(
+  factory Subscription_watchPerson_personsByPk_father_church.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$father$church(
+    return Subscription_watchPerson_personsByPk_father_church(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -4350,7 +4350,7 @@ class Subscription$watchPerson$personsByPk$father$church {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$father$church) ||
+    if (!(other is Subscription_watchPerson_personsByPk_father_church) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4373,27 +4373,27 @@ class Subscription$watchPerson$personsByPk$father$church {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$father$church
-    on Subscription$watchPerson$personsByPk$father$church {
-  CopyWith$Subscription$watchPerson$personsByPk$father$church<
-          Subscription$watchPerson$personsByPk$father$church>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_father_church
+    on Subscription_watchPerson_personsByPk_father_church {
+  CopyWith_Subscription_watchPerson_personsByPk_father_church<
+          Subscription_watchPerson_personsByPk_father_church>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$father$church(
+          CopyWith_Subscription_watchPerson_personsByPk_father_church(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$father$church<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_father_church<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$father$church(
-    Subscription$watchPerson$personsByPk$father$church instance,
-    TRes Function(Subscription$watchPerson$personsByPk$father$church) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church;
+  factory CopyWith_Subscription_watchPerson_personsByPk_father_church(
+    Subscription_watchPerson_personsByPk_father_church instance,
+    TRes Function(Subscription_watchPerson_personsByPk_father_church) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_father_church;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$father$church.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_father_church.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father$church;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father_church;
 
   TRes call({
     UuidValue? id,
@@ -4402,17 +4402,17 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$father$church<
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_father_church<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$father$church<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church(
+        CopyWith_Subscription_watchPerson_personsByPk_father_church<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_father_church(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$father$church _instance;
+  final Subscription_watchPerson_personsByPk_father_church _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$father$church) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_father_church) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4421,7 +4421,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$father$church(
+      _then(Subscription_watchPerson_personsByPk_father_church(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4432,10 +4432,10 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father_church<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$father$church<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father$church(
+        CopyWith_Subscription_watchPerson_personsByPk_father_church<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_father_church(
       this._res);
 
   TRes _res;
@@ -4448,24 +4448,24 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$father$church<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$groups {
-  Subscription$watchPerson$personsByPk$groups({
+class Subscription_watchPerson_personsByPk_groups {
+  Subscription_watchPerson_personsByPk_groups({
     required this.group,
     this.$__typename = 'PersonsGroups',
   });
 
-  factory Subscription$watchPerson$personsByPk$groups.fromJson(
+  factory Subscription_watchPerson_personsByPk_groups.fromJson(
       Map<String, dynamic> json) {
     final l$group = json['group'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$groups(
-      group: Subscription$watchPerson$personsByPk$groups$group.fromJson(
+    return Subscription_watchPerson_personsByPk_groups(
+      group: Subscription_watchPerson_personsByPk_groups_group.fromJson(
           (l$group as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$groups$group group;
+  final Subscription_watchPerson_personsByPk_groups_group group;
 
   final String $__typename;
 
@@ -4493,7 +4493,7 @@ class Subscription$watchPerson$personsByPk$groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$groups) ||
+    if (!(other is Subscription_watchPerson_personsByPk_groups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4511,42 +4511,42 @@ class Subscription$watchPerson$personsByPk$groups {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$groups
-    on Subscription$watchPerson$personsByPk$groups {
-  CopyWith$Subscription$watchPerson$personsByPk$groups<
-          Subscription$watchPerson$personsByPk$groups>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$groups(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_groups
+    on Subscription_watchPerson_personsByPk_groups {
+  CopyWith_Subscription_watchPerson_personsByPk_groups<
+          Subscription_watchPerson_personsByPk_groups>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_groups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$groups<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups(
-    Subscription$watchPerson$personsByPk$groups instance,
-    TRes Function(Subscription$watchPerson$personsByPk$groups) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$groups;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_groups<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups(
+    Subscription_watchPerson_personsByPk_groups instance,
+    TRes Function(Subscription_watchPerson_personsByPk_groups) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_groups;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups;
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$groups$group? group,
+    Subscription_watchPerson_personsByPk_groups_group? group,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group<TRes> get group;
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group<TRes> get group;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$groups<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$groups(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_groups<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_groups(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$groups _instance;
+  final Subscription_watchPerson_personsByPk_groups _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$groups) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_groups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4554,39 +4554,39 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups<TRes>
     Object? group = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$groups(
+      _then(Subscription_watchPerson_personsByPk_groups(
         group: group == _undefined || group == null
             ? _instance.group
-            : (group as Subscription$watchPerson$personsByPk$groups$group),
+            : (group as Subscription_watchPerson_personsByPk_groups_group),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group<TRes> get group {
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group<TRes> get group {
     final local$group = _instance.group;
-    return CopyWith$Subscription$watchPerson$personsByPk$groups$group(
+    return CopyWith_Subscription_watchPerson_personsByPk_groups_group(
         local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$groups<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_groups<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups(this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$groups$group? group,
+    Subscription_watchPerson_personsByPk_groups_group? group,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group<TRes> get group =>
-      CopyWith$Subscription$watchPerson$personsByPk$groups$group.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group<TRes> get group =>
+      CopyWith_Subscription_watchPerson_personsByPk_groups_group.stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$groups$group
-    implements Fragment$Group, Fragment$GroupNoPhoto {
-  Subscription$watchPerson$personsByPk$groups$group({
+class Subscription_watchPerson_personsByPk_groups_group
+    implements Fragment_Group, Fragment_GroupNoPhoto {
+  Subscription_watchPerson_personsByPk_groups_group({
     required this.id,
     required this.name,
     this.color,
@@ -4595,7 +4595,7 @@ class Subscription$watchPerson$personsByPk$groups$group
     required this.attendanceHistoryAggregate,
   });
 
-  factory Subscription$watchPerson$personsByPk$groups$group.fromJson(
+  factory Subscription_watchPerson_personsByPk_groups_group.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -4603,7 +4603,7 @@ class Subscription$watchPerson$personsByPk$groups$group
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
-    return Subscription$watchPerson$personsByPk$groups$group(
+    return Subscription_watchPerson_personsByPk_groups_group(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -4611,7 +4611,7 @@ class Subscription$watchPerson$personsByPk$groups$group
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
     );
   }
@@ -4626,7 +4626,7 @@ class Subscription$watchPerson$personsByPk$groups$group
 
   final DateTime? photoUpdatedAt;
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
   Map<String, dynamic> toJson() {
@@ -4671,7 +4671,7 @@ class Subscription$watchPerson$personsByPk$groups$group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$groups$group) ||
+    if (!(other is Subscription_watchPerson_personsByPk_groups_group) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4709,27 +4709,27 @@ class Subscription$watchPerson$personsByPk$groups$group
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$groups$group
-    on Subscription$watchPerson$personsByPk$groups$group {
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group<
-          Subscription$watchPerson$personsByPk$groups$group>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_groups_group
+    on Subscription_watchPerson_personsByPk_groups_group {
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group<
+          Subscription_watchPerson_personsByPk_groups_group>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group(
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group(
-    Subscription$watchPerson$personsByPk$groups$group instance,
-    TRes Function(Subscription$watchPerson$personsByPk$groups$group) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group;
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group(
+    Subscription_watchPerson_personsByPk_groups_group instance,
+    TRes Function(Subscription_watchPerson_personsByPk_groups_group) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group;
 
   TRes call({
     UuidValue? id,
@@ -4737,24 +4737,24 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group(
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$groups$group _instance;
+  final Subscription_watchPerson_personsByPk_groups_group _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$groups$group) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_groups_group) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4766,7 +4766,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$groups$group(
+      _then(Subscription_watchPerson_personsByPk_groups_group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -4782,22 +4782,22 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate),
+                as Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+    return CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group(
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group(
       this._res);
 
   TRes _res;
@@ -4808,37 +4808,37 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate {
-  Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate({
+class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate {
+  Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate({
     this.aggregate,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+    return Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+          : Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final String $__typename;
@@ -4868,7 +4868,7 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate) ||
+            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4886,55 +4886,55 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
-    on Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
+    on Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate)
+            Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate)
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -4944,69 +4944,69 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?),
+                as Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate {
-  Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate({
+class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate {
+  Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate({
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+    return Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
       max: l$max == null
           ? null
-          : Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+          : Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -5036,7 +5036,7 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate) ||
+            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5054,55 +5054,55 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
-    on Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
+    on Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
+            Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5112,60 +5112,60 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
         max: max == _undefined
             ? _instance.max
             : (max
-                as Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?),
+                as Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
-  Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max({
+class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max {
+  Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+    return Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -5200,7 +5200,7 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max) ||
+            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5218,30 +5218,30 @@ class Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
-    on Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
+    on Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
-    Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
+    Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
+            Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -5249,21 +5249,21 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$groups$group$attend
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+  final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5273,7 +5273,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+          Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -5281,12 +5281,12 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$groups$group$attendance
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -5298,19 +5298,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$groups$group$attend
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$job {
-  Subscription$watchPerson$personsByPk$job({
+class Subscription_watchPerson_personsByPk_job {
+  Subscription_watchPerson_personsByPk_job({
     required this.id,
     required this.name,
     this.$__typename = 'Jobs',
   });
 
-  factory Subscription$watchPerson$personsByPk$job.fromJson(
+  factory Subscription_watchPerson_personsByPk_job.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$job(
+    return Subscription_watchPerson_personsByPk_job(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -5351,7 +5351,7 @@ class Subscription$watchPerson$personsByPk$job {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$job) ||
+    if (!(other is Subscription_watchPerson_personsByPk_job) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5374,24 +5374,24 @@ class Subscription$watchPerson$personsByPk$job {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$job
-    on Subscription$watchPerson$personsByPk$job {
-  CopyWith$Subscription$watchPerson$personsByPk$job<
-          Subscription$watchPerson$personsByPk$job>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$job(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_job
+    on Subscription_watchPerson_personsByPk_job {
+  CopyWith_Subscription_watchPerson_personsByPk_job<
+          Subscription_watchPerson_personsByPk_job>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_job(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$job<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$job(
-    Subscription$watchPerson$personsByPk$job instance,
-    TRes Function(Subscription$watchPerson$personsByPk$job) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$job;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_job<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_job(
+    Subscription_watchPerson_personsByPk_job instance,
+    TRes Function(Subscription_watchPerson_personsByPk_job) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_job;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$job.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$job;
+  factory CopyWith_Subscription_watchPerson_personsByPk_job.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_job;
 
   TRes call({
     UuidValue? id,
@@ -5400,16 +5400,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$job<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$job<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$job<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$job(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_job<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_job<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_job(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$job _instance;
+  final Subscription_watchPerson_personsByPk_job _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$job) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_job) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5418,7 +5418,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$job<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$job(
+      _then(Subscription_watchPerson_personsByPk_job(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5429,9 +5429,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$job<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$job<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$job<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$job(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_job<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_job<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_job(this._res);
 
   TRes _res;
 
@@ -5443,19 +5443,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$job<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$personType {
-  Subscription$watchPerson$personsByPk$personType({
+class Subscription_watchPerson_personsByPk_personType {
+  Subscription_watchPerson_personsByPk_personType({
     required this.id,
     required this.name,
     this.$__typename = 'PersonTypes',
   });
 
-  factory Subscription$watchPerson$personsByPk$personType.fromJson(
+  factory Subscription_watchPerson_personsByPk_personType.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$personType(
+    return Subscription_watchPerson_personsByPk_personType(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -5496,7 +5496,7 @@ class Subscription$watchPerson$personsByPk$personType {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$personType) ||
+    if (!(other is Subscription_watchPerson_personsByPk_personType) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5519,25 +5519,25 @@ class Subscription$watchPerson$personsByPk$personType {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$personType
-    on Subscription$watchPerson$personsByPk$personType {
-  CopyWith$Subscription$watchPerson$personsByPk$personType<
-          Subscription$watchPerson$personsByPk$personType>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$personType(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_personType
+    on Subscription_watchPerson_personsByPk_personType {
+  CopyWith_Subscription_watchPerson_personsByPk_personType<
+          Subscription_watchPerson_personsByPk_personType>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_personType(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$personType<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$personType(
-    Subscription$watchPerson$personsByPk$personType instance,
-    TRes Function(Subscription$watchPerson$personsByPk$personType) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$personType;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_personType(
+    Subscription_watchPerson_personsByPk_personType instance,
+    TRes Function(Subscription_watchPerson_personsByPk_personType) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_personType;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$personType.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_personType.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$personType;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_personType;
 
   TRes call({
     UuidValue? id,
@@ -5546,16 +5546,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$personType<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$personType<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$personType<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$personType(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_personType<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_personType(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$personType _instance;
+  final Subscription_watchPerson_personsByPk_personType _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$personType) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_personType) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5564,7 +5564,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$personType<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$personType(
+      _then(Subscription_watchPerson_personsByPk_personType(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5575,9 +5575,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$personType<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$personType<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$personType<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$personType(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_personType<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_personType(this._res);
 
   TRes _res;
 
@@ -5589,19 +5589,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$personType<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$qualification {
-  Subscription$watchPerson$personsByPk$qualification({
+class Subscription_watchPerson_personsByPk_qualification {
+  Subscription_watchPerson_personsByPk_qualification({
     required this.id,
     required this.name,
     this.$__typename = 'Qualifications',
   });
 
-  factory Subscription$watchPerson$personsByPk$qualification.fromJson(
+  factory Subscription_watchPerson_personsByPk_qualification.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$qualification(
+    return Subscription_watchPerson_personsByPk_qualification(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -5642,7 +5642,7 @@ class Subscription$watchPerson$personsByPk$qualification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$qualification) ||
+    if (!(other is Subscription_watchPerson_personsByPk_qualification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5665,27 +5665,27 @@ class Subscription$watchPerson$personsByPk$qualification {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$qualification
-    on Subscription$watchPerson$personsByPk$qualification {
-  CopyWith$Subscription$watchPerson$personsByPk$qualification<
-          Subscription$watchPerson$personsByPk$qualification>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_qualification
+    on Subscription_watchPerson_personsByPk_qualification {
+  CopyWith_Subscription_watchPerson_personsByPk_qualification<
+          Subscription_watchPerson_personsByPk_qualification>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$qualification(
+          CopyWith_Subscription_watchPerson_personsByPk_qualification(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$qualification<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_qualification<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$qualification(
-    Subscription$watchPerson$personsByPk$qualification instance,
-    TRes Function(Subscription$watchPerson$personsByPk$qualification) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification;
+  factory CopyWith_Subscription_watchPerson_personsByPk_qualification(
+    Subscription_watchPerson_personsByPk_qualification instance,
+    TRes Function(Subscription_watchPerson_personsByPk_qualification) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_qualification;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$qualification.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_qualification.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$qualification;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_qualification;
 
   TRes call({
     UuidValue? id,
@@ -5694,17 +5694,17 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$qualification<
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_qualification<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$qualification<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification(
+        CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_qualification(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$qualification _instance;
+  final Subscription_watchPerson_personsByPk_qualification _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$qualification) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_qualification) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5713,7 +5713,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$qualification(
+      _then(Subscription_watchPerson_personsByPk_qualification(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5724,10 +5724,10 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_qualification<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$qualification<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$qualification(
+        CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_qualification(
       this._res);
 
   TRes _res;
@@ -5740,19 +5740,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$qualification<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$school {
-  Subscription$watchPerson$personsByPk$school({
+class Subscription_watchPerson_personsByPk_school {
+  Subscription_watchPerson_personsByPk_school({
     required this.id,
     required this.name,
     this.$__typename = 'Schools',
   });
 
-  factory Subscription$watchPerson$personsByPk$school.fromJson(
+  factory Subscription_watchPerson_personsByPk_school.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$school(
+    return Subscription_watchPerson_personsByPk_school(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -5793,7 +5793,7 @@ class Subscription$watchPerson$personsByPk$school {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$school) ||
+    if (!(other is Subscription_watchPerson_personsByPk_school) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5816,24 +5816,24 @@ class Subscription$watchPerson$personsByPk$school {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$school
-    on Subscription$watchPerson$personsByPk$school {
-  CopyWith$Subscription$watchPerson$personsByPk$school<
-          Subscription$watchPerson$personsByPk$school>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$school(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_school
+    on Subscription_watchPerson_personsByPk_school {
+  CopyWith_Subscription_watchPerson_personsByPk_school<
+          Subscription_watchPerson_personsByPk_school>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_school(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$school<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$school(
-    Subscription$watchPerson$personsByPk$school instance,
-    TRes Function(Subscription$watchPerson$personsByPk$school) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$school;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_school<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_school(
+    Subscription_watchPerson_personsByPk_school instance,
+    TRes Function(Subscription_watchPerson_personsByPk_school) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_school;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$school.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$school;
+  factory CopyWith_Subscription_watchPerson_personsByPk_school.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_school;
 
   TRes call({
     UuidValue? id,
@@ -5842,16 +5842,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$school<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$school<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$school<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$school(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_school<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_school<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_school(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$school _instance;
+  final Subscription_watchPerson_personsByPk_school _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$school) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_school) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5860,7 +5860,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$school<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$school(
+      _then(Subscription_watchPerson_personsByPk_school(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5871,9 +5871,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$school<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$school<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$school<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$school(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_school<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_school<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_school(this._res);
 
   TRes _res;
 
@@ -5885,24 +5885,24 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$school<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$services {
-  Subscription$watchPerson$personsByPk$services({
+class Subscription_watchPerson_personsByPk_services {
+  Subscription_watchPerson_personsByPk_services({
     required this.service,
     this.$__typename = 'PersonsServices',
   });
 
-  factory Subscription$watchPerson$personsByPk$services.fromJson(
+  factory Subscription_watchPerson_personsByPk_services.fromJson(
       Map<String, dynamic> json) {
     final l$service = json['service'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$services(
-      service: Subscription$watchPerson$personsByPk$services$service.fromJson(
+    return Subscription_watchPerson_personsByPk_services(
+      service: Subscription_watchPerson_personsByPk_services_service.fromJson(
           (l$service as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$services$service service;
+  final Subscription_watchPerson_personsByPk_services_service service;
 
   final String $__typename;
 
@@ -5930,7 +5930,7 @@ class Subscription$watchPerson$personsByPk$services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$services) ||
+    if (!(other is Subscription_watchPerson_personsByPk_services) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5948,44 +5948,44 @@ class Subscription$watchPerson$personsByPk$services {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$services
-    on Subscription$watchPerson$personsByPk$services {
-  CopyWith$Subscription$watchPerson$personsByPk$services<
-          Subscription$watchPerson$personsByPk$services>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$services(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services
+    on Subscription_watchPerson_personsByPk_services {
+  CopyWith_Subscription_watchPerson_personsByPk_services<
+          Subscription_watchPerson_personsByPk_services>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_services(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$services<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$services(
-    Subscription$watchPerson$personsByPk$services instance,
-    TRes Function(Subscription$watchPerson$personsByPk$services) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$services;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_services(
+    Subscription_watchPerson_personsByPk_services instance,
+    TRes Function(Subscription_watchPerson_personsByPk_services) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$services.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_services.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$services$service? service,
+    Subscription_watchPerson_personsByPk_services_service? service,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$services$service<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_services_service<TRes>
       get service;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$services<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$services<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$services(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_services<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$services _instance;
+  final Subscription_watchPerson_personsByPk_services _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$services) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_services) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5993,43 +5993,43 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services<TRes>
     Object? service = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$services(
+      _then(Subscription_watchPerson_personsByPk_services(
         service: service == _undefined || service == null
             ? _instance.service
             : (service
-                as Subscription$watchPerson$personsByPk$services$service),
+                as Subscription_watchPerson_personsByPk_services_service),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$services$service<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_services_service<TRes>
       get service {
     final local$service = _instance.service;
-    return CopyWith$Subscription$watchPerson$personsByPk$services$service(
+    return CopyWith_Subscription_watchPerson_personsByPk_services_service(
         local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$services<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_services<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services(this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$services$service? service,
+    Subscription_watchPerson_personsByPk_services_service? service,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$services$service<TRes>
+  CopyWith_Subscription_watchPerson_personsByPk_services_service<TRes>
       get service =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service.stub(
+          CopyWith_Subscription_watchPerson_personsByPk_services_service.stub(
               _res);
 }
 
-class Subscription$watchPerson$personsByPk$services$service
-    implements Fragment$Service, Fragment$ServiceNoPhoto {
-  Subscription$watchPerson$personsByPk$services$service({
+class Subscription_watchPerson_personsByPk_services_service
+    implements Fragment_Service, Fragment_ServiceNoPhoto {
+  Subscription_watchPerson_personsByPk_services_service({
     required this.id,
     required this.name,
     this.color,
@@ -6038,7 +6038,7 @@ class Subscription$watchPerson$personsByPk$services$service
     required this.attendanceHistoryAggregate,
   });
 
-  factory Subscription$watchPerson$personsByPk$services$service.fromJson(
+  factory Subscription_watchPerson_personsByPk_services_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -6046,7 +6046,7 @@ class Subscription$watchPerson$personsByPk$services$service
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
-    return Subscription$watchPerson$personsByPk$services$service(
+    return Subscription_watchPerson_personsByPk_services_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -6054,7 +6054,7 @@ class Subscription$watchPerson$personsByPk$services$service
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
     );
   }
@@ -6069,7 +6069,7 @@ class Subscription$watchPerson$personsByPk$services$service
 
   final DateTime? photoUpdatedAt;
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
   Map<String, dynamic> toJson() {
@@ -6114,7 +6114,7 @@ class Subscription$watchPerson$personsByPk$services$service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$services$service) ||
+    if (!(other is Subscription_watchPerson_personsByPk_services_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6152,27 +6152,27 @@ class Subscription$watchPerson$personsByPk$services$service
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$services$service
-    on Subscription$watchPerson$personsByPk$services$service {
-  CopyWith$Subscription$watchPerson$personsByPk$services$service<
-          Subscription$watchPerson$personsByPk$services$service>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service
+    on Subscription_watchPerson_personsByPk_services_service {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service<
+          Subscription_watchPerson_personsByPk_services_service>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service(
+          CopyWith_Subscription_watchPerson_personsByPk_services_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service(
-    Subscription$watchPerson$personsByPk$services$service instance,
-    TRes Function(Subscription$watchPerson$personsByPk$services$service) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service;
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service(
+    Subscription_watchPerson_personsByPk_services_service instance,
+    TRes Function(Subscription_watchPerson_personsByPk_services_service) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service;
 
   TRes call({
     UuidValue? id,
@@ -6180,24 +6180,24 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service(
+        CopyWith_Subscription_watchPerson_personsByPk_services_service<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$services$service _instance;
+  final Subscription_watchPerson_personsByPk_services_service _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$services$service)
+  final TRes Function(Subscription_watchPerson_personsByPk_services_service)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6210,7 +6210,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$services$service(
+      _then(Subscription_watchPerson_personsByPk_services_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -6226,23 +6226,23 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate),
+                as Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+    return CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service(
+        CopyWith_Subscription_watchPerson_personsByPk_services_service<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service(
       this._res);
 
   TRes _res;
@@ -6253,37 +6253,37 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate {
-  Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate({
+class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate {
+  Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate({
     this.aggregate,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+    return Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+          : Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final String $__typename;
@@ -6313,7 +6313,7 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate) ||
+            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6331,55 +6331,55 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
-    on Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
+    on Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate)
+            Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate)
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6389,69 +6389,69 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate?),
+                as Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate {
-  Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate({
+class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate {
+  Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate({
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+    return Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
       max: l$max == null
           ? null
-          : Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+          : Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -6481,7 +6481,7 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate) ||
+            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6499,55 +6499,55 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
-    on Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate {
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
+    on Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
+            Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6557,60 +6557,60 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
         max: max == _undefined
             ? _instance.max
             : (max
-                as Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?),
+                as Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
-  Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max({
+class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max {
+  Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+    return Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -6645,7 +6645,7 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
       return true;
     }
     if (!(other
-            is Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max) ||
+            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6663,30 +6663,30 @@ class Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAgg
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
-    on Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
+    on Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
-    Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
+    Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
+            Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -6694,21 +6694,21 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$services$service$at
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+  final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6718,7 +6718,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+          Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -6726,12 +6726,12 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$services$service$attend
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -6743,21 +6743,21 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$services$service$at
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$shammasLevel {
-  Subscription$watchPerson$personsByPk$shammasLevel({
+class Subscription_watchPerson_personsByPk_shammasLevel {
+  Subscription_watchPerson_personsByPk_shammasLevel({
     required this.id,
     required this.name,
     required this.order,
     this.$__typename = 'ShammasLevels',
   });
 
-  factory Subscription$watchPerson$personsByPk$shammasLevel.fromJson(
+  factory Subscription_watchPerson_personsByPk_shammasLevel.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$shammasLevel(
+    return Subscription_watchPerson_personsByPk_shammasLevel(
       id: stringToUuid(l$id),
       name: (l$name as String),
       order: (l$order as int),
@@ -6805,7 +6805,7 @@ class Subscription$watchPerson$personsByPk$shammasLevel {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$shammasLevel) ||
+    if (!(other is Subscription_watchPerson_personsByPk_shammasLevel) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6833,27 +6833,27 @@ class Subscription$watchPerson$personsByPk$shammasLevel {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$shammasLevel
-    on Subscription$watchPerson$personsByPk$shammasLevel {
-  CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<
-          Subscription$watchPerson$personsByPk$shammasLevel>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_shammasLevel
+    on Subscription_watchPerson_personsByPk_shammasLevel {
+  CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<
+          Subscription_watchPerson_personsByPk_shammasLevel>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$shammasLevel(
+          CopyWith_Subscription_watchPerson_personsByPk_shammasLevel(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$shammasLevel(
-    Subscription$watchPerson$personsByPk$shammasLevel instance,
-    TRes Function(Subscription$watchPerson$personsByPk$shammasLevel) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel;
+  factory CopyWith_Subscription_watchPerson_personsByPk_shammasLevel(
+    Subscription_watchPerson_personsByPk_shammasLevel instance,
+    TRes Function(Subscription_watchPerson_personsByPk_shammasLevel) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_shammasLevel;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$shammasLevel.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_shammasLevel.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$shammasLevel;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_shammasLevel;
 
   TRes call({
     UuidValue? id,
@@ -6863,17 +6863,17 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel(
+        CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_shammasLevel(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$shammasLevel _instance;
+  final Subscription_watchPerson_personsByPk_shammasLevel _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$shammasLevel) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_shammasLevel) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6883,7 +6883,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$shammasLevel(
+      _then(Subscription_watchPerson_personsByPk_shammasLevel(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -6897,10 +6897,10 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$shammasLevel<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$shammasLevel(
+        CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_shammasLevel(
       this._res);
 
   TRes _res;
@@ -6914,21 +6914,21 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$shammasLevel<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$state {
-  Subscription$watchPerson$personsByPk$state({
+class Subscription_watchPerson_personsByPk_state {
+  Subscription_watchPerson_personsByPk_state({
     required this.id,
     required this.color,
     required this.name,
     this.$__typename = 'PersonStates',
   });
 
-  factory Subscription$watchPerson$personsByPk$state.fromJson(
+  factory Subscription_watchPerson_personsByPk_state.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$color = json['color'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$state(
+    return Subscription_watchPerson_personsByPk_state(
       id: stringToUuid(l$id),
       color: (l$color as int),
       name: (l$name as String),
@@ -6976,7 +6976,7 @@ class Subscription$watchPerson$personsByPk$state {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$state) ||
+    if (!(other is Subscription_watchPerson_personsByPk_state) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7004,24 +7004,24 @@ class Subscription$watchPerson$personsByPk$state {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$state
-    on Subscription$watchPerson$personsByPk$state {
-  CopyWith$Subscription$watchPerson$personsByPk$state<
-          Subscription$watchPerson$personsByPk$state>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$state(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_state
+    on Subscription_watchPerson_personsByPk_state {
+  CopyWith_Subscription_watchPerson_personsByPk_state<
+          Subscription_watchPerson_personsByPk_state>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_state(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$state<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$state(
-    Subscription$watchPerson$personsByPk$state instance,
-    TRes Function(Subscription$watchPerson$personsByPk$state) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$state;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_state<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_state(
+    Subscription_watchPerson_personsByPk_state instance,
+    TRes Function(Subscription_watchPerson_personsByPk_state) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_state;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$state.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$state;
+  factory CopyWith_Subscription_watchPerson_personsByPk_state.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_state;
 
   TRes call({
     UuidValue? id,
@@ -7031,16 +7031,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$state<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$state<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$state<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$state(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_state<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_state<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_state(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$state _instance;
+  final Subscription_watchPerson_personsByPk_state _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$state) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_state) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7050,7 +7050,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$state<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$state(
+      _then(Subscription_watchPerson_personsByPk_state(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         color: color == _undefined || color == null
             ? _instance.color
@@ -7064,9 +7064,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$state<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$state<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$state<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$state(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_state<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_state<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_state(this._res);
 
   TRes _res;
 
@@ -7079,19 +7079,19 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$state<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$studyYear {
-  Subscription$watchPerson$personsByPk$studyYear({
+class Subscription_watchPerson_personsByPk_studyYear {
+  Subscription_watchPerson_personsByPk_studyYear({
     required this.name,
     required this.order,
     this.$__typename = 'StudyYears',
   });
 
-  factory Subscription$watchPerson$personsByPk$studyYear.fromJson(
+  factory Subscription_watchPerson_personsByPk_studyYear.fromJson(
       Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$studyYear(
+    return Subscription_watchPerson_personsByPk_studyYear(
       name: (l$name as String),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
@@ -7132,7 +7132,7 @@ class Subscription$watchPerson$personsByPk$studyYear {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$studyYear) ||
+    if (!(other is Subscription_watchPerson_personsByPk_studyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7155,25 +7155,25 @@ class Subscription$watchPerson$personsByPk$studyYear {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$studyYear
-    on Subscription$watchPerson$personsByPk$studyYear {
-  CopyWith$Subscription$watchPerson$personsByPk$studyYear<
-          Subscription$watchPerson$personsByPk$studyYear>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$studyYear(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_studyYear
+    on Subscription_watchPerson_personsByPk_studyYear {
+  CopyWith_Subscription_watchPerson_personsByPk_studyYear<
+          Subscription_watchPerson_personsByPk_studyYear>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_studyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$studyYear(
-    Subscription$watchPerson$personsByPk$studyYear instance,
-    TRes Function(Subscription$watchPerson$personsByPk$studyYear) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_studyYear(
+    Subscription_watchPerson_personsByPk_studyYear instance,
+    TRes Function(Subscription_watchPerson_personsByPk_studyYear) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$studyYear.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear;
 
   TRes call({
     String? name,
@@ -7182,16 +7182,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$studyYear _instance;
+  final Subscription_watchPerson_personsByPk_studyYear _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$studyYear) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_studyYear) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7200,7 +7200,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$studyYear(
+      _then(Subscription_watchPerson_personsByPk_studyYear(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -7213,9 +7213,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$studyYear<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear(this._res);
 
   TRes _res;
 
@@ -7227,24 +7227,24 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$studyYear<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$hobbies {
-  Subscription$watchPerson$personsByPk$hobbies({
+class Subscription_watchPerson_personsByPk_hobbies {
+  Subscription_watchPerson_personsByPk_hobbies({
     required this.hobby,
     this.$__typename = 'PersonsHobbies',
   });
 
-  factory Subscription$watchPerson$personsByPk$hobbies.fromJson(
+  factory Subscription_watchPerson_personsByPk_hobbies.fromJson(
       Map<String, dynamic> json) {
     final l$hobby = json['hobby'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$hobbies(
-      hobby: Subscription$watchPerson$personsByPk$hobbies$hobby.fromJson(
+    return Subscription_watchPerson_personsByPk_hobbies(
+      hobby: Subscription_watchPerson_personsByPk_hobbies_hobby.fromJson(
           (l$hobby as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$hobbies$hobby hobby;
+  final Subscription_watchPerson_personsByPk_hobbies_hobby hobby;
 
   final String $__typename;
 
@@ -7272,7 +7272,7 @@ class Subscription$watchPerson$personsByPk$hobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$hobbies) ||
+    if (!(other is Subscription_watchPerson_personsByPk_hobbies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7290,42 +7290,42 @@ class Subscription$watchPerson$personsByPk$hobbies {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$hobbies
-    on Subscription$watchPerson$personsByPk$hobbies {
-  CopyWith$Subscription$watchPerson$personsByPk$hobbies<
-          Subscription$watchPerson$personsByPk$hobbies>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$hobbies(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_hobbies
+    on Subscription_watchPerson_personsByPk_hobbies {
+  CopyWith_Subscription_watchPerson_personsByPk_hobbies<
+          Subscription_watchPerson_personsByPk_hobbies>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_hobbies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies(
-    Subscription$watchPerson$personsByPk$hobbies instance,
-    TRes Function(Subscription$watchPerson$personsByPk$hobbies) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_hobbies<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_hobbies(
+    Subscription_watchPerson_personsByPk_hobbies instance,
+    TRes Function(Subscription_watchPerson_personsByPk_hobbies) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies;
+  factory CopyWith_Subscription_watchPerson_personsByPk_hobbies.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$hobbies$hobby? hobby,
+    Subscription_watchPerson_personsByPk_hobbies_hobby? hobby,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby;
+  CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes> get hobby;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_hobbies<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$hobbies _instance;
+  final Subscription_watchPerson_personsByPk_hobbies _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$hobbies) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_hobbies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7333,51 +7333,51 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
     Object? hobby = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$hobbies(
+      _then(Subscription_watchPerson_personsByPk_hobbies(
         hobby: hobby == _undefined || hobby == null
             ? _instance.hobby
-            : (hobby as Subscription$watchPerson$personsByPk$hobbies$hobby),
+            : (hobby as Subscription_watchPerson_personsByPk_hobbies_hobby),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby {
+  CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes> get hobby {
     final local$hobby = _instance.hobby;
-    return CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
+    return CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby(
         local$hobby, (e) => call(hobby: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$hobbies<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_hobbies<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies(this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$hobbies$hobby? hobby,
+    Subscription_watchPerson_personsByPk_hobbies_hobby? hobby,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> get hobby =>
-      CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes> get hobby =>
+      CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby.stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$hobbies$hobby {
-  Subscription$watchPerson$personsByPk$hobbies$hobby({
+class Subscription_watchPerson_personsByPk_hobbies_hobby {
+  Subscription_watchPerson_personsByPk_hobbies_hobby({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Hobbies',
   });
 
-  factory Subscription$watchPerson$personsByPk$hobbies$hobby.fromJson(
+  factory Subscription_watchPerson_personsByPk_hobbies_hobby.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$hobbies$hobby(
+    return Subscription_watchPerson_personsByPk_hobbies_hobby(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -7425,7 +7425,7 @@ class Subscription$watchPerson$personsByPk$hobbies$hobby {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$hobbies$hobby) ||
+    if (!(other is Subscription_watchPerson_personsByPk_hobbies_hobby) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7453,27 +7453,27 @@ class Subscription$watchPerson$personsByPk$hobbies$hobby {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$hobbies$hobby
-    on Subscription$watchPerson$personsByPk$hobbies$hobby {
-  CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<
-          Subscription$watchPerson$personsByPk$hobbies$hobby>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_hobbies_hobby
+    on Subscription_watchPerson_personsByPk_hobbies_hobby {
+  CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<
+          Subscription_watchPerson_personsByPk_hobbies_hobby>
       get copyWith =>
-          CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
+          CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<
     TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby(
-    Subscription$watchPerson$personsByPk$hobbies$hobby instance,
-    TRes Function(Subscription$watchPerson$personsByPk$hobbies$hobby) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby;
+  factory CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby(
+    Subscription_watchPerson_personsByPk_hobbies_hobby instance,
+    TRes Function(Subscription_watchPerson_personsByPk_hobbies_hobby) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies_hobby;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies_hobby;
 
   TRes call({
     UuidValue? id,
@@ -7483,17 +7483,17 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby(
+        CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_hobbies_hobby(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$hobbies$hobby _instance;
+  final Subscription_watchPerson_personsByPk_hobbies_hobby _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$hobbies$hobby) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_hobbies_hobby) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7503,7 +7503,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$hobbies$hobby(
+      _then(Subscription_watchPerson_personsByPk_hobbies_hobby(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -7515,10 +7515,10 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes>
     implements
-        CopyWith$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby(
+        CopyWith_Subscription_watchPerson_personsByPk_hobbies_hobby<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_hobbies_hobby(
       this._res);
 
   TRes _res;
@@ -7532,24 +7532,24 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$hobbies$hobby<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$tags {
-  Subscription$watchPerson$personsByPk$tags({
+class Subscription_watchPerson_personsByPk_tags {
+  Subscription_watchPerson_personsByPk_tags({
     required this.tag,
     this.$__typename = 'PersonsTags',
   });
 
-  factory Subscription$watchPerson$personsByPk$tags.fromJson(
+  factory Subscription_watchPerson_personsByPk_tags.fromJson(
       Map<String, dynamic> json) {
     final l$tag = json['tag'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$tags(
-      tag: Subscription$watchPerson$personsByPk$tags$tag.fromJson(
+    return Subscription_watchPerson_personsByPk_tags(
+      tag: Subscription_watchPerson_personsByPk_tags_tag.fromJson(
           (l$tag as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$watchPerson$personsByPk$tags$tag tag;
+  final Subscription_watchPerson_personsByPk_tags_tag tag;
 
   final String $__typename;
 
@@ -7577,7 +7577,7 @@ class Subscription$watchPerson$personsByPk$tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$tags) ||
+    if (!(other is Subscription_watchPerson_personsByPk_tags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7595,42 +7595,42 @@ class Subscription$watchPerson$personsByPk$tags {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$tags
-    on Subscription$watchPerson$personsByPk$tags {
-  CopyWith$Subscription$watchPerson$personsByPk$tags<
-          Subscription$watchPerson$personsByPk$tags>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$tags(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_tags
+    on Subscription_watchPerson_personsByPk_tags {
+  CopyWith_Subscription_watchPerson_personsByPk_tags<
+          Subscription_watchPerson_personsByPk_tags>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_tags(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$tags<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$tags(
-    Subscription$watchPerson$personsByPk$tags instance,
-    TRes Function(Subscription$watchPerson$personsByPk$tags) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$tags;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_tags<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_tags(
+    Subscription_watchPerson_personsByPk_tags instance,
+    TRes Function(Subscription_watchPerson_personsByPk_tags) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_tags;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$tags.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags;
+  factory CopyWith_Subscription_watchPerson_personsByPk_tags.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags;
 
   TRes call({
-    Subscription$watchPerson$personsByPk$tags$tag? tag,
+    Subscription_watchPerson_personsByPk_tags_tag? tag,
     String? $__typename,
   });
-  CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> get tag;
+  CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> get tag;
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$tags<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$tags(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_tags<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_tags<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_tags(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$tags _instance;
+  final Subscription_watchPerson_personsByPk_tags _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$tags) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_tags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7638,51 +7638,51 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags<TRes>
     Object? tag = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$tags(
+      _then(Subscription_watchPerson_personsByPk_tags(
         tag: tag == _undefined || tag == null
             ? _instance.tag
-            : (tag as Subscription$watchPerson$personsByPk$tags$tag),
+            : (tag as Subscription_watchPerson_personsByPk_tags_tag),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> get tag {
+  CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> get tag {
     final local$tag = _instance.tag;
-    return CopyWith$Subscription$watchPerson$personsByPk$tags$tag(
+    return CopyWith_Subscription_watchPerson_personsByPk_tags_tag(
         local$tag, (e) => call(tag: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$tags<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_tags<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags(this._res);
 
   TRes _res;
 
   call({
-    Subscription$watchPerson$personsByPk$tags$tag? tag,
+    Subscription_watchPerson_personsByPk_tags_tag? tag,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> get tag =>
-      CopyWith$Subscription$watchPerson$personsByPk$tags$tag.stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> get tag =>
+      CopyWith_Subscription_watchPerson_personsByPk_tags_tag.stub(_res);
 }
 
-class Subscription$watchPerson$personsByPk$tags$tag {
-  Subscription$watchPerson$personsByPk$tags$tag({
+class Subscription_watchPerson_personsByPk_tags_tag {
+  Subscription_watchPerson_personsByPk_tags_tag({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Tags',
   });
 
-  factory Subscription$watchPerson$personsByPk$tags$tag.fromJson(
+  factory Subscription_watchPerson_personsByPk_tags_tag.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$tags$tag(
+    return Subscription_watchPerson_personsByPk_tags_tag(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -7730,7 +7730,7 @@ class Subscription$watchPerson$personsByPk$tags$tag {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$tags$tag) ||
+    if (!(other is Subscription_watchPerson_personsByPk_tags_tag) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7758,25 +7758,25 @@ class Subscription$watchPerson$personsByPk$tags$tag {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$tags$tag
-    on Subscription$watchPerson$personsByPk$tags$tag {
-  CopyWith$Subscription$watchPerson$personsByPk$tags$tag<
-          Subscription$watchPerson$personsByPk$tags$tag>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$tags$tag(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_tags_tag
+    on Subscription_watchPerson_personsByPk_tags_tag {
+  CopyWith_Subscription_watchPerson_personsByPk_tags_tag<
+          Subscription_watchPerson_personsByPk_tags_tag>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_tags_tag(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$tags$tag(
-    Subscription$watchPerson$personsByPk$tags$tag instance,
-    TRes Function(Subscription$watchPerson$personsByPk$tags$tag) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_tags_tag(
+    Subscription_watchPerson_personsByPk_tags_tag instance,
+    TRes Function(Subscription_watchPerson_personsByPk_tags_tag) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_tags_tag;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$tags$tag.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_tags_tag.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags$tag;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags_tag;
 
   TRes call({
     UuidValue? id,
@@ -7786,16 +7786,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_tags_tag<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_tags_tag(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$tags$tag _instance;
+  final Subscription_watchPerson_personsByPk_tags_tag _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$tags$tag) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_tags_tag) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7805,7 +7805,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$tags$tag(
+      _then(Subscription_watchPerson_personsByPk_tags_tag(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -7817,9 +7817,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$tags$tag<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags$tag(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags_tag<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_tags_tag<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_tags_tag(this._res);
 
   TRes _res;
 
@@ -7832,21 +7832,21 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$tags$tag<TRes>
       _res;
 }
 
-class Subscription$watchPerson$personsByPk$user {
-  Subscription$watchPerson$personsByPk$user({
+class Subscription_watchPerson_personsByPk_user {
+  Subscription_watchPerson_personsByPk_user({
     required this.uid,
     required this.name,
     required this.email,
     this.$__typename = 'AuthUsersData',
   });
 
-  factory Subscription$watchPerson$personsByPk$user.fromJson(
+  factory Subscription_watchPerson_personsByPk_user.fromJson(
       Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchPerson$personsByPk$user(
+    return Subscription_watchPerson_personsByPk_user(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -7894,7 +7894,7 @@ class Subscription$watchPerson$personsByPk$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchPerson$personsByPk$user) ||
+    if (!(other is Subscription_watchPerson_personsByPk_user) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7922,24 +7922,24 @@ class Subscription$watchPerson$personsByPk$user {
   }
 }
 
-extension UtilityExtension$Subscription$watchPerson$personsByPk$user
-    on Subscription$watchPerson$personsByPk$user {
-  CopyWith$Subscription$watchPerson$personsByPk$user<
-          Subscription$watchPerson$personsByPk$user>
-      get copyWith => CopyWith$Subscription$watchPerson$personsByPk$user(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_user
+    on Subscription_watchPerson_personsByPk_user {
+  CopyWith_Subscription_watchPerson_personsByPk_user<
+          Subscription_watchPerson_personsByPk_user>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_user(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchPerson$personsByPk$user<TRes> {
-  factory CopyWith$Subscription$watchPerson$personsByPk$user(
-    Subscription$watchPerson$personsByPk$user instance,
-    TRes Function(Subscription$watchPerson$personsByPk$user) then,
-  ) = _CopyWithImpl$Subscription$watchPerson$personsByPk$user;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_user<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_user(
+    Subscription_watchPerson_personsByPk_user instance,
+    TRes Function(Subscription_watchPerson_personsByPk_user) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_user;
 
-  factory CopyWith$Subscription$watchPerson$personsByPk$user.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchPerson$personsByPk$user;
+  factory CopyWith_Subscription_watchPerson_personsByPk_user.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_user;
 
   TRes call({
     UuidValue? uid,
@@ -7949,16 +7949,16 @@ abstract class CopyWith$Subscription$watchPerson$personsByPk$user<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchPerson$personsByPk$user<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$user<TRes> {
-  _CopyWithImpl$Subscription$watchPerson$personsByPk$user(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_user<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_user<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_user(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchPerson$personsByPk$user _instance;
+  final Subscription_watchPerson_personsByPk_user _instance;
 
-  final TRes Function(Subscription$watchPerson$personsByPk$user) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_user) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7968,7 +7968,7 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$user<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchPerson$personsByPk$user(
+      _then(Subscription_watchPerson_personsByPk_user(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -7984,9 +7984,9 @@ class _CopyWithImpl$Subscription$watchPerson$personsByPk$user<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$user<TRes>
-    implements CopyWith$Subscription$watchPerson$personsByPk$user<TRes> {
-  _CopyWithStubImpl$Subscription$watchPerson$personsByPk$user(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_user<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_user<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_user(this._res);
 
   TRes _res;
 
@@ -7999,48 +7999,48 @@ class _CopyWithStubImpl$Subscription$watchPerson$personsByPk$user<TRes>
       _res;
 }
 
-class Variables$Subscription$personAttendance {
-  factory Variables$Subscription$personAttendance({
-    List<Input$HistoryAttendanceHistoryBoolExp>? where,
-    List<Input$HistoryAttendanceHistoryOrderBy>? orderBy,
+class Variables_Subscription_personAttendance {
+  factory Variables_Subscription_personAttendance({
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
     required int limit,
   }) =>
-      Variables$Subscription$personAttendance._({
+      Variables_Subscription_personAttendance._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
         r'limit': limit,
       });
 
-  Variables$Subscription$personAttendance._(this._$data);
+  Variables_Subscription_personAttendance._(this._$data);
 
-  factory Variables$Subscription$personAttendance.fromJson(
+  factory Variables_Subscription_personAttendance.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryAttendanceHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryAttendanceHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
-          ?.map((e) => Input$HistoryAttendanceHistoryOrderBy.fromJson(
+          ?.map((e) => Input_HistoryAttendanceHistoryOrderBy.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
     final l$limit = data['limit'];
     result$data['limit'] = (l$limit as int);
-    return Variables$Subscription$personAttendance._(result$data);
+    return Variables_Subscription_personAttendance._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$HistoryAttendanceHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryAttendanceHistoryBoolExp>?);
-  List<Input$HistoryAttendanceHistoryOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$HistoryAttendanceHistoryOrderBy>?);
+  List<Input_HistoryAttendanceHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryAttendanceHistoryBoolExp>?);
+  List<Input_HistoryAttendanceHistoryOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_HistoryAttendanceHistoryOrderBy>?);
   int get limit => (_$data['limit'] as int);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -8057,9 +8057,9 @@ class Variables$Subscription$personAttendance {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$personAttendance<
-          Variables$Subscription$personAttendance>
-      get copyWith => CopyWith$Variables$Subscription$personAttendance(
+  CopyWith_Variables_Subscription_personAttendance<
+          Variables_Subscription_personAttendance>
+      get copyWith => CopyWith_Variables_Subscription_personAttendance(
             this,
             (i) => i,
           );
@@ -8068,7 +8068,7 @@ class Variables$Subscription$personAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$personAttendance) ||
+    if (!(other is Variables_Subscription_personAttendance) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8139,32 +8139,32 @@ class Variables$Subscription$personAttendance {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$personAttendance<TRes> {
-  factory CopyWith$Variables$Subscription$personAttendance(
-    Variables$Subscription$personAttendance instance,
-    TRes Function(Variables$Subscription$personAttendance) then,
-  ) = _CopyWithImpl$Variables$Subscription$personAttendance;
+abstract class CopyWith_Variables_Subscription_personAttendance<TRes> {
+  factory CopyWith_Variables_Subscription_personAttendance(
+    Variables_Subscription_personAttendance instance,
+    TRes Function(Variables_Subscription_personAttendance) then,
+  ) = _CopyWithImpl_Variables_Subscription_personAttendance;
 
-  factory CopyWith$Variables$Subscription$personAttendance.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$personAttendance;
+  factory CopyWith_Variables_Subscription_personAttendance.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_personAttendance;
 
   TRes call({
-    List<Input$HistoryAttendanceHistoryBoolExp>? where,
-    List<Input$HistoryAttendanceHistoryOrderBy>? orderBy,
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$personAttendance<TRes>
-    implements CopyWith$Variables$Subscription$personAttendance<TRes> {
-  _CopyWithImpl$Variables$Subscription$personAttendance(
+class _CopyWithImpl_Variables_Subscription_personAttendance<TRes>
+    implements CopyWith_Variables_Subscription_personAttendance<TRes> {
+  _CopyWithImpl_Variables_Subscription_personAttendance(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$personAttendance _instance;
+  final Variables_Subscription_personAttendance _instance;
 
-  final TRes Function(Variables$Subscription$personAttendance) _then;
+  final TRes Function(Variables_Subscription_personAttendance) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8173,43 +8173,43 @@ class _CopyWithImpl$Variables$Subscription$personAttendance<TRes>
     Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$personAttendance._({
+      _then(Variables_Subscription_personAttendance._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$HistoryAttendanceHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryAttendanceHistoryBoolExp>?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$HistoryAttendanceHistoryOrderBy>?),
+          'orderBy': (orderBy as List<Input_HistoryAttendanceHistoryOrderBy>?),
         if (limit != _undefined && limit != null) 'limit': (limit as int),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$personAttendance<TRes>
-    implements CopyWith$Variables$Subscription$personAttendance<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$personAttendance(this._res);
+class _CopyWithStubImpl_Variables_Subscription_personAttendance<TRes>
+    implements CopyWith_Variables_Subscription_personAttendance<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personAttendance(this._res);
 
   TRes _res;
 
   call({
-    List<Input$HistoryAttendanceHistoryBoolExp>? where,
-    List<Input$HistoryAttendanceHistoryOrderBy>? orderBy,
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$personAttendance {
-  Subscription$personAttendance({required this.historyAttendanceHistory});
+class Subscription_personAttendance {
+  Subscription_personAttendance({required this.historyAttendanceHistory});
 
-  factory Subscription$personAttendance.fromJson(Map<String, dynamic> json) {
+  factory Subscription_personAttendance.fromJson(Map<String, dynamic> json) {
     final l$historyAttendanceHistory = json['historyAttendanceHistory'];
-    return Subscription$personAttendance(
+    return Subscription_personAttendance(
         historyAttendanceHistory: (l$historyAttendanceHistory as List<dynamic>)
-            .map((e) => Fragment$AttendanceHistory.fromJson(
+            .map((e) => Fragment_AttendanceHistory.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$AttendanceHistory> historyAttendanceHistory;
+  final List<Fragment_AttendanceHistory> historyAttendanceHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -8231,7 +8231,7 @@ class Subscription$personAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$personAttendance) ||
+    if (!(other is Subscription_personAttendance) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8254,74 +8254,74 @@ class Subscription$personAttendance {
   }
 }
 
-extension UtilityExtension$Subscription$personAttendance
-    on Subscription$personAttendance {
-  CopyWith$Subscription$personAttendance<Subscription$personAttendance>
-      get copyWith => CopyWith$Subscription$personAttendance(
+extension UtilityExtension_Subscription_personAttendance
+    on Subscription_personAttendance {
+  CopyWith_Subscription_personAttendance<Subscription_personAttendance>
+      get copyWith => CopyWith_Subscription_personAttendance(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$personAttendance<TRes> {
-  factory CopyWith$Subscription$personAttendance(
-    Subscription$personAttendance instance,
-    TRes Function(Subscription$personAttendance) then,
-  ) = _CopyWithImpl$Subscription$personAttendance;
+abstract class CopyWith_Subscription_personAttendance<TRes> {
+  factory CopyWith_Subscription_personAttendance(
+    Subscription_personAttendance instance,
+    TRes Function(Subscription_personAttendance) then,
+  ) = _CopyWithImpl_Subscription_personAttendance;
 
-  factory CopyWith$Subscription$personAttendance.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$personAttendance;
+  factory CopyWith_Subscription_personAttendance.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personAttendance;
 
-  TRes call({List<Fragment$AttendanceHistory>? historyAttendanceHistory});
+  TRes call({List<Fragment_AttendanceHistory>? historyAttendanceHistory});
   TRes historyAttendanceHistory(
-      Iterable<Fragment$AttendanceHistory> Function(
+      Iterable<Fragment_AttendanceHistory> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceHistory<
-                      Fragment$AttendanceHistory>>)
+                  CopyWith_Fragment_AttendanceHistory<
+                      Fragment_AttendanceHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$personAttendance<TRes>
-    implements CopyWith$Subscription$personAttendance<TRes> {
-  _CopyWithImpl$Subscription$personAttendance(
+class _CopyWithImpl_Subscription_personAttendance<TRes>
+    implements CopyWith_Subscription_personAttendance<TRes> {
+  _CopyWithImpl_Subscription_personAttendance(
     this._instance,
     this._then,
   );
 
-  final Subscription$personAttendance _instance;
+  final Subscription_personAttendance _instance;
 
-  final TRes Function(Subscription$personAttendance) _then;
+  final TRes Function(Subscription_personAttendance) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyAttendanceHistory = _undefined}) =>
-      _then(Subscription$personAttendance(
+      _then(Subscription_personAttendance(
           historyAttendanceHistory: historyAttendanceHistory == _undefined ||
                   historyAttendanceHistory == null
               ? _instance.historyAttendanceHistory
               : (historyAttendanceHistory
-                  as List<Fragment$AttendanceHistory>)));
+                  as List<Fragment_AttendanceHistory>)));
   TRes historyAttendanceHistory(
-          Iterable<Fragment$AttendanceHistory> Function(
+          Iterable<Fragment_AttendanceHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceHistory<
-                          Fragment$AttendanceHistory>>)
+                      CopyWith_Fragment_AttendanceHistory<
+                          Fragment_AttendanceHistory>>)
               _fn) =>
       call(
           historyAttendanceHistory: _fn(_instance.historyAttendanceHistory
-              .map((e) => CopyWith$Fragment$AttendanceHistory(
+              .map((e) => CopyWith_Fragment_AttendanceHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$personAttendance<TRes>
-    implements CopyWith$Subscription$personAttendance<TRes> {
-  _CopyWithStubImpl$Subscription$personAttendance(this._res);
+class _CopyWithStubImpl_Subscription_personAttendance<TRes>
+    implements CopyWith_Subscription_personAttendance<TRes> {
+  _CopyWithStubImpl_Subscription_personAttendance(this._res);
 
   TRes _res;
 
-  call({List<Fragment$AttendanceHistory>? historyAttendanceHistory}) => _res;
+  call({List<Fragment_AttendanceHistory>? historyAttendanceHistory}) => _res;
   historyAttendanceHistory(_fn) => _res;
 }
 

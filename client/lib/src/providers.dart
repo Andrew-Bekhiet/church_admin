@@ -37,6 +37,7 @@ set globalProviderContainer(ProviderContainer? value) =>
 
 @visibleForTesting
 void resetGlobalProviderContainer() {
+  _globalProviderContainer?.dispose();
   _globalProviderContainer = null;
 }
 

@@ -1,32 +1,40 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'users/__generated__/queries.gql.dart';
 import 'users/__generated__/subscriptions.gql.dart';
 
-class UsersDAO extends DAOBase {
+class UsersDAO extends DAOBase<User> {
   const UsersDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<User> paginateUsers({
+  @override
+  GQLPaginatableStream<User> streamAll({
     Stream<String?>? searchQuery,
+    List<Input_AuthUsersDataBoolExp>? where,
   }) {
     return GQLPaginatableStream<User>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
+        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+          event,
+          Variables_Subscription_watchAllUsers.new,
+          Input_AuthUsersDataBoolExp.new,
+        );
+
+        final variables = defaultSearchVars.copyWith(
+          where: [
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+          ],
+        ).toJson();
+
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllUsers,
             operationName: 'watchAllUsers',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables$Subscription$watchAllUsers.new,
-                  Input$AuthUsersDataBoolExp.new,
-                )
-                .toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(User.fromJson),
           ),
         );
@@ -34,7 +42,7 @@ class UsersDAO extends DAOBase {
     );
   }
 
-  Stream<User?> watchUser({
+  Stream<User?> streamSingleById({
     required String uid,
     bool fullData = false,
   }) {
@@ -42,7 +50,7 @@ class UsersDAO extends DAOBase {
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchUser,
         operationName: 'watchUser',
-        variables: Variables$Subscription$watchUser(
+        variables: Variables_Subscription_watchUser(
           uid: uid.toUuid(),
           fullData: fullData,
         ).toJson(),
@@ -65,7 +73,7 @@ class UsersDAO extends DAOBase {
       eagerlyFetchResults: false,
       document: documentNodeQueryanalyzeUserAttendance,
       operationName: 'analyzeUserAttendance',
-      variables: Variables$Query$analyzeUserAttendance(
+      variables: Variables_Query_analyzeUserAttendance(
         userId: userId.toUuid(),
         personId: personId.toUuid(),
         dateFrom: dateFrom,

@@ -151,7 +151,8 @@ Override _setUpDatabaseRepo() {
 
 MockUsersDAO _setUpUsersDAO() {
   final usersDAO = MockUsersDAO();
-  when(usersDAO.watchUser(uid: anyNamed('uid'))).thenAnswer((_) async* {});
+  when(usersDAO.streamSingleById(uid: anyNamed('uid')))
+      .thenAnswer((_) async* {});
 
   return usersDAO;
 }
@@ -159,11 +160,11 @@ MockUsersDAO _setUpUsersDAO() {
 MockServicesDAO _setUpServiceDAO() {
   final servicesDAO = MockServicesDAO();
   when(
-    servicesDAO.paginateServices(
+    servicesDAO.streamAll(
       searchQuery: anyNamed('searchQuery'),
     ),
-  ).thenReturn(
-    GQLPaginatableStream(
+  ).thenAnswer(
+    (_) => GQLPaginatableStream(
       subscriptionStreamCallback: (_) async* {},
     ),
   );
@@ -174,11 +175,11 @@ MockServicesDAO _setUpServiceDAO() {
 MockPersonsDAO _setUpPersonsDAO() {
   final personsDAO = MockPersonsDAO();
   when(
-    personsDAO.paginatePersons(
+    personsDAO.streamAll(
       searchQuery: anyNamed('searchQuery'),
     ),
-  ).thenReturn(
-    GQLPaginatableStream(
+  ).thenAnswer(
+    (_) => GQLPaginatableStream(
       subscriptionStreamCallback: (_) async* {},
     ),
   );
@@ -189,11 +190,11 @@ MockPersonsDAO _setUpPersonsDAO() {
 MockAreasDAO _setUpAreasDAO() {
   final areasDAO = MockAreasDAO();
   when(
-    areasDAO.paginateAreas(
+    areasDAO.streamAll(
       searchQuery: anyNamed('searchQuery'),
     ),
-  ).thenReturn(
-    GQLPaginatableStream(
+  ).thenAnswer(
+    (_) => GQLPaginatableStream(
       subscriptionStreamCallback: (_) async* {},
     ),
   );

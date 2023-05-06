@@ -46,7 +46,7 @@ class ViewUser extends StatefulWidget {
 class _ViewUserState extends State<ViewUser> {
   final scrollController = ScrollController();
 
-  late final stream = DatabaseService.I.users.watchUser(
+  late final stream = DatabaseService.I.users.streamSingleById(
     uid: widget.userId,
     fullData: true,
   );

@@ -2,39 +2,39 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllPersonTypes {
-  factory Variables$Subscription$watchAllPersonTypes({
-    List<Input$PersonTypesBoolExp>? where,
+class Variables_Subscription_watchAllPersonTypes {
+  factory Variables_Subscription_watchAllPersonTypes({
+    List<Input_PersonTypesBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllPersonTypes._({
+      Variables_Subscription_watchAllPersonTypes._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllPersonTypes._(this._$data);
+  Variables_Subscription_watchAllPersonTypes._(this._$data);
 
-  factory Variables$Subscription$watchAllPersonTypes.fromJson(
+  factory Variables_Subscription_watchAllPersonTypes.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map((e) =>
-              Input$PersonTypesBoolExp.fromJson((e as Map<String, dynamic>)))
+              Input_PersonTypesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllPersonTypes._(result$data);
+    return Variables_Subscription_watchAllPersonTypes._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$PersonTypesBoolExp>? get where =>
-      (_$data['where'] as List<Input$PersonTypesBoolExp>?);
+  List<Input_PersonTypesBoolExp>? get where =>
+      (_$data['where'] as List<Input_PersonTypesBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -49,9 +49,9 @@ class Variables$Subscription$watchAllPersonTypes {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllPersonTypes<
-          Variables$Subscription$watchAllPersonTypes>
-      get copyWith => CopyWith$Variables$Subscription$watchAllPersonTypes(
+  CopyWith_Variables_Subscription_watchAllPersonTypes<
+          Variables_Subscription_watchAllPersonTypes>
+      get copyWith => CopyWith_Variables_Subscription_watchAllPersonTypes(
             this,
             (i) => i,
           );
@@ -60,7 +60,7 @@ class Variables$Subscription$watchAllPersonTypes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllPersonTypes) ||
+    if (!(other is Variables_Subscription_watchAllPersonTypes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109,31 +109,31 @@ class Variables$Subscription$watchAllPersonTypes {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllPersonTypes<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllPersonTypes(
-    Variables$Subscription$watchAllPersonTypes instance,
-    TRes Function(Variables$Subscription$watchAllPersonTypes) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllPersonTypes;
+abstract class CopyWith_Variables_Subscription_watchAllPersonTypes<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllPersonTypes(
+    Variables_Subscription_watchAllPersonTypes instance,
+    TRes Function(Variables_Subscription_watchAllPersonTypes) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllPersonTypes;
 
-  factory CopyWith$Variables$Subscription$watchAllPersonTypes.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllPersonTypes;
+  factory CopyWith_Variables_Subscription_watchAllPersonTypes.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllPersonTypes;
 
   TRes call({
-    List<Input$PersonTypesBoolExp>? where,
+    List<Input_PersonTypesBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllPersonTypes<TRes>
-    implements CopyWith$Variables$Subscription$watchAllPersonTypes<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllPersonTypes(
+class _CopyWithImpl_Variables_Subscription_watchAllPersonTypes<TRes>
+    implements CopyWith_Variables_Subscription_watchAllPersonTypes<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllPersonTypes(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllPersonTypes _instance;
+  final Variables_Subscription_watchAllPersonTypes _instance;
 
-  final TRes Function(Variables$Subscription$watchAllPersonTypes) _then;
+  final TRes Function(Variables_Subscription_watchAllPersonTypes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -141,40 +141,40 @@ class _CopyWithImpl$Variables$Subscription$watchAllPersonTypes<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllPersonTypes._({
+      _then(Variables_Subscription_watchAllPersonTypes._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$PersonTypesBoolExp>?),
+          'where': (where as List<Input_PersonTypesBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllPersonTypes<TRes>
-    implements CopyWith$Variables$Subscription$watchAllPersonTypes<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllPersonTypes(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllPersonTypes<TRes>
+    implements CopyWith_Variables_Subscription_watchAllPersonTypes<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllPersonTypes(this._res);
 
   TRes _res;
 
   call({
-    List<Input$PersonTypesBoolExp>? where,
+    List<Input_PersonTypesBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllPersonTypes {
-  Subscription$watchAllPersonTypes({required this.personTypes});
+class Subscription_watchAllPersonTypes {
+  Subscription_watchAllPersonTypes({required this.personTypes});
 
-  factory Subscription$watchAllPersonTypes.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllPersonTypes.fromJson(Map<String, dynamic> json) {
     final l$personTypes = json['personTypes'];
-    return Subscription$watchAllPersonTypes(
+    return Subscription_watchAllPersonTypes(
         personTypes: (l$personTypes as List<dynamic>)
-            .map((e) => Subscription$watchAllPersonTypes$personTypes.fromJson(
+            .map((e) => Subscription_watchAllPersonTypes_personTypes.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllPersonTypes$personTypes> personTypes;
+  final List<Subscription_watchAllPersonTypes_personTypes> personTypes;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -194,7 +194,7 @@ class Subscription$watchAllPersonTypes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllPersonTypes) ||
+    if (!(other is Subscription_watchAllPersonTypes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -214,73 +214,73 @@ class Subscription$watchAllPersonTypes {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllPersonTypes
-    on Subscription$watchAllPersonTypes {
-  CopyWith$Subscription$watchAllPersonTypes<Subscription$watchAllPersonTypes>
-      get copyWith => CopyWith$Subscription$watchAllPersonTypes(
+extension UtilityExtension_Subscription_watchAllPersonTypes
+    on Subscription_watchAllPersonTypes {
+  CopyWith_Subscription_watchAllPersonTypes<Subscription_watchAllPersonTypes>
+      get copyWith => CopyWith_Subscription_watchAllPersonTypes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllPersonTypes<TRes> {
-  factory CopyWith$Subscription$watchAllPersonTypes(
-    Subscription$watchAllPersonTypes instance,
-    TRes Function(Subscription$watchAllPersonTypes) then,
-  ) = _CopyWithImpl$Subscription$watchAllPersonTypes;
+abstract class CopyWith_Subscription_watchAllPersonTypes<TRes> {
+  factory CopyWith_Subscription_watchAllPersonTypes(
+    Subscription_watchAllPersonTypes instance,
+    TRes Function(Subscription_watchAllPersonTypes) then,
+  ) = _CopyWithImpl_Subscription_watchAllPersonTypes;
 
-  factory CopyWith$Subscription$watchAllPersonTypes.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllPersonTypes;
+  factory CopyWith_Subscription_watchAllPersonTypes.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllPersonTypes;
 
-  TRes call({List<Subscription$watchAllPersonTypes$personTypes>? personTypes});
+  TRes call({List<Subscription_watchAllPersonTypes_personTypes>? personTypes});
   TRes personTypes(
-      Iterable<Subscription$watchAllPersonTypes$personTypes> Function(
+      Iterable<Subscription_watchAllPersonTypes_personTypes> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllPersonTypes$personTypes<
-                      Subscription$watchAllPersonTypes$personTypes>>)
+                  CopyWith_Subscription_watchAllPersonTypes_personTypes<
+                      Subscription_watchAllPersonTypes_personTypes>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllPersonTypes<TRes>
-    implements CopyWith$Subscription$watchAllPersonTypes<TRes> {
-  _CopyWithImpl$Subscription$watchAllPersonTypes(
+class _CopyWithImpl_Subscription_watchAllPersonTypes<TRes>
+    implements CopyWith_Subscription_watchAllPersonTypes<TRes> {
+  _CopyWithImpl_Subscription_watchAllPersonTypes(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllPersonTypes _instance;
+  final Subscription_watchAllPersonTypes _instance;
 
-  final TRes Function(Subscription$watchAllPersonTypes) _then;
+  final TRes Function(Subscription_watchAllPersonTypes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? personTypes = _undefined}) =>
-      _then(Subscription$watchAllPersonTypes(
+      _then(Subscription_watchAllPersonTypes(
           personTypes: personTypes == _undefined || personTypes == null
               ? _instance.personTypes
               : (personTypes
-                  as List<Subscription$watchAllPersonTypes$personTypes>)));
+                  as List<Subscription_watchAllPersonTypes_personTypes>)));
   TRes personTypes(
-          Iterable<Subscription$watchAllPersonTypes$personTypes> Function(
+          Iterable<Subscription_watchAllPersonTypes_personTypes> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllPersonTypes$personTypes<
-                          Subscription$watchAllPersonTypes$personTypes>>)
+                      CopyWith_Subscription_watchAllPersonTypes_personTypes<
+                          Subscription_watchAllPersonTypes_personTypes>>)
               _fn) =>
       call(
           personTypes: _fn(_instance.personTypes
-              .map((e) => CopyWith$Subscription$watchAllPersonTypes$personTypes(
+              .map((e) => CopyWith_Subscription_watchAllPersonTypes_personTypes(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllPersonTypes<TRes>
-    implements CopyWith$Subscription$watchAllPersonTypes<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllPersonTypes(this._res);
+class _CopyWithStubImpl_Subscription_watchAllPersonTypes<TRes>
+    implements CopyWith_Subscription_watchAllPersonTypes<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllPersonTypes(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllPersonTypes$personTypes>? personTypes}) =>
+  call({List<Subscription_watchAllPersonTypes_personTypes>? personTypes}) =>
       _res;
   personTypes(_fn) => _res;
 }
@@ -377,21 +377,21 @@ const documentNodeSubscriptionwatchAllPersonTypes = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$watchAllPersonTypes$personTypes {
-  Subscription$watchAllPersonTypes$personTypes({
+class Subscription_watchAllPersonTypes_personTypes {
+  Subscription_watchAllPersonTypes_personTypes({
     required this.id,
     required this.order,
     required this.name,
     this.$__typename = 'PersonTypes',
   });
 
-  factory Subscription$watchAllPersonTypes$personTypes.fromJson(
+  factory Subscription_watchAllPersonTypes_personTypes.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllPersonTypes$personTypes(
+    return Subscription_watchAllPersonTypes_personTypes(
       id: stringToUuid(l$id),
       order: (l$order as int),
       name: (l$name as String),
@@ -439,7 +439,7 @@ class Subscription$watchAllPersonTypes$personTypes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllPersonTypes$personTypes) ||
+    if (!(other is Subscription_watchAllPersonTypes_personTypes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -467,24 +467,24 @@ class Subscription$watchAllPersonTypes$personTypes {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllPersonTypes$personTypes
-    on Subscription$watchAllPersonTypes$personTypes {
-  CopyWith$Subscription$watchAllPersonTypes$personTypes<
-          Subscription$watchAllPersonTypes$personTypes>
-      get copyWith => CopyWith$Subscription$watchAllPersonTypes$personTypes(
+extension UtilityExtension_Subscription_watchAllPersonTypes_personTypes
+    on Subscription_watchAllPersonTypes_personTypes {
+  CopyWith_Subscription_watchAllPersonTypes_personTypes<
+          Subscription_watchAllPersonTypes_personTypes>
+      get copyWith => CopyWith_Subscription_watchAllPersonTypes_personTypes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllPersonTypes$personTypes<TRes> {
-  factory CopyWith$Subscription$watchAllPersonTypes$personTypes(
-    Subscription$watchAllPersonTypes$personTypes instance,
-    TRes Function(Subscription$watchAllPersonTypes$personTypes) then,
-  ) = _CopyWithImpl$Subscription$watchAllPersonTypes$personTypes;
+abstract class CopyWith_Subscription_watchAllPersonTypes_personTypes<TRes> {
+  factory CopyWith_Subscription_watchAllPersonTypes_personTypes(
+    Subscription_watchAllPersonTypes_personTypes instance,
+    TRes Function(Subscription_watchAllPersonTypes_personTypes) then,
+  ) = _CopyWithImpl_Subscription_watchAllPersonTypes_personTypes;
 
-  factory CopyWith$Subscription$watchAllPersonTypes$personTypes.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllPersonTypes$personTypes;
+  factory CopyWith_Subscription_watchAllPersonTypes_personTypes.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllPersonTypes_personTypes;
 
   TRes call({
     UuidValue? id,
@@ -494,16 +494,16 @@ abstract class CopyWith$Subscription$watchAllPersonTypes$personTypes<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllPersonTypes$personTypes<TRes>
-    implements CopyWith$Subscription$watchAllPersonTypes$personTypes<TRes> {
-  _CopyWithImpl$Subscription$watchAllPersonTypes$personTypes(
+class _CopyWithImpl_Subscription_watchAllPersonTypes_personTypes<TRes>
+    implements CopyWith_Subscription_watchAllPersonTypes_personTypes<TRes> {
+  _CopyWithImpl_Subscription_watchAllPersonTypes_personTypes(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllPersonTypes$personTypes _instance;
+  final Subscription_watchAllPersonTypes_personTypes _instance;
 
-  final TRes Function(Subscription$watchAllPersonTypes$personTypes) _then;
+  final TRes Function(Subscription_watchAllPersonTypes_personTypes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -513,7 +513,7 @@ class _CopyWithImpl$Subscription$watchAllPersonTypes$personTypes<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllPersonTypes$personTypes(
+      _then(Subscription_watchAllPersonTypes_personTypes(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         order: order == _undefined || order == null
             ? _instance.order
@@ -527,9 +527,9 @@ class _CopyWithImpl$Subscription$watchAllPersonTypes$personTypes<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllPersonTypes$personTypes<TRes>
-    implements CopyWith$Subscription$watchAllPersonTypes$personTypes<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllPersonTypes$personTypes(this._res);
+class _CopyWithStubImpl_Subscription_watchAllPersonTypes_personTypes<TRes>
+    implements CopyWith_Subscription_watchAllPersonTypes_personTypes<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllPersonTypes_personTypes(this._res);
 
   TRes _res;
 

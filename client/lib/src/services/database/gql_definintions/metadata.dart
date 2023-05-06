@@ -13,9 +13,11 @@ import 'metadata/shammas_levels.dart';
 import 'metadata/study_years.dart';
 import 'metadata/tags.dart';
 
-class MetadataDAO extends DAOBase {
+class MetadataDAO {
+  final DatabaseService db;
+
   MetadataDAO({
-    required super.db,
+    required this.db,
   });
 
   late final churches = ChurchesDAO(db: db);

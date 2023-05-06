@@ -434,7 +434,7 @@ class _EditPersonState extends State<EditPerson> {
                                     ViewableObjectListController(
                                   objectsPaginatableStream: DatabaseService
                                       .I.metadata.studyYears
-                                      .paginateStudyYears(searchQuery: s),
+                                      .streamAll(searchQuery: s),
                                 ),
                                 labelText: 'السنة الدراسية',
                                 onChanged: (value) =>
@@ -471,7 +471,7 @@ class _EditPersonState extends State<EditPerson> {
                                       ViewableObjectListController(
                                     objectsPaginatableStream: DatabaseService
                                         .I.metadata.colleges
-                                        .paginateColleges(searchQuery: s),
+                                        .streamAll(searchQuery: s),
                                   ),
                                   labelText: 'الكلية',
                                   onChanged: (value) =>
@@ -496,7 +496,7 @@ class _EditPersonState extends State<EditPerson> {
                                       ViewableObjectListController(
                                     objectsPaginatableStream: DatabaseService
                                         .I.metadata.schools
-                                        .paginateSchools(searchQuery: s),
+                                        .streamAll(searchQuery: s),
                                   ),
                                   labelText: 'المدرسة',
                                   onChanged: (value) =>
@@ -522,7 +522,7 @@ class _EditPersonState extends State<EditPerson> {
                                     ViewableObjectListController(
                                   objectsPaginatableStream: DatabaseService
                                       .I.metadata.qualifications
-                                      .paginateQualifications(searchQuery: s),
+                                      .streamAll(searchQuery: s),
                                 ),
                                 labelText: 'المؤهل',
                                 onChanged: (value) =>
@@ -546,7 +546,7 @@ class _EditPersonState extends State<EditPerson> {
                                     ViewableObjectListController(
                                   objectsPaginatableStream: DatabaseService
                                       .I.metadata.jobs
-                                      .paginateJobs(searchQuery: s),
+                                      .streamAll(searchQuery: s),
                                 ),
                                 labelText: 'الوظيفة',
                                 onChanged: (value) =>
@@ -613,7 +613,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.personTypes
-                                    .paginatePersonTypes(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'الحالة الاجتماعية',
                               onChanged: (value) =>
@@ -658,7 +658,7 @@ class _EditPersonState extends State<EditPerson> {
                                     ViewableObjectListController(
                                   objectsPaginatableStream: DatabaseService
                                       .I.metadata.shammasLevels
-                                      .paginateShammasLevels(searchQuery: s),
+                                      .streamAll(searchQuery: s),
                                 ),
                                 labelText: 'رتبة الشموسية',
                                 onChanged: (value) =>
@@ -681,7 +681,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.churches
-                                    .paginateChurches(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'الكنيسة',
                               onChanged: (value) =>
@@ -705,7 +705,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.fathers
-                                    .paginateFathers(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'أب الاعتراف',
                               onChanged: (value) =>
@@ -741,7 +741,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.personStates
-                                    .paginatePersonStates(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'الحالة الروحية',
                               onChanged: (value) =>
@@ -792,7 +792,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.hobbies
-                                    .paginateHobbies(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'الهوايات',
                               builder: (context, state) {
@@ -841,7 +841,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.metadata.tags
-                                    .paginateTags(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'الشارات',
                               builder: (context, state) {
@@ -909,7 +909,7 @@ class _EditPersonState extends State<EditPerson> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.families
-                                    .paginateFamilies(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'العائلة',
                               onChanged: (value) =>
@@ -1452,7 +1452,7 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
     with TickerProviderStateMixin {
   final search = BehaviorSubject<String?>.seeded(null);
   late final listController = ViewableObjectListController<Service>(
-    objectsPaginatableStream: DatabaseService.I.services.paginateServices(
+    objectsPaginatableStream: DatabaseService.I.services.streamAll(
       searchQuery: search,
     ),
   );

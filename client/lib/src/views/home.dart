@@ -64,16 +64,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   );
 
   late final _personsController = _createControllerUsing<Person>(
-    ({searchQuery}) => DatabaseService.I.persons.paginatePersons(
+    ({searchQuery}) => DatabaseService.I.persons.streamAll(
       searchQuery: searchQuery,
       secondLineFieldName: UserSettingsService.I.getSecondLineFor(Person),
     ),
   );
   late final _servicesController = _createControllerUsing<Service>(
-    DatabaseService.I.services.paginateServices,
+    DatabaseService.I.services.streamAll,
   );
   late final _areasController = _createControllerUsing<Area>(
-    DatabaseService.I.areas.paginateAreas,
+    DatabaseService.I.areas.streamAll,
   );
 
   final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};

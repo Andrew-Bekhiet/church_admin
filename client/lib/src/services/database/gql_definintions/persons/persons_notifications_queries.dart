@@ -1,22 +1,25 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import '__generated__/queries.gql.dart';
 
-class PersonsNotificationsQueries extends DAOBase {
-  const PersonsNotificationsQueries({required super.db});
+class PersonsNotificationsQueries {
+  final DatabaseService db;
+
+  const PersonsNotificationsQueries({required this.db});
+
+  DBGraphQLClient get graphQLClient => db.graphQLClient;
 
   Future<Iterable<Person>> _getPersonsNames({
-    List<Input$PersonsBoolExp>? where,
+    List<Input_PersonsBoolExp>? where,
     int? limit,
-    List<Input$PersonsOrderBy>? orderBy,
+    List<Input_PersonsOrderBy>? orderBy,
   }) async {
     return graphQLClient.queryAndReturnParsed(
       QueryOptions(
         document: documentNodeQuerypersonsNames,
         operationName: 'personsNames',
-        variables: Variables$Query$personsNames(
+        variables: Variables_Query_personsNames(
           where: where,
           limit: limit,
           orderBy: orderBy,
@@ -31,18 +34,18 @@ class PersonsNotificationsQueries extends DAOBase {
   }) {
     return _getPersonsNames(
       where: [
-        Input$PersonsBoolExp(
+        Input_PersonsBoolExp(
           confessionHistoryAggregate:
-              Input$HistoryConfessionHistoryAggregateBoolExp(
-            count: Input$historyConfessionHistoryAggregateBoolExpCount(
-              predicate: Input$IntComparisonExp(
+              Input_HistoryConfessionHistoryAggregateBoolExp(
+            count: Input_historyConfessionHistoryAggregateBoolExpCount(
+              predicate: Input_IntComparisonExp(
                 $_neq: 0,
               ),
             ),
           ),
-          $_not: Input$PersonsBoolExp(
-            confessionHistory: Input$HistoryConfessionHistoryBoolExp(
-              dayId: Input$DateComparisonExp(
+          $_not: Input_PersonsBoolExp(
+            confessionHistory: Input_HistoryConfessionHistoryBoolExp(
+              dayId: Input_DateComparisonExp(
                 $_gt: date,
               ),
             ),
@@ -57,17 +60,17 @@ class PersonsNotificationsQueries extends DAOBase {
   }) {
     return _getPersonsNames(
       where: [
-        Input$PersonsBoolExp(
-          kodasHistoryAggregate: Input$HistoryKodasHistoryAggregateBoolExp(
-            count: Input$historyKodasHistoryAggregateBoolExpCount(
-              predicate: Input$IntComparisonExp(
+        Input_PersonsBoolExp(
+          kodasHistoryAggregate: Input_HistoryKodasHistoryAggregateBoolExp(
+            count: Input_historyKodasHistoryAggregateBoolExpCount(
+              predicate: Input_IntComparisonExp(
                 $_neq: 0,
               ),
             ),
           ),
-          $_not: Input$PersonsBoolExp(
-            kodasHistory: Input$HistoryKodasHistoryBoolExp(
-              dayId: Input$DateComparisonExp(
+          $_not: Input_PersonsBoolExp(
+            kodasHistory: Input_HistoryKodasHistoryBoolExp(
+              dayId: Input_DateComparisonExp(
                 $_gt: date,
               ),
             ),
@@ -82,18 +85,18 @@ class PersonsNotificationsQueries extends DAOBase {
   }) {
     return _getPersonsNames(
       where: [
-        Input$PersonsBoolExp(
+        Input_PersonsBoolExp(
           attendanceHistoryAggregate:
-              Input$HistoryAttendanceHistoryAggregateBoolExp(
-            count: Input$historyAttendanceHistoryAggregateBoolExpCount(
-              predicate: Input$IntComparisonExp(
+              Input_HistoryAttendanceHistoryAggregateBoolExp(
+            count: Input_historyAttendanceHistoryAggregateBoolExpCount(
+              predicate: Input_IntComparisonExp(
                 $_neq: 0,
               ),
             ),
           ),
-          $_not: Input$PersonsBoolExp(
-            attendanceHistory: Input$HistoryAttendanceHistoryBoolExp(
-              dayId: Input$DateComparisonExp(
+          $_not: Input_PersonsBoolExp(
+            attendanceHistory: Input_HistoryAttendanceHistoryBoolExp(
+              dayId: Input_DateComparisonExp(
                 $_gt: date,
               ),
             ),
@@ -108,17 +111,17 @@ class PersonsNotificationsQueries extends DAOBase {
   }) {
     return _getPersonsNames(
       where: [
-        Input$PersonsBoolExp(
-          visitHistoryAggregate: Input$HistoryVisitHistoryAggregateBoolExp(
-            count: Input$historyVisitHistoryAggregateBoolExpCount(
-              predicate: Input$IntComparisonExp(
+        Input_PersonsBoolExp(
+          visitHistoryAggregate: Input_HistoryVisitHistoryAggregateBoolExp(
+            count: Input_historyVisitHistoryAggregateBoolExpCount(
+              predicate: Input_IntComparisonExp(
                 $_neq: 0,
               ),
             ),
           ),
-          $_not: Input$PersonsBoolExp(
-            visitHistory: Input$HistoryVisitHistoryBoolExp(
-              time: Input$TimestamptzComparisonExp(
+          $_not: Input_PersonsBoolExp(
+            visitHistory: Input_HistoryVisitHistoryBoolExp(
+              time: Input_TimestamptzComparisonExp(
                 $_gt: date,
               ),
             ),
@@ -133,8 +136,8 @@ class PersonsNotificationsQueries extends DAOBase {
   }) {
     return _getPersonsNames(
       where: [
-        Input$PersonsBoolExp(
-          birthday: Input$StringComparisonExp(
+        Input_PersonsBoolExp(
+          birthday: Input_StringComparisonExp(
             //2022-06-25T12:30:00.440Z => 06-25
             $_eq: date.toIso8601String().split('-').sublist(1, 3).join('-'),
           ),

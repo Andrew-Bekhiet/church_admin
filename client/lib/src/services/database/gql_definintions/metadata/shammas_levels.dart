@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'shammas_levels/__generated__/subscriptions.gql.dart';
 
-class ShammasLevelsDAO extends DAOBase {
+class ShammasLevelsDAO extends DAOBase<ShammasLevel> {
   const ShammasLevelsDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<ShammasLevel> paginateShammasLevels({
+  @override
+  GQLPaginatableStream<ShammasLevel> streamAll({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<ShammasLevel>(
@@ -22,8 +22,8 @@ class ShammasLevelsDAO extends DAOBase {
             variables: graphQLClient
                 .getDefaultSearchVars(
                   event,
-                  Variables$Subscription$watchAllShammasLevels.new,
-                  Input$ShammasLevelsBoolExp.new,
+                  Variables_Subscription_watchAllShammasLevels.new,
+                  Input_ShammasLevelsBoolExp.new,
                 )
                 .toJson(),
             parserFn: db.parser.singleListParser(ShammasLevel.fromJson),

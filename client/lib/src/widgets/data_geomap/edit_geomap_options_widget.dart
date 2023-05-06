@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
-
 import 'package:rxdart/rxdart.dart';
 
 class EditGeomapOptionsWidget extends StatefulWidget {
@@ -213,7 +212,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectGroups() async {
     final rslt = await _select<Group>(
-      stream: DatabaseService.I.groups.paginateGroups(),
+      stream: DatabaseService.I.groups.streamAll(),
       selected: stagingMapOptions.selectedGroups.toList(),
       title: 'اختيار المجموعات',
     );
@@ -228,7 +227,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectClasses() async {
     final rslt = await _select<Class>(
-      stream: DatabaseService.I.classes.paginateClasses(),
+      stream: DatabaseService.I.classes.streamAll(),
       selected: stagingMapOptions.selectedClasses.toList(),
       title: 'اختيار الفصول',
     );
@@ -243,7 +242,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectServices() async {
     final rslt = await _select<Service>(
-      stream: DatabaseService.I.services.paginateServices(),
+      stream: DatabaseService.I.services.streamAll(),
       selected: stagingMapOptions.selectedServices.toList(),
       title: 'اختيار الخدمات',
     );
@@ -258,7 +257,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectStores() async {
     final rslt = await _select<Store>(
-      stream: DatabaseService.I.stores.paginateStores(),
+      stream: DatabaseService.I.stores.streamAll(),
       selected: stagingMapOptions.selectedStores.toList(),
       title: 'اختيار المتاجر',
     );
@@ -273,7 +272,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectFamilies() async {
     final rslt = await _select<Family>(
-      stream: DatabaseService.I.families.paginateFamilies(),
+      stream: DatabaseService.I.families.streamAll(),
       selected: stagingMapOptions.selectedFamilies.toList(),
       title: 'اختيار العائلات',
     );
@@ -288,7 +287,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectStreets() async {
     final rslt = await _select<Street>(
-      stream: DatabaseService.I.streets.paginateStreets(),
+      stream: DatabaseService.I.streets.streamAll(),
       selected: stagingMapOptions.selectedStreets.toList(),
       title: 'اختيار الشوارع',
     );
@@ -303,7 +302,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
   Future<void> _selectAreas() async {
     final rslt = await _select<Area>(
-      stream: DatabaseService.I.areas.paginateAreas(),
+      stream: DatabaseService.I.areas.streamAll(),
       selected: stagingMapOptions.selectedAreas.toList(),
       title: 'اختيار المناطق',
     );

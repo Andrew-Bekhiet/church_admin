@@ -2,39 +2,39 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllShammasLevels {
-  factory Variables$Subscription$watchAllShammasLevels({
-    List<Input$ShammasLevelsBoolExp>? where,
+class Variables_Subscription_watchAllShammasLevels {
+  factory Variables_Subscription_watchAllShammasLevels({
+    List<Input_ShammasLevelsBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllShammasLevels._({
+      Variables_Subscription_watchAllShammasLevels._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllShammasLevels._(this._$data);
+  Variables_Subscription_watchAllShammasLevels._(this._$data);
 
-  factory Variables$Subscription$watchAllShammasLevels.fromJson(
+  factory Variables_Subscription_watchAllShammasLevels.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map((e) =>
-              Input$ShammasLevelsBoolExp.fromJson((e as Map<String, dynamic>)))
+              Input_ShammasLevelsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllShammasLevels._(result$data);
+    return Variables_Subscription_watchAllShammasLevels._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$ShammasLevelsBoolExp>? get where =>
-      (_$data['where'] as List<Input$ShammasLevelsBoolExp>?);
+  List<Input_ShammasLevelsBoolExp>? get where =>
+      (_$data['where'] as List<Input_ShammasLevelsBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -49,9 +49,9 @@ class Variables$Subscription$watchAllShammasLevels {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllShammasLevels<
-          Variables$Subscription$watchAllShammasLevels>
-      get copyWith => CopyWith$Variables$Subscription$watchAllShammasLevels(
+  CopyWith_Variables_Subscription_watchAllShammasLevels<
+          Variables_Subscription_watchAllShammasLevels>
+      get copyWith => CopyWith_Variables_Subscription_watchAllShammasLevels(
             this,
             (i) => i,
           );
@@ -60,7 +60,7 @@ class Variables$Subscription$watchAllShammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllShammasLevels) ||
+    if (!(other is Variables_Subscription_watchAllShammasLevels) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109,31 +109,31 @@ class Variables$Subscription$watchAllShammasLevels {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllShammasLevels<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllShammasLevels(
-    Variables$Subscription$watchAllShammasLevels instance,
-    TRes Function(Variables$Subscription$watchAllShammasLevels) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllShammasLevels;
+abstract class CopyWith_Variables_Subscription_watchAllShammasLevels<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllShammasLevels(
+    Variables_Subscription_watchAllShammasLevels instance,
+    TRes Function(Variables_Subscription_watchAllShammasLevels) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllShammasLevels;
 
-  factory CopyWith$Variables$Subscription$watchAllShammasLevels.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllShammasLevels;
+  factory CopyWith_Variables_Subscription_watchAllShammasLevels.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllShammasLevels;
 
   TRes call({
-    List<Input$ShammasLevelsBoolExp>? where,
+    List<Input_ShammasLevelsBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllShammasLevels<TRes>
-    implements CopyWith$Variables$Subscription$watchAllShammasLevels<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllShammasLevels(
+class _CopyWithImpl_Variables_Subscription_watchAllShammasLevels<TRes>
+    implements CopyWith_Variables_Subscription_watchAllShammasLevels<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllShammasLevels(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllShammasLevels _instance;
+  final Variables_Subscription_watchAllShammasLevels _instance;
 
-  final TRes Function(Variables$Subscription$watchAllShammasLevels) _then;
+  final TRes Function(Variables_Subscription_watchAllShammasLevels) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -141,42 +141,42 @@ class _CopyWithImpl$Variables$Subscription$watchAllShammasLevels<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllShammasLevels._({
+      _then(Variables_Subscription_watchAllShammasLevels._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$ShammasLevelsBoolExp>?),
+          'where': (where as List<Input_ShammasLevelsBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllShammasLevels<TRes>
-    implements CopyWith$Variables$Subscription$watchAllShammasLevels<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllShammasLevels(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllShammasLevels<TRes>
+    implements CopyWith_Variables_Subscription_watchAllShammasLevels<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllShammasLevels(this._res);
 
   TRes _res;
 
   call({
-    List<Input$ShammasLevelsBoolExp>? where,
+    List<Input_ShammasLevelsBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllShammasLevels {
-  Subscription$watchAllShammasLevels({required this.shammasLevels});
+class Subscription_watchAllShammasLevels {
+  Subscription_watchAllShammasLevels({required this.shammasLevels});
 
-  factory Subscription$watchAllShammasLevels.fromJson(
+  factory Subscription_watchAllShammasLevels.fromJson(
       Map<String, dynamic> json) {
     final l$shammasLevels = json['shammasLevels'];
-    return Subscription$watchAllShammasLevels(
+    return Subscription_watchAllShammasLevels(
         shammasLevels: (l$shammasLevels as List<dynamic>)
             .map((e) =>
-                Subscription$watchAllShammasLevels$shammasLevels.fromJson(
+                Subscription_watchAllShammasLevels_shammasLevels.fromJson(
                     (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllShammasLevels$shammasLevels> shammasLevels;
+  final List<Subscription_watchAllShammasLevels_shammasLevels> shammasLevels;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -197,7 +197,7 @@ class Subscription$watchAllShammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllShammasLevels) ||
+    if (!(other is Subscription_watchAllShammasLevels) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -217,76 +217,76 @@ class Subscription$watchAllShammasLevels {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllShammasLevels
-    on Subscription$watchAllShammasLevels {
-  CopyWith$Subscription$watchAllShammasLevels<
-          Subscription$watchAllShammasLevels>
-      get copyWith => CopyWith$Subscription$watchAllShammasLevels(
+extension UtilityExtension_Subscription_watchAllShammasLevels
+    on Subscription_watchAllShammasLevels {
+  CopyWith_Subscription_watchAllShammasLevels<
+          Subscription_watchAllShammasLevels>
+      get copyWith => CopyWith_Subscription_watchAllShammasLevels(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllShammasLevels<TRes> {
-  factory CopyWith$Subscription$watchAllShammasLevels(
-    Subscription$watchAllShammasLevels instance,
-    TRes Function(Subscription$watchAllShammasLevels) then,
-  ) = _CopyWithImpl$Subscription$watchAllShammasLevels;
+abstract class CopyWith_Subscription_watchAllShammasLevels<TRes> {
+  factory CopyWith_Subscription_watchAllShammasLevels(
+    Subscription_watchAllShammasLevels instance,
+    TRes Function(Subscription_watchAllShammasLevels) then,
+  ) = _CopyWithImpl_Subscription_watchAllShammasLevels;
 
-  factory CopyWith$Subscription$watchAllShammasLevels.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllShammasLevels;
+  factory CopyWith_Subscription_watchAllShammasLevels.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllShammasLevels;
 
   TRes call(
-      {List<Subscription$watchAllShammasLevels$shammasLevels>? shammasLevels});
+      {List<Subscription_watchAllShammasLevels_shammasLevels>? shammasLevels});
   TRes shammasLevels(
-      Iterable<Subscription$watchAllShammasLevels$shammasLevels> Function(
+      Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllShammasLevels$shammasLevels<
-                      Subscription$watchAllShammasLevels$shammasLevels>>)
+                  CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
+                      Subscription_watchAllShammasLevels_shammasLevels>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllShammasLevels<TRes>
-    implements CopyWith$Subscription$watchAllShammasLevels<TRes> {
-  _CopyWithImpl$Subscription$watchAllShammasLevels(
+class _CopyWithImpl_Subscription_watchAllShammasLevels<TRes>
+    implements CopyWith_Subscription_watchAllShammasLevels<TRes> {
+  _CopyWithImpl_Subscription_watchAllShammasLevels(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllShammasLevels _instance;
+  final Subscription_watchAllShammasLevels _instance;
 
-  final TRes Function(Subscription$watchAllShammasLevels) _then;
+  final TRes Function(Subscription_watchAllShammasLevels) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? shammasLevels = _undefined}) =>
-      _then(Subscription$watchAllShammasLevels(
+      _then(Subscription_watchAllShammasLevels(
           shammasLevels: shammasLevels == _undefined || shammasLevels == null
               ? _instance.shammasLevels
               : (shammasLevels
-                  as List<Subscription$watchAllShammasLevels$shammasLevels>)));
+                  as List<Subscription_watchAllShammasLevels_shammasLevels>)));
   TRes shammasLevels(
-          Iterable<Subscription$watchAllShammasLevels$shammasLevels> Function(
+          Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllShammasLevels$shammasLevels<
-                          Subscription$watchAllShammasLevels$shammasLevels>>)
+                      CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
+                          Subscription_watchAllShammasLevels_shammasLevels>>)
               _fn) =>
       call(
           shammasLevels: _fn(_instance.shammasLevels.map(
-              (e) => CopyWith$Subscription$watchAllShammasLevels$shammasLevels(
+              (e) => CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllShammasLevels<TRes>
-    implements CopyWith$Subscription$watchAllShammasLevels<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllShammasLevels(this._res);
+class _CopyWithStubImpl_Subscription_watchAllShammasLevels<TRes>
+    implements CopyWith_Subscription_watchAllShammasLevels<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllShammasLevels(this._res);
 
   TRes _res;
 
   call(
-          {List<Subscription$watchAllShammasLevels$shammasLevels>?
+          {List<Subscription_watchAllShammasLevels_shammasLevels>?
               shammasLevels}) =>
       _res;
   shammasLevels(_fn) => _res;
@@ -385,21 +385,21 @@ const documentNodeSubscriptionwatchAllShammasLevels =
   ),
 ]);
 
-class Subscription$watchAllShammasLevels$shammasLevels {
-  Subscription$watchAllShammasLevels$shammasLevels({
+class Subscription_watchAllShammasLevels_shammasLevels {
+  Subscription_watchAllShammasLevels_shammasLevels({
     required this.id,
     required this.order,
     required this.name,
     this.$__typename = 'ShammasLevels',
   });
 
-  factory Subscription$watchAllShammasLevels$shammasLevels.fromJson(
+  factory Subscription_watchAllShammasLevels_shammasLevels.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllShammasLevels$shammasLevels(
+    return Subscription_watchAllShammasLevels_shammasLevels(
       id: stringToUuid(l$id),
       order: (l$order as int),
       name: (l$name as String),
@@ -447,7 +447,7 @@ class Subscription$watchAllShammasLevels$shammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllShammasLevels$shammasLevels) ||
+    if (!(other is Subscription_watchAllShammasLevels_shammasLevels) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -475,25 +475,25 @@ class Subscription$watchAllShammasLevels$shammasLevels {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllShammasLevels$shammasLevels
-    on Subscription$watchAllShammasLevels$shammasLevels {
-  CopyWith$Subscription$watchAllShammasLevels$shammasLevels<
-          Subscription$watchAllShammasLevels$shammasLevels>
-      get copyWith => CopyWith$Subscription$watchAllShammasLevels$shammasLevels(
+extension UtilityExtension_Subscription_watchAllShammasLevels_shammasLevels
+    on Subscription_watchAllShammasLevels_shammasLevels {
+  CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
+          Subscription_watchAllShammasLevels_shammasLevels>
+      get copyWith => CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllShammasLevels$shammasLevels<TRes> {
-  factory CopyWith$Subscription$watchAllShammasLevels$shammasLevels(
-    Subscription$watchAllShammasLevels$shammasLevels instance,
-    TRes Function(Subscription$watchAllShammasLevels$shammasLevels) then,
-  ) = _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels;
+abstract class CopyWith_Subscription_watchAllShammasLevels_shammasLevels<TRes> {
+  factory CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
+    Subscription_watchAllShammasLevels_shammasLevels instance,
+    TRes Function(Subscription_watchAllShammasLevels_shammasLevels) then,
+  ) = _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels;
 
-  factory CopyWith$Subscription$watchAllShammasLevels$shammasLevels.stub(
+  factory CopyWith_Subscription_watchAllShammasLevels_shammasLevels.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllShammasLevels$shammasLevels;
+      _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels;
 
   TRes call({
     UuidValue? id,
@@ -503,16 +503,16 @@ abstract class CopyWith$Subscription$watchAllShammasLevels$shammasLevels<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels<TRes>
-    implements CopyWith$Subscription$watchAllShammasLevels$shammasLevels<TRes> {
-  _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels(
+class _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
+    implements CopyWith_Subscription_watchAllShammasLevels_shammasLevels<TRes> {
+  _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllShammasLevels$shammasLevels _instance;
+  final Subscription_watchAllShammasLevels_shammasLevels _instance;
 
-  final TRes Function(Subscription$watchAllShammasLevels$shammasLevels) _then;
+  final TRes Function(Subscription_watchAllShammasLevels_shammasLevels) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -522,7 +522,7 @@ class _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllShammasLevels$shammasLevels(
+      _then(Subscription_watchAllShammasLevels_shammasLevels(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         order: order == _undefined || order == null
             ? _instance.order
@@ -536,9 +536,9 @@ class _CopyWithImpl$Subscription$watchAllShammasLevels$shammasLevels<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllShammasLevels$shammasLevels<TRes>
-    implements CopyWith$Subscription$watchAllShammasLevels$shammasLevels<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllShammasLevels$shammasLevels(this._res);
+class _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
+    implements CopyWith_Subscription_watchAllShammasLevels_shammasLevels<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels(this._res);
 
   TRes _res;
 

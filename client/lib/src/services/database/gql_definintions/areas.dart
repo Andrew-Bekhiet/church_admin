@@ -1,33 +1,41 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
 import 'areas/__generated__/subscriptions.gql.dart';
 import 'helpers.dart';
 
-class AreasDAO extends DAOBase {
+class AreasDAO extends DAOBase<Area> {
   const AreasDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Area> paginateAreas({
+  @override
+  GQLPaginatableStream<Area> streamAll({
     Stream<String?>? searchQuery,
+    List<Input_AreasBoolExp>? where,
   }) {
     return GQLPaginatableStream<Area>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
+        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+          event,
+          Variables_Subscription_watchAllAreas.new,
+          Input_AreasBoolExp.new,
+        );
+
+        final variables = defaultSearchVars.copyWith(
+          where: [
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+          ],
+        ).toJson();
+
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllAreas,
             operationName: 'watchAllAreas',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables$Subscription$watchAllAreas.new,
-                  Input$AreasBoolExp.new,
-                )
-                .toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Area.fromJson),
           ),
         );
@@ -35,8 +43,8 @@ class AreasDAO extends DAOBase {
     );
   }
 
-  Stream<Area?> watchArea({
-    required String areaId,
+  Stream<Area?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient
         .subscribe(
@@ -44,7 +52,7 @@ class AreasDAO extends DAOBase {
             document: documentNodeSubscriptionwatchArea,
             operationName: 'watchArea',
             variables:
-                Variables$Subscription$watchArea(id: areaId.toUuid()).toJson(),
+                Variables_Subscription_watchArea(id: id.toUuid()).toJson(),
             parserFn: db.parser.singleOrNullParser(Area.fromJson),
           ),
         )
@@ -56,7 +64,7 @@ class AreasDAO extends DAOBase {
   }) {
     final mutationOptions = MutationOptions(
       document: documentNodeMutationdeleteArea,
-      variables: Variables$Mutation$deleteArea(
+      variables: Variables_Mutation_deleteArea(
         areaId: areaId.toUuid(),
       ).toJson(),
       parserFn: db.parser.singleOrNullParser(Area.fromJson),
@@ -98,9 +106,9 @@ class AreasDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationupdateArea,
         operationName: 'updateArea',
-        variables: Variables$Mutation$updateArea(
+        variables: Variables_Mutation_updateArea(
           areaId: newArea.id.toUuid(),
-          newArea: Input$AreasSetInput.fromJson(delta),
+          newArea: Input_AreasSetInput.fromJson(delta),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(Area.fromJson),
       ),

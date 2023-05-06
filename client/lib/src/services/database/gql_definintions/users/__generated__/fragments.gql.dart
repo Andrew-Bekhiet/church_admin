@@ -6,8 +6,8 @@ import '../../services/__generated__/fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Fragment$User implements Fragment$UserNoPhoto {
-  Fragment$User({
+class Fragment_User implements Fragment_UserNoPhoto {
+  Fragment_User({
     required this.uid,
     required this.name,
     required this.email,
@@ -15,13 +15,13 @@ class Fragment$User implements Fragment$UserNoPhoto {
     this.photoUpdatedAt,
   });
 
-  factory Fragment$User.fromJson(Map<String, dynamic> json) {
+  factory Fragment_User.fromJson(Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
-    return Fragment$User(
+    return Fragment_User(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -78,7 +78,7 @@ class Fragment$User implements Fragment$UserNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$User) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_User) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -110,21 +110,21 @@ class Fragment$User implements Fragment$UserNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$User on Fragment$User {
-  CopyWith$Fragment$User<Fragment$User> get copyWith => CopyWith$Fragment$User(
+extension UtilityExtension_Fragment_User on Fragment_User {
+  CopyWith_Fragment_User<Fragment_User> get copyWith => CopyWith_Fragment_User(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$User<TRes> {
-  factory CopyWith$Fragment$User(
-    Fragment$User instance,
-    TRes Function(Fragment$User) then,
-  ) = _CopyWithImpl$Fragment$User;
+abstract class CopyWith_Fragment_User<TRes> {
+  factory CopyWith_Fragment_User(
+    Fragment_User instance,
+    TRes Function(Fragment_User) then,
+  ) = _CopyWithImpl_Fragment_User;
 
-  factory CopyWith$Fragment$User.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$User;
+  factory CopyWith_Fragment_User.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_User;
 
   TRes call({
     UuidValue? uid,
@@ -135,16 +135,16 @@ abstract class CopyWith$Fragment$User<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$User<TRes>
-    implements CopyWith$Fragment$User<TRes> {
-  _CopyWithImpl$Fragment$User(
+class _CopyWithImpl_Fragment_User<TRes>
+    implements CopyWith_Fragment_User<TRes> {
+  _CopyWithImpl_Fragment_User(
     this._instance,
     this._then,
   );
 
-  final Fragment$User _instance;
+  final Fragment_User _instance;
 
-  final TRes Function(Fragment$User) _then;
+  final TRes Function(Fragment_User) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -155,7 +155,7 @@ class _CopyWithImpl$Fragment$User<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
-      _then(Fragment$User(
+      _then(Fragment_User(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -174,9 +174,9 @@ class _CopyWithImpl$Fragment$User<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$User<TRes>
-    implements CopyWith$Fragment$User<TRes> {
-  _CopyWithStubImpl$Fragment$User(this._res);
+class _CopyWithStubImpl_Fragment_User<TRes>
+    implements CopyWith_Fragment_User<TRes> {
+  _CopyWithStubImpl_Fragment_User(this._res);
 
   TRes _res;
 
@@ -224,20 +224,20 @@ const documentNodeFragmentUser = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$UserNoPhoto {
-  Fragment$UserNoPhoto({
+class Fragment_UserNoPhoto {
+  Fragment_UserNoPhoto({
     required this.uid,
     required this.name,
     required this.email,
     this.$__typename = 'AuthUsersData',
   });
 
-  factory Fragment$UserNoPhoto.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserNoPhoto.fromJson(Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserNoPhoto(
+    return Fragment_UserNoPhoto(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -285,7 +285,7 @@ class Fragment$UserNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserNoPhoto) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_UserNoPhoto) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -312,22 +312,22 @@ class Fragment$UserNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$UserNoPhoto on Fragment$UserNoPhoto {
-  CopyWith$Fragment$UserNoPhoto<Fragment$UserNoPhoto> get copyWith =>
-      CopyWith$Fragment$UserNoPhoto(
+extension UtilityExtension_Fragment_UserNoPhoto on Fragment_UserNoPhoto {
+  CopyWith_Fragment_UserNoPhoto<Fragment_UserNoPhoto> get copyWith =>
+      CopyWith_Fragment_UserNoPhoto(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$UserNoPhoto<TRes> {
-  factory CopyWith$Fragment$UserNoPhoto(
-    Fragment$UserNoPhoto instance,
-    TRes Function(Fragment$UserNoPhoto) then,
-  ) = _CopyWithImpl$Fragment$UserNoPhoto;
+abstract class CopyWith_Fragment_UserNoPhoto<TRes> {
+  factory CopyWith_Fragment_UserNoPhoto(
+    Fragment_UserNoPhoto instance,
+    TRes Function(Fragment_UserNoPhoto) then,
+  ) = _CopyWithImpl_Fragment_UserNoPhoto;
 
-  factory CopyWith$Fragment$UserNoPhoto.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserNoPhoto;
+  factory CopyWith_Fragment_UserNoPhoto.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserNoPhoto;
 
   TRes call({
     UuidValue? uid,
@@ -337,16 +337,16 @@ abstract class CopyWith$Fragment$UserNoPhoto<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserNoPhoto<TRes>
-    implements CopyWith$Fragment$UserNoPhoto<TRes> {
-  _CopyWithImpl$Fragment$UserNoPhoto(
+class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
+    implements CopyWith_Fragment_UserNoPhoto<TRes> {
+  _CopyWithImpl_Fragment_UserNoPhoto(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserNoPhoto _instance;
+  final Fragment_UserNoPhoto _instance;
 
-  final TRes Function(Fragment$UserNoPhoto) _then;
+  final TRes Function(Fragment_UserNoPhoto) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -356,7 +356,7 @@ class _CopyWithImpl$Fragment$UserNoPhoto<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserNoPhoto(
+      _then(Fragment_UserNoPhoto(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -372,9 +372,9 @@ class _CopyWithImpl$Fragment$UserNoPhoto<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserNoPhoto<TRes>
-    implements CopyWith$Fragment$UserNoPhoto<TRes> {
-  _CopyWithStubImpl$Fragment$UserNoPhoto(this._res);
+class _CopyWithStubImpl_Fragment_UserNoPhoto<TRes>
+    implements CopyWith_Fragment_UserNoPhoto<TRes> {
+  _CopyWithStubImpl_Fragment_UserNoPhoto(this._res);
 
   TRes _res;
 
@@ -430,9 +430,9 @@ const documentNodeFragmentUserNoPhoto = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$UserOverview
-    implements Fragment$User, Fragment$UserNoPhoto, Fragment$UserPermissions {
-  Fragment$UserOverview({
+class Fragment_UserOverview
+    implements Fragment_User, Fragment_UserNoPhoto, Fragment_UserPermissions {
+  Fragment_UserOverview({
     required this.uid,
     required this.name,
     required this.email,
@@ -442,7 +442,7 @@ class Fragment$UserOverview
     this.person,
   });
 
-  factory Fragment$UserOverview.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserOverview.fromJson(Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
@@ -450,7 +450,7 @@ class Fragment$UserOverview
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
-    return Fragment$UserOverview(
+    return Fragment_UserOverview(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -458,12 +458,12 @@ class Fragment$UserOverview
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment$UserOverview$permissions.fromJson(
+          .map((e) => Fragment_UserOverview_permissions.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       person: l$person == null
           ? null
-          : Fragment$UserOverview$person.fromJson(
+          : Fragment_UserOverview_person.fromJson(
               (l$person as Map<String, dynamic>)),
     );
   }
@@ -478,9 +478,9 @@ class Fragment$UserOverview
 
   final DateTime? photoUpdatedAt;
 
-  final List<Fragment$UserOverview$permissions> permissions;
+  final List<Fragment_UserOverview_permissions> permissions;
 
-  final Fragment$UserOverview$person? person;
+  final Fragment_UserOverview_person? person;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -527,7 +527,7 @@ class Fragment$UserOverview
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserOverview) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_UserOverview) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -576,22 +576,22 @@ class Fragment$UserOverview
   }
 }
 
-extension UtilityExtension$Fragment$UserOverview on Fragment$UserOverview {
-  CopyWith$Fragment$UserOverview<Fragment$UserOverview> get copyWith =>
-      CopyWith$Fragment$UserOverview(
+extension UtilityExtension_Fragment_UserOverview on Fragment_UserOverview {
+  CopyWith_Fragment_UserOverview<Fragment_UserOverview> get copyWith =>
+      CopyWith_Fragment_UserOverview(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$UserOverview<TRes> {
-  factory CopyWith$Fragment$UserOverview(
-    Fragment$UserOverview instance,
-    TRes Function(Fragment$UserOverview) then,
-  ) = _CopyWithImpl$Fragment$UserOverview;
+abstract class CopyWith_Fragment_UserOverview<TRes> {
+  factory CopyWith_Fragment_UserOverview(
+    Fragment_UserOverview instance,
+    TRes Function(Fragment_UserOverview) then,
+  ) = _CopyWithImpl_Fragment_UserOverview;
 
-  factory CopyWith$Fragment$UserOverview.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserOverview;
+  factory CopyWith_Fragment_UserOverview.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserOverview;
 
   TRes call({
     UuidValue? uid,
@@ -599,28 +599,28 @@ abstract class CopyWith$Fragment$UserOverview<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$UserOverview$permissions>? permissions,
-    Fragment$UserOverview$person? person,
+    List<Fragment_UserOverview_permissions>? permissions,
+    Fragment_UserOverview_person? person,
   });
   TRes permissions(
-      Iterable<Fragment$UserOverview$permissions> Function(
+      Iterable<Fragment_UserOverview_permissions> Function(
               Iterable<
-                  CopyWith$Fragment$UserOverview$permissions<
-                      Fragment$UserOverview$permissions>>)
+                  CopyWith_Fragment_UserOverview_permissions<
+                      Fragment_UserOverview_permissions>>)
           _fn);
-  CopyWith$Fragment$UserOverview$person<TRes> get person;
+  CopyWith_Fragment_UserOverview_person<TRes> get person;
 }
 
-class _CopyWithImpl$Fragment$UserOverview<TRes>
-    implements CopyWith$Fragment$UserOverview<TRes> {
-  _CopyWithImpl$Fragment$UserOverview(
+class _CopyWithImpl_Fragment_UserOverview<TRes>
+    implements CopyWith_Fragment_UserOverview<TRes> {
+  _CopyWithImpl_Fragment_UserOverview(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserOverview _instance;
+  final Fragment_UserOverview _instance;
 
-  final TRes Function(Fragment$UserOverview) _then;
+  final TRes Function(Fragment_UserOverview) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -633,7 +633,7 @@ class _CopyWithImpl$Fragment$UserOverview<TRes>
     Object? permissions = _undefined,
     Object? person = _undefined,
   }) =>
-      _then(Fragment$UserOverview(
+      _then(Fragment_UserOverview(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -651,35 +651,35 @@ class _CopyWithImpl$Fragment$UserOverview<TRes>
             : (photoUpdatedAt as DateTime?),
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
-            : (permissions as List<Fragment$UserOverview$permissions>),
+            : (permissions as List<Fragment_UserOverview_permissions>),
         person: person == _undefined
             ? _instance.person
-            : (person as Fragment$UserOverview$person?),
+            : (person as Fragment_UserOverview_person?),
       ));
   TRes permissions(
-          Iterable<Fragment$UserOverview$permissions> Function(
+          Iterable<Fragment_UserOverview_permissions> Function(
                   Iterable<
-                      CopyWith$Fragment$UserOverview$permissions<
-                          Fragment$UserOverview$permissions>>)
+                      CopyWith_Fragment_UserOverview_permissions<
+                          Fragment_UserOverview_permissions>>)
               _fn) =>
       call(
           permissions: _fn(_instance.permissions
-              .map((e) => CopyWith$Fragment$UserOverview$permissions(
+              .map((e) => CopyWith_Fragment_UserOverview_permissions(
                     e,
                     (i) => i,
                   ))).toList());
-  CopyWith$Fragment$UserOverview$person<TRes> get person {
+  CopyWith_Fragment_UserOverview_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
-        ? CopyWith$Fragment$UserOverview$person.stub(_then(_instance))
-        : CopyWith$Fragment$UserOverview$person(
+        ? CopyWith_Fragment_UserOverview_person.stub(_then(_instance))
+        : CopyWith_Fragment_UserOverview_person(
             local$person, (e) => call(person: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$UserOverview<TRes>
-    implements CopyWith$Fragment$UserOverview<TRes> {
-  _CopyWithStubImpl$Fragment$UserOverview(this._res);
+class _CopyWithStubImpl_Fragment_UserOverview<TRes>
+    implements CopyWith_Fragment_UserOverview<TRes> {
+  _CopyWithStubImpl_Fragment_UserOverview(this._res);
 
   TRes _res;
 
@@ -689,13 +689,13 @@ class _CopyWithStubImpl$Fragment$UserOverview<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$UserOverview$permissions>? permissions,
-    Fragment$UserOverview$person? person,
+    List<Fragment_UserOverview_permissions>? permissions,
+    Fragment_UserOverview_person? person,
   }) =>
       _res;
   permissions(_fn) => _res;
-  CopyWith$Fragment$UserOverview$person<TRes> get person =>
-      CopyWith$Fragment$UserOverview$person.stub(_res);
+  CopyWith_Fragment_UserOverview_person<TRes> get person =>
+      CopyWith_Fragment_UserOverview_person.stub(_res);
 }
 
 const fragmentDefinitionUserOverview = FragmentDefinitionNode(
@@ -773,18 +773,18 @@ const documentNodeFragmentUserOverview = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Fragment$UserOverview$permissions
-    implements Fragment$UserPermissions$permissions {
-  Fragment$UserOverview$permissions({
+class Fragment_UserOverview_permissions
+    implements Fragment_UserPermissions_permissions {
+  Fragment_UserOverview_permissions({
     required this.permission,
     this.$__typename = 'AuthUsersPermissions',
   });
 
-  factory Fragment$UserOverview$permissions.fromJson(
+  factory Fragment_UserOverview_permissions.fromJson(
       Map<String, dynamic> json) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserOverview$permissions(
+    return Fragment_UserOverview_permissions(
       permission: (l$permission as String),
       $__typename: (l$$__typename as String),
     );
@@ -818,7 +818,7 @@ class Fragment$UserOverview$permissions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserOverview$permissions) ||
+    if (!(other is Fragment_UserOverview_permissions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -836,23 +836,23 @@ class Fragment$UserOverview$permissions
   }
 }
 
-extension UtilityExtension$Fragment$UserOverview$permissions
-    on Fragment$UserOverview$permissions {
-  CopyWith$Fragment$UserOverview$permissions<Fragment$UserOverview$permissions>
-      get copyWith => CopyWith$Fragment$UserOverview$permissions(
+extension UtilityExtension_Fragment_UserOverview_permissions
+    on Fragment_UserOverview_permissions {
+  CopyWith_Fragment_UserOverview_permissions<Fragment_UserOverview_permissions>
+      get copyWith => CopyWith_Fragment_UserOverview_permissions(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserOverview$permissions<TRes> {
-  factory CopyWith$Fragment$UserOverview$permissions(
-    Fragment$UserOverview$permissions instance,
-    TRes Function(Fragment$UserOverview$permissions) then,
-  ) = _CopyWithImpl$Fragment$UserOverview$permissions;
+abstract class CopyWith_Fragment_UserOverview_permissions<TRes> {
+  factory CopyWith_Fragment_UserOverview_permissions(
+    Fragment_UserOverview_permissions instance,
+    TRes Function(Fragment_UserOverview_permissions) then,
+  ) = _CopyWithImpl_Fragment_UserOverview_permissions;
 
-  factory CopyWith$Fragment$UserOverview$permissions.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserOverview$permissions;
+  factory CopyWith_Fragment_UserOverview_permissions.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserOverview_permissions;
 
   TRes call({
     String? permission,
@@ -860,16 +860,16 @@ abstract class CopyWith$Fragment$UserOverview$permissions<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserOverview$permissions<TRes>
-    implements CopyWith$Fragment$UserOverview$permissions<TRes> {
-  _CopyWithImpl$Fragment$UserOverview$permissions(
+class _CopyWithImpl_Fragment_UserOverview_permissions<TRes>
+    implements CopyWith_Fragment_UserOverview_permissions<TRes> {
+  _CopyWithImpl_Fragment_UserOverview_permissions(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserOverview$permissions _instance;
+  final Fragment_UserOverview_permissions _instance;
 
-  final TRes Function(Fragment$UserOverview$permissions) _then;
+  final TRes Function(Fragment_UserOverview_permissions) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -877,7 +877,7 @@ class _CopyWithImpl$Fragment$UserOverview$permissions<TRes>
     Object? permission = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserOverview$permissions(
+      _then(Fragment_UserOverview_permissions(
         permission: permission == _undefined || permission == null
             ? _instance.permission
             : (permission as String),
@@ -887,9 +887,9 @@ class _CopyWithImpl$Fragment$UserOverview$permissions<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserOverview$permissions<TRes>
-    implements CopyWith$Fragment$UserOverview$permissions<TRes> {
-  _CopyWithStubImpl$Fragment$UserOverview$permissions(this._res);
+class _CopyWithStubImpl_Fragment_UserOverview_permissions<TRes>
+    implements CopyWith_Fragment_UserOverview_permissions<TRes> {
+  _CopyWithStubImpl_Fragment_UserOverview_permissions(this._res);
 
   TRes _res;
 
@@ -900,9 +900,9 @@ class _CopyWithStubImpl$Fragment$UserOverview$permissions<TRes>
       _res;
 }
 
-class Fragment$UserOverview$person
-    implements Fragment$Person, Fragment$PersonNoPhoto {
-  Fragment$UserOverview$person({
+class Fragment_UserOverview_person
+    implements Fragment_Person, Fragment_PersonNoPhoto {
+  Fragment_UserOverview_person({
     required this.id,
     required this.name,
     this.color,
@@ -912,7 +912,7 @@ class Fragment$UserOverview$person
     this.lastConfession,
   });
 
-  factory Fragment$UserOverview$person.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserOverview_person.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -920,7 +920,7 @@ class Fragment$UserOverview$person
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
-    return Fragment$UserOverview$person(
+    return Fragment_UserOverview_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -991,7 +991,7 @@ class Fragment$UserOverview$person
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserOverview$person) ||
+    if (!(other is Fragment_UserOverview_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1034,23 +1034,23 @@ class Fragment$UserOverview$person
   }
 }
 
-extension UtilityExtension$Fragment$UserOverview$person
-    on Fragment$UserOverview$person {
-  CopyWith$Fragment$UserOverview$person<Fragment$UserOverview$person>
-      get copyWith => CopyWith$Fragment$UserOverview$person(
+extension UtilityExtension_Fragment_UserOverview_person
+    on Fragment_UserOverview_person {
+  CopyWith_Fragment_UserOverview_person<Fragment_UserOverview_person>
+      get copyWith => CopyWith_Fragment_UserOverview_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserOverview$person<TRes> {
-  factory CopyWith$Fragment$UserOverview$person(
-    Fragment$UserOverview$person instance,
-    TRes Function(Fragment$UserOverview$person) then,
-  ) = _CopyWithImpl$Fragment$UserOverview$person;
+abstract class CopyWith_Fragment_UserOverview_person<TRes> {
+  factory CopyWith_Fragment_UserOverview_person(
+    Fragment_UserOverview_person instance,
+    TRes Function(Fragment_UserOverview_person) then,
+  ) = _CopyWithImpl_Fragment_UserOverview_person;
 
-  factory CopyWith$Fragment$UserOverview$person.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserOverview$person;
+  factory CopyWith_Fragment_UserOverview_person.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserOverview_person;
 
   TRes call({
     UuidValue? id,
@@ -1063,16 +1063,16 @@ abstract class CopyWith$Fragment$UserOverview$person<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserOverview$person<TRes>
-    implements CopyWith$Fragment$UserOverview$person<TRes> {
-  _CopyWithImpl$Fragment$UserOverview$person(
+class _CopyWithImpl_Fragment_UserOverview_person<TRes>
+    implements CopyWith_Fragment_UserOverview_person<TRes> {
+  _CopyWithImpl_Fragment_UserOverview_person(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserOverview$person _instance;
+  final Fragment_UserOverview_person _instance;
 
-  final TRes Function(Fragment$UserOverview$person) _then;
+  final TRes Function(Fragment_UserOverview_person) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1085,7 +1085,7 @@ class _CopyWithImpl$Fragment$UserOverview$person<TRes>
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
-      _then(Fragment$UserOverview$person(
+      _then(Fragment_UserOverview_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1106,9 +1106,9 @@ class _CopyWithImpl$Fragment$UserOverview$person<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserOverview$person<TRes>
-    implements CopyWith$Fragment$UserOverview$person<TRes> {
-  _CopyWithStubImpl$Fragment$UserOverview$person(this._res);
+class _CopyWithStubImpl_Fragment_UserOverview_person<TRes>
+    implements CopyWith_Fragment_UserOverview_person<TRes> {
+  _CopyWithStubImpl_Fragment_UserOverview_person(this._res);
 
   TRes _res;
 
@@ -1124,14 +1124,14 @@ class _CopyWithStubImpl$Fragment$UserOverview$person<TRes>
       _res;
 }
 
-class Fragment$UserDetails
+class Fragment_UserDetails
     implements
-        Fragment$UserOverview,
-        Fragment$User,
-        Fragment$UserNoPhoto,
-        Fragment$UserPermissions,
-        Fragment$UserAdminOn {
-  Fragment$UserDetails({
+        Fragment_UserOverview,
+        Fragment_User,
+        Fragment_UserNoPhoto,
+        Fragment_UserPermissions,
+        Fragment_UserAdminOn {
+  Fragment_UserDetails({
     required this.uid,
     required this.name,
     required this.email,
@@ -1143,7 +1143,7 @@ class Fragment$UserDetails
     required this.adminOn,
   });
 
-  factory Fragment$UserDetails.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserDetails.fromJson(Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
@@ -1153,7 +1153,7 @@ class Fragment$UserDetails
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
     final l$adminOn = json['adminOn'];
-    return Fragment$UserDetails(
+    return Fragment_UserDetails(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String),
@@ -1161,16 +1161,16 @@ class Fragment$UserDetails
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment$UserDetails$permissions.fromJson(
+          .map((e) => Fragment_UserDetails_permissions.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       person: l$person == null
           ? null
-          : Fragment$UserDetails$person.fromJson(
+          : Fragment_UserDetails_person.fromJson(
               (l$person as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
       adminOn: (l$adminOn as List<dynamic>)
-          .map((e) => Fragment$UserDetails$adminOn.fromJson(
+          .map((e) => Fragment_UserDetails_adminOn.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
     );
@@ -1186,13 +1186,13 @@ class Fragment$UserDetails
 
   final DateTime? photoUpdatedAt;
 
-  final List<Fragment$UserDetails$permissions> permissions;
+  final List<Fragment_UserDetails_permissions> permissions;
 
-  final Fragment$UserDetails$person? person;
+  final Fragment_UserDetails_person? person;
 
   final Json? lastEdit;
 
-  final List<Fragment$UserDetails$adminOn> adminOn;
+  final List<Fragment_UserDetails_adminOn> adminOn;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1247,7 +1247,7 @@ class Fragment$UserDetails
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserDetails) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_UserDetails) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -1313,22 +1313,22 @@ class Fragment$UserDetails
   }
 }
 
-extension UtilityExtension$Fragment$UserDetails on Fragment$UserDetails {
-  CopyWith$Fragment$UserDetails<Fragment$UserDetails> get copyWith =>
-      CopyWith$Fragment$UserDetails(
+extension UtilityExtension_Fragment_UserDetails on Fragment_UserDetails {
+  CopyWith_Fragment_UserDetails<Fragment_UserDetails> get copyWith =>
+      CopyWith_Fragment_UserDetails(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$UserDetails<TRes> {
-  factory CopyWith$Fragment$UserDetails(
-    Fragment$UserDetails instance,
-    TRes Function(Fragment$UserDetails) then,
-  ) = _CopyWithImpl$Fragment$UserDetails;
+abstract class CopyWith_Fragment_UserDetails<TRes> {
+  factory CopyWith_Fragment_UserDetails(
+    Fragment_UserDetails instance,
+    TRes Function(Fragment_UserDetails) then,
+  ) = _CopyWithImpl_Fragment_UserDetails;
 
-  factory CopyWith$Fragment$UserDetails.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserDetails;
+  factory CopyWith_Fragment_UserDetails.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserDetails;
 
   TRes call({
     UuidValue? uid,
@@ -1336,36 +1336,36 @@ abstract class CopyWith$Fragment$UserDetails<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$UserDetails$permissions>? permissions,
-    Fragment$UserDetails$person? person,
+    List<Fragment_UserDetails_permissions>? permissions,
+    Fragment_UserDetails_person? person,
     Json? lastEdit,
-    List<Fragment$UserDetails$adminOn>? adminOn,
+    List<Fragment_UserDetails_adminOn>? adminOn,
   });
   TRes permissions(
-      Iterable<Fragment$UserDetails$permissions> Function(
+      Iterable<Fragment_UserDetails_permissions> Function(
               Iterable<
-                  CopyWith$Fragment$UserDetails$permissions<
-                      Fragment$UserDetails$permissions>>)
+                  CopyWith_Fragment_UserDetails_permissions<
+                      Fragment_UserDetails_permissions>>)
           _fn);
-  CopyWith$Fragment$UserDetails$person<TRes> get person;
+  CopyWith_Fragment_UserDetails_person<TRes> get person;
   TRes adminOn(
-      Iterable<Fragment$UserDetails$adminOn> Function(
+      Iterable<Fragment_UserDetails_adminOn> Function(
               Iterable<
-                  CopyWith$Fragment$UserDetails$adminOn<
-                      Fragment$UserDetails$adminOn>>)
+                  CopyWith_Fragment_UserDetails_adminOn<
+                      Fragment_UserDetails_adminOn>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$UserDetails<TRes>
-    implements CopyWith$Fragment$UserDetails<TRes> {
-  _CopyWithImpl$Fragment$UserDetails(
+class _CopyWithImpl_Fragment_UserDetails<TRes>
+    implements CopyWith_Fragment_UserDetails<TRes> {
+  _CopyWithImpl_Fragment_UserDetails(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserDetails _instance;
+  final Fragment_UserDetails _instance;
 
-  final TRes Function(Fragment$UserDetails) _then;
+  final TRes Function(Fragment_UserDetails) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1380,7 +1380,7 @@ class _CopyWithImpl$Fragment$UserDetails<TRes>
     Object? lastEdit = _undefined,
     Object? adminOn = _undefined,
   }) =>
-      _then(Fragment$UserDetails(
+      _then(Fragment_UserDetails(
         uid: uid == _undefined || uid == null
             ? _instance.uid
             : (uid as UuidValue),
@@ -1398,53 +1398,53 @@ class _CopyWithImpl$Fragment$UserDetails<TRes>
             : (photoUpdatedAt as DateTime?),
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
-            : (permissions as List<Fragment$UserDetails$permissions>),
+            : (permissions as List<Fragment_UserDetails_permissions>),
         person: person == _undefined
             ? _instance.person
-            : (person as Fragment$UserDetails$person?),
+            : (person as Fragment_UserDetails_person?),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         adminOn: adminOn == _undefined || adminOn == null
             ? _instance.adminOn
-            : (adminOn as List<Fragment$UserDetails$adminOn>),
+            : (adminOn as List<Fragment_UserDetails_adminOn>),
       ));
   TRes permissions(
-          Iterable<Fragment$UserDetails$permissions> Function(
+          Iterable<Fragment_UserDetails_permissions> Function(
                   Iterable<
-                      CopyWith$Fragment$UserDetails$permissions<
-                          Fragment$UserDetails$permissions>>)
+                      CopyWith_Fragment_UserDetails_permissions<
+                          Fragment_UserDetails_permissions>>)
               _fn) =>
       call(
           permissions: _fn(_instance.permissions
-              .map((e) => CopyWith$Fragment$UserDetails$permissions(
+              .map((e) => CopyWith_Fragment_UserDetails_permissions(
                     e,
                     (i) => i,
                   ))).toList());
-  CopyWith$Fragment$UserDetails$person<TRes> get person {
+  CopyWith_Fragment_UserDetails_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
-        ? CopyWith$Fragment$UserDetails$person.stub(_then(_instance))
-        : CopyWith$Fragment$UserDetails$person(
+        ? CopyWith_Fragment_UserDetails_person.stub(_then(_instance))
+        : CopyWith_Fragment_UserDetails_person(
             local$person, (e) => call(person: e));
   }
 
   TRes adminOn(
-          Iterable<Fragment$UserDetails$adminOn> Function(
+          Iterable<Fragment_UserDetails_adminOn> Function(
                   Iterable<
-                      CopyWith$Fragment$UserDetails$adminOn<
-                          Fragment$UserDetails$adminOn>>)
+                      CopyWith_Fragment_UserDetails_adminOn<
+                          Fragment_UserDetails_adminOn>>)
               _fn) =>
       call(
           adminOn: _fn(_instance.adminOn
-              .map((e) => CopyWith$Fragment$UserDetails$adminOn(
+              .map((e) => CopyWith_Fragment_UserDetails_adminOn(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$UserDetails<TRes>
-    implements CopyWith$Fragment$UserDetails<TRes> {
-  _CopyWithStubImpl$Fragment$UserDetails(this._res);
+class _CopyWithStubImpl_Fragment_UserDetails<TRes>
+    implements CopyWith_Fragment_UserDetails<TRes> {
+  _CopyWithStubImpl_Fragment_UserDetails(this._res);
 
   TRes _res;
 
@@ -1454,15 +1454,15 @@ class _CopyWithStubImpl$Fragment$UserDetails<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$UserDetails$permissions>? permissions,
-    Fragment$UserDetails$person? person,
+    List<Fragment_UserDetails_permissions>? permissions,
+    Fragment_UserDetails_person? person,
     Json? lastEdit,
-    List<Fragment$UserDetails$adminOn>? adminOn,
+    List<Fragment_UserDetails_adminOn>? adminOn,
   }) =>
       _res;
   permissions(_fn) => _res;
-  CopyWith$Fragment$UserDetails$person<TRes> get person =>
-      CopyWith$Fragment$UserDetails$person.stub(_res);
+  CopyWith_Fragment_UserDetails_person<TRes> get person =>
+      CopyWith_Fragment_UserDetails_person.stub(_res);
   adminOn(_fn) => _res;
 }
 
@@ -1518,19 +1518,19 @@ const documentNodeFragmentUserDetails = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Fragment$UserDetails$permissions
+class Fragment_UserDetails_permissions
     implements
-        Fragment$UserOverview$permissions,
-        Fragment$UserPermissions$permissions {
-  Fragment$UserDetails$permissions({
+        Fragment_UserOverview_permissions,
+        Fragment_UserPermissions_permissions {
+  Fragment_UserDetails_permissions({
     required this.permission,
     this.$__typename = 'AuthUsersPermissions',
   });
 
-  factory Fragment$UserDetails$permissions.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserDetails_permissions.fromJson(Map<String, dynamic> json) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserDetails$permissions(
+    return Fragment_UserDetails_permissions(
       permission: (l$permission as String),
       $__typename: (l$$__typename as String),
     );
@@ -1564,7 +1564,7 @@ class Fragment$UserDetails$permissions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserDetails$permissions) ||
+    if (!(other is Fragment_UserDetails_permissions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1582,23 +1582,23 @@ class Fragment$UserDetails$permissions
   }
 }
 
-extension UtilityExtension$Fragment$UserDetails$permissions
-    on Fragment$UserDetails$permissions {
-  CopyWith$Fragment$UserDetails$permissions<Fragment$UserDetails$permissions>
-      get copyWith => CopyWith$Fragment$UserDetails$permissions(
+extension UtilityExtension_Fragment_UserDetails_permissions
+    on Fragment_UserDetails_permissions {
+  CopyWith_Fragment_UserDetails_permissions<Fragment_UserDetails_permissions>
+      get copyWith => CopyWith_Fragment_UserDetails_permissions(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserDetails$permissions<TRes> {
-  factory CopyWith$Fragment$UserDetails$permissions(
-    Fragment$UserDetails$permissions instance,
-    TRes Function(Fragment$UserDetails$permissions) then,
-  ) = _CopyWithImpl$Fragment$UserDetails$permissions;
+abstract class CopyWith_Fragment_UserDetails_permissions<TRes> {
+  factory CopyWith_Fragment_UserDetails_permissions(
+    Fragment_UserDetails_permissions instance,
+    TRes Function(Fragment_UserDetails_permissions) then,
+  ) = _CopyWithImpl_Fragment_UserDetails_permissions;
 
-  factory CopyWith$Fragment$UserDetails$permissions.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserDetails$permissions;
+  factory CopyWith_Fragment_UserDetails_permissions.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserDetails_permissions;
 
   TRes call({
     String? permission,
@@ -1606,16 +1606,16 @@ abstract class CopyWith$Fragment$UserDetails$permissions<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserDetails$permissions<TRes>
-    implements CopyWith$Fragment$UserDetails$permissions<TRes> {
-  _CopyWithImpl$Fragment$UserDetails$permissions(
+class _CopyWithImpl_Fragment_UserDetails_permissions<TRes>
+    implements CopyWith_Fragment_UserDetails_permissions<TRes> {
+  _CopyWithImpl_Fragment_UserDetails_permissions(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserDetails$permissions _instance;
+  final Fragment_UserDetails_permissions _instance;
 
-  final TRes Function(Fragment$UserDetails$permissions) _then;
+  final TRes Function(Fragment_UserDetails_permissions) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1623,7 +1623,7 @@ class _CopyWithImpl$Fragment$UserDetails$permissions<TRes>
     Object? permission = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserDetails$permissions(
+      _then(Fragment_UserDetails_permissions(
         permission: permission == _undefined || permission == null
             ? _instance.permission
             : (permission as String),
@@ -1633,9 +1633,9 @@ class _CopyWithImpl$Fragment$UserDetails$permissions<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserDetails$permissions<TRes>
-    implements CopyWith$Fragment$UserDetails$permissions<TRes> {
-  _CopyWithStubImpl$Fragment$UserDetails$permissions(this._res);
+class _CopyWithStubImpl_Fragment_UserDetails_permissions<TRes>
+    implements CopyWith_Fragment_UserDetails_permissions<TRes> {
+  _CopyWithStubImpl_Fragment_UserDetails_permissions(this._res);
 
   TRes _res;
 
@@ -1646,12 +1646,12 @@ class _CopyWithStubImpl$Fragment$UserDetails$permissions<TRes>
       _res;
 }
 
-class Fragment$UserDetails$person
+class Fragment_UserDetails_person
     implements
-        Fragment$UserOverview$person,
-        Fragment$Person,
-        Fragment$PersonNoPhoto {
-  Fragment$UserDetails$person({
+        Fragment_UserOverview_person,
+        Fragment_Person,
+        Fragment_PersonNoPhoto {
+  Fragment_UserDetails_person({
     required this.id,
     required this.name,
     this.color,
@@ -1661,7 +1661,7 @@ class Fragment$UserDetails$person
     this.lastConfession,
   });
 
-  factory Fragment$UserDetails$person.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserDetails_person.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -1669,7 +1669,7 @@ class Fragment$UserDetails$person
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
-    return Fragment$UserDetails$person(
+    return Fragment_UserDetails_person(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -1740,7 +1740,7 @@ class Fragment$UserDetails$person
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserDetails$person) ||
+    if (!(other is Fragment_UserDetails_person) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1783,23 +1783,23 @@ class Fragment$UserDetails$person
   }
 }
 
-extension UtilityExtension$Fragment$UserDetails$person
-    on Fragment$UserDetails$person {
-  CopyWith$Fragment$UserDetails$person<Fragment$UserDetails$person>
-      get copyWith => CopyWith$Fragment$UserDetails$person(
+extension UtilityExtension_Fragment_UserDetails_person
+    on Fragment_UserDetails_person {
+  CopyWith_Fragment_UserDetails_person<Fragment_UserDetails_person>
+      get copyWith => CopyWith_Fragment_UserDetails_person(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserDetails$person<TRes> {
-  factory CopyWith$Fragment$UserDetails$person(
-    Fragment$UserDetails$person instance,
-    TRes Function(Fragment$UserDetails$person) then,
-  ) = _CopyWithImpl$Fragment$UserDetails$person;
+abstract class CopyWith_Fragment_UserDetails_person<TRes> {
+  factory CopyWith_Fragment_UserDetails_person(
+    Fragment_UserDetails_person instance,
+    TRes Function(Fragment_UserDetails_person) then,
+  ) = _CopyWithImpl_Fragment_UserDetails_person;
 
-  factory CopyWith$Fragment$UserDetails$person.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserDetails$person;
+  factory CopyWith_Fragment_UserDetails_person.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserDetails_person;
 
   TRes call({
     UuidValue? id,
@@ -1812,16 +1812,16 @@ abstract class CopyWith$Fragment$UserDetails$person<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserDetails$person<TRes>
-    implements CopyWith$Fragment$UserDetails$person<TRes> {
-  _CopyWithImpl$Fragment$UserDetails$person(
+class _CopyWithImpl_Fragment_UserDetails_person<TRes>
+    implements CopyWith_Fragment_UserDetails_person<TRes> {
+  _CopyWithImpl_Fragment_UserDetails_person(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserDetails$person _instance;
+  final Fragment_UserDetails_person _instance;
 
-  final TRes Function(Fragment$UserDetails$person) _then;
+  final TRes Function(Fragment_UserDetails_person) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1834,7 +1834,7 @@ class _CopyWithImpl$Fragment$UserDetails$person<TRes>
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
-      _then(Fragment$UserDetails$person(
+      _then(Fragment_UserDetails_person(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1855,9 +1855,9 @@ class _CopyWithImpl$Fragment$UserDetails$person<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserDetails$person<TRes>
-    implements CopyWith$Fragment$UserDetails$person<TRes> {
-  _CopyWithStubImpl$Fragment$UserDetails$person(this._res);
+class _CopyWithStubImpl_Fragment_UserDetails_person<TRes>
+    implements CopyWith_Fragment_UserDetails_person<TRes> {
+  _CopyWithStubImpl_Fragment_UserDetails_person(this._res);
 
   TRes _res;
 
@@ -1873,8 +1873,8 @@ class _CopyWithStubImpl$Fragment$UserDetails$person<TRes>
       _res;
 }
 
-class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
-  Fragment$UserDetails$adminOn({
+class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
+  Fragment_UserDetails_adminOn({
     required this.permissionId,
     this.area,
     this.areaAllowEdit,
@@ -1891,7 +1891,7 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Fragment$UserDetails$adminOn.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserDetails_adminOn.fromJson(Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
     final l$areaAllowEdit = json['areaAllowEdit'];
@@ -1906,29 +1906,29 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserDetails$adminOn(
+    return Fragment_UserDetails_adminOn(
       permissionId: stringToUuid(l$permissionId),
       area: l$area == null
           ? null
-          : Fragment$Area.fromJson((l$area as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
       areaAllowEdit: (l$areaAllowEdit as bool?),
       areaAdminOnUsers: (l$areaAdminOnUsers as bool?),
       service: l$service == null
           ? null
-          : Fragment$Service.fromJson((l$service as Map<String, dynamic>)),
+          : Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
-          : Fragment$UserDetails$adminOn$serviceStudyYearData.fromJson(
+          : Fragment_UserDetails_adminOn_serviceStudyYearData.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>)),
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       classes: (l$classes as List<dynamic>)
-          .map((e) => Fragment$Class.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
       group: l$group == null
           ? null
-          : Fragment$Group.fromJson((l$group as Map<String, dynamic>)),
+          : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       $__typename: (l$$__typename as String),
@@ -1937,15 +1937,15 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
 
   final UuidValue permissionId;
 
-  final Fragment$Area? area;
+  final Fragment_Area? area;
 
   final bool? areaAllowEdit;
 
   final bool? areaAdminOnUsers;
 
-  final Fragment$Service? service;
+  final Fragment_Service? service;
 
-  final Fragment$UserDetails$adminOn$serviceStudyYearData? serviceStudyYearData;
+  final Fragment_UserDetails_adminOn_serviceStudyYearData? serviceStudyYearData;
 
   final bool? serviceGender;
 
@@ -1953,9 +1953,9 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
 
   final bool? serviceAdminOnUsers;
 
-  final List<Fragment$Class> classes;
+  final List<Fragment_Class> classes;
 
-  final Fragment$Group? group;
+  final Fragment_Group? group;
 
   final bool? groupAllowEdit;
 
@@ -2035,7 +2035,7 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserDetails$adminOn) ||
+    if (!(other is Fragment_UserDetails_adminOn) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2120,61 +2120,61 @@ class Fragment$UserDetails$adminOn implements Fragment$UserAdminOn$adminOn {
   }
 }
 
-extension UtilityExtension$Fragment$UserDetails$adminOn
-    on Fragment$UserDetails$adminOn {
-  CopyWith$Fragment$UserDetails$adminOn<Fragment$UserDetails$adminOn>
-      get copyWith => CopyWith$Fragment$UserDetails$adminOn(
+extension UtilityExtension_Fragment_UserDetails_adminOn
+    on Fragment_UserDetails_adminOn {
+  CopyWith_Fragment_UserDetails_adminOn<Fragment_UserDetails_adminOn>
+      get copyWith => CopyWith_Fragment_UserDetails_adminOn(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserDetails$adminOn<TRes> {
-  factory CopyWith$Fragment$UserDetails$adminOn(
-    Fragment$UserDetails$adminOn instance,
-    TRes Function(Fragment$UserDetails$adminOn) then,
-  ) = _CopyWithImpl$Fragment$UserDetails$adminOn;
+abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
+  factory CopyWith_Fragment_UserDetails_adminOn(
+    Fragment_UserDetails_adminOn instance,
+    TRes Function(Fragment_UserDetails_adminOn) then,
+  ) = _CopyWithImpl_Fragment_UserDetails_adminOn;
 
-  factory CopyWith$Fragment$UserDetails$adminOn.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserDetails$adminOn;
+  factory CopyWith_Fragment_UserDetails_adminOn.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserDetails_adminOn;
 
   TRes call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Fragment$UserDetails$adminOn$serviceStudyYearData? serviceStudyYearData,
+    Fragment_Service? service,
+    Fragment_UserDetails_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get area;
-  CopyWith$Fragment$Service<TRes> get service;
-  CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_Area<TRes> get area;
+  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData;
   TRes classes(
-      Iterable<Fragment$Class> Function(
-              Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+      Iterable<Fragment_Class> Function(
+              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
           _fn);
-  CopyWith$Fragment$Group<TRes> get group;
+  CopyWith_Fragment_Group<TRes> get group;
 }
 
-class _CopyWithImpl$Fragment$UserDetails$adminOn<TRes>
-    implements CopyWith$Fragment$UserDetails$adminOn<TRes> {
-  _CopyWithImpl$Fragment$UserDetails$adminOn(
+class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
+    implements CopyWith_Fragment_UserDetails_adminOn<TRes> {
+  _CopyWithImpl_Fragment_UserDetails_adminOn(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserDetails$adminOn _instance;
+  final Fragment_UserDetails_adminOn _instance;
 
-  final TRes Function(Fragment$UserDetails$adminOn) _then;
+  final TRes Function(Fragment_UserDetails_adminOn) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2194,11 +2194,11 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn<TRes>
     Object? groupAdminOnUsers = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserDetails$adminOn(
+      _then(Fragment_UserDetails_adminOn(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
-        area: area == _undefined ? _instance.area : (area as Fragment$Area?),
+        area: area == _undefined ? _instance.area : (area as Fragment_Area?),
         areaAllowEdit: areaAllowEdit == _undefined
             ? _instance.areaAllowEdit
             : (areaAllowEdit as bool?),
@@ -2207,11 +2207,11 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn<TRes>
             : (areaAdminOnUsers as bool?),
         service: service == _undefined
             ? _instance.service
-            : (service as Fragment$Service?),
+            : (service as Fragment_Service?),
         serviceStudyYearData: serviceStudyYearData == _undefined
             ? _instance.serviceStudyYearData
             : (serviceStudyYearData
-                as Fragment$UserDetails$adminOn$serviceStudyYearData?),
+                as Fragment_UserDetails_adminOn_serviceStudyYearData?),
         serviceGender: serviceGender == _undefined
             ? _instance.serviceGender
             : (serviceGender as bool?),
@@ -2223,9 +2223,9 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn<TRes>
             : (serviceAdminOnUsers as bool?),
         classes: classes == _undefined || classes == null
             ? _instance.classes
-            : (classes as List<Fragment$Class>),
+            : (classes as List<Fragment_Class>),
         group:
-            group == _undefined ? _instance.group : (group as Fragment$Group?),
+            group == _undefined ? _instance.group : (group as Fragment_Group?),
         groupAllowEdit: groupAllowEdit == _undefined
             ? _instance.groupAllowEdit
             : (groupAllowEdit as bool?),
@@ -2236,94 +2236,94 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get area {
+  CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(local$area, (e) => call(area: e));
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
   }
 
-  CopyWith$Fragment$Service<TRes> get service {
+  CopyWith_Fragment_Service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
-        ? CopyWith$Fragment$Service.stub(_then(_instance))
-        : CopyWith$Fragment$Service(local$service, (e) => call(service: e));
+        ? CopyWith_Fragment_Service.stub(_then(_instance))
+        : CopyWith_Fragment_Service(local$service, (e) => call(service: e));
   }
 
-  CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
-        ? CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData.stub(
+        ? CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(
             _then(_instance))
-        : CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData(
+        : CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
             local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
   }
 
   TRes classes(
-          Iterable<Fragment$Class> Function(
-                  Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+          Iterable<Fragment_Class> Function(
+                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes.map((e) => CopyWith$Fragment$Class(
+          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
                 e,
                 (i) => i,
               ))).toList());
-  CopyWith$Fragment$Group<TRes> get group {
+  CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
-        ? CopyWith$Fragment$Group.stub(_then(_instance))
-        : CopyWith$Fragment$Group(local$group, (e) => call(group: e));
+        ? CopyWith_Fragment_Group.stub(_then(_instance))
+        : CopyWith_Fragment_Group(local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$UserDetails$adminOn<TRes>
-    implements CopyWith$Fragment$UserDetails$adminOn<TRes> {
-  _CopyWithStubImpl$Fragment$UserDetails$adminOn(this._res);
+class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
+    implements CopyWith_Fragment_UserDetails_adminOn<TRes> {
+  _CopyWithStubImpl_Fragment_UserDetails_adminOn(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Fragment$UserDetails$adminOn$serviceStudyYearData? serviceStudyYearData,
+    Fragment_Service? service,
+    Fragment_UserDetails_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get area => CopyWith$Fragment$Area.stub(_res);
-  CopyWith$Fragment$Service<TRes> get service =>
-      CopyWith$Fragment$Service.stub(_res);
-  CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+  CopyWith_Fragment_Service<TRes> get service =>
+      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData =>
-          CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData.stub(_res);
+          CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(_res);
   classes(_fn) => _res;
-  CopyWith$Fragment$Group<TRes> get group => CopyWith$Fragment$Group.stub(_res);
+  CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
-class Fragment$UserDetails$adminOn$serviceStudyYearData
-    implements Fragment$UserAdminOn$adminOn$serviceStudyYearData {
-  Fragment$UserDetails$adminOn$serviceStudyYearData({
+class Fragment_UserDetails_adminOn_serviceStudyYearData
+    implements Fragment_UserAdminOn_adminOn_serviceStudyYearData {
+  Fragment_UserDetails_adminOn_serviceStudyYearData({
     required this.name,
     required this.order,
     this.$__typename = 'StudyYears',
   });
 
-  factory Fragment$UserDetails$adminOn$serviceStudyYearData.fromJson(
+  factory Fragment_UserDetails_adminOn_serviceStudyYearData.fromJson(
       Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserDetails$adminOn$serviceStudyYearData(
+    return Fragment_UserDetails_adminOn_serviceStudyYearData(
       name: (l$name as String),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
@@ -2364,7 +2364,7 @@ class Fragment$UserDetails$adminOn$serviceStudyYearData
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserDetails$adminOn$serviceStudyYearData) ||
+    if (!(other is Fragment_UserDetails_adminOn_serviceStudyYearData) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2387,27 +2387,27 @@ class Fragment$UserDetails$adminOn$serviceStudyYearData
   }
 }
 
-extension UtilityExtension$Fragment$UserDetails$adminOn$serviceStudyYearData
-    on Fragment$UserDetails$adminOn$serviceStudyYearData {
-  CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<
-          Fragment$UserDetails$adminOn$serviceStudyYearData>
+extension UtilityExtension_Fragment_UserDetails_adminOn_serviceStudyYearData
+    on Fragment_UserDetails_adminOn_serviceStudyYearData {
+  CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<
+          Fragment_UserDetails_adminOn_serviceStudyYearData>
       get copyWith =>
-          CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData(
+          CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<
+abstract class CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<
     TRes> {
-  factory CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData(
-    Fragment$UserDetails$adminOn$serviceStudyYearData instance,
-    TRes Function(Fragment$UserDetails$adminOn$serviceStudyYearData) then,
-  ) = _CopyWithImpl$Fragment$UserDetails$adminOn$serviceStudyYearData;
+  factory CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
+    Fragment_UserDetails_adminOn_serviceStudyYearData instance,
+    TRes Function(Fragment_UserDetails_adminOn_serviceStudyYearData) then,
+  ) = _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData;
 
-  factory CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData.stub(
+  factory CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$UserDetails$adminOn$serviceStudyYearData;
+      _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData;
 
   TRes call({
     String? name,
@@ -2416,17 +2416,17 @@ abstract class CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<
   });
 }
 
-class _CopyWithImpl$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
+class _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
     implements
-        CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes> {
-  _CopyWithImpl$Fragment$UserDetails$adminOn$serviceStudyYearData(
+        CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserDetails$adminOn$serviceStudyYearData _instance;
+  final Fragment_UserDetails_adminOn_serviceStudyYearData _instance;
 
-  final TRes Function(Fragment$UserDetails$adminOn$serviceStudyYearData) _then;
+  final TRes Function(Fragment_UserDetails_adminOn_serviceStudyYearData) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2435,7 +2435,7 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserDetails$adminOn$serviceStudyYearData(
+      _then(Fragment_UserDetails_adminOn_serviceStudyYearData(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -2448,10 +2448,10 @@ class _CopyWithImpl$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
+class _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
     implements
-        CopyWith$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes> {
-  _CopyWithStubImpl$Fragment$UserDetails$adminOn$serviceStudyYearData(
+        CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData(
       this._res);
 
   TRes _res;
@@ -2464,25 +2464,25 @@ class _CopyWithStubImpl$Fragment$UserDetails$adminOn$serviceStudyYearData<TRes>
       _res;
 }
 
-class Fragment$UserPermissions {
-  Fragment$UserPermissions({
+class Fragment_UserPermissions {
+  Fragment_UserPermissions({
     required this.permissions,
     this.$__typename = 'AuthUsersData',
   });
 
-  factory Fragment$UserPermissions.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserPermissions.fromJson(Map<String, dynamic> json) {
     final l$permissions = json['permissions'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserPermissions(
+    return Fragment_UserPermissions(
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment$UserPermissions$permissions.fromJson(
+          .map((e) => Fragment_UserPermissions_permissions.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$UserPermissions$permissions> permissions;
+  final List<Fragment_UserPermissions_permissions> permissions;
 
   final String $__typename;
 
@@ -2510,7 +2510,7 @@ class Fragment$UserPermissions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserPermissions) ||
+    if (!(other is Fragment_UserPermissions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2535,46 +2535,46 @@ class Fragment$UserPermissions {
   }
 }
 
-extension UtilityExtension$Fragment$UserPermissions
-    on Fragment$UserPermissions {
-  CopyWith$Fragment$UserPermissions<Fragment$UserPermissions> get copyWith =>
-      CopyWith$Fragment$UserPermissions(
+extension UtilityExtension_Fragment_UserPermissions
+    on Fragment_UserPermissions {
+  CopyWith_Fragment_UserPermissions<Fragment_UserPermissions> get copyWith =>
+      CopyWith_Fragment_UserPermissions(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$UserPermissions<TRes> {
-  factory CopyWith$Fragment$UserPermissions(
-    Fragment$UserPermissions instance,
-    TRes Function(Fragment$UserPermissions) then,
-  ) = _CopyWithImpl$Fragment$UserPermissions;
+abstract class CopyWith_Fragment_UserPermissions<TRes> {
+  factory CopyWith_Fragment_UserPermissions(
+    Fragment_UserPermissions instance,
+    TRes Function(Fragment_UserPermissions) then,
+  ) = _CopyWithImpl_Fragment_UserPermissions;
 
-  factory CopyWith$Fragment$UserPermissions.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserPermissions;
+  factory CopyWith_Fragment_UserPermissions.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserPermissions;
 
   TRes call({
-    List<Fragment$UserPermissions$permissions>? permissions,
+    List<Fragment_UserPermissions_permissions>? permissions,
     String? $__typename,
   });
   TRes permissions(
-      Iterable<Fragment$UserPermissions$permissions> Function(
+      Iterable<Fragment_UserPermissions_permissions> Function(
               Iterable<
-                  CopyWith$Fragment$UserPermissions$permissions<
-                      Fragment$UserPermissions$permissions>>)
+                  CopyWith_Fragment_UserPermissions_permissions<
+                      Fragment_UserPermissions_permissions>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$UserPermissions<TRes>
-    implements CopyWith$Fragment$UserPermissions<TRes> {
-  _CopyWithImpl$Fragment$UserPermissions(
+class _CopyWithImpl_Fragment_UserPermissions<TRes>
+    implements CopyWith_Fragment_UserPermissions<TRes> {
+  _CopyWithImpl_Fragment_UserPermissions(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserPermissions _instance;
+  final Fragment_UserPermissions _instance;
 
-  final TRes Function(Fragment$UserPermissions) _then;
+  final TRes Function(Fragment_UserPermissions) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2582,36 +2582,36 @@ class _CopyWithImpl$Fragment$UserPermissions<TRes>
     Object? permissions = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserPermissions(
+      _then(Fragment_UserPermissions(
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
-            : (permissions as List<Fragment$UserPermissions$permissions>),
+            : (permissions as List<Fragment_UserPermissions_permissions>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes permissions(
-          Iterable<Fragment$UserPermissions$permissions> Function(
+          Iterable<Fragment_UserPermissions_permissions> Function(
                   Iterable<
-                      CopyWith$Fragment$UserPermissions$permissions<
-                          Fragment$UserPermissions$permissions>>)
+                      CopyWith_Fragment_UserPermissions_permissions<
+                          Fragment_UserPermissions_permissions>>)
               _fn) =>
       call(
           permissions: _fn(_instance.permissions
-              .map((e) => CopyWith$Fragment$UserPermissions$permissions(
+              .map((e) => CopyWith_Fragment_UserPermissions_permissions(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$UserPermissions<TRes>
-    implements CopyWith$Fragment$UserPermissions<TRes> {
-  _CopyWithStubImpl$Fragment$UserPermissions(this._res);
+class _CopyWithStubImpl_Fragment_UserPermissions<TRes>
+    implements CopyWith_Fragment_UserPermissions<TRes> {
+  _CopyWithStubImpl_Fragment_UserPermissions(this._res);
 
   TRes _res;
 
   call({
-    List<Fragment$UserPermissions$permissions>? permissions,
+    List<Fragment_UserPermissions_permissions>? permissions,
     String? $__typename,
   }) =>
       _res;
@@ -2662,17 +2662,17 @@ const documentNodeFragmentUserPermissions = DocumentNode(definitions: [
   fragmentDefinitionUserPermissions,
 ]);
 
-class Fragment$UserPermissions$permissions {
-  Fragment$UserPermissions$permissions({
+class Fragment_UserPermissions_permissions {
+  Fragment_UserPermissions_permissions({
     required this.permission,
     this.$__typename = 'AuthUsersPermissions',
   });
 
-  factory Fragment$UserPermissions$permissions.fromJson(
+  factory Fragment_UserPermissions_permissions.fromJson(
       Map<String, dynamic> json) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserPermissions$permissions(
+    return Fragment_UserPermissions_permissions(
       permission: (l$permission as String),
       $__typename: (l$$__typename as String),
     );
@@ -2706,7 +2706,7 @@ class Fragment$UserPermissions$permissions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserPermissions$permissions) ||
+    if (!(other is Fragment_UserPermissions_permissions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2724,24 +2724,24 @@ class Fragment$UserPermissions$permissions {
   }
 }
 
-extension UtilityExtension$Fragment$UserPermissions$permissions
-    on Fragment$UserPermissions$permissions {
-  CopyWith$Fragment$UserPermissions$permissions<
-          Fragment$UserPermissions$permissions>
-      get copyWith => CopyWith$Fragment$UserPermissions$permissions(
+extension UtilityExtension_Fragment_UserPermissions_permissions
+    on Fragment_UserPermissions_permissions {
+  CopyWith_Fragment_UserPermissions_permissions<
+          Fragment_UserPermissions_permissions>
+      get copyWith => CopyWith_Fragment_UserPermissions_permissions(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserPermissions$permissions<TRes> {
-  factory CopyWith$Fragment$UserPermissions$permissions(
-    Fragment$UserPermissions$permissions instance,
-    TRes Function(Fragment$UserPermissions$permissions) then,
-  ) = _CopyWithImpl$Fragment$UserPermissions$permissions;
+abstract class CopyWith_Fragment_UserPermissions_permissions<TRes> {
+  factory CopyWith_Fragment_UserPermissions_permissions(
+    Fragment_UserPermissions_permissions instance,
+    TRes Function(Fragment_UserPermissions_permissions) then,
+  ) = _CopyWithImpl_Fragment_UserPermissions_permissions;
 
-  factory CopyWith$Fragment$UserPermissions$permissions.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserPermissions$permissions;
+  factory CopyWith_Fragment_UserPermissions_permissions.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserPermissions_permissions;
 
   TRes call({
     String? permission,
@@ -2749,16 +2749,16 @@ abstract class CopyWith$Fragment$UserPermissions$permissions<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$UserPermissions$permissions<TRes>
-    implements CopyWith$Fragment$UserPermissions$permissions<TRes> {
-  _CopyWithImpl$Fragment$UserPermissions$permissions(
+class _CopyWithImpl_Fragment_UserPermissions_permissions<TRes>
+    implements CopyWith_Fragment_UserPermissions_permissions<TRes> {
+  _CopyWithImpl_Fragment_UserPermissions_permissions(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserPermissions$permissions _instance;
+  final Fragment_UserPermissions_permissions _instance;
 
-  final TRes Function(Fragment$UserPermissions$permissions) _then;
+  final TRes Function(Fragment_UserPermissions_permissions) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2766,7 +2766,7 @@ class _CopyWithImpl$Fragment$UserPermissions$permissions<TRes>
     Object? permission = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserPermissions$permissions(
+      _then(Fragment_UserPermissions_permissions(
         permission: permission == _undefined || permission == null
             ? _instance.permission
             : (permission as String),
@@ -2776,9 +2776,9 @@ class _CopyWithImpl$Fragment$UserPermissions$permissions<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserPermissions$permissions<TRes>
-    implements CopyWith$Fragment$UserPermissions$permissions<TRes> {
-  _CopyWithStubImpl$Fragment$UserPermissions$permissions(this._res);
+class _CopyWithStubImpl_Fragment_UserPermissions_permissions<TRes>
+    implements CopyWith_Fragment_UserPermissions_permissions<TRes> {
+  _CopyWithStubImpl_Fragment_UserPermissions_permissions(this._res);
 
   TRes _res;
 
@@ -2789,25 +2789,25 @@ class _CopyWithStubImpl$Fragment$UserPermissions$permissions<TRes>
       _res;
 }
 
-class Fragment$UserAdminOn {
-  Fragment$UserAdminOn({
+class Fragment_UserAdminOn {
+  Fragment_UserAdminOn({
     required this.adminOn,
     this.$__typename = 'AuthUsersData',
   });
 
-  factory Fragment$UserAdminOn.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserAdminOn.fromJson(Map<String, dynamic> json) {
     final l$adminOn = json['adminOn'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserAdminOn(
+    return Fragment_UserAdminOn(
       adminOn: (l$adminOn as List<dynamic>)
-          .map((e) => Fragment$UserAdminOn$adminOn.fromJson(
+          .map((e) => Fragment_UserAdminOn_adminOn.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$UserAdminOn$adminOn> adminOn;
+  final List<Fragment_UserAdminOn_adminOn> adminOn;
 
   final String $__typename;
 
@@ -2835,7 +2835,7 @@ class Fragment$UserAdminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserAdminOn) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_UserAdminOn) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminOn = adminOn;
@@ -2859,45 +2859,45 @@ class Fragment$UserAdminOn {
   }
 }
 
-extension UtilityExtension$Fragment$UserAdminOn on Fragment$UserAdminOn {
-  CopyWith$Fragment$UserAdminOn<Fragment$UserAdminOn> get copyWith =>
-      CopyWith$Fragment$UserAdminOn(
+extension UtilityExtension_Fragment_UserAdminOn on Fragment_UserAdminOn {
+  CopyWith_Fragment_UserAdminOn<Fragment_UserAdminOn> get copyWith =>
+      CopyWith_Fragment_UserAdminOn(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$UserAdminOn<TRes> {
-  factory CopyWith$Fragment$UserAdminOn(
-    Fragment$UserAdminOn instance,
-    TRes Function(Fragment$UserAdminOn) then,
-  ) = _CopyWithImpl$Fragment$UserAdminOn;
+abstract class CopyWith_Fragment_UserAdminOn<TRes> {
+  factory CopyWith_Fragment_UserAdminOn(
+    Fragment_UserAdminOn instance,
+    TRes Function(Fragment_UserAdminOn) then,
+  ) = _CopyWithImpl_Fragment_UserAdminOn;
 
-  factory CopyWith$Fragment$UserAdminOn.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserAdminOn;
+  factory CopyWith_Fragment_UserAdminOn.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserAdminOn;
 
   TRes call({
-    List<Fragment$UserAdminOn$adminOn>? adminOn,
+    List<Fragment_UserAdminOn_adminOn>? adminOn,
     String? $__typename,
   });
   TRes adminOn(
-      Iterable<Fragment$UserAdminOn$adminOn> Function(
+      Iterable<Fragment_UserAdminOn_adminOn> Function(
               Iterable<
-                  CopyWith$Fragment$UserAdminOn$adminOn<
-                      Fragment$UserAdminOn$adminOn>>)
+                  CopyWith_Fragment_UserAdminOn_adminOn<
+                      Fragment_UserAdminOn_adminOn>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$UserAdminOn<TRes>
-    implements CopyWith$Fragment$UserAdminOn<TRes> {
-  _CopyWithImpl$Fragment$UserAdminOn(
+class _CopyWithImpl_Fragment_UserAdminOn<TRes>
+    implements CopyWith_Fragment_UserAdminOn<TRes> {
+  _CopyWithImpl_Fragment_UserAdminOn(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserAdminOn _instance;
+  final Fragment_UserAdminOn _instance;
 
-  final TRes Function(Fragment$UserAdminOn) _then;
+  final TRes Function(Fragment_UserAdminOn) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2905,36 +2905,36 @@ class _CopyWithImpl$Fragment$UserAdminOn<TRes>
     Object? adminOn = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserAdminOn(
+      _then(Fragment_UserAdminOn(
         adminOn: adminOn == _undefined || adminOn == null
             ? _instance.adminOn
-            : (adminOn as List<Fragment$UserAdminOn$adminOn>),
+            : (adminOn as List<Fragment_UserAdminOn_adminOn>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes adminOn(
-          Iterable<Fragment$UserAdminOn$adminOn> Function(
+          Iterable<Fragment_UserAdminOn_adminOn> Function(
                   Iterable<
-                      CopyWith$Fragment$UserAdminOn$adminOn<
-                          Fragment$UserAdminOn$adminOn>>)
+                      CopyWith_Fragment_UserAdminOn_adminOn<
+                          Fragment_UserAdminOn_adminOn>>)
               _fn) =>
       call(
           adminOn: _fn(_instance.adminOn
-              .map((e) => CopyWith$Fragment$UserAdminOn$adminOn(
+              .map((e) => CopyWith_Fragment_UserAdminOn_adminOn(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$UserAdminOn<TRes>
-    implements CopyWith$Fragment$UserAdminOn<TRes> {
-  _CopyWithStubImpl$Fragment$UserAdminOn(this._res);
+class _CopyWithStubImpl_Fragment_UserAdminOn<TRes>
+    implements CopyWith_Fragment_UserAdminOn<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminOn(this._res);
 
   TRes _res;
 
   call({
-    List<Fragment$UserAdminOn$adminOn>? adminOn,
+    List<Fragment_UserAdminOn_adminOn>? adminOn,
     String? $__typename,
   }) =>
       _res;
@@ -3226,8 +3226,8 @@ const documentNodeFragmentUserAdminOn = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Fragment$UserAdminOn$adminOn {
-  Fragment$UserAdminOn$adminOn({
+class Fragment_UserAdminOn_adminOn {
+  Fragment_UserAdminOn_adminOn({
     required this.permissionId,
     this.area,
     this.areaAllowEdit,
@@ -3244,7 +3244,7 @@ class Fragment$UserAdminOn$adminOn {
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Fragment$UserAdminOn$adminOn.fromJson(Map<String, dynamic> json) {
+  factory Fragment_UserAdminOn_adminOn.fromJson(Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
     final l$areaAllowEdit = json['areaAllowEdit'];
@@ -3259,29 +3259,29 @@ class Fragment$UserAdminOn$adminOn {
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserAdminOn$adminOn(
+    return Fragment_UserAdminOn_adminOn(
       permissionId: stringToUuid(l$permissionId),
       area: l$area == null
           ? null
-          : Fragment$Area.fromJson((l$area as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
       areaAllowEdit: (l$areaAllowEdit as bool?),
       areaAdminOnUsers: (l$areaAdminOnUsers as bool?),
       service: l$service == null
           ? null
-          : Fragment$Service.fromJson((l$service as Map<String, dynamic>)),
+          : Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
-          : Fragment$UserAdminOn$adminOn$serviceStudyYearData.fromJson(
+          : Fragment_UserAdminOn_adminOn_serviceStudyYearData.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>)),
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       classes: (l$classes as List<dynamic>)
-          .map((e) => Fragment$Class.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
       group: l$group == null
           ? null
-          : Fragment$Group.fromJson((l$group as Map<String, dynamic>)),
+          : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       $__typename: (l$$__typename as String),
@@ -3290,15 +3290,15 @@ class Fragment$UserAdminOn$adminOn {
 
   final UuidValue permissionId;
 
-  final Fragment$Area? area;
+  final Fragment_Area? area;
 
   final bool? areaAllowEdit;
 
   final bool? areaAdminOnUsers;
 
-  final Fragment$Service? service;
+  final Fragment_Service? service;
 
-  final Fragment$UserAdminOn$adminOn$serviceStudyYearData? serviceStudyYearData;
+  final Fragment_UserAdminOn_adminOn_serviceStudyYearData? serviceStudyYearData;
 
   final bool? serviceGender;
 
@@ -3306,9 +3306,9 @@ class Fragment$UserAdminOn$adminOn {
 
   final bool? serviceAdminOnUsers;
 
-  final List<Fragment$Class> classes;
+  final List<Fragment_Class> classes;
 
-  final Fragment$Group? group;
+  final Fragment_Group? group;
 
   final bool? groupAllowEdit;
 
@@ -3388,7 +3388,7 @@ class Fragment$UserAdminOn$adminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserAdminOn$adminOn) ||
+    if (!(other is Fragment_UserAdminOn_adminOn) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3473,61 +3473,61 @@ class Fragment$UserAdminOn$adminOn {
   }
 }
 
-extension UtilityExtension$Fragment$UserAdminOn$adminOn
-    on Fragment$UserAdminOn$adminOn {
-  CopyWith$Fragment$UserAdminOn$adminOn<Fragment$UserAdminOn$adminOn>
-      get copyWith => CopyWith$Fragment$UserAdminOn$adminOn(
+extension UtilityExtension_Fragment_UserAdminOn_adminOn
+    on Fragment_UserAdminOn_adminOn {
+  CopyWith_Fragment_UserAdminOn_adminOn<Fragment_UserAdminOn_adminOn>
+      get copyWith => CopyWith_Fragment_UserAdminOn_adminOn(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserAdminOn$adminOn<TRes> {
-  factory CopyWith$Fragment$UserAdminOn$adminOn(
-    Fragment$UserAdminOn$adminOn instance,
-    TRes Function(Fragment$UserAdminOn$adminOn) then,
-  ) = _CopyWithImpl$Fragment$UserAdminOn$adminOn;
+abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
+  factory CopyWith_Fragment_UserAdminOn_adminOn(
+    Fragment_UserAdminOn_adminOn instance,
+    TRes Function(Fragment_UserAdminOn_adminOn) then,
+  ) = _CopyWithImpl_Fragment_UserAdminOn_adminOn;
 
-  factory CopyWith$Fragment$UserAdminOn$adminOn.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$UserAdminOn$adminOn;
+  factory CopyWith_Fragment_UserAdminOn_adminOn.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserAdminOn_adminOn;
 
   TRes call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Fragment$UserAdminOn$adminOn$serviceStudyYearData? serviceStudyYearData,
+    Fragment_Service? service,
+    Fragment_UserAdminOn_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   });
-  CopyWith$Fragment$Area<TRes> get area;
-  CopyWith$Fragment$Service<TRes> get service;
-  CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_Area<TRes> get area;
+  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData;
   TRes classes(
-      Iterable<Fragment$Class> Function(
-              Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+      Iterable<Fragment_Class> Function(
+              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
           _fn);
-  CopyWith$Fragment$Group<TRes> get group;
+  CopyWith_Fragment_Group<TRes> get group;
 }
 
-class _CopyWithImpl$Fragment$UserAdminOn$adminOn<TRes>
-    implements CopyWith$Fragment$UserAdminOn$adminOn<TRes> {
-  _CopyWithImpl$Fragment$UserAdminOn$adminOn(
+class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
+    implements CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
+  _CopyWithImpl_Fragment_UserAdminOn_adminOn(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserAdminOn$adminOn _instance;
+  final Fragment_UserAdminOn_adminOn _instance;
 
-  final TRes Function(Fragment$UserAdminOn$adminOn) _then;
+  final TRes Function(Fragment_UserAdminOn_adminOn) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3547,11 +3547,11 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn<TRes>
     Object? groupAdminOnUsers = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserAdminOn$adminOn(
+      _then(Fragment_UserAdminOn_adminOn(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
-        area: area == _undefined ? _instance.area : (area as Fragment$Area?),
+        area: area == _undefined ? _instance.area : (area as Fragment_Area?),
         areaAllowEdit: areaAllowEdit == _undefined
             ? _instance.areaAllowEdit
             : (areaAllowEdit as bool?),
@@ -3560,11 +3560,11 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn<TRes>
             : (areaAdminOnUsers as bool?),
         service: service == _undefined
             ? _instance.service
-            : (service as Fragment$Service?),
+            : (service as Fragment_Service?),
         serviceStudyYearData: serviceStudyYearData == _undefined
             ? _instance.serviceStudyYearData
             : (serviceStudyYearData
-                as Fragment$UserAdminOn$adminOn$serviceStudyYearData?),
+                as Fragment_UserAdminOn_adminOn_serviceStudyYearData?),
         serviceGender: serviceGender == _undefined
             ? _instance.serviceGender
             : (serviceGender as bool?),
@@ -3576,9 +3576,9 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn<TRes>
             : (serviceAdminOnUsers as bool?),
         classes: classes == _undefined || classes == null
             ? _instance.classes
-            : (classes as List<Fragment$Class>),
+            : (classes as List<Fragment_Class>),
         group:
-            group == _undefined ? _instance.group : (group as Fragment$Group?),
+            group == _undefined ? _instance.group : (group as Fragment_Group?),
         groupAllowEdit: groupAllowEdit == _undefined
             ? _instance.groupAllowEdit
             : (groupAllowEdit as bool?),
@@ -3589,93 +3589,93 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Area<TRes> get area {
+  CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
-        ? CopyWith$Fragment$Area.stub(_then(_instance))
-        : CopyWith$Fragment$Area(local$area, (e) => call(area: e));
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
   }
 
-  CopyWith$Fragment$Service<TRes> get service {
+  CopyWith_Fragment_Service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
-        ? CopyWith$Fragment$Service.stub(_then(_instance))
-        : CopyWith$Fragment$Service(local$service, (e) => call(service: e));
+        ? CopyWith_Fragment_Service.stub(_then(_instance))
+        : CopyWith_Fragment_Service(local$service, (e) => call(service: e));
   }
 
-  CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
-        ? CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData.stub(
+        ? CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(
             _then(_instance))
-        : CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+        : CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
             local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
   }
 
   TRes classes(
-          Iterable<Fragment$Class> Function(
-                  Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+          Iterable<Fragment_Class> Function(
+                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes.map((e) => CopyWith$Fragment$Class(
+          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
                 e,
                 (i) => i,
               ))).toList());
-  CopyWith$Fragment$Group<TRes> get group {
+  CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
-        ? CopyWith$Fragment$Group.stub(_then(_instance))
-        : CopyWith$Fragment$Group(local$group, (e) => call(group: e));
+        ? CopyWith_Fragment_Group.stub(_then(_instance))
+        : CopyWith_Fragment_Group(local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$UserAdminOn$adminOn<TRes>
-    implements CopyWith$Fragment$UserAdminOn$adminOn<TRes> {
-  _CopyWithStubImpl$Fragment$UserAdminOn$adminOn(this._res);
+class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
+    implements CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminOn_adminOn(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    Fragment$Area? area,
+    Fragment_Area? area,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
-    Fragment$Service? service,
-    Fragment$UserAdminOn$adminOn$serviceStudyYearData? serviceStudyYearData,
+    Fragment_Service? service,
+    Fragment_UserAdminOn_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
-    List<Fragment$Class>? classes,
-    Fragment$Group? group,
+    List<Fragment_Class>? classes,
+    Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Area<TRes> get area => CopyWith$Fragment$Area.stub(_res);
-  CopyWith$Fragment$Service<TRes> get service =>
-      CopyWith$Fragment$Service.stub(_res);
-  CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+  CopyWith_Fragment_Service<TRes> get service =>
+      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData =>
-          CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData.stub(_res);
+          CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(_res);
   classes(_fn) => _res;
-  CopyWith$Fragment$Group<TRes> get group => CopyWith$Fragment$Group.stub(_res);
+  CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
-class Fragment$UserAdminOn$adminOn$serviceStudyYearData {
-  Fragment$UserAdminOn$adminOn$serviceStudyYearData({
+class Fragment_UserAdminOn_adminOn_serviceStudyYearData {
+  Fragment_UserAdminOn_adminOn_serviceStudyYearData({
     required this.name,
     required this.order,
     this.$__typename = 'StudyYears',
   });
 
-  factory Fragment$UserAdminOn$adminOn$serviceStudyYearData.fromJson(
+  factory Fragment_UserAdminOn_adminOn_serviceStudyYearData.fromJson(
       Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
-    return Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+    return Fragment_UserAdminOn_adminOn_serviceStudyYearData(
       name: (l$name as String),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
@@ -3716,7 +3716,7 @@ class Fragment$UserAdminOn$adminOn$serviceStudyYearData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserAdminOn$adminOn$serviceStudyYearData) ||
+    if (!(other is Fragment_UserAdminOn_adminOn_serviceStudyYearData) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3739,27 +3739,27 @@ class Fragment$UserAdminOn$adminOn$serviceStudyYearData {
   }
 }
 
-extension UtilityExtension$Fragment$UserAdminOn$adminOn$serviceStudyYearData
-    on Fragment$UserAdminOn$adminOn$serviceStudyYearData {
-  CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<
-          Fragment$UserAdminOn$adminOn$serviceStudyYearData>
+extension UtilityExtension_Fragment_UserAdminOn_adminOn_serviceStudyYearData
+    on Fragment_UserAdminOn_adminOn_serviceStudyYearData {
+  CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<
+          Fragment_UserAdminOn_adminOn_serviceStudyYearData>
       get copyWith =>
-          CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+          CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<
+abstract class CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<
     TRes> {
-  factory CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData(
-    Fragment$UserAdminOn$adminOn$serviceStudyYearData instance,
-    TRes Function(Fragment$UserAdminOn$adminOn$serviceStudyYearData) then,
-  ) = _CopyWithImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData;
+  factory CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
+    Fragment_UserAdminOn_adminOn_serviceStudyYearData instance,
+    TRes Function(Fragment_UserAdminOn_adminOn_serviceStudyYearData) then,
+  ) = _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData;
 
-  factory CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData.stub(
+  factory CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData;
+      _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData;
 
   TRes call({
     String? name,
@@ -3768,17 +3768,17 @@ abstract class CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<
   });
 }
 
-class _CopyWithImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
+class _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
     implements
-        CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes> {
-  _CopyWithImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+        CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
     this._instance,
     this._then,
   );
 
-  final Fragment$UserAdminOn$adminOn$serviceStudyYearData _instance;
+  final Fragment_UserAdminOn_adminOn_serviceStudyYearData _instance;
 
-  final TRes Function(Fragment$UserAdminOn$adminOn$serviceStudyYearData) _then;
+  final TRes Function(Fragment_UserAdminOn_adminOn_serviceStudyYearData) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3787,7 +3787,7 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+      _then(Fragment_UserAdminOn_adminOn_serviceStudyYearData(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -3800,10 +3800,10 @@ class _CopyWithImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
+class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
     implements
-        CopyWith$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes> {
-  _CopyWithStubImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData(
+        CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
       this._res);
 
   TRes _res;
@@ -3816,8 +3816,8 @@ class _CopyWithStubImpl$Fragment$UserAdminOn$adminOn$serviceStudyYearData<TRes>
       _res;
 }
 
-class Variables$Fragment$AttendanceFields {
-  factory Variables$Fragment$AttendanceFields({
+class Variables_Fragment_AttendanceFields {
+  factory Variables_Fragment_AttendanceFields({
     DateTime? dateFrom,
     DateTime? dateTo,
     UuidValue? personId,
@@ -3825,7 +3825,7 @@ class Variables$Fragment$AttendanceFields {
     List<UuidValue>? classesIds,
     List<UuidValue>? groupsIds,
   }) =>
-      Variables$Fragment$AttendanceFields._({
+      Variables_Fragment_AttendanceFields._({
         if (dateFrom != null) r'dateFrom': dateFrom,
         if (dateTo != null) r'dateTo': dateTo,
         if (personId != null) r'personId': personId,
@@ -3834,9 +3834,9 @@ class Variables$Fragment$AttendanceFields {
         if (groupsIds != null) r'groupsIds': groupsIds,
       });
 
-  Variables$Fragment$AttendanceFields._(this._$data);
+  Variables_Fragment_AttendanceFields._(this._$data);
 
-  factory Variables$Fragment$AttendanceFields.fromJson(
+  factory Variables_Fragment_AttendanceFields.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('dateFrom')) {
@@ -3871,7 +3871,7 @@ class Variables$Fragment$AttendanceFields {
       result$data['groupsIds'] =
           (l$groupsIds as List<dynamic>?)?.map((e) => stringToUuid(e)).toList();
     }
-    return Variables$Fragment$AttendanceFields._(result$data);
+    return Variables_Fragment_AttendanceFields._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -3917,9 +3917,9 @@ class Variables$Fragment$AttendanceFields {
     return result$data;
   }
 
-  CopyWith$Variables$Fragment$AttendanceFields<
-          Variables$Fragment$AttendanceFields>
-      get copyWith => CopyWith$Variables$Fragment$AttendanceFields(
+  CopyWith_Variables_Fragment_AttendanceFields<
+          Variables_Fragment_AttendanceFields>
+      get copyWith => CopyWith_Variables_Fragment_AttendanceFields(
             this,
             (i) => i,
           );
@@ -3928,7 +3928,7 @@ class Variables$Fragment$AttendanceFields {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Fragment$AttendanceFields) ||
+    if (!(other is Variables_Fragment_AttendanceFields) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4052,14 +4052,14 @@ class Variables$Fragment$AttendanceFields {
   }
 }
 
-abstract class CopyWith$Variables$Fragment$AttendanceFields<TRes> {
-  factory CopyWith$Variables$Fragment$AttendanceFields(
-    Variables$Fragment$AttendanceFields instance,
-    TRes Function(Variables$Fragment$AttendanceFields) then,
-  ) = _CopyWithImpl$Variables$Fragment$AttendanceFields;
+abstract class CopyWith_Variables_Fragment_AttendanceFields<TRes> {
+  factory CopyWith_Variables_Fragment_AttendanceFields(
+    Variables_Fragment_AttendanceFields instance,
+    TRes Function(Variables_Fragment_AttendanceFields) then,
+  ) = _CopyWithImpl_Variables_Fragment_AttendanceFields;
 
-  factory CopyWith$Variables$Fragment$AttendanceFields.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Fragment$AttendanceFields;
+  factory CopyWith_Variables_Fragment_AttendanceFields.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Fragment_AttendanceFields;
 
   TRes call({
     DateTime? dateFrom,
@@ -4071,16 +4071,16 @@ abstract class CopyWith$Variables$Fragment$AttendanceFields<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Fragment$AttendanceFields<TRes>
-    implements CopyWith$Variables$Fragment$AttendanceFields<TRes> {
-  _CopyWithImpl$Variables$Fragment$AttendanceFields(
+class _CopyWithImpl_Variables_Fragment_AttendanceFields<TRes>
+    implements CopyWith_Variables_Fragment_AttendanceFields<TRes> {
+  _CopyWithImpl_Variables_Fragment_AttendanceFields(
     this._instance,
     this._then,
   );
 
-  final Variables$Fragment$AttendanceFields _instance;
+  final Variables_Fragment_AttendanceFields _instance;
 
-  final TRes Function(Variables$Fragment$AttendanceFields) _then;
+  final TRes Function(Variables_Fragment_AttendanceFields) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4092,7 +4092,7 @@ class _CopyWithImpl$Variables$Fragment$AttendanceFields<TRes>
     Object? classesIds = _undefined,
     Object? groupsIds = _undefined,
   }) =>
-      _then(Variables$Fragment$AttendanceFields._({
+      _then(Variables_Fragment_AttendanceFields._({
         ..._instance._$data,
         if (dateFrom != _undefined) 'dateFrom': (dateFrom as DateTime?),
         if (dateTo != _undefined) 'dateTo': (dateTo as DateTime?),
@@ -4106,9 +4106,9 @@ class _CopyWithImpl$Variables$Fragment$AttendanceFields<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Fragment$AttendanceFields<TRes>
-    implements CopyWith$Variables$Fragment$AttendanceFields<TRes> {
-  _CopyWithStubImpl$Variables$Fragment$AttendanceFields(this._res);
+class _CopyWithStubImpl_Variables_Fragment_AttendanceFields<TRes>
+    implements CopyWith_Variables_Fragment_AttendanceFields<TRes> {
+  _CopyWithStubImpl_Variables_Fragment_AttendanceFields(this._res);
 
   TRes _res;
 
@@ -4123,41 +4123,41 @@ class _CopyWithStubImpl$Variables$Fragment$AttendanceFields<TRes>
       _res;
 }
 
-class Fragment$AttendanceFields {
-  Fragment$AttendanceFields({
+class Fragment_AttendanceFields {
+  Fragment_AttendanceFields({
     required this.servicesHistory,
     required this.classesHistory,
     required this.groupsHistory,
     this.$__typename = 'AuthUsersData',
   });
 
-  factory Fragment$AttendanceFields.fromJson(Map<String, dynamic> json) {
+  factory Fragment_AttendanceFields.fromJson(Map<String, dynamic> json) {
     final l$servicesHistory = json['servicesHistory'];
     final l$classesHistory = json['classesHistory'];
     final l$groupsHistory = json['groupsHistory'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields(
+    return Fragment_AttendanceFields(
       servicesHistory: (l$servicesHistory as List<dynamic>)
-          .map((e) => Fragment$AttendanceFields$servicesHistory.fromJson(
+          .map((e) => Fragment_AttendanceFields_servicesHistory.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       classesHistory: (l$classesHistory as List<dynamic>)
-          .map((e) => Fragment$AttendanceFields$classesHistory.fromJson(
+          .map((e) => Fragment_AttendanceFields_classesHistory.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       groupsHistory: (l$groupsHistory as List<dynamic>)
-          .map((e) => Fragment$AttendanceFields$groupsHistory.fromJson(
+          .map((e) => Fragment_AttendanceFields_groupsHistory.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$AttendanceFields$servicesHistory> servicesHistory;
+  final List<Fragment_AttendanceFields_servicesHistory> servicesHistory;
 
-  final List<Fragment$AttendanceFields$classesHistory> classesHistory;
+  final List<Fragment_AttendanceFields_classesHistory> classesHistory;
 
-  final List<Fragment$AttendanceFields$groupsHistory> groupsHistory;
+  final List<Fragment_AttendanceFields_groupsHistory> groupsHistory;
 
   final String $__typename;
 
@@ -4196,7 +4196,7 @@ class Fragment$AttendanceFields {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields) ||
+    if (!(other is Fragment_AttendanceFields) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4245,60 +4245,60 @@ class Fragment$AttendanceFields {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields
-    on Fragment$AttendanceFields {
-  CopyWith$Fragment$AttendanceFields<Fragment$AttendanceFields> get copyWith =>
-      CopyWith$Fragment$AttendanceFields(
+extension UtilityExtension_Fragment_AttendanceFields
+    on Fragment_AttendanceFields {
+  CopyWith_Fragment_AttendanceFields<Fragment_AttendanceFields> get copyWith =>
+      CopyWith_Fragment_AttendanceFields(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields<TRes> {
-  factory CopyWith$Fragment$AttendanceFields(
-    Fragment$AttendanceFields instance,
-    TRes Function(Fragment$AttendanceFields) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields;
+abstract class CopyWith_Fragment_AttendanceFields<TRes> {
+  factory CopyWith_Fragment_AttendanceFields(
+    Fragment_AttendanceFields instance,
+    TRes Function(Fragment_AttendanceFields) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields;
 
-  factory CopyWith$Fragment$AttendanceFields.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields;
+  factory CopyWith_Fragment_AttendanceFields.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_AttendanceFields;
 
   TRes call({
-    List<Fragment$AttendanceFields$servicesHistory>? servicesHistory,
-    List<Fragment$AttendanceFields$classesHistory>? classesHistory,
-    List<Fragment$AttendanceFields$groupsHistory>? groupsHistory,
+    List<Fragment_AttendanceFields_servicesHistory>? servicesHistory,
+    List<Fragment_AttendanceFields_classesHistory>? classesHistory,
+    List<Fragment_AttendanceFields_groupsHistory>? groupsHistory,
     String? $__typename,
   });
   TRes servicesHistory(
-      Iterable<Fragment$AttendanceFields$servicesHistory> Function(
+      Iterable<Fragment_AttendanceFields_servicesHistory> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$servicesHistory<
-                      Fragment$AttendanceFields$servicesHistory>>)
+                  CopyWith_Fragment_AttendanceFields_servicesHistory<
+                      Fragment_AttendanceFields_servicesHistory>>)
           _fn);
   TRes classesHistory(
-      Iterable<Fragment$AttendanceFields$classesHistory> Function(
+      Iterable<Fragment_AttendanceFields_classesHistory> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$classesHistory<
-                      Fragment$AttendanceFields$classesHistory>>)
+                  CopyWith_Fragment_AttendanceFields_classesHistory<
+                      Fragment_AttendanceFields_classesHistory>>)
           _fn);
   TRes groupsHistory(
-      Iterable<Fragment$AttendanceFields$groupsHistory> Function(
+      Iterable<Fragment_AttendanceFields_groupsHistory> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$groupsHistory<
-                      Fragment$AttendanceFields$groupsHistory>>)
+                  CopyWith_Fragment_AttendanceFields_groupsHistory<
+                      Fragment_AttendanceFields_groupsHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields<TRes>
-    implements CopyWith$Fragment$AttendanceFields<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields(
+class _CopyWithImpl_Fragment_AttendanceFields<TRes>
+    implements CopyWith_Fragment_AttendanceFields<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields _instance;
+  final Fragment_AttendanceFields _instance;
 
-  final TRes Function(Fragment$AttendanceFields) _then;
+  final TRes Function(Fragment_AttendanceFields) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4308,71 +4308,71 @@ class _CopyWithImpl$Fragment$AttendanceFields<TRes>
     Object? groupsHistory = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields(
+      _then(Fragment_AttendanceFields(
         servicesHistory:
             servicesHistory == _undefined || servicesHistory == null
                 ? _instance.servicesHistory
                 : (servicesHistory
-                    as List<Fragment$AttendanceFields$servicesHistory>),
+                    as List<Fragment_AttendanceFields_servicesHistory>),
         classesHistory: classesHistory == _undefined || classesHistory == null
             ? _instance.classesHistory
             : (classesHistory
-                as List<Fragment$AttendanceFields$classesHistory>),
+                as List<Fragment_AttendanceFields_classesHistory>),
         groupsHistory: groupsHistory == _undefined || groupsHistory == null
             ? _instance.groupsHistory
-            : (groupsHistory as List<Fragment$AttendanceFields$groupsHistory>),
+            : (groupsHistory as List<Fragment_AttendanceFields_groupsHistory>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes servicesHistory(
-          Iterable<Fragment$AttendanceFields$servicesHistory> Function(
+          Iterable<Fragment_AttendanceFields_servicesHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$servicesHistory<
-                          Fragment$AttendanceFields$servicesHistory>>)
+                      CopyWith_Fragment_AttendanceFields_servicesHistory<
+                          Fragment_AttendanceFields_servicesHistory>>)
               _fn) =>
       call(
           servicesHistory: _fn(_instance.servicesHistory
-              .map((e) => CopyWith$Fragment$AttendanceFields$servicesHistory(
+              .map((e) => CopyWith_Fragment_AttendanceFields_servicesHistory(
                     e,
                     (i) => i,
                   ))).toList());
   TRes classesHistory(
-          Iterable<Fragment$AttendanceFields$classesHistory> Function(
+          Iterable<Fragment_AttendanceFields_classesHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$classesHistory<
-                          Fragment$AttendanceFields$classesHistory>>)
+                      CopyWith_Fragment_AttendanceFields_classesHistory<
+                          Fragment_AttendanceFields_classesHistory>>)
               _fn) =>
       call(
           classesHistory: _fn(_instance.classesHistory
-              .map((e) => CopyWith$Fragment$AttendanceFields$classesHistory(
+              .map((e) => CopyWith_Fragment_AttendanceFields_classesHistory(
                     e,
                     (i) => i,
                   ))).toList());
   TRes groupsHistory(
-          Iterable<Fragment$AttendanceFields$groupsHistory> Function(
+          Iterable<Fragment_AttendanceFields_groupsHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$groupsHistory<
-                          Fragment$AttendanceFields$groupsHistory>>)
+                      CopyWith_Fragment_AttendanceFields_groupsHistory<
+                          Fragment_AttendanceFields_groupsHistory>>)
               _fn) =>
       call(
           groupsHistory: _fn(_instance.groupsHistory
-              .map((e) => CopyWith$Fragment$AttendanceFields$groupsHistory(
+              .map((e) => CopyWith_Fragment_AttendanceFields_groupsHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields<TRes>
-    implements CopyWith$Fragment$AttendanceFields<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields<TRes>
+    implements CopyWith_Fragment_AttendanceFields<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields(this._res);
 
   TRes _res;
 
   call({
-    List<Fragment$AttendanceFields$servicesHistory>? servicesHistory,
-    List<Fragment$AttendanceFields$classesHistory>? classesHistory,
-    List<Fragment$AttendanceFields$groupsHistory>? groupsHistory,
+    List<Fragment_AttendanceFields_servicesHistory>? servicesHistory,
+    List<Fragment_AttendanceFields_classesHistory>? classesHistory,
+    List<Fragment_AttendanceFields_groupsHistory>? groupsHistory,
     String? $__typename,
   }) =>
       _res;
@@ -5220,23 +5220,23 @@ const documentNodeFragmentAttendanceFields = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Fragment$AttendanceFields$servicesHistory {
-  Fragment$AttendanceFields$servicesHistory({
+class Fragment_AttendanceFields_servicesHistory {
+  Fragment_AttendanceFields_servicesHistory({
     required this.permissionId,
     this.service,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory.fromJson(
       Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$service = json['service'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory(
+    return Fragment_AttendanceFields_servicesHistory(
       permissionId: stringToUuid(l$permissionId),
       service: l$service == null
           ? null
-          : Fragment$AttendanceFields$servicesHistory$service.fromJson(
+          : Fragment_AttendanceFields_servicesHistory_service.fromJson(
               (l$service as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -5244,7 +5244,7 @@ class Fragment$AttendanceFields$servicesHistory {
 
   final UuidValue permissionId;
 
-  final Fragment$AttendanceFields$servicesHistory$service? service;
+  final Fragment_AttendanceFields_servicesHistory_service? service;
 
   final String $__typename;
 
@@ -5276,7 +5276,7 @@ class Fragment$AttendanceFields$servicesHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$servicesHistory) ||
+    if (!(other is Fragment_AttendanceFields_servicesHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5299,43 +5299,43 @@ class Fragment$AttendanceFields$servicesHistory {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory
-    on Fragment$AttendanceFields$servicesHistory {
-  CopyWith$Fragment$AttendanceFields$servicesHistory<
-          Fragment$AttendanceFields$servicesHistory>
-      get copyWith => CopyWith$Fragment$AttendanceFields$servicesHistory(
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory
+    on Fragment_AttendanceFields_servicesHistory {
+  CopyWith_Fragment_AttendanceFields_servicesHistory<
+          Fragment_AttendanceFields_servicesHistory>
+      get copyWith => CopyWith_Fragment_AttendanceFields_servicesHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory<TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory(
-    Fragment$AttendanceFields$servicesHistory instance,
-    TRes Function(Fragment$AttendanceFields$servicesHistory) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory;
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory<TRes> {
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory(
+    Fragment_AttendanceFields_servicesHistory instance,
+    TRes Function(Fragment_AttendanceFields_servicesHistory) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory;
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory;
 
   TRes call({
     UuidValue? permissionId,
-    Fragment$AttendanceFields$servicesHistory$service? service,
+    Fragment_AttendanceFields_servicesHistory_service? service,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service<TRes> get service;
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> get service;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$servicesHistory<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory(
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_servicesHistory<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory _instance;
+  final Fragment_AttendanceFields_servicesHistory _instance;
 
-  final TRes Function(Fragment$AttendanceFields$servicesHistory) _then;
+  final TRes Function(Fragment_AttendanceFields_servicesHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5344,47 +5344,47 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory<TRes>
     Object? service = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$servicesHistory(
+      _then(Fragment_AttendanceFields_servicesHistory(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
         service: service == _undefined
             ? _instance.service
-            : (service as Fragment$AttendanceFields$servicesHistory$service?),
+            : (service as Fragment_AttendanceFields_servicesHistory_service?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service<TRes> get service {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
-        ? CopyWith$Fragment$AttendanceFields$servicesHistory$service.stub(
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(
             _then(_instance))
-        : CopyWith$Fragment$AttendanceFields$servicesHistory$service(
+        : CopyWith_Fragment_AttendanceFields_servicesHistory_service(
             local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$servicesHistory<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_servicesHistory<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    Fragment$AttendanceFields$servicesHistory$service? service,
+    Fragment_AttendanceFields_servicesHistory_service? service,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service<TRes>
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes>
       get service =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service.stub(_res);
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(_res);
 }
 
-class Fragment$AttendanceFields$servicesHistory$service
-    implements Fragment$Service, Fragment$ServiceNoPhoto {
-  Fragment$AttendanceFields$servicesHistory$service({
+class Fragment_AttendanceFields_servicesHistory_service
+    implements Fragment_Service, Fragment_ServiceNoPhoto {
+  Fragment_AttendanceFields_servicesHistory_service({
     required this.id,
     required this.name,
     this.color,
@@ -5394,7 +5394,7 @@ class Fragment$AttendanceFields$servicesHistory$service
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -5404,7 +5404,7 @@ class Fragment$AttendanceFields$servicesHistory$service
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Fragment$AttendanceFields$servicesHistory$service(
+    return Fragment_AttendanceFields_servicesHistory_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -5412,10 +5412,10 @@ class Fragment$AttendanceFields$servicesHistory$service
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -5431,10 +5431,10 @@ class Fragment$AttendanceFields$servicesHistory$service
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -5486,7 +5486,7 @@ class Fragment$AttendanceFields$servicesHistory$service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$servicesHistory$service) ||
+    if (!(other is Fragment_AttendanceFields_servicesHistory_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5532,27 +5532,27 @@ class Fragment$AttendanceFields$servicesHistory$service
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service
-    on Fragment$AttendanceFields$servicesHistory$service {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service<
-          Fragment$AttendanceFields$servicesHistory$service>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service
+    on Fragment_AttendanceFields_servicesHistory_service {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service<
+          Fragment_AttendanceFields_servicesHistory_service>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service(
-    Fragment$AttendanceFields$servicesHistory$service instance,
-    TRes Function(Fragment$AttendanceFields$servicesHistory$service) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service;
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service(
+    Fragment_AttendanceFields_servicesHistory_service instance,
+    TRes Function(Fragment_AttendanceFields_servicesHistory_service) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service;
 
   TRes call({
     UuidValue? id,
@@ -5560,28 +5560,28 @@ abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service<TRes>
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service(
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service _instance;
+  final Fragment_AttendanceFields_servicesHistory_service _instance;
 
-  final TRes Function(Fragment$AttendanceFields$servicesHistory$service) _then;
+  final TRes Function(Fragment_AttendanceFields_servicesHistory_service) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5594,7 +5594,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$servicesHistory$service(
+      _then(Fragment_AttendanceFields_servicesHistory_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5610,37 +5610,37 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate),
+                as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate),
+                as Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+    return CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+    return CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service<TRes>
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service(
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service(
       this._res);
 
   TRes _res;
@@ -5651,55 +5651,55 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes
+              Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate?
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -5733,7 +5733,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5763,63 +5763,63 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
-                      Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
+                      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5830,86 +5830,86 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate?),
+                as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>),
+                Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
-                          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
+                          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -5917,7 +5917,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
 
   final int count;
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max?
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -5951,7 +5951,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5974,56 +5974,56 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6034,64 +6034,64 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max?),
+                as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -6126,7 +6126,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6144,30 +6144,30 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -6175,21 +6175,21 @@ abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attend
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6199,7 +6199,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -6207,12 +6207,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -6224,17 +6224,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attend
       _res;
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -6269,7 +6269,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6287,30 +6287,30 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggrega
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -6318,21 +6318,21 @@ abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attend
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6342,7 +6342,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -6352,12 +6352,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -6369,37 +6369,37 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attend
       _res;
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes
+              Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate?
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -6433,7 +6433,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6463,63 +6463,63 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
-                      Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
+                      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6530,80 +6530,80 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate?),
+                as Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>),
+                Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
-                          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
+                          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -6638,7 +6638,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6656,30 +6656,30 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -6687,21 +6687,21 @@ abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attend
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6711,7 +6711,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -6721,12 +6721,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -6738,17 +6738,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attend
       _res;
 }
 
-class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes {
-  Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes({
+class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes {
+  Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+    return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -6783,7 +6783,7 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes) ||
+            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6801,30 +6801,30 @@ class Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraint
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes
-    on Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
-    Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes)
+            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -6832,21 +6832,21 @@ abstract class CopyWith$Fragment$AttendanceFields$servicesHistory$service$attend
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes
+  final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes)
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6856,7 +6856,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -6866,12 +6866,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$servicesHistory$service$attendance
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -6883,22 +6883,22 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$servicesHistory$service$attend
       _res;
 }
 
-class Fragment$AttendanceFields$classesHistory {
-  Fragment$AttendanceFields$classesHistory({
+class Fragment_AttendanceFields_classesHistory {
+  Fragment_AttendanceFields_classesHistory({
     required this.permissionId,
     required this.classes,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Fragment$AttendanceFields$classesHistory.fromJson(
+  factory Fragment_AttendanceFields_classesHistory.fromJson(
       Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$classes = json['classes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory(
+    return Fragment_AttendanceFields_classesHistory(
       permissionId: stringToUuid(l$permissionId),
       classes: (l$classes as List<dynamic>)
-          .map((e) => Fragment$AttendanceFields$classesHistory$classes.fromJson(
+          .map((e) => Fragment_AttendanceFields_classesHistory_classes.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
@@ -6907,7 +6907,7 @@ class Fragment$AttendanceFields$classesHistory {
 
   final UuidValue permissionId;
 
-  final List<Fragment$AttendanceFields$classesHistory$classes> classes;
+  final List<Fragment_AttendanceFields_classesHistory_classes> classes;
 
   final String $__typename;
 
@@ -6939,7 +6939,7 @@ class Fragment$AttendanceFields$classesHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$classesHistory) ||
+    if (!(other is Fragment_AttendanceFields_classesHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6969,48 +6969,48 @@ class Fragment$AttendanceFields$classesHistory {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory
-    on Fragment$AttendanceFields$classesHistory {
-  CopyWith$Fragment$AttendanceFields$classesHistory<
-          Fragment$AttendanceFields$classesHistory>
-      get copyWith => CopyWith$Fragment$AttendanceFields$classesHistory(
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory
+    on Fragment_AttendanceFields_classesHistory {
+  CopyWith_Fragment_AttendanceFields_classesHistory<
+          Fragment_AttendanceFields_classesHistory>
+      get copyWith => CopyWith_Fragment_AttendanceFields_classesHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory<TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory(
-    Fragment$AttendanceFields$classesHistory instance,
-    TRes Function(Fragment$AttendanceFields$classesHistory) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory;
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory<TRes> {
+  factory CopyWith_Fragment_AttendanceFields_classesHistory(
+    Fragment_AttendanceFields_classesHistory instance,
+    TRes Function(Fragment_AttendanceFields_classesHistory) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory;
+  factory CopyWith_Fragment_AttendanceFields_classesHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory;
 
   TRes call({
     UuidValue? permissionId,
-    List<Fragment$AttendanceFields$classesHistory$classes>? classes,
+    List<Fragment_AttendanceFields_classesHistory_classes>? classes,
     String? $__typename,
   });
   TRes classes(
-      Iterable<Fragment$AttendanceFields$classesHistory$classes> Function(
+      Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$classesHistory$classes<
-                      Fragment$AttendanceFields$classesHistory$classes>>)
+                  CopyWith_Fragment_AttendanceFields_classesHistory_classes<
+                      Fragment_AttendanceFields_classesHistory_classes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$classesHistory<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory(
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_classesHistory<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory _instance;
+  final Fragment_AttendanceFields_classesHistory _instance;
 
-  final TRes Function(Fragment$AttendanceFields$classesHistory) _then;
+  final TRes Function(Fragment_AttendanceFields_classesHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7019,50 +7019,50 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory<TRes>
     Object? classes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$classesHistory(
+      _then(Fragment_AttendanceFields_classesHistory(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
         classes: classes == _undefined || classes == null
             ? _instance.classes
             : (classes
-                as List<Fragment$AttendanceFields$classesHistory$classes>),
+                as List<Fragment_AttendanceFields_classesHistory_classes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes classes(
-          Iterable<Fragment$AttendanceFields$classesHistory$classes> Function(
+          Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$classesHistory$classes<
-                          Fragment$AttendanceFields$classesHistory$classes>>)
+                      CopyWith_Fragment_AttendanceFields_classesHistory_classes<
+                          Fragment_AttendanceFields_classesHistory_classes>>)
               _fn) =>
       call(
           classes: _fn(_instance.classes.map(
-              (e) => CopyWith$Fragment$AttendanceFields$classesHistory$classes(
+              (e) => CopyWith_Fragment_AttendanceFields_classesHistory_classes(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$classesHistory<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_classesHistory<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    List<Fragment$AttendanceFields$classesHistory$classes>? classes,
+    List<Fragment_AttendanceFields_classesHistory_classes>? classes,
     String? $__typename,
   }) =>
       _res;
   classes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes
-    implements Fragment$Class, Fragment$ClassNoPhoto {
-  Fragment$AttendanceFields$classesHistory$classes({
+class Fragment_AttendanceFields_classesHistory_classes
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Fragment_AttendanceFields_classesHistory_classes({
     required this.id,
     required this.name,
     this.color,
@@ -7072,7 +7072,7 @@ class Fragment$AttendanceFields$classesHistory$classes
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -7082,7 +7082,7 @@ class Fragment$AttendanceFields$classesHistory$classes
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Fragment$AttendanceFields$classesHistory$classes(
+    return Fragment_AttendanceFields_classesHistory_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -7090,10 +7090,10 @@ class Fragment$AttendanceFields$classesHistory$classes
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -7109,10 +7109,10 @@ class Fragment$AttendanceFields$classesHistory$classes
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -7164,7 +7164,7 @@ class Fragment$AttendanceFields$classesHistory$classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$classesHistory$classes) ||
+    if (!(other is Fragment_AttendanceFields_classesHistory_classes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7210,25 +7210,25 @@ class Fragment$AttendanceFields$classesHistory$classes
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes
-    on Fragment$AttendanceFields$classesHistory$classes {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes<
-          Fragment$AttendanceFields$classesHistory$classes>
-      get copyWith => CopyWith$Fragment$AttendanceFields$classesHistory$classes(
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes
+    on Fragment_AttendanceFields_classesHistory_classes {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes<
+          Fragment_AttendanceFields_classesHistory_classes>
+      get copyWith => CopyWith_Fragment_AttendanceFields_classesHistory_classes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes<TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes(
-    Fragment$AttendanceFields$classesHistory$classes instance,
-    TRes Function(Fragment$AttendanceFields$classesHistory$classes) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes;
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes(
+    Fragment_AttendanceFields_classesHistory_classes instance,
+    TRes Function(Fragment_AttendanceFields_classesHistory_classes) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes;
 
   TRes call({
     UuidValue? id,
@@ -7236,27 +7236,27 @@ abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes<TRes>
-    implements CopyWith$Fragment$AttendanceFields$classesHistory$classes<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes(
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
+    implements CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes _instance;
+  final Fragment_AttendanceFields_classesHistory_classes _instance;
 
-  final TRes Function(Fragment$AttendanceFields$classesHistory$classes) _then;
+  final TRes Function(Fragment_AttendanceFields_classesHistory_classes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7269,7 +7269,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$classesHistory$classes(
+      _then(Fragment_AttendanceFields_classesHistory_classes(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -7285,36 +7285,36 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate),
+                as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate),
+                as Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+    return CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+    return CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes<TRes>
-    implements CopyWith$Fragment$AttendanceFields$classesHistory$classes<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
+    implements CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes(this._res);
 
   TRes _res;
 
@@ -7324,55 +7324,55 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes
+              Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate?
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -7406,7 +7406,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7436,63 +7436,63 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
-                      Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
+                      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7503,86 +7503,86 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate?),
+                as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>),
+                Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
-                          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
+                          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -7590,7 +7590,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
 
   final int count;
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max?
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -7624,7 +7624,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7647,56 +7647,56 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7707,64 +7707,64 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max?),
+                as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -7799,7 +7799,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7817,30 +7817,30 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -7848,21 +7848,21 @@ abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attenda
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7872,7 +7872,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -7880,12 +7880,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -7897,17 +7897,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attenda
       _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -7942,7 +7942,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7960,30 +7960,30 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregat
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -7991,21 +7991,21 @@ abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attenda
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8015,7 +8015,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -8025,12 +8025,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceH
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -8042,37 +8042,37 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attenda
       _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes
+              Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate?
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -8106,7 +8106,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8136,63 +8136,63 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
-                      Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
+                      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8203,80 +8203,80 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceD
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate?),
+                as Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>),
+                Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
-                          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
+                          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -8311,7 +8311,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8329,30 +8329,30 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -8360,21 +8360,21 @@ abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attenda
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8384,7 +8384,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceD
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -8394,12 +8394,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceD
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -8411,17 +8411,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attenda
       _res;
 }
 
-class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes {
-  Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes({
+class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes {
+  Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+    return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -8456,7 +8456,7 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes) ||
+            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8474,30 +8474,30 @@ class Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraints
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes
-    on Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
-    Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes)
+            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -8505,21 +8505,21 @@ abstract class CopyWith$Fragment$AttendanceFields$classesHistory$classes$attenda
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes
+  final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes)
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8529,7 +8529,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceD
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -8539,12 +8539,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceD
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -8556,23 +8556,23 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$classesHistory$classes$attenda
       _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory {
-  Fragment$AttendanceFields$groupsHistory({
+class Fragment_AttendanceFields_groupsHistory {
+  Fragment_AttendanceFields_groupsHistory({
     required this.permissionId,
     this.group,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory.fromJson(
       Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$group = json['group'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory(
+    return Fragment_AttendanceFields_groupsHistory(
       permissionId: stringToUuid(l$permissionId),
       group: l$group == null
           ? null
-          : Fragment$AttendanceFields$groupsHistory$group.fromJson(
+          : Fragment_AttendanceFields_groupsHistory_group.fromJson(
               (l$group as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -8580,7 +8580,7 @@ class Fragment$AttendanceFields$groupsHistory {
 
   final UuidValue permissionId;
 
-  final Fragment$AttendanceFields$groupsHistory$group? group;
+  final Fragment_AttendanceFields_groupsHistory_group? group;
 
   final String $__typename;
 
@@ -8612,7 +8612,7 @@ class Fragment$AttendanceFields$groupsHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$groupsHistory) ||
+    if (!(other is Fragment_AttendanceFields_groupsHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8635,43 +8635,43 @@ class Fragment$AttendanceFields$groupsHistory {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory
-    on Fragment$AttendanceFields$groupsHistory {
-  CopyWith$Fragment$AttendanceFields$groupsHistory<
-          Fragment$AttendanceFields$groupsHistory>
-      get copyWith => CopyWith$Fragment$AttendanceFields$groupsHistory(
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory
+    on Fragment_AttendanceFields_groupsHistory {
+  CopyWith_Fragment_AttendanceFields_groupsHistory<
+          Fragment_AttendanceFields_groupsHistory>
+      get copyWith => CopyWith_Fragment_AttendanceFields_groupsHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory<TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory(
-    Fragment$AttendanceFields$groupsHistory instance,
-    TRes Function(Fragment$AttendanceFields$groupsHistory) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory;
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory<TRes> {
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory(
+    Fragment_AttendanceFields_groupsHistory instance,
+    TRes Function(Fragment_AttendanceFields_groupsHistory) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory;
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory;
 
   TRes call({
     UuidValue? permissionId,
-    Fragment$AttendanceFields$groupsHistory$group? group,
+    Fragment_AttendanceFields_groupsHistory_group? group,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> get group;
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$groupsHistory<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory(
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_groupsHistory<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory _instance;
+  final Fragment_AttendanceFields_groupsHistory _instance;
 
-  final TRes Function(Fragment$AttendanceFields$groupsHistory) _then;
+  final TRes Function(Fragment_AttendanceFields_groupsHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8680,46 +8680,46 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory<TRes>
     Object? group = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$groupsHistory(
+      _then(Fragment_AttendanceFields_groupsHistory(
         permissionId: permissionId == _undefined || permissionId == null
             ? _instance.permissionId
             : (permissionId as UuidValue),
         group: group == _undefined
             ? _instance.group
-            : (group as Fragment$AttendanceFields$groupsHistory$group?),
+            : (group as Fragment_AttendanceFields_groupsHistory_group?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> get group {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
-        ? CopyWith$Fragment$AttendanceFields$groupsHistory$group.stub(
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(
             _then(_instance))
-        : CopyWith$Fragment$AttendanceFields$groupsHistory$group(
+        : CopyWith_Fragment_AttendanceFields_groupsHistory_group(
             local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory<TRes>
-    implements CopyWith$Fragment$AttendanceFields$groupsHistory<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory<TRes>
+    implements CopyWith_Fragment_AttendanceFields_groupsHistory<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? permissionId,
-    Fragment$AttendanceFields$groupsHistory$group? group,
+    Fragment_AttendanceFields_groupsHistory_group? group,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> get group =>
-      CopyWith$Fragment$AttendanceFields$groupsHistory$group.stub(_res);
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(_res);
 }
 
-class Fragment$AttendanceFields$groupsHistory$group
-    implements Fragment$Group, Fragment$GroupNoPhoto {
-  Fragment$AttendanceFields$groupsHistory$group({
+class Fragment_AttendanceFields_groupsHistory_group
+    implements Fragment_Group, Fragment_GroupNoPhoto {
+  Fragment_AttendanceFields_groupsHistory_group({
     required this.id,
     required this.name,
     this.color,
@@ -8729,7 +8729,7 @@ class Fragment$AttendanceFields$groupsHistory$group
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -8739,7 +8739,7 @@ class Fragment$AttendanceFields$groupsHistory$group
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Fragment$AttendanceFields$groupsHistory$group(
+    return Fragment_AttendanceFields_groupsHistory_group(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -8747,10 +8747,10 @@ class Fragment$AttendanceFields$groupsHistory$group
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -8766,10 +8766,10 @@ class Fragment$AttendanceFields$groupsHistory$group
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -8821,7 +8821,7 @@ class Fragment$AttendanceFields$groupsHistory$group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceFields$groupsHistory$group) ||
+    if (!(other is Fragment_AttendanceFields_groupsHistory_group) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8867,25 +8867,25 @@ class Fragment$AttendanceFields$groupsHistory$group
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group
-    on Fragment$AttendanceFields$groupsHistory$group {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group<
-          Fragment$AttendanceFields$groupsHistory$group>
-      get copyWith => CopyWith$Fragment$AttendanceFields$groupsHistory$group(
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group
+    on Fragment_AttendanceFields_groupsHistory_group {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group<
+          Fragment_AttendanceFields_groupsHistory_group>
+      get copyWith => CopyWith_Fragment_AttendanceFields_groupsHistory_group(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group(
-    Fragment$AttendanceFields$groupsHistory$group instance,
-    TRes Function(Fragment$AttendanceFields$groupsHistory$group) then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group;
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group(
+    Fragment_AttendanceFields_groupsHistory_group instance,
+    TRes Function(Fragment_AttendanceFields_groupsHistory_group) then,
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group;
 
   TRes call({
     UuidValue? id,
@@ -8893,27 +8893,27 @@ abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group<TRes>
-    implements CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group(
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
+    implements CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group _instance;
+  final Fragment_AttendanceFields_groupsHistory_group _instance;
 
-  final TRes Function(Fragment$AttendanceFields$groupsHistory$group) _then;
+  final TRes Function(Fragment_AttendanceFields_groupsHistory_group) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8926,7 +8926,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Fragment$AttendanceFields$groupsHistory$group(
+      _then(Fragment_AttendanceFields_groupsHistory_group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -8942,36 +8942,36 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate),
+                as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate),
+                as Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+    return CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+    return CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group<TRes>
-    implements CopyWith$Fragment$AttendanceFields$groupsHistory$group<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
+    implements CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group(this._res);
 
   TRes _res;
 
@@ -8981,55 +8981,55 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes
+              Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate?
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -9063,7 +9063,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate {
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9093,63 +9093,63 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
-                      Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
+                      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9160,86 +9160,86 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate?),
+                as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>),
+                Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
-                          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
+                          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>?
+    List<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -9247,7 +9247,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$a
 
   final int count;
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max?
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -9281,7 +9281,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$a
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9304,56 +9304,56 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$a
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9364,64 +9364,64 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max?),
+                as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -9456,7 +9456,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$a
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9474,30 +9474,30 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$a
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -9505,21 +9505,21 @@ abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendance
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9529,7 +9529,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -9537,12 +9537,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -9554,17 +9554,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendance
       _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -9599,7 +9599,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$n
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9617,30 +9617,30 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$n
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -9648,21 +9648,21 @@ abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendance
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9672,7 +9672,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -9682,12 +9682,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHist
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -9699,37 +9699,37 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendance
       _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes
+              Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate?
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -9763,7 +9763,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9793,63 +9793,63 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
-                      Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
+                      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9860,80 +9860,80 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDays
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate?),
+                as Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>),
+                Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
-                          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
+                          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate?
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>?
+    List<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -9968,7 +9968,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9986,30 +9986,30 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -10017,21 +10017,21 @@ abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendance
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10041,7 +10041,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDays
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -10051,12 +10051,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDays
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -10068,17 +10068,17 @@ class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendance
       _res;
 }
 
-class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes {
-  Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes({
+class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes {
+  Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+    return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -10113,7 +10113,7 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
       return true;
     }
     if (!(other
-            is Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes) ||
+            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10131,30 +10131,30 @@ class Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAgg
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes
-    on Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
-    Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes)
+            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -10162,21 +10162,21 @@ abstract class CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendance
   });
 }
 
-class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes
+  final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes)
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10186,7 +10186,7 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDays
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -10196,12 +10196,12 @@ class _CopyWithImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDays
       ));
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceFields$groupsHistory$group$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;

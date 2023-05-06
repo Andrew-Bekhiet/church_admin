@@ -31,13 +31,19 @@ class ViewClass extends StatefulWidget {
 
 class _ViewClassState extends State<ViewClass> {
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byClassId: widget.classId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          classes: Input_ClassesBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   late final stream =
-      DatabaseService.I.classes.watchClass(classId: widget.classId);
+      DatabaseService.I.classes.streamSingleById(id: widget.classId);
 
   @override
   Widget build(BuildContext context) {

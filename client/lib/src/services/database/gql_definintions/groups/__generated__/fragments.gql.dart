@@ -1,8 +1,8 @@
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Fragment$Group implements Fragment$GroupNoPhoto {
-  Fragment$Group({
+class Fragment_Group implements Fragment_GroupNoPhoto {
+  Fragment_Group({
     required this.id,
     required this.name,
     this.color,
@@ -10,13 +10,13 @@ class Fragment$Group implements Fragment$GroupNoPhoto {
     this.photoUpdatedAt,
   });
 
-  factory Fragment$Group.fromJson(Map<String, dynamic> json) {
+  factory Fragment_Group.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
-    return Fragment$Group(
+    return Fragment_Group(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -73,7 +73,7 @@ class Fragment$Group implements Fragment$GroupNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Group) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_Group) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -105,22 +105,22 @@ class Fragment$Group implements Fragment$GroupNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$Group on Fragment$Group {
-  CopyWith$Fragment$Group<Fragment$Group> get copyWith =>
-      CopyWith$Fragment$Group(
+extension UtilityExtension_Fragment_Group on Fragment_Group {
+  CopyWith_Fragment_Group<Fragment_Group> get copyWith =>
+      CopyWith_Fragment_Group(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$Group<TRes> {
-  factory CopyWith$Fragment$Group(
-    Fragment$Group instance,
-    TRes Function(Fragment$Group) then,
-  ) = _CopyWithImpl$Fragment$Group;
+abstract class CopyWith_Fragment_Group<TRes> {
+  factory CopyWith_Fragment_Group(
+    Fragment_Group instance,
+    TRes Function(Fragment_Group) then,
+  ) = _CopyWithImpl_Fragment_Group;
 
-  factory CopyWith$Fragment$Group.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Group;
+  factory CopyWith_Fragment_Group.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_Group;
 
   TRes call({
     UuidValue? id,
@@ -131,16 +131,16 @@ abstract class CopyWith$Fragment$Group<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$Group<TRes>
-    implements CopyWith$Fragment$Group<TRes> {
-  _CopyWithImpl$Fragment$Group(
+class _CopyWithImpl_Fragment_Group<TRes>
+    implements CopyWith_Fragment_Group<TRes> {
+  _CopyWithImpl_Fragment_Group(
     this._instance,
     this._then,
   );
 
-  final Fragment$Group _instance;
+  final Fragment_Group _instance;
 
-  final TRes Function(Fragment$Group) _then;
+  final TRes Function(Fragment_Group) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -151,7 +151,7 @@ class _CopyWithImpl$Fragment$Group<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
-      _then(Fragment$Group(
+      _then(Fragment_Group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -166,9 +166,9 @@ class _CopyWithImpl$Fragment$Group<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$Group<TRes>
-    implements CopyWith$Fragment$Group<TRes> {
-  _CopyWithStubImpl$Fragment$Group(this._res);
+class _CopyWithStubImpl_Fragment_Group<TRes>
+    implements CopyWith_Fragment_Group<TRes> {
+  _CopyWithStubImpl_Fragment_Group(this._res);
 
   TRes _res;
 
@@ -216,20 +216,20 @@ const documentNodeFragmentGroup = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Fragment$GroupNoPhoto {
-  Fragment$GroupNoPhoto({
+class Fragment_GroupNoPhoto {
+  Fragment_GroupNoPhoto({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Groups',
   });
 
-  factory Fragment$GroupNoPhoto.fromJson(Map<String, dynamic> json) {
+  factory Fragment_GroupNoPhoto.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Fragment$GroupNoPhoto(
+    return Fragment_GroupNoPhoto(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -277,7 +277,7 @@ class Fragment$GroupNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$GroupNoPhoto) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_GroupNoPhoto) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -304,22 +304,22 @@ class Fragment$GroupNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$GroupNoPhoto on Fragment$GroupNoPhoto {
-  CopyWith$Fragment$GroupNoPhoto<Fragment$GroupNoPhoto> get copyWith =>
-      CopyWith$Fragment$GroupNoPhoto(
+extension UtilityExtension_Fragment_GroupNoPhoto on Fragment_GroupNoPhoto {
+  CopyWith_Fragment_GroupNoPhoto<Fragment_GroupNoPhoto> get copyWith =>
+      CopyWith_Fragment_GroupNoPhoto(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$GroupNoPhoto<TRes> {
-  factory CopyWith$Fragment$GroupNoPhoto(
-    Fragment$GroupNoPhoto instance,
-    TRes Function(Fragment$GroupNoPhoto) then,
-  ) = _CopyWithImpl$Fragment$GroupNoPhoto;
+abstract class CopyWith_Fragment_GroupNoPhoto<TRes> {
+  factory CopyWith_Fragment_GroupNoPhoto(
+    Fragment_GroupNoPhoto instance,
+    TRes Function(Fragment_GroupNoPhoto) then,
+  ) = _CopyWithImpl_Fragment_GroupNoPhoto;
 
-  factory CopyWith$Fragment$GroupNoPhoto.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$GroupNoPhoto;
+  factory CopyWith_Fragment_GroupNoPhoto.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_GroupNoPhoto;
 
   TRes call({
     UuidValue? id,
@@ -329,16 +329,16 @@ abstract class CopyWith$Fragment$GroupNoPhoto<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$GroupNoPhoto<TRes>
-    implements CopyWith$Fragment$GroupNoPhoto<TRes> {
-  _CopyWithImpl$Fragment$GroupNoPhoto(
+class _CopyWithImpl_Fragment_GroupNoPhoto<TRes>
+    implements CopyWith_Fragment_GroupNoPhoto<TRes> {
+  _CopyWithImpl_Fragment_GroupNoPhoto(
     this._instance,
     this._then,
   );
 
-  final Fragment$GroupNoPhoto _instance;
+  final Fragment_GroupNoPhoto _instance;
 
-  final TRes Function(Fragment$GroupNoPhoto) _then;
+  final TRes Function(Fragment_GroupNoPhoto) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -348,7 +348,7 @@ class _CopyWithImpl$Fragment$GroupNoPhoto<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$GroupNoPhoto(
+      _then(Fragment_GroupNoPhoto(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -360,9 +360,9 @@ class _CopyWithImpl$Fragment$GroupNoPhoto<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$GroupNoPhoto<TRes>
-    implements CopyWith$Fragment$GroupNoPhoto<TRes> {
-  _CopyWithStubImpl$Fragment$GroupNoPhoto(this._res);
+class _CopyWithStubImpl_Fragment_GroupNoPhoto<TRes>
+    implements CopyWith_Fragment_GroupNoPhoto<TRes> {
+  _CopyWithStubImpl_Fragment_GroupNoPhoto(this._res);
 
   TRes _res;
 

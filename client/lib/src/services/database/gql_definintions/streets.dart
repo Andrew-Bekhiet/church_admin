@@ -1,46 +1,44 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'helpers.dart';
 import 'streets/__generated__/mutations.gql.dart';
 import 'streets/__generated__/subscriptions.gql.dart';
 
-class StreetsDAO extends DAOBase {
+export 'streets/__generated__/mutations.gql.dart';
+export 'streets/__generated__/subscriptions.gql.dart';
+
+class StreetsDAO extends DAOBase<Street> {
   const StreetsDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Street> paginateStreets({
+  @override
+  GQLPaginatableStream<Street> streamAll({
     Stream<String?>? searchQuery,
-    String? byAreaId,
+    List<Input_StreetsBoolExp>? where,
   }) {
     return GQLPaginatableStream<Street>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
         final defaultSearchVars = graphQLClient.getDefaultSearchVars(
           event,
-          Variables$Subscription$watchAllStreets.new,
-          Input$StreetsBoolExp.new,
+          Variables_Subscription_watchAllStreets.new,
+          Input_StreetsBoolExp.new,
         );
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (byAreaId != null)
-              Input$StreetsBoolExp(
-                areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
-                ),
-              ),
-            ...defaultSearchVars.where ?? [],
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
           ],
-        );
+        ).toJson();
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllStreets,
             operationName: 'watchAllStreets',
-            variables: variables.toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Street.fromJson),
           ),
         );
@@ -48,15 +46,15 @@ class StreetsDAO extends DAOBase {
     );
   }
 
-  Stream<Street?> watchStreet({
-    required String streetId,
+  Stream<Street?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchStreet,
         operationName: 'watchStreet',
-        variables: Variables$Subscription$watchStreet(
-          id: streetId.toUuid(),
+        variables: Variables_Subscription_watchStreet(
+          id: id.toUuid(),
         ).toJson(),
         parserFn: db.parser.singleParser(Street.fromJson),
       ),
@@ -68,7 +66,7 @@ class StreetsDAO extends DAOBase {
   }) {
     final mutationOptions = MutationOptions(
       document: documentNodeMutationdeleteStreet,
-      variables: Variables$Mutation$deleteStreet(
+      variables: Variables_Mutation_deleteStreet(
         streetId: streetId.toUuid(),
       ).toJson(),
       parserFn: db.parser.singleOrNullParser(Street.fromJson),
@@ -110,9 +108,9 @@ class StreetsDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationupdateStreet,
         operationName: 'updateStreet',
-        variables: Variables$Mutation$updateStreet(
+        variables: Variables_Mutation_updateStreet(
           streetId: newStreet.id.toUuid(),
-          newStreet: Input$StreetsSetInput.fromJson(delta),
+          newStreet: Input_StreetsSetInput.fromJson(delta),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(Street.fromJson),
       ),

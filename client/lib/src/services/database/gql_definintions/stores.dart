@@ -1,60 +1,41 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart' hide Store;
 
 import 'helpers.dart';
 import 'stores/__generated__/mutations.gql.dart';
 import 'stores/__generated__/subscriptions.gql.dart';
 
-class StoresDAO extends DAOBase {
+class StoresDAO extends DAOBase<Store> {
   const StoresDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Store> paginateStores({
+  @override
+  GQLPaginatableStream<Store> streamAll({
     Stream<String?>? searchQuery,
-    String? byAreaId,
-    String? byStreetId,
-    String? byFamilyId,
+    List<Input_StoresBoolExp>? where,
   }) {
     return GQLPaginatableStream<Store>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
         final defaultSearchVars = graphQLClient.getDefaultSearchVars(
           event,
-          Variables$Subscription$watchAllStores.new,
-          Input$StoresBoolExp.new,
+          Variables_Subscription_watchAllStores.new,
+          Input_StoresBoolExp.new,
         );
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (byAreaId != null)
-              Input$StoresBoolExp(
-                areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
-                ),
-              ),
-            if (byStreetId != null)
-              Input$StoresBoolExp(
-                streets: Input$StreetsBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
-                ),
-              ),
-            if (byFamilyId != null)
-              Input$StoresBoolExp(
-                adminFamily: Input$UuidComparisonExp(
-                  $_eq: byFamilyId.toUuid(),
-                ),
-              ),
-            ...defaultSearchVars.where ?? [],
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
           ],
-        );
+        ).toJson();
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllStores,
             operationName: 'watchAllStores',
-            variables: variables.toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Store.fromJson),
           ),
         );
@@ -62,16 +43,16 @@ class StoresDAO extends DAOBase {
     );
   }
 
-  Stream<Store?> watchStore({
-    required String storeId,
+  Stream<Store?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient
         .subscribe(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchStore,
             operationName: 'watchStore',
-            variables: Variables$Subscription$watchStore(id: storeId.toUuid())
-                .toJson(),
+            variables:
+                Variables_Subscription_watchStore(id: id.toUuid()).toJson(),
             parserFn: db.parser.singleOrNullParser(Store.fromJson),
           ),
         )
@@ -83,7 +64,7 @@ class StoresDAO extends DAOBase {
   }) {
     final mutationOptions = MutationOptions(
       document: documentNodeMutationdeleteStore,
-      variables: Variables$Mutation$deleteStore(
+      variables: Variables_Mutation_deleteStore(
         storeId: storeId.toUuid(),
       ).toJson(),
       parserFn: db.parser.singleOrNullParser(Store.fromJson),
@@ -127,9 +108,9 @@ class StoresDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationupdateStore,
         operationName: 'updateStore',
-        variables: Variables$Mutation$updateStore(
+        variables: Variables_Mutation_updateStore(
           storeId: newStore.id.toUuid(),
-          newStore: Input$StoresSetInput.fromJson(delta),
+          newStore: Input_StoresSetInput.fromJson(delta),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(Store.fromJson),
       ),

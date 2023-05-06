@@ -34,7 +34,7 @@ class ViewStore extends StatefulWidget {
 
 class _ViewStoreState extends State<ViewStore> {
   late final stream =
-      DatabaseService.I.stores.watchStore(storeId: widget.storeId);
+      DatabaseService.I.stores.streamSingleById(id: widget.storeId);
 
   @override
   Widget build(BuildContext context) {

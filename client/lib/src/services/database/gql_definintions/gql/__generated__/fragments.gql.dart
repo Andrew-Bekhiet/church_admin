@@ -2,29 +2,29 @@ import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Fragment$EditHistory {
-  Fragment$EditHistory({
+class Fragment_EditHistory {
+  Fragment_EditHistory({
     required this.time,
     this.user,
     this.$__typename = 'HistoryEditHistory',
   });
 
-  factory Fragment$EditHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_EditHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$EditHistory(
+    return Fragment_EditHistory(
       time: tstzFromString(l$time),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime time;
 
-  final Fragment$User? user;
+  final Fragment_User? user;
 
   final String $__typename;
 
@@ -56,7 +56,7 @@ class Fragment$EditHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$EditHistory) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_EditHistory) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -78,41 +78,41 @@ class Fragment$EditHistory {
   }
 }
 
-extension UtilityExtension$Fragment$EditHistory on Fragment$EditHistory {
-  CopyWith$Fragment$EditHistory<Fragment$EditHistory> get copyWith =>
-      CopyWith$Fragment$EditHistory(
+extension UtilityExtension_Fragment_EditHistory on Fragment_EditHistory {
+  CopyWith_Fragment_EditHistory<Fragment_EditHistory> get copyWith =>
+      CopyWith_Fragment_EditHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$EditHistory<TRes> {
-  factory CopyWith$Fragment$EditHistory(
-    Fragment$EditHistory instance,
-    TRes Function(Fragment$EditHistory) then,
-  ) = _CopyWithImpl$Fragment$EditHistory;
+abstract class CopyWith_Fragment_EditHistory<TRes> {
+  factory CopyWith_Fragment_EditHistory(
+    Fragment_EditHistory instance,
+    TRes Function(Fragment_EditHistory) then,
+  ) = _CopyWithImpl_Fragment_EditHistory;
 
-  factory CopyWith$Fragment$EditHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$EditHistory;
+  factory CopyWith_Fragment_EditHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_EditHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$EditHistory<TRes>
-    implements CopyWith$Fragment$EditHistory<TRes> {
-  _CopyWithImpl$Fragment$EditHistory(
+class _CopyWithImpl_Fragment_EditHistory<TRes>
+    implements CopyWith_Fragment_EditHistory<TRes> {
+  _CopyWithImpl_Fragment_EditHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$EditHistory _instance;
+  final Fragment_EditHistory _instance;
 
-  final TRes Function(Fragment$EditHistory) _then;
+  final TRes Function(Fragment_EditHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -121,36 +121,36 @@ class _CopyWithImpl$Fragment$EditHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$EditHistory(
+      _then(Fragment_EditHistory(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$EditHistory<TRes>
-    implements CopyWith$Fragment$EditHistory<TRes> {
-  _CopyWithStubImpl$Fragment$EditHistory(this._res);
+class _CopyWithStubImpl_Fragment_EditHistory<TRes>
+    implements CopyWith_Fragment_EditHistory<TRes> {
+  _CopyWithStubImpl_Fragment_EditHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionEditHistory = FragmentDefinitionNode(
@@ -203,27 +203,27 @@ const documentNodeFragmentEditHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$AttendanceHistory {
-  Fragment$AttendanceHistory({
+class Fragment_AttendanceHistory {
+  Fragment_AttendanceHistory({
     required this.time,
     required this.user,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Fragment$AttendanceHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_AttendanceHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$AttendanceHistory(
+    return Fragment_AttendanceHistory(
       time: tstzFromString(l$time),
-      user: Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime time;
 
-  final Fragment$User user;
+  final Fragment_User user;
 
   final String $__typename;
 
@@ -255,7 +255,7 @@ class Fragment$AttendanceHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AttendanceHistory) ||
+    if (!(other is Fragment_AttendanceHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -278,42 +278,42 @@ class Fragment$AttendanceHistory {
   }
 }
 
-extension UtilityExtension$Fragment$AttendanceHistory
-    on Fragment$AttendanceHistory {
-  CopyWith$Fragment$AttendanceHistory<Fragment$AttendanceHistory>
-      get copyWith => CopyWith$Fragment$AttendanceHistory(
+extension UtilityExtension_Fragment_AttendanceHistory
+    on Fragment_AttendanceHistory {
+  CopyWith_Fragment_AttendanceHistory<Fragment_AttendanceHistory>
+      get copyWith => CopyWith_Fragment_AttendanceHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$AttendanceHistory<TRes> {
-  factory CopyWith$Fragment$AttendanceHistory(
-    Fragment$AttendanceHistory instance,
-    TRes Function(Fragment$AttendanceHistory) then,
-  ) = _CopyWithImpl$Fragment$AttendanceHistory;
+abstract class CopyWith_Fragment_AttendanceHistory<TRes> {
+  factory CopyWith_Fragment_AttendanceHistory(
+    Fragment_AttendanceHistory instance,
+    TRes Function(Fragment_AttendanceHistory) then,
+  ) = _CopyWithImpl_Fragment_AttendanceHistory;
 
-  factory CopyWith$Fragment$AttendanceHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$AttendanceHistory;
+  factory CopyWith_Fragment_AttendanceHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_AttendanceHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$AttendanceHistory<TRes>
-    implements CopyWith$Fragment$AttendanceHistory<TRes> {
-  _CopyWithImpl$Fragment$AttendanceHistory(
+class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
+    implements CopyWith_Fragment_AttendanceHistory<TRes> {
+  _CopyWithImpl_Fragment_AttendanceHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$AttendanceHistory _instance;
+  final Fragment_AttendanceHistory _instance;
 
-  final TRes Function(Fragment$AttendanceHistory) _then;
+  final TRes Function(Fragment_AttendanceHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -322,36 +322,36 @@ class _CopyWithImpl$Fragment$AttendanceHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$AttendanceHistory(
+      _then(Fragment_AttendanceHistory(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
         user: user == _undefined || user == null
             ? _instance.user
-            : (user as Fragment$User),
+            : (user as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
-    return CopyWith$Fragment$User(local$user, (e) => call(user: e));
+    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$AttendanceHistory<TRes>
-    implements CopyWith$Fragment$AttendanceHistory<TRes> {
-  _CopyWithStubImpl$Fragment$AttendanceHistory(this._res);
+class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
+    implements CopyWith_Fragment_AttendanceHistory<TRes> {
+  _CopyWithStubImpl_Fragment_AttendanceHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionAttendanceHistory = FragmentDefinitionNode(
@@ -404,29 +404,29 @@ const documentNodeFragmentAttendanceHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$CallHistory {
-  Fragment$CallHistory({
+class Fragment_CallHistory {
+  Fragment_CallHistory({
     required this.time,
     this.user,
     this.$__typename = 'HistoryCallHistory',
   });
 
-  factory Fragment$CallHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_CallHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$CallHistory(
+    return Fragment_CallHistory(
       time: tstzFromString(l$time),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime time;
 
-  final Fragment$User? user;
+  final Fragment_User? user;
 
   final String $__typename;
 
@@ -458,7 +458,7 @@ class Fragment$CallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CallHistory) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_CallHistory) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -480,41 +480,41 @@ class Fragment$CallHistory {
   }
 }
 
-extension UtilityExtension$Fragment$CallHistory on Fragment$CallHistory {
-  CopyWith$Fragment$CallHistory<Fragment$CallHistory> get copyWith =>
-      CopyWith$Fragment$CallHistory(
+extension UtilityExtension_Fragment_CallHistory on Fragment_CallHistory {
+  CopyWith_Fragment_CallHistory<Fragment_CallHistory> get copyWith =>
+      CopyWith_Fragment_CallHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$CallHistory<TRes> {
-  factory CopyWith$Fragment$CallHistory(
-    Fragment$CallHistory instance,
-    TRes Function(Fragment$CallHistory) then,
-  ) = _CopyWithImpl$Fragment$CallHistory;
+abstract class CopyWith_Fragment_CallHistory<TRes> {
+  factory CopyWith_Fragment_CallHistory(
+    Fragment_CallHistory instance,
+    TRes Function(Fragment_CallHistory) then,
+  ) = _CopyWithImpl_Fragment_CallHistory;
 
-  factory CopyWith$Fragment$CallHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$CallHistory;
+  factory CopyWith_Fragment_CallHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_CallHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$CallHistory<TRes>
-    implements CopyWith$Fragment$CallHistory<TRes> {
-  _CopyWithImpl$Fragment$CallHistory(
+class _CopyWithImpl_Fragment_CallHistory<TRes>
+    implements CopyWith_Fragment_CallHistory<TRes> {
+  _CopyWithImpl_Fragment_CallHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$CallHistory _instance;
+  final Fragment_CallHistory _instance;
 
-  final TRes Function(Fragment$CallHistory) _then;
+  final TRes Function(Fragment_CallHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -523,36 +523,36 @@ class _CopyWithImpl$Fragment$CallHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$CallHistory(
+      _then(Fragment_CallHistory(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$CallHistory<TRes>
-    implements CopyWith$Fragment$CallHistory<TRes> {
-  _CopyWithStubImpl$Fragment$CallHistory(this._res);
+class _CopyWithStubImpl_Fragment_CallHistory<TRes>
+    implements CopyWith_Fragment_CallHistory<TRes> {
+  _CopyWithStubImpl_Fragment_CallHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionCallHistory = FragmentDefinitionNode(
@@ -605,29 +605,29 @@ const documentNodeFragmentCallHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$VisitHistory {
-  Fragment$VisitHistory({
+class Fragment_VisitHistory {
+  Fragment_VisitHistory({
     required this.time,
     this.user,
     this.$__typename = 'HistoryVisitHistory',
   });
 
-  factory Fragment$VisitHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_VisitHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$VisitHistory(
+    return Fragment_VisitHistory(
       time: tstzFromString(l$time),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime time;
 
-  final Fragment$User? user;
+  final Fragment_User? user;
 
   final String $__typename;
 
@@ -659,7 +659,7 @@ class Fragment$VisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$VisitHistory) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_VisitHistory) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -681,41 +681,41 @@ class Fragment$VisitHistory {
   }
 }
 
-extension UtilityExtension$Fragment$VisitHistory on Fragment$VisitHistory {
-  CopyWith$Fragment$VisitHistory<Fragment$VisitHistory> get copyWith =>
-      CopyWith$Fragment$VisitHistory(
+extension UtilityExtension_Fragment_VisitHistory on Fragment_VisitHistory {
+  CopyWith_Fragment_VisitHistory<Fragment_VisitHistory> get copyWith =>
+      CopyWith_Fragment_VisitHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$VisitHistory<TRes> {
-  factory CopyWith$Fragment$VisitHistory(
-    Fragment$VisitHistory instance,
-    TRes Function(Fragment$VisitHistory) then,
-  ) = _CopyWithImpl$Fragment$VisitHistory;
+abstract class CopyWith_Fragment_VisitHistory<TRes> {
+  factory CopyWith_Fragment_VisitHistory(
+    Fragment_VisitHistory instance,
+    TRes Function(Fragment_VisitHistory) then,
+  ) = _CopyWithImpl_Fragment_VisitHistory;
 
-  factory CopyWith$Fragment$VisitHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$VisitHistory;
+  factory CopyWith_Fragment_VisitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_VisitHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$VisitHistory<TRes>
-    implements CopyWith$Fragment$VisitHistory<TRes> {
-  _CopyWithImpl$Fragment$VisitHistory(
+class _CopyWithImpl_Fragment_VisitHistory<TRes>
+    implements CopyWith_Fragment_VisitHistory<TRes> {
+  _CopyWithImpl_Fragment_VisitHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$VisitHistory _instance;
+  final Fragment_VisitHistory _instance;
 
-  final TRes Function(Fragment$VisitHistory) _then;
+  final TRes Function(Fragment_VisitHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -724,36 +724,36 @@ class _CopyWithImpl$Fragment$VisitHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$VisitHistory(
+      _then(Fragment_VisitHistory(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$VisitHistory<TRes>
-    implements CopyWith$Fragment$VisitHistory<TRes> {
-  _CopyWithStubImpl$Fragment$VisitHistory(this._res);
+class _CopyWithStubImpl_Fragment_VisitHistory<TRes>
+    implements CopyWith_Fragment_VisitHistory<TRes> {
+  _CopyWithStubImpl_Fragment_VisitHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionVisitHistory = FragmentDefinitionNode(
@@ -806,27 +806,27 @@ const documentNodeFragmentVisitHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$KodasHistory {
-  Fragment$KodasHistory({
+class Fragment_KodasHistory {
+  Fragment_KodasHistory({
     this.time,
     required this.user,
     this.$__typename = 'HistoryKodasHistory',
   });
 
-  factory Fragment$KodasHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_KodasHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$KodasHistory(
+    return Fragment_KodasHistory(
       time: l$time == null ? null : dateFromString(l$time),
-      user: Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime? time;
 
-  final Fragment$User user;
+  final Fragment_User user;
 
   final String $__typename;
 
@@ -858,7 +858,7 @@ class Fragment$KodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$KodasHistory) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_KodasHistory) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -880,41 +880,41 @@ class Fragment$KodasHistory {
   }
 }
 
-extension UtilityExtension$Fragment$KodasHistory on Fragment$KodasHistory {
-  CopyWith$Fragment$KodasHistory<Fragment$KodasHistory> get copyWith =>
-      CopyWith$Fragment$KodasHistory(
+extension UtilityExtension_Fragment_KodasHistory on Fragment_KodasHistory {
+  CopyWith_Fragment_KodasHistory<Fragment_KodasHistory> get copyWith =>
+      CopyWith_Fragment_KodasHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$KodasHistory<TRes> {
-  factory CopyWith$Fragment$KodasHistory(
-    Fragment$KodasHistory instance,
-    TRes Function(Fragment$KodasHistory) then,
-  ) = _CopyWithImpl$Fragment$KodasHistory;
+abstract class CopyWith_Fragment_KodasHistory<TRes> {
+  factory CopyWith_Fragment_KodasHistory(
+    Fragment_KodasHistory instance,
+    TRes Function(Fragment_KodasHistory) then,
+  ) = _CopyWithImpl_Fragment_KodasHistory;
 
-  factory CopyWith$Fragment$KodasHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$KodasHistory;
+  factory CopyWith_Fragment_KodasHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_KodasHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$KodasHistory<TRes>
-    implements CopyWith$Fragment$KodasHistory<TRes> {
-  _CopyWithImpl$Fragment$KodasHistory(
+class _CopyWithImpl_Fragment_KodasHistory<TRes>
+    implements CopyWith_Fragment_KodasHistory<TRes> {
+  _CopyWithImpl_Fragment_KodasHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$KodasHistory _instance;
+  final Fragment_KodasHistory _instance;
 
-  final TRes Function(Fragment$KodasHistory) _then;
+  final TRes Function(Fragment_KodasHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -923,34 +923,34 @@ class _CopyWithImpl$Fragment$KodasHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$KodasHistory(
+      _then(Fragment_KodasHistory(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         user: user == _undefined || user == null
             ? _instance.user
-            : (user as Fragment$User),
+            : (user as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
-    return CopyWith$Fragment$User(local$user, (e) => call(user: e));
+    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$KodasHistory<TRes>
-    implements CopyWith$Fragment$KodasHistory<TRes> {
-  _CopyWithStubImpl$Fragment$KodasHistory(this._res);
+class _CopyWithStubImpl_Fragment_KodasHistory<TRes>
+    implements CopyWith_Fragment_KodasHistory<TRes> {
+  _CopyWithStubImpl_Fragment_KodasHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionKodasHistory = FragmentDefinitionNode(
@@ -1003,27 +1003,27 @@ const documentNodeFragmentKodasHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Fragment$ConfessionHistory {
-  Fragment$ConfessionHistory({
+class Fragment_ConfessionHistory {
+  Fragment_ConfessionHistory({
     this.time,
     required this.user,
     this.$__typename = 'HistoryConfessionHistory',
   });
 
-  factory Fragment$ConfessionHistory.fromJson(Map<String, dynamic> json) {
+  factory Fragment_ConfessionHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Fragment$ConfessionHistory(
+    return Fragment_ConfessionHistory(
       time: l$time == null ? null : dateFromString(l$time),
-      user: Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime? time;
 
-  final Fragment$User user;
+  final Fragment_User user;
 
   final String $__typename;
 
@@ -1055,7 +1055,7 @@ class Fragment$ConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ConfessionHistory) ||
+    if (!(other is Fragment_ConfessionHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1078,42 +1078,42 @@ class Fragment$ConfessionHistory {
   }
 }
 
-extension UtilityExtension$Fragment$ConfessionHistory
-    on Fragment$ConfessionHistory {
-  CopyWith$Fragment$ConfessionHistory<Fragment$ConfessionHistory>
-      get copyWith => CopyWith$Fragment$ConfessionHistory(
+extension UtilityExtension_Fragment_ConfessionHistory
+    on Fragment_ConfessionHistory {
+  CopyWith_Fragment_ConfessionHistory<Fragment_ConfessionHistory>
+      get copyWith => CopyWith_Fragment_ConfessionHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$ConfessionHistory<TRes> {
-  factory CopyWith$Fragment$ConfessionHistory(
-    Fragment$ConfessionHistory instance,
-    TRes Function(Fragment$ConfessionHistory) then,
-  ) = _CopyWithImpl$Fragment$ConfessionHistory;
+abstract class CopyWith_Fragment_ConfessionHistory<TRes> {
+  factory CopyWith_Fragment_ConfessionHistory(
+    Fragment_ConfessionHistory instance,
+    TRes Function(Fragment_ConfessionHistory) then,
+  ) = _CopyWithImpl_Fragment_ConfessionHistory;
 
-  factory CopyWith$Fragment$ConfessionHistory.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$ConfessionHistory;
+  factory CopyWith_Fragment_ConfessionHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_ConfessionHistory;
 
   TRes call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Fragment$ConfessionHistory<TRes>
-    implements CopyWith$Fragment$ConfessionHistory<TRes> {
-  _CopyWithImpl$Fragment$ConfessionHistory(
+class _CopyWithImpl_Fragment_ConfessionHistory<TRes>
+    implements CopyWith_Fragment_ConfessionHistory<TRes> {
+  _CopyWithImpl_Fragment_ConfessionHistory(
     this._instance,
     this._then,
   );
 
-  final Fragment$ConfessionHistory _instance;
+  final Fragment_ConfessionHistory _instance;
 
-  final TRes Function(Fragment$ConfessionHistory) _then;
+  final TRes Function(Fragment_ConfessionHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1122,34 +1122,34 @@ class _CopyWithImpl$Fragment$ConfessionHistory<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$ConfessionHistory(
+      _then(Fragment_ConfessionHistory(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         user: user == _undefined || user == null
             ? _instance.user
-            : (user as Fragment$User),
+            : (user as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
-    return CopyWith$Fragment$User(local$user, (e) => call(user: e));
+    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$ConfessionHistory<TRes>
-    implements CopyWith$Fragment$ConfessionHistory<TRes> {
-  _CopyWithStubImpl$Fragment$ConfessionHistory(this._res);
+class _CopyWithStubImpl_Fragment_ConfessionHistory<TRes>
+    implements CopyWith_Fragment_ConfessionHistory<TRes> {
+  _CopyWithStubImpl_Fragment_ConfessionHistory(this._res);
 
   TRes _res;
 
   call({
     DateTime? time,
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionConfessionHistory = FragmentDefinitionNode(

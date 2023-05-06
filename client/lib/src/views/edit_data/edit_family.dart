@@ -202,7 +202,7 @@ class _EditFamilyState extends State<EditFamily> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.families
-                                    .paginateFamilies(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'عائلات الأب والأم',
                               onChanged: (value) =>
@@ -259,7 +259,7 @@ class _EditFamilyState extends State<EditFamily> {
                                   ViewableObjectListController(
                                 objectsPaginatableStream: DatabaseService
                                     .I.families
-                                    .paginateFamilies(searchQuery: s),
+                                    .streamAll(searchQuery: s),
                               ),
                               labelText: 'عائلات الأبناء',
                               onChanged: (value) =>

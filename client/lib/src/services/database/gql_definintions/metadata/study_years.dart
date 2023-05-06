@@ -1,16 +1,16 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'study_years/__generated__/queries.gql.dart';
 import 'study_years/__generated__/subscriptions.gql.dart';
 
-class StudyYearsDAO extends DAOBase {
+class StudyYearsDAO extends DAOBase<StudyYear> {
   const StudyYearsDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<StudyYear> paginateStudyYears({
+  @override
+  GQLPaginatableStream<StudyYear> streamAll({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<StudyYear>(
@@ -23,8 +23,8 @@ class StudyYearsDAO extends DAOBase {
             variables: graphQLClient
                 .getDefaultSearchVars(
                   event,
-                  Variables$Subscription$watchAllStudyYears.new,
-                  Input$StudyYearsBoolExp.new,
+                  Variables_Subscription_watchAllStudyYears.new,
+                  Input_StudyYearsBoolExp.new,
                 )
                 .toJson(),
             parserFn: db.parser.singleListParser(StudyYear.fromJson),
@@ -39,7 +39,7 @@ class StudyYearsDAO extends DAOBase {
       QueryOptions(
         document: documentNodeQuerygetStudyYearName,
         operationName: 'getStudyYearName',
-        variables: Variables$Query$getStudyYearName(order: order).toJson(),
+        variables: Variables_Query_getStudyYearName(order: order).toJson(),
         parserFn: db.parser.singleParser(StudyYear.fromJson),
       ),
     );

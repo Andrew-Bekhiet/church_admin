@@ -1,16 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'services/__generated__/subscriptions.gql.dart';
 
-class ServicesDAO extends DAOBase {
+class ServicesDAO extends DAOBase<Service> {
   const ServicesDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Service> paginateServices({
+  @override
+  GQLPaginatableStream<Service> streamAll({
     Stream<String?>? searchQuery,
+    List<Input_ServicesBoolExp>? where,
+    List<Input_GroupsBoolExp>? groupsWhere,
+    List<Input_ClassesBoolExp>? classesWhere,
   }) {
     return GQLPaginatableStream<Service>(
       searchQuery: searchQuery,
@@ -21,36 +24,37 @@ class ServicesDAO extends DAOBase {
         final lastSearch = event.lastSearch;
 
         final bool nameSearch = search != null && search.isNotEmpty;
-        final nameSearchExp = Input$StringComparisonExp($_ilike: '%$search%');
+        final nameSearchExp = Input_StringComparisonExp($_ilike: '%$search%');
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllServices,
             operationName: 'watchAllServices',
-            variables: Variables$Subscription$watchAllServices(
+            variables: Variables_Subscription_watchAllServices(
               limit: instance.limit + 1,
               where: [
+                if (where != null) ...where,
                 if (nameSearch)
-                  Input$ServicesBoolExp(
+                  Input_ServicesBoolExp(
                     $_or: [
-                      Input$ServicesBoolExp(
+                      Input_ServicesBoolExp(
                         name: nameSearchExp,
                       ),
-                      Input$ServicesBoolExp(
-                        classes: Input$ClassesBoolExp(
+                      Input_ServicesBoolExp(
+                        classes: Input_ClassesBoolExp(
                           name: nameSearchExp,
                         ),
                       ),
-                      Input$ServicesBoolExp(
-                        groups: Input$GroupsBoolExp(
+                      Input_ServicesBoolExp(
+                        groups: Input_GroupsBoolExp(
                           name: nameSearchExp,
                         ),
                       ),
                     ],
                   ),
                 if (lastSearch == search && offset > 0)
-                  Input$ServicesBoolExp(
-                    name: Input$StringComparisonExp(
+                  Input_ServicesBoolExp(
+                    name: Input_StringComparisonExp(
                       $_gt: instance
                           .currentValue[(offset - 1) * instance.limit +
                               instance.limit -
@@ -60,14 +64,16 @@ class ServicesDAO extends DAOBase {
                   ),
               ],
               classesWhere: [
+                if (classesWhere != null) ...classesWhere,
                 if (nameSearch)
-                  Input$ClassesBoolExp(
+                  Input_ClassesBoolExp(
                     name: nameSearchExp,
                   )
               ],
               groupsWhere: [
+                if (groupsWhere != null) ...groupsWhere,
                 if (nameSearch)
-                  Input$GroupsBoolExp(
+                  Input_GroupsBoolExp(
                     name: nameSearchExp,
                   ),
               ],
@@ -79,8 +85,8 @@ class ServicesDAO extends DAOBase {
     );
   }
 
-  Stream<Service?> watchService({
-    required String serviceId,
+  Stream<Service?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient
         .subscribe(
@@ -88,8 +94,7 @@ class ServicesDAO extends DAOBase {
             document: documentNodeSubscriptionwatchService,
             operationName: 'watchService',
             variables:
-                Variables$Subscription$watchService(id: serviceId.toUuid())
-                    .toJson(),
+                Variables_Subscription_watchService(id: id.toUuid()).toJson(),
             parserFn: db.parser.singleOrNullParser(Service.fromJson),
           ),
         )

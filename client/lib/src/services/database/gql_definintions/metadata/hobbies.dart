@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'hobbies/__generated__/subscriptions.gql.dart';
 
-class HobbiesDAO extends DAOBase {
+class HobbiesDAO extends DAOBase<Hobby> {
   const HobbiesDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Hobby> paginateHobbies({
+  @override
+  GQLPaginatableStream<Hobby> streamAll({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<Hobby>(
@@ -22,8 +22,8 @@ class HobbiesDAO extends DAOBase {
             variables: graphQLClient
                 .getDefaultSearchVars(
                   event,
-                  Variables$Subscription$watchAllHobbies.new,
-                  Input$HobbiesBoolExp.new,
+                  Variables_Subscription_watchAllHobbies.new,
+                  Input_HobbiesBoolExp.new,
                 )
                 .toJson(),
             parserFn: db.parser.singleListParser(Hobby.fromJson),

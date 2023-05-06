@@ -4,50 +4,50 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllStreets {
-  factory Variables$Subscription$watchAllStreets({
-    List<Input$StreetsBoolExp>? where,
-    List<Input$StreetsOrderBy>? orderBy,
+class Variables_Subscription_watchAllStreets {
+  factory Variables_Subscription_watchAllStreets({
+    List<Input_StreetsBoolExp>? where,
+    List<Input_StreetsOrderBy>? orderBy,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllStreets._({
+      Variables_Subscription_watchAllStreets._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllStreets._(this._$data);
+  Variables_Subscription_watchAllStreets._(this._$data);
 
-  factory Variables$Subscription$watchAllStreets.fromJson(
+  factory Variables_Subscription_watchAllStreets.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$StreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input$StreetsOrderBy.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_StreetsOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllStreets._(result$data);
+    return Variables_Subscription_watchAllStreets._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$StreetsBoolExp>? get where =>
-      (_$data['where'] as List<Input$StreetsBoolExp>?);
-  List<Input$StreetsOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$StreetsOrderBy>?);
+  List<Input_StreetsBoolExp>? get where =>
+      (_$data['where'] as List<Input_StreetsBoolExp>?);
+  List<Input_StreetsOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_StreetsOrderBy>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -66,9 +66,9 @@ class Variables$Subscription$watchAllStreets {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllStreets<
-          Variables$Subscription$watchAllStreets>
-      get copyWith => CopyWith$Variables$Subscription$watchAllStreets(
+  CopyWith_Variables_Subscription_watchAllStreets<
+          Variables_Subscription_watchAllStreets>
+      get copyWith => CopyWith_Variables_Subscription_watchAllStreets(
             this,
             (i) => i,
           );
@@ -77,7 +77,7 @@ class Variables$Subscription$watchAllStreets {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllStreets) ||
+    if (!(other is Variables_Subscription_watchAllStreets) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -151,32 +151,32 @@ class Variables$Subscription$watchAllStreets {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllStreets<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllStreets(
-    Variables$Subscription$watchAllStreets instance,
-    TRes Function(Variables$Subscription$watchAllStreets) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllStreets;
+abstract class CopyWith_Variables_Subscription_watchAllStreets<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllStreets(
+    Variables_Subscription_watchAllStreets instance,
+    TRes Function(Variables_Subscription_watchAllStreets) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllStreets;
 
-  factory CopyWith$Variables$Subscription$watchAllStreets.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllStreets;
+  factory CopyWith_Variables_Subscription_watchAllStreets.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllStreets;
 
   TRes call({
-    List<Input$StreetsBoolExp>? where,
-    List<Input$StreetsOrderBy>? orderBy,
+    List<Input_StreetsBoolExp>? where,
+    List<Input_StreetsOrderBy>? orderBy,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllStreets<TRes>
-    implements CopyWith$Variables$Subscription$watchAllStreets<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllStreets(
+class _CopyWithImpl_Variables_Subscription_watchAllStreets<TRes>
+    implements CopyWith_Variables_Subscription_watchAllStreets<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllStreets(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllStreets _instance;
+  final Variables_Subscription_watchAllStreets _instance;
 
-  final TRes Function(Variables$Subscription$watchAllStreets) _then;
+  final TRes Function(Variables_Subscription_watchAllStreets) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -185,43 +185,43 @@ class _CopyWithImpl$Variables$Subscription$watchAllStreets<TRes>
     Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllStreets._({
+      _then(Variables_Subscription_watchAllStreets._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$StreetsBoolExp>?),
+          'where': (where as List<Input_StreetsBoolExp>?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$StreetsOrderBy>?),
+          'orderBy': (orderBy as List<Input_StreetsOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllStreets<TRes>
-    implements CopyWith$Variables$Subscription$watchAllStreets<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllStreets(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllStreets<TRes>
+    implements CopyWith_Variables_Subscription_watchAllStreets<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllStreets(this._res);
 
   TRes _res;
 
   call({
-    List<Input$StreetsBoolExp>? where,
-    List<Input$StreetsOrderBy>? orderBy,
+    List<Input_StreetsBoolExp>? where,
+    List<Input_StreetsOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllStreets {
-  Subscription$watchAllStreets({required this.streets});
+class Subscription_watchAllStreets {
+  Subscription_watchAllStreets({required this.streets});
 
-  factory Subscription$watchAllStreets.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllStreets.fromJson(Map<String, dynamic> json) {
     final l$streets = json['streets'];
-    return Subscription$watchAllStreets(
+    return Subscription_watchAllStreets(
         streets: (l$streets as List<dynamic>)
-            .map((e) => Subscription$watchAllStreets$streets.fromJson(
+            .map((e) => Subscription_watchAllStreets_streets.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllStreets$streets> streets;
+  final List<Subscription_watchAllStreets_streets> streets;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -241,7 +241,7 @@ class Subscription$watchAllStreets {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllStreets) ||
+    if (!(other is Subscription_watchAllStreets) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -261,72 +261,72 @@ class Subscription$watchAllStreets {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllStreets
-    on Subscription$watchAllStreets {
-  CopyWith$Subscription$watchAllStreets<Subscription$watchAllStreets>
-      get copyWith => CopyWith$Subscription$watchAllStreets(
+extension UtilityExtension_Subscription_watchAllStreets
+    on Subscription_watchAllStreets {
+  CopyWith_Subscription_watchAllStreets<Subscription_watchAllStreets>
+      get copyWith => CopyWith_Subscription_watchAllStreets(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllStreets<TRes> {
-  factory CopyWith$Subscription$watchAllStreets(
-    Subscription$watchAllStreets instance,
-    TRes Function(Subscription$watchAllStreets) then,
-  ) = _CopyWithImpl$Subscription$watchAllStreets;
+abstract class CopyWith_Subscription_watchAllStreets<TRes> {
+  factory CopyWith_Subscription_watchAllStreets(
+    Subscription_watchAllStreets instance,
+    TRes Function(Subscription_watchAllStreets) then,
+  ) = _CopyWithImpl_Subscription_watchAllStreets;
 
-  factory CopyWith$Subscription$watchAllStreets.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllStreets;
+  factory CopyWith_Subscription_watchAllStreets.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllStreets;
 
-  TRes call({List<Subscription$watchAllStreets$streets>? streets});
+  TRes call({List<Subscription_watchAllStreets_streets>? streets});
   TRes streets(
-      Iterable<Subscription$watchAllStreets$streets> Function(
+      Iterable<Subscription_watchAllStreets_streets> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllStreets$streets<
-                      Subscription$watchAllStreets$streets>>)
+                  CopyWith_Subscription_watchAllStreets_streets<
+                      Subscription_watchAllStreets_streets>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllStreets<TRes>
-    implements CopyWith$Subscription$watchAllStreets<TRes> {
-  _CopyWithImpl$Subscription$watchAllStreets(
+class _CopyWithImpl_Subscription_watchAllStreets<TRes>
+    implements CopyWith_Subscription_watchAllStreets<TRes> {
+  _CopyWithImpl_Subscription_watchAllStreets(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllStreets _instance;
+  final Subscription_watchAllStreets _instance;
 
-  final TRes Function(Subscription$watchAllStreets) _then;
+  final TRes Function(Subscription_watchAllStreets) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? streets = _undefined}) =>
-      _then(Subscription$watchAllStreets(
+      _then(Subscription_watchAllStreets(
           streets: streets == _undefined || streets == null
               ? _instance.streets
-              : (streets as List<Subscription$watchAllStreets$streets>)));
+              : (streets as List<Subscription_watchAllStreets_streets>)));
   TRes streets(
-          Iterable<Subscription$watchAllStreets$streets> Function(
+          Iterable<Subscription_watchAllStreets_streets> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllStreets$streets<
-                          Subscription$watchAllStreets$streets>>)
+                      CopyWith_Subscription_watchAllStreets_streets<
+                          Subscription_watchAllStreets_streets>>)
               _fn) =>
       call(
           streets: _fn(_instance.streets
-              .map((e) => CopyWith$Subscription$watchAllStreets$streets(
+              .map((e) => CopyWith_Subscription_watchAllStreets_streets(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllStreets<TRes>
-    implements CopyWith$Subscription$watchAllStreets<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllStreets(this._res);
+class _CopyWithStubImpl_Subscription_watchAllStreets<TRes>
+    implements CopyWith_Subscription_watchAllStreets<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllStreets(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllStreets$streets>? streets}) => _res;
+  call({List<Subscription_watchAllStreets_streets>? streets}) => _res;
   streets(_fn) => _res;
 }
 
@@ -427,9 +427,9 @@ const documentNodeSubscriptionwatchAllStreets = DocumentNode(definitions: [
   fragmentDefinitionStreetNoPhoto,
 ]);
 
-class Subscription$watchAllStreets$streets
-    implements Fragment$Street, Fragment$StreetNoPhoto {
-  Subscription$watchAllStreets$streets({
+class Subscription_watchAllStreets_streets
+    implements Fragment_Street, Fragment_StreetNoPhoto {
+  Subscription_watchAllStreets_streets({
     required this.id,
     required this.name,
     this.color,
@@ -438,7 +438,7 @@ class Subscription$watchAllStreets$streets
     this.line,
   });
 
-  factory Subscription$watchAllStreets$streets.fromJson(
+  factory Subscription_watchAllStreets_streets.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -446,7 +446,7 @@ class Subscription$watchAllStreets$streets
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$line = json['line'];
-    return Subscription$watchAllStreets$streets(
+    return Subscription_watchAllStreets_streets(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -510,7 +510,7 @@ class Subscription$watchAllStreets$streets
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllStreets$streets) ||
+    if (!(other is Subscription_watchAllStreets_streets) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -548,24 +548,24 @@ class Subscription$watchAllStreets$streets
   }
 }
 
-extension UtilityExtension$Subscription$watchAllStreets$streets
-    on Subscription$watchAllStreets$streets {
-  CopyWith$Subscription$watchAllStreets$streets<
-          Subscription$watchAllStreets$streets>
-      get copyWith => CopyWith$Subscription$watchAllStreets$streets(
+extension UtilityExtension_Subscription_watchAllStreets_streets
+    on Subscription_watchAllStreets_streets {
+  CopyWith_Subscription_watchAllStreets_streets<
+          Subscription_watchAllStreets_streets>
+      get copyWith => CopyWith_Subscription_watchAllStreets_streets(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllStreets$streets<TRes> {
-  factory CopyWith$Subscription$watchAllStreets$streets(
-    Subscription$watchAllStreets$streets instance,
-    TRes Function(Subscription$watchAllStreets$streets) then,
-  ) = _CopyWithImpl$Subscription$watchAllStreets$streets;
+abstract class CopyWith_Subscription_watchAllStreets_streets<TRes> {
+  factory CopyWith_Subscription_watchAllStreets_streets(
+    Subscription_watchAllStreets_streets instance,
+    TRes Function(Subscription_watchAllStreets_streets) then,
+  ) = _CopyWithImpl_Subscription_watchAllStreets_streets;
 
-  factory CopyWith$Subscription$watchAllStreets$streets.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllStreets$streets;
+  factory CopyWith_Subscription_watchAllStreets_streets.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllStreets_streets;
 
   TRes call({
     UuidValue? id,
@@ -577,16 +577,16 @@ abstract class CopyWith$Subscription$watchAllStreets$streets<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllStreets$streets<TRes>
-    implements CopyWith$Subscription$watchAllStreets$streets<TRes> {
-  _CopyWithImpl$Subscription$watchAllStreets$streets(
+class _CopyWithImpl_Subscription_watchAllStreets_streets<TRes>
+    implements CopyWith_Subscription_watchAllStreets_streets<TRes> {
+  _CopyWithImpl_Subscription_watchAllStreets_streets(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllStreets$streets _instance;
+  final Subscription_watchAllStreets_streets _instance;
 
-  final TRes Function(Subscription$watchAllStreets$streets) _then;
+  final TRes Function(Subscription_watchAllStreets_streets) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -598,7 +598,7 @@ class _CopyWithImpl$Subscription$watchAllStreets$streets<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? line = _undefined,
   }) =>
-      _then(Subscription$watchAllStreets$streets(
+      _then(Subscription_watchAllStreets_streets(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -616,9 +616,9 @@ class _CopyWithImpl$Subscription$watchAllStreets$streets<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllStreets$streets<TRes>
-    implements CopyWith$Subscription$watchAllStreets$streets<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllStreets$streets(this._res);
+class _CopyWithStubImpl_Subscription_watchAllStreets_streets<TRes>
+    implements CopyWith_Subscription_watchAllStreets_streets<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllStreets_streets(this._res);
 
   TRes _res;
 
@@ -633,20 +633,20 @@ class _CopyWithStubImpl$Subscription$watchAllStreets$streets<TRes>
       _res;
 }
 
-class Variables$Subscription$watchStreet {
-  factory Variables$Subscription$watchStreet({required UuidValue id}) =>
-      Variables$Subscription$watchStreet._({
+class Variables_Subscription_watchStreet {
+  factory Variables_Subscription_watchStreet({required UuidValue id}) =>
+      Variables_Subscription_watchStreet._({
         r'id': id,
       });
 
-  Variables$Subscription$watchStreet._(this._$data);
+  Variables_Subscription_watchStreet._(this._$data);
 
-  factory Variables$Subscription$watchStreet.fromJson(
+  factory Variables_Subscription_watchStreet.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
-    return Variables$Subscription$watchStreet._(result$data);
+    return Variables_Subscription_watchStreet._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -659,9 +659,9 @@ class Variables$Subscription$watchStreet {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchStreet<
-          Variables$Subscription$watchStreet>
-      get copyWith => CopyWith$Variables$Subscription$watchStreet(
+  CopyWith_Variables_Subscription_watchStreet<
+          Variables_Subscription_watchStreet>
+      get copyWith => CopyWith_Variables_Subscription_watchStreet(
             this,
             (i) => i,
           );
@@ -670,7 +670,7 @@ class Variables$Subscription$watchStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchStreet) ||
+    if (!(other is Variables_Subscription_watchStreet) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -689,60 +689,60 @@ class Variables$Subscription$watchStreet {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchStreet<TRes> {
-  factory CopyWith$Variables$Subscription$watchStreet(
-    Variables$Subscription$watchStreet instance,
-    TRes Function(Variables$Subscription$watchStreet) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchStreet;
+abstract class CopyWith_Variables_Subscription_watchStreet<TRes> {
+  factory CopyWith_Variables_Subscription_watchStreet(
+    Variables_Subscription_watchStreet instance,
+    TRes Function(Variables_Subscription_watchStreet) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchStreet;
 
-  factory CopyWith$Variables$Subscription$watchStreet.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchStreet;
+  factory CopyWith_Variables_Subscription_watchStreet.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchStreet;
 
   TRes call({UuidValue? id});
 }
 
-class _CopyWithImpl$Variables$Subscription$watchStreet<TRes>
-    implements CopyWith$Variables$Subscription$watchStreet<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchStreet(
+class _CopyWithImpl_Variables_Subscription_watchStreet<TRes>
+    implements CopyWith_Variables_Subscription_watchStreet<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchStreet(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchStreet _instance;
+  final Variables_Subscription_watchStreet _instance;
 
-  final TRes Function(Variables$Subscription$watchStreet) _then;
+  final TRes Function(Variables_Subscription_watchStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
-      _then(Variables$Subscription$watchStreet._({
+      _then(Variables_Subscription_watchStreet._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchStreet<TRes>
-    implements CopyWith$Variables$Subscription$watchStreet<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchStreet(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchStreet<TRes>
+    implements CopyWith_Variables_Subscription_watchStreet<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchStreet(this._res);
 
   TRes _res;
 
   call({UuidValue? id}) => _res;
 }
 
-class Subscription$watchStreet {
-  Subscription$watchStreet({this.streetsByPk});
+class Subscription_watchStreet {
+  Subscription_watchStreet({this.streetsByPk});
 
-  factory Subscription$watchStreet.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchStreet.fromJson(Map<String, dynamic> json) {
     final l$streetsByPk = json['streetsByPk'];
-    return Subscription$watchStreet(
+    return Subscription_watchStreet(
         streetsByPk: l$streetsByPk == null
             ? null
-            : Subscription$watchStreet$streetsByPk.fromJson(
+            : Subscription_watchStreet_streetsByPk.fromJson(
                 (l$streetsByPk as Map<String, dynamic>)));
   }
 
-  final Subscription$watchStreet$streetsByPk? streetsByPk;
+  final Subscription_watchStreet_streetsByPk? streetsByPk;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -762,7 +762,7 @@ class Subscription$watchStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchStreet) ||
+    if (!(other is Subscription_watchStreet) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -775,64 +775,64 @@ class Subscription$watchStreet {
   }
 }
 
-extension UtilityExtension$Subscription$watchStreet
-    on Subscription$watchStreet {
-  CopyWith$Subscription$watchStreet<Subscription$watchStreet> get copyWith =>
-      CopyWith$Subscription$watchStreet(
+extension UtilityExtension_Subscription_watchStreet
+    on Subscription_watchStreet {
+  CopyWith_Subscription_watchStreet<Subscription_watchStreet> get copyWith =>
+      CopyWith_Subscription_watchStreet(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchStreet<TRes> {
-  factory CopyWith$Subscription$watchStreet(
-    Subscription$watchStreet instance,
-    TRes Function(Subscription$watchStreet) then,
-  ) = _CopyWithImpl$Subscription$watchStreet;
+abstract class CopyWith_Subscription_watchStreet<TRes> {
+  factory CopyWith_Subscription_watchStreet(
+    Subscription_watchStreet instance,
+    TRes Function(Subscription_watchStreet) then,
+  ) = _CopyWithImpl_Subscription_watchStreet;
 
-  factory CopyWith$Subscription$watchStreet.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchStreet;
+  factory CopyWith_Subscription_watchStreet.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreet;
 
-  TRes call({Subscription$watchStreet$streetsByPk? streetsByPk});
-  CopyWith$Subscription$watchStreet$streetsByPk<TRes> get streetsByPk;
+  TRes call({Subscription_watchStreet_streetsByPk? streetsByPk});
+  CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk;
 }
 
-class _CopyWithImpl$Subscription$watchStreet<TRes>
-    implements CopyWith$Subscription$watchStreet<TRes> {
-  _CopyWithImpl$Subscription$watchStreet(
+class _CopyWithImpl_Subscription_watchStreet<TRes>
+    implements CopyWith_Subscription_watchStreet<TRes> {
+  _CopyWithImpl_Subscription_watchStreet(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchStreet _instance;
+  final Subscription_watchStreet _instance;
 
-  final TRes Function(Subscription$watchStreet) _then;
+  final TRes Function(Subscription_watchStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? streetsByPk = _undefined}) =>
-      _then(Subscription$watchStreet(
+      _then(Subscription_watchStreet(
           streetsByPk: streetsByPk == _undefined
               ? _instance.streetsByPk
-              : (streetsByPk as Subscription$watchStreet$streetsByPk?)));
-  CopyWith$Subscription$watchStreet$streetsByPk<TRes> get streetsByPk {
+              : (streetsByPk as Subscription_watchStreet_streetsByPk?)));
+  CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk {
     final local$streetsByPk = _instance.streetsByPk;
     return local$streetsByPk == null
-        ? CopyWith$Subscription$watchStreet$streetsByPk.stub(_then(_instance))
-        : CopyWith$Subscription$watchStreet$streetsByPk(
+        ? CopyWith_Subscription_watchStreet_streetsByPk.stub(_then(_instance))
+        : CopyWith_Subscription_watchStreet_streetsByPk(
             local$streetsByPk, (e) => call(streetsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchStreet<TRes>
-    implements CopyWith$Subscription$watchStreet<TRes> {
-  _CopyWithStubImpl$Subscription$watchStreet(this._res);
+class _CopyWithStubImpl_Subscription_watchStreet<TRes>
+    implements CopyWith_Subscription_watchStreet<TRes> {
+  _CopyWithStubImpl_Subscription_watchStreet(this._res);
 
   TRes _res;
 
-  call({Subscription$watchStreet$streetsByPk? streetsByPk}) => _res;
-  CopyWith$Subscription$watchStreet$streetsByPk<TRes> get streetsByPk =>
-      CopyWith$Subscription$watchStreet$streetsByPk.stub(_res);
+  call({Subscription_watchStreet_streetsByPk? streetsByPk}) => _res;
+  CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk =>
+      CopyWith_Subscription_watchStreet_streetsByPk.stub(_res);
 }
 
 const documentNodeSubscriptionwatchStreet = DocumentNode(definitions: [
@@ -927,9 +927,9 @@ const documentNodeSubscriptionwatchStreet = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
 ]);
 
-class Subscription$watchStreet$streetsByPk
-    implements Fragment$Street, Fragment$StreetNoPhoto {
-  Subscription$watchStreet$streetsByPk({
+class Subscription_watchStreet_streetsByPk
+    implements Fragment_Street, Fragment_StreetNoPhoto {
+  Subscription_watchStreet_streetsByPk({
     required this.id,
     required this.name,
     this.color,
@@ -940,7 +940,7 @@ class Subscription$watchStreet$streetsByPk
     this.lastEdit,
   });
 
-  factory Subscription$watchStreet$streetsByPk.fromJson(
+  factory Subscription_watchStreet_streetsByPk.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -950,7 +950,7 @@ class Subscription$watchStreet$streetsByPk
     final l$areas = json['areas'];
     final l$line = json['line'];
     final l$lastEdit = json['lastEdit'];
-    return Subscription$watchStreet$streetsByPk(
+    return Subscription_watchStreet_streetsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -958,7 +958,7 @@ class Subscription$watchStreet$streetsByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment$Area.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
       line: (l$line as Map<String, dynamic>?),
       lastEdit: (l$lastEdit as Json?),
@@ -975,7 +975,7 @@ class Subscription$watchStreet$streetsByPk
 
   final DateTime? photoUpdatedAt;
 
-  final List<Fragment$Area>? areas;
+  final List<Fragment_Area>? areas;
 
   final Map<String, dynamic>? line;
 
@@ -1030,7 +1030,7 @@ class Subscription$watchStreet$streetsByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchStreet$streetsByPk) ||
+    if (!(other is Subscription_watchStreet_streetsByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1089,24 +1089,24 @@ class Subscription$watchStreet$streetsByPk
   }
 }
 
-extension UtilityExtension$Subscription$watchStreet$streetsByPk
-    on Subscription$watchStreet$streetsByPk {
-  CopyWith$Subscription$watchStreet$streetsByPk<
-          Subscription$watchStreet$streetsByPk>
-      get copyWith => CopyWith$Subscription$watchStreet$streetsByPk(
+extension UtilityExtension_Subscription_watchStreet_streetsByPk
+    on Subscription_watchStreet_streetsByPk {
+  CopyWith_Subscription_watchStreet_streetsByPk<
+          Subscription_watchStreet_streetsByPk>
+      get copyWith => CopyWith_Subscription_watchStreet_streetsByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchStreet$streetsByPk<TRes> {
-  factory CopyWith$Subscription$watchStreet$streetsByPk(
-    Subscription$watchStreet$streetsByPk instance,
-    TRes Function(Subscription$watchStreet$streetsByPk) then,
-  ) = _CopyWithImpl$Subscription$watchStreet$streetsByPk;
+abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
+  factory CopyWith_Subscription_watchStreet_streetsByPk(
+    Subscription_watchStreet_streetsByPk instance,
+    TRes Function(Subscription_watchStreet_streetsByPk) then,
+  ) = _CopyWithImpl_Subscription_watchStreet_streetsByPk;
 
-  factory CopyWith$Subscription$watchStreet$streetsByPk.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchStreet$streetsByPk;
+  factory CopyWith_Subscription_watchStreet_streetsByPk.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreet_streetsByPk;
 
   TRes call({
     UuidValue? id,
@@ -1114,26 +1114,26 @@ abstract class CopyWith$Subscription$watchStreet$streetsByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$Area>? areas,
+    List<Fragment_Area>? areas,
     Map<String, dynamic>? line,
     Json? lastEdit,
   });
   TRes areas(
-      Iterable<Fragment$Area>? Function(
-              Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+      Iterable<Fragment_Area>? Function(
+              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchStreet$streetsByPk<TRes>
-    implements CopyWith$Subscription$watchStreet$streetsByPk<TRes> {
-  _CopyWithImpl$Subscription$watchStreet$streetsByPk(
+class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
+    implements CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
+  _CopyWithImpl_Subscription_watchStreet_streetsByPk(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchStreet$streetsByPk _instance;
+  final Subscription_watchStreet_streetsByPk _instance;
 
-  final TRes Function(Subscription$watchStreet$streetsByPk) _then;
+  final TRes Function(Subscription_watchStreet_streetsByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1147,7 +1147,7 @@ class _CopyWithImpl$Subscription$watchStreet$streetsByPk<TRes>
     Object? line = _undefined,
     Object? lastEdit = _undefined,
   }) =>
-      _then(Subscription$watchStreet$streetsByPk(
+      _then(Subscription_watchStreet_streetsByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1161,7 +1161,7 @@ class _CopyWithImpl$Subscription$watchStreet$streetsByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         areas: areas == _undefined
             ? _instance.areas
-            : (areas as List<Fragment$Area>?),
+            : (areas as List<Fragment_Area>?),
         line: line == _undefined
             ? _instance.line
             : (line as Map<String, dynamic>?),
@@ -1169,19 +1169,19 @@ class _CopyWithImpl$Subscription$watchStreet$streetsByPk<TRes>
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
       ));
   TRes areas(
-          Iterable<Fragment$Area>? Function(
-                  Iterable<CopyWith$Fragment$Area<Fragment$Area>>?)
+          Iterable<Fragment_Area>? Function(
+                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
               _fn) =>
       call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith$Fragment$Area(
+          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
                 e,
                 (i) => i,
               )))?.toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchStreet$streetsByPk<TRes>
-    implements CopyWith$Subscription$watchStreet$streetsByPk<TRes> {
-  _CopyWithStubImpl$Subscription$watchStreet$streetsByPk(this._res);
+class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
+    implements CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
+  _CopyWithStubImpl_Subscription_watchStreet_streetsByPk(this._res);
 
   TRes _res;
 
@@ -1191,7 +1191,7 @@ class _CopyWithStubImpl$Subscription$watchStreet$streetsByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    List<Fragment$Area>? areas,
+    List<Fragment_Area>? areas,
     Map<String, dynamic>? line,
     Json? lastEdit,
   }) =>

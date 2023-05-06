@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-abstract class DAOBase {
+abstract class DAOBase<T> {
   const DAOBase({
     required this.db,
   });
@@ -8,4 +8,6 @@ abstract class DAOBase {
   final DatabaseService db;
 
   DBGraphQLClient get graphQLClient => db.graphQLClient;
+
+  Stream<List<T>> streamAll({Stream<String?>? searchQuery});
 }

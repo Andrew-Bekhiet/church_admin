@@ -42,20 +42,38 @@ class _ViewStreetState extends State<ViewStreet> {
   static const _addPerson = Icon(Icons.person_add_alt_1);
 
   late final _familiesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byStreetId: widget.streetId,
+    objectsPaginatableStream: DatabaseService.I.families.streamAll(
+      where: [
+        Input_FamiliesBoolExp(
+          streets: Input_StreetsBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
   late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byStreetId: widget.streetId,
+    objectsPaginatableStream: DatabaseService.I.stores.streamAll(
+      where: [
+        Input_StoresBoolExp(
+          streets: Input_StreetsBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byStreetId: widget.streetId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          streets: Input_StreetsBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+          ),
+        ),
+      ],
     ),
   );
 
@@ -64,7 +82,7 @@ class _ViewStreetState extends State<ViewStreet> {
   late final viewableObjectService = CAViewableObjectService.I;
 
   late final stream =
-      DatabaseService.I.streets.watchStreet(streetId: widget.streetId);
+      DatabaseService.I.streets.streamSingleById(id: widget.streetId);
 
   @override
   Widget build(BuildContext context) {

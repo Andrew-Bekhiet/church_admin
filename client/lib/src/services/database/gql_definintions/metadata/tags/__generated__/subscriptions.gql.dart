@@ -2,38 +2,38 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllTags {
-  factory Variables$Subscription$watchAllTags({
-    List<Input$TagsBoolExp>? where,
+class Variables_Subscription_watchAllTags {
+  factory Variables_Subscription_watchAllTags({
+    List<Input_TagsBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllTags._({
+      Variables_Subscription_watchAllTags._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllTags._(this._$data);
+  Variables_Subscription_watchAllTags._(this._$data);
 
-  factory Variables$Subscription$watchAllTags.fromJson(
+  factory Variables_Subscription_watchAllTags.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$TagsBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Input_TagsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllTags._(result$data);
+    return Variables_Subscription_watchAllTags._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$TagsBoolExp>? get where =>
-      (_$data['where'] as List<Input$TagsBoolExp>?);
+  List<Input_TagsBoolExp>? get where =>
+      (_$data['where'] as List<Input_TagsBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -48,9 +48,9 @@ class Variables$Subscription$watchAllTags {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllTags<
-          Variables$Subscription$watchAllTags>
-      get copyWith => CopyWith$Variables$Subscription$watchAllTags(
+  CopyWith_Variables_Subscription_watchAllTags<
+          Variables_Subscription_watchAllTags>
+      get copyWith => CopyWith_Variables_Subscription_watchAllTags(
             this,
             (i) => i,
           );
@@ -59,7 +59,7 @@ class Variables$Subscription$watchAllTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllTags) ||
+    if (!(other is Variables_Subscription_watchAllTags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108,31 +108,31 @@ class Variables$Subscription$watchAllTags {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllTags<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllTags(
-    Variables$Subscription$watchAllTags instance,
-    TRes Function(Variables$Subscription$watchAllTags) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllTags;
+abstract class CopyWith_Variables_Subscription_watchAllTags<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllTags(
+    Variables_Subscription_watchAllTags instance,
+    TRes Function(Variables_Subscription_watchAllTags) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllTags;
 
-  factory CopyWith$Variables$Subscription$watchAllTags.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllTags;
+  factory CopyWith_Variables_Subscription_watchAllTags.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllTags;
 
   TRes call({
-    List<Input$TagsBoolExp>? where,
+    List<Input_TagsBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllTags<TRes>
-    implements CopyWith$Variables$Subscription$watchAllTags<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllTags(
+class _CopyWithImpl_Variables_Subscription_watchAllTags<TRes>
+    implements CopyWith_Variables_Subscription_watchAllTags<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllTags(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllTags _instance;
+  final Variables_Subscription_watchAllTags _instance;
 
-  final TRes Function(Variables$Subscription$watchAllTags) _then;
+  final TRes Function(Variables_Subscription_watchAllTags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -140,39 +140,39 @@ class _CopyWithImpl$Variables$Subscription$watchAllTags<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllTags._({
+      _then(Variables_Subscription_watchAllTags._({
         ..._instance._$data,
-        if (where != _undefined) 'where': (where as List<Input$TagsBoolExp>?),
+        if (where != _undefined) 'where': (where as List<Input_TagsBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllTags<TRes>
-    implements CopyWith$Variables$Subscription$watchAllTags<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllTags(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllTags<TRes>
+    implements CopyWith_Variables_Subscription_watchAllTags<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllTags(this._res);
 
   TRes _res;
 
   call({
-    List<Input$TagsBoolExp>? where,
+    List<Input_TagsBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllTags {
-  Subscription$watchAllTags({required this.tags});
+class Subscription_watchAllTags {
+  Subscription_watchAllTags({required this.tags});
 
-  factory Subscription$watchAllTags.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllTags.fromJson(Map<String, dynamic> json) {
     final l$tags = json['tags'];
-    return Subscription$watchAllTags(
+    return Subscription_watchAllTags(
         tags: (l$tags as List<dynamic>)
-            .map((e) => Subscription$watchAllTags$tags.fromJson(
+            .map((e) => Subscription_watchAllTags_tags.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllTags$tags> tags;
+  final List<Subscription_watchAllTags_tags> tags;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -192,7 +192,7 @@ class Subscription$watchAllTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllTags) ||
+    if (!(other is Subscription_watchAllTags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -212,71 +212,71 @@ class Subscription$watchAllTags {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllTags
-    on Subscription$watchAllTags {
-  CopyWith$Subscription$watchAllTags<Subscription$watchAllTags> get copyWith =>
-      CopyWith$Subscription$watchAllTags(
+extension UtilityExtension_Subscription_watchAllTags
+    on Subscription_watchAllTags {
+  CopyWith_Subscription_watchAllTags<Subscription_watchAllTags> get copyWith =>
+      CopyWith_Subscription_watchAllTags(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchAllTags<TRes> {
-  factory CopyWith$Subscription$watchAllTags(
-    Subscription$watchAllTags instance,
-    TRes Function(Subscription$watchAllTags) then,
-  ) = _CopyWithImpl$Subscription$watchAllTags;
+abstract class CopyWith_Subscription_watchAllTags<TRes> {
+  factory CopyWith_Subscription_watchAllTags(
+    Subscription_watchAllTags instance,
+    TRes Function(Subscription_watchAllTags) then,
+  ) = _CopyWithImpl_Subscription_watchAllTags;
 
-  factory CopyWith$Subscription$watchAllTags.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllTags;
+  factory CopyWith_Subscription_watchAllTags.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllTags;
 
-  TRes call({List<Subscription$watchAllTags$tags>? tags});
+  TRes call({List<Subscription_watchAllTags_tags>? tags});
   TRes tags(
-      Iterable<Subscription$watchAllTags$tags> Function(
+      Iterable<Subscription_watchAllTags_tags> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllTags$tags<
-                      Subscription$watchAllTags$tags>>)
+                  CopyWith_Subscription_watchAllTags_tags<
+                      Subscription_watchAllTags_tags>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllTags<TRes>
-    implements CopyWith$Subscription$watchAllTags<TRes> {
-  _CopyWithImpl$Subscription$watchAllTags(
+class _CopyWithImpl_Subscription_watchAllTags<TRes>
+    implements CopyWith_Subscription_watchAllTags<TRes> {
+  _CopyWithImpl_Subscription_watchAllTags(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllTags _instance;
+  final Subscription_watchAllTags _instance;
 
-  final TRes Function(Subscription$watchAllTags) _then;
+  final TRes Function(Subscription_watchAllTags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? tags = _undefined}) => _then(Subscription$watchAllTags(
+  TRes call({Object? tags = _undefined}) => _then(Subscription_watchAllTags(
       tags: tags == _undefined || tags == null
           ? _instance.tags
-          : (tags as List<Subscription$watchAllTags$tags>)));
+          : (tags as List<Subscription_watchAllTags_tags>)));
   TRes tags(
-          Iterable<Subscription$watchAllTags$tags> Function(
+          Iterable<Subscription_watchAllTags_tags> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllTags$tags<
-                          Subscription$watchAllTags$tags>>)
+                      CopyWith_Subscription_watchAllTags_tags<
+                          Subscription_watchAllTags_tags>>)
               _fn) =>
       call(
           tags: _fn(
-              _instance.tags.map((e) => CopyWith$Subscription$watchAllTags$tags(
+              _instance.tags.map((e) => CopyWith_Subscription_watchAllTags_tags(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllTags<TRes>
-    implements CopyWith$Subscription$watchAllTags<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllTags(this._res);
+class _CopyWithStubImpl_Subscription_watchAllTags<TRes>
+    implements CopyWith_Subscription_watchAllTags<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllTags(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllTags$tags>? tags}) => _res;
+  call({List<Subscription_watchAllTags_tags>? tags}) => _res;
   tags(_fn) => _res;
 }
 
@@ -372,20 +372,20 @@ const documentNodeSubscriptionwatchAllTags = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$watchAllTags$tags {
-  Subscription$watchAllTags$tags({
+class Subscription_watchAllTags_tags {
+  Subscription_watchAllTags_tags({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Tags',
   });
 
-  factory Subscription$watchAllTags$tags.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllTags_tags.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllTags$tags(
+    return Subscription_watchAllTags_tags(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -433,7 +433,7 @@ class Subscription$watchAllTags$tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllTags$tags) ||
+    if (!(other is Subscription_watchAllTags_tags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -461,23 +461,23 @@ class Subscription$watchAllTags$tags {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllTags$tags
-    on Subscription$watchAllTags$tags {
-  CopyWith$Subscription$watchAllTags$tags<Subscription$watchAllTags$tags>
-      get copyWith => CopyWith$Subscription$watchAllTags$tags(
+extension UtilityExtension_Subscription_watchAllTags_tags
+    on Subscription_watchAllTags_tags {
+  CopyWith_Subscription_watchAllTags_tags<Subscription_watchAllTags_tags>
+      get copyWith => CopyWith_Subscription_watchAllTags_tags(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllTags$tags<TRes> {
-  factory CopyWith$Subscription$watchAllTags$tags(
-    Subscription$watchAllTags$tags instance,
-    TRes Function(Subscription$watchAllTags$tags) then,
-  ) = _CopyWithImpl$Subscription$watchAllTags$tags;
+abstract class CopyWith_Subscription_watchAllTags_tags<TRes> {
+  factory CopyWith_Subscription_watchAllTags_tags(
+    Subscription_watchAllTags_tags instance,
+    TRes Function(Subscription_watchAllTags_tags) then,
+  ) = _CopyWithImpl_Subscription_watchAllTags_tags;
 
-  factory CopyWith$Subscription$watchAllTags$tags.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllTags$tags;
+  factory CopyWith_Subscription_watchAllTags_tags.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllTags_tags;
 
   TRes call({
     UuidValue? id,
@@ -487,16 +487,16 @@ abstract class CopyWith$Subscription$watchAllTags$tags<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllTags$tags<TRes>
-    implements CopyWith$Subscription$watchAllTags$tags<TRes> {
-  _CopyWithImpl$Subscription$watchAllTags$tags(
+class _CopyWithImpl_Subscription_watchAllTags_tags<TRes>
+    implements CopyWith_Subscription_watchAllTags_tags<TRes> {
+  _CopyWithImpl_Subscription_watchAllTags_tags(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllTags$tags _instance;
+  final Subscription_watchAllTags_tags _instance;
 
-  final TRes Function(Subscription$watchAllTags$tags) _then;
+  final TRes Function(Subscription_watchAllTags_tags) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -506,7 +506,7 @@ class _CopyWithImpl$Subscription$watchAllTags$tags<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllTags$tags(
+      _then(Subscription_watchAllTags_tags(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -518,9 +518,9 @@ class _CopyWithImpl$Subscription$watchAllTags$tags<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllTags$tags<TRes>
-    implements CopyWith$Subscription$watchAllTags$tags<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllTags$tags(this._res);
+class _CopyWithStubImpl_Subscription_watchAllTags_tags<TRes>
+    implements CopyWith_Subscription_watchAllTags_tags<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllTags_tags(this._res);
 
   TRes _res;
 

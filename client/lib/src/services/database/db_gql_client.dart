@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
@@ -47,13 +46,13 @@ class DBGraphQLClient extends GraphQLClient {
       where: [
         if (search != null && search.isNotEmpty)
           boolExpConstructor(
-            name: Input$StringComparisonExp(
+            name: Input_StringComparisonExp(
               $_ilike: '%$search%',
             ),
           ),
         if (lastSearch == search && offset > 0)
           boolExpConstructor(
-            name: Input$StringComparisonExp(
+            name: Input_StringComparisonExp(
               $_gt: instance
                   .currentValue[
                       (offset - 1) * instance.limit + instance.limit - 1]
@@ -197,5 +196,5 @@ typedef VarsConstructor<T, BoolExp> = T Function({
 });
 
 typedef BoolExpConstructor<T> = T Function({
-  Input$StringComparisonExp? name,
+  Input_StringComparisonExp? name,
 });

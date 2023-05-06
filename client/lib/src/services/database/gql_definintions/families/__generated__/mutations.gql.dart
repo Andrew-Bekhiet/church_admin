@@ -3,19 +3,19 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Mutation$deleteFamily {
-  factory Variables$Mutation$deleteFamily({required UuidValue familyId}) =>
-      Variables$Mutation$deleteFamily._({
+class Variables_Mutation_deleteFamily {
+  factory Variables_Mutation_deleteFamily({required UuidValue familyId}) =>
+      Variables_Mutation_deleteFamily._({
         r'familyId': familyId,
       });
 
-  Variables$Mutation$deleteFamily._(this._$data);
+  Variables_Mutation_deleteFamily._(this._$data);
 
-  factory Variables$Mutation$deleteFamily.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_deleteFamily.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$familyId = data['familyId'];
     result$data['familyId'] = stringToUuid(l$familyId);
-    return Variables$Mutation$deleteFamily._(result$data);
+    return Variables_Mutation_deleteFamily._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -28,8 +28,8 @@ class Variables$Mutation$deleteFamily {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$deleteFamily<Variables$Mutation$deleteFamily>
-      get copyWith => CopyWith$Variables$Mutation$deleteFamily(
+  CopyWith_Variables_Mutation_deleteFamily<Variables_Mutation_deleteFamily>
+      get copyWith => CopyWith_Variables_Mutation_deleteFamily(
             this,
             (i) => i,
           );
@@ -38,7 +38,7 @@ class Variables$Mutation$deleteFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$deleteFamily) ||
+    if (!(other is Variables_Mutation_deleteFamily) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57,67 +57,67 @@ class Variables$Mutation$deleteFamily {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$deleteFamily<TRes> {
-  factory CopyWith$Variables$Mutation$deleteFamily(
-    Variables$Mutation$deleteFamily instance,
-    TRes Function(Variables$Mutation$deleteFamily) then,
-  ) = _CopyWithImpl$Variables$Mutation$deleteFamily;
+abstract class CopyWith_Variables_Mutation_deleteFamily<TRes> {
+  factory CopyWith_Variables_Mutation_deleteFamily(
+    Variables_Mutation_deleteFamily instance,
+    TRes Function(Variables_Mutation_deleteFamily) then,
+  ) = _CopyWithImpl_Variables_Mutation_deleteFamily;
 
-  factory CopyWith$Variables$Mutation$deleteFamily.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$deleteFamily;
+  factory CopyWith_Variables_Mutation_deleteFamily.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_deleteFamily;
 
   TRes call({UuidValue? familyId});
 }
 
-class _CopyWithImpl$Variables$Mutation$deleteFamily<TRes>
-    implements CopyWith$Variables$Mutation$deleteFamily<TRes> {
-  _CopyWithImpl$Variables$Mutation$deleteFamily(
+class _CopyWithImpl_Variables_Mutation_deleteFamily<TRes>
+    implements CopyWith_Variables_Mutation_deleteFamily<TRes> {
+  _CopyWithImpl_Variables_Mutation_deleteFamily(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$deleteFamily _instance;
+  final Variables_Mutation_deleteFamily _instance;
 
-  final TRes Function(Variables$Mutation$deleteFamily) _then;
+  final TRes Function(Variables_Mutation_deleteFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? familyId = _undefined}) =>
-      _then(Variables$Mutation$deleteFamily._({
+      _then(Variables_Mutation_deleteFamily._({
         ..._instance._$data,
         if (familyId != _undefined && familyId != null)
           'familyId': (familyId as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$deleteFamily<TRes>
-    implements CopyWith$Variables$Mutation$deleteFamily<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$deleteFamily(this._res);
+class _CopyWithStubImpl_Variables_Mutation_deleteFamily<TRes>
+    implements CopyWith_Variables_Mutation_deleteFamily<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_deleteFamily(this._res);
 
   TRes _res;
 
   call({UuidValue? familyId}) => _res;
 }
 
-class Mutation$deleteFamily {
-  Mutation$deleteFamily({
+class Mutation_deleteFamily {
+  Mutation_deleteFamily({
     this.deleteFamiliesByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$deleteFamily.fromJson(Map<String, dynamic> json) {
+  factory Mutation_deleteFamily.fromJson(Map<String, dynamic> json) {
     final l$deleteFamiliesByPk = json['deleteFamiliesByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$deleteFamily(
+    return Mutation_deleteFamily(
       deleteFamiliesByPk: l$deleteFamiliesByPk == null
           ? null
-          : Fragment$Family.fromJson(
+          : Fragment_Family.fromJson(
               (l$deleteFamiliesByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Family? deleteFamiliesByPk;
+  final Fragment_Family? deleteFamiliesByPk;
 
   final String $__typename;
 
@@ -145,7 +145,7 @@ class Mutation$deleteFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$deleteFamily) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_deleteFamily) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
@@ -162,40 +162,40 @@ class Mutation$deleteFamily {
   }
 }
 
-extension UtilityExtension$Mutation$deleteFamily on Mutation$deleteFamily {
-  CopyWith$Mutation$deleteFamily<Mutation$deleteFamily> get copyWith =>
-      CopyWith$Mutation$deleteFamily(
+extension UtilityExtension_Mutation_deleteFamily on Mutation_deleteFamily {
+  CopyWith_Mutation_deleteFamily<Mutation_deleteFamily> get copyWith =>
+      CopyWith_Mutation_deleteFamily(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$deleteFamily<TRes> {
-  factory CopyWith$Mutation$deleteFamily(
-    Mutation$deleteFamily instance,
-    TRes Function(Mutation$deleteFamily) then,
-  ) = _CopyWithImpl$Mutation$deleteFamily;
+abstract class CopyWith_Mutation_deleteFamily<TRes> {
+  factory CopyWith_Mutation_deleteFamily(
+    Mutation_deleteFamily instance,
+    TRes Function(Mutation_deleteFamily) then,
+  ) = _CopyWithImpl_Mutation_deleteFamily;
 
-  factory CopyWith$Mutation$deleteFamily.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deleteFamily;
+  factory CopyWith_Mutation_deleteFamily.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_deleteFamily;
 
   TRes call({
-    Fragment$Family? deleteFamiliesByPk,
+    Fragment_Family? deleteFamiliesByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Family<TRes> get deleteFamiliesByPk;
+  CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk;
 }
 
-class _CopyWithImpl$Mutation$deleteFamily<TRes>
-    implements CopyWith$Mutation$deleteFamily<TRes> {
-  _CopyWithImpl$Mutation$deleteFamily(
+class _CopyWithImpl_Mutation_deleteFamily<TRes>
+    implements CopyWith_Mutation_deleteFamily<TRes> {
+  _CopyWithImpl_Mutation_deleteFamily(
     this._instance,
     this._then,
   );
 
-  final Mutation$deleteFamily _instance;
+  final Mutation_deleteFamily _instance;
 
-  final TRes Function(Mutation$deleteFamily) _then;
+  final TRes Function(Mutation_deleteFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -203,36 +203,36 @@ class _CopyWithImpl$Mutation$deleteFamily<TRes>
     Object? deleteFamiliesByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$deleteFamily(
+      _then(Mutation_deleteFamily(
         deleteFamiliesByPk: deleteFamiliesByPk == _undefined
             ? _instance.deleteFamiliesByPk
-            : (deleteFamiliesByPk as Fragment$Family?),
+            : (deleteFamiliesByPk as Fragment_Family?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Family<TRes> get deleteFamiliesByPk {
+  CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk {
     final local$deleteFamiliesByPk = _instance.deleteFamiliesByPk;
     return local$deleteFamiliesByPk == null
-        ? CopyWith$Fragment$Family.stub(_then(_instance))
-        : CopyWith$Fragment$Family(
+        ? CopyWith_Fragment_Family.stub(_then(_instance))
+        : CopyWith_Fragment_Family(
             local$deleteFamiliesByPk, (e) => call(deleteFamiliesByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$deleteFamily<TRes>
-    implements CopyWith$Mutation$deleteFamily<TRes> {
-  _CopyWithStubImpl$Mutation$deleteFamily(this._res);
+class _CopyWithStubImpl_Mutation_deleteFamily<TRes>
+    implements CopyWith_Mutation_deleteFamily<TRes> {
+  _CopyWithStubImpl_Mutation_deleteFamily(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Family? deleteFamiliesByPk,
+    Fragment_Family? deleteFamiliesByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Family<TRes> get deleteFamiliesByPk =>
-      CopyWith$Fragment$Family.stub(_res);
+  CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk =>
+      CopyWith_Fragment_Family.stub(_res);
 }
 
 const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
@@ -289,27 +289,27 @@ const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
 ]);
 
-class Variables$Mutation$insertFamily {
-  factory Variables$Mutation$insertFamily(
-          {required Input$FamiliesInsertInput newFamily}) =>
-      Variables$Mutation$insertFamily._({
+class Variables_Mutation_insertFamily {
+  factory Variables_Mutation_insertFamily(
+          {required Input_FamiliesInsertInput newFamily}) =>
+      Variables_Mutation_insertFamily._({
         r'newFamily': newFamily,
       });
 
-  Variables$Mutation$insertFamily._(this._$data);
+  Variables_Mutation_insertFamily._(this._$data);
 
-  factory Variables$Mutation$insertFamily.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_insertFamily.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newFamily = data['newFamily'];
-    result$data['newFamily'] = Input$FamiliesInsertInput.fromJson(
+    result$data['newFamily'] = Input_FamiliesInsertInput.fromJson(
         (l$newFamily as Map<String, dynamic>));
-    return Variables$Mutation$insertFamily._(result$data);
+    return Variables_Mutation_insertFamily._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$FamiliesInsertInput get newFamily =>
-      (_$data['newFamily'] as Input$FamiliesInsertInput);
+  Input_FamiliesInsertInput get newFamily =>
+      (_$data['newFamily'] as Input_FamiliesInsertInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newFamily = newFamily;
@@ -317,8 +317,8 @@ class Variables$Mutation$insertFamily {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$insertFamily<Variables$Mutation$insertFamily>
-      get copyWith => CopyWith$Variables$Mutation$insertFamily(
+  CopyWith_Variables_Mutation_insertFamily<Variables_Mutation_insertFamily>
+      get copyWith => CopyWith_Variables_Mutation_insertFamily(
             this,
             (i) => i,
           );
@@ -327,7 +327,7 @@ class Variables$Mutation$insertFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$insertFamily) ||
+    if (!(other is Variables_Mutation_insertFamily) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -346,67 +346,67 @@ class Variables$Mutation$insertFamily {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$insertFamily<TRes> {
-  factory CopyWith$Variables$Mutation$insertFamily(
-    Variables$Mutation$insertFamily instance,
-    TRes Function(Variables$Mutation$insertFamily) then,
-  ) = _CopyWithImpl$Variables$Mutation$insertFamily;
+abstract class CopyWith_Variables_Mutation_insertFamily<TRes> {
+  factory CopyWith_Variables_Mutation_insertFamily(
+    Variables_Mutation_insertFamily instance,
+    TRes Function(Variables_Mutation_insertFamily) then,
+  ) = _CopyWithImpl_Variables_Mutation_insertFamily;
 
-  factory CopyWith$Variables$Mutation$insertFamily.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$insertFamily;
+  factory CopyWith_Variables_Mutation_insertFamily.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_insertFamily;
 
-  TRes call({Input$FamiliesInsertInput? newFamily});
+  TRes call({Input_FamiliesInsertInput? newFamily});
 }
 
-class _CopyWithImpl$Variables$Mutation$insertFamily<TRes>
-    implements CopyWith$Variables$Mutation$insertFamily<TRes> {
-  _CopyWithImpl$Variables$Mutation$insertFamily(
+class _CopyWithImpl_Variables_Mutation_insertFamily<TRes>
+    implements CopyWith_Variables_Mutation_insertFamily<TRes> {
+  _CopyWithImpl_Variables_Mutation_insertFamily(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$insertFamily _instance;
+  final Variables_Mutation_insertFamily _instance;
 
-  final TRes Function(Variables$Mutation$insertFamily) _then;
+  final TRes Function(Variables_Mutation_insertFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? newFamily = _undefined}) =>
-      _then(Variables$Mutation$insertFamily._({
+      _then(Variables_Mutation_insertFamily._({
         ..._instance._$data,
         if (newFamily != _undefined && newFamily != null)
-          'newFamily': (newFamily as Input$FamiliesInsertInput),
+          'newFamily': (newFamily as Input_FamiliesInsertInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$insertFamily<TRes>
-    implements CopyWith$Variables$Mutation$insertFamily<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$insertFamily(this._res);
+class _CopyWithStubImpl_Variables_Mutation_insertFamily<TRes>
+    implements CopyWith_Variables_Mutation_insertFamily<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_insertFamily(this._res);
 
   TRes _res;
 
-  call({Input$FamiliesInsertInput? newFamily}) => _res;
+  call({Input_FamiliesInsertInput? newFamily}) => _res;
 }
 
-class Mutation$insertFamily {
-  Mutation$insertFamily({
+class Mutation_insertFamily {
+  Mutation_insertFamily({
     this.insertFamiliesOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$insertFamily.fromJson(Map<String, dynamic> json) {
+  factory Mutation_insertFamily.fromJson(Map<String, dynamic> json) {
     final l$insertFamiliesOne = json['insertFamiliesOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$insertFamily(
+    return Mutation_insertFamily(
       insertFamiliesOne: l$insertFamiliesOne == null
           ? null
-          : Fragment$Family.fromJson(
+          : Fragment_Family.fromJson(
               (l$insertFamiliesOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Family? insertFamiliesOne;
+  final Fragment_Family? insertFamiliesOne;
 
   final String $__typename;
 
@@ -434,7 +434,7 @@ class Mutation$insertFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$insertFamily) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_insertFamily) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertFamiliesOne = insertFamiliesOne;
@@ -451,40 +451,40 @@ class Mutation$insertFamily {
   }
 }
 
-extension UtilityExtension$Mutation$insertFamily on Mutation$insertFamily {
-  CopyWith$Mutation$insertFamily<Mutation$insertFamily> get copyWith =>
-      CopyWith$Mutation$insertFamily(
+extension UtilityExtension_Mutation_insertFamily on Mutation_insertFamily {
+  CopyWith_Mutation_insertFamily<Mutation_insertFamily> get copyWith =>
+      CopyWith_Mutation_insertFamily(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$insertFamily<TRes> {
-  factory CopyWith$Mutation$insertFamily(
-    Mutation$insertFamily instance,
-    TRes Function(Mutation$insertFamily) then,
-  ) = _CopyWithImpl$Mutation$insertFamily;
+abstract class CopyWith_Mutation_insertFamily<TRes> {
+  factory CopyWith_Mutation_insertFamily(
+    Mutation_insertFamily instance,
+    TRes Function(Mutation_insertFamily) then,
+  ) = _CopyWithImpl_Mutation_insertFamily;
 
-  factory CopyWith$Mutation$insertFamily.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$insertFamily;
+  factory CopyWith_Mutation_insertFamily.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertFamily;
 
   TRes call({
-    Fragment$Family? insertFamiliesOne,
+    Fragment_Family? insertFamiliesOne,
     String? $__typename,
   });
-  CopyWith$Fragment$Family<TRes> get insertFamiliesOne;
+  CopyWith_Fragment_Family<TRes> get insertFamiliesOne;
 }
 
-class _CopyWithImpl$Mutation$insertFamily<TRes>
-    implements CopyWith$Mutation$insertFamily<TRes> {
-  _CopyWithImpl$Mutation$insertFamily(
+class _CopyWithImpl_Mutation_insertFamily<TRes>
+    implements CopyWith_Mutation_insertFamily<TRes> {
+  _CopyWithImpl_Mutation_insertFamily(
     this._instance,
     this._then,
   );
 
-  final Mutation$insertFamily _instance;
+  final Mutation_insertFamily _instance;
 
-  final TRes Function(Mutation$insertFamily) _then;
+  final TRes Function(Mutation_insertFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -492,36 +492,36 @@ class _CopyWithImpl$Mutation$insertFamily<TRes>
     Object? insertFamiliesOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$insertFamily(
+      _then(Mutation_insertFamily(
         insertFamiliesOne: insertFamiliesOne == _undefined
             ? _instance.insertFamiliesOne
-            : (insertFamiliesOne as Fragment$Family?),
+            : (insertFamiliesOne as Fragment_Family?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Family<TRes> get insertFamiliesOne {
+  CopyWith_Fragment_Family<TRes> get insertFamiliesOne {
     final local$insertFamiliesOne = _instance.insertFamiliesOne;
     return local$insertFamiliesOne == null
-        ? CopyWith$Fragment$Family.stub(_then(_instance))
-        : CopyWith$Fragment$Family(
+        ? CopyWith_Fragment_Family.stub(_then(_instance))
+        : CopyWith_Fragment_Family(
             local$insertFamiliesOne, (e) => call(insertFamiliesOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$insertFamily<TRes>
-    implements CopyWith$Mutation$insertFamily<TRes> {
-  _CopyWithStubImpl$Mutation$insertFamily(this._res);
+class _CopyWithStubImpl_Mutation_insertFamily<TRes>
+    implements CopyWith_Mutation_insertFamily<TRes> {
+  _CopyWithStubImpl_Mutation_insertFamily(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Family? insertFamiliesOne,
+    Fragment_Family? insertFamiliesOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Family<TRes> get insertFamiliesOne =>
-      CopyWith$Fragment$Family.stub(_res);
+  CopyWith_Fragment_Family<TRes> get insertFamiliesOne =>
+      CopyWith_Fragment_Family.stub(_res);
 }
 
 const documentNodeMutationinsertFamily = DocumentNode(definitions: [
@@ -578,18 +578,18 @@ const documentNodeMutationinsertFamily = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
 ]);
 
-class Variables$Mutation$updateFamily {
-  factory Variables$Mutation$updateFamily({
+class Variables_Mutation_updateFamily {
+  factory Variables_Mutation_updateFamily({
     required UuidValue familyId,
-    required Input$FamiliesSetInput newFamily,
+    required Input_FamiliesSetInput newFamily,
     required List<UuidValue> deleteParents,
     required List<UuidValue> deleteChildren,
-    required List<Input$FamiliesFamiliesInsertInput> addRelatedFamilies,
+    required List<Input_FamiliesFamiliesInsertInput> addRelatedFamilies,
     required bool updateFamily,
     required bool deleteRelatedFamilies,
     required bool insertRelatedFamilies,
   }) =>
-      Variables$Mutation$updateFamily._({
+      Variables_Mutation_updateFamily._({
         r'familyId': familyId,
         r'newFamily': newFamily,
         r'deleteParents': deleteParents,
@@ -600,15 +600,15 @@ class Variables$Mutation$updateFamily {
         r'insertRelatedFamilies': insertRelatedFamilies,
       });
 
-  Variables$Mutation$updateFamily._(this._$data);
+  Variables_Mutation_updateFamily._(this._$data);
 
-  factory Variables$Mutation$updateFamily.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_updateFamily.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$familyId = data['familyId'];
     result$data['familyId'] = stringToUuid(l$familyId);
     final l$newFamily = data['newFamily'];
     result$data['newFamily'] =
-        Input$FamiliesSetInput.fromJson((l$newFamily as Map<String, dynamic>));
+        Input_FamiliesSetInput.fromJson((l$newFamily as Map<String, dynamic>));
     final l$deleteParents = data['deleteParents'];
     result$data['deleteParents'] =
         (l$deleteParents as List<dynamic>).map((e) => stringToUuid(e)).toList();
@@ -618,7 +618,7 @@ class Variables$Mutation$updateFamily {
         .toList();
     final l$addRelatedFamilies = data['addRelatedFamilies'];
     result$data['addRelatedFamilies'] = (l$addRelatedFamilies as List<dynamic>)
-        .map((e) => Input$FamiliesFamiliesInsertInput.fromJson(
+        .map((e) => Input_FamiliesFamiliesInsertInput.fromJson(
             (e as Map<String, dynamic>)))
         .toList();
     final l$updateFamily = data['updateFamily'];
@@ -627,20 +627,20 @@ class Variables$Mutation$updateFamily {
     result$data['deleteRelatedFamilies'] = (l$deleteRelatedFamilies as bool);
     final l$insertRelatedFamilies = data['insertRelatedFamilies'];
     result$data['insertRelatedFamilies'] = (l$insertRelatedFamilies as bool);
-    return Variables$Mutation$updateFamily._(result$data);
+    return Variables_Mutation_updateFamily._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get familyId => (_$data['familyId'] as UuidValue);
-  Input$FamiliesSetInput get newFamily =>
-      (_$data['newFamily'] as Input$FamiliesSetInput);
+  Input_FamiliesSetInput get newFamily =>
+      (_$data['newFamily'] as Input_FamiliesSetInput);
   List<UuidValue> get deleteParents =>
       (_$data['deleteParents'] as List<UuidValue>);
   List<UuidValue> get deleteChildren =>
       (_$data['deleteChildren'] as List<UuidValue>);
-  List<Input$FamiliesFamiliesInsertInput> get addRelatedFamilies =>
-      (_$data['addRelatedFamilies'] as List<Input$FamiliesFamiliesInsertInput>);
+  List<Input_FamiliesFamiliesInsertInput> get addRelatedFamilies =>
+      (_$data['addRelatedFamilies'] as List<Input_FamiliesFamiliesInsertInput>);
   bool get updateFamily => (_$data['updateFamily'] as bool);
   bool get deleteRelatedFamilies => (_$data['deleteRelatedFamilies'] as bool);
   bool get insertRelatedFamilies => (_$data['insertRelatedFamilies'] as bool);
@@ -668,8 +668,8 @@ class Variables$Mutation$updateFamily {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$updateFamily<Variables$Mutation$updateFamily>
-      get copyWith => CopyWith$Variables$Mutation$updateFamily(
+  CopyWith_Variables_Mutation_updateFamily<Variables_Mutation_updateFamily>
+      get copyWith => CopyWith_Variables_Mutation_updateFamily(
             this,
             (i) => i,
           );
@@ -678,7 +678,7 @@ class Variables$Mutation$updateFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$updateFamily) ||
+    if (!(other is Variables_Mutation_updateFamily) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -769,37 +769,37 @@ class Variables$Mutation$updateFamily {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$updateFamily<TRes> {
-  factory CopyWith$Variables$Mutation$updateFamily(
-    Variables$Mutation$updateFamily instance,
-    TRes Function(Variables$Mutation$updateFamily) then,
-  ) = _CopyWithImpl$Variables$Mutation$updateFamily;
+abstract class CopyWith_Variables_Mutation_updateFamily<TRes> {
+  factory CopyWith_Variables_Mutation_updateFamily(
+    Variables_Mutation_updateFamily instance,
+    TRes Function(Variables_Mutation_updateFamily) then,
+  ) = _CopyWithImpl_Variables_Mutation_updateFamily;
 
-  factory CopyWith$Variables$Mutation$updateFamily.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$updateFamily;
+  factory CopyWith_Variables_Mutation_updateFamily.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updateFamily;
 
   TRes call({
     UuidValue? familyId,
-    Input$FamiliesSetInput? newFamily,
+    Input_FamiliesSetInput? newFamily,
     List<UuidValue>? deleteParents,
     List<UuidValue>? deleteChildren,
-    List<Input$FamiliesFamiliesInsertInput>? addRelatedFamilies,
+    List<Input_FamiliesFamiliesInsertInput>? addRelatedFamilies,
     bool? updateFamily,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
   });
 }
 
-class _CopyWithImpl$Variables$Mutation$updateFamily<TRes>
-    implements CopyWith$Variables$Mutation$updateFamily<TRes> {
-  _CopyWithImpl$Variables$Mutation$updateFamily(
+class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
+    implements CopyWith_Variables_Mutation_updateFamily<TRes> {
+  _CopyWithImpl_Variables_Mutation_updateFamily(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$updateFamily _instance;
+  final Variables_Mutation_updateFamily _instance;
 
-  final TRes Function(Variables$Mutation$updateFamily) _then;
+  final TRes Function(Variables_Mutation_updateFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -813,19 +813,19 @@ class _CopyWithImpl$Variables$Mutation$updateFamily<TRes>
     Object? deleteRelatedFamilies = _undefined,
     Object? insertRelatedFamilies = _undefined,
   }) =>
-      _then(Variables$Mutation$updateFamily._({
+      _then(Variables_Mutation_updateFamily._({
         ..._instance._$data,
         if (familyId != _undefined && familyId != null)
           'familyId': (familyId as UuidValue),
         if (newFamily != _undefined && newFamily != null)
-          'newFamily': (newFamily as Input$FamiliesSetInput),
+          'newFamily': (newFamily as Input_FamiliesSetInput),
         if (deleteParents != _undefined && deleteParents != null)
           'deleteParents': (deleteParents as List<UuidValue>),
         if (deleteChildren != _undefined && deleteChildren != null)
           'deleteChildren': (deleteChildren as List<UuidValue>),
         if (addRelatedFamilies != _undefined && addRelatedFamilies != null)
           'addRelatedFamilies':
-              (addRelatedFamilies as List<Input$FamiliesFamiliesInsertInput>),
+              (addRelatedFamilies as List<Input_FamiliesFamiliesInsertInput>),
         if (updateFamily != _undefined && updateFamily != null)
           'updateFamily': (updateFamily as bool),
         if (deleteRelatedFamilies != _undefined &&
@@ -837,18 +837,18 @@ class _CopyWithImpl$Variables$Mutation$updateFamily<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$updateFamily<TRes>
-    implements CopyWith$Variables$Mutation$updateFamily<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$updateFamily(this._res);
+class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
+    implements CopyWith_Variables_Mutation_updateFamily<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updateFamily(this._res);
 
   TRes _res;
 
   call({
     UuidValue? familyId,
-    Input$FamiliesSetInput? newFamily,
+    Input_FamiliesSetInput? newFamily,
     List<UuidValue>? deleteParents,
     List<UuidValue>? deleteChildren,
-    List<Input$FamiliesFamiliesInsertInput>? addRelatedFamilies,
+    List<Input_FamiliesFamiliesInsertInput>? addRelatedFamilies,
     bool? updateFamily,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
@@ -856,41 +856,41 @@ class _CopyWithStubImpl$Variables$Mutation$updateFamily<TRes>
       _res;
 }
 
-class Mutation$updateFamily {
-  Mutation$updateFamily({
+class Mutation_updateFamily {
+  Mutation_updateFamily({
     this.updateFamiliesByPk,
     this.deleteFamiliesFamilies,
     this.insertFamiliesFamilies,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$updateFamily.fromJson(Map<String, dynamic> json) {
+  factory Mutation_updateFamily.fromJson(Map<String, dynamic> json) {
     final l$updateFamiliesByPk = json['updateFamiliesByPk'];
     final l$deleteFamiliesFamilies = json['deleteFamiliesFamilies'];
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
     final l$$__typename = json['__typename'];
-    return Mutation$updateFamily(
+    return Mutation_updateFamily(
       updateFamiliesByPk: l$updateFamiliesByPk == null
           ? null
-          : Fragment$Family.fromJson(
+          : Fragment_Family.fromJson(
               (l$updateFamiliesByPk as Map<String, dynamic>)),
       deleteFamiliesFamilies: l$deleteFamiliesFamilies == null
           ? null
-          : Mutation$updateFamily$deleteFamiliesFamilies.fromJson(
+          : Mutation_updateFamily_deleteFamiliesFamilies.fromJson(
               (l$deleteFamiliesFamilies as Map<String, dynamic>)),
       insertFamiliesFamilies: l$insertFamiliesFamilies == null
           ? null
-          : Mutation$updateFamily$insertFamiliesFamilies.fromJson(
+          : Mutation_updateFamily_insertFamiliesFamilies.fromJson(
               (l$insertFamiliesFamilies as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Family? updateFamiliesByPk;
+  final Fragment_Family? updateFamiliesByPk;
 
-  final Mutation$updateFamily$deleteFamiliesFamilies? deleteFamiliesFamilies;
+  final Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies;
 
-  final Mutation$updateFamily$insertFamiliesFamilies? insertFamiliesFamilies;
+  final Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies;
 
   final String $__typename;
 
@@ -926,7 +926,7 @@ class Mutation$updateFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updateFamily) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_updateFamily) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateFamiliesByPk = updateFamiliesByPk;
@@ -953,46 +953,46 @@ class Mutation$updateFamily {
   }
 }
 
-extension UtilityExtension$Mutation$updateFamily on Mutation$updateFamily {
-  CopyWith$Mutation$updateFamily<Mutation$updateFamily> get copyWith =>
-      CopyWith$Mutation$updateFamily(
+extension UtilityExtension_Mutation_updateFamily on Mutation_updateFamily {
+  CopyWith_Mutation_updateFamily<Mutation_updateFamily> get copyWith =>
+      CopyWith_Mutation_updateFamily(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$updateFamily<TRes> {
-  factory CopyWith$Mutation$updateFamily(
-    Mutation$updateFamily instance,
-    TRes Function(Mutation$updateFamily) then,
-  ) = _CopyWithImpl$Mutation$updateFamily;
+abstract class CopyWith_Mutation_updateFamily<TRes> {
+  factory CopyWith_Mutation_updateFamily(
+    Mutation_updateFamily instance,
+    TRes Function(Mutation_updateFamily) then,
+  ) = _CopyWithImpl_Mutation_updateFamily;
 
-  factory CopyWith$Mutation$updateFamily.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updateFamily;
+  factory CopyWith_Mutation_updateFamily.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily;
 
   TRes call({
-    Fragment$Family? updateFamiliesByPk,
-    Mutation$updateFamily$deleteFamiliesFamilies? deleteFamiliesFamilies,
-    Mutation$updateFamily$insertFamiliesFamilies? insertFamiliesFamilies,
+    Fragment_Family? updateFamiliesByPk,
+    Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
+    Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     String? $__typename,
   });
-  CopyWith$Fragment$Family<TRes> get updateFamiliesByPk;
-  CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
+  CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
+  CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies;
-  CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes>
+  CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies;
 }
 
-class _CopyWithImpl$Mutation$updateFamily<TRes>
-    implements CopyWith$Mutation$updateFamily<TRes> {
-  _CopyWithImpl$Mutation$updateFamily(
+class _CopyWithImpl_Mutation_updateFamily<TRes>
+    implements CopyWith_Mutation_updateFamily<TRes> {
+  _CopyWithImpl_Mutation_updateFamily(
     this._instance,
     this._then,
   );
 
-  final Mutation$updateFamily _instance;
+  final Mutation_updateFamily _instance;
 
-  final TRes Function(Mutation$updateFamily) _then;
+  final TRes Function(Mutation_updateFamily) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1002,74 +1002,74 @@ class _CopyWithImpl$Mutation$updateFamily<TRes>
     Object? insertFamiliesFamilies = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updateFamily(
+      _then(Mutation_updateFamily(
         updateFamiliesByPk: updateFamiliesByPk == _undefined
             ? _instance.updateFamiliesByPk
-            : (updateFamiliesByPk as Fragment$Family?),
+            : (updateFamiliesByPk as Fragment_Family?),
         deleteFamiliesFamilies: deleteFamiliesFamilies == _undefined
             ? _instance.deleteFamiliesFamilies
             : (deleteFamiliesFamilies
-                as Mutation$updateFamily$deleteFamiliesFamilies?),
+                as Mutation_updateFamily_deleteFamiliesFamilies?),
         insertFamiliesFamilies: insertFamiliesFamilies == _undefined
             ? _instance.insertFamiliesFamilies
             : (insertFamiliesFamilies
-                as Mutation$updateFamily$insertFamiliesFamilies?),
+                as Mutation_updateFamily_insertFamiliesFamilies?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Family<TRes> get updateFamiliesByPk {
+  CopyWith_Fragment_Family<TRes> get updateFamiliesByPk {
     final local$updateFamiliesByPk = _instance.updateFamiliesByPk;
     return local$updateFamiliesByPk == null
-        ? CopyWith$Fragment$Family.stub(_then(_instance))
-        : CopyWith$Fragment$Family(
+        ? CopyWith_Fragment_Family.stub(_then(_instance))
+        : CopyWith_Fragment_Family(
             local$updateFamiliesByPk, (e) => call(updateFamiliesByPk: e));
   }
 
-  CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
+  CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies {
     final local$deleteFamiliesFamilies = _instance.deleteFamiliesFamilies;
     return local$deleteFamiliesFamilies == null
-        ? CopyWith$Mutation$updateFamily$deleteFamiliesFamilies.stub(
+        ? CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(
             _then(_instance))
-        : CopyWith$Mutation$updateFamily$deleteFamiliesFamilies(
+        : CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(
             local$deleteFamiliesFamilies,
             (e) => call(deleteFamiliesFamilies: e));
   }
 
-  CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes>
+  CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies {
     final local$insertFamiliesFamilies = _instance.insertFamiliesFamilies;
     return local$insertFamiliesFamilies == null
-        ? CopyWith$Mutation$updateFamily$insertFamiliesFamilies.stub(
+        ? CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(
             _then(_instance))
-        : CopyWith$Mutation$updateFamily$insertFamiliesFamilies(
+        : CopyWith_Mutation_updateFamily_insertFamiliesFamilies(
             local$insertFamiliesFamilies,
             (e) => call(insertFamiliesFamilies: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updateFamily<TRes>
-    implements CopyWith$Mutation$updateFamily<TRes> {
-  _CopyWithStubImpl$Mutation$updateFamily(this._res);
+class _CopyWithStubImpl_Mutation_updateFamily<TRes>
+    implements CopyWith_Mutation_updateFamily<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Family? updateFamiliesByPk,
-    Mutation$updateFamily$deleteFamiliesFamilies? deleteFamiliesFamilies,
-    Mutation$updateFamily$insertFamiliesFamilies? insertFamiliesFamilies,
+    Fragment_Family? updateFamiliesByPk,
+    Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
+    Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Family<TRes> get updateFamiliesByPk =>
-      CopyWith$Fragment$Family.stub(_res);
-  CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
+  CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
+      CopyWith_Fragment_Family.stub(_res);
+  CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies =>
-          CopyWith$Mutation$updateFamily$deleteFamiliesFamilies.stub(_res);
-  CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes>
+          CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(_res);
+  CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies =>
-          CopyWith$Mutation$updateFamily$insertFamiliesFamilies.stub(_res);
+          CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);
 }
 
 const documentNodeMutationupdateFamily = DocumentNode(definitions: [
@@ -1343,17 +1343,17 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
 ]);
 
-class Mutation$updateFamily$deleteFamiliesFamilies {
-  Mutation$updateFamily$deleteFamiliesFamilies({
+class Mutation_updateFamily_deleteFamiliesFamilies {
+  Mutation_updateFamily_deleteFamiliesFamilies({
     required this.affectedRows,
     this.$__typename = 'FamiliesFamiliesMutationResponse',
   });
 
-  factory Mutation$updateFamily$deleteFamiliesFamilies.fromJson(
+  factory Mutation_updateFamily_deleteFamiliesFamilies.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updateFamily$deleteFamiliesFamilies(
+    return Mutation_updateFamily_deleteFamiliesFamilies(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -1387,7 +1387,7 @@ class Mutation$updateFamily$deleteFamiliesFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updateFamily$deleteFamiliesFamilies) ||
+    if (!(other is Mutation_updateFamily_deleteFamiliesFamilies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1405,24 +1405,24 @@ class Mutation$updateFamily$deleteFamiliesFamilies {
   }
 }
 
-extension UtilityExtension$Mutation$updateFamily$deleteFamiliesFamilies
-    on Mutation$updateFamily$deleteFamiliesFamilies {
-  CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<
-          Mutation$updateFamily$deleteFamiliesFamilies>
-      get copyWith => CopyWith$Mutation$updateFamily$deleteFamiliesFamilies(
+extension UtilityExtension_Mutation_updateFamily_deleteFamiliesFamilies
+    on Mutation_updateFamily_deleteFamiliesFamilies {
+  CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<
+          Mutation_updateFamily_deleteFamiliesFamilies>
+      get copyWith => CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes> {
-  factory CopyWith$Mutation$updateFamily$deleteFamiliesFamilies(
-    Mutation$updateFamily$deleteFamiliesFamilies instance,
-    TRes Function(Mutation$updateFamily$deleteFamiliesFamilies) then,
-  ) = _CopyWithImpl$Mutation$updateFamily$deleteFamiliesFamilies;
+abstract class CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes> {
+  factory CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(
+    Mutation_updateFamily_deleteFamiliesFamilies instance,
+    TRes Function(Mutation_updateFamily_deleteFamiliesFamilies) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_deleteFamiliesFamilies;
 
-  factory CopyWith$Mutation$updateFamily$deleteFamiliesFamilies.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updateFamily$deleteFamiliesFamilies;
+  factory CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies;
 
   TRes call({
     int? affectedRows,
@@ -1430,16 +1430,16 @@ abstract class CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
-    implements CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes> {
-  _CopyWithImpl$Mutation$updateFamily$deleteFamiliesFamilies(
+class _CopyWithImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
+    implements CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_deleteFamiliesFamilies(
     this._instance,
     this._then,
   );
 
-  final Mutation$updateFamily$deleteFamiliesFamilies _instance;
+  final Mutation_updateFamily_deleteFamiliesFamilies _instance;
 
-  final TRes Function(Mutation$updateFamily$deleteFamiliesFamilies) _then;
+  final TRes Function(Mutation_updateFamily_deleteFamiliesFamilies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1447,7 +1447,7 @@ class _CopyWithImpl$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updateFamily$deleteFamiliesFamilies(
+      _then(Mutation_updateFamily_deleteFamiliesFamilies(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -1457,9 +1457,9 @@ class _CopyWithImpl$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
-    implements CopyWith$Mutation$updateFamily$deleteFamiliesFamilies<TRes> {
-  _CopyWithStubImpl$Mutation$updateFamily$deleteFamiliesFamilies(this._res);
+class _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
+    implements CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies(this._res);
 
   TRes _res;
 
@@ -1470,17 +1470,17 @@ class _CopyWithStubImpl$Mutation$updateFamily$deleteFamiliesFamilies<TRes>
       _res;
 }
 
-class Mutation$updateFamily$insertFamiliesFamilies {
-  Mutation$updateFamily$insertFamiliesFamilies({
+class Mutation_updateFamily_insertFamiliesFamilies {
+  Mutation_updateFamily_insertFamiliesFamilies({
     required this.affectedRows,
     this.$__typename = 'FamiliesFamiliesMutationResponse',
   });
 
-  factory Mutation$updateFamily$insertFamiliesFamilies.fromJson(
+  factory Mutation_updateFamily_insertFamiliesFamilies.fromJson(
       Map<String, dynamic> json) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
-    return Mutation$updateFamily$insertFamiliesFamilies(
+    return Mutation_updateFamily_insertFamiliesFamilies(
       affectedRows: (l$affectedRows as int),
       $__typename: (l$$__typename as String),
     );
@@ -1514,7 +1514,7 @@ class Mutation$updateFamily$insertFamiliesFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updateFamily$insertFamiliesFamilies) ||
+    if (!(other is Mutation_updateFamily_insertFamiliesFamilies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1532,24 +1532,24 @@ class Mutation$updateFamily$insertFamiliesFamilies {
   }
 }
 
-extension UtilityExtension$Mutation$updateFamily$insertFamiliesFamilies
-    on Mutation$updateFamily$insertFamiliesFamilies {
-  CopyWith$Mutation$updateFamily$insertFamiliesFamilies<
-          Mutation$updateFamily$insertFamiliesFamilies>
-      get copyWith => CopyWith$Mutation$updateFamily$insertFamiliesFamilies(
+extension UtilityExtension_Mutation_updateFamily_insertFamiliesFamilies
+    on Mutation_updateFamily_insertFamiliesFamilies {
+  CopyWith_Mutation_updateFamily_insertFamiliesFamilies<
+          Mutation_updateFamily_insertFamiliesFamilies>
+      get copyWith => CopyWith_Mutation_updateFamily_insertFamiliesFamilies(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes> {
-  factory CopyWith$Mutation$updateFamily$insertFamiliesFamilies(
-    Mutation$updateFamily$insertFamiliesFamilies instance,
-    TRes Function(Mutation$updateFamily$insertFamiliesFamilies) then,
-  ) = _CopyWithImpl$Mutation$updateFamily$insertFamiliesFamilies;
+abstract class CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
+  factory CopyWith_Mutation_updateFamily_insertFamiliesFamilies(
+    Mutation_updateFamily_insertFamiliesFamilies instance,
+    TRes Function(Mutation_updateFamily_insertFamiliesFamilies) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies;
 
-  factory CopyWith$Mutation$updateFamily$insertFamiliesFamilies.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updateFamily$insertFamiliesFamilies;
+  factory CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies;
 
   TRes call({
     int? affectedRows,
@@ -1557,16 +1557,16 @@ abstract class CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$updateFamily$insertFamiliesFamilies<TRes>
-    implements CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes> {
-  _CopyWithImpl$Mutation$updateFamily$insertFamiliesFamilies(
+class _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
+    implements CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies(
     this._instance,
     this._then,
   );
 
-  final Mutation$updateFamily$insertFamiliesFamilies _instance;
+  final Mutation_updateFamily_insertFamiliesFamilies _instance;
 
-  final TRes Function(Mutation$updateFamily$insertFamiliesFamilies) _then;
+  final TRes Function(Mutation_updateFamily_insertFamiliesFamilies) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1574,7 +1574,7 @@ class _CopyWithImpl$Mutation$updateFamily$insertFamiliesFamilies<TRes>
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updateFamily$insertFamiliesFamilies(
+      _then(Mutation_updateFamily_insertFamiliesFamilies(
         affectedRows: affectedRows == _undefined || affectedRows == null
             ? _instance.affectedRows
             : (affectedRows as int),
@@ -1584,9 +1584,9 @@ class _CopyWithImpl$Mutation$updateFamily$insertFamiliesFamilies<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$updateFamily$insertFamiliesFamilies<TRes>
-    implements CopyWith$Mutation$updateFamily$insertFamiliesFamilies<TRes> {
-  _CopyWithStubImpl$Mutation$updateFamily$insertFamiliesFamilies(this._res);
+class _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
+    implements CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies(this._res);
 
   TRes _res;
 

@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/src/services/database/gql_definintions/families/helpers.dart';
 import 'package:graphql/client.dart';
 
@@ -7,69 +6,37 @@ import 'families/__generated__/mutations.gql.dart';
 import 'families/__generated__/queries.gql.dart';
 import 'families/__generated__/subscriptions.gql.dart';
 
-class FamiliesDAO extends DAOBase {
+class FamiliesDAO extends DAOBase<Family> {
   const FamiliesDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<Family> paginateFamilies({
+  @override
+  GQLPaginatableStream<Family> streamAll({
     Stream<String?>? searchQuery,
-    String? byAreaId,
-    String? byStreetId,
-    String? byParentFamilyId,
-    String? byChildFamilyId,
+    List<Input_FamiliesBoolExp>? where,
   }) {
-    assert(
-      byParentFamilyId == null || byChildFamilyId == null,
-      'Cannot filter by both parent and child family',
-    );
-
     return GQLPaginatableStream<Family>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
         final defaultSearchVars = graphQLClient.getDefaultSearchVars(
           event,
-          Variables$Subscription$watchAllFamilies.new,
-          Input$FamiliesBoolExp.new,
+          Variables_Subscription_watchAllFamilies.new,
+          Input_FamiliesBoolExp.new,
         );
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (byAreaId != null)
-              Input$FamiliesBoolExp(
-                areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
-                ),
-              ),
-            if (byStreetId != null)
-              Input$FamiliesBoolExp(
-                streets: Input$StreetsBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
-                ),
-              ),
-            if (byParentFamilyId != null)
-              Input$FamiliesBoolExp(
-                parents: Input$FamiliesFamiliesBoolExp(
-                  parentFamilyId:
-                      Input$UuidComparisonExp($_eq: byParentFamilyId.toUuid()),
-                ),
-              ),
-            if (byChildFamilyId != null)
-              Input$FamiliesBoolExp(
-                children: Input$FamiliesFamiliesBoolExp(
-                  childFamilyId:
-                      Input$UuidComparisonExp($_eq: byChildFamilyId.toUuid()),
-                ),
-              ),
-            ...defaultSearchVars.where ?? [],
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
           ],
-        );
+        ).toJson();
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionwatchAllFamilies,
             operationName: 'watchAllFamilies',
-            variables: variables.toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Family.fromJson),
           ),
         );
@@ -77,15 +44,15 @@ class FamiliesDAO extends DAOBase {
     );
   }
 
-  Stream<Family?> watchFamily({
-    required String familyId,
+  Stream<Family?> streamSingleById({
+    required String id,
   }) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchFamily,
         operationName: 'watchFamily',
-        variables: Variables$Subscription$watchFamily(
-          id: familyId.toUuid(),
+        variables: Variables_Subscription_watchFamily(
+          id: id.toUuid(),
         ).toJson(),
         parserFn: db.parser.singleParser(Family.fromJson),
       ),
@@ -97,7 +64,7 @@ class FamiliesDAO extends DAOBase {
   }) {
     final mutationOptions = MutationOptions(
       document: documentNodeMutationdeleteFamily,
-      variables: Variables$Mutation$deleteFamily(
+      variables: Variables_Mutation_deleteFamily(
         familyId: familyId.toUuid(),
       ).toJson(),
       parserFn: db.parser.singleOrNullParser(Family.fromJson),
@@ -145,7 +112,7 @@ class FamiliesDAO extends DAOBase {
       document: documentNodeQuerygetFamilyRelatedFamilies,
       operationName: 'getFamilyRelatedFamilies',
       variables:
-          Variables$Query$getFamilyRelatedFamilies(familyId: familyId.toUuid())
+          Variables_Query_getFamilyRelatedFamilies(familyId: familyId.toUuid())
               .toJson(),
       parserFn: db.parser.singleOrNullParser(Family.fromJson),
     );

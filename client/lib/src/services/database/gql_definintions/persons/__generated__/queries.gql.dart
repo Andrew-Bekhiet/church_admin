@@ -10,49 +10,49 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Query$personsNames {
-  factory Variables$Query$personsNames({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+class Variables_Query_personsNames {
+  factory Variables_Query_personsNames({
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   }) =>
-      Variables$Query$personsNames._({
+      Variables_Query_personsNames._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Query$personsNames._(this._$data);
+  Variables_Query_personsNames._(this._$data);
 
-  factory Variables$Query$personsNames.fromJson(Map<String, dynamic> data) {
+  factory Variables_Query_personsNames.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input$PersonsOrderBy.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_PersonsOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Query$personsNames._(result$data);
+    return Variables_Query_personsNames._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$PersonsBoolExp>? get where =>
-      (_$data['where'] as List<Input$PersonsBoolExp>?);
-  List<Input$PersonsOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$PersonsOrderBy>?);
+  List<Input_PersonsBoolExp>? get where =>
+      (_$data['where'] as List<Input_PersonsBoolExp>?);
+  List<Input_PersonsOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_PersonsOrderBy>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -71,8 +71,8 @@ class Variables$Query$personsNames {
     return result$data;
   }
 
-  CopyWith$Variables$Query$personsNames<Variables$Query$personsNames>
-      get copyWith => CopyWith$Variables$Query$personsNames(
+  CopyWith_Variables_Query_personsNames<Variables_Query_personsNames>
+      get copyWith => CopyWith_Variables_Query_personsNames(
             this,
             (i) => i,
           );
@@ -81,7 +81,7 @@ class Variables$Query$personsNames {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$personsNames) ||
+    if (!(other is Variables_Query_personsNames) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -155,32 +155,32 @@ class Variables$Query$personsNames {
   }
 }
 
-abstract class CopyWith$Variables$Query$personsNames<TRes> {
-  factory CopyWith$Variables$Query$personsNames(
-    Variables$Query$personsNames instance,
-    TRes Function(Variables$Query$personsNames) then,
-  ) = _CopyWithImpl$Variables$Query$personsNames;
+abstract class CopyWith_Variables_Query_personsNames<TRes> {
+  factory CopyWith_Variables_Query_personsNames(
+    Variables_Query_personsNames instance,
+    TRes Function(Variables_Query_personsNames) then,
+  ) = _CopyWithImpl_Variables_Query_personsNames;
 
-  factory CopyWith$Variables$Query$personsNames.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$personsNames;
+  factory CopyWith_Variables_Query_personsNames.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_personsNames;
 
   TRes call({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Query$personsNames<TRes>
-    implements CopyWith$Variables$Query$personsNames<TRes> {
-  _CopyWithImpl$Variables$Query$personsNames(
+class _CopyWithImpl_Variables_Query_personsNames<TRes>
+    implements CopyWith_Variables_Query_personsNames<TRes> {
+  _CopyWithImpl_Variables_Query_personsNames(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$personsNames _instance;
+  final Variables_Query_personsNames _instance;
 
-  final TRes Function(Variables$Query$personsNames) _then;
+  final TRes Function(Variables_Query_personsNames) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -189,49 +189,49 @@ class _CopyWithImpl$Variables$Query$personsNames<TRes>
     Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Query$personsNames._({
+      _then(Variables_Query_personsNames._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$PersonsBoolExp>?),
+          'where': (where as List<Input_PersonsBoolExp>?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$PersonsOrderBy>?),
+          'orderBy': (orderBy as List<Input_PersonsOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$personsNames<TRes>
-    implements CopyWith$Variables$Query$personsNames<TRes> {
-  _CopyWithStubImpl$Variables$Query$personsNames(this._res);
+class _CopyWithStubImpl_Variables_Query_personsNames<TRes>
+    implements CopyWith_Variables_Query_personsNames<TRes> {
+  _CopyWithStubImpl_Variables_Query_personsNames(this._res);
 
   TRes _res;
 
   call({
-    List<Input$PersonsBoolExp>? where,
-    List<Input$PersonsOrderBy>? orderBy,
+    List<Input_PersonsBoolExp>? where,
+    List<Input_PersonsOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
 }
 
-class Query$personsNames {
-  Query$personsNames({
+class Query_personsNames {
+  Query_personsNames({
     required this.persons,
     this.$__typename = 'query_root',
   });
 
-  factory Query$personsNames.fromJson(Map<String, dynamic> json) {
+  factory Query_personsNames.fromJson(Map<String, dynamic> json) {
     final l$persons = json['persons'];
     final l$$__typename = json['__typename'];
-    return Query$personsNames(
+    return Query_personsNames(
       persons: (l$persons as List<dynamic>)
           .map((e) =>
-              Query$personsNames$persons.fromJson((e as Map<String, dynamic>)))
+              Query_personsNames_persons.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$personsNames$persons> persons;
+  final List<Query_personsNames_persons> persons;
 
   final String $__typename;
 
@@ -259,7 +259,7 @@ class Query$personsNames {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsNames) || runtimeType != other.runtimeType) {
+    if (!(other is Query_personsNames) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$persons = persons;
@@ -283,45 +283,45 @@ class Query$personsNames {
   }
 }
 
-extension UtilityExtension$Query$personsNames on Query$personsNames {
-  CopyWith$Query$personsNames<Query$personsNames> get copyWith =>
-      CopyWith$Query$personsNames(
+extension UtilityExtension_Query_personsNames on Query_personsNames {
+  CopyWith_Query_personsNames<Query_personsNames> get copyWith =>
+      CopyWith_Query_personsNames(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$personsNames<TRes> {
-  factory CopyWith$Query$personsNames(
-    Query$personsNames instance,
-    TRes Function(Query$personsNames) then,
-  ) = _CopyWithImpl$Query$personsNames;
+abstract class CopyWith_Query_personsNames<TRes> {
+  factory CopyWith_Query_personsNames(
+    Query_personsNames instance,
+    TRes Function(Query_personsNames) then,
+  ) = _CopyWithImpl_Query_personsNames;
 
-  factory CopyWith$Query$personsNames.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsNames;
+  factory CopyWith_Query_personsNames.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsNames;
 
   TRes call({
-    List<Query$personsNames$persons>? persons,
+    List<Query_personsNames_persons>? persons,
     String? $__typename,
   });
   TRes persons(
-      Iterable<Query$personsNames$persons> Function(
+      Iterable<Query_personsNames_persons> Function(
               Iterable<
-                  CopyWith$Query$personsNames$persons<
-                      Query$personsNames$persons>>)
+                  CopyWith_Query_personsNames_persons<
+                      Query_personsNames_persons>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personsNames<TRes>
-    implements CopyWith$Query$personsNames<TRes> {
-  _CopyWithImpl$Query$personsNames(
+class _CopyWithImpl_Query_personsNames<TRes>
+    implements CopyWith_Query_personsNames<TRes> {
+  _CopyWithImpl_Query_personsNames(
     this._instance,
     this._then,
   );
 
-  final Query$personsNames _instance;
+  final Query_personsNames _instance;
 
-  final TRes Function(Query$personsNames) _then;
+  final TRes Function(Query_personsNames) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -329,36 +329,36 @@ class _CopyWithImpl$Query$personsNames<TRes>
     Object? persons = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personsNames(
+      _then(Query_personsNames(
         persons: persons == _undefined || persons == null
             ? _instance.persons
-            : (persons as List<Query$personsNames$persons>),
+            : (persons as List<Query_personsNames_persons>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes persons(
-          Iterable<Query$personsNames$persons> Function(
+          Iterable<Query_personsNames_persons> Function(
                   Iterable<
-                      CopyWith$Query$personsNames$persons<
-                          Query$personsNames$persons>>)
+                      CopyWith_Query_personsNames_persons<
+                          Query_personsNames_persons>>)
               _fn) =>
       call(
           persons: _fn(
-              _instance.persons.map((e) => CopyWith$Query$personsNames$persons(
+              _instance.persons.map((e) => CopyWith_Query_personsNames_persons(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personsNames<TRes>
-    implements CopyWith$Query$personsNames<TRes> {
-  _CopyWithStubImpl$Query$personsNames(this._res);
+class _CopyWithStubImpl_Query_personsNames<TRes>
+    implements CopyWith_Query_personsNames<TRes> {
+  _CopyWithStubImpl_Query_personsNames(this._res);
 
   TRes _res;
 
   call({
-    List<Query$personsNames$persons>? persons,
+    List<Query_personsNames_persons>? persons,
     String? $__typename,
   }) =>
       _res;
@@ -463,16 +463,16 @@ const documentNodeQuerypersonsNames = DocumentNode(definitions: [
   ),
 ]);
 
-class Query$personsNames$persons {
-  Query$personsNames$persons({
+class Query_personsNames_persons {
+  Query_personsNames_persons({
     required this.name,
     this.$__typename = 'Persons',
   });
 
-  factory Query$personsNames$persons.fromJson(Map<String, dynamic> json) {
+  factory Query_personsNames_persons.fromJson(Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personsNames$persons(
+    return Query_personsNames_persons(
       name: (l$name as String),
       $__typename: (l$$__typename as String),
     );
@@ -506,7 +506,7 @@ class Query$personsNames$persons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsNames$persons) ||
+    if (!(other is Query_personsNames_persons) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -524,23 +524,23 @@ class Query$personsNames$persons {
   }
 }
 
-extension UtilityExtension$Query$personsNames$persons
-    on Query$personsNames$persons {
-  CopyWith$Query$personsNames$persons<Query$personsNames$persons>
-      get copyWith => CopyWith$Query$personsNames$persons(
+extension UtilityExtension_Query_personsNames_persons
+    on Query_personsNames_persons {
+  CopyWith_Query_personsNames_persons<Query_personsNames_persons>
+      get copyWith => CopyWith_Query_personsNames_persons(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsNames$persons<TRes> {
-  factory CopyWith$Query$personsNames$persons(
-    Query$personsNames$persons instance,
-    TRes Function(Query$personsNames$persons) then,
-  ) = _CopyWithImpl$Query$personsNames$persons;
+abstract class CopyWith_Query_personsNames_persons<TRes> {
+  factory CopyWith_Query_personsNames_persons(
+    Query_personsNames_persons instance,
+    TRes Function(Query_personsNames_persons) then,
+  ) = _CopyWithImpl_Query_personsNames_persons;
 
-  factory CopyWith$Query$personsNames$persons.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsNames$persons;
+  factory CopyWith_Query_personsNames_persons.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsNames_persons;
 
   TRes call({
     String? name,
@@ -548,16 +548,16 @@ abstract class CopyWith$Query$personsNames$persons<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsNames$persons<TRes>
-    implements CopyWith$Query$personsNames$persons<TRes> {
-  _CopyWithImpl$Query$personsNames$persons(
+class _CopyWithImpl_Query_personsNames_persons<TRes>
+    implements CopyWith_Query_personsNames_persons<TRes> {
+  _CopyWithImpl_Query_personsNames_persons(
     this._instance,
     this._then,
   );
 
-  final Query$personsNames$persons _instance;
+  final Query_personsNames_persons _instance;
 
-  final TRes Function(Query$personsNames$persons) _then;
+  final TRes Function(Query_personsNames_persons) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -565,7 +565,7 @@ class _CopyWithImpl$Query$personsNames$persons<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personsNames$persons(
+      _then(Query_personsNames_persons(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -575,9 +575,9 @@ class _CopyWithImpl$Query$personsNames$persons<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsNames$persons<TRes>
-    implements CopyWith$Query$personsNames$persons<TRes> {
-  _CopyWithStubImpl$Query$personsNames$persons(this._res);
+class _CopyWithStubImpl_Query_personsNames_persons<TRes>
+    implements CopyWith_Query_personsNames_persons<TRes> {
+  _CopyWithStubImpl_Query_personsNames_persons(this._res);
 
   TRes _res;
 
@@ -588,8 +588,8 @@ class _CopyWithStubImpl$Query$personsNames$persons<TRes>
       _res;
 }
 
-class Variables$Query$personsGeolocations {
-  factory Variables$Query$personsGeolocations({
+class Variables_Query_personsGeolocations {
+  factory Variables_Query_personsGeolocations({
     required bool getAreas,
     required bool getStreets,
     required bool getFamilies,
@@ -599,9 +599,9 @@ class Variables$Query$personsGeolocations {
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
     List<UuidValue>? storesIds,
-    List<Input$PersonsBoolExp>? personsConditions,
+    List<Input_PersonsBoolExp>? personsConditions,
   }) =>
-      Variables$Query$personsGeolocations._({
+      Variables_Query_personsGeolocations._({
         r'getAreas': getAreas,
         r'getStreets': getStreets,
         r'getFamilies': getFamilies,
@@ -614,9 +614,9 @@ class Variables$Query$personsGeolocations {
         if (personsConditions != null) r'personsConditions': personsConditions,
       });
 
-  Variables$Query$personsGeolocations._(this._$data);
+  Variables_Query_personsGeolocations._(this._$data);
 
-  factory Variables$Query$personsGeolocations.fromJson(
+  factory Variables_Query_personsGeolocations.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$getAreas = data['getAreas'];
@@ -655,10 +655,10 @@ class Variables$Query$personsGeolocations {
       final l$personsConditions = data['personsConditions'];
       result$data['personsConditions'] = (l$personsConditions as List<dynamic>?)
           ?.map(
-              (e) => Input$PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
-    return Variables$Query$personsGeolocations._(result$data);
+    return Variables_Query_personsGeolocations._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -673,8 +673,8 @@ class Variables$Query$personsGeolocations {
   List<UuidValue>? get familiesIds =>
       (_$data['familiesIds'] as List<UuidValue>?);
   List<UuidValue>? get storesIds => (_$data['storesIds'] as List<UuidValue>?);
-  List<Input$PersonsBoolExp>? get personsConditions =>
-      (_$data['personsConditions'] as List<Input$PersonsBoolExp>?);
+  List<Input_PersonsBoolExp>? get personsConditions =>
+      (_$data['personsConditions'] as List<Input_PersonsBoolExp>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$getAreas = getAreas;
@@ -715,9 +715,9 @@ class Variables$Query$personsGeolocations {
     return result$data;
   }
 
-  CopyWith$Variables$Query$personsGeolocations<
-          Variables$Query$personsGeolocations>
-      get copyWith => CopyWith$Variables$Query$personsGeolocations(
+  CopyWith_Variables_Query_personsGeolocations<
+          Variables_Query_personsGeolocations>
+      get copyWith => CopyWith_Variables_Query_personsGeolocations(
             this,
             (i) => i,
           );
@@ -726,7 +726,7 @@ class Variables$Query$personsGeolocations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$personsGeolocations) ||
+    if (!(other is Variables_Query_personsGeolocations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -905,14 +905,14 @@ class Variables$Query$personsGeolocations {
   }
 }
 
-abstract class CopyWith$Variables$Query$personsGeolocations<TRes> {
-  factory CopyWith$Variables$Query$personsGeolocations(
-    Variables$Query$personsGeolocations instance,
-    TRes Function(Variables$Query$personsGeolocations) then,
-  ) = _CopyWithImpl$Variables$Query$personsGeolocations;
+abstract class CopyWith_Variables_Query_personsGeolocations<TRes> {
+  factory CopyWith_Variables_Query_personsGeolocations(
+    Variables_Query_personsGeolocations instance,
+    TRes Function(Variables_Query_personsGeolocations) then,
+  ) = _CopyWithImpl_Variables_Query_personsGeolocations;
 
-  factory CopyWith$Variables$Query$personsGeolocations.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$personsGeolocations;
+  factory CopyWith_Variables_Query_personsGeolocations.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_personsGeolocations;
 
   TRes call({
     bool? getAreas,
@@ -924,20 +924,20 @@ abstract class CopyWith$Variables$Query$personsGeolocations<TRes> {
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
     List<UuidValue>? storesIds,
-    List<Input$PersonsBoolExp>? personsConditions,
+    List<Input_PersonsBoolExp>? personsConditions,
   });
 }
 
-class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
-    implements CopyWith$Variables$Query$personsGeolocations<TRes> {
-  _CopyWithImpl$Variables$Query$personsGeolocations(
+class _CopyWithImpl_Variables_Query_personsGeolocations<TRes>
+    implements CopyWith_Variables_Query_personsGeolocations<TRes> {
+  _CopyWithImpl_Variables_Query_personsGeolocations(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$personsGeolocations _instance;
+  final Variables_Query_personsGeolocations _instance;
 
-  final TRes Function(Variables$Query$personsGeolocations) _then;
+  final TRes Function(Variables_Query_personsGeolocations) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -953,7 +953,7 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
     Object? storesIds = _undefined,
     Object? personsConditions = _undefined,
   }) =>
-      _then(Variables$Query$personsGeolocations._({
+      _then(Variables_Query_personsGeolocations._({
         ..._instance._$data,
         if (getAreas != _undefined && getAreas != null)
           'getAreas': (getAreas as bool),
@@ -974,13 +974,13 @@ class _CopyWithImpl$Variables$Query$personsGeolocations<TRes>
           'storesIds': (storesIds as List<UuidValue>?),
         if (personsConditions != _undefined)
           'personsConditions':
-              (personsConditions as List<Input$PersonsBoolExp>?),
+              (personsConditions as List<Input_PersonsBoolExp>?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$personsGeolocations<TRes>
-    implements CopyWith$Variables$Query$personsGeolocations<TRes> {
-  _CopyWithStubImpl$Variables$Query$personsGeolocations(this._res);
+class _CopyWithStubImpl_Variables_Query_personsGeolocations<TRes>
+    implements CopyWith_Variables_Query_personsGeolocations<TRes> {
+  _CopyWithStubImpl_Variables_Query_personsGeolocations(this._res);
 
   TRes _res;
 
@@ -994,13 +994,13 @@ class _CopyWithStubImpl$Variables$Query$personsGeolocations<TRes>
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
     List<UuidValue>? storesIds,
-    List<Input$PersonsBoolExp>? personsConditions,
+    List<Input_PersonsBoolExp>? personsConditions,
   }) =>
       _res;
 }
 
-class Query$personsGeolocations {
-  Query$personsGeolocations({
+class Query_personsGeolocations {
+  Query_personsGeolocations({
     required this.areas,
     required this.streets,
     required this.families,
@@ -1009,47 +1009,47 @@ class Query$personsGeolocations {
     this.$__typename = 'query_root',
   });
 
-  factory Query$personsGeolocations.fromJson(Map<String, dynamic> json) {
+  factory Query_personsGeolocations.fromJson(Map<String, dynamic> json) {
     final l$areas = json['areas'];
     final l$streets = json['streets'];
     final l$families = json['families'];
     final l$stores = json['stores'];
     final l$persons = json['persons'];
     final l$$__typename = json['__typename'];
-    return Query$personsGeolocations(
+    return Query_personsGeolocations(
       areas: (l$areas as List<dynamic>)
-          .map((e) => Query$personsGeolocations$areas.fromJson(
+          .map((e) => Query_personsGeolocations_areas.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       streets: (l$streets as List<dynamic>)
-          .map((e) => Query$personsGeolocations$streets.fromJson(
+          .map((e) => Query_personsGeolocations_streets.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       families: (l$families as List<dynamic>)
-          .map((e) => Query$personsGeolocations$families.fromJson(
+          .map((e) => Query_personsGeolocations_families.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       stores: (l$stores as List<dynamic>)
-          .map((e) => Query$personsGeolocations$stores.fromJson(
+          .map((e) => Query_personsGeolocations_stores.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       persons: (l$persons as List<dynamic>)
-          .map((e) => Query$personsGeolocations$persons.fromJson(
+          .map((e) => Query_personsGeolocations_persons.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$personsGeolocations$areas> areas;
+  final List<Query_personsGeolocations_areas> areas;
 
-  final List<Query$personsGeolocations$streets> streets;
+  final List<Query_personsGeolocations_streets> streets;
 
-  final List<Query$personsGeolocations$families> families;
+  final List<Query_personsGeolocations_families> families;
 
-  final List<Query$personsGeolocations$stores> stores;
+  final List<Query_personsGeolocations_stores> stores;
 
-  final List<Query$personsGeolocations$persons> persons;
+  final List<Query_personsGeolocations_persons> persons;
 
   final String $__typename;
 
@@ -1093,7 +1093,7 @@ class Query$personsGeolocations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations) ||
+    if (!(other is Query_personsGeolocations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1166,74 +1166,74 @@ class Query$personsGeolocations {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations
-    on Query$personsGeolocations {
-  CopyWith$Query$personsGeolocations<Query$personsGeolocations> get copyWith =>
-      CopyWith$Query$personsGeolocations(
+extension UtilityExtension_Query_personsGeolocations
+    on Query_personsGeolocations {
+  CopyWith_Query_personsGeolocations<Query_personsGeolocations> get copyWith =>
+      CopyWith_Query_personsGeolocations(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$personsGeolocations<TRes> {
-  factory CopyWith$Query$personsGeolocations(
-    Query$personsGeolocations instance,
-    TRes Function(Query$personsGeolocations) then,
-  ) = _CopyWithImpl$Query$personsGeolocations;
+abstract class CopyWith_Query_personsGeolocations<TRes> {
+  factory CopyWith_Query_personsGeolocations(
+    Query_personsGeolocations instance,
+    TRes Function(Query_personsGeolocations) then,
+  ) = _CopyWithImpl_Query_personsGeolocations;
 
-  factory CopyWith$Query$personsGeolocations.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations;
+  factory CopyWith_Query_personsGeolocations.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations;
 
   TRes call({
-    List<Query$personsGeolocations$areas>? areas,
-    List<Query$personsGeolocations$streets>? streets,
-    List<Query$personsGeolocations$families>? families,
-    List<Query$personsGeolocations$stores>? stores,
-    List<Query$personsGeolocations$persons>? persons,
+    List<Query_personsGeolocations_areas>? areas,
+    List<Query_personsGeolocations_streets>? streets,
+    List<Query_personsGeolocations_families>? families,
+    List<Query_personsGeolocations_stores>? stores,
+    List<Query_personsGeolocations_persons>? persons,
     String? $__typename,
   });
   TRes areas(
-      Iterable<Query$personsGeolocations$areas> Function(
+      Iterable<Query_personsGeolocations_areas> Function(
               Iterable<
-                  CopyWith$Query$personsGeolocations$areas<
-                      Query$personsGeolocations$areas>>)
+                  CopyWith_Query_personsGeolocations_areas<
+                      Query_personsGeolocations_areas>>)
           _fn);
   TRes streets(
-      Iterable<Query$personsGeolocations$streets> Function(
+      Iterable<Query_personsGeolocations_streets> Function(
               Iterable<
-                  CopyWith$Query$personsGeolocations$streets<
-                      Query$personsGeolocations$streets>>)
+                  CopyWith_Query_personsGeolocations_streets<
+                      Query_personsGeolocations_streets>>)
           _fn);
   TRes families(
-      Iterable<Query$personsGeolocations$families> Function(
+      Iterable<Query_personsGeolocations_families> Function(
               Iterable<
-                  CopyWith$Query$personsGeolocations$families<
-                      Query$personsGeolocations$families>>)
+                  CopyWith_Query_personsGeolocations_families<
+                      Query_personsGeolocations_families>>)
           _fn);
   TRes stores(
-      Iterable<Query$personsGeolocations$stores> Function(
+      Iterable<Query_personsGeolocations_stores> Function(
               Iterable<
-                  CopyWith$Query$personsGeolocations$stores<
-                      Query$personsGeolocations$stores>>)
+                  CopyWith_Query_personsGeolocations_stores<
+                      Query_personsGeolocations_stores>>)
           _fn);
   TRes persons(
-      Iterable<Query$personsGeolocations$persons> Function(
+      Iterable<Query_personsGeolocations_persons> Function(
               Iterable<
-                  CopyWith$Query$personsGeolocations$persons<
-                      Query$personsGeolocations$persons>>)
+                  CopyWith_Query_personsGeolocations_persons<
+                      Query_personsGeolocations_persons>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personsGeolocations<TRes>
-    implements CopyWith$Query$personsGeolocations<TRes> {
-  _CopyWithImpl$Query$personsGeolocations(
+class _CopyWithImpl_Query_personsGeolocations<TRes>
+    implements CopyWith_Query_personsGeolocations<TRes> {
+  _CopyWithImpl_Query_personsGeolocations(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations _instance;
+  final Query_personsGeolocations _instance;
 
-  final TRes Function(Query$personsGeolocations) _then;
+  final TRes Function(Query_personsGeolocations) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1245,100 +1245,100 @@ class _CopyWithImpl$Query$personsGeolocations<TRes>
     Object? persons = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personsGeolocations(
+      _then(Query_personsGeolocations(
         areas: areas == _undefined || areas == null
             ? _instance.areas
-            : (areas as List<Query$personsGeolocations$areas>),
+            : (areas as List<Query_personsGeolocations_areas>),
         streets: streets == _undefined || streets == null
             ? _instance.streets
-            : (streets as List<Query$personsGeolocations$streets>),
+            : (streets as List<Query_personsGeolocations_streets>),
         families: families == _undefined || families == null
             ? _instance.families
-            : (families as List<Query$personsGeolocations$families>),
+            : (families as List<Query_personsGeolocations_families>),
         stores: stores == _undefined || stores == null
             ? _instance.stores
-            : (stores as List<Query$personsGeolocations$stores>),
+            : (stores as List<Query_personsGeolocations_stores>),
         persons: persons == _undefined || persons == null
             ? _instance.persons
-            : (persons as List<Query$personsGeolocations$persons>),
+            : (persons as List<Query_personsGeolocations_persons>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes areas(
-          Iterable<Query$personsGeolocations$areas> Function(
+          Iterable<Query_personsGeolocations_areas> Function(
                   Iterable<
-                      CopyWith$Query$personsGeolocations$areas<
-                          Query$personsGeolocations$areas>>)
+                      CopyWith_Query_personsGeolocations_areas<
+                          Query_personsGeolocations_areas>>)
               _fn) =>
       call(
           areas: _fn(_instance.areas
-              .map((e) => CopyWith$Query$personsGeolocations$areas(
+              .map((e) => CopyWith_Query_personsGeolocations_areas(
                     e,
                     (i) => i,
                   ))).toList());
   TRes streets(
-          Iterable<Query$personsGeolocations$streets> Function(
+          Iterable<Query_personsGeolocations_streets> Function(
                   Iterable<
-                      CopyWith$Query$personsGeolocations$streets<
-                          Query$personsGeolocations$streets>>)
+                      CopyWith_Query_personsGeolocations_streets<
+                          Query_personsGeolocations_streets>>)
               _fn) =>
       call(
           streets: _fn(_instance.streets
-              .map((e) => CopyWith$Query$personsGeolocations$streets(
+              .map((e) => CopyWith_Query_personsGeolocations_streets(
                     e,
                     (i) => i,
                   ))).toList());
   TRes families(
-          Iterable<Query$personsGeolocations$families> Function(
+          Iterable<Query_personsGeolocations_families> Function(
                   Iterable<
-                      CopyWith$Query$personsGeolocations$families<
-                          Query$personsGeolocations$families>>)
+                      CopyWith_Query_personsGeolocations_families<
+                          Query_personsGeolocations_families>>)
               _fn) =>
       call(
           families: _fn(_instance.families
-              .map((e) => CopyWith$Query$personsGeolocations$families(
+              .map((e) => CopyWith_Query_personsGeolocations_families(
                     e,
                     (i) => i,
                   ))).toList());
   TRes stores(
-          Iterable<Query$personsGeolocations$stores> Function(
+          Iterable<Query_personsGeolocations_stores> Function(
                   Iterable<
-                      CopyWith$Query$personsGeolocations$stores<
-                          Query$personsGeolocations$stores>>)
+                      CopyWith_Query_personsGeolocations_stores<
+                          Query_personsGeolocations_stores>>)
               _fn) =>
       call(
           stores: _fn(_instance.stores
-              .map((e) => CopyWith$Query$personsGeolocations$stores(
+              .map((e) => CopyWith_Query_personsGeolocations_stores(
                     e,
                     (i) => i,
                   ))).toList());
   TRes persons(
-          Iterable<Query$personsGeolocations$persons> Function(
+          Iterable<Query_personsGeolocations_persons> Function(
                   Iterable<
-                      CopyWith$Query$personsGeolocations$persons<
-                          Query$personsGeolocations$persons>>)
+                      CopyWith_Query_personsGeolocations_persons<
+                          Query_personsGeolocations_persons>>)
               _fn) =>
       call(
           persons: _fn(_instance.persons
-              .map((e) => CopyWith$Query$personsGeolocations$persons(
+              .map((e) => CopyWith_Query_personsGeolocations_persons(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations<TRes>
-    implements CopyWith$Query$personsGeolocations<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations<TRes>
+    implements CopyWith_Query_personsGeolocations<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations(this._res);
 
   TRes _res;
 
   call({
-    List<Query$personsGeolocations$areas>? areas,
-    List<Query$personsGeolocations$streets>? streets,
-    List<Query$personsGeolocations$families>? families,
-    List<Query$personsGeolocations$stores>? stores,
-    List<Query$personsGeolocations$persons>? persons,
+    List<Query_personsGeolocations_areas>? areas,
+    List<Query_personsGeolocations_streets>? streets,
+    List<Query_personsGeolocations_families>? families,
+    List<Query_personsGeolocations_stores>? stores,
+    List<Query_personsGeolocations_persons>? persons,
     String? $__typename,
   }) =>
       _res;
@@ -2023,8 +2023,8 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
-class Query$personsGeolocations$areas implements Fragment$AreaNoPhoto {
-  Query$personsGeolocations$areas({
+class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
+  Query_personsGeolocations_areas({
     required this.id,
     required this.name,
     this.color,
@@ -2032,13 +2032,13 @@ class Query$personsGeolocations$areas implements Fragment$AreaNoPhoto {
     this.bounds,
   });
 
-  factory Query$personsGeolocations$areas.fromJson(Map<String, dynamic> json) {
+  factory Query_personsGeolocations_areas.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$bounds = json['bounds'];
-    return Query$personsGeolocations$areas(
+    return Query_personsGeolocations_areas(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -2093,7 +2093,7 @@ class Query$personsGeolocations$areas implements Fragment$AreaNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations$areas) ||
+    if (!(other is Query_personsGeolocations_areas) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2126,23 +2126,23 @@ class Query$personsGeolocations$areas implements Fragment$AreaNoPhoto {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations$areas
-    on Query$personsGeolocations$areas {
-  CopyWith$Query$personsGeolocations$areas<Query$personsGeolocations$areas>
-      get copyWith => CopyWith$Query$personsGeolocations$areas(
+extension UtilityExtension_Query_personsGeolocations_areas
+    on Query_personsGeolocations_areas {
+  CopyWith_Query_personsGeolocations_areas<Query_personsGeolocations_areas>
+      get copyWith => CopyWith_Query_personsGeolocations_areas(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsGeolocations$areas<TRes> {
-  factory CopyWith$Query$personsGeolocations$areas(
-    Query$personsGeolocations$areas instance,
-    TRes Function(Query$personsGeolocations$areas) then,
-  ) = _CopyWithImpl$Query$personsGeolocations$areas;
+abstract class CopyWith_Query_personsGeolocations_areas<TRes> {
+  factory CopyWith_Query_personsGeolocations_areas(
+    Query_personsGeolocations_areas instance,
+    TRes Function(Query_personsGeolocations_areas) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_areas;
 
-  factory CopyWith$Query$personsGeolocations$areas.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations$areas;
+  factory CopyWith_Query_personsGeolocations_areas.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_areas;
 
   TRes call({
     UuidValue? id,
@@ -2153,16 +2153,16 @@ abstract class CopyWith$Query$personsGeolocations$areas<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsGeolocations$areas<TRes>
-    implements CopyWith$Query$personsGeolocations$areas<TRes> {
-  _CopyWithImpl$Query$personsGeolocations$areas(
+class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
+    implements CopyWith_Query_personsGeolocations_areas<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_areas(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations$areas _instance;
+  final Query_personsGeolocations_areas _instance;
 
-  final TRes Function(Query$personsGeolocations$areas) _then;
+  final TRes Function(Query_personsGeolocations_areas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2173,7 +2173,7 @@ class _CopyWithImpl$Query$personsGeolocations$areas<TRes>
     Object? $__typename = _undefined,
     Object? bounds = _undefined,
   }) =>
-      _then(Query$personsGeolocations$areas(
+      _then(Query_personsGeolocations_areas(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2188,9 +2188,9 @@ class _CopyWithImpl$Query$personsGeolocations$areas<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations$areas<TRes>
-    implements CopyWith$Query$personsGeolocations$areas<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations$areas(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations_areas<TRes>
+    implements CopyWith_Query_personsGeolocations_areas<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_areas(this._res);
 
   TRes _res;
 
@@ -2204,8 +2204,8 @@ class _CopyWithStubImpl$Query$personsGeolocations$areas<TRes>
       _res;
 }
 
-class Query$personsGeolocations$streets implements Fragment$StreetNoPhoto {
-  Query$personsGeolocations$streets({
+class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
+  Query_personsGeolocations_streets({
     required this.id,
     required this.name,
     this.color,
@@ -2213,14 +2213,14 @@ class Query$personsGeolocations$streets implements Fragment$StreetNoPhoto {
     this.line,
   });
 
-  factory Query$personsGeolocations$streets.fromJson(
+  factory Query_personsGeolocations_streets.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$line = json['line'];
-    return Query$personsGeolocations$streets(
+    return Query_personsGeolocations_streets(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -2275,7 +2275,7 @@ class Query$personsGeolocations$streets implements Fragment$StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations$streets) ||
+    if (!(other is Query_personsGeolocations_streets) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2308,23 +2308,23 @@ class Query$personsGeolocations$streets implements Fragment$StreetNoPhoto {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations$streets
-    on Query$personsGeolocations$streets {
-  CopyWith$Query$personsGeolocations$streets<Query$personsGeolocations$streets>
-      get copyWith => CopyWith$Query$personsGeolocations$streets(
+extension UtilityExtension_Query_personsGeolocations_streets
+    on Query_personsGeolocations_streets {
+  CopyWith_Query_personsGeolocations_streets<Query_personsGeolocations_streets>
+      get copyWith => CopyWith_Query_personsGeolocations_streets(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsGeolocations$streets<TRes> {
-  factory CopyWith$Query$personsGeolocations$streets(
-    Query$personsGeolocations$streets instance,
-    TRes Function(Query$personsGeolocations$streets) then,
-  ) = _CopyWithImpl$Query$personsGeolocations$streets;
+abstract class CopyWith_Query_personsGeolocations_streets<TRes> {
+  factory CopyWith_Query_personsGeolocations_streets(
+    Query_personsGeolocations_streets instance,
+    TRes Function(Query_personsGeolocations_streets) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_streets;
 
-  factory CopyWith$Query$personsGeolocations$streets.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations$streets;
+  factory CopyWith_Query_personsGeolocations_streets.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_streets;
 
   TRes call({
     UuidValue? id,
@@ -2335,16 +2335,16 @@ abstract class CopyWith$Query$personsGeolocations$streets<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsGeolocations$streets<TRes>
-    implements CopyWith$Query$personsGeolocations$streets<TRes> {
-  _CopyWithImpl$Query$personsGeolocations$streets(
+class _CopyWithImpl_Query_personsGeolocations_streets<TRes>
+    implements CopyWith_Query_personsGeolocations_streets<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_streets(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations$streets _instance;
+  final Query_personsGeolocations_streets _instance;
 
-  final TRes Function(Query$personsGeolocations$streets) _then;
+  final TRes Function(Query_personsGeolocations_streets) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2355,7 +2355,7 @@ class _CopyWithImpl$Query$personsGeolocations$streets<TRes>
     Object? $__typename = _undefined,
     Object? line = _undefined,
   }) =>
-      _then(Query$personsGeolocations$streets(
+      _then(Query_personsGeolocations_streets(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2370,9 +2370,9 @@ class _CopyWithImpl$Query$personsGeolocations$streets<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations$streets<TRes>
-    implements CopyWith$Query$personsGeolocations$streets<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations$streets(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations_streets<TRes>
+    implements CopyWith_Query_personsGeolocations_streets<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_streets(this._res);
 
   TRes _res;
 
@@ -2386,8 +2386,8 @@ class _CopyWithStubImpl$Query$personsGeolocations$streets<TRes>
       _res;
 }
 
-class Query$personsGeolocations$families implements Fragment$FamilyNoPhoto {
-  Query$personsGeolocations$families({
+class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
+  Query_personsGeolocations_families({
     required this.id,
     required this.name,
     this.color,
@@ -2395,14 +2395,14 @@ class Query$personsGeolocations$families implements Fragment$FamilyNoPhoto {
     this.geolocation,
   });
 
-  factory Query$personsGeolocations$families.fromJson(
+  factory Query_personsGeolocations_families.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$geolocation = json['geolocation'];
-    return Query$personsGeolocations$families(
+    return Query_personsGeolocations_families(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -2457,7 +2457,7 @@ class Query$personsGeolocations$families implements Fragment$FamilyNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations$families) ||
+    if (!(other is Query_personsGeolocations_families) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2490,24 +2490,24 @@ class Query$personsGeolocations$families implements Fragment$FamilyNoPhoto {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations$families
-    on Query$personsGeolocations$families {
-  CopyWith$Query$personsGeolocations$families<
-          Query$personsGeolocations$families>
-      get copyWith => CopyWith$Query$personsGeolocations$families(
+extension UtilityExtension_Query_personsGeolocations_families
+    on Query_personsGeolocations_families {
+  CopyWith_Query_personsGeolocations_families<
+          Query_personsGeolocations_families>
+      get copyWith => CopyWith_Query_personsGeolocations_families(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsGeolocations$families<TRes> {
-  factory CopyWith$Query$personsGeolocations$families(
-    Query$personsGeolocations$families instance,
-    TRes Function(Query$personsGeolocations$families) then,
-  ) = _CopyWithImpl$Query$personsGeolocations$families;
+abstract class CopyWith_Query_personsGeolocations_families<TRes> {
+  factory CopyWith_Query_personsGeolocations_families(
+    Query_personsGeolocations_families instance,
+    TRes Function(Query_personsGeolocations_families) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_families;
 
-  factory CopyWith$Query$personsGeolocations$families.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations$families;
+  factory CopyWith_Query_personsGeolocations_families.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_families;
 
   TRes call({
     UuidValue? id,
@@ -2518,16 +2518,16 @@ abstract class CopyWith$Query$personsGeolocations$families<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsGeolocations$families<TRes>
-    implements CopyWith$Query$personsGeolocations$families<TRes> {
-  _CopyWithImpl$Query$personsGeolocations$families(
+class _CopyWithImpl_Query_personsGeolocations_families<TRes>
+    implements CopyWith_Query_personsGeolocations_families<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_families(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations$families _instance;
+  final Query_personsGeolocations_families _instance;
 
-  final TRes Function(Query$personsGeolocations$families) _then;
+  final TRes Function(Query_personsGeolocations_families) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2538,7 +2538,7 @@ class _CopyWithImpl$Query$personsGeolocations$families<TRes>
     Object? $__typename = _undefined,
     Object? geolocation = _undefined,
   }) =>
-      _then(Query$personsGeolocations$families(
+      _then(Query_personsGeolocations_families(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2553,9 +2553,9 @@ class _CopyWithImpl$Query$personsGeolocations$families<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations$families<TRes>
-    implements CopyWith$Query$personsGeolocations$families<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations$families(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
+    implements CopyWith_Query_personsGeolocations_families<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_families(this._res);
 
   TRes _res;
 
@@ -2569,8 +2569,8 @@ class _CopyWithStubImpl$Query$personsGeolocations$families<TRes>
       _res;
 }
 
-class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
-  Query$personsGeolocations$stores({
+class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
+  Query_personsGeolocations_stores({
     required this.id,
     required this.name,
     this.color,
@@ -2578,13 +2578,13 @@ class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
     this.geolocation,
   });
 
-  factory Query$personsGeolocations$stores.fromJson(Map<String, dynamic> json) {
+  factory Query_personsGeolocations_stores.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$geolocation = json['geolocation'];
-    return Query$personsGeolocations$stores(
+    return Query_personsGeolocations_stores(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -2639,7 +2639,7 @@ class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations$stores) ||
+    if (!(other is Query_personsGeolocations_stores) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2672,23 +2672,23 @@ class Query$personsGeolocations$stores implements Fragment$StoreNoPhoto {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations$stores
-    on Query$personsGeolocations$stores {
-  CopyWith$Query$personsGeolocations$stores<Query$personsGeolocations$stores>
-      get copyWith => CopyWith$Query$personsGeolocations$stores(
+extension UtilityExtension_Query_personsGeolocations_stores
+    on Query_personsGeolocations_stores {
+  CopyWith_Query_personsGeolocations_stores<Query_personsGeolocations_stores>
+      get copyWith => CopyWith_Query_personsGeolocations_stores(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsGeolocations$stores<TRes> {
-  factory CopyWith$Query$personsGeolocations$stores(
-    Query$personsGeolocations$stores instance,
-    TRes Function(Query$personsGeolocations$stores) then,
-  ) = _CopyWithImpl$Query$personsGeolocations$stores;
+abstract class CopyWith_Query_personsGeolocations_stores<TRes> {
+  factory CopyWith_Query_personsGeolocations_stores(
+    Query_personsGeolocations_stores instance,
+    TRes Function(Query_personsGeolocations_stores) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_stores;
 
-  factory CopyWith$Query$personsGeolocations$stores.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations$stores;
+  factory CopyWith_Query_personsGeolocations_stores.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_stores;
 
   TRes call({
     UuidValue? id,
@@ -2699,16 +2699,16 @@ abstract class CopyWith$Query$personsGeolocations$stores<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsGeolocations$stores<TRes>
-    implements CopyWith$Query$personsGeolocations$stores<TRes> {
-  _CopyWithImpl$Query$personsGeolocations$stores(
+class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
+    implements CopyWith_Query_personsGeolocations_stores<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_stores(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations$stores _instance;
+  final Query_personsGeolocations_stores _instance;
 
-  final TRes Function(Query$personsGeolocations$stores) _then;
+  final TRes Function(Query_personsGeolocations_stores) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2719,7 +2719,7 @@ class _CopyWithImpl$Query$personsGeolocations$stores<TRes>
     Object? $__typename = _undefined,
     Object? geolocation = _undefined,
   }) =>
-      _then(Query$personsGeolocations$stores(
+      _then(Query_personsGeolocations_stores(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2734,9 +2734,9 @@ class _CopyWithImpl$Query$personsGeolocations$stores<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations$stores<TRes>
-    implements CopyWith$Query$personsGeolocations$stores<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations$stores(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
+    implements CopyWith_Query_personsGeolocations_stores<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_stores(this._res);
 
   TRes _res;
 
@@ -2750,8 +2750,8 @@ class _CopyWithStubImpl$Query$personsGeolocations$stores<TRes>
       _res;
 }
 
-class Query$personsGeolocations$persons implements Fragment$PersonNoPhoto {
-  Query$personsGeolocations$persons({
+class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
+  Query_personsGeolocations_persons({
     required this.id,
     required this.name,
     this.color,
@@ -2759,14 +2759,14 @@ class Query$personsGeolocations$persons implements Fragment$PersonNoPhoto {
     this.geolocation,
   });
 
-  factory Query$personsGeolocations$persons.fromJson(
+  factory Query_personsGeolocations_persons.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$geolocation = json['geolocation'];
-    return Query$personsGeolocations$persons(
+    return Query_personsGeolocations_persons(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -2821,7 +2821,7 @@ class Query$personsGeolocations$persons implements Fragment$PersonNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personsGeolocations$persons) ||
+    if (!(other is Query_personsGeolocations_persons) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2854,23 +2854,23 @@ class Query$personsGeolocations$persons implements Fragment$PersonNoPhoto {
   }
 }
 
-extension UtilityExtension$Query$personsGeolocations$persons
-    on Query$personsGeolocations$persons {
-  CopyWith$Query$personsGeolocations$persons<Query$personsGeolocations$persons>
-      get copyWith => CopyWith$Query$personsGeolocations$persons(
+extension UtilityExtension_Query_personsGeolocations_persons
+    on Query_personsGeolocations_persons {
+  CopyWith_Query_personsGeolocations_persons<Query_personsGeolocations_persons>
+      get copyWith => CopyWith_Query_personsGeolocations_persons(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personsGeolocations$persons<TRes> {
-  factory CopyWith$Query$personsGeolocations$persons(
-    Query$personsGeolocations$persons instance,
-    TRes Function(Query$personsGeolocations$persons) then,
-  ) = _CopyWithImpl$Query$personsGeolocations$persons;
+abstract class CopyWith_Query_personsGeolocations_persons<TRes> {
+  factory CopyWith_Query_personsGeolocations_persons(
+    Query_personsGeolocations_persons instance,
+    TRes Function(Query_personsGeolocations_persons) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_persons;
 
-  factory CopyWith$Query$personsGeolocations$persons.stub(TRes res) =
-      _CopyWithStubImpl$Query$personsGeolocations$persons;
+  factory CopyWith_Query_personsGeolocations_persons.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_persons;
 
   TRes call({
     UuidValue? id,
@@ -2881,16 +2881,16 @@ abstract class CopyWith$Query$personsGeolocations$persons<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$personsGeolocations$persons<TRes>
-    implements CopyWith$Query$personsGeolocations$persons<TRes> {
-  _CopyWithImpl$Query$personsGeolocations$persons(
+class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
+    implements CopyWith_Query_personsGeolocations_persons<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_persons(
     this._instance,
     this._then,
   );
 
-  final Query$personsGeolocations$persons _instance;
+  final Query_personsGeolocations_persons _instance;
 
-  final TRes Function(Query$personsGeolocations$persons) _then;
+  final TRes Function(Query_personsGeolocations_persons) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2901,7 +2901,7 @@ class _CopyWithImpl$Query$personsGeolocations$persons<TRes>
     Object? $__typename = _undefined,
     Object? geolocation = _undefined,
   }) =>
-      _then(Query$personsGeolocations$persons(
+      _then(Query_personsGeolocations_persons(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2916,9 +2916,9 @@ class _CopyWithImpl$Query$personsGeolocations$persons<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$personsGeolocations$persons<TRes>
-    implements CopyWith$Query$personsGeolocations$persons<TRes> {
-  _CopyWithStubImpl$Query$personsGeolocations$persons(this._res);
+class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
+    implements CopyWith_Query_personsGeolocations_persons<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_persons(this._res);
 
   TRes _res;
 
@@ -2932,8 +2932,8 @@ class _CopyWithStubImpl$Query$personsGeolocations$persons<TRes>
       _res;
 }
 
-class Variables$Query$personHistoryAnalysis {
-  factory Variables$Query$personHistoryAnalysis({
+class Variables_Query_personHistoryAnalysis {
+  factory Variables_Query_personHistoryAnalysis({
     required DateTime dateFrom,
     required DateTime dateTo,
     required DateTime timeFrom,
@@ -2948,7 +2948,7 @@ class Variables$Query$personHistoryAnalysis {
     required bool confessionHistory,
     required bool kodasHistory,
   }) =>
-      Variables$Query$personHistoryAnalysis._({
+      Variables_Query_personHistoryAnalysis._({
         r'dateFrom': dateFrom,
         r'dateTo': dateTo,
         r'timeFrom': timeFrom,
@@ -2964,9 +2964,9 @@ class Variables$Query$personHistoryAnalysis {
         r'kodasHistory': kodasHistory,
       });
 
-  Variables$Query$personHistoryAnalysis._(this._$data);
+  Variables_Query_personHistoryAnalysis._(this._$data);
 
-  factory Variables$Query$personHistoryAnalysis.fromJson(
+  factory Variables_Query_personHistoryAnalysis.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$dateFrom = data['dateFrom'];
@@ -3006,7 +3006,7 @@ class Variables$Query$personHistoryAnalysis {
     result$data['confessionHistory'] = (l$confessionHistory as bool);
     final l$kodasHistory = data['kodasHistory'];
     result$data['kodasHistory'] = (l$kodasHistory as bool);
-    return Variables$Query$personHistoryAnalysis._(result$data);
+    return Variables_Query_personHistoryAnalysis._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -3065,9 +3065,9 @@ class Variables$Query$personHistoryAnalysis {
     return result$data;
   }
 
-  CopyWith$Variables$Query$personHistoryAnalysis<
-          Variables$Query$personHistoryAnalysis>
-      get copyWith => CopyWith$Variables$Query$personHistoryAnalysis(
+  CopyWith_Variables_Query_personHistoryAnalysis<
+          Variables_Query_personHistoryAnalysis>
+      get copyWith => CopyWith_Variables_Query_personHistoryAnalysis(
             this,
             (i) => i,
           );
@@ -3076,7 +3076,7 @@ class Variables$Query$personHistoryAnalysis {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$personHistoryAnalysis) ||
+    if (!(other is Variables_Query_personHistoryAnalysis) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3238,14 +3238,14 @@ class Variables$Query$personHistoryAnalysis {
   }
 }
 
-abstract class CopyWith$Variables$Query$personHistoryAnalysis<TRes> {
-  factory CopyWith$Variables$Query$personHistoryAnalysis(
-    Variables$Query$personHistoryAnalysis instance,
-    TRes Function(Variables$Query$personHistoryAnalysis) then,
-  ) = _CopyWithImpl$Variables$Query$personHistoryAnalysis;
+abstract class CopyWith_Variables_Query_personHistoryAnalysis<TRes> {
+  factory CopyWith_Variables_Query_personHistoryAnalysis(
+    Variables_Query_personHistoryAnalysis instance,
+    TRes Function(Variables_Query_personHistoryAnalysis) then,
+  ) = _CopyWithImpl_Variables_Query_personHistoryAnalysis;
 
-  factory CopyWith$Variables$Query$personHistoryAnalysis.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$personHistoryAnalysis;
+  factory CopyWith_Variables_Query_personHistoryAnalysis.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_personHistoryAnalysis;
 
   TRes call({
     DateTime? dateFrom,
@@ -3264,16 +3264,16 @@ abstract class CopyWith$Variables$Query$personHistoryAnalysis<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Query$personHistoryAnalysis<TRes>
-    implements CopyWith$Variables$Query$personHistoryAnalysis<TRes> {
-  _CopyWithImpl$Variables$Query$personHistoryAnalysis(
+class _CopyWithImpl_Variables_Query_personHistoryAnalysis<TRes>
+    implements CopyWith_Variables_Query_personHistoryAnalysis<TRes> {
+  _CopyWithImpl_Variables_Query_personHistoryAnalysis(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$personHistoryAnalysis _instance;
+  final Variables_Query_personHistoryAnalysis _instance;
 
-  final TRes Function(Variables$Query$personHistoryAnalysis) _then;
+  final TRes Function(Variables_Query_personHistoryAnalysis) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3292,7 +3292,7 @@ class _CopyWithImpl$Variables$Query$personHistoryAnalysis<TRes>
     Object? confessionHistory = _undefined,
     Object? kodasHistory = _undefined,
   }) =>
-      _then(Variables$Query$personHistoryAnalysis._({
+      _then(Variables_Query_personHistoryAnalysis._({
         ..._instance._$data,
         if (dateFrom != _undefined && dateFrom != null)
           'dateFrom': (dateFrom as DateTime),
@@ -3323,9 +3323,9 @@ class _CopyWithImpl$Variables$Query$personHistoryAnalysis<TRes>
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$personHistoryAnalysis<TRes>
-    implements CopyWith$Variables$Query$personHistoryAnalysis<TRes> {
-  _CopyWithStubImpl$Variables$Query$personHistoryAnalysis(this._res);
+class _CopyWithStubImpl_Variables_Query_personHistoryAnalysis<TRes>
+    implements CopyWith_Variables_Query_personHistoryAnalysis<TRes> {
+  _CopyWithStubImpl_Variables_Query_personHistoryAnalysis(this._res);
 
   TRes _res;
 
@@ -3347,25 +3347,25 @@ class _CopyWithStubImpl$Variables$Query$personHistoryAnalysis<TRes>
       _res;
 }
 
-class Query$personHistoryAnalysis {
-  Query$personHistoryAnalysis({
+class Query_personHistoryAnalysis {
+  Query_personHistoryAnalysis({
     this.personsByPk,
     this.$__typename = 'query_root',
   });
 
-  factory Query$personHistoryAnalysis.fromJson(Map<String, dynamic> json) {
+  factory Query_personHistoryAnalysis.fromJson(Map<String, dynamic> json) {
     final l$personsByPk = json['personsByPk'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis(
+    return Query_personHistoryAnalysis(
       personsByPk: l$personsByPk == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk.fromJson(
+          : Query_personHistoryAnalysis_personsByPk.fromJson(
               (l$personsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk? personsByPk;
+  final Query_personHistoryAnalysis_personsByPk? personsByPk;
 
   final String $__typename;
 
@@ -3393,7 +3393,7 @@ class Query$personHistoryAnalysis {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis) ||
+    if (!(other is Query_personHistoryAnalysis) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3411,41 +3411,41 @@ class Query$personHistoryAnalysis {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis
-    on Query$personHistoryAnalysis {
-  CopyWith$Query$personHistoryAnalysis<Query$personHistoryAnalysis>
-      get copyWith => CopyWith$Query$personHistoryAnalysis(
+extension UtilityExtension_Query_personHistoryAnalysis
+    on Query_personHistoryAnalysis {
+  CopyWith_Query_personHistoryAnalysis<Query_personHistoryAnalysis>
+      get copyWith => CopyWith_Query_personHistoryAnalysis(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis<TRes> {
-  factory CopyWith$Query$personHistoryAnalysis(
-    Query$personHistoryAnalysis instance,
-    TRes Function(Query$personHistoryAnalysis) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis;
+abstract class CopyWith_Query_personHistoryAnalysis<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis(
+    Query_personHistoryAnalysis instance,
+    TRes Function(Query_personHistoryAnalysis) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis;
 
-  factory CopyWith$Query$personHistoryAnalysis.stub(TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis;
+  factory CopyWith_Query_personHistoryAnalysis.stub(TRes res) =
+      _CopyWithStubImpl_Query_personHistoryAnalysis;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk? personsByPk,
+    Query_personHistoryAnalysis_personsByPk? personsByPk,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> get personsByPk;
+  CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> get personsByPk;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis<TRes>
-    implements CopyWith$Query$personHistoryAnalysis<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis(
+class _CopyWithImpl_Query_personHistoryAnalysis<TRes>
+    implements CopyWith_Query_personHistoryAnalysis<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis _instance;
+  final Query_personHistoryAnalysis _instance;
 
-  final TRes Function(Query$personHistoryAnalysis) _then;
+  final TRes Function(Query_personHistoryAnalysis) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3453,37 +3453,37 @@ class _CopyWithImpl$Query$personHistoryAnalysis<TRes>
     Object? personsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis(
+      _then(Query_personHistoryAnalysis(
         personsByPk: personsByPk == _undefined
             ? _instance.personsByPk
-            : (personsByPk as Query$personHistoryAnalysis$personsByPk?),
+            : (personsByPk as Query_personHistoryAnalysis_personsByPk?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> get personsByPk {
+  CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> get personsByPk {
     final local$personsByPk = _instance.personsByPk;
     return local$personsByPk == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk.stub(
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk.stub(
             _then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk(
             local$personsByPk, (e) => call(personsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis<TRes>
-    implements CopyWith$Query$personHistoryAnalysis<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis<TRes>
+    implements CopyWith_Query_personHistoryAnalysis<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis(this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk? personsByPk,
+    Query_personHistoryAnalysis_personsByPk? personsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> get personsByPk =>
-      CopyWith$Query$personHistoryAnalysis$personsByPk.stub(_res);
+  CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> get personsByPk =>
+      CopyWith_Query_personHistoryAnalysis_personsByPk.stub(_res);
 }
 
 const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
@@ -4956,8 +4956,8 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Query$personHistoryAnalysis$personsByPk {
-  Query$personHistoryAnalysis$personsByPk({
+class Query_personHistoryAnalysis_personsByPk {
+  Query_personHistoryAnalysis_personsByPk({
     required this.id,
     required this.name,
     required this.callHistoryAggregate,
@@ -4971,7 +4971,7 @@ class Query$personHistoryAnalysis$personsByPk {
     this.$__typename = 'Persons',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -4984,34 +4984,34 @@ class Query$personHistoryAnalysis$personsByPk {
     final l$classes = json['classes'];
     final l$groups = json['groups'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk(
+    return Query_personHistoryAnalysis_personsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       callHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate.fromJson(
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate.fromJson(
               (l$callHistoryAggregate as Map<String, dynamic>)),
       visitHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
               .fromJson((l$visitHistoryAggregate as Map<String, dynamic>)),
       editHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate.fromJson(
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate.fromJson(
               (l$editHistoryAggregate as Map<String, dynamic>)),
       kodasHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
               .fromJson((l$kodasHistoryAggregate as Map<String, dynamic>)),
       confessionHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
               .fromJson((l$confessionHistoryAggregate as Map<String, dynamic>)),
       services: (l$services as List<dynamic>)
-          .map((e) => Query$personHistoryAnalysis$personsByPk$services.fromJson(
+          .map((e) => Query_personHistoryAnalysis_personsByPk_services.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       classes: (l$classes as List<dynamic>?)
-          ?.map((e) => Query$personHistoryAnalysis$personsByPk$classes.fromJson(
+          ?.map((e) => Query_personHistoryAnalysis_personsByPk_classes.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       groups: (l$groups as List<dynamic>)
-          .map((e) => Query$personHistoryAnalysis$personsByPk$groups.fromJson(
+          .map((e) => Query_personHistoryAnalysis_personsByPk_groups.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
@@ -5022,26 +5022,26 @@ class Query$personHistoryAnalysis$personsByPk {
 
   final String name;
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
       callHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
       visitHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
       editHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
       kodasHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
       confessionHistoryAggregate;
 
-  final List<Query$personHistoryAnalysis$personsByPk$services> services;
+  final List<Query_personHistoryAnalysis_personsByPk_services> services;
 
-  final List<Query$personHistoryAnalysis$personsByPk$classes>? classes;
+  final List<Query_personHistoryAnalysis_personsByPk_classes>? classes;
 
-  final List<Query$personHistoryAnalysis$personsByPk$groups> groups;
+  final List<Query_personHistoryAnalysis_personsByPk_groups> groups;
 
   final String $__typename;
 
@@ -5106,7 +5106,7 @@ class Query$personHistoryAnalysis$personsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5194,83 +5194,83 @@ class Query$personHistoryAnalysis$personsByPk {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk
-    on Query$personHistoryAnalysis$personsByPk {
-  CopyWith$Query$personHistoryAnalysis$personsByPk<
-          Query$personHistoryAnalysis$personsByPk>
-      get copyWith => CopyWith$Query$personHistoryAnalysis$personsByPk(
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk
+    on Query_personHistoryAnalysis_personsByPk {
+  CopyWith_Query_personHistoryAnalysis_personsByPk<
+          Query_personHistoryAnalysis_personsByPk>
+      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk(
-    Query$personHistoryAnalysis$personsByPk instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk;
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk(
+    Query_personHistoryAnalysis_personsByPk instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk.stub(TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk;
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk.stub(TRes res) =
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk;
 
   TRes call({
     UuidValue? id,
     String? name,
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate?
         callHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate?
         visitHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate?
         editHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate?
         kodasHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
         confessionHistoryAggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services>? services,
-    List<Query$personHistoryAnalysis$personsByPk$classes>? classes,
-    List<Query$personHistoryAnalysis$personsByPk$groups>? groups,
+    List<Query_personHistoryAnalysis_personsByPk_services>? services,
+    List<Query_personHistoryAnalysis_personsByPk_classes>? classes,
+    List<Query_personHistoryAnalysis_personsByPk_groups>? groups,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<TRes>
       get callHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<TRes>
       get visitHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<TRes>
       get editHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<TRes>
       get kodasHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
       TRes> get confessionHistoryAggregate;
   TRes services(
-      Iterable<Query$personHistoryAnalysis$personsByPk$services> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_services> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$services<
-                      Query$personHistoryAnalysis$personsByPk$services>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_services<
+                      Query_personHistoryAnalysis_personsByPk_services>>)
           _fn);
   TRes classes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$classes>? Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes>? Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$classes<
-                      Query$personHistoryAnalysis$personsByPk$classes>>?)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
+                      Query_personHistoryAnalysis_personsByPk_classes>>?)
           _fn);
   TRes groups(
-      Iterable<Query$personHistoryAnalysis$personsByPk$groups> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$groups<
-                      Query$personHistoryAnalysis$personsByPk$groups>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
+                      Query_personHistoryAnalysis_personsByPk_groups>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk(
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk _instance;
+  final Query_personHistoryAnalysis_personsByPk _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk) _then;
+  final TRes Function(Query_personHistoryAnalysis_personsByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5287,7 +5287,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk<TRes>
     Object? groups = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk(
+      _then(Query_personHistoryAnalysis_personsByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -5296,198 +5296,198 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk<TRes>
                 callHistoryAggregate == null
             ? _instance.callHistoryAggregate
             : (callHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$callHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_callHistoryAggregate),
         visitHistoryAggregate: visitHistoryAggregate == _undefined ||
                 visitHistoryAggregate == null
             ? _instance.visitHistoryAggregate
             : (visitHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate),
         editHistoryAggregate: editHistoryAggregate == _undefined ||
                 editHistoryAggregate == null
             ? _instance.editHistoryAggregate
             : (editHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$editHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_editHistoryAggregate),
         kodasHistoryAggregate: kodasHistoryAggregate == _undefined ||
                 kodasHistoryAggregate == null
             ? _instance.kodasHistoryAggregate
             : (kodasHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate),
         confessionHistoryAggregate: confessionHistoryAggregate == _undefined ||
                 confessionHistoryAggregate == null
             ? _instance.confessionHistoryAggregate
             : (confessionHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate),
         services: services == _undefined || services == null
             ? _instance.services
             : (services
-                as List<Query$personHistoryAnalysis$personsByPk$services>),
+                as List<Query_personHistoryAnalysis_personsByPk_services>),
         classes: classes == _undefined
             ? _instance.classes
             : (classes
-                as List<Query$personHistoryAnalysis$personsByPk$classes>?),
+                as List<Query_personHistoryAnalysis_personsByPk_classes>?),
         groups: groups == _undefined || groups == null
             ? _instance.groups
-            : (groups as List<Query$personHistoryAnalysis$personsByPk$groups>),
+            : (groups as List<Query_personHistoryAnalysis_personsByPk_groups>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<TRes>
       get callHistoryAggregate {
     final local$callHistoryAggregate = _instance.callHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
         local$callHistoryAggregate, (e) => call(callHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<TRes>
       get visitHistoryAggregate {
     final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
         local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<TRes>
       get editHistoryAggregate {
     final local$editHistoryAggregate = _instance.editHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
         local$editHistoryAggregate, (e) => call(editHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<TRes>
       get kodasHistoryAggregate {
     final local$kodasHistoryAggregate = _instance.kodasHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
         local$kodasHistoryAggregate, (e) => call(kodasHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
       TRes> get confessionHistoryAggregate {
     final local$confessionHistoryAggregate =
         _instance.confessionHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
         local$confessionHistoryAggregate,
         (e) => call(confessionHistoryAggregate: e));
   }
 
   TRes services(
-          Iterable<Query$personHistoryAnalysis$personsByPk$services> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_services> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$services<
-                          Query$personHistoryAnalysis$personsByPk$services>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_services<
+                          Query_personHistoryAnalysis_personsByPk_services>>)
               _fn) =>
       call(
           services: _fn(_instance.services.map(
-              (e) => CopyWith$Query$personHistoryAnalysis$personsByPk$services(
+              (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_services(
                     e,
                     (i) => i,
                   ))).toList());
   TRes classes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$classes>? Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes>? Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$classes<
-                          Query$personHistoryAnalysis$personsByPk$classes>>?)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
+                          Query_personHistoryAnalysis_personsByPk_classes>>?)
               _fn) =>
       call(
           classes: _fn(_instance.classes?.map(
-              (e) => CopyWith$Query$personHistoryAnalysis$personsByPk$classes(
+              (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
                     e,
                     (i) => i,
                   )))?.toList());
   TRes groups(
-          Iterable<Query$personHistoryAnalysis$personsByPk$groups> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$groups<
-                          Query$personHistoryAnalysis$personsByPk$groups>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
+                          Query_personHistoryAnalysis_personsByPk_groups>>)
               _fn) =>
       call(
           groups: _fn(_instance.groups.map(
-              (e) => CopyWith$Query$personHistoryAnalysis$personsByPk$groups(
+              (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_groups(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk(this._res);
 
   TRes _res;
 
   call({
     UuidValue? id,
     String? name,
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate?
         callHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate?
         visitHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate?
         editHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate?
         kodasHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
         confessionHistoryAggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services>? services,
-    List<Query$personHistoryAnalysis$personsByPk$classes>? classes,
-    List<Query$personHistoryAnalysis$personsByPk$groups>? groups,
+    List<Query_personHistoryAnalysis_personsByPk_services>? services,
+    List<Query_personHistoryAnalysis_personsByPk_classes>? classes,
+    List<Query_personHistoryAnalysis_personsByPk_groups>? groups,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<TRes>
       get callHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<TRes>
       get visitHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<TRes>
       get editHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<TRes>
       get kodasHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
           TRes>
       get confessionHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
               .stub(_res);
   services(_fn) => _res;
   classes(_fn) => _res;
   groups(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$callHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_callHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryCallHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_callHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate?
       aggregate;
 
-  final List<Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>
+  final List<Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -5521,7 +5521,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$callHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5551,60 +5551,60 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$callHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_callHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$callHistoryAggregate)
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_callHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate _instance;
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$callHistoryAggregate) _then;
+      Query_personHistoryAnalysis_personsByPk_callHistoryAggregate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5613,86 +5613,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+      _then(Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryCallHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -5700,7 +5700,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -5734,7 +5734,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5757,56 +5757,56 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5817,64 +5817,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryCallHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -5909,7 +5909,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5927,30 +5927,30 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -5958,21 +5958,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -5982,7 +5982,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -5990,12 +5990,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -6007,17 +6007,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes({
     required this.time,
     this.$__typename = 'HistoryCallHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
       time: tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -6052,7 +6052,7 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6070,29 +6070,29 @@ class Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes instance,
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes;
 
   TRes call({
     DateTime? time,
@@ -6100,21 +6100,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes) _then;
+      Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6122,7 +6122,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
     Object? time = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+      _then(Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
@@ -6132,12 +6132,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -6149,37 +6149,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$callHistoryAggre
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryVisitHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -6213,7 +6213,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6243,60 +6243,60 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate)
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate _instance;
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate) _then;
+      Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6305,86 +6305,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+      _then(Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryVisitHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -6392,7 +6392,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -6426,7 +6426,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6449,56 +6449,56 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6509,64 +6509,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryVisitHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -6601,7 +6601,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$ma
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6619,30 +6619,30 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$ma
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -6650,21 +6650,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6674,7 +6674,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -6682,12 +6682,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -6699,17 +6699,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes({
     required this.time,
     this.$__typename = 'HistoryVisitHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
       time: tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -6744,7 +6744,7 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6762,30 +6762,30 @@ class Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes;
 
   TRes call({
     DateTime? time,
@@ -6793,21 +6793,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -6816,7 +6816,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
     Object? time = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+      _then(Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
@@ -6826,12 +6826,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregat
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -6843,36 +6843,36 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$visitHistoryAggr
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$editHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_editHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryEditHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_editHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate?
       aggregate;
 
-  final List<Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>
+  final List<Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -6906,7 +6906,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$editHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6936,60 +6936,60 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$editHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_editHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$editHistoryAggregate)
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_editHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate _instance;
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$editHistoryAggregate) _then;
+      Query_personHistoryAnalysis_personsByPk_editHistoryAggregate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6998,86 +6998,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+      _then(Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryEditHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -7085,7 +7085,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -7119,7 +7119,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7142,56 +7142,56 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7202,64 +7202,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryEditHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -7294,7 +7294,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7312,30 +7312,30 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -7343,21 +7343,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7367,7 +7367,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -7375,12 +7375,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -7392,17 +7392,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes({
     required this.time,
     this.$__typename = 'HistoryEditHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
       time: tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -7437,7 +7437,7 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7455,29 +7455,29 @@ class Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes instance,
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes;
 
   TRes call({
     DateTime? time,
@@ -7485,21 +7485,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes) _then;
+      Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7507,7 +7507,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
     Object? time = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+      _then(Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
@@ -7517,12 +7517,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -7534,37 +7534,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$editHistoryAggre
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryKodasHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -7598,7 +7598,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7628,60 +7628,60 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate)
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate _instance;
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate) _then;
+      Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7690,86 +7690,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+      _then(Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryKodasHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -7777,7 +7777,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -7811,7 +7811,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7834,56 +7834,56 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -7894,64 +7894,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryKodasHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -7986,7 +7986,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$ma
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8004,30 +8004,30 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$ma
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -8035,21 +8035,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8059,7 +8059,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -8067,12 +8067,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -8084,17 +8084,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes({
     this.time,
     this.$__typename = 'HistoryKodasHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -8129,7 +8129,7 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8147,30 +8147,30 @@ class Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes;
 
   TRes call({
     DateTime? time,
@@ -8178,21 +8178,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8201,7 +8201,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
     Object? time = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+      _then(Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -8209,12 +8209,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregat
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -8226,37 +8226,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$kodasHistoryAggr
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryConfessionHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -8290,7 +8290,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8320,62 +8320,62 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate instance,
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate)
+            Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
       _instance;
 
   final TRes Function(
-      Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate) _then;
+      Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8384,86 +8384,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+      _then(Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryConfessionHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -8471,7 +8471,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -8505,7 +8505,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8528,56 +8528,56 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8588,64 +8588,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryConfessionHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -8680,7 +8680,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8698,30 +8698,30 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggrega
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -8729,21 +8729,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistor
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8753,7 +8753,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -8761,12 +8761,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -8778,17 +8778,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistor
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes({
     this.time,
     this.$__typename = 'HistoryConfessionHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -8823,7 +8823,7 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes {
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8841,30 +8841,30 @@ class Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes;
 
   TRes call({
     DateTime? time,
@@ -8872,21 +8872,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistor
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -8896,7 +8896,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -8904,12 +8904,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAgg
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -8921,25 +8921,25 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$confessionHistor
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services {
-  Query$personHistoryAnalysis$personsByPk$services({
+class Query_personHistoryAnalysis_personsByPk_services {
+  Query_personHistoryAnalysis_personsByPk_services({
     required this.service,
     this.$__typename = 'PersonsServices',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services.fromJson(
       Map<String, dynamic> json) {
     final l$service = json['service'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services(
+    return Query_personHistoryAnalysis_personsByPk_services(
       service:
-          Query$personHistoryAnalysis$personsByPk$services$service.fromJson(
+          Query_personHistoryAnalysis_personsByPk_services_service.fromJson(
               (l$service as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$services$service service;
+  final Query_personHistoryAnalysis_personsByPk_services_service service;
 
   final String $__typename;
 
@@ -8967,7 +8967,7 @@ class Query$personHistoryAnalysis$personsByPk$services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk$services) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk_services) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8985,44 +8985,44 @@ class Query$personHistoryAnalysis$personsByPk$services {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services
-    on Query$personHistoryAnalysis$personsByPk$services {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services<
-          Query$personHistoryAnalysis$personsByPk$services>
-      get copyWith => CopyWith$Query$personHistoryAnalysis$personsByPk$services(
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services
+    on Query_personHistoryAnalysis_personsByPk_services {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services<
+          Query_personHistoryAnalysis_personsByPk_services>
+      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk_services(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services<TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services(
-    Query$personHistoryAnalysis$personsByPk$services instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$services) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services;
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services(
+    Query_personHistoryAnalysis_personsByPk_services instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_services) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$services$service? service,
+    Query_personHistoryAnalysis_personsByPk_services_service? service,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<TRes>
       get service;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$services<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services(
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services _instance;
+  final Query_personHistoryAnalysis_personsByPk_services _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk$services) _then;
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_services) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -9030,43 +9030,43 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services<TRes>
     Object? service = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$services(
+      _then(Query_personHistoryAnalysis_personsByPk_services(
         service: service == _undefined || service == null
             ? _instance.service
             : (service
-                as Query$personHistoryAnalysis$personsByPk$services$service),
+                as Query_personHistoryAnalysis_personsByPk_services_service),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<TRes>
       get service {
     final local$service = _instance.service;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$services$service(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_services_service(
         local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$services<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services(this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$services$service? service,
+    Query_personHistoryAnalysis_personsByPk_services_service? service,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<TRes>
       get service =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service
-    implements Fragment$ServiceNoPhoto {
-  Query$personHistoryAnalysis$personsByPk$services$service({
+class Query_personHistoryAnalysis_personsByPk_services_service
+    implements Fragment_ServiceNoPhoto {
+  Query_personHistoryAnalysis_personsByPk_services_service({
     required this.id,
     required this.name,
     this.color,
@@ -9075,7 +9075,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -9084,16 +9084,16 @@ class Query$personHistoryAnalysis$personsByPk$services$service
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Query$personHistoryAnalysis$personsByPk$services$service(
+    return Query_personHistoryAnalysis_personsByPk_services_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -9107,10 +9107,10 @@ class Query$personHistoryAnalysis$personsByPk$services$service
 
   final String $__typename;
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -9157,7 +9157,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk$services$service) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk_services_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9198,58 +9198,58 @@ class Query$personHistoryAnalysis$personsByPk$services$service
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service
-    on Query$personHistoryAnalysis$personsByPk$services$service {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<
-          Query$personHistoryAnalysis$personsByPk$services$service>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service
+    on Query_personHistoryAnalysis_personsByPk_services_service {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<
+          Query_personHistoryAnalysis_personsByPk_services_service>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service(
-    Query$personHistoryAnalysis$personsByPk$services$service instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$services$service)
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service(
+    Query_personHistoryAnalysis_personsByPk_services_service instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_services_service)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service;
 
   TRes call({
     UuidValue? id,
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service _instance;
+  final Query_personHistoryAnalysis_personsByPk_services_service _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk$services$service)
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_services_service)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9262,7 +9262,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service<
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$services$service(
+      _then(Query_personHistoryAnalysis_personsByPk_services_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -9275,39 +9275,39 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service<
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate),
+                as Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service(
       this._res);
 
   TRes _res;
@@ -9317,55 +9317,55 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -9399,7 +9399,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9429,63 +9429,63 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9496,86 +9496,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -9583,7 +9583,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -9617,7 +9617,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9640,56 +9640,56 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9700,64 +9700,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -9792,7 +9792,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9810,30 +9810,30 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -9841,21 +9841,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -9865,7 +9865,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -9873,12 +9873,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -9890,17 +9890,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -9935,7 +9935,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9953,30 +9953,30 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistory
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -9984,21 +9984,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10008,7 +10008,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -10018,12 +10018,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -10035,37 +10035,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -10099,7 +10099,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10129,63 +10129,63 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10196,80 +10196,80 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -10304,7 +10304,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10322,30 +10322,30 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -10353,21 +10353,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10377,7 +10377,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -10387,12 +10387,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -10404,17 +10404,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -10449,7 +10449,7 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10467,30 +10467,30 @@ class Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysCon
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -10498,21 +10498,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$services$service
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10522,7 +10522,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -10532,12 +10532,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$services$service$att
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -10549,9 +10549,9 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$services$service
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes
-    implements Fragment$ClassNoPhoto {
-  Query$personHistoryAnalysis$personsByPk$classes({
+class Query_personHistoryAnalysis_personsByPk_classes
+    implements Fragment_ClassNoPhoto {
+  Query_personHistoryAnalysis_personsByPk_classes({
     required this.id,
     required this.name,
     this.color,
@@ -10560,7 +10560,7 @@ class Query$personHistoryAnalysis$personsByPk$classes
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -10569,16 +10569,16 @@ class Query$personHistoryAnalysis$personsByPk$classes
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Query$personHistoryAnalysis$personsByPk$classes(
+    return Query_personHistoryAnalysis_personsByPk_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -10592,10 +10592,10 @@ class Query$personHistoryAnalysis$personsByPk$classes
 
   final String $__typename;
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -10642,7 +10642,7 @@ class Query$personHistoryAnalysis$personsByPk$classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk$classes) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk_classes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10683,52 +10683,52 @@ class Query$personHistoryAnalysis$personsByPk$classes
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes
-    on Query$personHistoryAnalysis$personsByPk$classes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes<
-          Query$personHistoryAnalysis$personsByPk$classes>
-      get copyWith => CopyWith$Query$personHistoryAnalysis$personsByPk$classes(
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes
+    on Query_personHistoryAnalysis_personsByPk_classes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
+          Query_personHistoryAnalysis_personsByPk_classes>
+      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes<TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes(
-    Query$personHistoryAnalysis$personsByPk$classes instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$classes) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes;
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
+    Query_personHistoryAnalysis_personsByPk_classes instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_classes) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes;
 
   TRes call({
     UuidValue? id,
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$classes<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes(
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes _instance;
+  final Query_personHistoryAnalysis_personsByPk_classes _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk$classes) _then;
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_classes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -10740,7 +10740,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$classes(
+      _then(Query_personHistoryAnalysis_personsByPk_classes(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -10753,36 +10753,36 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate),
+                as Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$classes<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes(this._res);
 
   TRes _res;
 
@@ -10791,55 +10791,55 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes<TRes>
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -10873,7 +10873,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10903,63 +10903,63 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -10970,86 +10970,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -11057,7 +11057,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -11091,7 +11091,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11114,56 +11114,56 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11174,64 +11174,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -11266,7 +11266,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11284,30 +11284,30 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -11315,21 +11315,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendan
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11339,7 +11339,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -11347,12 +11347,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -11364,17 +11364,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -11409,7 +11409,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11427,30 +11427,30 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -11458,21 +11458,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendan
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11482,7 +11482,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -11492,12 +11492,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHi
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -11509,37 +11509,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -11573,7 +11573,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11603,63 +11603,63 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11670,80 +11670,80 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -11778,7 +11778,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11796,30 +11796,30 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -11827,21 +11827,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendan
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11851,7 +11851,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -11861,12 +11861,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -11878,17 +11878,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -11923,7 +11923,7 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11941,30 +11941,30 @@ class Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -11972,21 +11972,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendan
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11996,7 +11996,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -12006,12 +12006,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDa
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -12023,24 +12023,24 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$classes$attendan
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups {
-  Query$personHistoryAnalysis$personsByPk$groups({
+class Query_personHistoryAnalysis_personsByPk_groups {
+  Query_personHistoryAnalysis_personsByPk_groups({
     required this.group,
     this.$__typename = 'PersonsGroups',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups.fromJson(
       Map<String, dynamic> json) {
     final l$group = json['group'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups(
-      group: Query$personHistoryAnalysis$personsByPk$groups$group.fromJson(
+    return Query_personHistoryAnalysis_personsByPk_groups(
+      group: Query_personHistoryAnalysis_personsByPk_groups_group.fromJson(
           (l$group as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group group;
+  final Query_personHistoryAnalysis_personsByPk_groups_group group;
 
   final String $__typename;
 
@@ -12068,7 +12068,7 @@ class Query$personHistoryAnalysis$personsByPk$groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk$groups) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk_groups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12086,43 +12086,43 @@ class Query$personHistoryAnalysis$personsByPk$groups {
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups
-    on Query$personHistoryAnalysis$personsByPk$groups {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups<
-          Query$personHistoryAnalysis$personsByPk$groups>
-      get copyWith => CopyWith$Query$personHistoryAnalysis$personsByPk$groups(
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups
+    on Query_personHistoryAnalysis_personsByPk_groups {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
+          Query_personHistoryAnalysis_personsByPk_groups>
+      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk_groups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups<TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups(
-    Query$personHistoryAnalysis$personsByPk$groups instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$groups) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups;
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups(
+    Query_personHistoryAnalysis_personsByPk_groups instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_groups) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$groups$group? group,
+    Query_personHistoryAnalysis_personsByPk_groups_group? group,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<TRes> get group;
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<TRes> get group;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$groups<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups(
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups _instance;
+  final Query_personHistoryAnalysis_personsByPk_groups _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk$groups) _then;
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_groups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -12130,42 +12130,42 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups<TRes>
     Object? group = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$groups(
+      _then(Query_personHistoryAnalysis_personsByPk_groups(
         group: group == _undefined || group == null
             ? _instance.group
-            : (group as Query$personHistoryAnalysis$personsByPk$groups$group),
+            : (group as Query_personHistoryAnalysis_personsByPk_groups_group),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<TRes>
       get group {
     final local$group = _instance.group;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group(
         local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups<TRes>
-    implements CopyWith$Query$personHistoryAnalysis$personsByPk$groups<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups(this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$groups$group? group,
+    Query_personHistoryAnalysis_personsByPk_groups_group? group,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<TRes>
       get group =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group.stub(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group.stub(
               _res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group
-    implements Fragment$GroupNoPhoto {
-  Query$personHistoryAnalysis$personsByPk$groups$group({
+class Query_personHistoryAnalysis_personsByPk_groups_group
+    implements Fragment_GroupNoPhoto {
+  Query_personHistoryAnalysis_personsByPk_groups_group({
     required this.id,
     required this.name,
     this.color,
@@ -12174,7 +12174,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -12183,16 +12183,16 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group(
+    return Query_personHistoryAnalysis_personsByPk_groups_group(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -12206,10 +12206,10 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
 
   final String $__typename;
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -12256,7 +12256,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personHistoryAnalysis$personsByPk$groups$group) ||
+    if (!(other is Query_personHistoryAnalysis_personsByPk_groups_group) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12297,55 +12297,55 @@ class Query$personHistoryAnalysis$personsByPk$groups$group
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group
-    on Query$personHistoryAnalysis$personsByPk$groups$group {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<
-          Query$personHistoryAnalysis$personsByPk$groups$group>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group
+    on Query_personHistoryAnalysis_personsByPk_groups_group {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<
+          Query_personHistoryAnalysis_personsByPk_groups_group>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group(
-    Query$personHistoryAnalysis$personsByPk$groups$group instance,
-    TRes Function(Query$personHistoryAnalysis$personsByPk$groups$group) then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group;
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group(
+    Query_personHistoryAnalysis_personsByPk_groups_group instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_groups_group) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group;
 
   TRes call({
     UuidValue? id,
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group<TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group(
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group _instance;
+  final Query_personHistoryAnalysis_personsByPk_groups_group _instance;
 
-  final TRes Function(Query$personHistoryAnalysis$personsByPk$groups$group)
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_groups_group)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12358,7 +12358,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Query$personHistoryAnalysis$personsByPk$groups$group(
+      _then(Query_personHistoryAnalysis_personsByPk_groups_group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -12371,38 +12371,38 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate),
+                as Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group<TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group(
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group(
       this._res);
 
   TRes _res;
@@ -12412,55 +12412,55 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group<
     String? name,
     int? color,
     String? $__typename,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
               .stub(_res);
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -12494,7 +12494,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12524,63 +12524,63 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12591,86 +12591,86 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+          : Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -12678,7 +12678,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
 
   final int count;
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -12712,7 +12712,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12735,56 +12735,56 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12795,64 +12795,64 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?),
+                as Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -12887,7 +12887,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12905,30 +12905,30 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -12936,21 +12936,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$att
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12960,7 +12960,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -12968,12 +12968,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$aggregate$max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -12985,17 +12985,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -13030,7 +13030,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13048,30 +13048,30 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggr
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -13079,21 +13079,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$att
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -13103,7 +13103,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -13113,12 +13113,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceHistoryAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -13130,37 +13130,37 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
+          : Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes
+              Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate?
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -13194,7 +13194,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13224,63 +13224,63 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
-                      Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -13291,80 +13291,80 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>),
+                Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
-                          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate?
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
   nodes(_fn) => _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -13399,7 +13399,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13417,30 +13417,30 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -13448,21 +13448,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$att
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -13472,7 +13472,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -13482,12 +13482,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -13499,17 +13499,17 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
       _res;
 }
 
-class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes {
-  Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes({
+class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+    return Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -13544,7 +13544,7 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
       return true;
     }
     if (!(other
-            is Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes) ||
+            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13562,30 +13562,30 @@ class Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstra
   }
 }
 
-extension UtilityExtension$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes
-    on Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes {
-  CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
-    Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes)
+            Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -13593,21 +13593,21 @@ abstract class CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$att
   });
 }
 
-class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes
+  final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes)
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -13617,7 +13617,7 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+          Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -13627,12 +13627,12 @@ class _CopyWithImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attenda
       ));
 }
 
-class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$attendanceDaysConstraintsAggregate$nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -13644,21 +13644,21 @@ class _CopyWithStubImpl$Query$personHistoryAnalysis$personsByPk$groups$group$att
       _res;
 }
 
-class Variables$Query$personServicesClassesGroups {
-  factory Variables$Query$personServicesClassesGroups(
+class Variables_Query_personServicesClassesGroups {
+  factory Variables_Query_personServicesClassesGroups(
           {required UuidValue id}) =>
-      Variables$Query$personServicesClassesGroups._({
+      Variables_Query_personServicesClassesGroups._({
         r'id': id,
       });
 
-  Variables$Query$personServicesClassesGroups._(this._$data);
+  Variables_Query_personServicesClassesGroups._(this._$data);
 
-  factory Variables$Query$personServicesClassesGroups.fromJson(
+  factory Variables_Query_personServicesClassesGroups.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
-    return Variables$Query$personServicesClassesGroups._(result$data);
+    return Variables_Query_personServicesClassesGroups._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -13671,9 +13671,9 @@ class Variables$Query$personServicesClassesGroups {
     return result$data;
   }
 
-  CopyWith$Variables$Query$personServicesClassesGroups<
-          Variables$Query$personServicesClassesGroups>
-      get copyWith => CopyWith$Variables$Query$personServicesClassesGroups(
+  CopyWith_Variables_Query_personServicesClassesGroups<
+          Variables_Query_personServicesClassesGroups>
+      get copyWith => CopyWith_Variables_Query_personServicesClassesGroups(
             this,
             (i) => i,
           );
@@ -13682,7 +13682,7 @@ class Variables$Query$personServicesClassesGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$personServicesClassesGroups) ||
+    if (!(other is Variables_Query_personServicesClassesGroups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13701,67 +13701,67 @@ class Variables$Query$personServicesClassesGroups {
   }
 }
 
-abstract class CopyWith$Variables$Query$personServicesClassesGroups<TRes> {
-  factory CopyWith$Variables$Query$personServicesClassesGroups(
-    Variables$Query$personServicesClassesGroups instance,
-    TRes Function(Variables$Query$personServicesClassesGroups) then,
-  ) = _CopyWithImpl$Variables$Query$personServicesClassesGroups;
+abstract class CopyWith_Variables_Query_personServicesClassesGroups<TRes> {
+  factory CopyWith_Variables_Query_personServicesClassesGroups(
+    Variables_Query_personServicesClassesGroups instance,
+    TRes Function(Variables_Query_personServicesClassesGroups) then,
+  ) = _CopyWithImpl_Variables_Query_personServicesClassesGroups;
 
-  factory CopyWith$Variables$Query$personServicesClassesGroups.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$personServicesClassesGroups;
+  factory CopyWith_Variables_Query_personServicesClassesGroups.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_personServicesClassesGroups;
 
   TRes call({UuidValue? id});
 }
 
-class _CopyWithImpl$Variables$Query$personServicesClassesGroups<TRes>
-    implements CopyWith$Variables$Query$personServicesClassesGroups<TRes> {
-  _CopyWithImpl$Variables$Query$personServicesClassesGroups(
+class _CopyWithImpl_Variables_Query_personServicesClassesGroups<TRes>
+    implements CopyWith_Variables_Query_personServicesClassesGroups<TRes> {
+  _CopyWithImpl_Variables_Query_personServicesClassesGroups(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$personServicesClassesGroups _instance;
+  final Variables_Query_personServicesClassesGroups _instance;
 
-  final TRes Function(Variables$Query$personServicesClassesGroups) _then;
+  final TRes Function(Variables_Query_personServicesClassesGroups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
-      _then(Variables$Query$personServicesClassesGroups._({
+      _then(Variables_Query_personServicesClassesGroups._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$personServicesClassesGroups<TRes>
-    implements CopyWith$Variables$Query$personServicesClassesGroups<TRes> {
-  _CopyWithStubImpl$Variables$Query$personServicesClassesGroups(this._res);
+class _CopyWithStubImpl_Variables_Query_personServicesClassesGroups<TRes>
+    implements CopyWith_Variables_Query_personServicesClassesGroups<TRes> {
+  _CopyWithStubImpl_Variables_Query_personServicesClassesGroups(this._res);
 
   TRes _res;
 
   call({UuidValue? id}) => _res;
 }
 
-class Query$personServicesClassesGroups {
-  Query$personServicesClassesGroups({
+class Query_personServicesClassesGroups {
+  Query_personServicesClassesGroups({
     this.personsByPk,
     this.$__typename = 'query_root',
   });
 
-  factory Query$personServicesClassesGroups.fromJson(
+  factory Query_personServicesClassesGroups.fromJson(
       Map<String, dynamic> json) {
     final l$personsByPk = json['personsByPk'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups(
+    return Query_personServicesClassesGroups(
       personsByPk: l$personsByPk == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk.fromJson(
+          : Query_personServicesClassesGroups_personsByPk.fromJson(
               (l$personsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personServicesClassesGroups$personsByPk? personsByPk;
+  final Query_personServicesClassesGroups_personsByPk? personsByPk;
 
   final String $__typename;
 
@@ -13789,7 +13789,7 @@ class Query$personServicesClassesGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personServicesClassesGroups) ||
+    if (!(other is Query_personServicesClassesGroups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13807,41 +13807,41 @@ class Query$personServicesClassesGroups {
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups
-    on Query$personServicesClassesGroups {
-  CopyWith$Query$personServicesClassesGroups<Query$personServicesClassesGroups>
-      get copyWith => CopyWith$Query$personServicesClassesGroups(
+extension UtilityExtension_Query_personServicesClassesGroups
+    on Query_personServicesClassesGroups {
+  CopyWith_Query_personServicesClassesGroups<Query_personServicesClassesGroups>
+      get copyWith => CopyWith_Query_personServicesClassesGroups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups<TRes> {
-  factory CopyWith$Query$personServicesClassesGroups(
-    Query$personServicesClassesGroups instance,
-    TRes Function(Query$personServicesClassesGroups) then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups;
+abstract class CopyWith_Query_personServicesClassesGroups<TRes> {
+  factory CopyWith_Query_personServicesClassesGroups(
+    Query_personServicesClassesGroups instance,
+    TRes Function(Query_personServicesClassesGroups) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups;
 
-  factory CopyWith$Query$personServicesClassesGroups.stub(TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups;
+  factory CopyWith_Query_personServicesClassesGroups.stub(TRes res) =
+      _CopyWithStubImpl_Query_personServicesClassesGroups;
 
   TRes call({
-    Query$personServicesClassesGroups$personsByPk? personsByPk,
+    Query_personServicesClassesGroups_personsByPk? personsByPk,
     String? $__typename,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk<TRes> get personsByPk;
+  CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> get personsByPk;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups<TRes>
-    implements CopyWith$Query$personServicesClassesGroups<TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups(
+class _CopyWithImpl_Query_personServicesClassesGroups<TRes>
+    implements CopyWith_Query_personServicesClassesGroups<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups _instance;
+  final Query_personServicesClassesGroups _instance;
 
-  final TRes Function(Query$personServicesClassesGroups) _then;
+  final TRes Function(Query_personServicesClassesGroups) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -13849,38 +13849,38 @@ class _CopyWithImpl$Query$personServicesClassesGroups<TRes>
     Object? personsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups(
+      _then(Query_personServicesClassesGroups(
         personsByPk: personsByPk == _undefined
             ? _instance.personsByPk
-            : (personsByPk as Query$personServicesClassesGroups$personsByPk?),
+            : (personsByPk as Query_personServicesClassesGroups_personsByPk?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk<TRes> get personsByPk {
+  CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> get personsByPk {
     final local$personsByPk = _instance.personsByPk;
     return local$personsByPk == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk.stub(
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk.stub(
             _then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk(
             local$personsByPk, (e) => call(personsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups<TRes>
-    implements CopyWith$Query$personServicesClassesGroups<TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups(this._res);
+class _CopyWithStubImpl_Query_personServicesClassesGroups<TRes>
+    implements CopyWith_Query_personServicesClassesGroups<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups(this._res);
 
   TRes _res;
 
   call({
-    Query$personServicesClassesGroups$personsByPk? personsByPk,
+    Query_personServicesClassesGroups_personsByPk? personsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk<TRes>
       get personsByPk =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk.stub(_res);
+          CopyWith_Query_personServicesClassesGroups_personsByPk.stub(_res);
 }
 
 const documentNodeQuerypersonServicesClassesGroups = DocumentNode(definitions: [
@@ -14290,8 +14290,8 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(definitions: [
   fragmentDefinitionGroupNoPhoto,
 ]);
 
-class Query$personServicesClassesGroups$personsByPk {
-  Query$personServicesClassesGroups$personsByPk({
+class Query_personServicesClassesGroups_personsByPk {
+  Query_personServicesClassesGroups_personsByPk({
     required this.id,
     required this.name,
     required this.services,
@@ -14300,7 +14300,7 @@ class Query$personServicesClassesGroups$personsByPk {
     this.$__typename = 'Persons',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -14308,22 +14308,22 @@ class Query$personServicesClassesGroups$personsByPk {
     final l$classes = json['classes'];
     final l$groups = json['groups'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk(
+    return Query_personServicesClassesGroups_personsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       services: (l$services as List<dynamic>)
           .map((e) =>
-              Query$personServicesClassesGroups$personsByPk$services.fromJson(
+              Query_personServicesClassesGroups_personsByPk_services.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       classes: (l$classes as List<dynamic>?)
           ?.map((e) =>
-              Query$personServicesClassesGroups$personsByPk$classes.fromJson(
+              Query_personServicesClassesGroups_personsByPk_classes.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       groups: (l$groups as List<dynamic>)
           .map((e) =>
-              Query$personServicesClassesGroups$personsByPk$groups.fromJson(
+              Query_personServicesClassesGroups_personsByPk_groups.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
@@ -14334,11 +14334,11 @@ class Query$personServicesClassesGroups$personsByPk {
 
   final String name;
 
-  final List<Query$personServicesClassesGroups$personsByPk$services> services;
+  final List<Query_personServicesClassesGroups_personsByPk_services> services;
 
-  final List<Query$personServicesClassesGroups$personsByPk$classes>? classes;
+  final List<Query_personServicesClassesGroups_personsByPk_classes>? classes;
 
-  final List<Query$personServicesClassesGroups$personsByPk$groups> groups;
+  final List<Query_personServicesClassesGroups_personsByPk_groups> groups;
 
   final String $__typename;
 
@@ -14382,7 +14382,7 @@ class Query$personServicesClassesGroups$personsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personServicesClassesGroups$personsByPk) ||
+    if (!(other is Query_personServicesClassesGroups_personsByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14445,64 +14445,64 @@ class Query$personServicesClassesGroups$personsByPk {
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk
-    on Query$personServicesClassesGroups$personsByPk {
-  CopyWith$Query$personServicesClassesGroups$personsByPk<
-          Query$personServicesClassesGroups$personsByPk>
-      get copyWith => CopyWith$Query$personServicesClassesGroups$personsByPk(
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk
+    on Query_personServicesClassesGroups_personsByPk {
+  CopyWith_Query_personServicesClassesGroups_personsByPk<
+          Query_personServicesClassesGroups_personsByPk>
+      get copyWith => CopyWith_Query_personServicesClassesGroups_personsByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk<TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk(
-    Query$personServicesClassesGroups$personsByPk instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk) then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk;
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> {
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk(
+    Query_personServicesClassesGroups_personsByPk instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk;
 
   TRes call({
     UuidValue? id,
     String? name,
-    List<Query$personServicesClassesGroups$personsByPk$services>? services,
-    List<Query$personServicesClassesGroups$personsByPk$classes>? classes,
-    List<Query$personServicesClassesGroups$personsByPk$groups>? groups,
+    List<Query_personServicesClassesGroups_personsByPk_services>? services,
+    List<Query_personServicesClassesGroups_personsByPk_classes>? classes,
+    List<Query_personServicesClassesGroups_personsByPk_groups>? groups,
     String? $__typename,
   });
   TRes services(
-      Iterable<Query$personServicesClassesGroups$personsByPk$services> Function(
+      Iterable<Query_personServicesClassesGroups_personsByPk_services> Function(
               Iterable<
-                  CopyWith$Query$personServicesClassesGroups$personsByPk$services<
-                      Query$personServicesClassesGroups$personsByPk$services>>)
+                  CopyWith_Query_personServicesClassesGroups_personsByPk_services<
+                      Query_personServicesClassesGroups_personsByPk_services>>)
           _fn);
   TRes classes(
-      Iterable<Query$personServicesClassesGroups$personsByPk$classes>? Function(
+      Iterable<Query_personServicesClassesGroups_personsByPk_classes>? Function(
               Iterable<
-                  CopyWith$Query$personServicesClassesGroups$personsByPk$classes<
-                      Query$personServicesClassesGroups$personsByPk$classes>>?)
+                  CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+                      Query_personServicesClassesGroups_personsByPk_classes>>?)
           _fn);
   TRes groups(
-      Iterable<Query$personServicesClassesGroups$personsByPk$groups> Function(
+      Iterable<Query_personServicesClassesGroups_personsByPk_groups> Function(
               Iterable<
-                  CopyWith$Query$personServicesClassesGroups$personsByPk$groups<
-                      Query$personServicesClassesGroups$personsByPk$groups>>)
+                  CopyWith_Query_personServicesClassesGroups_personsByPk_groups<
+                      Query_personServicesClassesGroups_personsByPk_groups>>)
           _fn);
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk<TRes>
-    implements CopyWith$Query$personServicesClassesGroups$personsByPk<TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk(
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk<TRes>
+    implements CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk _instance;
+  final Query_personServicesClassesGroups_personsByPk _instance;
 
-  final TRes Function(Query$personServicesClassesGroups$personsByPk) _then;
+  final TRes Function(Query_personServicesClassesGroups_personsByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -14514,7 +14514,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk<TRes>
     Object? groups = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk(
+      _then(Query_personServicesClassesGroups_personsByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -14522,69 +14522,69 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk<TRes>
         services: services == _undefined || services == null
             ? _instance.services
             : (services as List<
-                Query$personServicesClassesGroups$personsByPk$services>),
+                Query_personServicesClassesGroups_personsByPk_services>),
         classes: classes == _undefined
             ? _instance.classes
             : (classes as List<
-                Query$personServicesClassesGroups$personsByPk$classes>?),
+                Query_personServicesClassesGroups_personsByPk_classes>?),
         groups: groups == _undefined || groups == null
             ? _instance.groups
             : (groups
-                as List<Query$personServicesClassesGroups$personsByPk$groups>),
+                as List<Query_personServicesClassesGroups_personsByPk_groups>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes services(
-          Iterable<Query$personServicesClassesGroups$personsByPk$services> Function(
+          Iterable<Query_personServicesClassesGroups_personsByPk_services> Function(
                   Iterable<
-                      CopyWith$Query$personServicesClassesGroups$personsByPk$services<
-                          Query$personServicesClassesGroups$personsByPk$services>>)
+                      CopyWith_Query_personServicesClassesGroups_personsByPk_services<
+                          Query_personServicesClassesGroups_personsByPk_services>>)
               _fn) =>
       call(
           services: _fn(_instance.services.map((e) =>
-              CopyWith$Query$personServicesClassesGroups$personsByPk$services(
+              CopyWith_Query_personServicesClassesGroups_personsByPk_services(
                 e,
                 (i) => i,
               ))).toList());
   TRes classes(
-          Iterable<Query$personServicesClassesGroups$personsByPk$classes>? Function(
+          Iterable<Query_personServicesClassesGroups_personsByPk_classes>? Function(
                   Iterable<
-                      CopyWith$Query$personServicesClassesGroups$personsByPk$classes<
-                          Query$personServicesClassesGroups$personsByPk$classes>>?)
+                      CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+                          Query_personServicesClassesGroups_personsByPk_classes>>?)
               _fn) =>
       call(
           classes: _fn(_instance.classes?.map((e) =>
-              CopyWith$Query$personServicesClassesGroups$personsByPk$classes(
+              CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
                 e,
                 (i) => i,
               )))?.toList());
   TRes groups(
-          Iterable<Query$personServicesClassesGroups$personsByPk$groups> Function(
+          Iterable<Query_personServicesClassesGroups_personsByPk_groups> Function(
                   Iterable<
-                      CopyWith$Query$personServicesClassesGroups$personsByPk$groups<
-                          Query$personServicesClassesGroups$personsByPk$groups>>)
+                      CopyWith_Query_personServicesClassesGroups_personsByPk_groups<
+                          Query_personServicesClassesGroups_personsByPk_groups>>)
               _fn) =>
       call(
           groups: _fn(_instance.groups.map((e) =>
-              CopyWith$Query$personServicesClassesGroups$personsByPk$groups(
+              CopyWith_Query_personServicesClassesGroups_personsByPk_groups(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk<TRes>
-    implements CopyWith$Query$personServicesClassesGroups$personsByPk<TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk(this._res);
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk<TRes>
+    implements CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk(this._res);
 
   TRes _res;
 
   call({
     UuidValue? id,
     String? name,
-    List<Query$personServicesClassesGroups$personsByPk$services>? services,
-    List<Query$personServicesClassesGroups$personsByPk$classes>? classes,
-    List<Query$personServicesClassesGroups$personsByPk$groups>? groups,
+    List<Query_personServicesClassesGroups_personsByPk_services>? services,
+    List<Query_personServicesClassesGroups_personsByPk_classes>? classes,
+    List<Query_personServicesClassesGroups_personsByPk_groups>? groups,
     String? $__typename,
   }) =>
       _res;
@@ -14593,24 +14593,24 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk<TRes>
   groups(_fn) => _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$services {
-  Query$personServicesClassesGroups$personsByPk$services({
+class Query_personServicesClassesGroups_personsByPk_services {
+  Query_personServicesClassesGroups_personsByPk_services({
     required this.service,
     this.$__typename = 'PersonsServices',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$services.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_services.fromJson(
       Map<String, dynamic> json) {
     final l$service = json['service'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$services(
-      service: Query$personServicesClassesGroups$personsByPk$services$service
+    return Query_personServicesClassesGroups_personsByPk_services(
+      service: Query_personServicesClassesGroups_personsByPk_services_service
           .fromJson((l$service as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personServicesClassesGroups$personsByPk$services$service service;
+  final Query_personServicesClassesGroups_personsByPk_services_service service;
 
   final String $__typename;
 
@@ -14638,7 +14638,7 @@ class Query$personServicesClassesGroups$personsByPk$services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personServicesClassesGroups$personsByPk$services) ||
+    if (!(other is Query_personServicesClassesGroups_personsByPk_services) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14656,47 +14656,47 @@ class Query$personServicesClassesGroups$personsByPk$services {
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$services
-    on Query$personServicesClassesGroups$personsByPk$services {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services<
-          Query$personServicesClassesGroups$personsByPk$services>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_services
+    on Query_personServicesClassesGroups_personsByPk_services {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services<
+          Query_personServicesClassesGroups_personsByPk_services>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_services<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services(
-    Query$personServicesClassesGroups$personsByPk$services instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk$services) then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services;
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services(
+    Query_personServicesClassesGroups_personsByPk_services instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_services) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services;
 
   TRes call({
-    Query$personServicesClassesGroups$personsByPk$services$service? service,
+    Query_personServicesClassesGroups_personsByPk_services_service? service,
     String? $__typename,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<TRes>
       get service;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services<TRes>
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services<TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services<TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$services _instance;
+  final Query_personServicesClassesGroups_personsByPk_services _instance;
 
-  final TRes Function(Query$personServicesClassesGroups$personsByPk$services)
+  final TRes Function(Query_personServicesClassesGroups_personsByPk_services)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -14705,46 +14705,46 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services<TRes>
     Object? service = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$services(
+      _then(Query_personServicesClassesGroups_personsByPk_services(
         service: service == _undefined || service == null
             ? _instance.service
             : (service
-                as Query$personServicesClassesGroups$personsByPk$services$service),
+                as Query_personServicesClassesGroups_personsByPk_services_service),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<TRes>
       get service {
     final local$service = _instance.service;
-    return CopyWith$Query$personServicesClassesGroups$personsByPk$services$service(
+    return CopyWith_Query_personServicesClassesGroups_personsByPk_services_service(
         local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services<TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personServicesClassesGroups$personsByPk$services$service? service,
+    Query_personServicesClassesGroups_personsByPk_services_service? service,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<TRes>
       get service =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$services$service
-    implements Fragment$Service, Fragment$ServiceNoPhoto {
-  Query$personServicesClassesGroups$personsByPk$services$service({
+class Query_personServicesClassesGroups_personsByPk_services_service
+    implements Fragment_Service, Fragment_ServiceNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_services_service({
     required this.id,
     required this.name,
     this.color,
@@ -14754,7 +14754,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service
     this.toStudyYear,
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$services$service.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_services_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -14763,7 +14763,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$fromStudyYear = json['fromStudyYear'];
     final l$toStudyYear = json['toStudyYear'];
-    return Query$personServicesClassesGroups$personsByPk$services$service(
+    return Query_personServicesClassesGroups_personsByPk_services_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -14772,11 +14772,11 @@ class Query$personServicesClassesGroups$personsByPk$services$service
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       fromStudyYear: l$fromStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
+          : Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
               .fromJson((l$fromStudyYear as Map<String, dynamic>)),
       toStudyYear: l$toStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
+          : Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
               .fromJson((l$toStudyYear as Map<String, dynamic>)),
     );
   }
@@ -14791,10 +14791,10 @@ class Query$personServicesClassesGroups$personsByPk$services$service
 
   final DateTime? photoUpdatedAt;
 
-  final Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear?
       fromStudyYear;
 
-  final Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear?
       toStudyYear;
 
   Map<String, dynamic> toJson() {
@@ -14843,7 +14843,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$services$service) ||
+            is Query_personServicesClassesGroups_personsByPk_services_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14886,29 +14886,29 @@ class Query$personServicesClassesGroups$personsByPk$services$service
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$services$service
-    on Query$personServicesClassesGroups$personsByPk$services$service {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<
-          Query$personServicesClassesGroups$personsByPk$services$service>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_services_service
+    on Query_personServicesClassesGroups_personsByPk_services_service {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<
+          Query_personServicesClassesGroups_personsByPk_services_service>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service(
-    Query$personServicesClassesGroups$personsByPk$services$service instance,
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service(
+    Query_personServicesClassesGroups_personsByPk_services_service instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$services$service)
+            Query_personServicesClassesGroups_personsByPk_services_service)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service;
 
   TRes call({
     UuidValue? id,
@@ -14916,32 +14916,32 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$s
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear?
         toStudyYear,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
       TRes> get fromStudyYear;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
       TRes> get toStudyYear;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$services$service
+  final Query_personServicesClassesGroups_personsByPk_services_service
       _instance;
 
   final TRes Function(
-      Query$personServicesClassesGroups$personsByPk$services$service) _then;
+      Query_personServicesClassesGroups_personsByPk_services_service) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -14954,7 +14954,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
     Object? fromStudyYear = _undefined,
     Object? toStudyYear = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$services$service(
+      _then(Query_personServicesClassesGroups_personsByPk_services_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -14969,39 +14969,39 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
         fromStudyYear: fromStudyYear == _undefined
             ? _instance.fromStudyYear
             : (fromStudyYear
-                as Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear?),
         toStudyYear: toStudyYear == _undefined
             ? _instance.toStudyYear
             : (toStudyYear
-                as Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear?),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
       TRes> get fromStudyYear {
     final local$fromStudyYear = _instance.fromStudyYear;
     return local$fromStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
             local$fromStudyYear, (e) => call(fromStudyYear: e));
   }
 
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
       TRes> get toStudyYear {
     final local$toStudyYear = _instance.toStudyYear;
     return local$toStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service(
       this._res);
 
   TRes _res;
@@ -15012,37 +15012,37 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$s
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear?
         toStudyYear,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
           TRes>
       get fromStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
               .stub(_res);
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
           TRes>
       get toStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear {
-  Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear({
+class Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear {
+  Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -15084,7 +15084,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYe
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15107,30 +15107,30 @@ class Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYe
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
-    on Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
-          Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
+    on Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
+          Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
-    Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
+    Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear)
+            Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear;
 
   TRes call({
     int? order,
@@ -15139,21 +15139,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$s
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear
+  final Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear)
+          Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -15164,7 +15164,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+          Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -15177,12 +15177,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$fromStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_fromStudyYear(
       this._res);
 
   TRes _res;
@@ -15195,19 +15195,19 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$s
       _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear {
-  Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear({
+class Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear {
+  Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -15249,7 +15249,7 @@ class Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15272,30 +15272,30 @@ class Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
-    on Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
-          Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
+    on Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
+          Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
-    Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
+    Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear)
+            Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear;
 
   TRes call({
     int? order,
@@ -15304,21 +15304,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$services$s
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear
+  final Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear)
+          Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -15329,7 +15329,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+          Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -15342,12 +15342,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$services$servi
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$service$toStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services_service_toStudyYear(
       this._res);
 
   TRes _res;
@@ -15360,9 +15360,9 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$services$s
       _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$classes
-    implements Fragment$Class, Fragment$ClassNoPhoto {
-  Query$personServicesClassesGroups$personsByPk$classes({
+class Query_personServicesClassesGroups_personsByPk_classes
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_classes({
     required this.id,
     required this.name,
     this.color,
@@ -15371,7 +15371,7 @@ class Query$personServicesClassesGroups$personsByPk$classes
     required this.service,
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$classes.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_classes.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -15379,14 +15379,14 @@ class Query$personServicesClassesGroups$personsByPk$classes
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$service = json['service'];
-    return Query$personServicesClassesGroups$personsByPk$classes(
+    return Query_personServicesClassesGroups_personsByPk_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
-      service: Query$personServicesClassesGroups$personsByPk$classes$service
+      service: Query_personServicesClassesGroups_personsByPk_classes_service
           .fromJson((l$service as Map<String, dynamic>)),
     );
   }
@@ -15401,7 +15401,7 @@ class Query$personServicesClassesGroups$personsByPk$classes
 
   final DateTime? photoUpdatedAt;
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service service;
+  final Query_personServicesClassesGroups_personsByPk_classes_service service;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -15444,7 +15444,7 @@ class Query$personServicesClassesGroups$personsByPk$classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personServicesClassesGroups$personsByPk$classes) ||
+    if (!(other is Query_personServicesClassesGroups_personsByPk_classes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15482,27 +15482,27 @@ class Query$personServicesClassesGroups$personsByPk$classes
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$classes
-    on Query$personServicesClassesGroups$personsByPk$classes {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes<
-          Query$personServicesClassesGroups$personsByPk$classes>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes
+    on Query_personServicesClassesGroups_personsByPk_classes {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+          Query_personServicesClassesGroups_personsByPk_classes>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes(
-    Query$personServicesClassesGroups$personsByPk$classes instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk$classes) then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes;
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
+    Query_personServicesClassesGroups_personsByPk_classes instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_classes) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes;
 
   TRes call({
     UuidValue? id,
@@ -15510,23 +15510,23 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$classes$service? service,
+    Query_personServicesClassesGroups_personsByPk_classes_service? service,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<TRes>
       get service;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes<TRes>
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes<TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$classes _instance;
+  final Query_personServicesClassesGroups_personsByPk_classes _instance;
 
-  final TRes Function(Query$personServicesClassesGroups$personsByPk$classes)
+  final TRes Function(Query_personServicesClassesGroups_personsByPk_classes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -15539,7 +15539,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? service = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$classes(
+      _then(Query_personServicesClassesGroups_personsByPk_classes(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -15554,21 +15554,21 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes<TRes>
         service: service == _undefined || service == null
             ? _instance.service
             : (service
-                as Query$personServicesClassesGroups$personsByPk$classes$service),
+                as Query_personServicesClassesGroups_personsByPk_classes_service),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<TRes>
       get service {
     final local$service = _instance.service;
-    return CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service(
+    return CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service(
         local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes<TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes(
       this._res);
 
   TRes _res;
@@ -15579,18 +15579,18 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$classes$service? service,
+    Query_personServicesClassesGroups_personsByPk_classes_service? service,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<TRes>
       get service =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$classes$service
-    implements Fragment$Service, Fragment$ServiceNoPhoto {
-  Query$personServicesClassesGroups$personsByPk$classes$service({
+class Query_personServicesClassesGroups_personsByPk_classes_service
+    implements Fragment_Service, Fragment_ServiceNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_classes_service({
     required this.id,
     required this.name,
     this.color,
@@ -15600,7 +15600,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
     this.toStudyYear,
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$classes$service.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_classes_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -15609,7 +15609,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$fromStudyYear = json['fromStudyYear'];
     final l$toStudyYear = json['toStudyYear'];
-    return Query$personServicesClassesGroups$personsByPk$classes$service(
+    return Query_personServicesClassesGroups_personsByPk_classes_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -15618,11 +15618,11 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       fromStudyYear: l$fromStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
+          : Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
               .fromJson((l$fromStudyYear as Map<String, dynamic>)),
       toStudyYear: l$toStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
+          : Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
               .fromJson((l$toStudyYear as Map<String, dynamic>)),
     );
   }
@@ -15637,10 +15637,10 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
 
   final DateTime? photoUpdatedAt;
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear?
       fromStudyYear;
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear?
       toStudyYear;
 
   Map<String, dynamic> toJson() {
@@ -15689,7 +15689,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$classes$service) ||
+            is Query_personServicesClassesGroups_personsByPk_classes_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15732,28 +15732,28 @@ class Query$personServicesClassesGroups$personsByPk$classes$service
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$classes$service
-    on Query$personServicesClassesGroups$personsByPk$classes$service {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<
-          Query$personServicesClassesGroups$personsByPk$classes$service>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes_service
+    on Query_personServicesClassesGroups_personsByPk_classes_service {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<
+          Query_personServicesClassesGroups_personsByPk_classes_service>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service(
-    Query$personServicesClassesGroups$personsByPk$classes$service instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk$classes$service)
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service(
+    Query_personServicesClassesGroups_personsByPk_classes_service instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_classes_service)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service;
 
   TRes call({
     UuidValue? id,
@@ -15761,31 +15761,31 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$se
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear?
         toStudyYear,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
       TRes> get fromStudyYear;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
       TRes> get toStudyYear;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service _instance;
+  final Query_personServicesClassesGroups_personsByPk_classes_service _instance;
 
   final TRes Function(
-      Query$personServicesClassesGroups$personsByPk$classes$service) _then;
+      Query_personServicesClassesGroups_personsByPk_classes_service) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -15798,7 +15798,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
     Object? fromStudyYear = _undefined,
     Object? toStudyYear = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$classes$service(
+      _then(Query_personServicesClassesGroups_personsByPk_classes_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -15813,39 +15813,39 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
         fromStudyYear: fromStudyYear == _undefined
             ? _instance.fromStudyYear
             : (fromStudyYear
-                as Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear?),
         toStudyYear: toStudyYear == _undefined
             ? _instance.toStudyYear
             : (toStudyYear
-                as Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear?),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
       TRes> get fromStudyYear {
     final local$fromStudyYear = _instance.fromStudyYear;
     return local$fromStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
             local$fromStudyYear, (e) => call(fromStudyYear: e));
   }
 
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
       TRes> get toStudyYear {
     final local$toStudyYear = _instance.toStudyYear;
     return local$toStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service(
       this._res);
 
   TRes _res;
@@ -15856,37 +15856,37 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$se
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear?
         toStudyYear,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
           TRes>
       get fromStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
               .stub(_res);
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
           TRes>
       get toStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear {
-  Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear({
+class Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear {
+  Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -15928,7 +15928,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYea
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15951,30 +15951,30 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYea
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
-    on Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
-          Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
+    on Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
+          Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
-    Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
+    Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear)
+            Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear;
 
   TRes call({
     int? order,
@@ -15983,21 +15983,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$se
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear
+  final Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear)
+          Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -16008,7 +16008,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+          Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -16021,12 +16021,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$fromStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_fromStudyYear(
       this._res);
 
   TRes _res;
@@ -16039,19 +16039,19 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$se
       _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear {
-  Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear({
+class Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear {
+  Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -16093,7 +16093,7 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear 
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16116,30 +16116,30 @@ class Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear 
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
-    on Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
-          Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
+    on Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
+          Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
-    Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
+    Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear)
+            Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear;
 
   TRes call({
     int? order,
@@ -16148,21 +16148,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$classes$se
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear
+  final Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear)
+          Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -16173,7 +16173,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+          Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -16186,12 +16186,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$classes$servic
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$service$toStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_service_toStudyYear(
       this._res);
 
   TRes _res;
@@ -16204,25 +16204,25 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$classes$se
       _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$groups {
-  Query$personServicesClassesGroups$personsByPk$groups({
+class Query_personServicesClassesGroups_personsByPk_groups {
+  Query_personServicesClassesGroups_personsByPk_groups({
     required this.group,
     this.$__typename = 'PersonsGroups',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$groups.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_groups.fromJson(
       Map<String, dynamic> json) {
     final l$group = json['group'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$groups(
+    return Query_personServicesClassesGroups_personsByPk_groups(
       group:
-          Query$personServicesClassesGroups$personsByPk$groups$group.fromJson(
+          Query_personServicesClassesGroups_personsByPk_groups_group.fromJson(
               (l$group as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group group;
+  final Query_personServicesClassesGroups_personsByPk_groups_group group;
 
   final String $__typename;
 
@@ -16250,7 +16250,7 @@ class Query$personServicesClassesGroups$personsByPk$groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$personServicesClassesGroups$personsByPk$groups) ||
+    if (!(other is Query_personServicesClassesGroups_personsByPk_groups) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16268,47 +16268,47 @@ class Query$personServicesClassesGroups$personsByPk$groups {
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$groups
-    on Query$personServicesClassesGroups$personsByPk$groups {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups<
-          Query$personServicesClassesGroups$personsByPk$groups>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_groups
+    on Query_personServicesClassesGroups_personsByPk_groups {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups<
+          Query_personServicesClassesGroups_personsByPk_groups>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups(
-    Query$personServicesClassesGroups$personsByPk$groups instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk$groups) then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups;
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups(
+    Query_personServicesClassesGroups_personsByPk_groups instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_groups) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups;
 
   TRes call({
-    Query$personServicesClassesGroups$personsByPk$groups$group? group,
+    Query_personServicesClassesGroups_personsByPk_groups_group? group,
     String? $__typename,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<TRes>
       get group;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups<TRes>
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups<TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups<TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$groups _instance;
+  final Query_personServicesClassesGroups_personsByPk_groups _instance;
 
-  final TRes Function(Query$personServicesClassesGroups$personsByPk$groups)
+  final TRes Function(Query_personServicesClassesGroups_personsByPk_groups)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -16317,46 +16317,46 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups<TRes>
     Object? group = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$groups(
+      _then(Query_personServicesClassesGroups_personsByPk_groups(
         group: group == _undefined || group == null
             ? _instance.group
             : (group
-                as Query$personServicesClassesGroups$personsByPk$groups$group),
+                as Query_personServicesClassesGroups_personsByPk_groups_group),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<TRes>
       get group {
     final local$group = _instance.group;
-    return CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group(
+    return CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group(
         local$group, (e) => call(group: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups<TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups(
       this._res);
 
   TRes _res;
 
   call({
-    Query$personServicesClassesGroups$personsByPk$groups$group? group,
+    Query_personServicesClassesGroups_personsByPk_groups_group? group,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<TRes>
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<TRes>
       get group =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$groups$group
-    implements Fragment$Group, Fragment$GroupNoPhoto {
-  Query$personServicesClassesGroups$personsByPk$groups$group({
+class Query_personServicesClassesGroups_personsByPk_groups_group
+    implements Fragment_Group, Fragment_GroupNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_groups_group({
     required this.id,
     required this.name,
     this.color,
@@ -16365,7 +16365,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
     required this.service,
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$groups$group.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_groups_group.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -16373,7 +16373,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$service = json['service'];
-    return Query$personServicesClassesGroups$personsByPk$groups$group(
+    return Query_personServicesClassesGroups_personsByPk_groups_group(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -16381,7 +16381,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       service:
-          Query$personServicesClassesGroups$personsByPk$groups$group$service
+          Query_personServicesClassesGroups_personsByPk_groups_group_service
               .fromJson((l$service as Map<String, dynamic>)),
     );
   }
@@ -16396,7 +16396,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
 
   final DateTime? photoUpdatedAt;
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service
       service;
 
   Map<String, dynamic> toJson() {
@@ -16441,7 +16441,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$groups$group) ||
+            is Query_personServicesClassesGroups_personsByPk_groups_group) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16479,28 +16479,28 @@ class Query$personServicesClassesGroups$personsByPk$groups$group
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$groups$group
-    on Query$personServicesClassesGroups$personsByPk$groups$group {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<
-          Query$personServicesClassesGroups$personsByPk$groups$group>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_groups_group
+    on Query_personServicesClassesGroups_personsByPk_groups_group {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<
+          Query_personServicesClassesGroups_personsByPk_groups_group>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group(
-    Query$personServicesClassesGroups$personsByPk$groups$group instance,
-    TRes Function(Query$personServicesClassesGroups$personsByPk$groups$group)
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group(
+    Query_personServicesClassesGroups_personsByPk_groups_group instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_groups_group)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group;
 
   TRes call({
     UuidValue? id,
@@ -16508,26 +16508,26 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service? service,
+    Query_personServicesClassesGroups_personsByPk_groups_group_service? service,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
       TRes> get service;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group _instance;
+  final Query_personServicesClassesGroups_personsByPk_groups_group _instance;
 
   final TRes Function(
-      Query$personServicesClassesGroups$personsByPk$groups$group) _then;
+      Query_personServicesClassesGroups_personsByPk_groups_group) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -16539,7 +16539,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group<
     Object? photoUpdatedAt = _undefined,
     Object? service = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$groups$group(
+      _then(Query_personServicesClassesGroups_personsByPk_groups_group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -16554,22 +16554,22 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group<
         service: service == _undefined || service == null
             ? _instance.service
             : (service
-                as Query$personServicesClassesGroups$personsByPk$groups$group$service),
+                as Query_personServicesClassesGroups_personsByPk_groups_group_service),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
       TRes> get service {
     final local$service = _instance.service;
-    return CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service(
+    return CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service(
         local$service, (e) => call(service: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group(
       this._res);
 
   TRes _res;
@@ -16580,19 +16580,19 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service? service,
+    Query_personServicesClassesGroups_personsByPk_groups_group_service? service,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
           TRes>
       get service =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$groups$group$service
-    implements Fragment$Service, Fragment$ServiceNoPhoto {
-  Query$personServicesClassesGroups$personsByPk$groups$group$service({
+class Query_personServicesClassesGroups_personsByPk_groups_group_service
+    implements Fragment_Service, Fragment_ServiceNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_groups_group_service({
     required this.id,
     required this.name,
     this.color,
@@ -16602,7 +16602,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
     this.toStudyYear,
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$groups$group$service.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_groups_group_service.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -16611,7 +16611,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$fromStudyYear = json['fromStudyYear'];
     final l$toStudyYear = json['toStudyYear'];
-    return Query$personServicesClassesGroups$personsByPk$groups$group$service(
+    return Query_personServicesClassesGroups_personsByPk_groups_group_service(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -16620,11 +16620,11 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       fromStudyYear: l$fromStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
+          : Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
               .fromJson((l$fromStudyYear as Map<String, dynamic>)),
       toStudyYear: l$toStudyYear == null
           ? null
-          : Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
+          : Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
               .fromJson((l$toStudyYear as Map<String, dynamic>)),
     );
   }
@@ -16639,10 +16639,10 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
 
   final DateTime? photoUpdatedAt;
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear?
       fromStudyYear;
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear?
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear?
       toStudyYear;
 
   Map<String, dynamic> toJson() {
@@ -16691,7 +16691,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$groups$group$service) ||
+            is Query_personServicesClassesGroups_personsByPk_groups_group_service) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16734,29 +16734,29 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$groups$group$service
-    on Query$personServicesClassesGroups$personsByPk$groups$group$service {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
-          Query$personServicesClassesGroups$personsByPk$groups$group$service>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_groups_group_service
+    on Query_personServicesClassesGroups_personsByPk_groups_group_service {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
+          Query_personServicesClassesGroups_personsByPk_groups_group_service>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service(
-    Query$personServicesClassesGroups$personsByPk$groups$group$service instance,
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service(
+    Query_personServicesClassesGroups_personsByPk_groups_group_service instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$groups$group$service)
+            Query_personServicesClassesGroups_personsByPk_groups_group_service)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service;
 
   TRes call({
     UuidValue? id,
@@ -16764,32 +16764,32 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear?
         toStudyYear,
   });
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
       TRes> get fromStudyYear;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
       TRes> get toStudyYear;
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service
       _instance;
 
   final TRes Function(
-      Query$personServicesClassesGroups$personsByPk$groups$group$service) _then;
+      Query_personServicesClassesGroups_personsByPk_groups_group_service) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -16802,7 +16802,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
     Object? fromStudyYear = _undefined,
     Object? toStudyYear = _undefined,
   }) =>
-      _then(Query$personServicesClassesGroups$personsByPk$groups$group$service(
+      _then(Query_personServicesClassesGroups_personsByPk_groups_group_service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -16817,39 +16817,39 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
         fromStudyYear: fromStudyYear == _undefined
             ? _instance.fromStudyYear
             : (fromStudyYear
-                as Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear?),
         toStudyYear: toStudyYear == _undefined
             ? _instance.toStudyYear
             : (toStudyYear
-                as Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear?),
+                as Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear?),
       ));
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
       TRes> get fromStudyYear {
     final local$fromStudyYear = _instance.fromStudyYear;
     return local$fromStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
             local$fromStudyYear, (e) => call(fromStudyYear: e));
   }
 
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
       TRes> get toStudyYear {
     final local$toStudyYear = _instance.toStudyYear;
     return local$toStudyYear == null
-        ? CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
             .stub(_then(_instance))
-        : CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
             local$toStudyYear, (e) => call(toStudyYear: e));
   }
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service(
       this._res);
 
   TRes _res;
@@ -16860,37 +16860,37 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear?
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear?
         fromStudyYear,
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear?
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear?
         toStudyYear,
   }) =>
       _res;
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
           TRes>
       get fromStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
               .stub(_res);
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
           TRes>
       get toStudyYear =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
               .stub(_res);
 }
 
-class Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear {
-  Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear({
+class Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear {
+  Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -16932,7 +16932,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStu
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16955,30 +16955,30 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStu
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
-    on Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
+    on Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear)
+            Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear;
 
   TRes call({
     int? order,
@@ -16987,21 +16987,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$gro
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear)
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -17012,7 +17012,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -17025,12 +17025,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$fromStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_fromStudyYear(
       this._res);
 
   TRes _res;
@@ -17043,19 +17043,19 @@ class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$gro
       _res;
 }
 
-class Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear {
-  Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear({
+class Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear {
+  Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+    return Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -17097,7 +17097,7 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudy
       return true;
     }
     if (!(other
-            is Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear) ||
+            is Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17120,30 +17120,30 @@ class Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudy
   }
 }
 
-extension UtilityExtension$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
-    on Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear {
-  CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
+    on Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear>
       get copyWith =>
-          CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
     TRes> {
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
-    Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
+    Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
         instance,
     TRes Function(
-            Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear)
+            Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear)
         then,
-  ) = _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear;
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear;
 
-  factory CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear;
 
   TRes call({
     int? order,
@@ -17152,21 +17152,21 @@ abstract class CopyWith$Query$personServicesClassesGroups$personsByPk$groups$gro
   });
 }
 
-class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
             TRes> {
-  _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
     this._instance,
     this._then,
   );
 
-  final Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear
+  final Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear
       _instance;
 
   final TRes Function(
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear)
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -17177,7 +17177,7 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+          Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -17190,12 +17190,12 @@ class _CopyWithImpl$Query$personServicesClassesGroups$personsByPk$groups$group$s
       ));
 }
 
-class _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
         TRes>
     implements
-        CopyWith$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear<
+        CopyWith_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear<
             TRes> {
-  _CopyWithStubImpl$Query$personServicesClassesGroups$personsByPk$groups$group$service$toStudyYear(
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_group_service_toStudyYear(
       this._res);
 
   TRes _res;

@@ -5,21 +5,21 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllClasses {
-  factory Variables$Subscription$watchAllClasses({
+class Variables_Subscription_watchAllClasses {
+  factory Variables_Subscription_watchAllClasses({
     int? limit,
-    List<Input$ClassesOrderBy>? orderBy,
-    List<Input$ClassesBoolExp>? where,
+    List<Input_ClassesOrderBy>? orderBy,
+    List<Input_ClassesBoolExp>? where,
   }) =>
-      Variables$Subscription$watchAllClasses._({
+      Variables_Subscription_watchAllClasses._({
         if (limit != null) r'limit': limit,
         if (orderBy != null) r'orderBy': orderBy,
         if (where != null) r'where': where,
       });
 
-  Variables$Subscription$watchAllClasses._(this._$data);
+  Variables_Subscription_watchAllClasses._(this._$data);
 
-  factory Variables$Subscription$watchAllClasses.fromJson(
+  factory Variables_Subscription_watchAllClasses.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('limit')) {
@@ -30,26 +30,26 @@ class Variables$Subscription$watchAllClasses {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input$ClassesOrderBy.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_ClassesOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$ClassesBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_ClassesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
-    return Variables$Subscription$watchAllClasses._(result$data);
+    return Variables_Subscription_watchAllClasses._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
-  List<Input$ClassesOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$ClassesOrderBy>?);
-  List<Input$ClassesBoolExp>? get where =>
-      (_$data['where'] as List<Input$ClassesBoolExp>?);
+  List<Input_ClassesOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_ClassesOrderBy>?);
+  List<Input_ClassesBoolExp>? get where =>
+      (_$data['where'] as List<Input_ClassesBoolExp>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -67,9 +67,9 @@ class Variables$Subscription$watchAllClasses {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllClasses<
-          Variables$Subscription$watchAllClasses>
-      get copyWith => CopyWith$Variables$Subscription$watchAllClasses(
+  CopyWith_Variables_Subscription_watchAllClasses<
+          Variables_Subscription_watchAllClasses>
+      get copyWith => CopyWith_Variables_Subscription_watchAllClasses(
             this,
             (i) => i,
           );
@@ -78,7 +78,7 @@ class Variables$Subscription$watchAllClasses {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllClasses) ||
+    if (!(other is Variables_Subscription_watchAllClasses) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -152,32 +152,32 @@ class Variables$Subscription$watchAllClasses {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllClasses<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllClasses(
-    Variables$Subscription$watchAllClasses instance,
-    TRes Function(Variables$Subscription$watchAllClasses) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllClasses;
+abstract class CopyWith_Variables_Subscription_watchAllClasses<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllClasses(
+    Variables_Subscription_watchAllClasses instance,
+    TRes Function(Variables_Subscription_watchAllClasses) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllClasses;
 
-  factory CopyWith$Variables$Subscription$watchAllClasses.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllClasses;
+  factory CopyWith_Variables_Subscription_watchAllClasses.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllClasses;
 
   TRes call({
     int? limit,
-    List<Input$ClassesOrderBy>? orderBy,
-    List<Input$ClassesBoolExp>? where,
+    List<Input_ClassesOrderBy>? orderBy,
+    List<Input_ClassesBoolExp>? where,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllClasses<TRes>
-    implements CopyWith$Variables$Subscription$watchAllClasses<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllClasses(
+class _CopyWithImpl_Variables_Subscription_watchAllClasses<TRes>
+    implements CopyWith_Variables_Subscription_watchAllClasses<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllClasses(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllClasses _instance;
+  final Variables_Subscription_watchAllClasses _instance;
 
-  final TRes Function(Variables$Subscription$watchAllClasses) _then;
+  final TRes Function(Variables_Subscription_watchAllClasses) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -186,42 +186,42 @@ class _CopyWithImpl$Variables$Subscription$watchAllClasses<TRes>
     Object? orderBy = _undefined,
     Object? where = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllClasses._({
+      _then(Variables_Subscription_watchAllClasses._({
         ..._instance._$data,
         if (limit != _undefined) 'limit': (limit as int?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$ClassesOrderBy>?),
+          'orderBy': (orderBy as List<Input_ClassesOrderBy>?),
         if (where != _undefined)
-          'where': (where as List<Input$ClassesBoolExp>?),
+          'where': (where as List<Input_ClassesBoolExp>?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllClasses<TRes>
-    implements CopyWith$Variables$Subscription$watchAllClasses<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllClasses(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllClasses<TRes>
+    implements CopyWith_Variables_Subscription_watchAllClasses<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllClasses(this._res);
 
   TRes _res;
 
   call({
     int? limit,
-    List<Input$ClassesOrderBy>? orderBy,
-    List<Input$ClassesBoolExp>? where,
+    List<Input_ClassesOrderBy>? orderBy,
+    List<Input_ClassesBoolExp>? where,
   }) =>
       _res;
 }
 
-class Subscription$watchAllClasses {
-  Subscription$watchAllClasses({required this.classes});
+class Subscription_watchAllClasses {
+  Subscription_watchAllClasses({required this.classes});
 
-  factory Subscription$watchAllClasses.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllClasses.fromJson(Map<String, dynamic> json) {
     final l$classes = json['classes'];
-    return Subscription$watchAllClasses(
+    return Subscription_watchAllClasses(
         classes: (l$classes as List<dynamic>)
-            .map((e) => Fragment$Class.fromJson((e as Map<String, dynamic>)))
+            .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$Class> classes;
+  final List<Fragment_Class> classes;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -241,7 +241,7 @@ class Subscription$watchAllClasses {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllClasses) ||
+    if (!(other is Subscription_watchAllClasses) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -261,67 +261,67 @@ class Subscription$watchAllClasses {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllClasses
-    on Subscription$watchAllClasses {
-  CopyWith$Subscription$watchAllClasses<Subscription$watchAllClasses>
-      get copyWith => CopyWith$Subscription$watchAllClasses(
+extension UtilityExtension_Subscription_watchAllClasses
+    on Subscription_watchAllClasses {
+  CopyWith_Subscription_watchAllClasses<Subscription_watchAllClasses>
+      get copyWith => CopyWith_Subscription_watchAllClasses(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllClasses<TRes> {
-  factory CopyWith$Subscription$watchAllClasses(
-    Subscription$watchAllClasses instance,
-    TRes Function(Subscription$watchAllClasses) then,
-  ) = _CopyWithImpl$Subscription$watchAllClasses;
+abstract class CopyWith_Subscription_watchAllClasses<TRes> {
+  factory CopyWith_Subscription_watchAllClasses(
+    Subscription_watchAllClasses instance,
+    TRes Function(Subscription_watchAllClasses) then,
+  ) = _CopyWithImpl_Subscription_watchAllClasses;
 
-  factory CopyWith$Subscription$watchAllClasses.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllClasses;
+  factory CopyWith_Subscription_watchAllClasses.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllClasses;
 
-  TRes call({List<Fragment$Class>? classes});
+  TRes call({List<Fragment_Class>? classes});
   TRes classes(
-      Iterable<Fragment$Class> Function(
-              Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+      Iterable<Fragment_Class> Function(
+              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllClasses<TRes>
-    implements CopyWith$Subscription$watchAllClasses<TRes> {
-  _CopyWithImpl$Subscription$watchAllClasses(
+class _CopyWithImpl_Subscription_watchAllClasses<TRes>
+    implements CopyWith_Subscription_watchAllClasses<TRes> {
+  _CopyWithImpl_Subscription_watchAllClasses(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllClasses _instance;
+  final Subscription_watchAllClasses _instance;
 
-  final TRes Function(Subscription$watchAllClasses) _then;
+  final TRes Function(Subscription_watchAllClasses) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? classes = _undefined}) =>
-      _then(Subscription$watchAllClasses(
+      _then(Subscription_watchAllClasses(
           classes: classes == _undefined || classes == null
               ? _instance.classes
-              : (classes as List<Fragment$Class>)));
+              : (classes as List<Fragment_Class>)));
   TRes classes(
-          Iterable<Fragment$Class> Function(
-                  Iterable<CopyWith$Fragment$Class<Fragment$Class>>)
+          Iterable<Fragment_Class> Function(
+                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes.map((e) => CopyWith$Fragment$Class(
+          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllClasses<TRes>
-    implements CopyWith$Subscription$watchAllClasses<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllClasses(this._res);
+class _CopyWithStubImpl_Subscription_watchAllClasses<TRes>
+    implements CopyWith_Subscription_watchAllClasses<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllClasses(this._res);
 
   TRes _res;
 
-  call({List<Fragment$Class>? classes}) => _res;
+  call({List<Fragment_Class>? classes}) => _res;
   classes(_fn) => _res;
 }
 
@@ -415,20 +415,20 @@ const documentNodeSubscriptionwatchAllClasses = DocumentNode(definitions: [
   fragmentDefinitionClassNoPhoto,
 ]);
 
-class Variables$Subscription$watchClass {
-  factory Variables$Subscription$watchClass({required UuidValue id}) =>
-      Variables$Subscription$watchClass._({
+class Variables_Subscription_watchClass {
+  factory Variables_Subscription_watchClass({required UuidValue id}) =>
+      Variables_Subscription_watchClass._({
         r'id': id,
       });
 
-  Variables$Subscription$watchClass._(this._$data);
+  Variables_Subscription_watchClass._(this._$data);
 
-  factory Variables$Subscription$watchClass.fromJson(
+  factory Variables_Subscription_watchClass.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
-    return Variables$Subscription$watchClass._(result$data);
+    return Variables_Subscription_watchClass._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -441,8 +441,8 @@ class Variables$Subscription$watchClass {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchClass<Variables$Subscription$watchClass>
-      get copyWith => CopyWith$Variables$Subscription$watchClass(
+  CopyWith_Variables_Subscription_watchClass<Variables_Subscription_watchClass>
+      get copyWith => CopyWith_Variables_Subscription_watchClass(
             this,
             (i) => i,
           );
@@ -451,7 +451,7 @@ class Variables$Subscription$watchClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchClass) ||
+    if (!(other is Variables_Subscription_watchClass) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -470,60 +470,60 @@ class Variables$Subscription$watchClass {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchClass<TRes> {
-  factory CopyWith$Variables$Subscription$watchClass(
-    Variables$Subscription$watchClass instance,
-    TRes Function(Variables$Subscription$watchClass) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchClass;
+abstract class CopyWith_Variables_Subscription_watchClass<TRes> {
+  factory CopyWith_Variables_Subscription_watchClass(
+    Variables_Subscription_watchClass instance,
+    TRes Function(Variables_Subscription_watchClass) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchClass;
 
-  factory CopyWith$Variables$Subscription$watchClass.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchClass;
+  factory CopyWith_Variables_Subscription_watchClass.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchClass;
 
   TRes call({UuidValue? id});
 }
 
-class _CopyWithImpl$Variables$Subscription$watchClass<TRes>
-    implements CopyWith$Variables$Subscription$watchClass<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchClass(
+class _CopyWithImpl_Variables_Subscription_watchClass<TRes>
+    implements CopyWith_Variables_Subscription_watchClass<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchClass(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchClass _instance;
+  final Variables_Subscription_watchClass _instance;
 
-  final TRes Function(Variables$Subscription$watchClass) _then;
+  final TRes Function(Variables_Subscription_watchClass) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
-      _then(Variables$Subscription$watchClass._({
+      _then(Variables_Subscription_watchClass._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchClass<TRes>
-    implements CopyWith$Variables$Subscription$watchClass<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchClass(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchClass<TRes>
+    implements CopyWith_Variables_Subscription_watchClass<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchClass(this._res);
 
   TRes _res;
 
   call({UuidValue? id}) => _res;
 }
 
-class Subscription$watchClass {
-  Subscription$watchClass({this.classesByPk});
+class Subscription_watchClass {
+  Subscription_watchClass({this.classesByPk});
 
-  factory Subscription$watchClass.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchClass.fromJson(Map<String, dynamic> json) {
     final l$classesByPk = json['classesByPk'];
-    return Subscription$watchClass(
+    return Subscription_watchClass(
         classesByPk: l$classesByPk == null
             ? null
-            : Subscription$watchClass$classesByPk.fromJson(
+            : Subscription_watchClass_classesByPk.fromJson(
                 (l$classesByPk as Map<String, dynamic>)));
   }
 
-  final Subscription$watchClass$classesByPk? classesByPk;
+  final Subscription_watchClass_classesByPk? classesByPk;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -543,7 +543,7 @@ class Subscription$watchClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchClass) ||
+    if (!(other is Subscription_watchClass) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -556,63 +556,63 @@ class Subscription$watchClass {
   }
 }
 
-extension UtilityExtension$Subscription$watchClass on Subscription$watchClass {
-  CopyWith$Subscription$watchClass<Subscription$watchClass> get copyWith =>
-      CopyWith$Subscription$watchClass(
+extension UtilityExtension_Subscription_watchClass on Subscription_watchClass {
+  CopyWith_Subscription_watchClass<Subscription_watchClass> get copyWith =>
+      CopyWith_Subscription_watchClass(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchClass<TRes> {
-  factory CopyWith$Subscription$watchClass(
-    Subscription$watchClass instance,
-    TRes Function(Subscription$watchClass) then,
-  ) = _CopyWithImpl$Subscription$watchClass;
+abstract class CopyWith_Subscription_watchClass<TRes> {
+  factory CopyWith_Subscription_watchClass(
+    Subscription_watchClass instance,
+    TRes Function(Subscription_watchClass) then,
+  ) = _CopyWithImpl_Subscription_watchClass;
 
-  factory CopyWith$Subscription$watchClass.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchClass;
+  factory CopyWith_Subscription_watchClass.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchClass;
 
-  TRes call({Subscription$watchClass$classesByPk? classesByPk});
-  CopyWith$Subscription$watchClass$classesByPk<TRes> get classesByPk;
+  TRes call({Subscription_watchClass_classesByPk? classesByPk});
+  CopyWith_Subscription_watchClass_classesByPk<TRes> get classesByPk;
 }
 
-class _CopyWithImpl$Subscription$watchClass<TRes>
-    implements CopyWith$Subscription$watchClass<TRes> {
-  _CopyWithImpl$Subscription$watchClass(
+class _CopyWithImpl_Subscription_watchClass<TRes>
+    implements CopyWith_Subscription_watchClass<TRes> {
+  _CopyWithImpl_Subscription_watchClass(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchClass _instance;
+  final Subscription_watchClass _instance;
 
-  final TRes Function(Subscription$watchClass) _then;
+  final TRes Function(Subscription_watchClass) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? classesByPk = _undefined}) =>
-      _then(Subscription$watchClass(
+      _then(Subscription_watchClass(
           classesByPk: classesByPk == _undefined
               ? _instance.classesByPk
-              : (classesByPk as Subscription$watchClass$classesByPk?)));
-  CopyWith$Subscription$watchClass$classesByPk<TRes> get classesByPk {
+              : (classesByPk as Subscription_watchClass_classesByPk?)));
+  CopyWith_Subscription_watchClass_classesByPk<TRes> get classesByPk {
     final local$classesByPk = _instance.classesByPk;
     return local$classesByPk == null
-        ? CopyWith$Subscription$watchClass$classesByPk.stub(_then(_instance))
-        : CopyWith$Subscription$watchClass$classesByPk(
+        ? CopyWith_Subscription_watchClass_classesByPk.stub(_then(_instance))
+        : CopyWith_Subscription_watchClass_classesByPk(
             local$classesByPk, (e) => call(classesByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchClass<TRes>
-    implements CopyWith$Subscription$watchClass<TRes> {
-  _CopyWithStubImpl$Subscription$watchClass(this._res);
+class _CopyWithStubImpl_Subscription_watchClass<TRes>
+    implements CopyWith_Subscription_watchClass<TRes> {
+  _CopyWithStubImpl_Subscription_watchClass(this._res);
 
   TRes _res;
 
-  call({Subscription$watchClass$classesByPk? classesByPk}) => _res;
-  CopyWith$Subscription$watchClass$classesByPk<TRes> get classesByPk =>
-      CopyWith$Subscription$watchClass$classesByPk.stub(_res);
+  call({Subscription_watchClass_classesByPk? classesByPk}) => _res;
+  CopyWith_Subscription_watchClass_classesByPk<TRes> get classesByPk =>
+      CopyWith_Subscription_watchClass_classesByPk.stub(_res);
 }
 
 const documentNodeSubscriptionwatchClass = DocumentNode(definitions: [
@@ -767,9 +767,9 @@ const documentNodeSubscriptionwatchClass = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Subscription$watchClass$classesByPk
-    implements Fragment$Class, Fragment$ClassNoPhoto {
-  Subscription$watchClass$classesByPk({
+class Subscription_watchClass_classesByPk
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Subscription_watchClass_classesByPk({
     required this.id,
     required this.name,
     this.color,
@@ -782,7 +782,7 @@ class Subscription$watchClass$classesByPk
     required this.adminUsers,
   });
 
-  factory Subscription$watchClass$classesByPk.fromJson(
+  factory Subscription_watchClass_classesByPk.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -794,20 +794,20 @@ class Subscription$watchClass$classesByPk
     final l$serviceGender = json['serviceGender'];
     final l$studyYear = json['studyYear'];
     final l$adminUsers = json['adminUsers'];
-    return Subscription$watchClass$classesByPk(
+    return Subscription_watchClass_classesByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
-      service: Fragment$Service.fromJson((l$service as Map<String, dynamic>)),
+      service: Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
       serviceGender: (l$serviceGender as bool),
-      studyYear: Subscription$watchClass$classesByPk$studyYear.fromJson(
+      studyYear: Subscription_watchClass_classesByPk_studyYear.fromJson(
           (l$studyYear as Map<String, dynamic>)),
       adminUsers: (l$adminUsers as List<dynamic>)
-          .map((e) => Subscription$watchClass$classesByPk$adminUsers.fromJson(
+          .map((e) => Subscription_watchClass_classesByPk_adminUsers.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
     );
@@ -823,15 +823,15 @@ class Subscription$watchClass$classesByPk
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment$Service service;
+  final Fragment_Service service;
 
   final Json? lastEdit;
 
   final bool serviceGender;
 
-  final Subscription$watchClass$classesByPk$studyYear studyYear;
+  final Subscription_watchClass_classesByPk_studyYear studyYear;
 
-  final List<Subscription$watchClass$classesByPk$adminUsers> adminUsers;
+  final List<Subscription_watchClass_classesByPk_adminUsers> adminUsers;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -890,7 +890,7 @@ class Subscription$watchClass$classesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchClass$classesByPk) ||
+    if (!(other is Subscription_watchClass_classesByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -955,24 +955,24 @@ class Subscription$watchClass$classesByPk
   }
 }
 
-extension UtilityExtension$Subscription$watchClass$classesByPk
-    on Subscription$watchClass$classesByPk {
-  CopyWith$Subscription$watchClass$classesByPk<
-          Subscription$watchClass$classesByPk>
-      get copyWith => CopyWith$Subscription$watchClass$classesByPk(
+extension UtilityExtension_Subscription_watchClass_classesByPk
+    on Subscription_watchClass_classesByPk {
+  CopyWith_Subscription_watchClass_classesByPk<
+          Subscription_watchClass_classesByPk>
+      get copyWith => CopyWith_Subscription_watchClass_classesByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchClass$classesByPk<TRes> {
-  factory CopyWith$Subscription$watchClass$classesByPk(
-    Subscription$watchClass$classesByPk instance,
-    TRes Function(Subscription$watchClass$classesByPk) then,
-  ) = _CopyWithImpl$Subscription$watchClass$classesByPk;
+abstract class CopyWith_Subscription_watchClass_classesByPk<TRes> {
+  factory CopyWith_Subscription_watchClass_classesByPk(
+    Subscription_watchClass_classesByPk instance,
+    TRes Function(Subscription_watchClass_classesByPk) then,
+  ) = _CopyWithImpl_Subscription_watchClass_classesByPk;
 
-  factory CopyWith$Subscription$watchClass$classesByPk.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchClass$classesByPk;
+  factory CopyWith_Subscription_watchClass_classesByPk.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchClass_classesByPk;
 
   TRes call({
     UuidValue? id,
@@ -980,32 +980,32 @@ abstract class CopyWith$Subscription$watchClass$classesByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$Service? service,
+    Fragment_Service? service,
     Json? lastEdit,
     bool? serviceGender,
-    Subscription$watchClass$classesByPk$studyYear? studyYear,
-    List<Subscription$watchClass$classesByPk$adminUsers>? adminUsers,
+    Subscription_watchClass_classesByPk_studyYear? studyYear,
+    List<Subscription_watchClass_classesByPk_adminUsers>? adminUsers,
   });
-  CopyWith$Fragment$Service<TRes> get service;
-  CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> get studyYear;
+  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear;
   TRes adminUsers(
-      Iterable<Subscription$watchClass$classesByPk$adminUsers> Function(
+      Iterable<Subscription_watchClass_classesByPk_adminUsers> Function(
               Iterable<
-                  CopyWith$Subscription$watchClass$classesByPk$adminUsers<
-                      Subscription$watchClass$classesByPk$adminUsers>>)
+                  CopyWith_Subscription_watchClass_classesByPk_adminUsers<
+                      Subscription_watchClass_classesByPk_adminUsers>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchClass$classesByPk<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk<TRes> {
-  _CopyWithImpl$Subscription$watchClass$classesByPk(
+class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk<TRes> {
+  _CopyWithImpl_Subscription_watchClass_classesByPk(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchClass$classesByPk _instance;
+  final Subscription_watchClass_classesByPk _instance;
 
-  final TRes Function(Subscription$watchClass$classesByPk) _then;
+  final TRes Function(Subscription_watchClass_classesByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1021,7 +1021,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk<TRes>
     Object? studyYear = _undefined,
     Object? adminUsers = _undefined,
   }) =>
-      _then(Subscription$watchClass$classesByPk(
+      _then(Subscription_watchClass_classesByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1035,7 +1035,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         service: service == _undefined || service == null
             ? _instance.service
-            : (service as Fragment$Service),
+            : (service as Fragment_Service),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         serviceGender: serviceGender == _undefined || serviceGender == null
@@ -1043,40 +1043,40 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk<TRes>
             : (serviceGender as bool),
         studyYear: studyYear == _undefined || studyYear == null
             ? _instance.studyYear
-            : (studyYear as Subscription$watchClass$classesByPk$studyYear),
+            : (studyYear as Subscription_watchClass_classesByPk_studyYear),
         adminUsers: adminUsers == _undefined || adminUsers == null
             ? _instance.adminUsers
             : (adminUsers
-                as List<Subscription$watchClass$classesByPk$adminUsers>),
+                as List<Subscription_watchClass_classesByPk_adminUsers>),
       ));
-  CopyWith$Fragment$Service<TRes> get service {
+  CopyWith_Fragment_Service<TRes> get service {
     final local$service = _instance.service;
-    return CopyWith$Fragment$Service(local$service, (e) => call(service: e));
+    return CopyWith_Fragment_Service(local$service, (e) => call(service: e));
   }
 
-  CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> get studyYear {
+  CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
-    return CopyWith$Subscription$watchClass$classesByPk$studyYear(
+    return CopyWith_Subscription_watchClass_classesByPk_studyYear(
         local$studyYear, (e) => call(studyYear: e));
   }
 
   TRes adminUsers(
-          Iterable<Subscription$watchClass$classesByPk$adminUsers> Function(
+          Iterable<Subscription_watchClass_classesByPk_adminUsers> Function(
                   Iterable<
-                      CopyWith$Subscription$watchClass$classesByPk$adminUsers<
-                          Subscription$watchClass$classesByPk$adminUsers>>)
+                      CopyWith_Subscription_watchClass_classesByPk_adminUsers<
+                          Subscription_watchClass_classesByPk_adminUsers>>)
               _fn) =>
       call(
           adminUsers: _fn(_instance.adminUsers.map(
-              (e) => CopyWith$Subscription$watchClass$classesByPk$adminUsers(
+              (e) => CopyWith_Subscription_watchClass_classesByPk_adminUsers(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchClass$classesByPk<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk<TRes> {
-  _CopyWithStubImpl$Subscription$watchClass$classesByPk(this._res);
+class _CopyWithStubImpl_Subscription_watchClass_classesByPk<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk<TRes> {
+  _CopyWithStubImpl_Subscription_watchClass_classesByPk(this._res);
 
   TRes _res;
 
@@ -1086,33 +1086,33 @@ class _CopyWithStubImpl$Subscription$watchClass$classesByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment$Service? service,
+    Fragment_Service? service,
     Json? lastEdit,
     bool? serviceGender,
-    Subscription$watchClass$classesByPk$studyYear? studyYear,
-    List<Subscription$watchClass$classesByPk$adminUsers>? adminUsers,
+    Subscription_watchClass_classesByPk_studyYear? studyYear,
+    List<Subscription_watchClass_classesByPk_adminUsers>? adminUsers,
   }) =>
       _res;
-  CopyWith$Fragment$Service<TRes> get service =>
-      CopyWith$Fragment$Service.stub(_res);
-  CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> get studyYear =>
-      CopyWith$Subscription$watchClass$classesByPk$studyYear.stub(_res);
+  CopyWith_Fragment_Service<TRes> get service =>
+      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear =>
+      CopyWith_Subscription_watchClass_classesByPk_studyYear.stub(_res);
   adminUsers(_fn) => _res;
 }
 
-class Subscription$watchClass$classesByPk$studyYear {
-  Subscription$watchClass$classesByPk$studyYear({
+class Subscription_watchClass_classesByPk_studyYear {
+  Subscription_watchClass_classesByPk_studyYear({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Subscription$watchClass$classesByPk$studyYear.fromJson(
+  factory Subscription_watchClass_classesByPk_studyYear.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchClass$classesByPk$studyYear(
+    return Subscription_watchClass_classesByPk_studyYear(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -1153,7 +1153,7 @@ class Subscription$watchClass$classesByPk$studyYear {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchClass$classesByPk$studyYear) ||
+    if (!(other is Subscription_watchClass_classesByPk_studyYear) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1176,25 +1176,25 @@ class Subscription$watchClass$classesByPk$studyYear {
   }
 }
 
-extension UtilityExtension$Subscription$watchClass$classesByPk$studyYear
-    on Subscription$watchClass$classesByPk$studyYear {
-  CopyWith$Subscription$watchClass$classesByPk$studyYear<
-          Subscription$watchClass$classesByPk$studyYear>
-      get copyWith => CopyWith$Subscription$watchClass$classesByPk$studyYear(
+extension UtilityExtension_Subscription_watchClass_classesByPk_studyYear
+    on Subscription_watchClass_classesByPk_studyYear {
+  CopyWith_Subscription_watchClass_classesByPk_studyYear<
+          Subscription_watchClass_classesByPk_studyYear>
+      get copyWith => CopyWith_Subscription_watchClass_classesByPk_studyYear(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> {
-  factory CopyWith$Subscription$watchClass$classesByPk$studyYear(
-    Subscription$watchClass$classesByPk$studyYear instance,
-    TRes Function(Subscription$watchClass$classesByPk$studyYear) then,
-  ) = _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear;
+abstract class CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> {
+  factory CopyWith_Subscription_watchClass_classesByPk_studyYear(
+    Subscription_watchClass_classesByPk_studyYear instance,
+    TRes Function(Subscription_watchClass_classesByPk_studyYear) then,
+  ) = _CopyWithImpl_Subscription_watchClass_classesByPk_studyYear;
 
-  factory CopyWith$Subscription$watchClass$classesByPk$studyYear.stub(
+  factory CopyWith_Subscription_watchClass_classesByPk_studyYear.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchClass$classesByPk$studyYear;
+      _CopyWithStubImpl_Subscription_watchClass_classesByPk_studyYear;
 
   TRes call({
     int? order,
@@ -1203,16 +1203,16 @@ abstract class CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> {
-  _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear(
+class _CopyWithImpl_Subscription_watchClass_classesByPk_studyYear<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> {
+  _CopyWithImpl_Subscription_watchClass_classesByPk_studyYear(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchClass$classesByPk$studyYear _instance;
+  final Subscription_watchClass_classesByPk_studyYear _instance;
 
-  final TRes Function(Subscription$watchClass$classesByPk$studyYear) _then;
+  final TRes Function(Subscription_watchClass_classesByPk_studyYear) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1221,7 +1221,7 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchClass$classesByPk$studyYear(
+      _then(Subscription_watchClass_classesByPk_studyYear(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -1234,9 +1234,9 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk$studyYear<TRes> {
-  _CopyWithStubImpl$Subscription$watchClass$classesByPk$studyYear(this._res);
+class _CopyWithStubImpl_Subscription_watchClass_classesByPk_studyYear<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> {
+  _CopyWithStubImpl_Subscription_watchClass_classesByPk_studyYear(this._res);
 
   TRes _res;
 
@@ -1248,23 +1248,23 @@ class _CopyWithStubImpl$Subscription$watchClass$classesByPk$studyYear<TRes>
       _res;
 }
 
-class Subscription$watchClass$classesByPk$adminUsers {
-  Subscription$watchClass$classesByPk$adminUsers({
+class Subscription_watchClass_classesByPk_adminUsers {
+  Subscription_watchClass_classesByPk_adminUsers({
     required this.user,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Subscription$watchClass$classesByPk$adminUsers.fromJson(
+  factory Subscription_watchClass_classesByPk_adminUsers.fromJson(
       Map<String, dynamic> json) {
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchClass$classesByPk$adminUsers(
-      user: Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+    return Subscription_watchClass_classesByPk_adminUsers(
+      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$User user;
+  final Fragment_User user;
 
   final String $__typename;
 
@@ -1292,7 +1292,7 @@ class Subscription$watchClass$classesByPk$adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchClass$classesByPk$adminUsers) ||
+    if (!(other is Subscription_watchClass_classesByPk_adminUsers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1310,43 +1310,43 @@ class Subscription$watchClass$classesByPk$adminUsers {
   }
 }
 
-extension UtilityExtension$Subscription$watchClass$classesByPk$adminUsers
-    on Subscription$watchClass$classesByPk$adminUsers {
-  CopyWith$Subscription$watchClass$classesByPk$adminUsers<
-          Subscription$watchClass$classesByPk$adminUsers>
-      get copyWith => CopyWith$Subscription$watchClass$classesByPk$adminUsers(
+extension UtilityExtension_Subscription_watchClass_classesByPk_adminUsers
+    on Subscription_watchClass_classesByPk_adminUsers {
+  CopyWith_Subscription_watchClass_classesByPk_adminUsers<
+          Subscription_watchClass_classesByPk_adminUsers>
+      get copyWith => CopyWith_Subscription_watchClass_classesByPk_adminUsers(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchClass$classesByPk$adminUsers<TRes> {
-  factory CopyWith$Subscription$watchClass$classesByPk$adminUsers(
-    Subscription$watchClass$classesByPk$adminUsers instance,
-    TRes Function(Subscription$watchClass$classesByPk$adminUsers) then,
-  ) = _CopyWithImpl$Subscription$watchClass$classesByPk$adminUsers;
+abstract class CopyWith_Subscription_watchClass_classesByPk_adminUsers<TRes> {
+  factory CopyWith_Subscription_watchClass_classesByPk_adminUsers(
+    Subscription_watchClass_classesByPk_adminUsers instance,
+    TRes Function(Subscription_watchClass_classesByPk_adminUsers) then,
+  ) = _CopyWithImpl_Subscription_watchClass_classesByPk_adminUsers;
 
-  factory CopyWith$Subscription$watchClass$classesByPk$adminUsers.stub(
+  factory CopyWith_Subscription_watchClass_classesByPk_adminUsers.stub(
           TRes res) =
-      _CopyWithStubImpl$Subscription$watchClass$classesByPk$adminUsers;
+      _CopyWithStubImpl_Subscription_watchClass_classesByPk_adminUsers;
 
   TRes call({
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Subscription$watchClass$classesByPk$adminUsers<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk$adminUsers<TRes> {
-  _CopyWithImpl$Subscription$watchClass$classesByPk$adminUsers(
+class _CopyWithImpl_Subscription_watchClass_classesByPk_adminUsers<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk_adminUsers<TRes> {
+  _CopyWithImpl_Subscription_watchClass_classesByPk_adminUsers(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchClass$classesByPk$adminUsers _instance;
+  final Subscription_watchClass_classesByPk_adminUsers _instance;
 
-  final TRes Function(Subscription$watchClass$classesByPk$adminUsers) _then;
+  final TRes Function(Subscription_watchClass_classesByPk_adminUsers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1354,30 +1354,30 @@ class _CopyWithImpl$Subscription$watchClass$classesByPk$adminUsers<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchClass$classesByPk$adminUsers(
+      _then(Subscription_watchClass_classesByPk_adminUsers(
         user: user == _undefined || user == null
             ? _instance.user
-            : (user as Fragment$User),
+            : (user as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
-    return CopyWith$Fragment$User(local$user, (e) => call(user: e));
+    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchClass$classesByPk$adminUsers<TRes>
-    implements CopyWith$Subscription$watchClass$classesByPk$adminUsers<TRes> {
-  _CopyWithStubImpl$Subscription$watchClass$classesByPk$adminUsers(this._res);
+class _CopyWithStubImpl_Subscription_watchClass_classesByPk_adminUsers<TRes>
+    implements CopyWith_Subscription_watchClass_classesByPk_adminUsers<TRes> {
+  _CopyWithStubImpl_Subscription_watchClass_classesByPk_adminUsers(this._res);
 
   TRes _res;
 
   call({
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

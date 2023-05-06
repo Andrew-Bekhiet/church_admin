@@ -2,39 +2,39 @@ import '../../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllFathers {
-  factory Variables$Subscription$watchAllFathers({
-    List<Input$FathersBoolExp>? where,
+class Variables_Subscription_watchAllFathers {
+  factory Variables_Subscription_watchAllFathers({
+    List<Input_FathersBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$watchAllFathers._({
+      Variables_Subscription_watchAllFathers._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$watchAllFathers._(this._$data);
+  Variables_Subscription_watchAllFathers._(this._$data);
 
-  factory Variables$Subscription$watchAllFathers.fromJson(
+  factory Variables_Subscription_watchAllFathers.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input$FathersBoolExp.fromJson((e as Map<String, dynamic>)))
+              (e) => Input_FathersBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$watchAllFathers._(result$data);
+    return Variables_Subscription_watchAllFathers._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$FathersBoolExp>? get where =>
-      (_$data['where'] as List<Input$FathersBoolExp>?);
+  List<Input_FathersBoolExp>? get where =>
+      (_$data['where'] as List<Input_FathersBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -49,9 +49,9 @@ class Variables$Subscription$watchAllFathers {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllFathers<
-          Variables$Subscription$watchAllFathers>
-      get copyWith => CopyWith$Variables$Subscription$watchAllFathers(
+  CopyWith_Variables_Subscription_watchAllFathers<
+          Variables_Subscription_watchAllFathers>
+      get copyWith => CopyWith_Variables_Subscription_watchAllFathers(
             this,
             (i) => i,
           );
@@ -60,7 +60,7 @@ class Variables$Subscription$watchAllFathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllFathers) ||
+    if (!(other is Variables_Subscription_watchAllFathers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109,31 +109,31 @@ class Variables$Subscription$watchAllFathers {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllFathers<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllFathers(
-    Variables$Subscription$watchAllFathers instance,
-    TRes Function(Variables$Subscription$watchAllFathers) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllFathers;
+abstract class CopyWith_Variables_Subscription_watchAllFathers<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllFathers(
+    Variables_Subscription_watchAllFathers instance,
+    TRes Function(Variables_Subscription_watchAllFathers) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllFathers;
 
-  factory CopyWith$Variables$Subscription$watchAllFathers.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllFathers;
+  factory CopyWith_Variables_Subscription_watchAllFathers.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllFathers;
 
   TRes call({
-    List<Input$FathersBoolExp>? where,
+    List<Input_FathersBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllFathers<TRes>
-    implements CopyWith$Variables$Subscription$watchAllFathers<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllFathers(
+class _CopyWithImpl_Variables_Subscription_watchAllFathers<TRes>
+    implements CopyWith_Variables_Subscription_watchAllFathers<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllFathers(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllFathers _instance;
+  final Variables_Subscription_watchAllFathers _instance;
 
-  final TRes Function(Variables$Subscription$watchAllFathers) _then;
+  final TRes Function(Variables_Subscription_watchAllFathers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -141,40 +141,40 @@ class _CopyWithImpl$Variables$Subscription$watchAllFathers<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllFathers._({
+      _then(Variables_Subscription_watchAllFathers._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$FathersBoolExp>?),
+          'where': (where as List<Input_FathersBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllFathers<TRes>
-    implements CopyWith$Variables$Subscription$watchAllFathers<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllFathers(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllFathers<TRes>
+    implements CopyWith_Variables_Subscription_watchAllFathers<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllFathers(this._res);
 
   TRes _res;
 
   call({
-    List<Input$FathersBoolExp>? where,
+    List<Input_FathersBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$watchAllFathers {
-  Subscription$watchAllFathers({required this.fathers});
+class Subscription_watchAllFathers {
+  Subscription_watchAllFathers({required this.fathers});
 
-  factory Subscription$watchAllFathers.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllFathers.fromJson(Map<String, dynamic> json) {
     final l$fathers = json['fathers'];
-    return Subscription$watchAllFathers(
+    return Subscription_watchAllFathers(
         fathers: (l$fathers as List<dynamic>)
-            .map((e) => Subscription$watchAllFathers$fathers.fromJson(
+            .map((e) => Subscription_watchAllFathers_fathers.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllFathers$fathers> fathers;
+  final List<Subscription_watchAllFathers_fathers> fathers;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -194,7 +194,7 @@ class Subscription$watchAllFathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllFathers) ||
+    if (!(other is Subscription_watchAllFathers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -214,72 +214,72 @@ class Subscription$watchAllFathers {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllFathers
-    on Subscription$watchAllFathers {
-  CopyWith$Subscription$watchAllFathers<Subscription$watchAllFathers>
-      get copyWith => CopyWith$Subscription$watchAllFathers(
+extension UtilityExtension_Subscription_watchAllFathers
+    on Subscription_watchAllFathers {
+  CopyWith_Subscription_watchAllFathers<Subscription_watchAllFathers>
+      get copyWith => CopyWith_Subscription_watchAllFathers(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllFathers<TRes> {
-  factory CopyWith$Subscription$watchAllFathers(
-    Subscription$watchAllFathers instance,
-    TRes Function(Subscription$watchAllFathers) then,
-  ) = _CopyWithImpl$Subscription$watchAllFathers;
+abstract class CopyWith_Subscription_watchAllFathers<TRes> {
+  factory CopyWith_Subscription_watchAllFathers(
+    Subscription_watchAllFathers instance,
+    TRes Function(Subscription_watchAllFathers) then,
+  ) = _CopyWithImpl_Subscription_watchAllFathers;
 
-  factory CopyWith$Subscription$watchAllFathers.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllFathers;
+  factory CopyWith_Subscription_watchAllFathers.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllFathers;
 
-  TRes call({List<Subscription$watchAllFathers$fathers>? fathers});
+  TRes call({List<Subscription_watchAllFathers_fathers>? fathers});
   TRes fathers(
-      Iterable<Subscription$watchAllFathers$fathers> Function(
+      Iterable<Subscription_watchAllFathers_fathers> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllFathers$fathers<
-                      Subscription$watchAllFathers$fathers>>)
+                  CopyWith_Subscription_watchAllFathers_fathers<
+                      Subscription_watchAllFathers_fathers>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllFathers<TRes>
-    implements CopyWith$Subscription$watchAllFathers<TRes> {
-  _CopyWithImpl$Subscription$watchAllFathers(
+class _CopyWithImpl_Subscription_watchAllFathers<TRes>
+    implements CopyWith_Subscription_watchAllFathers<TRes> {
+  _CopyWithImpl_Subscription_watchAllFathers(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllFathers _instance;
+  final Subscription_watchAllFathers _instance;
 
-  final TRes Function(Subscription$watchAllFathers) _then;
+  final TRes Function(Subscription_watchAllFathers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? fathers = _undefined}) =>
-      _then(Subscription$watchAllFathers(
+      _then(Subscription_watchAllFathers(
           fathers: fathers == _undefined || fathers == null
               ? _instance.fathers
-              : (fathers as List<Subscription$watchAllFathers$fathers>)));
+              : (fathers as List<Subscription_watchAllFathers_fathers>)));
   TRes fathers(
-          Iterable<Subscription$watchAllFathers$fathers> Function(
+          Iterable<Subscription_watchAllFathers_fathers> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllFathers$fathers<
-                          Subscription$watchAllFathers$fathers>>)
+                      CopyWith_Subscription_watchAllFathers_fathers<
+                          Subscription_watchAllFathers_fathers>>)
               _fn) =>
       call(
           fathers: _fn(_instance.fathers
-              .map((e) => CopyWith$Subscription$watchAllFathers$fathers(
+              .map((e) => CopyWith_Subscription_watchAllFathers_fathers(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllFathers<TRes>
-    implements CopyWith$Subscription$watchAllFathers<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllFathers(this._res);
+class _CopyWithStubImpl_Subscription_watchAllFathers<TRes>
+    implements CopyWith_Subscription_watchAllFathers<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllFathers(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllFathers$fathers>? fathers}) => _res;
+  call({List<Subscription_watchAllFathers_fathers>? fathers}) => _res;
   fathers(_fn) => _res;
 }
 
@@ -368,19 +368,19 @@ const documentNodeSubscriptionwatchAllFathers = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$watchAllFathers$fathers {
-  Subscription$watchAllFathers$fathers({
+class Subscription_watchAllFathers_fathers {
+  Subscription_watchAllFathers_fathers({
     required this.id,
     required this.name,
     this.$__typename = 'Fathers',
   });
 
-  factory Subscription$watchAllFathers$fathers.fromJson(
+  factory Subscription_watchAllFathers_fathers.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchAllFathers$fathers(
+    return Subscription_watchAllFathers_fathers(
       id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -421,7 +421,7 @@ class Subscription$watchAllFathers$fathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllFathers$fathers) ||
+    if (!(other is Subscription_watchAllFathers_fathers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -444,24 +444,24 @@ class Subscription$watchAllFathers$fathers {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllFathers$fathers
-    on Subscription$watchAllFathers$fathers {
-  CopyWith$Subscription$watchAllFathers$fathers<
-          Subscription$watchAllFathers$fathers>
-      get copyWith => CopyWith$Subscription$watchAllFathers$fathers(
+extension UtilityExtension_Subscription_watchAllFathers_fathers
+    on Subscription_watchAllFathers_fathers {
+  CopyWith_Subscription_watchAllFathers_fathers<
+          Subscription_watchAllFathers_fathers>
+      get copyWith => CopyWith_Subscription_watchAllFathers_fathers(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllFathers$fathers<TRes> {
-  factory CopyWith$Subscription$watchAllFathers$fathers(
-    Subscription$watchAllFathers$fathers instance,
-    TRes Function(Subscription$watchAllFathers$fathers) then,
-  ) = _CopyWithImpl$Subscription$watchAllFathers$fathers;
+abstract class CopyWith_Subscription_watchAllFathers_fathers<TRes> {
+  factory CopyWith_Subscription_watchAllFathers_fathers(
+    Subscription_watchAllFathers_fathers instance,
+    TRes Function(Subscription_watchAllFathers_fathers) then,
+  ) = _CopyWithImpl_Subscription_watchAllFathers_fathers;
 
-  factory CopyWith$Subscription$watchAllFathers$fathers.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllFathers$fathers;
+  factory CopyWith_Subscription_watchAllFathers_fathers.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllFathers_fathers;
 
   TRes call({
     UuidValue? id,
@@ -470,16 +470,16 @@ abstract class CopyWith$Subscription$watchAllFathers$fathers<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllFathers$fathers<TRes>
-    implements CopyWith$Subscription$watchAllFathers$fathers<TRes> {
-  _CopyWithImpl$Subscription$watchAllFathers$fathers(
+class _CopyWithImpl_Subscription_watchAllFathers_fathers<TRes>
+    implements CopyWith_Subscription_watchAllFathers_fathers<TRes> {
+  _CopyWithImpl_Subscription_watchAllFathers_fathers(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllFathers$fathers _instance;
+  final Subscription_watchAllFathers_fathers _instance;
 
-  final TRes Function(Subscription$watchAllFathers$fathers) _then;
+  final TRes Function(Subscription_watchAllFathers_fathers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -488,7 +488,7 @@ class _CopyWithImpl$Subscription$watchAllFathers$fathers<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchAllFathers$fathers(
+      _then(Subscription_watchAllFathers_fathers(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -499,9 +499,9 @@ class _CopyWithImpl$Subscription$watchAllFathers$fathers<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllFathers$fathers<TRes>
-    implements CopyWith$Subscription$watchAllFathers$fathers<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllFathers$fathers(this._res);
+class _CopyWithStubImpl_Subscription_watchAllFathers_fathers<TRes>
+    implements CopyWith_Subscription_watchAllFathers_fathers<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllFathers_fathers(this._res);
 
   TRes _res;
 

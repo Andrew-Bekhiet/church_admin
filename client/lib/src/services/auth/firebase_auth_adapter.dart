@@ -63,7 +63,9 @@ class FirebaseAuthAdapter extends AuthAdapter {
     Json jwtClaims,
     String token,
   ) {
-    return _databaseService.users.watchUser(uid: _getHasuraUID(jwtClaims)).map(
+    return _databaseService.users
+        .streamSingleById(uid: _getHasuraUID(jwtClaims))
+        .map(
           (user) => user!.copyWith(
             password: _getPassword(jwtClaims),
             idToken: token,

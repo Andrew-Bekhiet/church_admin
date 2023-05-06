@@ -1,8 +1,8 @@
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Fragment$Street implements Fragment$StreetNoPhoto {
-  Fragment$Street({
+class Fragment_Street implements Fragment_StreetNoPhoto {
+  Fragment_Street({
     required this.id,
     required this.name,
     this.color,
@@ -10,13 +10,13 @@ class Fragment$Street implements Fragment$StreetNoPhoto {
     this.photoUpdatedAt,
   });
 
-  factory Fragment$Street.fromJson(Map<String, dynamic> json) {
+  factory Fragment_Street.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
-    return Fragment$Street(
+    return Fragment_Street(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -73,7 +73,7 @@ class Fragment$Street implements Fragment$StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Street) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment_Street) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -105,22 +105,22 @@ class Fragment$Street implements Fragment$StreetNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$Street on Fragment$Street {
-  CopyWith$Fragment$Street<Fragment$Street> get copyWith =>
-      CopyWith$Fragment$Street(
+extension UtilityExtension_Fragment_Street on Fragment_Street {
+  CopyWith_Fragment_Street<Fragment_Street> get copyWith =>
+      CopyWith_Fragment_Street(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$Street<TRes> {
-  factory CopyWith$Fragment$Street(
-    Fragment$Street instance,
-    TRes Function(Fragment$Street) then,
-  ) = _CopyWithImpl$Fragment$Street;
+abstract class CopyWith_Fragment_Street<TRes> {
+  factory CopyWith_Fragment_Street(
+    Fragment_Street instance,
+    TRes Function(Fragment_Street) then,
+  ) = _CopyWithImpl_Fragment_Street;
 
-  factory CopyWith$Fragment$Street.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Street;
+  factory CopyWith_Fragment_Street.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_Street;
 
   TRes call({
     UuidValue? id,
@@ -131,16 +131,16 @@ abstract class CopyWith$Fragment$Street<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$Street<TRes>
-    implements CopyWith$Fragment$Street<TRes> {
-  _CopyWithImpl$Fragment$Street(
+class _CopyWithImpl_Fragment_Street<TRes>
+    implements CopyWith_Fragment_Street<TRes> {
+  _CopyWithImpl_Fragment_Street(
     this._instance,
     this._then,
   );
 
-  final Fragment$Street _instance;
+  final Fragment_Street _instance;
 
-  final TRes Function(Fragment$Street) _then;
+  final TRes Function(Fragment_Street) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -151,7 +151,7 @@ class _CopyWithImpl$Fragment$Street<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
-      _then(Fragment$Street(
+      _then(Fragment_Street(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -166,9 +166,9 @@ class _CopyWithImpl$Fragment$Street<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$Street<TRes>
-    implements CopyWith$Fragment$Street<TRes> {
-  _CopyWithStubImpl$Fragment$Street(this._res);
+class _CopyWithStubImpl_Fragment_Street<TRes>
+    implements CopyWith_Fragment_Street<TRes> {
+  _CopyWithStubImpl_Fragment_Street(this._res);
 
   TRes _res;
 
@@ -216,20 +216,20 @@ const documentNodeFragmentStreet = DocumentNode(definitions: [
   fragmentDefinitionStreetNoPhoto,
 ]);
 
-class Fragment$StreetNoPhoto {
-  Fragment$StreetNoPhoto({
+class Fragment_StreetNoPhoto {
+  Fragment_StreetNoPhoto({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Streets',
   });
 
-  factory Fragment$StreetNoPhoto.fromJson(Map<String, dynamic> json) {
+  factory Fragment_StreetNoPhoto.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    return Fragment$StreetNoPhoto(
+    return Fragment_StreetNoPhoto(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -277,7 +277,7 @@ class Fragment$StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$StreetNoPhoto) ||
+    if (!(other is Fragment_StreetNoPhoto) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -305,22 +305,22 @@ class Fragment$StreetNoPhoto {
   }
 }
 
-extension UtilityExtension$Fragment$StreetNoPhoto on Fragment$StreetNoPhoto {
-  CopyWith$Fragment$StreetNoPhoto<Fragment$StreetNoPhoto> get copyWith =>
-      CopyWith$Fragment$StreetNoPhoto(
+extension UtilityExtension_Fragment_StreetNoPhoto on Fragment_StreetNoPhoto {
+  CopyWith_Fragment_StreetNoPhoto<Fragment_StreetNoPhoto> get copyWith =>
+      CopyWith_Fragment_StreetNoPhoto(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$StreetNoPhoto<TRes> {
-  factory CopyWith$Fragment$StreetNoPhoto(
-    Fragment$StreetNoPhoto instance,
-    TRes Function(Fragment$StreetNoPhoto) then,
-  ) = _CopyWithImpl$Fragment$StreetNoPhoto;
+abstract class CopyWith_Fragment_StreetNoPhoto<TRes> {
+  factory CopyWith_Fragment_StreetNoPhoto(
+    Fragment_StreetNoPhoto instance,
+    TRes Function(Fragment_StreetNoPhoto) then,
+  ) = _CopyWithImpl_Fragment_StreetNoPhoto;
 
-  factory CopyWith$Fragment$StreetNoPhoto.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$StreetNoPhoto;
+  factory CopyWith_Fragment_StreetNoPhoto.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_StreetNoPhoto;
 
   TRes call({
     UuidValue? id,
@@ -330,16 +330,16 @@ abstract class CopyWith$Fragment$StreetNoPhoto<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$StreetNoPhoto<TRes>
-    implements CopyWith$Fragment$StreetNoPhoto<TRes> {
-  _CopyWithImpl$Fragment$StreetNoPhoto(
+class _CopyWithImpl_Fragment_StreetNoPhoto<TRes>
+    implements CopyWith_Fragment_StreetNoPhoto<TRes> {
+  _CopyWithImpl_Fragment_StreetNoPhoto(
     this._instance,
     this._then,
   );
 
-  final Fragment$StreetNoPhoto _instance;
+  final Fragment_StreetNoPhoto _instance;
 
-  final TRes Function(Fragment$StreetNoPhoto) _then;
+  final TRes Function(Fragment_StreetNoPhoto) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -349,7 +349,7 @@ class _CopyWithImpl$Fragment$StreetNoPhoto<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$StreetNoPhoto(
+      _then(Fragment_StreetNoPhoto(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -361,9 +361,9 @@ class _CopyWithImpl$Fragment$StreetNoPhoto<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$StreetNoPhoto<TRes>
-    implements CopyWith$Fragment$StreetNoPhoto<TRes> {
-  _CopyWithStubImpl$Fragment$StreetNoPhoto(this._res);
+class _CopyWithStubImpl_Fragment_StreetNoPhoto<TRes>
+    implements CopyWith_Fragment_StreetNoPhoto<TRes> {
+  _CopyWithStubImpl_Fragment_StreetNoPhoto(this._res);
 
   TRes _res;
 

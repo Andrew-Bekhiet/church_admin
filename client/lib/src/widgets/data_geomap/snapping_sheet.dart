@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:snapping_sheet/src/sheet_position_data.dart';
 

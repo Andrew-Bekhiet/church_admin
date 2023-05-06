@@ -44,33 +44,57 @@ class _ViewAreaState extends State<ViewArea> {
   static const _addPerson = Icon(Icons.person_add_alt_1);
 
   late final _streetsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.streets.paginateStreets(
-      byAreaId: widget.areaId,
+    objectsPaginatableStream: DatabaseService.I.streets.streamAll(
+      where: [
+        Input_StreetsBoolExp(
+          areas: Input_AreasBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   late final _familiesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.paginateFamilies(
-      byAreaId: widget.areaId,
+    objectsPaginatableStream: DatabaseService.I.families.streamAll(
+      where: [
+        Input_FamiliesBoolExp(
+          areas: Input_AreasBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.paginateStores(
-      byAreaId: widget.areaId,
+    objectsPaginatableStream: DatabaseService.I.stores.streamAll(
+      where: [
+        Input_StoresBoolExp(
+          areas: Input_AreasBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.paginatePersons(
-      byAreaId: widget.areaId,
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: [
+        Input_PersonsBoolExp(
+          areas: Input_AreasBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          ),
+        )
+      ],
     ),
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
   late final Stream<Area?> stream =
-      DatabaseService.I.areas.watchArea(areaId: widget.areaId);
+      DatabaseService.I.areas.streamSingleById(id: widget.areaId);
 
   late final viewableObjectService = CAViewableObjectService.I;
 

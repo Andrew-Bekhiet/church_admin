@@ -33,7 +33,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
   late final _usersController = ViewableObjectListController(
     objectsPaginatableStream:
-        DatabaseService.I.users.paginateUsers(searchQuery: _search.stream),
+        DatabaseService.I.users.streamAll(searchQuery: _search.stream),
     filterStream: _search.stream,
   );
 

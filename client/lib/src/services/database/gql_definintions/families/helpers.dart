@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
@@ -27,31 +26,31 @@ class FamilyInsertHelper {
           (oldFamily ?? Family(id: '', name: '')).toJson(),
         )..removeWhere((k, v) => _mutationNonExistentVars.contains(k));
 
-  Input$FamiliesFamiliesArrRelInsertInput get _childrenFamilies =>
-      Input$FamiliesFamiliesArrRelInsertInput(
+  Input_FamiliesFamiliesArrRelInsertInput get _childrenFamilies =>
+      Input_FamiliesFamiliesArrRelInsertInput(
         data: [
           ...(newFamily.children ?? []).map(
-            (e) => Input$FamiliesFamiliesInsertInput(
+            (e) => Input_FamiliesFamiliesInsertInput(
               childFamilyId: e.id.toUuid(),
             ),
           ),
         ],
       );
 
-  Input$FamiliesFamiliesArrRelInsertInput get _parentsFamilies =>
-      Input$FamiliesFamiliesArrRelInsertInput(
+  Input_FamiliesFamiliesArrRelInsertInput get _parentsFamilies =>
+      Input_FamiliesFamiliesArrRelInsertInput(
         data: [
           ...(newFamily.parents ?? []).map(
-            (e) => Input$FamiliesFamiliesInsertInput(
+            (e) => Input_FamiliesFamiliesInsertInput(
               parentFamilyId: e.id.toUuid(),
             ),
           ),
         ],
       );
 
-  Variables$Mutation$insertFamily get variables =>
-      Variables$Mutation$insertFamily(
-        newFamily: Input$FamiliesInsertInput.fromJson(_familyDelta).copyWith(
+  Variables_Mutation_insertFamily get variables =>
+      Variables_Mutation_insertFamily(
+        newFamily: Input_FamiliesInsertInput.fromJson(_familyDelta).copyWith(
           children: _childrenFamilies,
           parents: _parentsFamilies,
         ),
@@ -97,25 +96,25 @@ class FamilyUpdateHelper {
   List<UuidValue> get _deleteParents =>
       _parentsDiff.removed.map((s) => s.id.toUuid()).toList();
 
-  List<Input$FamiliesFamiliesInsertInput> get _addRelatedFamilies => [
+  List<Input_FamiliesFamiliesInsertInput> get _addRelatedFamilies => [
         ..._childrenDiff.added.map(
-          (e) => Input$FamiliesFamiliesInsertInput(
+          (e) => Input_FamiliesFamiliesInsertInput(
             parentFamilyId: newFamily.id.toUuid(),
             childFamilyId: e.id.toUuid(),
           ),
         ),
         ..._parentsDiff.added.map(
-          (e) => Input$FamiliesFamiliesInsertInput(
+          (e) => Input_FamiliesFamiliesInsertInput(
             parentFamilyId: e.id.toUuid(),
             childFamilyId: newFamily.id.toUuid(),
           ),
         ),
       ];
 
-  Variables$Mutation$updateFamily get variables =>
-      Variables$Mutation$updateFamily(
+  Variables_Mutation_updateFamily get variables =>
+      Variables_Mutation_updateFamily(
         familyId: newFamily.id.toUuid(),
-        newFamily: Input$FamiliesSetInput.fromJson(_familyDelta),
+        newFamily: Input_FamiliesSetInput.fromJson(_familyDelta),
         updateFamily: _updateFamily,
         addRelatedFamilies: _addRelatedFamilies,
         insertRelatedFamilies: _insertRelatedFamilies,

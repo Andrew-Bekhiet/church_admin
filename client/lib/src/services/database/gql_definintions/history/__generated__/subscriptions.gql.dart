@@ -4,25 +4,25 @@ import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$editHistory {
-  factory Variables$Subscription$editHistory({
-    List<Input$HistoryEditHistoryBoolExp>? where,
+class Variables_Subscription_editHistory {
+  factory Variables_Subscription_editHistory({
+    List<Input_HistoryEditHistoryBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$editHistory._({
+      Variables_Subscription_editHistory._({
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$editHistory._(this._$data);
+  Variables_Subscription_editHistory._(this._$data);
 
-  factory Variables$Subscription$editHistory.fromJson(
+  factory Variables_Subscription_editHistory.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryEditHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryEditHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
@@ -30,13 +30,13 @@ class Variables$Subscription$editHistory {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$editHistory._(result$data);
+    return Variables_Subscription_editHistory._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input$HistoryEditHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryEditHistoryBoolExp>?);
+  List<Input_HistoryEditHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryEditHistoryBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -51,9 +51,9 @@ class Variables$Subscription$editHistory {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$editHistory<
-          Variables$Subscription$editHistory>
-      get copyWith => CopyWith$Variables$Subscription$editHistory(
+  CopyWith_Variables_Subscription_editHistory<
+          Variables_Subscription_editHistory>
+      get copyWith => CopyWith_Variables_Subscription_editHistory(
             this,
             (i) => i,
           );
@@ -62,7 +62,7 @@ class Variables$Subscription$editHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$editHistory) ||
+    if (!(other is Variables_Subscription_editHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111,31 +111,31 @@ class Variables$Subscription$editHistory {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$editHistory<TRes> {
-  factory CopyWith$Variables$Subscription$editHistory(
-    Variables$Subscription$editHistory instance,
-    TRes Function(Variables$Subscription$editHistory) then,
-  ) = _CopyWithImpl$Variables$Subscription$editHistory;
+abstract class CopyWith_Variables_Subscription_editHistory<TRes> {
+  factory CopyWith_Variables_Subscription_editHistory(
+    Variables_Subscription_editHistory instance,
+    TRes Function(Variables_Subscription_editHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_editHistory;
 
-  factory CopyWith$Variables$Subscription$editHistory.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$editHistory;
+  factory CopyWith_Variables_Subscription_editHistory.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_editHistory;
 
   TRes call({
-    List<Input$HistoryEditHistoryBoolExp>? where,
+    List<Input_HistoryEditHistoryBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$editHistory<TRes>
-    implements CopyWith$Variables$Subscription$editHistory<TRes> {
-  _CopyWithImpl$Variables$Subscription$editHistory(
+class _CopyWithImpl_Variables_Subscription_editHistory<TRes>
+    implements CopyWith_Variables_Subscription_editHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_editHistory(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$editHistory _instance;
+  final Variables_Subscription_editHistory _instance;
 
-  final TRes Function(Variables$Subscription$editHistory) _then;
+  final TRes Function(Variables_Subscription_editHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -143,40 +143,40 @@ class _CopyWithImpl$Variables$Subscription$editHistory<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$editHistory._({
+      _then(Variables_Subscription_editHistory._({
         ..._instance._$data,
         if (where != _undefined)
-          'where': (where as List<Input$HistoryEditHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryEditHistoryBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$editHistory<TRes>
-    implements CopyWith$Variables$Subscription$editHistory<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$editHistory(this._res);
+class _CopyWithStubImpl_Variables_Subscription_editHistory<TRes>
+    implements CopyWith_Variables_Subscription_editHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_editHistory(this._res);
 
   TRes _res;
 
   call({
-    List<Input$HistoryEditHistoryBoolExp>? where,
+    List<Input_HistoryEditHistoryBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$editHistory {
-  Subscription$editHistory({required this.historyEditHistory});
+class Subscription_editHistory {
+  Subscription_editHistory({required this.historyEditHistory});
 
-  factory Subscription$editHistory.fromJson(Map<String, dynamic> json) {
+  factory Subscription_editHistory.fromJson(Map<String, dynamic> json) {
     final l$historyEditHistory = json['historyEditHistory'];
-    return Subscription$editHistory(
+    return Subscription_editHistory(
         historyEditHistory: (l$historyEditHistory as List<dynamic>)
             .map((e) =>
-                Fragment$EditHistory.fromJson((e as Map<String, dynamic>)))
+                Fragment_EditHistory.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$EditHistory> historyEditHistory;
+  final List<Fragment_EditHistory> historyEditHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -197,7 +197,7 @@ class Subscription$editHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$editHistory) ||
+    if (!(other is Subscription_editHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -217,69 +217,69 @@ class Subscription$editHistory {
   }
 }
 
-extension UtilityExtension$Subscription$editHistory
-    on Subscription$editHistory {
-  CopyWith$Subscription$editHistory<Subscription$editHistory> get copyWith =>
-      CopyWith$Subscription$editHistory(
+extension UtilityExtension_Subscription_editHistory
+    on Subscription_editHistory {
+  CopyWith_Subscription_editHistory<Subscription_editHistory> get copyWith =>
+      CopyWith_Subscription_editHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$editHistory<TRes> {
-  factory CopyWith$Subscription$editHistory(
-    Subscription$editHistory instance,
-    TRes Function(Subscription$editHistory) then,
-  ) = _CopyWithImpl$Subscription$editHistory;
+abstract class CopyWith_Subscription_editHistory<TRes> {
+  factory CopyWith_Subscription_editHistory(
+    Subscription_editHistory instance,
+    TRes Function(Subscription_editHistory) then,
+  ) = _CopyWithImpl_Subscription_editHistory;
 
-  factory CopyWith$Subscription$editHistory.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$editHistory;
+  factory CopyWith_Subscription_editHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_editHistory;
 
-  TRes call({List<Fragment$EditHistory>? historyEditHistory});
+  TRes call({List<Fragment_EditHistory>? historyEditHistory});
   TRes historyEditHistory(
-      Iterable<Fragment$EditHistory> Function(
-              Iterable<CopyWith$Fragment$EditHistory<Fragment$EditHistory>>)
+      Iterable<Fragment_EditHistory> Function(
+              Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$editHistory<TRes>
-    implements CopyWith$Subscription$editHistory<TRes> {
-  _CopyWithImpl$Subscription$editHistory(
+class _CopyWithImpl_Subscription_editHistory<TRes>
+    implements CopyWith_Subscription_editHistory<TRes> {
+  _CopyWithImpl_Subscription_editHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription$editHistory _instance;
+  final Subscription_editHistory _instance;
 
-  final TRes Function(Subscription$editHistory) _then;
+  final TRes Function(Subscription_editHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyEditHistory = _undefined}) =>
-      _then(Subscription$editHistory(
+      _then(Subscription_editHistory(
           historyEditHistory:
               historyEditHistory == _undefined || historyEditHistory == null
                   ? _instance.historyEditHistory
-                  : (historyEditHistory as List<Fragment$EditHistory>)));
+                  : (historyEditHistory as List<Fragment_EditHistory>)));
   TRes historyEditHistory(
-          Iterable<Fragment$EditHistory> Function(
-                  Iterable<CopyWith$Fragment$EditHistory<Fragment$EditHistory>>)
+          Iterable<Fragment_EditHistory> Function(
+                  Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>)
               _fn) =>
       call(
           historyEditHistory: _fn(_instance.historyEditHistory
-              .map((e) => CopyWith$Fragment$EditHistory(
+              .map((e) => CopyWith_Fragment_EditHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$editHistory<TRes>
-    implements CopyWith$Subscription$editHistory<TRes> {
-  _CopyWithStubImpl$Subscription$editHistory(this._res);
+class _CopyWithStubImpl_Subscription_editHistory<TRes>
+    implements CopyWith_Subscription_editHistory<TRes> {
+  _CopyWithStubImpl_Subscription_editHistory(this._res);
 
   TRes _res;
 
-  call({List<Fragment$EditHistory>? historyEditHistory}) => _res;
+  call({List<Fragment_EditHistory>? historyEditHistory}) => _res;
   historyEditHistory(_fn) => _res;
 }
 
@@ -361,21 +361,21 @@ const documentNodeSubscriptioneditHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Variables$Subscription$personCallHistory {
-  factory Variables$Subscription$personCallHistory({
+class Variables_Subscription_personCallHistory {
+  factory Variables_Subscription_personCallHistory({
     required UuidValue personId,
-    List<Input$HistoryCallHistoryBoolExp>? where,
+    List<Input_HistoryCallHistoryBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$personCallHistory._({
+      Variables_Subscription_personCallHistory._({
         r'personId': personId,
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$personCallHistory._(this._$data);
+  Variables_Subscription_personCallHistory._(this._$data);
 
-  factory Variables$Subscription$personCallHistory.fromJson(
+  factory Variables_Subscription_personCallHistory.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
@@ -383,7 +383,7 @@ class Variables$Subscription$personCallHistory {
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryCallHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryCallHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
@@ -391,14 +391,14 @@ class Variables$Subscription$personCallHistory {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$personCallHistory._(result$data);
+    return Variables_Subscription_personCallHistory._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-  List<Input$HistoryCallHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryCallHistoryBoolExp>?);
+  List<Input_HistoryCallHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryCallHistoryBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -415,9 +415,9 @@ class Variables$Subscription$personCallHistory {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$personCallHistory<
-          Variables$Subscription$personCallHistory>
-      get copyWith => CopyWith$Variables$Subscription$personCallHistory(
+  CopyWith_Variables_Subscription_personCallHistory<
+          Variables_Subscription_personCallHistory>
+      get copyWith => CopyWith_Variables_Subscription_personCallHistory(
             this,
             (i) => i,
           );
@@ -426,7 +426,7 @@ class Variables$Subscription$personCallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$personCallHistory) ||
+    if (!(other is Variables_Subscription_personCallHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -482,32 +482,32 @@ class Variables$Subscription$personCallHistory {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$personCallHistory<TRes> {
-  factory CopyWith$Variables$Subscription$personCallHistory(
-    Variables$Subscription$personCallHistory instance,
-    TRes Function(Variables$Subscription$personCallHistory) then,
-  ) = _CopyWithImpl$Variables$Subscription$personCallHistory;
+abstract class CopyWith_Variables_Subscription_personCallHistory<TRes> {
+  factory CopyWith_Variables_Subscription_personCallHistory(
+    Variables_Subscription_personCallHistory instance,
+    TRes Function(Variables_Subscription_personCallHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_personCallHistory;
 
-  factory CopyWith$Variables$Subscription$personCallHistory.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$personCallHistory;
+  factory CopyWith_Variables_Subscription_personCallHistory.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_personCallHistory;
 
   TRes call({
     UuidValue? personId,
-    List<Input$HistoryCallHistoryBoolExp>? where,
+    List<Input_HistoryCallHistoryBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$personCallHistory<TRes>
-    implements CopyWith$Variables$Subscription$personCallHistory<TRes> {
-  _CopyWithImpl$Variables$Subscription$personCallHistory(
+class _CopyWithImpl_Variables_Subscription_personCallHistory<TRes>
+    implements CopyWith_Variables_Subscription_personCallHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_personCallHistory(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$personCallHistory _instance;
+  final Variables_Subscription_personCallHistory _instance;
 
-  final TRes Function(Variables$Subscription$personCallHistory) _then;
+  final TRes Function(Variables_Subscription_personCallHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -516,43 +516,43 @@ class _CopyWithImpl$Variables$Subscription$personCallHistory<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$personCallHistory._({
+      _then(Variables_Subscription_personCallHistory._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
         if (where != _undefined)
-          'where': (where as List<Input$HistoryCallHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryCallHistoryBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$personCallHistory<TRes>
-    implements CopyWith$Variables$Subscription$personCallHistory<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$personCallHistory(this._res);
+class _CopyWithStubImpl_Variables_Subscription_personCallHistory<TRes>
+    implements CopyWith_Variables_Subscription_personCallHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personCallHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? personId,
-    List<Input$HistoryCallHistoryBoolExp>? where,
+    List<Input_HistoryCallHistoryBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$personCallHistory {
-  Subscription$personCallHistory({required this.historyCallHistory});
+class Subscription_personCallHistory {
+  Subscription_personCallHistory({required this.historyCallHistory});
 
-  factory Subscription$personCallHistory.fromJson(Map<String, dynamic> json) {
+  factory Subscription_personCallHistory.fromJson(Map<String, dynamic> json) {
     final l$historyCallHistory = json['historyCallHistory'];
-    return Subscription$personCallHistory(
+    return Subscription_personCallHistory(
         historyCallHistory: (l$historyCallHistory as List<dynamic>)
             .map((e) =>
-                Fragment$CallHistory.fromJson((e as Map<String, dynamic>)))
+                Fragment_CallHistory.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$CallHistory> historyCallHistory;
+  final List<Fragment_CallHistory> historyCallHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -573,7 +573,7 @@ class Subscription$personCallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$personCallHistory) ||
+    if (!(other is Subscription_personCallHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -593,69 +593,69 @@ class Subscription$personCallHistory {
   }
 }
 
-extension UtilityExtension$Subscription$personCallHistory
-    on Subscription$personCallHistory {
-  CopyWith$Subscription$personCallHistory<Subscription$personCallHistory>
-      get copyWith => CopyWith$Subscription$personCallHistory(
+extension UtilityExtension_Subscription_personCallHistory
+    on Subscription_personCallHistory {
+  CopyWith_Subscription_personCallHistory<Subscription_personCallHistory>
+      get copyWith => CopyWith_Subscription_personCallHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$personCallHistory<TRes> {
-  factory CopyWith$Subscription$personCallHistory(
-    Subscription$personCallHistory instance,
-    TRes Function(Subscription$personCallHistory) then,
-  ) = _CopyWithImpl$Subscription$personCallHistory;
+abstract class CopyWith_Subscription_personCallHistory<TRes> {
+  factory CopyWith_Subscription_personCallHistory(
+    Subscription_personCallHistory instance,
+    TRes Function(Subscription_personCallHistory) then,
+  ) = _CopyWithImpl_Subscription_personCallHistory;
 
-  factory CopyWith$Subscription$personCallHistory.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$personCallHistory;
+  factory CopyWith_Subscription_personCallHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personCallHistory;
 
-  TRes call({List<Fragment$CallHistory>? historyCallHistory});
+  TRes call({List<Fragment_CallHistory>? historyCallHistory});
   TRes historyCallHistory(
-      Iterable<Fragment$CallHistory> Function(
-              Iterable<CopyWith$Fragment$CallHistory<Fragment$CallHistory>>)
+      Iterable<Fragment_CallHistory> Function(
+              Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$personCallHistory<TRes>
-    implements CopyWith$Subscription$personCallHistory<TRes> {
-  _CopyWithImpl$Subscription$personCallHistory(
+class _CopyWithImpl_Subscription_personCallHistory<TRes>
+    implements CopyWith_Subscription_personCallHistory<TRes> {
+  _CopyWithImpl_Subscription_personCallHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription$personCallHistory _instance;
+  final Subscription_personCallHistory _instance;
 
-  final TRes Function(Subscription$personCallHistory) _then;
+  final TRes Function(Subscription_personCallHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyCallHistory = _undefined}) =>
-      _then(Subscription$personCallHistory(
+      _then(Subscription_personCallHistory(
           historyCallHistory:
               historyCallHistory == _undefined || historyCallHistory == null
                   ? _instance.historyCallHistory
-                  : (historyCallHistory as List<Fragment$CallHistory>)));
+                  : (historyCallHistory as List<Fragment_CallHistory>)));
   TRes historyCallHistory(
-          Iterable<Fragment$CallHistory> Function(
-                  Iterable<CopyWith$Fragment$CallHistory<Fragment$CallHistory>>)
+          Iterable<Fragment_CallHistory> Function(
+                  Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>)
               _fn) =>
       call(
           historyCallHistory: _fn(_instance.historyCallHistory
-              .map((e) => CopyWith$Fragment$CallHistory(
+              .map((e) => CopyWith_Fragment_CallHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$personCallHistory<TRes>
-    implements CopyWith$Subscription$personCallHistory<TRes> {
-  _CopyWithStubImpl$Subscription$personCallHistory(this._res);
+class _CopyWithStubImpl_Subscription_personCallHistory<TRes>
+    implements CopyWith_Subscription_personCallHistory<TRes> {
+  _CopyWithStubImpl_Subscription_personCallHistory(this._res);
 
   TRes _res;
 
-  call({List<Fragment$CallHistory>? historyCallHistory}) => _res;
+  call({List<Fragment_CallHistory>? historyCallHistory}) => _res;
   historyCallHistory(_fn) => _res;
 }
 
@@ -765,21 +765,21 @@ const documentNodeSubscriptionpersonCallHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Variables$Subscription$personVisitHistory {
-  factory Variables$Subscription$personVisitHistory({
+class Variables_Subscription_personVisitHistory {
+  factory Variables_Subscription_personVisitHistory({
     required UuidValue personId,
-    List<Input$HistoryVisitHistoryBoolExp>? where,
+    List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$personVisitHistory._({
+      Variables_Subscription_personVisitHistory._({
         r'personId': personId,
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$personVisitHistory._(this._$data);
+  Variables_Subscription_personVisitHistory._(this._$data);
 
-  factory Variables$Subscription$personVisitHistory.fromJson(
+  factory Variables_Subscription_personVisitHistory.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
@@ -787,7 +787,7 @@ class Variables$Subscription$personVisitHistory {
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryVisitHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryVisitHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
@@ -795,14 +795,14 @@ class Variables$Subscription$personVisitHistory {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$personVisitHistory._(result$data);
+    return Variables_Subscription_personVisitHistory._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-  List<Input$HistoryVisitHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryVisitHistoryBoolExp>?);
+  List<Input_HistoryVisitHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryVisitHistoryBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -819,9 +819,9 @@ class Variables$Subscription$personVisitHistory {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$personVisitHistory<
-          Variables$Subscription$personVisitHistory>
-      get copyWith => CopyWith$Variables$Subscription$personVisitHistory(
+  CopyWith_Variables_Subscription_personVisitHistory<
+          Variables_Subscription_personVisitHistory>
+      get copyWith => CopyWith_Variables_Subscription_personVisitHistory(
             this,
             (i) => i,
           );
@@ -830,7 +830,7 @@ class Variables$Subscription$personVisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$personVisitHistory) ||
+    if (!(other is Variables_Subscription_personVisitHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -886,32 +886,32 @@ class Variables$Subscription$personVisitHistory {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$personVisitHistory<TRes> {
-  factory CopyWith$Variables$Subscription$personVisitHistory(
-    Variables$Subscription$personVisitHistory instance,
-    TRes Function(Variables$Subscription$personVisitHistory) then,
-  ) = _CopyWithImpl$Variables$Subscription$personVisitHistory;
+abstract class CopyWith_Variables_Subscription_personVisitHistory<TRes> {
+  factory CopyWith_Variables_Subscription_personVisitHistory(
+    Variables_Subscription_personVisitHistory instance,
+    TRes Function(Variables_Subscription_personVisitHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_personVisitHistory;
 
-  factory CopyWith$Variables$Subscription$personVisitHistory.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$personVisitHistory;
+  factory CopyWith_Variables_Subscription_personVisitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_personVisitHistory;
 
   TRes call({
     UuidValue? personId,
-    List<Input$HistoryVisitHistoryBoolExp>? where,
+    List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$personVisitHistory<TRes>
-    implements CopyWith$Variables$Subscription$personVisitHistory<TRes> {
-  _CopyWithImpl$Variables$Subscription$personVisitHistory(
+class _CopyWithImpl_Variables_Subscription_personVisitHistory<TRes>
+    implements CopyWith_Variables_Subscription_personVisitHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_personVisitHistory(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$personVisitHistory _instance;
+  final Variables_Subscription_personVisitHistory _instance;
 
-  final TRes Function(Variables$Subscription$personVisitHistory) _then;
+  final TRes Function(Variables_Subscription_personVisitHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -920,43 +920,43 @@ class _CopyWithImpl$Variables$Subscription$personVisitHistory<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$personVisitHistory._({
+      _then(Variables_Subscription_personVisitHistory._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
         if (where != _undefined)
-          'where': (where as List<Input$HistoryVisitHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$personVisitHistory<TRes>
-    implements CopyWith$Variables$Subscription$personVisitHistory<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$personVisitHistory(this._res);
+class _CopyWithStubImpl_Variables_Subscription_personVisitHistory<TRes>
+    implements CopyWith_Variables_Subscription_personVisitHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personVisitHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? personId,
-    List<Input$HistoryVisitHistoryBoolExp>? where,
+    List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$personVisitHistory {
-  Subscription$personVisitHistory({required this.historyVisitHistory});
+class Subscription_personVisitHistory {
+  Subscription_personVisitHistory({required this.historyVisitHistory});
 
-  factory Subscription$personVisitHistory.fromJson(Map<String, dynamic> json) {
+  factory Subscription_personVisitHistory.fromJson(Map<String, dynamic> json) {
     final l$historyVisitHistory = json['historyVisitHistory'];
-    return Subscription$personVisitHistory(
+    return Subscription_personVisitHistory(
         historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
             .map((e) =>
-                Fragment$VisitHistory.fromJson((e as Map<String, dynamic>)))
+                Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$VisitHistory> historyVisitHistory;
+  final List<Fragment_VisitHistory> historyVisitHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -978,7 +978,7 @@ class Subscription$personVisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$personVisitHistory) ||
+    if (!(other is Subscription_personVisitHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -998,70 +998,70 @@ class Subscription$personVisitHistory {
   }
 }
 
-extension UtilityExtension$Subscription$personVisitHistory
-    on Subscription$personVisitHistory {
-  CopyWith$Subscription$personVisitHistory<Subscription$personVisitHistory>
-      get copyWith => CopyWith$Subscription$personVisitHistory(
+extension UtilityExtension_Subscription_personVisitHistory
+    on Subscription_personVisitHistory {
+  CopyWith_Subscription_personVisitHistory<Subscription_personVisitHistory>
+      get copyWith => CopyWith_Subscription_personVisitHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$personVisitHistory<TRes> {
-  factory CopyWith$Subscription$personVisitHistory(
-    Subscription$personVisitHistory instance,
-    TRes Function(Subscription$personVisitHistory) then,
-  ) = _CopyWithImpl$Subscription$personVisitHistory;
+abstract class CopyWith_Subscription_personVisitHistory<TRes> {
+  factory CopyWith_Subscription_personVisitHistory(
+    Subscription_personVisitHistory instance,
+    TRes Function(Subscription_personVisitHistory) then,
+  ) = _CopyWithImpl_Subscription_personVisitHistory;
 
-  factory CopyWith$Subscription$personVisitHistory.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$personVisitHistory;
+  factory CopyWith_Subscription_personVisitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personVisitHistory;
 
-  TRes call({List<Fragment$VisitHistory>? historyVisitHistory});
+  TRes call({List<Fragment_VisitHistory>? historyVisitHistory});
   TRes historyVisitHistory(
-      Iterable<Fragment$VisitHistory> Function(
-              Iterable<CopyWith$Fragment$VisitHistory<Fragment$VisitHistory>>)
+      Iterable<Fragment_VisitHistory> Function(
+              Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$personVisitHistory<TRes>
-    implements CopyWith$Subscription$personVisitHistory<TRes> {
-  _CopyWithImpl$Subscription$personVisitHistory(
+class _CopyWithImpl_Subscription_personVisitHistory<TRes>
+    implements CopyWith_Subscription_personVisitHistory<TRes> {
+  _CopyWithImpl_Subscription_personVisitHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription$personVisitHistory _instance;
+  final Subscription_personVisitHistory _instance;
 
-  final TRes Function(Subscription$personVisitHistory) _then;
+  final TRes Function(Subscription_personVisitHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyVisitHistory = _undefined}) =>
-      _then(Subscription$personVisitHistory(
+      _then(Subscription_personVisitHistory(
           historyVisitHistory:
               historyVisitHistory == _undefined || historyVisitHistory == null
                   ? _instance.historyVisitHistory
-                  : (historyVisitHistory as List<Fragment$VisitHistory>)));
+                  : (historyVisitHistory as List<Fragment_VisitHistory>)));
   TRes historyVisitHistory(
-          Iterable<Fragment$VisitHistory> Function(
+          Iterable<Fragment_VisitHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$VisitHistory<Fragment$VisitHistory>>)
+                      CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
               _fn) =>
       call(
           historyVisitHistory: _fn(_instance.historyVisitHistory
-              .map((e) => CopyWith$Fragment$VisitHistory(
+              .map((e) => CopyWith_Fragment_VisitHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$personVisitHistory<TRes>
-    implements CopyWith$Subscription$personVisitHistory<TRes> {
-  _CopyWithStubImpl$Subscription$personVisitHistory(this._res);
+class _CopyWithStubImpl_Subscription_personVisitHistory<TRes>
+    implements CopyWith_Subscription_personVisitHistory<TRes> {
+  _CopyWithStubImpl_Subscription_personVisitHistory(this._res);
 
   TRes _res;
 
-  call({List<Fragment$VisitHistory>? historyVisitHistory}) => _res;
+  call({List<Fragment_VisitHistory>? historyVisitHistory}) => _res;
   historyVisitHistory(_fn) => _res;
 }
 
@@ -1171,21 +1171,21 @@ const documentNodeSubscriptionpersonVisitHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Variables$Subscription$personConfessionHistory {
-  factory Variables$Subscription$personConfessionHistory({
+class Variables_Subscription_personConfessionHistory {
+  factory Variables_Subscription_personConfessionHistory({
     required UuidValue personId,
-    List<Input$HistoryConfessionHistoryBoolExp>? where,
+    List<Input_HistoryConfessionHistoryBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$personConfessionHistory._({
+      Variables_Subscription_personConfessionHistory._({
         r'personId': personId,
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$personConfessionHistory._(this._$data);
+  Variables_Subscription_personConfessionHistory._(this._$data);
 
-  factory Variables$Subscription$personConfessionHistory.fromJson(
+  factory Variables_Subscription_personConfessionHistory.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
@@ -1193,7 +1193,7 @@ class Variables$Subscription$personConfessionHistory {
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryConfessionHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryConfessionHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
@@ -1201,14 +1201,14 @@ class Variables$Subscription$personConfessionHistory {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$personConfessionHistory._(result$data);
+    return Variables_Subscription_personConfessionHistory._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-  List<Input$HistoryConfessionHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryConfessionHistoryBoolExp>?);
+  List<Input_HistoryConfessionHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryConfessionHistoryBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1225,9 +1225,9 @@ class Variables$Subscription$personConfessionHistory {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$personConfessionHistory<
-          Variables$Subscription$personConfessionHistory>
-      get copyWith => CopyWith$Variables$Subscription$personConfessionHistory(
+  CopyWith_Variables_Subscription_personConfessionHistory<
+          Variables_Subscription_personConfessionHistory>
+      get copyWith => CopyWith_Variables_Subscription_personConfessionHistory(
             this,
             (i) => i,
           );
@@ -1236,7 +1236,7 @@ class Variables$Subscription$personConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$personConfessionHistory) ||
+    if (!(other is Variables_Subscription_personConfessionHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1292,33 +1292,33 @@ class Variables$Subscription$personConfessionHistory {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$personConfessionHistory<TRes> {
-  factory CopyWith$Variables$Subscription$personConfessionHistory(
-    Variables$Subscription$personConfessionHistory instance,
-    TRes Function(Variables$Subscription$personConfessionHistory) then,
-  ) = _CopyWithImpl$Variables$Subscription$personConfessionHistory;
+abstract class CopyWith_Variables_Subscription_personConfessionHistory<TRes> {
+  factory CopyWith_Variables_Subscription_personConfessionHistory(
+    Variables_Subscription_personConfessionHistory instance,
+    TRes Function(Variables_Subscription_personConfessionHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_personConfessionHistory;
 
-  factory CopyWith$Variables$Subscription$personConfessionHistory.stub(
+  factory CopyWith_Variables_Subscription_personConfessionHistory.stub(
           TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$personConfessionHistory;
+      _CopyWithStubImpl_Variables_Subscription_personConfessionHistory;
 
   TRes call({
     UuidValue? personId,
-    List<Input$HistoryConfessionHistoryBoolExp>? where,
+    List<Input_HistoryConfessionHistoryBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$personConfessionHistory<TRes>
-    implements CopyWith$Variables$Subscription$personConfessionHistory<TRes> {
-  _CopyWithImpl$Variables$Subscription$personConfessionHistory(
+class _CopyWithImpl_Variables_Subscription_personConfessionHistory<TRes>
+    implements CopyWith_Variables_Subscription_personConfessionHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_personConfessionHistory(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$personConfessionHistory _instance;
+  final Variables_Subscription_personConfessionHistory _instance;
 
-  final TRes Function(Variables$Subscription$personConfessionHistory) _then;
+  final TRes Function(Variables_Subscription_personConfessionHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1327,45 +1327,45 @@ class _CopyWithImpl$Variables$Subscription$personConfessionHistory<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$personConfessionHistory._({
+      _then(Variables_Subscription_personConfessionHistory._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
         if (where != _undefined)
-          'where': (where as List<Input$HistoryConfessionHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryConfessionHistoryBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$personConfessionHistory<TRes>
-    implements CopyWith$Variables$Subscription$personConfessionHistory<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$personConfessionHistory(this._res);
+class _CopyWithStubImpl_Variables_Subscription_personConfessionHistory<TRes>
+    implements CopyWith_Variables_Subscription_personConfessionHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personConfessionHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? personId,
-    List<Input$HistoryConfessionHistoryBoolExp>? where,
+    List<Input_HistoryConfessionHistoryBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$personConfessionHistory {
-  Subscription$personConfessionHistory(
+class Subscription_personConfessionHistory {
+  Subscription_personConfessionHistory(
       {required this.historyConfessionHistory});
 
-  factory Subscription$personConfessionHistory.fromJson(
+  factory Subscription_personConfessionHistory.fromJson(
       Map<String, dynamic> json) {
     final l$historyConfessionHistory = json['historyConfessionHistory'];
-    return Subscription$personConfessionHistory(
+    return Subscription_personConfessionHistory(
         historyConfessionHistory: (l$historyConfessionHistory as List<dynamic>)
-            .map((e) => Fragment$ConfessionHistory.fromJson(
+            .map((e) => Fragment_ConfessionHistory.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$ConfessionHistory> historyConfessionHistory;
+  final List<Fragment_ConfessionHistory> historyConfessionHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1387,7 +1387,7 @@ class Subscription$personConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$personConfessionHistory) ||
+    if (!(other is Subscription_personConfessionHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1410,75 +1410,75 @@ class Subscription$personConfessionHistory {
   }
 }
 
-extension UtilityExtension$Subscription$personConfessionHistory
-    on Subscription$personConfessionHistory {
-  CopyWith$Subscription$personConfessionHistory<
-          Subscription$personConfessionHistory>
-      get copyWith => CopyWith$Subscription$personConfessionHistory(
+extension UtilityExtension_Subscription_personConfessionHistory
+    on Subscription_personConfessionHistory {
+  CopyWith_Subscription_personConfessionHistory<
+          Subscription_personConfessionHistory>
+      get copyWith => CopyWith_Subscription_personConfessionHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$personConfessionHistory<TRes> {
-  factory CopyWith$Subscription$personConfessionHistory(
-    Subscription$personConfessionHistory instance,
-    TRes Function(Subscription$personConfessionHistory) then,
-  ) = _CopyWithImpl$Subscription$personConfessionHistory;
+abstract class CopyWith_Subscription_personConfessionHistory<TRes> {
+  factory CopyWith_Subscription_personConfessionHistory(
+    Subscription_personConfessionHistory instance,
+    TRes Function(Subscription_personConfessionHistory) then,
+  ) = _CopyWithImpl_Subscription_personConfessionHistory;
 
-  factory CopyWith$Subscription$personConfessionHistory.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$personConfessionHistory;
+  factory CopyWith_Subscription_personConfessionHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personConfessionHistory;
 
-  TRes call({List<Fragment$ConfessionHistory>? historyConfessionHistory});
+  TRes call({List<Fragment_ConfessionHistory>? historyConfessionHistory});
   TRes historyConfessionHistory(
-      Iterable<Fragment$ConfessionHistory> Function(
+      Iterable<Fragment_ConfessionHistory> Function(
               Iterable<
-                  CopyWith$Fragment$ConfessionHistory<
-                      Fragment$ConfessionHistory>>)
+                  CopyWith_Fragment_ConfessionHistory<
+                      Fragment_ConfessionHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$personConfessionHistory<TRes>
-    implements CopyWith$Subscription$personConfessionHistory<TRes> {
-  _CopyWithImpl$Subscription$personConfessionHistory(
+class _CopyWithImpl_Subscription_personConfessionHistory<TRes>
+    implements CopyWith_Subscription_personConfessionHistory<TRes> {
+  _CopyWithImpl_Subscription_personConfessionHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription$personConfessionHistory _instance;
+  final Subscription_personConfessionHistory _instance;
 
-  final TRes Function(Subscription$personConfessionHistory) _then;
+  final TRes Function(Subscription_personConfessionHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyConfessionHistory = _undefined}) =>
-      _then(Subscription$personConfessionHistory(
+      _then(Subscription_personConfessionHistory(
           historyConfessionHistory: historyConfessionHistory == _undefined ||
                   historyConfessionHistory == null
               ? _instance.historyConfessionHistory
               : (historyConfessionHistory
-                  as List<Fragment$ConfessionHistory>)));
+                  as List<Fragment_ConfessionHistory>)));
   TRes historyConfessionHistory(
-          Iterable<Fragment$ConfessionHistory> Function(
+          Iterable<Fragment_ConfessionHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$ConfessionHistory<
-                          Fragment$ConfessionHistory>>)
+                      CopyWith_Fragment_ConfessionHistory<
+                          Fragment_ConfessionHistory>>)
               _fn) =>
       call(
           historyConfessionHistory: _fn(_instance.historyConfessionHistory
-              .map((e) => CopyWith$Fragment$ConfessionHistory(
+              .map((e) => CopyWith_Fragment_ConfessionHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$personConfessionHistory<TRes>
-    implements CopyWith$Subscription$personConfessionHistory<TRes> {
-  _CopyWithStubImpl$Subscription$personConfessionHistory(this._res);
+class _CopyWithStubImpl_Subscription_personConfessionHistory<TRes>
+    implements CopyWith_Subscription_personConfessionHistory<TRes> {
+  _CopyWithStubImpl_Subscription_personConfessionHistory(this._res);
 
   TRes _res;
 
-  call({List<Fragment$ConfessionHistory>? historyConfessionHistory}) => _res;
+  call({List<Fragment_ConfessionHistory>? historyConfessionHistory}) => _res;
   historyConfessionHistory(_fn) => _res;
 }
 
@@ -1589,21 +1589,21 @@ const documentNodeSubscriptionpersonConfessionHistory =
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Variables$Subscription$personKodasHistory {
-  factory Variables$Subscription$personKodasHistory({
+class Variables_Subscription_personKodasHistory {
+  factory Variables_Subscription_personKodasHistory({
     required UuidValue personId,
-    List<Input$HistoryKodasHistoryBoolExp>? where,
+    List<Input_HistoryKodasHistoryBoolExp>? where,
     int? limit,
   }) =>
-      Variables$Subscription$personKodasHistory._({
+      Variables_Subscription_personKodasHistory._({
         r'personId': personId,
         if (where != null) r'where': where,
         if (limit != null) r'limit': limit,
       });
 
-  Variables$Subscription$personKodasHistory._(this._$data);
+  Variables_Subscription_personKodasHistory._(this._$data);
 
-  factory Variables$Subscription$personKodasHistory.fromJson(
+  factory Variables_Subscription_personKodasHistory.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
@@ -1611,7 +1611,7 @@ class Variables$Subscription$personKodasHistory {
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$HistoryKodasHistoryBoolExp.fromJson(
+          ?.map((e) => Input_HistoryKodasHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
     }
@@ -1619,14 +1619,14 @@ class Variables$Subscription$personKodasHistory {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
     }
-    return Variables$Subscription$personKodasHistory._(result$data);
+    return Variables_Subscription_personKodasHistory._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-  List<Input$HistoryKodasHistoryBoolExp>? get where =>
-      (_$data['where'] as List<Input$HistoryKodasHistoryBoolExp>?);
+  List<Input_HistoryKodasHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryKodasHistoryBoolExp>?);
   int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1643,9 +1643,9 @@ class Variables$Subscription$personKodasHistory {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$personKodasHistory<
-          Variables$Subscription$personKodasHistory>
-      get copyWith => CopyWith$Variables$Subscription$personKodasHistory(
+  CopyWith_Variables_Subscription_personKodasHistory<
+          Variables_Subscription_personKodasHistory>
+      get copyWith => CopyWith_Variables_Subscription_personKodasHistory(
             this,
             (i) => i,
           );
@@ -1654,7 +1654,7 @@ class Variables$Subscription$personKodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$personKodasHistory) ||
+    if (!(other is Variables_Subscription_personKodasHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1710,32 +1710,32 @@ class Variables$Subscription$personKodasHistory {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$personKodasHistory<TRes> {
-  factory CopyWith$Variables$Subscription$personKodasHistory(
-    Variables$Subscription$personKodasHistory instance,
-    TRes Function(Variables$Subscription$personKodasHistory) then,
-  ) = _CopyWithImpl$Variables$Subscription$personKodasHistory;
+abstract class CopyWith_Variables_Subscription_personKodasHistory<TRes> {
+  factory CopyWith_Variables_Subscription_personKodasHistory(
+    Variables_Subscription_personKodasHistory instance,
+    TRes Function(Variables_Subscription_personKodasHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_personKodasHistory;
 
-  factory CopyWith$Variables$Subscription$personKodasHistory.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$personKodasHistory;
+  factory CopyWith_Variables_Subscription_personKodasHistory.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_personKodasHistory;
 
   TRes call({
     UuidValue? personId,
-    List<Input$HistoryKodasHistoryBoolExp>? where,
+    List<Input_HistoryKodasHistoryBoolExp>? where,
     int? limit,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$personKodasHistory<TRes>
-    implements CopyWith$Variables$Subscription$personKodasHistory<TRes> {
-  _CopyWithImpl$Variables$Subscription$personKodasHistory(
+class _CopyWithImpl_Variables_Subscription_personKodasHistory<TRes>
+    implements CopyWith_Variables_Subscription_personKodasHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_personKodasHistory(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$personKodasHistory _instance;
+  final Variables_Subscription_personKodasHistory _instance;
 
-  final TRes Function(Variables$Subscription$personKodasHistory) _then;
+  final TRes Function(Variables_Subscription_personKodasHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1744,43 +1744,43 @@ class _CopyWithImpl$Variables$Subscription$personKodasHistory<TRes>
     Object? where = _undefined,
     Object? limit = _undefined,
   }) =>
-      _then(Variables$Subscription$personKodasHistory._({
+      _then(Variables_Subscription_personKodasHistory._({
         ..._instance._$data,
         if (personId != _undefined && personId != null)
           'personId': (personId as UuidValue),
         if (where != _undefined)
-          'where': (where as List<Input$HistoryKodasHistoryBoolExp>?),
+          'where': (where as List<Input_HistoryKodasHistoryBoolExp>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$personKodasHistory<TRes>
-    implements CopyWith$Variables$Subscription$personKodasHistory<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$personKodasHistory(this._res);
+class _CopyWithStubImpl_Variables_Subscription_personKodasHistory<TRes>
+    implements CopyWith_Variables_Subscription_personKodasHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personKodasHistory(this._res);
 
   TRes _res;
 
   call({
     UuidValue? personId,
-    List<Input$HistoryKodasHistoryBoolExp>? where,
+    List<Input_HistoryKodasHistoryBoolExp>? where,
     int? limit,
   }) =>
       _res;
 }
 
-class Subscription$personKodasHistory {
-  Subscription$personKodasHistory({required this.historyKodasHistory});
+class Subscription_personKodasHistory {
+  Subscription_personKodasHistory({required this.historyKodasHistory});
 
-  factory Subscription$personKodasHistory.fromJson(Map<String, dynamic> json) {
+  factory Subscription_personKodasHistory.fromJson(Map<String, dynamic> json) {
     final l$historyKodasHistory = json['historyKodasHistory'];
-    return Subscription$personKodasHistory(
+    return Subscription_personKodasHistory(
         historyKodasHistory: (l$historyKodasHistory as List<dynamic>)
             .map((e) =>
-                Fragment$KodasHistory.fromJson((e as Map<String, dynamic>)))
+                Fragment_KodasHistory.fromJson((e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Fragment$KodasHistory> historyKodasHistory;
+  final List<Fragment_KodasHistory> historyKodasHistory;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1802,7 +1802,7 @@ class Subscription$personKodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$personKodasHistory) ||
+    if (!(other is Subscription_personKodasHistory) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1822,70 +1822,70 @@ class Subscription$personKodasHistory {
   }
 }
 
-extension UtilityExtension$Subscription$personKodasHistory
-    on Subscription$personKodasHistory {
-  CopyWith$Subscription$personKodasHistory<Subscription$personKodasHistory>
-      get copyWith => CopyWith$Subscription$personKodasHistory(
+extension UtilityExtension_Subscription_personKodasHistory
+    on Subscription_personKodasHistory {
+  CopyWith_Subscription_personKodasHistory<Subscription_personKodasHistory>
+      get copyWith => CopyWith_Subscription_personKodasHistory(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$personKodasHistory<TRes> {
-  factory CopyWith$Subscription$personKodasHistory(
-    Subscription$personKodasHistory instance,
-    TRes Function(Subscription$personKodasHistory) then,
-  ) = _CopyWithImpl$Subscription$personKodasHistory;
+abstract class CopyWith_Subscription_personKodasHistory<TRes> {
+  factory CopyWith_Subscription_personKodasHistory(
+    Subscription_personKodasHistory instance,
+    TRes Function(Subscription_personKodasHistory) then,
+  ) = _CopyWithImpl_Subscription_personKodasHistory;
 
-  factory CopyWith$Subscription$personKodasHistory.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$personKodasHistory;
+  factory CopyWith_Subscription_personKodasHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personKodasHistory;
 
-  TRes call({List<Fragment$KodasHistory>? historyKodasHistory});
+  TRes call({List<Fragment_KodasHistory>? historyKodasHistory});
   TRes historyKodasHistory(
-      Iterable<Fragment$KodasHistory> Function(
-              Iterable<CopyWith$Fragment$KodasHistory<Fragment$KodasHistory>>)
+      Iterable<Fragment_KodasHistory> Function(
+              Iterable<CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$personKodasHistory<TRes>
-    implements CopyWith$Subscription$personKodasHistory<TRes> {
-  _CopyWithImpl$Subscription$personKodasHistory(
+class _CopyWithImpl_Subscription_personKodasHistory<TRes>
+    implements CopyWith_Subscription_personKodasHistory<TRes> {
+  _CopyWithImpl_Subscription_personKodasHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription$personKodasHistory _instance;
+  final Subscription_personKodasHistory _instance;
 
-  final TRes Function(Subscription$personKodasHistory) _then;
+  final TRes Function(Subscription_personKodasHistory) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? historyKodasHistory = _undefined}) =>
-      _then(Subscription$personKodasHistory(
+      _then(Subscription_personKodasHistory(
           historyKodasHistory:
               historyKodasHistory == _undefined || historyKodasHistory == null
                   ? _instance.historyKodasHistory
-                  : (historyKodasHistory as List<Fragment$KodasHistory>)));
+                  : (historyKodasHistory as List<Fragment_KodasHistory>)));
   TRes historyKodasHistory(
-          Iterable<Fragment$KodasHistory> Function(
+          Iterable<Fragment_KodasHistory> Function(
                   Iterable<
-                      CopyWith$Fragment$KodasHistory<Fragment$KodasHistory>>)
+                      CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>)
               _fn) =>
       call(
           historyKodasHistory: _fn(_instance.historyKodasHistory
-              .map((e) => CopyWith$Fragment$KodasHistory(
+              .map((e) => CopyWith_Fragment_KodasHistory(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$personKodasHistory<TRes>
-    implements CopyWith$Subscription$personKodasHistory<TRes> {
-  _CopyWithStubImpl$Subscription$personKodasHistory(this._res);
+class _CopyWithStubImpl_Subscription_personKodasHistory<TRes>
+    implements CopyWith_Subscription_personKodasHistory<TRes> {
+  _CopyWithStubImpl_Subscription_personKodasHistory(this._res);
 
   TRes _res;
 
-  call({List<Fragment$KodasHistory>? historyKodasHistory}) => _res;
+  call({List<Fragment_KodasHistory>? historyKodasHistory}) => _res;
   historyKodasHistory(_fn) => _res;
 }
 

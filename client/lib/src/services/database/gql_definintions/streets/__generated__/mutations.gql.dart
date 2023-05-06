@@ -3,19 +3,19 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Mutation$deleteStreet {
-  factory Variables$Mutation$deleteStreet({required UuidValue streetId}) =>
-      Variables$Mutation$deleteStreet._({
+class Variables_Mutation_deleteStreet {
+  factory Variables_Mutation_deleteStreet({required UuidValue streetId}) =>
+      Variables_Mutation_deleteStreet._({
         r'streetId': streetId,
       });
 
-  Variables$Mutation$deleteStreet._(this._$data);
+  Variables_Mutation_deleteStreet._(this._$data);
 
-  factory Variables$Mutation$deleteStreet.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_deleteStreet.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$streetId = data['streetId'];
     result$data['streetId'] = stringToUuid(l$streetId);
-    return Variables$Mutation$deleteStreet._(result$data);
+    return Variables_Mutation_deleteStreet._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -28,8 +28,8 @@ class Variables$Mutation$deleteStreet {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$deleteStreet<Variables$Mutation$deleteStreet>
-      get copyWith => CopyWith$Variables$Mutation$deleteStreet(
+  CopyWith_Variables_Mutation_deleteStreet<Variables_Mutation_deleteStreet>
+      get copyWith => CopyWith_Variables_Mutation_deleteStreet(
             this,
             (i) => i,
           );
@@ -38,7 +38,7 @@ class Variables$Mutation$deleteStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$deleteStreet) ||
+    if (!(other is Variables_Mutation_deleteStreet) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57,67 +57,67 @@ class Variables$Mutation$deleteStreet {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$deleteStreet<TRes> {
-  factory CopyWith$Variables$Mutation$deleteStreet(
-    Variables$Mutation$deleteStreet instance,
-    TRes Function(Variables$Mutation$deleteStreet) then,
-  ) = _CopyWithImpl$Variables$Mutation$deleteStreet;
+abstract class CopyWith_Variables_Mutation_deleteStreet<TRes> {
+  factory CopyWith_Variables_Mutation_deleteStreet(
+    Variables_Mutation_deleteStreet instance,
+    TRes Function(Variables_Mutation_deleteStreet) then,
+  ) = _CopyWithImpl_Variables_Mutation_deleteStreet;
 
-  factory CopyWith$Variables$Mutation$deleteStreet.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$deleteStreet;
+  factory CopyWith_Variables_Mutation_deleteStreet.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_deleteStreet;
 
   TRes call({UuidValue? streetId});
 }
 
-class _CopyWithImpl$Variables$Mutation$deleteStreet<TRes>
-    implements CopyWith$Variables$Mutation$deleteStreet<TRes> {
-  _CopyWithImpl$Variables$Mutation$deleteStreet(
+class _CopyWithImpl_Variables_Mutation_deleteStreet<TRes>
+    implements CopyWith_Variables_Mutation_deleteStreet<TRes> {
+  _CopyWithImpl_Variables_Mutation_deleteStreet(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$deleteStreet _instance;
+  final Variables_Mutation_deleteStreet _instance;
 
-  final TRes Function(Variables$Mutation$deleteStreet) _then;
+  final TRes Function(Variables_Mutation_deleteStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? streetId = _undefined}) =>
-      _then(Variables$Mutation$deleteStreet._({
+      _then(Variables_Mutation_deleteStreet._({
         ..._instance._$data,
         if (streetId != _undefined && streetId != null)
           'streetId': (streetId as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$deleteStreet<TRes>
-    implements CopyWith$Variables$Mutation$deleteStreet<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$deleteStreet(this._res);
+class _CopyWithStubImpl_Variables_Mutation_deleteStreet<TRes>
+    implements CopyWith_Variables_Mutation_deleteStreet<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_deleteStreet(this._res);
 
   TRes _res;
 
   call({UuidValue? streetId}) => _res;
 }
 
-class Mutation$deleteStreet {
-  Mutation$deleteStreet({
+class Mutation_deleteStreet {
+  Mutation_deleteStreet({
     this.deleteStreetsByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$deleteStreet.fromJson(Map<String, dynamic> json) {
+  factory Mutation_deleteStreet.fromJson(Map<String, dynamic> json) {
     final l$deleteStreetsByPk = json['deleteStreetsByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$deleteStreet(
+    return Mutation_deleteStreet(
       deleteStreetsByPk: l$deleteStreetsByPk == null
           ? null
-          : Fragment$Street.fromJson(
+          : Fragment_Street.fromJson(
               (l$deleteStreetsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Street? deleteStreetsByPk;
+  final Fragment_Street? deleteStreetsByPk;
 
   final String $__typename;
 
@@ -145,7 +145,7 @@ class Mutation$deleteStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$deleteStreet) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_deleteStreet) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteStreetsByPk = deleteStreetsByPk;
@@ -162,40 +162,40 @@ class Mutation$deleteStreet {
   }
 }
 
-extension UtilityExtension$Mutation$deleteStreet on Mutation$deleteStreet {
-  CopyWith$Mutation$deleteStreet<Mutation$deleteStreet> get copyWith =>
-      CopyWith$Mutation$deleteStreet(
+extension UtilityExtension_Mutation_deleteStreet on Mutation_deleteStreet {
+  CopyWith_Mutation_deleteStreet<Mutation_deleteStreet> get copyWith =>
+      CopyWith_Mutation_deleteStreet(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$deleteStreet<TRes> {
-  factory CopyWith$Mutation$deleteStreet(
-    Mutation$deleteStreet instance,
-    TRes Function(Mutation$deleteStreet) then,
-  ) = _CopyWithImpl$Mutation$deleteStreet;
+abstract class CopyWith_Mutation_deleteStreet<TRes> {
+  factory CopyWith_Mutation_deleteStreet(
+    Mutation_deleteStreet instance,
+    TRes Function(Mutation_deleteStreet) then,
+  ) = _CopyWithImpl_Mutation_deleteStreet;
 
-  factory CopyWith$Mutation$deleteStreet.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$deleteStreet;
+  factory CopyWith_Mutation_deleteStreet.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_deleteStreet;
 
   TRes call({
-    Fragment$Street? deleteStreetsByPk,
+    Fragment_Street? deleteStreetsByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk;
+  CopyWith_Fragment_Street<TRes> get deleteStreetsByPk;
 }
 
-class _CopyWithImpl$Mutation$deleteStreet<TRes>
-    implements CopyWith$Mutation$deleteStreet<TRes> {
-  _CopyWithImpl$Mutation$deleteStreet(
+class _CopyWithImpl_Mutation_deleteStreet<TRes>
+    implements CopyWith_Mutation_deleteStreet<TRes> {
+  _CopyWithImpl_Mutation_deleteStreet(
     this._instance,
     this._then,
   );
 
-  final Mutation$deleteStreet _instance;
+  final Mutation_deleteStreet _instance;
 
-  final TRes Function(Mutation$deleteStreet) _then;
+  final TRes Function(Mutation_deleteStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -203,36 +203,36 @@ class _CopyWithImpl$Mutation$deleteStreet<TRes>
     Object? deleteStreetsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$deleteStreet(
+      _then(Mutation_deleteStreet(
         deleteStreetsByPk: deleteStreetsByPk == _undefined
             ? _instance.deleteStreetsByPk
-            : (deleteStreetsByPk as Fragment$Street?),
+            : (deleteStreetsByPk as Fragment_Street?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk {
+  CopyWith_Fragment_Street<TRes> get deleteStreetsByPk {
     final local$deleteStreetsByPk = _instance.deleteStreetsByPk;
     return local$deleteStreetsByPk == null
-        ? CopyWith$Fragment$Street.stub(_then(_instance))
-        : CopyWith$Fragment$Street(
+        ? CopyWith_Fragment_Street.stub(_then(_instance))
+        : CopyWith_Fragment_Street(
             local$deleteStreetsByPk, (e) => call(deleteStreetsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$deleteStreet<TRes>
-    implements CopyWith$Mutation$deleteStreet<TRes> {
-  _CopyWithStubImpl$Mutation$deleteStreet(this._res);
+class _CopyWithStubImpl_Mutation_deleteStreet<TRes>
+    implements CopyWith_Mutation_deleteStreet<TRes> {
+  _CopyWithStubImpl_Mutation_deleteStreet(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Street? deleteStreetsByPk,
+    Fragment_Street? deleteStreetsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Street<TRes> get deleteStreetsByPk =>
-      CopyWith$Fragment$Street.stub(_res);
+  CopyWith_Fragment_Street<TRes> get deleteStreetsByPk =>
+      CopyWith_Fragment_Street.stub(_res);
 }
 
 const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
@@ -289,27 +289,27 @@ const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
   fragmentDefinitionStreetNoPhoto,
 ]);
 
-class Variables$Mutation$insertStreet {
-  factory Variables$Mutation$insertStreet(
-          {required Input$StreetsInsertInput newStreet}) =>
-      Variables$Mutation$insertStreet._({
+class Variables_Mutation_insertStreet {
+  factory Variables_Mutation_insertStreet(
+          {required Input_StreetsInsertInput newStreet}) =>
+      Variables_Mutation_insertStreet._({
         r'newStreet': newStreet,
       });
 
-  Variables$Mutation$insertStreet._(this._$data);
+  Variables_Mutation_insertStreet._(this._$data);
 
-  factory Variables$Mutation$insertStreet.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_insertStreet.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newStreet = data['newStreet'];
-    result$data['newStreet'] = Input$StreetsInsertInput.fromJson(
+    result$data['newStreet'] = Input_StreetsInsertInput.fromJson(
         (l$newStreet as Map<String, dynamic>));
-    return Variables$Mutation$insertStreet._(result$data);
+    return Variables_Mutation_insertStreet._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$StreetsInsertInput get newStreet =>
-      (_$data['newStreet'] as Input$StreetsInsertInput);
+  Input_StreetsInsertInput get newStreet =>
+      (_$data['newStreet'] as Input_StreetsInsertInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newStreet = newStreet;
@@ -317,8 +317,8 @@ class Variables$Mutation$insertStreet {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$insertStreet<Variables$Mutation$insertStreet>
-      get copyWith => CopyWith$Variables$Mutation$insertStreet(
+  CopyWith_Variables_Mutation_insertStreet<Variables_Mutation_insertStreet>
+      get copyWith => CopyWith_Variables_Mutation_insertStreet(
             this,
             (i) => i,
           );
@@ -327,7 +327,7 @@ class Variables$Mutation$insertStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$insertStreet) ||
+    if (!(other is Variables_Mutation_insertStreet) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -346,67 +346,67 @@ class Variables$Mutation$insertStreet {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$insertStreet<TRes> {
-  factory CopyWith$Variables$Mutation$insertStreet(
-    Variables$Mutation$insertStreet instance,
-    TRes Function(Variables$Mutation$insertStreet) then,
-  ) = _CopyWithImpl$Variables$Mutation$insertStreet;
+abstract class CopyWith_Variables_Mutation_insertStreet<TRes> {
+  factory CopyWith_Variables_Mutation_insertStreet(
+    Variables_Mutation_insertStreet instance,
+    TRes Function(Variables_Mutation_insertStreet) then,
+  ) = _CopyWithImpl_Variables_Mutation_insertStreet;
 
-  factory CopyWith$Variables$Mutation$insertStreet.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$insertStreet;
+  factory CopyWith_Variables_Mutation_insertStreet.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_insertStreet;
 
-  TRes call({Input$StreetsInsertInput? newStreet});
+  TRes call({Input_StreetsInsertInput? newStreet});
 }
 
-class _CopyWithImpl$Variables$Mutation$insertStreet<TRes>
-    implements CopyWith$Variables$Mutation$insertStreet<TRes> {
-  _CopyWithImpl$Variables$Mutation$insertStreet(
+class _CopyWithImpl_Variables_Mutation_insertStreet<TRes>
+    implements CopyWith_Variables_Mutation_insertStreet<TRes> {
+  _CopyWithImpl_Variables_Mutation_insertStreet(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$insertStreet _instance;
+  final Variables_Mutation_insertStreet _instance;
 
-  final TRes Function(Variables$Mutation$insertStreet) _then;
+  final TRes Function(Variables_Mutation_insertStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? newStreet = _undefined}) =>
-      _then(Variables$Mutation$insertStreet._({
+      _then(Variables_Mutation_insertStreet._({
         ..._instance._$data,
         if (newStreet != _undefined && newStreet != null)
-          'newStreet': (newStreet as Input$StreetsInsertInput),
+          'newStreet': (newStreet as Input_StreetsInsertInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$insertStreet<TRes>
-    implements CopyWith$Variables$Mutation$insertStreet<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$insertStreet(this._res);
+class _CopyWithStubImpl_Variables_Mutation_insertStreet<TRes>
+    implements CopyWith_Variables_Mutation_insertStreet<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_insertStreet(this._res);
 
   TRes _res;
 
-  call({Input$StreetsInsertInput? newStreet}) => _res;
+  call({Input_StreetsInsertInput? newStreet}) => _res;
 }
 
-class Mutation$insertStreet {
-  Mutation$insertStreet({
+class Mutation_insertStreet {
+  Mutation_insertStreet({
     this.insertStreetsOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$insertStreet.fromJson(Map<String, dynamic> json) {
+  factory Mutation_insertStreet.fromJson(Map<String, dynamic> json) {
     final l$insertStreetsOne = json['insertStreetsOne'];
     final l$$__typename = json['__typename'];
-    return Mutation$insertStreet(
+    return Mutation_insertStreet(
       insertStreetsOne: l$insertStreetsOne == null
           ? null
-          : Fragment$Street.fromJson(
+          : Fragment_Street.fromJson(
               (l$insertStreetsOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Street? insertStreetsOne;
+  final Fragment_Street? insertStreetsOne;
 
   final String $__typename;
 
@@ -434,7 +434,7 @@ class Mutation$insertStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$insertStreet) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_insertStreet) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertStreetsOne = insertStreetsOne;
@@ -451,40 +451,40 @@ class Mutation$insertStreet {
   }
 }
 
-extension UtilityExtension$Mutation$insertStreet on Mutation$insertStreet {
-  CopyWith$Mutation$insertStreet<Mutation$insertStreet> get copyWith =>
-      CopyWith$Mutation$insertStreet(
+extension UtilityExtension_Mutation_insertStreet on Mutation_insertStreet {
+  CopyWith_Mutation_insertStreet<Mutation_insertStreet> get copyWith =>
+      CopyWith_Mutation_insertStreet(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$insertStreet<TRes> {
-  factory CopyWith$Mutation$insertStreet(
-    Mutation$insertStreet instance,
-    TRes Function(Mutation$insertStreet) then,
-  ) = _CopyWithImpl$Mutation$insertStreet;
+abstract class CopyWith_Mutation_insertStreet<TRes> {
+  factory CopyWith_Mutation_insertStreet(
+    Mutation_insertStreet instance,
+    TRes Function(Mutation_insertStreet) then,
+  ) = _CopyWithImpl_Mutation_insertStreet;
 
-  factory CopyWith$Mutation$insertStreet.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$insertStreet;
+  factory CopyWith_Mutation_insertStreet.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertStreet;
 
   TRes call({
-    Fragment$Street? insertStreetsOne,
+    Fragment_Street? insertStreetsOne,
     String? $__typename,
   });
-  CopyWith$Fragment$Street<TRes> get insertStreetsOne;
+  CopyWith_Fragment_Street<TRes> get insertStreetsOne;
 }
 
-class _CopyWithImpl$Mutation$insertStreet<TRes>
-    implements CopyWith$Mutation$insertStreet<TRes> {
-  _CopyWithImpl$Mutation$insertStreet(
+class _CopyWithImpl_Mutation_insertStreet<TRes>
+    implements CopyWith_Mutation_insertStreet<TRes> {
+  _CopyWithImpl_Mutation_insertStreet(
     this._instance,
     this._then,
   );
 
-  final Mutation$insertStreet _instance;
+  final Mutation_insertStreet _instance;
 
-  final TRes Function(Mutation$insertStreet) _then;
+  final TRes Function(Mutation_insertStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -492,36 +492,36 @@ class _CopyWithImpl$Mutation$insertStreet<TRes>
     Object? insertStreetsOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$insertStreet(
+      _then(Mutation_insertStreet(
         insertStreetsOne: insertStreetsOne == _undefined
             ? _instance.insertStreetsOne
-            : (insertStreetsOne as Fragment$Street?),
+            : (insertStreetsOne as Fragment_Street?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Street<TRes> get insertStreetsOne {
+  CopyWith_Fragment_Street<TRes> get insertStreetsOne {
     final local$insertStreetsOne = _instance.insertStreetsOne;
     return local$insertStreetsOne == null
-        ? CopyWith$Fragment$Street.stub(_then(_instance))
-        : CopyWith$Fragment$Street(
+        ? CopyWith_Fragment_Street.stub(_then(_instance))
+        : CopyWith_Fragment_Street(
             local$insertStreetsOne, (e) => call(insertStreetsOne: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$insertStreet<TRes>
-    implements CopyWith$Mutation$insertStreet<TRes> {
-  _CopyWithStubImpl$Mutation$insertStreet(this._res);
+class _CopyWithStubImpl_Mutation_insertStreet<TRes>
+    implements CopyWith_Mutation_insertStreet<TRes> {
+  _CopyWithStubImpl_Mutation_insertStreet(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Street? insertStreetsOne,
+    Fragment_Street? insertStreetsOne,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Street<TRes> get insertStreetsOne =>
-      CopyWith$Fragment$Street.stub(_res);
+  CopyWith_Fragment_Street<TRes> get insertStreetsOne =>
+      CopyWith_Fragment_Street.stub(_res);
 }
 
 const documentNodeMutationinsertStreet = DocumentNode(definitions: [
@@ -578,33 +578,33 @@ const documentNodeMutationinsertStreet = DocumentNode(definitions: [
   fragmentDefinitionStreetNoPhoto,
 ]);
 
-class Variables$Mutation$updateStreet {
-  factory Variables$Mutation$updateStreet({
+class Variables_Mutation_updateStreet {
+  factory Variables_Mutation_updateStreet({
     required UuidValue streetId,
-    required Input$StreetsSetInput newStreet,
+    required Input_StreetsSetInput newStreet,
   }) =>
-      Variables$Mutation$updateStreet._({
+      Variables_Mutation_updateStreet._({
         r'streetId': streetId,
         r'newStreet': newStreet,
       });
 
-  Variables$Mutation$updateStreet._(this._$data);
+  Variables_Mutation_updateStreet._(this._$data);
 
-  factory Variables$Mutation$updateStreet.fromJson(Map<String, dynamic> data) {
+  factory Variables_Mutation_updateStreet.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$streetId = data['streetId'];
     result$data['streetId'] = stringToUuid(l$streetId);
     final l$newStreet = data['newStreet'];
     result$data['newStreet'] =
-        Input$StreetsSetInput.fromJson((l$newStreet as Map<String, dynamic>));
-    return Variables$Mutation$updateStreet._(result$data);
+        Input_StreetsSetInput.fromJson((l$newStreet as Map<String, dynamic>));
+    return Variables_Mutation_updateStreet._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get streetId => (_$data['streetId'] as UuidValue);
-  Input$StreetsSetInput get newStreet =>
-      (_$data['newStreet'] as Input$StreetsSetInput);
+  Input_StreetsSetInput get newStreet =>
+      (_$data['newStreet'] as Input_StreetsSetInput);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$streetId = streetId;
@@ -614,8 +614,8 @@ class Variables$Mutation$updateStreet {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$updateStreet<Variables$Mutation$updateStreet>
-      get copyWith => CopyWith$Variables$Mutation$updateStreet(
+  CopyWith_Variables_Mutation_updateStreet<Variables_Mutation_updateStreet>
+      get copyWith => CopyWith_Variables_Mutation_updateStreet(
             this,
             (i) => i,
           );
@@ -624,7 +624,7 @@ class Variables$Mutation$updateStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$updateStreet) ||
+    if (!(other is Variables_Mutation_updateStreet) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -652,31 +652,31 @@ class Variables$Mutation$updateStreet {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$updateStreet<TRes> {
-  factory CopyWith$Variables$Mutation$updateStreet(
-    Variables$Mutation$updateStreet instance,
-    TRes Function(Variables$Mutation$updateStreet) then,
-  ) = _CopyWithImpl$Variables$Mutation$updateStreet;
+abstract class CopyWith_Variables_Mutation_updateStreet<TRes> {
+  factory CopyWith_Variables_Mutation_updateStreet(
+    Variables_Mutation_updateStreet instance,
+    TRes Function(Variables_Mutation_updateStreet) then,
+  ) = _CopyWithImpl_Variables_Mutation_updateStreet;
 
-  factory CopyWith$Variables$Mutation$updateStreet.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$updateStreet;
+  factory CopyWith_Variables_Mutation_updateStreet.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updateStreet;
 
   TRes call({
     UuidValue? streetId,
-    Input$StreetsSetInput? newStreet,
+    Input_StreetsSetInput? newStreet,
   });
 }
 
-class _CopyWithImpl$Variables$Mutation$updateStreet<TRes>
-    implements CopyWith$Variables$Mutation$updateStreet<TRes> {
-  _CopyWithImpl$Variables$Mutation$updateStreet(
+class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
+    implements CopyWith_Variables_Mutation_updateStreet<TRes> {
+  _CopyWithImpl_Variables_Mutation_updateStreet(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$updateStreet _instance;
+  final Variables_Mutation_updateStreet _instance;
 
-  final TRes Function(Variables$Mutation$updateStreet) _then;
+  final TRes Function(Variables_Mutation_updateStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -684,47 +684,47 @@ class _CopyWithImpl$Variables$Mutation$updateStreet<TRes>
     Object? streetId = _undefined,
     Object? newStreet = _undefined,
   }) =>
-      _then(Variables$Mutation$updateStreet._({
+      _then(Variables_Mutation_updateStreet._({
         ..._instance._$data,
         if (streetId != _undefined && streetId != null)
           'streetId': (streetId as UuidValue),
         if (newStreet != _undefined && newStreet != null)
-          'newStreet': (newStreet as Input$StreetsSetInput),
+          'newStreet': (newStreet as Input_StreetsSetInput),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$updateStreet<TRes>
-    implements CopyWith$Variables$Mutation$updateStreet<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$updateStreet(this._res);
+class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
+    implements CopyWith_Variables_Mutation_updateStreet<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updateStreet(this._res);
 
   TRes _res;
 
   call({
     UuidValue? streetId,
-    Input$StreetsSetInput? newStreet,
+    Input_StreetsSetInput? newStreet,
   }) =>
       _res;
 }
 
-class Mutation$updateStreet {
-  Mutation$updateStreet({
+class Mutation_updateStreet {
+  Mutation_updateStreet({
     this.updateStreetsByPk,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation$updateStreet.fromJson(Map<String, dynamic> json) {
+  factory Mutation_updateStreet.fromJson(Map<String, dynamic> json) {
     final l$updateStreetsByPk = json['updateStreetsByPk'];
     final l$$__typename = json['__typename'];
-    return Mutation$updateStreet(
+    return Mutation_updateStreet(
       updateStreetsByPk: l$updateStreetsByPk == null
           ? null
-          : Fragment$Street.fromJson(
+          : Fragment_Street.fromJson(
               (l$updateStreetsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$Street? updateStreetsByPk;
+  final Fragment_Street? updateStreetsByPk;
 
   final String $__typename;
 
@@ -752,7 +752,7 @@ class Mutation$updateStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$updateStreet) || runtimeType != other.runtimeType) {
+    if (!(other is Mutation_updateStreet) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateStreetsByPk = updateStreetsByPk;
@@ -769,40 +769,40 @@ class Mutation$updateStreet {
   }
 }
 
-extension UtilityExtension$Mutation$updateStreet on Mutation$updateStreet {
-  CopyWith$Mutation$updateStreet<Mutation$updateStreet> get copyWith =>
-      CopyWith$Mutation$updateStreet(
+extension UtilityExtension_Mutation_updateStreet on Mutation_updateStreet {
+  CopyWith_Mutation_updateStreet<Mutation_updateStreet> get copyWith =>
+      CopyWith_Mutation_updateStreet(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Mutation$updateStreet<TRes> {
-  factory CopyWith$Mutation$updateStreet(
-    Mutation$updateStreet instance,
-    TRes Function(Mutation$updateStreet) then,
-  ) = _CopyWithImpl$Mutation$updateStreet;
+abstract class CopyWith_Mutation_updateStreet<TRes> {
+  factory CopyWith_Mutation_updateStreet(
+    Mutation_updateStreet instance,
+    TRes Function(Mutation_updateStreet) then,
+  ) = _CopyWithImpl_Mutation_updateStreet;
 
-  factory CopyWith$Mutation$updateStreet.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$updateStreet;
+  factory CopyWith_Mutation_updateStreet.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateStreet;
 
   TRes call({
-    Fragment$Street? updateStreetsByPk,
+    Fragment_Street? updateStreetsByPk,
     String? $__typename,
   });
-  CopyWith$Fragment$Street<TRes> get updateStreetsByPk;
+  CopyWith_Fragment_Street<TRes> get updateStreetsByPk;
 }
 
-class _CopyWithImpl$Mutation$updateStreet<TRes>
-    implements CopyWith$Mutation$updateStreet<TRes> {
-  _CopyWithImpl$Mutation$updateStreet(
+class _CopyWithImpl_Mutation_updateStreet<TRes>
+    implements CopyWith_Mutation_updateStreet<TRes> {
+  _CopyWithImpl_Mutation_updateStreet(
     this._instance,
     this._then,
   );
 
-  final Mutation$updateStreet _instance;
+  final Mutation_updateStreet _instance;
 
-  final TRes Function(Mutation$updateStreet) _then;
+  final TRes Function(Mutation_updateStreet) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -810,36 +810,36 @@ class _CopyWithImpl$Mutation$updateStreet<TRes>
     Object? updateStreetsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$updateStreet(
+      _then(Mutation_updateStreet(
         updateStreetsByPk: updateStreetsByPk == _undefined
             ? _instance.updateStreetsByPk
-            : (updateStreetsByPk as Fragment$Street?),
+            : (updateStreetsByPk as Fragment_Street?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Street<TRes> get updateStreetsByPk {
+  CopyWith_Fragment_Street<TRes> get updateStreetsByPk {
     final local$updateStreetsByPk = _instance.updateStreetsByPk;
     return local$updateStreetsByPk == null
-        ? CopyWith$Fragment$Street.stub(_then(_instance))
-        : CopyWith$Fragment$Street(
+        ? CopyWith_Fragment_Street.stub(_then(_instance))
+        : CopyWith_Fragment_Street(
             local$updateStreetsByPk, (e) => call(updateStreetsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Mutation$updateStreet<TRes>
-    implements CopyWith$Mutation$updateStreet<TRes> {
-  _CopyWithStubImpl$Mutation$updateStreet(this._res);
+class _CopyWithStubImpl_Mutation_updateStreet<TRes>
+    implements CopyWith_Mutation_updateStreet<TRes> {
+  _CopyWithStubImpl_Mutation_updateStreet(this._res);
 
   TRes _res;
 
   call({
-    Fragment$Street? updateStreetsByPk,
+    Fragment_Street? updateStreetsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Street<TRes> get updateStreetsByPk =>
-      CopyWith$Fragment$Street.stub(_res);
+  CopyWith_Fragment_Street<TRes> get updateStreetsByPk =>
+      CopyWith_Fragment_Street.stub(_res);
 }
 
 const documentNodeMutationupdateStreet = DocumentNode(definitions: [

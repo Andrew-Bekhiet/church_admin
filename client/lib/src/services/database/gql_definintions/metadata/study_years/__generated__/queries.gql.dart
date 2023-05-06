@@ -1,18 +1,18 @@
 import 'package:gql/ast.dart';
 
-class Variables$Query$getStudyYearName {
-  factory Variables$Query$getStudyYearName({required int order}) =>
-      Variables$Query$getStudyYearName._({
+class Variables_Query_getStudyYearName {
+  factory Variables_Query_getStudyYearName({required int order}) =>
+      Variables_Query_getStudyYearName._({
         r'order': order,
       });
 
-  Variables$Query$getStudyYearName._(this._$data);
+  Variables_Query_getStudyYearName._(this._$data);
 
-  factory Variables$Query$getStudyYearName.fromJson(Map<String, dynamic> data) {
+  factory Variables_Query_getStudyYearName.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$order = data['order'];
     result$data['order'] = (l$order as int);
-    return Variables$Query$getStudyYearName._(result$data);
+    return Variables_Query_getStudyYearName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -25,8 +25,8 @@ class Variables$Query$getStudyYearName {
     return result$data;
   }
 
-  CopyWith$Variables$Query$getStudyYearName<Variables$Query$getStudyYearName>
-      get copyWith => CopyWith$Variables$Query$getStudyYearName(
+  CopyWith_Variables_Query_getStudyYearName<Variables_Query_getStudyYearName>
+      get copyWith => CopyWith_Variables_Query_getStudyYearName(
             this,
             (i) => i,
           );
@@ -35,7 +35,7 @@ class Variables$Query$getStudyYearName {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$getStudyYearName) ||
+    if (!(other is Variables_Query_getStudyYearName) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -54,66 +54,66 @@ class Variables$Query$getStudyYearName {
   }
 }
 
-abstract class CopyWith$Variables$Query$getStudyYearName<TRes> {
-  factory CopyWith$Variables$Query$getStudyYearName(
-    Variables$Query$getStudyYearName instance,
-    TRes Function(Variables$Query$getStudyYearName) then,
-  ) = _CopyWithImpl$Variables$Query$getStudyYearName;
+abstract class CopyWith_Variables_Query_getStudyYearName<TRes> {
+  factory CopyWith_Variables_Query_getStudyYearName(
+    Variables_Query_getStudyYearName instance,
+    TRes Function(Variables_Query_getStudyYearName) then,
+  ) = _CopyWithImpl_Variables_Query_getStudyYearName;
 
-  factory CopyWith$Variables$Query$getStudyYearName.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$getStudyYearName;
+  factory CopyWith_Variables_Query_getStudyYearName.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_getStudyYearName;
 
   TRes call({int? order});
 }
 
-class _CopyWithImpl$Variables$Query$getStudyYearName<TRes>
-    implements CopyWith$Variables$Query$getStudyYearName<TRes> {
-  _CopyWithImpl$Variables$Query$getStudyYearName(
+class _CopyWithImpl_Variables_Query_getStudyYearName<TRes>
+    implements CopyWith_Variables_Query_getStudyYearName<TRes> {
+  _CopyWithImpl_Variables_Query_getStudyYearName(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$getStudyYearName _instance;
+  final Variables_Query_getStudyYearName _instance;
 
-  final TRes Function(Variables$Query$getStudyYearName) _then;
+  final TRes Function(Variables_Query_getStudyYearName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined}) =>
-      _then(Variables$Query$getStudyYearName._({
+      _then(Variables_Query_getStudyYearName._({
         ..._instance._$data,
         if (order != _undefined && order != null) 'order': (order as int),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$getStudyYearName<TRes>
-    implements CopyWith$Variables$Query$getStudyYearName<TRes> {
-  _CopyWithStubImpl$Variables$Query$getStudyYearName(this._res);
+class _CopyWithStubImpl_Variables_Query_getStudyYearName<TRes>
+    implements CopyWith_Variables_Query_getStudyYearName<TRes> {
+  _CopyWithStubImpl_Variables_Query_getStudyYearName(this._res);
 
   TRes _res;
 
   call({int? order}) => _res;
 }
 
-class Query$getStudyYearName {
-  Query$getStudyYearName({
+class Query_getStudyYearName {
+  Query_getStudyYearName({
     this.studyYearsByPk,
     this.$__typename = 'query_root',
   });
 
-  factory Query$getStudyYearName.fromJson(Map<String, dynamic> json) {
+  factory Query_getStudyYearName.fromJson(Map<String, dynamic> json) {
     final l$studyYearsByPk = json['studyYearsByPk'];
     final l$$__typename = json['__typename'];
-    return Query$getStudyYearName(
+    return Query_getStudyYearName(
       studyYearsByPk: l$studyYearsByPk == null
           ? null
-          : Query$getStudyYearName$studyYearsByPk.fromJson(
+          : Query_getStudyYearName_studyYearsByPk.fromJson(
               (l$studyYearsByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$getStudyYearName$studyYearsByPk? studyYearsByPk;
+  final Query_getStudyYearName_studyYearsByPk? studyYearsByPk;
 
   final String $__typename;
 
@@ -141,7 +141,7 @@ class Query$getStudyYearName {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$getStudyYearName) ||
+    if (!(other is Query_getStudyYearName) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159,40 +159,40 @@ class Query$getStudyYearName {
   }
 }
 
-extension UtilityExtension$Query$getStudyYearName on Query$getStudyYearName {
-  CopyWith$Query$getStudyYearName<Query$getStudyYearName> get copyWith =>
-      CopyWith$Query$getStudyYearName(
+extension UtilityExtension_Query_getStudyYearName on Query_getStudyYearName {
+  CopyWith_Query_getStudyYearName<Query_getStudyYearName> get copyWith =>
+      CopyWith_Query_getStudyYearName(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$getStudyYearName<TRes> {
-  factory CopyWith$Query$getStudyYearName(
-    Query$getStudyYearName instance,
-    TRes Function(Query$getStudyYearName) then,
-  ) = _CopyWithImpl$Query$getStudyYearName;
+abstract class CopyWith_Query_getStudyYearName<TRes> {
+  factory CopyWith_Query_getStudyYearName(
+    Query_getStudyYearName instance,
+    TRes Function(Query_getStudyYearName) then,
+  ) = _CopyWithImpl_Query_getStudyYearName;
 
-  factory CopyWith$Query$getStudyYearName.stub(TRes res) =
-      _CopyWithStubImpl$Query$getStudyYearName;
+  factory CopyWith_Query_getStudyYearName.stub(TRes res) =
+      _CopyWithStubImpl_Query_getStudyYearName;
 
   TRes call({
-    Query$getStudyYearName$studyYearsByPk? studyYearsByPk,
+    Query_getStudyYearName_studyYearsByPk? studyYearsByPk,
     String? $__typename,
   });
-  CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> get studyYearsByPk;
+  CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> get studyYearsByPk;
 }
 
-class _CopyWithImpl$Query$getStudyYearName<TRes>
-    implements CopyWith$Query$getStudyYearName<TRes> {
-  _CopyWithImpl$Query$getStudyYearName(
+class _CopyWithImpl_Query_getStudyYearName<TRes>
+    implements CopyWith_Query_getStudyYearName<TRes> {
+  _CopyWithImpl_Query_getStudyYearName(
     this._instance,
     this._then,
   );
 
-  final Query$getStudyYearName _instance;
+  final Query_getStudyYearName _instance;
 
-  final TRes Function(Query$getStudyYearName) _then;
+  final TRes Function(Query_getStudyYearName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -200,36 +200,36 @@ class _CopyWithImpl$Query$getStudyYearName<TRes>
     Object? studyYearsByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$getStudyYearName(
+      _then(Query_getStudyYearName(
         studyYearsByPk: studyYearsByPk == _undefined
             ? _instance.studyYearsByPk
-            : (studyYearsByPk as Query$getStudyYearName$studyYearsByPk?),
+            : (studyYearsByPk as Query_getStudyYearName_studyYearsByPk?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> get studyYearsByPk {
+  CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> get studyYearsByPk {
     final local$studyYearsByPk = _instance.studyYearsByPk;
     return local$studyYearsByPk == null
-        ? CopyWith$Query$getStudyYearName$studyYearsByPk.stub(_then(_instance))
-        : CopyWith$Query$getStudyYearName$studyYearsByPk(
+        ? CopyWith_Query_getStudyYearName_studyYearsByPk.stub(_then(_instance))
+        : CopyWith_Query_getStudyYearName_studyYearsByPk(
             local$studyYearsByPk, (e) => call(studyYearsByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Query$getStudyYearName<TRes>
-    implements CopyWith$Query$getStudyYearName<TRes> {
-  _CopyWithStubImpl$Query$getStudyYearName(this._res);
+class _CopyWithStubImpl_Query_getStudyYearName<TRes>
+    implements CopyWith_Query_getStudyYearName<TRes> {
+  _CopyWithStubImpl_Query_getStudyYearName(this._res);
 
   TRes _res;
 
   call({
-    Query$getStudyYearName$studyYearsByPk? studyYearsByPk,
+    Query_getStudyYearName_studyYearsByPk? studyYearsByPk,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> get studyYearsByPk =>
-      CopyWith$Query$getStudyYearName$studyYearsByPk.stub(_res);
+  CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> get studyYearsByPk =>
+      CopyWith_Query_getStudyYearName_studyYearsByPk.stub(_res);
 }
 
 const documentNodeQuerygetStudyYearName = DocumentNode(definitions: [
@@ -294,19 +294,19 @@ const documentNodeQuerygetStudyYearName = DocumentNode(definitions: [
   ),
 ]);
 
-class Query$getStudyYearName$studyYearsByPk {
-  Query$getStudyYearName$studyYearsByPk({
+class Query_getStudyYearName_studyYearsByPk {
+  Query_getStudyYearName_studyYearsByPk({
     required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
 
-  factory Query$getStudyYearName$studyYearsByPk.fromJson(
+  factory Query_getStudyYearName_studyYearsByPk.fromJson(
       Map<String, dynamic> json) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$getStudyYearName$studyYearsByPk(
+    return Query_getStudyYearName_studyYearsByPk(
       order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -347,7 +347,7 @@ class Query$getStudyYearName$studyYearsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$getStudyYearName$studyYearsByPk) ||
+    if (!(other is Query_getStudyYearName_studyYearsByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -370,24 +370,24 @@ class Query$getStudyYearName$studyYearsByPk {
   }
 }
 
-extension UtilityExtension$Query$getStudyYearName$studyYearsByPk
-    on Query$getStudyYearName$studyYearsByPk {
-  CopyWith$Query$getStudyYearName$studyYearsByPk<
-          Query$getStudyYearName$studyYearsByPk>
-      get copyWith => CopyWith$Query$getStudyYearName$studyYearsByPk(
+extension UtilityExtension_Query_getStudyYearName_studyYearsByPk
+    on Query_getStudyYearName_studyYearsByPk {
+  CopyWith_Query_getStudyYearName_studyYearsByPk<
+          Query_getStudyYearName_studyYearsByPk>
+      get copyWith => CopyWith_Query_getStudyYearName_studyYearsByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> {
-  factory CopyWith$Query$getStudyYearName$studyYearsByPk(
-    Query$getStudyYearName$studyYearsByPk instance,
-    TRes Function(Query$getStudyYearName$studyYearsByPk) then,
-  ) = _CopyWithImpl$Query$getStudyYearName$studyYearsByPk;
+abstract class CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> {
+  factory CopyWith_Query_getStudyYearName_studyYearsByPk(
+    Query_getStudyYearName_studyYearsByPk instance,
+    TRes Function(Query_getStudyYearName_studyYearsByPk) then,
+  ) = _CopyWithImpl_Query_getStudyYearName_studyYearsByPk;
 
-  factory CopyWith$Query$getStudyYearName$studyYearsByPk.stub(TRes res) =
-      _CopyWithStubImpl$Query$getStudyYearName$studyYearsByPk;
+  factory CopyWith_Query_getStudyYearName_studyYearsByPk.stub(TRes res) =
+      _CopyWithStubImpl_Query_getStudyYearName_studyYearsByPk;
 
   TRes call({
     int? order,
@@ -396,16 +396,16 @@ abstract class CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$getStudyYearName$studyYearsByPk<TRes>
-    implements CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> {
-  _CopyWithImpl$Query$getStudyYearName$studyYearsByPk(
+class _CopyWithImpl_Query_getStudyYearName_studyYearsByPk<TRes>
+    implements CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> {
+  _CopyWithImpl_Query_getStudyYearName_studyYearsByPk(
     this._instance,
     this._then,
   );
 
-  final Query$getStudyYearName$studyYearsByPk _instance;
+  final Query_getStudyYearName_studyYearsByPk _instance;
 
-  final TRes Function(Query$getStudyYearName$studyYearsByPk) _then;
+  final TRes Function(Query_getStudyYearName_studyYearsByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -414,7 +414,7 @@ class _CopyWithImpl$Query$getStudyYearName$studyYearsByPk<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$getStudyYearName$studyYearsByPk(
+      _then(Query_getStudyYearName_studyYearsByPk(
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -427,9 +427,9 @@ class _CopyWithImpl$Query$getStudyYearName$studyYearsByPk<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$getStudyYearName$studyYearsByPk<TRes>
-    implements CopyWith$Query$getStudyYearName$studyYearsByPk<TRes> {
-  _CopyWithStubImpl$Query$getStudyYearName$studyYearsByPk(this._res);
+class _CopyWithStubImpl_Query_getStudyYearName_studyYearsByPk<TRes>
+    implements CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> {
+  _CopyWithStubImpl_Query_getStudyYearName_studyYearsByPk(this._res);
 
   TRes _res;
 

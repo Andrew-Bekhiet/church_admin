@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
@@ -10,7 +9,7 @@ import 'persons/__generated__/queries.gql.dart';
 import 'persons/__generated__/subscriptions.gql.dart';
 import 'persons/helpers.dart';
 
-class PersonsDAO extends DAOBase {
+class PersonsDAO extends DAOBase<Person> {
   PersonsDAO({
     required super.db,
   });
@@ -54,7 +53,7 @@ class PersonsDAO extends DAOBase {
   }) {
     final mutationOptions = MutationOptions(
       document: documentNodeMutationdeletePerson,
-      variables: Variables$Mutation$deletePerson(
+      variables: Variables_Mutation_deletePerson(
         personId: personId.toUuid(),
       ).toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
@@ -63,8 +62,8 @@ class PersonsDAO extends DAOBase {
     return graphQLClient.mutateAndReturnParsed(mutationOptions);
   }
 
-  Stream<Person?> watchPerson({
-    required String personId,
+  Stream<Person?> streamSingleById({
+    required String id,
     int? servicesLimit = 6,
     int? classesLimit = 6,
     int? groupsLimit = 6,
@@ -73,8 +72,8 @@ class PersonsDAO extends DAOBase {
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchPerson,
         operationName: 'watchPerson',
-        variables: Variables$Subscription$watchPerson(
-          id: personId.toUuid(),
+        variables: Variables_Subscription_watchPerson(
+          id: id.toUuid(),
           servicesLimit: servicesLimit,
           classesLimit: classesLimit,
           groupsLimit: groupsLimit,
@@ -84,67 +83,27 @@ class PersonsDAO extends DAOBase {
     );
   }
 
-  GQLPaginatableStream<Person> paginatePersons({
+  @override
+  GQLPaginatableStream<Person> streamAll({
     Stream<String?>? searchQuery,
     String? secondLineFieldName,
-    String? byAreaId,
-    String? byStreetId,
-    String? byFamilyId,
-    String? byServiceId,
-    String? byClassId,
-    String? byGroupId,
+    List<Input_PersonsBoolExp>? where,
   }) {
     return GQLPaginatableStream<Person>(
       searchQuery: searchQuery,
       subscriptionStreamCallback: (event) {
         final defaultSearchVars = graphQLClient.getDefaultSearchVars(
           event,
-          Variables$Subscription$watchAllPersons.new,
-          Input$PersonsBoolExp.new,
+          Variables_Subscription_watchAllPersons.new,
+          Input_PersonsBoolExp.new,
         );
 
         final variables = defaultSearchVars.copyWith(
           where: [
-            if (byServiceId != null)
-              Input$PersonsBoolExp(
-                services: Input$PersonsServicesBoolExp(
-                  serviceId:
-                      Input$UuidComparisonExp($_eq: byServiceId.toUuid()),
-                ),
-              ),
-            if (byClassId != null)
-              Input$PersonsBoolExp(
-                classes: Input$ClassesBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byClassId.toUuid()),
-                ),
-              ),
-            if (byGroupId != null)
-              Input$PersonsBoolExp(
-                groups: Input$PersonsGroupsBoolExp(
-                  groupId: Input$UuidComparisonExp($_eq: byGroupId.toUuid()),
-                ),
-              ),
-            if (byAreaId != null)
-              Input$PersonsBoolExp(
-                areas: Input$AreasBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byAreaId.toUuid()),
-                ),
-              ),
-            if (byStreetId != null)
-              Input$PersonsBoolExp(
-                streets: Input$StreetsBoolExp(
-                  id: Input$UuidComparisonExp($_eq: byStreetId.toUuid()),
-                ),
-              ),
-            if (byFamilyId != null)
-              Input$PersonsBoolExp(
-                familyId: Input$UuidComparisonExp(
-                  $_eq: byFamilyId.toUuid(),
-                ),
-              ),
-            ...defaultSearchVars.where ?? [],
+            if (where != null) ...where,
+            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
           ],
-        );
+        ).toJson();
 
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -158,7 +117,7 @@ class PersonsDAO extends DAOBase {
                     },
                   ),
             operationName: 'watchAllPersons',
-            variables: variables.toJson(),
+            variables: variables,
             parserFn: db.parser.singleListParser(Person.fromJson),
           ),
         );
@@ -173,7 +132,7 @@ class PersonsDAO extends DAOBase {
       document: documentNodeQuerypersonServicesClassesGroups,
       operationName: 'personServicesClassesGroups',
       variables:
-          Variables$Query$personServicesClassesGroups(id: personId.toUuid())
+          Variables_Query_personServicesClassesGroups(id: personId.toUuid())
               .toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
     );
@@ -215,7 +174,7 @@ class PersonsDAO extends DAOBase {
     final queryOptions = QueryOptions(
       document: documentNodeQuerypersonsGeolocations,
       operationName: 'personsGeolocations',
-      variables: Variables$Query$personsGeolocations(
+      variables: Variables_Query_personsGeolocations(
         getAreas: getAreas,
         getStreets: getStreets,
         getFamilies: getFamilies,
@@ -227,36 +186,36 @@ class PersonsDAO extends DAOBase {
         streetsIds: streetsIds,
         personsConditions: [
           if (personId != null)
-            Input$PersonsBoolExp(
-              id: Input$UuidComparisonExp(
+            Input_PersonsBoolExp(
+              id: Input_UuidComparisonExp(
                 $_eq: personId.toUuid(),
               ),
             ),
           if (areasIds.isNotEmpty ||
               streetsIds.isNotEmpty ||
               familiesIds.isNotEmpty)
-            Input$PersonsBoolExp(
+            Input_PersonsBoolExp(
               $_or: [
                 if (areasIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    areas: Input$AreasBoolExp(
-                      id: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    areas: Input_AreasBoolExp(
+                      id: Input_UuidComparisonExp(
                         $_in: areasIds,
                       ),
                     ),
                   ),
                 if (streetsIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    streets: Input$StreetsBoolExp(
-                      id: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    streets: Input_StreetsBoolExp(
+                      id: Input_UuidComparisonExp(
                         $_in: streetsIds,
                       ),
                     ),
                   ),
                 if (familiesIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    family: Input$FamiliesBoolExp(
-                      id: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    family: Input_FamiliesBoolExp(
+                      id: Input_UuidComparisonExp(
                         $_in: familiesIds,
                       ),
                     ),
@@ -266,28 +225,28 @@ class PersonsDAO extends DAOBase {
           if (servicesIds.isNotEmpty ||
               classesIds.isNotEmpty ||
               groupsIds.isNotEmpty)
-            Input$PersonsBoolExp(
+            Input_PersonsBoolExp(
               $_or: [
                 if (servicesIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    services: Input$PersonsServicesBoolExp(
-                      serviceId: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    services: Input_PersonsServicesBoolExp(
+                      serviceId: Input_UuidComparisonExp(
                         $_in: servicesIds,
                       ),
                     ),
                   ),
                 if (classesIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    classes: Input$ClassesBoolExp(
-                      id: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    classes: Input_ClassesBoolExp(
+                      id: Input_UuidComparisonExp(
                         $_in: classesIds,
                       ),
                     ),
                   ),
                 if (groupsIds.isNotEmpty)
-                  Input$PersonsBoolExp(
-                    groups: Input$PersonsGroupsBoolExp(
-                      groupId: Input$UuidComparisonExp(
+                  Input_PersonsBoolExp(
+                    groups: Input_PersonsGroupsBoolExp(
+                      groupId: Input_UuidComparisonExp(
                         $_in: groupsIds,
                       ),
                     ),
@@ -306,25 +265,27 @@ class PersonsDAO extends DAOBase {
     required String personId,
     required String classId,
     bool asAdmin = false,
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables$Subscription$personAttendance(
+      vars: (offset, instance) => Variables_Subscription_personAttendance(
         limit: instance.limit + 1,
         where: [
-          Input$HistoryAttendanceHistoryBoolExp(
-            personId: Input$UuidComparisonExp($_eq: personId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            $class: Input$ClassesBoolExp(
-              id: Input$UuidComparisonExp($_eq: classId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            $class: Input_ClassesBoolExp(
+              id: Input_UuidComparisonExp($_eq: classId.toUuid()),
             ),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input$BooleanComparisonExp($_eq: asAdmin),
+          Input_HistoryAttendanceHistoryBoolExp(
+            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
+          if (where != null) ...where,
           if (offset > 0)
-            Input$HistoryAttendanceHistoryBoolExp(
-              time: Input$TimestampComparisonExp(
+            Input_HistoryAttendanceHistoryBoolExp(
+              time: Input_TimestampComparisonExp(
                 $_lt: instance
                     .currentValue[
                         (offset - 1) * instance.limit + instance.limit - 1]
@@ -340,23 +301,25 @@ class PersonsDAO extends DAOBase {
     required String personId,
     required String groupId,
     bool asAdmin = false,
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables$Subscription$personAttendance(
+      vars: (offset, instance) => Variables_Subscription_personAttendance(
         limit: instance.limit + 1,
         where: [
-          Input$HistoryAttendanceHistoryBoolExp(
-            personId: Input$UuidComparisonExp($_eq: personId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            groupId: Input$UuidComparisonExp($_eq: groupId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            groupId: Input_UuidComparisonExp($_eq: groupId.toUuid()),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input$BooleanComparisonExp($_eq: asAdmin),
+          Input_HistoryAttendanceHistoryBoolExp(
+            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
+          if (where != null) ...where,
           if (offset > 0)
-            Input$HistoryAttendanceHistoryBoolExp(
-              time: Input$TimestampComparisonExp(
+            Input_HistoryAttendanceHistoryBoolExp(
+              time: Input_TimestampComparisonExp(
                 $_lt: instance
                     .currentValue[
                         (offset - 1) * instance.limit + instance.limit - 1]
@@ -372,23 +335,25 @@ class PersonsDAO extends DAOBase {
     required String personId,
     required String serviceId,
     bool asAdmin = false,
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables$Subscription$personAttendance(
+      vars: (offset, instance) => Variables_Subscription_personAttendance(
         limit: instance.limit + 1,
         where: [
-          Input$HistoryAttendanceHistoryBoolExp(
-            personId: Input$UuidComparisonExp($_eq: personId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            serviceId: Input$UuidComparisonExp($_eq: serviceId.toUuid()),
+          Input_HistoryAttendanceHistoryBoolExp(
+            serviceId: Input_UuidComparisonExp($_eq: serviceId.toUuid()),
           ),
-          Input$HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input$BooleanComparisonExp($_eq: asAdmin),
+          Input_HistoryAttendanceHistoryBoolExp(
+            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
+          if (where != null) ...where,
           if (offset > 0)
-            Input$HistoryAttendanceHistoryBoolExp(
-              time: Input$TimestampComparisonExp(
+            Input_HistoryAttendanceHistoryBoolExp(
+              time: Input_TimestampComparisonExp(
                 $_lt: instance
                     .currentValue[
                         (offset - 1) * instance.limit + instance.limit - 1]
@@ -401,7 +366,7 @@ class PersonsDAO extends DAOBase {
   }
 
   GQLPaginatableStream<LastRecordedByInfo> paginatePersonAttendance({
-    required Variables$Subscription$personAttendance Function(
+    required Variables_Subscription_personAttendance Function(
       int,
       GQLPaginatableStream<LastRecordedByInfo>,
     )
@@ -431,7 +396,7 @@ class PersonsDAO extends DAOBase {
       errorPolicy: ErrorPolicy.all,
       document: documentNodeQuerypersonHistoryAnalysis,
       operationName: 'personHistoryAnalysis',
-      variables: Variables$Query$personHistoryAnalysis(
+      variables: Variables_Query_personHistoryAnalysis(
         personId: personId.toUuid(),
         dateFrom: options.dateRange.start,
         dateTo: options.dateRange.end,
@@ -461,7 +426,7 @@ class PersonsDAO extends DAOBase {
       MutationOptions(
         document: documentNodeMutationupdatePersonSpiritData,
         operationName: 'updatePersonSpiritData',
-        variables: Variables$Mutation$updatePersonSpiritData(
+        variables: Variables_Mutation_updatePersonSpiritData(
           personId: personId.toUuid(),
           lastKodas: lastKodas,
           lastConfession: lastConfession,

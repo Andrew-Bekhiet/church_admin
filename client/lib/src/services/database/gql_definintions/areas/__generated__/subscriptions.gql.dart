@@ -4,21 +4,21 @@ import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Variables$Subscription$watchAllAreas {
-  factory Variables$Subscription$watchAllAreas({
+class Variables_Subscription_watchAllAreas {
+  factory Variables_Subscription_watchAllAreas({
     int? limit,
-    List<Input$AreasOrderBy>? orderBy,
-    List<Input$AreasBoolExp>? where,
+    List<Input_AreasOrderBy>? orderBy,
+    List<Input_AreasBoolExp>? where,
   }) =>
-      Variables$Subscription$watchAllAreas._({
+      Variables_Subscription_watchAllAreas._({
         if (limit != null) r'limit': limit,
         if (orderBy != null) r'orderBy': orderBy,
         if (where != null) r'where': where,
       });
 
-  Variables$Subscription$watchAllAreas._(this._$data);
+  Variables_Subscription_watchAllAreas._(this._$data);
 
-  factory Variables$Subscription$watchAllAreas.fromJson(
+  factory Variables_Subscription_watchAllAreas.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('limit')) {
@@ -28,25 +28,25 @@ class Variables$Subscription$watchAllAreas {
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
-          ?.map((e) => Input$AreasOrderBy.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Input_AreasOrderBy.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input$AreasBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => Input_AreasBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
-    return Variables$Subscription$watchAllAreas._(result$data);
+    return Variables_Subscription_watchAllAreas._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
-  List<Input$AreasOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input$AreasOrderBy>?);
-  List<Input$AreasBoolExp>? get where =>
-      (_$data['where'] as List<Input$AreasBoolExp>?);
+  List<Input_AreasOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_AreasOrderBy>?);
+  List<Input_AreasBoolExp>? get where =>
+      (_$data['where'] as List<Input_AreasBoolExp>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -64,9 +64,9 @@ class Variables$Subscription$watchAllAreas {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchAllAreas<
-          Variables$Subscription$watchAllAreas>
-      get copyWith => CopyWith$Variables$Subscription$watchAllAreas(
+  CopyWith_Variables_Subscription_watchAllAreas<
+          Variables_Subscription_watchAllAreas>
+      get copyWith => CopyWith_Variables_Subscription_watchAllAreas(
             this,
             (i) => i,
           );
@@ -75,7 +75,7 @@ class Variables$Subscription$watchAllAreas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchAllAreas) ||
+    if (!(other is Variables_Subscription_watchAllAreas) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149,32 +149,32 @@ class Variables$Subscription$watchAllAreas {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchAllAreas<TRes> {
-  factory CopyWith$Variables$Subscription$watchAllAreas(
-    Variables$Subscription$watchAllAreas instance,
-    TRes Function(Variables$Subscription$watchAllAreas) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchAllAreas;
+abstract class CopyWith_Variables_Subscription_watchAllAreas<TRes> {
+  factory CopyWith_Variables_Subscription_watchAllAreas(
+    Variables_Subscription_watchAllAreas instance,
+    TRes Function(Variables_Subscription_watchAllAreas) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAllAreas;
 
-  factory CopyWith$Variables$Subscription$watchAllAreas.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchAllAreas;
+  factory CopyWith_Variables_Subscription_watchAllAreas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAllAreas;
 
   TRes call({
     int? limit,
-    List<Input$AreasOrderBy>? orderBy,
-    List<Input$AreasBoolExp>? where,
+    List<Input_AreasOrderBy>? orderBy,
+    List<Input_AreasBoolExp>? where,
   });
 }
 
-class _CopyWithImpl$Variables$Subscription$watchAllAreas<TRes>
-    implements CopyWith$Variables$Subscription$watchAllAreas<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchAllAreas(
+class _CopyWithImpl_Variables_Subscription_watchAllAreas<TRes>
+    implements CopyWith_Variables_Subscription_watchAllAreas<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAllAreas(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchAllAreas _instance;
+  final Variables_Subscription_watchAllAreas _instance;
 
-  final TRes Function(Variables$Subscription$watchAllAreas) _then;
+  final TRes Function(Variables_Subscription_watchAllAreas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -183,42 +183,42 @@ class _CopyWithImpl$Variables$Subscription$watchAllAreas<TRes>
     Object? orderBy = _undefined,
     Object? where = _undefined,
   }) =>
-      _then(Variables$Subscription$watchAllAreas._({
+      _then(Variables_Subscription_watchAllAreas._({
         ..._instance._$data,
         if (limit != _undefined) 'limit': (limit as int?),
         if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input$AreasOrderBy>?),
-        if (where != _undefined) 'where': (where as List<Input$AreasBoolExp>?),
+          'orderBy': (orderBy as List<Input_AreasOrderBy>?),
+        if (where != _undefined) 'where': (where as List<Input_AreasBoolExp>?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchAllAreas<TRes>
-    implements CopyWith$Variables$Subscription$watchAllAreas<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchAllAreas(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchAllAreas<TRes>
+    implements CopyWith_Variables_Subscription_watchAllAreas<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAllAreas(this._res);
 
   TRes _res;
 
   call({
     int? limit,
-    List<Input$AreasOrderBy>? orderBy,
-    List<Input$AreasBoolExp>? where,
+    List<Input_AreasOrderBy>? orderBy,
+    List<Input_AreasBoolExp>? where,
   }) =>
       _res;
 }
 
-class Subscription$watchAllAreas {
-  Subscription$watchAllAreas({required this.areas});
+class Subscription_watchAllAreas {
+  Subscription_watchAllAreas({required this.areas});
 
-  factory Subscription$watchAllAreas.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllAreas.fromJson(Map<String, dynamic> json) {
     final l$areas = json['areas'];
-    return Subscription$watchAllAreas(
+    return Subscription_watchAllAreas(
         areas: (l$areas as List<dynamic>)
-            .map((e) => Subscription$watchAllAreas$areas.fromJson(
+            .map((e) => Subscription_watchAllAreas_areas.fromJson(
                 (e as Map<String, dynamic>)))
             .toList());
   }
 
-  final List<Subscription$watchAllAreas$areas> areas;
+  final List<Subscription_watchAllAreas_areas> areas;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -238,7 +238,7 @@ class Subscription$watchAllAreas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllAreas) ||
+    if (!(other is Subscription_watchAllAreas) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -258,71 +258,71 @@ class Subscription$watchAllAreas {
   }
 }
 
-extension UtilityExtension$Subscription$watchAllAreas
-    on Subscription$watchAllAreas {
-  CopyWith$Subscription$watchAllAreas<Subscription$watchAllAreas>
-      get copyWith => CopyWith$Subscription$watchAllAreas(
+extension UtilityExtension_Subscription_watchAllAreas
+    on Subscription_watchAllAreas {
+  CopyWith_Subscription_watchAllAreas<Subscription_watchAllAreas>
+      get copyWith => CopyWith_Subscription_watchAllAreas(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllAreas<TRes> {
-  factory CopyWith$Subscription$watchAllAreas(
-    Subscription$watchAllAreas instance,
-    TRes Function(Subscription$watchAllAreas) then,
-  ) = _CopyWithImpl$Subscription$watchAllAreas;
+abstract class CopyWith_Subscription_watchAllAreas<TRes> {
+  factory CopyWith_Subscription_watchAllAreas(
+    Subscription_watchAllAreas instance,
+    TRes Function(Subscription_watchAllAreas) then,
+  ) = _CopyWithImpl_Subscription_watchAllAreas;
 
-  factory CopyWith$Subscription$watchAllAreas.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllAreas;
+  factory CopyWith_Subscription_watchAllAreas.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllAreas;
 
-  TRes call({List<Subscription$watchAllAreas$areas>? areas});
+  TRes call({List<Subscription_watchAllAreas_areas>? areas});
   TRes areas(
-      Iterable<Subscription$watchAllAreas$areas> Function(
+      Iterable<Subscription_watchAllAreas_areas> Function(
               Iterable<
-                  CopyWith$Subscription$watchAllAreas$areas<
-                      Subscription$watchAllAreas$areas>>)
+                  CopyWith_Subscription_watchAllAreas_areas<
+                      Subscription_watchAllAreas_areas>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchAllAreas<TRes>
-    implements CopyWith$Subscription$watchAllAreas<TRes> {
-  _CopyWithImpl$Subscription$watchAllAreas(
+class _CopyWithImpl_Subscription_watchAllAreas<TRes>
+    implements CopyWith_Subscription_watchAllAreas<TRes> {
+  _CopyWithImpl_Subscription_watchAllAreas(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllAreas _instance;
+  final Subscription_watchAllAreas _instance;
 
-  final TRes Function(Subscription$watchAllAreas) _then;
+  final TRes Function(Subscription_watchAllAreas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? areas = _undefined}) => _then(Subscription$watchAllAreas(
+  TRes call({Object? areas = _undefined}) => _then(Subscription_watchAllAreas(
       areas: areas == _undefined || areas == null
           ? _instance.areas
-          : (areas as List<Subscription$watchAllAreas$areas>)));
+          : (areas as List<Subscription_watchAllAreas_areas>)));
   TRes areas(
-          Iterable<Subscription$watchAllAreas$areas> Function(
+          Iterable<Subscription_watchAllAreas_areas> Function(
                   Iterable<
-                      CopyWith$Subscription$watchAllAreas$areas<
-                          Subscription$watchAllAreas$areas>>)
+                      CopyWith_Subscription_watchAllAreas_areas<
+                          Subscription_watchAllAreas_areas>>)
               _fn) =>
       call(
           areas: _fn(_instance.areas
-              .map((e) => CopyWith$Subscription$watchAllAreas$areas(
+              .map((e) => CopyWith_Subscription_watchAllAreas_areas(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchAllAreas<TRes>
-    implements CopyWith$Subscription$watchAllAreas<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllAreas(this._res);
+class _CopyWithStubImpl_Subscription_watchAllAreas<TRes>
+    implements CopyWith_Subscription_watchAllAreas<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllAreas(this._res);
 
   TRes _res;
 
-  call({List<Subscription$watchAllAreas$areas>? areas}) => _res;
+  call({List<Subscription_watchAllAreas_areas>? areas}) => _res;
   areas(_fn) => _res;
 }
 
@@ -423,9 +423,9 @@ const documentNodeSubscriptionwatchAllAreas = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
 ]);
 
-class Subscription$watchAllAreas$areas
-    implements Fragment$Area, Fragment$AreaNoPhoto {
-  Subscription$watchAllAreas$areas({
+class Subscription_watchAllAreas_areas
+    implements Fragment_Area, Fragment_AreaNoPhoto {
+  Subscription_watchAllAreas_areas({
     required this.id,
     required this.name,
     this.color,
@@ -434,14 +434,14 @@ class Subscription$watchAllAreas$areas
     this.bounds,
   });
 
-  factory Subscription$watchAllAreas$areas.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchAllAreas_areas.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$bounds = json['bounds'];
-    return Subscription$watchAllAreas$areas(
+    return Subscription_watchAllAreas_areas(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -505,7 +505,7 @@ class Subscription$watchAllAreas$areas
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchAllAreas$areas) ||
+    if (!(other is Subscription_watchAllAreas_areas) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -543,23 +543,23 @@ class Subscription$watchAllAreas$areas
   }
 }
 
-extension UtilityExtension$Subscription$watchAllAreas$areas
-    on Subscription$watchAllAreas$areas {
-  CopyWith$Subscription$watchAllAreas$areas<Subscription$watchAllAreas$areas>
-      get copyWith => CopyWith$Subscription$watchAllAreas$areas(
+extension UtilityExtension_Subscription_watchAllAreas_areas
+    on Subscription_watchAllAreas_areas {
+  CopyWith_Subscription_watchAllAreas_areas<Subscription_watchAllAreas_areas>
+      get copyWith => CopyWith_Subscription_watchAllAreas_areas(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchAllAreas$areas<TRes> {
-  factory CopyWith$Subscription$watchAllAreas$areas(
-    Subscription$watchAllAreas$areas instance,
-    TRes Function(Subscription$watchAllAreas$areas) then,
-  ) = _CopyWithImpl$Subscription$watchAllAreas$areas;
+abstract class CopyWith_Subscription_watchAllAreas_areas<TRes> {
+  factory CopyWith_Subscription_watchAllAreas_areas(
+    Subscription_watchAllAreas_areas instance,
+    TRes Function(Subscription_watchAllAreas_areas) then,
+  ) = _CopyWithImpl_Subscription_watchAllAreas_areas;
 
-  factory CopyWith$Subscription$watchAllAreas$areas.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchAllAreas$areas;
+  factory CopyWith_Subscription_watchAllAreas_areas.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllAreas_areas;
 
   TRes call({
     UuidValue? id,
@@ -571,16 +571,16 @@ abstract class CopyWith$Subscription$watchAllAreas$areas<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$watchAllAreas$areas<TRes>
-    implements CopyWith$Subscription$watchAllAreas$areas<TRes> {
-  _CopyWithImpl$Subscription$watchAllAreas$areas(
+class _CopyWithImpl_Subscription_watchAllAreas_areas<TRes>
+    implements CopyWith_Subscription_watchAllAreas_areas<TRes> {
+  _CopyWithImpl_Subscription_watchAllAreas_areas(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchAllAreas$areas _instance;
+  final Subscription_watchAllAreas_areas _instance;
 
-  final TRes Function(Subscription$watchAllAreas$areas) _then;
+  final TRes Function(Subscription_watchAllAreas_areas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -592,7 +592,7 @@ class _CopyWithImpl$Subscription$watchAllAreas$areas<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? bounds = _undefined,
   }) =>
-      _then(Subscription$watchAllAreas$areas(
+      _then(Subscription_watchAllAreas_areas(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -610,9 +610,9 @@ class _CopyWithImpl$Subscription$watchAllAreas$areas<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$watchAllAreas$areas<TRes>
-    implements CopyWith$Subscription$watchAllAreas$areas<TRes> {
-  _CopyWithStubImpl$Subscription$watchAllAreas$areas(this._res);
+class _CopyWithStubImpl_Subscription_watchAllAreas_areas<TRes>
+    implements CopyWith_Subscription_watchAllAreas_areas<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllAreas_areas(this._res);
 
   TRes _res;
 
@@ -627,19 +627,19 @@ class _CopyWithStubImpl$Subscription$watchAllAreas$areas<TRes>
       _res;
 }
 
-class Variables$Subscription$watchArea {
-  factory Variables$Subscription$watchArea({required UuidValue id}) =>
-      Variables$Subscription$watchArea._({
+class Variables_Subscription_watchArea {
+  factory Variables_Subscription_watchArea({required UuidValue id}) =>
+      Variables_Subscription_watchArea._({
         r'id': id,
       });
 
-  Variables$Subscription$watchArea._(this._$data);
+  Variables_Subscription_watchArea._(this._$data);
 
-  factory Variables$Subscription$watchArea.fromJson(Map<String, dynamic> data) {
+  factory Variables_Subscription_watchArea.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
-    return Variables$Subscription$watchArea._(result$data);
+    return Variables_Subscription_watchArea._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -652,8 +652,8 @@ class Variables$Subscription$watchArea {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$watchArea<Variables$Subscription$watchArea>
-      get copyWith => CopyWith$Variables$Subscription$watchArea(
+  CopyWith_Variables_Subscription_watchArea<Variables_Subscription_watchArea>
+      get copyWith => CopyWith_Variables_Subscription_watchArea(
             this,
             (i) => i,
           );
@@ -662,7 +662,7 @@ class Variables$Subscription$watchArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$watchArea) ||
+    if (!(other is Variables_Subscription_watchArea) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -681,60 +681,60 @@ class Variables$Subscription$watchArea {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$watchArea<TRes> {
-  factory CopyWith$Variables$Subscription$watchArea(
-    Variables$Subscription$watchArea instance,
-    TRes Function(Variables$Subscription$watchArea) then,
-  ) = _CopyWithImpl$Variables$Subscription$watchArea;
+abstract class CopyWith_Variables_Subscription_watchArea<TRes> {
+  factory CopyWith_Variables_Subscription_watchArea(
+    Variables_Subscription_watchArea instance,
+    TRes Function(Variables_Subscription_watchArea) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchArea;
 
-  factory CopyWith$Variables$Subscription$watchArea.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$watchArea;
+  factory CopyWith_Variables_Subscription_watchArea.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchArea;
 
   TRes call({UuidValue? id});
 }
 
-class _CopyWithImpl$Variables$Subscription$watchArea<TRes>
-    implements CopyWith$Variables$Subscription$watchArea<TRes> {
-  _CopyWithImpl$Variables$Subscription$watchArea(
+class _CopyWithImpl_Variables_Subscription_watchArea<TRes>
+    implements CopyWith_Variables_Subscription_watchArea<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchArea(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$watchArea _instance;
+  final Variables_Subscription_watchArea _instance;
 
-  final TRes Function(Variables$Subscription$watchArea) _then;
+  final TRes Function(Variables_Subscription_watchArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? id = _undefined}) =>
-      _then(Variables$Subscription$watchArea._({
+      _then(Variables_Subscription_watchArea._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as UuidValue),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$watchArea<TRes>
-    implements CopyWith$Variables$Subscription$watchArea<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$watchArea(this._res);
+class _CopyWithStubImpl_Variables_Subscription_watchArea<TRes>
+    implements CopyWith_Variables_Subscription_watchArea<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchArea(this._res);
 
   TRes _res;
 
   call({UuidValue? id}) => _res;
 }
 
-class Subscription$watchArea {
-  Subscription$watchArea({this.areasByPk});
+class Subscription_watchArea {
+  Subscription_watchArea({this.areasByPk});
 
-  factory Subscription$watchArea.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchArea.fromJson(Map<String, dynamic> json) {
     final l$areasByPk = json['areasByPk'];
-    return Subscription$watchArea(
+    return Subscription_watchArea(
         areasByPk: l$areasByPk == null
             ? null
-            : Subscription$watchArea$areasByPk.fromJson(
+            : Subscription_watchArea_areasByPk.fromJson(
                 (l$areasByPk as Map<String, dynamic>)));
   }
 
-  final Subscription$watchArea$areasByPk? areasByPk;
+  final Subscription_watchArea_areasByPk? areasByPk;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -754,7 +754,7 @@ class Subscription$watchArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchArea) ||
+    if (!(other is Subscription_watchArea) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -767,62 +767,62 @@ class Subscription$watchArea {
   }
 }
 
-extension UtilityExtension$Subscription$watchArea on Subscription$watchArea {
-  CopyWith$Subscription$watchArea<Subscription$watchArea> get copyWith =>
-      CopyWith$Subscription$watchArea(
+extension UtilityExtension_Subscription_watchArea on Subscription_watchArea {
+  CopyWith_Subscription_watchArea<Subscription_watchArea> get copyWith =>
+      CopyWith_Subscription_watchArea(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Subscription$watchArea<TRes> {
-  factory CopyWith$Subscription$watchArea(
-    Subscription$watchArea instance,
-    TRes Function(Subscription$watchArea) then,
-  ) = _CopyWithImpl$Subscription$watchArea;
+abstract class CopyWith_Subscription_watchArea<TRes> {
+  factory CopyWith_Subscription_watchArea(
+    Subscription_watchArea instance,
+    TRes Function(Subscription_watchArea) then,
+  ) = _CopyWithImpl_Subscription_watchArea;
 
-  factory CopyWith$Subscription$watchArea.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchArea;
+  factory CopyWith_Subscription_watchArea.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchArea;
 
-  TRes call({Subscription$watchArea$areasByPk? areasByPk});
-  CopyWith$Subscription$watchArea$areasByPk<TRes> get areasByPk;
+  TRes call({Subscription_watchArea_areasByPk? areasByPk});
+  CopyWith_Subscription_watchArea_areasByPk<TRes> get areasByPk;
 }
 
-class _CopyWithImpl$Subscription$watchArea<TRes>
-    implements CopyWith$Subscription$watchArea<TRes> {
-  _CopyWithImpl$Subscription$watchArea(
+class _CopyWithImpl_Subscription_watchArea<TRes>
+    implements CopyWith_Subscription_watchArea<TRes> {
+  _CopyWithImpl_Subscription_watchArea(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchArea _instance;
+  final Subscription_watchArea _instance;
 
-  final TRes Function(Subscription$watchArea) _then;
+  final TRes Function(Subscription_watchArea) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? areasByPk = _undefined}) => _then(Subscription$watchArea(
+  TRes call({Object? areasByPk = _undefined}) => _then(Subscription_watchArea(
       areasByPk: areasByPk == _undefined
           ? _instance.areasByPk
-          : (areasByPk as Subscription$watchArea$areasByPk?)));
-  CopyWith$Subscription$watchArea$areasByPk<TRes> get areasByPk {
+          : (areasByPk as Subscription_watchArea_areasByPk?)));
+  CopyWith_Subscription_watchArea_areasByPk<TRes> get areasByPk {
     final local$areasByPk = _instance.areasByPk;
     return local$areasByPk == null
-        ? CopyWith$Subscription$watchArea$areasByPk.stub(_then(_instance))
-        : CopyWith$Subscription$watchArea$areasByPk(
+        ? CopyWith_Subscription_watchArea_areasByPk.stub(_then(_instance))
+        : CopyWith_Subscription_watchArea_areasByPk(
             local$areasByPk, (e) => call(areasByPk: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchArea<TRes>
-    implements CopyWith$Subscription$watchArea<TRes> {
-  _CopyWithStubImpl$Subscription$watchArea(this._res);
+class _CopyWithStubImpl_Subscription_watchArea<TRes>
+    implements CopyWith_Subscription_watchArea<TRes> {
+  _CopyWithStubImpl_Subscription_watchArea(this._res);
 
   TRes _res;
 
-  call({Subscription$watchArea$areasByPk? areasByPk}) => _res;
-  CopyWith$Subscription$watchArea$areasByPk<TRes> get areasByPk =>
-      CopyWith$Subscription$watchArea$areasByPk.stub(_res);
+  call({Subscription_watchArea_areasByPk? areasByPk}) => _res;
+  CopyWith_Subscription_watchArea_areasByPk<TRes> get areasByPk =>
+      CopyWith_Subscription_watchArea_areasByPk.stub(_res);
 }
 
 const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
@@ -927,9 +927,9 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
-class Subscription$watchArea$areasByPk
-    implements Fragment$Area, Fragment$AreaNoPhoto {
-  Subscription$watchArea$areasByPk({
+class Subscription_watchArea_areasByPk
+    implements Fragment_Area, Fragment_AreaNoPhoto {
+  Subscription_watchArea_areasByPk({
     required this.id,
     required this.name,
     this.color,
@@ -940,7 +940,7 @@ class Subscription$watchArea$areasByPk
     required this.adminUsers,
   });
 
-  factory Subscription$watchArea$areasByPk.fromJson(Map<String, dynamic> json) {
+  factory Subscription_watchArea_areasByPk.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -949,7 +949,7 @@ class Subscription$watchArea$areasByPk
     final l$bounds = json['bounds'];
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
-    return Subscription$watchArea$areasByPk(
+    return Subscription_watchArea_areasByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -959,7 +959,7 @@ class Subscription$watchArea$areasByPk
       bounds: (l$bounds as Map<String, dynamic>?),
       lastEdit: (l$lastEdit as Json?),
       adminUsers: (l$adminUsers as List<dynamic>)
-          .map((e) => Subscription$watchArea$areasByPk$adminUsers.fromJson(
+          .map((e) => Subscription_watchArea_areasByPk_adminUsers.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
     );
@@ -979,7 +979,7 @@ class Subscription$watchArea$areasByPk
 
   final Json? lastEdit;
 
-  final List<Subscription$watchArea$areasByPk$adminUsers> adminUsers;
+  final List<Subscription_watchArea_areasByPk_adminUsers> adminUsers;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1030,7 +1030,7 @@ class Subscription$watchArea$areasByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchArea$areasByPk) ||
+    if (!(other is Subscription_watchArea_areasByPk) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1085,23 +1085,23 @@ class Subscription$watchArea$areasByPk
   }
 }
 
-extension UtilityExtension$Subscription$watchArea$areasByPk
-    on Subscription$watchArea$areasByPk {
-  CopyWith$Subscription$watchArea$areasByPk<Subscription$watchArea$areasByPk>
-      get copyWith => CopyWith$Subscription$watchArea$areasByPk(
+extension UtilityExtension_Subscription_watchArea_areasByPk
+    on Subscription_watchArea_areasByPk {
+  CopyWith_Subscription_watchArea_areasByPk<Subscription_watchArea_areasByPk>
+      get copyWith => CopyWith_Subscription_watchArea_areasByPk(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchArea$areasByPk<TRes> {
-  factory CopyWith$Subscription$watchArea$areasByPk(
-    Subscription$watchArea$areasByPk instance,
-    TRes Function(Subscription$watchArea$areasByPk) then,
-  ) = _CopyWithImpl$Subscription$watchArea$areasByPk;
+abstract class CopyWith_Subscription_watchArea_areasByPk<TRes> {
+  factory CopyWith_Subscription_watchArea_areasByPk(
+    Subscription_watchArea_areasByPk instance,
+    TRes Function(Subscription_watchArea_areasByPk) then,
+  ) = _CopyWithImpl_Subscription_watchArea_areasByPk;
 
-  factory CopyWith$Subscription$watchArea$areasByPk.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchArea$areasByPk;
+  factory CopyWith_Subscription_watchArea_areasByPk.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchArea_areasByPk;
 
   TRes call({
     UuidValue? id,
@@ -1111,26 +1111,26 @@ abstract class CopyWith$Subscription$watchArea$areasByPk<TRes> {
     DateTime? photoUpdatedAt,
     Map<String, dynamic>? bounds,
     Json? lastEdit,
-    List<Subscription$watchArea$areasByPk$adminUsers>? adminUsers,
+    List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   });
   TRes adminUsers(
-      Iterable<Subscription$watchArea$areasByPk$adminUsers> Function(
+      Iterable<Subscription_watchArea_areasByPk_adminUsers> Function(
               Iterable<
-                  CopyWith$Subscription$watchArea$areasByPk$adminUsers<
-                      Subscription$watchArea$areasByPk$adminUsers>>)
+                  CopyWith_Subscription_watchArea_areasByPk_adminUsers<
+                      Subscription_watchArea_areasByPk_adminUsers>>)
           _fn);
 }
 
-class _CopyWithImpl$Subscription$watchArea$areasByPk<TRes>
-    implements CopyWith$Subscription$watchArea$areasByPk<TRes> {
-  _CopyWithImpl$Subscription$watchArea$areasByPk(
+class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
+    implements CopyWith_Subscription_watchArea_areasByPk<TRes> {
+  _CopyWithImpl_Subscription_watchArea_areasByPk(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchArea$areasByPk _instance;
+  final Subscription_watchArea_areasByPk _instance;
 
-  final TRes Function(Subscription$watchArea$areasByPk) _then;
+  final TRes Function(Subscription_watchArea_areasByPk) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1144,7 +1144,7 @@ class _CopyWithImpl$Subscription$watchArea$areasByPk<TRes>
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
   }) =>
-      _then(Subscription$watchArea$areasByPk(
+      _then(Subscription_watchArea_areasByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -1163,25 +1163,25 @@ class _CopyWithImpl$Subscription$watchArea$areasByPk<TRes>
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         adminUsers: adminUsers == _undefined || adminUsers == null
             ? _instance.adminUsers
-            : (adminUsers as List<Subscription$watchArea$areasByPk$adminUsers>),
+            : (adminUsers as List<Subscription_watchArea_areasByPk_adminUsers>),
       ));
   TRes adminUsers(
-          Iterable<Subscription$watchArea$areasByPk$adminUsers> Function(
+          Iterable<Subscription_watchArea_areasByPk_adminUsers> Function(
                   Iterable<
-                      CopyWith$Subscription$watchArea$areasByPk$adminUsers<
-                          Subscription$watchArea$areasByPk$adminUsers>>)
+                      CopyWith_Subscription_watchArea_areasByPk_adminUsers<
+                          Subscription_watchArea_areasByPk_adminUsers>>)
               _fn) =>
       call(
           adminUsers: _fn(_instance.adminUsers
-              .map((e) => CopyWith$Subscription$watchArea$areasByPk$adminUsers(
+              .map((e) => CopyWith_Subscription_watchArea_areasByPk_adminUsers(
                     e,
                     (i) => i,
                   ))).toList());
 }
 
-class _CopyWithStubImpl$Subscription$watchArea$areasByPk<TRes>
-    implements CopyWith$Subscription$watchArea$areasByPk<TRes> {
-  _CopyWithStubImpl$Subscription$watchArea$areasByPk(this._res);
+class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
+    implements CopyWith_Subscription_watchArea_areasByPk<TRes> {
+  _CopyWithStubImpl_Subscription_watchArea_areasByPk(this._res);
 
   TRes _res;
 
@@ -1193,29 +1193,29 @@ class _CopyWithStubImpl$Subscription$watchArea$areasByPk<TRes>
     DateTime? photoUpdatedAt,
     Map<String, dynamic>? bounds,
     Json? lastEdit,
-    List<Subscription$watchArea$areasByPk$adminUsers>? adminUsers,
+    List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   }) =>
       _res;
   adminUsers(_fn) => _res;
 }
 
-class Subscription$watchArea$areasByPk$adminUsers {
-  Subscription$watchArea$areasByPk$adminUsers({
+class Subscription_watchArea_areasByPk_adminUsers {
+  Subscription_watchArea_areasByPk_adminUsers({
     required this.user,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
-  factory Subscription$watchArea$areasByPk$adminUsers.fromJson(
+  factory Subscription_watchArea_areasByPk_adminUsers.fromJson(
       Map<String, dynamic> json) {
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
-    return Subscription$watchArea$areasByPk$adminUsers(
-      user: Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+    return Subscription_watchArea_areasByPk_adminUsers(
+      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment$User user;
+  final Fragment_User user;
 
   final String $__typename;
 
@@ -1243,7 +1243,7 @@ class Subscription$watchArea$areasByPk$adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$watchArea$areasByPk$adminUsers) ||
+    if (!(other is Subscription_watchArea_areasByPk_adminUsers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1261,42 +1261,42 @@ class Subscription$watchArea$areasByPk$adminUsers {
   }
 }
 
-extension UtilityExtension$Subscription$watchArea$areasByPk$adminUsers
-    on Subscription$watchArea$areasByPk$adminUsers {
-  CopyWith$Subscription$watchArea$areasByPk$adminUsers<
-          Subscription$watchArea$areasByPk$adminUsers>
-      get copyWith => CopyWith$Subscription$watchArea$areasByPk$adminUsers(
+extension UtilityExtension_Subscription_watchArea_areasByPk_adminUsers
+    on Subscription_watchArea_areasByPk_adminUsers {
+  CopyWith_Subscription_watchArea_areasByPk_adminUsers<
+          Subscription_watchArea_areasByPk_adminUsers>
+      get copyWith => CopyWith_Subscription_watchArea_areasByPk_adminUsers(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$watchArea$areasByPk$adminUsers<TRes> {
-  factory CopyWith$Subscription$watchArea$areasByPk$adminUsers(
-    Subscription$watchArea$areasByPk$adminUsers instance,
-    TRes Function(Subscription$watchArea$areasByPk$adminUsers) then,
-  ) = _CopyWithImpl$Subscription$watchArea$areasByPk$adminUsers;
+abstract class CopyWith_Subscription_watchArea_areasByPk_adminUsers<TRes> {
+  factory CopyWith_Subscription_watchArea_areasByPk_adminUsers(
+    Subscription_watchArea_areasByPk_adminUsers instance,
+    TRes Function(Subscription_watchArea_areasByPk_adminUsers) then,
+  ) = _CopyWithImpl_Subscription_watchArea_areasByPk_adminUsers;
 
-  factory CopyWith$Subscription$watchArea$areasByPk$adminUsers.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$watchArea$areasByPk$adminUsers;
+  factory CopyWith_Subscription_watchArea_areasByPk_adminUsers.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchArea_areasByPk_adminUsers;
 
   TRes call({
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
-class _CopyWithImpl$Subscription$watchArea$areasByPk$adminUsers<TRes>
-    implements CopyWith$Subscription$watchArea$areasByPk$adminUsers<TRes> {
-  _CopyWithImpl$Subscription$watchArea$areasByPk$adminUsers(
+class _CopyWithImpl_Subscription_watchArea_areasByPk_adminUsers<TRes>
+    implements CopyWith_Subscription_watchArea_areasByPk_adminUsers<TRes> {
+  _CopyWithImpl_Subscription_watchArea_areasByPk_adminUsers(
     this._instance,
     this._then,
   );
 
-  final Subscription$watchArea$areasByPk$adminUsers _instance;
+  final Subscription_watchArea_areasByPk_adminUsers _instance;
 
-  final TRes Function(Subscription$watchArea$areasByPk$adminUsers) _then;
+  final TRes Function(Subscription_watchArea_areasByPk_adminUsers) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1304,30 +1304,30 @@ class _CopyWithImpl$Subscription$watchArea$areasByPk$adminUsers<TRes>
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$watchArea$areasByPk$adminUsers(
+      _then(Subscription_watchArea_areasByPk_adminUsers(
         user: user == _undefined || user == null
             ? _instance.user
-            : (user as Fragment$User),
+            : (user as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
-    return CopyWith$Fragment$User(local$user, (e) => call(user: e));
+    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$watchArea$areasByPk$adminUsers<TRes>
-    implements CopyWith$Subscription$watchArea$areasByPk$adminUsers<TRes> {
-  _CopyWithStubImpl$Subscription$watchArea$areasByPk$adminUsers(this._res);
+class _CopyWithStubImpl_Subscription_watchArea_areasByPk_adminUsers<TRes>
+    implements CopyWith_Subscription_watchArea_areasByPk_adminUsers<TRes> {
+  _CopyWithStubImpl_Subscription_watchArea_areasByPk_adminUsers(this._res);
 
   TRes _res;
 
   call({
-    Fragment$User? user,
+    Fragment_User? user,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

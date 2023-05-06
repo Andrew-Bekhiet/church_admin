@@ -1665,39 +1665,50 @@ class MockUsersDAO extends _i1.Mock implements _i8.UsersDAO {
         ),
       ) as _i6.DBGraphQLClient);
   @override
-  _i6.GQLPaginatableStream<_i6.User> paginateUsers(
-          {_i9.Stream<String?>? searchQuery}) =>
+  _i6.GQLPaginatableStream<_i6.User> streamAll({
+    _i9.Stream<String?>? searchQuery,
+    List<_i6.Input_AuthUsersDataBoolExp>? where,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #paginateUsers,
+          #streamAll,
           [],
-          {#searchQuery: searchQuery},
+          {
+            #searchQuery: searchQuery,
+            #where: where,
+          },
         ),
         returnValue: _FakeGQLPaginatableStream_23<_i6.User>(
           this,
           Invocation.method(
-            #paginateUsers,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
         returnValueForMissingStub: _FakeGQLPaginatableStream_23<_i6.User>(
           this,
           Invocation.method(
-            #paginateUsers,
+            #streamAll,
             [],
-            {#searchQuery: searchQuery},
+            {
+              #searchQuery: searchQuery,
+              #where: where,
+            },
           ),
         ),
       ) as _i6.GQLPaginatableStream<_i6.User>);
   @override
-  _i9.Stream<_i6.User?> watchUser({
+  _i9.Stream<_i6.User?> streamSingleById({
     required String? uid,
     bool? fullData = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchUser,
+          #streamSingleById,
           [],
           {
             #uid: uid,

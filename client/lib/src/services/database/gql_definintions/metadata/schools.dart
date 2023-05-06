@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/__generated__/schema.graphql.dart';
 import 'package:graphql/client.dart';
 
 import 'schools/__generated__/subscriptions.gql.dart';
 
-class SchoolsDAO extends DAOBase {
+class SchoolsDAO extends DAOBase<School> {
   const SchoolsDAO({
     required super.db,
   });
 
-  GQLPaginatableStream<School> paginateSchools({
+  @override
+  GQLPaginatableStream<School> streamAll({
     Stream<String?>? searchQuery,
   }) {
     return GQLPaginatableStream<School>(
@@ -22,8 +22,8 @@ class SchoolsDAO extends DAOBase {
             variables: graphQLClient
                 .getDefaultSearchVars(
                   event,
-                  Variables$Subscription$watchAllSchools.new,
-                  Input$SchoolsBoolExp.new,
+                  Variables_Subscription_watchAllSchools.new,
+                  Input_SchoolsBoolExp.new,
                 )
                 .toJson(),
             parserFn: db.parser.singleListParser(School.fromJson),
