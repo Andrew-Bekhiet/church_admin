@@ -25,7 +25,7 @@ mixin _$UserData {
   PermissionsSet get permissions => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get firebaseAuthUid => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   String? get password => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
@@ -46,7 +46,7 @@ abstract class $UserDataCopyWith<$Res> {
           PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
-      @JsonKey(ignore: true)
+      @JsonKey(includeToJson: false, includeFromJson: false)
           String? password,
       LastRecordedByInfo? lastEdit});
 
@@ -127,7 +127,7 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
           PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
-      @JsonKey(ignore: true)
+      @JsonKey(includeToJson: false, includeFromJson: false)
           String? password,
       LastRecordedByInfo? lastEdit});
 
@@ -191,7 +191,7 @@ class _$_UserData implements _UserData {
           required this.permissions,
       required this.email,
       required this.firebaseAuthUid,
-      @JsonKey(ignore: true)
+      @JsonKey(includeToJson: false, includeFromJson: false)
           this.password,
       this.lastEdit});
 
@@ -208,7 +208,7 @@ class _$_UserData implements _UserData {
   @override
   final String? firebaseAuthUid;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final String? password;
   @override
   final LastRecordedByInfo? lastEdit;
@@ -261,7 +261,7 @@ abstract class _UserData implements UserData {
           required final PermissionsSet permissions,
       required final String email,
       required final String? firebaseAuthUid,
-      @JsonKey(ignore: true)
+      @JsonKey(includeToJson: false, includeFromJson: false)
           final String? password,
       final LastRecordedByInfo? lastEdit}) = _$_UserData;
 
@@ -277,7 +277,7 @@ abstract class _UserData implements UserData {
   @override
   String? get firebaseAuthUid;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   String? get password;
   @override
   LastRecordedByInfo? get lastEdit;

@@ -255,7 +255,11 @@ Override _setUpFirebaseAuth() {
   when(mockFirebaseAuth.userChanges())
       .thenAnswer((_) => stateController.stream);
 
-  return firebaseAuthProvider.overrideWithValue(mockFirebaseAuth);
+  return firebaseAuthProvider.overrideWith((ref) {
+    ref.onDispose(stateController.close);
+
+    return mockFirebaseAuth;
+  });
 }
 
 Override _setUpGoogleSignIn() {

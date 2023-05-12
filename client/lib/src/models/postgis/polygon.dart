@@ -19,8 +19,8 @@ class Polygon with EquatableMixin {
       'type': 'Polygon',
       'coordinates': [
         coordinates.map((p) => [p.longitude, p.latitude]).toList()
-          ..add([coordinates.first.longitude, coordinates.first.latitude])
-      ]
+          ..add([coordinates.first.longitude, coordinates.first.latitude]),
+      ],
     };
   }
 

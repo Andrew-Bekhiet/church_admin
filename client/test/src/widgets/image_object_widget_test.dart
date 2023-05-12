@@ -3,12 +3,12 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core_mocks/utils.dart';
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:photo_view/photo_view.dart';
@@ -17,7 +17,7 @@ import 'image_object_widget_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<ImageUrlCacheService>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<BaseCacheManager>(),
 ])
 void main() {
@@ -29,14 +29,13 @@ void main() {
     (tester) async {
       final unit = Person(id: 'id', name: 'name');
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: ImageObjectWidget(
-              unit,
-            ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: ImageObjectWidget(
+            unit,
           ),
         ),
+        wrapper: materialAppWrapper(),
       );
 
       await tester.pumpAndSettle();
@@ -54,14 +53,13 @@ void main() {
       final unit =
           Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: ImageObjectWidget(
-              unit,
-            ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: ImageObjectWidget(
+            unit,
           ),
         ),
+        wrapper: materialAppWrapper(),
       );
 
       expect(
@@ -110,14 +108,13 @@ void main() {
       final person =
           Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: ImageObjectWidget(
-              person,
-            ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: ImageObjectWidget(
+            person,
           ),
         ),
+        wrapper: materialAppWrapper(),
       );
 
       expect(
@@ -152,15 +149,14 @@ void main() {
       final person =
           Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: ImageObjectWidget(
-              person,
-              circleCrop: false,
-            ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: ImageObjectWidget(
+            person,
+            circleCrop: false,
           ),
         ),
+        wrapper: materialAppWrapper(),
       );
 
       expect(
@@ -195,14 +191,13 @@ void main() {
       final person =
           Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: ImageObjectWidget(
-              person,
-            ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: ImageObjectWidget(
+            person,
           ),
         ),
+        wrapper: materialAppWrapper(),
       );
 
       await tester.pump(const Duration(milliseconds: 120));
@@ -282,7 +277,7 @@ Override _setUpImageUrlCacheService() {
 }
 
 Override _setUpViewableObjectService() {
-  final viewableObjectService = MockCAViewableObjectService();
+  final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);

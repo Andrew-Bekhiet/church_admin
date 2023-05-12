@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -86,7 +85,7 @@ class DBGraphQLClient extends GraphQLClient {
   Future<T?> mutateAndReturnParsedNullable<T>(
     MutationOptions<T?> options, {
     bool? autoChangeFetchPolicy,
-  }) async {
+  }) {
     return mutate(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
         .then((r) => r.parsedData);
   }
@@ -94,7 +93,7 @@ class DBGraphQLClient extends GraphQLClient {
   Future<T> mutateAndReturnParsed<T>(
     MutationOptions<T> options, {
     bool? autoChangeFetchPolicy,
-  }) async {
+  }) {
     return mutate(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
         .then((r) => r.parsedData!);
   }
@@ -176,7 +175,7 @@ class DBGraphQLClient extends GraphQLClient {
   Future<T?> queryAndReturnParsedNullable<T>(
     QueryOptions<T?> options, {
     bool? autoChangeFetchPolicy,
-  }) async {
+  }) {
     return query(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
         .then((r) => r.parsedData);
   }
@@ -184,7 +183,7 @@ class DBGraphQLClient extends GraphQLClient {
   Future<T> queryAndReturnParsed<T>(
     QueryOptions<T> options, {
     bool? autoChangeFetchPolicy,
-  }) async {
+  }) {
     return query(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
         .then((r) => r.parsedData!);
   }

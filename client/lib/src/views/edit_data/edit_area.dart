@@ -45,7 +45,7 @@ class _EditAreaState extends State<EditArea> {
     final foregroundColor = newArea.color?.findInvert();
 
     return Theme(
-      data: CAThemingService.getDefault(primaryOverride: newArea.color),
+      data: ThemingService.getDefault(primaryOverride: newArea.color),
       child: Scaffold(
         body: Form(
           key: _form,
@@ -216,10 +216,10 @@ class _EditAreaState extends State<EditArea> {
         final themeData = Theme.of(context);
 
         scaffoldMessenger.showSnackBar(
-          SnackBar(
-            duration: const Duration(minutes: 1),
+          const SnackBar(
+            duration: Duration(minutes: 1),
             content: Row(
-              children: const [
+              children: [
                 Expanded(child: Text('جار الحفظ ...')),
                 CircularProgressIndicator(),
               ],
@@ -262,13 +262,13 @@ class _EditAreaState extends State<EditArea> {
 
           final mimeType =
               MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
-          final uploadUrl = await CAFunctionsService.I.getUploadUrl(
+          final uploadUrl = await FunctionsService.I.getUploadUrl(
             'areas',
             newArea.id,
             contentType: mimeType,
           );
 
-          await CAFunctionsService.I.uploadPhoto(
+          await FunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
             fileStream: _photoFieldState.newPhoto!.openRead(),

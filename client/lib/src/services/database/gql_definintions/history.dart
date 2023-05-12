@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:graphql/client.dart';
 
 import 'history/__generated__/mutations.gql.dart';

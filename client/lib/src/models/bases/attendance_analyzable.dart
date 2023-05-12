@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-mixin AttendanceAnalyzable {
+abstract interface class AttendanceAnalyzable {
   AnalysisData<DateTime>? get attendanceHistoryAggregate;
   AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate;
 }

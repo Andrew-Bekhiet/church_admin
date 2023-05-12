@@ -1,9 +1,7 @@
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
-import 'user_permission.dart';
 
 class PermissionsSet extends Equatable {
   final Set<UserPermission> permissions;

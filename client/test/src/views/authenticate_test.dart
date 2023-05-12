@@ -3,13 +3,12 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService,PermissionsSet;
-import 'package:churchdata_core_mocks/utils.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -34,7 +33,10 @@ void main() {
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(1024, 1365 * 3));
 
-      await tester.pumpWidget(wrapWithMaterialApp(const AuthenticateScreen()));
+      await tester.pumpWidgetBuilder(
+        const AuthenticateScreen(),
+        wrapper: materialAppWrapper(),
+      );
       await tester.pumpAndSettle();
 
       expect(
@@ -90,18 +92,16 @@ void main() {
     'Authenticate Screen => Authentication',
     (tester) async {
       final authCompleter = Completer<bool>();
-      final navigatorKey = GlobalKey<NavigatorState>();
+      final widgetKey = GlobalKey();
 
       when(LocalAuthService.I.authenticate())
           .thenAnswer((_) async => authCompleter.future);
 
       await tester.binding.setSurfaceSize(const Size(1024, 1365 * 5));
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          const AuthenticateScreen(),
-          navigatorKey: navigatorKey,
-        ),
+      await tester.pumpWidgetBuilder(
+        AuthenticateScreen(key: widgetKey),
+        wrapper: materialAppWrapper(),
       );
       await tester.pumpAndSettle();
 
@@ -124,7 +124,7 @@ void main() {
           findsOneWidget,
         );
 
-        navigatorKey.currentState!.pop();
+        Navigator.of(widgetKey.currentContext!).pop();
         await tester.pumpAndSettle();
 
         await tester.enterText(

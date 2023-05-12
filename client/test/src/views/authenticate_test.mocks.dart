@@ -288,6 +288,17 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
+  _i5.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+        Invocation.method(
+          #didRequestAppExit,
+          [],
+        ),
+        returnValue:
+            _i5.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
+        returnValueForMissingStub:
+            _i5.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
+      ) as _i5.Future<_i6.AppExitResponse>);
+  @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(
           #didHaveMemoryPressure,

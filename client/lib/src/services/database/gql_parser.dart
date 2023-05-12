@@ -9,7 +9,7 @@ class GQLParser {
   }
 
   Iterable<T> Function(Json d) singleListParser<T>(T Function(Json) mapper) {
-    return (d) => (d.values.whereType<List>().first).map(
+    return (d) => d.values.whereType<List>().first.map(
           (o) => mapper(
             castMapToJson(o),
           ),

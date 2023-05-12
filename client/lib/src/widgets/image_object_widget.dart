@@ -7,16 +7,16 @@ class ImageObjectWidget extends StatelessWidget {
   ImageObjectWidget(
     this.imageObject, {
     ImageUrlCacheService? imageUrlCacheService,
-    CAViewableObjectService? viewableObjectService,
+    ViewableObjectService? viewableObjectService,
     this.circleCrop = true,
     this.heroTag,
     super.key,
   })  : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
         viewableObjectService =
-            viewableObjectService ?? CAViewableObjectService.I;
+            viewableObjectService ?? ViewableObjectService.I;
 
   final ImageUrlCacheService photoUrlCacheService;
-  final CAViewableObjectService viewableObjectService;
+  final ViewableObjectService viewableObjectService;
   final IImage imageObject;
   final bool circleCrop;
   // ignore: no-object-declaration
@@ -53,7 +53,7 @@ class ImageObjectWidget extends StatelessWidget {
             child: FutureBuilder<String>(
               initialData: cachedImageUrl,
               future: Future(
-                () async => photoUrlCacheService.getImageUrl(imageObject),
+                () => photoUrlCacheService.getImageUrl(imageObject),
               ),
               builder: (context, downloadUrlData) {
                 final downloadUrlOrCache =
@@ -81,7 +81,7 @@ class ImageObjectWidget extends StatelessWidget {
                   shape: circleCrop ? const CircleBorder() : null,
                   borderRadius: circleCrop ? null : borderRadius,
                   child: InkWell(
-                    onTap: () async => Navigator.of(context).push(
+                    onTap: () => Navigator.of(context).push(
                       PageRouteBuilder(
                         opaque: false,
                         barrierDismissible: true,

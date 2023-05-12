@@ -79,7 +79,7 @@ class _ViewStreetState extends State<ViewStreet> {
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final viewableObjectService = CAViewableObjectService.I;
+  late final viewableObjectService = ViewableObjectService.I;
 
   late final stream =
       DatabaseService.I.streets.streamSingleById(id: widget.streetId);
@@ -133,7 +133,7 @@ class _ViewStreetState extends State<ViewStreet> {
                 child: FilledButton.tonalIcon(
                   label: const Text('الموقع على الخريطة'),
                   icon: const Icon(Icons.map),
-                  onPressed: () async => Navigator.of(context).push(
+                  onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ViewGeodataMap(
                         initialGeomapOptions:

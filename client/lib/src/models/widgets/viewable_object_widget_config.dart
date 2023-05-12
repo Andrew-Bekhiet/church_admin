@@ -1,4 +1,4 @@
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/widgets.dart';
 
 class ViewableObjectWidgetConfig<T extends Viewable> {

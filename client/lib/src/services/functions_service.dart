@@ -1,24 +1,21 @@
-// coverage:ignore-file
 import 'dart:async';
 
 //TODO: support web
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dio/dio.dart';
 
-class CAFunctionsService extends FunctionsService {
-  static CAFunctionsService get I =>
+class FunctionsService {
+  static FunctionsService get I =>
       globalProviderContainer.read(functionsServiceProvider);
 
   final Dio _dio;
 
-  CAFunctionsService({required Dio dio}) : _dio = dio;
+  FunctionsService({required Dio dio}) : _dio = dio;
 
   final _pendingDownloadUrls = <int, Future<String>>{};
 
-  @override
   HttpsCallable httpsCallable(
     String functionName, {
     HttpsCallableOptions? options,
@@ -26,6 +23,10 @@ class CAFunctionsService extends FunctionsService {
     return globalProviderContainer
         .read(firebaseFunctionsProvider)
         .httpsCallable(functionName, options: options);
+  }
+
+  Future<HttpsCallableResult> registerFCMToken(String token) {
+    return httpsCallable('registerFCMToken')({'token': token});
   }
 
   Future<String> getDownloadUrl(
@@ -62,15 +63,6 @@ class CAFunctionsService extends FunctionsService {
       'contentType': contentType,
     }))
         .data;
-  }
-
-  @override
-  Future<HttpsCallableResult> recoverDocument(
-    JsonRef deletedDoc, {
-    bool keepBackup = true,
-    bool nested = true,
-  }) async {
-    throw UnimplementedError();
   }
 
   Future<String?> getAddressFromLocation(Point location) async {

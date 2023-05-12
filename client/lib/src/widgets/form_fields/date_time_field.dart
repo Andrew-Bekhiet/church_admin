@@ -1,4 +1,4 @@
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

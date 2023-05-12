@@ -45,7 +45,7 @@ class _EditStreetState extends State<EditStreet> {
     final foregroundColor = newStreet.color?.findInvert();
 
     return Theme(
-      data: CAThemingService.getDefault(primaryOverride: newStreet.color),
+      data: ThemingService.getDefault(primaryOverride: newStreet.color),
       child: Scaffold(
         body: Form(
           key: _form,
@@ -217,10 +217,10 @@ class _EditStreetState extends State<EditStreet> {
         final themeData = Theme.of(context);
 
         scaffoldMessenger.showSnackBar(
-          SnackBar(
-            duration: const Duration(minutes: 1),
+          const SnackBar(
+            duration: Duration(minutes: 1),
             content: Row(
-              children: const [
+              children: [
                 Expanded(child: Text('جار الحفظ ...')),
                 CircularProgressIndicator(),
               ],
@@ -263,13 +263,13 @@ class _EditStreetState extends State<EditStreet> {
 
           final mimeType =
               MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
-          final uploadUrl = await CAFunctionsService.I.getUploadUrl(
+          final uploadUrl = await FunctionsService.I.getUploadUrl(
             'streets',
             newStreet.id,
             contentType: mimeType,
           );
 
-          await CAFunctionsService.I.uploadPhoto(
+          await FunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
             fileStream: _photoFieldState.newPhoto!.openRead(),

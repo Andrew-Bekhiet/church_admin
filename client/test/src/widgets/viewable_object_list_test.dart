@@ -1,10 +1,9 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
-import 'package:churchdata_core_mocks/utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
@@ -14,7 +13,7 @@ import 'viewable_object_list_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PaginatableStreamBase>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
 void main() {
@@ -37,8 +36,10 @@ void main() {
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
-        wrapWithMaterialApp(
-          ViewableObjectList(objectsController: controller),
+        MaterialApp(
+          home: Scaffold(
+            body: ViewableObjectList(objectsController: controller),
+          ),
         ),
       );
 
@@ -126,10 +127,9 @@ void main() {
       );
       addTearDown(controller.dispose);
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          ViewableObjectList(objectsController: controller),
-        ),
+      await tester.pumpWidgetBuilder(
+        ViewableObjectList(objectsController: controller),
+        wrapper: materialAppWrapper(),
       );
 
       await tester.pumpAndSettle();
@@ -198,10 +198,9 @@ void main() {
       );
       addTearDown(controller.dispose);
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          ViewableObjectList(objectsController: controller),
-        ),
+      await tester.pumpWidgetBuilder(
+        ViewableObjectList(objectsController: controller),
+        wrapper: materialAppWrapper(),
       );
 
       await tester.pumpAndSettle();
@@ -270,10 +269,9 @@ void main() {
       );
       addTearDown(controller.dispose);
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          ViewableObjectList(objectsController: controller),
-        ),
+      await tester.pumpWidgetBuilder(
+        ViewableObjectList(objectsController: controller),
+        wrapper: materialAppWrapper(),
       );
       await tester.pumpAndSettle();
 
@@ -343,7 +341,7 @@ void _setUp() {
 }
 
 Override _setUpViewableObjectService() {
-  final viewableObjectService = MockCAViewableObjectService();
+  final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);

@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +10,7 @@ import 'viewable_object_list_item_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PaginatableStreamBase>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
 void main() async {
@@ -35,7 +33,7 @@ void main() async {
           ),
         ),
         wrapper: materialAppWrapper(
-          theme: CAThemingService.getDefault(
+          theme: ThemingService.getDefault(
             darkTheme: false,
             greatFeastThemeOverride: false,
           ),
@@ -252,19 +250,19 @@ void main() async {
       );
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(CAViewableObjectService.I.onTap(item)).called(1);
+      verify(ViewableObjectService.I.onTap(item)).called(1);
 
       await tester.longPress(find.byType(ViewableObjectWidget<Person>));
       expect(onLongPressCalled, 1);
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(CAViewableObjectService.I.onTap(item)).called(1);
+      verify(ViewableObjectService.I.onTap(item)).called(1);
 
       await tester.longPress(find.byType(ViewableObjectWidget<Person>));
       expect(onLongPressCalled, 2);
 
       await tester.tap(find.byType(ViewableObjectWidget<Person>));
-      verify(CAViewableObjectService.I.onTap(item)).called(1);
+      verify(ViewableObjectService.I.onTap(item)).called(1);
     },
   );
 }
@@ -276,7 +274,7 @@ void _setUp() {
 }
 
 Override _setUpMockObjectService() {
-  final mockCAViewableObjectService = MockCAViewableObjectService();
+  final mockCAViewableObjectService = MockViewableObjectService();
   when(mockCAViewableObjectService.getDefaultIconFor<Person>(any))
       .thenAnswer((_) => Icons.person);
 

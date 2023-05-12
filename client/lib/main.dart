@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide Json, LoggingService, Notification;
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -92,9 +90,12 @@ Future<void> _initializeHive(ProviderContainer ref) async {
           boxName: 'cache',
         ),
   );
-  await hive.openBox('Settings');
-  await hive.openBox<String>('ImageUrlsCache');
-  await hive.openLazyBox<Notification>('Notifications');
+  await Future.wait([
+    hive.openBox('Settings'),
+    hive.openBox<String>('ImageUrlsCache'),
+    hive.openLazyBox<Notification>('Notifications'),
+    hive.openBox<NotificationSetting>('NotificationsSettings'),
+  ]);
 }
 
 Future<void> _initializeFirebase(ProviderContainer ref) async {

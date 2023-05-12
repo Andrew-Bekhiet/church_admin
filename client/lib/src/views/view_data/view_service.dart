@@ -65,7 +65,7 @@ class _ViewServiceState extends State<ViewService> {
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final viewableObjectService = CAViewableObjectService.I;
+  late final viewableObjectService = ViewableObjectService.I;
 
   late final stream = DatabaseService.I.services.streamSingleById(
     id: widget.serviceId,

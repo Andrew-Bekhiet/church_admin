@@ -1,13 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/links.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide LoggingService, Notification;
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -137,14 +136,16 @@ final userSettingsServiceProvider = Provider<UserSettingsService>(
 final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
+final firebaseDynamicLinksProvider =
+    Provider((_) => FirebaseDynamicLinks.instance);
 final firebaseFunctionsProvider =
     Provider((_) => FirebaseFunctions.instanceFor(region: 'europe-west6'));
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
 
 final dioProvider = Provider((_) => Dio());
 
-final functionsServiceProvider = Provider<CAFunctionsService>(
-  (ref) => CAFunctionsService(dio: ref.watch(dioProvider)),
+final functionsServiceProvider = Provider<FunctionsService>(
+  (ref) => FunctionsService(dio: ref.watch(dioProvider)),
 );
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
@@ -156,8 +157,8 @@ final localNotificationsPluginProvider =
   (ref) => FlutterLocalNotificationsPlugin(),
 );
 
-final notificationsServiceProvider = Provider<CANotificationsService>(
-  (ref) => CANotificationsService(
+final notificationsServiceProvider = Provider<NotificationsService>(
+  (ref) => NotificationsService(
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
     userSettingsService: ref.watch(userSettingsServiceProvider),
@@ -172,6 +173,12 @@ final notificationsServiceProvider = Provider<CANotificationsService>(
 final notificationsStorageProvider = Provider<NotificationsStorage>(
   (ref) => NotificationsStorageImpl(
     ref.watch(hiveProvider).lazyBox<Notification>('Notifications'),
+  ),
+);
+
+final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
+  (ref) => NotificationsSettingsStorage(
+    ref.watch(hiveProvider).box<NotificationSetting>('NotificationsSettings'),
   ),
 );
 
@@ -205,8 +212,8 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>(
   ),
 );
 
-final viewableObjectServiceProvider = Provider<CAViewableObjectService>(
-  (ref) => CAViewableObjectService(
+final viewableObjectServiceProvider = Provider<ViewableObjectService>(
+  (ref) => ViewableObjectService(
     router: ChurchAdminApp.router,
     userSettingsService: ref.watch(userSettingsServiceProvider),
   ),
@@ -274,16 +281,16 @@ final phoneNumberServiceProvider = Provider<PhoneNumberService>(
   (ref) => const PhoneNumberService(),
 );
 
-final themingServiceProvider = Provider<CAThemingService>(
-  (ref) => CAThemingService(
+final themingServiceProvider = Provider<ThemingService>(
+  (ref) => ThemingService(
     userSettingsService: ref.watch(userSettingsServiceProvider),
   ),
 );
 
 final fmtcProvider = Provider((_) => FMTC.instance);
 
-final shareServiceProvider = Provider<CAShareService>(
-  (ref) => CAShareService(),
+final shareServiceProvider = Provider<ShareService>(
+  (ref) => ShareService(),
 );
 
 final authAdapterProvider = Provider<AuthAdapter>(

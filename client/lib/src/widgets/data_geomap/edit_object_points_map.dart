@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:churchdata_core/churchdata_core.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_line_editor/dragmarker.dart';
 import 'package:flutter_map_line_editor/polyeditor.dart';
 import 'package:latlong2/latlong.dart';
-
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
@@ -128,12 +126,11 @@ class _EditObjectPointsMap<T extends ViewableWithID>
               resultObject.value = widget.onModify(
                 [
                   ...widget.getObjectPoints(resultObject.value) ?? [],
-                  Point(latlng.latitude, latlng.longitude)
+                  Point(latlng.latitude, latlng.longitude),
                 ],
                 resultObject.value,
               );
             },
-            absorbPanEventsOnScrollables: false,
             maxZoom: 18,
             zoom: 14,
             interactiveFlags:

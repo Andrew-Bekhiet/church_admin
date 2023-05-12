@@ -16,8 +16,9 @@ class UserSettingsService {
 
   bool get darkTheme => box.get(
         'darkTheme',
-        defaultValue: WidgetsBinding.instance.window.platformBrightness ==
-            Brightness.dark,
+        defaultValue:
+            WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark,
       )!;
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
 

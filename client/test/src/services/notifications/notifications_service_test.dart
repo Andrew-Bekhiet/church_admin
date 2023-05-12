@@ -23,8 +23,9 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<FlutterLocalNotificationsPlugin>(),
   MockSpec<AuthService>(),
   MockSpec<UserSettingsService>(),
-  MockSpec<CAFunctionsService>(),
+  MockSpec<FunctionsService>(),
   MockSpec<NotificationsStorage>(),
+  MockSpec<NotificationsSettingsStorage>(),
 ])
 void main() {
   setUp(_setUp);
@@ -282,7 +283,8 @@ void main() {
       final onMessageOpenedAppStream = StreamController<RemoteMessage>();
       final onForegroundMessageStream = StreamController<RemoteMessage>();
 
-      final unit = CANotificationsService(
+      final unit = NotificationsService(
+        settings: MockNotificationsSettingsStorage(),
         localNotificationsPlugin:
             globalProviderContainer.read(localNotificationsPluginProvider),
         firebaseMessaging:
@@ -394,7 +396,7 @@ void main() {
 
       verifyInOrder(
         [
-          CAFunctionsService.I.registerFCMToken(expectedToken),
+          FunctionsService.I.registerFCMToken(expectedToken),
           globalProviderContainer
               .read(userSettingsServiceProvider)
               .setRegisteredFCMToken(expectedToken),
@@ -404,8 +406,9 @@ void main() {
   );
 }
 
-CANotificationsService _createNewUnit() {
-  return CANotificationsService(
+NotificationsService _createNewUnit() {
+  return NotificationsService(
+    settings: MockNotificationsSettingsStorage(),
     localNotificationsPlugin:
         globalProviderContainer.read(localNotificationsPluginProvider),
     firebaseMessaging: globalProviderContainer.read(firebaseMessagingProvider),
@@ -435,7 +438,7 @@ Override _setUpStorage() {
 }
 
 Override _setUpFunctionsService() {
-  return functionsServiceProvider.overrideWithValue(MockCAFunctionsService());
+  return functionsServiceProvider.overrideWithValue(MockFunctionsService());
 }
 
 Override _setUpUserSettingsService() {

@@ -12,6 +12,7 @@ class _StreetsLayer extends StatelessWidget {
     return PolylineLayer(
       polylineCulling: true,
       polylines: streets
+          .where((s) => s.line != null && s.line!.coordinates.isNotEmpty)
           .map(
             (s) => Polyline(
               color: s.color?.withOpacity(0.9) ?? Colors.transparent,

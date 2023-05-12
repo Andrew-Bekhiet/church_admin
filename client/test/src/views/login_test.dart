@@ -1,13 +1,11 @@
 // ignore_for_file: discarded_futures
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService,PermissionsSet;
-import 'package:churchdata_core_mocks/fakes/fake_cache_repo.dart' show Box;
-import 'package:churchdata_core_mocks/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Family;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart' hide Box;
+import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
@@ -21,7 +19,7 @@ import 'login_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<UserSettingsService>(),
   MockSpec<HiveInterface>(),
-  MockSpec<CANotificationsService>()
+  MockSpec<NotificationsService>()
 ])
 void main() {
   tearDown(resetGlobalProviderContainer);
@@ -29,7 +27,10 @@ void main() {
   testWidgets(
     'Login Screen => Key elements',
     (tester) async {
-      await tester.pumpWidget(wrapWithMaterialApp(const LoginScreen()));
+      await tester.pumpWidgetBuilder(
+        const LoginScreen(),
+        wrapper: materialAppWrapper(),
+      );
 
       expect(find.text('كنيسة السيدة العذراء مريم'), findsOneWidget);
 
@@ -68,7 +69,6 @@ void main() {
       // final firebaseAuth = _setUpFirebaseAuth();
 
       final overrides = [
-        await _setUpHive(),
         _setUpNotificationsService(),
         _setUpUserSettings(),
         _setUpAuthService(),
@@ -76,7 +76,10 @@ void main() {
 
       initGlobalProviderContainer(overrides);
 
-      await tester.pumpWidget(wrapWithMaterialApp(const LoginScreen()));
+      await tester.pumpWidgetBuilder(
+        const LoginScreen(),
+        wrapper: materialAppWrapper(),
+      );
 
       expect(find.bySubtype<FilledButton>(), findsOneWidget);
 
@@ -120,15 +123,6 @@ void main() {
   );
 }
 
-Future<Override> _setUpHive() async {
-  final hiveMock = MockHiveInterface();
-
-  when(hiveMock.openBox(captureAny))
-      .thenAnswer((_) async => Box<NotificationSetting>('name'));
-
-  return hiveProvider.overrideWithValue(hiveMock);
-}
-
 Override _setUpUserSettings() {
   final userSettings = MockUserSettingsService();
   when(userSettings.setSecondLineFor(Area, captureAny))
@@ -169,19 +163,7 @@ Override _setUpAuthService({bool isSignedIn = true}) {
 }
 
 Override _setUpNotificationsService() {
-  final notifications = MockCANotificationsService();
-  when(
-    notifications.schedulePeriodic(
-      any,
-      any,
-      any,
-      startAt: anyNamed('startAt'),
-      allowWhileIdle: anyNamed('allowWhileIdle'),
-      exact: anyNamed('exact'),
-      rescheduleOnReboot: anyNamed('rescheduleOnReboot'),
-      wakeup: anyNamed('wakeup'),
-    ),
-  ).thenAnswer((_) async => true);
+  final notifications = MockNotificationsService();
 
   return notificationsServiceProvider.overrideWithValue(notifications);
 }

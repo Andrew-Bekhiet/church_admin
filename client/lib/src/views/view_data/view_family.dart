@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide LoggingService, ViewableObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +45,7 @@ class _ViewFamilyState extends State<ViewFamily> {
       where: [
         Input_PersonsBoolExp(
           familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-        )
+        ),
       ],
     ),
   );
@@ -73,7 +71,7 @@ class _ViewFamilyState extends State<ViewFamily> {
             childFamilyId:
                 Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -83,14 +81,14 @@ class _ViewFamilyState extends State<ViewFamily> {
       where: [
         Input_StoresBoolExp(
           adminFamily: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-        )
+        ),
       ],
     ),
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final viewableObjectService = CAViewableObjectService.I;
+  late final viewableObjectService = ViewableObjectService.I;
 
   late final stream =
       DatabaseService.I.families.streamSingleById(id: widget.familyId);
@@ -151,7 +149,7 @@ class _ViewFamilyState extends State<ViewFamily> {
                 if (family.geolocation != null)
                   IconButton(
                     icon: const Icon(Icons.map),
-                    onPressed: () async => Navigator.of(context).push(
+                    onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ViewGeodataMap(
                           initialGeomapOptions: GeomapOptions(

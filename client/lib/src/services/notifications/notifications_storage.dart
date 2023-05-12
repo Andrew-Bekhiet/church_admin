@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-abstract class NotificationsStorage {
+abstract interface class NotificationsStorage {
   static NotificationsStorage get I =>
       globalProviderContainer.read(notificationsStorageProvider);
 

@@ -8,7 +8,7 @@ void flushVisibilityDetectors() {
 }
 
 WidgetWrapper materialWithCATheme() => materialAppWrapper(
-      theme: CAThemingService.getDefault(
+      theme: ThemingService.getDefault(
         darkTheme: false,
         greatFeastThemeOverride: false,
       ),

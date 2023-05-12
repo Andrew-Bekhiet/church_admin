@@ -36,12 +36,12 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [CANotificationsService].
+/// A class which mocks [NotificationsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCANotificationsService extends _i1.Mock
-    implements _i3.CANotificationsService {
-  MockCANotificationsService() {
+class MockNotificationsService extends _i1.Mock
+    implements _i3.NotificationsService {
+  MockNotificationsService() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -60,34 +60,69 @@ class MockCANotificationsService extends _i1.Mock
         returnValue: false,
       ) as bool);
   @override
-  _i4.Future<bool> schedulePeriodic(
-    Duration? duration,
-    int? id,
-    Function? callback, {
-    DateTime? startAt,
-    bool? allowWhileIdle = false,
-    bool? exact = false,
-    bool? wakeup = false,
-    bool? rescheduleOnReboot = false,
-  }) =>
+  _i4.Future<void> scheduleBirthDayNotification(
+          [_i3.NotificationSetting? notificationSetting =
+              const _i3.NotificationSetting(
+            11,
+            0,
+            1,
+          )]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #schedulePeriodic,
-          [
-            duration,
-            id,
-            callback,
-          ],
-          {
-            #startAt: startAt,
-            #allowWhileIdle: allowWhileIdle,
-            #exact: exact,
-            #wakeup: wakeup,
-            #rescheduleOnReboot: rescheduleOnReboot,
-          },
+          #scheduleBirthDayNotification,
+          [notificationSetting],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> scheduleMeetingNotification(
+          [_i3.NotificationSetting? notificationSetting =
+              const _i3.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleMeetingNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> scheduleKodasNotification(
+          [_i3.NotificationSetting? notificationSetting =
+              const _i3.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleKodasNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> scheduleConfessionNotification(
+          [_i3.NotificationSetting? notificationSetting =
+              const _i3.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleConfessionNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<_i3.Notification?> getInitialNotification() => (super.noSuchMethod(
         Invocation.method(

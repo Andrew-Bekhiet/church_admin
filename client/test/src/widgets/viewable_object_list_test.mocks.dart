@@ -6,9 +6,8 @@
 import 'dart:async' as _i9;
 import 'dart:io' as _i7;
 
-import 'package:church_admin/church_admin.dart' as _i10;
-import 'package:churchdata_core/churchdata_core.dart' as _i8;
-import 'package:flutter/cupertino.dart' as _i4;
+import 'package:church_admin/church_admin.dart' as _i8;
+import 'package:flutter/material.dart' as _i4;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i6;
 import 'package:go_router/go_router.dart' as _i3;
 import 'package:hive_flutter/hive_flutter.dart' as _i5;
@@ -217,11 +216,11 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
       ) as _i9.Future<void>);
 }
 
-/// A class which mocks [CAViewableObjectService].
+/// A class which mocks [ViewableObjectService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCAViewableObjectService extends _i1.Mock
-    implements _i10.CAViewableObjectService {
+class MockViewableObjectService extends _i1.Mock
+    implements _i8.ViewableObjectService {
   @override
   _i3.GoRouter get router => (super.noSuchMethod(
         Invocation.getter(#router),
@@ -275,7 +274,7 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i4.IconData getDefaultIconFor<T extends _i10.IImage>([T? imageObject]) =>
+  _i4.IconData getDefaultIconFor<T extends _i8.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultIconFor,
@@ -302,7 +301,7 @@ class MockCAViewableObjectService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockImageUrlCacheService extends _i1.Mock
-    implements _i10.ImageUrlCacheService {
+    implements _i8.ImageUrlCacheService {
   @override
   _i5.Box<String> get box => (super.noSuchMethod(
         Invocation.getter(#box),
@@ -328,7 +327,7 @@ class MockImageUrlCacheService extends _i1.Mock
         ),
       ) as _i6.BaseCacheManager);
   @override
-  _i9.Future<_i7.File> getImageFile(_i10.IImage? imageObject) =>
+  _i9.Future<_i7.File> getImageFile(_i8.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
@@ -350,7 +349,7 @@ class MockImageUrlCacheService extends _i1.Mock
         )),
       ) as _i9.Future<_i7.File>);
   @override
-  _i9.Future<String> getImageUrl(_i10.IImage? imageObject) =>
+  _i9.Future<String> getImageUrl(_i8.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
@@ -360,7 +359,7 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValueForMissingStub: _i9.Future<String>.value(''),
       ) as _i9.Future<String>);
   @override
-  String? getCachedImageUrl(_i10.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i8.IImage? imageObject) => (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
           [imageObject],

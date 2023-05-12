@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:church_admin/src/controllers/selection_controller.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:rxdart_ext/single.dart';
 
@@ -66,3 +65,5 @@ class ViewableObjectListController<T extends Viewable> {
 
 String normalizeString(String s) =>
     s.trim().toLowerCase().replaceAll(RegExp('أ|إ|آ'), 'ا');
+
+int defaultOffsetFromIndex(int limit, int index) => (index / limit).floor();

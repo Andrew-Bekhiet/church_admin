@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show PaginatableStreamBase;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,7 +41,7 @@ Future<void> main() async {
           listController: viewableObjectListController,
         ),
         wrapper: materialAppWrapper(
-          theme: CAThemingService.getDefault(
+          theme: ThemingService.getDefault(
             darkTheme: false,
             greatFeastThemeOverride: false,
           ),
@@ -309,7 +307,7 @@ Override _setUpUserSettingsService() {
 
 Override _setUpCAViewableObjectService() {
   return viewableObjectServiceProvider.overrideWith(
-    (ref) => CAViewableObjectService(
+    (ref) => ViewableObjectService(
       router: MockGoRouter(),
       userSettingsService: ref.read(userSettingsServiceProvider),
     ),

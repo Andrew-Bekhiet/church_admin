@@ -26,7 +26,7 @@ class ColorField extends StatelessWidget {
       validator: validator,
       builder: (state) => ListTile(
         title: const Text('اللون'),
-        onTap: () async => _selectColor(context, state),
+        onTap: () => _selectColor(context, state),
         trailing: ColorIndicator(
           hasBorder: true,
           width: 50,

@@ -1,10 +1,10 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
-class CAThemingService extends ThemingService with WidgetsBindingObserver {
-  static CAThemingService get I =>
+class ThemingService with WidgetsBindingObserver {
+  static ThemingService get I =>
       globalProviderContainer.read(themingServiceProvider);
 
   static const MaterialColor black = MaterialColor(0xFF000000, <int, Color>{
@@ -253,20 +253,29 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
 
   final UserSettingsService _userSettingsService;
 
-  factory CAThemingService({
+  factory ThemingService({
     required UserSettingsService userSettingsService,
   }) =>
-      CAThemingService.withInitialThemeata(
+      ThemingService.withInitialThemeata(
         userSettingsService: userSettingsService,
         initialTheme: getDefault(userSettingsService: userSettingsService),
       );
 
-  CAThemingService.withInitialThemeata({
+  ThemingService.withInitialThemeata({
     required UserSettingsService userSettingsService,
     required ThemeData initialTheme,
   })  : _userSettingsService = userSettingsService,
-        super.withInitialThemeata(initialTheme) {
+        _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  final BehaviorSubject<ThemeData> _themeData;
+
+  Stream<ThemeData> get stream => _themeData.share();
+
+  ThemeData get theme => _themeData.value;
+  set theme(ThemeData themeData) {
+    _themeData.add(themeData);
   }
 
   @override
@@ -274,8 +283,11 @@ class CAThemingService extends ThemingService with WidgetsBindingObserver {
     switchTheme(_userSettingsService.darkTheme);
   }
 
-  @override
   void switchTheme(bool darkTheme) {
     theme = getDefault(darkTheme: darkTheme);
+  }
+
+  Future<void> dispose() async {
+    await _themeData.close();
   }
 }

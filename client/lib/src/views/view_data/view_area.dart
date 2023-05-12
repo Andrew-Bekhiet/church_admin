@@ -50,7 +50,7 @@ class _ViewAreaState extends State<ViewArea> {
           areas: Input_AreasBoolExp(
             id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -62,7 +62,7 @@ class _ViewAreaState extends State<ViewArea> {
           areas: Input_AreasBoolExp(
             id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -74,7 +74,7 @@ class _ViewAreaState extends State<ViewArea> {
           areas: Input_AreasBoolExp(
             id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -86,7 +86,7 @@ class _ViewAreaState extends State<ViewArea> {
           areas: Input_AreasBoolExp(
             id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -96,7 +96,7 @@ class _ViewAreaState extends State<ViewArea> {
   late final Stream<Area?> stream =
       DatabaseService.I.areas.streamSingleById(id: widget.areaId);
 
-  late final viewableObjectService = CAViewableObjectService.I;
+  late final viewableObjectService = ViewableObjectService.I;
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +155,7 @@ class _ViewAreaState extends State<ViewArea> {
                 child: FilledButton.tonalIcon(
                   label: const Text('الموقع على الخريطة'),
                   icon: const Icon(Icons.map),
-                  onPressed: () async => Navigator.of(context).push(
+                  onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ViewGeodataMap(
                         initialGeomapOptions:

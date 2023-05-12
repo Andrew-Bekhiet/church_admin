@@ -14,7 +14,7 @@ class PersonsNotificationsQueries {
     List<Input_PersonsBoolExp>? where,
     int? limit,
     List<Input_PersonsOrderBy>? orderBy,
-  }) async {
+  }) {
     return graphQLClient.queryAndReturnParsed(
       QueryOptions(
         document: documentNodeQuerypersonsNames,

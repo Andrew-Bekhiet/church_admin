@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' show Viewable;
 import 'package:flutter/material.dart';
 
 class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
@@ -8,16 +7,15 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     required this.selectionController,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
-    CAViewableObjectService? viewableObjectService,
+    ViewableObjectService? viewableObjectService,
     super.key,
-  }) : viewableObjectService =
-            viewableObjectService ?? CAViewableObjectService.I;
+  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   final T item;
   final SelectionController<T> selectionController;
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
-  final CAViewableObjectService viewableObjectService;
+  final ViewableObjectService viewableObjectService;
 
   late final ViewableObjectWidgetConfig<T> effectiveConfig =
       (viewableObjectWidgetConfig ?? ViewableObjectWidgetConfig<T>()).copyWith(

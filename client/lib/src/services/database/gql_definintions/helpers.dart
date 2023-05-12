@@ -1,4 +1,4 @@
-import 'package:churchdata_core/churchdata_core.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
 final idEquality = EqualityBy<ID, String>((o) => o.id);

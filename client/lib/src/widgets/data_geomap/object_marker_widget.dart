@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' show Viewable;
 import 'package:flutter/material.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
@@ -77,7 +76,7 @@ class ObjectMarkerWidget extends StatelessWidget {
                 object.color == Colors.transparent ? null : object.color,
             action: SnackBarAction(
               label: 'فتح',
-              onPressed: () => CAViewableObjectService.I.onTap(object),
+              onPressed: () => ViewableObjectService.I.onTap(object),
             ),
           ),
         );

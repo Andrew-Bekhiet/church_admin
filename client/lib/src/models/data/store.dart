@@ -30,8 +30,13 @@ class Store extends ViewableWithIDAndImage with _$Store {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'stores/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('stores', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('stores', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'stores',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

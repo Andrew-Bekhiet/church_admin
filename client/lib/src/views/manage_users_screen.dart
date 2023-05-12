@@ -63,7 +63,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                           Tooltip(
                             message: p.humanReadableName,
                             child: Icon(p.icon, size: 20),
-                          )
+                          ),
                     ],
                   ),
             config: config,

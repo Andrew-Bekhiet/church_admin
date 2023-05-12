@@ -14,7 +14,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'local_auth_service_test.mocks.dart';
 
 @GenerateMocks(
-  [CANotificationsService, AuthService],
+  [NotificationsService, AuthService],
   customMocks: [
     MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
   ],
@@ -345,7 +345,7 @@ void _setUp() {
 Override _setUpCANotificationsService() {
   bool isPaused = false;
 
-  final mockCANotificationsService = MockCANotificationsService();
+  final mockCANotificationsService = MockNotificationsService();
 
   when(
     mockCANotificationsService.pauseListeners(),

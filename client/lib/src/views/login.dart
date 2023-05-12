@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -108,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                         text: 'شروط الاستخدام',
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () async {
+                          ..onTap = () {
                             //TODO: TOS
                           },
                       ),
@@ -122,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                         text: 'سياسة الخصوصية',
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () async {
+                          ..onTap = () {
                             //TODO: Privacy Policy
                           },
                       ),
@@ -177,74 +176,10 @@ class _LoginScreenState extends State<LoginScreen> {
       await settings.setSecondLineFor(Person, 'birthdate');
       await settings.setSecondLineFor(User, 'permissions');
 
-      final notificationsSettings = await globalProviderContainer
-          .read(hiveProvider)
-          .openBox<NotificationSetting>('NotificationsSettings');
-
-      await notificationsSettings.put(
-        'BirthDayTime',
-        const NotificationSetting(11, 0, 1),
-      );
-
-      await CANotificationsService.I.schedulePeriodic(
-        const Duration(days: 1),
-        'BirthDay'.hashCode,
-        NotificationsServiceCallbacks.showBirthDayNotification,
-        exact: true,
-        startAt: DateTime.now().replaceTimeOfDay(
-          const TimeOfDay(hour: 11, minute: 0),
-        ),
-        wakeup: true,
-        rescheduleOnReboot: true,
-      );
-
-      await notificationsSettings.put(
-        'KodasTime',
-        const NotificationSetting(11, 0, 7),
-      );
-
-      await CANotificationsService.I.schedulePeriodic(
-        const Duration(days: 7),
-        'Kodas'.hashCode,
-        NotificationsServiceCallbacks.showKodasNotification,
-        exact: true,
-        startAt: DateTime.now().replaceTimeOfDay(
-          const TimeOfDay(hour: 11, minute: 0),
-        ),
-        rescheduleOnReboot: true,
-      );
-
-      await notificationsSettings.put(
-        'MeetingTime',
-        const NotificationSetting(11, 0, 7),
-      );
-
-      await CANotificationsService.I.schedulePeriodic(
-        const Duration(days: 7),
-        'Meeting'.hashCode,
-        NotificationsServiceCallbacks.showMeetingNotification,
-        exact: true,
-        startAt: DateTime.now().replaceTimeOfDay(
-          const TimeOfDay(hour: 11, minute: 0),
-        ),
-        rescheduleOnReboot: true,
-      );
-
-      await notificationsSettings.put(
-        'ConfessionTime',
-        const NotificationSetting(11, 0, 7),
-      );
-
-      await CANotificationsService.I.schedulePeriodic(
-        const Duration(days: 7),
-        'Confessions'.hashCode,
-        NotificationsServiceCallbacks.showConfessionNotification,
-        exact: true,
-        startAt: DateTime.now().replaceTimeOfDay(
-          const TimeOfDay(hour: 11, minute: 0),
-        ),
-        rescheduleOnReboot: true,
-      );
+      await NotificationsService.I.scheduleBirthDayNotification();
+      await NotificationsService.I.scheduleKodasNotification();
+      await NotificationsService.I.scheduleMeetingNotification();
+      await NotificationsService.I.scheduleConfessionNotification();
     } catch (err, stack) {
       await LoggingService.I.reportError(
         err as Exception,
@@ -254,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class _LoginTitle extends StatelessWidget with PreferredSizeWidget {
+class _LoginTitle extends StatelessWidget implements PreferredSizeWidget {
   const _LoginTitle();
 
   @override

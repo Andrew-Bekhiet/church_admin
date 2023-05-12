@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide PhotoObjectWidget, ViewableObjectWidget;
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +113,7 @@ class _ViewPersonState extends State<ViewPerson> {
 
         final foregroundColor = person.color?.findInvert();
         return Theme(
-          data: CAThemingService.getDefault(primaryOverride: person.color),
+          data: ThemingService.getDefault(primaryOverride: person.color),
           child: Scaffold(
             body: CustomScrollView(
               controller: scrollController,
@@ -162,15 +160,15 @@ class _ViewPersonState extends State<ViewPerson> {
                       PhoneNumberProperty(
                         'رقم الهاتف',
                         person.mainPhone,
-                        (n) async => _phoneCall(context, n),
-                        (n) async => _contactAdd(context, n, person),
+                        (n) => _phoneCall(context, n),
+                        (n) => _contactAdd(context, n, person),
                       ),
                       ...person.otherPhones.entries.map(
                         (e) => PhoneNumberProperty(
                           e.key,
                           e.value,
-                          (n) async => _phoneCall(context, n),
-                          (n) async => _contactAdd(context, n, person),
+                          (n) => _phoneCall(context, n),
+                          (n) => _contactAdd(context, n, person),
                         ),
                       ),
                       CopiablePropertyWidget(
@@ -180,7 +178,7 @@ class _ViewPersonState extends State<ViewPerson> {
                           if (person.geolocation != null)
                             IconButton(
                               icon: const Icon(Icons.map),
-                              onPressed: () async => Navigator.of(context).push(
+                              onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ViewGeodataMap(
                                     initialPerson: person,
@@ -358,7 +356,7 @@ class _ViewPersonState extends State<ViewPerson> {
                                   ),
                                   backgroundColor: hobby.color,
                                 ),
-                              )
+                              ),
                           ],
                         ),
                       ),
@@ -383,7 +381,7 @@ class _ViewPersonState extends State<ViewPerson> {
                                   ),
                                   backgroundColor: tag.color,
                                 ),
-                              )
+                              ),
                           ],
                         ),
                       ),
@@ -447,7 +445,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         showTime: false,
                         getHistoryStream: () => DatabaseService.I.history
                             .paginatePersonKodasHistory(personId: person.id),
-                        onRecordNow: () async =>
+                        onRecordNow: () =>
                             DatabaseService.I.history.updatePersonLastKodas(
                           personId: widget.personId,
                           lastKodas: DateTime.now(),
@@ -461,7 +459,7 @@ class _ViewPersonState extends State<ViewPerson> {
                             .paginatePersonConfessionHistory(
                           personId: person.id,
                         ),
-                        onRecordNow: () async => DatabaseService.I.history
+                        onRecordNow: () => DatabaseService.I.history
                             .updatePersonLastConfession(
                           personId: widget.personId,
                           lastConfession: DateTime.now(),
@@ -473,7 +471,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         value: person.lastVisit?.time,
                         getHistoryStream: () => DatabaseService.I.history
                             .paginatePersonVisitHistory(personId: person.id),
-                        onRecordNow: () async =>
+                        onRecordNow: () =>
                             DatabaseService.I.history.updatePersonLastVisit(
                           personId: widget.personId,
                           lastVisit: DateTime.now(),
@@ -484,7 +482,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         value: person.lastCall?.time,
                         getHistoryStream: () => DatabaseService.I.history
                             .paginatePersonCallHistory(personId: person.id),
-                        onRecordNow: () async =>
+                        onRecordNow: () =>
                             DatabaseService.I.history.updatePersonLastCall(
                           personId: widget.personId,
                           lastCall: DateTime.now(),
@@ -499,7 +497,7 @@ class _ViewPersonState extends State<ViewPerson> {
                       const SizedBox(height: 50),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -554,8 +552,8 @@ class _ViewPersonState extends State<ViewPerson> {
     if (result == null) return;
     if (result) {
       await Permission.phone.request();
-      await LauncherService.I.launchUrl(
-        Uri(scheme: 'tel', path: formatPhone(number ?? '', false)),
+      await LauncherService.I.launchCall(
+        PhoneNumberService.I.formatInternational(number!),
       );
 
       if (!mounted) return;
@@ -588,8 +586,8 @@ class _ViewPersonState extends State<ViewPerson> {
         );
       }
     } else {
-      await LauncherService.I.launchUrl(
-        Uri(scheme: 'tel', path: formatPhone(number ?? '', false)),
+      await LauncherService.I.launchCall(
+        PhoneNumberService.I.formatInternational(number!),
       );
     }
   }
@@ -622,7 +620,7 @@ class _ViewPersonState extends State<ViewPerson> {
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               child: const Text('حفظ جهة الاتصال'),
-            )
+            ),
           ],
         ),
       );
@@ -638,7 +636,7 @@ class _ViewPersonState extends State<ViewPerson> {
               if (person.address != null)
                 Address(
                   person.address!,
-                )
+                ),
             ],
             name: Name(first: _name.text),
             photo:
@@ -834,7 +832,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       body: FutureBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
         initialData: <ViewableWithIDAndImage>[
           ...widget.person.classes ?? [],
-          ...widget.person.groups ?? []
+          ...widget.person.groups ?? [],
         ].groupListsBy(
           (o) =>
               (o is Class ? o.service : (o as Group).service) ??
@@ -849,14 +847,14 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
           (p) {
             final groupedObjects = <ViewableWithIDAndImage>[
               ...p?.classes ?? [],
-              ...p?.groups ?? []
+              ...p?.groups ?? [],
             ].groupListsBy(
               (o) => o is Class ? o.service! : (o as Group).service!,
             );
 
             return {
               for (final s in p?.services ?? []) s: [],
-              ...groupedObjects
+              ...groupedObjects,
             };
           },
         ),
@@ -1002,7 +1000,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                             ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                   const Divider(thickness: 2, height: 5),
                   CheckboxListTile(

@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'college.freezed.dart';

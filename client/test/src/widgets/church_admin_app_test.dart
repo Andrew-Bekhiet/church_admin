@@ -1,4 +1,4 @@
-// ignore_for_file: discarded_futures
+// ignore_for_file: discarded_futures, avoid_redundant_argument_values
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
@@ -63,15 +63,15 @@ void main() {
 
       expect(
         tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        CAThemingService.I.theme,
+        ThemingService.I.theme,
       );
 
-      CAThemingService.I.theme = ThemeData.dark();
+      ThemingService.I.theme = ThemeData.dark();
       await tester.pumpAndSettle();
 
       expect(
         tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        CAThemingService.I.theme,
+        ThemingService.I.theme,
       );
     },
   );
@@ -204,7 +204,7 @@ MockAreasDAO _setUpAreasDAO() {
 
 Override _setUpThemingService(UserSettingsService userSettingsService) {
   return themingServiceProvider.overrideWithValue(
-    CAThemingService.withInitialThemeata(
+    ThemingService.withInitialThemeata(
       initialTheme: ThemeData.light(),
       userSettingsService: userSettingsService,
     ),

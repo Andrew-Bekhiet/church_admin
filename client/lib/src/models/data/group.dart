@@ -9,7 +9,7 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-class Group extends ViewableWithIDAndImage with _$Group, AttendanceAnalyzable {
+class Group extends ViewableWithIDAndImage with _$Group implements AttendanceAnalyzable  {
   factory Group({
     required String id,
     required String name,
@@ -41,8 +41,13 @@ class Group extends ViewableWithIDAndImage with _$Group, AttendanceAnalyzable {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'groups/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('groups', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('groups', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'groups',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

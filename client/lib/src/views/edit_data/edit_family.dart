@@ -85,7 +85,7 @@ class _EditFamilyState extends State<EditFamily> {
     final foregroundColor = newFamily.color?.findInvert();
 
     return Theme(
-      data: CAThemingService.getDefault(primaryOverride: newFamily.color),
+      data: ThemingService.getDefault(primaryOverride: newFamily.color),
       child: Scaffold(
         body: Form(
           key: _form,
@@ -391,10 +391,10 @@ class _EditFamilyState extends State<EditFamily> {
         final themeData = Theme.of(context);
 
         scaffoldMessenger.showSnackBar(
-          SnackBar(
-            duration: const Duration(minutes: 1),
+          const SnackBar(
+            duration: Duration(minutes: 1),
             content: Row(
-              children: const [
+              children: [
                 Expanded(child: Text('جار الحفظ ...')),
                 CircularProgressIndicator(),
               ],
@@ -437,13 +437,13 @@ class _EditFamilyState extends State<EditFamily> {
 
           final mimeType =
               MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
-          final uploadUrl = await CAFunctionsService.I.getUploadUrl(
+          final uploadUrl = await FunctionsService.I.getUploadUrl(
             'families',
             newFamily.id,
             contentType: mimeType,
           );
 
-          await CAFunctionsService.I.uploadPhoto(
+          await FunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
             fileStream: _photoFieldState.newPhoto!.openRead(),

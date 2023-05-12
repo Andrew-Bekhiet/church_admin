@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
@@ -115,12 +114,14 @@ class DataGeomapState extends State<DataGeomap> {
             persons: persons,
           ),
           nonRotatedChildren: [
-            AttributionWidget.defaultWidget(
+            SimpleAttributionWidget(
               alignment: Alignment.topLeft,
-              source: 'OpenStreetMap',
-              onSourceTapped: () async => LauncherService.I.launchUrl(
-                Uri.parse('https://openstreetmap.org/copyright'),
-              ),
+              source: const Text('OpenStreetMap'),
+              onTap: () => globalProviderContainer
+                  .read(launcherServiceProvider)
+                  .launchUrl(
+                    Uri.parse('https://openstreetmap.org/copyright'),
+                  ),
             ),
           ],
           children: [

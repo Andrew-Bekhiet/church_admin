@@ -71,7 +71,7 @@ class _ViewStoreState extends State<ViewStore> {
                 child: FilledButton.tonalIcon(
                   label: const Text('الموقع على الخريطة'),
                   icon: const Icon(Icons.map),
-                  onPressed: () async => Navigator.of(context).push(
+                  onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ViewGeodataMap(
                         initialGeomapOptions:

@@ -9,7 +9,7 @@ import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
 Future<void> main() async {
@@ -83,7 +83,7 @@ void _setUp() {
 }
 
 Override _setUpViewableObjectService() {
-  final viewableObjectService = MockCAViewableObjectService();
+  final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);

@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
-import 'package:churchdata_core/churchdata_core.dart' show ViewableWithID;
+import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'study_year.freezed.dart';

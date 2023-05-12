@@ -22,7 +22,7 @@ void main() {
           ),
         ),
         wrapper: materialAppWrapper(
-          theme: CAThemingService.getDefault(
+          theme: ThemingService.getDefault(
             darkTheme: false,
             greatFeastThemeOverride: false,
           ),

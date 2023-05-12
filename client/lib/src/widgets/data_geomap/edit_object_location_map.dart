@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:churchdata_core/churchdata_core.dart' show ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:rxdart/rxdart.dart';

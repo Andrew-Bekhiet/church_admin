@@ -68,7 +68,7 @@ class ServicesDAO extends DAOBase<Service> {
                 if (nameSearch)
                   Input_ClassesBoolExp(
                     name: nameSearchExp,
-                  )
+                  ),
               ],
               groupsWhere: [
                 if (groupsWhere != null) ...groupsWhere,

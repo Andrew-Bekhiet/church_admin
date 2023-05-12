@@ -14,9 +14,11 @@ class Family extends ViewableWithIDAndImage with _$Family {
     required String id,
     required String name,
     String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+        Point? geolocation,
     String? notes,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+        Color? color,
     DateTime? photoUpdatedAt,
     List<Area>? areas,
     List<Street>? streets,
@@ -34,8 +36,14 @@ class Family extends ViewableWithIDAndImage with _$Family {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'families/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('families', id),
+          downloadUrlFn: () =>
+              FunctionsService.I.getDownloadUrl('families', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'families',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

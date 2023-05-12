@@ -2,7 +2,7 @@ import 'package:church_admin/src/models/notification.dart';
 import 'package:church_admin/src/services/notifications/notifications_storage.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class NotificationsStorageImpl extends NotificationsStorage {
+class NotificationsStorageImpl implements NotificationsStorage {
   final LazyBox<Notification> _box;
 
   NotificationsStorageImpl(this._box) : assert(_box.isOpen);

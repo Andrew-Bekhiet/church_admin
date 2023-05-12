@@ -9,7 +9,9 @@ part 'class.freezed.dart';
 part 'class.g.dart';
 
 @freezed
-class Class extends ViewableWithIDAndImage with _$Class, AttendanceAnalyzable {
+class Class extends ViewableWithIDAndImage
+    with _$Class
+    implements AttendanceAnalyzable {
   factory Class({
     required String id,
     required String name,
@@ -41,8 +43,13 @@ class Class extends ViewableWithIDAndImage with _$Class, AttendanceAnalyzable {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'classes/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('classes', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('classes', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'classes',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

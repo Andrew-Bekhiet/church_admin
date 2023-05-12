@@ -143,7 +143,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
               );
 
         return Theme(
-          data: CAThemingService.getDefault(primaryOverride: objectData.color),
+          data: ThemingService.getDefault(primaryOverride: objectData.color),
           child: DefaultTabController(
             length: childrenTypes.length,
             child: Scaffold(

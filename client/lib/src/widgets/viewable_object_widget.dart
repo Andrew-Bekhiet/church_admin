@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final void Function(T)? onTap;
   final void Function(T)? onLongPress;
 
-  final CAViewableObjectService viewableObjectService;
+  final ViewableObjectService viewableObjectService;
   final ViewableObjectWidgetConfig config;
 
   ViewableObjectWidget(
@@ -44,10 +43,10 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     this.onTap,
     this.onLongPress,
     ViewableObjectWidgetConfig? config,
-    CAViewableObjectService? viewableObjectService,
+    ViewableObjectService? viewableObjectService,
     super.key,
   })  : viewableObjectService =
-            viewableObjectService ?? CAViewableObjectService.I,
+            viewableObjectService ?? ViewableObjectService.I,
         config = config ?? const ViewableObjectWidgetConfig();
 
   @override

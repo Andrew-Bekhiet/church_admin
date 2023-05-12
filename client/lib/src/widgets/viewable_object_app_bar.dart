@@ -143,7 +143,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                   overflow: TextOverflow.ellipsis,
                   style: _textStyleTween.transform(animationValue),
                 ),
-              )
+              ),
             ],
           );
         },

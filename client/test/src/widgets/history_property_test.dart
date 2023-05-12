@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
-import 'package:churchdata_core_mocks/utils.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +15,7 @@ import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
 Future<void> main() async {
@@ -108,12 +106,11 @@ Future<void> main() async {
         onRecordNow: () => called = true,
       );
 
-      await tester.pumpWidget(
-        wrapWithMaterialApp(
-          Scaffold(
-            body: historyProperty,
-          ),
+      await tester.pumpWidgetBuilder(
+        Scaffold(
+          body: historyProperty,
         ),
+        wrapper: materialAppWrapper(),
       );
       await tester.tap(
         find.descendant(
@@ -162,12 +159,11 @@ Future<void> main() async {
           onRecordNow: () {},
         );
 
-        await tester.pumpWidget(
-          wrapWithMaterialApp(
-            Scaffold(
-              body: historyProperty,
-            ),
+        await tester.pumpWidgetBuilder(
+          Scaffold(
+            body: historyProperty,
           ),
+          wrapper: materialAppWrapper(),
         );
 
         await tester.tap(
@@ -222,7 +218,7 @@ void _setUp() {
 }
 
 Override _setUpViewableObjectService() {
-  final viewableObjectService = MockCAViewableObjectService();
+  final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);

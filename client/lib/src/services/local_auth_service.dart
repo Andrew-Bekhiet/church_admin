@@ -16,7 +16,7 @@ class LocalAuthService with WidgetsBindingObserver {
 
   final LocalAuthentication _localAuthPlugin;
 
-  final CANotificationsService _notificationsService;
+  final NotificationsService _notificationsService;
 
   bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
@@ -33,10 +33,10 @@ class LocalAuthService with WidgetsBindingObserver {
   LocalAuthService({
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
-    CANotificationsService? notificationService,
+    NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService = notificationService ?? CANotificationsService.I,
+        _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
             currentPlatformService ?? CurrentPlatformService.I {
     scheduleReauth();
@@ -49,10 +49,10 @@ class LocalAuthService with WidgetsBindingObserver {
   LocalAuthService.noInitialAuth({
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
-    CANotificationsService? notificationService,
+    NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService = notificationService ?? CANotificationsService.I,
+        _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
             currentPlatformService ?? CurrentPlatformService.I {
     didChangeAppLifecycleState(

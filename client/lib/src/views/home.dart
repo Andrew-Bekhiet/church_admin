@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    hide PhotoObjectWidget, StudyYear, ViewableObjectWidget;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
@@ -111,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           break;
                         case 1:
                           context.push('/manage_users');
-                          break;
                         case 2:
                           break;
                       }

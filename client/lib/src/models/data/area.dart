@@ -13,8 +13,10 @@ class Area extends ViewableWithIDAndImage with _$Area {
   factory Area({
     required String id,
     required String name,
-    @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) Polygon? bounds,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+    @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
+        Polygon? bounds,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+        Color? color,
     DateTime? photoUpdatedAt,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
@@ -28,8 +30,13 @@ class Area extends ViewableWithIDAndImage with _$Area {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'areas/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('areas', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('areas', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'areas',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

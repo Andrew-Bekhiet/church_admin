@@ -10,7 +10,8 @@ part 'service.g.dart';
 
 @freezed
 class Service extends ViewableWithIDAndImage
-    with _$Service, AttendanceAnalyzable {
+    with _$Service
+    implements AttendanceAnalyzable {
   factory Service({
     required String id,
     required String name,
@@ -46,8 +47,14 @@ class Service extends ViewableWithIDAndImage
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'services/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('services', id),
+          downloadUrlFn: () =>
+              FunctionsService.I.getDownloadUrl('services', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'services',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

@@ -11,7 +11,7 @@ import 'viewable_object_app_bar_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
-  MockSpec<CAViewableObjectService>(),
+  MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
 Future<void> main() async {
@@ -61,7 +61,7 @@ Future<void> main() async {
               ),
             ),
             wrapper: materialAppWrapper(
-              theme: CAThemingService.getDefault(
+              theme: ThemingService.getDefault(
                 darkTheme: false,
                 greatFeastThemeOverride: false,
               ),
@@ -140,7 +140,7 @@ Future<void> main() async {
               ),
             ),
             wrapper: materialAppWrapper(
-              theme: CAThemingService.getDefault(
+              theme: ThemingService.getDefault(
                 darkTheme: false,
                 greatFeastThemeOverride: false,
               ),
@@ -219,7 +219,7 @@ Future<void> main() async {
               ),
             ),
             wrapper: materialAppWrapper(
-              theme: CAThemingService.getDefault(
+              theme: ThemingService.getDefault(
                 darkTheme: false,
                 greatFeastThemeOverride: false,
               ),
@@ -276,7 +276,7 @@ void _setUp() {
 }
 
 Override _setUpViewableObjectService() {
-  final viewableObjectService = MockCAViewableObjectService();
+  final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
       .thenReturn(Icons.person);

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ChurchAdminApp extends StatefulWidget {
@@ -100,8 +99,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ThemeData>(
-      stream: CAThemingService.I.stream,
-      initialData: CAThemingService.I.theme,
+      stream: ThemingService.I.stream,
+      initialData: ThemingService.I.theme,
       builder: (context, themeData) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
@@ -172,10 +171,5 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     super.dispose();
 
     await _connectivityListener.cancel();
-
-    if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.detached) {
-      // Dispose churchdata_core dependencies that use GetIt:
-      await GetIt.I.reset();
-    }
   }
 }

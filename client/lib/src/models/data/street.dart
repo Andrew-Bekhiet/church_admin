@@ -27,8 +27,13 @@ class Street extends ViewableWithIDAndImage with _$Street {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'streets/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('streets', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('streets', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'streets',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

@@ -3,7 +3,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:hive_flutter/adapters.dart';
 
-abstract class EncryptionService {
+abstract interface class EncryptionService {
   static EncryptionService get I =>
       globalProviderContainer.read(encryptionServiceProvider);
 

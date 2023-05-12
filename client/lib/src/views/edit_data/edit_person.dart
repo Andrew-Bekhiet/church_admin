@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' show TappableFormField;
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +87,7 @@ class _EditPersonState extends State<EditPerson> {
     final foregroundColor = newPerson.color?.findInvert();
 
     return Theme(
-      data: CAThemingService.getDefault(primaryOverride: newPerson.color),
+      data: ThemingService.getDefault(primaryOverride: newPerson.color),
       child: Scaffold(
         body: Form(
           key: _form,
@@ -174,7 +173,7 @@ class _EditPersonState extends State<EditPerson> {
                                 initialValue: newPerson.mainPhone,
                                 keyboardType: TextInputType.phone,
                                 autofillHints: const [
-                                  AutofillHints.telephoneNumber
+                                  AutofillHints.telephoneNumber,
                                 ],
                                 textInputAction: TextInputAction.next,
                                 onChanged: (value) =>
@@ -192,7 +191,7 @@ class _EditPersonState extends State<EditPerson> {
                                       text: newValue.text
                                           .replaceAll(RegExp(r'[^\d\+]'), ''),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -225,7 +224,7 @@ class _EditPersonState extends State<EditPerson> {
                                           },
                                           keyboardType: TextInputType.phone,
                                           autofillHints: const [
-                                            AutofillHints.telephoneNumber
+                                            AutofillHints.telephoneNumber,
                                           ],
                                           initialValue: phone.value,
                                           onChanged: (value) =>
@@ -247,7 +246,7 @@ class _EditPersonState extends State<EditPerson> {
                                                 text: newValue.text
                                                     .replaceAll(r'[^\d\+]', ''),
                                               ),
-                                            )
+                                            ),
                                           ],
                                           textInputAction: TextInputAction.next,
                                         );
@@ -387,8 +386,8 @@ class _EditPersonState extends State<EditPerson> {
                                                     wrapInCard: false,
                                                   ),
                                                 ),
-                                              )
-                                          ]
+                                              ),
+                                          ],
                                         ],
                                       ),
                                     ),
@@ -513,7 +512,7 @@ class _EditPersonState extends State<EditPerson> {
                                         : null;
                                   },
                                   validator: (v) => null,
-                                )
+                                ),
                             ] else ...[
                               ObjectSelectionField<Qualification,
                                   Qualification?>(
@@ -822,7 +821,7 @@ class _EditPersonState extends State<EditPerson> {
                                                 ),
                                                 backgroundColor: hobby.color,
                                               ),
-                                            )
+                                            ),
                                         ],
                                       )
                                     : const Text('لا يوجد هوايات');
@@ -1037,7 +1036,7 @@ class _EditPersonState extends State<EditPerson> {
           newPerson = newPerson.copyWith(
             otherPhones: {
               for (final p in newPerson.otherPhones.entries)
-                if (p.key != phone.key) p.key: p.value
+                if (p.key != phone.key) p.key: p.value,
             },
           );
           if (mounted) setState(() {});
@@ -1046,7 +1045,7 @@ class _EditPersonState extends State<EditPerson> {
             otherPhones: {
               for (final p in newPerson.otherPhones.entries)
                 if (p.key != phone.key) p.key: p.value,
-              name: phone.value
+              name: phone.value,
             },
           );
 
@@ -1306,10 +1305,10 @@ class _EditPersonState extends State<EditPerson> {
         final themeData = Theme.of(context);
 
         scaffoldMessenger.showSnackBar(
-          SnackBar(
-            duration: const Duration(minutes: 1),
+          const SnackBar(
+            duration: Duration(minutes: 1),
             content: Row(
-              children: const [
+              children: [
                 Expanded(child: Text('جار الحفظ ...')),
                 CircularProgressIndicator(),
               ],
@@ -1352,13 +1351,13 @@ class _EditPersonState extends State<EditPerson> {
 
           final mimeType =
               MimeTypeResolver().lookup(_photoFieldState.newPhoto!.path);
-          final uploadUrl = await CAFunctionsService.I.getUploadUrl(
+          final uploadUrl = await FunctionsService.I.getUploadUrl(
             'persons',
             newPerson.id,
             contentType: mimeType,
           );
 
-          await CAFunctionsService.I.uploadPhoto(
+          await FunctionsService.I.uploadPhoto(
             url: uploadUrl,
             contentType: mimeType,
             fileStream: _photoFieldState.newPhoto!.openRead(),
@@ -1503,9 +1502,9 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
                   service.id: (selected.value[service.id] ?? service).copyWith(
                     groups: [
                       ...selected.value[service.id]?.groups ?? [],
-                      group
+                      group,
                     ],
-                  )
+                  ),
                 });
               } else {
                 selected.add({
@@ -1514,7 +1513,7 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
                     groups: selected.value[service.id]!.groups!
                         .where((o) => o.id != group.id)
                         .toList(),
-                  )
+                  ),
                 });
               }
             },

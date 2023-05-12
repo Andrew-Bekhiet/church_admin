@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart'
-    show TappableFormField, ViewableWithID;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

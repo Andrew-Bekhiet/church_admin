@@ -51,8 +51,8 @@ class ImagePickerService {
                   },
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(
                           Icons.camera,
                           size: 30,
@@ -72,8 +72,8 @@ class ImagePickerService {
                   },
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(
                           Icons.photo_library,
                           size: 30,

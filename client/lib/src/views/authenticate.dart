@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -87,7 +86,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 textInputAction: TextInputAction.done,
               ),
               FilledButton(
-                onPressed: () async => _submit(_passwordText.text),
+                onPressed: () => _submit(_passwordText.text),
                 child: const Text('تسجيل الدخول'),
               ),
               FutureBuilder<bool>(

@@ -3,19 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i13;
+import 'dart:async' as _i12;
 import 'dart:io' as _i10;
-import 'dart:ui' as _i15;
+import 'dart:ui' as _i14;
 
-import 'package:church_admin/church_admin.dart' as _i12;
-import 'package:churchdata_core/churchdata_core.dart' as _i11;
-import 'package:flutter/cupertino.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i11;
+import 'package:flutter/material.dart' as _i3;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i9;
 import 'package:go_router/src/configuration.dart' as _i7;
 import 'package:go_router/src/delegate.dart' as _i4;
 import 'package:go_router/src/information_provider.dart' as _i5;
 import 'package:go_router/src/parser.dart' as _i6;
-import 'package:go_router/src/router.dart' as _i14;
+import 'package:go_router/src/router.dart' as _i13;
 import 'package:hive_flutter/hive_flutter.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i2;
@@ -132,7 +131,7 @@ class _FakeFile_8 extends _i1.SmartFake implements _i10.File {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPaginatableStreamBase extends _i1.Mock
-    implements _i11.PaginatableStreamBase<_i12.Service> {
+    implements _i11.PaginatableStreamBase<_i11.Service> {
   @override
   int get limit => (super.noSuchMethod(
         Invocation.getter(#limit),
@@ -176,65 +175,65 @@ class MockPaginatableStreamBase extends _i1.Mock
         ),
       ) as _i2.ValueStream<bool>);
   @override
-  _i2.ValueStream<List<_i12.Service>> get stream => (super.noSuchMethod(
+  _i2.ValueStream<List<_i11.Service>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _FakeValueStream_0<List<_i12.Service>>(
+        returnValue: _FakeValueStream_0<List<_i11.Service>>(
           this,
           Invocation.getter(#stream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<List<_i12.Service>>(
+        returnValueForMissingStub: _FakeValueStream_0<List<_i11.Service>>(
           this,
           Invocation.getter(#stream),
         ),
-      ) as _i2.ValueStream<List<_i12.Service>>);
+      ) as _i2.ValueStream<List<_i11.Service>>);
   @override
-  List<_i12.Service> get currentValue => (super.noSuchMethod(
+  List<_i11.Service> get currentValue => (super.noSuchMethod(
         Invocation.getter(#currentValue),
-        returnValue: <_i12.Service>[],
-        returnValueForMissingStub: <_i12.Service>[],
-      ) as List<_i12.Service>);
+        returnValue: <_i11.Service>[],
+        returnValueForMissingStub: <_i11.Service>[],
+      ) as List<_i11.Service>);
   @override
-  _i13.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+  _i12.Future<void> loadPage(int? offset) => (super.noSuchMethod(
         Invocation.method(
           #loadPage,
           [offset],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
-  _i13.Future<void> loadNextPage() => (super.noSuchMethod(
+  _i12.Future<void> loadNextPage() => (super.noSuchMethod(
         Invocation.method(
           #loadNextPage,
           [],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
-  _i13.Future<void> loadPreviousPage() => (super.noSuchMethod(
+  _i12.Future<void> loadPreviousPage() => (super.noSuchMethod(
         Invocation.method(
           #loadPreviousPage,
           [],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
-  _i13.Future<void> dispose() => (super.noSuchMethod(
+  _i12.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
 }
 
 /// A class which mocks [GoRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
+class MockGoRouter extends _i1.Mock implements _i13.GoRouter {
   @override
   _i3.BackButtonDispatcher get backButtonDispatcher => (super.noSuchMethod(
         Invocation.getter(#backButtonDispatcher),
@@ -369,7 +368,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValueForMissingStub: null,
       );
   @override
-  _i13.Future<T?> push<T extends Object?>(
+  _i12.Future<T?> push<T extends Object?>(
     String? location, {
     Object? extra,
   }) =>
@@ -379,11 +378,11 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           [location],
           {#extra: extra},
         ),
-        returnValue: _i13.Future<T?>.value(),
-        returnValueForMissingStub: _i13.Future<T?>.value(),
-      ) as _i13.Future<T?>);
+        returnValue: _i12.Future<T?>.value(),
+        returnValueForMissingStub: _i12.Future<T?>.value(),
+      ) as _i12.Future<T?>);
   @override
-  _i13.Future<T?> pushNamed<T extends Object?>(
+  _i12.Future<T?> pushNamed<T extends Object?>(
     String? name, {
     Map<String, String>? params = const {},
     Map<String, dynamic>? queryParams = const {},
@@ -399,9 +398,9 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
             #extra: extra,
           },
         ),
-        returnValue: _i13.Future<T?>.value(),
-        returnValueForMissingStub: _i13.Future<T?>.value(),
-      ) as _i13.Future<T?>);
+        returnValue: _i12.Future<T?>.value(),
+        returnValueForMissingStub: _i12.Future<T?>.value(),
+      ) as _i12.Future<T?>);
   @override
   void pushReplacement(
     String? location, {
@@ -491,7 +490,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValueForMissingStub: null,
       );
   @override
-  void addListener(_i15.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -499,7 +498,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i15.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -520,7 +519,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockImageUrlCacheService extends _i1.Mock
-    implements _i12.ImageUrlCacheService {
+    implements _i11.ImageUrlCacheService {
   @override
   _i8.Box<String> get box => (super.noSuchMethod(
         Invocation.getter(#box),
@@ -546,39 +545,39 @@ class MockImageUrlCacheService extends _i1.Mock
         ),
       ) as _i9.BaseCacheManager);
   @override
-  _i13.Future<_i10.File> getImageFile(_i12.IImage? imageObject) =>
+  _i12.Future<_i10.File> getImageFile(_i11.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
           [imageObject],
         ),
-        returnValue: _i13.Future<_i10.File>.value(_FakeFile_8(
+        returnValue: _i12.Future<_i10.File>.value(_FakeFile_8(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-        returnValueForMissingStub: _i13.Future<_i10.File>.value(_FakeFile_8(
+        returnValueForMissingStub: _i12.Future<_i10.File>.value(_FakeFile_8(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-      ) as _i13.Future<_i10.File>);
+      ) as _i12.Future<_i10.File>);
   @override
-  _i13.Future<String> getImageUrl(_i12.IImage? imageObject) =>
+  _i12.Future<String> getImageUrl(_i11.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
           [imageObject],
         ),
-        returnValue: _i13.Future<String>.value(''),
-        returnValueForMissingStub: _i13.Future<String>.value(''),
-      ) as _i13.Future<String>);
+        returnValue: _i12.Future<String>.value(''),
+        returnValueForMissingStub: _i12.Future<String>.value(''),
+      ) as _i12.Future<String>);
   @override
-  String? getCachedImageUrl(_i12.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i11.IImage? imageObject) => (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
           [imageObject],
@@ -586,15 +585,15 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i13.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
+  _i12.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
       (super.noSuchMethod(
         Invocation.method(
           #isUrlFileCachedAndValid,
           [cachedUrl],
         ),
-        returnValue: _i13.Future<bool>.value(false),
-        returnValueForMissingStub: _i13.Future<bool>.value(false),
-      ) as _i13.Future<bool>);
+        returnValue: _i12.Future<bool>.value(false),
+        returnValueForMissingStub: _i12.Future<bool>.value(false),
+      ) as _i12.Future<bool>);
   @override
   bool isUrlExpired(String? url) => (super.noSuchMethod(
         Invocation.method(
@@ -610,7 +609,7 @@ class MockImageUrlCacheService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserSettingsService extends _i1.Mock
-    implements _i12.UserSettingsService {
+    implements _i11.UserSettingsService {
   @override
   _i8.Box<dynamic> get box => (super.noSuchMethod(
         Invocation.getter(#box),
@@ -636,32 +635,32 @@ class MockUserSettingsService extends _i1.Mock
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i13.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
+  _i12.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
           #setDarkTheme,
           [value],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
-  _i13.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
+  _i12.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
         Invocation.method(
           #setRegisteredFCMToken,
           [value],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
-  _i13.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
+  _i12.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
           #setGreatFeastTheme,
           [value],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
   @override
   String? getSecondLineFor(Type? t) => (super.noSuchMethod(
         Invocation.method(
@@ -671,7 +670,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValueForMissingStub: null,
       ) as String?);
   @override
-  _i13.Future<void> setSecondLineFor(
+  _i12.Future<void> setSecondLineFor(
     Type? t,
     String? value,
   ) =>
@@ -683,7 +682,7 @@ class MockUserSettingsService extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i13.Future<void>.value(),
-        returnValueForMissingStub: _i13.Future<void>.value(),
-      ) as _i13.Future<void>);
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
 }

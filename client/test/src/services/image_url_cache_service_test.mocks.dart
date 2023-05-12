@@ -7,7 +7,6 @@ import 'dart:async' as _i7;
 import 'dart:typed_data' as _i9;
 
 import 'package:church_admin/church_admin.dart' as _i10;
-import 'package:cloud_firestore/cloud_firestore.dart' as _i11;
 import 'package:cloud_functions/cloud_functions.dart' as _i4;
 import 'package:dio/dio.dart' as _i5;
 import 'package:file/file.dart' as _i2;
@@ -367,11 +366,10 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
       ) as _i7.Future<void>);
 }
 
-/// A class which mocks [CAFunctionsService].
+/// A class which mocks [FunctionsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCAFunctionsService extends _i1.Mock
-    implements _i10.CAFunctionsService {
+class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
   @override
   _i4.HttpsCallable httpsCallable(
     String? functionName, {
@@ -400,6 +398,32 @@ class MockCAFunctionsService extends _i1.Mock
           ),
         ),
       ) as _i4.HttpsCallable);
+  @override
+  _i7.Future<_i4.HttpsCallableResult<dynamic>> registerFCMToken(
+          String? token) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerFCMToken,
+          [token],
+        ),
+        returnValue: _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
+            _FakeHttpsCallableResult_3<dynamic>(
+          this,
+          Invocation.method(
+            #registerFCMToken,
+            [token],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
+                _FakeHttpsCallableResult_3<dynamic>(
+          this,
+          Invocation.method(
+            #registerFCMToken,
+            [token],
+          ),
+        )),
+      ) as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
   @override
   _i7.Future<String> getDownloadUrl(
     String? table,
@@ -436,47 +460,6 @@ class MockCAFunctionsService extends _i1.Mock
         returnValue: _i7.Future<String>.value(''),
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
-  @override
-  _i7.Future<_i4.HttpsCallableResult<dynamic>> recoverDocument(
-    _i11.DocumentReference<Map<String, dynamic>>? deletedDoc, {
-    bool? keepBackup = true,
-    bool? nested = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #recoverDocument,
-          [deletedDoc],
-          {
-            #keepBackup: keepBackup,
-            #nested: nested,
-          },
-        ),
-        returnValue: _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #recoverDocument,
-            [deletedDoc],
-            {
-              #keepBackup: keepBackup,
-              #nested: nested,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #recoverDocument,
-            [deletedDoc],
-            {
-              #keepBackup: keepBackup,
-              #nested: nested,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
   @override
   _i7.Future<String?> getAddressFromLocation(_i10.Point? location) =>
       (super.noSuchMethod(
@@ -550,30 +533,4 @@ class MockCAFunctionsService extends _i1.Mock
         returnValue: _i7.Future<bool>.value(false),
         returnValueForMissingStub: _i7.Future<bool>.value(false),
       ) as _i7.Future<bool>);
-  @override
-  _i7.Future<_i4.HttpsCallableResult<dynamic>> registerFCMToken(
-          String? token) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMToken,
-          [token],
-        ),
-        returnValue: _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-      ) as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
 }

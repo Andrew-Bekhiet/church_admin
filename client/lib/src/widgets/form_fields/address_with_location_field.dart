@@ -41,7 +41,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                     final newLocation = await widget.onEditLocation(context);
 
                     if (newLocation != null) {
-                      final address = await CAFunctionsService.I
+                      final address = await FunctionsService.I
                           .getAddressFromLocation(newLocation);
 
                       if (address != null) {

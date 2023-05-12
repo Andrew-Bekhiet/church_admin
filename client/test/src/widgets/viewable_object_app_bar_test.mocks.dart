@@ -7,7 +7,6 @@ import 'dart:async' as _i3;
 import 'dart:io' as _i9;
 
 import 'package:church_admin/church_admin.dart' as _i10;
-import 'package:churchdata_core/churchdata_core.dart' as _i11;
 import 'package:flutter/foundation.dart' as _i6;
 import 'package:flutter/material.dart' as _i5;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i8;
@@ -757,11 +756,11 @@ class MockDelegatingPaginatableStream extends _i1.Mock
       ) as _i3.Future<void>);
 }
 
-/// A class which mocks [CAViewableObjectService].
+/// A class which mocks [ViewableObjectService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCAViewableObjectService extends _i1.Mock
-    implements _i10.CAViewableObjectService {
+class MockViewableObjectService extends _i1.Mock
+    implements _i10.ViewableObjectService {
   @override
   _i4.GoRouter get router => (super.noSuchMethod(
         Invocation.getter(#router),
@@ -799,7 +798,7 @@ class MockCAViewableObjectService extends _i1.Mock
         ),
       ) as _i5.GlobalKey<_i5.NavigatorState>);
   @override
-  void onTap(_i11.Viewable? object) => super.noSuchMethod(
+  void onTap(_i10.Viewable? object) => super.noSuchMethod(
         Invocation.method(
           #onTap,
           [object],
@@ -807,7 +806,7 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  String? getSecondLine(_i11.Viewable? object) => (super.noSuchMethod(
+  String? getSecondLine(_i10.Viewable? object) => (super.noSuchMethod(
         Invocation.method(
           #getSecondLine,
           [object],

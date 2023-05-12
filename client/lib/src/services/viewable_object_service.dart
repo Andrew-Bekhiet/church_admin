@@ -1,14 +1,13 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:churchdata_core/churchdata_core.dart' hide Json, LoggingService,PermissionsSet;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class CAViewableObjectService implements DefaultViewableObjectService {
-  static CAViewableObjectService get I =>
+class ViewableObjectService {
+  static ViewableObjectService get I =>
       globalProviderContainer.read(viewableObjectServiceProvider);
 
-  CAViewableObjectService({
+  ViewableObjectService({
     required this.router,
     required UserSettingsService userSettingsService,
   }) : _userSettingsService = userSettingsService;
@@ -16,14 +15,11 @@ class CAViewableObjectService implements DefaultViewableObjectService {
   final GoRouter router;
   final UserSettingsService _userSettingsService;
 
-  @override
   NavigatorState get navigator =>
       router.routeInformationParser.configuration.navigatorKey.currentState!;
 
-  @override
   GlobalKey<NavigatorState> get navigatorKey => throw UnimplementedError();
 
-  @override
   void onTap(Viewable object) {
     if (object is Person) {
       router.push(
@@ -164,7 +160,6 @@ class CAViewableObjectService implements DefaultViewableObjectService {
     return value.toString();
   }
 
-  @override
   String? getSecondLine(Viewable object) {
     final key = _userSettingsService.getSecondLineFor(object.runtimeType);
 

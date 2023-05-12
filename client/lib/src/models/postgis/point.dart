@@ -12,7 +12,7 @@ class Point with EquatableMixin {
   Json toPostGISJson() {
     return {
       'type': 'Point',
-      'coordinates': [longitude, latitude]
+      'coordinates': [longitude, latitude],
     };
   }
 

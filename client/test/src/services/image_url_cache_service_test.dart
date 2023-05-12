@@ -11,7 +11,7 @@ import 'image_url_cache_service_test.mocks.dart';
 @GenerateNiceMocks(
   [
     MockSpec<BaseCacheManager>(),
-    MockSpec<CAFunctionsService>(),
+    MockSpec<FunctionsService>(),
   ],
 )
 void main() {
@@ -216,17 +216,17 @@ MockBaseCacheManager getMockedCacheManager(
   return baseCacheManager;
 }
 
-void registerFunctionsService(MockCAFunctionsService mockFunctionsService) {
+void registerFunctionsService(MockFunctionsService mockFunctionsService) {
   initGlobalProviderContainer(
     [functionsServiceProvider.overrideWithValue(mockFunctionsService)],
   );
 }
 
-MockCAFunctionsService getMockedFunctionsSrvc(
+MockFunctionsService getMockedFunctionsSrvc(
   String personId,
   String urlFromNetwork,
 ) {
-  final mockFunctionsService = MockCAFunctionsService();
+  final mockFunctionsService = MockFunctionsService();
   // ignore: discarded_futures
   when(mockFunctionsService.getDownloadUrl('persons', personId))
       .thenAnswer((_) async => urlFromNetwork);

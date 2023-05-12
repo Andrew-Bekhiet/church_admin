@@ -5,10 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
 import 'dart:io' as _i4;
-import 'dart:typed_data' as _i11;
+import 'dart:typed_data' as _i10;
 
 import 'package:church_admin/church_admin.dart' as _i8;
-import 'package:churchdata_core/churchdata_core.dart' as _i10;
 import 'package:file/file.dart' as _i7;
 import 'package:flutter/material.dart' as _i6;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i3;
@@ -214,11 +213,11 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as bool);
 }
 
-/// A class which mocks [CAViewableObjectService].
+/// A class which mocks [ViewableObjectService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCAViewableObjectService extends _i1.Mock
-    implements _i8.CAViewableObjectService {
+class MockViewableObjectService extends _i1.Mock
+    implements _i8.ViewableObjectService {
   @override
   _i5.GoRouter get router => (super.noSuchMethod(
         Invocation.getter(#router),
@@ -256,7 +255,7 @@ class MockCAViewableObjectService extends _i1.Mock
         ),
       ) as _i6.GlobalKey<_i6.NavigatorState>);
   @override
-  void onTap(_i10.Viewable? object) => super.noSuchMethod(
+  void onTap(_i8.Viewable? object) => super.noSuchMethod(
         Invocation.method(
           #onTap,
           [object],
@@ -264,7 +263,7 @@ class MockCAViewableObjectService extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  String? getSecondLine(_i10.Viewable? object) => (super.noSuchMethod(
+  String? getSecondLine(_i8.Viewable? object) => (super.noSuchMethod(
         Invocation.method(
           #getSecondLine,
           [object],
@@ -445,7 +444,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
   @override
   _i9.Future<_i7.File> putFile(
     String? url,
-    _i11.Uint8List? fileBytes, {
+    _i10.Uint8List? fileBytes, {
     String? key,
     String? eTag,
     Duration? maxAge = const Duration(days: 30),

@@ -16,8 +16,7 @@ dart_code_metrics:
     - avoid-duplicate-exports
     - avoid-global-state
     - avoid-missing-enum-constant-in-map
-    # - avoid-nested-conditional-expressions
-    # - avoid-redundant-async
+    - avoid-redundant-async
     - avoid-unnecessary-conditionals
     - avoid-unnecessary-type-assertions
     - avoid-unnecessary-type-casts
@@ -53,8 +52,7 @@ dart_code_metrics:
           - dispose-method
     # - newline-before-return
     - no-boolean-literal-compare
-    # - no-empty-block
-    # - no-equal-then-else
+    - no-equal-then-else
     # - no-magic-number
     - no-object-declaration
     - prefer-correct-test-file-name
@@ -66,7 +64,7 @@ dart_code_metrics:
     # - prefer-match-file-name
     # - prefer-moving-to-variable:
     #     allowed-duplicated-chains: 5
-    # - prefer-trailing-comma
+    - prefer-trailing-comma
     - use-setstate-synchronously
     - always-remove-listener
     - avoid-border-all
@@ -168,7 +166,6 @@ linter:
     - prefer_const_literals_to_create_immutables
     - prefer_constructors_over_static_methods
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
@@ -201,9 +198,11 @@ linter:
     - test_types_in_equals
     - tighten_type_of_initializing_formals
     - type_init_formals
+    - type_literal_in_constant_pattern
     - unawaited_futures
     - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
+    - unnecessary_breaks
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_getters_setters

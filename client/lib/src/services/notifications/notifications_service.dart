@@ -12,8 +12,8 @@ import 'package:rxdart/rxdart.dart' hide Notification;
 
 import 'notifications_storage.dart';
 
-class CANotificationsService {
-  static CANotificationsService get I =>
+class NotificationsService {
+  static NotificationsService get I =>
       globalProviderContainer.read(notificationsServiceProvider);
 
   static const String localNotificationSenderUID =
@@ -28,7 +28,7 @@ class CANotificationsService {
     await NotificationsStorage.I.writeNotification(notification);
 
     if (notification.type == NotificationType.manualPushRemote) {
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
@@ -41,21 +41,23 @@ class CANotificationsService {
     }
   }
 
-  CANotificationsService({
+  NotificationsService({
     required FirebaseMessaging firebaseMessaging,
     required FlutterLocalNotificationsPlugin localNotificationsPlugin,
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     AuthService Function()? getAuthService,
     UserSettingsService? userSettingsService,
-    CAFunctionsService? functionsService,
+    FunctionsService? functionsService,
     NotificationsStorage? storage,
+    NotificationsSettingsStorage? settings,
   })  : _storage = storage ?? NotificationsStorage.I,
+        _settings = settings ?? NotificationsSettingsStorage.I,
         _firebaseMessaging = firebaseMessaging,
         _localNotificationsPlugin = localNotificationsPlugin,
         _getAuthService = getAuthService ?? (() => AuthService.I),
         _userSettingsService = userSettingsService ?? UserSettingsService.I,
-        _functionsService = functionsService ?? CAFunctionsService.I {
+        _functionsService = functionsService ?? FunctionsService.I {
     _onForegroundMessageSubscription =
         onForegroundMessageStream.listen(_onForegroundMessage);
 
@@ -63,13 +65,14 @@ class CANotificationsService {
         onMessageOpenedAppStream.listen(_onMessageOpenedApp);
   }
 
+  final NotificationsSettingsStorage _settings;
   final NotificationsStorage _storage;
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
   final AuthService Function() _getAuthService;
   final UserSettingsService _userSettingsService;
-  final CAFunctionsService _functionsService;
+  final FunctionsService _functionsService;
 
   final BehaviorSubject<Notification>
       _foregroundNotificationsStreamNotificationsStreamController =
@@ -101,25 +104,76 @@ class CANotificationsService {
         .add(notification);
   }
 
-  Future<bool> schedulePeriodic(
-    Duration duration,
-    int id,
-    Function callback, {
-    DateTime? startAt,
-    bool allowWhileIdle = false,
-    bool exact = false,
-    bool wakeup = false,
-    bool rescheduleOnReboot = false,
-  }) {
-    return AndroidAlarmManager.periodic(
-      duration,
-      id,
+  Future<void> scheduleBirthDayNotification([
+    NotificationSetting notificationSetting =
+        const NotificationSetting(11, 0, 1),
+  ]) {
+    return _scheduleNotification(
+      code: 'BirthDay'.hashCode,
+      callback: NotificationsServiceCallbacks.showBirthDayNotification,
+      settingsCallback: _settings.setMeetingTime,
+      notificationSetting: notificationSetting,
+    );
+  }
+
+  Future<void> scheduleMeetingNotification([
+    NotificationSetting notificationSetting =
+        const NotificationSetting(11, 0, 7),
+  ]) {
+    return _scheduleNotification(
+      code: 'Meeting'.hashCode,
+      callback: NotificationsServiceCallbacks.showMeetingNotification,
+      settingsCallback: _settings.setMeetingTime,
+      notificationSetting: notificationSetting,
+    );
+  }
+
+  Future<void> scheduleKodasNotification([
+    NotificationSetting notificationSetting =
+        const NotificationSetting(11, 0, 7),
+  ]) {
+    return _scheduleNotification(
+      code: 'Kodas'.hashCode,
+      callback: NotificationsServiceCallbacks.showKodasNotification,
+      settingsCallback: _settings.setMeetingTime,
+      notificationSetting: notificationSetting,
+    );
+  }
+
+  Future<void> scheduleConfessionNotification([
+    NotificationSetting notificationSetting =
+        const NotificationSetting(11, 0, 7),
+  ]) {
+    return _scheduleNotification(
+      code: 'Confession'.hashCode,
+      callback: NotificationsServiceCallbacks.showConfessionNotification,
+      settingsCallback: _settings.setMeetingTime,
+      notificationSetting: notificationSetting,
+    );
+  }
+
+  Future<void> _scheduleNotification({
+    required int code,
+    required VoidCallback callback,
+    required Future<void> Function(NotificationSetting) settingsCallback,
+    NotificationSetting notificationSetting =
+        const NotificationSetting(11, 0, 7),
+  }) async {
+    await settingsCallback(notificationSetting);
+    await AndroidAlarmManager.periodic(
+      Duration(days: notificationSetting.intervalInDays),
+      code,
       callback,
-      startAt: startAt,
-      allowWhileIdle: allowWhileIdle,
-      exact: exact,
-      wakeup: wakeup,
-      rescheduleOnReboot: rescheduleOnReboot,
+      startAt: DateTime.now().replaceTimeOfDay(
+        TimeOfDay(
+          hour: notificationSetting.hours,
+          minute: notificationSetting.minutes,
+        ),
+      ),
+      exact: true,
+      allowWhileIdle: true,
+      wakeup: true,
+      rescheduleOnReboot: true,
     );
   }
 
@@ -226,7 +280,7 @@ class NotificationsServiceCallbacks {
   static Future<Notification?> defaultOnNotificationClicked(
     String? notificationId,
   ) async {
-    if (WidgetsBinding.instance.renderViewElement != null &&
+    if (WidgetsBinding.instance.isRootWidgetAttached &&
         notificationId != null) {
       return NotificationsStorage.I.readNotification(notificationId);
     }
@@ -247,7 +301,7 @@ class NotificationsServiceCallbacks {
     if (persons.isNotEmpty || !kReleaseMode) {
       final notification = Notification(
         id: DateTime.now().toIso8601String(),
-        senderUID: CANotificationsService.localNotificationSenderUID,
+        senderUID: NotificationsService.localNotificationSenderUID,
         body: persons.map((p) => p.name).join(', '),
         title: 'انذار حضور القداس',
         sentTime: DateTime.now(),
@@ -267,7 +321,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         id: 4,
         notificationDetails: NotificationDetails(
@@ -303,7 +357,7 @@ class NotificationsServiceCallbacks {
     if (persons.isNotEmpty || !kReleaseMode) {
       final notification = Notification(
         id: DateTime.now().toIso8601String(),
-        senderUID: CANotificationsService.localNotificationSenderUID,
+        senderUID: NotificationsService.localNotificationSenderUID,
         body: persons.map((p) => p.name).join(', '),
         title: 'انذار حضور الاجتماع',
         sentTime: DateTime.now(),
@@ -323,7 +377,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         id: 3,
         notificationDetails: NotificationDetails(
@@ -359,7 +413,7 @@ class NotificationsServiceCallbacks {
     if (persons.isNotEmpty || !kReleaseMode) {
       final notification = Notification(
         id: DateTime.now().toIso8601String(),
-        senderUID: CANotificationsService.localNotificationSenderUID,
+        senderUID: NotificationsService.localNotificationSenderUID,
         body: persons.map((p) => p.name).join(', '),
         title: 'انذار الافتقاد',
         sentTime: DateTime.now(),
@@ -379,7 +433,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         id: 5,
         notificationDetails: NotificationDetails(
@@ -415,7 +469,7 @@ class NotificationsServiceCallbacks {
     if (persons.isNotEmpty || !kReleaseMode) {
       final notification = Notification(
         id: DateTime.now().toIso8601String(),
-        senderUID: CANotificationsService.localNotificationSenderUID,
+        senderUID: NotificationsService.localNotificationSenderUID,
         body: persons.map((p) => p.name).join(', '),
         title: 'انذار الاعتراف',
         sentTime: DateTime.now(),
@@ -435,7 +489,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         id: 0,
         notificationDetails: NotificationDetails(
@@ -471,7 +525,7 @@ class NotificationsServiceCallbacks {
         id: DateTime.now().toIso8601String(),
         title: 'أعياد الميلاد',
         body: persons.map((p) => p.name).join(', '),
-        senderUID: CANotificationsService.localNotificationSenderUID,
+        senderUID: NotificationsService.localNotificationSenderUID,
         sentTime: DateTime.now(),
         type: NotificationType.local,
         additionalData: const {
@@ -489,7 +543,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await CANotificationsService.I.show(
+      await NotificationsService.I.show(
         notification,
         id: 2,
         notificationDetails: NotificationDetails(

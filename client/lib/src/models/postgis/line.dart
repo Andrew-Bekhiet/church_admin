@@ -15,7 +15,7 @@ class Line with EquatableMixin {
     if (coordinates.isEmpty) return null;
     return {
       'type': 'LineString',
-      'coordinates': coordinates.map((p) => [p.longitude, p.latitude]).toList()
+      'coordinates': coordinates.map((p) => [p.longitude, p.latitude]).toList(),
     };
   }
 

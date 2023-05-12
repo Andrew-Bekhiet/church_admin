@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:churchdata_core/churchdata_core.dart' hide LoggingService;
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
-
 import 'package:rxdart/rxdart.dart';
 
 class GeomapFAB extends StatelessWidget {
@@ -57,7 +56,7 @@ class GeomapFAB extends StatelessWidget {
                   'api': '1',
                   'query': location.latitude.toString() +
                       ',' +
-                      location.longitude.toString()
+                      location.longitude.toString(),
                 },
               ),
             );

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
-class GoRouterRefreshStream extends ChangeNotifier {
+class GoRouterRefreshStream with ChangeNotifier {
   static GoRouterRefreshStream get I =>
       globalProviderContainer.read(goRouterRefreshStreamProvider);
 

@@ -44,7 +44,7 @@ class _ViewGroupState extends State<ViewGroup> {
     ),
   );
 
-  late final viewableObjectService = CAViewableObjectService.I;
+  late final viewableObjectService = ViewableObjectService.I;
 
   late final stream =
       DatabaseService.I.groups.streamSingleById(id: widget.groupId);
@@ -64,7 +64,7 @@ class _ViewGroupState extends State<ViewGroup> {
         Group: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _personsController,
-            )
+            ),
       },
       detailsBuilder: (context, group) => SliverList(
         delegate: SliverChildListDelegate(

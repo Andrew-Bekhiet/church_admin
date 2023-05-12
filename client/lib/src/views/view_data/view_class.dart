@@ -37,7 +37,7 @@ class _ViewClassState extends State<ViewClass> {
           classes: Input_ClassesBoolExp(
             id: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
           ),
-        )
+        ),
       ],
     ),
   );
@@ -118,7 +118,7 @@ class _ViewClassState extends State<ViewClass> {
       tabsHeaderBuilder: (context, $class) => Tab(
         text: 'المخدومين',
         icon: Icon(
-          CAViewableObjectService.I.getDefaultIconFor<Person>(),
+          ViewableObjectService.I.getDefaultIconFor<Person>(),
         ),
       ),
     );

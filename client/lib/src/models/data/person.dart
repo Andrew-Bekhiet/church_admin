@@ -107,8 +107,13 @@ class Person extends ViewableWithIDAndImage with _$Person {
   ObjectImageInfo? get imageInfo => photoUpdatedAt != null
       ? ObjectImageInfo(
           cacheKey: 'persons/$id',
-          downloadUrlFn: () async =>
-              CAFunctionsService.I.getDownloadUrl('persons', id),
+          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('persons', id),
+          uploadUrlFn: ({contentType, overrideId}) =>
+              FunctionsService.I.getUploadUrl(
+            'persons',
+            overrideId ?? id,
+            contentType: contentType,
+          ),
           lastUpdatedTime: photoUpdatedAt!,
         )
       : null;

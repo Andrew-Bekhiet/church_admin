@@ -12,6 +12,7 @@ class _AreasLayer extends StatelessWidget {
     return PolygonLayer(
       polygonCulling: true,
       polygons: areas
+          .where((a) => a.bounds != null && a.bounds!.coordinates.isNotEmpty)
           .map(
             (a) => Polygon(
               rotateLabel: true,

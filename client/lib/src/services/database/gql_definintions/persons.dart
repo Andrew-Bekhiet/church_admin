@@ -112,8 +112,8 @@ class PersonsDAO extends DAOBase<Person> {
                 : documentNodeSubscriptionwatchAllPersons.addSelectionFields(
                     {
                       'persons': [
-                        FieldNode(name: NameNode(value: secondLineFieldName))
-                      ]
+                        FieldNode(name: NameNode(value: secondLineFieldName)),
+                      ],
                     },
                   ),
             operationName: 'watchAllPersons',
@@ -369,8 +369,7 @@ class PersonsDAO extends DAOBase<Person> {
     required Variables_Subscription_personAttendance Function(
       int,
       GQLPaginatableStream<LastRecordedByInfo>,
-    )
-        vars,
+    ) vars,
     int? limit,
   }) {
     return GQLPaginatableStream<LastRecordedByInfo>(
@@ -421,7 +420,7 @@ class PersonsDAO extends DAOBase<Person> {
     required String personId,
     required DateTime lastConfession,
     required DateTime lastKodas,
-  }) async {
+  }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationupdatePersonSpiritData,
