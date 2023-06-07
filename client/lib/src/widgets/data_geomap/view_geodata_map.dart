@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:snapping_sheet/snapping_sheet.dart';
-import 'package:snapping_sheet/src/sheet_position_data.dart';
+import 'package:snapping_sheet_2/snapping_sheet.dart';
+import 'package:snapping_sheet_2/src/sheet_position_data.dart';
 
 import 'data_geomap.dart';
 import 'edit_geomap_options_widget.dart';
@@ -62,7 +62,7 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
       body: MapSnappingSheet(
         onSheetMoved: _onSheetMoved,
         sheetBelow: SnappingSheetContent(
-          draggable: true,
+          draggable: (_) => true,
           childScrollController: _sheetScrollController,
           child: StreamBuilder<GeomapOptions>(
             initialData: _mapOptions.value,

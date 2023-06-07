@@ -6,12 +6,12 @@ class ViewArea extends StatefulWidget {
   static final route = GoRoute(
     path: 'viewArea',
     builder: (context, state) {
-      if (state.queryParams['id'] == null) {
+      if (state.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewArea(
-        areaId: state.queryParams['id']!,
+        areaId: state.queryParameters['id']!,
         area: (state.extra as Map?)?['area'] as Area?,
       );
     },

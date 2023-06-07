@@ -4,11 +4,10 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_line_editor/dragmarker.dart';
-import 'package:flutter_map_line_editor/polyeditor.dart';
+import 'package:flutter_map_dragmarker/flutter_map_dragmarker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:snapping_sheet/snapping_sheet.dart';
+import 'package:snapping_sheet_2/snapping_sheet.dart';
 
 import 'data_geomap.dart';
 import 'edit_geomap_options_widget.dart';
@@ -58,15 +57,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   late final BehaviorSubject<GeomapOptions> _mapOptionsStream =
       BehaviorSubject.seeded(widget.geomapOptions);
 
-  late final lineEditor = PolyEditor(
-    points: points,
-    pointIcon: const Icon(Icons.circle_outlined, size: 10),
-    intermediateIcon: const Icon(Icons.circle, size: 10),
-    callbackRefresh: () {
-      setState(() {});
-    },
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +72,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
       ),
       body: MapSnappingSheet(
         sheetBelow: SnappingSheetContent(
-          draggable: true,
+          draggable: (_) => true,
           childScrollController: _sheetScrollController,
           child: StreamBuilder<GeomapOptions>(
             initialData: _mapOptionsStream.value,
@@ -156,9 +146,8 @@ class _EditObjectPointsMap<T extends ViewableWithID>
         return [
           DragMarker(
             point: LatLng(p.latitude, p.longitude),
-            width: markerSize,
-            height: markerSize,
-            builder: (context) => _EditablePoint(
+            size: Size(markerSize, markerSize),
+            builder: (context, pos, isDragging) => _EditablePoint(
               markerSize: markerSize,
               color: resultObject.value.color,
               icon: Icons.circle,
@@ -194,9 +183,8 @@ class _EditObjectPointsMap<T extends ViewableWithID>
                       ? (nextPoint.longitude - p.longitude) / 2
                       : 0),
             ),
-            width: markerSize,
-            height: markerSize,
-            builder: (context) => _EditablePoint(
+            size: Size(markerSize, markerSize),
+            builder: (context, pos, isDragging) => _EditablePoint(
               markerSize: markerSize,
               color: resultObject.value.color,
               icon: Icons.add_circle_outline,

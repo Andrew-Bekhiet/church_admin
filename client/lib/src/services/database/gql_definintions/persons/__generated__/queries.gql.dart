@@ -1001,11 +1001,11 @@ class _CopyWithStubImpl_Variables_Query_personsGeolocations<TRes>
 
 class Query_personsGeolocations {
   Query_personsGeolocations({
-    required this.areas,
-    required this.streets,
-    required this.families,
-    required this.stores,
-    required this.persons,
+    this.areas,
+    this.streets,
+    this.families,
+    this.stores,
+    this.persons,
     this.$__typename = 'query_root',
   });
 
@@ -1017,54 +1017,54 @@ class Query_personsGeolocations {
     final l$persons = json['persons'];
     final l$$__typename = json['__typename'];
     return Query_personsGeolocations(
-      areas: (l$areas as List<dynamic>)
-          .map((e) => Query_personsGeolocations_areas.fromJson(
+      areas: (l$areas as List<dynamic>?)
+          ?.map((e) => Query_personsGeolocations_areas.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      streets: (l$streets as List<dynamic>)
-          .map((e) => Query_personsGeolocations_streets.fromJson(
+      streets: (l$streets as List<dynamic>?)
+          ?.map((e) => Query_personsGeolocations_streets.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      families: (l$families as List<dynamic>)
-          .map((e) => Query_personsGeolocations_families.fromJson(
+      families: (l$families as List<dynamic>?)
+          ?.map((e) => Query_personsGeolocations_families.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      stores: (l$stores as List<dynamic>)
-          .map((e) => Query_personsGeolocations_stores.fromJson(
+      stores: (l$stores as List<dynamic>?)
+          ?.map((e) => Query_personsGeolocations_stores.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      persons: (l$persons as List<dynamic>)
-          .map((e) => Query_personsGeolocations_persons.fromJson(
+      persons: (l$persons as List<dynamic>?)
+          ?.map((e) => Query_personsGeolocations_persons.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query_personsGeolocations_areas> areas;
+  final List<Query_personsGeolocations_areas>? areas;
 
-  final List<Query_personsGeolocations_streets> streets;
+  final List<Query_personsGeolocations_streets>? streets;
 
-  final List<Query_personsGeolocations_families> families;
+  final List<Query_personsGeolocations_families>? families;
 
-  final List<Query_personsGeolocations_stores> stores;
+  final List<Query_personsGeolocations_stores>? stores;
 
-  final List<Query_personsGeolocations_persons> persons;
+  final List<Query_personsGeolocations_persons>? persons;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$areas = areas;
-    _resultData['areas'] = l$areas.map((e) => e.toJson()).toList();
+    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
     final l$streets = streets;
-    _resultData['streets'] = l$streets.map((e) => e.toJson()).toList();
+    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
     final l$families = families;
-    _resultData['families'] = l$families.map((e) => e.toJson()).toList();
+    _resultData['families'] = l$families?.map((e) => e.toJson()).toList();
     final l$stores = stores;
-    _resultData['stores'] = l$stores.map((e) => e.toJson()).toList();
+    _resultData['stores'] = l$stores?.map((e) => e.toJson()).toList();
     final l$persons = persons;
-    _resultData['persons'] = l$persons.map((e) => e.toJson()).toList();
+    _resultData['persons'] = l$persons?.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1079,11 +1079,11 @@ class Query_personsGeolocations {
     final l$persons = persons;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      Object.hashAll(l$areas.map((v) => v)),
-      Object.hashAll(l$streets.map((v) => v)),
-      Object.hashAll(l$families.map((v) => v)),
-      Object.hashAll(l$stores.map((v) => v)),
-      Object.hashAll(l$persons.map((v) => v)),
+      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
+      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
+      l$families == null ? null : Object.hashAll(l$families.map((v) => v)),
+      l$stores == null ? null : Object.hashAll(l$stores.map((v) => v)),
+      l$persons == null ? null : Object.hashAll(l$persons.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -1099,63 +1099,83 @@ class Query_personsGeolocations {
     }
     final l$areas = areas;
     final lOther$areas = other.areas;
-    if (l$areas.length != lOther$areas.length) {
-      return false;
-    }
-    for (int i = 0; i < l$areas.length; i++) {
-      final l$areas$entry = l$areas[i];
-      final lOther$areas$entry = lOther$areas[i];
-      if (l$areas$entry != lOther$areas$entry) {
+    if (l$areas != null && lOther$areas != null) {
+      if (l$areas.length != lOther$areas.length) {
         return false;
       }
+      for (int i = 0; i < l$areas.length; i++) {
+        final l$areas$entry = l$areas[i];
+        final lOther$areas$entry = lOther$areas[i];
+        if (l$areas$entry != lOther$areas$entry) {
+          return false;
+        }
+      }
+    } else if (l$areas != lOther$areas) {
+      return false;
     }
     final l$streets = streets;
     final lOther$streets = other.streets;
-    if (l$streets.length != lOther$streets.length) {
-      return false;
-    }
-    for (int i = 0; i < l$streets.length; i++) {
-      final l$streets$entry = l$streets[i];
-      final lOther$streets$entry = lOther$streets[i];
-      if (l$streets$entry != lOther$streets$entry) {
+    if (l$streets != null && lOther$streets != null) {
+      if (l$streets.length != lOther$streets.length) {
         return false;
       }
+      for (int i = 0; i < l$streets.length; i++) {
+        final l$streets$entry = l$streets[i];
+        final lOther$streets$entry = lOther$streets[i];
+        if (l$streets$entry != lOther$streets$entry) {
+          return false;
+        }
+      }
+    } else if (l$streets != lOther$streets) {
+      return false;
     }
     final l$families = families;
     final lOther$families = other.families;
-    if (l$families.length != lOther$families.length) {
-      return false;
-    }
-    for (int i = 0; i < l$families.length; i++) {
-      final l$families$entry = l$families[i];
-      final lOther$families$entry = lOther$families[i];
-      if (l$families$entry != lOther$families$entry) {
+    if (l$families != null && lOther$families != null) {
+      if (l$families.length != lOther$families.length) {
         return false;
       }
+      for (int i = 0; i < l$families.length; i++) {
+        final l$families$entry = l$families[i];
+        final lOther$families$entry = lOther$families[i];
+        if (l$families$entry != lOther$families$entry) {
+          return false;
+        }
+      }
+    } else if (l$families != lOther$families) {
+      return false;
     }
     final l$stores = stores;
     final lOther$stores = other.stores;
-    if (l$stores.length != lOther$stores.length) {
-      return false;
-    }
-    for (int i = 0; i < l$stores.length; i++) {
-      final l$stores$entry = l$stores[i];
-      final lOther$stores$entry = lOther$stores[i];
-      if (l$stores$entry != lOther$stores$entry) {
+    if (l$stores != null && lOther$stores != null) {
+      if (l$stores.length != lOther$stores.length) {
         return false;
       }
+      for (int i = 0; i < l$stores.length; i++) {
+        final l$stores$entry = l$stores[i];
+        final lOther$stores$entry = lOther$stores[i];
+        if (l$stores$entry != lOther$stores$entry) {
+          return false;
+        }
+      }
+    } else if (l$stores != lOther$stores) {
+      return false;
     }
     final l$persons = persons;
     final lOther$persons = other.persons;
-    if (l$persons.length != lOther$persons.length) {
-      return false;
-    }
-    for (int i = 0; i < l$persons.length; i++) {
-      final l$persons$entry = l$persons[i];
-      final lOther$persons$entry = lOther$persons[i];
-      if (l$persons$entry != lOther$persons$entry) {
+    if (l$persons != null && lOther$persons != null) {
+      if (l$persons.length != lOther$persons.length) {
         return false;
       }
+      for (int i = 0; i < l$persons.length; i++) {
+        final l$persons$entry = l$persons[i];
+        final lOther$persons$entry = lOther$persons[i];
+        if (l$persons$entry != lOther$persons$entry) {
+          return false;
+        }
+      }
+    } else if (l$persons != lOther$persons) {
+      return false;
     }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
@@ -1193,34 +1213,34 @@ abstract class CopyWith_Query_personsGeolocations<TRes> {
     String? $__typename,
   });
   TRes areas(
-      Iterable<Query_personsGeolocations_areas> Function(
+      Iterable<Query_personsGeolocations_areas>? Function(
               Iterable<
                   CopyWith_Query_personsGeolocations_areas<
-                      Query_personsGeolocations_areas>>)
+                      Query_personsGeolocations_areas>>?)
           _fn);
   TRes streets(
-      Iterable<Query_personsGeolocations_streets> Function(
+      Iterable<Query_personsGeolocations_streets>? Function(
               Iterable<
                   CopyWith_Query_personsGeolocations_streets<
-                      Query_personsGeolocations_streets>>)
+                      Query_personsGeolocations_streets>>?)
           _fn);
   TRes families(
-      Iterable<Query_personsGeolocations_families> Function(
+      Iterable<Query_personsGeolocations_families>? Function(
               Iterable<
                   CopyWith_Query_personsGeolocations_families<
-                      Query_personsGeolocations_families>>)
+                      Query_personsGeolocations_families>>?)
           _fn);
   TRes stores(
-      Iterable<Query_personsGeolocations_stores> Function(
+      Iterable<Query_personsGeolocations_stores>? Function(
               Iterable<
                   CopyWith_Query_personsGeolocations_stores<
-                      Query_personsGeolocations_stores>>)
+                      Query_personsGeolocations_stores>>?)
           _fn);
   TRes persons(
-      Iterable<Query_personsGeolocations_persons> Function(
+      Iterable<Query_personsGeolocations_persons>? Function(
               Iterable<
                   CopyWith_Query_personsGeolocations_persons<
-                      Query_personsGeolocations_persons>>)
+                      Query_personsGeolocations_persons>>?)
           _fn);
 }
 
@@ -1246,85 +1266,85 @@ class _CopyWithImpl_Query_personsGeolocations<TRes>
     Object? $__typename = _undefined,
   }) =>
       _then(Query_personsGeolocations(
-        areas: areas == _undefined || areas == null
+        areas: areas == _undefined
             ? _instance.areas
-            : (areas as List<Query_personsGeolocations_areas>),
-        streets: streets == _undefined || streets == null
+            : (areas as List<Query_personsGeolocations_areas>?),
+        streets: streets == _undefined
             ? _instance.streets
-            : (streets as List<Query_personsGeolocations_streets>),
-        families: families == _undefined || families == null
+            : (streets as List<Query_personsGeolocations_streets>?),
+        families: families == _undefined
             ? _instance.families
-            : (families as List<Query_personsGeolocations_families>),
-        stores: stores == _undefined || stores == null
+            : (families as List<Query_personsGeolocations_families>?),
+        stores: stores == _undefined
             ? _instance.stores
-            : (stores as List<Query_personsGeolocations_stores>),
-        persons: persons == _undefined || persons == null
+            : (stores as List<Query_personsGeolocations_stores>?),
+        persons: persons == _undefined
             ? _instance.persons
-            : (persons as List<Query_personsGeolocations_persons>),
+            : (persons as List<Query_personsGeolocations_persons>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes areas(
-          Iterable<Query_personsGeolocations_areas> Function(
+          Iterable<Query_personsGeolocations_areas>? Function(
                   Iterable<
                       CopyWith_Query_personsGeolocations_areas<
-                          Query_personsGeolocations_areas>>)
+                          Query_personsGeolocations_areas>>?)
               _fn) =>
       call(
           areas: _fn(_instance.areas
-              .map((e) => CopyWith_Query_personsGeolocations_areas(
+              ?.map((e) => CopyWith_Query_personsGeolocations_areas(
                     e,
                     (i) => i,
-                  ))).toList());
+                  )))?.toList());
   TRes streets(
-          Iterable<Query_personsGeolocations_streets> Function(
+          Iterable<Query_personsGeolocations_streets>? Function(
                   Iterable<
                       CopyWith_Query_personsGeolocations_streets<
-                          Query_personsGeolocations_streets>>)
+                          Query_personsGeolocations_streets>>?)
               _fn) =>
       call(
           streets: _fn(_instance.streets
-              .map((e) => CopyWith_Query_personsGeolocations_streets(
+              ?.map((e) => CopyWith_Query_personsGeolocations_streets(
                     e,
                     (i) => i,
-                  ))).toList());
+                  )))?.toList());
   TRes families(
-          Iterable<Query_personsGeolocations_families> Function(
+          Iterable<Query_personsGeolocations_families>? Function(
                   Iterable<
                       CopyWith_Query_personsGeolocations_families<
-                          Query_personsGeolocations_families>>)
+                          Query_personsGeolocations_families>>?)
               _fn) =>
       call(
           families: _fn(_instance.families
-              .map((e) => CopyWith_Query_personsGeolocations_families(
+              ?.map((e) => CopyWith_Query_personsGeolocations_families(
                     e,
                     (i) => i,
-                  ))).toList());
+                  )))?.toList());
   TRes stores(
-          Iterable<Query_personsGeolocations_stores> Function(
+          Iterable<Query_personsGeolocations_stores>? Function(
                   Iterable<
                       CopyWith_Query_personsGeolocations_stores<
-                          Query_personsGeolocations_stores>>)
+                          Query_personsGeolocations_stores>>?)
               _fn) =>
       call(
           stores: _fn(_instance.stores
-              .map((e) => CopyWith_Query_personsGeolocations_stores(
+              ?.map((e) => CopyWith_Query_personsGeolocations_stores(
                     e,
                     (i) => i,
-                  ))).toList());
+                  )))?.toList());
   TRes persons(
-          Iterable<Query_personsGeolocations_persons> Function(
+          Iterable<Query_personsGeolocations_persons>? Function(
                   Iterable<
                       CopyWith_Query_personsGeolocations_persons<
-                          Query_personsGeolocations_persons>>)
+                          Query_personsGeolocations_persons>>?)
               _fn) =>
       call(
           persons: _fn(_instance.persons
-              .map((e) => CopyWith_Query_personsGeolocations_persons(
+              ?.map((e) => CopyWith_Query_personsGeolocations_persons(
                     e,
                     (i) => i,
-                  ))).toList());
+                  )))?.toList());
 }
 
 class _CopyWithStubImpl_Query_personsGeolocations<TRes>
@@ -4960,11 +4980,11 @@ class Query_personHistoryAnalysis_personsByPk {
   Query_personHistoryAnalysis_personsByPk({
     required this.id,
     required this.name,
-    required this.callHistoryAggregate,
-    required this.visitHistoryAggregate,
-    required this.editHistoryAggregate,
-    required this.kodasHistoryAggregate,
-    required this.confessionHistoryAggregate,
+    this.callHistoryAggregate,
+    this.visitHistoryAggregate,
+    this.editHistoryAggregate,
+    this.kodasHistoryAggregate,
+    this.confessionHistoryAggregate,
     required this.services,
     this.classes,
     required this.groups,
@@ -4987,20 +5007,25 @@ class Query_personHistoryAnalysis_personsByPk {
     return Query_personHistoryAnalysis_personsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
-      callHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_callHistoryAggregate.fromJson(
-              (l$callHistoryAggregate as Map<String, dynamic>)),
-      visitHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
+      callHistoryAggregate: l$callHistoryAggregate == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
+              .fromJson((l$callHistoryAggregate as Map<String, dynamic>)),
+      visitHistoryAggregate: l$visitHistoryAggregate == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
               .fromJson((l$visitHistoryAggregate as Map<String, dynamic>)),
-      editHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_editHistoryAggregate.fromJson(
-              (l$editHistoryAggregate as Map<String, dynamic>)),
-      kodasHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
+      editHistoryAggregate: l$editHistoryAggregate == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
+              .fromJson((l$editHistoryAggregate as Map<String, dynamic>)),
+      kodasHistoryAggregate: l$kodasHistoryAggregate == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
               .fromJson((l$kodasHistoryAggregate as Map<String, dynamic>)),
-      confessionHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
+      confessionHistoryAggregate: l$confessionHistoryAggregate == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
               .fromJson((l$confessionHistoryAggregate as Map<String, dynamic>)),
       services: (l$services as List<dynamic>)
           .map((e) => Query_personHistoryAnalysis_personsByPk_services.fromJson(
@@ -5022,19 +5047,19 @@ class Query_personHistoryAnalysis_personsByPk {
 
   final String name;
 
-  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_callHistoryAggregate?
       callHistoryAggregate;
 
-  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate?
       visitHistoryAggregate;
 
-  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_editHistoryAggregate?
       editHistoryAggregate;
 
-  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate?
       kodasHistoryAggregate;
 
-  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
       confessionHistoryAggregate;
 
   final List<Query_personHistoryAnalysis_personsByPk_services> services;
@@ -5052,16 +5077,16 @@ class Query_personHistoryAnalysis_personsByPk {
     final l$name = name;
     _resultData['name'] = l$name;
     final l$callHistoryAggregate = callHistoryAggregate;
-    _resultData['callHistoryAggregate'] = l$callHistoryAggregate.toJson();
+    _resultData['callHistoryAggregate'] = l$callHistoryAggregate?.toJson();
     final l$visitHistoryAggregate = visitHistoryAggregate;
-    _resultData['visitHistoryAggregate'] = l$visitHistoryAggregate.toJson();
+    _resultData['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
     final l$editHistoryAggregate = editHistoryAggregate;
-    _resultData['editHistoryAggregate'] = l$editHistoryAggregate.toJson();
+    _resultData['editHistoryAggregate'] = l$editHistoryAggregate?.toJson();
     final l$kodasHistoryAggregate = kodasHistoryAggregate;
-    _resultData['kodasHistoryAggregate'] = l$kodasHistoryAggregate.toJson();
+    _resultData['kodasHistoryAggregate'] = l$kodasHistoryAggregate?.toJson();
     final l$confessionHistoryAggregate = confessionHistoryAggregate;
     _resultData['confessionHistoryAggregate'] =
-        l$confessionHistoryAggregate.toJson();
+        l$confessionHistoryAggregate?.toJson();
     final l$services = services;
     _resultData['services'] = l$services.map((e) => e.toJson()).toList();
     final l$classes = classes;
@@ -5292,31 +5317,26 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
-        callHistoryAggregate: callHistoryAggregate == _undefined ||
-                callHistoryAggregate == null
+        callHistoryAggregate: callHistoryAggregate == _undefined
             ? _instance.callHistoryAggregate
             : (callHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_callHistoryAggregate),
-        visitHistoryAggregate: visitHistoryAggregate == _undefined ||
-                visitHistoryAggregate == null
+                as Query_personHistoryAnalysis_personsByPk_callHistoryAggregate?),
+        visitHistoryAggregate: visitHistoryAggregate == _undefined
             ? _instance.visitHistoryAggregate
             : (visitHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate),
-        editHistoryAggregate: editHistoryAggregate == _undefined ||
-                editHistoryAggregate == null
+                as Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate?),
+        editHistoryAggregate: editHistoryAggregate == _undefined
             ? _instance.editHistoryAggregate
             : (editHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_editHistoryAggregate),
-        kodasHistoryAggregate: kodasHistoryAggregate == _undefined ||
-                kodasHistoryAggregate == null
+                as Query_personHistoryAnalysis_personsByPk_editHistoryAggregate?),
+        kodasHistoryAggregate: kodasHistoryAggregate == _undefined
             ? _instance.kodasHistoryAggregate
             : (kodasHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate),
-        confessionHistoryAggregate: confessionHistoryAggregate == _undefined ||
-                confessionHistoryAggregate == null
+                as Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate?),
+        confessionHistoryAggregate: confessionHistoryAggregate == _undefined
             ? _instance.confessionHistoryAggregate
             : (confessionHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?),
         services: services == _undefined || services == null
             ? _instance.services
             : (services
@@ -5335,38 +5355,53 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
   CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<TRes>
       get callHistoryAggregate {
     final local$callHistoryAggregate = _instance.callHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
-        local$callHistoryAggregate, (e) => call(callHistoryAggregate: e));
+    return local$callHistoryAggregate == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate
+            .stub(_then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate(
+            local$callHistoryAggregate, (e) => call(callHistoryAggregate: e));
   }
 
   CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate<TRes>
       get visitHistoryAggregate {
     final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
-        local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
+    return local$visitHistoryAggregate == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate
+            .stub(_then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate(
+            local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
   }
 
   CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate<TRes>
       get editHistoryAggregate {
     final local$editHistoryAggregate = _instance.editHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
-        local$editHistoryAggregate, (e) => call(editHistoryAggregate: e));
+    return local$editHistoryAggregate == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate
+            .stub(_then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_editHistoryAggregate(
+            local$editHistoryAggregate, (e) => call(editHistoryAggregate: e));
   }
 
   CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate<TRes>
       get kodasHistoryAggregate {
     final local$kodasHistoryAggregate = _instance.kodasHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
-        local$kodasHistoryAggregate, (e) => call(kodasHistoryAggregate: e));
+    return local$kodasHistoryAggregate == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate
+            .stub(_then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate(
+            local$kodasHistoryAggregate, (e) => call(kodasHistoryAggregate: e));
   }
 
   CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate<
       TRes> get confessionHistoryAggregate {
     final local$confessionHistoryAggregate =
         _instance.confessionHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
-        local$confessionHistoryAggregate,
-        (e) => call(confessionHistoryAggregate: e));
+    return local$confessionHistoryAggregate == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate
+            .stub(_then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate(
+            local$confessionHistoryAggregate,
+            (e) => call(confessionHistoryAggregate: e));
   }
 
   TRes services(

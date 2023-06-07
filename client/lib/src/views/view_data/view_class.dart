@@ -6,12 +6,12 @@ class ViewClass extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewClass',
     builder: (context, state) {
-      if (state.queryParams['id'] == null) {
+      if (state.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewClass(
-        classId: state.queryParams['id']!,
+        classId: state.queryParameters['id']!,
         $class: (state.extra as Map?)?['class'] as Class?,
       );
     },

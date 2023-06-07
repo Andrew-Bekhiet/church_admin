@@ -6,12 +6,12 @@ class ViewFamily extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewFamily',
     builder: (context, state) {
-      if (state.queryParams['id'] == null) {
+      if (state.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewFamily(
-        familyId: state.queryParams['id']!,
+        familyId: state.queryParameters['id']!,
         family: (state.extra as Map?)?['family'] as Family?,
       );
     },

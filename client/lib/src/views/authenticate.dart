@@ -9,7 +9,7 @@ class AuthenticateScreen extends StatefulWidget {
     name: 'authenticate',
     path: '/authenticate',
     builder: (context, state) => AuthenticateScreen(
-      next: _hasRedirect(state.queryParams) ? state.queryParams['next'] : null,
+      next: _hasRedirect(state.queryParameters) ? state.queryParameters['next'] : null,
     ),
     redirect: (context, state) {
       return redirect(state);
@@ -23,12 +23,12 @@ class AuthenticateScreen extends StatefulWidget {
     } else if (AuthService.I.currentUser?.password == null) {
       return '/registerUserData';
     } else if (LocalAuthService.I.shouldAuthenticate ||
-        (_hasRedirect(state.queryParams) &&
+        (_hasRedirect(state.queryParameters) &&
             LocalAuthService.I
-                .shouldAuthenticateForPath(state.queryParams['next']!))) {
+                .shouldAuthenticateForPath(state.queryParameters['next']!))) {
       return null;
     } else {
-      return state.queryParams['next'] ?? '/';
+      return state.queryParameters['next'] ?? '/';
     }
   }
 

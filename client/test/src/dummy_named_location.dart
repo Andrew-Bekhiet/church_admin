@@ -6,7 +6,7 @@ class DummyNamedLocation extends GoRouterState {
   const DummyNamedLocation(
     super.configuration, {
     required super.location,
-    required super.subloc,
+    required super.matchedLocation,
     required super.name,
     required super.pageKey,
   });
@@ -14,8 +14,8 @@ class DummyNamedLocation extends GoRouterState {
   @override
   String namedLocation(
     String name, {
-    Map<String, String> params = const {},
-    Map<String, dynamic> queryParams = const {},
+    Map<String, String> pathParameters = const {},
+    Map<String, dynamic> queryParameters = const {},
   }) {
     throw UnimplementedError();
   }

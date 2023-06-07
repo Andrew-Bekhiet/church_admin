@@ -7,12 +7,12 @@ class ViewGroup extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewGroup',
     builder: (context, state) {
-      if (state.queryParams['id'] == null) {
+      if (state.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewGroup(
-        groupId: state.queryParams['id']!,
+        groupId: state.queryParameters['id']!,
         group: (state.extra as Map?)?['group'] as Group?,
       );
     },

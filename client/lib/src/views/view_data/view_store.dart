@@ -6,12 +6,12 @@ class ViewStore extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewStore',
     builder: (context, state) {
-      if (state.queryParams['id'] == null) {
+      if (state.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewStore(
-        storeId: state.queryParams['id']!,
+        storeId: state.queryParameters['id']!,
         store: (state.extra as Map?)?['store'] as Store?,
       );
     },
