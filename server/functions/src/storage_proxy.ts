@@ -1,20 +1,56 @@
 import { auth, storage } from "firebase-admin";
 import { https, runWith } from "firebase-functions/v1";
 import {
+  PhotoTable,
   checkUserAccess,
   checkUserApproved,
   getHasuraUID,
   getPersonIdFromUser,
-  PhotoTable,
   photoTables,
 } from "./hasura_interface";
+
+const expiryWindowMillis = 1000 * 60 * 5;
+
+export const deletePhoto = runWith({
+  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
+})
+  .region("europe-west6")
+  .https.onCall(async (data, context) => {
+    const { path, table, id, hasuraUID } = await _authenticateStorageRequest(
+      data,
+      context,
+      "delete"
+    );
+
+    console.log("Deleting photo", { table, id, hasuraUID });
+
+    await storage().bucket("church-data-admin.appspot.com").file(path).delete();
+
+    return true;
+  });
 
 export const getDownloadUrl = runWith({
   enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
 })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
-    return await _getSignedUrl(data, context, "read");
+    const { path, contentType } = await _authenticateStorageRequest(
+      data,
+      context,
+      "read"
+    );
+
+    return (
+      await storage()
+        .bucket("church-data-admin.appspot.com")
+        .file(path)
+        .getSignedUrl({
+          expires: Date.now() + expiryWindowMillis,
+          version: "v4",
+          action: "read",
+          contentType: contentType,
+        })
+    )[0];
   });
 
 export const getUploadUrl = runWith({
@@ -22,15 +58,37 @@ export const getUploadUrl = runWith({
 })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
-    return await _getSignedUrl(data, context, "write");
+    const { path, contentType } = await _authenticateStorageRequest(
+      data,
+      context,
+      "write"
+    );
+
+    return (
+      await storage()
+        .bucket("church-data-admin.appspot.com")
+        .file(path)
+        .getSignedUrl({
+          expires: Date.now() + expiryWindowMillis,
+          version: "v4",
+          action: "write",
+          contentType: contentType,
+        })
+    )[0];
   });
 
-async function _getSignedUrl(
+async function _authenticateStorageRequest(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
   context: https.CallableContext,
-  action: "write" | "read"
-): Promise<string> {
+  action: "write" | "read" | "delete"
+): Promise<{
+  path: string;
+  contentType: string;
+  id: string;
+  table: string;
+  hasuraUID: string;
+}> {
   try {
     if (
       // (!context.app && !process.env.FUNCTIONS_EMULATOR) ||
@@ -54,7 +112,11 @@ async function _getSignedUrl(
     if (typeof _id !== "string")
       throw new https.HttpsError("invalid-argument", "'id' must be string");
 
-    if (_contentType != null && typeof _contentType !== "string")
+    if (
+      action != "delete" &&
+      _contentType != null &&
+      typeof _contentType !== "string"
+    )
       throw new https.HttpsError(
         "invalid-argument",
         "'contentType' must be string"
@@ -77,7 +139,14 @@ async function _getSignedUrl(
     const hasuraUID = (await getHasuraUID(currentUser.uid))!;
 
     console.log({ hasuraUID, table, id, action });
-    if (!(await checkUserAccess(table as PhotoTable, id, hasuraUID, action)))
+    if (
+      !(await checkUserAccess(
+        table as PhotoTable,
+        id,
+        hasuraUID,
+        action == "delete" ? "write" : action
+      ))
+    )
       throw new https.HttpsError(
         "not-found",
         `Object with id ${id} in table ${table} was not found`
@@ -88,17 +157,7 @@ async function _getSignedUrl(
         ? "persons/" + (await getPersonIdFromUser(hasuraUID))!
         : table + "/" + id;
 
-    return (
-      await storage()
-        .bucket("church-data-admin.appspot.com")
-        .file(path)
-        .getSignedUrl({
-          expires: Date.now() + 1000 * 60 * 5,
-          version: "v4",
-          action,
-          contentType,
-        })
-    )[0];
+    return { path, contentType, table, id, hasuraUID };
   } catch (e) {
     console.error(e);
     console.dir(e, { depth: 4 });

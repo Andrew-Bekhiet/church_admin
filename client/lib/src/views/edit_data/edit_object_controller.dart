@@ -1,0 +1,218 @@
+import 'dart:async';
+
+import 'package:church_admin/church_admin.dart';
+import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:universal_file/universal_file.dart';
+
+typedef UpdateFunc<T> = Future<T?> Function(
+  T oldObject,
+  T newObject,
+);
+
+class EditObjectController<T extends ViewableWithID> {
+  bool _saveLock = false;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late PhotoFieldState photoFieldState = PhotoFieldState(
+    deletePhoto: false,
+  );
+
+  final T? initialObject;
+
+  T newObject;
+
+  final Future<T> Function(T object) onCreate;
+  final UpdateFunc<T>? onUpdate;
+  final Future<void> Function(T object)? onDelete;
+
+  final Json Function(T object) toJson;
+
+  EditObjectController({
+    required this.toJson,
+    required this.newObject,
+    this.initialObject,
+    // ignore: always_put_required_named_parameters_first
+    required this.onCreate,
+    this.onUpdate,
+    this.onDelete,
+  }) : assert(
+          initialObject == null || (onUpdate != null && onDelete != null),
+          'You must provide update and delete functions when editing an existing object',
+        );
+
+  bool get hasChanged => initialObject != newObject;
+  bool get isCreate => initialObject == null;
+  bool get isUpdate => initialObject != null;
+
+  Future<void> save(BuildContext context) async {
+    try {
+      if (_saveLock) return;
+
+      if (formKey.currentState!.validate()) {
+        _saveLock = true;
+        formKey.currentState!.save();
+
+        final scaffoldMessenger = ScaffoldMessenger.of(context);
+        final themeData = Theme.of(context);
+        final navigator = Navigator.of(context);
+
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(
+            duration: Duration(minutes: 2),
+            content: Row(
+              children: [
+                Expanded(child: Text('جار الحفظ ...')),
+                CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        );
+
+        final T returnedObject;
+        if (isCreate) {
+          returnedObject = await onCreate(newObject);
+        } else {
+          returnedObject = await onUpdate!(
+                initialObject!,
+                newObject,
+              ) ??
+              newObject;
+        }
+        if (photoFieldState.hasChanged && photoFieldState.deletePhoto) {
+          await (returnedObject as IImage).imageInfo.delete();
+        } else if (photoFieldState.hasChanged) {
+          scaffoldMessenger.hideCurrentSnackBar();
+
+          final uploadProgress = BehaviorSubject<double?>();
+
+          scaffoldMessenger.showSnackBar(
+            SnackBar(
+              duration: const Duration(minutes: 30),
+              content: Row(
+                children: [
+                  const Expanded(child: Text('جار رفع الصورة ...')),
+                  StreamBuilder<double?>(
+                    stream: uploadProgress.stream,
+                    builder: (context, snapshot) => CircularProgressIndicator(
+                      value: snapshot.data,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          final mimeType =
+              MimeTypeResolver().lookup(photoFieldState.newPhoto!.path);
+
+          final uploadUrl =
+              await (returnedObject as IImage).imageInfo.getUploadUrl(
+                    contentType: mimeType,
+                  );
+
+          await FunctionsService.I.uploadPhoto(
+            url: uploadUrl,
+            contentType: mimeType,
+            fileStream: photoFieldState.newPhoto!.openRead(),
+            fileLength: File(photoFieldState.newPhoto!.path).lengthSync(),
+            onSendProgress: (sent, total) => uploadProgress.add(sent / total),
+          );
+
+          await uploadProgress.close();
+        }
+
+        scaffoldMessenger
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Row(
+                children: [
+                  const Expanded(child: Text('تم بنجاح')),
+                  Icon(
+                    Icons.done,
+                    color: themeData.primaryIconTheme.color,
+                  ),
+                ],
+              ),
+            ),
+          );
+        navigator.pop();
+      }
+    } on Exception catch (e, stackTrace) {
+      scaffoldMessenger.hideCurrentSnackBar();
+
+      unawaited(
+        showDialog(
+          context: context,
+          builder: (context) => CAErrorDialog(exception: e),
+        ),
+      );
+
+      unawaited(
+        LoggingService.I.reportError(
+          e,
+          stackTrace: stackTrace,
+          data: toJson(newObject),
+        ),
+      );
+    } finally {
+      _saveLock = false;
+    }
+  }
+
+  Future<void> delete(BuildContext context) async {
+    if (isCreate) {
+      throw Exception('Cannot delete an object that has not been created');
+    }
+
+    final navigator = Navigator.of(context);
+    final rslt = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('هل تريد حذف ' + initialObject!.name + '؟'),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('لا'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('نعم'),
+          ),
+        ],
+      ),
+    );
+
+    if (rslt == true) {
+      await onDelete!(initialObject!);
+      navigator
+        ..pop()
+        ..pop();
+    }
+  }
+
+  Future<bool> confirmExit(BuildContext context) async {
+    formKey.currentState!.save();
+
+    return newObject == initialObject ||
+        (await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('هل تريد تجاهل التغييرات؟'),
+                actions: [
+                  OutlinedButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text('البقاء'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: const Text('تجاهل'),
+                  ),
+                ],
+              ),
+            ) ??
+            false);
+  }
+}

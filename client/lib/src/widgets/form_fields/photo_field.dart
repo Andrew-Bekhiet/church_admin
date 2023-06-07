@@ -123,8 +123,10 @@ class PhotoField extends StatelessWidget {
     FormFieldState<PhotoFieldState> state,
   ) =>
       () async {
-        final source =
-            await ImagePickerService.I.showSourceSheet(context: context);
+        final source = await ImagePickerService.I.showSourceSheet(
+          context: context,
+          canDelete: canDelete,
+        );
 
         if (source == null) {
           return;
@@ -132,6 +134,7 @@ class PhotoField extends StatelessWidget {
           state
             ..didChange(PhotoFieldState(deletePhoto: true))
             ..save();
+          return;
         }
 
         if (context.mounted) {
