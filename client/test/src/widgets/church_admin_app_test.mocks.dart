@@ -4,13 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:ui' as _i13;
+import 'dart:ui' as _i12;
 
 import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:church_admin/src/services/database/gql_definintions.dart'
     as _i6;
-import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
-    as _i12;
 import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i7;
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i5;
@@ -587,7 +585,7 @@ class MockUsersDAO extends _i1.Mock implements _i6.UsersDAO {
   @override
   _i4.GQLPaginatableStream<_i4.User> streamAll({
     _i8.Stream<String?>? searchQuery,
-    List<_i4.Input_AuthUsersDataBoolExp>? where,
+    List<dynamic>? where,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -786,7 +784,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
   _i4.GQLPaginatableStream<_i4.Person> streamAll({
     _i8.Stream<String?>? searchQuery,
     String? secondLineFieldName,
-    List<_i4.Input_PersonsBoolExp>? where,
+    List<dynamic>? where,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -881,7 +879,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? classId,
     bool? asAdmin = false,
-    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<dynamic>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -928,7 +926,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? groupId,
     bool? asAdmin = false,
-    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<dynamic>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -975,7 +973,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
     required String? personId,
     required String? serviceId,
     bool? asAdmin = false,
-    List<_i4.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<dynamic>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -1018,7 +1016,7 @@ class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
           ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> paginatePersonAttendance({
-    required _i12.Variables_Subscription_personAttendance Function(
+    required dynamic Function(
       int,
       _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>,
     )? vars,
@@ -1126,7 +1124,7 @@ class MockAreasDAO extends _i1.Mock implements _i6.AreasDAO {
   @override
   _i4.GQLPaginatableStream<_i4.Area> streamAll({
     _i8.Stream<String?>? searchQuery,
-    List<_i4.Input_AreasBoolExp>? where,
+    List<dynamic>? where,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1257,9 +1255,9 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
   @override
   _i4.GQLPaginatableStream<_i4.Service> streamAll({
     _i8.Stream<String?>? searchQuery,
-    List<_i4.Input_ServicesBoolExp>? where,
-    List<_i4.Input_GroupsBoolExp>? groupsWhere,
-    List<_i4.Input_ClassesBoolExp>? classesWhere,
+    List<dynamic>? where,
+    List<dynamic>? groupsWhere,
+    List<dynamic>? classesWhere,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1359,7 +1357,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  void didChangeAppLifecycleState(_i13.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i12.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -1465,7 +1463,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void didChangeLocales(List<_i13.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i12.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -1473,16 +1471,16 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  _i8.Future<_i13.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+  _i8.Future<_i12.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
           #didRequestAppExit,
           [],
         ),
         returnValue:
-            _i8.Future<_i13.AppExitResponse>.value(_i13.AppExitResponse.exit),
+            _i8.Future<_i12.AppExitResponse>.value(_i12.AppExitResponse.exit),
         returnValueForMissingStub:
-            _i8.Future<_i13.AppExitResponse>.value(_i13.AppExitResponse.exit),
-      ) as _i8.Future<_i13.AppExitResponse>);
+            _i8.Future<_i12.AppExitResponse>.value(_i12.AppExitResponse.exit),
+      ) as _i8.Future<_i12.AppExitResponse>);
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(

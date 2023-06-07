@@ -7,7 +7,7 @@ import 'dart:async' as _i10;
 
 import 'package:church_admin/church_admin.dart' as _i8;
 import 'package:church_admin/src/services/notifications/notifications_storage.dart'
-    as _i19;
+    as _i20;
 import 'package:cloud_functions/cloud_functions.dart' as _i6;
 import 'package:dio/dio.dart' as _i7;
 import 'package:firebase_core/firebase_core.dart' as _i2;
@@ -20,9 +20,11 @@ import 'package:flutter_local_notifications/src/initialization_settings.dart'
     as _i13;
 import 'package:flutter_local_notifications/src/notification_details.dart'
     as _i15;
+import 'package:flutter_local_notifications/src/platform_specifics/android/schedule_mode.dart'
+    as _i16;
 import 'package:flutter_local_notifications/src/platform_specifics/ios/enums.dart'
-    as _i17;
-import 'package:flutter_local_notifications/src/types.dart' as _i18;
+    as _i18;
+import 'package:flutter_local_notifications/src/types.dart' as _i19;
 import 'package:flutter_local_notifications_platform_interface/flutter_local_notifications_platform_interface.dart'
     as _i14;
 import 'package:hive_flutter/hive_flutter.dart' as _i5;
@@ -30,7 +32,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart'
     as _i9;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i4;
-import 'package:timezone/timezone.dart' as _i16;
+import 'package:timezone/timezone.dart' as _i17;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -614,6 +616,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     _i15.NotificationDetails? notificationDetails, {
     String? payload,
     bool? androidAllowWhileIdle = false,
+    _i16.AndroidScheduleMode? androidScheduleMode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -628,6 +631,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
           {
             #payload: payload,
             #androidAllowWhileIdle: androidAllowWhileIdle,
+            #androidScheduleMode: androidScheduleMode,
           },
         ),
         returnValue: _i10.Future<void>.value(),
@@ -638,13 +642,14 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     int? id,
     String? title,
     String? body,
-    _i16.TZDateTime? scheduledDate,
+    _i17.TZDateTime? scheduledDate,
     _i15.NotificationDetails? notificationDetails, {
-    required _i17.UILocalNotificationDateInterpretation?
+    required _i18.UILocalNotificationDateInterpretation?
         uiLocalNotificationDateInterpretation,
-    required bool? androidAllowWhileIdle,
+    bool? androidAllowWhileIdle = false,
+    _i16.AndroidScheduleMode? androidScheduleMode,
     String? payload,
-    _i18.DateTimeComponents? matchDateTimeComponents,
+    _i19.DateTimeComponents? matchDateTimeComponents,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -660,6 +665,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
             #uiLocalNotificationDateInterpretation:
                 uiLocalNotificationDateInterpretation,
             #androidAllowWhileIdle: androidAllowWhileIdle,
+            #androidScheduleMode: androidScheduleMode,
             #payload: payload,
             #matchDateTimeComponents: matchDateTimeComponents,
           },
@@ -676,6 +682,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     _i15.NotificationDetails? notificationDetails, {
     String? payload,
     bool? androidAllowWhileIdle = false,
+    _i16.AndroidScheduleMode? androidScheduleMode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -690,6 +697,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
           {
             #payload: payload,
             #androidAllowWhileIdle: androidAllowWhileIdle,
+            #androidScheduleMode: androidScheduleMode,
           },
         ),
         returnValue: _i10.Future<void>.value(),
@@ -700,7 +708,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     int? id,
     String? title,
     String? body,
-    _i18.Time? notificationTime,
+    _i19.Time? notificationTime,
     _i15.NotificationDetails? notificationDetails, {
     String? payload,
   }) =>
@@ -724,8 +732,8 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     int? id,
     String? title,
     String? body,
-    _i18.Day? day,
-    _i18.Time? notificationTime,
+    _i19.Day? day,
+    _i19.Time? notificationTime,
     _i15.NotificationDetails? notificationDetails, {
     String? payload,
   }) =>
@@ -1023,6 +1031,22 @@ class MockFunctionsService extends _i1.Mock implements _i8.FunctionsService {
         returnValueForMissingStub: _i10.Future<String>.value(''),
       ) as _i10.Future<String>);
   @override
+  _i10.Future<void> deletePhoto(
+    String? table,
+    String? id,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deletePhoto,
+          [
+            table,
+            id,
+          ],
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+  @override
   _i10.Future<String?> getAddressFromLocation(_i8.Point? location) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1101,7 +1125,7 @@ class MockFunctionsService extends _i1.Mock implements _i8.FunctionsService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationsStorage extends _i1.Mock
-    implements _i19.NotificationsStorage {
+    implements _i20.NotificationsStorage {
   @override
   _i10.Future<void> writeNotification(_i8.Notification? notification) =>
       (super.noSuchMethod(

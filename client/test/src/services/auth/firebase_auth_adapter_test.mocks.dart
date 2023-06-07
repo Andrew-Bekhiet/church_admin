@@ -1667,7 +1667,7 @@ class MockUsersDAO extends _i1.Mock implements _i8.UsersDAO {
   @override
   _i6.GQLPaginatableStream<_i6.User> streamAll({
     _i9.Stream<String?>? searchQuery,
-    List<_i6.Input_AuthUsersDataBoolExp>? where,
+    List<dynamic>? where,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

@@ -125,17 +125,17 @@ class FakeIosUtsname implements IosUtsname {
   const FakeIosUtsname();
 
   @override
-  String? get machine => null;
+  String get machine => 'null';
 
   @override
-  String? get nodename => null;
+  String get nodename => 'null';
 
   @override
-  String? get release => null;
+  String get release => 'null';
 
   @override
-  String? get sysname => null;
+  String get sysname => 'null';
 
   @override
-  String? get version => null;
+  String get version => 'null';
 }
