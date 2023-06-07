@@ -40,17 +40,6 @@ class Class extends ViewableWithIDAndImage
   factory Class.fromJson(Map<String, Object?> json) => _$ClassFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'classes/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('classes', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'classes',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('classes', id, lastUpdatedTime: photoUpdatedAt);
 }

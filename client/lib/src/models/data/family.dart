@@ -33,20 +33,8 @@ class Family extends ViewableWithIDAndImage with _$Family {
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'families/$id',
-          downloadUrlFn: () =>
-              FunctionsService.I.getDownloadUrl('families', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'families',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
 }
 
 List<Family>? familyChildrenFromJson(List? data) =>

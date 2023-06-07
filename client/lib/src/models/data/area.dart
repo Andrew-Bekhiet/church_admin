@@ -27,19 +27,8 @@ class Area extends ViewableWithIDAndImage with _$Area {
   factory Area.fromJson(Map<String, Object?> json) => _$AreaFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'areas/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('areas', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'areas',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('areas', id, lastUpdatedTime: photoUpdatedAt);
 }
 
 List<User>? adminUsersFromJson(List? data) =>

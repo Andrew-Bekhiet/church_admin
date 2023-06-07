@@ -36,19 +36,8 @@ class User extends ViewableWithIDAndImage with _$User {
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'users/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('users', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'users',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
   String get id => uid;

@@ -24,17 +24,6 @@ class Street extends ViewableWithIDAndImage with _$Street {
   factory Street.fromJson(Map<String, Object?> json) => _$StreetFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'streets/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('streets', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'streets',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
 }

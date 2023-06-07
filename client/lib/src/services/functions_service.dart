@@ -65,6 +65,13 @@ class FunctionsService {
         .data;
   }
 
+  Future<void> deletePhoto(String table, String id) async {
+    await httpsCallable('deletePhoto').call({
+      'table': table,
+      'id': id,
+    });
+  }
+
   Future<String?> getAddressFromLocation(Point location) async {
     final response = await _dio.getUri(
       Uri(

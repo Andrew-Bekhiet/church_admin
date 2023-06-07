@@ -44,18 +44,6 @@ class Service extends ViewableWithIDAndImage
       _$ServiceFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'services/$id',
-          downloadUrlFn: () =>
-              FunctionsService.I.getDownloadUrl('services', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'services',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
 }

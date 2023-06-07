@@ -26,6 +26,8 @@ class ImageUrlCacheService {
   /// Returns cached url if available and its file is cached or if its not expired
   /// otherwise returns a fresh download url
   Future<String> getImageUrl(IImage imageObject) async {
+    if (!imageObject.hasImage) throw StateError('Object has no image');
+
     final cachedImageUrl = getCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
@@ -38,9 +40,9 @@ class ImageUrlCacheService {
   }
 
   String? getCachedImageUrl(IImage imageObject) {
-    assert(imageObject.hasImage);
+    if (!imageObject.hasImage) throw StateError('Object has no image');
 
-    final imageInfo = imageObject.imageInfo!;
+    final imageInfo = imageObject.imageInfo;
 
     final cachedData = box.get(imageInfo.cacheKey);
 
@@ -77,7 +79,7 @@ class ImageUrlCacheService {
   }
 
   Future<String> _getUrlAndSaveToCache(IImage imageObject) async {
-    final downloadUrl = await imageObject.imageInfo!.downloadUrl();
+    final downloadUrl = await imageObject.imageInfo.getDownloadUrl();
 
     await _saveUrlToCache(imageObject, downloadUrl);
 
@@ -89,8 +91,8 @@ class ImageUrlCacheService {
     String url,
   ) async {
     await box.put(
-      imageObject.imageInfo!.cacheKey,
-      imageObject.imageInfo!.lastUpdatedTime.toIso8601String() + '|' + url,
+      imageObject.imageInfo.cacheKey,
+      imageObject.imageInfo.lastUpdatedTime!.toIso8601String() + '|' + url,
     );
 
     return url;

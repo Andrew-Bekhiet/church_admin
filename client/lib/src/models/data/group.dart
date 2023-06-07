@@ -9,7 +9,9 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-class Group extends ViewableWithIDAndImage with _$Group implements AttendanceAnalyzable  {
+class Group extends ViewableWithIDAndImage
+    with _$Group
+    implements AttendanceAnalyzable {
   factory Group({
     required String id,
     required String name,
@@ -38,17 +40,6 @@ class Group extends ViewableWithIDAndImage with _$Group implements AttendanceAna
   factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'groups/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('groups', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'groups',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('groups', id, lastUpdatedTime: photoUpdatedAt);
 }

@@ -27,17 +27,6 @@ class Store extends ViewableWithIDAndImage with _$Store {
   factory Store.fromJson(Map<String, Object?> json) => _$StoreFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'stores/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('stores', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'stores',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
 }

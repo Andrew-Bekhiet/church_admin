@@ -86,8 +86,8 @@ void main() {
       expect(unit.getCachedImageUrl(person), isNull);
 
       await fakeBox.put(
-        person.imageInfo!.cacheKey,
-        '${person.imageInfo!.lastUpdatedTime.toIso8601String()}|url',
+        person.imageInfo.cacheKey,
+        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|url',
       );
 
       expect(unit.getCachedImageUrl(person), 'url');
@@ -119,22 +119,22 @@ void main() {
       // Test:
       expect(await unit.getImageUrl(person), urlFromNetwork);
       expect(
-        box.get(person.imageInfo!.cacheKey),
-        person.imageInfo!.lastUpdatedTime.toIso8601String() +
+        box.get(person.imageInfo.cacheKey),
+        person.imageInfo.lastUpdatedTime!.toIso8601String() +
             '|' +
             urlFromNetwork,
       );
       expect(await unit.getImageUrl(person), urlFromNetwork);
 
       await box.put(
-        person.imageInfo!.cacheKey,
-        person.imageInfo!.lastUpdatedTime.toIso8601String() + '|cachedUrl',
+        person.imageInfo.cacheKey,
+        person.imageInfo.lastUpdatedTime!.toIso8601String() + '|cachedUrl',
       );
       expect(await unit.getImageUrl(person), 'cachedUrl');
 
       await box.put(
-        person.imageInfo!.cacheKey,
-        person.imageInfo!.lastUpdatedTime
+        person.imageInfo.cacheKey,
+        person.imageInfo.lastUpdatedTime!
                 .subtract(const Duration(days: 1))
                 .toIso8601String() +
             '|cachedUrl',
@@ -142,8 +142,8 @@ void main() {
       expect(await unit.getImageUrl(person), urlFromNetwork);
 
       await box.put(
-        person.imageInfo!.cacheKey,
-        person.imageInfo!.lastUpdatedTime.toIso8601String() + '|uncachedUrl',
+        person.imageInfo.cacheKey,
+        person.imageInfo.lastUpdatedTime!.toIso8601String() + '|uncachedUrl',
       );
       expect(await unit.getImageUrl(person), urlFromNetwork);
     },

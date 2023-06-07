@@ -461,6 +461,22 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
   @override
+  _i7.Future<void> deletePhoto(
+    String? table,
+    String? id,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deletePhoto,
+          [
+            table,
+            id,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
   _i7.Future<String?> getAddressFromLocation(_i10.Point? location) =>
       (super.noSuchMethod(
         Invocation.method(

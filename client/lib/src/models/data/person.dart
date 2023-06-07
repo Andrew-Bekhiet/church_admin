@@ -104,19 +104,8 @@ class Person extends ViewableWithIDAndImage with _$Person {
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
   @override
-  ObjectImageInfo? get imageInfo => photoUpdatedAt != null
-      ? ObjectImageInfo(
-          cacheKey: 'persons/$id',
-          downloadUrlFn: () => FunctionsService.I.getDownloadUrl('persons', id),
-          uploadUrlFn: ({contentType, overrideId}) =>
-              FunctionsService.I.getUploadUrl(
-            'persons',
-            overrideId ?? id,
-            contentType: contentType,
-          ),
-          lastUpdatedTime: photoUpdatedAt!,
-        )
-      : null;
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));

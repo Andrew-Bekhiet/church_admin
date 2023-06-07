@@ -2,7 +2,7 @@ export 'bases/attendance_analyzable.dart';
 export 'bases/dao_base.dart';
 export 'bases/i_image.dart';
 export 'bases/id.dart';
-export 'bases/image_info.dart';
+export 'bases/object_image_info.dart';
 export 'bases/viewable.dart';
 export 'bases/viewable_with_id.dart';
 export 'bases/viewable_with_id_and_image.dart';
