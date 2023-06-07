@@ -5,23 +5,25 @@ class LauncherService {
   static LauncherService get I =>
       launcherServiceProvider.read(globalProviderContainer);
 
-  Future<bool> launch(String url) {
-    return launchUrl(Uri.parse(url));
-  }
-
   Future<bool> launchUrl(Uri url) {
     return l.launchUrl(url, mode: l.LaunchMode.externalApplication);
   }
 
   Future<bool> launchSMSChat(String fomattedPhone) {
-    return launch('sms:' + fomattedPhone);
+    return launchUrl(Uri(scheme: 'sms', path: fomattedPhone));
   }
 
   Future<bool> launchCall(String fomattedPhone) {
-    return launch('tel:' + fomattedPhone);
+    return launchUrl(Uri(scheme: 'tel', path: fomattedPhone));
   }
 
   Future<bool> launchWhatsappChat(String fomattedPhone) {
-    return launch('whatsapp://send?phone=+' + fomattedPhone);
+    return launchUrl(
+      Uri(
+        scheme: 'whatsapp',
+        host: 'send',
+        queryParameters: {'phone': '+' + fomattedPhone},
+      ),
+    );
   }
 }
