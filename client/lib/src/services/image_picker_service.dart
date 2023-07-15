@@ -121,7 +121,7 @@ class ImagePickerService {
     );
   }
 
-  Future<CroppedFile?> pickAndCropImage({
+  Future<XFile?> pickAndCropImage({
     required BuildContext context,
     required ImageSource source,
     CropAspectRatio aspectRatio = const CropAspectRatio(ratioX: 1, ratioY: 1),
@@ -151,7 +151,7 @@ class ImagePickerService {
 
     if (image == null) return null;
 
-    return _imageCropper.cropImage(
+    final croppedFile = await _imageCropper.cropImage(
       sourcePath: image.path,
       aspectRatio: aspectRatio,
       cropStyle: cropStyle,
@@ -171,6 +171,10 @@ class ImagePickerService {
         webUiSettings,
       ],
     );
+
+    if (croppedFile == null) return null;
+
+    return XFile(croppedFile.path);
   }
 }
 

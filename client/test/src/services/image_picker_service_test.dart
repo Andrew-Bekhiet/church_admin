@@ -286,7 +286,7 @@ void main() {
               cropStyle: CropStyle.circle,
             ),
             completion(
-              predicate<CroppedFile>(
+              predicate<XFile>(
                 (f) => f.path == '/path/foo/bar/CroppedFile',
               ),
             ),

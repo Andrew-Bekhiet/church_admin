@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:universal_file/universal_file.dart';
 
 typedef UpdateFunc<T> = Future<T?> Function(
   T oldObject,
@@ -47,6 +46,8 @@ class EditObjectController<T extends ViewableWithID> {
   bool get isUpdate => initialObject != null;
 
   Future<void> save(BuildContext context) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     try {
       if (_saveLock) return;
 
@@ -80,48 +81,8 @@ class EditObjectController<T extends ViewableWithID> {
               ) ??
               newObject;
         }
-        if (photoFieldState.hasChanged && photoFieldState.deletePhoto) {
-          await (returnedObject as IImage).imageInfo.delete();
-        } else if (photoFieldState.hasChanged) {
-          scaffoldMessenger.hideCurrentSnackBar();
 
-          final uploadProgress = BehaviorSubject<double?>();
-
-          scaffoldMessenger.showSnackBar(
-            SnackBar(
-              duration: const Duration(minutes: 30),
-              content: Row(
-                children: [
-                  const Expanded(child: Text('جار رفع الصورة ...')),
-                  StreamBuilder<double?>(
-                    stream: uploadProgress.stream,
-                    builder: (context, snapshot) => CircularProgressIndicator(
-                      value: snapshot.data,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          final mimeType =
-              MimeTypeResolver().lookup(photoFieldState.newPhoto!.path);
-
-          final uploadUrl =
-              await (returnedObject as IImage).imageInfo.getUploadUrl(
-                    contentType: mimeType,
-                  );
-
-          await FunctionsService.I.uploadPhoto(
-            url: uploadUrl,
-            contentType: mimeType,
-            fileStream: photoFieldState.newPhoto!.openRead(),
-            fileLength: File(photoFieldState.newPhoto!.path).lengthSync(),
-            onSendProgress: (sent, total) => uploadProgress.add(sent / total),
-          );
-
-          await uploadProgress.close();
-        }
+        await _handlePhotoChange(returnedObject, scaffoldMessenger);
 
         scaffoldMessenger
           ..hideCurrentSnackBar()
@@ -139,8 +100,11 @@ class EditObjectController<T extends ViewableWithID> {
             ),
           );
         navigator.pop();
+        _saveLock = false;
       }
     } on Exception catch (e, stackTrace) {
+      _saveLock = false;
+
       scaffoldMessenger.hideCurrentSnackBar();
 
       unawaited(
@@ -157,8 +121,53 @@ class EditObjectController<T extends ViewableWithID> {
           data: toJson(newObject),
         ),
       );
-    } finally {
-      _saveLock = false;
+    }
+  }
+
+  Future<void> _handlePhotoChange(
+    T returnedObject,
+    ScaffoldMessengerState scaffoldMessenger,
+  ) async {
+    if (photoFieldState.hasChanged && photoFieldState.deletePhoto) {
+      await (returnedObject as IImage).imageInfo.delete();
+    } else if (photoFieldState.hasChanged) {
+      scaffoldMessenger.hideCurrentSnackBar();
+
+      final uploadProgress = BehaviorSubject<double?>();
+
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          duration: const Duration(minutes: 30),
+          content: Row(
+            children: [
+              const Expanded(child: Text('جار رفع الصورة ...')),
+              StreamBuilder<double?>(
+                stream: uploadProgress.stream,
+                builder: (context, snapshot) => CircularProgressIndicator(
+                  value: snapshot.data,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final mimeType =
+          MimeTypeResolver().lookup(photoFieldState.newPhoto!.path);
+
+      final uploadUrl = await (returnedObject as IImage).imageInfo.getUploadUrl(
+            contentType: mimeType,
+          );
+
+      await FunctionsService.I.uploadPhoto(
+        url: uploadUrl,
+        contentType: mimeType,
+        fileStream: photoFieldState.newPhoto!.openRead(),
+        fileLength: await photoFieldState.newPhoto!.length(),
+        onSendProgress: (sent, total) => uploadProgress.add(sent / total),
+      );
+
+      await uploadProgress.close();
     }
   }
 
