@@ -51,18 +51,16 @@ abstract class $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-          List<Family>? children,
+      List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-          List<Family>? parents,
+      List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -169,18 +167,16 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-          List<Family>? children,
+      List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-          List<Family>? parents,
+      List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
   @override
@@ -270,18 +266,16 @@ class _$_Family extends _Family {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          this.geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       this.notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-          final List<Family>? children,
+      final List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-          final List<Family>? parents,
+      final List<Family>? parents,
       this.lastEdit})
       : _areas = areas,
         _streets = streets,
@@ -417,17 +411,16 @@ abstract class _Family extends Family {
       required final String name,
       final String? address,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          final Point? geolocation,
+      final Point? geolocation,
       final String? notes,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-          final List<Family>? children,
+      final List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-          final List<Family>? parents,
+      final List<Family>? parents,
       final LastRecordedByInfo? lastEdit}) = _$_Family;
   _Family._() : super._();
 

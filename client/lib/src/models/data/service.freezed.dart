@@ -56,20 +56,18 @@ abstract class $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
-      @JsonKey(name: 'nextServiceObject')
-          Service? nextService,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(name: 'nextServiceObject') Service? nextService,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
       List<Group>? groups,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $StudyYearCopyWith<$Res>? get fromStudyYear;
   $StudyYearCopyWith<$Res>? get toStudyYear;
@@ -252,20 +250,18 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
       String name,
       StudyYear? fromStudyYear,
       StudyYear? toStudyYear,
-      @JsonKey(name: 'nextServiceObject')
-          Service? nextService,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(name: 'nextServiceObject') Service? nextService,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       List<Class>? classes,
       List<Group>? groups,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   @override
   $StudyYearCopyWith<$Res>? get fromStudyYear;
@@ -371,20 +367,18 @@ class _$_Service extends _Service {
       required this.name,
       this.fromStudyYear,
       this.toStudyYear,
-      @JsonKey(name: 'nextServiceObject')
-          this.nextService,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(name: 'nextServiceObject') this.nextService,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       final List<Class>? classes,
       final List<Group>? groups,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceHistoryAggregate,
+      this.attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceDaysConstraintsAggregate})
+      this.attendanceDaysConstraintsAggregate})
       : _classes = classes,
         _groups = groups,
         _adminUsers = adminUsers,
@@ -524,21 +518,19 @@ abstract class _Service extends Service {
       required final String name,
       final StudyYear? fromStudyYear,
       final StudyYear? toStudyYear,
-      @JsonKey(name: 'nextServiceObject')
-          final Service? nextService,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      @JsonKey(name: 'nextServiceObject') final Service? nextService,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final List<Class>? classes,
       final List<Group>? groups,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? attendanceHistoryAggregate,
+      final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>?
-              attendanceDaysConstraintsAggregate}) = _$_Service;
+      final AnalysisData<DateTime>?
+          attendanceDaysConstraintsAggregate}) = _$_Service;
   _Service._() : super._();
 
   factory _Service.fromJson(Map<String, dynamic> json) = _$_Service.fromJson;

@@ -175,7 +175,7 @@ abstract class _Hobby extends Hobby {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color}) = _$_Hobby;
+      final Color? color}) = _$_Hobby;
   _Hobby._() : super._();
 
   factory _Hobby.fromJson(Map<String, dynamic> json) = _$_Hobby.fromJson;

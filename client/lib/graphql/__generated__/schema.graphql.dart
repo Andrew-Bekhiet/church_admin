@@ -2475,12 +2475,12 @@ class _CopyWithStubImpl_Input_AreasObjRelInsertInput<TRes>
 class Input_AreasOnConflict {
   factory Input_AreasOnConflict({
     required Enum_AreasConstraint constraint,
-    required List<Enum_AreasUpdateColumn> updateColumns,
+    List<Enum_AreasUpdateColumn>? updateColumns,
     Input_AreasBoolExp? where,
   }) =>
       Input_AreasOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -2491,10 +2491,12 @@ class Input_AreasOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_AreasConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_AreasUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_AreasUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -2508,16 +2510,20 @@ class Input_AreasOnConflict {
 
   Enum_AreasConstraint get constraint =>
       (_$data['constraint'] as Enum_AreasConstraint);
-  List<Enum_AreasUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_AreasUpdateColumn>);
+  List<Enum_AreasUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AreasUpdateColumn>?);
   Input_AreasBoolExp? get where => (_$data['where'] as Input_AreasBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_AreasConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_AreasUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AreasUpdateColumn>)
+              .map((e) => toJson_Enum_AreasUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -2545,15 +2551,23 @@ class Input_AreasOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -2573,7 +2587,11 @@ class Input_AreasOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -8328,12 +8346,12 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy<TRes>
 class Input_AuthUsersAdminOnOnConflict {
   factory Input_AuthUsersAdminOnOnConflict({
     required Enum_AuthUsersAdminOnConstraint constraint,
-    required List<Enum_AuthUsersAdminOnUpdateColumn> updateColumns,
+    List<Enum_AuthUsersAdminOnUpdateColumn>? updateColumns,
     Input_AuthUsersAdminOnBoolExp? where,
   }) =>
       Input_AuthUsersAdminOnOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -8344,10 +8362,12 @@ class Input_AuthUsersAdminOnOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_AuthUsersAdminOnConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_AuthUsersAdminOnUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_AuthUsersAdminOnUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -8362,8 +8382,8 @@ class Input_AuthUsersAdminOnOnConflict {
 
   Enum_AuthUsersAdminOnConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersAdminOnConstraint);
-  List<Enum_AuthUsersAdminOnUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_AuthUsersAdminOnUpdateColumn>);
+  List<Enum_AuthUsersAdminOnUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AuthUsersAdminOnUpdateColumn>?);
   Input_AuthUsersAdminOnBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersAdminOnBoolExp?);
   Map<String, dynamic> toJson() {
@@ -8371,10 +8391,13 @@ class Input_AuthUsersAdminOnOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_AuthUsersAdminOnConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_AuthUsersAdminOnUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AuthUsersAdminOnUpdateColumn>)
+              .map((e) => toJson_Enum_AuthUsersAdminOnUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -8403,15 +8426,23 @@ class Input_AuthUsersAdminOnOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -8431,7 +8462,11 @@ class Input_AuthUsersAdminOnOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -12694,12 +12729,12 @@ class _CopyWithStubImpl_Input_AuthUsersDataObjRelInsertInput<TRes>
 class Input_AuthUsersDataOnConflict {
   factory Input_AuthUsersDataOnConflict({
     required Enum_AuthUsersDataConstraint constraint,
-    required List<Enum_AuthUsersDataUpdateColumn> updateColumns,
+    List<Enum_AuthUsersDataUpdateColumn>? updateColumns,
     Input_AuthUsersDataBoolExp? where,
   }) =>
       Input_AuthUsersDataOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -12710,10 +12745,12 @@ class Input_AuthUsersDataOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_AuthUsersDataConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_AuthUsersDataUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_AuthUsersDataUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -12728,8 +12765,8 @@ class Input_AuthUsersDataOnConflict {
 
   Enum_AuthUsersDataConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersDataConstraint);
-  List<Enum_AuthUsersDataUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_AuthUsersDataUpdateColumn>);
+  List<Enum_AuthUsersDataUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AuthUsersDataUpdateColumn>?);
   Input_AuthUsersDataBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersDataBoolExp?);
   Map<String, dynamic> toJson() {
@@ -12737,10 +12774,13 @@ class Input_AuthUsersDataOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_AuthUsersDataConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_AuthUsersDataUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AuthUsersDataUpdateColumn>)
+              .map((e) => toJson_Enum_AuthUsersDataUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -12769,15 +12809,23 @@ class Input_AuthUsersDataOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -12797,7 +12845,11 @@ class Input_AuthUsersDataOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -15522,12 +15574,12 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
 class Input_AuthUsersPermissionsOnConflict {
   factory Input_AuthUsersPermissionsOnConflict({
     required Enum_AuthUsersPermissionsConstraint constraint,
-    required List<Enum_AuthUsersPermissionsUpdateColumn> updateColumns,
+    List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
     Input_AuthUsersPermissionsBoolExp? where,
   }) =>
       Input_AuthUsersPermissionsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -15539,11 +15591,13 @@ class Input_AuthUsersPermissionsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_AuthUsersPermissionsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_AuthUsersPermissionsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_AuthUsersPermissionsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -15558,8 +15612,8 @@ class Input_AuthUsersPermissionsOnConflict {
 
   Enum_AuthUsersPermissionsConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersPermissionsConstraint);
-  List<Enum_AuthUsersPermissionsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_AuthUsersPermissionsUpdateColumn>);
+  List<Enum_AuthUsersPermissionsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AuthUsersPermissionsUpdateColumn>?);
   Input_AuthUsersPermissionsBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersPermissionsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -15567,10 +15621,13 @@ class Input_AuthUsersPermissionsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_AuthUsersPermissionsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_AuthUsersPermissionsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AuthUsersPermissionsUpdateColumn>)
+              .map((e) => toJson_Enum_AuthUsersPermissionsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -15600,15 +15657,23 @@ class Input_AuthUsersPermissionsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -15628,7 +15693,11 @@ class Input_AuthUsersPermissionsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -18510,12 +18579,12 @@ class _CopyWithStubImpl_Input_ChurchesObjRelInsertInput<TRes>
 class Input_ChurchesOnConflict {
   factory Input_ChurchesOnConflict({
     required Enum_ChurchesConstraint constraint,
-    required List<Enum_ChurchesUpdateColumn> updateColumns,
+    List<Enum_ChurchesUpdateColumn>? updateColumns,
     Input_ChurchesBoolExp? where,
   }) =>
       Input_ChurchesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -18526,10 +18595,12 @@ class Input_ChurchesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_ChurchesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_ChurchesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_ChurchesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -18543,18 +18614,21 @@ class Input_ChurchesOnConflict {
 
   Enum_ChurchesConstraint get constraint =>
       (_$data['constraint'] as Enum_ChurchesConstraint);
-  List<Enum_ChurchesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_ChurchesUpdateColumn>);
+  List<Enum_ChurchesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_ChurchesUpdateColumn>?);
   Input_ChurchesBoolExp? get where =>
       (_$data['where'] as Input_ChurchesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_ChurchesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_ChurchesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_ChurchesUpdateColumn>)
+              .map((e) => toJson_Enum_ChurchesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -18583,15 +18657,23 @@ class Input_ChurchesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -18611,7 +18693,11 @@ class Input_ChurchesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -23607,12 +23693,12 @@ class _CopyWithStubImpl_Input_ClassesObjRelInsertInput<TRes>
 class Input_ClassesOnConflict {
   factory Input_ClassesOnConflict({
     required Enum_ClassesConstraint constraint,
-    required List<Enum_ClassesUpdateColumn> updateColumns,
+    List<Enum_ClassesUpdateColumn>? updateColumns,
     Input_ClassesBoolExp? where,
   }) =>
       Input_ClassesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -23623,10 +23709,12 @@ class Input_ClassesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_ClassesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_ClassesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_ClassesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -23640,16 +23728,20 @@ class Input_ClassesOnConflict {
 
   Enum_ClassesConstraint get constraint =>
       (_$data['constraint'] as Enum_ClassesConstraint);
-  List<Enum_ClassesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_ClassesUpdateColumn>);
+  List<Enum_ClassesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_ClassesUpdateColumn>?);
   Input_ClassesBoolExp? get where => (_$data['where'] as Input_ClassesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_ClassesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_ClassesUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_ClassesUpdateColumn>)
+              .map((e) => toJson_Enum_ClassesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -23678,15 +23770,23 @@ class Input_ClassesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -23706,7 +23806,11 @@ class Input_ClassesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -28152,12 +28256,12 @@ class _CopyWithStubImpl_Input_CollegesObjRelInsertInput<TRes>
 class Input_CollegesOnConflict {
   factory Input_CollegesOnConflict({
     required Enum_CollegesConstraint constraint,
-    required List<Enum_CollegesUpdateColumn> updateColumns,
+    List<Enum_CollegesUpdateColumn>? updateColumns,
     Input_CollegesBoolExp? where,
   }) =>
       Input_CollegesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -28168,10 +28272,12 @@ class Input_CollegesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_CollegesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_CollegesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_CollegesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -28185,18 +28291,21 @@ class Input_CollegesOnConflict {
 
   Enum_CollegesConstraint get constraint =>
       (_$data['constraint'] as Enum_CollegesConstraint);
-  List<Enum_CollegesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_CollegesUpdateColumn>);
+  List<Enum_CollegesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_CollegesUpdateColumn>?);
   Input_CollegesBoolExp? get where =>
       (_$data['where'] as Input_CollegesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_CollegesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_CollegesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_CollegesUpdateColumn>)
+              .map((e) => toJson_Enum_CollegesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -28225,15 +28334,23 @@ class Input_CollegesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -28253,7 +28370,11 @@ class Input_CollegesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -33250,12 +33371,12 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesMinOrderBy<TRes>
 class Input_FamiliesFamiliesOnConflict {
   factory Input_FamiliesFamiliesOnConflict({
     required Enum_FamiliesFamiliesConstraint constraint,
-    required List<Enum_FamiliesFamiliesUpdateColumn> updateColumns,
+    List<Enum_FamiliesFamiliesUpdateColumn>? updateColumns,
     Input_FamiliesFamiliesBoolExp? where,
   }) =>
       Input_FamiliesFamiliesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -33266,10 +33387,12 @@ class Input_FamiliesFamiliesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_FamiliesFamiliesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_FamiliesFamiliesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_FamiliesFamiliesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -33284,8 +33407,8 @@ class Input_FamiliesFamiliesOnConflict {
 
   Enum_FamiliesFamiliesConstraint get constraint =>
       (_$data['constraint'] as Enum_FamiliesFamiliesConstraint);
-  List<Enum_FamiliesFamiliesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_FamiliesFamiliesUpdateColumn>);
+  List<Enum_FamiliesFamiliesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_FamiliesFamiliesUpdateColumn>?);
   Input_FamiliesFamiliesBoolExp? get where =>
       (_$data['where'] as Input_FamiliesFamiliesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -33293,10 +33416,13 @@ class Input_FamiliesFamiliesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_FamiliesFamiliesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_FamiliesFamiliesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_FamiliesFamiliesUpdateColumn>)
+              .map((e) => toJson_Enum_FamiliesFamiliesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -33325,15 +33451,23 @@ class Input_FamiliesFamiliesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -33353,7 +33487,11 @@ class Input_FamiliesFamiliesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -35638,12 +35776,12 @@ class _CopyWithStubImpl_Input_FamiliesObjRelInsertInput<TRes>
 class Input_FamiliesOnConflict {
   factory Input_FamiliesOnConflict({
     required Enum_FamiliesConstraint constraint,
-    required List<Enum_FamiliesUpdateColumn> updateColumns,
+    List<Enum_FamiliesUpdateColumn>? updateColumns,
     Input_FamiliesBoolExp? where,
   }) =>
       Input_FamiliesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -35654,10 +35792,12 @@ class Input_FamiliesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_FamiliesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_FamiliesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_FamiliesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -35671,18 +35811,21 @@ class Input_FamiliesOnConflict {
 
   Enum_FamiliesConstraint get constraint =>
       (_$data['constraint'] as Enum_FamiliesConstraint);
-  List<Enum_FamiliesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_FamiliesUpdateColumn>);
+  List<Enum_FamiliesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_FamiliesUpdateColumn>?);
   Input_FamiliesBoolExp? get where =>
       (_$data['where'] as Input_FamiliesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_FamiliesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_FamiliesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_FamiliesUpdateColumn>)
+              .map((e) => toJson_Enum_FamiliesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -35711,15 +35854,23 @@ class Input_FamiliesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -35739,7 +35890,11 @@ class Input_FamiliesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -39860,12 +40015,12 @@ class _CopyWithStubImpl_Input_FathersObjRelInsertInput<TRes>
 class Input_FathersOnConflict {
   factory Input_FathersOnConflict({
     required Enum_FathersConstraint constraint,
-    required List<Enum_FathersUpdateColumn> updateColumns,
+    List<Enum_FathersUpdateColumn>? updateColumns,
     Input_FathersBoolExp? where,
   }) =>
       Input_FathersOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -39876,10 +40031,12 @@ class Input_FathersOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_FathersConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_FathersUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_FathersUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -39893,16 +40050,20 @@ class Input_FathersOnConflict {
 
   Enum_FathersConstraint get constraint =>
       (_$data['constraint'] as Enum_FathersConstraint);
-  List<Enum_FathersUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_FathersUpdateColumn>);
+  List<Enum_FathersUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_FathersUpdateColumn>?);
   Input_FathersBoolExp? get where => (_$data['where'] as Input_FathersBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_FathersConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_FathersUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_FathersUpdateColumn>)
+              .map((e) => toJson_Enum_FathersUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -39931,15 +40092,23 @@ class Input_FathersOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -39959,7 +40128,11 @@ class Input_FathersOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -45549,12 +45722,12 @@ class _CopyWithStubImpl_Input_GroupsObjRelInsertInput<TRes>
 class Input_GroupsOnConflict {
   factory Input_GroupsOnConflict({
     required Enum_GroupsConstraint constraint,
-    required List<Enum_GroupsUpdateColumn> updateColumns,
+    List<Enum_GroupsUpdateColumn>? updateColumns,
     Input_GroupsBoolExp? where,
   }) =>
       Input_GroupsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -45565,10 +45738,12 @@ class Input_GroupsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_GroupsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_GroupsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_GroupsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -45582,16 +45757,20 @@ class Input_GroupsOnConflict {
 
   Enum_GroupsConstraint get constraint =>
       (_$data['constraint'] as Enum_GroupsConstraint);
-  List<Enum_GroupsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_GroupsUpdateColumn>);
+  List<Enum_GroupsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_GroupsUpdateColumn>?);
   Input_GroupsBoolExp? get where => (_$data['where'] as Input_GroupsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_GroupsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_GroupsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_GroupsUpdateColumn>)
+              .map((e) => toJson_Enum_GroupsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -45620,15 +45799,23 @@ class Input_GroupsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -45648,7 +45835,11 @@ class Input_GroupsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -51646,13 +51837,12 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsMinOrderBy<TRes>
 class Input_HistoryAttendanceDaysConstraintsOnConflict {
   factory Input_HistoryAttendanceDaysConstraintsOnConflict({
     required Enum_HistoryAttendanceDaysConstraintsConstraint constraint,
-    required List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>
-        updateColumns,
+    List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>? updateColumns,
     Input_HistoryAttendanceDaysConstraintsBoolExp? where,
   }) =>
       Input_HistoryAttendanceDaysConstraintsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -51665,11 +51855,14 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
     result$data['constraint'] =
         fromJson_Enum_HistoryAttendanceDaysConstraintsConstraint(
             (l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(
-            (e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(
+                  (e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -51684,9 +51877,9 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
 
   Enum_HistoryAttendanceDaysConstraintsConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceDaysConstraintsConstraint);
-  List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn> get updateColumns =>
+  List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
-          as List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>);
+          as List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>?);
   Input_HistoryAttendanceDaysConstraintsBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -51694,10 +51887,14 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryAttendanceDaysConstraintsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] = (l$updateColumns
+              as List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>)
+          .map((e) =>
+              toJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(e))
+          .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -51727,15 +51924,23 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -51755,7 +51960,11 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -54660,12 +54869,12 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysObjRelInsertInput<TRes>
 class Input_HistoryAttendanceDaysOnConflict {
   factory Input_HistoryAttendanceDaysOnConflict({
     required Enum_HistoryAttendanceDaysConstraint constraint,
-    required List<Enum_HistoryAttendanceDaysUpdateColumn> updateColumns,
+    List<Enum_HistoryAttendanceDaysUpdateColumn>? updateColumns,
     Input_HistoryAttendanceDaysBoolExp? where,
   }) =>
       Input_HistoryAttendanceDaysOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -54677,11 +54886,13 @@ class Input_HistoryAttendanceDaysOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HistoryAttendanceDaysConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_HistoryAttendanceDaysUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryAttendanceDaysUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -54696,8 +54907,9 @@ class Input_HistoryAttendanceDaysOnConflict {
 
   Enum_HistoryAttendanceDaysConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceDaysConstraint);
-  List<Enum_HistoryAttendanceDaysUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryAttendanceDaysUpdateColumn>);
+  List<Enum_HistoryAttendanceDaysUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns']
+          as List<Enum_HistoryAttendanceDaysUpdateColumn>?);
   Input_HistoryAttendanceDaysBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysBoolExp?);
   Map<String, dynamic> toJson() {
@@ -54705,10 +54917,13 @@ class Input_HistoryAttendanceDaysOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryAttendanceDaysConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryAttendanceDaysUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryAttendanceDaysUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryAttendanceDaysUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -54738,15 +54953,23 @@ class Input_HistoryAttendanceDaysOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -54766,7 +54989,11 @@ class Input_HistoryAttendanceDaysOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -59429,12 +59656,12 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryMinOrderBy<TRes>
 class Input_HistoryAttendanceHistoryOnConflict {
   factory Input_HistoryAttendanceHistoryOnConflict({
     required Enum_HistoryAttendanceHistoryConstraint constraint,
-    required List<Enum_HistoryAttendanceHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryAttendanceHistoryUpdateColumn>? updateColumns,
     Input_HistoryAttendanceHistoryBoolExp? where,
   }) =>
       Input_HistoryAttendanceHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -59447,11 +59674,13 @@ class Input_HistoryAttendanceHistoryOnConflict {
     result$data['constraint'] =
         fromJson_Enum_HistoryAttendanceHistoryConstraint(
             (l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_HistoryAttendanceHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryAttendanceHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -59466,9 +59695,9 @@ class Input_HistoryAttendanceHistoryOnConflict {
 
   Enum_HistoryAttendanceHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceHistoryConstraint);
-  List<Enum_HistoryAttendanceHistoryUpdateColumn> get updateColumns =>
+  List<Enum_HistoryAttendanceHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
-          as List<Enum_HistoryAttendanceHistoryUpdateColumn>);
+          as List<Enum_HistoryAttendanceHistoryUpdateColumn>?);
   Input_HistoryAttendanceHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -59476,10 +59705,13 @@ class Input_HistoryAttendanceHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryAttendanceHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryAttendanceHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryAttendanceHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryAttendanceHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -59509,15 +59741,23 @@ class Input_HistoryAttendanceHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -59537,7 +59777,11 @@ class Input_HistoryAttendanceHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -63996,12 +64240,12 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy<TRes>
 class Input_HistoryCallHistoryOnConflict {
   factory Input_HistoryCallHistoryOnConflict({
     required Enum_HistoryCallHistoryConstraint constraint,
-    required List<Enum_HistoryCallHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryCallHistoryUpdateColumn>? updateColumns,
     Input_HistoryCallHistoryBoolExp? where,
   }) =>
       Input_HistoryCallHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -64013,10 +64257,13 @@ class Input_HistoryCallHistoryOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HistoryCallHistoryConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_HistoryCallHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryCallHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -64031,8 +64278,8 @@ class Input_HistoryCallHistoryOnConflict {
 
   Enum_HistoryCallHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryCallHistoryConstraint);
-  List<Enum_HistoryCallHistoryUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryCallHistoryUpdateColumn>);
+  List<Enum_HistoryCallHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HistoryCallHistoryUpdateColumn>?);
   Input_HistoryCallHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryCallHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -64040,10 +64287,13 @@ class Input_HistoryCallHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryCallHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryCallHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryCallHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryCallHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -64073,15 +64323,23 @@ class Input_HistoryCallHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -64101,7 +64359,11 @@ class Input_HistoryCallHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -67119,12 +67381,12 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy<TRes>
 class Input_HistoryConfessionHistoryOnConflict {
   factory Input_HistoryConfessionHistoryOnConflict({
     required Enum_HistoryConfessionHistoryConstraint constraint,
-    required List<Enum_HistoryConfessionHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryConfessionHistoryUpdateColumn>? updateColumns,
     Input_HistoryConfessionHistoryBoolExp? where,
   }) =>
       Input_HistoryConfessionHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -67137,11 +67399,13 @@ class Input_HistoryConfessionHistoryOnConflict {
     result$data['constraint'] =
         fromJson_Enum_HistoryConfessionHistoryConstraint(
             (l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_HistoryConfessionHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryConfessionHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -67156,9 +67420,9 @@ class Input_HistoryConfessionHistoryOnConflict {
 
   Enum_HistoryConfessionHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryConfessionHistoryConstraint);
-  List<Enum_HistoryConfessionHistoryUpdateColumn> get updateColumns =>
+  List<Enum_HistoryConfessionHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
-          as List<Enum_HistoryConfessionHistoryUpdateColumn>);
+          as List<Enum_HistoryConfessionHistoryUpdateColumn>?);
   Input_HistoryConfessionHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryConfessionHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -67166,10 +67430,13 @@ class Input_HistoryConfessionHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryConfessionHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryConfessionHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryConfessionHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryConfessionHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -67199,15 +67466,23 @@ class Input_HistoryConfessionHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -67227,7 +67502,11 @@ class Input_HistoryConfessionHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -70331,12 +70610,12 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryMinOrderBy<TRes>
 class Input_HistoryEditHistoryOnConflict {
   factory Input_HistoryEditHistoryOnConflict({
     required Enum_HistoryEditHistoryConstraint constraint,
-    required List<Enum_HistoryEditHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryEditHistoryUpdateColumn>? updateColumns,
     Input_HistoryEditHistoryBoolExp? where,
   }) =>
       Input_HistoryEditHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -70348,10 +70627,13 @@ class Input_HistoryEditHistoryOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HistoryEditHistoryConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_HistoryEditHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryEditHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -70366,8 +70648,8 @@ class Input_HistoryEditHistoryOnConflict {
 
   Enum_HistoryEditHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryEditHistoryConstraint);
-  List<Enum_HistoryEditHistoryUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryEditHistoryUpdateColumn>);
+  List<Enum_HistoryEditHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HistoryEditHistoryUpdateColumn>?);
   Input_HistoryEditHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryEditHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -70375,10 +70657,13 @@ class Input_HistoryEditHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryEditHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryEditHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryEditHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryEditHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -70408,15 +70693,23 @@ class Input_HistoryEditHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -70436,7 +70729,11 @@ class Input_HistoryEditHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -73600,12 +73897,12 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
 class Input_HistoryKodasHistoryOnConflict {
   factory Input_HistoryKodasHistoryOnConflict({
     required Enum_HistoryKodasHistoryConstraint constraint,
-    required List<Enum_HistoryKodasHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryKodasHistoryUpdateColumn>? updateColumns,
     Input_HistoryKodasHistoryBoolExp? where,
   }) =>
       Input_HistoryKodasHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -73617,11 +73914,13 @@ class Input_HistoryKodasHistoryOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HistoryKodasHistoryConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map(
-            (e) => fromJson_Enum_HistoryKodasHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryKodasHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -73636,8 +73935,8 @@ class Input_HistoryKodasHistoryOnConflict {
 
   Enum_HistoryKodasHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryKodasHistoryConstraint);
-  List<Enum_HistoryKodasHistoryUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryKodasHistoryUpdateColumn>);
+  List<Enum_HistoryKodasHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HistoryKodasHistoryUpdateColumn>?);
   Input_HistoryKodasHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryKodasHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -73645,10 +73944,13 @@ class Input_HistoryKodasHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryKodasHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryKodasHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryKodasHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryKodasHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -73678,15 +73980,23 @@ class Input_HistoryKodasHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -73706,7 +74016,11 @@ class Input_HistoryKodasHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -76641,12 +76955,12 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryMinOrderBy<TRes>
 class Input_HistoryVisitHistoryOnConflict {
   factory Input_HistoryVisitHistoryOnConflict({
     required Enum_HistoryVisitHistoryConstraint constraint,
-    required List<Enum_HistoryVisitHistoryUpdateColumn> updateColumns,
+    List<Enum_HistoryVisitHistoryUpdateColumn>? updateColumns,
     Input_HistoryVisitHistoryBoolExp? where,
   }) =>
       Input_HistoryVisitHistoryOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -76658,11 +76972,13 @@ class Input_HistoryVisitHistoryOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HistoryVisitHistoryConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map(
-            (e) => fromJson_Enum_HistoryVisitHistoryUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryVisitHistoryUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -76677,8 +76993,8 @@ class Input_HistoryVisitHistoryOnConflict {
 
   Enum_HistoryVisitHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryVisitHistoryConstraint);
-  List<Enum_HistoryVisitHistoryUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryVisitHistoryUpdateColumn>);
+  List<Enum_HistoryVisitHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HistoryVisitHistoryUpdateColumn>?);
   Input_HistoryVisitHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryVisitHistoryBoolExp?);
   Map<String, dynamic> toJson() {
@@ -76686,10 +77002,13 @@ class Input_HistoryVisitHistoryOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_HistoryVisitHistoryConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_HistoryVisitHistoryUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryVisitHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryVisitHistoryUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -76719,15 +77038,23 @@ class Input_HistoryVisitHistoryOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -76747,7 +77074,11 @@ class Input_HistoryVisitHistoryOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -78810,12 +79141,12 @@ class _CopyWithStubImpl_Input_HobbiesObjRelInsertInput<TRes>
 class Input_HobbiesOnConflict {
   factory Input_HobbiesOnConflict({
     required Enum_HobbiesConstraint constraint,
-    required List<Enum_HobbiesUpdateColumn> updateColumns,
+    List<Enum_HobbiesUpdateColumn>? updateColumns,
     Input_HobbiesBoolExp? where,
   }) =>
       Input_HobbiesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -78826,10 +79157,12 @@ class Input_HobbiesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_HobbiesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_HobbiesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_HobbiesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -78843,16 +79176,20 @@ class Input_HobbiesOnConflict {
 
   Enum_HobbiesConstraint get constraint =>
       (_$data['constraint'] as Enum_HobbiesConstraint);
-  List<Enum_HobbiesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HobbiesUpdateColumn>);
+  List<Enum_HobbiesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HobbiesUpdateColumn>?);
   Input_HobbiesBoolExp? get where => (_$data['where'] as Input_HobbiesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_HobbiesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_HobbiesUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HobbiesUpdateColumn>)
+              .map((e) => toJson_Enum_HobbiesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -78881,15 +79218,23 @@ class Input_HobbiesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -78909,7 +79254,11 @@ class Input_HobbiesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -81026,12 +81375,12 @@ class _CopyWithStubImpl_Input_JobsObjRelInsertInput<TRes>
 class Input_JobsOnConflict {
   factory Input_JobsOnConflict({
     required Enum_JobsConstraint constraint,
-    required List<Enum_JobsUpdateColumn> updateColumns,
+    List<Enum_JobsUpdateColumn>? updateColumns,
     Input_JobsBoolExp? where,
   }) =>
       Input_JobsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -81042,10 +81391,12 @@ class Input_JobsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_JobsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_JobsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_JobsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -81059,16 +81410,20 @@ class Input_JobsOnConflict {
 
   Enum_JobsConstraint get constraint =>
       (_$data['constraint'] as Enum_JobsConstraint);
-  List<Enum_JobsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_JobsUpdateColumn>);
+  List<Enum_JobsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_JobsUpdateColumn>?);
   Input_JobsBoolExp? get where => (_$data['where'] as Input_JobsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_JobsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_JobsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_JobsUpdateColumn>)
+              .map((e) => toJson_Enum_JobsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -81096,15 +81451,23 @@ class Input_JobsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -81124,7 +81487,11 @@ class Input_JobsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -84120,12 +84487,12 @@ class _CopyWithStubImpl_Input_PersonStatesObjRelInsertInput<TRes>
 class Input_PersonStatesOnConflict {
   factory Input_PersonStatesOnConflict({
     required Enum_PersonStatesConstraint constraint,
-    required List<Enum_PersonStatesUpdateColumn> updateColumns,
+    List<Enum_PersonStatesUpdateColumn>? updateColumns,
     Input_PersonStatesBoolExp? where,
   }) =>
       Input_PersonStatesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -84136,10 +84503,12 @@ class Input_PersonStatesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonStatesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonStatesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonStatesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -84154,8 +84523,8 @@ class Input_PersonStatesOnConflict {
 
   Enum_PersonStatesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonStatesConstraint);
-  List<Enum_PersonStatesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonStatesUpdateColumn>);
+  List<Enum_PersonStatesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonStatesUpdateColumn>?);
   Input_PersonStatesBoolExp? get where =>
       (_$data['where'] as Input_PersonStatesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -84163,10 +84532,13 @@ class Input_PersonStatesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_PersonStatesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonStatesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonStatesUpdateColumn>)
+              .map((e) => toJson_Enum_PersonStatesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -84195,15 +84567,23 @@ class Input_PersonStatesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -84223,7 +84603,11 @@ class Input_PersonStatesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -86195,12 +86579,12 @@ class _CopyWithStubImpl_Input_PersonTypesObjRelInsertInput<TRes>
 class Input_PersonTypesOnConflict {
   factory Input_PersonTypesOnConflict({
     required Enum_PersonTypesConstraint constraint,
-    required List<Enum_PersonTypesUpdateColumn> updateColumns,
+    List<Enum_PersonTypesUpdateColumn>? updateColumns,
     Input_PersonTypesBoolExp? where,
   }) =>
       Input_PersonTypesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -86211,10 +86595,12 @@ class Input_PersonTypesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonTypesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonTypesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonTypesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -86229,18 +86615,21 @@ class Input_PersonTypesOnConflict {
 
   Enum_PersonTypesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonTypesConstraint);
-  List<Enum_PersonTypesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonTypesUpdateColumn>);
+  List<Enum_PersonTypesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonTypesUpdateColumn>?);
   Input_PersonTypesBoolExp? get where =>
       (_$data['where'] as Input_PersonTypesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_PersonTypesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonTypesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonTypesUpdateColumn>)
+              .map((e) => toJson_Enum_PersonTypesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -86269,15 +86658,23 @@ class Input_PersonTypesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -86297,7 +86694,11 @@ class Input_PersonTypesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -93649,12 +94050,12 @@ class _CopyWithStubImpl_Input_PersonsGroupsMinOrderBy<TRes>
 class Input_PersonsGroupsOnConflict {
   factory Input_PersonsGroupsOnConflict({
     required Enum_PersonsGroupsConstraint constraint,
-    required List<Enum_PersonsGroupsUpdateColumn> updateColumns,
+    List<Enum_PersonsGroupsUpdateColumn>? updateColumns,
     Input_PersonsGroupsBoolExp? where,
   }) =>
       Input_PersonsGroupsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -93665,10 +94066,12 @@ class Input_PersonsGroupsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonsGroupsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonsGroupsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonsGroupsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -93683,8 +94086,8 @@ class Input_PersonsGroupsOnConflict {
 
   Enum_PersonsGroupsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsGroupsConstraint);
-  List<Enum_PersonsGroupsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonsGroupsUpdateColumn>);
+  List<Enum_PersonsGroupsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonsGroupsUpdateColumn>?);
   Input_PersonsGroupsBoolExp? get where =>
       (_$data['where'] as Input_PersonsGroupsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -93692,10 +94095,13 @@ class Input_PersonsGroupsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_PersonsGroupsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonsGroupsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsGroupsUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsGroupsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -93724,15 +94130,23 @@ class Input_PersonsGroupsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -93752,7 +94166,11 @@ class Input_PersonsGroupsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -96363,12 +96781,12 @@ class _CopyWithStubImpl_Input_PersonsHobbiesMinOrderBy<TRes>
 class Input_PersonsHobbiesOnConflict {
   factory Input_PersonsHobbiesOnConflict({
     required Enum_PersonsHobbiesConstraint constraint,
-    required List<Enum_PersonsHobbiesUpdateColumn> updateColumns,
+    List<Enum_PersonsHobbiesUpdateColumn>? updateColumns,
     Input_PersonsHobbiesBoolExp? where,
   }) =>
       Input_PersonsHobbiesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -96379,10 +96797,12 @@ class Input_PersonsHobbiesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonsHobbiesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonsHobbiesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonsHobbiesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -96397,8 +96817,8 @@ class Input_PersonsHobbiesOnConflict {
 
   Enum_PersonsHobbiesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsHobbiesConstraint);
-  List<Enum_PersonsHobbiesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonsHobbiesUpdateColumn>);
+  List<Enum_PersonsHobbiesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonsHobbiesUpdateColumn>?);
   Input_PersonsHobbiesBoolExp? get where =>
       (_$data['where'] as Input_PersonsHobbiesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -96406,10 +96826,13 @@ class Input_PersonsHobbiesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_PersonsHobbiesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonsHobbiesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsHobbiesUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsHobbiesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -96438,15 +96861,23 @@ class Input_PersonsHobbiesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -96466,7 +96897,11 @@ class Input_PersonsHobbiesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -101131,12 +101566,12 @@ class _CopyWithStubImpl_Input_PersonsObjRelInsertInput<TRes>
 class Input_PersonsOnConflict {
   factory Input_PersonsOnConflict({
     required Enum_PersonsConstraint constraint,
-    required List<Enum_PersonsUpdateColumn> updateColumns,
+    List<Enum_PersonsUpdateColumn>? updateColumns,
     Input_PersonsBoolExp? where,
   }) =>
       Input_PersonsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -101147,10 +101582,12 @@ class Input_PersonsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -101164,16 +101601,20 @@ class Input_PersonsOnConflict {
 
   Enum_PersonsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsConstraint);
-  List<Enum_PersonsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonsUpdateColumn>);
+  List<Enum_PersonsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonsUpdateColumn>?);
   Input_PersonsBoolExp? get where => (_$data['where'] as Input_PersonsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_PersonsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_PersonsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -101202,15 +101643,23 @@ class Input_PersonsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -101230,7 +101679,11 @@ class Input_PersonsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -105314,12 +105767,12 @@ class _CopyWithStubImpl_Input_PersonsServicesMinOrderBy<TRes>
 class Input_PersonsServicesOnConflict {
   factory Input_PersonsServicesOnConflict({
     required Enum_PersonsServicesConstraint constraint,
-    required List<Enum_PersonsServicesUpdateColumn> updateColumns,
+    List<Enum_PersonsServicesUpdateColumn>? updateColumns,
     Input_PersonsServicesBoolExp? where,
   }) =>
       Input_PersonsServicesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -105330,10 +105783,12 @@ class Input_PersonsServicesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonsServicesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonsServicesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonsServicesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -105348,8 +105803,8 @@ class Input_PersonsServicesOnConflict {
 
   Enum_PersonsServicesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsServicesConstraint);
-  List<Enum_PersonsServicesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonsServicesUpdateColumn>);
+  List<Enum_PersonsServicesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonsServicesUpdateColumn>?);
   Input_PersonsServicesBoolExp? get where =>
       (_$data['where'] as Input_PersonsServicesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -105357,10 +105812,13 @@ class Input_PersonsServicesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_PersonsServicesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonsServicesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsServicesUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsServicesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -105389,15 +105847,23 @@ class Input_PersonsServicesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -105417,7 +105883,11 @@ class Input_PersonsServicesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -110472,12 +110942,12 @@ class _CopyWithStubImpl_Input_PersonsTagsMinOrderBy<TRes>
 class Input_PersonsTagsOnConflict {
   factory Input_PersonsTagsOnConflict({
     required Enum_PersonsTagsConstraint constraint,
-    required List<Enum_PersonsTagsUpdateColumn> updateColumns,
+    List<Enum_PersonsTagsUpdateColumn>? updateColumns,
     Input_PersonsTagsBoolExp? where,
   }) =>
       Input_PersonsTagsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -110488,10 +110958,12 @@ class Input_PersonsTagsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_PersonsTagsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_PersonsTagsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_PersonsTagsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -110506,18 +110978,21 @@ class Input_PersonsTagsOnConflict {
 
   Enum_PersonsTagsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsTagsConstraint);
-  List<Enum_PersonsTagsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_PersonsTagsUpdateColumn>);
+  List<Enum_PersonsTagsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_PersonsTagsUpdateColumn>?);
   Input_PersonsTagsBoolExp? get where =>
       (_$data['where'] as Input_PersonsTagsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_PersonsTagsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_PersonsTagsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsTagsUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsTagsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -110546,15 +111021,23 @@ class Input_PersonsTagsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -110574,7 +111057,11 @@ class Input_PersonsTagsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -113221,12 +113708,12 @@ class _CopyWithStubImpl_Input_QualificationsObjRelInsertInput<TRes>
 class Input_QualificationsOnConflict {
   factory Input_QualificationsOnConflict({
     required Enum_QualificationsConstraint constraint,
-    required List<Enum_QualificationsUpdateColumn> updateColumns,
+    List<Enum_QualificationsUpdateColumn>? updateColumns,
     Input_QualificationsBoolExp? where,
   }) =>
       Input_QualificationsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -113237,10 +113724,12 @@ class Input_QualificationsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_QualificationsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_QualificationsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_QualificationsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -113255,8 +113744,8 @@ class Input_QualificationsOnConflict {
 
   Enum_QualificationsConstraint get constraint =>
       (_$data['constraint'] as Enum_QualificationsConstraint);
-  List<Enum_QualificationsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_QualificationsUpdateColumn>);
+  List<Enum_QualificationsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_QualificationsUpdateColumn>?);
   Input_QualificationsBoolExp? get where =>
       (_$data['where'] as Input_QualificationsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -113264,10 +113753,13 @@ class Input_QualificationsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_QualificationsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_QualificationsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_QualificationsUpdateColumn>)
+              .map((e) => toJson_Enum_QualificationsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -113296,15 +113788,23 @@ class Input_QualificationsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -113324,7 +113824,11 @@ class Input_QualificationsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -115005,12 +115509,12 @@ class _CopyWithStubImpl_Input_SchoolsObjRelInsertInput<TRes>
 class Input_SchoolsOnConflict {
   factory Input_SchoolsOnConflict({
     required Enum_SchoolsConstraint constraint,
-    required List<Enum_SchoolsUpdateColumn> updateColumns,
+    List<Enum_SchoolsUpdateColumn>? updateColumns,
     Input_SchoolsBoolExp? where,
   }) =>
       Input_SchoolsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -115021,10 +115525,12 @@ class Input_SchoolsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_SchoolsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_SchoolsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_SchoolsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -115038,16 +115544,20 @@ class Input_SchoolsOnConflict {
 
   Enum_SchoolsConstraint get constraint =>
       (_$data['constraint'] as Enum_SchoolsConstraint);
-  List<Enum_SchoolsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_SchoolsUpdateColumn>);
+  List<Enum_SchoolsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_SchoolsUpdateColumn>?);
   Input_SchoolsBoolExp? get where => (_$data['where'] as Input_SchoolsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_SchoolsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_SchoolsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_SchoolsUpdateColumn>)
+              .map((e) => toJson_Enum_SchoolsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -115076,15 +115586,23 @@ class Input_SchoolsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -115104,7 +115622,11 @@ class Input_SchoolsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -118442,12 +118964,12 @@ class _CopyWithStubImpl_Input_ServicesObjRelInsertInput<TRes>
 class Input_ServicesOnConflict {
   factory Input_ServicesOnConflict({
     required Enum_ServicesConstraint constraint,
-    required List<Enum_ServicesUpdateColumn> updateColumns,
+    List<Enum_ServicesUpdateColumn>? updateColumns,
     Input_ServicesBoolExp? where,
   }) =>
       Input_ServicesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -118458,10 +118980,12 @@ class Input_ServicesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_ServicesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_ServicesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_ServicesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -118475,18 +118999,21 @@ class Input_ServicesOnConflict {
 
   Enum_ServicesConstraint get constraint =>
       (_$data['constraint'] as Enum_ServicesConstraint);
-  List<Enum_ServicesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_ServicesUpdateColumn>);
+  List<Enum_ServicesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_ServicesUpdateColumn>?);
   Input_ServicesBoolExp? get where =>
       (_$data['where'] as Input_ServicesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_ServicesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_ServicesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_ServicesUpdateColumn>)
+              .map((e) => toJson_Enum_ServicesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -118515,15 +119042,23 @@ class Input_ServicesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -118543,7 +119078,11 @@ class Input_ServicesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -121292,12 +121831,12 @@ class _CopyWithStubImpl_Input_ShammasLevelsObjRelInsertInput<TRes>
 class Input_ShammasLevelsOnConflict {
   factory Input_ShammasLevelsOnConflict({
     required Enum_ShammasLevelsConstraint constraint,
-    required List<Enum_ShammasLevelsUpdateColumn> updateColumns,
+    List<Enum_ShammasLevelsUpdateColumn>? updateColumns,
     Input_ShammasLevelsBoolExp? where,
   }) =>
       Input_ShammasLevelsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -121308,10 +121847,12 @@ class Input_ShammasLevelsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_ShammasLevelsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_ShammasLevelsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_ShammasLevelsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -121326,8 +121867,8 @@ class Input_ShammasLevelsOnConflict {
 
   Enum_ShammasLevelsConstraint get constraint =>
       (_$data['constraint'] as Enum_ShammasLevelsConstraint);
-  List<Enum_ShammasLevelsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_ShammasLevelsUpdateColumn>);
+  List<Enum_ShammasLevelsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_ShammasLevelsUpdateColumn>?);
   Input_ShammasLevelsBoolExp? get where =>
       (_$data['where'] as Input_ShammasLevelsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -121335,10 +121876,13 @@ class Input_ShammasLevelsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_ShammasLevelsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_ShammasLevelsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_ShammasLevelsUpdateColumn>)
+              .map((e) => toJson_Enum_ShammasLevelsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -121367,15 +121911,23 @@ class Input_ShammasLevelsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -121395,7 +121947,11 @@ class Input_ShammasLevelsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -125242,12 +125798,12 @@ class _CopyWithStubImpl_Input_StoresMinOrderBy<TRes>
 class Input_StoresOnConflict {
   factory Input_StoresOnConflict({
     required Enum_StoresConstraint constraint,
-    required List<Enum_StoresUpdateColumn> updateColumns,
+    List<Enum_StoresUpdateColumn>? updateColumns,
     Input_StoresBoolExp? where,
   }) =>
       Input_StoresOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -125258,10 +125814,12 @@ class Input_StoresOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_StoresConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_StoresUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_StoresUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -125275,16 +125833,20 @@ class Input_StoresOnConflict {
 
   Enum_StoresConstraint get constraint =>
       (_$data['constraint'] as Enum_StoresConstraint);
-  List<Enum_StoresUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_StoresUpdateColumn>);
+  List<Enum_StoresUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_StoresUpdateColumn>?);
   Input_StoresBoolExp? get where => (_$data['where'] as Input_StoresBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_StoresConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_StoresUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_StoresUpdateColumn>)
+              .map((e) => toJson_Enum_StoresUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -125313,15 +125875,23 @@ class Input_StoresOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -125341,7 +125911,11 @@ class Input_StoresOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -129610,12 +130184,12 @@ class _CopyWithStubImpl_Input_StreetsMinOrderBy<TRes>
 class Input_StreetsOnConflict {
   factory Input_StreetsOnConflict({
     required Enum_StreetsConstraint constraint,
-    required List<Enum_StreetsUpdateColumn> updateColumns,
+    List<Enum_StreetsUpdateColumn>? updateColumns,
     Input_StreetsBoolExp? where,
   }) =>
       Input_StreetsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -129626,10 +130200,12 @@ class Input_StreetsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_StreetsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_StreetsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_StreetsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -129643,16 +130219,20 @@ class Input_StreetsOnConflict {
 
   Enum_StreetsConstraint get constraint =>
       (_$data['constraint'] as Enum_StreetsConstraint);
-  List<Enum_StreetsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_StreetsUpdateColumn>);
+  List<Enum_StreetsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_StreetsUpdateColumn>?);
   Input_StreetsBoolExp? get where => (_$data['where'] as Input_StreetsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_StreetsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_StreetsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_StreetsUpdateColumn>)
+              .map((e) => toJson_Enum_StreetsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -129681,15 +130261,23 @@ class Input_StreetsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -129709,7 +130297,11 @@ class Input_StreetsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -133622,12 +134214,12 @@ class _CopyWithStubImpl_Input_StudyYearsObjRelInsertInput<TRes>
 class Input_StudyYearsOnConflict {
   factory Input_StudyYearsOnConflict({
     required Enum_StudyYearsConstraint constraint,
-    required List<Enum_StudyYearsUpdateColumn> updateColumns,
+    List<Enum_StudyYearsUpdateColumn>? updateColumns,
     Input_StudyYearsBoolExp? where,
   }) =>
       Input_StudyYearsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -133638,10 +134230,12 @@ class Input_StudyYearsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_StudyYearsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_StudyYearsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_StudyYearsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -133655,18 +134249,21 @@ class Input_StudyYearsOnConflict {
 
   Enum_StudyYearsConstraint get constraint =>
       (_$data['constraint'] as Enum_StudyYearsConstraint);
-  List<Enum_StudyYearsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_StudyYearsUpdateColumn>);
+  List<Enum_StudyYearsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_StudyYearsUpdateColumn>?);
   Input_StudyYearsBoolExp? get where =>
       (_$data['where'] as Input_StudyYearsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_StudyYearsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_StudyYearsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_StudyYearsUpdateColumn>)
+              .map((e) => toJson_Enum_StudyYearsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -133695,15 +134292,23 @@ class Input_StudyYearsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -133723,7 +134328,11 @@ class Input_StudyYearsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -135707,12 +136316,12 @@ class _CopyWithStubImpl_Input_TagsObjRelInsertInput<TRes>
 class Input_TagsOnConflict {
   factory Input_TagsOnConflict({
     required Enum_TagsConstraint constraint,
-    required List<Enum_TagsUpdateColumn> updateColumns,
+    List<Enum_TagsUpdateColumn>? updateColumns,
     Input_TagsBoolExp? where,
   }) =>
       Input_TagsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -135723,10 +136332,12 @@ class Input_TagsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_TagsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_TagsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_TagsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -135740,16 +136351,20 @@ class Input_TagsOnConflict {
 
   Enum_TagsConstraint get constraint =>
       (_$data['constraint'] as Enum_TagsConstraint);
-  List<Enum_TagsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_TagsUpdateColumn>);
+  List<Enum_TagsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_TagsUpdateColumn>?);
   Input_TagsBoolExp? get where => (_$data['where'] as Input_TagsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_TagsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_TagsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_TagsUpdateColumn>)
+              .map((e) => toJson_Enum_TagsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -135777,15 +136392,23 @@ class Input_TagsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -135805,7 +136428,11 @@ class Input_TagsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -138290,12 +138917,12 @@ class _CopyWithStubImpl_Input_UniversitiesObjRelInsertInput<TRes>
 class Input_UniversitiesOnConflict {
   factory Input_UniversitiesOnConflict({
     required Enum_UniversitiesConstraint constraint,
-    required List<Enum_UniversitiesUpdateColumn> updateColumns,
+    List<Enum_UniversitiesUpdateColumn>? updateColumns,
     Input_UniversitiesBoolExp? where,
   }) =>
       Input_UniversitiesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -138306,10 +138933,12 @@ class Input_UniversitiesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_UniversitiesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_UniversitiesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_UniversitiesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -138324,8 +138953,8 @@ class Input_UniversitiesOnConflict {
 
   Enum_UniversitiesConstraint get constraint =>
       (_$data['constraint'] as Enum_UniversitiesConstraint);
-  List<Enum_UniversitiesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_UniversitiesUpdateColumn>);
+  List<Enum_UniversitiesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_UniversitiesUpdateColumn>?);
   Input_UniversitiesBoolExp? get where =>
       (_$data['where'] as Input_UniversitiesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -138333,10 +138962,13 @@ class Input_UniversitiesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_UniversitiesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_UniversitiesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_UniversitiesUpdateColumn>)
+              .map((e) => toJson_Enum_UniversitiesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -138365,15 +138997,23 @@ class Input_UniversitiesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -138393,7 +139033,11 @@ class Input_UniversitiesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -140593,12 +141237,12 @@ class _CopyWithStubImpl_Input_authProviderRequestsInsertInput<TRes>
 class Input_authProviderRequestsOnConflict {
   factory Input_authProviderRequestsOnConflict({
     required Enum_authProviderRequestsConstraint constraint,
-    required List<Enum_authProviderRequestsUpdateColumn> updateColumns,
+    List<Enum_authProviderRequestsUpdateColumn>? updateColumns,
     Input_authProviderRequestsBoolExp? where,
   }) =>
       Input_authProviderRequestsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -140610,11 +141254,13 @@ class Input_authProviderRequestsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authProviderRequestsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_authProviderRequestsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_authProviderRequestsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -140629,8 +141275,8 @@ class Input_authProviderRequestsOnConflict {
 
   Enum_authProviderRequestsConstraint get constraint =>
       (_$data['constraint'] as Enum_authProviderRequestsConstraint);
-  List<Enum_authProviderRequestsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authProviderRequestsUpdateColumn>);
+  List<Enum_authProviderRequestsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authProviderRequestsUpdateColumn>?);
   Input_authProviderRequestsBoolExp? get where =>
       (_$data['where'] as Input_authProviderRequestsBoolExp?);
   Map<String, dynamic> toJson() {
@@ -140638,10 +141284,13 @@ class Input_authProviderRequestsOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authProviderRequestsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authProviderRequestsUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authProviderRequestsUpdateColumn>)
+              .map((e) => toJson_Enum_authProviderRequestsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -140671,15 +141320,23 @@ class Input_authProviderRequestsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -140699,7 +141356,11 @@ class Input_authProviderRequestsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -142641,12 +143302,12 @@ class _CopyWithStubImpl_Input_authProvidersObjRelInsertInput<TRes>
 class Input_authProvidersOnConflict {
   factory Input_authProvidersOnConflict({
     required Enum_authProvidersConstraint constraint,
-    required List<Enum_authProvidersUpdateColumn> updateColumns,
+    List<Enum_authProvidersUpdateColumn>? updateColumns,
     Input_authProvidersBoolExp? where,
   }) =>
       Input_authProvidersOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -142657,10 +143318,12 @@ class Input_authProvidersOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authProvidersConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authProvidersUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_authProvidersUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -142675,8 +143338,8 @@ class Input_authProvidersOnConflict {
 
   Enum_authProvidersConstraint get constraint =>
       (_$data['constraint'] as Enum_authProvidersConstraint);
-  List<Enum_authProvidersUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authProvidersUpdateColumn>);
+  List<Enum_authProvidersUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authProvidersUpdateColumn>?);
   Input_authProvidersBoolExp? get where =>
       (_$data['where'] as Input_authProvidersBoolExp?);
   Map<String, dynamic> toJson() {
@@ -142684,10 +143347,13 @@ class Input_authProvidersOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authProvidersConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authProvidersUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authProvidersUpdateColumn>)
+              .map((e) => toJson_Enum_authProvidersUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -142716,15 +143382,23 @@ class Input_authProvidersOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -142744,7 +143418,11 @@ class Input_authProvidersOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -145442,12 +146120,12 @@ class _CopyWithStubImpl_Input_authRefreshTokensMinOrderBy<TRes>
 class Input_authRefreshTokensOnConflict {
   factory Input_authRefreshTokensOnConflict({
     required Enum_authRefreshTokensConstraint constraint,
-    required List<Enum_authRefreshTokensUpdateColumn> updateColumns,
+    List<Enum_authRefreshTokensUpdateColumn>? updateColumns,
     Input_authRefreshTokensBoolExp? where,
   }) =>
       Input_authRefreshTokensOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -145459,10 +146137,13 @@ class Input_authRefreshTokensOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authRefreshTokensConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authRefreshTokensUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map(
+              (e) => fromJson_Enum_authRefreshTokensUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -145477,8 +146158,8 @@ class Input_authRefreshTokensOnConflict {
 
   Enum_authRefreshTokensConstraint get constraint =>
       (_$data['constraint'] as Enum_authRefreshTokensConstraint);
-  List<Enum_authRefreshTokensUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authRefreshTokensUpdateColumn>);
+  List<Enum_authRefreshTokensUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authRefreshTokensUpdateColumn>?);
   Input_authRefreshTokensBoolExp? get where =>
       (_$data['where'] as Input_authRefreshTokensBoolExp?);
   Map<String, dynamic> toJson() {
@@ -145486,10 +146167,13 @@ class Input_authRefreshTokensOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authRefreshTokensConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authRefreshTokensUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authRefreshTokensUpdateColumn>)
+              .map((e) => toJson_Enum_authRefreshTokensUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -145518,15 +146202,23 @@ class Input_authRefreshTokensOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -145546,7 +146238,11 @@ class Input_authRefreshTokensOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -147508,12 +148204,12 @@ class _CopyWithStubImpl_Input_authRolesObjRelInsertInput<TRes>
 class Input_authRolesOnConflict {
   factory Input_authRolesOnConflict({
     required Enum_authRolesConstraint constraint,
-    required List<Enum_authRolesUpdateColumn> updateColumns,
+    List<Enum_authRolesUpdateColumn>? updateColumns,
     Input_authRolesBoolExp? where,
   }) =>
       Input_authRolesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -147524,10 +148220,12 @@ class Input_authRolesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authRolesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authRolesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_authRolesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -147541,18 +148239,21 @@ class Input_authRolesOnConflict {
 
   Enum_authRolesConstraint get constraint =>
       (_$data['constraint'] as Enum_authRolesConstraint);
-  List<Enum_authRolesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authRolesUpdateColumn>);
+  List<Enum_authRolesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authRolesUpdateColumn>?);
   Input_authRolesBoolExp? get where =>
       (_$data['where'] as Input_authRolesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_authRolesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authRolesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authRolesUpdateColumn>)
+              .map((e) => toJson_Enum_authRolesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -147581,15 +148282,23 @@ class Input_authRolesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -147609,7 +148318,11 @@ class Input_authRolesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -150929,12 +151642,12 @@ class _CopyWithStubImpl_Input_authUserProvidersMinOrderBy<TRes>
 class Input_authUserProvidersOnConflict {
   factory Input_authUserProvidersOnConflict({
     required Enum_authUserProvidersConstraint constraint,
-    required List<Enum_authUserProvidersUpdateColumn> updateColumns,
+    List<Enum_authUserProvidersUpdateColumn>? updateColumns,
     Input_authUserProvidersBoolExp? where,
   }) =>
       Input_authUserProvidersOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -150946,10 +151659,13 @@ class Input_authUserProvidersOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authUserProvidersConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authUserProvidersUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map(
+              (e) => fromJson_Enum_authUserProvidersUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -150964,8 +151680,8 @@ class Input_authUserProvidersOnConflict {
 
   Enum_authUserProvidersConstraint get constraint =>
       (_$data['constraint'] as Enum_authUserProvidersConstraint);
-  List<Enum_authUserProvidersUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authUserProvidersUpdateColumn>);
+  List<Enum_authUserProvidersUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authUserProvidersUpdateColumn>?);
   Input_authUserProvidersBoolExp? get where =>
       (_$data['where'] as Input_authUserProvidersBoolExp?);
   Map<String, dynamic> toJson() {
@@ -150973,10 +151689,13 @@ class Input_authUserProvidersOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authUserProvidersConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authUserProvidersUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authUserProvidersUpdateColumn>)
+              .map((e) => toJson_Enum_authUserProvidersUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -151005,15 +151724,23 @@ class Input_authUserProvidersOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -151033,7 +151760,11 @@ class Input_authUserProvidersOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -154413,12 +155144,12 @@ class _CopyWithStubImpl_Input_authUserRolesMinOrderBy<TRes>
 class Input_authUserRolesOnConflict {
   factory Input_authUserRolesOnConflict({
     required Enum_authUserRolesConstraint constraint,
-    required List<Enum_authUserRolesUpdateColumn> updateColumns,
+    List<Enum_authUserRolesUpdateColumn>? updateColumns,
     Input_authUserRolesBoolExp? where,
   }) =>
       Input_authUserRolesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -154429,10 +155160,12 @@ class Input_authUserRolesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authUserRolesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authUserRolesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_authUserRolesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -154447,8 +155180,8 @@ class Input_authUserRolesOnConflict {
 
   Enum_authUserRolesConstraint get constraint =>
       (_$data['constraint'] as Enum_authUserRolesConstraint);
-  List<Enum_authUserRolesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authUserRolesUpdateColumn>);
+  List<Enum_authUserRolesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authUserRolesUpdateColumn>?);
   Input_authUserRolesBoolExp? get where =>
       (_$data['where'] as Input_authUserRolesBoolExp?);
   Map<String, dynamic> toJson() {
@@ -154456,10 +155189,13 @@ class Input_authUserRolesOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authUserRolesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authUserRolesUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authUserRolesUpdateColumn>)
+              .map((e) => toJson_Enum_authUserRolesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -154488,15 +155224,23 @@ class Input_authUserRolesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -154516,7 +155260,11 @@ class Input_authUserRolesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -158367,12 +159115,12 @@ class _CopyWithStubImpl_Input_authUserSecurityKeysMinOrderBy<TRes>
 class Input_authUserSecurityKeysOnConflict {
   factory Input_authUserSecurityKeysOnConflict({
     required Enum_authUserSecurityKeysConstraint constraint,
-    required List<Enum_authUserSecurityKeysUpdateColumn> updateColumns,
+    List<Enum_authUserSecurityKeysUpdateColumn>? updateColumns,
     Input_authUserSecurityKeysBoolExp? where,
   }) =>
       Input_authUserSecurityKeysOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -158384,11 +159132,13 @@ class Input_authUserSecurityKeysOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authUserSecurityKeysConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) =>
-            fromJson_Enum_authUserSecurityKeysUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_authUserSecurityKeysUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -158403,8 +159153,8 @@ class Input_authUserSecurityKeysOnConflict {
 
   Enum_authUserSecurityKeysConstraint get constraint =>
       (_$data['constraint'] as Enum_authUserSecurityKeysConstraint);
-  List<Enum_authUserSecurityKeysUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authUserSecurityKeysUpdateColumn>);
+  List<Enum_authUserSecurityKeysUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authUserSecurityKeysUpdateColumn>?);
   Input_authUserSecurityKeysBoolExp? get where =>
       (_$data['where'] as Input_authUserSecurityKeysBoolExp?);
   Map<String, dynamic> toJson() {
@@ -158412,10 +159162,13 @@ class Input_authUserSecurityKeysOnConflict {
     final l$constraint = constraint;
     result$data['constraint'] =
         toJson_Enum_authUserSecurityKeysConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authUserSecurityKeysUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authUserSecurityKeysUpdateColumn>)
+              .map((e) => toJson_Enum_authUserSecurityKeysUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -158445,15 +159198,23 @@ class Input_authUserSecurityKeysOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -158473,7 +159234,11 @@ class Input_authUserSecurityKeysOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -167159,12 +167924,12 @@ class _CopyWithStubImpl_Input_authUsersObjRelInsertInput<TRes>
 class Input_authUsersOnConflict {
   factory Input_authUsersOnConflict({
     required Enum_authUsersConstraint constraint,
-    required List<Enum_authUsersUpdateColumn> updateColumns,
+    List<Enum_authUsersUpdateColumn>? updateColumns,
     Input_authUsersBoolExp? where,
   }) =>
       Input_authUsersOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -167175,10 +167940,12 @@ class Input_authUsersOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_authUsersConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_authUsersUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_authUsersUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -167192,18 +167959,21 @@ class Input_authUsersOnConflict {
 
   Enum_authUsersConstraint get constraint =>
       (_$data['constraint'] as Enum_authUsersConstraint);
-  List<Enum_authUsersUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_authUsersUpdateColumn>);
+  List<Enum_authUsersUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_authUsersUpdateColumn>?);
   Input_authUsersBoolExp? get where =>
       (_$data['where'] as Input_authUsersBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_authUsersConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] = l$updateColumns
-        .map((e) => toJson_Enum_authUsersUpdateColumn(e))
-        .toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_authUsersUpdateColumn>)
+              .map((e) => toJson_Enum_authUsersUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -167232,15 +168002,23 @@ class Input_authUsersOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -167260,7 +168038,11 @@ class Input_authUsersOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -172205,12 +172987,12 @@ class _CopyWithStubImpl_Input_bucketsObjRelInsertInput<TRes>
 class Input_bucketsOnConflict {
   factory Input_bucketsOnConflict({
     required Enum_bucketsConstraint constraint,
-    required List<Enum_bucketsUpdateColumn> updateColumns,
+    List<Enum_bucketsUpdateColumn>? updateColumns,
     Input_bucketsBoolExp? where,
   }) =>
       Input_bucketsOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -172221,10 +173003,12 @@ class Input_bucketsOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_bucketsConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_bucketsUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_bucketsUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -172238,16 +173022,20 @@ class Input_bucketsOnConflict {
 
   Enum_bucketsConstraint get constraint =>
       (_$data['constraint'] as Enum_bucketsConstraint);
-  List<Enum_bucketsUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_bucketsUpdateColumn>);
+  List<Enum_bucketsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_bucketsUpdateColumn>?);
   Input_bucketsBoolExp? get where => (_$data['where'] as Input_bucketsBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_bucketsConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_bucketsUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_bucketsUpdateColumn>)
+              .map((e) => toJson_Enum_bucketsUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -172276,15 +173064,23 @@ class Input_bucketsOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -172304,7 +173100,11 @@ class Input_bucketsOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
@@ -178647,12 +179447,12 @@ class _CopyWithStubImpl_Input_filesMinOrderBy<TRes>
 class Input_filesOnConflict {
   factory Input_filesOnConflict({
     required Enum_filesConstraint constraint,
-    required List<Enum_filesUpdateColumn> updateColumns,
+    List<Enum_filesUpdateColumn>? updateColumns,
     Input_filesBoolExp? where,
   }) =>
       Input_filesOnConflict._({
         r'constraint': constraint,
-        r'updateColumns': updateColumns,
+        if (updateColumns != null) r'updateColumns': updateColumns,
         if (where != null) r'where': where,
       });
 
@@ -178663,10 +179463,12 @@ class Input_filesOnConflict {
     final l$constraint = data['constraint'];
     result$data['constraint'] =
         fromJson_Enum_filesConstraint((l$constraint as String));
-    final l$updateColumns = data['updateColumns'];
-    result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-        .map((e) => fromJson_Enum_filesUpdateColumn((e as String)))
-        .toList();
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_filesUpdateColumn((e as String)))
+          .toList();
+    }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = l$where == null
@@ -178680,16 +179482,20 @@ class Input_filesOnConflict {
 
   Enum_filesConstraint get constraint =>
       (_$data['constraint'] as Enum_filesConstraint);
-  List<Enum_filesUpdateColumn> get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_filesUpdateColumn>);
+  List<Enum_filesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_filesUpdateColumn>?);
   Input_filesBoolExp? get where => (_$data['where'] as Input_filesBoolExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
     result$data['constraint'] = toJson_Enum_filesConstraint(l$constraint);
-    final l$updateColumns = updateColumns;
-    result$data['updateColumns'] =
-        l$updateColumns.map((e) => toJson_Enum_filesUpdateColumn(e)).toList();
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_filesUpdateColumn>)
+              .map((e) => toJson_Enum_filesUpdateColumn(e))
+              .toList();
+    }
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.toJson();
@@ -178717,15 +179523,23 @@ class Input_filesOnConflict {
     }
     final l$updateColumns = updateColumns;
     final lOther$updateColumns = other.updateColumns;
-    if (l$updateColumns.length != lOther$updateColumns.length) {
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
       return false;
     }
-    for (int i = 0; i < l$updateColumns.length; i++) {
-      final l$updateColumns$entry = l$updateColumns[i];
-      final lOther$updateColumns$entry = lOther$updateColumns[i];
-      if (l$updateColumns$entry != lOther$updateColumns$entry) {
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
         return false;
       }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
     }
     final l$where = where;
     final lOther$where = other.where;
@@ -178745,7 +179559,11 @@ class Input_filesOnConflict {
     final l$where = where;
     return Object.hashAll([
       l$constraint,
-      Object.hashAll(l$updateColumns.map((v) => v)),
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }

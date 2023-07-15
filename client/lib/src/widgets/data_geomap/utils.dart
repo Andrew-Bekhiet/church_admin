@@ -88,7 +88,7 @@ LatLng getMapCenter({
           ),
     );
   } else {
-    return LatLng(30.60109, 32.27371);
+    return const LatLng(30.60109, 32.27371);
   }
 }
 

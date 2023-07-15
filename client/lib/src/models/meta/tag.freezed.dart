@@ -173,7 +173,7 @@ abstract class _Tag extends Tag {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color}) = _$_Tag;
+      final Color? color}) = _$_Tag;
   _Tag._() : super._();
 
   factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;

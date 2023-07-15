@@ -293,60 +293,71 @@ class Variables_Mutation_updatePerson {
   factory Variables_Mutation_updatePerson({
     required UuidValue personId,
     required Input_PersonsSetInput newPerson,
-    required List<Input_PersonsGroupsInsertInput> newGroups,
+    List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
-    required List<Input_PersonsServicesInsertInput> newServices,
+    List<Input_PersonsServicesInsertInput>? newServices,
     List<UuidValue>? deleteServices,
-    required List<Input_PersonsHobbiesInsertInput> newHobbies,
+    List<Input_PersonsHobbiesInsertInput>? newHobbies,
     List<UuidValue>? deleteHobbies,
-    required List<Input_PersonsTagsInsertInput> newTags,
+    List<Input_PersonsTagsInsertInput>? newTags,
     List<UuidValue>? deleteTags,
     DateTime? lastConfession,
     DateTime? lastKodas,
     DateTime? lastCall,
     DateTime? lastVisit,
-    required bool updatePersonsByPk,
-    required bool insertPersonsServices,
-    required bool insertPersonsGroups,
-    required bool insertPersonsHobbies,
-    required bool insertPersonsTags,
-    required bool deletePersonsTags,
-    required bool deletePersonsHobbies,
-    required bool deletePersonsGroups,
-    required bool deletePersonsServices,
-    required bool insertHistoryConfessionHistoryOne,
-    required bool insertHistoryKodasHistoryOne,
-    required bool insertHistoryCallHistoryOne,
-    required bool insertHistoryVisitHistoryOne,
+    bool? updatePersonsByPk,
+    bool? insertPersonsServices,
+    bool? insertPersonsGroups,
+    bool? insertPersonsHobbies,
+    bool? insertPersonsTags,
+    bool? deletePersonsTags,
+    bool? deletePersonsHobbies,
+    bool? deletePersonsGroups,
+    bool? deletePersonsServices,
+    bool? insertHistoryConfessionHistoryOne,
+    bool? insertHistoryKodasHistoryOne,
+    bool? insertHistoryCallHistoryOne,
+    bool? insertHistoryVisitHistoryOne,
   }) =>
       Variables_Mutation_updatePerson._({
         r'personId': personId,
         r'newPerson': newPerson,
-        r'newGroups': newGroups,
+        if (newGroups != null) r'newGroups': newGroups,
         if (deleteGroups != null) r'deleteGroups': deleteGroups,
-        r'newServices': newServices,
+        if (newServices != null) r'newServices': newServices,
         if (deleteServices != null) r'deleteServices': deleteServices,
-        r'newHobbies': newHobbies,
+        if (newHobbies != null) r'newHobbies': newHobbies,
         if (deleteHobbies != null) r'deleteHobbies': deleteHobbies,
-        r'newTags': newTags,
+        if (newTags != null) r'newTags': newTags,
         if (deleteTags != null) r'deleteTags': deleteTags,
         if (lastConfession != null) r'lastConfession': lastConfession,
         if (lastKodas != null) r'lastKodas': lastKodas,
         if (lastCall != null) r'lastCall': lastCall,
         if (lastVisit != null) r'lastVisit': lastVisit,
-        r'updatePersonsByPk': updatePersonsByPk,
-        r'insertPersonsServices': insertPersonsServices,
-        r'insertPersonsGroups': insertPersonsGroups,
-        r'insertPersonsHobbies': insertPersonsHobbies,
-        r'insertPersonsTags': insertPersonsTags,
-        r'deletePersonsTags': deletePersonsTags,
-        r'deletePersonsHobbies': deletePersonsHobbies,
-        r'deletePersonsGroups': deletePersonsGroups,
-        r'deletePersonsServices': deletePersonsServices,
-        r'insertHistoryConfessionHistoryOne': insertHistoryConfessionHistoryOne,
-        r'insertHistoryKodasHistoryOne': insertHistoryKodasHistoryOne,
-        r'insertHistoryCallHistoryOne': insertHistoryCallHistoryOne,
-        r'insertHistoryVisitHistoryOne': insertHistoryVisitHistoryOne,
+        if (updatePersonsByPk != null) r'updatePersonsByPk': updatePersonsByPk,
+        if (insertPersonsServices != null)
+          r'insertPersonsServices': insertPersonsServices,
+        if (insertPersonsGroups != null)
+          r'insertPersonsGroups': insertPersonsGroups,
+        if (insertPersonsHobbies != null)
+          r'insertPersonsHobbies': insertPersonsHobbies,
+        if (insertPersonsTags != null) r'insertPersonsTags': insertPersonsTags,
+        if (deletePersonsTags != null) r'deletePersonsTags': deletePersonsTags,
+        if (deletePersonsHobbies != null)
+          r'deletePersonsHobbies': deletePersonsHobbies,
+        if (deletePersonsGroups != null)
+          r'deletePersonsGroups': deletePersonsGroups,
+        if (deletePersonsServices != null)
+          r'deletePersonsServices': deletePersonsServices,
+        if (insertHistoryConfessionHistoryOne != null)
+          r'insertHistoryConfessionHistoryOne':
+              insertHistoryConfessionHistoryOne,
+        if (insertHistoryKodasHistoryOne != null)
+          r'insertHistoryKodasHistoryOne': insertHistoryKodasHistoryOne,
+        if (insertHistoryCallHistoryOne != null)
+          r'insertHistoryCallHistoryOne': insertHistoryCallHistoryOne,
+        if (insertHistoryVisitHistoryOne != null)
+          r'insertHistoryVisitHistoryOne': insertHistoryVisitHistoryOne,
       });
 
   Variables_Mutation_updatePerson._(this._$data);
@@ -358,44 +369,52 @@ class Variables_Mutation_updatePerson {
     final l$newPerson = data['newPerson'];
     result$data['newPerson'] =
         Input_PersonsSetInput.fromJson((l$newPerson as Map<String, dynamic>));
-    final l$newGroups = data['newGroups'];
-    result$data['newGroups'] = (l$newGroups as List<dynamic>)
-        .map((e) => Input_PersonsGroupsInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
-        .toList();
+    if (data.containsKey('newGroups')) {
+      final l$newGroups = data['newGroups'];
+      result$data['newGroups'] = (l$newGroups as List<dynamic>)
+          .map((e) => Input_PersonsGroupsInsertInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('deleteGroups')) {
       final l$deleteGroups = data['deleteGroups'];
       result$data['deleteGroups'] = (l$deleteGroups as List<dynamic>?)
           ?.map((e) => stringToUuid(e))
           .toList();
     }
-    final l$newServices = data['newServices'];
-    result$data['newServices'] = (l$newServices as List<dynamic>)
-        .map((e) => Input_PersonsServicesInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
-        .toList();
+    if (data.containsKey('newServices')) {
+      final l$newServices = data['newServices'];
+      result$data['newServices'] = (l$newServices as List<dynamic>)
+          .map((e) => Input_PersonsServicesInsertInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('deleteServices')) {
       final l$deleteServices = data['deleteServices'];
       result$data['deleteServices'] = (l$deleteServices as List<dynamic>?)
           ?.map((e) => stringToUuid(e))
           .toList();
     }
-    final l$newHobbies = data['newHobbies'];
-    result$data['newHobbies'] = (l$newHobbies as List<dynamic>)
-        .map((e) => Input_PersonsHobbiesInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
-        .toList();
+    if (data.containsKey('newHobbies')) {
+      final l$newHobbies = data['newHobbies'];
+      result$data['newHobbies'] = (l$newHobbies as List<dynamic>)
+          .map((e) => Input_PersonsHobbiesInsertInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('deleteHobbies')) {
       final l$deleteHobbies = data['deleteHobbies'];
       result$data['deleteHobbies'] = (l$deleteHobbies as List<dynamic>?)
           ?.map((e) => stringToUuid(e))
           .toList();
     }
-    final l$newTags = data['newTags'];
-    result$data['newTags'] = (l$newTags as List<dynamic>)
-        .map((e) =>
-            Input_PersonsTagsInsertInput.fromJson((e as Map<String, dynamic>)))
-        .toList();
+    if (data.containsKey('newTags')) {
+      final l$newTags = data['newTags'];
+      result$data['newTags'] = (l$newTags as List<dynamic>)
+          .map((e) => Input_PersonsTagsInsertInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('deleteTags')) {
       final l$deleteTags = data['deleteTags'];
       result$data['deleteTags'] = (l$deleteTags as List<dynamic>?)
@@ -422,37 +441,65 @@ class Variables_Mutation_updatePerson {
       result$data['lastVisit'] =
           l$lastVisit == null ? null : tstzFromString(l$lastVisit);
     }
-    final l$updatePersonsByPk = data['updatePersonsByPk'];
-    result$data['updatePersonsByPk'] = (l$updatePersonsByPk as bool);
-    final l$insertPersonsServices = data['insertPersonsServices'];
-    result$data['insertPersonsServices'] = (l$insertPersonsServices as bool);
-    final l$insertPersonsGroups = data['insertPersonsGroups'];
-    result$data['insertPersonsGroups'] = (l$insertPersonsGroups as bool);
-    final l$insertPersonsHobbies = data['insertPersonsHobbies'];
-    result$data['insertPersonsHobbies'] = (l$insertPersonsHobbies as bool);
-    final l$insertPersonsTags = data['insertPersonsTags'];
-    result$data['insertPersonsTags'] = (l$insertPersonsTags as bool);
-    final l$deletePersonsTags = data['deletePersonsTags'];
-    result$data['deletePersonsTags'] = (l$deletePersonsTags as bool);
-    final l$deletePersonsHobbies = data['deletePersonsHobbies'];
-    result$data['deletePersonsHobbies'] = (l$deletePersonsHobbies as bool);
-    final l$deletePersonsGroups = data['deletePersonsGroups'];
-    result$data['deletePersonsGroups'] = (l$deletePersonsGroups as bool);
-    final l$deletePersonsServices = data['deletePersonsServices'];
-    result$data['deletePersonsServices'] = (l$deletePersonsServices as bool);
-    final l$insertHistoryConfessionHistoryOne =
-        data['insertHistoryConfessionHistoryOne'];
-    result$data['insertHistoryConfessionHistoryOne'] =
-        (l$insertHistoryConfessionHistoryOne as bool);
-    final l$insertHistoryKodasHistoryOne = data['insertHistoryKodasHistoryOne'];
-    result$data['insertHistoryKodasHistoryOne'] =
-        (l$insertHistoryKodasHistoryOne as bool);
-    final l$insertHistoryCallHistoryOne = data['insertHistoryCallHistoryOne'];
-    result$data['insertHistoryCallHistoryOne'] =
-        (l$insertHistoryCallHistoryOne as bool);
-    final l$insertHistoryVisitHistoryOne = data['insertHistoryVisitHistoryOne'];
-    result$data['insertHistoryVisitHistoryOne'] =
-        (l$insertHistoryVisitHistoryOne as bool);
+    if (data.containsKey('updatePersonsByPk')) {
+      final l$updatePersonsByPk = data['updatePersonsByPk'];
+      result$data['updatePersonsByPk'] = (l$updatePersonsByPk as bool);
+    }
+    if (data.containsKey('insertPersonsServices')) {
+      final l$insertPersonsServices = data['insertPersonsServices'];
+      result$data['insertPersonsServices'] = (l$insertPersonsServices as bool);
+    }
+    if (data.containsKey('insertPersonsGroups')) {
+      final l$insertPersonsGroups = data['insertPersonsGroups'];
+      result$data['insertPersonsGroups'] = (l$insertPersonsGroups as bool);
+    }
+    if (data.containsKey('insertPersonsHobbies')) {
+      final l$insertPersonsHobbies = data['insertPersonsHobbies'];
+      result$data['insertPersonsHobbies'] = (l$insertPersonsHobbies as bool);
+    }
+    if (data.containsKey('insertPersonsTags')) {
+      final l$insertPersonsTags = data['insertPersonsTags'];
+      result$data['insertPersonsTags'] = (l$insertPersonsTags as bool);
+    }
+    if (data.containsKey('deletePersonsTags')) {
+      final l$deletePersonsTags = data['deletePersonsTags'];
+      result$data['deletePersonsTags'] = (l$deletePersonsTags as bool);
+    }
+    if (data.containsKey('deletePersonsHobbies')) {
+      final l$deletePersonsHobbies = data['deletePersonsHobbies'];
+      result$data['deletePersonsHobbies'] = (l$deletePersonsHobbies as bool);
+    }
+    if (data.containsKey('deletePersonsGroups')) {
+      final l$deletePersonsGroups = data['deletePersonsGroups'];
+      result$data['deletePersonsGroups'] = (l$deletePersonsGroups as bool);
+    }
+    if (data.containsKey('deletePersonsServices')) {
+      final l$deletePersonsServices = data['deletePersonsServices'];
+      result$data['deletePersonsServices'] = (l$deletePersonsServices as bool);
+    }
+    if (data.containsKey('insertHistoryConfessionHistoryOne')) {
+      final l$insertHistoryConfessionHistoryOne =
+          data['insertHistoryConfessionHistoryOne'];
+      result$data['insertHistoryConfessionHistoryOne'] =
+          (l$insertHistoryConfessionHistoryOne as bool);
+    }
+    if (data.containsKey('insertHistoryKodasHistoryOne')) {
+      final l$insertHistoryKodasHistoryOne =
+          data['insertHistoryKodasHistoryOne'];
+      result$data['insertHistoryKodasHistoryOne'] =
+          (l$insertHistoryKodasHistoryOne as bool);
+    }
+    if (data.containsKey('insertHistoryCallHistoryOne')) {
+      final l$insertHistoryCallHistoryOne = data['insertHistoryCallHistoryOne'];
+      result$data['insertHistoryCallHistoryOne'] =
+          (l$insertHistoryCallHistoryOne as bool);
+    }
+    if (data.containsKey('insertHistoryVisitHistoryOne')) {
+      final l$insertHistoryVisitHistoryOne =
+          data['insertHistoryVisitHistoryOne'];
+      result$data['insertHistoryVisitHistoryOne'] =
+          (l$insertHistoryVisitHistoryOne as bool);
+    }
     return Variables_Mutation_updatePerson._(result$data);
   }
 
@@ -461,71 +508,90 @@ class Variables_Mutation_updatePerson {
   UuidValue get personId => (_$data['personId'] as UuidValue);
   Input_PersonsSetInput get newPerson =>
       (_$data['newPerson'] as Input_PersonsSetInput);
-  List<Input_PersonsGroupsInsertInput> get newGroups =>
-      (_$data['newGroups'] as List<Input_PersonsGroupsInsertInput>);
+  List<Input_PersonsGroupsInsertInput>? get newGroups =>
+      (_$data['newGroups'] as List<Input_PersonsGroupsInsertInput>?);
   List<UuidValue>? get deleteGroups =>
       (_$data['deleteGroups'] as List<UuidValue>?);
-  List<Input_PersonsServicesInsertInput> get newServices =>
-      (_$data['newServices'] as List<Input_PersonsServicesInsertInput>);
+  List<Input_PersonsServicesInsertInput>? get newServices =>
+      (_$data['newServices'] as List<Input_PersonsServicesInsertInput>?);
   List<UuidValue>? get deleteServices =>
       (_$data['deleteServices'] as List<UuidValue>?);
-  List<Input_PersonsHobbiesInsertInput> get newHobbies =>
-      (_$data['newHobbies'] as List<Input_PersonsHobbiesInsertInput>);
+  List<Input_PersonsHobbiesInsertInput>? get newHobbies =>
+      (_$data['newHobbies'] as List<Input_PersonsHobbiesInsertInput>?);
   List<UuidValue>? get deleteHobbies =>
       (_$data['deleteHobbies'] as List<UuidValue>?);
-  List<Input_PersonsTagsInsertInput> get newTags =>
-      (_$data['newTags'] as List<Input_PersonsTagsInsertInput>);
+  List<Input_PersonsTagsInsertInput>? get newTags =>
+      (_$data['newTags'] as List<Input_PersonsTagsInsertInput>?);
   List<UuidValue>? get deleteTags => (_$data['deleteTags'] as List<UuidValue>?);
   DateTime? get lastConfession => (_$data['lastConfession'] as DateTime?);
   DateTime? get lastKodas => (_$data['lastKodas'] as DateTime?);
   DateTime? get lastCall => (_$data['lastCall'] as DateTime?);
   DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
-  bool get updatePersonsByPk => (_$data['updatePersonsByPk'] as bool);
-  bool get insertPersonsServices => (_$data['insertPersonsServices'] as bool);
-  bool get insertPersonsGroups => (_$data['insertPersonsGroups'] as bool);
-  bool get insertPersonsHobbies => (_$data['insertPersonsHobbies'] as bool);
-  bool get insertPersonsTags => (_$data['insertPersonsTags'] as bool);
-  bool get deletePersonsTags => (_$data['deletePersonsTags'] as bool);
-  bool get deletePersonsHobbies => (_$data['deletePersonsHobbies'] as bool);
-  bool get deletePersonsGroups => (_$data['deletePersonsGroups'] as bool);
-  bool get deletePersonsServices => (_$data['deletePersonsServices'] as bool);
-  bool get insertHistoryConfessionHistoryOne =>
-      (_$data['insertHistoryConfessionHistoryOne'] as bool);
-  bool get insertHistoryKodasHistoryOne =>
-      (_$data['insertHistoryKodasHistoryOne'] as bool);
-  bool get insertHistoryCallHistoryOne =>
-      (_$data['insertHistoryCallHistoryOne'] as bool);
-  bool get insertHistoryVisitHistoryOne =>
-      (_$data['insertHistoryVisitHistoryOne'] as bool);
+  bool? get updatePersonsByPk => (_$data['updatePersonsByPk'] as bool?);
+  bool? get insertPersonsServices => (_$data['insertPersonsServices'] as bool?);
+  bool? get insertPersonsGroups => (_$data['insertPersonsGroups'] as bool?);
+  bool? get insertPersonsHobbies => (_$data['insertPersonsHobbies'] as bool?);
+  bool? get insertPersonsTags => (_$data['insertPersonsTags'] as bool?);
+  bool? get deletePersonsTags => (_$data['deletePersonsTags'] as bool?);
+  bool? get deletePersonsHobbies => (_$data['deletePersonsHobbies'] as bool?);
+  bool? get deletePersonsGroups => (_$data['deletePersonsGroups'] as bool?);
+  bool? get deletePersonsServices => (_$data['deletePersonsServices'] as bool?);
+  bool? get insertHistoryConfessionHistoryOne =>
+      (_$data['insertHistoryConfessionHistoryOne'] as bool?);
+  bool? get insertHistoryKodasHistoryOne =>
+      (_$data['insertHistoryKodasHistoryOne'] as bool?);
+  bool? get insertHistoryCallHistoryOne =>
+      (_$data['insertHistoryCallHistoryOne'] as bool?);
+  bool? get insertHistoryVisitHistoryOne =>
+      (_$data['insertHistoryVisitHistoryOne'] as bool?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
     result$data['personId'] = uuidToString(l$personId);
     final l$newPerson = newPerson;
     result$data['newPerson'] = l$newPerson.toJson();
-    final l$newGroups = newGroups;
-    result$data['newGroups'] = l$newGroups.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('newGroups')) {
+      final l$newGroups = newGroups;
+      result$data['newGroups'] =
+          (l$newGroups as List<Input_PersonsGroupsInsertInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
     if (_$data.containsKey('deleteGroups')) {
       final l$deleteGroups = deleteGroups;
       result$data['deleteGroups'] =
           l$deleteGroups?.map((e) => uuidToString(e)).toList();
     }
-    final l$newServices = newServices;
-    result$data['newServices'] = l$newServices.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('newServices')) {
+      final l$newServices = newServices;
+      result$data['newServices'] =
+          (l$newServices as List<Input_PersonsServicesInsertInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
     if (_$data.containsKey('deleteServices')) {
       final l$deleteServices = deleteServices;
       result$data['deleteServices'] =
           l$deleteServices?.map((e) => uuidToString(e)).toList();
     }
-    final l$newHobbies = newHobbies;
-    result$data['newHobbies'] = l$newHobbies.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('newHobbies')) {
+      final l$newHobbies = newHobbies;
+      result$data['newHobbies'] =
+          (l$newHobbies as List<Input_PersonsHobbiesInsertInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
     if (_$data.containsKey('deleteHobbies')) {
       final l$deleteHobbies = deleteHobbies;
       result$data['deleteHobbies'] =
           l$deleteHobbies?.map((e) => uuidToString(e)).toList();
     }
-    final l$newTags = newTags;
-    result$data['newTags'] = l$newTags.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('newTags')) {
+      final l$newTags = newTags;
+      result$data['newTags'] = (l$newTags as List<Input_PersonsTagsInsertInput>)
+          .map((e) => e.toJson())
+          .toList();
+    }
     if (_$data.containsKey('deleteTags')) {
       final l$deleteTags = deleteTags;
       result$data['deleteTags'] =
@@ -551,36 +617,63 @@ class Variables_Mutation_updatePerson {
       result$data['lastVisit'] =
           l$lastVisit == null ? null : tstzToString(l$lastVisit);
     }
-    final l$updatePersonsByPk = updatePersonsByPk;
-    result$data['updatePersonsByPk'] = l$updatePersonsByPk;
-    final l$insertPersonsServices = insertPersonsServices;
-    result$data['insertPersonsServices'] = l$insertPersonsServices;
-    final l$insertPersonsGroups = insertPersonsGroups;
-    result$data['insertPersonsGroups'] = l$insertPersonsGroups;
-    final l$insertPersonsHobbies = insertPersonsHobbies;
-    result$data['insertPersonsHobbies'] = l$insertPersonsHobbies;
-    final l$insertPersonsTags = insertPersonsTags;
-    result$data['insertPersonsTags'] = l$insertPersonsTags;
-    final l$deletePersonsTags = deletePersonsTags;
-    result$data['deletePersonsTags'] = l$deletePersonsTags;
-    final l$deletePersonsHobbies = deletePersonsHobbies;
-    result$data['deletePersonsHobbies'] = l$deletePersonsHobbies;
-    final l$deletePersonsGroups = deletePersonsGroups;
-    result$data['deletePersonsGroups'] = l$deletePersonsGroups;
-    final l$deletePersonsServices = deletePersonsServices;
-    result$data['deletePersonsServices'] = l$deletePersonsServices;
-    final l$insertHistoryConfessionHistoryOne =
-        insertHistoryConfessionHistoryOne;
-    result$data['insertHistoryConfessionHistoryOne'] =
-        l$insertHistoryConfessionHistoryOne;
-    final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    result$data['insertHistoryKodasHistoryOne'] =
-        l$insertHistoryKodasHistoryOne;
-    final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
-    result$data['insertHistoryCallHistoryOne'] = l$insertHistoryCallHistoryOne;
-    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    result$data['insertHistoryVisitHistoryOne'] =
-        l$insertHistoryVisitHistoryOne;
+    if (_$data.containsKey('updatePersonsByPk')) {
+      final l$updatePersonsByPk = updatePersonsByPk;
+      result$data['updatePersonsByPk'] = (l$updatePersonsByPk as bool);
+    }
+    if (_$data.containsKey('insertPersonsServices')) {
+      final l$insertPersonsServices = insertPersonsServices;
+      result$data['insertPersonsServices'] = (l$insertPersonsServices as bool);
+    }
+    if (_$data.containsKey('insertPersonsGroups')) {
+      final l$insertPersonsGroups = insertPersonsGroups;
+      result$data['insertPersonsGroups'] = (l$insertPersonsGroups as bool);
+    }
+    if (_$data.containsKey('insertPersonsHobbies')) {
+      final l$insertPersonsHobbies = insertPersonsHobbies;
+      result$data['insertPersonsHobbies'] = (l$insertPersonsHobbies as bool);
+    }
+    if (_$data.containsKey('insertPersonsTags')) {
+      final l$insertPersonsTags = insertPersonsTags;
+      result$data['insertPersonsTags'] = (l$insertPersonsTags as bool);
+    }
+    if (_$data.containsKey('deletePersonsTags')) {
+      final l$deletePersonsTags = deletePersonsTags;
+      result$data['deletePersonsTags'] = (l$deletePersonsTags as bool);
+    }
+    if (_$data.containsKey('deletePersonsHobbies')) {
+      final l$deletePersonsHobbies = deletePersonsHobbies;
+      result$data['deletePersonsHobbies'] = (l$deletePersonsHobbies as bool);
+    }
+    if (_$data.containsKey('deletePersonsGroups')) {
+      final l$deletePersonsGroups = deletePersonsGroups;
+      result$data['deletePersonsGroups'] = (l$deletePersonsGroups as bool);
+    }
+    if (_$data.containsKey('deletePersonsServices')) {
+      final l$deletePersonsServices = deletePersonsServices;
+      result$data['deletePersonsServices'] = (l$deletePersonsServices as bool);
+    }
+    if (_$data.containsKey('insertHistoryConfessionHistoryOne')) {
+      final l$insertHistoryConfessionHistoryOne =
+          insertHistoryConfessionHistoryOne;
+      result$data['insertHistoryConfessionHistoryOne'] =
+          (l$insertHistoryConfessionHistoryOne as bool);
+    }
+    if (_$data.containsKey('insertHistoryKodasHistoryOne')) {
+      final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
+      result$data['insertHistoryKodasHistoryOne'] =
+          (l$insertHistoryKodasHistoryOne as bool);
+    }
+    if (_$data.containsKey('insertHistoryCallHistoryOne')) {
+      final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
+      result$data['insertHistoryCallHistoryOne'] =
+          (l$insertHistoryCallHistoryOne as bool);
+    }
+    if (_$data.containsKey('insertHistoryVisitHistoryOne')) {
+      final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+      result$data['insertHistoryVisitHistoryOne'] =
+          (l$insertHistoryVisitHistoryOne as bool);
+    }
     return result$data;
   }
 
@@ -610,15 +703,23 @@ class Variables_Mutation_updatePerson {
     }
     final l$newGroups = newGroups;
     final lOther$newGroups = other.newGroups;
-    if (l$newGroups.length != lOther$newGroups.length) {
+    if (_$data.containsKey('newGroups') !=
+        other._$data.containsKey('newGroups')) {
       return false;
     }
-    for (int i = 0; i < l$newGroups.length; i++) {
-      final l$newGroups$entry = l$newGroups[i];
-      final lOther$newGroups$entry = lOther$newGroups[i];
-      if (l$newGroups$entry != lOther$newGroups$entry) {
+    if (l$newGroups != null && lOther$newGroups != null) {
+      if (l$newGroups.length != lOther$newGroups.length) {
         return false;
       }
+      for (int i = 0; i < l$newGroups.length; i++) {
+        final l$newGroups$entry = l$newGroups[i];
+        final lOther$newGroups$entry = lOther$newGroups[i];
+        if (l$newGroups$entry != lOther$newGroups$entry) {
+          return false;
+        }
+      }
+    } else if (l$newGroups != lOther$newGroups) {
+      return false;
     }
     final l$deleteGroups = deleteGroups;
     final lOther$deleteGroups = other.deleteGroups;
@@ -642,15 +743,23 @@ class Variables_Mutation_updatePerson {
     }
     final l$newServices = newServices;
     final lOther$newServices = other.newServices;
-    if (l$newServices.length != lOther$newServices.length) {
+    if (_$data.containsKey('newServices') !=
+        other._$data.containsKey('newServices')) {
       return false;
     }
-    for (int i = 0; i < l$newServices.length; i++) {
-      final l$newServices$entry = l$newServices[i];
-      final lOther$newServices$entry = lOther$newServices[i];
-      if (l$newServices$entry != lOther$newServices$entry) {
+    if (l$newServices != null && lOther$newServices != null) {
+      if (l$newServices.length != lOther$newServices.length) {
         return false;
       }
+      for (int i = 0; i < l$newServices.length; i++) {
+        final l$newServices$entry = l$newServices[i];
+        final lOther$newServices$entry = lOther$newServices[i];
+        if (l$newServices$entry != lOther$newServices$entry) {
+          return false;
+        }
+      }
+    } else if (l$newServices != lOther$newServices) {
+      return false;
     }
     final l$deleteServices = deleteServices;
     final lOther$deleteServices = other.deleteServices;
@@ -674,15 +783,23 @@ class Variables_Mutation_updatePerson {
     }
     final l$newHobbies = newHobbies;
     final lOther$newHobbies = other.newHobbies;
-    if (l$newHobbies.length != lOther$newHobbies.length) {
+    if (_$data.containsKey('newHobbies') !=
+        other._$data.containsKey('newHobbies')) {
       return false;
     }
-    for (int i = 0; i < l$newHobbies.length; i++) {
-      final l$newHobbies$entry = l$newHobbies[i];
-      final lOther$newHobbies$entry = lOther$newHobbies[i];
-      if (l$newHobbies$entry != lOther$newHobbies$entry) {
+    if (l$newHobbies != null && lOther$newHobbies != null) {
+      if (l$newHobbies.length != lOther$newHobbies.length) {
         return false;
       }
+      for (int i = 0; i < l$newHobbies.length; i++) {
+        final l$newHobbies$entry = l$newHobbies[i];
+        final lOther$newHobbies$entry = lOther$newHobbies[i];
+        if (l$newHobbies$entry != lOther$newHobbies$entry) {
+          return false;
+        }
+      }
+    } else if (l$newHobbies != lOther$newHobbies) {
+      return false;
     }
     final l$deleteHobbies = deleteHobbies;
     final lOther$deleteHobbies = other.deleteHobbies;
@@ -706,15 +823,22 @@ class Variables_Mutation_updatePerson {
     }
     final l$newTags = newTags;
     final lOther$newTags = other.newTags;
-    if (l$newTags.length != lOther$newTags.length) {
+    if (_$data.containsKey('newTags') != other._$data.containsKey('newTags')) {
       return false;
     }
-    for (int i = 0; i < l$newTags.length; i++) {
-      final l$newTags$entry = l$newTags[i];
-      final lOther$newTags$entry = lOther$newTags[i];
-      if (l$newTags$entry != lOther$newTags$entry) {
+    if (l$newTags != null && lOther$newTags != null) {
+      if (l$newTags.length != lOther$newTags.length) {
         return false;
       }
+      for (int i = 0; i < l$newTags.length; i++) {
+        final l$newTags$entry = l$newTags[i];
+        final lOther$newTags$entry = lOther$newTags[i];
+        if (l$newTags$entry != lOther$newTags$entry) {
+          return false;
+        }
+      }
+    } else if (l$newTags != lOther$newTags) {
+      return false;
     }
     final l$deleteTags = deleteTags;
     final lOther$deleteTags = other.deleteTags;
@@ -774,46 +898,82 @@ class Variables_Mutation_updatePerson {
     }
     final l$updatePersonsByPk = updatePersonsByPk;
     final lOther$updatePersonsByPk = other.updatePersonsByPk;
+    if (_$data.containsKey('updatePersonsByPk') !=
+        other._$data.containsKey('updatePersonsByPk')) {
+      return false;
+    }
     if (l$updatePersonsByPk != lOther$updatePersonsByPk) {
       return false;
     }
     final l$insertPersonsServices = insertPersonsServices;
     final lOther$insertPersonsServices = other.insertPersonsServices;
+    if (_$data.containsKey('insertPersonsServices') !=
+        other._$data.containsKey('insertPersonsServices')) {
+      return false;
+    }
     if (l$insertPersonsServices != lOther$insertPersonsServices) {
       return false;
     }
     final l$insertPersonsGroups = insertPersonsGroups;
     final lOther$insertPersonsGroups = other.insertPersonsGroups;
+    if (_$data.containsKey('insertPersonsGroups') !=
+        other._$data.containsKey('insertPersonsGroups')) {
+      return false;
+    }
     if (l$insertPersonsGroups != lOther$insertPersonsGroups) {
       return false;
     }
     final l$insertPersonsHobbies = insertPersonsHobbies;
     final lOther$insertPersonsHobbies = other.insertPersonsHobbies;
+    if (_$data.containsKey('insertPersonsHobbies') !=
+        other._$data.containsKey('insertPersonsHobbies')) {
+      return false;
+    }
     if (l$insertPersonsHobbies != lOther$insertPersonsHobbies) {
       return false;
     }
     final l$insertPersonsTags = insertPersonsTags;
     final lOther$insertPersonsTags = other.insertPersonsTags;
+    if (_$data.containsKey('insertPersonsTags') !=
+        other._$data.containsKey('insertPersonsTags')) {
+      return false;
+    }
     if (l$insertPersonsTags != lOther$insertPersonsTags) {
       return false;
     }
     final l$deletePersonsTags = deletePersonsTags;
     final lOther$deletePersonsTags = other.deletePersonsTags;
+    if (_$data.containsKey('deletePersonsTags') !=
+        other._$data.containsKey('deletePersonsTags')) {
+      return false;
+    }
     if (l$deletePersonsTags != lOther$deletePersonsTags) {
       return false;
     }
     final l$deletePersonsHobbies = deletePersonsHobbies;
     final lOther$deletePersonsHobbies = other.deletePersonsHobbies;
+    if (_$data.containsKey('deletePersonsHobbies') !=
+        other._$data.containsKey('deletePersonsHobbies')) {
+      return false;
+    }
     if (l$deletePersonsHobbies != lOther$deletePersonsHobbies) {
       return false;
     }
     final l$deletePersonsGroups = deletePersonsGroups;
     final lOther$deletePersonsGroups = other.deletePersonsGroups;
+    if (_$data.containsKey('deletePersonsGroups') !=
+        other._$data.containsKey('deletePersonsGroups')) {
+      return false;
+    }
     if (l$deletePersonsGroups != lOther$deletePersonsGroups) {
       return false;
     }
     final l$deletePersonsServices = deletePersonsServices;
     final lOther$deletePersonsServices = other.deletePersonsServices;
+    if (_$data.containsKey('deletePersonsServices') !=
+        other._$data.containsKey('deletePersonsServices')) {
+      return false;
+    }
     if (l$deletePersonsServices != lOther$deletePersonsServices) {
       return false;
     }
@@ -821,6 +981,10 @@ class Variables_Mutation_updatePerson {
         insertHistoryConfessionHistoryOne;
     final lOther$insertHistoryConfessionHistoryOne =
         other.insertHistoryConfessionHistoryOne;
+    if (_$data.containsKey('insertHistoryConfessionHistoryOne') !=
+        other._$data.containsKey('insertHistoryConfessionHistoryOne')) {
+      return false;
+    }
     if (l$insertHistoryConfessionHistoryOne !=
         lOther$insertHistoryConfessionHistoryOne) {
       return false;
@@ -828,18 +992,30 @@ class Variables_Mutation_updatePerson {
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     final lOther$insertHistoryKodasHistoryOne =
         other.insertHistoryKodasHistoryOne;
+    if (_$data.containsKey('insertHistoryKodasHistoryOne') !=
+        other._$data.containsKey('insertHistoryKodasHistoryOne')) {
+      return false;
+    }
     if (l$insertHistoryKodasHistoryOne != lOther$insertHistoryKodasHistoryOne) {
       return false;
     }
     final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
     final lOther$insertHistoryCallHistoryOne =
         other.insertHistoryCallHistoryOne;
+    if (_$data.containsKey('insertHistoryCallHistoryOne') !=
+        other._$data.containsKey('insertHistoryCallHistoryOne')) {
+      return false;
+    }
     if (l$insertHistoryCallHistoryOne != lOther$insertHistoryCallHistoryOne) {
       return false;
     }
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
+    if (_$data.containsKey('insertHistoryVisitHistoryOne') !=
+        other._$data.containsKey('insertHistoryVisitHistoryOne')) {
+      return false;
+    }
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
       return false;
     }
@@ -879,25 +1055,41 @@ class Variables_Mutation_updatePerson {
     return Object.hashAll([
       l$personId,
       l$newPerson,
-      Object.hashAll(l$newGroups.map((v) => v)),
+      _$data.containsKey('newGroups')
+          ? l$newGroups == null
+              ? null
+              : Object.hashAll(l$newGroups.map((v) => v))
+          : const {},
       _$data.containsKey('deleteGroups')
           ? l$deleteGroups == null
               ? null
               : Object.hashAll(l$deleteGroups.map((v) => v))
           : const {},
-      Object.hashAll(l$newServices.map((v) => v)),
+      _$data.containsKey('newServices')
+          ? l$newServices == null
+              ? null
+              : Object.hashAll(l$newServices.map((v) => v))
+          : const {},
       _$data.containsKey('deleteServices')
           ? l$deleteServices == null
               ? null
               : Object.hashAll(l$deleteServices.map((v) => v))
           : const {},
-      Object.hashAll(l$newHobbies.map((v) => v)),
+      _$data.containsKey('newHobbies')
+          ? l$newHobbies == null
+              ? null
+              : Object.hashAll(l$newHobbies.map((v) => v))
+          : const {},
       _$data.containsKey('deleteHobbies')
           ? l$deleteHobbies == null
               ? null
               : Object.hashAll(l$deleteHobbies.map((v) => v))
           : const {},
-      Object.hashAll(l$newTags.map((v) => v)),
+      _$data.containsKey('newTags')
+          ? l$newTags == null
+              ? null
+              : Object.hashAll(l$newTags.map((v) => v))
+          : const {},
       _$data.containsKey('deleteTags')
           ? l$deleteTags == null
               ? null
@@ -907,19 +1099,39 @@ class Variables_Mutation_updatePerson {
       _$data.containsKey('lastKodas') ? l$lastKodas : const {},
       _$data.containsKey('lastCall') ? l$lastCall : const {},
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
-      l$updatePersonsByPk,
-      l$insertPersonsServices,
-      l$insertPersonsGroups,
-      l$insertPersonsHobbies,
-      l$insertPersonsTags,
-      l$deletePersonsTags,
-      l$deletePersonsHobbies,
-      l$deletePersonsGroups,
-      l$deletePersonsServices,
-      l$insertHistoryConfessionHistoryOne,
-      l$insertHistoryKodasHistoryOne,
-      l$insertHistoryCallHistoryOne,
-      l$insertHistoryVisitHistoryOne,
+      _$data.containsKey('updatePersonsByPk') ? l$updatePersonsByPk : const {},
+      _$data.containsKey('insertPersonsServices')
+          ? l$insertPersonsServices
+          : const {},
+      _$data.containsKey('insertPersonsGroups')
+          ? l$insertPersonsGroups
+          : const {},
+      _$data.containsKey('insertPersonsHobbies')
+          ? l$insertPersonsHobbies
+          : const {},
+      _$data.containsKey('insertPersonsTags') ? l$insertPersonsTags : const {},
+      _$data.containsKey('deletePersonsTags') ? l$deletePersonsTags : const {},
+      _$data.containsKey('deletePersonsHobbies')
+          ? l$deletePersonsHobbies
+          : const {},
+      _$data.containsKey('deletePersonsGroups')
+          ? l$deletePersonsGroups
+          : const {},
+      _$data.containsKey('deletePersonsServices')
+          ? l$deletePersonsServices
+          : const {},
+      _$data.containsKey('insertHistoryConfessionHistoryOne')
+          ? l$insertHistoryConfessionHistoryOne
+          : const {},
+      _$data.containsKey('insertHistoryKodasHistoryOne')
+          ? l$insertHistoryKodasHistoryOne
+          : const {},
+      _$data.containsKey('insertHistoryCallHistoryOne')
+          ? l$insertHistoryCallHistoryOne
+          : const {},
+      _$data.containsKey('insertHistoryVisitHistoryOne')
+          ? l$insertHistoryVisitHistoryOne
+          : const {},
     ]);
   }
 }

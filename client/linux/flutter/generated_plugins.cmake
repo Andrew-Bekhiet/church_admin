@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_webview_auth
+  file_selector_linux
   flutter_secure_storage_linux
   isar_flutter_libs
   sentry_flutter

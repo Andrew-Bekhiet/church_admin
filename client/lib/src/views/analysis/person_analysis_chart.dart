@@ -167,21 +167,15 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                 ),
                 showingTooltipIndicators: selectedSpots.toList(),
                 titlesData: FlTitlesData(
-                  rightTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  leftTitles: AxisTitles(
-                    drawBehindEverything: true,
+                  rightTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
+                  leftTitles: const AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 30,
                     ),
                   ),
                   bottomTitles: AxisTitles(
-                    drawBehindEverything: true,
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 30,
@@ -204,8 +198,10 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                 lineBarsData: [
                   LineChartBarData(
                     dotData: FlDotData(
-                      getDotPainter: (p0, p1, p2, p3) =>
-                          FlDotCirclePainter(color: p2.color, radius: 3),
+                      getDotPainter: (p0, p1, p2, p3) => FlDotCirclePainter(
+                        color: p2.color!,
+                        radius: 3,
+                      ),
                     ),
                     spots: groupedAnalysisData.entries
                         .map(

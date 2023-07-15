@@ -45,13 +45,12 @@ abstract class $AreaCopyWith<$Res> {
       {String id,
       String name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          Polygon? bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      Polygon? bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers});
+      List<User>? adminUsers});
 
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
@@ -132,13 +131,12 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
       {String id,
       String name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          Polygon? bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      Polygon? bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers});
+      List<User>? adminUsers});
 
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -200,14 +198,12 @@ class _$_Area extends _Area {
   _$_Area(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          this.bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) this.bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers})
+      final List<User>? adminUsers})
       : _adminUsers = adminUsers,
         super._();
 
@@ -291,13 +287,12 @@ abstract class _Area extends Area {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-          final Polygon? bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      final Polygon? bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers}) = _$_Area;
+      final List<User>? adminUsers}) = _$_Area;
   _Area._() : super._();
 
   factory _Area.fromJson(Map<String, dynamic> json) = _$_Area.fromJson;

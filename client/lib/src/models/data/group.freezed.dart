@@ -51,19 +51,18 @@ abstract class $GroupCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-          DateTimeRange? validity,
+      DateTimeRange? validity,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -202,19 +201,18 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-          DateTimeRange? validity,
+      DateTimeRange? validity,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   @override
   $ServiceCopyWith<$Res>? get service;
@@ -298,19 +296,18 @@ class _$_Group extends _Group {
   _$_Group(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-          this.validity,
+      this.validity,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceHistoryAggregate,
+      this.attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceDaysConstraintsAggregate})
+      this.attendanceDaysConstraintsAggregate})
       : _adminUsers = adminUsers,
         super._();
 
@@ -416,20 +413,19 @@ abstract class _Group extends Group {
   factory _Group(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-          final DateTimeRange? validity,
+      final DateTimeRange? validity,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? attendanceHistoryAggregate,
+      final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>?
-              attendanceDaysConstraintsAggregate}) = _$_Group;
+      final AnalysisData<DateTime>?
+          attendanceDaysConstraintsAggregate}) = _$_Group;
   _Group._() : super._();
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;

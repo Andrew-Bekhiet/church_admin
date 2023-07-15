@@ -43,11 +43,10 @@ abstract class $UserDataCopyWith<$Res> {
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          PermissionsSet permissions,
+      PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-          String? password,
+      @JsonKey(includeToJson: false, includeFromJson: false) String? password,
       LastRecordedByInfo? lastEdit});
 
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -124,11 +123,10 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   $Res call(
       {String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          PermissionsSet permissions,
+      PermissionsSet permissions,
       String email,
       String? firebaseAuthUid,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-          String? password,
+      @JsonKey(includeToJson: false, includeFromJson: false) String? password,
       LastRecordedByInfo? lastEdit});
 
   @override
@@ -188,11 +186,10 @@ class _$_UserData implements _UserData {
   const _$_UserData(
       {required this.uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          required this.permissions,
+      required this.permissions,
       required this.email,
       required this.firebaseAuthUid,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-          this.password,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.password,
       this.lastEdit});
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
@@ -258,11 +255,11 @@ abstract class _UserData implements UserData {
   const factory _UserData(
       {required final String uid,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          required final PermissionsSet permissions,
+      required final PermissionsSet permissions,
       required final String email,
       required final String? firebaseAuthUid,
       @JsonKey(includeToJson: false, includeFromJson: false)
-          final String? password,
+      final String? password,
       final LastRecordedByInfo? lastEdit}) = _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;

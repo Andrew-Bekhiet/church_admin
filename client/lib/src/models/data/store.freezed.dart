@@ -363,12 +363,10 @@ abstract class _Store extends Store {
       {required final String id,
       required final String name,
       final Family? family,
-      @JsonKey(name: 'adminFamily')
-          final String? familyId,
+      @JsonKey(name: 'adminFamily') final String? familyId,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          final Point? geolocation,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      final Point? geolocation,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final List<Area>? areas,
       final List<Street>? streets,
       final LastRecordedByInfo? lastEdit,

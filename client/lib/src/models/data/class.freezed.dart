@@ -51,19 +51,18 @@ abstract class $ClassCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
       bool? serviceGender,
       StudyYear? studyYear,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
   $StudyYearCopyWith<$Res>? get studyYear;
@@ -220,19 +219,18 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
       bool? serviceGender,
       StudyYear? studyYear,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          List<User>? adminUsers,
+      List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceHistoryAggregate,
+      AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
 
   @override
   $ServiceCopyWith<$Res>? get service;
@@ -323,19 +321,18 @@ class _$_Class extends _Class {
   _$_Class(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.service,
       this.serviceGender,
       this.studyYear,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceHistoryAggregate,
+      this.attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.attendanceDaysConstraintsAggregate})
+      this.attendanceDaysConstraintsAggregate})
       : _adminUsers = adminUsers,
         super._();
 
@@ -445,20 +442,19 @@ abstract class _Class extends Class {
   factory _Class(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final Service? service,
       final bool? serviceGender,
       final StudyYear? studyYear,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-          final List<User>? adminUsers,
+      final List<User>? adminUsers,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? attendanceHistoryAggregate,
+      final AnalysisData<DateTime>? attendanceHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>?
-              attendanceDaysConstraintsAggregate}) = _$_Class;
+      final AnalysisData<DateTime>?
+          attendanceDaysConstraintsAggregate}) = _$_Class;
   _Class._() : super._();
 
   factory _Class.fromJson(Map<String, dynamic> json) = _$_Class.fromJson;

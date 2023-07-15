@@ -107,8 +107,7 @@ abstract class $PersonCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -141,8 +140,7 @@ abstract class $PersonCopyWith<$Res> {
       String? storeId,
       StudyYear? studyYear,
       int? studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       LastRecordedByInfo? lastConfession,
       LastRecordedByInfo? lastKodas,
@@ -151,26 +149,26 @@ abstract class $PersonCopyWith<$Res> {
       LastRecordedByInfo? lastEdit,
       List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-          List<Group>? groups,
+      List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-          List<Service>? services,
+      List<Service>? services,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-          List<Tag>? tags,
+      List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-          List<Hobby>? hobbies,
+      List<Hobby>? hobbies,
       User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? kodasHistoryAggregate,
+      AnalysisData<DateTime>? kodasHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? confessionHistoryAggregate,
+      AnalysisData<DateTime>? confessionHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? callHistoryAggregate,
+      AnalysisData<DateTime>? callHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? visitHistoryAggregate,
+      AnalysisData<DateTime>? visitHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? editHistoryAggregate});
+      AnalysisData<DateTime>? editHistoryAggregate});
 
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
   $SchoolCopyWith<$Res>? get school;
@@ -774,8 +772,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       {String id,
       String name,
       String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          Point? geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -808,8 +805,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? storeId,
       StudyYear? studyYear,
       int? studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       LastRecordedByInfo? lastConfession,
       LastRecordedByInfo? lastKodas,
@@ -818,26 +814,26 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       LastRecordedByInfo? lastEdit,
       List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-          List<Group>? groups,
+      List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-          List<Service>? services,
+      List<Service>? services,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-          List<Tag>? tags,
+      List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-          List<Hobby>? hobbies,
+      List<Hobby>? hobbies,
       User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? kodasHistoryAggregate,
+      AnalysisData<DateTime>? kodasHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? confessionHistoryAggregate,
+      AnalysisData<DateTime>? confessionHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? callHistoryAggregate,
+      AnalysisData<DateTime>? callHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? visitHistoryAggregate,
+      AnalysisData<DateTime>? visitHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          AnalysisData<DateTime>? editHistoryAggregate});
+      AnalysisData<DateTime>? editHistoryAggregate});
 
   @override
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
@@ -1188,8 +1184,7 @@ class _$_Person extends _Person {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          this.geolocation,
+      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       this.mainPhone,
       final Map<String, dynamic> otherPhones = const {},
       this.birthdate,
@@ -1222,8 +1217,7 @@ class _$_Person extends _Person {
       this.storeId,
       this.studyYear,
       this.studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          this.color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.lastConfession,
       this.lastKodas,
@@ -1232,26 +1226,26 @@ class _$_Person extends _Person {
       this.lastEdit,
       final List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-          final List<Group>? groups,
+      final List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-          final List<Service>? services,
+      final List<Service>? services,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-          final List<Tag>? tags,
+      final List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-          final List<Hobby>? hobbies,
+      final List<Hobby>? hobbies,
       this.user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.kodasHistoryAggregate,
+      this.kodasHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.confessionHistoryAggregate,
+      this.confessionHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.callHistoryAggregate,
+      this.callHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.visitHistoryAggregate,
+      this.visitHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          this.editHistoryAggregate})
+      this.editHistoryAggregate})
       : _otherPhones = otherPhones,
         _classes = classes,
         _groups = groups,
@@ -1640,7 +1634,7 @@ abstract class _Person extends Person {
       required final String name,
       final String? address,
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-          final Point? geolocation,
+      final Point? geolocation,
       final String? mainPhone,
       final Map<String, dynamic> otherPhones,
       final DateTime? birthdate,
@@ -1673,8 +1667,7 @@ abstract class _Person extends Person {
       final String? storeId,
       final StudyYear? studyYear,
       final int? studyYearId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final LastRecordedByInfo? lastConfession,
       final LastRecordedByInfo? lastKodas,
@@ -1683,26 +1676,26 @@ abstract class _Person extends Person {
       final LastRecordedByInfo? lastEdit,
       final List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-          final List<Group>? groups,
+      final List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-          final List<Service>? services,
+      final List<Service>? services,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-          final List<Tag>? tags,
+      final List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-          final List<Hobby>? hobbies,
+      final List<Hobby>? hobbies,
       final User? user,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? kodasHistoryAggregate,
+      final AnalysisData<DateTime>? kodasHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? confessionHistoryAggregate,
+      final AnalysisData<DateTime>? confessionHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? callHistoryAggregate,
+      final AnalysisData<DateTime>? callHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? visitHistoryAggregate,
+      final AnalysisData<DateTime>? visitHistoryAggregate,
       @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-          final AnalysisData<DateTime>? editHistoryAggregate}) = _$_Person;
+      final AnalysisData<DateTime>? editHistoryAggregate}) = _$_Person;
   _Person._() : super._();
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;

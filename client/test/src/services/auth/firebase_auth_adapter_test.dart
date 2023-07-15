@@ -5,6 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth show User;
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,13 +17,15 @@ import 'package:rxdart/subjects.dart';
 import 'firebase_auth_adapter_test.mocks.dart';
 
 final mockFirebaseUser = _createMockUser();
-final idTokenResult = IdTokenResult({
-  'claims': {
-    'x-hasura-user-id': 'x-hasura-user-id-asdasdas',
-    'password': 'vdvdvpassword'
-  },
-  'token': 'header.token.signature'
-});
+final idTokenResult = IdTokenResult(
+  PigeonIdTokenResult(
+    claims: {
+      'x-hasura-user-id': 'x-hasura-user-id-asdasdas',
+      'password': 'vdvdvpassword'
+    },
+    token: 'header.token.signature',
+  ),
+);
 final expectedDomainUser = User(
   uid: idTokenResult.claims!['x-hasura-user-id'],
   name: 'name',
@@ -148,7 +151,9 @@ void main() {
         idTokenController.add(
           _createMockUser(
             idTokenResult$: IdTokenResult(
-              {'token': t},
+              PigeonIdTokenResult(
+                token: t,
+              ),
             ),
           ),
         );

@@ -181,7 +181,7 @@ abstract class _PersonState extends PersonState {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color}) = _$_PersonState;
+      final Color? color}) = _$_PersonState;
   _PersonState._() : super._();
 
   factory _PersonState.fromJson(Map<String, dynamic> json) =

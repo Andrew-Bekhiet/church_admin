@@ -49,20 +49,14 @@ abstract class $NotificationCopyWith<$Res> {
       _$NotificationCopyWithImpl<$Res, Notification>;
   @useResult
   $Res call(
-      {@HiveField(0)
-          String id,
-      @HiveField(1)
-          String title,
-      @HiveField(2)
-          String body,
-      @HiveField(3)
-          DateTime sentTime,
-      @HiveField(4)
-          String senderUID,
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String body,
+      @HiveField(3) DateTime sentTime,
+      @HiveField(4) String senderUID,
       @HiveField(5, defaultValue: NotificationType.remote)
-          NotificationType type,
-      @HiveField(6)
-          Map<String, dynamic>? additionalData});
+      NotificationType type,
+      @HiveField(6) Map<String, dynamic>? additionalData});
 }
 
 /// @nodoc
@@ -128,20 +122,14 @@ abstract class _$$_NotificationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0)
-          String id,
-      @HiveField(1)
-          String title,
-      @HiveField(2)
-          String body,
-      @HiveField(3)
-          DateTime sentTime,
-      @HiveField(4)
-          String senderUID,
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String body,
+      @HiveField(3) DateTime sentTime,
+      @HiveField(4) String senderUID,
       @HiveField(5, defaultValue: NotificationType.remote)
-          NotificationType type,
-      @HiveField(6)
-          Map<String, dynamic>? additionalData});
+      NotificationType type,
+      @HiveField(6) Map<String, dynamic>? additionalData});
 }
 
 /// @nodoc
@@ -200,20 +188,14 @@ class __$$_NotificationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Notification implements _Notification {
   const _$_Notification(
-      {@HiveField(0)
-          required this.id,
-      @HiveField(1)
-          required this.title,
-      @HiveField(2)
-          required this.body,
-      @HiveField(3)
-          required this.sentTime,
-      @HiveField(4)
-          required this.senderUID,
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.body,
+      @HiveField(3) required this.sentTime,
+      @HiveField(4) required this.senderUID,
       @HiveField(5, defaultValue: NotificationType.remote)
-          this.type = NotificationType.remote,
-      @HiveField(6)
-          final Map<String, dynamic>? additionalData})
+      this.type = NotificationType.remote,
+      @HiveField(6) final Map<String, dynamic>? additionalData})
       : _additionalData = additionalData;
 
   factory _$_Notification.fromJson(Map<String, dynamic> json) =>
@@ -292,20 +274,15 @@ class _$_Notification implements _Notification {
 
 abstract class _Notification implements Notification {
   const factory _Notification(
-      {@HiveField(0)
-          required final String id,
-      @HiveField(1)
-          required final String title,
-      @HiveField(2)
-          required final String body,
-      @HiveField(3)
-          required final DateTime sentTime,
-      @HiveField(4)
-          required final String senderUID,
-      @HiveField(5, defaultValue: NotificationType.remote)
+          {@HiveField(0) required final String id,
+          @HiveField(1) required final String title,
+          @HiveField(2) required final String body,
+          @HiveField(3) required final DateTime sentTime,
+          @HiveField(4) required final String senderUID,
+          @HiveField(5, defaultValue: NotificationType.remote)
           final NotificationType type,
-      @HiveField(6)
-          final Map<String, dynamic>? additionalData}) = _$_Notification;
+          @HiveField(6) final Map<String, dynamic>? additionalData}) =
+      _$_Notification;
 
   factory _Notification.fromJson(Map<String, dynamic> json) =
       _$_Notification.fromJson;

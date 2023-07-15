@@ -55,12 +55,10 @@ abstract class $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          PermissionsSet permissions,
+      PermissionsSet permissions,
       String? authId,
-      @JsonKey(includeIfNull: false)
-          String? password,
-      @JsonKey(includeIfNull: false)
-          String? idToken,
+      @JsonKey(includeIfNull: false) String? password,
+      @JsonKey(includeIfNull: false) String? idToken,
       LastRecordedByInfo? lastEdit,
       Person? person,
       List<AdminOnData>? servicesHistory,
@@ -197,12 +195,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          PermissionsSet permissions,
+      PermissionsSet permissions,
       String? authId,
-      @JsonKey(includeIfNull: false)
-          String? password,
-      @JsonKey(includeIfNull: false)
-          String? idToken,
+      @JsonKey(includeIfNull: false) String? password,
+      @JsonKey(includeIfNull: false) String? idToken,
       LastRecordedByInfo? lastEdit,
       Person? person,
       List<AdminOnData>? servicesHistory,
@@ -310,12 +306,10 @@ class _$_User extends _User {
       this.photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          this.permissions = const PermissionsSet.empty(),
+      this.permissions = const PermissionsSet.empty(),
       this.authId,
-      @JsonKey(includeIfNull: false)
-          this.password,
-      @JsonKey(includeIfNull: false)
-          this.idToken,
+      @JsonKey(includeIfNull: false) this.password,
+      @JsonKey(includeIfNull: false) this.idToken,
       this.lastEdit,
       this.person,
       final List<AdminOnData>? servicesHistory,
@@ -466,12 +460,10 @@ abstract class _User extends User {
       final DateTime? photoUpdatedAt,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-          final PermissionsSet permissions,
+      final PermissionsSet permissions,
       final String? authId,
-      @JsonKey(includeIfNull: false)
-          final String? password,
-      @JsonKey(includeIfNull: false)
-          final String? idToken,
+      @JsonKey(includeIfNull: false) final String? password,
+      @JsonKey(includeIfNull: false) final String? idToken,
       final LastRecordedByInfo? lastEdit,
       final Person? person,
       final List<AdminOnData>? servicesHistory,

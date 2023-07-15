@@ -181,7 +181,7 @@ abstract class _PersonType extends PersonType {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-          final Color? color}) = _$_PersonType;
+      final Color? color}) = _$_PersonType;
   _PersonType._() : super._();
 
   factory _PersonType.fromJson(Map<String, dynamic> json) =

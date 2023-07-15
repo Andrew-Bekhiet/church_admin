@@ -590,11 +590,11 @@ class _CopyWithStubImpl_Query_personsNames_persons<TRes>
 
 class Variables_Query_personsGeolocations {
   factory Variables_Query_personsGeolocations({
-    required bool getAreas,
-    required bool getStreets,
-    required bool getFamilies,
-    required bool getStores,
-    required bool getPersons,
+    bool? getAreas,
+    bool? getStreets,
+    bool? getFamilies,
+    bool? getStores,
+    bool? getPersons,
     List<UuidValue>? areasIds,
     List<UuidValue>? streetsIds,
     List<UuidValue>? familiesIds,
@@ -602,11 +602,11 @@ class Variables_Query_personsGeolocations {
     List<Input_PersonsBoolExp>? personsConditions,
   }) =>
       Variables_Query_personsGeolocations._({
-        r'getAreas': getAreas,
-        r'getStreets': getStreets,
-        r'getFamilies': getFamilies,
-        r'getStores': getStores,
-        r'getPersons': getPersons,
+        if (getAreas != null) r'getAreas': getAreas,
+        if (getStreets != null) r'getStreets': getStreets,
+        if (getFamilies != null) r'getFamilies': getFamilies,
+        if (getStores != null) r'getStores': getStores,
+        if (getPersons != null) r'getPersons': getPersons,
         if (areasIds != null) r'areasIds': areasIds,
         if (streetsIds != null) r'streetsIds': streetsIds,
         if (familiesIds != null) r'familiesIds': familiesIds,
@@ -619,16 +619,26 @@ class Variables_Query_personsGeolocations {
   factory Variables_Query_personsGeolocations.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$getAreas = data['getAreas'];
-    result$data['getAreas'] = (l$getAreas as bool);
-    final l$getStreets = data['getStreets'];
-    result$data['getStreets'] = (l$getStreets as bool);
-    final l$getFamilies = data['getFamilies'];
-    result$data['getFamilies'] = (l$getFamilies as bool);
-    final l$getStores = data['getStores'];
-    result$data['getStores'] = (l$getStores as bool);
-    final l$getPersons = data['getPersons'];
-    result$data['getPersons'] = (l$getPersons as bool);
+    if (data.containsKey('getAreas')) {
+      final l$getAreas = data['getAreas'];
+      result$data['getAreas'] = (l$getAreas as bool);
+    }
+    if (data.containsKey('getStreets')) {
+      final l$getStreets = data['getStreets'];
+      result$data['getStreets'] = (l$getStreets as bool);
+    }
+    if (data.containsKey('getFamilies')) {
+      final l$getFamilies = data['getFamilies'];
+      result$data['getFamilies'] = (l$getFamilies as bool);
+    }
+    if (data.containsKey('getStores')) {
+      final l$getStores = data['getStores'];
+      result$data['getStores'] = (l$getStores as bool);
+    }
+    if (data.containsKey('getPersons')) {
+      final l$getPersons = data['getPersons'];
+      result$data['getPersons'] = (l$getPersons as bool);
+    }
     if (data.containsKey('areasIds')) {
       final l$areasIds = data['areasIds'];
       result$data['areasIds'] =
@@ -663,11 +673,11 @@ class Variables_Query_personsGeolocations {
 
   Map<String, dynamic> _$data;
 
-  bool get getAreas => (_$data['getAreas'] as bool);
-  bool get getStreets => (_$data['getStreets'] as bool);
-  bool get getFamilies => (_$data['getFamilies'] as bool);
-  bool get getStores => (_$data['getStores'] as bool);
-  bool get getPersons => (_$data['getPersons'] as bool);
+  bool? get getAreas => (_$data['getAreas'] as bool?);
+  bool? get getStreets => (_$data['getStreets'] as bool?);
+  bool? get getFamilies => (_$data['getFamilies'] as bool?);
+  bool? get getStores => (_$data['getStores'] as bool?);
+  bool? get getPersons => (_$data['getPersons'] as bool?);
   List<UuidValue>? get areasIds => (_$data['areasIds'] as List<UuidValue>?);
   List<UuidValue>? get streetsIds => (_$data['streetsIds'] as List<UuidValue>?);
   List<UuidValue>? get familiesIds =>
@@ -677,16 +687,26 @@ class Variables_Query_personsGeolocations {
       (_$data['personsConditions'] as List<Input_PersonsBoolExp>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$getAreas = getAreas;
-    result$data['getAreas'] = l$getAreas;
-    final l$getStreets = getStreets;
-    result$data['getStreets'] = l$getStreets;
-    final l$getFamilies = getFamilies;
-    result$data['getFamilies'] = l$getFamilies;
-    final l$getStores = getStores;
-    result$data['getStores'] = l$getStores;
-    final l$getPersons = getPersons;
-    result$data['getPersons'] = l$getPersons;
+    if (_$data.containsKey('getAreas')) {
+      final l$getAreas = getAreas;
+      result$data['getAreas'] = (l$getAreas as bool);
+    }
+    if (_$data.containsKey('getStreets')) {
+      final l$getStreets = getStreets;
+      result$data['getStreets'] = (l$getStreets as bool);
+    }
+    if (_$data.containsKey('getFamilies')) {
+      final l$getFamilies = getFamilies;
+      result$data['getFamilies'] = (l$getFamilies as bool);
+    }
+    if (_$data.containsKey('getStores')) {
+      final l$getStores = getStores;
+      result$data['getStores'] = (l$getStores as bool);
+    }
+    if (_$data.containsKey('getPersons')) {
+      final l$getPersons = getPersons;
+      result$data['getPersons'] = (l$getPersons as bool);
+    }
     if (_$data.containsKey('areasIds')) {
       final l$areasIds = areasIds;
       result$data['areasIds'] =
@@ -732,26 +752,46 @@ class Variables_Query_personsGeolocations {
     }
     final l$getAreas = getAreas;
     final lOther$getAreas = other.getAreas;
+    if (_$data.containsKey('getAreas') !=
+        other._$data.containsKey('getAreas')) {
+      return false;
+    }
     if (l$getAreas != lOther$getAreas) {
       return false;
     }
     final l$getStreets = getStreets;
     final lOther$getStreets = other.getStreets;
+    if (_$data.containsKey('getStreets') !=
+        other._$data.containsKey('getStreets')) {
+      return false;
+    }
     if (l$getStreets != lOther$getStreets) {
       return false;
     }
     final l$getFamilies = getFamilies;
     final lOther$getFamilies = other.getFamilies;
+    if (_$data.containsKey('getFamilies') !=
+        other._$data.containsKey('getFamilies')) {
+      return false;
+    }
     if (l$getFamilies != lOther$getFamilies) {
       return false;
     }
     final l$getStores = getStores;
     final lOther$getStores = other.getStores;
+    if (_$data.containsKey('getStores') !=
+        other._$data.containsKey('getStores')) {
+      return false;
+    }
     if (l$getStores != lOther$getStores) {
       return false;
     }
     final l$getPersons = getPersons;
     final lOther$getPersons = other.getPersons;
+    if (_$data.containsKey('getPersons') !=
+        other._$data.containsKey('getPersons')) {
+      return false;
+    }
     if (l$getPersons != lOther$getPersons) {
       return false;
     }
@@ -871,11 +911,11 @@ class Variables_Query_personsGeolocations {
     final l$storesIds = storesIds;
     final l$personsConditions = personsConditions;
     return Object.hashAll([
-      l$getAreas,
-      l$getStreets,
-      l$getFamilies,
-      l$getStores,
-      l$getPersons,
+      _$data.containsKey('getAreas') ? l$getAreas : const {},
+      _$data.containsKey('getStreets') ? l$getStreets : const {},
+      _$data.containsKey('getFamilies') ? l$getFamilies : const {},
+      _$data.containsKey('getStores') ? l$getStores : const {},
+      _$data.containsKey('getPersons') ? l$getPersons : const {},
       _$data.containsKey('areasIds')
           ? l$areasIds == null
               ? null
@@ -2962,11 +3002,11 @@ class Variables_Query_personHistoryAnalysis {
     List<UuidValue>? groupsIds,
     List<UuidValue>? classesIds,
     List<UuidValue>? servicesIds,
-    required bool callHistory,
-    required bool visitHistory,
-    required bool editHistory,
-    required bool confessionHistory,
-    required bool kodasHistory,
+    bool? callHistory,
+    bool? visitHistory,
+    bool? editHistory,
+    bool? confessionHistory,
+    bool? kodasHistory,
   }) =>
       Variables_Query_personHistoryAnalysis._({
         r'dateFrom': dateFrom,
@@ -2977,11 +3017,11 @@ class Variables_Query_personHistoryAnalysis {
         if (groupsIds != null) r'groupsIds': groupsIds,
         if (classesIds != null) r'classesIds': classesIds,
         if (servicesIds != null) r'servicesIds': servicesIds,
-        r'callHistory': callHistory,
-        r'visitHistory': visitHistory,
-        r'editHistory': editHistory,
-        r'confessionHistory': confessionHistory,
-        r'kodasHistory': kodasHistory,
+        if (callHistory != null) r'callHistory': callHistory,
+        if (visitHistory != null) r'visitHistory': visitHistory,
+        if (editHistory != null) r'editHistory': editHistory,
+        if (confessionHistory != null) r'confessionHistory': confessionHistory,
+        if (kodasHistory != null) r'kodasHistory': kodasHistory,
       });
 
   Variables_Query_personHistoryAnalysis._(this._$data);
@@ -3016,16 +3056,26 @@ class Variables_Query_personHistoryAnalysis {
           ?.map((e) => stringToUuid(e))
           .toList();
     }
-    final l$callHistory = data['callHistory'];
-    result$data['callHistory'] = (l$callHistory as bool);
-    final l$visitHistory = data['visitHistory'];
-    result$data['visitHistory'] = (l$visitHistory as bool);
-    final l$editHistory = data['editHistory'];
-    result$data['editHistory'] = (l$editHistory as bool);
-    final l$confessionHistory = data['confessionHistory'];
-    result$data['confessionHistory'] = (l$confessionHistory as bool);
-    final l$kodasHistory = data['kodasHistory'];
-    result$data['kodasHistory'] = (l$kodasHistory as bool);
+    if (data.containsKey('callHistory')) {
+      final l$callHistory = data['callHistory'];
+      result$data['callHistory'] = (l$callHistory as bool);
+    }
+    if (data.containsKey('visitHistory')) {
+      final l$visitHistory = data['visitHistory'];
+      result$data['visitHistory'] = (l$visitHistory as bool);
+    }
+    if (data.containsKey('editHistory')) {
+      final l$editHistory = data['editHistory'];
+      result$data['editHistory'] = (l$editHistory as bool);
+    }
+    if (data.containsKey('confessionHistory')) {
+      final l$confessionHistory = data['confessionHistory'];
+      result$data['confessionHistory'] = (l$confessionHistory as bool);
+    }
+    if (data.containsKey('kodasHistory')) {
+      final l$kodasHistory = data['kodasHistory'];
+      result$data['kodasHistory'] = (l$kodasHistory as bool);
+    }
     return Variables_Query_personHistoryAnalysis._(result$data);
   }
 
@@ -3040,11 +3090,11 @@ class Variables_Query_personHistoryAnalysis {
   List<UuidValue>? get classesIds => (_$data['classesIds'] as List<UuidValue>?);
   List<UuidValue>? get servicesIds =>
       (_$data['servicesIds'] as List<UuidValue>?);
-  bool get callHistory => (_$data['callHistory'] as bool);
-  bool get visitHistory => (_$data['visitHistory'] as bool);
-  bool get editHistory => (_$data['editHistory'] as bool);
-  bool get confessionHistory => (_$data['confessionHistory'] as bool);
-  bool get kodasHistory => (_$data['kodasHistory'] as bool);
+  bool? get callHistory => (_$data['callHistory'] as bool?);
+  bool? get visitHistory => (_$data['visitHistory'] as bool?);
+  bool? get editHistory => (_$data['editHistory'] as bool?);
+  bool? get confessionHistory => (_$data['confessionHistory'] as bool?);
+  bool? get kodasHistory => (_$data['kodasHistory'] as bool?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$dateFrom = dateFrom;
@@ -3072,16 +3122,26 @@ class Variables_Query_personHistoryAnalysis {
       result$data['servicesIds'] =
           l$servicesIds?.map((e) => uuidToString(e)).toList();
     }
-    final l$callHistory = callHistory;
-    result$data['callHistory'] = l$callHistory;
-    final l$visitHistory = visitHistory;
-    result$data['visitHistory'] = l$visitHistory;
-    final l$editHistory = editHistory;
-    result$data['editHistory'] = l$editHistory;
-    final l$confessionHistory = confessionHistory;
-    result$data['confessionHistory'] = l$confessionHistory;
-    final l$kodasHistory = kodasHistory;
-    result$data['kodasHistory'] = l$kodasHistory;
+    if (_$data.containsKey('callHistory')) {
+      final l$callHistory = callHistory;
+      result$data['callHistory'] = (l$callHistory as bool);
+    }
+    if (_$data.containsKey('visitHistory')) {
+      final l$visitHistory = visitHistory;
+      result$data['visitHistory'] = (l$visitHistory as bool);
+    }
+    if (_$data.containsKey('editHistory')) {
+      final l$editHistory = editHistory;
+      result$data['editHistory'] = (l$editHistory as bool);
+    }
+    if (_$data.containsKey('confessionHistory')) {
+      final l$confessionHistory = confessionHistory;
+      result$data['confessionHistory'] = (l$confessionHistory as bool);
+    }
+    if (_$data.containsKey('kodasHistory')) {
+      final l$kodasHistory = kodasHistory;
+      result$data['kodasHistory'] = (l$kodasHistory as bool);
+    }
     return result$data;
   }
 
@@ -3187,26 +3247,46 @@ class Variables_Query_personHistoryAnalysis {
     }
     final l$callHistory = callHistory;
     final lOther$callHistory = other.callHistory;
+    if (_$data.containsKey('callHistory') !=
+        other._$data.containsKey('callHistory')) {
+      return false;
+    }
     if (l$callHistory != lOther$callHistory) {
       return false;
     }
     final l$visitHistory = visitHistory;
     final lOther$visitHistory = other.visitHistory;
+    if (_$data.containsKey('visitHistory') !=
+        other._$data.containsKey('visitHistory')) {
+      return false;
+    }
     if (l$visitHistory != lOther$visitHistory) {
       return false;
     }
     final l$editHistory = editHistory;
     final lOther$editHistory = other.editHistory;
+    if (_$data.containsKey('editHistory') !=
+        other._$data.containsKey('editHistory')) {
+      return false;
+    }
     if (l$editHistory != lOther$editHistory) {
       return false;
     }
     final l$confessionHistory = confessionHistory;
     final lOther$confessionHistory = other.confessionHistory;
+    if (_$data.containsKey('confessionHistory') !=
+        other._$data.containsKey('confessionHistory')) {
+      return false;
+    }
     if (l$confessionHistory != lOther$confessionHistory) {
       return false;
     }
     final l$kodasHistory = kodasHistory;
     final lOther$kodasHistory = other.kodasHistory;
+    if (_$data.containsKey('kodasHistory') !=
+        other._$data.containsKey('kodasHistory')) {
+      return false;
+    }
     if (l$kodasHistory != lOther$kodasHistory) {
       return false;
     }
@@ -3249,11 +3329,11 @@ class Variables_Query_personHistoryAnalysis {
               ? null
               : Object.hashAll(l$servicesIds.map((v) => v))
           : const {},
-      l$callHistory,
-      l$visitHistory,
-      l$editHistory,
-      l$confessionHistory,
-      l$kodasHistory,
+      _$data.containsKey('callHistory') ? l$callHistory : const {},
+      _$data.containsKey('visitHistory') ? l$visitHistory : const {},
+      _$data.containsKey('editHistory') ? l$editHistory : const {},
+      _$data.containsKey('confessionHistory') ? l$confessionHistory : const {},
+      _$data.containsKey('kodasHistory') ? l$kodasHistory : const {},
     ]);
   }
 }

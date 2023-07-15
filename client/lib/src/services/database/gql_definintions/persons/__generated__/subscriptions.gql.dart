@@ -8003,12 +8003,12 @@ class Variables_Subscription_personAttendance {
   factory Variables_Subscription_personAttendance({
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
     List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
-    required int limit,
+    int? limit,
   }) =>
       Variables_Subscription_personAttendance._({
         if (where != null) r'where': where,
         if (orderBy != null) r'orderBy': orderBy,
-        r'limit': limit,
+        if (limit != null) r'limit': limit,
       });
 
   Variables_Subscription_personAttendance._(this._$data);
@@ -8030,8 +8030,10 @@ class Variables_Subscription_personAttendance {
               (e as Map<String, dynamic>)))
           .toList();
     }
-    final l$limit = data['limit'];
-    result$data['limit'] = (l$limit as int);
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int);
+    }
     return Variables_Subscription_personAttendance._(result$data);
   }
 
@@ -8041,7 +8043,7 @@ class Variables_Subscription_personAttendance {
       (_$data['where'] as List<Input_HistoryAttendanceHistoryBoolExp>?);
   List<Input_HistoryAttendanceHistoryOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_HistoryAttendanceHistoryOrderBy>?);
-  int get limit => (_$data['limit'] as int);
+  int? get limit => (_$data['limit'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -8052,8 +8054,10 @@ class Variables_Subscription_personAttendance {
       final l$orderBy = orderBy;
       result$data['orderBy'] = l$orderBy?.map((e) => e.toJson()).toList();
     }
-    final l$limit = limit;
-    result$data['limit'] = l$limit;
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = (l$limit as int);
+    }
     return result$data;
   }
 
@@ -8112,6 +8116,9 @@ class Variables_Subscription_personAttendance {
     }
     final l$limit = limit;
     final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
     if (l$limit != lOther$limit) {
       return false;
     }
@@ -8134,7 +8141,7 @@ class Variables_Subscription_personAttendance {
               ? null
               : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
-      l$limit,
+      _$data.containsKey('limit') ? l$limit : const {},
     ]);
   }
 }
