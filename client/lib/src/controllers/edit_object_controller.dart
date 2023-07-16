@@ -224,4 +224,22 @@ class EditObjectController<T extends ViewableWithID> {
             ) ??
             false);
   }
+
+  EditObjectController<T> copyWith({
+    T? initialObject,
+    T? newObject,
+    Future<T> Function(T object)? onCreate,
+    UpdateFunc<T>? onUpdate,
+    Future<void> Function(T object)? onDelete,
+    Json Function(T object)? toJson,
+  }) {
+    return EditObjectController<T>(
+      initialObject: initialObject ?? this.initialObject,
+      newObject: newObject ?? this.newObject,
+      onCreate: onCreate ?? this.onCreate,
+      onUpdate: onUpdate ?? this.onUpdate,
+      onDelete: onDelete ?? this.onDelete,
+      toJson: toJson ?? this.toJson,
+    );
+  }
 }
