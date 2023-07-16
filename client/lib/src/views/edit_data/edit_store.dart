@@ -86,24 +86,14 @@ class _EditStoreState extends State<EditStore> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextFormField(
-                          key: ValueKey(newStore.name),
-                          decoration: const InputDecoration(
-                            labelText: 'الاسم',
-                          ),
+                        NameField(
                           initialValue: newStore.name,
-                          onChanged: (value) => newStore = newStore.copyWith(
+                          onValueChanged: (value) =>
+                              newStore = newStore.copyWith(
                             name: value.trim(),
                           ),
-                          textInputAction: TextInputAction.next,
-                          textCapitalization: TextCapitalization.words,
-                          validator: (value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'يجب ملئ الاسم';
-                            }
-                            return null;
-                          },
-                        ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                        ),
                         FilledButton.tonalIcon(
                           onPressed: _editGeolocation(context),
                           icon: const Icon(Icons.edit_location),

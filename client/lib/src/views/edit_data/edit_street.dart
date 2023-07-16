@@ -87,24 +87,14 @@ class _EditStreetState extends State<EditStreet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextFormField(
-                          key: ValueKey(newStreet.name),
-                          decoration: const InputDecoration(
-                            labelText: 'الاسم',
-                          ),
+                        NameField(
                           initialValue: newStreet.name,
-                          onChanged: (value) => newStreet = newStreet.copyWith(
+                          onValueChanged: (value) =>
+                              newStreet = newStreet.copyWith(
                             name: value.trim(),
                           ),
-                          textInputAction: TextInputAction.next,
-                          textCapitalization: TextCapitalization.words,
-                          validator: (value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'يجب ملئ الاسم';
-                            }
-                            return null;
-                          },
-                        ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                        ),
                         FilledButton.tonalIcon(
                           onPressed: _editGeolocation(context),
                           icon: const Icon(Icons.edit_location),

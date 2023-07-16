@@ -110,24 +110,14 @@ class _EditFamilyState extends State<EditFamily> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextFormField(
-                          key: ValueKey(newFamily.name),
-                          decoration: const InputDecoration(
-                            labelText: 'الاسم',
-                          ),
+                        NameField(
                           initialValue: newFamily.name,
-                          onChanged: (value) => newFamily = newFamily.copyWith(
+                          onValueChanged: (value) =>
+                              newFamily = newFamily.copyWith(
                             name: value.trim(),
                           ),
-                          textInputAction: TextInputAction.next,
-                          textCapitalization: TextCapitalization.words,
-                          validator: (value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'يجب ملئ الاسم';
-                            }
-                            return null;
-                          },
-                        ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                        ),
                         AddressWithLocationField(
                           initialAddress: newFamily.address,
                           onAddressChanged: (value) => setState(
