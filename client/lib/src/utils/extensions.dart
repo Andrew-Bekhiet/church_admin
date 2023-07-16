@@ -151,3 +151,10 @@ extension NextItem<T> on Stream<T> {
   Future<T?> get nextNonNull =>
       nextWhere((o) => o != null, ignoreStreamDone: true);
 }
+
+extension WithPadding on Widget {
+  Widget withPadding(EdgeInsetsGeometry padding) => Padding(
+        padding: padding,
+        child: this,
+      );
+}
