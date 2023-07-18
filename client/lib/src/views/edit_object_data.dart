@@ -61,7 +61,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                   backgroundColor: newObjectData.color,
                   foregroundColor: foregroundColor,
                   addActions: [
-                    if (_controller.isUpdate)
+                    if (widget.canDeletePhoto(_controller))
                       IconButton(
                         onPressed: () => _controller.delete(context),
                         icon: const Icon(Icons.delete),
