@@ -4,15 +4,15 @@ import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 
-export 'view_data/view_area.dart';
-export 'view_data/view_class.dart';
-export 'view_data/view_family.dart';
-export 'view_data/view_group.dart';
-export 'view_data/view_person.dart';
-export 'view_data/view_service.dart';
-export 'view_data/view_store.dart';
-export 'view_data/view_street.dart';
-export 'view_data/view_user.dart';
+export 'view_object_details/view_area.dart';
+export 'view_object_details/view_class.dart';
+export 'view_object_details/view_family.dart';
+export 'view_object_details/view_group.dart';
+export 'view_object_details/view_person.dart';
+export 'view_object_details/view_service.dart';
+export 'view_object_details/view_store.dart';
+export 'view_object_details/view_street.dart';
+export 'view_object_details/view_user.dart';
 
 typedef WidgetBuilderWithObject<T> = WBuilderWithObject<T, Widget>;
 
