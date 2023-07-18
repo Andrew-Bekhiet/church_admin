@@ -11,29 +11,28 @@ part 'group.g.dart';
 @freezed
 class Group extends ViewableWithIDAndImage
     with _$Group
-    implements AttendanceAnalyzable {
+    implements ToJson, AttendanceAnalyzable {
   factory Group({
     required String id,
     required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-        Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
     @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-        DateTimeRange? validity,
+    DateTimeRange? validity,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-        List<User>? adminUsers,
+    List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceHistoryAggregate,
+    AnalysisData<DateTime>? attendanceHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
   }) = _Group;
   Group._() : super();
 

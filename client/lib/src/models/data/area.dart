@@ -9,18 +9,16 @@ part 'area.freezed.dart';
 part 'area.g.dart';
 
 @freezed
-class Area extends ViewableWithIDAndImage with _$Area {
+class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
   factory Area({
     required String id,
     required String name,
-    @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-        Polygon? bounds,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-        Color? color,
+    @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) Polygon? bounds,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-        List<User>? adminUsers,
+    List<User>? adminUsers,
   }) = _Area;
   Area._() : super();
 

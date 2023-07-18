@@ -11,32 +11,30 @@ part 'service.g.dart';
 @freezed
 class Service extends ViewableWithIDAndImage
     with _$Service
-    implements AttendanceAnalyzable {
+    implements ToJson, AttendanceAnalyzable {
   factory Service({
     required String id,
     required String name,
     StudyYear? fromStudyYear,
     StudyYear? toStudyYear,
-    @JsonKey(name: 'nextServiceObject')
-        Service? nextService,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-        Color? color,
+    @JsonKey(name: 'nextServiceObject') Service? nextService,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     List<Class>? classes,
     List<Group>? groups,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-        List<User>? adminUsers,
+    List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceHistoryAggregate,
+    AnalysisData<DateTime>? attendanceHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
   }) = _Service;
   Service._() : super();
 

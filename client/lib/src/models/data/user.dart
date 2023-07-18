@@ -7,7 +7,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User extends ViewableWithIDAndImage with _$User {
+class User extends ViewableWithIDAndImage with _$User implements ToJson {
   factory User({
     required String uid,
     required String name,
@@ -19,12 +19,10 @@ class User extends ViewableWithIDAndImage with _$User {
       toJson: permissionsSetToJson,
     )
     @Default(PermissionsSet.empty())
-        PermissionsSet permissions,
+    PermissionsSet permissions,
     String? authId,
-    @JsonKey(includeIfNull: false)
-        String? password,
-    @JsonKey(includeIfNull: false)
-        String? idToken,
+    @JsonKey(includeIfNull: false) String? password,
+    @JsonKey(includeIfNull: false) String? idToken,
     LastRecordedByInfo? lastEdit,
     Person? person,
     List<AdminOnData>? servicesHistory,

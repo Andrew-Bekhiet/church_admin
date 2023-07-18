@@ -5,7 +5,9 @@ part 'persons_geolocations_response.freezed.dart';
 part 'persons_geolocations_response.g.dart';
 
 @freezed
-class PersonsGeolocationsResponse with _$PersonsGeolocationsResponse {
+class PersonsGeolocationsResponse
+    with _$PersonsGeolocationsResponse
+    implements ToJson {
   factory PersonsGeolocationsResponse({
     @Default({}) Set<Area> areas,
     @Default({}) Set<Street> streets,

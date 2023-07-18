@@ -9,7 +9,7 @@ part 'street.freezed.dart';
 part 'street.g.dart';
 
 @freezed
-class Street extends ViewableWithIDAndImage with _$Street {
+class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
   factory Street({
     required String id,
     required String name,

@@ -11,29 +11,28 @@ part 'class.g.dart';
 @freezed
 class Class extends ViewableWithIDAndImage
     with _$Class
-    implements AttendanceAnalyzable {
+    implements ToJson, AttendanceAnalyzable {
   factory Class({
     required String id,
     required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-        Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
     bool? serviceGender,
     StudyYear? studyYear,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-        List<User>? adminUsers,
+    List<User>? adminUsers,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceHistoryAggregate,
+    AnalysisData<DateTime>? attendanceHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
   }) = _Class;
   Class._() : super();
 

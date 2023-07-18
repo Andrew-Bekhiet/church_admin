@@ -9,7 +9,7 @@ part 'store.freezed.dart';
 part 'store.g.dart';
 
 @freezed
-class Store extends ViewableWithIDAndImage with _$Store {
+class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
   factory Store({
     required String id,
     required String name,

@@ -21,115 +21,120 @@ class ViewableObjectService {
   GlobalKey<NavigatorState> get navigatorKey => throw UnimplementedError();
 
   void onTap(Viewable object) {
-    if (object is Person) {
-      router.push(
-        Uri(
-          path: '/viewPerson',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'person': object,
-        },
-      );
-    } else if (object is Service) {
-      router.push(
-        Uri(
-          path: '/viewService',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'service': object,
-        },
-      );
-    } else if (object is Group) {
-      router.push(
-        Uri(
-          path: '/viewGroup',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'group': object,
-        },
-      );
-    } else if (object is Class) {
-      router.push(
-        Uri(
-          path: '/viewClass',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'class': object,
-        },
-      );
-    } else if (object is Area) {
-      router.push(
-        Uri(
-          path: '/viewArea',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'area': object,
-        },
-      );
-    } else if (object is Street) {
-      router.push(
-        Uri(
-          path: '/viewStreet',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'street': object,
-        },
-      );
-    } else if (object is Family) {
-      router.push(
-        Uri(
-          path: '/viewFamily',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'family': object,
-        },
-      );
-    } else if (object is Store) {
-      router.push(
-        Uri(
-          path: '/viewStore',
-          queryParameters: {'id': object.id},
-        ).toString(),
-        extra: {
-          'store': object,
-        },
-      );
-    } else if (object is User) {
-      router.push(
-        Uri(
-          path: '/viewUser',
-          queryParameters: {'uid': object.uid},
-        ).toString(),
-        extra: {
-          'user': object,
-        },
-      );
-    } else if (object is LastRecordedByInfo) {
-      if (object.user != null) {
-        onTap(object.user!);
-      }
-    } else {
-      throw UnimplementedError('Unexpected object:\n' + object.toString());
+    switch (object) {
+      case Person _:
+        router.push(
+          Uri(
+            path: '/viewPerson',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'person': object,
+          },
+        );
+
+      case Service _:
+        router.push(
+          Uri(
+            path: '/viewService',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'service': object,
+          },
+        );
+      case Group _:
+        router.push(
+          Uri(
+            path: '/viewGroup',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'group': object,
+          },
+        );
+      case Class _:
+        router.push(
+          Uri(
+            path: '/viewClass',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'class': object,
+          },
+        );
+      case Area _:
+        router.push(
+          Uri(
+            path: '/viewArea',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'area': object,
+          },
+        );
+      case Street _:
+        router.push(
+          Uri(
+            path: '/viewStreet',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'street': object,
+          },
+        );
+      case Family _:
+        router.push(
+          Uri(
+            path: '/viewFamily',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'family': object,
+          },
+        );
+      case Store _:
+        router.push(
+          Uri(
+            path: '/viewStore',
+            queryParameters: {'id': object.id},
+          ).toString(),
+          extra: {
+            'store': object,
+          },
+        );
+      case User _:
+        router.push(
+          Uri(
+            path: '/viewUser',
+            queryParameters: {'uid': object.uid},
+          ).toString(),
+          extra: {
+            'user': object,
+          },
+        );
+      case LastRecordedByInfo _:
+        if (object.user != null) {
+          onTap(object.user!);
+        }
+      default:
+        throw UnimplementedError('Unexpected object:\n' + object.toString());
     }
   }
 
   String? getFormattedValue(String? key, Object? value) {
     if (key == null || value == null) return null;
 
-    if (value is PermissionsSet) {
-      return value.toHumanReadableString();
-    } else if (value is Json) {
-      return value['name'];
-    } else if (value is List) {
-      return value.map((o) => getFormattedValue(key, o)).join(',');
-    } else if (key == 'birthday') {
+    switch (value) {
+      case PermissionsSet _:
+        return value.toHumanReadableString();
+      case Json _:
+        return value['name'];
+      case List _:
+        return value.map((o) => getFormattedValue(key, o)).join(',');
+    }
+
+    if (key == 'birthday') {
       return DateFormat('M/d').format(DateTime.parse(value as String));
     } else if (DateTime.tryParse(value.toString()) != null) {
       final parsed = DateTime.parse(value.toString());
@@ -163,64 +168,36 @@ class ViewableObjectService {
   String? getSecondLine(Viewable object) {
     final key = _userSettingsService.getSecondLineFor(object.runtimeType);
 
-    if (object is Person) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
-    } else if (object is User) {
-      if (key == 'permissions') {
-        return getFormattedValue(
-          key,
-          object.permissions,
-        );
-      } else {
-        return getFormattedValue(
-          key,
-          object.toJson()[key],
-        );
-      }
-    } else if (object is Service) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
-    } else if (object is Area) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
-    } else if (object is Group) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
-    } else if (object is Class) {
-      return getFormattedValue(
-        key,
-        object.toJson()[key],
-      );
-    } else {
-      return null;
+    switch (object) {
+      case User _ when key == 'permissions':
+        return getFormattedValue(key, object.permissions);
+      case ToJson _:
+        return getFormattedValue(key, (object as ToJson).toJson()[key]);
+      default:
+        return null;
     }
   }
 
   IconData getDefaultIconFor<T extends IImage>([T? imageObject]) {
-    if (imageObject is Area || _isSubtype<T, Area>()) return Icons.pin_drop;
-    if (imageObject is Street || _isSubtype<T, Street>()) return Icons.pin_drop;
-    if (imageObject is Family || _isSubtype<T, Family>()) {
+    if (imageObject is Area || _isSubtype<T, Area>()) {
+      return Icons.pin_drop;
+    } else if (imageObject is Street || _isSubtype<T, Street>()) {
+      return Icons.pin_drop;
+    } else if (imageObject is Family || _isSubtype<T, Family>()) {
       return Icons.diversity_1;
-    }
-    if (imageObject is Store || _isSubtype<T, Store>()) return Icons.store;
-    if (imageObject is Service || _isSubtype<T, Service>()) {
+    } else if (imageObject is Store || _isSubtype<T, Store>()) {
+      return Icons.store;
+    } else if (imageObject is Service || _isSubtype<T, Service>()) {
       return Icons.miscellaneous_services;
-    }
-    if (imageObject is Class || _isSubtype<T, Class>()) {
+    } else if (imageObject is Class || _isSubtype<T, Class>()) {
       return Icons.groups_outlined;
+    } else if (imageObject is Group || _isSubtype<T, Group>()) {
+      return Icons.groups;
+    } else if (imageObject is Person || _isSubtype<T, Person>()) {
+      return Icons.person;
+    } else if (imageObject is User || _isSubtype<T, User>()) {
+      return Icons.person;
     }
-    if (imageObject is Group || _isSubtype<T, Group>()) return Icons.groups;
-    if (imageObject is Person || _isSubtype<T, Person>()) return Icons.person;
-    if (imageObject is User || _isSubtype<T, User>()) return Icons.person;
 
     return Icons.image_not_supported;
   }

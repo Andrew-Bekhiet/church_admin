@@ -7,18 +7,17 @@ part 'user_data.freezed.dart';
 part 'user_data.g.dart';
 
 @freezed
-class UserData with _$UserData {
+class UserData with _$UserData implements ToJson {
   const factory UserData({
     required String uid,
     @JsonKey(
       fromJson: permissionsSetFromJson,
       toJson: permissionsSetToJson,
     )
-        required PermissionsSet permissions,
+    required PermissionsSet permissions,
     required String email,
     required String? firebaseAuthUid,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-        String? password,
+    @JsonKey(includeToJson: false, includeFromJson: false) String? password,
     LastRecordedByInfo? lastEdit,
   }) = _UserData;
 

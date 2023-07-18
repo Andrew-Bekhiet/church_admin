@@ -9,21 +9,17 @@ part 'person.freezed.dart';
 part 'person.g.dart';
 
 @freezed
-class Person extends ViewableWithIDAndImage with _$Person {
+class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
   factory Person({
     required String id,
     required String name,
     String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-        Point? geolocation,
+    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     String? mainPhone,
-    @Default({})
-        Json otherPhones,
+    @Default({}) Json otherPhones,
     DateTime? birthdate,
-    @Default(true)
-        bool gender,
-    @Default(false)
-        bool isShammas,
+    @Default(true) bool gender,
+    @Default(false) bool isShammas,
     String? shammasLevelId,
     ShammasLevel? shammasLevel,
     School? school,
@@ -34,8 +30,7 @@ class Person extends ViewableWithIDAndImage with _$Person {
     String? churchId,
     Father? father,
     String? fatherId,
-    @Default(false)
-        bool isStudent,
+    @Default(false) bool isStudent,
     Job? job,
     String? jobId,
     String? jobDescription,
@@ -45,16 +40,14 @@ class Person extends ViewableWithIDAndImage with _$Person {
     String? personTypeId,
     PersonState? state,
     String? stateId,
-    @Default(false)
-        bool isServant,
+    @Default(false) bool isServant,
     String? notes,
     Family? family,
     String? familyId,
     String? storeId,
     StudyYear? studyYear,
     int? studyYearId,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-        Color? color,
+    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     LastRecordedByInfo? lastConfession,
     LastRecordedByInfo? lastKodas,
@@ -63,41 +56,41 @@ class Person extends ViewableWithIDAndImage with _$Person {
     LastRecordedByInfo? lastEdit,
     List<Class>? classes,
     @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-        List<Group>? groups,
+    List<Group>? groups,
     @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-        List<Service>? services,
+    List<Service>? services,
     List<Area>? areas,
     List<Street>? streets,
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-        List<Tag>? tags,
+    List<Tag>? tags,
     @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-        List<Hobby>? hobbies,
+    List<Hobby>? hobbies,
     User? user,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? kodasHistoryAggregate,
+    AnalysisData<DateTime>? kodasHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? confessionHistoryAggregate,
+    AnalysisData<DateTime>? confessionHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? callHistoryAggregate,
+    AnalysisData<DateTime>? callHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? visitHistoryAggregate,
+    AnalysisData<DateTime>? visitHistoryAggregate,
     @JsonKey(
       fromJson: analysisDataFromJson,
       toJson: analysisDataToJson,
     )
-        AnalysisData<DateTime>? editHistoryAggregate,
+    AnalysisData<DateTime>? editHistoryAggregate,
   }) = _Person;
   Person._() : super();
 

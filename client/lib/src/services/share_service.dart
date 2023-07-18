@@ -70,11 +70,11 @@ class ShareService {
   }
 
   Future<Uri> shareObject<T>(T object) async {
-    switch (T) {
-      case Person:
-        return sharePerson(object as Person);
-      case User:
-        return shareUser(object as User);
+    switch (object) {
+      case Person _:
+        return sharePerson(object);
+      case User _:
+        return shareUser(object);
       default:
         throw UnimplementedError(
           'Expected an object of type PersonBase, UserBase or QuerInfo, but instead got type' +
