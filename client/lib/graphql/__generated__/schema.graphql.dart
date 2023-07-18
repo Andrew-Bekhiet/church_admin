@@ -124229,7 +124229,7 @@ class Input_StoresBoolExp {
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
-    Input_IntComparisonExp? color,
+    Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
@@ -124301,7 +124301,8 @@ class Input_StoresBoolExp {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
-          : Input_IntComparisonExp.fromJson((l$color as Map<String, dynamic>));
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>));
     }
     if (data.containsKey('family')) {
       final l$family = data['family'];
@@ -124376,8 +124377,8 @@ class Input_StoresBoolExp {
   Input_UuidComparisonExp? get adminFamily =>
       (_$data['adminFamily'] as Input_UuidComparisonExp?);
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
-  Input_IntComparisonExp? get color =>
-      (_$data['color'] as Input_IntComparisonExp?);
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
   Input_FamiliesBoolExp? get family =>
       (_$data['family'] as Input_FamiliesBoolExp?);
   Input_GeographyComparisonExp? get geolocation =>
@@ -124688,7 +124689,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
-    Input_IntComparisonExp? color,
+    Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
@@ -124710,7 +124711,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
           _fn);
   CopyWith_Input_UuidComparisonExp<TRes> get adminFamily;
   CopyWith_Input_AreasBoolExp<TRes> get areas;
-  CopyWith_Input_IntComparisonExp<TRes> get color;
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
@@ -124760,7 +124761,7 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Input_UuidComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input_AreasBoolExp?),
-        if (color != _undefined) 'color': (color as Input_IntComparisonExp?),
+        if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Input_GeographyComparisonExp?),
@@ -124819,11 +124820,12 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
         : CopyWith_Input_AreasBoolExp(local$areas, (e) => call(areas: e));
   }
 
-  CopyWith_Input_IntComparisonExp<TRes> get color {
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
-        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_IntComparisonExp(local$color, (e) => call(color: e));
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color, (e) => call(color: e));
   }
 
   CopyWith_Input_FamiliesBoolExp<TRes> get family {
@@ -124907,7 +124909,7 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
-    Input_IntComparisonExp? color,
+    Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
@@ -124927,8 +124929,8 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
       CopyWith_Input_UuidComparisonExp.stub(_res);
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
-  CopyWith_Input_IntComparisonExp<TRes> get color =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_FamiliesBoolExp<TRes> get family =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
