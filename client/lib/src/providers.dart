@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/links.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,11 +47,14 @@ void initGlobalProviderContainer(List<Override> overrides) {
 }
 
 late final PackageInfo packageInfoPluginInstance;
+late final AndroidDeviceInfo androidDeviceInfoInstance;
 
 final hiveProvider = Provider<HiveInterface>((ref) => Hive);
 
 final encryptionServiceProvider = Provider<EncryptionService>((ref) {
-  return EncryptionServiceImpl();
+  return const String.fromEnvironment('CI') == 'true'
+      ? EncryptionServiceCIImpl()
+      : EncryptionServiceImpl();
 });
 
 final Provider<DatabaseService> databaseServiceProvider =
@@ -90,7 +94,7 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
 
 final graphQLCacheStore = Provider<HiveStore>(
   (ref) => HiveStore(
-    ref.watch(hiveProvider).box('cache'),
+    ref.watch(hiveProvider).box('GQLCache'),
   ),
 );
 
@@ -149,7 +153,19 @@ final functionsServiceProvider = Provider<FunctionsService>(
 );
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
-  (ref) => const FlutterSecureStorage(),
+  (ref) => FlutterSecureStorage(
+    aOptions: ref.read(currentPlatformServiceProvider).isAndroid
+        ? AndroidOptions(
+            sharedPreferencesName: 'secure_storage',
+            encryptedSharedPreferences:
+                androidDeviceInfoInstance.version.sdkInt >= 23,
+          )
+        : AndroidOptions.defaultOptions,
+    webOptions: const WebOptions(
+      dbName: 'secure_storage',
+      publicKey: 'secure_storage_pub_key',
+    ),
+  ),
 );
 
 final localNotificationsPluginProvider =

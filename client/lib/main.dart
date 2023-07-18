@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -47,6 +48,8 @@ Future<void> initializeChurchAdmin() async {
 
   await _initializePackageInfo();
 
+  await _initializeAndroidDeviceInfo();
+
   await _initializeHive(ref);
 
   await _initializeFirebase(ref);
@@ -65,6 +68,10 @@ Future<void> _initializePackageInfo() async {
   packageInfoPluginInstance = await PackageInfo.fromPlatform();
 }
 
+Future<void> _initializeAndroidDeviceInfo() async {
+  androidDeviceInfoInstance = await DeviceInfoPlugin().androidInfo;
+}
+
 Future<void> _initializeSentry() async {
   await SentryFlutter.init(
     (options) => options
@@ -81,18 +88,23 @@ Future<void> _initializeSentry() async {
 Future<void> _initializeHive(ProviderContainer ref) async {
   final hive = ref.read(hiveProvider);
 
-  await hive.initFlutter();
+  await hive.initFlutter('church_admin');
   hive.registerAdapter(NotificationSettingAdapter());
 
   await hive.openBox<Map?>(
-    'cache',
+    'GQLCache',
     encryptionCipher: await ref.read(encryptionServiceProvider).getHiveCipher(
-          boxName: 'cache',
+          boxName: 'GQLCache',
         ),
   );
   await Future.wait([
     hive.openBox('Settings'),
-    hive.openBox<String>('ImageUrlsCache'),
+    hive.openBox<String>(
+      'ImageUrlsCache',
+      encryptionCipher: await ref.read(encryptionServiceProvider).getHiveCipher(
+            boxName: 'ImageUrlsCache',
+          ),
+    ),
     hive.openLazyBox<Notification>('Notifications'),
     hive.openBox<NotificationSetting>('NotificationsSettings'),
   ]);
