@@ -93,7 +93,7 @@ class _EditStreetState extends State<EditStreet> {
                               newStreet = newStreet.copyWith(
                             name: value.trim(),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                         ),
                         FilledButton.tonalIcon(
                           onPressed: _editGeolocation(context),

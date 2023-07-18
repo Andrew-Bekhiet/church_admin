@@ -116,7 +116,7 @@ class _EditFamilyState extends State<EditFamily> {
                               newFamily = newFamily.copyWith(
                             name: value.trim(),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                         ),
                         AddressWithLocationField(
                           initialAddress: newFamily.address,

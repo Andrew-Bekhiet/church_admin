@@ -114,7 +114,7 @@ class _EditPersonState extends State<EditPerson> {
                             newPerson = newPerson.copyWith(
                           name: value.trim(),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                       ),
                       Builder(
                         builder: (context) => TextFormField(

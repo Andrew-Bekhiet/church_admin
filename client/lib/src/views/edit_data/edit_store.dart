@@ -92,7 +92,7 @@ class _EditStoreState extends State<EditStore> {
                               newStore = newStore.copyWith(
                             name: value.trim(),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                         ),
                         FilledButton.tonalIcon(
                           onPressed: _editGeolocation(context),
