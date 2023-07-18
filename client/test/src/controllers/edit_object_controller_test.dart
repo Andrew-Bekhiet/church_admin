@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import './edit_object_controller_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<FunctionsService>(), MockSpec<XFile>()])
+@GenerateNiceMocks([MockSpec<FunctionsService>()])
 void main() {
   group(
     'EditObjectController tests =>',
@@ -536,11 +536,10 @@ void main() {
                     wrapper: materialAppWrapper(),
                   );
 
-                  final mockXFile = MockXFile();
-                  when(mockXFile.openRead())
-                      .thenAnswer((_) => Stream.fromIterable([Uint8List(1)]));
-                  when(mockXFile.length()).thenAnswer((_) async => 1);
-                  when(mockXFile.path).thenReturn('path.jpg');
+                  final mockXFile = MockXFile(
+                    'path/to/file.jpg',
+                    length: 1,
+                  );
 
                   unit.photoFieldState = PhotoFieldState(
                     deletePhoto: false,
@@ -614,4 +613,22 @@ void _setUpPhotoFieldTests() {
   initGlobalProviderContainer(
     [functionsServiceProvider.overrideWithValue(mockFunctionsService)],
   );
+}
+
+class MockXFile extends XFile {
+  MockXFile(
+    super.path, {
+    super.mimeType,
+    super.name,
+    super.length,
+    super.bytes,
+    super.lastModified,
+  });
+
+  @override
+  Stream<Uint8List> openRead([int? start, int? end]) =>
+      Stream.fromIterable([Uint8List(1)]);
+
+  @override
+  Future<int> length() async => 1;
 }
