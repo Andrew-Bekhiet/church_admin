@@ -110,8 +110,11 @@ final connectivityServiceProvider = Provider<ConnectivityService>(
   ),
 );
 
-final secretsServiceProvider =
-    Provider<SecretsService>((ref) => SecretsServiceImpl());
+final secretsServiceProvider = Provider<SecretsService>(
+  (ref) => const String.fromEnvironment('CI') == 'true'
+      ? SecretsServiceCIImpl()
+      : SecretsServiceImpl(),
+);
 
 final authServiceProvider = Provider<AuthService>(
   (ref) => AuthService(

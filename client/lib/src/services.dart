@@ -16,6 +16,7 @@ export 'services/notifications/notifications_settings_storage.dart';
 export 'services/notifications/notifications_storage_impl.dart';
 export 'services/phone_number_service.dart';
 export 'services/secrets/secrets_service.dart';
+export 'services/secrets/secrets_service_ci_impl.dart';
 export 'services/secrets/secrets_service_impl.dart';
 export 'services/share_service.dart';
 export 'services/theming_service.dart';
