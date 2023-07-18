@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -111,6 +114,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           context.push('/manage_users');
                         case 2:
                           break;
+                        case 3:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                final gqlClient = graphQLClientProvider
+                                    .read(globalProviderContainer);
+                                return GraphqlCacheInspector(
+                                  title: 'GraphQL Cache',
+                                  data: (gqlClient.cache.store as HiveStore)
+                                      .box
+                                      .toMap(),
+                                  getCacheData:
+                                      (gqlClient.cache.store as HiveStore)
+                                          .box
+                                          .toMap,
+                                );
+                              },
+                            ),
+                          );
                       }
                     },
                     children: const [
@@ -126,6 +148,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         icon: Icon(Icons.settings),
                         label: Text('الإعدادات'),
                       ),
+                      if (kDebugMode)
+                        NavigationDrawerDestination(
+                          icon: Icon(Icons.developer_mode),
+                          label: Text('gql cache'),
+                        ),
                     ],
                   ),
                 ),
