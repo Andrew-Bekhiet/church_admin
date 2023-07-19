@@ -9,14 +9,17 @@ class EditStore extends StatefulWidget {
     builder: (context, state) {
       return EditStore(
         store: (state.extra as Map?)?['store'] as Store?,
+        family: (state.extra as Map?)?['family'] as Family?,
       );
     },
   );
 
   final Store? store;
+  final Family? family;
 
   const EditStore({
     required this.store,
+    this.family,
     super.key,
   });
 
@@ -35,7 +38,13 @@ class _EditStoreState extends State<EditStore> {
     onDelete: (object) =>
         DatabaseService.I.stores.deleteStore(storeId: object.id),
     toJson: (object) => object.toJson(),
-    newObject: widget.store ?? Store(id: const Uuid().v4(), name: 'متجر جديد'),
+    newObject: widget.store ??
+        Store(
+          id: const Uuid().v4(),
+          name: 'متجر جديد',
+          family: widget.family,
+          familyId: widget.family?.id,
+        ),
     initialObject: widget.store,
   );
 
