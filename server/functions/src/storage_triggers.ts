@@ -11,14 +11,6 @@ export const onPhotoUploaded = region("europe-west6")
       await updatePhotoTime(match.table, match.file, new Date(object.updated));
   });
 
-export const onPhotoDeleted = region("europe-west6")
-  .storage.bucket("church-data-admin.appspot.com")
-  .object()
-  .onDelete(async (object) => {
-    const match = _checkIsValidObject(object);
-    if (match) await updatePhotoTime(match.table, match.file, null);
-  });
-
 function _checkIsValidObject(
   object: ObjectMetadata
 ): { table: PhotoTable; file: string } | null {

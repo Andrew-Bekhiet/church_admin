@@ -7,6 +7,7 @@ import {
   getHasuraUID,
   getPersonIdFromUser,
   photoTables,
+  updatePhotoTime,
 } from "./hasura_interface";
 
 const expiryWindowMillis = 1000 * 60 * 5;
@@ -25,6 +26,7 @@ export const deletePhoto = runWith({
     console.log("Deleting photo", { table, id, hasuraUID });
 
     await storage().bucket("church-data-admin.appspot.com").file(path).delete();
+    await updatePhotoTime(table as PhotoTable, id, null);
 
     return true;
   });

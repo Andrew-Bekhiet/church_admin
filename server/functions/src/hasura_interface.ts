@@ -232,15 +232,16 @@ export async function updatePhotoTime(
 
 export const photoTables = [
   "areas",
-  "families",
-  "groups",
-  "persons",
-  "services",
-  "stores",
   "streets",
+  "stores",
+  "families",
+  "services",
+  "groups",
+  "classes",
+  "persons",
   "users",
 ] as const;
-export type PhotoTable = typeof photoTables[number];
+export type PhotoTable = (typeof photoTables)[number];
 
 async function _makeGraphqlRequest({
   query,
