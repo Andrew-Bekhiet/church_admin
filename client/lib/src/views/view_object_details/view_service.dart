@@ -37,10 +37,6 @@ class ViewService extends StatefulWidget {
 }
 
 class _ViewServiceState extends State<ViewService> {
-  static const _addClass = Icon(Icons.group_add_outlined);
-  static const _addGroup = Icon(Icons.group_add);
-  static const _addPerson = Icon(Icons.person_add_alt_1);
-
   late final _classesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.classes.streamAll(
       where: [
@@ -179,56 +175,33 @@ class _ViewServiceState extends State<ViewService> {
         icon: const Icon(Icons.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
-          AnimatedBuilder(
-        animation: tabController.animation!,
-        builder: (context, child) {
-          final currentIndex = tabController.index;
-          final offset = tabController.offset;
-
-          final newIndex = offset.isNegative
-              ? (currentIndex + offset).floor()
-              : (currentIndex + offset).ceil();
-
-          return AnimatedFloatingActionButton(
-            offset: offset,
-            newFAB: FloatingActionButton(
-              onPressed: _onFABPressed(newIndex),
-              child: newIndex == 0
-                  ? _addClass
-                  : newIndex == 1
-                      ? _addGroup
-                      : _addPerson,
-            ),
-            oldFAB: FloatingActionButton(
-              heroTag: null,
-              onPressed: _onFABPressed(currentIndex),
-              child: currentIndex == 0
-                  ? _addClass
-                  : currentIndex == 1
-                      ? _addGroup
-                      : _addPerson,
-            ),
-          );
+          SwitchingFloatingActionButton(
+        tabController: tabController,
+        icons: const {
+          0: Icon(Icons.group_add_outlined),
+          1: Icon(Icons.group_add),
+          2: Icon(Icons.person_add_alt_1),
+        },
+        onTap: (newIndex) {
+          if (newIndex == 0) {
+            context.push(
+              '/viewService/editClass',
+              extra: {'service': widget.service},
+            );
+          } else if (newIndex == 1) {
+            context.push(
+              '/viewService/editGroup',
+              extra: {'service': widget.service},
+            );
+          } else if (newIndex == 2) {
+            context.push(
+              '/viewService/editPerson',
+              extra: {'service': widget.service},
+            );
+          }
         },
       ),
     );
-  }
-
-  void Function() _onFABPressed(int newIndex) {
-    return () {
-      if (newIndex == 0) {
-        context
-            .push('/viewService/editClass', extra: {'service': widget.service});
-      } else if (newIndex == 1) {
-        context
-            .push('/viewService/editGroup', extra: {'service': widget.service});
-      } else if (newIndex == 2) {
-        context.push(
-          '/viewService/editPerson',
-          extra: {'service': widget.service},
-        );
-      }
-    };
   }
 
   ViewableObjectListController<T>

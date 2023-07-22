@@ -192,13 +192,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         servicesController: () => _ensureWillDispose(_servicesController),
         areasController: () => _ensureWillDispose(_areasController),
       ),
-      floatingActionButton: AnimatedBuilder(
-        animation: _tabController.animation!,
-        builder: (context, child) {
-          return _HomeFloatingActionButton(
-            offset: _tabController.offset,
-            currentIdex: _tabController.index,
-          );
+      floatingActionButton: SwitchingFloatingActionButton(
+        tabController: _tabController,
+        icons: const {
+          0: Icon(Icons.person_add_alt_1),
+          1: Icon(Icons.add),
+          2: Icon(Icons.add_location),
+        },
+        onTap: (i) {
+          if (i == 0) {
+            context.push('/editPerson');
+          } else if (i == 1) {
+            context.push('/editService');
+          } else if (i == 2) {
+            context.push('/editArea');
+          }
         },
       ),
       bottomNavigationBar: AnimatedBuilder(
@@ -358,61 +366,4 @@ class _HomeBody extends StatelessWidget {
       ),
     );
   }
-}
-
-class _HomeFloatingActionButton extends StatelessWidget {
-  static const _addPerson = Icon(Icons.person_add_alt_1);
-  static const _add = Icon(Icons.add);
-  static const _addLocation = Icon(Icons.add_location);
-
-  const _HomeFloatingActionButton({
-    required this.offset,
-    required this.currentIdex,
-  });
-
-  final double offset;
-  final int currentIdex;
-
-  @override
-  Widget build(BuildContext context) {
-    final newIndex = getNewIndex();
-
-    return AnimatedFloatingActionButton(
-      offset: offset,
-      newFAB: FloatingActionButton(
-        onPressed: _addItem(context),
-        child: newIndex == 0
-            ? _addPerson
-            : newIndex == 1
-                ? _add
-                : _addLocation,
-      ),
-      oldFAB: FloatingActionButton(
-        heroTag: null,
-        onPressed: _addItem(context),
-        child: currentIdex == 0
-            ? _addPerson
-            : currentIdex == 1
-                ? _add
-                : _addLocation,
-      ),
-    );
-  }
-
-  int getNewIndex() {
-    return offset.isNegative
-        ? (currentIdex + offset).floor()
-        : (currentIdex + offset).ceil();
-  }
-
-  void Function() _addItem(BuildContext context) => () {
-        final newIndex = getNewIndex();
-        if (newIndex == 0) {
-          context.push('/editPerson');
-        } else if (newIndex == 1) {
-          context.push('/editService');
-        } else if (newIndex == 2) {
-          context.push('/editArea');
-        }
-      };
 }

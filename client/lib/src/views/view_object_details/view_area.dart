@@ -38,11 +38,6 @@ class ViewArea extends StatefulWidget {
 }
 
 class _ViewAreaState extends State<ViewArea> {
-  static const _addStreet = Icon(Icons.add_road);
-  static const _addFamily = Icon(Icons.group_add);
-  static const _addStore = Icon(Icons.add_business);
-  static const _addPerson = Icon(Icons.person_add_alt_1);
-
   late final _streetsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.streets.streamAll(
       where: [
@@ -198,57 +193,27 @@ class _ViewAreaState extends State<ViewArea> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
-          AnimatedBuilder(
-        animation: tabController.animation!,
-        builder: (context, child) {
-          final currentIndex = tabController.index;
-          final offset = tabController.offset;
-
-          final newIndex = offset.isNegative
-              ? (currentIndex + offset).floor()
-              : (currentIndex + offset).ceil();
-
-          return AnimatedFloatingActionButton(
-            offset: offset,
-            newFAB: FloatingActionButton(
-              onPressed: _onFABPressed(newIndex),
-              child: newIndex == 0
-                  ? _addStreet
-                  : newIndex == 1
-                      ? _addFamily
-                      : newIndex == 2
-                          ? _addStore
-                          : _addPerson,
-            ),
-            oldFAB: FloatingActionButton(
-              heroTag: null,
-              onPressed: _onFABPressed(currentIndex),
-              child: currentIndex == 0
-                  ? _addStreet
-                  : currentIndex == 1
-                      ? _addFamily
-                      : currentIndex == 2
-                          ? _addStore
-                          : _addPerson,
-            ),
-          );
+          SwitchingFloatingActionButton(
+        tabController: tabController,
+        icons: const {
+          0: Icon(Icons.add_road),
+          1: Icon(Icons.group_add),
+          2: Icon(Icons.add_business),
+          3: Icon(Icons.person_add_alt_1),
+        },
+        onTap: (newIndex) {
+          if (newIndex == 0) {
+            context.push('/viewArea/editStreet');
+          } else if (newIndex == 1) {
+            context.push('/viewArea/editFamily');
+          } else if (newIndex == 2) {
+            context.push('/viewArea/editStore');
+          } else if (newIndex == 3) {
+            context.push('/viewArea/editPerson');
+          }
         },
       ),
     );
-  }
-
-  void Function() _onFABPressed(int newIndex) {
-    return () {
-      if (newIndex == 0) {
-        context.push('/viewArea/editStreet');
-      } else if (newIndex == 1) {
-        context.push('/viewArea/editFamily');
-      } else if (newIndex == 2) {
-        context.push('/viewArea/editStore');
-      } else if (newIndex == 3) {
-        context.push('/viewArea/editPerson');
-      }
-    };
   }
 
   ViewableObjectListController<T>

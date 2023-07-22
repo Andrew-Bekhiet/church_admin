@@ -37,10 +37,6 @@ class ViewStreet extends StatefulWidget {
 }
 
 class _ViewStreetState extends State<ViewStreet> {
-  static const _addFamily = Icon(Icons.group_add);
-  static const _addStore = Icon(Icons.add_business);
-  static const _addPerson = Icon(Icons.person_add_alt_1);
-
   late final _familiesController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.families.streamAll(
       where: [
@@ -192,51 +188,24 @@ class _ViewStreetState extends State<ViewStreet> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, street) =>
-          AnimatedBuilder(
-        animation: tabController.animation!,
-        builder: (context, child) {
-          final currentIndex = tabController.index;
-          final offset = tabController.offset;
-
-          final newIndex = offset.isNegative
-              ? (currentIndex + offset).floor()
-              : (currentIndex + offset).ceil();
-
-          return AnimatedFloatingActionButton(
-            offset: offset,
-            newFAB: FloatingActionButton(
-              onPressed: _onFABPressed(newIndex),
-              child: newIndex == 0
-                  ? _addFamily
-                  : newIndex == 1
-                      ? _addStore
-                      : _addPerson,
-            ),
-            oldFAB: FloatingActionButton(
-              heroTag: null,
-              onPressed: _onFABPressed(currentIndex),
-              child: currentIndex == 0
-                  ? _addFamily
-                  : currentIndex == 1
-                      ? _addStore
-                      : _addPerson,
-            ),
-          );
+          SwitchingFloatingActionButton(
+        tabController: tabController,
+        icons: const {
+          0: Icon(Icons.group_add),
+          1: Icon(Icons.add_business),
+          2: Icon(Icons.person_add_alt_1),
+        },
+        onTap: (newIndex) {
+          if (newIndex == 0) {
+            context.push('/viewStreet/editFamily');
+          } else if (newIndex == 1) {
+            context.push('/viewStreet/editStore');
+          } else if (newIndex == 2) {
+            context.push('/viewStreet/editPerson');
+          }
         },
       ),
     );
-  }
-
-  void Function() _onFABPressed(int newIndex) {
-    return () {
-      if (newIndex == 0) {
-        context.push('/viewStreet/editFamily');
-      } else if (newIndex == 1) {
-        context.push('/viewStreet/editStore');
-      } else if (newIndex == 2) {
-        context.push('/viewStreet/editPerson');
-      }
-    };
   }
 
   ViewableObjectListController<T>
