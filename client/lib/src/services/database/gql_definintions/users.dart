@@ -28,6 +28,16 @@ class UsersDAO extends DAOBase<User> {
             if (where != null) ...where,
             if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
           ],
+          orderBy: [
+            ...defaultSearchVars.orderBy ?? [],
+            Input_AuthUsersDataOrderBy(
+              permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
+                count: Enum_OrderBy.DESC,
+              ),
+            ),
+            Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC),
+            Input_AuthUsersDataOrderBy(email: Enum_OrderBy.ASC),
+          ],
         ).toJson();
 
         return graphQLClient.subscribeAndReturnParsed(
