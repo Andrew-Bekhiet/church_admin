@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -21,10 +20,6 @@ class ViewUser extends StatefulWidget {
     },
     routes: [
       PersonAnalysis.route,
-      // ViewArea.route,
-      // ViewService.route,
-      // ViewClass.route,
-      // ViewGroup.route,
     ],
   );
 
@@ -51,278 +46,223 @@ class _ViewUserState extends State<ViewUser> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      initialData: widget.user,
-      stream: stream,
-      builder: (context, snapshot) {
+    return ViewObjectDetails<User>(
+      objectId: widget.userId,
+      object: widget.user,
+      objectStream: stream,
+      detailsBuilder: (context, user) {
         final themeData = Theme.of(context);
 
-        if (snapshot.hasError) {
-          return ErrorWidget.builder(
-            FlutterErrorDetails(exception: snapshot.error!),
-          );
-        } else if (!snapshot.hasData &&
-            snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (!snapshot.hasData) {
-          return Center(
-            child: Text(
-              'لم يتم العثور على الخادم',
-              style: themeData.textTheme.titleLarge,
-            ),
-          );
-        }
-
-        final user = snapshot.requireData!;
-        final person = user.person;
-
-        final foregroundColor = person?.color?.findInvert();
-        return Scaffold(
-          body: CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SliverAppBar(
-                backgroundColor: user.color,
-                foregroundColor: foregroundColor,
-                stretch: true,
-                pinned: true,
-                expandedHeight: 280,
-                actions: [
-                  if (snapshot.connectionState != ConnectionState.active)
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  else
-                    IconButton(
-                      tooltip: 'تعديل',
-                      onPressed: () => context.push(
-                        '/viewUser/editUser?id=' + widget.userId,
-                        extra: {'user': user},
-                      ),
-                      icon: const Icon(Icons.edit),
-                    ),
-                ],
-                flexibleSpace: ViewableObjectAppBar(
-                  backgroundColor: user.color,
-                  foregroundColor: foregroundColor,
-                  viewable:
-                      widget.user?.hasImage ?? false ? widget.user! : user,
-                  appBarMaxHeight: 280,
-                  scrollController: scrollController,
-                  duration: const Duration(milliseconds: 450),
-                ),
+        return SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              CopiablePropertyWidget(
+                'البريد الاكتروني',
+                user.email,
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    CopiablePropertyWidget(
-                      'البريد الاكتروني',
-                      user.email,
-                    ),
-                    //TODO: approving pending users
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: const Text('الصلاحيات'),
-                      subtitle: user.permissions.permissions.isEmpty
-                          ? const Text('لا يملك هذا الخادم صلاحيات محددة')
-                          : Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (user.permissions.manageAllUsers)
-                                  ListTile(
-                                    leading: Icon(
-                                      UserPermission.manageAllUsers.icon,
-                                    ),
-                                    title: Text(
-                                      UserPermission
-                                          .manageAllUsers.humanReadableName,
-                                    ),
-                                  ),
-                                if (user.permissions.readAllData)
-                                  ListTile(
-                                    leading:
-                                        Icon(UserPermission.readAllData.icon),
-                                    title: Text(
-                                      UserPermission
-                                          .readAllData.humanReadableName,
-                                    ),
-                                  ),
-                                if (user.permissions.writeAllData)
-                                  ListTile(
-                                    leading:
-                                        Icon(UserPermission.writeAllData.icon),
-                                    title: Text(
-                                      UserPermission
-                                          .writeAllData.humanReadableName,
-                                    ),
-                                  ),
-                                if ((user.permissions.manageAllUsers ||
-                                        user.permissions.readAllData ||
-                                        user.permissions.writeAllData) &&
-                                    (user.permissions.recordHistory ||
-                                        user.permissions.changeOldHistory ||
-                                        user.permissions.recoverDeleted ||
-                                        user.permissions.exportData))
-                                  const Divider(),
-                                if (user.permissions.recordHistory)
-                                  ListTile(
-                                    leading:
-                                        Icon(UserPermission.recordHistory.icon),
-                                    title: Text(
-                                      UserPermission
-                                          .recordHistory.humanReadableName,
-                                    ),
-                                  ),
-                                if (user.permissions.changeOldHistory)
-                                  ListTile(
-                                    leading: Icon(
-                                      UserPermission.changeOldHistory.icon,
-                                    ),
-                                    title: Text(
-                                      UserPermission
-                                          .changeOldHistory.humanReadableName,
-                                    ),
-                                  ),
-                                if (user.permissions.recoverDeleted)
-                                  ListTile(
-                                    leading: Icon(
-                                      UserPermission.recoverDeleted.icon,
-                                    ),
-                                    title: Text(
-                                      UserPermission
-                                          .recoverDeleted.humanReadableName,
-                                    ),
-                                  ),
-                                if (user.permissions.exportData)
-                                  ListTile(
-                                    leading:
-                                        Icon(UserPermission.exportData.icon),
-                                    title: Text(
-                                      UserPermission
-                                          .exportData.humanReadableName,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                    ),
-                    const Divider(thickness: 1),
-                    const SizedBox(height: 10),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      title: Text(
-                        'المناطق المسؤول عنها',
-                        style: themeData.textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Column(
+              //TODO: approving pending users
+              const Divider(thickness: 1),
+              ListTile(
+                title: const Text('الصلاحيات'),
+                subtitle: user.permissions.permissions.isEmpty
+                    ? const Text('لا يملك هذا الخادم صلاحيات محددة')
+                    : Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          for (final adminData
-                              in user.adminOn?.where((a) => a.area != null) ??
-                                  <AdminOnData>[])
-                            ViewableObjectWidget(
-                              adminData.area!,
-                              forceShowSecondLine: false,
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (adminData.areaAdminOnUsers ?? false)
-                                    Icon(UserPermission.manageAllUsers.icon),
-                                  if (adminData.areaAllowEdit ?? false)
-                                    Icon(UserPermission.readAllData.icon),
-                                  Icon(UserPermission.writeAllData.icon),
-                                ],
+                          if (user.permissions.manageAllUsers)
+                            ListTile(
+                              leading: Icon(
+                                UserPermission.manageAllUsers.icon,
+                              ),
+                              title: Text(
+                                UserPermission.manageAllUsers.humanReadableName,
+                              ),
+                            ),
+                          if (user.permissions.readAllData)
+                            ListTile(
+                              leading: Icon(UserPermission.readAllData.icon),
+                              title: Text(
+                                UserPermission.readAllData.humanReadableName,
+                              ),
+                            ),
+                          if (user.permissions.writeAllData)
+                            ListTile(
+                              leading: Icon(UserPermission.writeAllData.icon),
+                              title: Text(
+                                UserPermission.writeAllData.humanReadableName,
+                              ),
+                            ),
+                          if ((user.permissions.manageAllUsers ||
+                                  user.permissions.readAllData ||
+                                  user.permissions.writeAllData) &&
+                              (user.permissions.recordHistory ||
+                                  user.permissions.changeOldHistory ||
+                                  user.permissions.recoverDeleted ||
+                                  user.permissions.exportData))
+                            const Divider(),
+                          if (user.permissions.recordHistory)
+                            ListTile(
+                              leading: Icon(UserPermission.recordHistory.icon),
+                              title: Text(
+                                UserPermission.recordHistory.humanReadableName,
+                              ),
+                            ),
+                          if (user.permissions.changeOldHistory)
+                            ListTile(
+                              leading: Icon(
+                                UserPermission.changeOldHistory.icon,
+                              ),
+                              title: Text(
+                                UserPermission
+                                    .changeOldHistory.humanReadableName,
+                              ),
+                            ),
+                          if (user.permissions.recoverDeleted)
+                            ListTile(
+                              leading: Icon(
+                                UserPermission.recoverDeleted.icon,
+                              ),
+                              title: Text(
+                                UserPermission.recoverDeleted.humanReadableName,
+                              ),
+                            ),
+                          if (user.permissions.exportData)
+                            ListTile(
+                              leading: Icon(UserPermission.exportData.icon),
+                              title: Text(
+                                UserPermission.exportData.humanReadableName,
                               ),
                             ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      title: Text(
-                        'الخدمات المسؤول عنها',
-                        style: themeData.textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Divider(thickness: 1),
+              const SizedBox(height: 10),
+              ListTile(
+                minVerticalPadding: 0,
+                title: Text(
+                  'المناطق المسؤول عنها',
+                  style: themeData.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final adminData
+                        in user.adminOn?.where((a) => a.area != null) ??
+                            <AdminOnData>[])
+                      ViewableObjectWidget(
+                        adminData.area!,
+                        forceShowSecondLine: false,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (adminData.areaAdminOnUsers ?? false)
+                              Icon(UserPermission.manageAllUsers.icon),
+                            if (adminData.areaAllowEdit ?? false)
+                              Icon(UserPermission.readAllData.icon),
+                            Icon(UserPermission.writeAllData.icon),
+                          ],
+                        ),
                       ),
-                      subtitle: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          for (final s in (user.adminOn
-                                      ?.where((a) => a.service != null) ??
-                                  [])
-                              .groupListsBy((a) => a.service!)
-                              .entries)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Card(
-                                child: _AdminOnServiceWidget(
-                                  serviceData: s,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      title: Text(
-                        'المجموعات المسؤول عنها',
-                        style: themeData.textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          for (final adminData
-                              in user.adminOn?.where((a) => a.group != null) ??
-                                  <AdminOnData>[])
-                            Card(
-                              child: ViewableObjectWidget(
-                                adminData.group!,
-                                forceShowSecondLine: false,
-                                wrapInCard: false,
-                                // dense: true,
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (adminData.groupAdminOnUsers ?? false)
-                                      Icon(UserPermission.manageAllUsers.icon),
-                                    if (adminData.groupAllowEdit ?? false)
-                                      Icon(UserPermission.readAllData.icon),
-                                    Icon(UserPermission.writeAllData.icon),
-                                  ],
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    const Divider(thickness: 1),
-                    ListTile(
-                      title: FilledButton.tonalIcon(
-                        icon: const Icon(Icons.query_stats),
-                        label: const Text('احصائيات الحضور'),
-                        onPressed: () => _attendanceAnalysis(context, user),
-                      ),
-                    ),
-                    const Divider(thickness: 1),
-                    HistoryProperty(
-                      name: 'أخر تحديث لبيانات الخادم',
-                      value: user.lastEdit?.time,
-                      getHistoryStream: () => DatabaseService.I.history
-                          .paginateEditHistory<User>(id: user.id),
-                    ),
-                    const SizedBox(height: 50),
                   ],
                 ),
               ),
+              const SizedBox(height: 10),
+              ListTile(
+                minVerticalPadding: 0,
+                title: Text(
+                  'الخدمات المسؤول عنها',
+                  style: themeData.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final s
+                        in (user.adminOn?.where((a) => a.service != null) ?? [])
+                            .groupListsBy((a) => a.service!)
+                            .entries)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Card(
+                          child: _AdminOnServiceWidget(
+                            serviceData: s,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              ListTile(
+                minVerticalPadding: 0,
+                title: Text(
+                  'المجموعات المسؤول عنها',
+                  style: themeData.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final adminData
+                        in user.adminOn?.where((a) => a.group != null) ??
+                            <AdminOnData>[])
+                      Card(
+                        child: ViewableObjectWidget(
+                          adminData.group!,
+                          forceShowSecondLine: false,
+                          wrapInCard: false,
+                          // dense: true,
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (adminData.groupAdminOnUsers ?? false)
+                                Icon(UserPermission.manageAllUsers.icon),
+                              if (adminData.groupAllowEdit ?? false)
+                                Icon(UserPermission.readAllData.icon),
+                              Icon(UserPermission.writeAllData.icon),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const Divider(thickness: 1),
+              ListTile(
+                title: FilledButton.tonalIcon(
+                  icon: const Icon(Icons.query_stats),
+                  label: const Text('احصائيات الحضور'),
+                  onPressed: () => _attendanceAnalysis(context, user),
+                ),
+              ),
+              const Divider(thickness: 1),
+              HistoryProperty(
+                name: 'أخر تحديث لبيانات الخادم',
+                value: user.lastEdit?.time,
+                getHistoryStream: () => DatabaseService.I.history
+                    .paginateEditHistory<User>(id: user.id),
+              ),
+              const SizedBox(height: 50),
             ],
           ),
         );
       },
+      editButtonBuilder: (context, user) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () => context.push(
+          '/viewUser/editUser?id=' + widget.userId,
+          extra: {'user': user},
+        ),
+        icon: const Icon(Icons.edit),
+      ),
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على الخادم',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
     );
   }
 
