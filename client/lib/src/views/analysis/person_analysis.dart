@@ -21,7 +21,7 @@ class PersonAnalysis extends StatefulWidget {
       return PersonAnalysis(
         person: extra['person'],
         user: extra['user'],
-        onEditOptions: extra['onEditOptions'],
+        editOptionsBuilder: extra['editOptionsBuilder'],
         options: extra['options'],
       );
     },
@@ -34,10 +34,10 @@ class PersonAnalysis extends StatefulWidget {
     BuildContext,
     PersonAnalysisOptions?,
     void Function(PersonAnalysisOptions),
-  ) onEditOptions;
+  ) editOptionsBuilder;
 
   const PersonAnalysis({
-    required this.onEditOptions,
+    required this.editOptionsBuilder,
     this.person,
     this.user,
     this.options,
@@ -59,7 +59,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
   @override
   Widget build(BuildContext context) {
     if (options == null) {
-      return widget.onEditOptions(
+      return widget.editOptionsBuilder(
         context,
         options,
         (o) => setState(
@@ -75,7 +75,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
             onPressed: () async {
               final staged = await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => widget.onEditOptions(
+                  builder: (context) => widget.editOptionsBuilder(
                     context,
                     options,
                     (o) => Navigator.of(context).pop(o),

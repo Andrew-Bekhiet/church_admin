@@ -445,7 +445,7 @@ class _ViewPersonState extends State<ViewPerson> {
       ).toString(),
       extra: {
         'person': person,
-        'onEditOptions': (
+        'editOptionsBuilder': (
           context,
           options,
           void Function(PersonAnalysisOptions) onComplete,
