@@ -795,108 +795,29 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TappableFormField<DateTime>(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: (context, state) => InputDecoration(
-                            errorText: state.errorText,
-                            labelText: 'من',
-                          ),
-                          initialValue: dateRange.start,
-                          onTap: (state) async {
-                            final _picked = await showDatePicker(
-                              context: context,
-                              initialDate: state.value ?? dateRange.start,
-                              firstDate: DateTime(2010),
-                              lastDate: DateTime.now().add(
-                                const Duration(days: 1),
-                              ),
-                              helpText: 'من',
-                            );
-                            if (_picked != null) {
-                              state.didChange(_picked);
-                            }
-                          },
-                          builder: (context, state) {
-                            return state.value != null
-                                ? Text(
-                                    DateFormat('yyyy/M/d').format(state.value!),
-                                  )
-                                : null;
-                          },
-                          onSaved: (v) => dateRange = DateTimeRange(
-                            start: v!,
-                            end: dateRange.end,
-                          ),
-                          validator: (value) =>
-                              value == null || value.isAfter(dateRange.end)
-                                  ? 'بداية التاريخ قبل النهاية'
-                                  : null,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TappableFormField<DateTime>(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: (context, state) => InputDecoration(
-                            errorText: state.errorText,
-                            labelText: 'الى',
-                          ),
-                          initialValue: dateRange.end,
-                          onTap: (state) async {
-                            final _picked = await showDatePicker(
-                              context: context,
-                              initialDate: state.value ?? dateRange.end,
-                              firstDate: DateTime(2010),
-                              lastDate: DateTime.now().add(
-                                const Duration(days: 1),
-                              ),
-                              helpText: 'من',
-                            );
-                            if (_picked != null) {
-                              state.didChange(_picked);
-                            }
-                          },
-                          builder: (context, state) {
-                            return state.value != null
-                                ? Text(
-                                    DateFormat('yyyy/M/d').format(state.value!),
-                                  )
-                                : null;
-                          },
-                          onSaved: (v) => dateRange = DateTimeRange(
-                            end: v!,
-                            start: dateRange.start,
-                          ),
-                          validator: (value) =>
-                              value == null || value.isBefore(dateRange.start)
-                                  ? 'نهاية التاريخ قبل البداية'
-                                  : null,
-                        ),
-                      ),
-                    ],
+                  DateTimeRangeField(
+                    label: 'الفترة',
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    initialValue: dateRange,
+                    onSaved: (v) => dateRange = v!,
                   ),
                   for (final entry in snapshot.requireData.entries) ...[
-                    StreamBuilder<bool>(
-                      initialData: false,
-                      stream: selected.map((s) => s.contains(entry.key)),
-                      builder: (context, entryChecked) => CheckboxListTile(
-                        onChanged: (c) {
-                          if (c ?? false) {
-                            selected.add({...selected.value, entry.key});
-                          } else {
-                            selected.add(
-                              selected.value.difference(
-                                <ViewableWithID>{entry.key},
-                              ),
-                            );
-                          }
-                        },
-                        value: entryChecked.requireData,
-                        secondary: ImageObjectWidget(entry.key),
-                        title: Text(entry.key.name),
+                    ViewableObjectWidget(
+                      entry.key,
+                      wrapInCard: false,
+                      forceShowSecondLine: false,
+                      onTap: (service) =>
+                          _toggle(service, !selected.value.contains(service)),
+                      trailing: StreamBuilder<bool>(
+                        initialData: false,
+                        stream: selected.map((set) => set.contains(entry.key)),
+                        builder: (context, entryChecked) => Checkbox(
+                          onChanged: (checked) => _toggle(
+                            entry.key,
+                            checked ?? false,
+                          ),
+                          value: entryChecked.requireData,
+                        ),
                       ),
                     ),
                     Padding(
@@ -904,27 +825,24 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          for (final o in entry.value)
-                            StreamBuilder<bool>(
-                              initialData: false,
-                              stream: selected.map((s) => s.contains(o)),
-                              builder: (context, checked) => CheckboxListTile(
-                                onChanged: (c) {
-                                  if (c ?? false) {
-                                    selected.add({...selected.value, o});
-                                  } else {
-                                    selected.add(
-                                      selected.value.difference(
-                                        <ViewableWithID>{o},
-                                      ),
-                                    );
-                                  }
-                                },
-                                value: checked.requireData,
-                                secondary: ImageObjectWidget(
-                                  o,
+                          for (final descendent in entry.value)
+                            ViewableObjectWidget(
+                              descendent,
+                              wrapInCard: false,
+                              forceShowSecondLine: false,
+                              onTap: (object) => _toggle(
+                                  object, !selected.value.contains(object)),
+                              trailing: StreamBuilder<bool>(
+                                initialData: false,
+                                stream: selected
+                                    .map((set) => set.contains(descendent)),
+                                builder: (context, entryChecked) => Checkbox(
+                                  onChanged: (checked) => _toggle(
+                                    descendent,
+                                    checked ?? false,
+                                  ),
+                                  value: entryChecked.requireData,
                                 ),
-                                title: Text(o.name),
                               ),
                             ),
                         ],
@@ -991,6 +909,18 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         ),
       ],
     );
+  }
+
+  void _toggle(ViewableWithID object, bool isSelected) {
+    if (isSelected) {
+      selected.add({...selected.value, object});
+    } else {
+      selected.add(
+        selected.value.difference(
+          <ViewableWithID>{object},
+        ),
+      );
+    }
   }
 
   @override
