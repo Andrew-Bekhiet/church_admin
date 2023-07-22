@@ -15,5 +15,4 @@ DateTime dateFromString(dynamic data) {
         );
 }
 
-String dateToString(DateTime date) =>
-    date.toUtc().toIso8601String().split('T').first;
+String dateToString(DateTime date) => date.toIso8601String().split('T').first;
