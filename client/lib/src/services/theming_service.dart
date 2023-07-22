@@ -203,52 +203,11 @@ class ThemingService with WidgetsBindingObserver {
           borderSide: BorderSide(color: primary),
         ),
       ),
-    );
-    //TODO: tune theming
-    /* .copyWith(
-      floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: primary),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      brightness: isDark ? Brightness.dark : Brightness.light,
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          primary: secondary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
+      bottomAppBarTheme: const BottomAppBarTheme(
+        shape: CircularNotchedRectangle(),
       ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          primary: secondary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          primary: secondary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-      ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: primary,
-        foregroundColor: (isDark
-                ? Typography.material2021().white
-                : Typography.material2021().black)
-            .headline6
-            ?.color,
-        systemOverlayStyle:
-            isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
-      ),
-      bottomAppBarTheme: BottomAppBarTheme(
-        color: secondary,
-        shape: const CircularNotchedRectangle(),
-      ),
-    ); */
+    );
   }
 
   final UserSettingsService _userSettingsService;
