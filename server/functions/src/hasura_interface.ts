@@ -36,18 +36,18 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
 }
 
 export async function getHasuraUID(
-  firebase_auth_uid: string
+  firebaseAuthUID: string
 ): Promise<string | null> {
   try {
     const hasura_request = await _makeGraphqlRequest({
       query: `
-            query getUserByFirebaseUID($firebase_auth_uid: String) {
-              authUsersData(where: {authId: {_eq: $firebase_auth_uid}}, limit: 1) {
+            query getUserByFirebaseUID($firebaseAuthUID: String) {
+              authUsersData(where: {authId: {_eq: $firebaseAuthUID}}, limit: 1) {
                 uid
               }
             }
           `,
-      variables: { firebase_auth_uid },
+      variables: { firebaseAuthUID },
       operationName: "getUserByFirebaseUID",
     });
     const hasura_uid: string =
@@ -141,27 +141,28 @@ export async function insertUser(user: {
   email: string;
   name: string;
   uid: string;
-}): Promise<string | null> {
+}): Promise<{ person_id: string; hasura_uid: string } | null> {
   try {
     const hasura_request = await _makeGraphqlRequest({
       query: `
             mutation addUser(
               $email: String
               $name: String
-              $firebase_auth_uid: String
-              $permissions: _text = "{}"
+              $firebaseAuthUID: String
             ) {
               insertAuthUsersData(
                 objects: {
                   email: $email
-                  authId: $firebase_auth_uid
-                  permissions: $permissions
-                  name: $name
-                  person: { data: { name: $name, isStudent: false, isServant: true } }
+                  authId: $firebaseAuthUID
+                  name: $name,
+                  person: {data: {name: $name, isServant: true, isStudent: false}}
                 }
               ) {
                 returning {
                   uid
+                  person {
+                    id
+                  }
                 }
               }
             }
@@ -169,17 +170,22 @@ export async function insertUser(user: {
       variables: {
         name: user.name,
         email: user.email,
-        firebase_auth_uid: user.uid,
-        permissions: "{}",
+        firebaseAuthUID: user.uid,
       },
       operationName: "addUser",
     });
 
-    return (
+    const rslt =
       hasura_request.data?.["data"]?.["insertAuthUsersData"]?.[
         "returning"
-      ]?.[0]?.["uid"] ?? null
-    );
+      ]?.[0];
+
+    return rslt
+      ? {
+          hasura_uid: rslt?.["uid"],
+          person_id: rslt?.["person"]?.["id"],
+        }
+      : null;
   } catch (e) {
     console.error(e);
   }

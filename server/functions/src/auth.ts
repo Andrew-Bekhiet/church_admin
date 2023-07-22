@@ -16,20 +16,22 @@ export const beforeUserSignUp = region("europe-west6")
   .beforeCreate(async (user) => {
     console.dir(user, { depth: 4 });
     try {
-      const hasura_uid = await insertUser({
+      const rslt = await insertUser({
         name: user.displayName ?? user.email!,
         email: user.email!,
         uid: user.uid!,
       });
 
-      if (hasura_uid == null) {
+      if (rslt == null) {
         throw new https.HttpsError("unknown", "");
       }
+
+      const { person_id, hasura_uid } = rslt;
 
       await get(user.photoURL!, (response) => {
         const file = storage()
           .bucket("church-data-admin.appspot.com")
-          .file("users/" + hasura_uid)
+          .file("persons/" + person_id)
           .createWriteStream({
             contentType: "image/jpeg",
             gzip: true,
@@ -58,7 +60,7 @@ export const onUserSignUp = region("europe-west6")
     console.dir(user, { depth: 4 });
     try {
       await auth().setCustomUserClaims(user.uid, {
-        "x-hasura-user-id": getHasuraUID(user.uid),
+        "x-hasura-user-id": await getHasuraUID(user.uid),
         "x-hasura-default-role": "user",
         "x-hasura-allowed-roles": ["user"],
       });
