@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];
-  static String _getPassword(Json jwtClaims) => jwtClaims['password'];
+  static String? _getPassword(Json jwtClaims) => jwtClaims['password'];
   static Future<IdTokenResult?> _getIdTokenResultFromAuthUser(
     auth.User? authUser,
   ) async {
