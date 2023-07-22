@@ -316,7 +316,7 @@ class __$$_AdminOnDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AdminOnData implements _AdminOnData {
+class _$_AdminOnData extends _AdminOnData {
   const _$_AdminOnData(
       {required this.permissionId,
       this.area,
@@ -331,7 +331,8 @@ class _$_AdminOnData implements _AdminOnData {
       this.group,
       this.groupAllowEdit,
       this.groupAdminOnUsers})
-      : _classes = classes;
+      : _classes = classes,
+        super._();
 
   factory _$_AdminOnData.fromJson(Map<String, dynamic> json) =>
       _$$_AdminOnDataFromJson(json);
@@ -436,7 +437,7 @@ class _$_AdminOnData implements _AdminOnData {
   }
 }
 
-abstract class _AdminOnData implements AdminOnData {
+abstract class _AdminOnData extends AdminOnData {
   const factory _AdminOnData(
       {required final String permissionId,
       final Area? area,
@@ -451,6 +452,7 @@ abstract class _AdminOnData implements AdminOnData {
       final Group? group,
       final bool? groupAllowEdit,
       final bool? groupAdminOnUsers}) = _$_AdminOnData;
+  const _AdminOnData._() : super._();
 
   factory _AdminOnData.fromJson(Map<String, dynamic> json) =
       _$_AdminOnData.fromJson;

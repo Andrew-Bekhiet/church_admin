@@ -107,7 +107,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                 editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(
-              circleCrop: false,
+              circleCrop: objectData is Person || objectData is User,
               backgroundColor: objectData.color,
               foregroundColor: foregroundColor,
               viewable: object?.hasImage ?? false ? object! : objectData,

@@ -95,6 +95,7 @@ class _EditGroupState extends State<EditGroup> {
           DateTimeRangeField(
             label: 'الصلاحية',
             initialValue: newGroup.validity,
+            startFirstDate: DateTime.now(),
             nullable: true,
             onChanged: (value) => newGroup = newGroup.copyWith(validity: value),
           ),

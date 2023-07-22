@@ -14,9 +14,15 @@ class AdminOnDataIndicator extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (adminOnData.groupAdminOnUsers ?? false)
+        if (adminOnData.serviceAdminOnUsers ??
+            adminOnData.groupAdminOnUsers ??
+            adminOnData.areaAdminOnUsers ??
+            false)
           Icon(UserPermission.manageAllUsers.icon),
-        if (adminOnData.groupAllowEdit ?? false)
+        if (adminOnData.serviceAllowEdit ??
+            adminOnData.groupAllowEdit ??
+            adminOnData.areaAllowEdit ??
+            false)
           Icon(UserPermission.readAllData.icon),
         Icon(UserPermission.writeAllData.icon),
       ],

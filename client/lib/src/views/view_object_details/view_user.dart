@@ -246,6 +246,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                       Card(
                         child: ViewableObjectWidget(
                           adminData.group!,
+                          wrapInCard: false,
+                          forceShowSecondLine: false,
                           onTap: (g) => _toggle(g, !selected.value.contains(g)),
                           trailing: StreamBuilder<bool>(
                             initialData: false,

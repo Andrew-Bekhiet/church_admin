@@ -24,6 +24,8 @@ class AdminOnData with _$AdminOnData {
     bool? groupAdminOnUsers,
   }) = _AdminOnData;
 
+  const AdminOnData._();
+
   factory AdminOnData.fromJson(Map<String, Object?> json) =>
       _$AdminOnDataFromJson(json);
 

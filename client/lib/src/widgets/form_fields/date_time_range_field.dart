@@ -9,6 +9,7 @@ class DateTimeRangeField extends StatelessWidget {
   final DateTimeRange? initialValue;
   final bool nullable;
   final DateFormat dateFormat;
+  final DateTime? startFirstDate;
 
   final void Function(DateTimeRange?)? onChanged;
   final void Function(DateTimeRange?)? onSaved;
@@ -19,6 +20,7 @@ class DateTimeRangeField extends StatelessWidget {
 
   DateTimeRangeField({
     required this.label,
+    this.startFirstDate,
     this.initialValue,
     this.nullable = false,
     DateFormat? dateFormat,
@@ -45,7 +47,7 @@ class DateTimeRangeField extends StatelessWidget {
         final rslt = await showOmniDateTimeRangePicker(
           context: context,
           type: OmniDateTimePickerType.date,
-          startFirstDate: DateTime.now(),
+          startFirstDate: startFirstDate,
           startInitialDate: state.value?.start,
           endInitialDate: state.value?.end,
         );
