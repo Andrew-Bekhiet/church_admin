@@ -50,137 +50,43 @@ class _ViewUserState extends State<ViewUser> {
       objectId: widget.userId,
       object: widget.user,
       objectStream: stream,
-      detailsBuilder: (context, user) {
-        final themeData = Theme.of(context);
-
-        return SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              CopiablePropertyWidget(
-                'البريد الاكتروني',
-                user.email,
+      detailsBuilder: (context, user) => SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            CopiablePropertyWidget(
+              'البريد الاكتروني',
+              user.email,
+            ),
+            //TODO: approving pending users
+            const Divider(thickness: 1),
+            ListTile(
+              title: const Text('الصلاحيات'),
+              subtitle: user.permissions.permissions.isEmpty
+                  ? const Text('لا يملك هذا الخادم صلاحيات محددة')
+                  : PermissionsSetWidget(permissions: user.permissions),
+            ),
+            const Divider(thickness: 1),
+            const SizedBox(height: 10),
+            AdminOnDataWidget(adminOn: user.adminOn ?? []),
+            const Divider(thickness: 1),
+            ListTile(
+              title: FilledButton.tonalIcon(
+                icon: const Icon(Icons.query_stats),
+                label: const Text('احصائيات الحضور'),
+                onPressed: () => _attendanceAnalysis(context, user),
               ),
-              //TODO: approving pending users
-              const Divider(thickness: 1),
-              ListTile(
-                title: const Text('الصلاحيات'),
-                subtitle: user.permissions.permissions.isEmpty
-                    ? const Text('لا يملك هذا الخادم صلاحيات محددة')
-                    : PermissionsSetWidget(permissions: user.permissions),
-              ),
-              const Divider(thickness: 1),
-              const SizedBox(height: 10),
-              ListTile(
-                minVerticalPadding: 0,
-                title: Text(
-                  'المناطق المسؤول عنها',
-                  style: themeData.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (final adminData
-                        in user.adminOn?.where((a) => a.area != null) ??
-                            <AdminOnData>[])
-                      ViewableObjectWidget(
-                        adminData.area!,
-                        forceShowSecondLine: false,
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (adminData.areaAdminOnUsers ?? false)
-                              Icon(UserPermission.manageAllUsers.icon),
-                            if (adminData.areaAllowEdit ?? false)
-                              Icon(UserPermission.readAllData.icon),
-                            Icon(UserPermission.writeAllData.icon),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              ListTile(
-                minVerticalPadding: 0,
-                title: Text(
-                  'الخدمات المسؤول عنها',
-                  style: themeData.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (final s
-                        in (user.adminOn?.where((a) => a.service != null) ?? [])
-                            .groupListsBy((a) => a.service!)
-                            .entries)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Card(
-                          child: _AdminOnServiceWidget(
-                            serviceData: s,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              ListTile(
-                minVerticalPadding: 0,
-                title: Text(
-                  'المجموعات المسؤول عنها',
-                  style: themeData.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (final adminData
-                        in user.adminOn?.where((a) => a.group != null) ??
-                            <AdminOnData>[])
-                      Card(
-                        child: ViewableObjectWidget(
-                          adminData.group!,
-                          forceShowSecondLine: false,
-                          wrapInCard: false,
-                          // dense: true,
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (adminData.groupAdminOnUsers ?? false)
-                                Icon(UserPermission.manageAllUsers.icon),
-                              if (adminData.groupAllowEdit ?? false)
-                                Icon(UserPermission.readAllData.icon),
-                              Icon(UserPermission.writeAllData.icon),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              const Divider(thickness: 1),
-              ListTile(
-                title: FilledButton.tonalIcon(
-                  icon: const Icon(Icons.query_stats),
-                  label: const Text('احصائيات الحضور'),
-                  onPressed: () => _attendanceAnalysis(context, user),
-                ),
-              ),
-              const Divider(thickness: 1),
-              HistoryProperty(
-                name: 'أخر تحديث لبيانات الخادم',
-                value: user.lastEdit?.time,
-                getHistoryStream: () => DatabaseService.I.history
-                    .paginateEditHistory<User>(id: user.id),
-              ),
-              const SizedBox(height: 50),
-            ],
-          ),
-        );
-      },
+            ),
+            const Divider(thickness: 1),
+            HistoryProperty(
+              name: 'أخر تحديث لبيانات الخادم',
+              value: user.lastEdit?.time,
+              getHistoryStream: () => DatabaseService.I.history
+                  .paginateEditHistory<User>(id: user.id),
+            ),
+            const SizedBox(height: 50),
+          ],
+        ),
+      ),
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => context.push(
@@ -229,110 +135,6 @@ class _ViewUserState extends State<ViewUser> {
   void dispose() {
     scrollController.dispose();
     super.dispose();
-  }
-}
-
-class _AdminOnServiceWidget extends StatelessWidget {
-  const _AdminOnServiceWidget({
-    required this.serviceData,
-    this.trailingBuilder,
-    this.onTap,
-  });
-
-  final MapEntry<Service, List<AdminOnData>> serviceData;
-  final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
-  final void Function(ViewableWithID)? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ViewableObjectWidget(
-          serviceData.key,
-          forceShowSecondLine: false,
-          wrapInCard: false,
-          onTap: onTap,
-          trailing: trailingBuilder?.call(context, serviceData.key),
-        ),
-        if (serviceData.value.any(
-          (p) =>
-              (p.classes.isEmpty && trailingBuilder == null) ||
-              p.classes.isNotEmpty,
-        ))
-          const Divider(thickness: 2),
-        for (final p in serviceData.value)
-          if (p.classes.isEmpty && trailingBuilder == null)
-            Padding(
-              padding: const EdgeInsets.only(right: 26),
-              child: Card(
-                elevation: 0,
-                child: ListTile(
-                  title: p.serviceGender == null &&
-                          p.serviceStudyYearData == null
-                      ? const Text('(جميع البيانات داخل الخدمة)')
-                      : p.serviceGender != null &&
-                              p.serviceStudyYearData == null
-                          ? Text(
-                              p.serviceGender!
-                                  ? '(جميع البنين في الخدمة)'
-                                  : '(جميع البنات داخل الخدمة)',
-                            )
-                          : p.serviceGender != null
-                              ? Text(
-                                  '(' +
-                                      p.serviceStudyYearData!.name +
-                                      (p.serviceGender! ? ' بنين' : ' بنات') +
-                                      ')',
-                                )
-                              : Text(
-                                  '(جميع بيانات ' +
-                                      p.serviceStudyYearData!.name +
-                                      ')',
-                                ),
-                  dense: true,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (p.serviceAdminOnUsers ?? false)
-                        Icon(UserPermission.manageAllUsers.icon),
-                      if (p.serviceAllowEdit ?? false)
-                        Icon(UserPermission.readAllData.icon),
-                      Icon(UserPermission.writeAllData.icon),
-                    ],
-                  ),
-                ),
-              ),
-            )
-          else
-            for (final c in p.classes)
-              Padding(
-                padding: const EdgeInsets.only(right: 26),
-                child: Card(
-                  elevation: 0,
-                  child: ViewableObjectWidget(
-                    c,
-                    dense: true,
-                    forceShowSecondLine: false,
-                    wrapInCard: false,
-                    onTap: onTap,
-                    trailing: trailingBuilder == null
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (p.serviceAdminOnUsers ?? false)
-                                Icon(UserPermission.manageAllUsers.icon),
-                              if (p.serviceAllowEdit ?? false)
-                                Icon(UserPermission.readAllData.icon),
-                              Icon(UserPermission.writeAllData.icon),
-                            ],
-                          )
-                        : trailingBuilder!(context, c),
-                  ),
-                ),
-              ),
-      ],
-    );
   }
 }
 
@@ -474,16 +276,17 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                 subtitle: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    for (final s in (widget.user.adminOn
-                                ?.where((a) => a.service != null) ??
-                            [])
-                        .groupListsBy((a) => a.service!)
-                        .entries)
+                    for (final MapEntry(key: service, value: permissions)
+                        in (widget.user.adminOn
+                                    ?.where((a) => a.service != null) ??
+                                [])
+                            .groupListsBy((a) => a.service!)
+                            .entries)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: Card(
-                          child: _AdminOnServiceWidget(
-                            serviceData: s,
+                          child: AdminOnServiceWidget(
+                            serviceData: (service, permissions),
                             onTap: (s) => selected.value.contains(s)
                                 ? selected.add(
                                     selected.value.difference(

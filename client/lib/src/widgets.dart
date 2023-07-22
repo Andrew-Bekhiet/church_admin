@@ -1,3 +1,6 @@
+export 'widgets/admin_on_data_indicator.dart';
+export 'widgets/admin_on_data_widget.dart';
+export 'widgets/admin_on_service_widget.dart';
 export 'widgets/admin_users.dart';
 export 'widgets/animated_fab.dart';
 export 'widgets/church_admin_app.dart';

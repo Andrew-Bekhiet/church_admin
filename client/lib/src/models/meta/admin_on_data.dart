@@ -26,4 +26,21 @@ class AdminOnData with _$AdminOnData {
 
   factory AdminOnData.fromJson(Map<String, Object?> json) =>
       _$AdminOnDataFromJson(json);
+
+  String describeServicePermission() {
+    if (serviceGender == null && serviceStudyYearData == null) {
+      return '(جميع البيانات داخل الخدمة)';
+    } else if (serviceGender != null && serviceStudyYearData == null) {
+      return serviceGender!
+          ? '(جميع البنين في الخدمة)'
+          : '(جميع البنات داخل الخدمة)';
+    } else if (serviceGender != null) {
+      return '(' +
+          serviceStudyYearData!.name +
+          (serviceGender! ? ' بنين' : ' بنات') +
+          ')';
+    } else {
+      return '(جميع بيانات ' + serviceStudyYearData!.name + ')';
+    }
+  }
 }
