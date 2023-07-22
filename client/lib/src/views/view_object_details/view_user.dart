@@ -66,75 +66,7 @@ class _ViewUserState extends State<ViewUser> {
                 title: const Text('الصلاحيات'),
                 subtitle: user.permissions.permissions.isEmpty
                     ? const Text('لا يملك هذا الخادم صلاحيات محددة')
-                    : Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (user.permissions.manageAllUsers)
-                            ListTile(
-                              leading: Icon(
-                                UserPermission.manageAllUsers.icon,
-                              ),
-                              title: Text(
-                                UserPermission.manageAllUsers.humanReadableName,
-                              ),
-                            ),
-                          if (user.permissions.readAllData)
-                            ListTile(
-                              leading: Icon(UserPermission.readAllData.icon),
-                              title: Text(
-                                UserPermission.readAllData.humanReadableName,
-                              ),
-                            ),
-                          if (user.permissions.writeAllData)
-                            ListTile(
-                              leading: Icon(UserPermission.writeAllData.icon),
-                              title: Text(
-                                UserPermission.writeAllData.humanReadableName,
-                              ),
-                            ),
-                          if ((user.permissions.manageAllUsers ||
-                                  user.permissions.readAllData ||
-                                  user.permissions.writeAllData) &&
-                              (user.permissions.recordHistory ||
-                                  user.permissions.changeOldHistory ||
-                                  user.permissions.recoverDeleted ||
-                                  user.permissions.exportData))
-                            const Divider(),
-                          if (user.permissions.recordHistory)
-                            ListTile(
-                              leading: Icon(UserPermission.recordHistory.icon),
-                              title: Text(
-                                UserPermission.recordHistory.humanReadableName,
-                              ),
-                            ),
-                          if (user.permissions.changeOldHistory)
-                            ListTile(
-                              leading: Icon(
-                                UserPermission.changeOldHistory.icon,
-                              ),
-                              title: Text(
-                                UserPermission
-                                    .changeOldHistory.humanReadableName,
-                              ),
-                            ),
-                          if (user.permissions.recoverDeleted)
-                            ListTile(
-                              leading: Icon(
-                                UserPermission.recoverDeleted.icon,
-                              ),
-                              title: Text(
-                                UserPermission.recoverDeleted.humanReadableName,
-                              ),
-                            ),
-                          if (user.permissions.exportData)
-                            ListTile(
-                              leading: Icon(UserPermission.exportData.icon),
-                              title: Text(
-                                UserPermission.exportData.humanReadableName,
-                              ),
-                            ),
-                        ],
-                      ),
+                    : PermissionsSetWidget(permissions: user.permissions),
               ),
               const Divider(thickness: 1),
               const SizedBox(height: 10),
