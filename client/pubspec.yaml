@@ -85,6 +85,7 @@ dependencies:
   map_launcher: ^2.5.0+1
   meta: ^1.8.0
   mime: ^1.0.2
+  omni_datetime_picker: ^1.0.7
   package_info_plus: ^4.0.0
   percent_indicator: ^4.2.2
   permission_handler: ^10.2.0

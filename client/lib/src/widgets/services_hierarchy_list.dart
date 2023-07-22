@@ -163,9 +163,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
               ),
             if (widget.showClasses &&
                 widget.showGroups &&
-                s.fromStudyYear != null &&
-                s.toStudyYear != null &&
-                s.toStudyYear!.order - s.fromStudyYear!.order >= 1 &&
+                s.studyYearFrom != null &&
+                s.studyYearTo != null &&
+                s.studyYearTo!.order - s.studyYearFrom!.order >= 1 &&
                 (s.groups?.isNotEmpty ?? false))
               const Divider(),
             if (widget.showGroups)

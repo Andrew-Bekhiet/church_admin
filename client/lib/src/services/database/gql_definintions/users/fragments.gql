@@ -36,7 +36,7 @@ fragment UserAdminOn on AuthUsersData {
   adminOn(
     orderBy: [
       { area: { name: ASC_NULLS_LAST } }
-      { service: { studyYearFrom: ASC, studyYearTo: ASC } }
+      { service: { studyYearFromId: ASC, studyYearToId: ASC } }
       { serviceStudyYear: ASC }
       { serviceGender: DESC_NULLS_FIRST }
       { service: { name: ASC_NULLS_LAST } }

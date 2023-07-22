@@ -3,6 +3,19 @@ fragment Service on Services {
   photoUpdatedAt
 }
 
+fragment ServiceWithStudyYears on Services {
+  ...ServiceNoPhoto
+  studyYearFrom {
+    order
+    name
+  }
+  studyYearTo {
+    order
+    name
+  }
+  photoUpdatedAt
+}
+
 fragment ServiceNoPhoto on Services {
   id
   name

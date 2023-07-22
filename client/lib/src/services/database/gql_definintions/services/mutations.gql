@@ -1,0 +1,17 @@
+mutation deleteService($serviceId: uuid!) {
+  deleteServicesByPk(id: $serviceId) {
+    ...Service
+  }
+}
+
+mutation insertService($newService: ServicesInsertInput!) {
+  insertServicesOne(object: $newService) {
+    ...Service
+  }
+}
+
+mutation updateService($serviceId: uuid!, $newService: ServicesSetInput!) {
+  updateServicesByPk(pkColumns: { id: $serviceId }, _set: $newService) {
+    ...Service
+  }
+}

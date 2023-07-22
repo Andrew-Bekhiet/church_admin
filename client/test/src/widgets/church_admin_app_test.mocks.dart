@@ -238,8 +238,18 @@ class _FakeArea_19 extends _i1.SmartFake implements _i4.Area {
         );
 }
 
-class _FakeDuration_20 extends _i1.SmartFake implements Duration {
-  _FakeDuration_20(
+class _FakeService_20 extends _i1.SmartFake implements _i4.Service {
+  _FakeService_20(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_21 extends _i1.SmartFake implements Duration {
+  _FakeDuration_21(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1310,6 +1320,60 @@ class MockServicesDAO extends _i1.Mock implements _i6.ServicesDAO {
         returnValue: _i8.Stream<_i4.Service?>.empty(),
         returnValueForMissingStub: _i8.Stream<_i4.Service?>.empty(),
       ) as _i8.Stream<_i4.Service?>);
+  @override
+  _i8.Future<_i4.Service?> deleteService({required String? serviceId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteService,
+          [],
+          {#serviceId: serviceId},
+        ),
+        returnValue: _i8.Future<_i4.Service?>.value(),
+        returnValueForMissingStub: _i8.Future<_i4.Service?>.value(),
+      ) as _i8.Future<_i4.Service?>);
+  @override
+  _i8.Future<_i4.Service> insertService({required _i4.Service? newService}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #insertService,
+          [],
+          {#newService: newService},
+        ),
+        returnValue: _i8.Future<_i4.Service>.value(_FakeService_20(
+          this,
+          Invocation.method(
+            #insertService,
+            [],
+            {#newService: newService},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i4.Service>.value(_FakeService_20(
+          this,
+          Invocation.method(
+            #insertService,
+            [],
+            {#newService: newService},
+          ),
+        )),
+      ) as _i8.Future<_i4.Service>);
+  @override
+  _i8.Future<_i4.Service?> updateService({
+    required _i4.Service? newService,
+    required _i4.Service? oldService,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateService,
+          [],
+          {
+            #newService: newService,
+            #oldService: oldService,
+          },
+        ),
+        returnValue: _i8.Future<_i4.Service?>.value(),
+        returnValueForMissingStub: _i8.Future<_i4.Service?>.value(),
+      ) as _i8.Future<_i4.Service?>);
 }
 
 /// A class which mocks [LocalAuthService].
@@ -1319,11 +1383,11 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_20(
+        returnValue: _FakeDuration_21(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_20(
+        returnValueForMissingStub: _FakeDuration_21(
           this,
           Invocation.getter(#timeToReauth),
         ),

@@ -1,0 +1,17 @@
+mutation deleteGroup($groupId: uuid!) {
+  deleteGroupsByPk(id: $groupId) {
+    ...Group
+  }
+}
+
+mutation insertGroup($newGroup: GroupsInsertInput!) {
+  insertGroupsOne(object: $newGroup) {
+    ...Group
+  }
+}
+
+mutation updateGroup($groupId: uuid!, $newGroup: GroupsSetInput!) {
+  updateGroupsByPk(pkColumns: { id: $groupId }, _set: $newGroup) {
+    ...Group
+  }
+}

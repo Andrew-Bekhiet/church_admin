@@ -1,7 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 
+import 'groups/__generated__/mutations.gql.dart';
 import 'groups/__generated__/subscriptions.gql.dart';
+import 'helpers.dart';
 
 class GroupsDAO extends DAOBase<Group> {
   const GroupsDAO({
@@ -60,6 +62,64 @@ class GroupsDAO extends DAOBase<Group> {
           id: id.toUuid(),
         ).toJson(),
         parserFn: db.parser.singleParser(Group.fromJson),
+      ),
+    );
+  }
+
+  Future<Group?> deleteGroup({
+    required String groupId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteGroup,
+      variables: Variables_Mutation_deleteGroup(
+        groupId: groupId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Group.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Group> insertGroup({
+    required Group newGroup,
+  }) {
+    final delta = computeObjectDelta(
+      newGroup.toJson(),
+      Group(id: '', name: '').toJson(),
+    )
+      ..remove('id')
+      ..remove('service');
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertGroup,
+        operationName: 'insertGroup',
+        variables: {'newGroup': delta},
+        parserFn: db.parser.singleParser(Group.fromJson),
+      ),
+    );
+  }
+
+  Future<Group?> updateGroup({
+    required Group newGroup,
+    required Group oldGroup,
+  }) {
+    final delta = computeObjectDelta(
+      newGroup.toJson(),
+      oldGroup.toJson(),
+    );
+
+    if (delta.isEmpty) return Future.value(newGroup);
+
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationupdateGroup,
+        operationName: 'updateGroup',
+        variables: Variables_Mutation_updateGroup(
+          groupId: newGroup.id.toUuid(),
+          newGroup: Input_GroupsSetInput.fromJson(delta),
+        ).toJson(),
+        parserFn: db.parser.singleOrNullParser(Group.fromJson),
       ),
     );
   }

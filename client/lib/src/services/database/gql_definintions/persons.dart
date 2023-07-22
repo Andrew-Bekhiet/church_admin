@@ -43,7 +43,9 @@ class PersonsDAO extends DAOBase<Person> {
         document: documentNodeMutationupdatePerson,
         operationName: 'updatePerson',
         variables: updateHelper.variables.toJson(),
-        parserFn: db.parser.singleOrNullParser(Person.fromJson),
+        parserFn: (data) => data['updatePersonsByPk'] != null
+            ? Person.fromJson(data['updatePersonsByPk'])
+            : null,
       ),
     );
   }

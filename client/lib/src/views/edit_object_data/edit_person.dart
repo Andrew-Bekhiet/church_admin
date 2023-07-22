@@ -18,16 +18,28 @@ class EditPerson extends StatefulWidget {
       return EditPerson(
         person: (state.extra as Map?)?['person'] as Person?,
         family: (state.extra as Map?)?['family'] as Family?,
+        service: (state.extra as Map?)?['service'] as Service?,
+        group: (state.extra as Map?)?['group'] as Group?,
+        studyYear: (state.extra as Map?)?['studyYear'] as StudyYear?,
+        gender: (state.extra as Map?)?['gender'] as bool?,
       );
     },
   );
 
   final Person? person;
   final Family? family;
+  final Service? service;
+  final Group? group;
+  final StudyYear? studyYear;
+  final bool? gender;
 
   const EditPerson({
     required this.person,
     this.family,
+    this.service,
+    this.group,
+    this.studyYear,
+    this.gender,
     super.key,
   });
 
@@ -51,6 +63,13 @@ class _EditPersonState extends State<EditPerson> {
           id: const Uuid().v4(),
           name: 'مخدوم جديد',
           family: widget.family,
+          familyId: widget.family?.id,
+          services: widget.service != null ? [widget.service!] : [],
+          groups: widget.group != null ? [widget.group!] : [],
+          studyYear: widget.studyYear,
+          studyYearId: widget.studyYear?.order,
+          isStudent: widget.studyYear != null,
+          gender: widget.gender ?? true,
         ),
     initialObject: widget.person,
   );
@@ -67,6 +86,8 @@ class _EditPersonState extends State<EditPerson> {
 
     _loadPersonServicesClassesGroups();
   }
+
+  //TODO: make every field a separate widget
 
   @override
   Widget build(BuildContext context) {
@@ -243,10 +264,10 @@ class _EditPersonState extends State<EditPerson> {
                   newPerson.studyYear != null &&
                   v!.item1.any(
                     (s) =>
-                        s.fromStudyYear == null ||
-                        s.toStudyYear == null ||
-                        (newPerson.studyYear!.order < s.fromStudyYear!.order ||
-                            newPerson.studyYear!.order > s.toStudyYear!.order),
+                        s.studyYearFrom == null ||
+                        s.studyYearTo == null ||
+                        (newPerson.studyYear!.order < s.studyYearFrom!.order ||
+                            newPerson.studyYear!.order > s.studyYearTo!.order),
                   )) {
                 return 'بعض الخدمات لا تناسب السنة الدراسية للمخدوم'
                     '\nيرجى تغيير السنة الدراسية او ازالة التحديد من احدى الخدمات';
@@ -369,16 +390,16 @@ class _EditPersonState extends State<EditPerson> {
             if (newPerson.studyYear?.order != null &&
                 newPerson.studyYear!.order > 12) ...[
               /* ObjectSelectionField<University, University?>(
-                                      initialValue: newPerson.college?.university,
-                                      listController: (s)=>ListControllerBase( objectsPaginatableStream:CADatabaseRepository.I.metadata.universities.watchAllUniversities(searchQuery:s),),
-                                      labelText: 'الجامعةpaginate                                    onC: (value) => newPerson =
-                                          newPerson.copyWith(universityId: value?.id),
-                                      builder: (context, state) {
-                                        return state.value != null
-                                            ? Text(state.value!.name)
-                                            : null;
-                                      },
-                                    ), */
+                initialValue: newPerson.college?.university,
+                listController: (s)=>ListControllerBase( objectsPaginatableStream:CADatabaseRepository.I.metadata.universities.watchAllUniversities(searchQuery:s),),
+                labelText: 'الجامعةpaginate                                    onC: (value) => newPerson =
+                    newPerson.copyWith(universityId: value?.id),
+                builder: (context, state) {
+                  return state.value != null
+                      ? Text(state.value!.name)
+                      : null;
+                },
+              ), */
               ObjectSelectionField<College, College?>(
                 initialValue: newPerson.college,
                 listController: (s) => ViewableObjectListController(
@@ -856,7 +877,7 @@ class _EditPersonState extends State<EditPerson> {
   }
 
   void _loadPersonServicesClassesGroups() {
-    if (widget.person == null) {
+    if (_controller.isCreate) {
       _classesAndGroupsLoaded = true;
     } else {
       WidgetsBinding.instance.addPostFrameCallback(

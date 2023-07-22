@@ -17,6 +17,7 @@ class Group extends ViewableWithIDAndImage
     required String name,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? serviceId,
     Service? service,
     @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
     DateTimeRange? validity,

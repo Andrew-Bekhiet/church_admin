@@ -26,8 +26,10 @@ mixin _$Class {
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
-  bool? get serviceGender => throw _privateConstructorUsedError;
+  String? get serviceId => throw _privateConstructorUsedError;
   StudyYear? get studyYear => throw _privateConstructorUsedError;
+  int? get serviceStudyYear => throw _privateConstructorUsedError;
+  bool? get serviceGender => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers => throw _privateConstructorUsedError;
@@ -54,8 +56,10 @@ abstract class $ClassCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
-      bool? serviceGender,
+      String? serviceId,
       StudyYear? studyYear,
+      int? serviceStudyYear,
+      bool? serviceGender,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers,
@@ -89,8 +93,10 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
-    Object? serviceGender = freezed,
+    Object? serviceId = freezed,
     Object? studyYear = freezed,
+    Object? serviceStudyYear = freezed,
+    Object? serviceGender = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
@@ -117,14 +123,22 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
-      serviceGender: freezed == serviceGender
-          ? _value.serviceGender
-          : serviceGender // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      serviceId: freezed == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       studyYear: freezed == studyYear
           ? _value.studyYear
           : studyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
+      serviceStudyYear: freezed == serviceStudyYear
+          ? _value.serviceStudyYear
+          : serviceStudyYear // ignore: cast_nullable_to_non_nullable
+              as int?,
+      serviceGender: freezed == serviceGender
+          ? _value.serviceGender
+          : serviceGender // ignore: cast_nullable_to_non_nullable
+              as bool?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -222,8 +236,10 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       Service? service,
-      bool? serviceGender,
+      String? serviceId,
       StudyYear? studyYear,
+      int? serviceStudyYear,
+      bool? serviceGender,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers,
@@ -258,8 +274,10 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res, _$_Class>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? service = freezed,
-    Object? serviceGender = freezed,
+    Object? serviceId = freezed,
     Object? studyYear = freezed,
+    Object? serviceStudyYear = freezed,
+    Object? serviceGender = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
@@ -286,14 +304,22 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res, _$_Class>
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
-      serviceGender: freezed == serviceGender
-          ? _value.serviceGender
-          : serviceGender // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      serviceId: freezed == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       studyYear: freezed == studyYear
           ? _value.studyYear
           : studyYear // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
+      serviceStudyYear: freezed == serviceStudyYear
+          ? _value.serviceStudyYear
+          : serviceStudyYear // ignore: cast_nullable_to_non_nullable
+              as int?,
+      serviceGender: freezed == serviceGender
+          ? _value.serviceGender
+          : serviceGender // ignore: cast_nullable_to_non_nullable
+              as bool?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -324,8 +350,10 @@ class _$_Class extends _Class {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.service,
-      this.serviceGender,
+      this.serviceId,
       this.studyYear,
+      this.serviceStudyYear,
+      this.serviceGender,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers,
@@ -351,9 +379,13 @@ class _$_Class extends _Class {
   @override
   final Service? service;
   @override
-  final bool? serviceGender;
+  final String? serviceId;
   @override
   final StudyYear? studyYear;
+  @override
+  final int? serviceStudyYear;
+  @override
+  final bool? serviceGender;
   @override
   final LastRecordedByInfo? lastEdit;
   final List<User>? _adminUsers;
@@ -376,7 +408,7 @@ class _$_Class extends _Class {
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, serviceGender: $serviceGender, studyYear: $studyYear, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -390,10 +422,14 @@ class _$_Class extends _Class {
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             (identical(other.service, service) || other.service == service) &&
-            (identical(other.serviceGender, serviceGender) ||
-                other.serviceGender == serviceGender) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId) &&
             (identical(other.studyYear, studyYear) ||
                 other.studyYear == studyYear) &&
+            (identical(other.serviceStudyYear, serviceStudyYear) ||
+                other.serviceStudyYear == serviceStudyYear) &&
+            (identical(other.serviceGender, serviceGender) ||
+                other.serviceGender == serviceGender) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             const DeepCollectionEquality()
@@ -417,8 +453,10 @@ class _$_Class extends _Class {
       color,
       photoUpdatedAt,
       service,
-      serviceGender,
+      serviceId,
       studyYear,
+      serviceStudyYear,
+      serviceGender,
       lastEdit,
       const DeepCollectionEquality().hash(_adminUsers),
       attendanceHistoryAggregate,
@@ -445,8 +483,10 @@ abstract class _Class extends Class {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final Service? service,
-      final bool? serviceGender,
+      final String? serviceId,
       final StudyYear? studyYear,
+      final int? serviceStudyYear,
+      final bool? serviceGender,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers,
@@ -471,9 +511,13 @@ abstract class _Class extends Class {
   @override
   Service? get service;
   @override
-  bool? get serviceGender;
+  String? get serviceId;
   @override
   StudyYear? get studyYear;
+  @override
+  int? get serviceStudyYear;
+  @override
+  bool? get serviceGender;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

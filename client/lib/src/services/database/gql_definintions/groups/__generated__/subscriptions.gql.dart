@@ -651,7 +651,7 @@ const documentNodeSubscriptionwatchGroup = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'Service'),
+                name: NameNode(value: 'ServiceWithStudyYears'),
                 directives: [],
               ),
               FieldNode(
@@ -729,7 +729,7 @@ const documentNodeSubscriptionwatchGroup = DocumentNode(definitions: [
   ),
   fragmentDefinitionGroup,
   fragmentDefinitionGroupNoPhoto,
-  fragmentDefinitionService,
+  fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
@@ -767,7 +767,8 @@ class Subscription_watchGroup_groupsByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
-      service: Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
+      service: Fragment_ServiceWithStudyYears.fromJson(
+          (l$service as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
       validity: l$validity == null ? null : dateRangeFromString(l$validity),
       adminUsers: (l$adminUsers as List<dynamic>)
@@ -787,7 +788,7 @@ class Subscription_watchGroup_groupsByPk
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment_Service service;
+  final Fragment_ServiceWithStudyYears service;
 
   final Json? lastEdit;
 
@@ -934,12 +935,12 @@ abstract class CopyWith_Subscription_watchGroup_groupsByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment_Service? service,
+    Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     DateTimeRange? validity,
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
   });
-  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
   TRes adminUsers(
       Iterable<Subscription_watchGroup_groupsByPk_adminUsers> Function(
               Iterable<
@@ -986,7 +987,7 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         service: service == _undefined || service == null
             ? _instance.service
-            : (service as Fragment_Service),
+            : (service as Fragment_ServiceWithStudyYears),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         validity: validity == _undefined
@@ -997,9 +998,10 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
             : (adminUsers
                 as List<Subscription_watchGroup_groupsByPk_adminUsers>),
       ));
-  CopyWith_Fragment_Service<TRes> get service {
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
-    return CopyWith_Fragment_Service(local$service, (e) => call(service: e));
+    return CopyWith_Fragment_ServiceWithStudyYears(
+        local$service, (e) => call(service: e));
   }
 
   TRes adminUsers(
@@ -1028,14 +1030,14 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment_Service? service,
+    Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     DateTimeRange? validity,
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
   }) =>
       _res;
-  CopyWith_Fragment_Service<TRes> get service =>
-      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
+      CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
   adminUsers(_fn) => _res;
 }
 

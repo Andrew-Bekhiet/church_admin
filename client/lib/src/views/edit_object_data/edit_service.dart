@@ -1,0 +1,123 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:uuid/uuid.dart';
+
+class EditService extends StatefulWidget {
+  static final route = GoRoute(
+    path: 'editService',
+    builder: (context, state) {
+      return EditService(
+        service: (state.extra as Map?)?['service'] as Service?,
+      );
+    },
+  );
+
+  final Service? service;
+
+  const EditService({
+    required this.service,
+    super.key,
+  });
+
+  @override
+  State<EditService> createState() => _EditServiceState();
+}
+
+class _EditServiceState extends State<EditService> {
+  late final EditObjectController<Service> _controller = EditObjectController(
+    onCreate: (object) =>
+        DatabaseService.I.services.insertService(newService: object),
+    onUpdate: (oldService, newService) =>
+        DatabaseService.I.services.updateService(
+      oldService: oldService,
+      newService: newService,
+    ),
+    onDelete: (object) =>
+        DatabaseService.I.services.deleteService(serviceId: object.id),
+    toJson: (object) => object.toJson(),
+    newObject: widget.service ??
+        Service(
+          id: const Uuid().v4(),
+          name: 'خدمة جديدة',
+        ),
+    initialObject: widget.service,
+  );
+
+  Service get initialService => _controller.initialObject!;
+  Service get newService => _controller.newObject;
+  set newService(Service a) => _controller.newObject = a;
+
+  @override
+  Widget build(BuildContext context) {
+    return EditObjectData(
+      objectData: widget.service,
+      getController: () => _controller,
+      objectOnEmptyPhoto: Service(id: '', name: ''),
+      builder: (context, _controller) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          NameField(
+            initialValue: newService.name,
+            onValueChanged: (value) => newService = newService.copyWith(
+              name: value.trim(),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+          ),
+          ObjectSelectionField<Service, Service?>(
+            decoration: const InputDecoration(errorMaxLines: 2),
+            initialValue: newService.nextService,
+            listController: (s) => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.services.streamAll(searchQuery: s),
+            ),
+            labelText: 'الخدمة التالية',
+            onChanged: (value) => newService = newService.copyWith(
+              nextService: value,
+              nextServiceId: value?.id,
+            ),
+            builder: (context, state) {
+              return state.value != null
+                  ? IgnorePointer(
+                      child: ViewableObjectWidget(
+                        state.value!,
+                        dense: true,
+                      ),
+                    )
+                  : null;
+            },
+          ),
+          StudyYearRangeField(
+            label: 'السنوات الدراسية',
+            initialValue: (newService.studyYearFrom, newService.studyYearTo),
+            nullable: true,
+            onChanged: (value) => newService = newService.copyWith(
+              studyYearFrom: value?.$1,
+              studyYearTo: value?.$2,
+              studyYearFromId: value?.$1?.order,
+              studyYearToId: value?.$2?.order,
+            ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (v) {
+              if (v != null) {
+                if (v.$1 == null || v.$2 == null) {
+                  return 'برجاء ادخال السنتين الدراسيتين';
+                } else if (v.$1!.order > v.$2!.order) {
+                  return 'السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية';
+                }
+              }
+              return null;
+            },
+          ),
+          ColorField(
+            initialValue: newService.color,
+            onChanged: (value) => setState(
+              () => newService = newService.copyWith(color: value),
+            ),
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+    );
+  }
+}

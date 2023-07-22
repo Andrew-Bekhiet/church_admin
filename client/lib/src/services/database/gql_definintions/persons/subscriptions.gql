@@ -96,7 +96,7 @@ subscription watchPerson(
     }
     services(limit: $servicesLimit, orderBy: { service: { name: ASC } }) {
       service {
-        ...Service
+        ...ServiceWithStudyYears
 
         attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
           aggregate {

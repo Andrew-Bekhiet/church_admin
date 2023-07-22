@@ -15,9 +15,10 @@ class HomeScreen extends StatefulWidget {
     routes: [
       ViewPerson.route,
       EditPerson.route,
+      ViewArea.route,
       EditArea.route,
       ViewService.route,
-      ViewArea.route,
+      EditService.route,
       ViewUser.route,
       ViewGroup.route,
       ViewClass.route,
@@ -408,6 +409,8 @@ class _HomeFloatingActionButton extends StatelessWidget {
         final newIndex = getNewIndex();
         if (newIndex == 0) {
           context.push('/editPerson');
+        } else if (newIndex == 1) {
+          context.push('/editService');
         } else if (newIndex == 2) {
           context.push('/editArea');
         }

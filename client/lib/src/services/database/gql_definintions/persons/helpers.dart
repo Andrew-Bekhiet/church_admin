@@ -118,7 +118,12 @@ class PersonUpdateHelper {
     );
   }
 
-  bool get _updatePersonsByPk => _personDelta.isNotEmpty;
+  bool get _updatePersonsByPk => _personDelta.keys
+      .where(
+        (k) =>
+            k != 'services' && k != 'groups' && k != 'hobbies' && k != 'tags',
+      )
+      .isNotEmpty;
 
   bool get _insertPersonsGroups => _groupsDiff.added.isNotEmpty;
   bool get _insertPersonsServices => _servicesDiff.added.isNotEmpty;

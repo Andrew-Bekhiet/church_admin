@@ -654,7 +654,7 @@ const documentNodeSubscriptionwatchClass = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'Service'),
+                name: NameNode(value: 'ServiceWithStudyYears'),
                 directives: [],
               ),
               FieldNode(
@@ -761,7 +761,7 @@ const documentNodeSubscriptionwatchClass = DocumentNode(definitions: [
   ),
   fragmentDefinitionClass,
   fragmentDefinitionClassNoPhoto,
-  fragmentDefinitionService,
+  fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
@@ -777,7 +777,7 @@ class Subscription_watchClass_classesByPk
     this.photoUpdatedAt,
     required this.service,
     this.lastEdit,
-    required this.serviceGender,
+    this.serviceGender,
     required this.studyYear,
     required this.adminUsers,
   });
@@ -801,9 +801,10 @@ class Subscription_watchClass_classesByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
-      service: Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
+      service: Fragment_ServiceWithStudyYears.fromJson(
+          (l$service as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
-      serviceGender: (l$serviceGender as bool),
+      serviceGender: (l$serviceGender as bool?),
       studyYear: Subscription_watchClass_classesByPk_studyYear.fromJson(
           (l$studyYear as Map<String, dynamic>)),
       adminUsers: (l$adminUsers as List<dynamic>)
@@ -823,11 +824,11 @@ class Subscription_watchClass_classesByPk
 
   final DateTime? photoUpdatedAt;
 
-  final Fragment_Service service;
+  final Fragment_ServiceWithStudyYears service;
 
   final Json? lastEdit;
 
-  final bool serviceGender;
+  final bool? serviceGender;
 
   final Subscription_watchClass_classesByPk_studyYear studyYear;
 
@@ -980,13 +981,13 @@ abstract class CopyWith_Subscription_watchClass_classesByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment_Service? service,
+    Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     bool? serviceGender,
     Subscription_watchClass_classesByPk_studyYear? studyYear,
     List<Subscription_watchClass_classesByPk_adminUsers>? adminUsers,
   });
-  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
   CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear;
   TRes adminUsers(
       Iterable<Subscription_watchClass_classesByPk_adminUsers> Function(
@@ -1035,12 +1036,12 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         service: service == _undefined || service == null
             ? _instance.service
-            : (service as Fragment_Service),
+            : (service as Fragment_ServiceWithStudyYears),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
-        serviceGender: serviceGender == _undefined || serviceGender == null
+        serviceGender: serviceGender == _undefined
             ? _instance.serviceGender
-            : (serviceGender as bool),
+            : (serviceGender as bool?),
         studyYear: studyYear == _undefined || studyYear == null
             ? _instance.studyYear
             : (studyYear as Subscription_watchClass_classesByPk_studyYear),
@@ -1049,9 +1050,10 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
             : (adminUsers
                 as List<Subscription_watchClass_classesByPk_adminUsers>),
       ));
-  CopyWith_Fragment_Service<TRes> get service {
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
-    return CopyWith_Fragment_Service(local$service, (e) => call(service: e));
+    return CopyWith_Fragment_ServiceWithStudyYears(
+        local$service, (e) => call(service: e));
   }
 
   CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear {
@@ -1086,15 +1088,15 @@ class _CopyWithStubImpl_Subscription_watchClass_classesByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
-    Fragment_Service? service,
+    Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     bool? serviceGender,
     Subscription_watchClass_classesByPk_studyYear? studyYear,
     List<Subscription_watchClass_classesByPk_adminUsers>? adminUsers,
   }) =>
       _res;
-  CopyWith_Fragment_Service<TRes> get service =>
-      CopyWith_Fragment_Service.stub(_res);
+  CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
+      CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
   CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear =>
       CopyWith_Subscription_watchClass_classesByPk_studyYear.stub(_res);
   adminUsers(_fn) => _res;

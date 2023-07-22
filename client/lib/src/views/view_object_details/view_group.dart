@@ -16,6 +16,10 @@ class ViewGroup extends StatefulWidget {
         group: (state.extra as Map?)?['group'] as Group?,
       );
     },
+    routes: [
+      EditGroup.route,
+      EditPerson.route,
+    ],
   );
 
   final Group? group;
@@ -36,8 +40,8 @@ class _ViewGroupState extends State<ViewGroup> {
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
       where: [
         Input_PersonsBoolExp(
-          classes: Input_ClassesBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
+          groups: Input_PersonsGroupsBoolExp(
+            groupId: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
           ),
         ),
       ],
@@ -129,6 +133,21 @@ class _ViewGroupState extends State<ViewGroup> {
           extra: {'group': group},
         ),
         icon: const Icon(Icons.edit),
+      ),
+      floatingActionButtonBuilder: (context, tabController, group) =>
+          FloatingActionButton(
+        onPressed: () {
+          context.push(
+            Uri(
+              path: '/viewGroup/editPerson',
+            ).toString(),
+            extra: {
+              'service': group.service?.copyWith(groups: [group]),
+              'group': group,
+            },
+          );
+        },
+        child: const Icon(Icons.person_add_alt_1),
       ),
     );
   }

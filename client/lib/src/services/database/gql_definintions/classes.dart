@@ -1,7 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 
+import 'classes/__generated__/mutations.gql.dart';
 import 'classes/__generated__/subscriptions.gql.dart';
+import 'helpers.dart';
 
 class ClassesDAO extends DAOBase<Class> {
   const ClassesDAO({
@@ -68,5 +70,64 @@ class ClassesDAO extends DAOBase<Class> {
           ),
         )
         .map((p) => p.parsedData);
+  }
+
+  Future<Class?> deleteClass({
+    required String classId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteClass,
+      variables: Variables_Mutation_deleteClass(
+        classId: classId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Class.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Class> insertClass({
+    required Class newClass,
+  }) {
+    final delta = computeObjectDelta(
+      newClass.toJson(),
+      Class(id: '', name: '').toJson(),
+    )
+      ..remove('id')
+      ..remove('service')
+      ..remove('studyYear');
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertClass,
+        operationName: 'insertClass',
+        variables: {'newClass': delta},
+        parserFn: db.parser.singleParser(Class.fromJson),
+      ),
+    );
+  }
+
+  Future<Class?> updateClass({
+    required Class newClass,
+    required Class oldClass,
+  }) {
+    final delta = computeObjectDelta(
+      newClass.toJson(),
+      oldClass.toJson(),
+    );
+
+    if (delta.isEmpty) return Future.value(newClass);
+
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationupdateClass,
+        operationName: 'updateClass',
+        variables: Variables_Mutation_updateClass(
+          classId: newClass.id.toUuid(),
+          newClass: Input_ClassesSetInput.fromJson(delta),
+        ).toJson(),
+        parserFn: db.parser.singleOrNullParser(Class.fromJson),
+      ),
+    );
   }
 }

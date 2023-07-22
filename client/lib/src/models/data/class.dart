@@ -18,8 +18,10 @@ class Class extends ViewableWithIDAndImage
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     Service? service,
-    bool? serviceGender,
+    String? serviceId,
     StudyYear? studyYear,
+    int? serviceStudyYear,
+    bool? serviceGender,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
     List<User>? adminUsers,

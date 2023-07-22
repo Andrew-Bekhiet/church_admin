@@ -116567,7 +116567,6 @@ class Input_ServicesBoolExp {
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? firestoreId,
-    Input_StudyYearsBoolExp? fromStudyYear,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -116575,14 +116574,15 @@ class Input_ServicesBoolExp {
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_JsonbComparisonExp? lastEdit,
     Input_StringComparisonExp? name,
-    Input_UuidComparisonExp? nextService,
-    Input_ServicesBoolExp? nextServiceObject,
+    Input_ServicesBoolExp? nextService,
+    Input_UuidComparisonExp? nextServiceId,
     Input_PersonsServicesBoolExp? persons,
     Input_PersonsServicesAggregateBoolExp? personsAggregate,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
-    Input_SmallintComparisonExp? studyYearFrom,
-    Input_SmallintComparisonExp? studyYearTo,
-    Input_StudyYearsBoolExp? toStudyYear,
+    Input_StudyYearsBoolExp? studyYearFrom,
+    Input_SmallintComparisonExp? studyYearFromId,
+    Input_StudyYearsBoolExp? studyYearTo,
+    Input_SmallintComparisonExp? studyYearToId,
   }) =>
       Input_ServicesBoolExp._({
         if ($_and != null) r'_and': $_and,
@@ -116603,7 +116603,6 @@ class Input_ServicesBoolExp {
         if (classesAggregate != null) r'classesAggregate': classesAggregate,
         if (color != null) r'color': color,
         if (firestoreId != null) r'firestoreId': firestoreId,
-        if (fromStudyYear != null) r'fromStudyYear': fromStudyYear,
         if (groups != null) r'groups': groups,
         if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
         if (id != null) r'id': id,
@@ -116614,13 +116613,14 @@ class Input_ServicesBoolExp {
         if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (nextService != null) r'nextService': nextService,
-        if (nextServiceObject != null) r'nextServiceObject': nextServiceObject,
+        if (nextServiceId != null) r'nextServiceId': nextServiceId,
         if (persons != null) r'persons': persons,
         if (personsAggregate != null) r'personsAggregate': personsAggregate,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
-        if (toStudyYear != null) r'toStudyYear': toStudyYear,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesBoolExp._(this._$data);
@@ -116721,13 +116721,6 @@ class Input_ServicesBoolExp {
           : Input_StringComparisonExp.fromJson(
               (l$firestoreId as Map<String, dynamic>));
     }
-    if (data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = data['fromStudyYear'];
-      result$data['fromStudyYear'] = l$fromStudyYear == null
-          ? null
-          : Input_StudyYearsBoolExp.fromJson(
-              (l$fromStudyYear as Map<String, dynamic>));
-    }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
       result$data['groups'] = l$groups == null
@@ -116779,15 +116772,15 @@ class Input_ServicesBoolExp {
       final l$nextService = data['nextService'];
       result$data['nextService'] = l$nextService == null
           ? null
-          : Input_UuidComparisonExp.fromJson(
+          : Input_ServicesBoolExp.fromJson(
               (l$nextService as Map<String, dynamic>));
     }
-    if (data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = data['nextServiceObject'];
-      result$data['nextServiceObject'] = l$nextServiceObject == null
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] = l$nextServiceId == null
           ? null
-          : Input_ServicesBoolExp.fromJson(
-              (l$nextServiceObject as Map<String, dynamic>));
+          : Input_UuidComparisonExp.fromJson(
+              (l$nextServiceId as Map<String, dynamic>));
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
@@ -116814,22 +116807,29 @@ class Input_ServicesBoolExp {
       final l$studyYearFrom = data['studyYearFrom'];
       result$data['studyYearFrom'] = l$studyYearFrom == null
           ? null
-          : Input_SmallintComparisonExp.fromJson(
+          : Input_StudyYearsBoolExp.fromJson(
               (l$studyYearFrom as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = l$studyYearFromId == null
+          ? null
+          : Input_SmallintComparisonExp.fromJson(
+              (l$studyYearFromId as Map<String, dynamic>));
     }
     if (data.containsKey('studyYearTo')) {
       final l$studyYearTo = data['studyYearTo'];
       result$data['studyYearTo'] = l$studyYearTo == null
           ? null
-          : Input_SmallintComparisonExp.fromJson(
+          : Input_StudyYearsBoolExp.fromJson(
               (l$studyYearTo as Map<String, dynamic>));
     }
-    if (data.containsKey('toStudyYear')) {
-      final l$toStudyYear = data['toStudyYear'];
-      result$data['toStudyYear'] = l$toStudyYear == null
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = l$studyYearToId == null
           ? null
-          : Input_StudyYearsBoolExp.fromJson(
-              (l$toStudyYear as Map<String, dynamic>));
+          : Input_SmallintComparisonExp.fromJson(
+              (l$studyYearToId as Map<String, dynamic>));
     }
     return Input_ServicesBoolExp._(result$data);
   }
@@ -116867,8 +116867,6 @@ class Input_ServicesBoolExp {
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_StringComparisonExp? get firestoreId =>
       (_$data['firestoreId'] as Input_StringComparisonExp?);
-  Input_StudyYearsBoolExp? get fromStudyYear =>
-      (_$data['fromStudyYear'] as Input_StudyYearsBoolExp?);
   Input_GroupsBoolExp? get groups => (_$data['groups'] as Input_GroupsBoolExp?);
   Input_GroupsAggregateBoolExp? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateBoolExp?);
@@ -116881,22 +116879,24 @@ class Input_ServicesBoolExp {
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
-  Input_UuidComparisonExp? get nextService =>
-      (_$data['nextService'] as Input_UuidComparisonExp?);
-  Input_ServicesBoolExp? get nextServiceObject =>
-      (_$data['nextServiceObject'] as Input_ServicesBoolExp?);
+  Input_ServicesBoolExp? get nextService =>
+      (_$data['nextService'] as Input_ServicesBoolExp?);
+  Input_UuidComparisonExp? get nextServiceId =>
+      (_$data['nextServiceId'] as Input_UuidComparisonExp?);
   Input_PersonsServicesBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsServicesBoolExp?);
   Input_PersonsServicesAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsServicesAggregateBoolExp?);
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
-  Input_SmallintComparisonExp? get studyYearFrom =>
-      (_$data['studyYearFrom'] as Input_SmallintComparisonExp?);
-  Input_SmallintComparisonExp? get studyYearTo =>
-      (_$data['studyYearTo'] as Input_SmallintComparisonExp?);
-  Input_StudyYearsBoolExp? get toStudyYear =>
-      (_$data['toStudyYear'] as Input_StudyYearsBoolExp?);
+  Input_StudyYearsBoolExp? get studyYearFrom =>
+      (_$data['studyYearFrom'] as Input_StudyYearsBoolExp?);
+  Input_SmallintComparisonExp? get studyYearFromId =>
+      (_$data['studyYearFromId'] as Input_SmallintComparisonExp?);
+  Input_StudyYearsBoolExp? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsBoolExp?);
+  Input_SmallintComparisonExp? get studyYearToId =>
+      (_$data['studyYearToId'] as Input_SmallintComparisonExp?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -116955,10 +116955,6 @@ class Input_ServicesBoolExp {
       final l$firestoreId = firestoreId;
       result$data['firestoreId'] = l$firestoreId?.toJson();
     }
-    if (_$data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = fromStudyYear;
-      result$data['fromStudyYear'] = l$fromStudyYear?.toJson();
-    }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
       result$data['groups'] = l$groups?.toJson();
@@ -116991,9 +116987,9 @@ class Input_ServicesBoolExp {
       final l$nextService = nextService;
       result$data['nextService'] = l$nextService?.toJson();
     }
-    if (_$data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = nextServiceObject;
-      result$data['nextServiceObject'] = l$nextServiceObject?.toJson();
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] = l$nextServiceId?.toJson();
     }
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
@@ -117011,13 +117007,17 @@ class Input_ServicesBoolExp {
       final l$studyYearFrom = studyYearFrom;
       result$data['studyYearFrom'] = l$studyYearFrom?.toJson();
     }
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId?.toJson();
+    }
     if (_$data.containsKey('studyYearTo')) {
       final l$studyYearTo = studyYearTo;
       result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
-    if (_$data.containsKey('toStudyYear')) {
-      final l$toStudyYear = toStudyYear;
-      result$data['toStudyYear'] = l$toStudyYear?.toJson();
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId?.toJson();
     }
     return result$data;
   }
@@ -117172,15 +117172,6 @@ class Input_ServicesBoolExp {
     if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
-    final l$fromStudyYear = fromStudyYear;
-    final lOther$fromStudyYear = other.fromStudyYear;
-    if (_$data.containsKey('fromStudyYear') !=
-        other._$data.containsKey('fromStudyYear')) {
-      return false;
-    }
-    if (l$fromStudyYear != lOther$fromStudyYear) {
-      return false;
-    }
     final l$groups = groups;
     final lOther$groups = other.groups;
     if (_$data.containsKey('groups') != other._$data.containsKey('groups')) {
@@ -117250,13 +117241,13 @@ class Input_ServicesBoolExp {
     if (l$nextService != lOther$nextService) {
       return false;
     }
-    final l$nextServiceObject = nextServiceObject;
-    final lOther$nextServiceObject = other.nextServiceObject;
-    if (_$data.containsKey('nextServiceObject') !=
-        other._$data.containsKey('nextServiceObject')) {
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
       return false;
     }
-    if (l$nextServiceObject != lOther$nextServiceObject) {
+    if (l$nextServiceId != lOther$nextServiceId) {
       return false;
     }
     final l$persons = persons;
@@ -117294,6 +117285,15 @@ class Input_ServicesBoolExp {
     if (l$studyYearFrom != lOther$studyYearFrom) {
       return false;
     }
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
+      return false;
+    }
+    if (l$studyYearFromId != lOther$studyYearFromId) {
+      return false;
+    }
     final l$studyYearTo = studyYearTo;
     final lOther$studyYearTo = other.studyYearTo;
     if (_$data.containsKey('studyYearTo') !=
@@ -117303,13 +117303,13 @@ class Input_ServicesBoolExp {
     if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
-    final l$toStudyYear = toStudyYear;
-    final lOther$toStudyYear = other.toStudyYear;
-    if (_$data.containsKey('toStudyYear') !=
-        other._$data.containsKey('toStudyYear')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$toStudyYear != lOther$toStudyYear) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -117331,7 +117331,6 @@ class Input_ServicesBoolExp {
     final l$classesAggregate = classesAggregate;
     final l$color = color;
     final l$firestoreId = firestoreId;
-    final l$fromStudyYear = fromStudyYear;
     final l$groups = groups;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
@@ -117340,13 +117339,14 @@ class Input_ServicesBoolExp {
     final l$lastEdit = lastEdit;
     final l$name = name;
     final l$nextService = nextService;
-    final l$nextServiceObject = nextServiceObject;
+    final l$nextServiceId = nextServiceId;
     final l$persons = persons;
     final l$personsAggregate = personsAggregate;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$studyYearFrom = studyYearFrom;
+    final l$studyYearFromId = studyYearFromId;
     final l$studyYearTo = studyYearTo;
-    final l$toStudyYear = toStudyYear;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -117377,7 +117377,6 @@ class Input_ServicesBoolExp {
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('firestoreId') ? l$firestoreId : const {},
-      _$data.containsKey('fromStudyYear') ? l$fromStudyYear : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('groupsAggregate') ? l$groupsAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -117390,13 +117389,14 @@ class Input_ServicesBoolExp {
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextService') ? l$nextService : const {},
-      _$data.containsKey('nextServiceObject') ? l$nextServiceObject : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
-      _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -117425,7 +117425,6 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? firestoreId,
-    Input_StudyYearsBoolExp? fromStudyYear,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -117433,14 +117432,15 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_JsonbComparisonExp? lastEdit,
     Input_StringComparisonExp? name,
-    Input_UuidComparisonExp? nextService,
-    Input_ServicesBoolExp? nextServiceObject,
+    Input_ServicesBoolExp? nextService,
+    Input_UuidComparisonExp? nextServiceId,
     Input_PersonsServicesBoolExp? persons,
     Input_PersonsServicesAggregateBoolExp? personsAggregate,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
-    Input_SmallintComparisonExp? studyYearFrom,
-    Input_SmallintComparisonExp? studyYearTo,
-    Input_StudyYearsBoolExp? toStudyYear,
+    Input_StudyYearsBoolExp? studyYearFrom,
+    Input_SmallintComparisonExp? studyYearFromId,
+    Input_StudyYearsBoolExp? studyYearTo,
+    Input_SmallintComparisonExp? studyYearToId,
   });
   TRes $_and(
       Iterable<Input_ServicesBoolExp>? Function(
@@ -117464,7 +117464,6 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_StringComparisonExp<TRes> get firestoreId;
-  CopyWith_Input_StudyYearsBoolExp<TRes> get fromStudyYear;
   CopyWith_Input_GroupsBoolExp<TRes> get groups;
   CopyWith_Input_GroupsAggregateBoolExp<TRes> get groupsAggregate;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
@@ -117472,14 +117471,15 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite;
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit;
   CopyWith_Input_StringComparisonExp<TRes> get name;
-  CopyWith_Input_UuidComparisonExp<TRes> get nextService;
-  CopyWith_Input_ServicesBoolExp<TRes> get nextServiceObject;
+  CopyWith_Input_ServicesBoolExp<TRes> get nextService;
+  CopyWith_Input_UuidComparisonExp<TRes> get nextServiceId;
   CopyWith_Input_PersonsServicesBoolExp<TRes> get persons;
   CopyWith_Input_PersonsServicesAggregateBoolExp<TRes> get personsAggregate;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFrom;
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearTo;
-  CopyWith_Input_StudyYearsBoolExp<TRes> get toStudyYear;
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearFrom;
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFromId;
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo;
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearToId;
 }
 
 class _CopyWithImpl_Input_ServicesBoolExp<TRes>
@@ -117509,7 +117509,6 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
     Object? firestoreId = _undefined,
-    Object? fromStudyYear = _undefined,
     Object? groups = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
@@ -117518,13 +117517,14 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
     Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? nextService = _undefined,
-    Object? nextServiceObject = _undefined,
+    Object? nextServiceId = _undefined,
     Object? persons = _undefined,
     Object? personsAggregate = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? studyYearFrom = _undefined,
+    Object? studyYearFromId = _undefined,
     Object? studyYearTo = _undefined,
-    Object? toStudyYear = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesBoolExp._({
         ..._instance._$data,
@@ -117558,8 +117558,6 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (firestoreId != _undefined)
           'firestoreId': (firestoreId as Input_StringComparisonExp?),
-        if (fromStudyYear != _undefined)
-          'fromStudyYear': (fromStudyYear as Input_StudyYearsBoolExp?),
         if (groups != _undefined) 'groups': (groups as Input_GroupsBoolExp?),
         if (groupsAggregate != _undefined)
           'groupsAggregate': (groupsAggregate as Input_GroupsAggregateBoolExp?),
@@ -117574,9 +117572,9 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
           'lastEdit': (lastEdit as Input_JsonbComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (nextService != _undefined)
-          'nextService': (nextService as Input_UuidComparisonExp?),
-        if (nextServiceObject != _undefined)
-          'nextServiceObject': (nextServiceObject as Input_ServicesBoolExp?),
+          'nextService': (nextService as Input_ServicesBoolExp?),
+        if (nextServiceId != _undefined)
+          'nextServiceId': (nextServiceId as Input_UuidComparisonExp?),
         if (persons != _undefined)
           'persons': (persons as Input_PersonsServicesBoolExp?),
         if (personsAggregate != _undefined)
@@ -117585,11 +117583,13 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
         if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as Input_SmallintComparisonExp?),
+          'studyYearFrom': (studyYearFrom as Input_StudyYearsBoolExp?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as Input_SmallintComparisonExp?),
         if (studyYearTo != _undefined)
-          'studyYearTo': (studyYearTo as Input_SmallintComparisonExp?),
-        if (toStudyYear != _undefined)
-          'toStudyYear': (toStudyYear as Input_StudyYearsBoolExp?),
+          'studyYearTo': (studyYearTo as Input_StudyYearsBoolExp?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as Input_SmallintComparisonExp?),
       }));
   TRes $_and(
           Iterable<Input_ServicesBoolExp>? Function(
@@ -117709,14 +117709,6 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
             local$firestoreId, (e) => call(firestoreId: e));
   }
 
-  CopyWith_Input_StudyYearsBoolExp<TRes> get fromStudyYear {
-    final local$fromStudyYear = _instance.fromStudyYear;
-    return local$fromStudyYear == null
-        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsBoolExp(
-            local$fromStudyYear, (e) => call(fromStudyYear: e));
-  }
-
   CopyWith_Input_GroupsBoolExp<TRes> get groups {
     final local$groups = _instance.groups;
     return local$groups == null
@@ -117770,20 +117762,20 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
   }
 
-  CopyWith_Input_UuidComparisonExp<TRes> get nextService {
+  CopyWith_Input_ServicesBoolExp<TRes> get nextService {
     final local$nextService = _instance.nextService;
     return local$nextService == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
+        ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ServicesBoolExp(
             local$nextService, (e) => call(nextService: e));
   }
 
-  CopyWith_Input_ServicesBoolExp<TRes> get nextServiceObject {
-    final local$nextServiceObject = _instance.nextServiceObject;
-    return local$nextServiceObject == null
-        ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ServicesBoolExp(
-            local$nextServiceObject, (e) => call(nextServiceObject: e));
+  CopyWith_Input_UuidComparisonExp<TRes> get nextServiceId {
+    final local$nextServiceId = _instance.nextServiceId;
+    return local$nextServiceId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$nextServiceId, (e) => call(nextServiceId: e));
   }
 
   CopyWith_Input_PersonsServicesBoolExp<TRes> get persons {
@@ -117810,28 +117802,36 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
             local$photoUpdatedAt, (e) => call(photoUpdatedAt: e));
   }
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFrom {
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
     return local$studyYearFrom == null
-        ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_SmallintComparisonExp(
+        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsBoolExp(
             local$studyYearFrom, (e) => call(studyYearFrom: e));
   }
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearTo {
-    final local$studyYearTo = _instance.studyYearTo;
-    return local$studyYearTo == null
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFromId {
+    final local$studyYearFromId = _instance.studyYearFromId;
+    return local$studyYearFromId == null
         ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
         : CopyWith_Input_SmallintComparisonExp(
+            local$studyYearFromId, (e) => call(studyYearFromId: e));
+  }
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsBoolExp(
             local$studyYearTo, (e) => call(studyYearTo: e));
   }
 
-  CopyWith_Input_StudyYearsBoolExp<TRes> get toStudyYear {
-    final local$toStudyYear = _instance.toStudyYear;
-    return local$toStudyYear == null
-        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsBoolExp(
-            local$toStudyYear, (e) => call(toStudyYear: e));
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearToId {
+    final local$studyYearToId = _instance.studyYearToId;
+    return local$studyYearToId == null
+        ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_SmallintComparisonExp(
+            local$studyYearToId, (e) => call(studyYearToId: e));
   }
 }
 
@@ -117856,7 +117856,6 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? firestoreId,
-    Input_StudyYearsBoolExp? fromStudyYear,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -117864,14 +117863,15 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_JsonbComparisonExp? lastEdit,
     Input_StringComparisonExp? name,
-    Input_UuidComparisonExp? nextService,
-    Input_ServicesBoolExp? nextServiceObject,
+    Input_ServicesBoolExp? nextService,
+    Input_UuidComparisonExp? nextServiceId,
     Input_PersonsServicesBoolExp? persons,
     Input_PersonsServicesAggregateBoolExp? personsAggregate,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
-    Input_SmallintComparisonExp? studyYearFrom,
-    Input_SmallintComparisonExp? studyYearTo,
-    Input_StudyYearsBoolExp? toStudyYear,
+    Input_StudyYearsBoolExp? studyYearFrom,
+    Input_SmallintComparisonExp? studyYearFromId,
+    Input_StudyYearsBoolExp? studyYearTo,
+    Input_SmallintComparisonExp? studyYearToId,
   }) =>
       _res;
   $_and(_fn) => _res;
@@ -117903,8 +117903,6 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_StringComparisonExp<TRes> get firestoreId =>
       CopyWith_Input_StringComparisonExp.stub(_res);
-  CopyWith_Input_StudyYearsBoolExp<TRes> get fromStudyYear =>
-      CopyWith_Input_StudyYearsBoolExp.stub(_res);
   CopyWith_Input_GroupsBoolExp<TRes> get groups =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
   CopyWith_Input_GroupsAggregateBoolExp<TRes> get groupsAggregate =>
@@ -117919,34 +117917,36 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
-  CopyWith_Input_UuidComparisonExp<TRes> get nextService =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-  CopyWith_Input_ServicesBoolExp<TRes> get nextServiceObject =>
+  CopyWith_Input_ServicesBoolExp<TRes> get nextService =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+  CopyWith_Input_UuidComparisonExp<TRes> get nextServiceId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
   CopyWith_Input_PersonsServicesBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
   CopyWith_Input_PersonsServicesAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsServicesAggregateBoolExp.stub(_res);
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFrom =>
-      CopyWith_Input_SmallintComparisonExp.stub(_res);
-  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearTo =>
-      CopyWith_Input_SmallintComparisonExp.stub(_res);
-  CopyWith_Input_StudyYearsBoolExp<TRes> get toStudyYear =>
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearFrom =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFromId =>
+      CopyWith_Input_SmallintComparisonExp.stub(_res);
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo =>
+      CopyWith_Input_StudyYearsBoolExp.stub(_res);
+  CopyWith_Input_SmallintComparisonExp<TRes> get studyYearToId =>
+      CopyWith_Input_SmallintComparisonExp.stub(_res);
 }
 
 class Input_ServicesIncInput {
   factory Input_ServicesIncInput({
     int? color,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       Input_ServicesIncInput._({
         if (color != null) r'color': color,
-        if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
-        if (studyYearTo != null) r'studyYearTo': studyYearTo,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesIncInput._(this._$data);
@@ -117957,13 +117957,13 @@ class Input_ServicesIncInput {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
     }
-    if (data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = data['studyYearFrom'];
-      result$data['studyYearFrom'] = (l$studyYearFrom as int?);
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
     }
-    if (data.containsKey('studyYearTo')) {
-      final l$studyYearTo = data['studyYearTo'];
-      result$data['studyYearTo'] = (l$studyYearTo as int?);
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
     }
     return Input_ServicesIncInput._(result$data);
   }
@@ -117971,21 +117971,21 @@ class Input_ServicesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
-  int? get studyYearFrom => (_$data['studyYearFrom'] as int?);
-  int? get studyYearTo => (_$data['studyYearTo'] as int?);
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
     }
-    if (_$data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = studyYearFrom;
-      result$data['studyYearFrom'] = l$studyYearFrom;
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
     }
-    if (_$data.containsKey('studyYearTo')) {
-      final l$studyYearTo = studyYearTo;
-      result$data['studyYearTo'] = l$studyYearTo;
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
     }
     return result$data;
   }
@@ -118012,22 +118012,22 @@ class Input_ServicesIncInput {
     if (l$color != lOther$color) {
       return false;
     }
-    final l$studyYearFrom = studyYearFrom;
-    final lOther$studyYearFrom = other.studyYearFrom;
-    if (_$data.containsKey('studyYearFrom') !=
-        other._$data.containsKey('studyYearFrom')) {
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
       return false;
     }
-    if (l$studyYearFrom != lOther$studyYearFrom) {
+    if (l$studyYearFromId != lOther$studyYearFromId) {
       return false;
     }
-    final l$studyYearTo = studyYearTo;
-    final lOther$studyYearTo = other.studyYearTo;
-    if (_$data.containsKey('studyYearTo') !=
-        other._$data.containsKey('studyYearTo')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$studyYearTo != lOther$studyYearTo) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -118036,12 +118036,12 @@ class Input_ServicesIncInput {
   @override
   int get hashCode {
     final l$color = color;
-    final l$studyYearFrom = studyYearFrom;
-    final l$studyYearTo = studyYearTo;
+    final l$studyYearFromId = studyYearFromId;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
-      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -118057,8 +118057,8 @@ abstract class CopyWith_Input_ServicesIncInput<TRes> {
 
   TRes call({
     int? color,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   });
 }
 
@@ -118077,15 +118077,16 @@ class _CopyWithImpl_Input_ServicesIncInput<TRes>
 
   TRes call({
     Object? color = _undefined,
-    Object? studyYearFrom = _undefined,
-    Object? studyYearTo = _undefined,
+    Object? studyYearFromId = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesIncInput._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as int?),
-        if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as int?),
-        if (studyYearTo != _undefined) 'studyYearTo': (studyYearTo as int?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as int?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as int?),
       }));
 }
 
@@ -118097,8 +118098,8 @@ class _CopyWithStubImpl_Input_ServicesIncInput<TRes>
 
   call({
     int? color,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       _res;
 }
@@ -118112,17 +118113,17 @@ class Input_ServicesInsertInput {
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     String? firestoreId,
-    Input_StudyYearsObjRelInsertInput? fromStudyYear,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
-    Input_ServicesObjRelInsertInput? nextServiceObject,
+    Input_ServicesObjRelInsertInput? nextService,
+    UuidValue? nextServiceId,
     Input_PersonsServicesArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
-    Input_StudyYearsObjRelInsertInput? toStudyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearFrom,
+    int? studyYearFromId,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
+    int? studyYearToId,
   }) =>
       Input_ServicesInsertInput._({
         if (adminUsers != null) r'adminUsers': adminUsers,
@@ -118132,17 +118133,17 @@ class Input_ServicesInsertInput {
         if (classes != null) r'classes': classes,
         if (color != null) r'color': color,
         if (firestoreId != null) r'firestoreId': firestoreId,
-        if (fromStudyYear != null) r'fromStudyYear': fromStudyYear,
         if (groups != null) r'groups': groups,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (nextService != null) r'nextService': nextService,
-        if (nextServiceObject != null) r'nextServiceObject': nextServiceObject,
+        if (nextServiceId != null) r'nextServiceId': nextServiceId,
         if (persons != null) r'persons': persons,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
-        if (toStudyYear != null) r'toStudyYear': toStudyYear,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesInsertInput._(this._$data);
@@ -118186,13 +118187,6 @@ class Input_ServicesInsertInput {
       final l$firestoreId = data['firestoreId'];
       result$data['firestoreId'] = (l$firestoreId as String?);
     }
-    if (data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = data['fromStudyYear'];
-      result$data['fromStudyYear'] = l$fromStudyYear == null
-          ? null
-          : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$fromStudyYear as Map<String, dynamic>));
-    }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
       result$data['groups'] = l$groups == null
@@ -118210,15 +118204,15 @@ class Input_ServicesInsertInput {
     }
     if (data.containsKey('nextService')) {
       final l$nextService = data['nextService'];
-      result$data['nextService'] =
-          l$nextService == null ? null : stringToUuid(l$nextService);
-    }
-    if (data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = data['nextServiceObject'];
-      result$data['nextServiceObject'] = l$nextServiceObject == null
+      result$data['nextService'] = l$nextService == null
           ? null
           : Input_ServicesObjRelInsertInput.fromJson(
-              (l$nextServiceObject as Map<String, dynamic>));
+              (l$nextService as Map<String, dynamic>));
+    }
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : stringToUuid(l$nextServiceId);
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
@@ -118234,18 +118228,25 @@ class Input_ServicesInsertInput {
     }
     if (data.containsKey('studyYearFrom')) {
       final l$studyYearFrom = data['studyYearFrom'];
-      result$data['studyYearFrom'] = (l$studyYearFrom as int?);
+      result$data['studyYearFrom'] = l$studyYearFrom == null
+          ? null
+          : Input_StudyYearsObjRelInsertInput.fromJson(
+              (l$studyYearFrom as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
     }
     if (data.containsKey('studyYearTo')) {
       final l$studyYearTo = data['studyYearTo'];
-      result$data['studyYearTo'] = (l$studyYearTo as int?);
-    }
-    if (data.containsKey('toStudyYear')) {
-      final l$toStudyYear = data['toStudyYear'];
-      result$data['toStudyYear'] = l$toStudyYear == null
+      result$data['studyYearTo'] = l$studyYearTo == null
           ? null
           : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$toStudyYear as Map<String, dynamic>));
+              (l$studyYearTo as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
     }
     return Input_ServicesInsertInput._(result$data);
   }
@@ -118264,22 +118265,22 @@ class Input_ServicesInsertInput {
       (_$data['classes'] as Input_ClassesArrRelInsertInput?);
   int? get color => (_$data['color'] as int?);
   String? get firestoreId => (_$data['firestoreId'] as String?);
-  Input_StudyYearsObjRelInsertInput? get fromStudyYear =>
-      (_$data['fromStudyYear'] as Input_StudyYearsObjRelInsertInput?);
   Input_GroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_GroupsArrRelInsertInput?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
-  UuidValue? get nextService => (_$data['nextService'] as UuidValue?);
-  Input_ServicesObjRelInsertInput? get nextServiceObject =>
-      (_$data['nextServiceObject'] as Input_ServicesObjRelInsertInput?);
+  Input_ServicesObjRelInsertInput? get nextService =>
+      (_$data['nextService'] as Input_ServicesObjRelInsertInput?);
+  UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
   Input_PersonsServicesArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsServicesArrRelInsertInput?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-  int? get studyYearFrom => (_$data['studyYearFrom'] as int?);
-  int? get studyYearTo => (_$data['studyYearTo'] as int?);
-  Input_StudyYearsObjRelInsertInput? get toStudyYear =>
-      (_$data['toStudyYear'] as Input_StudyYearsObjRelInsertInput?);
+  Input_StudyYearsObjRelInsertInput? get studyYearFrom =>
+      (_$data['studyYearFrom'] as Input_StudyYearsObjRelInsertInput?);
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+  Input_StudyYearsObjRelInsertInput? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsObjRelInsertInput?);
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsers')) {
@@ -118307,10 +118308,6 @@ class Input_ServicesInsertInput {
       final l$firestoreId = firestoreId;
       result$data['firestoreId'] = l$firestoreId;
     }
-    if (_$data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = fromStudyYear;
-      result$data['fromStudyYear'] = l$fromStudyYear?.toJson();
-    }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
       result$data['groups'] = l$groups?.toJson();
@@ -118325,12 +118322,12 @@ class Input_ServicesInsertInput {
     }
     if (_$data.containsKey('nextService')) {
       final l$nextService = nextService;
-      result$data['nextService'] =
-          l$nextService == null ? null : uuidToString(l$nextService);
+      result$data['nextService'] = l$nextService?.toJson();
     }
-    if (_$data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = nextServiceObject;
-      result$data['nextServiceObject'] = l$nextServiceObject?.toJson();
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : uuidToString(l$nextServiceId);
     }
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
@@ -118343,15 +118340,19 @@ class Input_ServicesInsertInput {
     }
     if (_$data.containsKey('studyYearFrom')) {
       final l$studyYearFrom = studyYearFrom;
-      result$data['studyYearFrom'] = l$studyYearFrom;
+      result$data['studyYearFrom'] = l$studyYearFrom?.toJson();
+    }
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
     }
     if (_$data.containsKey('studyYearTo')) {
       final l$studyYearTo = studyYearTo;
-      result$data['studyYearTo'] = l$studyYearTo;
+      result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
-    if (_$data.containsKey('toStudyYear')) {
-      final l$toStudyYear = toStudyYear;
-      result$data['toStudyYear'] = l$toStudyYear?.toJson();
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
     }
     return result$data;
   }
@@ -118422,15 +118423,6 @@ class Input_ServicesInsertInput {
     if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
-    final l$fromStudyYear = fromStudyYear;
-    final lOther$fromStudyYear = other.fromStudyYear;
-    if (_$data.containsKey('fromStudyYear') !=
-        other._$data.containsKey('fromStudyYear')) {
-      return false;
-    }
-    if (l$fromStudyYear != lOther$fromStudyYear) {
-      return false;
-    }
     final l$groups = groups;
     final lOther$groups = other.groups;
     if (_$data.containsKey('groups') != other._$data.containsKey('groups')) {
@@ -118464,13 +118456,13 @@ class Input_ServicesInsertInput {
     if (l$nextService != lOther$nextService) {
       return false;
     }
-    final l$nextServiceObject = nextServiceObject;
-    final lOther$nextServiceObject = other.nextServiceObject;
-    if (_$data.containsKey('nextServiceObject') !=
-        other._$data.containsKey('nextServiceObject')) {
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
       return false;
     }
-    if (l$nextServiceObject != lOther$nextServiceObject) {
+    if (l$nextServiceId != lOther$nextServiceId) {
       return false;
     }
     final l$persons = persons;
@@ -118499,6 +118491,15 @@ class Input_ServicesInsertInput {
     if (l$studyYearFrom != lOther$studyYearFrom) {
       return false;
     }
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
+      return false;
+    }
+    if (l$studyYearFromId != lOther$studyYearFromId) {
+      return false;
+    }
     final l$studyYearTo = studyYearTo;
     final lOther$studyYearTo = other.studyYearTo;
     if (_$data.containsKey('studyYearTo') !=
@@ -118508,13 +118509,13 @@ class Input_ServicesInsertInput {
     if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
-    final l$toStudyYear = toStudyYear;
-    final lOther$toStudyYear = other.toStudyYear;
-    if (_$data.containsKey('toStudyYear') !=
-        other._$data.containsKey('toStudyYear')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$toStudyYear != lOther$toStudyYear) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -118528,17 +118529,17 @@ class Input_ServicesInsertInput {
     final l$classes = classes;
     final l$color = color;
     final l$firestoreId = firestoreId;
-    final l$fromStudyYear = fromStudyYear;
     final l$groups = groups;
     final l$id = id;
     final l$name = name;
     final l$nextService = nextService;
-    final l$nextServiceObject = nextServiceObject;
+    final l$nextServiceId = nextServiceId;
     final l$persons = persons;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$studyYearFrom = studyYearFrom;
+    final l$studyYearFromId = studyYearFromId;
     final l$studyYearTo = studyYearTo;
-    final l$toStudyYear = toStudyYear;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('attendanceDaysConstraints')
@@ -118548,17 +118549,17 @@ class Input_ServicesInsertInput {
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('firestoreId') ? l$firestoreId : const {},
-      _$data.containsKey('fromStudyYear') ? l$fromStudyYear : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextService') ? l$nextService : const {},
-      _$data.containsKey('nextServiceObject') ? l$nextServiceObject : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
-      _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -118580,17 +118581,17 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     String? firestoreId,
-    Input_StudyYearsObjRelInsertInput? fromStudyYear,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
-    Input_ServicesObjRelInsertInput? nextServiceObject,
+    Input_ServicesObjRelInsertInput? nextService,
+    UuidValue? nextServiceId,
     Input_PersonsServicesArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
-    Input_StudyYearsObjRelInsertInput? toStudyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearFrom,
+    int? studyYearFromId,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
+    int? studyYearToId,
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
@@ -118598,11 +118599,11 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory;
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes;
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get fromStudyYear;
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups;
-  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextServiceObject;
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextService;
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get persons;
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get toStudyYear;
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearFrom;
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Input_ServicesInsertInput<TRes>
@@ -118625,17 +118626,17 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
     Object? classes = _undefined,
     Object? color = _undefined,
     Object? firestoreId = _undefined,
-    Object? fromStudyYear = _undefined,
     Object? groups = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? nextService = _undefined,
-    Object? nextServiceObject = _undefined,
+    Object? nextServiceId = _undefined,
     Object? persons = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? studyYearFrom = _undefined,
+    Object? studyYearFromId = _undefined,
     Object? studyYearTo = _undefined,
-    Object? toStudyYear = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesInsertInput._({
         ..._instance._$data,
@@ -118652,27 +118653,27 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
           'classes': (classes as Input_ClassesArrRelInsertInput?),
         if (color != _undefined) 'color': (color as int?),
         if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
-        if (fromStudyYear != _undefined)
-          'fromStudyYear':
-              (fromStudyYear as Input_StudyYearsObjRelInsertInput?),
         if (groups != _undefined)
           'groups': (groups as Input_GroupsArrRelInsertInput?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (nextService != _undefined)
-          'nextService': (nextService as UuidValue?),
-        if (nextServiceObject != _undefined)
-          'nextServiceObject':
-              (nextServiceObject as Input_ServicesObjRelInsertInput?),
+          'nextService': (nextService as Input_ServicesObjRelInsertInput?),
+        if (nextServiceId != _undefined)
+          'nextServiceId': (nextServiceId as UuidValue?),
         if (persons != _undefined)
           'persons': (persons as Input_PersonsServicesArrRelInsertInput?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
         if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as int?),
-        if (studyYearTo != _undefined) 'studyYearTo': (studyYearTo as int?),
-        if (toStudyYear != _undefined)
-          'toStudyYear': (toStudyYear as Input_StudyYearsObjRelInsertInput?),
+          'studyYearFrom':
+              (studyYearFrom as Input_StudyYearsObjRelInsertInput?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as int?),
+        if (studyYearTo != _undefined)
+          'studyYearTo': (studyYearTo as Input_StudyYearsObjRelInsertInput?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as int?),
       }));
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
@@ -118712,14 +118713,6 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
             local$classes, (e) => call(classes: e));
   }
 
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get fromStudyYear {
-    final local$fromStudyYear = _instance.fromStudyYear;
-    return local$fromStudyYear == null
-        ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsObjRelInsertInput(
-            local$fromStudyYear, (e) => call(fromStudyYear: e));
-  }
-
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups {
     final local$groups = _instance.groups;
     return local$groups == null
@@ -118728,12 +118721,12 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
             local$groups, (e) => call(groups: e));
   }
 
-  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextServiceObject {
-    final local$nextServiceObject = _instance.nextServiceObject;
-    return local$nextServiceObject == null
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextService {
+    final local$nextService = _instance.nextService;
+    return local$nextService == null
         ? CopyWith_Input_ServicesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ServicesObjRelInsertInput(
-            local$nextServiceObject, (e) => call(nextServiceObject: e));
+            local$nextService, (e) => call(nextService: e));
   }
 
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get persons {
@@ -118744,12 +118737,20 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
             local$persons, (e) => call(persons: e));
   }
 
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get toStudyYear {
-    final local$toStudyYear = _instance.toStudyYear;
-    return local$toStudyYear == null
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearFrom {
+    final local$studyYearFrom = _instance.studyYearFrom;
+    return local$studyYearFrom == null
         ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_StudyYearsObjRelInsertInput(
-            local$toStudyYear, (e) => call(toStudyYear: e));
+            local$studyYearFrom, (e) => call(studyYearFrom: e));
+  }
+
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsObjRelInsertInput(
+            local$studyYearTo, (e) => call(studyYearTo: e));
   }
 }
 
@@ -118767,17 +118768,17 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     String? firestoreId,
-    Input_StudyYearsObjRelInsertInput? fromStudyYear,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
-    Input_ServicesObjRelInsertInput? nextServiceObject,
+    Input_ServicesObjRelInsertInput? nextService,
+    UuidValue? nextServiceId,
     Input_PersonsServicesArrRelInsertInput? persons,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
-    Input_StudyYearsObjRelInsertInput? toStudyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearFrom,
+    int? studyYearFromId,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
+    int? studyYearToId,
   }) =>
       _res;
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
@@ -118791,15 +118792,15 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
       CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get fromStudyYear =>
-      CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups =>
       CopyWith_Input_GroupsArrRelInsertInput.stub(_res);
-  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextServiceObject =>
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextService =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsServicesArrRelInsertInput.stub(_res);
-  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get toStudyYear =>
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearFrom =>
+      CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
 }
 
@@ -119164,20 +119165,20 @@ class Input_ServicesOrderBy {
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? firestoreId,
-    Input_StudyYearsOrderBy? fromStudyYear,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Enum_OrderBy? lastEdit,
     Enum_OrderBy? name,
-    Enum_OrderBy? nextService,
-    Input_ServicesOrderBy? nextServiceObject,
+    Input_ServicesOrderBy? nextService,
+    Enum_OrderBy? nextServiceId,
     Input_PersonsServicesAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? studyYearFrom,
-    Enum_OrderBy? studyYearTo,
-    Input_StudyYearsOrderBy? toStudyYear,
+    Input_StudyYearsOrderBy? studyYearFrom,
+    Enum_OrderBy? studyYearFromId,
+    Input_StudyYearsOrderBy? studyYearTo,
+    Enum_OrderBy? studyYearToId,
   }) =>
       Input_ServicesOrderBy._({
         if (adminUsersAggregate != null)
@@ -119190,7 +119191,6 @@ class Input_ServicesOrderBy {
         if (classesAggregate != null) r'classesAggregate': classesAggregate,
         if (color != null) r'color': color,
         if (firestoreId != null) r'firestoreId': firestoreId,
-        if (fromStudyYear != null) r'fromStudyYear': fromStudyYear,
         if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -119200,12 +119200,13 @@ class Input_ServicesOrderBy {
         if (lastEdit != null) r'lastEdit': lastEdit,
         if (name != null) r'name': name,
         if (nextService != null) r'nextService': nextService,
-        if (nextServiceObject != null) r'nextServiceObject': nextServiceObject,
+        if (nextServiceId != null) r'nextServiceId': nextServiceId,
         if (personsAggregate != null) r'personsAggregate': personsAggregate,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
         if (studyYearTo != null) r'studyYearTo': studyYearTo,
-        if (toStudyYear != null) r'toStudyYear': toStudyYear,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesOrderBy._(this._$data);
@@ -119255,13 +119256,6 @@ class Input_ServicesOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
-    if (data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = data['fromStudyYear'];
-      result$data['fromStudyYear'] = l$fromStudyYear == null
-          ? null
-          : Input_StudyYearsOrderBy.fromJson(
-              (l$fromStudyYear as Map<String, dynamic>));
-    }
     if (data.containsKey('groupsAggregate')) {
       final l$groupsAggregate = data['groupsAggregate'];
       result$data['groupsAggregate'] = l$groupsAggregate == null
@@ -119301,14 +119295,14 @@ class Input_ServicesOrderBy {
       final l$nextService = data['nextService'];
       result$data['nextService'] = l$nextService == null
           ? null
-          : fromJson_Enum_OrderBy((l$nextService as String));
-    }
-    if (data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = data['nextServiceObject'];
-      result$data['nextServiceObject'] = l$nextServiceObject == null
-          ? null
           : Input_ServicesOrderBy.fromJson(
-              (l$nextServiceObject as Map<String, dynamic>));
+              (l$nextService as Map<String, dynamic>));
+    }
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] = l$nextServiceId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nextServiceId as String));
     }
     if (data.containsKey('personsAggregate')) {
       final l$personsAggregate = data['personsAggregate'];
@@ -119327,20 +119321,27 @@ class Input_ServicesOrderBy {
       final l$studyYearFrom = data['studyYearFrom'];
       result$data['studyYearFrom'] = l$studyYearFrom == null
           ? null
-          : fromJson_Enum_OrderBy((l$studyYearFrom as String));
+          : Input_StudyYearsOrderBy.fromJson(
+              (l$studyYearFrom as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = l$studyYearFromId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$studyYearFromId as String));
     }
     if (data.containsKey('studyYearTo')) {
       final l$studyYearTo = data['studyYearTo'];
       result$data['studyYearTo'] = l$studyYearTo == null
           ? null
-          : fromJson_Enum_OrderBy((l$studyYearTo as String));
-    }
-    if (data.containsKey('toStudyYear')) {
-      final l$toStudyYear = data['toStudyYear'];
-      result$data['toStudyYear'] = l$toStudyYear == null
-          ? null
           : Input_StudyYearsOrderBy.fromJson(
-              (l$toStudyYear as Map<String, dynamic>));
+              (l$studyYearTo as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = l$studyYearToId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$studyYearToId as String));
     }
     return Input_ServicesOrderBy._(result$data);
   }
@@ -119361,8 +119362,6 @@ class Input_ServicesOrderBy {
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
-  Input_StudyYearsOrderBy? get fromStudyYear =>
-      (_$data['fromStudyYear'] as Input_StudyYearsOrderBy?);
   Input_GroupsAggregateOrderBy? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateOrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
@@ -119372,17 +119371,20 @@ class Input_ServicesOrderBy {
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-  Enum_OrderBy? get nextService => (_$data['nextService'] as Enum_OrderBy?);
-  Input_ServicesOrderBy? get nextServiceObject =>
-      (_$data['nextServiceObject'] as Input_ServicesOrderBy?);
+  Input_ServicesOrderBy? get nextService =>
+      (_$data['nextService'] as Input_ServicesOrderBy?);
+  Enum_OrderBy? get nextServiceId => (_$data['nextServiceId'] as Enum_OrderBy?);
   Input_PersonsServicesAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsServicesAggregateOrderBy?);
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
-  Enum_OrderBy? get studyYearFrom => (_$data['studyYearFrom'] as Enum_OrderBy?);
-  Enum_OrderBy? get studyYearTo => (_$data['studyYearTo'] as Enum_OrderBy?);
-  Input_StudyYearsOrderBy? get toStudyYear =>
-      (_$data['toStudyYear'] as Input_StudyYearsOrderBy?);
+  Input_StudyYearsOrderBy? get studyYearFrom =>
+      (_$data['studyYearFrom'] as Input_StudyYearsOrderBy?);
+  Enum_OrderBy? get studyYearFromId =>
+      (_$data['studyYearFromId'] as Enum_OrderBy?);
+  Input_StudyYearsOrderBy? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsOrderBy?);
+  Enum_OrderBy? get studyYearToId => (_$data['studyYearToId'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsersAggregate')) {
@@ -119413,10 +119415,6 @@ class Input_ServicesOrderBy {
       final l$firestoreId = firestoreId;
       result$data['firestoreId'] =
           l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
-    }
-    if (_$data.containsKey('fromStudyYear')) {
-      final l$fromStudyYear = fromStudyYear;
-      result$data['fromStudyYear'] = l$fromStudyYear?.toJson();
     }
     if (_$data.containsKey('groupsAggregate')) {
       final l$groupsAggregate = groupsAggregate;
@@ -119449,12 +119447,12 @@ class Input_ServicesOrderBy {
     }
     if (_$data.containsKey('nextService')) {
       final l$nextService = nextService;
-      result$data['nextService'] =
-          l$nextService == null ? null : toJson_Enum_OrderBy(l$nextService);
+      result$data['nextService'] = l$nextService?.toJson();
     }
-    if (_$data.containsKey('nextServiceObject')) {
-      final l$nextServiceObject = nextServiceObject;
-      result$data['nextServiceObject'] = l$nextServiceObject?.toJson();
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : toJson_Enum_OrderBy(l$nextServiceId);
     }
     if (_$data.containsKey('personsAggregate')) {
       final l$personsAggregate = personsAggregate;
@@ -119468,17 +119466,22 @@ class Input_ServicesOrderBy {
     }
     if (_$data.containsKey('studyYearFrom')) {
       final l$studyYearFrom = studyYearFrom;
-      result$data['studyYearFrom'] =
-          l$studyYearFrom == null ? null : toJson_Enum_OrderBy(l$studyYearFrom);
+      result$data['studyYearFrom'] = l$studyYearFrom?.toJson();
+    }
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearFromId);
     }
     if (_$data.containsKey('studyYearTo')) {
       final l$studyYearTo = studyYearTo;
-      result$data['studyYearTo'] =
-          l$studyYearTo == null ? null : toJson_Enum_OrderBy(l$studyYearTo);
+      result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
-    if (_$data.containsKey('toStudyYear')) {
-      final l$toStudyYear = toStudyYear;
-      result$data['toStudyYear'] = l$toStudyYear?.toJson();
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] =
+          l$studyYearToId == null ? null : toJson_Enum_OrderBy(l$studyYearToId);
     }
     return result$data;
   }
@@ -119552,15 +119555,6 @@ class Input_ServicesOrderBy {
     if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
-    final l$fromStudyYear = fromStudyYear;
-    final lOther$fromStudyYear = other.fromStudyYear;
-    if (_$data.containsKey('fromStudyYear') !=
-        other._$data.containsKey('fromStudyYear')) {
-      return false;
-    }
-    if (l$fromStudyYear != lOther$fromStudyYear) {
-      return false;
-    }
     final l$groupsAggregate = groupsAggregate;
     final lOther$groupsAggregate = other.groupsAggregate;
     if (_$data.containsKey('groupsAggregate') !=
@@ -119622,13 +119616,13 @@ class Input_ServicesOrderBy {
     if (l$nextService != lOther$nextService) {
       return false;
     }
-    final l$nextServiceObject = nextServiceObject;
-    final lOther$nextServiceObject = other.nextServiceObject;
-    if (_$data.containsKey('nextServiceObject') !=
-        other._$data.containsKey('nextServiceObject')) {
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
       return false;
     }
-    if (l$nextServiceObject != lOther$nextServiceObject) {
+    if (l$nextServiceId != lOther$nextServiceId) {
       return false;
     }
     final l$personsAggregate = personsAggregate;
@@ -119658,6 +119652,15 @@ class Input_ServicesOrderBy {
     if (l$studyYearFrom != lOther$studyYearFrom) {
       return false;
     }
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
+      return false;
+    }
+    if (l$studyYearFromId != lOther$studyYearFromId) {
+      return false;
+    }
     final l$studyYearTo = studyYearTo;
     final lOther$studyYearTo = other.studyYearTo;
     if (_$data.containsKey('studyYearTo') !=
@@ -119667,13 +119670,13 @@ class Input_ServicesOrderBy {
     if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
-    final l$toStudyYear = toStudyYear;
-    final lOther$toStudyYear = other.toStudyYear;
-    if (_$data.containsKey('toStudyYear') !=
-        other._$data.containsKey('toStudyYear')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$toStudyYear != lOther$toStudyYear) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -119688,7 +119691,6 @@ class Input_ServicesOrderBy {
     final l$classesAggregate = classesAggregate;
     final l$color = color;
     final l$firestoreId = firestoreId;
-    final l$fromStudyYear = fromStudyYear;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -119696,12 +119698,13 @@ class Input_ServicesOrderBy {
     final l$lastEdit = lastEdit;
     final l$name = name;
     final l$nextService = nextService;
-    final l$nextServiceObject = nextServiceObject;
+    final l$nextServiceId = nextServiceId;
     final l$personsAggregate = personsAggregate;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$studyYearFrom = studyYearFrom;
+    final l$studyYearFromId = studyYearFromId;
     final l$studyYearTo = studyYearTo;
-    final l$toStudyYear = toStudyYear;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('adminUsersAggregate')
           ? l$adminUsersAggregate
@@ -119715,7 +119718,6 @@ class Input_ServicesOrderBy {
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('firestoreId') ? l$firestoreId : const {},
-      _$data.containsKey('fromStudyYear') ? l$fromStudyYear : const {},
       _$data.containsKey('groupsAggregate') ? l$groupsAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -119727,12 +119729,13 @@ class Input_ServicesOrderBy {
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextService') ? l$nextService : const {},
-      _$data.containsKey('nextServiceObject') ? l$nextServiceObject : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
       _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
-      _$data.containsKey('toStudyYear') ? l$toStudyYear : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -119754,20 +119757,20 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? firestoreId,
-    Input_StudyYearsOrderBy? fromStudyYear,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Enum_OrderBy? lastEdit,
     Enum_OrderBy? name,
-    Enum_OrderBy? nextService,
-    Input_ServicesOrderBy? nextServiceObject,
+    Input_ServicesOrderBy? nextService,
+    Enum_OrderBy? nextServiceId,
     Input_PersonsServicesAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? studyYearFrom,
-    Enum_OrderBy? studyYearTo,
-    Input_StudyYearsOrderBy? toStudyYear,
+    Input_StudyYearsOrderBy? studyYearFrom,
+    Enum_OrderBy? studyYearFromId,
+    Input_StudyYearsOrderBy? studyYearTo,
+    Enum_OrderBy? studyYearToId,
   });
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
@@ -119775,11 +119778,11 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate;
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate;
-  CopyWith_Input_StudyYearsOrderBy<TRes> get fromStudyYear;
   CopyWith_Input_GroupsAggregateOrderBy<TRes> get groupsAggregate;
-  CopyWith_Input_ServicesOrderBy<TRes> get nextServiceObject;
+  CopyWith_Input_ServicesOrderBy<TRes> get nextService;
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get personsAggregate;
-  CopyWith_Input_StudyYearsOrderBy<TRes> get toStudyYear;
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearFrom;
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Input_ServicesOrderBy<TRes>
@@ -119802,7 +119805,6 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
     Object? firestoreId = _undefined,
-    Object? fromStudyYear = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -119810,12 +119812,13 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
     Object? lastEdit = _undefined,
     Object? name = _undefined,
     Object? nextService = _undefined,
-    Object? nextServiceObject = _undefined,
+    Object? nextServiceId = _undefined,
     Object? personsAggregate = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? studyYearFrom = _undefined,
+    Object? studyYearFromId = _undefined,
     Object? studyYearTo = _undefined,
-    Object? toStudyYear = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesOrderBy._({
         ..._instance._$data,
@@ -119835,8 +119838,6 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (firestoreId != _undefined)
           'firestoreId': (firestoreId as Enum_OrderBy?),
-        if (fromStudyYear != _undefined)
-          'fromStudyYear': (fromStudyYear as Input_StudyYearsOrderBy?),
         if (groupsAggregate != _undefined)
           'groupsAggregate': (groupsAggregate as Input_GroupsAggregateOrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -119847,20 +119848,22 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         if (lastEdit != _undefined) 'lastEdit': (lastEdit as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (nextService != _undefined)
-          'nextService': (nextService as Enum_OrderBy?),
-        if (nextServiceObject != _undefined)
-          'nextServiceObject': (nextServiceObject as Input_ServicesOrderBy?),
+          'nextService': (nextService as Input_ServicesOrderBy?),
+        if (nextServiceId != _undefined)
+          'nextServiceId': (nextServiceId as Enum_OrderBy?),
         if (personsAggregate != _undefined)
           'personsAggregate':
               (personsAggregate as Input_PersonsServicesAggregateOrderBy?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
         if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as Enum_OrderBy?),
+          'studyYearFrom': (studyYearFrom as Input_StudyYearsOrderBy?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as Enum_OrderBy?),
         if (studyYearTo != _undefined)
-          'studyYearTo': (studyYearTo as Enum_OrderBy?),
-        if (toStudyYear != _undefined)
-          'toStudyYear': (toStudyYear as Input_StudyYearsOrderBy?),
+          'studyYearTo': (studyYearTo as Input_StudyYearsOrderBy?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as Enum_OrderBy?),
       }));
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate {
@@ -119903,14 +119906,6 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
             local$classesAggregate, (e) => call(classesAggregate: e));
   }
 
-  CopyWith_Input_StudyYearsOrderBy<TRes> get fromStudyYear {
-    final local$fromStudyYear = _instance.fromStudyYear;
-    return local$fromStudyYear == null
-        ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsOrderBy(
-            local$fromStudyYear, (e) => call(fromStudyYear: e));
-  }
-
   CopyWith_Input_GroupsAggregateOrderBy<TRes> get groupsAggregate {
     final local$groupsAggregate = _instance.groupsAggregate;
     return local$groupsAggregate == null
@@ -119919,12 +119914,12 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
             local$groupsAggregate, (e) => call(groupsAggregate: e));
   }
 
-  CopyWith_Input_ServicesOrderBy<TRes> get nextServiceObject {
-    final local$nextServiceObject = _instance.nextServiceObject;
-    return local$nextServiceObject == null
+  CopyWith_Input_ServicesOrderBy<TRes> get nextService {
+    final local$nextService = _instance.nextService;
+    return local$nextService == null
         ? CopyWith_Input_ServicesOrderBy.stub(_then(_instance))
         : CopyWith_Input_ServicesOrderBy(
-            local$nextServiceObject, (e) => call(nextServiceObject: e));
+            local$nextService, (e) => call(nextService: e));
   }
 
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get personsAggregate {
@@ -119935,12 +119930,20 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
             local$personsAggregate, (e) => call(personsAggregate: e));
   }
 
-  CopyWith_Input_StudyYearsOrderBy<TRes> get toStudyYear {
-    final local$toStudyYear = _instance.toStudyYear;
-    return local$toStudyYear == null
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearFrom {
+    final local$studyYearFrom = _instance.studyYearFrom;
+    return local$studyYearFrom == null
         ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
         : CopyWith_Input_StudyYearsOrderBy(
-            local$toStudyYear, (e) => call(toStudyYear: e));
+            local$studyYearFrom, (e) => call(studyYearFrom: e));
+  }
+
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsOrderBy(
+            local$studyYearTo, (e) => call(studyYearTo: e));
   }
 }
 
@@ -119958,20 +119961,20 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? firestoreId,
-    Input_StudyYearsOrderBy? fromStudyYear,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Enum_OrderBy? lastEdit,
     Enum_OrderBy? name,
-    Enum_OrderBy? nextService,
-    Input_ServicesOrderBy? nextServiceObject,
+    Input_ServicesOrderBy? nextService,
+    Enum_OrderBy? nextServiceId,
     Input_PersonsServicesAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? studyYearFrom,
-    Enum_OrderBy? studyYearTo,
-    Input_StudyYearsOrderBy? toStudyYear,
+    Input_StudyYearsOrderBy? studyYearFrom,
+    Enum_OrderBy? studyYearFromId,
+    Input_StudyYearsOrderBy? studyYearTo,
+    Enum_OrderBy? studyYearToId,
   }) =>
       _res;
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
@@ -119986,15 +119989,15 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
-  CopyWith_Input_StudyYearsOrderBy<TRes> get fromStudyYear =>
-      CopyWith_Input_StudyYearsOrderBy.stub(_res);
   CopyWith_Input_GroupsAggregateOrderBy<TRes> get groupsAggregate =>
       CopyWith_Input_GroupsAggregateOrderBy.stub(_res);
-  CopyWith_Input_ServicesOrderBy<TRes> get nextServiceObject =>
+  CopyWith_Input_ServicesOrderBy<TRes> get nextService =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_res);
-  CopyWith_Input_StudyYearsOrderBy<TRes> get toStudyYear =>
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearFrom =>
+      CopyWith_Input_StudyYearsOrderBy.stub(_res);
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
 }
 
@@ -120098,20 +120101,20 @@ class Input_ServicesSetInput {
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       Input_ServicesSetInput._({
         if (color != null) r'color': color,
         if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
-        if (nextService != null) r'nextService': nextService,
+        if (nextServiceId != null) r'nextServiceId': nextServiceId,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
-        if (studyYearTo != null) r'studyYearTo': studyYearTo,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesSetInput._(this._$data);
@@ -120134,23 +120137,23 @@ class Input_ServicesSetInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('nextService')) {
-      final l$nextService = data['nextService'];
-      result$data['nextService'] =
-          l$nextService == null ? null : stringToUuid(l$nextService);
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : stringToUuid(l$nextServiceId);
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] =
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt);
     }
-    if (data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = data['studyYearFrom'];
-      result$data['studyYearFrom'] = (l$studyYearFrom as int?);
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
     }
-    if (data.containsKey('studyYearTo')) {
-      final l$studyYearTo = data['studyYearTo'];
-      result$data['studyYearTo'] = (l$studyYearTo as int?);
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
     }
     return Input_ServicesSetInput._(result$data);
   }
@@ -120161,10 +120164,10 @@ class Input_ServicesSetInput {
   String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
-  UuidValue? get nextService => (_$data['nextService'] as UuidValue?);
+  UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-  int? get studyYearFrom => (_$data['studyYearFrom'] as int?);
-  int? get studyYearTo => (_$data['studyYearTo'] as int?);
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -120183,23 +120186,23 @@ class Input_ServicesSetInput {
       final l$name = name;
       result$data['name'] = l$name;
     }
-    if (_$data.containsKey('nextService')) {
-      final l$nextService = nextService;
-      result$data['nextService'] =
-          l$nextService == null ? null : uuidToString(l$nextService);
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : uuidToString(l$nextServiceId);
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
       result$data['photoUpdatedAt'] =
           l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
     }
-    if (_$data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = studyYearFrom;
-      result$data['studyYearFrom'] = l$studyYearFrom;
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
     }
-    if (_$data.containsKey('studyYearTo')) {
-      final l$studyYearTo = studyYearTo;
-      result$data['studyYearTo'] = l$studyYearTo;
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
     }
     return result$data;
   }
@@ -120251,13 +120254,13 @@ class Input_ServicesSetInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$nextService = nextService;
-    final lOther$nextService = other.nextService;
-    if (_$data.containsKey('nextService') !=
-        other._$data.containsKey('nextService')) {
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
       return false;
     }
-    if (l$nextService != lOther$nextService) {
+    if (l$nextServiceId != lOther$nextServiceId) {
       return false;
     }
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -120269,22 +120272,22 @@ class Input_ServicesSetInput {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
-    final l$studyYearFrom = studyYearFrom;
-    final lOther$studyYearFrom = other.studyYearFrom;
-    if (_$data.containsKey('studyYearFrom') !=
-        other._$data.containsKey('studyYearFrom')) {
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
       return false;
     }
-    if (l$studyYearFrom != lOther$studyYearFrom) {
+    if (l$studyYearFromId != lOther$studyYearFromId) {
       return false;
     }
-    final l$studyYearTo = studyYearTo;
-    final lOther$studyYearTo = other.studyYearTo;
-    if (_$data.containsKey('studyYearTo') !=
-        other._$data.containsKey('studyYearTo')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$studyYearTo != lOther$studyYearTo) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -120296,19 +120299,19 @@ class Input_ServicesSetInput {
     final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
-    final l$nextService = nextService;
+    final l$nextServiceId = nextServiceId;
     final l$photoUpdatedAt = photoUpdatedAt;
-    final l$studyYearFrom = studyYearFrom;
-    final l$studyYearTo = studyYearTo;
+    final l$studyYearFromId = studyYearFromId;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('nextService') ? l$nextService : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
-      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -120327,10 +120330,10 @@ abstract class CopyWith_Input_ServicesSetInput<TRes> {
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   });
 }
 
@@ -120352,10 +120355,10 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
     Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
-    Object? nextService = _undefined,
+    Object? nextServiceId = _undefined,
     Object? photoUpdatedAt = _undefined,
-    Object? studyYearFrom = _undefined,
-    Object? studyYearTo = _undefined,
+    Object? studyYearFromId = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesSetInput._({
         ..._instance._$data,
@@ -120363,13 +120366,14 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
         if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
-        if (nextService != _undefined)
-          'nextService': (nextService as UuidValue?),
+        if (nextServiceId != _undefined)
+          'nextServiceId': (nextServiceId as UuidValue?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-        if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as int?),
-        if (studyYearTo != _undefined) 'studyYearTo': (studyYearTo as int?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as int?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as int?),
       }));
 }
 
@@ -120384,10 +120388,10 @@ class _CopyWithStubImpl_Input_ServicesSetInput<TRes>
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       _res;
 }
@@ -120547,20 +120551,20 @@ class Input_ServicesStreamCursorValueInput {
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       Input_ServicesStreamCursorValueInput._({
         if (color != null) r'color': color,
         if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
-        if (nextService != null) r'nextService': nextService,
+        if (nextServiceId != null) r'nextServiceId': nextServiceId,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (studyYearFrom != null) r'studyYearFrom': studyYearFrom,
-        if (studyYearTo != null) r'studyYearTo': studyYearTo,
+        if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
+        if (studyYearToId != null) r'studyYearToId': studyYearToId,
       });
 
   Input_ServicesStreamCursorValueInput._(this._$data);
@@ -120584,23 +120588,23 @@ class Input_ServicesStreamCursorValueInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('nextService')) {
-      final l$nextService = data['nextService'];
-      result$data['nextService'] =
-          l$nextService == null ? null : stringToUuid(l$nextService);
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : stringToUuid(l$nextServiceId);
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] =
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt);
     }
-    if (data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = data['studyYearFrom'];
-      result$data['studyYearFrom'] = (l$studyYearFrom as int?);
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
     }
-    if (data.containsKey('studyYearTo')) {
-      final l$studyYearTo = data['studyYearTo'];
-      result$data['studyYearTo'] = (l$studyYearTo as int?);
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
     }
     return Input_ServicesStreamCursorValueInput._(result$data);
   }
@@ -120611,10 +120615,10 @@ class Input_ServicesStreamCursorValueInput {
   String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
-  UuidValue? get nextService => (_$data['nextService'] as UuidValue?);
+  UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-  int? get studyYearFrom => (_$data['studyYearFrom'] as int?);
-  int? get studyYearTo => (_$data['studyYearTo'] as int?);
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -120633,23 +120637,23 @@ class Input_ServicesStreamCursorValueInput {
       final l$name = name;
       result$data['name'] = l$name;
     }
-    if (_$data.containsKey('nextService')) {
-      final l$nextService = nextService;
-      result$data['nextService'] =
-          l$nextService == null ? null : uuidToString(l$nextService);
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] =
+          l$nextServiceId == null ? null : uuidToString(l$nextServiceId);
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
       result$data['photoUpdatedAt'] =
           l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
     }
-    if (_$data.containsKey('studyYearFrom')) {
-      final l$studyYearFrom = studyYearFrom;
-      result$data['studyYearFrom'] = l$studyYearFrom;
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
     }
-    if (_$data.containsKey('studyYearTo')) {
-      final l$studyYearTo = studyYearTo;
-      result$data['studyYearTo'] = l$studyYearTo;
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
     }
     return result$data;
   }
@@ -120702,13 +120706,13 @@ class Input_ServicesStreamCursorValueInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$nextService = nextService;
-    final lOther$nextService = other.nextService;
-    if (_$data.containsKey('nextService') !=
-        other._$data.containsKey('nextService')) {
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
       return false;
     }
-    if (l$nextService != lOther$nextService) {
+    if (l$nextServiceId != lOther$nextServiceId) {
       return false;
     }
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -120720,22 +120724,22 @@ class Input_ServicesStreamCursorValueInput {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
-    final l$studyYearFrom = studyYearFrom;
-    final lOther$studyYearFrom = other.studyYearFrom;
-    if (_$data.containsKey('studyYearFrom') !=
-        other._$data.containsKey('studyYearFrom')) {
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
       return false;
     }
-    if (l$studyYearFrom != lOther$studyYearFrom) {
+    if (l$studyYearFromId != lOther$studyYearFromId) {
       return false;
     }
-    final l$studyYearTo = studyYearTo;
-    final lOther$studyYearTo = other.studyYearTo;
-    if (_$data.containsKey('studyYearTo') !=
-        other._$data.containsKey('studyYearTo')) {
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
       return false;
     }
-    if (l$studyYearTo != lOther$studyYearTo) {
+    if (l$studyYearToId != lOther$studyYearToId) {
       return false;
     }
     return true;
@@ -120747,19 +120751,19 @@ class Input_ServicesStreamCursorValueInput {
     final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
-    final l$nextService = nextService;
+    final l$nextServiceId = nextServiceId;
     final l$photoUpdatedAt = photoUpdatedAt;
-    final l$studyYearFrom = studyYearFrom;
-    final l$studyYearTo = studyYearTo;
+    final l$studyYearFromId = studyYearFromId;
+    final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('nextService') ? l$nextService : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('studyYearFrom') ? l$studyYearFrom : const {},
-      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
     ]);
   }
 }
@@ -120778,10 +120782,10 @@ abstract class CopyWith_Input_ServicesStreamCursorValueInput<TRes> {
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   });
 }
 
@@ -120803,10 +120807,10 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
     Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
-    Object? nextService = _undefined,
+    Object? nextServiceId = _undefined,
     Object? photoUpdatedAt = _undefined,
-    Object? studyYearFrom = _undefined,
-    Object? studyYearTo = _undefined,
+    Object? studyYearFromId = _undefined,
+    Object? studyYearToId = _undefined,
   }) =>
       _then(Input_ServicesStreamCursorValueInput._({
         ..._instance._$data,
@@ -120814,13 +120818,14 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
         if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
-        if (nextService != _undefined)
-          'nextService': (nextService as UuidValue?),
+        if (nextServiceId != _undefined)
+          'nextServiceId': (nextServiceId as UuidValue?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-        if (studyYearFrom != _undefined)
-          'studyYearFrom': (studyYearFrom as int?),
-        if (studyYearTo != _undefined) 'studyYearTo': (studyYearTo as int?),
+        if (studyYearFromId != _undefined)
+          'studyYearFromId': (studyYearFromId as int?),
+        if (studyYearToId != _undefined)
+          'studyYearToId': (studyYearToId as int?),
       }));
 }
 
@@ -120835,10 +120840,10 @@ class _CopyWithStubImpl_Input_ServicesStreamCursorValueInput<TRes>
     String? firestoreId,
     UuidValue? id,
     String? name,
-    UuidValue? nextService,
+    UuidValue? nextServiceId,
     DateTime? photoUpdatedAt,
-    int? studyYearFrom,
-    int? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
   }) =>
       _res;
 }
@@ -190732,10 +190737,10 @@ enum Enum_ServicesSelectColumn {
   firestoreId,
   id,
   name,
-  nextService,
+  nextServiceId,
   photoUpdatedAt,
-  studyYearFrom,
-  studyYearTo,
+  studyYearFromId,
+  studyYearToId,
   $unknown
 }
 
@@ -190749,14 +190754,14 @@ String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
       return r'id';
     case Enum_ServicesSelectColumn.name:
       return r'name';
-    case Enum_ServicesSelectColumn.nextService:
-      return r'nextService';
+    case Enum_ServicesSelectColumn.nextServiceId:
+      return r'nextServiceId';
     case Enum_ServicesSelectColumn.photoUpdatedAt:
       return r'photoUpdatedAt';
-    case Enum_ServicesSelectColumn.studyYearFrom:
-      return r'studyYearFrom';
-    case Enum_ServicesSelectColumn.studyYearTo:
-      return r'studyYearTo';
+    case Enum_ServicesSelectColumn.studyYearFromId:
+      return r'studyYearFromId';
+    case Enum_ServicesSelectColumn.studyYearToId:
+      return r'studyYearToId';
     case Enum_ServicesSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -190772,14 +190777,14 @@ Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
       return Enum_ServicesSelectColumn.id;
     case r'name':
       return Enum_ServicesSelectColumn.name;
-    case r'nextService':
-      return Enum_ServicesSelectColumn.nextService;
+    case r'nextServiceId':
+      return Enum_ServicesSelectColumn.nextServiceId;
     case r'photoUpdatedAt':
       return Enum_ServicesSelectColumn.photoUpdatedAt;
-    case r'studyYearFrom':
-      return Enum_ServicesSelectColumn.studyYearFrom;
-    case r'studyYearTo':
-      return Enum_ServicesSelectColumn.studyYearTo;
+    case r'studyYearFromId':
+      return Enum_ServicesSelectColumn.studyYearFromId;
+    case r'studyYearToId':
+      return Enum_ServicesSelectColumn.studyYearToId;
     default:
       return Enum_ServicesSelectColumn.$unknown;
   }
@@ -190790,10 +190795,10 @@ enum Enum_ServicesUpdateColumn {
   firestoreId,
   id,
   name,
-  nextService,
+  nextServiceId,
   photoUpdatedAt,
-  studyYearFrom,
-  studyYearTo,
+  studyYearFromId,
+  studyYearToId,
   $unknown
 }
 
@@ -190807,14 +190812,14 @@ String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
       return r'id';
     case Enum_ServicesUpdateColumn.name:
       return r'name';
-    case Enum_ServicesUpdateColumn.nextService:
-      return r'nextService';
+    case Enum_ServicesUpdateColumn.nextServiceId:
+      return r'nextServiceId';
     case Enum_ServicesUpdateColumn.photoUpdatedAt:
       return r'photoUpdatedAt';
-    case Enum_ServicesUpdateColumn.studyYearFrom:
-      return r'studyYearFrom';
-    case Enum_ServicesUpdateColumn.studyYearTo:
-      return r'studyYearTo';
+    case Enum_ServicesUpdateColumn.studyYearFromId:
+      return r'studyYearFromId';
+    case Enum_ServicesUpdateColumn.studyYearToId:
+      return r'studyYearToId';
     case Enum_ServicesUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -190830,14 +190835,14 @@ Enum_ServicesUpdateColumn fromJson_Enum_ServicesUpdateColumn(String value) {
       return Enum_ServicesUpdateColumn.id;
     case r'name':
       return Enum_ServicesUpdateColumn.name;
-    case r'nextService':
-      return Enum_ServicesUpdateColumn.nextService;
+    case r'nextServiceId':
+      return Enum_ServicesUpdateColumn.nextServiceId;
     case r'photoUpdatedAt':
       return Enum_ServicesUpdateColumn.photoUpdatedAt;
-    case r'studyYearFrom':
-      return Enum_ServicesUpdateColumn.studyYearFrom;
-    case r'studyYearTo':
-      return Enum_ServicesUpdateColumn.studyYearTo;
+    case r'studyYearFromId':
+      return Enum_ServicesUpdateColumn.studyYearFromId;
+    case r'studyYearToId':
+      return Enum_ServicesUpdateColumn.studyYearToId;
     default:
       return Enum_ServicesUpdateColumn.$unknown;
   }

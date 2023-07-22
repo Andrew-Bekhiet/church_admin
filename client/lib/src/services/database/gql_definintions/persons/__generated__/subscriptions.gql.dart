@@ -1417,7 +1417,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
                   FragmentSpreadNode(
-                    name: NameNode(value: 'Service'),
+                    name: NameNode(value: 'ServiceWithStudyYears'),
                     directives: [],
                   ),
                   FieldNode(
@@ -1822,7 +1822,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
   fragmentDefinitionGroup,
   fragmentDefinitionGroupNoPhoto,
-  fragmentDefinitionService,
+  fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
   fragmentDefinitionStreet,
   fragmentDefinitionStreetNoPhoto,
@@ -6028,12 +6028,14 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services<TRes>
 }
 
 class Subscription_watchPerson_personsByPk_services_service
-    implements Fragment_Service, Fragment_ServiceNoPhoto {
+    implements Fragment_ServiceWithStudyYears, Fragment_ServiceNoPhoto {
   Subscription_watchPerson_personsByPk_services_service({
     required this.id,
     required this.name,
     this.color,
     this.$__typename = 'Services',
+    this.studyYearFrom,
+    this.studyYearTo,
     this.photoUpdatedAt,
     required this.attendanceHistoryAggregate,
   });
@@ -6044,6 +6046,8 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
+    final l$studyYearFrom = json['studyYearFrom'];
+    final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     return Subscription_watchPerson_personsByPk_services_service(
@@ -6051,6 +6055,14 @@ class Subscription_watchPerson_personsByPk_services_service
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
+      studyYearFrom: l$studyYearFrom == null
+          ? null
+          : Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+              .fromJson((l$studyYearFrom as Map<String, dynamic>)),
+      studyYearTo: l$studyYearTo == null
+          ? null
+          : Subscription_watchPerson_personsByPk_services_service_studyYearTo
+              .fromJson((l$studyYearTo as Map<String, dynamic>)),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       attendanceHistoryAggregate:
@@ -6067,6 +6079,12 @@ class Subscription_watchPerson_personsByPk_services_service
 
   final String $__typename;
 
+  final Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
+      studyYearFrom;
+
+  final Subscription_watchPerson_personsByPk_services_service_studyYearTo?
+      studyYearTo;
+
   final DateTime? photoUpdatedAt;
 
   final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
@@ -6082,6 +6100,10 @@ class Subscription_watchPerson_personsByPk_services_service
     _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
+    final l$studyYearFrom = studyYearFrom;
+    _resultData['studyYearFrom'] = l$studyYearFrom?.toJson();
+    final l$studyYearTo = studyYearTo;
+    _resultData['studyYearTo'] = l$studyYearTo?.toJson();
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
@@ -6097,6 +6119,8 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
+    final l$studyYearFrom = studyYearFrom;
+    final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     return Object.hashAll([
@@ -6104,6 +6128,8 @@ class Subscription_watchPerson_personsByPk_services_service
       l$name,
       l$color,
       l$$__typename,
+      l$studyYearFrom,
+      l$studyYearTo,
       l$photoUpdatedAt,
       l$attendanceHistoryAggregate,
     ]);
@@ -6136,6 +6162,16 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$studyYearFrom = studyYearFrom;
+    final lOther$studyYearFrom = other.studyYearFrom;
+    if (l$studyYearFrom != lOther$studyYearFrom) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -6179,10 +6215,18 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service<
     String? name,
     int? color,
     String? $__typename,
+    Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
+        studyYearFrom,
+    Subscription_watchPerson_personsByPk_services_service_studyYearTo?
+        studyYearTo,
     DateTime? photoUpdatedAt,
     Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+      TRes> get studyYearFrom;
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+      TRes> get studyYearTo;
   CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
 }
@@ -6207,6 +6251,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
+    Object? studyYearFrom = _undefined,
+    Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
@@ -6219,6 +6265,14 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
+        studyYearFrom: studyYearFrom == _undefined
+            ? _instance.studyYearFrom
+            : (studyYearFrom
+                as Subscription_watchPerson_personsByPk_services_service_studyYearFrom?),
+        studyYearTo: studyYearTo == _undefined
+            ? _instance.studyYearTo
+            : (studyYearTo
+                as Subscription_watchPerson_personsByPk_services_service_studyYearTo?),
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
@@ -6228,6 +6282,26 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
             : (attendanceHistoryAggregate
                 as Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate),
       ));
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+      TRes> get studyYearFrom {
+    final local$studyYearFrom = _instance.studyYearFrom;
+    return local$studyYearFrom == null
+        ? CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+            local$studyYearFrom, (e) => call(studyYearFrom: e));
+  }
+
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+      TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+            local$studyYearTo, (e) => call(studyYearTo: e));
+  }
+
   CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -6252,16 +6326,358 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service<
     String? name,
     int? color,
     String? $__typename,
+    Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
+        studyYearFrom,
+    Subscription_watchPerson_personsByPk_services_service_studyYearTo?
+        studyYearTo,
     DateTime? photoUpdatedAt,
     Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
       _res;
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+          TRes>
+      get studyYearFrom =>
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+              .stub(_res);
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+          TRes>
+      get studyYearTo =>
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo
+              .stub(_res);
   CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
               .stub(_res);
+}
+
+class Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+    implements Fragment_ServiceWithStudyYears_studyYearFrom {
+  Subscription_watchPerson_personsByPk_services_service_studyYearFrom({
+    required this.order,
+    required this.name,
+    this.$__typename = 'StudyYears',
+  });
+
+  factory Subscription_watchPerson_personsByPk_services_service_studyYearFrom.fromJson(
+      Map<String, dynamic> json) {
+    final l$order = json['order'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+      order: (l$order as int),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int order;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$order,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Subscription_watchPerson_personsByPk_services_service_studyYearFrom) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+    on Subscription_watchPerson_personsByPk_services_service_studyYearFrom {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+          Subscription_watchPerson_personsByPk_services_service_studyYearFrom>
+      get copyWith =>
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+    TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+    Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+        instance,
+    TRes Function(
+            Subscription_watchPerson_personsByPk_services_service_studyYearFrom)
+        then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom;
+
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom;
+
+  TRes call({
+    int? order,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+            TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPerson_personsByPk_services_service_studyYearFrom
+      _instance;
+
+  final TRes Function(
+          Subscription_watchPerson_personsByPk_services_service_studyYearFrom)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? order = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+        order: order == _undefined || order == null
+            ? _instance.order
+            : (order as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearFrom<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearFrom(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? order,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Subscription_watchPerson_personsByPk_services_service_studyYearTo
+    implements Fragment_ServiceWithStudyYears_studyYearTo {
+  Subscription_watchPerson_personsByPk_services_service_studyYearTo({
+    required this.order,
+    required this.name,
+    this.$__typename = 'StudyYears',
+  });
+
+  factory Subscription_watchPerson_personsByPk_services_service_studyYearTo.fromJson(
+      Map<String, dynamic> json) {
+    final l$order = json['order'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+      order: (l$order as int),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int order;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$order,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Subscription_watchPerson_personsByPk_services_service_studyYearTo) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPerson_personsByPk_services_service_studyYearTo
+    on Subscription_watchPerson_personsByPk_services_service_studyYearTo {
+  CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+          Subscription_watchPerson_personsByPk_services_service_studyYearTo>
+      get copyWith =>
+          CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+    TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+    Subscription_watchPerson_personsByPk_services_service_studyYearTo instance,
+    TRes Function(
+            Subscription_watchPerson_personsByPk_services_service_studyYearTo)
+        then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo;
+
+  factory CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo;
+
+  TRes call({
+    int? order,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+            TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPerson_personsByPk_services_service_studyYearTo
+      _instance;
+
+  final TRes Function(
+      Subscription_watchPerson_personsByPk_services_service_studyYearTo) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? order = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+        order: order == _undefined || order == null
+            ? _instance.order
+            : (order as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_services_service_studyYearTo<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service_studyYearTo(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? order,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate {

@@ -2,26 +2,18 @@ subscription watchAllServices(
   $where: [ServicesBoolExp!] = {}
   $groupsWhere: [GroupsBoolExp!] = {}
   $classesWhere: [ClassesBoolExp!] = {}
-  $orderBy: [ServicesOrderBy!] = { studyYearFrom: ASC, studyYearTo: ASC }
+  $orderBy: [ServicesOrderBy!] = { studyYearFromId: ASC, studyYearToId: ASC }
   $classesOrderBy: [ClassesOrderBy!] = {
     studyYear: { order: ASC }
     serviceGender: DESC_NULLS_LAST
   }
   $groupsOrderBy: [GroupsOrderBy!] = {
-    service: { studyYearFrom: ASC, studyYearTo: ASC }
+    service: { studyYearFromId: ASC, studyYearToId: ASC }
   }
   $limit: Int = 200
 ) {
   services(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
-    ...Service
-    fromStudyYear {
-      name
-      order
-    }
-    toStudyYear {
-      name
-      order
-    }
+    ...ServiceWithStudyYears
     classes(where: { _and: $classesWhere }, orderBy: $classesOrderBy) {
       ...Class
 
@@ -37,23 +29,15 @@ subscription watchAllServices(
 }
 subscription watchService($id: uuid!) {
   servicesByPk(id: $id) {
-    ...Service
+    ...ServiceWithStudyYears
     lastEdit
     adminUsers(distinctOn: uid) {
       user {
         ...User
       }
     }
-    fromStudyYear {
-      order
-      name
-    }
-    nextServiceObject {
+    nextService {
       ...Service
-    }
-    toStudyYear {
-      order
-      name
     }
   }
 }

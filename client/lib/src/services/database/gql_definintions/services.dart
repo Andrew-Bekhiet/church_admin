@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 
+import 'helpers.dart';
+import 'services/__generated__/mutations.gql.dart';
 import 'services/__generated__/subscriptions.gql.dart';
 
 class ServicesDAO extends DAOBase<Service> {
@@ -99,5 +101,65 @@ class ServicesDAO extends DAOBase<Service> {
           ),
         )
         .map((p) => p.parsedData);
+  }
+
+  Future<Service?> deleteService({
+    required String serviceId,
+  }) {
+    final mutationOptions = MutationOptions(
+      document: documentNodeMutationdeleteService,
+      variables: Variables_Mutation_deleteService(
+        serviceId: serviceId.toUuid(),
+      ).toJson(),
+      parserFn: db.parser.singleOrNullParser(Service.fromJson),
+    );
+
+    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+  }
+
+  Future<Service> insertService({
+    required Service newService,
+  }) {
+    final delta = computeObjectDelta(
+      newService.toJson(),
+      Service(id: '', name: '').toJson(),
+    )
+      ..remove('id')
+      ..remove('nextService')
+      ..remove('studyYearFrom')
+      ..remove('studyYearTo');
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertService,
+        operationName: 'insertService',
+        variables: {'newService': delta},
+        parserFn: db.parser.singleParser(Service.fromJson),
+      ),
+    );
+  }
+
+  Future<Service?> updateService({
+    required Service newService,
+    required Service oldService,
+  }) {
+    final delta = computeObjectDelta(
+      newService.toJson(),
+      oldService.toJson(),
+    );
+
+    if (delta.isEmpty) return Future.value(newService);
+
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationupdateService,
+        operationName: 'updateService',
+        variables: Variables_Mutation_updateService(
+          serviceId: newService.id.toUuid(),
+          newService: Input_ServicesSetInput.fromJson(delta),
+        ).toJson(),
+        parserFn: db.parser.singleOrNullParser(Service.fromJson),
+      ),
+    );
   }
 }

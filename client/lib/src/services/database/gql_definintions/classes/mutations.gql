@@ -1,0 +1,17 @@
+mutation deleteClass($classId: uuid!) {
+  deleteClassesByPk(id: $classId) {
+    ...Class
+  }
+}
+
+mutation insertClass($newClass: ClassesInsertInput!) {
+  insertClassesOne(object: $newClass) {
+    ...Class
+  }
+}
+
+mutation updateClass($classId: uuid!, $newClass: ClassesSetInput!) {
+  updateClassesByPk(pkColumns: { id: $classId }, _set: $newClass) {
+    ...Class
+  }
+}

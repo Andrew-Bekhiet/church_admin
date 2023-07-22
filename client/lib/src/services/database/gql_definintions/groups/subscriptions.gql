@@ -12,7 +12,7 @@ subscription watchGroup($id: uuid!) {
   groupsByPk(id: $id) {
     ...Group
     service {
-      ...Service
+      ...ServiceWithStudyYears
     }
     lastEdit
     validity

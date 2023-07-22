@@ -272,44 +272,20 @@ query personServicesClassesGroups($id: uuid!) {
     name
     services(orderBy: { service: { name: ASC } }) {
       service {
-        ...Service
-        fromStudyYear {
-          order
-          name
-        }
-        toStudyYear {
-          order
-          name
-        }
+        ...ServiceWithStudyYears
       }
     }
     classes(orderBy: { name: ASC }) {
       ...Class
       service {
-        ...Service
-        fromStudyYear {
-          order
-          name
-        }
-        toStudyYear {
-          order
-          name
-        }
+        ...ServiceWithStudyYears
       }
     }
     groups(orderBy: { group: { name: ASC } }) {
       group {
         ...Group
         service {
-          ...Service
-          fromStudyYear {
-            order
-            name
-          }
-          toStudyYear {
-            order
-            name
-          }
+          ...ServiceWithStudyYears
         }
       }
     }

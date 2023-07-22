@@ -15,6 +15,10 @@ class ViewClass extends StatefulWidget {
         $class: (state.extra as Map?)?['class'] as Class?,
       );
     },
+    routes: [
+      EditClass.route,
+      EditPerson.route,
+    ],
   );
 
   final Class? $class;
@@ -120,6 +124,22 @@ class _ViewClassState extends State<ViewClass> {
         icon: Icon(
           ViewableObjectService.I.getDefaultIconFor<Person>(),
         ),
+      ),
+      floatingActionButtonBuilder: (context, tabController, class$) =>
+          FloatingActionButton(
+        onPressed: () {
+          context.push(
+            Uri(
+              path: '/viewClass/editPerson',
+            ).toString(),
+            extra: {
+              'service': class$.service,
+              'studyYear': class$.studyYear,
+              'gender': class$.serviceGender,
+            },
+          );
+        },
+        child: const Icon(Icons.person_add_alt_1),
       ),
     );
   }

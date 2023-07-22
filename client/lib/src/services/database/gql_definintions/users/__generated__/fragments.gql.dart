@@ -2974,11 +2974,11 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
                 name: NameNode(value: 'service'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'studyYearFrom'),
+                    name: NameNode(value: 'studyYearFromId'),
                     value: EnumValueNode(name: NameNode(value: 'ASC')),
                   ),
                   ObjectFieldNode(
-                    name: NameNode(value: 'studyYearTo'),
+                    name: NameNode(value: 'studyYearToId'),
                     value: EnumValueNode(name: NameNode(value: 'ASC')),
                   ),
                 ]),

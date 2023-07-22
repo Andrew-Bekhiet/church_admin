@@ -12,7 +12,7 @@ subscription watchClass($id: uuid!) {
   classesByPk(id: $id) {
     ...Class
     service {
-      ...Service
+      ...ServiceWithStudyYears
     }
     lastEdit
     serviceGender

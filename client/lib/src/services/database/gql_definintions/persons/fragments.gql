@@ -75,7 +75,7 @@ fragment FullPersonData on Persons {
   }
   services(limit: 6, orderBy: { service: { name: ASC } }) {
     service {
-      ...Service
+      ...ServiceWithStudyYears
     }
   }
   shammasLevel {
@@ -145,7 +145,7 @@ fragment FullPersonDataWithAttendance on Persons {
   }
   services(limit: 6, orderBy: { service: { name: ASC } }) {
     service {
-      ...Service
+      ...ServiceWithStudyYears
 
       attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
         aggregate {
