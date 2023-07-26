@@ -11,10 +11,9 @@ import {
 } from "./hasura_interface";
 
 const expiryWindowMillis = 1000 * 60 * 5;
+const enforceAppCheck = process.env["IS_APP_LIVE"] == "true";
 
-export const deletePhoto = runWith({
-  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
-})
+export const deletePhoto = runWith({ enforceAppCheck: enforceAppCheck })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
     const { path, table, id, hasuraUID } = await _authenticateStorageRequest(
@@ -31,9 +30,7 @@ export const deletePhoto = runWith({
     return true;
   });
 
-export const getDownloadUrl = runWith({
-  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
-})
+export const getDownloadUrl = runWith({ enforceAppCheck: enforceAppCheck })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
     const { path, contentType } = await _authenticateStorageRequest(
@@ -55,9 +52,7 @@ export const getDownloadUrl = runWith({
     )[0];
   });
 
-export const getUploadUrl = runWith({
-  enforceAppCheck: process.env["IS_APP_LIVE"] == "true",
-})
+export const getUploadUrl = runWith({ enforceAppCheck: enforceAppCheck })
   .region("europe-west6")
   .https.onCall(async (data, context) => {
     const { path, contentType } = await _authenticateStorageRequest(
@@ -92,14 +87,7 @@ async function _authenticateStorageRequest(
   hasuraUID: string;
 }> {
   try {
-    if (
-      // (!context.app && !process.env.FUNCTIONS_EMULATOR) ||
-      !context.auth ||
-      !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
-    )
-      throw new https.HttpsError("unauthenticated", "");
-
-    const currentUser = await auth().getUser(context.auth.uid);
+    const currentUser = await assertUserAuthenticatedAndApproved(context);
 
     const { table: _table, id: _id, contentType: _contentType } = data;
     if (_table == null || _id == null)
@@ -148,11 +136,23 @@ async function _authenticateStorageRequest(
         hasuraUID,
         action == "delete" ? "write" : action
       ))
-    )
+    ) {
       throw new https.HttpsError(
         "not-found",
         `Object with id ${id} in table ${table} was not found`
       );
+    }
+
+    if (
+      table == "persons" &&
+      action == "write" &&
+      id != (await getPersonIdFromUser(hasuraUID))
+    ) {
+      throw new https.HttpsError(
+        "permission-denied",
+        "You can only upload your own photo"
+      );
+    }
 
     const path =
       table == "users"
@@ -165,4 +165,29 @@ async function _authenticateStorageRequest(
     console.dir(e, { depth: 4 });
     throw e;
   }
+}
+async function assertUserAuthenticatedAndApproved(
+  context: https.CallableContext
+): Promise<auth.UserRecord> {
+  if (!context.auth) {
+    console.error("User not authenticated");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
+  } else if (!(context.auth!.token.email_verified ?? false)) {
+    console.error("User email not verified");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
+  }
+
+  const authUser = await auth().getUser(context.auth!.uid!);
+
+  if (!authUser.multiFactor) {
+    console.error("User does not have 2FA enabled");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
+  } else if (
+    !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
+  ) {
+    console.error("User is not approved");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
+  }
+
+  return authUser;
 }

@@ -23,6 +23,7 @@ export const beforeUserSignUp = region("europe-west6")
       });
 
       if (rslt == null) {
+        console.error("User not found in database");
         throw new https.HttpsError("unknown", "");
       }
 
@@ -36,7 +37,13 @@ export const beforeUserSignUp = region("europe-west6")
             contentType: "image/jpeg",
             gzip: true,
           });
-        response.pipe(file).on("end", file.end).on("error", file.destroy);
+        response
+          .pipe(file)
+          .on("end", file.end)
+          .on("error", (error) => {
+            console.error(error);
+            file.destroy(error);
+          });
       });
 
       const sessionClaims = {
