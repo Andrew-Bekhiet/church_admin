@@ -9,7 +9,9 @@ class AuthenticateScreen extends StatefulWidget {
     name: 'authenticate',
     path: '/authenticate',
     builder: (context, state) => AuthenticateScreen(
-      next: _hasRedirect(state.queryParameters) ? state.queryParameters['next'] : null,
+      next: _hasRedirect(state.queryParameters)
+          ? state.queryParameters['next']
+          : null,
     ),
     redirect: (context, state) {
       return redirect(state);
@@ -19,9 +21,9 @@ class AuthenticateScreen extends StatefulWidget {
   @visibleForTesting
   static String? redirect(GoRouterState state) {
     if (!AuthService.I.isSignedIn) {
-      return '/login';
-    } else if (AuthService.I.currentUser?.password == null) {
-      return '/registerUserData';
+      return LoginScreen.route.path;
+    } else if (!(AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
+      return MultiFactorLogin.route.path;
     } else if (LocalAuthService.I.shouldAuthenticate ||
         (_hasRedirect(state.queryParameters) &&
             LocalAuthService.I
@@ -152,14 +154,13 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       return;
     }
 
-    String? encryptedPassword =
-        await EncryptionService.I.encryptPassword(password);
-
-    if (AuthService.I.currentUser?.password == encryptedPassword) {
-      encryptedPassword = null;
+    final keyBytes = await EncryptionService.I.deriveKey(
+      password: password,
+      salt: AuthService.I.currentUser!.email!,
+    );
+    if (await EncryptionService.I.verifyPassword(password, keyBytes)) {
       LocalAuthService.I.resetAuthState(path: widget.next);
     } else {
-      encryptedPassword = null;
       _passwordText.clear();
 
       if (mounted) {

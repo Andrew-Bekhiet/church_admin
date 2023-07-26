@@ -23,6 +23,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
+import 'package:zxcvbn/zxcvbn.dart';
 
 import 'services/notifications/notifications_storage.dart';
 
@@ -327,3 +328,5 @@ final authCacheProvider = Provider<AuthCache>(
 final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
   (ref) => const CurrentPlatformService(),
 );
+
+final zxcvbnProvider = Provider<Zxcvbn>((ref) => Zxcvbn());

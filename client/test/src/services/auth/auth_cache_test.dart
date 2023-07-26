@@ -20,7 +20,6 @@ void main() {
     authId: 'authId',
     email: 'email',
     idToken: 'idToken',
-    password: 'password',
     lastEdit: LastRecordedByInfo(
       time: DateTime.now(),
       recordedBy: 'recordedBy',

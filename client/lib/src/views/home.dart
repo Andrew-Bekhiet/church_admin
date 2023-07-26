@@ -35,15 +35,22 @@ class HomeScreen extends StatefulWidget {
   @visibleForTesting
   static String? redirect(GoRouterState state) {
     if (!AuthService.I.isSignedIn) {
-      return '/login';
-    } else if (AuthService.I.currentUser?.person == null) {
-      return '/registerUserData';
-    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
-      return '/updateUserData?forced=true';
+      return LoginScreen.route.path;
+    } else if (!(AuthService.I.currentUser!.emailVerified ?? false)) {
+      return EmailVerificationScreen.route.path;
+    } else if (!(AuthService.I.currentUser!.isMultiFactorEnrolled ?? false)) {
+      return MultiFactorLogin.route.path;
+    } else if (!AuthService.I.currentUser!.permissions.approved) {
+      return UnapprovedUser.route.path;
     } else if (LocalAuthService.I.shouldAuthenticate) {
       return Uri(
-        path: '/authenticate',
+        path: AuthenticateScreen.route.path,
         queryParameters: {'next': state.location},
+      ).toString();
+    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
+      return Uri(
+        path: UpdateUserSpiritData.route.path,
+        queryParameters: {'forced': 'true'},
       ).toString();
     }
     return null;

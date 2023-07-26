@@ -36,4 +36,12 @@ class UserSettingsService {
         (t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine',
         value,
       );
+
+  Future<void> setupDefaults() async {
+    await setSecondLineFor(Area, 'lastVisit');
+    await setSecondLineFor(Street, 'lastVisit');
+    await setSecondLineFor(Family, 'lastVisit');
+    await setSecondLineFor(Person, 'birthdate');
+    await setSecondLineFor(User, 'permissions');
+  }
 }

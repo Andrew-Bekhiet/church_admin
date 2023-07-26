@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:church_admin/church_admin.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart/rxdart.dart' as _i2;
+import 'package:rxdart/rxdart.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,8 +20,9 @@ import 'package:rxdart/rxdart.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_0(
+class _FakeMultiFactorSession_0 extends _i1.SmartFake
+    implements _i2.MultiFactorSession {
+  _FakeMultiFactorSession_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -30,9 +31,30 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
         );
 }
 
-class _FakeValueStream_1<T> extends _i1.SmartFake
-    implements _i2.ValueStream<T> {
-  _FakeValueStream_1(
+class _FakeMultiFactorInfo_1 extends _i1.SmartFake
+    implements _i2.MultiFactorInfo {
+  _FakeMultiFactorInfo_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDateTime_2 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeValueStream_3<T> extends _i1.SmartFake
+    implements _i3.ValueStream<T> {
+  _FakeValueStream_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -44,18 +66,18 @@ class _FakeValueStream_1<T> extends _i1.SmartFake
 /// A class which mocks [AuthCache].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthCache extends _i1.Mock implements _i3.AuthCache {
+class MockAuthCache extends _i1.Mock implements _i2.AuthCache {
   @override
-  _i4.Future<_i3.User?> getUserFromCache() => (super.noSuchMethod(
+  _i4.Future<_i2.User?> getUserFromCache() => (super.noSuchMethod(
         Invocation.method(
           #getUserFromCache,
           [],
         ),
-        returnValue: _i4.Future<_i3.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i3.User?>.value(),
-      ) as _i4.Future<_i3.User?>);
+        returnValue: _i4.Future<_i2.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
+      ) as _i4.Future<_i2.User?>);
   @override
-  _i4.Future<void> writeUserToCache(_i3.User? user) => (super.noSuchMethod(
+  _i4.Future<void> writeUserToCache(_i2.User? user) => (super.noSuchMethod(
         Invocation.method(
           #writeUserToCache,
           [user],
@@ -68,13 +90,13 @@ class MockAuthCache extends _i1.Mock implements _i3.AuthCache {
 /// A class which mocks [AuthAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
+class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
   @override
-  _i4.Stream<_i3.User?> get userStream => (super.noSuchMethod(
+  _i4.Stream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _i4.Stream<_i3.User?>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i3.User?>.empty(),
-      ) as _i4.Stream<_i3.User?>);
+        returnValue: _i4.Stream<_i2.User?>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
+      ) as _i4.Stream<_i2.User?>);
   @override
   _i4.Stream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -82,14 +104,153 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
         returnValueForMissingStub: _i4.Stream<String?>.empty(),
       ) as _i4.Stream<String?>);
   @override
-  _i4.Future<bool> signInWithGoogle() => (super.noSuchMethod(
+  bool get hasPendingMultifactorSession => (super.noSuchMethod(
+        Invocation.getter(#hasPendingMultifactorSession),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i4.Future<bool> signInWithEmailPassword({
+    required String? email,
+    required String? password,
+    bool? reauth = false,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #signInWithGoogle,
+          #signInWithEmailPassword,
           [],
+          {
+            #email: email,
+            #password: password,
+            #reauth: reauth,
+          },
         ),
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> signUpWithEmailPassword({
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUpWithEmailPassword,
+          [],
+          {
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
+        Invocation.method(
+          #sendEmailVerification,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> reload() => (super.noSuchMethod(
+        Invocation.method(
+          #reload,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.MultiFactorSession> startMultiFactorSession(
+          {required String? password}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #startMultiFactorSession,
+          [],
+          {#password: password},
+        ),
+        returnValue:
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
+          this,
+          Invocation.method(
+            #startMultiFactorSession,
+            [],
+            {#password: password},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
+          this,
+          Invocation.method(
+            #startMultiFactorSession,
+            [],
+            {#password: password},
+          ),
+        )),
+      ) as _i4.Future<_i2.MultiFactorSession>);
+  @override
+  _i2.MultiFactorInfo getMultiFactorInfoFor(_i2.MultiFactorSession? session) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMultiFactorInfoFor,
+          [session],
+        ),
+        returnValue: _FakeMultiFactorInfo_1(
+          this,
+          Invocation.method(
+            #getMultiFactorInfoFor,
+            [session],
+          ),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorInfo_1(
+          this,
+          Invocation.method(
+            #getMultiFactorInfoFor,
+            [session],
+          ),
+        ),
+      ) as _i2.MultiFactorInfo);
+  @override
+  _i4.Future<(String, int?)> initiateMultifactorLogin(
+    _i2.MultiFactorSession? session, {
+    _i2.MultiFactorInfo? factor,
+    String? phoneNumber,
+    int? forceResendingToken,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initiateMultifactorLogin,
+          [session],
+          {
+            #factor: factor,
+            #phoneNumber: phoneNumber,
+            #forceResendingToken: forceResendingToken,
+          },
+        ),
+        returnValue: _i4.Future<(String, int?)>.value(('', null)),
+        returnValueForMissingStub: _i4.Future<(String, int?)>.value(('', null)),
+      ) as _i4.Future<(String, int?)>);
+  @override
+  _i4.Future<void> finishMultiFactorLogin(
+    String? verificationId,
+    String? smsCode,
+    _i2.MultiFactorSession? session,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #finishMultiFactorLogin,
+          [
+            verificationId,
+            smsCode,
+            session,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -100,7 +261,7 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  bool isTokenUpToDate(_i3.User? user) => (super.noSuchMethod(
+  bool isTokenUpToDate(_i2.User? user) => (super.noSuchMethod(
         Invocation.method(
           #isTokenUpToDate,
           [user],
@@ -114,14 +275,14 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
           #tokenExpiry,
           [idToken],
         ),
-        returnValue: _FakeDateTime_0(
+        returnValue: _FakeDateTime_2(
           this,
           Invocation.method(
             #tokenExpiry,
             [idToken],
           ),
         ),
-        returnValueForMissingStub: _FakeDateTime_0(
+        returnValueForMissingStub: _FakeDateTime_2(
           this,
           Invocation.method(
             #tokenExpiry,
@@ -153,7 +314,7 @@ class MockAuthAdapter extends _i1.Mock implements _i3.AuthAdapter {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockConnectivityService extends _i1.Mock
-    implements _i3.ConnectivityService {
+    implements _i2.ConnectivityService {
   @override
   String get urlToPing => (super.noSuchMethod(
         Invocation.getter(#urlToPing),
@@ -161,17 +322,17 @@ class MockConnectivityService extends _i1.Mock
         returnValueForMissingStub: '',
       ) as String);
   @override
-  _i2.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
+  _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _FakeValueStream_1<bool>(
+        returnValue: _FakeValueStream_3<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_1<bool>(
+        returnValueForMissingStub: _FakeValueStream_3<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
-      ) as _i2.ValueStream<bool>);
+      ) as _i3.ValueStream<bool>);
   @override
   _i4.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(

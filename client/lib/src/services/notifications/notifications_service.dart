@@ -177,6 +177,13 @@ class NotificationsService {
     );
   }
 
+  Future<void> scheduleDefaultNotifications() async {
+    await NotificationsService.I.scheduleBirthDayNotification();
+    await NotificationsService.I.scheduleKodasNotification();
+    await NotificationsService.I.scheduleMeetingNotification();
+    await NotificationsService.I.scheduleConfessionNotification();
+  }
+
   Future<Notification?> getInitialNotification() async {
     final remoteMessage = await _firebaseMessaging.getInitialMessage();
 

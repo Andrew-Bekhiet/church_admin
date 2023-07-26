@@ -1,6 +1,7 @@
 // ignore_for_file: discarded_futures
 
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
@@ -189,18 +190,18 @@ void main() {
         'Signed In User =>',
         () {
           test(
-            'No Password',
+            'No Person',
             () async {
               initGlobalProviderContainer([
                 _setUpAuthService(
-                  currentUser: _fakeUser.copyWith(password: null),
+                  currentUser: _fakeUser.copyWith(person: null),
                 ),
                 _setUpLocalAuth(),
               ]);
 
               expect(
                 AuthenticateScreen.redirect(MockGoRouterState()),
-                '/registerUserData',
+                '/registerNewUser',
               );
             },
           );
@@ -308,7 +309,6 @@ Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
 final User _fakeUser = User(
   uid: 'uid',
   name: '',
-  password: '',
   permissions: PermissionsSet.fromSet(const {}),
   email: 'email',
   authId: 'firebaseAuthUID',
@@ -358,7 +358,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
       User(
         uid: 'uid',
         name: '',
-        password: await encryptionService.encryptPassword(r'password\1234'),
+        // password: await encryptionService.hashPassword(r'password\1234'),
         permissions: PermissionsSet.fromSet(const {}),
         email: 'email',
         authId: 'firebaseAuthUID',
@@ -391,11 +391,37 @@ void _setUpDeviceInfo() {
 
 class FakeEncryptionService implements EncryptionService {
   @override
-  Future<String> encryptPassword(String password) async =>
-      'FakeEncryption:' + password.runes.toList().reversed.join().toUpperCase();
+  Future<HiveCipher> getHiveCipher({String? boxName}) {
+    throw UnimplementedError();
+  }
 
   @override
-  Future<HiveCipher> getHiveCipher({String? boxName}) {
+  Future<Uint8List> additionalDeviceInfo() {
+    // TODO: implement additionalDeviceInfo
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Uint8List> deriveKey({
+    required String password,
+    required String salt,
+  }) {
+    // TODO: implement deriveKey
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> hashPassword({
+    required String password,
+    required Uint8List keyBytes,
+  }) {
+    // TODO: implement hashPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> verifyPassword(String password, Uint8List keyBytes) {
+    // TODO: implement verifyPassword
     throw UnimplementedError();
   }
 }

@@ -1,31 +1,29 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:pointycastle/export.dart';
 
-class EncryptionServiceCIImpl implements EncryptionService {
+class EncryptionServiceCIImpl extends EncryptionService {
   static final EncryptionServiceCIImpl _instance = EncryptionServiceCIImpl._();
 
   factory EncryptionServiceCIImpl() => _instance;
 
   EncryptionServiceCIImpl._();
 
-  @override
-  Future<String> encryptPassword(String password) async {
-    //SHA-3/256 (password)
-    return base64.encode(
-      SHA3Digest(256).process(
-        Uint8List.fromList(utf8.encode(password)),
-      ),
-    );
-  }
+  Uint8List? _cachedKeyBytes;
 
   @override
   Future<HiveCipher> getHiveCipher({String? boxName}) async {
+    _cachedKeyBytes ??= await deriveKey(password: 'password', salt: 'salt');
+
     return HiveAesCipher(
-      base64Url.decode(await encryptPassword(boxName ?? 'default')),
+      base64Url.decode(
+        await hashPassword(
+          password: boxName ?? 'default',
+          keyBytes: _cachedKeyBytes!,
+        ),
+      ),
     );
   }
 }

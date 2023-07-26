@@ -14,6 +14,8 @@ class PasswordFormField extends StatefulWidget {
     this.textInputAction,
     this.autoFillHints = const [AutofillHints.password],
     this.focusNode,
+    this.autoValidateMode = AutovalidateMode.disabled,
+    this.decoration,
   });
 
   final EdgeInsetsGeometry? padding;
@@ -27,6 +29,8 @@ class PasswordFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final Iterable<String>? autoFillHints;
   final FocusNode? focusNode;
+  final AutovalidateMode autoValidateMode;
+  final InputDecoration? decoration;
 
   @override
   _PasswordFormFieldState createState() => _PasswordFormFieldState();
@@ -40,9 +44,13 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     return Container(
       padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
-        decoration: InputDecoration(
-          labelText: widget.labelText ?? 'كلمة السر',
-          errorMaxLines: 5,
+        autovalidateMode: widget.autoValidateMode,
+        decoration: (widget.decoration ??
+                InputDecoration(
+                  labelText: widget.labelText ?? 'كلمة السر',
+                  errorMaxLines: 5,
+                ))
+            .copyWith(
           suffixIcon: IconButton(
             icon: Icon(visible ? Icons.visibility_off : Icons.visibility),
             onPressed: () => setState(() => visible = !visible),

@@ -26,6 +26,11 @@ class AuthService {
   }
 
   bool get isSignedIn => _currentUser != null;
+  bool get hasPendingMultifactorSession =>
+      _adapter.hasPendingMultifactorSession;
+
+  MultiFactorSession? get pendingMultifactorSession =>
+      _adapter.pendingMultifactorSession;
 
   User? get currentUser => _currentUser;
   ValueStream<User?> get userStream => _userStreamController.stream;
@@ -47,7 +52,80 @@ class AuthService {
 
   late final StreamSubscription<bool> _connectivitySubscription;
 
-  Future<bool> signInWithGoogle() => _adapter.signInWithGoogle();
+  Future<bool> signInWithEmailPassword({
+    required String email,
+    required String password,
+    bool reauth = false,
+  }) async {
+    final rslt = await _adapter.signInWithEmailPassword(
+      email: email,
+      password: password,
+      reauth: reauth,
+    );
+
+    if (rslt) await _saveUserPasswordHash(email, password);
+
+    return rslt;
+  }
+
+  Future<bool> signUpWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
+    final rslt = await _adapter.signUpWithEmailPassword(
+      email: email,
+      password: password,
+    );
+
+    if (rslt) {
+      await _saveUserPasswordHash(email, password);
+      await _adapter.sendEmailVerification();
+    }
+
+    return rslt;
+  }
+
+  Future<void> sendEmailVerification() => _adapter.sendEmailVerification();
+
+  Future<void> reload() => _adapter.reload();
+
+  Future<MultiFactorSession> startMultiFactorSession({
+    required String password,
+  }) {
+    if (!isSignedIn) throw StateError('Must be signed in');
+
+    return _adapter.startMultiFactorSession(password: password);
+  }
+
+  MultiFactorInfo getMultiFactorInfoFor(MultiFactorSession session) =>
+      _adapter.getMultiFactorInfoFor(session);
+
+  Future<(String verificationId, int? resendToken)> initiateMultifactorLogin(
+    MultiFactorSession session, {
+    MultiFactorInfo? factor,
+    String? phoneNumber,
+    int? forceResendingToken,
+  }) {
+    if ((factor == null) == (phoneNumber == null)) {
+      throw Exception('One of "factor" or "phoneNumber" must be provided');
+    }
+
+    return _adapter.initiateMultifactorLogin(
+      session,
+      factor: factor,
+      phoneNumber: phoneNumber,
+      forceResendingToken: forceResendingToken,
+    );
+  }
+
+  Future<void> finishMultiFactorLogin(
+    String verificationId,
+    String smsCode,
+    MultiFactorSession session,
+  ) async {
+    await _adapter.finishMultiFactorLogin(verificationId, smsCode, session);
+    await _saveUserPasswordHash(session.email, session.password);
+  }
 
   Future<void> refreshToken() => _adapter.refreshToken();
 
@@ -84,11 +162,35 @@ class AuthService {
             : _adapter.userStream.asBroadcastStream().startWith(null))
         .distinct()
         .asyncMap(_saveUserToCache)
+        .asyncMap(_updateUserPasswordHash)
         .listen(
           _userStreamController.add,
           onError: _userStreamController.addError,
           onDone: _userStreamController.close,
         );
+  }
+
+  Future<void> _saveUserPasswordHash(String email, String password) async {
+    if (await LocalAuthService.I.getPasswordHash() != null) return;
+
+    final hashBytes = await EncryptionService.I.hashPassword(
+      password: password,
+      keyBytes:
+          await EncryptionService.I.deriveKey(password: password, salt: email),
+    );
+
+    return LocalAuthService.I.savePasswordHash(hashBytes);
+  }
+
+  Future<User?> _updateUserPasswordHash(User? user) async {
+    if (user == null) {
+      await LocalAuthService.I.clearPasswordHash();
+      return null;
+    } else {
+      return user.copyWith(
+        passwordKeyHash: await LocalAuthService.I.getPasswordHash(),
+      );
+    }
   }
 
   String? _scheduleTokenRefersh(String? idToken) {

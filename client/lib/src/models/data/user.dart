@@ -21,8 +21,11 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
     @Default(PermissionsSet.empty())
     PermissionsSet permissions,
     String? authId,
-    @JsonKey(includeIfNull: false) String? password,
+    @JsonKey(includeIfNull: false) bool? isMultiFactorEnrolled,
     @JsonKey(includeIfNull: false) String? idToken,
+    @JsonKey(includeIfNull: false) bool? emailVerified,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    String? passwordKeyHash,
     LastRecordedByInfo? lastEdit,
     Person? person,
     List<AdminOnData>? servicesHistory,

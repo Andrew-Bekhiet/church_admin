@@ -29,7 +29,6 @@ final idTokenResult = IdTokenResult(
 final expectedDomainUser = User(
   uid: idTokenResult.claims!['x-hasura-user-id'],
   name: 'name',
-  password: idTokenResult.claims!['password'],
   idToken: idTokenResult.token,
 );
 
@@ -52,7 +51,7 @@ void main() {
     () async {
       final unit = globalProviderContainer.read(authAdapterProvider);
 
-      await unit.signInWithGoogle();
+      await unit.signInWithEmailPassword(email: 'email', password: 'password');
 
       verifyInOrder([
         globalProviderContainer.read(googleSignInProvider).signIn(),
@@ -89,7 +88,7 @@ void main() {
 
       expect(unit.userStream, emitsInOrder([expectedDomainUser, isNull]));
 
-      await unit.signInWithGoogle();
+      await unit.signInWithEmailPassword(email: 'email', password: 'password');
       await unit.signOut();
 
       final mockUsersDAO = globalProviderContainer

@@ -14,7 +14,6 @@ final initialUser = User(
   name: 'Display Name',
   authId: 'authId',
   email: 'email@example.com',
-  password: 'password',
   idToken: 'idToken',
   photoUpdatedAt: DateTime.now(),
   permissions: PermissionsSet.fromSet(const {
@@ -116,7 +115,7 @@ void main() {
       await unit.signOut();
       await unit.userStream.take(1).first;
 
-      await unit.signInWithGoogle();
+      await unit.signInWithEmailPassword(email: 'email', password: 'password');
       await unit.userStream.take(1).first;
     },
   );
@@ -153,13 +152,14 @@ void main() {
       await unit.userStream.take(1).first;
       expect(unit.currentUser, isNull);
 
-      expect(unit.signInWithGoogle(), completion(isTrue));
+      expect(unit.signInWithEmailPassword(email: 'email', password: 'password'),
+          completion(isTrue));
       await unit.userStream.take(1).first;
 
       expect(unit.currentUser, initialUser);
 
       verify(
-        unit.signInWithGoogle(),
+        unit.signInWithEmailPassword(email: 'email', password: 'password'),
       );
     },
   );
@@ -252,7 +252,8 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
 
   final mock = MockAuthAdapter();
 
-  when(mock.signInWithGoogle()).thenAnswer((_) async {
+  when(mock.signInWithEmailPassword(email: 'email', password: 'password'))
+      .thenAnswer((_) async {
     _controller.add(userOnSignIn);
     return true;
   });

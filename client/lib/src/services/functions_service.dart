@@ -118,4 +118,10 @@ class FunctionsService {
         .timeout(const Duration(seconds: 15));
     return res.data == 'OK';
   }
+
+  Future<void> registerUserWithCode(String? registerCode) async {
+    await httpsCallable('registerUserWithCode').call({
+      'registerCode': registerCode,
+    });
+  }
 }

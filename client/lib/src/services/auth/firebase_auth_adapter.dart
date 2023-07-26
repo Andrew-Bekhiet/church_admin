@@ -2,21 +2,26 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:desktop_webview_auth/desktop_webview_auth.dart';
-import 'package:desktop_webview_auth/google.dart';
 import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, GoogleAuthProvider, IdTokenResult, OAuthCredential;
-import 'package:firebase_auth/firebase_auth.dart' as auth show User;
+    show
+        EmailAuthProvider,
+        FirebaseAuth,
+        FirebaseAuthMultiFactorException,
+        IdTokenResult,
+        PhoneAuthProvider,
+        PhoneMultiFactorGenerator,
+        PhoneMultiFactorInfo;
+import 'package:firebase_auth/firebase_auth.dart' as auth
+    show MultiFactorSession, User;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];
-  static String? _getPassword(Json jwtClaims) => jwtClaims['password'];
-  static Future<IdTokenResult?> _getIdTokenResultFromAuthUser(
+  static Future<(auth.User?, IdTokenResult?)> _getIdTokenResultFromAuthUser(
     auth.User? authUser,
   ) async {
-    return await authUser?.getIdTokenResult();
+    return (authUser, await authUser?.getIdTokenResult());
   }
 
   FirebaseAuthAdapter({
@@ -35,99 +40,227 @@ class FirebaseAuthAdapter extends AuthAdapter {
   final DatabaseService _databaseService;
   final CurrentPlatformService _currentPlatformService;
 
+  MultiFactorSession? _pendingMultiFactorSession;
+  FirebaseAuthMultiFactorException? _pendingMultiFactorException;
+
+  @override
+  bool get hasPendingMultifactorSession => _pendingMultiFactorSession != null;
+  @override
+  MultiFactorSession? get pendingMultifactorSession =>
+      _pendingMultiFactorSession;
+
   @override
   late final Stream<User?> userStream = _firebaseAuth
       .userChanges()
       .asyncMap(_getIdTokenResultFromAuthUser)
-      .onErrorReturn(null)
-      .switchMap(_onUserChanged);
+      .onErrorReturn((null, null)).switchMap(_onUserChanged);
 
   @override
   late final Stream<String?> idTokenStream = _firebaseAuth
       .userChanges()
       .asyncMap(_getIdTokenResultFromAuthUser)
-      .onErrorReturn(null)
-      .map((t) => t?.token)
+      .onErrorReturn((null, null))
+      .map((t) => t.$2?.token)
       .distinct();
 
-  Stream<User?> _onUserChanged(IdTokenResult? idTokenResult) {
-    if (idTokenResult == null) return Stream.value(null);
+  @override
+  Future<void> reload() {
+    if (_firebaseAuth.currentUser == null) {
+      throw StateError('Must be signed in');
+    }
+
+    return _firebaseAuth.currentUser!.reload();
+  }
+
+  Stream<User?> _onUserChanged(
+    (auth.User?, IdTokenResult?) rslt,
+  ) {
+    final (authUser, idTokenResult) = rslt;
+
+    if (authUser == null || idTokenResult == null) return Stream.value(null);
+
+    _clearPendingMultiFactorSession();
 
     return _getUserStreamFromDB(
       idTokenResult.claims ?? {},
-      idTokenResult.token!,
+    ).asyncMap(
+      (user) async => user!.copyWith(
+        emailVerified: authUser.emailVerified,
+        idToken: idTokenResult.token,
+        isMultiFactorEnrolled:
+            (await authUser.multiFactor.getEnrolledFactors()).isNotEmpty,
+      ),
     );
   }
 
-  Stream<User?> _getUserStreamFromDB(
-    Json jwtClaims,
-    String token,
-  ) {
+  void _clearPendingMultiFactorSession() {
+    _pendingMultiFactorSession = null;
+    _pendingMultiFactorException = null;
+  }
+
+  Stream<User?> _getUserStreamFromDB(Json jwtClaims) {
     return _databaseService.users
-        .streamSingleById(uid: _getHasuraUID(jwtClaims))
-        .map(
-          (user) => user!.copyWith(
-            password: _getPassword(jwtClaims),
-            idToken: token,
-          ),
-        );
+        .streamSingleById(uid: _getHasuraUID(jwtClaims));
   }
 
   @override
-  Future<bool> signInWithGoogle() {
-    return _currentPlatformService.isWeb ? _signInForWeb() : _signInForNative();
-  }
+  Future<bool> signInWithEmailPassword({
+    required String email,
+    required String password,
+    bool reauth = false,
+  }) async {
+    try {
+      if (reauth) {
+        final user = _firebaseAuth.currentUser;
 
-  Future<bool> _signInForNative() async {
-    if (_currentPlatformService.isDesktop) {
-      final credential = await DesktopWebviewAuth.signIn(
-        GoogleSignInArgs(
-          redirectUri: SecretsService.I.webAuthHandler,
-          clientId: SecretsService.I.desktopClientId,
-        ),
-      );
-      if (credential != null) {
-        await _firebaseAuth.signInWithCredential(
-          OAuthCredential(
-            accessToken: credential.accessToken,
-            idToken: credential.idToken,
-            secret: credential.tokenSecret,
-            providerId: 'google.com',
-            signInMethod: 'google.com',
-          ),
+        if (user == null) throw StateError('Must be signed in to reauth');
+
+        final credential = EmailAuthProvider.credential(
+          email: email,
+          password: password,
         );
-        return true;
-      }
-    } else {
-      final googleUser = await _googleSignIn.signIn();
-      if (googleUser != null) {
-        final googleAuth = await googleUser.authentication;
 
-        if (googleAuth.accessToken != null) {
-          final credential = GoogleAuthProvider.credential(
-            idToken: googleAuth.idToken,
-            accessToken: googleAuth.accessToken,
-          );
-
-          await _firebaseAuth.signInWithCredential(credential);
-          return true;
-        }
+        await user.reauthenticateWithCredential(credential);
+      } else {
+        await _firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
       }
+
+      return true;
+    } on FirebaseAuthMultiFactorException catch (e) {
+      final multiFactorSession = MultiFactorSession(
+        id: e.resolver.session.id,
+        email: email,
+        password: password,
+      );
+
+      _pendingMultiFactorSession = multiFactorSession;
+      _pendingMultiFactorException = e;
+
+      throw MultiFactorException(multiFactorSession);
     }
-    return false;
   }
 
-  Future<bool> _signInForWeb() async {
-    final signInResult = await _firebaseAuth.signInWithPopup(
-      GoogleAuthProvider(),
+  @override
+  Future<bool> signUpWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
+    await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
     );
-    final credential = signInResult.credential;
 
-    if (credential != null) {
-      await _firebaseAuth.signInWithCredential(credential);
-      return true;
+    return true;
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    if (_firebaseAuth.currentUser == null) {
+      throw StateError('Must be signed in');
     }
-    return false;
+
+    await _firebaseAuth.currentUser!.sendEmailVerification();
+  }
+
+  @override
+  Future<MultiFactorSession> startMultiFactorSession({
+    required String password,
+  }) async {
+    if (_firebaseAuth.currentUser == null) {
+      throw StateError('Must be signed in');
+    }
+
+    final multiFactorSession =
+        await _firebaseAuth.currentUser!.multiFactor.getSession();
+
+    return MultiFactorSession(
+      id: multiFactorSession.id,
+      email: _firebaseAuth.currentUser!.email!,
+      password: password,
+    );
+  }
+
+  @override
+  MultiFactorInfo getMultiFactorInfoFor(MultiFactorSession session) {
+    if (!hasPendingMultifactorSession) {
+      throw StateError('No pending multi factor session');
+    }
+
+    final factor = _pendingMultiFactorException!.resolver.hints
+        .firstWhere((f) => f is PhoneMultiFactorInfo);
+
+    return MultiFactorInfo(
+      uid: factor.uid,
+      displayName: factor.displayName,
+      factorId: factor.factorId,
+      enrollmentTimestamp: factor.enrollmentTimestamp.round(),
+    );
+  }
+
+  @override
+  Future<(String verificationId, int? resendToken)> initiateMultifactorLogin(
+    MultiFactorSession session, {
+    MultiFactorInfo? factor,
+    String? phoneNumber,
+    int? forceResendingToken,
+  }) {
+    final completer = Completer<(String verificationId, int? resendToken)>();
+
+    final e = _pendingMultiFactorException;
+
+    _firebaseAuth.verifyPhoneNumber(
+      forceResendingToken: forceResendingToken,
+      phoneNumber: phoneNumber,
+      multiFactorSession: auth.MultiFactorSession(session.id),
+      multiFactorInfo: factor != null
+          ? e!.resolver.hints.firstWhere(
+              (f) => f.uid == factor.uid,
+            ) as PhoneMultiFactorInfo
+          : null,
+      verificationCompleted: (credential) {
+        finishMultiFactorLogin(
+          credential.verificationId!,
+          credential.smsCode!,
+          session,
+        );
+      },
+      verificationFailed: completer.completeError,
+      codeSent: (verificationId, resendToken) {
+        if (!completer.isCompleted) {
+          completer.complete((verificationId, resendToken));
+        }
+      },
+      codeAutoRetrievalTimeout: (verificationId) {
+        if (!completer.isCompleted) {
+          completer.complete((verificationId, null));
+        }
+      },
+    );
+
+    return completer.future;
+  }
+
+  @override
+  Future<void> finishMultiFactorLogin(
+    String verificationId,
+    String smsCode,
+    MultiFactorSession session,
+  ) async {
+    final assertion = PhoneMultiFactorGenerator.getAssertion(
+      PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      ),
+    );
+
+    if (!hasPendingMultifactorSession) {
+      await _firebaseAuth.currentUser!.multiFactor.enroll(assertion);
+    } else {
+      await _pendingMultiFactorException!.resolver.resolveSignIn(assertion);
+    }
   }
 
   @override

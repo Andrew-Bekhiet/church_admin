@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
@@ -17,6 +18,8 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
+
+  final FlutterSecureStorage _secureStorage;
 
   bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
@@ -34,11 +37,14 @@ class LocalAuthService with WidgetsBindingObserver {
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    FlutterSecureStorage? secureStorage,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
         _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I {
+            currentPlatformService ?? CurrentPlatformService.I,
+        _secureStorage = secureStorage ??
+            globalProviderContainer.read(secureStorageProvider) {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -50,11 +56,14 @@ class LocalAuthService with WidgetsBindingObserver {
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    FlutterSecureStorage? secureStorage,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
         _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I {
+            currentPlatformService ?? CurrentPlatformService.I,
+        _secureStorage = secureStorage ??
+            globalProviderContainer.read(secureStorageProvider) {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
@@ -147,6 +156,22 @@ class LocalAuthService with WidgetsBindingObserver {
     );
 
     return _localAuthCompleter!.future;
+  }
+
+  Future<String?> getPasswordHash() {
+    return _secureStorage.read(key: 'passwordHash');
+  }
+
+  Future<void> savePasswordHash(String passwordHash) async {
+    if (await _secureStorage.containsKey(key: 'passwordHash')) {
+      throw StateError('User already has a password');
+    }
+
+    return _secureStorage.write(key: 'passwordHash', value: passwordHash);
+  }
+
+  Future<void> clearPasswordHash() {
+    return _secureStorage.delete(key: 'passwordHash');
   }
 
   Future<void> dispose() async {

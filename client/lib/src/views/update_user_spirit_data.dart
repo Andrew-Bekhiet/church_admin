@@ -5,16 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class UpdateUserData extends StatefulWidget {
+class UpdateUserSpiritData extends StatefulWidget {
   static final route = GoRoute(
-    name: 'update_user_data',
     path: '/updateUserData',
-    builder: (context, state) => const UpdateUserData(),
+    builder: (context, state) => const UpdateUserSpiritData(),
     redirect: (context, state) {
       if (!AuthService.I.isSignedIn) {
-        return '/login';
+        return LoginScreen.route.path;
       } else if (AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
-        return '/';
+        return HomeScreen.route.path;
       } else if (LocalAuthService.I.shouldAuthenticate) {
         return Uri(
           path: '/authenticate',
@@ -26,13 +25,13 @@ class UpdateUserData extends StatefulWidget {
   );
 
   final Person? userData;
-  const UpdateUserData({this.userData, super.key});
+  const UpdateUserSpiritData({this.userData, super.key});
 
   @override
-  State<UpdateUserData> createState() => _UpdateUserDataState();
+  State<UpdateUserSpiritData> createState() => _UpdateUserSpiritDataState();
 }
 
-class _UpdateUserDataState extends State<UpdateUserData> {
+class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
   late Person _userData = widget.userData ?? AuthService.I.currentUser!.person!;
   final _formKey = GlobalKey<FormState>();
   bool _isSaving = false;

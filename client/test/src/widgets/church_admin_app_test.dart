@@ -265,7 +265,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     final user = User(
       uid: 'uid',
       name: 'name',
-      password: 'pass',
       person: Person(
         id: 'id',
         name: 'name',

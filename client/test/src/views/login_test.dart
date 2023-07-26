@@ -85,7 +85,10 @@ void main() {
 
       await tester.tap(find.bySubtype<FilledButton>());
 
-      verify(AuthService.I.signInWithGoogle());
+      verify(
+        AuthService.I
+            .signInWithEmailPassword(email: 'email', password: 'password'),
+      );
     },
   );
 
@@ -143,7 +146,6 @@ Override _setUpAuthService({bool isSignedIn = true}) {
     final user = User(
       uid: 'uid',
       name: '',
-      password: '',
       permissions: PermissionsSet.fromSet(const {}),
       email: 'email',
       authId: 'firebaseAuthUID',

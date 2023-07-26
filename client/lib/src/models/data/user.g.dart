@@ -21,8 +21,9 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
           ? const PermissionsSet.empty()
           : permissionsSetFromJson(json['permissions']),
       authId: json['authId'] as String?,
-      password: json['password'] as String?,
+      isMultiFactorEnrolled: json['isMultiFactorEnrolled'] as bool?,
       idToken: json['idToken'] as String?,
+      emailVerified: json['emailVerified'] as bool?,
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -61,8 +62,9 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) {
     }
   }
 
-  writeNotNull('password', instance.password);
+  writeNotNull('isMultiFactorEnrolled', instance.isMultiFactorEnrolled);
   writeNotNull('idToken', instance.idToken);
+  writeNotNull('emailVerified', instance.emailVerified);
   val['lastEdit'] = instance.lastEdit?.toJson();
   val['person'] = instance.person?.toJson();
   val['servicesHistory'] =

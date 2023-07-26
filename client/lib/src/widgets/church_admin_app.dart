@@ -15,38 +15,10 @@ class ChurchAdminApp extends StatefulWidget {
     routes: [
       HomeScreen.route,
       LoginScreen.route,
-      UpdateUserData.route,
-      GoRoute(
-        path: '/registerUserData',
-        builder: (context, state) => Scaffold(
-          body: Column(
-            children: [
-              ElevatedButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              OutlinedButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              TextButton(
-                onPressed: LocalAuthService.I.resetAuthState,
-                child: const Text('updateUserData'),
-              ),
-              const Text('data'),
-            ],
-          ),
-        ) /* UpdateUserDataScreen() */,
-        redirect: (context, state) {
-          if (!AuthService.I.isSignedIn) {
-            return '/login';
-          } else if (AuthService.I.currentUser?.password != null &&
-              AuthService.I.currentUser?.person != null) {
-            return '/';
-          }
-          return null;
-        },
-      ),
+      EmailVerificationScreen.route,
+      MultiFactorLogin.route,
+      UnapprovedUser.route,
+      UpdateUserSpiritData.route,
       AuthenticateScreen.route,
     ],
     errorBuilder: (context, state) {
