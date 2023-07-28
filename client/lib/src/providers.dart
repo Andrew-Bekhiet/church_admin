@@ -15,7 +15,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -122,14 +121,11 @@ final authServiceProvider = Provider<AuthService>(
     cache: AuthCache(secureStorage: ref.watch(secureStorageProvider)),
     adapter: FirebaseAuthAdapter(
       firebaseAuth: ref.watch(firebaseAuthProvider),
-      googleSignIn: ref.watch(googleSignInProvider),
       databaseService: ref.watch(databaseServiceProvider),
     ),
     connectivityService: ref.watch(connectivityServiceProvider),
   ),
 );
-
-final googleSignInProvider = Provider<GoogleSignIn>((ref) => GoogleSignIn());
 
 final loggingServiceProvider = Provider<LoggingService>(
   (ref) => LoggingService(),
@@ -316,7 +312,6 @@ final shareServiceProvider = Provider<ShareService>(
 final authAdapterProvider = Provider<AuthAdapter>(
   (ref) => FirebaseAuthAdapter(
     firebaseAuth: ref.watch(firebaseAuthProvider),
-    googleSignIn: ref.watch(googleSignInProvider),
     databaseService: ref.watch(databaseServiceProvider),
   ),
 );

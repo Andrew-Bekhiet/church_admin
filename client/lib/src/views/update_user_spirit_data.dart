@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 class UpdateUserSpiritData extends StatefulWidget {
   static final route = GoRoute(
-    path: '/updateUserData',
+    path: '/updateUserSpiritData',
     builder: (context, state) => const UpdateUserSpiritData(),
     redirect: (context, state) {
       if (!AuthService.I.isSignedIn) {

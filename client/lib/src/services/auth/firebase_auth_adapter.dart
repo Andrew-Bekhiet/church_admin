@@ -13,32 +13,29 @@ import 'package:firebase_auth/firebase_auth.dart'
         PhoneMultiFactorInfo;
 import 'package:firebase_auth/firebase_auth.dart' as auth
     show MultiFactorSession, User;
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart_ext/rxdart_ext.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];
-  static Future<(auth.User?, IdTokenResult?)> _getIdTokenResultFromAuthUser(
+  static Future<(auth.User?, IdTokenResult?, bool)>
+      _getIdTokenAndMultiFactorFromAuthUser(
     auth.User? authUser,
   ) async {
-    return (authUser, await authUser?.getIdTokenResult());
+    final enrolledFactors =
+        await authUser?.multiFactor.getEnrolledFactors() ?? [];
+    final idTokenResult = await authUser?.getIdTokenResult();
+
+    return (authUser, idTokenResult, enrolledFactors.isNotEmpty);
   }
 
   FirebaseAuthAdapter({
     required FirebaseAuth firebaseAuth,
-    required GoogleSignIn googleSignIn,
     DatabaseService? databaseService,
-    CurrentPlatformService? currentPlatformService,
-  })  : _googleSignIn = googleSignIn,
-        _firebaseAuth = firebaseAuth,
-        _databaseService = databaseService ?? DatabaseService.I,
-        _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I;
+  })  : _firebaseAuth = firebaseAuth,
+        _databaseService = databaseService ?? DatabaseService.I;
 
   final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
   final DatabaseService _databaseService;
-  final CurrentPlatformService _currentPlatformService;
 
   MultiFactorSession? _pendingMultiFactorSession;
   FirebaseAuthMultiFactorException? _pendingMultiFactorException;
@@ -52,14 +49,14 @@ class FirebaseAuthAdapter extends AuthAdapter {
   @override
   late final Stream<User?> userStream = _firebaseAuth
       .userChanges()
-      .asyncMap(_getIdTokenResultFromAuthUser)
-      .onErrorReturn((null, null)).switchMap(_onUserChanged);
+      .asyncMap(_getIdTokenAndMultiFactorFromAuthUser)
+      .onErrorReturn((null, null, false)).switchMap(_onUserChanged);
 
   @override
   late final Stream<String?> idTokenStream = _firebaseAuth
       .userChanges()
-      .asyncMap(_getIdTokenResultFromAuthUser)
-      .onErrorReturn((null, null))
+      .asyncMap(_getIdTokenAndMultiFactorFromAuthUser)
+      .onErrorReturn((null, null, false))
       .map((t) => t.$2?.token)
       .distinct();
 
@@ -73,9 +70,9 @@ class FirebaseAuthAdapter extends AuthAdapter {
   }
 
   Stream<User?> _onUserChanged(
-    (auth.User?, IdTokenResult?) rslt,
+    (auth.User?, IdTokenResult?, bool) rslt,
   ) {
-    final (authUser, idTokenResult) = rslt;
+    final (authUser, idTokenResult, multiFactorEntrolled) = rslt;
 
     if (authUser == null || idTokenResult == null) return Stream.value(null);
 
@@ -83,12 +80,11 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
     return _getUserStreamFromDB(
       idTokenResult.claims ?? {},
-    ).asyncMap(
-      (user) async => user!.copyWith(
+    ).map(
+      (user) => user!.copyWith(
+        isMultiFactorEnrolled: multiFactorEntrolled,
         emailVerified: authUser.emailVerified,
         idToken: idTokenResult.token,
-        isMultiFactorEnrolled:
-            (await authUser.multiFactor.getEnrolledFactors()).isNotEmpty,
       ),
     );
   }
@@ -293,9 +289,6 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   @override
   Future<void> signOut() async {
-    if (!_currentPlatformService.isDesktop) {
-      await _googleSignIn.signOut();
-    }
     await _firebaseAuth.signOut();
   }
 

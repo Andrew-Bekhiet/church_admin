@@ -45,17 +45,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.shortestSide * 0.5,
                   width: MediaQuery.of(context).size.shortestSide * 0.5,
-                  child: Image.asset(
-                    'assets/Logo.png',
-                    color: Theme.of(context).colorScheme.primary,
-                    fit: BoxFit.scaleDown,
-                    colorBlendMode: BlendMode.softLight,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    child: Image.asset(
+                      'assets/Logo.png',
+                      color: Theme.of(context).colorScheme.primary,
+                      fit: BoxFit.scaleDown,
+                      colorBlendMode: BlendMode.softLight,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Center(
                   child: Text(
-                    'قم بتسجيل الدخول أو انشاء حساب',
+                    'قم بتسجيل الدخول أو إنشاء حساب',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -78,21 +81,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 const SizedBox(height: 30),
-                InkWell(
-                  onTap: () => setState(() => _isLogin = !_isLogin),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    padding: const EdgeInsets.all(15),
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.all(15),
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(width: 10),
+                      InkWell(
+                        onTap: () => setState(() => _isLogin = !_isLogin),
+                        child: Text(
                           _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
                           style: Theme.of(context)
                               .textTheme
@@ -101,8 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -221,6 +224,7 @@ class _SignUpViewState extends State<_SignUpView> {
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
             decoration: const InputDecoration(labelText: 'البريد الإلكتروني'),
@@ -340,6 +344,7 @@ class _LoginViewState extends State<_LoginView> {
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
             decoration: const InputDecoration(labelText: 'البريد الإلكتروني'),
