@@ -4,15 +4,15 @@ import 'dart:convert';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:firebase_auth/firebase_auth.dart' as auth show User;
+import 'package:firebase_auth/firebase_auth.dart' as auth
+    show MultiFactorInfo, User;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';
 
@@ -29,15 +29,15 @@ final idTokenResult = IdTokenResult(
 final expectedDomainUser = User(
   uid: idTokenResult.claims!['x-hasura-user-id'],
   name: 'name',
+  isMultiFactorEnrolled: true,
+  emailVerified: true,
   idToken: idTokenResult.token,
 );
 
 @GenerateNiceMocks([
-  MockSpec<GoogleSignInAuthentication>(),
-  MockSpec<GoogleSignInAccount>(),
-  MockSpec<GoogleSignIn>(),
   MockSpec<FirebaseAuth>(),
   MockSpec<auth.User>(),
+  MockSpec<MultiFactor>(),
   MockSpec<UserCredential>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
@@ -54,15 +54,8 @@ void main() {
       await unit.signInWithEmailPassword(email: 'email', password: 'password');
 
       verifyInOrder([
-        globalProviderContainer.read(googleSignInProvider).signIn(),
         (globalProviderContainer.read(firebaseAuthProvider) as MockFirebaseAuth)
-            .signInWithCredential(
-          argThat(
-            predicate<GoogleAuthCredential>(
-              (c) => c.idToken == 'idToken' && c.accessToken == 'accessToken',
-            ),
-          ),
-        ),
+            .signInWithEmailAndPassword(email: 'email', password: 'password'),
       ]);
     },
   );
@@ -75,7 +68,6 @@ void main() {
       await unit.signOut();
 
       verifyInOrder([
-        globalProviderContainer.read(googleSignInProvider).signOut(),
         globalProviderContainer.read(firebaseAuthProvider).signOut(),
       ]);
     },
@@ -86,10 +78,15 @@ void main() {
     () async {
       final unit = globalProviderContainer.read(authAdapterProvider);
 
-      expect(unit.userStream, emitsInOrder([expectedDomainUser, isNull]));
+      final expectFuture = expectLater(
+        unit.userStream,
+        emitsInOrder([expectedDomainUser, isNull]),
+      );
 
       await unit.signInWithEmailPassword(email: 'email', password: 'password');
       await unit.signOut();
+
+      await expectFuture;
 
       final mockUsersDAO = globalProviderContainer
           .read(databaseServiceProvider)
@@ -202,17 +199,30 @@ String _createIdTokenWithExp(DateTime exp) {
 
 MockUser _createMockUser({IdTokenResult? idTokenResult$}) {
   final mockUser = MockUser();
+  final mockMultiFactor = MockMultiFactor();
+
+  when(mockMultiFactor.getEnrolledFactors()).thenAnswer(
+    (_) async => [
+      const auth.MultiFactorInfo(
+        factorId: 'factorId',
+        enrollmentTimestamp: 0,
+        uid: 'uid',
+        displayName: 'displayName',
+      )
+    ],
+  );
 
   // ignore: discarded_futures
   when(mockUser.getIdTokenResult()).thenAnswer(
     (_) async => idTokenResult$ ?? idTokenResult,
   );
+  when(mockUser.multiFactor).thenReturn(mockMultiFactor);
+  when(mockUser.emailVerified).thenReturn(true);
   return mockUser;
 }
 
 Future<void> _setUp() async {
   final overrides = [
-    _setUpGoogleSignIn(),
     _setUpFirebaseAuth(),
     _setUpDatabaseService(),
     _setUpCurrentPlatformService(),
@@ -249,7 +259,12 @@ Override _setUpFirebaseAuth() {
 
   final mockFirebaseAuth = MockFirebaseAuth();
 
-  when(mockFirebaseAuth.signInWithCredential(any)).thenAnswer((i) async {
+  when(
+    mockFirebaseAuth.signInWithEmailAndPassword(
+      email: anyNamed('email'),
+      password: anyNamed('password'),
+    ),
+  ).thenAnswer((i) async {
     stateController.add(mockFirebaseUser);
 
     return MockUserCredential();
@@ -264,33 +279,4 @@ Override _setUpFirebaseAuth() {
 
     return mockFirebaseAuth;
   });
-}
-
-Override _setUpGoogleSignIn() {
-  final mockAccount = _setUpMockGAccount();
-
-  final mockGoogleSignIn = MockGoogleSignIn();
-
-  when(mockGoogleSignIn.signIn()).thenAnswer((_) async => mockAccount);
-  when(mockGoogleSignIn.signOut()).thenAnswer((_) async => null);
-
-  return googleSignInProvider.overrideWithValue(mockGoogleSignIn);
-}
-
-MockGoogleSignInAccount _setUpMockGAccount() {
-  final mockSignInAuth = _setupMockGSignInAuth();
-
-  final mockGAccount = MockGoogleSignInAccount();
-
-  when(mockGAccount.authentication).thenAnswer((_) async => mockSignInAuth);
-  return mockGAccount;
-}
-
-MockGoogleSignInAuthentication _setupMockGSignInAuth() {
-  final mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
-
-  when(mockGoogleSignInAuthentication.accessToken).thenReturn('accessToken');
-  when(mockGoogleSignInAuthentication.idToken).thenReturn('idToken');
-
-  return mockGoogleSignInAuthentication;
 }

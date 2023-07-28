@@ -1,6 +1,7 @@
 // ignore_for_file: discarded_futures
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
@@ -201,7 +202,7 @@ void main() {
 
               expect(
                 AuthenticateScreen.redirect(MockGoRouterState()),
-                '/registerNewUser',
+                isNull,
               );
             },
           );
@@ -306,11 +307,16 @@ Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
   return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
 }
 
+//Changing these values will change the precomputed password hash
+const password = r'password\1234';
+const email = 'email';
+
 final User _fakeUser = User(
   uid: 'uid',
   name: '',
-  permissions: PermissionsSet.fromSet(const {}),
-  email: 'email',
+  permissions: PermissionsSet.fromSet(const {'approved'}),
+  isMultiFactorEnrolled: true,
+  email: email,
   authId: 'firebaseAuthUID',
 );
 
@@ -358,9 +364,9 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
       User(
         uid: 'uid',
         name: '',
-        // password: await encryptionService.hashPassword(r'password\1234'),
+        passwordKeyHash: 'asdasdasdas',
         permissions: PermissionsSet.fromSet(const {}),
-        email: 'email',
+        email: email,
         authId: 'firebaseAuthUID',
       ),
     );
@@ -389,24 +395,9 @@ void _setUpDeviceInfo() {
   DeviceInfoPlatform.instance = FakeDeviceInfoPlatform();
 }
 
-class FakeEncryptionService implements EncryptionService {
+class FakeEncryptionService extends EncryptionService {
   @override
   Future<HiveCipher> getHiveCipher({String? boxName}) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Uint8List> additionalDeviceInfo() {
-    // TODO: implement additionalDeviceInfo
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Uint8List> deriveKey({
-    required String password,
-    required String salt,
-  }) {
-    // TODO: implement deriveKey
     throw UnimplementedError();
   }
 
@@ -414,14 +405,21 @@ class FakeEncryptionService implements EncryptionService {
   Future<String> hashPassword({
     required String password,
     required Uint8List keyBytes,
-  }) {
-    // TODO: implement hashPassword
-    throw UnimplementedError();
+  }) async {
+    return password;
   }
 
   @override
-  Future<bool> verifyPassword(String password, Uint8List keyBytes) {
-    // TODO: implement verifyPassword
-    throw UnimplementedError();
+  Future<Uint8List> deriveKey({
+    required String password,
+    required String salt,
+  }) async {
+    return Uint8List.fromList(utf8.encode(password));
+  }
+
+  @override
+  Future<bool> verifyPassword(String _password, Uint8List keyBytes) async {
+    if (_password == password) return true;
+    return false;
   }
 }

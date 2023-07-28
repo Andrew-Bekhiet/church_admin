@@ -265,6 +265,12 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     final user = User(
       uid: 'uid',
       name: 'name',
+      permissions: PermissionsSet.fromSet(
+        {if (value != FirstScreenVariantEnum.unapprovedUser) 'approved'},
+      ),
+      isMultiFactorEnrolled: value != FirstScreenVariantEnum.multiFactor,
+      emailVerified: value != FirstScreenVariantEnum.emailVerification,
+      passwordKeyHash: 'passwordKeyHash',
       person: Person(
         id: 'id',
         name: 'name',
@@ -273,10 +279,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
         isShammas: false,
         isStudent: false,
         isServant: false,
-        lastKodas: value == FirstScreenVariantEnum.updateUserData
+        lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
             ? null
             : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
-        lastConfession: value == FirstScreenVariantEnum.updateUserData
+        lastConfession: value == FirstScreenVariantEnum.updateUserSpiritData
             ? null
             : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
       ),
@@ -289,14 +295,23 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   }
 
   String expectedLocation() {
-    if (currentValue == FirstScreenVariantEnum.login) {
-      return '/login';
-    } else if (currentValue == FirstScreenVariantEnum.updateUserData) {
-      return '/updateUserData?forced=true';
-    } else if (currentValue == FirstScreenVariantEnum.authenticate) {
-      return '/authenticate?next=%2F';
-    } else {
-      return '/';
+    switch (currentValue) {
+      case FirstScreenVariantEnum.login:
+        return '/login';
+      case FirstScreenVariantEnum.emailVerification:
+        return '/emailVerification';
+      case FirstScreenVariantEnum.multiFactor:
+        return '/multiFactor';
+      case FirstScreenVariantEnum.unapprovedUser:
+        return '/unapprovedUser';
+      case FirstScreenVariantEnum.updateUserSpiritData:
+        return '/updateUserSpiritData?forced=true';
+      case FirstScreenVariantEnum.authenticate:
+        return '/authenticate?next=%2F';
+      case FirstScreenVariantEnum.home:
+        return '/';
+      case null:
+        throw Exception('currentValue is null');
     }
   }
 
@@ -309,7 +324,15 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   }
 }
 
-enum FirstScreenVariantEnum { login, updateUserData, authenticate, home }
+enum FirstScreenVariantEnum {
+  login,
+  emailVerification,
+  multiFactor,
+  unapprovedUser,
+  updateUserSpiritData,
+  authenticate,
+  home
+}
 
 class FakeUserSettings extends Fake implements UserSettingsService {
   @override

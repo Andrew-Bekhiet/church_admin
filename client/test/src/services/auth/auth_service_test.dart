@@ -16,6 +16,7 @@ final initialUser = User(
   email: 'email@example.com',
   idToken: 'idToken',
   photoUpdatedAt: DateTime.now(),
+  passwordKeyHash: 'FakePasswordHash1234',
   permissions: PermissionsSet.fromSet(const {
     'approved',
     'manageAllUsers',
@@ -31,6 +32,7 @@ final initialUser = User(
 @GenerateNiceMocks([
   MockSpec<AuthCache>(),
   MockSpec<AuthAdapter>(),
+  MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>()
 ])
 void main() {
@@ -152,8 +154,10 @@ void main() {
       await unit.userStream.take(1).first;
       expect(unit.currentUser, isNull);
 
-      expect(unit.signInWithEmailPassword(email: 'email', password: 'password'),
-          completion(isTrue));
+      expect(
+        unit.signInWithEmailPassword(email: 'email', password: 'password'),
+        completion(isTrue),
+      );
       await unit.userStream.take(1).first;
 
       expect(unit.currentUser, initialUser);
@@ -221,6 +225,7 @@ Future<void> _setUp() async {
     await _setUpMockConnectivity(),
     await _setUpMockAuthCache(initialUser: initialUser),
     await _setUpMockAuthAdapter(userOnSignIn: initialUser),
+    await _setUpMockLocalAuthService(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -262,6 +267,15 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   when(mock.dispose()).thenAnswer((_) => _controller.close());
 
   return authAdapterProvider.overrideWithValue(mock);
+}
+
+Future<Override> _setUpMockLocalAuthService() async {
+  final mock = MockLocalAuthService();
+
+  when(mock.getPasswordHash())
+      .thenAnswer((_) async => initialUser.passwordKeyHash);
+
+  return localAuthServiceProvider.overrideWithValue(mock);
 }
 
 AuthService _createAuthService({bool noCachedUser = false}) {

@@ -27,6 +27,8 @@ void main() {
   testWidgets(
     'Login Screen => Key elements',
     (tester) async {
+      tester.view.physicalSize = const Size(800, 1400 * 4);
+
       await tester.pumpWidgetBuilder(
         const LoginScreen(),
         wrapper: materialAppWrapper(),
@@ -39,35 +41,50 @@ void main() {
         findsOneWidget,
       );
 
-      expect(find.bySubtype<FilledButton>(), findsOneWidget);
+      expect(find.byType(TextField), findsNWidgets(2));
       expect(
-        find.descendant(
-          of: find.bySubtype<FilledButton>(),
-          matching: find.image(
-            const AssetImage('assets/google_logo.png'),
-          ),
-        ),
+        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
         findsOneWidget,
       );
+      expect(find.widgetWithText(InkWell, 'إنشاء حساب جديد'), findsOneWidget);
+
+      await tester.scrollUntilVisible(
+        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
+        20,
+        scrollable: find.byType(Scrollable).first,
+      );
+
+      await tester.tap(find.widgetWithText(InkWell, 'إنشاء حساب جديد'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(TextField), findsNWidgets(3));
       expect(
-        find.descendant(
-          of: find.bySubtype<FilledButton>(),
-          matching: find.text('تسجيل الدخول بجوجل'),
-        ),
+        find.widgetWithText(FilledButton, 'إنشاء حساب جديد'),
         findsOneWidget,
       );
+      expect(find.widgetWithText(InkWell, 'تسجيل الدخول'), findsOneWidget);
+
+      await tester.scrollUntilVisible(
+        find.widgetWithText(FilledButton, 'إنشاء حساب جديد'),
+        20,
+        scrollable: find.byType(Scrollable).first,
+      );
+
+      await tester.tap(find.widgetWithText(InkWell, 'تسجيل الدخول'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(TextField), findsNWidgets(2));
+      expect(
+        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('إنشاء حساب جديد'), findsOneWidget);
     },
   );
 
   testWidgets(
-    'Login Screen => Can login with Google',
+    'Login Screen => Can login with Email and Password',
     (tester) async {
-      // final googleSignInResult = _setUpGoogleSignIn();
-      // final googleSignIn = googleSignInResult.item1;
-      // final account = googleSignInResult.item2;
-
-      // final firebaseAuth = _setUpFirebaseAuth();
-
       final overrides = [
         _setUpNotificationsService(),
         _setUpUserSettings(),
@@ -80,14 +97,25 @@ void main() {
         const LoginScreen(),
         wrapper: materialAppWrapper(),
       );
+      await tester.enterText(find.byType(TextField).first, 'email@example.com');
+      await tester.enterText(find.byType(TextField).last, 'password');
 
       expect(find.bySubtype<FilledButton>(), findsOneWidget);
 
-      await tester.tap(find.bySubtype<FilledButton>());
+      await tester.scrollUntilVisible(
+        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
+        20,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.tap(
+        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
+      );
 
       verify(
-        AuthService.I
-            .signInWithEmailPassword(email: 'email', password: 'password'),
+        AuthService.I.signInWithEmailPassword(
+          email: 'email@example.com',
+          password: 'password',
+        ),
       );
     },
   );
@@ -160,6 +188,12 @@ Override _setUpAuthService({bool isSignedIn = true}) {
     );
   }
   when(authRepo.isSignedIn).thenReturn(isSignedIn);
+  when(
+    authRepo.signInWithEmailPassword(
+      email: 'email@example.com',
+      password: 'password',
+    ),
+  ).thenAnswer((_) async => true);
 
   return authServiceProvider.overrideWithValue(authRepo);
 }

@@ -4,8 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
+import 'dart:ui' as _i5;
 
 import 'package:church_admin/church_admin.dart' as _i2;
+import 'package:flutter/material.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart/rxdart.dart' as _i3;
 
@@ -52,9 +54,19 @@ class _FakeDateTime_2 extends _i1.SmartFake implements DateTime {
         );
 }
 
-class _FakeValueStream_3<T> extends _i1.SmartFake
+class _FakeDuration_3 extends _i1.SmartFake implements Duration {
+  _FakeDuration_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeValueStream_4<T> extends _i1.SmartFake
     implements _i3.ValueStream<T> {
-  _FakeValueStream_3(
+  _FakeValueStream_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -310,6 +322,223 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
       ) as _i4.Future<void>);
 }
 
+/// A class which mocks [LocalAuthService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
+  @override
+  Duration get timeToReauth => (super.noSuchMethod(
+        Invocation.getter(#timeToReauth),
+        returnValue: _FakeDuration_3(
+          this,
+          Invocation.getter(#timeToReauth),
+        ),
+        returnValueForMissingStub: _FakeDuration_3(
+          this,
+          Invocation.getter(#timeToReauth),
+        ),
+      ) as Duration);
+  @override
+  bool get shouldAuthenticate => (super.noSuchMethod(
+        Invocation.getter(#shouldAuthenticate),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i4.Stream<void> get refreshUIStream => (super.noSuchMethod(
+        Invocation.getter(#refreshUIStream),
+        returnValue: _i4.Stream<void>.empty(),
+        returnValueForMissingStub: _i4.Stream<void>.empty(),
+      ) as _i4.Stream<void>);
+  @override
+  bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #requestOneTimeAuthForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #shouldAuthenticateForPath,
+          [path],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  void didChangeAppLifecycleState(_i5.AppLifecycleState? state) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didChangeAppLifecycleState,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void scheduleReauth() => super.noSuchMethod(
+        Invocation.method(
+          #scheduleReauth,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void resetAuthState({String? path}) => super.noSuchMethod(
+        Invocation.method(
+          #resetAuthState,
+          [],
+          {#path: path},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
+        Invocation.method(
+          #canCheckBiometrics,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> authenticate() => (super.noSuchMethod(
+        Invocation.method(
+          #authenticate,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<String?> getPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getPasswordHash,
+          [],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+        returnValueForMissingStub: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
+  @override
+  _i4.Future<void> savePasswordHash(String? passwordHash) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #savePasswordHash,
+          [passwordHash],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> clearPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #clearPasswordHash,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<bool> didPopRoute() => (super.noSuchMethod(
+        Invocation.method(
+          #didPopRoute,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
+        Invocation.method(
+          #didPushRoute,
+          [route],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> didPushRouteInformation(
+          _i6.RouteInformation? routeInformation) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #didPushRouteInformation,
+          [routeInformation],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  void didChangeMetrics() => super.noSuchMethod(
+        Invocation.method(
+          #didChangeMetrics,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void didChangeTextScaleFactor() => super.noSuchMethod(
+        Invocation.method(
+          #didChangeTextScaleFactor,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void didChangePlatformBrightness() => super.noSuchMethod(
+        Invocation.method(
+          #didChangePlatformBrightness,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void didChangeLocales(List<_i5.Locale>? locales) => super.noSuchMethod(
+        Invocation.method(
+          #didChangeLocales,
+          [locales],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<_i5.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+        Invocation.method(
+          #didRequestAppExit,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
+        returnValueForMissingStub:
+            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
+      ) as _i4.Future<_i5.AppExitResponse>);
+  @override
+  void didHaveMemoryPressure() => super.noSuchMethod(
+        Invocation.method(
+          #didHaveMemoryPressure,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void didChangeAccessibilityFeatures() => super.noSuchMethod(
+        Invocation.method(
+          #didChangeAccessibilityFeatures,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
 /// A class which mocks [ConnectivityService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -324,11 +553,11 @@ class MockConnectivityService extends _i1.Mock
   @override
   _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _FakeValueStream_3<bool>(
+        returnValue: _FakeValueStream_4<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_3<bool>(
+        returnValueForMissingStub: _FakeValueStream_4<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
