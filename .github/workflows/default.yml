@@ -49,6 +49,7 @@ jobs:
 
       - uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        id: dart_tool_cache
         with:
           path: ${{ env.GITHUB_WORKSPACE }}/.dart_tool
           key: dart-tool-v1-${{hashFiles('pubspec.yaml', 'build.yaml')}}
@@ -62,8 +63,12 @@ jobs:
           cp --force lib/src/services/encryption/encryption_service_ci_impl.dart lib/src/services/encryption/encryption_service_impl.dart
           cp --force lib/src/services/secrets/secrets_service_ci_impl.dart lib/src/services/secrets/secrets_service_impl.dart
 
-      - name: Build files
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+      - name: Run new builder
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Run cached builder
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit == 'true' }}
         run: dart run build_runner build
 
       - name: Analyze project source
