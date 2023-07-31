@@ -6,7 +6,6 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
 ScaffoldMessengerState get scaffoldMessenger =>
     scaffoldMessengerKey.currentState!;
 
-///Gets the rise day date for the specified [year]
 DateTime getRiseDay([int? year]) {
   year ??= DateTime.now().year;
   final int a = year % 4;
