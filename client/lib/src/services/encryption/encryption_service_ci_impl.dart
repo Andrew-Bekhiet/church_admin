@@ -4,12 +4,16 @@ import 'dart:typed_data';
 import 'package:church_admin/church_admin.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class EncryptionServiceCIImpl extends EncryptionService {
-  static final EncryptionServiceCIImpl _instance = EncryptionServiceCIImpl._();
+class EncryptionServiceImpl extends EncryptionService {
+  static final EncryptionServiceImpl _instance = EncryptionServiceImpl._();
 
-  factory EncryptionServiceCIImpl() => _instance;
+  factory EncryptionServiceImpl() => _instance;
 
-  EncryptionServiceCIImpl._();
+  EncryptionServiceImpl._() {
+    if (const String.fromEnvironment('CI') != 'true') {
+      throw Exception('This EncryptionServiceImpl should only be used in CI');
+    }
+  }
 
   Uint8List? _cachedKeyBytes;
 

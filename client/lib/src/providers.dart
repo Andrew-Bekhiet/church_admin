@@ -52,9 +52,7 @@ late final AndroidDeviceInfo androidDeviceInfoInstance;
 final hiveProvider = Provider<HiveInterface>((ref) => Hive);
 
 final encryptionServiceProvider = Provider<EncryptionService>((ref) {
-  return const String.fromEnvironment('CI') == 'true'
-      ? EncryptionServiceCIImpl()
-      : EncryptionServiceImpl();
+  return EncryptionServiceImpl();
 });
 
 final Provider<DatabaseService> databaseServiceProvider =
@@ -111,9 +109,7 @@ final connectivityServiceProvider = Provider<ConnectivityService>(
 );
 
 final secretsServiceProvider = Provider<SecretsService>(
-  (ref) => const String.fromEnvironment('CI') == 'true'
-      ? SecretsServiceCIImpl()
-      : SecretsServiceImpl(),
+  (ref) => SecretsServiceImpl(),
 );
 
 final authServiceProvider = Provider<AuthService>(
