@@ -137,7 +137,14 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        verify(LocalAuthService.I.resetAuthState());
+        verifyInOrder([
+          LocalAuthService.I.verifyPassword(
+            email: _fakeUser.email!,
+            password: testPassword,
+            storedPasswordHash: anyNamed('storedPasswordHash'),
+          ),
+          LocalAuthService.I.resetAuthState()
+        ]);
         verifyNever(LocalAuthService.I.authenticate());
       } else {
         verify(LocalAuthService.I.authenticate());
@@ -308,7 +315,7 @@ Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
 }
 
 //Changing these values will change the precomputed password hash
-const password = r'password\1234';
+const testPassword = r'password\1234';
 const email = 'email';
 
 final User _fakeUser = User(
@@ -380,6 +387,13 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     when(mockLocalAuthService.canCheckBiometrics())
         .thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
     when(mockLocalAuthService.authenticate()).thenAnswer((_) async => true);
+    when(
+      mockLocalAuthService.verifyPassword(
+        email: anyNamed('email'),
+        password: anyNamed('password'),
+        storedPasswordHash: anyNamed('storedPasswordHash'),
+      ),
+    ).thenAnswer((_) async => _.namedArguments[#password] == testPassword);
 
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
@@ -418,8 +432,11 @@ class FakeEncryptionService extends EncryptionService {
   }
 
   @override
-  Future<bool> verifyPassword(String _password, Uint8List keyBytes) async {
-    if (_password == password) return true;
-    return false;
+  Future<bool> verifyPassword({
+    required String passwordToVerify,
+    required Uint8List keyBytes,
+    required String? storedPasswordHash,
+  }) async {
+    return passwordToVerify == testPassword;
   }
 }

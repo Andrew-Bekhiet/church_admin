@@ -65,14 +65,16 @@ abstract class EncryptionService {
     );
   }
 
-  Future<bool> verifyPassword(String password, Uint8List keyBytes) async {
-    final storedKeyHash = await LocalAuthService.I.getPasswordHash();
+  Future<bool> verifyPassword({
+    required String passwordToVerify,
+    required Uint8List keyBytes,
+    required String? storedPasswordHash,
+  }) async {
+    if (storedPasswordHash != null) {
+      final passwordHashToVerify =
+          await hashPassword(password: passwordToVerify, keyBytes: keyBytes);
 
-    if (storedKeyHash != null) {
-      final passwordHash =
-          await hashPassword(password: password, keyBytes: keyBytes);
-
-      return storedKeyHash == passwordHash;
+      return storedPasswordHash == passwordHashToVerify;
     }
 
     return false;

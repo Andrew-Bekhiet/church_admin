@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i10;
 
-import 'package:church_admin/church_admin.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:gql/ast.dart' as _i7;
 import 'package:gql_exec/gql_exec.dart' as _i6;
 import 'package:gql_exec/src/context.dart' as _i5;
@@ -16,7 +16,7 @@ import 'package:graphql/src/links/websocket_link/websocket_client.dart' as _i9;
 import 'package:graphql/src/links/websocket_link/websocket_link.dart' as _i13;
 import 'package:http/http.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
+import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,9 +29,9 @@ import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueStream_0<T> extends _i1.SmartFake
-    implements _i2.ValueStream<T> {
-  _FakeValueStream_0(
+class _FakeMultiFactorManager_0 extends _i1.SmartFake
+    implements _i2.MultiFactorManager {
+  _FakeMultiFactorManager_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -40,9 +40,9 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorSession_1 extends _i1.SmartFake
-    implements _i3.MultiFactorSession {
-  _FakeMultiFactorSession_1(
+class _FakeValueStream_1<T> extends _i1.SmartFake
+    implements _i3.ValueStream<T> {
+  _FakeValueStream_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -51,9 +51,8 @@ class _FakeMultiFactorSession_1 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_2 extends _i1.SmartFake
-    implements _i3.MultiFactorInfo {
-  _FakeMultiFactorInfo_2(
+class _FakeOperation_2 extends _i1.SmartFake implements _i4.Operation {
+  _FakeOperation_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,8 +61,8 @@ class _FakeMultiFactorInfo_2 extends _i1.SmartFake
         );
 }
 
-class _FakeOperation_3 extends _i1.SmartFake implements _i4.Operation {
-  _FakeOperation_3(
+class _FakeContext_3 extends _i1.SmartFake implements _i5.Context {
+  _FakeContext_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -72,8 +71,8 @@ class _FakeOperation_3 extends _i1.SmartFake implements _i4.Operation {
         );
 }
 
-class _FakeContext_4 extends _i1.SmartFake implements _i5.Context {
-  _FakeContext_4(
+class _FakeRequest_4 extends _i1.SmartFake implements _i6.Request {
+  _FakeRequest_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -82,8 +81,8 @@ class _FakeContext_4 extends _i1.SmartFake implements _i5.Context {
         );
 }
 
-class _FakeRequest_5 extends _i1.SmartFake implements _i6.Request {
-  _FakeRequest_5(
+class _FakeResponse_5 extends _i1.SmartFake implements _i6.Response {
+  _FakeResponse_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -92,8 +91,8 @@ class _FakeRequest_5 extends _i1.SmartFake implements _i6.Request {
         );
 }
 
-class _FakeResponse_6 extends _i1.SmartFake implements _i6.Response {
-  _FakeResponse_6(
+class _FakeDocumentNode_6 extends _i1.SmartFake implements _i7.DocumentNode {
+  _FakeDocumentNode_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -102,8 +101,8 @@ class _FakeResponse_6 extends _i1.SmartFake implements _i6.Response {
         );
 }
 
-class _FakeDocumentNode_7 extends _i1.SmartFake implements _i7.DocumentNode {
-  _FakeDocumentNode_7(
+class _FakeUri_7 extends _i1.SmartFake implements Uri {
+  _FakeUri_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -112,19 +111,9 @@ class _FakeDocumentNode_7 extends _i1.SmartFake implements _i7.DocumentNode {
         );
 }
 
-class _FakeUri_8 extends _i1.SmartFake implements Uri {
-  _FakeUri_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeRequestSerializer_9 extends _i1.SmartFake
+class _FakeRequestSerializer_8 extends _i1.SmartFake
     implements _i8.RequestSerializer {
-  _FakeRequestSerializer_9(
+  _FakeRequestSerializer_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -133,9 +122,9 @@ class _FakeRequestSerializer_9 extends _i1.SmartFake
         );
 }
 
-class _FakeResponseParser_10 extends _i1.SmartFake
+class _FakeResponseParser_9 extends _i1.SmartFake
     implements _i8.ResponseParser {
-  _FakeResponseParser_10(
+  _FakeResponseParser_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -144,8 +133,8 @@ class _FakeResponseParser_10 extends _i1.SmartFake
         );
 }
 
-class _FakeLink_11 extends _i1.SmartFake implements _i8.Link {
-  _FakeLink_11(
+class _FakeLink_10 extends _i1.SmartFake implements _i8.Link {
+  _FakeLink_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -154,9 +143,9 @@ class _FakeLink_11 extends _i1.SmartFake implements _i8.Link {
         );
 }
 
-class _FakeSocketClientConfig_12 extends _i1.SmartFake
+class _FakeSocketClientConfig_11 extends _i1.SmartFake
     implements _i9.SocketClientConfig {
-  _FakeSocketClientConfig_12(
+  _FakeSocketClientConfig_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -168,7 +157,28 @@ class _FakeSocketClientConfig_12 extends _i1.SmartFake
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i3.AuthService {
+class MockAuthService extends _i1.Mock implements _i2.AuthService {
+  @override
+  _i2.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+        Invocation.getter(#multiFactorManager),
+        returnValue: _FakeMultiFactorManager_0(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorManager_0(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+      ) as _i2.MultiFactorManager);
+  @override
+  set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #multiFactorManager,
+          _multiFactorManager,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
@@ -176,35 +186,29 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i2.ValueStream<_i3.User?> get userStream => (super.noSuchMethod(
+  _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _FakeValueStream_0<_i3.User?>(
+        returnValue: _FakeValueStream_1<_i2.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<_i3.User?>(
+        returnValueForMissingStub: _FakeValueStream_1<_i2.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-      ) as _i2.ValueStream<_i3.User?>);
+      ) as _i3.ValueStream<_i2.User?>);
   @override
-  _i2.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
+  _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _FakeValueStream_0<String?>(
+        returnValue: _FakeValueStream_1<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<String?>(
+        returnValueForMissingStub: _FakeValueStream_1<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-      ) as _i2.ValueStream<String?>);
+      ) as _i3.ValueStream<String?>);
   @override
   _i10.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -260,95 +264,6 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<_i3.MultiFactorSession> startMultiFactorSession(
-          {required String? password}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorSession,
-          [],
-          {#password: password},
-        ),
-        returnValue:
-            _i10.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i10.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-      ) as _i10.Future<_i3.MultiFactorSession>);
-  @override
-  _i3.MultiFactorInfo getMultiFactorInfoFor(_i3.MultiFactorSession? session) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
-        ),
-        returnValue: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-      ) as _i3.MultiFactorInfo);
-  @override
-  _i10.Future<(String, int?)> initiateMultifactorLogin(
-    _i3.MultiFactorSession? session, {
-    _i3.MultiFactorInfo? factor,
-    String? phoneNumber,
-    int? forceResendingToken,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #initiateMultifactorLogin,
-          [session],
-          {
-            #factor: factor,
-            #phoneNumber: phoneNumber,
-            #forceResendingToken: forceResendingToken,
-          },
-        ),
-        returnValue: _i10.Future<(String, int?)>.value(('', null)),
-        returnValueForMissingStub:
-            _i10.Future<(String, int?)>.value(('', null)),
-      ) as _i10.Future<(String, int?)>);
-  @override
-  _i10.Future<void> finishMultiFactorLogin(
-    String? verificationId,
-    String? smsCode,
-    _i3.MultiFactorSession? session,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #finishMultiFactorLogin,
-          [
-            verificationId,
-            smsCode,
-            session,
-          ],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-  @override
   _i10.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
@@ -357,6 +272,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+  @override
+  _i10.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoredPasswordHash,
+          [],
+        ),
+        returnValue: _i10.Future<String?>.value(),
+        returnValueForMissingStub: _i10.Future<String?>.value(),
+      ) as _i10.Future<String?>);
   @override
   _i10.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -385,11 +309,11 @@ class MockRequest extends _i1.Mock implements _i6.Request {
   @override
   _i4.Operation get operation => (super.noSuchMethod(
         Invocation.getter(#operation),
-        returnValue: _FakeOperation_3(
+        returnValue: _FakeOperation_2(
           this,
           Invocation.getter(#operation),
         ),
-        returnValueForMissingStub: _FakeOperation_3(
+        returnValueForMissingStub: _FakeOperation_2(
           this,
           Invocation.getter(#operation),
         ),
@@ -403,11 +327,11 @@ class MockRequest extends _i1.Mock implements _i6.Request {
   @override
   _i5.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
-        returnValue: _FakeContext_4(
+        returnValue: _FakeContext_3(
           this,
           Invocation.getter(#context),
         ),
-        returnValueForMissingStub: _FakeContext_4(
+        returnValueForMissingStub: _FakeContext_3(
           this,
           Invocation.getter(#context),
         ),
@@ -419,14 +343,14 @@ class MockRequest extends _i1.Mock implements _i6.Request {
           #withContextEntry,
           [entry],
         ),
-        returnValue: _FakeRequest_5(
+        returnValue: _FakeRequest_4(
           this,
           Invocation.method(
             #withContextEntry,
             [entry],
           ),
         ),
-        returnValueForMissingStub: _FakeRequest_5(
+        returnValueForMissingStub: _FakeRequest_4(
           this,
           Invocation.method(
             #withContextEntry,
@@ -442,14 +366,14 @@ class MockRequest extends _i1.Mock implements _i6.Request {
           #updateContextEntry,
           [update],
         ),
-        returnValue: _FakeRequest_5(
+        returnValue: _FakeRequest_4(
           this,
           Invocation.method(
             #updateContextEntry,
             [update],
           ),
         ),
-        returnValueForMissingStub: _FakeRequest_5(
+        returnValueForMissingStub: _FakeRequest_4(
           this,
           Invocation.method(
             #updateContextEntry,
@@ -473,11 +397,11 @@ class MockResponse extends _i1.Mock implements _i6.Response {
   @override
   _i5.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
-        returnValue: _FakeContext_4(
+        returnValue: _FakeContext_3(
           this,
           Invocation.getter(#context),
         ),
-        returnValueForMissingStub: _FakeContext_4(
+        returnValueForMissingStub: _FakeContext_3(
           this,
           Invocation.getter(#context),
         ),
@@ -489,14 +413,14 @@ class MockResponse extends _i1.Mock implements _i6.Response {
           #withContextEntry,
           [entry],
         ),
-        returnValue: _FakeResponse_6(
+        returnValue: _FakeResponse_5(
           this,
           Invocation.method(
             #withContextEntry,
             [entry],
           ),
         ),
-        returnValueForMissingStub: _FakeResponse_6(
+        returnValueForMissingStub: _FakeResponse_5(
           this,
           Invocation.method(
             #withContextEntry,
@@ -512,14 +436,14 @@ class MockResponse extends _i1.Mock implements _i6.Response {
           #updateContextEntry,
           [update],
         ),
-        returnValue: _FakeResponse_6(
+        returnValue: _FakeResponse_5(
           this,
           Invocation.method(
             #updateContextEntry,
             [update],
           ),
         ),
-        returnValueForMissingStub: _FakeResponse_6(
+        returnValueForMissingStub: _FakeResponse_5(
           this,
           Invocation.method(
             #updateContextEntry,
@@ -537,11 +461,11 @@ class MockOperation extends _i1.Mock implements _i4.Operation {
   @override
   _i7.DocumentNode get document => (super.noSuchMethod(
         Invocation.getter(#document),
-        returnValue: _FakeDocumentNode_7(
+        returnValue: _FakeDocumentNode_6(
           this,
           Invocation.getter(#document),
         ),
-        returnValueForMissingStub: _FakeDocumentNode_7(
+        returnValueForMissingStub: _FakeDocumentNode_6(
           this,
           Invocation.getter(#document),
         ),
@@ -555,11 +479,11 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
   @override
   Uri get uri => (super.noSuchMethod(
         Invocation.getter(#uri),
-        returnValue: _FakeUri_8(
+        returnValue: _FakeUri_7(
           this,
           Invocation.getter(#uri),
         ),
-        returnValueForMissingStub: _FakeUri_8(
+        returnValueForMissingStub: _FakeUri_7(
           this,
           Invocation.getter(#uri),
         ),
@@ -579,11 +503,11 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
   @override
   _i8.RequestSerializer get serializer => (super.noSuchMethod(
         Invocation.getter(#serializer),
-        returnValue: _FakeRequestSerializer_9(
+        returnValue: _FakeRequestSerializer_8(
           this,
           Invocation.getter(#serializer),
         ),
-        returnValueForMissingStub: _FakeRequestSerializer_9(
+        returnValueForMissingStub: _FakeRequestSerializer_8(
           this,
           Invocation.getter(#serializer),
         ),
@@ -591,11 +515,11 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
   @override
   _i8.ResponseParser get parser => (super.noSuchMethod(
         Invocation.getter(#parser),
-        returnValue: _FakeResponseParser_10(
+        returnValue: _FakeResponseParser_9(
           this,
           Invocation.getter(#parser),
         ),
-        returnValueForMissingStub: _FakeResponseParser_10(
+        returnValueForMissingStub: _FakeResponseParser_9(
           this,
           Invocation.getter(#parser),
         ),
@@ -646,14 +570,14 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           #concat,
           [next],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #concat,
             [next],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #concat,
@@ -667,14 +591,14 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           #route,
           [route],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #route,
             [route],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #route,
@@ -697,7 +621,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
             right,
           ],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #split,
@@ -708,7 +632,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
             ],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #split,
@@ -741,11 +665,11 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
   @override
   _i9.SocketClientConfig get config => (super.noSuchMethod(
         Invocation.getter(#config),
-        returnValue: _FakeSocketClientConfig_12(
+        returnValue: _FakeSocketClientConfig_11(
           this,
           Invocation.getter(#config),
         ),
-        returnValueForMissingStub: _FakeSocketClientConfig_12(
+        returnValueForMissingStub: _FakeSocketClientConfig_11(
           this,
           Invocation.getter(#config),
         ),
@@ -789,14 +713,14 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
           #concat,
           [next],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #concat,
             [next],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #concat,
@@ -810,14 +734,14 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
           #route,
           [route],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #route,
             [route],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #route,
@@ -840,7 +764,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
             right,
           ],
         ),
-        returnValue: _FakeLink_11(
+        returnValue: _FakeLink_10(
           this,
           Invocation.method(
             #split,
@@ -851,7 +775,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
             ],
           ),
         ),
-        returnValueForMissingStub: _FakeLink_11(
+        returnValueForMissingStub: _FakeLink_10(
           this,
           Invocation.method(
             #split,

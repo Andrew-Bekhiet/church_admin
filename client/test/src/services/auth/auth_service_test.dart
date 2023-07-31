@@ -30,7 +30,7 @@ final initialUser = User(
 );
 
 @GenerateNiceMocks([
-  MockSpec<AuthCache>(),
+  MockSpec<AuthStorage>(),
   MockSpec<AuthAdapter>(),
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>()
@@ -43,7 +43,7 @@ void main() {
     'Authentication Service => initialization => not logged in',
     () async {
       await globalProviderContainer
-          .read(authCacheProvider)
+          .read(authStorageProvider)
           .writeUserToCache(null);
 
       final unit = _createAuthService();
@@ -93,7 +93,7 @@ void main() {
 
       final captured = verify(
         globalProviderContainer
-            .read(authCacheProvider)
+            .read(authStorageProvider)
             .writeUserToCache(captureAny),
       ).captured;
 
@@ -223,9 +223,8 @@ void main() {
 Future<void> _setUp() async {
   final overrides = [
     await _setUpMockConnectivity(),
-    await _setUpMockAuthCache(initialUser: initialUser),
+    await _setUpMockAuthStorage(initialUser: initialUser),
     await _setUpMockAuthAdapter(userOnSignIn: initialUser),
-    await _setUpMockLocalAuthService(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -240,15 +239,16 @@ Future<Override> _setUpMockConnectivity() async {
   return connectivityServiceProvider.overrideWithValue(mock);
 }
 
-Future<Override> _setUpMockAuthCache({User? initialUser}) async {
+Future<Override> _setUpMockAuthStorage({User? initialUser}) async {
   User? state = initialUser;
 
-  final mock = MockAuthCache();
+  final mock = MockAuthStorage();
   when(mock.getUserFromCache()).thenAnswer((_) async => state);
+  when(mock.getPasswordHash()).thenAnswer((_) async => state?.passwordKeyHash);
   when(mock.writeUserToCache(any))
       .thenAnswer((i) async => state = i.positionalArguments[0]);
 
-  return authCacheProvider.overrideWithValue(mock);
+  return authStorageProvider.overrideWithValue(mock);
 }
 
 Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
@@ -269,25 +269,16 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   return authAdapterProvider.overrideWithValue(mock);
 }
 
-Future<Override> _setUpMockLocalAuthService() async {
-  final mock = MockLocalAuthService();
-
-  when(mock.getPasswordHash())
-      .thenAnswer((_) async => initialUser.passwordKeyHash);
-
-  return localAuthServiceProvider.overrideWithValue(mock);
-}
-
 AuthService _createAuthService({bool noCachedUser = false}) {
   if (noCachedUser) {
     return AuthService.noCachedUser(
-      cache: globalProviderContainer.read(authCacheProvider),
+      storage: globalProviderContainer.read(authStorageProvider),
       adapter: globalProviderContainer.read(authAdapterProvider),
     );
   }
 
   return AuthService(
-    cache: globalProviderContainer.read(authCacheProvider),
+    storage: globalProviderContainer.read(authStorageProvider),
     adapter: globalProviderContainer.read(authAdapterProvider),
   );
 }

@@ -154,11 +154,14 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       return;
     }
 
-    final keyBytes = await EncryptionService.I.deriveKey(
+    final storedPasswordHash = await AuthService.I.getStoredPasswordHash();
+    final isPasswordValid = await LocalAuthService.I.verifyPassword(
+      email: AuthService.I.currentUser!.email!,
       password: password,
-      salt: AuthService.I.currentUser!.email!,
+      storedPasswordHash: storedPasswordHash,
     );
-    if (await EncryptionService.I.verifyPassword(password, keyBytes)) {
+
+    if (isPasswordValid) {
       LocalAuthService.I.resetAuthState(path: widget.next);
     } else {
       _passwordText.clear();

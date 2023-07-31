@@ -15,6 +15,7 @@ import 'church_admin_app_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<LoggingService>(),
   MockSpec<AuthService>(),
+  MockSpec<MultiFactorManager>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
   MockSpec<PersonsDAO>(),
@@ -288,6 +289,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       ),
     );
     when(mock.currentUser).thenReturn(user);
+    when(mock.multiFactorManager).thenReturn(MockMultiFactorManager());
 
     when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
 

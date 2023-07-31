@@ -46,7 +46,7 @@ void main() {
     () async {
       final mockSecureStorage =
           globalProviderContainer.read(secureStorageProvider);
-      final unit = AuthCache(secureStorage: mockSecureStorage);
+      final unit = AuthStorage(secureStorage: mockSecureStorage);
 
       when(mockSecureStorage.read(key: 'User'))
           .thenAnswer((_) async => jsonEncode(user.toJson()));
@@ -64,7 +64,7 @@ void main() {
     () async {
       final mockSecureStorage =
           globalProviderContainer.read(secureStorageProvider);
-      final unit = AuthCache(secureStorage: mockSecureStorage);
+      final unit = AuthStorage(secureStorage: mockSecureStorage);
 
       await unit.writeUserToCache(user);
       verify(
@@ -83,7 +83,7 @@ void main() {
     () async {
       final mockSecureStorage =
           globalProviderContainer.read(secureStorageProvider);
-      final unit = AuthCache(secureStorage: mockSecureStorage);
+      final unit = AuthStorage(secureStorage: mockSecureStorage);
 
       when(mockSecureStorage.read(key: 'User')).thenAnswer(
         (_) async => jsonEncode(user.toJson()).replaceFirst('{', '{ '),

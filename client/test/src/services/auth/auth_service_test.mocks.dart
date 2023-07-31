@@ -75,10 +75,10 @@ class _FakeValueStream_4<T> extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [AuthCache].
+/// A class which mocks [AuthStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthCache extends _i1.Mock implements _i2.AuthCache {
+class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
   @override
   _i4.Future<_i2.User?> getUserFromCache() => (super.noSuchMethod(
         Invocation.method(
@@ -93,6 +93,40 @@ class MockAuthCache extends _i1.Mock implements _i2.AuthCache {
         Invocation.method(
           #writeUserToCache,
           [user],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<String?> getPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getPasswordHash,
+          [],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+        returnValueForMissingStub: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
+  @override
+  _i4.Future<void> saveUserPasswordHash(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUserPasswordHash,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> clearPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #clearPasswordHash,
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
@@ -413,33 +447,24 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
   @override
-  _i4.Future<String?> getPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #getPasswordHash,
-          [],
-        ),
-        returnValue: _i4.Future<String?>.value(),
-        returnValueForMissingStub: _i4.Future<String?>.value(),
-      ) as _i4.Future<String?>);
-  @override
-  _i4.Future<void> savePasswordHash(String? passwordHash) =>
+  _i4.Future<bool> verifyPassword({
+    required String? email,
+    required String? password,
+    String? storedPasswordHash,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #savePasswordHash,
-          [passwordHash],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> clearPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #clearPasswordHash,
+          #verifyPassword,
           [],
+          {
+            #email: email,
+            #password: password,
+            #storedPasswordHash: storedPasswordHash,
+          },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

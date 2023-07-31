@@ -158,20 +158,21 @@ class LocalAuthService with WidgetsBindingObserver {
     return _localAuthCompleter!.future;
   }
 
-  Future<String?> getPasswordHash() {
-    return _secureStorage.read(key: 'passwordHash');
-  }
+  Future<bool> verifyPassword({
+    required String email,
+    required String password,
+    String? storedPasswordHash,
+  }) async {
+    final keyBytes = await EncryptionService.I.deriveKey(
+      password: password,
+      salt: email,
+    );
 
-  Future<void> savePasswordHash(String passwordHash) async {
-    if (await _secureStorage.containsKey(key: 'passwordHash')) {
-      throw StateError('User already has a password');
-    }
-
-    return _secureStorage.write(key: 'passwordHash', value: passwordHash);
-  }
-
-  Future<void> clearPasswordHash() {
-    return _secureStorage.delete(key: 'passwordHash');
+    return EncryptionService.I.verifyPassword(
+      passwordToVerify: password,
+      keyBytes: keyBytes,
+      storedPasswordHash: storedPasswordHash,
+    );
   }
 
   Future<void> dispose() async {

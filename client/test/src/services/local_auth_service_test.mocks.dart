@@ -36,20 +36,9 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorSession_1 extends _i1.SmartFake
-    implements _i3.MultiFactorSession {
-  _FakeMultiFactorSession_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeMultiFactorInfo_2 extends _i1.SmartFake
-    implements _i3.MultiFactorInfo {
-  _FakeMultiFactorInfo_2(
+class _FakeMultiFactorManager_1 extends _i1.SmartFake
+    implements _i3.MultiFactorManager {
+  _FakeMultiFactorManager_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -234,13 +223,25 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
   }
 
   @override
+  _i3.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+        Invocation.getter(#multiFactorManager),
+        returnValue: _FakeMultiFactorManager_1(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+      ) as _i3.MultiFactorManager);
+  @override
+  set multiFactorManager(_i3.MultiFactorManager? _multiFactorManager) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #multiFactorManager,
+          _multiFactorManager,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
-        returnValue: false,
-      ) as bool);
-  @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
         returnValue: false,
       ) as bool);
   @override
@@ -312,77 +313,6 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i3.MultiFactorSession> startMultiFactorSession(
-          {required String? password}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorSession,
-          [],
-          {#password: password},
-        ),
-        returnValue:
-            _i4.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-      ) as _i4.Future<_i3.MultiFactorSession>);
-  @override
-  _i3.MultiFactorInfo getMultiFactorInfoFor(_i3.MultiFactorSession? session) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
-        ),
-        returnValue: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-      ) as _i3.MultiFactorInfo);
-  @override
-  _i4.Future<(String, int?)> initiateMultifactorLogin(
-    _i3.MultiFactorSession? session, {
-    _i3.MultiFactorInfo? factor,
-    String? phoneNumber,
-    int? forceResendingToken,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #initiateMultifactorLogin,
-          [session],
-          {
-            #factor: factor,
-            #phoneNumber: phoneNumber,
-            #forceResendingToken: forceResendingToken,
-          },
-        ),
-        returnValue: _i4.Future<(String, int?)>.value(('', null)),
-      ) as _i4.Future<(String, int?)>);
-  @override
-  _i4.Future<void> finishMultiFactorLogin(
-    String? verificationId,
-    String? smsCode,
-    _i3.MultiFactorSession? session,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #finishMultiFactorLogin,
-          [
-            verificationId,
-            smsCode,
-            session,
-          ],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
   _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
@@ -391,6 +321,14 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoredPasswordHash,
+          [],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
   @override
   _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(

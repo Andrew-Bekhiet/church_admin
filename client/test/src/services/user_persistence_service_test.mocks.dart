@@ -35,9 +35,9 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorSession_1 extends _i1.SmartFake
-    implements _i3.MultiFactorSession {
-  _FakeMultiFactorSession_1(
+class _FakeMultiFactorManager_1 extends _i1.SmartFake
+    implements _i3.MultiFactorManager {
+  _FakeMultiFactorManager_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,9 +46,8 @@ class _FakeMultiFactorSession_1 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_2 extends _i1.SmartFake
-    implements _i3.MultiFactorInfo {
-  _FakeMultiFactorInfo_2(
+class _FakeFirebaseApp_2 extends _i1.SmartFake implements _i4.FirebaseApp {
+  _FakeFirebaseApp_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -57,19 +56,9 @@ class _FakeMultiFactorInfo_2 extends _i1.SmartFake
         );
 }
 
-class _FakeFirebaseApp_3 extends _i1.SmartFake implements _i4.FirebaseApp {
-  _FakeFirebaseApp_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDatabaseReference_4 extends _i1.SmartFake
+class _FakeDatabaseReference_3 extends _i1.SmartFake
     implements _i5.DatabaseReference {
-  _FakeDatabaseReference_4(
+  _FakeDatabaseReference_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -78,9 +67,9 @@ class _FakeDatabaseReference_4 extends _i1.SmartFake
         );
 }
 
-class _FakeTransactionResult_5 extends _i1.SmartFake
+class _FakeTransactionResult_4 extends _i1.SmartFake
     implements _i5.TransactionResult {
-  _FakeTransactionResult_5(
+  _FakeTransactionResult_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -89,8 +78,8 @@ class _FakeTransactionResult_5 extends _i1.SmartFake
         );
 }
 
-class _FakeOnDisconnect_6 extends _i1.SmartFake implements _i5.OnDisconnect {
-  _FakeOnDisconnect_6(
+class _FakeOnDisconnect_5 extends _i1.SmartFake implements _i5.OnDisconnect {
+  _FakeOnDisconnect_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -99,8 +88,8 @@ class _FakeOnDisconnect_6 extends _i1.SmartFake implements _i5.OnDisconnect {
         );
 }
 
-class _FakeDataSnapshot_7 extends _i1.SmartFake implements _i5.DataSnapshot {
-  _FakeDataSnapshot_7(
+class _FakeDataSnapshot_6 extends _i1.SmartFake implements _i5.DataSnapshot {
+  _FakeDataSnapshot_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -109,8 +98,8 @@ class _FakeDataSnapshot_7 extends _i1.SmartFake implements _i5.DataSnapshot {
         );
 }
 
-class _FakeDatabaseEvent_8 extends _i1.SmartFake implements _i5.DatabaseEvent {
-  _FakeDatabaseEvent_8(
+class _FakeDatabaseEvent_7 extends _i1.SmartFake implements _i5.DatabaseEvent {
+  _FakeDatabaseEvent_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -119,8 +108,8 @@ class _FakeDatabaseEvent_8 extends _i1.SmartFake implements _i5.DatabaseEvent {
         );
 }
 
-class _FakeQuery_9 extends _i1.SmartFake implements _i5.Query {
-  _FakeQuery_9(
+class _FakeQuery_8 extends _i1.SmartFake implements _i5.Query {
+  _FakeQuery_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -177,14 +166,29 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthService extends _i1.Mock implements _i3.AuthService {
   @override
+  _i3.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+        Invocation.getter(#multiFactorManager),
+        returnValue: _FakeMultiFactorManager_1(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorManager_1(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+      ) as _i3.MultiFactorManager);
+  @override
+  set multiFactorManager(_i3.MultiFactorManager? _multiFactorManager) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #multiFactorManager,
+          _multiFactorManager,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
@@ -267,94 +271,6 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
   @override
-  _i6.Future<_i3.MultiFactorSession> startMultiFactorSession(
-          {required String? password}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorSession,
-          [],
-          {#password: password},
-        ),
-        returnValue:
-            _i6.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i6.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-      ) as _i6.Future<_i3.MultiFactorSession>);
-  @override
-  _i3.MultiFactorInfo getMultiFactorInfoFor(_i3.MultiFactorSession? session) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
-        ),
-        returnValue: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-      ) as _i3.MultiFactorInfo);
-  @override
-  _i6.Future<(String, int?)> initiateMultifactorLogin(
-    _i3.MultiFactorSession? session, {
-    _i3.MultiFactorInfo? factor,
-    String? phoneNumber,
-    int? forceResendingToken,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #initiateMultifactorLogin,
-          [session],
-          {
-            #factor: factor,
-            #phoneNumber: phoneNumber,
-            #forceResendingToken: forceResendingToken,
-          },
-        ),
-        returnValue: _i6.Future<(String, int?)>.value(('', null)),
-        returnValueForMissingStub: _i6.Future<(String, int?)>.value(('', null)),
-      ) as _i6.Future<(String, int?)>);
-  @override
-  _i6.Future<void> finishMultiFactorLogin(
-    String? verificationId,
-    String? smsCode,
-    _i3.MultiFactorSession? session,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #finishMultiFactorLogin,
-          [
-            verificationId,
-            smsCode,
-            session,
-          ],
-        ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
-  @override
   _i6.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
@@ -363,6 +279,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+  @override
+  _i6.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoredPasswordHash,
+          [],
+        ),
+        returnValue: _i6.Future<String?>.value(),
+        returnValueForMissingStub: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
   @override
   _i6.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -390,11 +315,11 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
   @override
   _i4.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_3(
+        returnValue: _FakeFirebaseApp_2(
           this,
           Invocation.getter(#app),
         ),
-        returnValueForMissingStub: _FakeFirebaseApp_3(
+        returnValueForMissingStub: _FakeFirebaseApp_2(
           this,
           Invocation.getter(#app),
         ),
@@ -442,14 +367,14 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
           #reference,
           [],
         ),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #reference,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #reference,
@@ -463,14 +388,14 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
           #ref,
           [path],
         ),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #ref,
             [path],
           ),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #ref,
@@ -484,14 +409,14 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
           #refFromURL,
           [url],
         ),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #refFromURL,
             [url],
           ),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #refFromURL,
@@ -559,11 +484,11 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
   @override
   _i5.DatabaseReference get root => (super.noSuchMethod(
         Invocation.getter(#root),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.getter(#root),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.getter(#root),
         ),
@@ -571,11 +496,11 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
   @override
   _i5.DatabaseReference get ref => (super.noSuchMethod(
         Invocation.getter(#ref),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.getter(#ref),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.getter(#ref),
         ),
@@ -622,14 +547,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #child,
           [path],
         ),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #child,
             [path],
           ),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #child,
@@ -643,14 +568,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #push,
           [],
         ),
-        returnValue: _FakeDatabaseReference_4(
+        returnValue: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #push,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeDatabaseReference_4(
+        returnValueForMissingStub: _FakeDatabaseReference_3(
           this,
           Invocation.method(
             #push,
@@ -722,7 +647,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           {#applyLocally: applyLocally},
         ),
         returnValue:
-            _i6.Future<_i5.TransactionResult>.value(_FakeTransactionResult_5(
+            _i6.Future<_i5.TransactionResult>.value(_FakeTransactionResult_4(
           this,
           Invocation.method(
             #runTransaction,
@@ -731,7 +656,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.TransactionResult>.value(_FakeTransactionResult_5(
+            _i6.Future<_i5.TransactionResult>.value(_FakeTransactionResult_4(
           this,
           Invocation.method(
             #runTransaction,
@@ -746,14 +671,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #onDisconnect,
           [],
         ),
-        returnValue: _FakeOnDisconnect_6(
+        returnValue: _FakeOnDisconnect_5(
           this,
           Invocation.method(
             #onDisconnect,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeOnDisconnect_6(
+        returnValueForMissingStub: _FakeOnDisconnect_5(
           this,
           Invocation.method(
             #onDisconnect,
@@ -767,7 +692,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #get,
           [],
         ),
-        returnValue: _i6.Future<_i5.DataSnapshot>.value(_FakeDataSnapshot_7(
+        returnValue: _i6.Future<_i5.DataSnapshot>.value(_FakeDataSnapshot_6(
           this,
           Invocation.method(
             #get,
@@ -775,7 +700,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.DataSnapshot>.value(_FakeDataSnapshot_7(
+            _i6.Future<_i5.DataSnapshot>.value(_FakeDataSnapshot_6(
           this,
           Invocation.method(
             #get,
@@ -791,7 +716,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #once,
           [eventType],
         ),
-        returnValue: _i6.Future<_i5.DatabaseEvent>.value(_FakeDatabaseEvent_8(
+        returnValue: _i6.Future<_i5.DatabaseEvent>.value(_FakeDatabaseEvent_7(
           this,
           Invocation.method(
             #once,
@@ -799,7 +724,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.DatabaseEvent>.value(_FakeDatabaseEvent_8(
+            _i6.Future<_i5.DatabaseEvent>.value(_FakeDatabaseEvent_7(
           this,
           Invocation.method(
             #once,
@@ -818,7 +743,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           [value],
           {#key: key},
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #startAt,
@@ -826,7 +751,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
             {#key: key},
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #startAt,
@@ -846,7 +771,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           [value],
           {#key: key},
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #startAfter,
@@ -854,7 +779,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
             {#key: key},
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #startAfter,
@@ -874,7 +799,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           [value],
           {#key: key},
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #endAt,
@@ -882,7 +807,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
             {#key: key},
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #endAt,
@@ -902,7 +827,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           [value],
           {#key: key},
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #endBefore,
@@ -910,7 +835,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
             {#key: key},
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #endBefore,
@@ -930,7 +855,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           [value],
           {#key: key},
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #equalTo,
@@ -938,7 +863,7 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
             {#key: key},
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #equalTo,
@@ -953,14 +878,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #limitToFirst,
           [limit],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #limitToFirst,
             [limit],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #limitToFirst,
@@ -974,14 +899,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #limitToLast,
           [limit],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #limitToLast,
             [limit],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #limitToLast,
@@ -995,14 +920,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #orderByChild,
           [path],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByChild,
             [path],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByChild,
@@ -1016,14 +941,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #orderByKey,
           [],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByKey,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByKey,
@@ -1037,14 +962,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #orderByValue,
           [],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByValue,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByValue,
@@ -1058,14 +983,14 @@ class MockDatabaseReference extends _i1.Mock implements _i5.DatabaseReference {
           #orderByPriority,
           [],
         ),
-        returnValue: _FakeQuery_9(
+        returnValue: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByPriority,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeQuery_9(
+        returnValueForMissingStub: _FakeQuery_8(
           this,
           Invocation.method(
             #orderByPriority,

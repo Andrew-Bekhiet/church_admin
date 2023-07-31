@@ -114,7 +114,7 @@ final secretsServiceProvider = Provider<SecretsService>(
 
 final authServiceProvider = Provider<AuthService>(
   (ref) => AuthService(
-    cache: AuthCache(secureStorage: ref.watch(secureStorageProvider)),
+    storage: AuthStorage(secureStorage: ref.watch(secureStorageProvider)),
     adapter: FirebaseAuthAdapter(
       firebaseAuth: ref.watch(firebaseAuthProvider),
       databaseService: ref.watch(databaseServiceProvider),
@@ -312,8 +312,8 @@ final authAdapterProvider = Provider<AuthAdapter>(
   ),
 );
 
-final authCacheProvider = Provider<AuthCache>(
-  (ref) => AuthCache(secureStorage: ref.watch(secureStorageProvider)),
+final authStorageProvider = Provider<AuthStorage>(
+  (ref) => AuthStorage(secureStorage: ref.watch(secureStorageProvider)),
 );
 
 final currentPlatformServiceProvider = Provider<CurrentPlatformService>(

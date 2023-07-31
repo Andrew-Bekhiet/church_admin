@@ -6,12 +6,12 @@
 import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
-import 'package:church_admin/church_admin.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter/material.dart' as _i7;
 import 'package:go_router/src/configuration.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
+import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,9 +24,9 @@ import 'package:rxdart_ext/rxdart_ext.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueStream_0<T> extends _i1.SmartFake
-    implements _i2.ValueStream<T> {
-  _FakeValueStream_0(
+class _FakeMultiFactorManager_0 extends _i1.SmartFake
+    implements _i2.MultiFactorManager {
+  _FakeMultiFactorManager_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -35,9 +35,9 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorSession_1 extends _i1.SmartFake
-    implements _i3.MultiFactorSession {
-  _FakeMultiFactorSession_1(
+class _FakeValueStream_1<T> extends _i1.SmartFake
+    implements _i3.ValueStream<T> {
+  _FakeValueStream_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,9 +46,8 @@ class _FakeMultiFactorSession_1 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_2 extends _i1.SmartFake
-    implements _i3.MultiFactorInfo {
-  _FakeMultiFactorInfo_2(
+class _FakeDuration_2 extends _i1.SmartFake implements Duration {
+  _FakeDuration_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -57,18 +56,8 @@ class _FakeMultiFactorInfo_2 extends _i1.SmartFake
         );
 }
 
-class _FakeDuration_3 extends _i1.SmartFake implements Duration {
-  _FakeDuration_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeValueKey_4<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
-  _FakeValueKey_4(
+class _FakeValueKey_3<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
+  _FakeValueKey_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -80,7 +69,28 @@ class _FakeValueKey_4<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i3.AuthService {
+class MockAuthService extends _i1.Mock implements _i2.AuthService {
+  @override
+  _i2.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+        Invocation.getter(#multiFactorManager),
+        returnValue: _FakeMultiFactorManager_0(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorManager_0(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+      ) as _i2.MultiFactorManager);
+  @override
+  set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #multiFactorManager,
+          _multiFactorManager,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
@@ -88,35 +98,29 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i2.ValueStream<_i3.User?> get userStream => (super.noSuchMethod(
+  _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _FakeValueStream_0<_i3.User?>(
+        returnValue: _FakeValueStream_1<_i2.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<_i3.User?>(
+        returnValueForMissingStub: _FakeValueStream_1<_i2.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-      ) as _i2.ValueStream<_i3.User?>);
+      ) as _i3.ValueStream<_i2.User?>);
   @override
-  _i2.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
+  _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _FakeValueStream_0<String?>(
+        returnValue: _FakeValueStream_1<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_0<String?>(
+        returnValueForMissingStub: _FakeValueStream_1<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-      ) as _i2.ValueStream<String?>);
+      ) as _i3.ValueStream<String?>);
   @override
   _i5.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -172,94 +176,6 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
-  _i5.Future<_i3.MultiFactorSession> startMultiFactorSession(
-          {required String? password}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorSession,
-          [],
-          {#password: password},
-        ),
-        returnValue:
-            _i5.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<_i3.MultiFactorSession>.value(_FakeMultiFactorSession_1(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-      ) as _i5.Future<_i3.MultiFactorSession>);
-  @override
-  _i3.MultiFactorInfo getMultiFactorInfoFor(_i3.MultiFactorSession? session) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
-        ),
-        returnValue: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_2(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-      ) as _i3.MultiFactorInfo);
-  @override
-  _i5.Future<(String, int?)> initiateMultifactorLogin(
-    _i3.MultiFactorSession? session, {
-    _i3.MultiFactorInfo? factor,
-    String? phoneNumber,
-    int? forceResendingToken,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #initiateMultifactorLogin,
-          [session],
-          {
-            #factor: factor,
-            #phoneNumber: phoneNumber,
-            #forceResendingToken: forceResendingToken,
-          },
-        ),
-        returnValue: _i5.Future<(String, int?)>.value(('', null)),
-        returnValueForMissingStub: _i5.Future<(String, int?)>.value(('', null)),
-      ) as _i5.Future<(String, int?)>);
-  @override
-  _i5.Future<void> finishMultiFactorLogin(
-    String? verificationId,
-    String? smsCode,
-    _i3.MultiFactorSession? session,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #finishMultiFactorLogin,
-          [
-            verificationId,
-            smsCode,
-            session,
-          ],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-  @override
   _i5.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
@@ -268,6 +184,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+  @override
+  _i5.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoredPasswordHash,
+          [],
+        ),
+        returnValue: _i5.Future<String?>.value(),
+        returnValueForMissingStub: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
   @override
   _i5.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -291,15 +216,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
 /// A class which mocks [LocalAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
+class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_3(
+        returnValue: _FakeDuration_2(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_3(
+        returnValueForMissingStub: _FakeDuration_2(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -379,33 +304,24 @@ class MockLocalAuthService extends _i1.Mock implements _i3.LocalAuthService {
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
   @override
-  _i5.Future<String?> getPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #getPasswordHash,
-          [],
-        ),
-        returnValue: _i5.Future<String?>.value(),
-        returnValueForMissingStub: _i5.Future<String?>.value(),
-      ) as _i5.Future<String?>);
-  @override
-  _i5.Future<void> savePasswordHash(String? passwordHash) =>
+  _i5.Future<bool> verifyPassword({
+    required String? email,
+    required String? password,
+    String? storedPasswordHash,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #savePasswordHash,
-          [passwordHash],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-  @override
-  _i5.Future<void> clearPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #clearPasswordHash,
+          #verifyPassword,
           [],
+          {
+            #email: email,
+            #password: password,
+            #storedPasswordHash: storedPasswordHash,
+          },
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
   _i5.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -543,11 +459,11 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
   @override
   _i4.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_4<String>(
+        returnValue: _FakeValueKey_3<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-        returnValueForMissingStub: _FakeValueKey_4<String>(
+        returnValueForMissingStub: _FakeValueKey_3<String>(
           this,
           Invocation.getter(#pageKey),
         ),

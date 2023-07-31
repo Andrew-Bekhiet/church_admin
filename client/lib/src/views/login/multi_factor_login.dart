@@ -11,7 +11,7 @@ class MultiFactorLogin extends StatefulWidget {
     path: '/multiFactor',
     builder: (context, state) => const MultiFactorLogin(),
     redirect: (context, state) {
-      if (!AuthService.I.hasPendingMultifactorSession &&
+      if (!AuthService.I.multiFactorManager.hasPendingMultifactorSession &&
           (AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
         return '/';
       }
@@ -26,7 +26,8 @@ class MultiFactorLogin extends StatefulWidget {
 }
 
 class _MultifactorStateLogin extends State<MultiFactorLogin> {
-  late MultiFactorSession? _session = AuthService.I.pendingMultifactorSession;
+  late MultiFactorSession? _session =
+      AuthService.I.multiFactorManager.pendingMultifactorSession;
 
   MultiFactorInfo? _multiFactorInfo;
 
@@ -39,9 +40,10 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     super.initState();
 
     if (_session != null) {
-      _multiFactorInfo = AuthService.I.getMultiFactorInfoFor(_session!);
+      _multiFactorInfo =
+          AuthService.I.multiFactorManager.getMultiFactorInfoFor(_session!);
 
-      initiateMultifactorLogin = AuthService.I
+      initiateMultifactorLogin = AuthService.I.multiFactorManager
           .initiateMultifactorLogin(
             _session!,
             factor: _multiFactorInfo,
@@ -72,7 +74,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                   _session = newSession;
                   _phoneNumber = phoneNumber;
 
-                  initiateMultifactorLogin = AuthService.I
+                  initiateMultifactorLogin = AuthService.I.multiFactorManager
                       .initiateMultifactorLogin(
                         _session!,
                         phoneNumber: _phoneNumber,
@@ -223,7 +225,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
         reauth: true,
       );
 
-      final multiFactorSession = await AuthService.I
+      final multiFactorSession = await AuthService.I.multiFactorManager
           .startMultiFactorSession(password: _passwordController.text);
 
       _loading = false;
@@ -343,8 +345,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                 if ((s.data ?? 0) >= 30) {
                   return OutlinedButton(
                     onPressed: () {
-                      initiateMultifactorLogin =
-                          AuthService.I.initiateMultifactorLogin(
+                      initiateMultifactorLogin = AuthService
+                          .I.multiFactorManager
+                          .initiateMultifactorLogin(
                         widget.session,
                         factor: widget.multiFactorInfo,
                         phoneNumber: widget.phoneNumber,
@@ -370,7 +373,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
   }
 
   Future<void> _finishSignIn(String verificationId) async {
-    await AuthService.I.finishMultiFactorLogin(
+    await AuthService.I.multiFactorManager.finishMultiFactorLogin(
       verificationId,
       _code.text,
       widget.session,

@@ -14,7 +14,7 @@ import 'login_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthService>(),
-  MockSpec<AuthCache>(),
+  MockSpec<AuthStorage>(),
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
   MockSpec<UserSettingsService>(),

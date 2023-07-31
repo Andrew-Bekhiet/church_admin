@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i10;
 
-import 'package:church_admin/church_admin.dart' as _i5;
+import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:church_admin/src/services/notifications/notifications_storage.dart'
     as _i20;
 import 'package:cloud_functions/cloud_functions.dart' as _i7;
@@ -31,7 +31,7 @@ import 'package:hive_flutter/hive_flutter.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart'
     as _i9;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i4;
+import 'package:rxdart_ext/rxdart_ext.dart' as _i5;
 import 'package:timezone/timezone.dart' as _i16;
 
 // ignore_for_file: type=lint
@@ -66,9 +66,9 @@ class _FakeNotificationSettings_1 extends _i1.SmartFake
         );
 }
 
-class _FakeValueStream_2<T> extends _i1.SmartFake
-    implements _i4.ValueStream<T> {
-  _FakeValueStream_2(
+class _FakeMultiFactorManager_2 extends _i1.SmartFake
+    implements _i4.MultiFactorManager {
+  _FakeMultiFactorManager_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -77,9 +77,9 @@ class _FakeValueStream_2<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorSession_3 extends _i1.SmartFake
-    implements _i5.MultiFactorSession {
-  _FakeMultiFactorSession_3(
+class _FakeValueStream_3<T> extends _i1.SmartFake
+    implements _i5.ValueStream<T> {
+  _FakeValueStream_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -88,9 +88,8 @@ class _FakeMultiFactorSession_3 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_4 extends _i1.SmartFake
-    implements _i5.MultiFactorInfo {
-  _FakeMultiFactorInfo_4(
+class _FakeBox_4<E> extends _i1.SmartFake implements _i6.Box<E> {
+  _FakeBox_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -99,8 +98,8 @@ class _FakeMultiFactorInfo_4 extends _i1.SmartFake
         );
 }
 
-class _FakeBox_5<E> extends _i1.SmartFake implements _i6.Box<E> {
-  _FakeBox_5(
+class _FakeHttpsCallable_5 extends _i1.SmartFake implements _i7.HttpsCallable {
+  _FakeHttpsCallable_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -109,19 +108,9 @@ class _FakeBox_5<E> extends _i1.SmartFake implements _i6.Box<E> {
         );
 }
 
-class _FakeHttpsCallable_6 extends _i1.SmartFake implements _i7.HttpsCallable {
-  _FakeHttpsCallable_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeHttpsCallableResult_7<T> extends _i1.SmartFake
+class _FakeHttpsCallableResult_6<T> extends _i1.SmartFake
     implements _i7.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_7(
+  _FakeHttpsCallableResult_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -130,8 +119,8 @@ class _FakeHttpsCallableResult_7<T> extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_8<T> extends _i1.SmartFake implements _i8.Response<T> {
-  _FakeResponse_8(
+class _FakeResponse_7<T> extends _i1.SmartFake implements _i8.Response<T> {
+  _FakeResponse_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -140,9 +129,9 @@ class _FakeResponse_8<T> extends _i1.SmartFake implements _i8.Response<T> {
         );
 }
 
-class _FakeNotificationSetting_9 extends _i1.SmartFake
-    implements _i5.NotificationSetting {
-  _FakeNotificationSetting_9(
+class _FakeNotificationSetting_8 extends _i1.SmartFake
+    implements _i4.NotificationSetting {
+  _FakeNotificationSetting_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -727,7 +716,28 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i5.AuthService {
+class MockAuthService extends _i1.Mock implements _i4.AuthService {
+  @override
+  _i4.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+        Invocation.getter(#multiFactorManager),
+        returnValue: _FakeMultiFactorManager_2(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorManager_2(
+          this,
+          Invocation.getter(#multiFactorManager),
+        ),
+      ) as _i4.MultiFactorManager);
+  @override
+  set multiFactorManager(_i4.MultiFactorManager? _multiFactorManager) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #multiFactorManager,
+          _multiFactorManager,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
@@ -735,35 +745,29 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i4.ValueStream<_i5.User?> get userStream => (super.noSuchMethod(
+  _i5.ValueStream<_i4.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _FakeValueStream_2<_i5.User?>(
+        returnValue: _FakeValueStream_3<_i4.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_2<_i5.User?>(
+        returnValueForMissingStub: _FakeValueStream_3<_i4.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-      ) as _i4.ValueStream<_i5.User?>);
+      ) as _i5.ValueStream<_i4.User?>);
   @override
-  _i4.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
+  _i5.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _FakeValueStream_2<String?>(
+        returnValue: _FakeValueStream_3<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_2<String?>(
+        returnValueForMissingStub: _FakeValueStream_3<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-      ) as _i4.ValueStream<String?>);
+      ) as _i5.ValueStream<String?>);
   @override
   _i10.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -819,95 +823,6 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<_i5.MultiFactorSession> startMultiFactorSession(
-          {required String? password}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorSession,
-          [],
-          {#password: password},
-        ),
-        returnValue:
-            _i10.Future<_i5.MultiFactorSession>.value(_FakeMultiFactorSession_3(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i10.Future<_i5.MultiFactorSession>.value(_FakeMultiFactorSession_3(
-          this,
-          Invocation.method(
-            #startMultiFactorSession,
-            [],
-            {#password: password},
-          ),
-        )),
-      ) as _i10.Future<_i5.MultiFactorSession>);
-  @override
-  _i5.MultiFactorInfo getMultiFactorInfoFor(_i5.MultiFactorSession? session) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
-        ),
-        returnValue: _FakeMultiFactorInfo_4(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_4(
-          this,
-          Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
-          ),
-        ),
-      ) as _i5.MultiFactorInfo);
-  @override
-  _i10.Future<(String, int?)> initiateMultifactorLogin(
-    _i5.MultiFactorSession? session, {
-    _i5.MultiFactorInfo? factor,
-    String? phoneNumber,
-    int? forceResendingToken,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #initiateMultifactorLogin,
-          [session],
-          {
-            #factor: factor,
-            #phoneNumber: phoneNumber,
-            #forceResendingToken: forceResendingToken,
-          },
-        ),
-        returnValue: _i10.Future<(String, int?)>.value(('', null)),
-        returnValueForMissingStub:
-            _i10.Future<(String, int?)>.value(('', null)),
-      ) as _i10.Future<(String, int?)>);
-  @override
-  _i10.Future<void> finishMultiFactorLogin(
-    String? verificationId,
-    String? smsCode,
-    _i5.MultiFactorSession? session,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #finishMultiFactorLogin,
-          [
-            verificationId,
-            smsCode,
-            session,
-          ],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-  @override
   _i10.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
@@ -916,6 +831,15 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+  @override
+  _i10.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoredPasswordHash,
+          [],
+        ),
+        returnValue: _i10.Future<String?>.value(),
+        returnValueForMissingStub: _i10.Future<String?>.value(),
+      ) as _i10.Future<String?>);
   @override
   _i10.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -940,15 +864,15 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserSettingsService extends _i1.Mock
-    implements _i5.UserSettingsService {
+    implements _i4.UserSettingsService {
   @override
   _i6.Box<dynamic> get box => (super.noSuchMethod(
         Invocation.getter(#box),
-        returnValue: _FakeBox_5<dynamic>(
+        returnValue: _FakeBox_4<dynamic>(
           this,
           Invocation.getter(#box),
         ),
-        returnValueForMissingStub: _FakeBox_5<dynamic>(
+        returnValueForMissingStub: _FakeBox_4<dynamic>(
           this,
           Invocation.getter(#box),
         ),
@@ -1030,7 +954,7 @@ class MockUserSettingsService extends _i1.Mock
 /// A class which mocks [FunctionsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
+class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
   @override
   _i7.HttpsCallable httpsCallable(
     String? functionName, {
@@ -1042,7 +966,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           [functionName],
           {#options: options},
         ),
-        returnValue: _FakeHttpsCallable_6(
+        returnValue: _FakeHttpsCallable_5(
           this,
           Invocation.method(
             #httpsCallable,
@@ -1050,7 +974,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
             {#options: options},
           ),
         ),
-        returnValueForMissingStub: _FakeHttpsCallable_6(
+        returnValueForMissingStub: _FakeHttpsCallable_5(
           this,
           Invocation.method(
             #httpsCallable,
@@ -1068,7 +992,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           [token],
         ),
         returnValue: _i10.Future<_i7.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_7<dynamic>(
+            _FakeHttpsCallableResult_6<dynamic>(
           this,
           Invocation.method(
             #registerFCMToken,
@@ -1077,7 +1001,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
         )),
         returnValueForMissingStub:
             _i10.Future<_i7.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_7<dynamic>(
+                _FakeHttpsCallableResult_6<dynamic>(
           this,
           Invocation.method(
             #registerFCMToken,
@@ -1138,7 +1062,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<String?> getAddressFromLocation(_i5.Point? location) =>
+  _i10.Future<String?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAddressFromLocation,
@@ -1171,7 +1095,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           },
         ),
         returnValue:
-            _i10.Future<_i8.Response<dynamic>>.value(_FakeResponse_8<dynamic>(
+            _i10.Future<_i8.Response<dynamic>>.value(_FakeResponse_7<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -1186,7 +1110,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i8.Response<dynamic>>.value(_FakeResponse_8<dynamic>(
+            _i10.Future<_i8.Response<dynamic>>.value(_FakeResponse_7<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -1228,7 +1152,7 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
 class MockNotificationsStorage extends _i1.Mock
     implements _i20.NotificationsStorage {
   @override
-  _i10.Future<void> writeNotification(_i5.Notification? notification) =>
+  _i10.Future<void> writeNotification(_i4.Notification? notification) =>
       (super.noSuchMethod(
         Invocation.method(
           #writeNotification,
@@ -1238,72 +1162,72 @@ class MockNotificationsStorage extends _i1.Mock
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<_i5.Notification?> readNotification(String? notificationId) =>
+  _i10.Future<_i4.Notification?> readNotification(String? notificationId) =>
       (super.noSuchMethod(
         Invocation.method(
           #readNotification,
           [notificationId],
         ),
-        returnValue: _i10.Future<_i5.Notification?>.value(),
-        returnValueForMissingStub: _i10.Future<_i5.Notification?>.value(),
-      ) as _i10.Future<_i5.Notification?>);
+        returnValue: _i10.Future<_i4.Notification?>.value(),
+        returnValueForMissingStub: _i10.Future<_i4.Notification?>.value(),
+      ) as _i10.Future<_i4.Notification?>);
 }
 
 /// A class which mocks [NotificationsSettingsStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationsSettingsStorage extends _i1.Mock
-    implements _i5.NotificationsSettingsStorage {
+    implements _i4.NotificationsSettingsStorage {
   @override
-  _i5.NotificationSetting get birthDayTimeSetting => (super.noSuchMethod(
+  _i4.NotificationSetting get birthDayTimeSetting => (super.noSuchMethod(
         Invocation.getter(#birthDayTimeSetting),
-        returnValue: _FakeNotificationSetting_9(
+        returnValue: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#birthDayTimeSetting),
         ),
-        returnValueForMissingStub: _FakeNotificationSetting_9(
+        returnValueForMissingStub: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#birthDayTimeSetting),
         ),
-      ) as _i5.NotificationSetting);
+      ) as _i4.NotificationSetting);
   @override
-  _i5.NotificationSetting get kodasTimeSetting => (super.noSuchMethod(
+  _i4.NotificationSetting get kodasTimeSetting => (super.noSuchMethod(
         Invocation.getter(#kodasTimeSetting),
-        returnValue: _FakeNotificationSetting_9(
+        returnValue: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#kodasTimeSetting),
         ),
-        returnValueForMissingStub: _FakeNotificationSetting_9(
+        returnValueForMissingStub: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#kodasTimeSetting),
         ),
-      ) as _i5.NotificationSetting);
+      ) as _i4.NotificationSetting);
   @override
-  _i5.NotificationSetting get meetingTimeSetting => (super.noSuchMethod(
+  _i4.NotificationSetting get meetingTimeSetting => (super.noSuchMethod(
         Invocation.getter(#meetingTimeSetting),
-        returnValue: _FakeNotificationSetting_9(
+        returnValue: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#meetingTimeSetting),
         ),
-        returnValueForMissingStub: _FakeNotificationSetting_9(
+        returnValueForMissingStub: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#meetingTimeSetting),
         ),
-      ) as _i5.NotificationSetting);
+      ) as _i4.NotificationSetting);
   @override
-  _i5.NotificationSetting get confessionTimeSetting => (super.noSuchMethod(
+  _i4.NotificationSetting get confessionTimeSetting => (super.noSuchMethod(
         Invocation.getter(#confessionTimeSetting),
-        returnValue: _FakeNotificationSetting_9(
+        returnValue: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#confessionTimeSetting),
         ),
-        returnValueForMissingStub: _FakeNotificationSetting_9(
+        returnValueForMissingStub: _FakeNotificationSetting_8(
           this,
           Invocation.getter(#confessionTimeSetting),
         ),
-      ) as _i5.NotificationSetting);
+      ) as _i4.NotificationSetting);
   @override
-  _i10.Future<void> setBirthDayTime(_i5.NotificationSetting? setting) =>
+  _i10.Future<void> setBirthDayTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
         Invocation.method(
           #setBirthDayTime,
@@ -1313,7 +1237,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<void> setKodasTime(_i5.NotificationSetting? setting) =>
+  _i10.Future<void> setKodasTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
         Invocation.method(
           #setKodasTime,
@@ -1323,7 +1247,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<void> setMeetingTime(_i5.NotificationSetting? setting) =>
+  _i10.Future<void> setMeetingTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
         Invocation.method(
           #setMeetingTime,
@@ -1333,7 +1257,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<void> setConfessionTime(_i5.NotificationSetting? setting) =>
+  _i10.Future<void> setConfessionTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
         Invocation.method(
           #setConfessionTime,
