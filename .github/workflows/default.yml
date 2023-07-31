@@ -4,8 +4,6 @@ on: [push, pull_request]
 
 jobs:
   test-and-upload-coverage:
-    if: false
-
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +27,7 @@ jobs:
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           path: ${{ runner.tool_cache }}/flutter
-          key: flutter-3.3.10-stable
+          key: flutter-3.10.6-stable
 
       - uses: subosito/flutter-action@v2
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
@@ -48,6 +46,10 @@ jobs:
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter pub get
 
+      - name: Build files
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        run: flutter run build_runner build --delete-conflicting-outputs
+
       - name: Analyze project source
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter analyze
@@ -55,10 +57,6 @@ jobs:
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter test --coverage --machine > test-results.json
-
-      - name: Run Tests Expanded
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' && failure() }}
-        run: flutter test --coverage -r expanded
 
       - name: Upload Test Report
         uses: dorny/test-reporter@v1
