@@ -20,6 +20,7 @@ jobs:
             **/*.dart
             assets
             pubspec.yaml
+            build.yaml
             analysis_options.yaml
             codecov.yaml
 
