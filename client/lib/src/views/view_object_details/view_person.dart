@@ -831,7 +831,9 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                               wrapInCard: false,
                               forceShowSecondLine: false,
                               onTap: (object) => _toggle(
-                                  object, !selected.value.contains(object)),
+                                object,
+                                !selected.value.contains(object),
+                              ),
                               trailing: StreamBuilder<bool>(
                                 initialData: false,
                                 stream: selected

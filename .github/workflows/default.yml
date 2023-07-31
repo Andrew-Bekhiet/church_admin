@@ -37,11 +37,18 @@ jobs:
 
       - uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        id: flutter_cache
         with:
           path: ${{ env.PUB_CACHE }}
           key: flutter-dependencies-v1-${{hashFiles('pubspec.yaml')}}
           restore-keys: |
             flutter-dependencies-v1-
+
+      - name: Populate the Flutter tool's cache of binary artifacts
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.flutter_cache.outputs.cache-hit != 'true' }}
+        run: |
+          flutter config --no-analytics
+          flutter precache
 
       - name: Install dependencies
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
@@ -73,7 +80,9 @@ jobs:
 
       - name: Analyze project source
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        run: flutter analyze
+        uses: zgosalvez/github-actions-analyze-dart@v2
+        with:
+          fail-on-warnings: true
 
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
