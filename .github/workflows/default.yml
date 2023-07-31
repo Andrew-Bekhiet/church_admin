@@ -94,11 +94,12 @@ jobs:
         uses: dorny/test-reporter@v1
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
-          name: Package Tests
+          name: Unit and Widget Tests
           path: test-results.json
           reporter: flutter-json
 
       - uses: codecov/codecov-action@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
+          file: test-results.json
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -161,9 +161,6 @@ extension WithPadding on Widget {
 
 extension CopyDateTimeRange on DateTimeRange {
   DateTimeRange copyWith({DateTime? start, DateTime? end}) {
-    return DateTimeRange(
-      start: start ?? this.start,
-      end: end ?? this.end,
-    );
+    return DateTimeRange(start: start ?? this.start, end: end ?? this.end);
   }
 }
