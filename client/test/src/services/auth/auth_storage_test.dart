@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'auth_cache_test.mocks.dart';
+import 'auth_storage_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FlutterSecureStorage>()])
 void main() {
