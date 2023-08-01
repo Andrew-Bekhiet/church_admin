@@ -36,186 +36,294 @@ final initialUser = User(
   MockSpec<ConnectivityService>()
 ])
 void main() {
-  setUp(_setUp);
-  tearDown(resetGlobalProviderContainer);
+  group(
+    'Authentication Service =>',
+    () {
+      setUp(_setUp);
+      tearDown(resetGlobalProviderContainer);
 
-  test(
-    'Authentication Service => initialization => not logged in',
-    () async {
-      await globalProviderContainer
-          .read(authStorageProvider)
-          .writeUserToCache(null);
+      group(
+        'initialization =>',
+        () {
+          test(
+            'not logged in',
+            () async {
+              await globalProviderContainer
+                  .read(authStorageProvider)
+                  .writeUserToCache(null);
 
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
+              final unit = _createAuthService();
+              addTearDown(unit.dispose);
 
-      await unit.userStream.take(1).first;
+              await unit.userStream.take(1).first;
 
-      expect(unit.currentUser, isNull);
-    },
-  );
+              expect(unit.currentUser, isNull);
+            },
+          );
 
-  test(
-    'Authentication Service => initialization => logged in',
-    () async {
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
+          test(
+            'logged in',
+            () async {
+              final unit = _createAuthService();
+              addTearDown(unit.dispose);
 
-      await unit.userStream.take(1).first;
+              await unit.userStream.take(1).first;
 
-      expect(unit.currentUser, initialUser);
-    },
-  );
+              expect(unit.currentUser, initialUser);
+            },
+          );
 
-  test(
-    'Authentication Service => initialization => noCachedUser',
-    () async {
-      final unit = _createAuthService(noCachedUser: true);
-      addTearDown(unit.dispose);
+          test(
+            'noCachedUser',
+            () async {
+              final unit = _createAuthService(noCachedUser: true);
+              addTearDown(unit.dispose);
 
-      await unit.userStream.take(1).first;
+              await unit.userStream.take(1).first;
 
-      expect(unit.currentUser, isNull);
-    },
-  );
-
-  test(
-    'Authentication Service => signOut',
-    () async {
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
-
-      await unit.userStream.take(1).first;
-      await unit.signOut();
-      await unit.userStream.take(1).first;
-
-      expect(unit.currentUser, isNull);
-
-      final captured = verify(
-        globalProviderContainer
-            .read(authStorageProvider)
-            .writeUserToCache(captureAny),
-      ).captured;
-
-      expect(captured[1], isNull);
-    },
-  );
-
-  test(
-    'Authentication Service => userStream',
-    () async {
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
-
-      expect(
-        unit.userStream,
-        emitsInOrder([initialUser, isNull, initialUser]),
+              expect(unit.currentUser, isNull);
+            },
+          );
+        },
       );
 
-      await unit.userStream.take(1).first;
+      test(
+        'userStream',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
 
-      await unit.signOut();
-      await unit.userStream.take(1).first;
+          expect(
+            unit.userStream,
+            emitsInOrder([initialUser, isNull, initialUser]),
+          );
 
-      await unit.signInWithEmailPassword(email: 'email', password: 'password');
-      await unit.userStream.take(1).first;
-    },
-  );
+          await unit.userStream.take(1).first;
 
-  test(
-    'Authentication Service => isSignedIn',
-    () async {
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
+          await unit.signOut();
+          await unit.userStream.take(1).first;
 
-      await unit.userStream.take(1).first;
-
-      expect(
-        unit.isSignedIn,
-        isTrue,
+          await unit.signInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          );
+          await unit.userStream.take(1).first;
+        },
       );
 
-      await unit.signOut();
-      await unit.userStream.take(1).first;
+      test(
+        'isSignedIn',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
 
-      expect(
-        unit.isSignedIn,
-        isFalse,
-      );
-    },
-  );
+          await unit.userStream.take(1).first;
 
-  test(
-    'Authentication Service => signIn',
-    () async {
-      final unit = _createAuthService(noCachedUser: true);
-      addTearDown(unit.dispose);
+          expect(
+            unit.isSignedIn,
+            isTrue,
+          );
 
-      await unit.userStream.take(1).first;
-      expect(unit.currentUser, isNull);
+          await unit.signOut();
+          await unit.userStream.take(1).first;
 
-      expect(
-        unit.signInWithEmailPassword(email: 'email', password: 'password'),
-        completion(isTrue),
-      );
-      await unit.userStream.take(1).first;
-
-      expect(unit.currentUser, initialUser);
-
-      verify(
-        unit.signInWithEmailPassword(email: 'email', password: 'password'),
-      );
-    },
-  );
-
-  test(
-    'Authentication Service => refreshToken',
-    () async {
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
-
-      await unit.refreshToken();
-
-      verify(unit.refreshToken());
-    },
-  );
-
-  test(
-    'Authentication Service => refreshes token on connection change',
-    () async {
-      final connectivityController = BehaviorSubject.seeded(false);
-      addTearDown(connectivityController.close);
-
-      when(
-        globalProviderContainer
-            .read(connectivityServiceProvider)
-            .connectivityStream,
-      ).thenAnswer((_) => connectivityController.stream);
-
-      when(
-        (globalProviderContainer.read(authAdapterProvider) as MockAuthAdapter)
-            .isTokenUpToDate(any),
-      ).thenReturn(false);
-
-      final unit = _createAuthService();
-      addTearDown(unit.dispose);
-
-      await unit.userStream.take(1).first;
-
-      verifyNever(
-        unit.refreshToken(),
+          expect(
+            unit.isSignedIn,
+            isFalse,
+          );
+        },
       );
 
-      connectivityController.add(true);
-      await unit.userStream.take(1).first;
+      test(
+        'signUp',
+        () async {
+          final unit = _createAuthService(noCachedUser: true);
+          addTearDown(unit.dispose);
 
-      final captured = verifyInOrder([
-        (globalProviderContainer.read(authAdapterProvider) as MockAuthAdapter)
-            .isTokenUpToDate(captureAny),
-        unit.refreshToken()
-      ]).captured;
+          await unit.userStream.take(1).first;
+          expect(unit.currentUser, isNull);
 
-      expect(captured.first.first, initialUser);
+          expect(
+            unit.signUpWithEmailPassword(email: 'email', password: 'password'),
+            completion(isTrue),
+          );
+          await unit.userStream.take(1).first;
+
+          expect(unit.currentUser, initialUser);
+
+          verifyInOrder([
+            globalProviderContainer
+                .read(authAdapterProvider)
+                .signUpWithEmailPassword(email: 'email', password: 'password'),
+            globalProviderContainer
+                .read(authStorageProvider)
+                .saveUserPasswordHash('email', 'password'),
+            globalProviderContainer
+                .read(authAdapterProvider)
+                .sendEmailVerification(),
+          ]);
+        },
+      );
+      test(
+        'signIn',
+        () async {
+          final unit = _createAuthService(noCachedUser: true);
+          addTearDown(unit.dispose);
+
+          await unit.userStream.take(1).first;
+          expect(unit.currentUser, isNull);
+
+          expect(
+            unit.signInWithEmailPassword(email: 'email', password: 'password'),
+            completion(isTrue),
+          );
+          await unit.userStream.take(1).first;
+
+          expect(unit.currentUser, initialUser);
+
+          verifyInOrder([
+            globalProviderContainer
+                .read(authAdapterProvider)
+                .signInWithEmailPassword(email: 'email', password: 'password'),
+            globalProviderContainer
+                .read(authStorageProvider)
+                .saveUserPasswordHash('email', 'password'),
+          ]);
+        },
+      );
+
+      test(
+        'refreshToken',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.refreshToken();
+
+          verify(unit.refreshToken());
+        },
+      );
+
+      test(
+        'refreshes token on connection change',
+        () async {
+          final connectivityController = BehaviorSubject.seeded(false);
+          addTearDown(connectivityController.close);
+
+          when(
+            globalProviderContainer
+                .read(connectivityServiceProvider)
+                .connectivityStream,
+          ).thenAnswer((_) => connectivityController.stream);
+
+          when(
+            (globalProviderContainer.read(authAdapterProvider)
+                    as MockAuthAdapter)
+                .isTokenUpToDate(any),
+          ).thenReturn(false);
+
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.userStream.take(1).first;
+
+          verifyNever(
+            unit.refreshToken(),
+          );
+
+          connectivityController.add(true);
+          await unit.userStream.take(1).first;
+
+          final captured = verifyInOrder([
+            (globalProviderContainer.read(authAdapterProvider)
+                    as MockAuthAdapter)
+                .isTokenUpToDate(captureAny),
+            unit.refreshToken()
+          ]).captured;
+
+          expect(captured.first.first, initialUser);
+        },
+      );
+
+      test(
+        'sendEmailVerification',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.sendEmailVerification();
+
+          verify(
+            globalProviderContainer
+                .read(authAdapterProvider)
+                .sendEmailVerification(),
+          );
+        },
+      );
+
+      test(
+        'reload',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.reload();
+
+          verify(
+            globalProviderContainer.read(authAdapterProvider).reload(),
+          );
+        },
+      );
+
+      test(
+        'refreshToken',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.refreshToken();
+
+          verify(
+            globalProviderContainer.read(authAdapterProvider).refreshToken(),
+          );
+        },
+      );
+
+      test(
+        'getStoredPasswordHash',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.getStoredPasswordHash();
+
+          verify(
+            globalProviderContainer.read(authStorageProvider).getPasswordHash(),
+          );
+        },
+      );
+
+      test(
+        'signOut',
+        () async {
+          final unit = _createAuthService();
+          addTearDown(unit.dispose);
+
+          await unit.userStream.take(1).first;
+          await unit.signOut();
+          await unit.userStream.take(1).first;
+
+          expect(unit.currentUser, isNull);
+
+          final captured = verify(
+            globalProviderContainer
+                .read(authStorageProvider)
+                .writeUserToCache(captureAny),
+          ).captured;
+
+          expect(captured[1], isNull);
+        },
+      );
     },
   );
 }
@@ -258,6 +366,11 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   final mock = MockAuthAdapter();
 
   when(mock.signInWithEmailPassword(email: 'email', password: 'password'))
+      .thenAnswer((_) async {
+    _controller.add(userOnSignIn);
+    return true;
+  });
+  when(mock.signUpWithEmailPassword(email: 'email', password: 'password'))
       .thenAnswer((_) async {
     _controller.add(userOnSignIn);
     return true;
