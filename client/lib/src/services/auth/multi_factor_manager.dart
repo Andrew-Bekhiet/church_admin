@@ -2,12 +2,12 @@
 import 'package:church_admin/church_admin.dart';
 
 class MultiFactorManager {
-  final AuthAdapter _adapter;
+  final MultiFactorManagerAdapter _adapter;
   final AuthService _authService;
   final AuthStorage _storage;
 
   MultiFactorManager({
-    required AuthAdapter adapter,
+    required MultiFactorManagerAdapter adapter,
     required AuthService authService,
     required AuthStorage storage,
   })  : _adapter = adapter,

@@ -32,19 +32,14 @@ class FirebaseAuthAdapter extends AuthAdapter {
     required FirebaseAuth firebaseAuth,
     DatabaseService? databaseService,
   })  : _firebaseAuth = firebaseAuth,
-        _databaseService = databaseService ?? DatabaseService.I;
+        _databaseService = databaseService ?? DatabaseService.I,
+        _multiFactorManagerAdapter = FirebaseMultiFactorManagerAdapter(
+          firebaseAuth: firebaseAuth,
+        );
 
   final FirebaseAuth _firebaseAuth;
   final DatabaseService _databaseService;
-
-  MultiFactorSession? _pendingMultiFactorSession;
-  FirebaseAuthMultiFactorException? _pendingMultiFactorException;
-
-  @override
-  bool get hasPendingMultifactorSession => _pendingMultiFactorSession != null;
-  @override
-  MultiFactorSession? get pendingMultifactorSession =>
-      _pendingMultiFactorSession;
+  final FirebaseMultiFactorManagerAdapter _multiFactorManagerAdapter;
 
   @override
   late final Stream<User?> userStream = _firebaseAuth
@@ -76,7 +71,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
     if (authUser == null || idTokenResult == null) return Stream.value(null);
 
-    _clearPendingMultiFactorSession();
+    _multiFactorManagerAdapter.clearPendingMultiFactorSession();
 
     return _getUserStreamFromDB(
       idTokenResult.claims ?? {},
@@ -87,11 +82,6 @@ class FirebaseAuthAdapter extends AuthAdapter {
         idToken: idTokenResult.token,
       ),
     );
-  }
-
-  void _clearPendingMultiFactorSession() {
-    _pendingMultiFactorSession = null;
-    _pendingMultiFactorException = null;
   }
 
   Stream<User?> _getUserStreamFromDB(Json jwtClaims) {
@@ -132,8 +122,10 @@ class FirebaseAuthAdapter extends AuthAdapter {
         password: password,
       );
 
-      _pendingMultiFactorSession = multiFactorSession;
-      _pendingMultiFactorException = e;
+      _multiFactorManagerAdapter.addPendingMultiFactorSession(
+        multiFactorSession,
+        e,
+      );
 
       throw MultiFactorException(multiFactorSession);
     }
@@ -159,6 +151,67 @@ class FirebaseAuthAdapter extends AuthAdapter {
     }
 
     await _firebaseAuth.currentUser!.sendEmailVerification();
+  }
+
+  @override
+  bool isTokenUpToDate(User user) {
+    return tokenExpiry(user.idToken!).isAfter(DateTime.now());
+  }
+
+  @override
+  DateTime tokenExpiry(String idToken) {
+    return DateTime.fromMillisecondsSinceEpoch(
+      ((json.decode(
+                utf8.decode(
+                  base64.decode(
+                    base64.normalize(
+                      idToken.split('.')[1],
+                    ),
+                  ),
+                ),
+              )['exp'] as num) *
+              1000)
+          .toInt(),
+    );
+  }
+
+  @override
+  Future<void> refreshToken() async {
+    if (_firebaseAuth.currentUser == null) throw StateError('Not signed in');
+    await _firebaseAuth.currentUser!.getIdToken(true);
+  }
+
+  @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<void> dispose() async {}
+}
+
+class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
+  final FirebaseAuth _firebaseAuth;
+
+  FirebaseMultiFactorManagerAdapter({
+    required FirebaseAuth firebaseAuth,
+  }) : _firebaseAuth = firebaseAuth;
+
+  MultiFactorSession? _pendingMultiFactorSession;
+  FirebaseAuthMultiFactorException? _pendingMultiFactorException;
+
+  @override
+  bool get hasPendingMultifactorSession => _pendingMultiFactorSession != null;
+  @override
+  MultiFactorSession? get pendingMultifactorSession =>
+      _pendingMultiFactorSession;
+
+  void addPendingMultiFactorSession(
+    MultiFactorSession session,
+    FirebaseAuthMultiFactorException exception,
+  ) {
+    _pendingMultiFactorSession = session;
+    _pendingMultiFactorException = exception;
   }
 
   @override
@@ -260,38 +313,8 @@ class FirebaseAuthAdapter extends AuthAdapter {
   }
 
   @override
-  bool isTokenUpToDate(User user) {
-    return tokenExpiry(user.idToken!).isAfter(DateTime.now());
+  Future<void> clearPendingMultiFactorSession() async {
+    _pendingMultiFactorSession = null;
+    _pendingMultiFactorException = null;
   }
-
-  @override
-  DateTime tokenExpiry(String idToken) {
-    return DateTime.fromMillisecondsSinceEpoch(
-      ((json.decode(
-                utf8.decode(
-                  base64.decode(
-                    base64.normalize(
-                      idToken.split('.')[1],
-                    ),
-                  ),
-                ),
-              )['exp'] as num) *
-              1000)
-          .toInt(),
-    );
-  }
-
-  @override
-  Future<void> refreshToken() async {
-    if (_firebaseAuth.currentUser == null) throw StateError('Not signed in');
-    await _firebaseAuth.currentUser!.getIdToken(true);
-  }
-
-  @override
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
-
-  @override
-  Future<void> dispose() async {}
 }

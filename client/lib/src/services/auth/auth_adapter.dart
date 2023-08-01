@@ -4,9 +4,6 @@ abstract class AuthAdapter {
   Stream<User?> get userStream;
   Stream<String?> get idTokenStream;
 
-  bool get hasPendingMultifactorSession;
-  MultiFactorSession? get pendingMultifactorSession;
-
   Future<bool> signInWithEmailPassword({
     required String email,
     required String password,
@@ -21,6 +18,21 @@ abstract class AuthAdapter {
   Future<void> sendEmailVerification();
 
   Future<void> reload();
+
+  Future<void> refreshToken();
+
+  bool isTokenUpToDate(User user);
+
+  DateTime tokenExpiry(String idToken);
+
+  Future<void> signOut();
+
+  Future<void> dispose();
+}
+
+abstract class MultiFactorManagerAdapter {
+  bool get hasPendingMultifactorSession;
+  MultiFactorSession? get pendingMultifactorSession;
 
   Future<MultiFactorSession> startMultiFactorSession({
     required String password,
@@ -41,13 +53,5 @@ abstract class AuthAdapter {
     MultiFactorSession session,
   );
 
-  Future<void> refreshToken();
-
-  bool isTokenUpToDate(User user);
-
-  DateTime tokenExpiry(String idToken);
-
-  Future<void> signOut();
-
-  Future<void> dispose();
+  Future<void> clearPendingMultiFactorSession();
 }

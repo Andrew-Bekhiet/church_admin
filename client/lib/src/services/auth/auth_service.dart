@@ -9,12 +9,13 @@ class AuthService {
   AuthService({
     required AuthStorage storage,
     required AuthAdapter adapter,
+    required MultiFactorManagerAdapter multiFactorAdapter,
     ConnectivityService? connectivityService,
   })  : _storage = storage,
         _adapter = adapter,
         _connectivityService = connectivityService ?? ConnectivityService.I {
     multiFactorManager = MultiFactorManager(
-      adapter: adapter,
+      adapter: multiFactorAdapter,
       authService: this,
       storage: storage,
     );
@@ -25,12 +26,13 @@ class AuthService {
   AuthService.noCachedUser({
     required AuthStorage storage,
     required AuthAdapter adapter,
+    required MultiFactorManagerAdapter multiFactorAdapter,
     ConnectivityService? connectivityService,
   })  : _storage = storage,
         _adapter = adapter,
         _connectivityService = connectivityService ?? ConnectivityService.I {
     multiFactorManager = MultiFactorManager(
-      adapter: adapter,
+      adapter: multiFactorAdapter,
       authService: this,
       storage: storage,
     );

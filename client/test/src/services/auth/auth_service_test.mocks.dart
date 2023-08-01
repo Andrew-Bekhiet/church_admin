@@ -22,9 +22,19 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeMultiFactorSession_0 extends _i1.SmartFake
+class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMultiFactorSession_1 extends _i1.SmartFake
     implements _i2.MultiFactorSession {
-  _FakeMultiFactorSession_0(
+  _FakeMultiFactorSession_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -33,19 +43,9 @@ class _FakeMultiFactorSession_0 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_1 extends _i1.SmartFake
+class _FakeMultiFactorInfo_2 extends _i1.SmartFake
     implements _i2.MultiFactorInfo {
-  _FakeMultiFactorInfo_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDateTime_2 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_2(
+  _FakeMultiFactorInfo_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -150,12 +150,6 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValueForMissingStub: _i4.Stream<String?>.empty(),
       ) as _i4.Stream<String?>);
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
   _i4.Future<bool> signInWithEmailPassword({
     required String? email,
     required String? password,
@@ -210,6 +204,76 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
+  _i4.Future<void> refreshToken() => (super.noSuchMethod(
+        Invocation.method(
+          #refreshToken,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  bool isTokenUpToDate(_i2.User? user) => (super.noSuchMethod(
+        Invocation.method(
+          #isTokenUpToDate,
+          [user],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  DateTime tokenExpiry(String? idToken) => (super.noSuchMethod(
+        Invocation.method(
+          #tokenExpiry,
+          [idToken],
+        ),
+        returnValue: _FakeDateTime_0(
+          this,
+          Invocation.method(
+            #tokenExpiry,
+            [idToken],
+          ),
+        ),
+        returnValueForMissingStub: _FakeDateTime_0(
+          this,
+          Invocation.method(
+            #tokenExpiry,
+            [idToken],
+          ),
+        ),
+      ) as DateTime);
+  @override
+  _i4.Future<void> signOut() => (super.noSuchMethod(
+        Invocation.method(
+          #signOut,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+}
+
+/// A class which mocks [MultiFactorManagerAdapter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMultiFactorManagerAdapter extends _i1.Mock
+    implements _i2.MultiFactorManagerAdapter {
+  @override
+  bool get hasPendingMultifactorSession => (super.noSuchMethod(
+        Invocation.getter(#hasPendingMultifactorSession),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
   _i4.Future<_i2.MultiFactorSession> startMultiFactorSession(
           {required String? password}) =>
       (super.noSuchMethod(
@@ -219,7 +283,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           {#password: password},
         ),
         returnValue:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_1(
           this,
           Invocation.method(
             #startMultiFactorSession,
@@ -228,7 +292,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_1(
           this,
           Invocation.method(
             #startMultiFactorSession,
@@ -244,14 +308,14 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           #getMultiFactorInfoFor,
           [session],
         ),
-        returnValue: _FakeMultiFactorInfo_1(
+        returnValue: _FakeMultiFactorInfo_2(
           this,
           Invocation.method(
             #getMultiFactorInfoFor,
             [session],
           ),
         ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_1(
+        returnValueForMissingStub: _FakeMultiFactorInfo_2(
           this,
           Invocation.method(
             #getMultiFactorInfoFor,
@@ -298,57 +362,9 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> refreshToken() => (super.noSuchMethod(
+  _i4.Future<void> clearPendingMultiFactorSession() => (super.noSuchMethod(
         Invocation.method(
-          #refreshToken,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  bool isTokenUpToDate(_i2.User? user) => (super.noSuchMethod(
-        Invocation.method(
-          #isTokenUpToDate,
-          [user],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  DateTime tokenExpiry(String? idToken) => (super.noSuchMethod(
-        Invocation.method(
-          #tokenExpiry,
-          [idToken],
-        ),
-        returnValue: _FakeDateTime_2(
-          this,
-          Invocation.method(
-            #tokenExpiry,
-            [idToken],
-          ),
-        ),
-        returnValueForMissingStub: _FakeDateTime_2(
-          this,
-          Invocation.method(
-            #tokenExpiry,
-            [idToken],
-          ),
-        ),
-      ) as DateTime);
-  @override
-  _i4.Future<void> signOut() => (super.noSuchMethod(
-        Invocation.method(
-          #signOut,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
+          #clearPendingMultiFactorSession,
           [],
         ),
         returnValue: _i4.Future<void>.value(),

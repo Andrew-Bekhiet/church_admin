@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthService with WidgetsBindingObserver {
@@ -18,8 +17,6 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
-
-  final FlutterSecureStorage _secureStorage;
 
   bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
@@ -37,14 +34,11 @@ class LocalAuthService with WidgetsBindingObserver {
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    FlutterSecureStorage? secureStorage,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
         _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I,
-        _secureStorage = secureStorage ??
-            globalProviderContainer.read(secureStorageProvider) {
+            currentPlatformService ?? CurrentPlatformService.I {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -56,14 +50,11 @@ class LocalAuthService with WidgetsBindingObserver {
     required LocalAuthentication localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    FlutterSecureStorage? secureStorage,
     this.timeToReauth = const Duration(seconds: 30),
   })  : _localAuthPlugin = localAuthPlugin,
         _notificationsService = notificationService ?? NotificationsService.I,
         _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I,
-        _secureStorage = secureStorage ??
-            globalProviderContainer.read(secureStorageProvider) {
+            currentPlatformService ?? CurrentPlatformService.I {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );

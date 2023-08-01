@@ -101,5 +101,4 @@ jobs:
       - uses: codecov/codecov-action@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
-          file: test-results.json
           token: ${{ secrets.CODECOV_TOKEN }}

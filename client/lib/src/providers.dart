@@ -119,7 +119,14 @@ final authServiceProvider = Provider<AuthService>(
       firebaseAuth: ref.watch(firebaseAuthProvider),
       databaseService: ref.watch(databaseServiceProvider),
     ),
+    multiFactorAdapter: ref.watch(multiFactorManagerAdapterProvider),
     connectivityService: ref.watch(connectivityServiceProvider),
+  ),
+);
+
+final multiFactorManagerAdapterProvider = Provider<MultiFactorManagerAdapter>(
+  (ref) => FirebaseMultiFactorManagerAdapter(
+    firebaseAuth: ref.watch(firebaseAuthProvider),
   ),
 );
 
