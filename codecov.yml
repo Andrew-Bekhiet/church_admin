@@ -2,3 +2,4 @@ ignore:
   - "**.g.dart"
   - "**.freezed.dart"
   - "**.graphql.dart"
+  - "**.gql.dart"
