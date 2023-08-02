@@ -43,144 +43,159 @@ final expectedDomainUser = User(
   MockSpec<UsersDAO>(),
 ])
 void main() {
-  setUp(_setUp);
-  tearDown(resetGlobalProviderContainer);
+  group(
+    'Firebase Auth Adapter =>',
+    () {
+      setUp(_setUp);
+      tearDown(resetGlobalProviderContainer);
 
-  test(
-    'Firebase Auth Adapter => signInWithGoogle',
-    () async {
-      final unit = globalProviderContainer.read(authAdapterProvider);
+      test(
+        'signInWithGoogle',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
 
-      await unit.signInWithEmailPassword(email: 'email', password: 'password');
+          await unit.signInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          );
 
-      verifyInOrder([
-        (globalProviderContainer.read(firebaseAuthProvider) as MockFirebaseAuth)
-            .signInWithEmailAndPassword(email: 'email', password: 'password'),
-      ]);
-    },
-  );
-
-  test(
-    'Firebase Auth Adapter => signOut',
-    () async {
-      final unit = globalProviderContainer.read(authAdapterProvider);
-
-      await unit.signOut();
-
-      verifyInOrder([
-        globalProviderContainer.read(firebaseAuthProvider).signOut(),
-      ]);
-    },
-  );
-
-  test(
-    'Firebase Auth Adapter => userStream',
-    () async {
-      final unit = globalProviderContainer.read(authAdapterProvider);
-
-      final expectFuture = expectLater(
-        unit.userStream,
-        emitsInOrder([expectedDomainUser, isNull]),
-      );
-
-      await unit.signInWithEmailPassword(email: 'email', password: 'password');
-      await unit.signOut();
-
-      await expectFuture;
-
-      final mockUsersDAO = globalProviderContainer
-          .read(databaseServiceProvider)
-          .users as MockUsersDAO;
-      final captured = verify(
-        mockUsersDAO.streamSingleById(uid: captureAnyNamed('uid')),
-      ).captured;
-
-      expect(captured.first, expectedDomainUser.uid);
-    },
-  );
-
-  test(
-    'Firebase Auth Adapter => refreshToken',
-    () async {
-      final unit = globalProviderContainer.read(authAdapterProvider);
-
-      final _mockUser = _createMockUser();
-      when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
-          .thenReturn(_mockUser);
-
-      await unit.refreshToken();
-
-      verify(_mockUser.getIdToken(true));
-
-      when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
-          .thenReturn(null);
-
-      expect(unit.refreshToken(), throwsStateError);
-    },
-  );
-
-  test(
-    'Firebase Auth Adapter => idTokenResult',
-    () async {
-      final idTokenController = StreamController<auth.User?>();
-      addTearDown(idTokenController.close);
-
-      final unit = globalProviderContainer.read(authAdapterProvider);
-
-      when(globalProviderContainer.read(firebaseAuthProvider).userChanges())
-          .thenAnswer((_) => idTokenController.stream);
-
-      final tokens = [
-        mockString(),
-        mockString(),
-        mockString(),
-        mockString(),
-        mockString()
-      ];
-      tokens
-        ..insert(0, tokens.first)
-        ..add(tokens.last);
-
-      expect(unit.idTokenStream, emitsInOrder(tokens.toSet()));
-
-      for (final t in tokens) {
-        idTokenController.add(
-          _createMockUser(
-            idTokenResult$: IdTokenResult(
-              PigeonIdTokenResult(
-                token: t,
-              ),
+          verifyInOrder([
+            (globalProviderContainer.read(firebaseAuthProvider)
+                    as MockFirebaseAuth)
+                .signInWithEmailAndPassword(
+              email: 'email',
+              password: 'password',
             ),
-          ),
-        );
-      }
-    },
-  );
-
-  test(
-    'Firebase Auth Adapter => isTokenUpToDate',
-    () async {
-      final unit = globalProviderContainer.read(authAdapterProvider);
-
-      final _domainUser1 = User(
-        name: 'name',
-        uid: 'uid',
-        idToken: _createIdTokenWithExp(
-          DateTime.now().subtract(const Duration(minutes: 5)),
-        ),
+          ]);
+        },
       );
 
-      expect(unit.isTokenUpToDate(_domainUser1), isFalse);
+      test(
+        'signOut',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
 
-      final _domainUser2 = User(
-        name: 'name',
-        uid: 'uid',
-        idToken: _createIdTokenWithExp(
-          DateTime.now().add(const Duration(minutes: 5)),
-        ),
+          await unit.signOut();
+
+          verifyInOrder([
+            globalProviderContainer.read(firebaseAuthProvider).signOut(),
+          ]);
+        },
       );
 
-      expect(unit.isTokenUpToDate(_domainUser2), isTrue);
+      test(
+        'userStream',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          final expectFuture = expectLater(
+            unit.userStream,
+            emitsInOrder([expectedDomainUser, isNull]),
+          );
+
+          await unit.signInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          );
+          await unit.signOut();
+
+          await expectFuture;
+
+          final mockUsersDAO = globalProviderContainer
+              .read(databaseServiceProvider)
+              .users as MockUsersDAO;
+          final captured = verify(
+            mockUsersDAO.streamSingleById(uid: captureAnyNamed('uid')),
+          ).captured;
+
+          expect(captured.first, expectedDomainUser.uid);
+        },
+      );
+
+      test(
+        'refreshToken',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          final _mockUser = _createMockUser();
+          when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+              .thenReturn(_mockUser);
+
+          await unit.refreshToken();
+
+          verify(_mockUser.getIdToken(true));
+
+          when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+              .thenReturn(null);
+
+          expect(unit.refreshToken(), throwsStateError);
+        },
+      );
+
+      test(
+        'idTokenResult',
+        () async {
+          final idTokenController = StreamController<auth.User?>();
+          addTearDown(idTokenController.close);
+
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          when(globalProviderContainer.read(firebaseAuthProvider).userChanges())
+              .thenAnswer((_) => idTokenController.stream);
+
+          final tokens = [
+            mockString(),
+            mockString(),
+            mockString(),
+            mockString(),
+            mockString()
+          ];
+          tokens
+            ..insert(0, tokens.first)
+            ..add(tokens.last);
+
+          expect(unit.idTokenStream, emitsInOrder(tokens.toSet()));
+
+          for (final t in tokens) {
+            idTokenController.add(
+              _createMockUser(
+                idTokenResult$: IdTokenResult(
+                  PigeonIdTokenResult(
+                    token: t,
+                  ),
+                ),
+              ),
+            );
+          }
+        },
+      );
+
+      test(
+        'isTokenUpToDate',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          final _domainUser1 = User(
+            name: 'name',
+            uid: 'uid',
+            idToken: _createIdTokenWithExp(
+              DateTime.now().subtract(const Duration(minutes: 5)),
+            ),
+          );
+
+          expect(unit.isTokenUpToDate(_domainUser1), isFalse);
+
+          final _domainUser2 = User(
+            name: 'name',
+            uid: 'uid',
+            idToken: _createIdTokenWithExp(
+              DateTime.now().add(const Duration(minutes: 5)),
+            ),
+          );
+
+          expect(unit.isTokenUpToDate(_domainUser2), isTrue);
+        },
+      );
     },
   );
 }
