@@ -219,10 +219,9 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
       _loading = true;
       if (mounted) setState(() {});
 
-      await AuthService.I.signInWithEmailPassword(
+      await AuthService.I.reauthWithEmailPassword(
         email: AuthService.I.currentUser!.email!,
         password: _passwordController.text,
-        reauth: true,
       );
 
       final multiFactorSession = await AuthService.I.multiFactorManager

@@ -93,26 +93,12 @@ class FirebaseAuthAdapter extends AuthAdapter {
   Future<bool> signInWithEmailPassword({
     required String email,
     required String password,
-    bool reauth = false,
   }) async {
     try {
-      if (reauth) {
-        final user = _firebaseAuth.currentUser;
-
-        if (user == null) throw StateError('Must be signed in to reauth');
-
-        final credential = EmailAuthProvider.credential(
-          email: email,
-          password: password,
-        );
-
-        await user.reauthenticateWithCredential(credential);
-      } else {
-        await _firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-      }
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
       return true;
     } on FirebaseAuthMultiFactorException catch (e) {
@@ -129,6 +115,25 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
       throw MultiFactorException(multiFactorSession);
     }
+  }
+
+  @override
+  Future<bool> reauthWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
+    final user = _firebaseAuth.currentUser;
+
+    if (user == null) throw StateError('Must be signed in to reauth');
+
+    final credential = EmailAuthProvider.credential(
+      email: email,
+      password: password,
+    );
+
+    await user.reauthenticateWithCredential(credential);
+
+    return true;
   }
 
   @override

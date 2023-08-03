@@ -67,17 +67,25 @@ class AuthService {
   Future<bool> signInWithEmailPassword({
     required String email,
     required String password,
-    bool reauth = false,
   }) async {
     final rslt = await _adapter.signInWithEmailPassword(
       email: email,
       password: password,
-      reauth: reauth,
     );
 
     if (rslt) await _storage.saveUserPasswordHash(email, password);
 
     return rslt;
+  }
+
+  Future<bool> reauthWithEmailPassword({
+    required String email,
+    required String password,
+  }) {
+    return _adapter.reauthWithEmailPassword(
+      email: email,
+      password: password,
+    );
   }
 
   Future<bool> signUpWithEmailPassword({

@@ -7,7 +7,11 @@ abstract class AuthAdapter {
   Future<bool> signInWithEmailPassword({
     required String email,
     required String password,
-    bool reauth = false,
+  });
+
+  Future<bool> reauthWithEmailPassword({
+    required String email,
+    required String password,
   });
 
   Future<bool> signUpWithEmailPassword({
