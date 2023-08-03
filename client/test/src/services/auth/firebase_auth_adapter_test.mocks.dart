@@ -120,9 +120,20 @@ class _FakeMultiFactorSession_8 extends _i1.SmartFake
         );
 }
 
-class _FakeDBGraphQLClient_9 extends _i1.SmartFake
+class _FakeMultiFactorResolver_9 extends _i1.SmartFake
+    implements _i4.MultiFactorResolver {
+  _FakeMultiFactorResolver_9(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDBGraphQLClient_10 extends _i1.SmartFake
     implements _i5.DBGraphQLClient {
-  _FakeDBGraphQLClient_9(
+  _FakeDBGraphQLClient_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -131,8 +142,8 @@ class _FakeDBGraphQLClient_9 extends _i1.SmartFake
         );
 }
 
-class _FakeGQLParser_10 extends _i1.SmartFake implements _i6.GQLParser {
-  _FakeGQLParser_10(
+class _FakeGQLParser_11 extends _i1.SmartFake implements _i6.GQLParser {
+  _FakeGQLParser_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -141,8 +152,8 @@ class _FakeGQLParser_10 extends _i1.SmartFake implements _i6.GQLParser {
         );
 }
 
-class _FakeAreasDAO_11 extends _i1.SmartFake implements _i7.AreasDAO {
-  _FakeAreasDAO_11(
+class _FakeAreasDAO_12 extends _i1.SmartFake implements _i7.AreasDAO {
+  _FakeAreasDAO_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -151,8 +162,8 @@ class _FakeAreasDAO_11 extends _i1.SmartFake implements _i7.AreasDAO {
         );
 }
 
-class _FakeStreetsDAO_12 extends _i1.SmartFake implements _i7.StreetsDAO {
-  _FakeStreetsDAO_12(
+class _FakeStreetsDAO_13 extends _i1.SmartFake implements _i7.StreetsDAO {
+  _FakeStreetsDAO_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -161,8 +172,8 @@ class _FakeStreetsDAO_12 extends _i1.SmartFake implements _i7.StreetsDAO {
         );
 }
 
-class _FakeFamiliesDAO_13 extends _i1.SmartFake implements _i7.FamiliesDAO {
-  _FakeFamiliesDAO_13(
+class _FakeFamiliesDAO_14 extends _i1.SmartFake implements _i7.FamiliesDAO {
+  _FakeFamiliesDAO_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -171,8 +182,8 @@ class _FakeFamiliesDAO_13 extends _i1.SmartFake implements _i7.FamiliesDAO {
         );
 }
 
-class _FakeStoresDAO_14 extends _i1.SmartFake implements _i7.StoresDAO {
-  _FakeStoresDAO_14(
+class _FakeStoresDAO_15 extends _i1.SmartFake implements _i7.StoresDAO {
+  _FakeStoresDAO_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -181,8 +192,8 @@ class _FakeStoresDAO_14 extends _i1.SmartFake implements _i7.StoresDAO {
         );
 }
 
-class _FakePersonsDAO_15 extends _i1.SmartFake implements _i7.PersonsDAO {
-  _FakePersonsDAO_15(
+class _FakePersonsDAO_16 extends _i1.SmartFake implements _i7.PersonsDAO {
+  _FakePersonsDAO_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -191,8 +202,8 @@ class _FakePersonsDAO_15 extends _i1.SmartFake implements _i7.PersonsDAO {
         );
 }
 
-class _FakeServicesDAO_16 extends _i1.SmartFake implements _i7.ServicesDAO {
-  _FakeServicesDAO_16(
+class _FakeServicesDAO_17 extends _i1.SmartFake implements _i7.ServicesDAO {
+  _FakeServicesDAO_17(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -201,8 +212,8 @@ class _FakeServicesDAO_16 extends _i1.SmartFake implements _i7.ServicesDAO {
         );
 }
 
-class _FakeClassesDAO_17 extends _i1.SmartFake implements _i7.ClassesDAO {
-  _FakeClassesDAO_17(
+class _FakeClassesDAO_18 extends _i1.SmartFake implements _i7.ClassesDAO {
+  _FakeClassesDAO_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -211,8 +222,8 @@ class _FakeClassesDAO_17 extends _i1.SmartFake implements _i7.ClassesDAO {
         );
 }
 
-class _FakeGroupsDAO_18 extends _i1.SmartFake implements _i7.GroupsDAO {
-  _FakeGroupsDAO_18(
+class _FakeGroupsDAO_19 extends _i1.SmartFake implements _i7.GroupsDAO {
+  _FakeGroupsDAO_19(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -221,8 +232,8 @@ class _FakeGroupsDAO_18 extends _i1.SmartFake implements _i7.GroupsDAO {
         );
 }
 
-class _FakeUsersDAO_19 extends _i1.SmartFake implements _i7.UsersDAO {
-  _FakeUsersDAO_19(
+class _FakeUsersDAO_20 extends _i1.SmartFake implements _i7.UsersDAO {
+  _FakeUsersDAO_20(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -231,8 +242,8 @@ class _FakeUsersDAO_19 extends _i1.SmartFake implements _i7.UsersDAO {
         );
 }
 
-class _FakeMetadataDAO_20 extends _i1.SmartFake implements _i7.MetadataDAO {
-  _FakeMetadataDAO_20(
+class _FakeMetadataDAO_21 extends _i1.SmartFake implements _i7.MetadataDAO {
+  _FakeMetadataDAO_21(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -241,8 +252,8 @@ class _FakeMetadataDAO_20 extends _i1.SmartFake implements _i7.MetadataDAO {
         );
 }
 
-class _FakeHistoryDAO_21 extends _i1.SmartFake implements _i7.HistoryDAO {
-  _FakeHistoryDAO_21(
+class _FakeHistoryDAO_22 extends _i1.SmartFake implements _i7.HistoryDAO {
+  _FakeHistoryDAO_22(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -251,9 +262,9 @@ class _FakeHistoryDAO_21 extends _i1.SmartFake implements _i7.HistoryDAO {
         );
 }
 
-class _FakeDatabaseService_22 extends _i1.SmartFake
+class _FakeDatabaseService_23 extends _i1.SmartFake
     implements _i5.DatabaseService {
-  _FakeDatabaseService_22(
+  _FakeDatabaseService_23(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -262,9 +273,9 @@ class _FakeDatabaseService_22 extends _i1.SmartFake
         );
 }
 
-class _FakeGQLPaginatableStream_23<T> extends _i1.SmartFake
+class _FakeGQLPaginatableStream_24<T> extends _i1.SmartFake
     implements _i5.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_23(
+  _FakeGQLPaginatableStream_24(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1378,6 +1389,99 @@ class MockMultiFactor extends _i1.Mock implements _i4.MultiFactor {
 /// See the documentation for Mockito's code generation for more information.
 class MockUserCredential extends _i1.Mock implements _i4.UserCredential {}
 
+/// A class which mocks [FirebaseAuthMultiFactorException].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirebaseAuthMultiFactorException extends _i1.Mock
+    implements _i4.FirebaseAuthMultiFactorException {
+  @override
+  _i4.MultiFactorResolver get resolver => (super.noSuchMethod(
+        Invocation.getter(#resolver),
+        returnValue: _FakeMultiFactorResolver_9(
+          this,
+          Invocation.getter(#resolver),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorResolver_9(
+          this,
+          Invocation.getter(#resolver),
+        ),
+      ) as _i4.MultiFactorResolver);
+  @override
+  String get plugin => (super.noSuchMethod(
+        Invocation.getter(#plugin),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  String get code => (super.noSuchMethod(
+        Invocation.getter(#code),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+}
+
+/// A class which mocks [MultiFactorResolver].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMultiFactorResolver extends _i1.Mock
+    implements _i4.MultiFactorResolver {
+  @override
+  List<_i3.MultiFactorInfo> get hints => (super.noSuchMethod(
+        Invocation.getter(#hints),
+        returnValue: <_i3.MultiFactorInfo>[],
+        returnValueForMissingStub: <_i3.MultiFactorInfo>[],
+      ) as List<_i3.MultiFactorInfo>);
+  @override
+  _i3.MultiFactorSession get session => (super.noSuchMethod(
+        Invocation.getter(#session),
+        returnValue: _FakeMultiFactorSession_8(
+          this,
+          Invocation.getter(#session),
+        ),
+        returnValueForMissingStub: _FakeMultiFactorSession_8(
+          this,
+          Invocation.getter(#session),
+        ),
+      ) as _i3.MultiFactorSession);
+  @override
+  _i8.Future<_i4.UserCredential> resolveSignIn(
+          _i4.MultiFactorAssertion? assertion) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resolveSignIn,
+          [assertion],
+        ),
+        returnValue: _i8.Future<_i4.UserCredential>.value(_FakeUserCredential_2(
+          this,
+          Invocation.method(
+            #resolveSignIn,
+            [assertion],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i4.UserCredential>.value(_FakeUserCredential_2(
+          this,
+          Invocation.method(
+            #resolveSignIn,
+            [assertion],
+          ),
+        )),
+      ) as _i8.Future<_i4.UserCredential>);
+}
+
+/// A class which mocks [MultiFactorSession].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMultiFactorSession extends _i1.Mock
+    implements _i3.MultiFactorSession {
+  @override
+  String get id => (super.noSuchMethod(
+        Invocation.getter(#id),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+}
+
 /// A class which mocks [DatabaseService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1385,11 +1489,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i5.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_9(
+        returnValue: _FakeDBGraphQLClient_10(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_9(
+        returnValueForMissingStub: _FakeDBGraphQLClient_10(
           this,
           Invocation.getter(#graphQLClient),
         ),
@@ -1397,11 +1501,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i6.GQLParser get parser => (super.noSuchMethod(
         Invocation.getter(#parser),
-        returnValue: _FakeGQLParser_10(
+        returnValue: _FakeGQLParser_11(
           this,
           Invocation.getter(#parser),
         ),
-        returnValueForMissingStub: _FakeGQLParser_10(
+        returnValueForMissingStub: _FakeGQLParser_11(
           this,
           Invocation.getter(#parser),
         ),
@@ -1409,11 +1513,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.AreasDAO get areas => (super.noSuchMethod(
         Invocation.getter(#areas),
-        returnValue: _FakeAreasDAO_11(
+        returnValue: _FakeAreasDAO_12(
           this,
           Invocation.getter(#areas),
         ),
-        returnValueForMissingStub: _FakeAreasDAO_11(
+        returnValueForMissingStub: _FakeAreasDAO_12(
           this,
           Invocation.getter(#areas),
         ),
@@ -1421,11 +1525,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.StreetsDAO get streets => (super.noSuchMethod(
         Invocation.getter(#streets),
-        returnValue: _FakeStreetsDAO_12(
+        returnValue: _FakeStreetsDAO_13(
           this,
           Invocation.getter(#streets),
         ),
-        returnValueForMissingStub: _FakeStreetsDAO_12(
+        returnValueForMissingStub: _FakeStreetsDAO_13(
           this,
           Invocation.getter(#streets),
         ),
@@ -1433,11 +1537,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.FamiliesDAO get families => (super.noSuchMethod(
         Invocation.getter(#families),
-        returnValue: _FakeFamiliesDAO_13(
+        returnValue: _FakeFamiliesDAO_14(
           this,
           Invocation.getter(#families),
         ),
-        returnValueForMissingStub: _FakeFamiliesDAO_13(
+        returnValueForMissingStub: _FakeFamiliesDAO_14(
           this,
           Invocation.getter(#families),
         ),
@@ -1445,11 +1549,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.StoresDAO get stores => (super.noSuchMethod(
         Invocation.getter(#stores),
-        returnValue: _FakeStoresDAO_14(
+        returnValue: _FakeStoresDAO_15(
           this,
           Invocation.getter(#stores),
         ),
-        returnValueForMissingStub: _FakeStoresDAO_14(
+        returnValueForMissingStub: _FakeStoresDAO_15(
           this,
           Invocation.getter(#stores),
         ),
@@ -1457,11 +1561,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_15(
+        returnValue: _FakePersonsDAO_16(
           this,
           Invocation.getter(#persons),
         ),
-        returnValueForMissingStub: _FakePersonsDAO_15(
+        returnValueForMissingStub: _FakePersonsDAO_16(
           this,
           Invocation.getter(#persons),
         ),
@@ -1469,11 +1573,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_16(
+        returnValue: _FakeServicesDAO_17(
           this,
           Invocation.getter(#services),
         ),
-        returnValueForMissingStub: _FakeServicesDAO_16(
+        returnValueForMissingStub: _FakeServicesDAO_17(
           this,
           Invocation.getter(#services),
         ),
@@ -1481,11 +1585,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_17(
+        returnValue: _FakeClassesDAO_18(
           this,
           Invocation.getter(#classes),
         ),
-        returnValueForMissingStub: _FakeClassesDAO_17(
+        returnValueForMissingStub: _FakeClassesDAO_18(
           this,
           Invocation.getter(#classes),
         ),
@@ -1493,11 +1597,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_18(
+        returnValue: _FakeGroupsDAO_19(
           this,
           Invocation.getter(#groups),
         ),
-        returnValueForMissingStub: _FakeGroupsDAO_18(
+        returnValueForMissingStub: _FakeGroupsDAO_19(
           this,
           Invocation.getter(#groups),
         ),
@@ -1505,11 +1609,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_19(
+        returnValue: _FakeUsersDAO_20(
           this,
           Invocation.getter(#users),
         ),
-        returnValueForMissingStub: _FakeUsersDAO_19(
+        returnValueForMissingStub: _FakeUsersDAO_20(
           this,
           Invocation.getter(#users),
         ),
@@ -1517,11 +1621,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_20(
+        returnValue: _FakeMetadataDAO_21(
           this,
           Invocation.getter(#metadata),
         ),
-        returnValueForMissingStub: _FakeMetadataDAO_20(
+        returnValueForMissingStub: _FakeMetadataDAO_21(
           this,
           Invocation.getter(#metadata),
         ),
@@ -1529,11 +1633,11 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
   @override
   _i7.HistoryDAO get history => (super.noSuchMethod(
         Invocation.getter(#history),
-        returnValue: _FakeHistoryDAO_21(
+        returnValue: _FakeHistoryDAO_22(
           this,
           Invocation.getter(#history),
         ),
-        returnValueForMissingStub: _FakeHistoryDAO_21(
+        returnValueForMissingStub: _FakeHistoryDAO_22(
           this,
           Invocation.getter(#history),
         ),
@@ -1547,11 +1651,11 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
   @override
   _i5.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_22(
+        returnValue: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_22(
+        returnValueForMissingStub: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
@@ -1559,11 +1663,11 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
   @override
   _i5.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_9(
+        returnValue: _FakeDBGraphQLClient_10(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_9(
+        returnValueForMissingStub: _FakeDBGraphQLClient_10(
           this,
           Invocation.getter(#graphQLClient),
         ),
@@ -1582,7 +1686,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
             #where: where,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_23<_i5.User>(
+        returnValue: _FakeGQLPaginatableStream_24<_i5.User>(
           this,
           Invocation.method(
             #streamAll,
@@ -1593,7 +1697,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_23<_i5.User>(
+        returnValueForMissingStub: _FakeGQLPaginatableStream_24<_i5.User>(
           this,
           Invocation.method(
             #streamAll,

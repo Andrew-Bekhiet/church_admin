@@ -5,7 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as auth
-    show MultiFactorInfo, User;
+    show MultiFactorInfo, MultiFactorSession, User;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,12 +33,17 @@ final expectedDomainUser = User(
   emailVerified: true,
   idToken: idTokenResult.token,
 );
+const fakeTestEmail = 'fakeTestEmail@example.com';
+const fakeTestPassword = 'fakeTestPassword1234%^&';
 
 @GenerateNiceMocks([
   MockSpec<FirebaseAuth>(),
   MockSpec<auth.User>(),
   MockSpec<MultiFactor>(),
   MockSpec<UserCredential>(),
+  MockSpec<FirebaseAuthMultiFactorException>(),
+  MockSpec<MultiFactorResolver>(),
+  MockSpec<auth.MultiFactorSession>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
 ])
@@ -55,16 +60,16 @@ void main() {
           final unit = globalProviderContainer.read(authAdapterProvider);
 
           await unit.signInWithEmailPassword(
-            email: 'email',
-            password: 'password',
+            email: fakeTestEmail,
+            password: fakeTestPassword,
           );
 
           verifyInOrder([
             (globalProviderContainer.read(firebaseAuthProvider)
                     as MockFirebaseAuth)
                 .signInWithEmailAndPassword(
-              email: 'email',
-              password: 'password',
+              email: fakeTestEmail,
+              password: fakeTestPassword,
             ),
           ]);
         },
@@ -94,8 +99,8 @@ void main() {
           );
 
           await unit.signInWithEmailPassword(
-            email: 'email',
-            password: 'password',
+            email: fakeTestEmail,
+            password: fakeTestPassword,
           );
           await unit.signOut();
 
@@ -196,8 +201,193 @@ void main() {
           expect(unit.isTokenUpToDate(_domainUser2), isTrue);
         },
       );
+
+      test(
+        'reload',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(unit.reload, throwsStateError);
+
+          final _mockUser = _createMockUser();
+          when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+              .thenReturn(_mockUser);
+
+          await expectLater(unit.reload(), completes);
+
+          verify(_mockUser.reload());
+        },
+      );
+
+      test(
+        'sendEmailVerification',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(unit.sendEmailVerification, throwsStateError);
+
+          final _mockUser = _createMockUser();
+          when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
+              .thenReturn(_mockUser);
+
+          await expectLater(unit.sendEmailVerification(), completes);
+
+          verify(_mockUser.sendEmailVerification());
+        },
+      );
+
+      test(
+        'signUpWithEmailPassword',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(
+            unit.signUpWithEmailPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+            completion(isTrue),
+          );
+
+          verify(
+            (globalProviderContainer.read(firebaseAuthProvider)
+                    as MockFirebaseAuth)
+                .createUserWithEmailAndPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+          );
+        },
+      );
+
+      test(
+        'signInWithEmailPassword: No multifactor auth',
+        () async {
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(
+            unit.signInWithEmailPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+            completion(isTrue),
+          );
+
+          verify(
+            (globalProviderContainer.read(firebaseAuthProvider)
+                    as MockFirebaseAuth)
+                .signInWithEmailAndPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+          );
+        },
+      );
+
+      test(
+        'signInWithEmailPassword: With multifactor auth',
+        () async {
+          final firebaseAuth = globalProviderContainer
+              .read(firebaseAuthProvider) as MockFirebaseAuth;
+
+          final mock2FAException = _createMock2FAException();
+
+          when(
+            firebaseAuth.signInWithEmailAndPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+          ).thenThrow(mock2FAException);
+
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(
+            unit.signInWithEmailPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+            throwsA(
+              predicate<MultiFactorException>(
+                (e) =>
+                    e.session.id == 'id' &&
+                    e.session.email == fakeTestEmail &&
+                    e.session.password == fakeTestPassword,
+              ),
+            ),
+          );
+
+          verify(
+            (globalProviderContainer.read(firebaseAuthProvider)
+                    as MockFirebaseAuth)
+                .signInWithEmailAndPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+          );
+        },
+      );
+
+      test(
+        'reauthWithEmailPassword: User signed in',
+        () async {
+          final firebaseAuth = globalProviderContainer
+              .read(firebaseAuthProvider) as MockFirebaseAuth;
+
+          final _mockUser = _createMockUser();
+          when(firebaseAuth.currentUser).thenReturn(_mockUser);
+
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          await expectLater(
+            unit.reauthWithEmailPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+            completion(isTrue),
+          );
+
+          final captured =
+              verify(_mockUser.reauthenticateWithCredential(captureAny));
+          final credential = captured.captured.first as EmailAuthCredential;
+
+          expect(credential.email, fakeTestEmail);
+          expect(credential.password, fakeTestPassword);
+        },
+      );
+
+      test(
+        'reauthWithEmailPassword: User not signed in',
+        () async {
+          final firebaseAuth = globalProviderContainer
+              .read(firebaseAuthProvider) as MockFirebaseAuth;
+
+          when(firebaseAuth.currentUser).thenReturn(null);
+
+          final unit = globalProviderContainer.read(authAdapterProvider);
+
+          expect(
+            () => unit.reauthWithEmailPassword(
+              email: fakeTestEmail,
+              password: fakeTestPassword,
+            ),
+            throwsStateError,
+          );
+        },
+      );
     },
   );
+}
+
+MockFirebaseAuthMultiFactorException _createMock2FAException() {
+  final mockMultiFactorSession = MockMultiFactorSession();
+  final mockMultiFactorResolver = MockMultiFactorResolver();
+  final mock2FAException = MockFirebaseAuthMultiFactorException();
+
+  when(mockMultiFactorSession.id).thenReturn('id');
+  when(mockMultiFactorResolver.session).thenReturn(mockMultiFactorSession);
+  when(mock2FAException.resolver).thenReturn(mockMultiFactorResolver);
+
+  return mock2FAException;
 }
 
 String _createIdTokenWithExp(DateTime exp) {

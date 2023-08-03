@@ -213,7 +213,6 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
   _i10.Future<bool> signInWithEmailPassword({
     required String? email,
     required String? password,
-    bool? reauth = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -222,7 +221,23 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           {
             #email: email,
             #password: password,
-            #reauth: reauth,
+          },
+        ),
+        returnValue: _i10.Future<bool>.value(false),
+        returnValueForMissingStub: _i10.Future<bool>.value(false),
+      ) as _i10.Future<bool>);
+  @override
+  _i10.Future<bool> reauthWithEmailPassword({
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reauthWithEmailPassword,
+          [],
+          {
+            #email: email,
+            #password: password,
           },
         ),
         returnValue: _i10.Future<bool>.value(false),
