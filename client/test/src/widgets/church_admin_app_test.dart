@@ -267,7 +267,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       uid: 'uid',
       name: 'name',
       permissions: PermissionsSet.fromSet(
-        {if (value != FirstScreenVariantEnum.unapprovedUser) 'approved'},
+        {
+          if (value != FirstScreenVariantEnum.unapprovedUser)
+            UserPermission.approved
+        },
       ),
       isMultiFactorEnrolled: value != FirstScreenVariantEnum.multiFactor,
       emailVerified: value != FirstScreenVariantEnum.emailVerification,

@@ -321,7 +321,7 @@ const email = 'email';
 final User _fakeUser = User(
   uid: 'uid',
   name: '',
-  permissions: PermissionsSet.fromSet(const {'approved'}),
+  permissions: const PermissionsSet.fromSet({UserPermission.approved}),
   isMultiFactorEnrolled: true,
   email: email,
   authId: 'firebaseAuthUID',
@@ -372,7 +372,6 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
         uid: 'uid',
         name: '',
         passwordKeyHash: 'asdasdasdas',
-        permissions: PermissionsSet.fromSet(const {}),
         email: email,
         authId: 'firebaseAuthUID',
       ),

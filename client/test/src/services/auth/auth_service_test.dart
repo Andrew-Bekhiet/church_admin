@@ -17,15 +17,15 @@ final initialUser = User(
   idToken: 'idToken',
   photoUpdatedAt: DateTime.now(),
   passwordKeyHash: 'FakePasswordHash1234',
-  permissions: PermissionsSet.fromSet(const {
-    'approved',
-    'manageAllUsers',
-    'readAllData',
-    'writeAllData',
-    'recordHistory',
-    'changeOldHistory',
-    'recoverDeleted',
-    'exportData',
+  permissions: const PermissionsSet.fromSet({
+    UserPermission.approved,
+    UserPermission.manageAllUsers,
+    UserPermission.readAllData,
+    UserPermission.writeAllData,
+    UserPermission.recordHistory,
+    UserPermission.changeOldHistory,
+    UserPermission.recoverDeleted,
+    UserPermission.exportData,
   }),
 );
 

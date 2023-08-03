@@ -174,7 +174,6 @@ Override _setUpAuthService({bool isSignedIn = true}) {
     final user = User(
       uid: 'uid',
       name: '',
-      permissions: PermissionsSet.fromSet(const {}),
       email: 'email',
       authId: 'firebaseAuthUID',
     );
