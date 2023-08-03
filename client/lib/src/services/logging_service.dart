@@ -12,40 +12,25 @@ class LoggingService {
   final NavigatorObserver navigatorObserver = SentryNavigatorObserver();
 
   LoggingService() {
-    _init();
+    FlutterError.onError = onFlutterError;
+    ErrorWidget.builder = errorWidgetBuilder;
   }
 
-  void _init() {
-    FlutterError.onError = (flutterError) {
-      Sentry.captureException(
-        flutterError,
-        stackTrace: flutterError.stack,
-      );
-    };
+  Future<void> onFlutterError(FlutterErrorDetails flutterError) async {
+    await reportError(flutterError, stackTrace: flutterError.stack);
+  }
 
-    ErrorWidget.builder = (error) {
-      if (kReleaseMode) {
-        Sentry.captureException(
-          error,
-          stackTrace: error.stack,
-        );
-      }
-      return Material(
-        type: MaterialType.card,
-        child: Center(
-          child: Text(
-            'حدث خطأ:\n' + error.summary.toString(),
-          ),
+  Widget errorWidgetBuilder(FlutterErrorDetails error) {
+    if (kReleaseMode) onFlutterError(error);
+
+    return Material(
+      type: MaterialType.card,
+      child: Center(
+        child: Text(
+          'حدث خطأ:\n' + error.summary.toString(),
         ),
-      );
-    };
-  }
-
-  FutureOr<void> Function(FutureOr<void> Function(Scope)) get configureScope =>
-      Sentry.configureScope;
-
-  Future<void> log(String msg) async {
-    await Sentry.captureMessage(msg);
+      ),
+    );
   }
 
   Future<void> reportError(
@@ -58,66 +43,79 @@ class LoggingService {
       error,
       stackTrace: stackTrace,
       withScope: (scope) {
-        final currentUser = AuthService.I.currentUser;
+        _maybeConfigureScopeUser(scope);
 
-        scope.setUser(
-          SentryUser(
-            data: currentUser?.toJson().map(
-                  (key, value) => MapEntry(
-                    key,
-                    value is Set ? value.toList() : value,
-                  ),
-                ),
-            email: currentUser?.email,
-            id: currentUser?.uid,
-          ),
-        );
+        _maybeConfigureScopeData(scope, data);
 
-        if (data != null) {
-          scope.setContexts('Data', data);
-        }
-
-        if (extras != null) {
-          for (final entry in extras.entries) {
-            scope.setExtra(entry.key, entry.value);
-          }
-        }
+        _maybeConfigureScopeExtras(scope, extras);
       },
     );
+  }
+
+  void _maybeConfigureScopeUser(Scope scope) {
+    if (AuthService.I.isSignedIn) {
+      final currentUser = AuthService.I.currentUser!;
+
+      scope.setUser(
+        SentryUser(
+          id: currentUser.uid,
+          email: currentUser.email,
+          name: currentUser.name,
+          data: currentUser.toJson().map(
+                (key, value) => MapEntry(
+                  key,
+                  value is Set ? value.toList() : value,
+                ),
+              ),
+        ),
+      );
+    }
+  }
+
+  void _maybeConfigureScopeData(Scope scope, Map<String, dynamic>? data) {
+    if (data != null) {
+      scope.setContexts('Data', data);
+    }
+  }
+
+  void _maybeConfigureScopeExtras(Scope scope, Map<String, dynamic>? extras) {
+    if (extras != null) {
+      for (final entry in extras.entries) {
+        scope.setExtra(entry.key, entry.value);
+      }
+    }
   }
 
   Future<void> reportFlutterError(
     FlutterErrorDetails flutterError, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extras,
-  }) async {
-    await Sentry.captureException(
-      flutterError,
+  }) {
+    return reportError(
+      flutterError.exception,
+      data: data,
+      extras: extras,
       stackTrace: flutterError.stack,
-      withScope: (scope) {
-        final currentUser = AuthService.I.currentUser;
-        scope
-          ..setUser(
-            SentryUser(
-              id: currentUser?.uid,
-              email: currentUser?.email,
-              name: currentUser?.name,
-              data: currentUser?.toJson().map(
-                    (key, value) => MapEntry(
-                      key,
-                      value is Set ? value.toList() : value,
-                    ),
-                  ),
-            ),
-          )
-          ..setContexts('Data', data);
+    );
+  }
 
-        if (extras != null) {
-          for (final entry in extras.entries) {
-            scope.setExtra(entry.key, entry.value);
-          }
-        }
-      },
+  Future<void> showErrorDialogAndReport(
+    BuildContext context,
+    Object error, {
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? extras,
+    StackTrace? stackTrace,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => CAErrorDialog(exception: error),
+    );
+
+    return reportError(
+      error,
+      data: data,
+      extras: extras,
+      stackTrace: stackTrace,
     );
   }
 }
