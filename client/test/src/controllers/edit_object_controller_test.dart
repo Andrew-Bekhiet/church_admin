@@ -12,7 +12,7 @@ import 'package:mockito/mockito.dart';
 
 import './edit_object_controller_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<FunctionsService>()])
+@GenerateNiceMocks([MockSpec<FunctionsService>(), MockSpec<LoggingService>()])
 void main() {
   group(
     'EditObjectController tests =>',
@@ -305,6 +305,11 @@ void main() {
               testWidgets(
                 'error',
                 (tester) async {
+                  initGlobalProviderContainer([
+                    loggingServiceProvider
+                        .overrideWithValue(MockLoggingService())
+                  ]);
+
                   final completer = Completer<Person?>();
 
                   int saveCallTimes = 0;
