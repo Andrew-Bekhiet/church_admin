@@ -179,19 +179,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
             ),
           );
       }
-    } on Exception catch (err, stack) {
+    } on Exception catch (error, stackTrace) {
       scaffoldMessenger.hideCurrentSnackBar();
 
-      unawaited(
-        showDialog(
-          context: context,
-          builder: (context) => CAErrorDialog(exception: err),
-        ),
-      );
-
-      await LoggingService.I.reportError(
-        err,
-        stackTrace: stack,
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        error,
+        stackTrace: stackTrace,
         data: _userData.toJson(),
       );
     } finally {

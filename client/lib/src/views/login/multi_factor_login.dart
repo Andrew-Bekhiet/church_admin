@@ -105,21 +105,11 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     _session = null;
     if (mounted) setState(() {});
 
-    await LoggingService.I.reportError(
+    await LoggingService.I.showErrorDialogAndReport(
+      context,
       error,
       stackTrace: stackTrace,
     );
-    if (mounted) {
-      unawaited(
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('تعذر تسجيل الدخول'),
-            content: Text(error.toString()),
-          ),
-        ),
-      );
-    }
 
     throw error;
   }
@@ -238,21 +228,11 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
       _loading = false;
       if (mounted) setState(() {});
 
-      await LoggingService.I.reportError(
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
         error,
         stackTrace: stackTrace,
       );
-      if (mounted) {
-        unawaited(
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('تعذر تسجيل الدخول'),
-              content: Text(error.toString()),
-            ),
-          ),
-        );
-      }
     }
   }
 
@@ -386,10 +366,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
       await NotificationsService.I.requestNotificationsPermission();
       await NotificationsService.I.scheduleDefaultNotifications();
     } catch (err, stack) {
-      await LoggingService.I.reportError(
-        err as Exception,
-        stackTrace: stack,
-      );
+      await LoggingService.I.reportError(err, stackTrace: stack);
     }
   }
 }

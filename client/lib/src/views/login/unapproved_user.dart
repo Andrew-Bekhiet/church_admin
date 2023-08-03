@@ -104,22 +104,11 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
     } on Exception catch (e, stackTrace) {
       navigator.pop();
 
-      unawaited(
-        showDialog(
-          context: context,
-          builder: (context) => CAErrorDialog(exception: e),
-        ),
-      );
-
-      unawaited(
-        LoggingService.I.reportError(
-          e,
-          stackTrace: stackTrace,
-          data: {
-            'user': AuthService.I.currentUser?.toJson(),
-            'registerCode': registerCode,
-          },
-        ),
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        e,
+        stackTrace: stackTrace,
+        data: {'registerCode': registerCode},
       );
     }
   }

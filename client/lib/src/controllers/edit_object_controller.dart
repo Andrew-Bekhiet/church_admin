@@ -107,19 +107,11 @@ class EditObjectController<T extends ViewableWithID> {
 
       scaffoldMessenger.hideCurrentSnackBar();
 
-      unawaited(
-        showDialog(
-          context: context,
-          builder: (context) => CAErrorDialog(exception: e),
-        ),
-      );
-
-      unawaited(
-        LoggingService.I.reportError(
-          e,
-          stackTrace: stackTrace,
-          data: toJson(newObject),
-        ),
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        e,
+        stackTrace: stackTrace,
+        data: toJson(newObject),
       );
     }
   }

@@ -140,20 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } on MultiFactorException {
       context.go('/multiFactor');
-    } on Exception catch (err, stack) {
-      await LoggingService.I.reportError(
-        err,
-        stackTrace: stack,
+    } on Exception catch (e, stackTrace) {
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        e,
+        stackTrace: stackTrace,
       );
-      if (mounted) {
-        await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('تعذر تسجيل الدخول'),
-            content: Text(err.toString()),
-          ),
-        );
-      }
     }
   }
 
@@ -164,10 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await NotificationsService.I.requestNotificationsPermission();
       await NotificationsService.I.scheduleDefaultNotifications();
     } catch (err, stack) {
-      await LoggingService.I.reportError(
-        err as Exception,
-        stackTrace: stack,
-      );
+      await LoggingService.I.reportError(err, stackTrace: stack);
     }
   }
 }
