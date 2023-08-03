@@ -41,7 +41,6 @@ const fakeTestPassword = 'fakeTestPassword1234%^&';
   MockSpec<auth.User>(),
   MockSpec<MultiFactor>(),
   MockSpec<UserCredential>(),
-  MockSpec<FirebaseAuthMultiFactorException>(),
   MockSpec<MultiFactorResolver>(),
   MockSpec<auth.MultiFactorSession>(),
   MockSpec<DatabaseService>(),
@@ -381,13 +380,11 @@ void main() {
 MockFirebaseAuthMultiFactorException _createMock2FAException() {
   final mockMultiFactorSession = MockMultiFactorSession();
   final mockMultiFactorResolver = MockMultiFactorResolver();
-  final mock2FAException = MockFirebaseAuthMultiFactorException();
 
   when(mockMultiFactorSession.id).thenReturn('id');
   when(mockMultiFactorResolver.session).thenReturn(mockMultiFactorSession);
-  when(mock2FAException.resolver).thenReturn(mockMultiFactorResolver);
 
-  return mock2FAException;
+  return MockFirebaseAuthMultiFactorException(mockMultiFactorResolver);
 }
 
 String _createIdTokenWithExp(DateTime exp) {
@@ -484,4 +481,38 @@ Override _setUpFirebaseAuth() {
 
     return mockFirebaseAuth;
   });
+}
+
+class MockFirebaseAuthMultiFactorException
+    implements FirebaseAuthMultiFactorException {
+  final MockMultiFactorResolver _resolver;
+
+  MockFirebaseAuthMultiFactorException(this._resolver);
+
+  @override
+  String get code => 'code';
+
+  @override
+  AuthCredential? get credential => null;
+
+  @override
+  String? get email => 'email';
+
+  @override
+  String? get message => 'message';
+
+  @override
+  String? get phoneNumber => 'phoneNumber';
+
+  @override
+  String get plugin => 'plugin';
+
+  @override
+  MultiFactorResolver get resolver => _resolver;
+
+  @override
+  StackTrace? get stackTrace => null;
+
+  @override
+  String? get tenantId => 'tenantId';
 }
