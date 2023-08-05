@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -83,9 +82,7 @@ void main() {
 }
 
 void _setUp() {
-  globalProviderContainer = ProviderContainer(
-    overrides: [
-      functionsServiceProvider.overrideWith((ref) => MockFunctionsService()),
-    ],
-  );
+  initGlobalProviderContainer([
+    functionsServiceProvider.overrideWith((ref) => MockFunctionsService()),
+  ]);
 }

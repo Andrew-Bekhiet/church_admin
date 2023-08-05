@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
@@ -23,7 +22,7 @@ class NotificationsService {
   static Future<void> onBackgroundMessageReceived(RemoteMessage message) async {
     final notification = Notification.fromRemoteMessage(message);
 
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     await NotificationsStorage.I.writeNotification(notification);
 
@@ -178,10 +177,10 @@ class NotificationsService {
   }
 
   Future<void> scheduleDefaultNotifications() async {
-    await NotificationsService.I.scheduleBirthDayNotification();
-    await NotificationsService.I.scheduleKodasNotification();
-    await NotificationsService.I.scheduleMeetingNotification();
-    await NotificationsService.I.scheduleConfessionNotification();
+    await scheduleBirthDayNotification();
+    await scheduleKodasNotification();
+    await scheduleMeetingNotification();
+    await scheduleConfessionNotification();
   }
 
   Future<Notification?> getInitialNotification() async {
@@ -296,7 +295,7 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showKodasNotification() async {
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 
@@ -352,7 +351,7 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showMeetingNotification() async {
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 
@@ -408,7 +407,7 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showVisitNotification() async {
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 
@@ -464,7 +463,7 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showConfessionNotification() async {
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 
@@ -520,7 +519,7 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showBirthDayNotification() async {
-    await initializeChurchAdmin();
+    await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 

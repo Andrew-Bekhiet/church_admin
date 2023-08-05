@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 
 abstract class AuthAdapter {
+  static AuthAdapter get I => globalProviderContainer.read(authAdapterProvider);
+
   Stream<User?> get userStream;
   Stream<String?> get idTokenStream;
 

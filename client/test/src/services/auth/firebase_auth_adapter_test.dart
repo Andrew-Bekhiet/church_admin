@@ -56,7 +56,7 @@ void main() {
       test(
         'signInWithGoogle',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await unit.signInWithEmailPassword(
             email: fakeTestEmail,
@@ -77,7 +77,7 @@ void main() {
       test(
         'signOut',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await unit.signOut();
 
@@ -90,7 +90,7 @@ void main() {
       test(
         'userStream',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           final expectFuture = expectLater(
             unit.userStream,
@@ -119,7 +119,7 @@ void main() {
       test(
         'refreshToken',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           final _mockUser = _createMockUser();
           when(globalProviderContainer.read(firebaseAuthProvider).currentUser)
@@ -142,7 +142,7 @@ void main() {
           final idTokenController = StreamController<auth.User?>();
           addTearDown(idTokenController.close);
 
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           when(globalProviderContainer.read(firebaseAuthProvider).userChanges())
               .thenAnswer((_) => idTokenController.stream);
@@ -177,7 +177,7 @@ void main() {
       test(
         'isTokenUpToDate',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           final _domainUser1 = User(
             name: 'name',
@@ -204,7 +204,7 @@ void main() {
       test(
         'reload',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(unit.reload, throwsStateError);
 
@@ -221,7 +221,7 @@ void main() {
       test(
         'sendEmailVerification',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(unit.sendEmailVerification, throwsStateError);
 
@@ -238,7 +238,7 @@ void main() {
       test(
         'signUpWithEmailPassword',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(
             unit.signUpWithEmailPassword(
@@ -262,7 +262,7 @@ void main() {
       test(
         'signInWithEmailPassword: No multifactor auth',
         () async {
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(
             unit.signInWithEmailPassword(
@@ -298,7 +298,7 @@ void main() {
             ),
           ).thenThrow(mock2FAException);
 
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(
             unit.signInWithEmailPassword(
@@ -335,7 +335,7 @@ void main() {
           final _mockUser = _createMockUser();
           when(firebaseAuth.currentUser).thenReturn(_mockUser);
 
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           await expectLater(
             unit.reauthWithEmailPassword(
@@ -362,7 +362,7 @@ void main() {
 
           when(firebaseAuth.currentUser).thenReturn(null);
 
-          final unit = globalProviderContainer.read(authAdapterProvider);
+          final unit = AuthAdapter.I;
 
           expect(
             () => unit.reauthWithEmailPassword(

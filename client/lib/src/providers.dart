@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/links.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,7 +46,12 @@ void initGlobalProviderContainer(List<Override> overrides) {
 }
 
 late final PackageInfo packageInfoPluginInstance;
-late final AndroidDeviceInfo androidDeviceInfoInstance;
+
+late final DeviceInfoService deviceInfoServiceInstance;
+
+final deviceInfoServiceProvider = Provider<DeviceInfoService>(
+  (ref) => deviceInfoServiceInstance,
+);
 
 final hiveProvider = Provider<HiveInterface>((ref) => Hive);
 
@@ -160,8 +164,12 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
     aOptions: ref.read(currentPlatformServiceProvider).isAndroid
         ? AndroidOptions(
             sharedPreferencesName: 'secure_storage',
-            encryptedSharedPreferences:
-                androidDeviceInfoInstance.version.sdkInt >= 23,
+            encryptedSharedPreferences: ref
+                    .read(deviceInfoServiceProvider)
+                    .androidDeviceInfo
+                    .version
+                    .sdkInt >=
+                23,
           )
         : AndroidOptions.defaultOptions,
     webOptions: const WebOptions(

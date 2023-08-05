@@ -136,7 +136,7 @@ void main() {
               final mockSecureStorage =
                   globalProviderContainer.read(secureStorageProvider);
               final mockEncryptionService =
-                  globalProviderContainer.read(encryptionServiceProvider);
+                  EncryptionService.I as MockEncryptionService;
 
               final unit = AuthStorage(secureStorage: mockSecureStorage);
 
@@ -165,8 +165,8 @@ void main() {
             () async {
               final mockSecureStorage = globalProviderContainer
                   .read(secureStorageProvider) as MockFlutterSecureStorage;
-              final mockEncryptionService = globalProviderContainer
-                  .read(encryptionServiceProvider) as MockEncryptionService;
+              final mockEncryptionService =
+                  EncryptionService.I as MockEncryptionService;
 
               when(mockSecureStorage.containsKey(key: 'passwordHash'))
                   .thenAnswer((_) async => true);

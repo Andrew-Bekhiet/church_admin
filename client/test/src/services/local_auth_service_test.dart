@@ -39,7 +39,7 @@ void main() {
 
           expect(unit.shouldAuthenticate, isFalse);
           expect(
-            globalProviderContainer.read(notificationsServiceProvider).isPaused,
+            NotificationsService.I.isPaused,
             isFalse,
           );
         },
@@ -53,7 +53,7 @@ void main() {
 
           expect(unit.shouldAuthenticate, isTrue);
           expect(
-            globalProviderContainer.read(notificationsServiceProvider).isPaused,
+            NotificationsService.I.isPaused,
             isTrue,
           );
         },
@@ -85,7 +85,7 @@ void main() {
           );
 
           expect(
-            globalProviderContainer.read(notificationsServiceProvider).isPaused,
+            NotificationsService.I.isPaused,
             isTrue,
           );
         },
@@ -324,7 +324,7 @@ void main() {
           expect(unit.shouldAuthenticate, isFalse);
 
           expect(
-            globalProviderContainer.read(notificationsServiceProvider).isPaused,
+            NotificationsService.I.isPaused,
             isFalse,
           );
         },

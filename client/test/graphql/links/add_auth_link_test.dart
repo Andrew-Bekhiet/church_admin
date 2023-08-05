@@ -239,7 +239,7 @@ MockOperation _createMockOperation(bool isSubscription) {
 void _setUp() {
   final overrides = [_setUpAuthService()];
 
-  globalProviderContainer = ProviderContainer(overrides: overrides);
+  initGlobalProviderContainer(overrides);
 }
 
 Override _setUpAuthService() {

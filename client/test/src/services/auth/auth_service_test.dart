@@ -49,9 +49,7 @@ void main() {
           test(
             'not logged in',
             () async {
-              await globalProviderContainer
-                  .read(authStorageProvider)
-                  .writeUserToCache(null);
+              await AuthStorage.I.writeUserToCache(null);
 
               final unit = _createAuthService();
               addTearDown(unit.dispose);
@@ -153,15 +151,10 @@ void main() {
           expect(unit.currentUser, initialUser);
 
           verifyInOrder([
-            globalProviderContainer
-                .read(authAdapterProvider)
+            AuthAdapter.I
                 .signUpWithEmailPassword(email: 'email', password: 'password'),
-            globalProviderContainer
-                .read(authStorageProvider)
-                .saveUserPasswordHash('email', 'password'),
-            globalProviderContainer
-                .read(authAdapterProvider)
-                .sendEmailVerification(),
+            AuthStorage.I.saveUserPasswordHash('email', 'password'),
+            AuthAdapter.I.sendEmailVerification(),
           ]);
         },
       );
@@ -183,12 +176,9 @@ void main() {
           expect(unit.currentUser, initialUser);
 
           verifyInOrder([
-            globalProviderContainer
-                .read(authAdapterProvider)
+            AuthAdapter.I
                 .signInWithEmailPassword(email: 'email', password: 'password'),
-            globalProviderContainer
-                .read(authStorageProvider)
-                .saveUserPasswordHash('email', 'password'),
+            AuthStorage.I.saveUserPasswordHash('email', 'password'),
           ]);
         },
       );
@@ -212,15 +202,11 @@ void main() {
           addTearDown(connectivityController.close);
 
           when(
-            globalProviderContainer
-                .read(connectivityServiceProvider)
-                .connectivityStream,
+            ConnectivityService.I.connectivityStream,
           ).thenAnswer((_) => connectivityController.stream);
 
           when(
-            (globalProviderContainer.read(authAdapterProvider)
-                    as MockAuthAdapter)
-                .isTokenUpToDate(any),
+            (AuthAdapter.I as MockAuthAdapter).isTokenUpToDate(any),
           ).thenReturn(false);
 
           final unit = _createAuthService();
@@ -236,9 +222,7 @@ void main() {
           await unit.userStream.take(1).first;
 
           final captured = verifyInOrder([
-            (globalProviderContainer.read(authAdapterProvider)
-                    as MockAuthAdapter)
-                .isTokenUpToDate(captureAny),
+            (AuthAdapter.I as MockAuthAdapter).isTokenUpToDate(captureAny),
             unit.refreshToken()
           ]).captured;
 
@@ -254,11 +238,7 @@ void main() {
 
           await unit.sendEmailVerification();
 
-          verify(
-            globalProviderContainer
-                .read(authAdapterProvider)
-                .sendEmailVerification(),
-          );
+          verify(AuthAdapter.I.sendEmailVerification());
         },
       );
 
@@ -270,9 +250,7 @@ void main() {
 
           await unit.reload();
 
-          verify(
-            globalProviderContainer.read(authAdapterProvider).reload(),
-          );
+          verify(AuthAdapter.I.reload());
         },
       );
 
@@ -284,9 +262,7 @@ void main() {
 
           await unit.refreshToken();
 
-          verify(
-            globalProviderContainer.read(authAdapterProvider).refreshToken(),
-          );
+          verify(AuthAdapter.I.refreshToken());
         },
       );
 
@@ -298,9 +274,7 @@ void main() {
 
           await unit.getStoredPasswordHash();
 
-          verify(
-            globalProviderContainer.read(authStorageProvider).getPasswordHash(),
-          );
+          verify(AuthStorage.I.getPasswordHash());
         },
       );
 
@@ -317,9 +291,7 @@ void main() {
           expect(unit.currentUser, isNull);
 
           final captured = verify(
-            globalProviderContainer
-                .read(authStorageProvider)
-                .writeUserToCache(captureAny),
+            AuthStorage.I.writeUserToCache(captureAny),
           ).captured;
 
           expect(captured[1], isNull);

@@ -28,7 +28,7 @@ void main() {
             .checkConnectivity(),
       ).thenAnswer((_) async => ConnectivityResult.wifi);
 
-      final unit = globalProviderContainer.read(connectivityServiceProvider);
+      final unit = ConnectivityService.I;
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isTrue));
@@ -44,9 +44,8 @@ void main() {
 
       expect(
         captured[1].first,
-        Uri.parse(
-          globalProviderContainer.read(secretsServiceProvider).hasuraServer,
-        ).replace(pathSegments: ['healthz']).toString(),
+        Uri.parse(SecretsService.I.hasuraServer)
+            .replace(pathSegments: ['healthz']).toString(),
       );
     },
   );
@@ -60,7 +59,7 @@ void main() {
             .checkConnectivity(),
       ).thenAnswer((_) async => ConnectivityResult.none);
 
-      final unit = globalProviderContainer.read(connectivityServiceProvider);
+      final unit = ConnectivityService.I;
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isFalse));
@@ -98,7 +97,7 @@ void main() {
         ConnectivityResult.mobile: false
       };
 
-      final unit = globalProviderContainer.read(connectivityServiceProvider);
+      final unit = ConnectivityService.I;
       addTearDown(unit.dispose);
 
       expect(
