@@ -7,5 +7,6 @@ class IntlLocaleMessagesInit implements Initializer {
   @override
   Future<void> initialize() async {
     setLocaleMessages('ar', ArMessages());
+    setDefaultLocale('ar');
   }
 }

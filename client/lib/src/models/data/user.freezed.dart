@@ -441,8 +441,8 @@ class _$_User extends _User {
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             const DeepCollectionEquality().equals(other._adminOn, _adminOn) &&
-            (identical(other.permissions, permissions) ||
-                other.permissions == permissions) &&
+            const DeepCollectionEquality()
+                .equals(other.permissions, permissions) &&
             (identical(other.authId, authId) || other.authId == authId) &&
             (identical(other.isMultiFactorEnrolled, isMultiFactorEnrolled) ||
                 other.isMultiFactorEnrolled == isMultiFactorEnrolled) &&
@@ -471,7 +471,7 @@ class _$_User extends _User {
       email,
       photoUpdatedAt,
       const DeepCollectionEquality().hash(_adminOn),
-      permissions,
+      const DeepCollectionEquality().hash(permissions),
       authId,
       isMultiFactorEnrolled,
       idToken,

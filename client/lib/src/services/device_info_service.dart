@@ -5,12 +5,12 @@ class DeviceInfoService {
   static DeviceInfoService get I =>
       globalProviderContainer.read(deviceInfoServiceProvider);
 
-  final AndroidDeviceInfo androidDeviceInfo;
-  final IosDeviceInfo iosDeviceInfo;
-  final WebBrowserInfo webBrowserInfo;
-  final LinuxDeviceInfo linuxDeviceInfo;
-  final MacOsDeviceInfo macOSDeviceInfo;
-  final WindowsDeviceInfo windowsDeviceInfo;
+  final AndroidDeviceInfo? androidDeviceInfo;
+  final IosDeviceInfo? iosDeviceInfo;
+  final WebBrowserInfo? webBrowserInfo;
+  final LinuxDeviceInfo? linuxDeviceInfo;
+  final MacOsDeviceInfo? macOSDeviceInfo;
+  final WindowsDeviceInfo? windowsDeviceInfo;
 
   const DeviceInfoService({
     required this.androidDeviceInfo,

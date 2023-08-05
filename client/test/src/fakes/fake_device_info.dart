@@ -53,8 +53,7 @@ class FakeDeviceInfoPlatform extends DeviceInfoPlatform {
         releaseId: 'releaseId',
         deviceId: 'deviceId',
       );
-    }
-    if (Platform.isLinux) {
+    } else if (Platform.isLinux) {
       return LinuxDeviceInfo(
         id: 'id',
         prettyName: 'prettyName',

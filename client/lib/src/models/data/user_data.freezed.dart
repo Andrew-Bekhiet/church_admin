@@ -221,8 +221,8 @@ class _$_UserData implements _UserData {
         (other.runtimeType == runtimeType &&
             other is _$_UserData &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.permissions, permissions) ||
-                other.permissions == permissions) &&
+            const DeepCollectionEquality()
+                .equals(other.permissions, permissions) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.firebaseAuthUid, firebaseAuthUid) ||
                 other.firebaseAuthUid == firebaseAuthUid) &&
@@ -234,8 +234,14 @@ class _$_UserData implements _UserData {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, permissions, email,
-      firebaseAuthUid, password, lastEdit);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uid,
+      const DeepCollectionEquality().hash(permissions),
+      email,
+      firebaseAuthUid,
+      password,
+      lastEdit);
 
   @JsonKey(ignore: true)
   @override

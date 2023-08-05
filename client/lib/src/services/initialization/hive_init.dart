@@ -17,6 +17,16 @@ class HiveInit implements Initializer {
   }
 
   @visibleForTesting
+  Future<void> initHiveDir(HiveInterface hiveInstance) async {
+    await hiveInstance.initFlutter('church_admin');
+  }
+
+  @visibleForTesting
+  void registerAdapters(HiveInterface hiveInstance) {
+    hiveInstance.registerAdapter(NotificationSettingAdapter());
+  }
+
+  @visibleForTesting
   Future<void> openBoxes(HiveInterface hiveInstance) async {
     await Future.wait([
       hiveInstance.openBox<Map?>(
@@ -35,15 +45,5 @@ class HiveInit implements Initializer {
       hiveInstance.openLazyBox<Notification>('Notifications'),
       hiveInstance.openBox<NotificationSetting>('NotificationsSettings'),
     ]);
-  }
-
-  @visibleForTesting
-  void registerAdapters(HiveInterface hiveInstance) {
-    hiveInstance.registerAdapter(NotificationSettingAdapter());
-  }
-
-  @visibleForTesting
-  Future<void> initHiveDir(HiveInterface hiveInstance) async {
-    await hiveInstance.initFlutter('church_admin');
   }
 }

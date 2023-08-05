@@ -4,25 +4,25 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final initializationServiceProvider = Provider<InitializationService>(
-  (ref) => InitializationService._(),
+  (ref) => InitializationService(),
 );
 
 class InitializationService {
   static InitializationService get I =>
       globalProviderContainer.read(initializationServiceProvider);
 
-  static const Set<Initializer> steps = {
-    UsePathUrlStrategyInit(),
-    SentryInit(),
-    PackageInfoInit(),
-    DeviceInfoInit(),
-    HiveInit(),
-    FirebaseInit(),
-    FMTCInit(),
-    IntlLocaleMessagesInit(),
-  };
+  Set<Initializer> get steps => const {
+        UsePathUrlStrategyInit(),
+        SentryInit(),
+        PackageInfoInit(),
+        DeviceInfoInit(),
+        HiveInit(),
+        FirebaseInit(),
+        FMTCInit(),
+        IntlLocaleMessagesInit(),
+      };
 
-  InitializationService._();
+  InitializationService();
 
   final Completer<void> _initializationCompleter = Completer();
   bool _isInitialized = false;

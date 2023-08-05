@@ -14,6 +14,6 @@ class FMTCInit implements Initializer {
       ),
     );
 
-    await FMTC.instance.call('default').manage.createAsync();
+    await FMTC.instance('default').manage.createAsync();
   }
 }

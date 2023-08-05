@@ -166,7 +166,7 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
             sharedPreferencesName: 'secure_storage',
             encryptedSharedPreferences: ref
                     .read(deviceInfoServiceProvider)
-                    .androidDeviceInfo
+                    .androidDeviceInfo!
                     .version
                     .sdkInt >=
                 23,
