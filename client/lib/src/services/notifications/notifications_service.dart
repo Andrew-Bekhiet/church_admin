@@ -109,7 +109,7 @@ class NotificationsService {
     return _scheduleNotification(
       code: 'BirthDay'.hashCode,
       callback: NotificationsServiceCallbacks.showBirthDayNotification,
-      settingsCallback: _settings.setMeetingTime,
+      settingsCallback: _settings.setBirthDayTime,
       notificationSetting: notificationSetting,
     );
   }
@@ -133,7 +133,7 @@ class NotificationsService {
     return _scheduleNotification(
       code: 'Kodas'.hashCode,
       callback: NotificationsServiceCallbacks.showKodasNotification,
-      settingsCallback: _settings.setMeetingTime,
+      settingsCallback: _settings.setKodasTime,
       notificationSetting: notificationSetting,
     );
   }
@@ -145,7 +145,7 @@ class NotificationsService {
     return _scheduleNotification(
       code: 'Confession'.hashCode,
       callback: NotificationsServiceCallbacks.showConfessionNotification,
-      settingsCallback: _settings.setMeetingTime,
+      settingsCallback: _settings.setConfessionTime,
       notificationSetting: notificationSetting,
     );
   }
