@@ -20,6 +20,45 @@ class NotificationsServiceCallbacks {
     return null;
   }
 
+  static Future<void> _showNotification({
+    required String channelId,
+    required String channelName,
+    required String channelDescription,
+    required String title,
+    required _NotificationType type,
+    required Map<String, dynamic> additionalData,
+    required Future<Iterable<Person>> Function() getPersons,
+  }) async {
+    await InitializationService.I.initialize();
+
+    if (!AuthService.I.isSignedIn) return;
+
+    final persons = await getPersons();
+
+    if (persons.isNotEmpty || !kReleaseMode) {
+      final notification = _getNotificationFor(
+        persons: persons,
+        title: title,
+        additionalData: additionalData,
+      );
+
+      await NotificationsStorage.I.writeNotification(notification);
+
+      await NotificationsService.I.show(
+        notification,
+        id: type.index,
+        notificationDetails: NotificationDetails(
+          android: _androidNotificationDetailsFor(
+            channelId,
+            channelName,
+            channelDescription: channelDescription,
+            body: notification.body,
+          ),
+        ),
+      );
+    }
+  }
+
   static Notification _getNotificationFor({
     required String title,
     required Iterable<Person> persons,
@@ -57,226 +96,88 @@ class NotificationsServiceCallbacks {
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showKodasNotification() async {
-    await InitializationService.I.initialize();
-
-    if (!AuthService.I.isSignedIn) return;
-
-    final persons = await DatabaseService.I.persons.notificationsQueries
-        .getPersonsKodasWarning(
-      date: DateTime.now().subtract(const Duration(days: 7)),
+  static Future<void> showKodasNotification() {
+    return _showNotification(
+      channelId: 'Kodas',
+      channelName: 'إشعارات القداس',
+      channelDescription: 'إشعارات القداس',
+      title: 'إشعارات القداس',
+      type: _NotificationType.kodas,
+      additionalData: const {},
+      getPersons: () =>
+          DatabaseService.I.persons.notificationsQueries.getPersonsKodasWarning(
+        date: DateTime.now().subtract(const Duration(days: 7)),
+      ),
     );
-
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
-        persons: persons,
-        title: 'انذار حضور القداس',
-        additionalData: const {
-          /* 'Query': QueryInfo(
-            collection: CADatabaseRepository.I.collection('Persons'),
-            fieldPath: 'LastKodas',
-            operator: '<',
-            queryValue: DateTime.now().truncateToDay(),
-            order: true,
-            orderBy: 'LastKodas',
-            descending: false,
-          ).toJson(), */
-        },
-      );
-
-      await NotificationsStorage.I.writeNotification(notification);
-
-      await NotificationsService.I.show(
-        notification,
-        id: 4,
-        notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
-            'Kodas',
-            'إشعارات حضور القداس',
-            channelDescription: 'إشعارات حضور القداس',
-            body: notification.body,
-          ),
-        ),
-      );
-    }
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showMeetingNotification() async {
-    await InitializationService.I.initialize();
-
-    if (!AuthService.I.isSignedIn) return;
-
-    final persons = await DatabaseService.I.persons.notificationsQueries
-        .getPersonsMeetingWarning(
-      date: DateTime.now().subtract(const Duration(days: 7)),
+  static Future<void> showMeetingNotification() {
+    return _showNotification(
+      channelId: 'Meeting',
+      channelName: 'إشعارات حضور الاجتماع',
+      channelDescription: 'إشعارات حضور الاجتماع',
+      title: 'انذار حضور الاجتماع',
+      type: _NotificationType.meeting,
+      additionalData: const {},
+      getPersons: () => DatabaseService.I.persons.notificationsQueries
+          .getPersonsMeetingWarning(
+        date: DateTime.now().subtract(const Duration(days: 7)),
+      ),
     );
-
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
-        persons: persons,
-        title: 'انذار حضور الاجتماع',
-        additionalData: const {
-          /* 'Query': QueryInfo(
-            collection: CADatabaseRepository.I.collection('Persons'),
-            fieldPath: 'LastMeeting',
-            operator: '<',
-            queryValue: DateTime.now().truncateToDay(),
-            order: true,
-            orderBy: 'LastMeeting',
-            descending: false,
-          ).toJson(), */
-        },
-      );
-
-      await NotificationsStorage.I.writeNotification(notification);
-
-      await NotificationsService.I.show(
-        notification,
-        id: 3,
-        notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
-            'Meeting',
-            'إشعارات حضور الاجتماع',
-            channelDescription: 'إشعارات حضور الاجتماع',
-            body: notification.body,
-          ),
-        ),
-      );
-    }
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showVisitNotification() async {
-    await InitializationService.I.initialize();
-
-    if (!AuthService.I.isSignedIn) return;
-
-    final persons = await DatabaseService.I.persons.notificationsQueries
-        .getPersonsVisitWarning(
-      date: DateTime.now().subtract(const Duration(days: 20)),
+  static Future<void> showVisitNotification() {
+    return _showNotification(
+      channelId: 'Visit',
+      channelName: 'إشعارات الافتقاد',
+      channelDescription: 'إشعارات الافتقاد',
+      title: 'انذار الافتقاد',
+      type: _NotificationType.visit,
+      additionalData: const {},
+      getPersons: () =>
+          DatabaseService.I.persons.notificationsQueries.getPersonsVisitWarning(
+        date: DateTime.now().subtract(const Duration(days: 20)),
+      ),
     );
-
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
-        persons: persons,
-        title: 'انذار الافتقاد',
-        additionalData: const {
-          /* 'Query': QueryInfo(
-            collection: CADatabaseRepository.I.collection('Persons'),
-            fieldPath: 'LastVisit',
-            operator: '<',
-            queryValue: DateTime.now().truncateToDay(),
-            order: true,
-            orderBy: 'LastVisit',
-            descending: false,
-          ).toJson(), */
-        },
-      );
-
-      await NotificationsStorage.I.writeNotification(notification);
-
-      await NotificationsService.I.show(
-        notification,
-        id: 5,
-        notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
-            'Visit',
-            'إشعارات الافتقاد',
-            channelDescription: 'إشعارات الافتقاد',
-            body: notification.body,
-          ),
-        ),
-      );
-    }
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showConfessionNotification() async {
-    await InitializationService.I.initialize();
-
-    if (!AuthService.I.isSignedIn) return;
-
-    final persons = await DatabaseService.I.persons.notificationsQueries
-        .getPersonsConfessionWarning(
-      date: DateTime.now().subtract(const Duration(days: 7)),
+  static Future<void> showConfessionNotification() {
+    return _showNotification(
+      channelId: 'Confession',
+      channelName: 'إشعارات الاعتراف',
+      channelDescription: 'إشعارات الاعتراف',
+      title: 'انذار الاعتراف',
+      type: _NotificationType.confession,
+      additionalData: const {},
+      getPersons: () => DatabaseService.I.persons.notificationsQueries
+          .getPersonsConfessionWarning(
+        date: DateTime.now().subtract(const Duration(days: 7)),
+      ),
     );
-
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
-        persons: persons,
-        title: 'انذار الاعتراف',
-        additionalData: const {
-          /* 'Query': QueryInfo(
-            collection: CADatabaseRepository.I.collection('Persons'),
-            fieldPath: 'LastConfession',
-            operator: '<',
-            queryValue: DateTime.now().truncateToDay(),
-            order: true,
-            orderBy: 'LastConfession',
-            descending: false,
-          ).toJson(), */
-        },
-      );
-
-      await NotificationsStorage.I.writeNotification(notification);
-
-      await NotificationsService.I.show(
-        notification,
-        id: 0,
-        notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
-            'Confession',
-            'إشعارات الاعتراف',
-            channelDescription: 'إشعارات الاعتراف',
-            body: notification.body,
-          ),
-        ),
-      );
-    }
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showBirthDayNotification() async {
-    await InitializationService.I.initialize();
-
-    if (!AuthService.I.isSignedIn) return;
-
-    final persons = await DatabaseService.I.persons.notificationsQueries
-        .getBirthdayPersons(date: DateTime.now());
-
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
-        title: 'أعياد الميلاد',
-        persons: persons,
-        additionalData: const {
-          /* 'Query': QueryInfo(
-            collection: CADatabaseRepository.I.collection('Persons'),
-            fieldPath: 'BirthDay',
-            operator: '=',
-            queryValue: DateTime.now().truncateToDay(),
-            order: true,
-            orderBy: 'BirthDay',
-            descending: false,
-          ).toJson(), */
-        },
-      );
-
-      await NotificationsStorage.I.writeNotification(notification);
-
-      await NotificationsService.I.show(
-        notification,
-        id: 2,
-        notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
-            'Birthday',
-            'إشعارات أعياد الميلاد',
-            channelDescription: 'إشعارات أعياد الميلاد',
-            icon: 'birthday',
-            body: notification.body,
-          ),
-        ),
-      );
-    }
+  static Future<void> showBirthDayNotification() {
+    return _showNotification(
+      channelId: 'Birthday',
+      channelName: 'إشعارات أعياد الميلاد',
+      channelDescription: 'إشعارات أعياد الميلاد',
+      title: 'أعياد الميلاد',
+      type: _NotificationType.birthday,
+      additionalData: const {},
+      getPersons: () => DatabaseService.I.persons.notificationsQueries
+          .getBirthdayPersons(date: DateTime.now()),
+    );
   }
+}
+
+enum _NotificationType {
+  confession,
+  birthday,
+  meeting,
+  kodas,
+  visit,
 }
