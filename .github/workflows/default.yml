@@ -90,11 +90,13 @@ jobs:
         with:
           fail-on: "warning"
 
+      - name: View CI var
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        run: flutter run -t lib/test_ci_var.dart
+
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter test --coverage --machine > test-results.json
-        env:
-          CI: "true"
 
       - name: Upload test-results.json if failed
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && failure() }}
