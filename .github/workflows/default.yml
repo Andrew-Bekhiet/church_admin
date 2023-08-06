@@ -24,20 +24,23 @@ jobs:
             analysis_options.yaml
             codecov.yaml
 
-      - uses: actions/cache@v3
+      - name: Get Cached Flutter installation
+        uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           path: ${{ runner.tool_cache }}/flutter
           key: flutter-3.10.6-stable
 
-      - uses: subosito/flutter-action@v2
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           cache: true
           cache-key: "flutter-:channel:-:version:"
           channel: "stable"
 
-      - uses: actions/cache@v3
+      - name: Get Cached dependencies
+        uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         id: flutter_cache
         with:
@@ -56,7 +59,8 @@ jobs:
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter pub get
 
-      - uses: actions/cache@v3
+      - name: Get Cached .dart_tool
+        uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         id: dart_tool_cache
         with:
@@ -89,6 +93,13 @@ jobs:
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter test --coverage --machine > test-results.json
+
+      - name: Upload test-results.json if failed
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' && failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results.json
 
       - name: Upload Test Report
         uses: dorny/test-reporter@v1
