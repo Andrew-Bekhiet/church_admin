@@ -10,8 +10,11 @@ class EncryptionServiceImpl extends EncryptionService {
   factory EncryptionServiceImpl() => _instance;
 
   EncryptionServiceImpl._() {
-    if (const String.fromEnvironment('CI') != 'true') {
-      throw Exception('This EncryptionServiceImpl should only be used in CI');
+    const ci = String.fromEnvironment('CI');
+    if (ci != 'true') {
+      throw Exception(
+        'This EncryptionServiceImpl should only be used in CI. value was: $ci',
+      );
     }
   }
 
