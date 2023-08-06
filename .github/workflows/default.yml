@@ -92,7 +92,7 @@ jobs:
 
       - name: View CI var
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        run: flutter run -t lib/test_ci_var.dart
+        run: flutter run -t lib/test_ci_var.dart -d linux
 
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
