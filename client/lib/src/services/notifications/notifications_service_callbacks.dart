@@ -20,12 +20,13 @@ class NotificationsServiceCallbacks {
     return null;
   }
 
-  static Future<void> _showNotification({
+  @visibleForTesting
+  static Future<void> showNotification({
     required String channelId,
     required String channelName,
     required String channelDescription,
     required String title,
-    required _NotificationType type,
+    required LocalNotificationType type,
     required Map<String, dynamic> additionalData,
     required Future<Iterable<Person>> Function() getPersons,
   }) async {
@@ -36,7 +37,7 @@ class NotificationsServiceCallbacks {
     final persons = await getPersons();
 
     if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = _getNotificationFor(
+      final notification = makeNotificationWith(
         persons: persons,
         title: title,
         additionalData: additionalData,
@@ -48,7 +49,7 @@ class NotificationsServiceCallbacks {
         notification,
         id: type.index,
         notificationDetails: NotificationDetails(
-          android: _androidNotificationDetailsFor(
+          android: androidNotificationDetailsFor(
             channelId,
             channelName,
             channelDescription: channelDescription,
@@ -59,7 +60,8 @@ class NotificationsServiceCallbacks {
     }
   }
 
-  static Notification _getNotificationFor({
+  @visibleForTesting
+  static Notification makeNotificationWith({
     required String title,
     required Iterable<Person> persons,
     Map<String, dynamic>? additionalData,
@@ -75,7 +77,8 @@ class NotificationsServiceCallbacks {
     );
   }
 
-  static AndroidNotificationDetails _androidNotificationDetailsFor(
+  @visibleForTesting
+  static AndroidNotificationDetails androidNotificationDetailsFor(
     String channelId,
     String channelName, {
     required String channelDescription,
@@ -97,12 +100,12 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showKodasNotification() {
-    return _showNotification(
+    return showNotification(
       channelId: 'Kodas',
       channelName: 'إشعارات القداس',
       channelDescription: 'إشعارات القداس',
       title: 'إشعارات القداس',
-      type: _NotificationType.kodas,
+      type: LocalNotificationType.kodas,
       additionalData: const {},
       getPersons: () =>
           DatabaseService.I.persons.notificationsQueries.getPersonsKodasWarning(
@@ -113,12 +116,12 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showMeetingNotification() {
-    return _showNotification(
+    return showNotification(
       channelId: 'Meeting',
       channelName: 'إشعارات حضور الاجتماع',
       channelDescription: 'إشعارات حضور الاجتماع',
       title: 'انذار حضور الاجتماع',
-      type: _NotificationType.meeting,
+      type: LocalNotificationType.meeting,
       additionalData: const {},
       getPersons: () => DatabaseService.I.persons.notificationsQueries
           .getPersonsMeetingWarning(
@@ -129,12 +132,12 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showVisitNotification() {
-    return _showNotification(
+    return showNotification(
       channelId: 'Visit',
       channelName: 'إشعارات الافتقاد',
       channelDescription: 'إشعارات الافتقاد',
       title: 'انذار الافتقاد',
-      type: _NotificationType.visit,
+      type: LocalNotificationType.visit,
       additionalData: const {},
       getPersons: () =>
           DatabaseService.I.persons.notificationsQueries.getPersonsVisitWarning(
@@ -145,12 +148,12 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showConfessionNotification() {
-    return _showNotification(
+    return showNotification(
       channelId: 'Confession',
       channelName: 'إشعارات الاعتراف',
       channelDescription: 'إشعارات الاعتراف',
       title: 'انذار الاعتراف',
-      type: _NotificationType.confession,
+      type: LocalNotificationType.confession,
       additionalData: const {},
       getPersons: () => DatabaseService.I.persons.notificationsQueries
           .getPersonsConfessionWarning(
@@ -161,12 +164,12 @@ class NotificationsServiceCallbacks {
 
   @pragma('vm:entry-point')
   static Future<void> showBirthDayNotification() {
-    return _showNotification(
+    return showNotification(
       channelId: 'Birthday',
       channelName: 'إشعارات أعياد الميلاد',
       channelDescription: 'إشعارات أعياد الميلاد',
       title: 'أعياد الميلاد',
-      type: _NotificationType.birthday,
+      type: LocalNotificationType.birthday,
       additionalData: const {},
       getPersons: () => DatabaseService.I.persons.notificationsQueries
           .getBirthdayPersons(date: DateTime.now()),
@@ -174,10 +177,10 @@ class NotificationsServiceCallbacks {
   }
 }
 
-enum _NotificationType {
-  confession,
+enum LocalNotificationType {
   birthday,
-  meeting,
   kodas,
+  meeting,
+  confession,
   visit,
 }
