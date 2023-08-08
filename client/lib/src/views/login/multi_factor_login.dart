@@ -11,7 +11,7 @@ class MultiFactorLogin extends StatefulWidget {
     path: '/multiFactor',
     builder: (context, state) => const MultiFactorLogin(),
     redirect: (context, state) {
-      if (!AuthService.I.multiFactorManager.hasPendingMultifactorSession &&
+      if (!AuthService.I.multiFactorManager.hasPendingMultifactorLogin &&
           (AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
         return '/';
       }
@@ -27,7 +27,7 @@ class MultiFactorLogin extends StatefulWidget {
 
 class _MultifactorStateLogin extends State<MultiFactorLogin> {
   late MultiFactorSession? _session =
-      AuthService.I.multiFactorManager.pendingMultifactorSession;
+      AuthService.I.multiFactorManager.pendingMultifactorLogin;
 
   MultiFactorInfo? _multiFactorInfo;
 
@@ -40,8 +40,8 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     super.initState();
 
     if (_session != null) {
-      _multiFactorInfo =
-          AuthService.I.multiFactorManager.getMultiFactorInfoFor(_session!);
+      _multiFactorInfo = AuthService.I.multiFactorManager
+          .getMultiFactorInfoForPendingSession();
 
       initiateMultifactorLogin = AuthService.I.multiFactorManager
           .initiateMultifactorLogin(
@@ -214,8 +214,10 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
         password: _passwordController.text,
       );
 
-      final multiFactorSession = await AuthService.I.multiFactorManager
-          .startMultiFactorSession(password: _passwordController.text);
+      final multiFactorSession =
+          await AuthService.I.multiFactorManager.enrollNewMultiFactor(
+        password: _passwordController.text,
+      );
 
       _loading = false;
       if (mounted) setState(() {});
@@ -352,7 +354,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
   }
 
   Future<void> _finishSignIn(String verificationId) async {
-    await AuthService.I.multiFactorManager.finishMultiFactorLogin(
+    await AuthService.I.multiFactorManager.finishMultiFactorSession(
       verificationId,
       _code.text,
       widget.session,

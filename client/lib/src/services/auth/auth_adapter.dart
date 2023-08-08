@@ -37,14 +37,14 @@ abstract class AuthAdapter {
 }
 
 abstract class MultiFactorManagerAdapter {
-  bool get hasPendingMultifactorSession;
-  MultiFactorSession? get pendingMultifactorSession;
+  bool get hasPendingMultifactorLogin;
+  MultiFactorSession? get pendingMultifactorLogin;
 
-  Future<MultiFactorSession> startMultiFactorSession({
+  Future<MultiFactorSession> enrollNewMultiFactor({
     required String password,
   });
 
-  MultiFactorInfo getMultiFactorInfoFor(MultiFactorSession session);
+  MultiFactorInfo getMultiFactorInfoForPendingSession();
 
   Future<(String verificationId, int? resendToken)> initiateMultifactorLogin(
     MultiFactorSession session, {
@@ -53,11 +53,7 @@ abstract class MultiFactorManagerAdapter {
     int? forceResendingToken,
   });
 
-  Future<void> finishMultiFactorLogin(
-    String verificationId,
-    String smsCode,
-    MultiFactorSession session,
-  );
+  Future<void> finishMultiFactorSession(String verificationId, String smsCode);
 
-  Future<void> clearPendingMultiFactorSession();
+  void clearPendingMultiFactorLogin();
 }

@@ -26,11 +26,11 @@ void main() {
             storage: MockAuthStorage(),
           );
 
-          when(adapter.hasPendingMultifactorSession).thenReturn(true);
+          when(adapter.hasPendingMultifactorLogin).thenReturn(true);
 
-          expect(unit.hasPendingMultifactorSession, isTrue);
+          expect(unit.hasPendingMultifactorLogin, isTrue);
 
-          verify(adapter.hasPendingMultifactorSession).called(1);
+          verify(adapter.hasPendingMultifactorLogin).called(1);
         },
       );
 
@@ -46,13 +46,13 @@ void main() {
 
           final session = MockMultiFactorSession();
 
-          when(adapter.pendingMultifactorSession).thenReturn(session);
-          expect(unit.pendingMultifactorSession, session);
-          verify(adapter.pendingMultifactorSession).called(1);
+          when(adapter.pendingMultifactorLogin).thenReturn(session);
+          expect(unit.pendingMultifactorLogin, session);
+          verify(adapter.pendingMultifactorLogin).called(1);
 
-          when(adapter.pendingMultifactorSession).thenReturn(null);
-          expect(unit.pendingMultifactorSession, isNull);
-          verify(adapter.pendingMultifactorSession).called(1);
+          when(adapter.pendingMultifactorLogin).thenReturn(null);
+          expect(unit.pendingMultifactorLogin, isNull);
+          verify(adapter.pendingMultifactorLogin).called(1);
         },
       );
 
@@ -71,20 +71,19 @@ void main() {
           final session = MockMultiFactorSession();
 
           when(authService.isSignedIn).thenReturn(true);
-          when(adapter.startMultiFactorSession(password: 'password'))
+          when(adapter.enrollNewMultiFactor(password: 'password'))
               .thenAnswer((_) async => session);
 
           expect(
-            await unit.startMultiFactorSession(password: 'password'),
+            await unit.enrollNewMultiFactor(password: 'password'),
             session,
           );
           verify(authService.isSignedIn).called(1);
-          verify(adapter.startMultiFactorSession(password: 'password'))
-              .called(1);
+          verify(adapter.enrollNewMultiFactor(password: 'password')).called(1);
 
           when(authService.isSignedIn).thenReturn(false);
           expect(
-            () async => unit.startMultiFactorSession(password: 'password'),
+            () async => unit.enrollNewMultiFactor(password: 'password'),
             throwsA(isA<StateError>()),
           );
           verify(authService.isSignedIn).called(1);
@@ -102,13 +101,12 @@ void main() {
             storage: MockAuthStorage(),
           );
 
-          final session = MockMultiFactorSession();
           final info = MockMultiFactorInfo();
 
-          when(adapter.getMultiFactorInfoFor(session)).thenReturn(info);
+          when(adapter.getMultiFactorInfoForPendingSession()).thenReturn(info);
 
-          expect(unit.getMultiFactorInfoFor(session), info);
-          verify(adapter.getMultiFactorInfoFor(session)).called(1);
+          expect(unit.getMultiFactorInfoForPendingSession(), info);
+          verify(adapter.getMultiFactorInfoForPendingSession()).called(1);
         },
       );
 
@@ -204,15 +202,14 @@ void main() {
           when(session.password).thenReturn('password');
 
           when(
-            adapter.finishMultiFactorLogin(
+            adapter.finishMultiFactorSession(
               'verificationId',
               'smsCode',
-              session,
             ),
           ).thenAnswer((_) async {});
 
           await expectLater(
-            unit.finishMultiFactorLogin(
+            unit.finishMultiFactorSession(
               'verificationId',
               'smsCode',
               session,
@@ -221,10 +218,9 @@ void main() {
           );
 
           verify(
-            adapter.finishMultiFactorLogin(
+            adapter.finishMultiFactorSession(
               'verificationId',
               'smsCode',
-              session,
             ),
           ).called(1);
           verify(storage.saveUserPasswordHash('email', 'password')).called(1);

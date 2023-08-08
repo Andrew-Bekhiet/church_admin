@@ -584,17 +584,17 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
 class MockMultiFactorManager extends _i1.Mock
     implements _i4.MultiFactorManager {
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
+  bool get hasPendingMultifactorLogin => (super.noSuchMethod(
+        Invocation.getter(#hasPendingMultifactorLogin),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i9.Future<_i4.MultiFactorSession> startMultiFactorSession(
+  _i9.Future<_i4.MultiFactorSession> enrollNewMultiFactor(
           {required String? password}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #startMultiFactorSession,
+          #enrollNewMultiFactor,
           [],
           {#password: password},
         ),
@@ -602,7 +602,7 @@ class MockMultiFactorManager extends _i1.Mock
             _i9.Future<_i4.MultiFactorSession>.value(_FakeMultiFactorSession_4(
           this,
           Invocation.method(
-            #startMultiFactorSession,
+            #enrollNewMultiFactor,
             [],
             {#password: password},
           ),
@@ -611,31 +611,31 @@ class MockMultiFactorManager extends _i1.Mock
             _i9.Future<_i4.MultiFactorSession>.value(_FakeMultiFactorSession_4(
           this,
           Invocation.method(
-            #startMultiFactorSession,
+            #enrollNewMultiFactor,
             [],
             {#password: password},
           ),
         )),
       ) as _i9.Future<_i4.MultiFactorSession>);
   @override
-  _i4.MultiFactorInfo getMultiFactorInfoFor(_i4.MultiFactorSession? session) =>
+  _i4.MultiFactorInfo getMultiFactorInfoForPendingSession() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
+          #getMultiFactorInfoForPendingSession,
+          [],
         ),
         returnValue: _FakeMultiFactorInfo_5(
           this,
           Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
+            #getMultiFactorInfoForPendingSession,
+            [],
           ),
         ),
         returnValueForMissingStub: _FakeMultiFactorInfo_5(
           this,
           Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
+            #getMultiFactorInfoForPendingSession,
+            [],
           ),
         ),
       ) as _i4.MultiFactorInfo);
@@ -660,14 +660,14 @@ class MockMultiFactorManager extends _i1.Mock
         returnValueForMissingStub: _i9.Future<(String, int?)>.value(('', null)),
       ) as _i9.Future<(String, int?)>);
   @override
-  _i9.Future<void> finishMultiFactorLogin(
+  _i9.Future<void> finishMultiFactorSession(
     String? verificationId,
     String? smsCode,
     _i4.MultiFactorSession? session,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #finishMultiFactorLogin,
+          #finishMultiFactorSession,
           [
             verificationId,
             smsCode,

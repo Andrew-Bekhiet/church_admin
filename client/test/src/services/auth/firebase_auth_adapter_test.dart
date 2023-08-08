@@ -3,15 +3,18 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions.dart';
-import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:firebase_auth/firebase_auth.dart'
+    hide MultiFactorInfo, MultiFactorSession, User;
 import 'package:firebase_auth/firebase_auth.dart' as auth
-    show MultiFactorInfo, MultiFactorSession, User;
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
+    show MultiFactor, MultiFactorInfo, MultiFactorSession, User;
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart'
+    hide MultiFactorInfo, MultiFactorSession;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';
@@ -42,17 +45,25 @@ const fakeTestPassword = 'fakeTestPassword1234%^&';
   MockSpec<MultiFactor>(),
   MockSpec<UserCredential>(),
   MockSpec<MultiFactorResolver>(),
-  MockSpec<auth.MultiFactorSession>(),
+  MockSpec<auth.MultiFactorSession>(as: #MockAuthMultiFactorSession),
+  MockSpec<auth.MultiFactor>(as: #MockAuthMultiFactor),
+  MockSpec<PhoneMultiFactorGeneratorPlatform>(
+    as: #MockPhoneMultiFactorGeneratorPlatform_,
+  ),
+  MockSpec<MultiFactorAssertionPlatform>(
+    as: #MockMultiFactorAssertionPlatform_,
+  ),
+  MockSpec<MultiFactorSession>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
 ])
 void main() {
+  setUp(_setUp);
+  tearDown(resetGlobalProviderContainer);
+
   group(
     'Firebase Auth Adapter =>',
     () {
-      setUp(_setUp);
-      tearDown(resetGlobalProviderContainer);
-
       test(
         'signInWithGoogle',
         () async {
@@ -375,10 +386,366 @@ void main() {
       );
     },
   );
+
+  group(
+    'FirebaseMultifactorManagerAdapter =>',
+    () {
+      test(
+        'addPendingMultiFactorSession',
+        () async {
+          final unit = FirebaseMultiFactorManagerAdapter(
+            firebaseAuth: globalProviderContainer.read(firebaseAuthProvider),
+          );
+
+          final mockMultiFactorSession = MockMultiFactorSession();
+
+          unit.addPendingMultiFactorLogin(
+            mockMultiFactorSession,
+            _createMock2FAException(),
+          );
+
+          expect(unit.hasPendingMultifactorLogin, isTrue);
+          expect(unit.pendingMultifactorLogin, mockMultiFactorSession);
+        },
+      );
+
+      group(
+        'enrollNewMultiFactor =>',
+        () {
+          test(
+            'enrollNewMultiFactor: user signed in',
+            () async {
+              const sessionId = 'a2r32wq';
+
+              final mockUser = _createMockUser(
+                mockAuthSession: _createMockAuthSession(sessionId),
+              );
+              when(mockUser.email).thenReturn(fakeTestEmail);
+
+              final firebaseAuth =
+                  globalProviderContainer.read(firebaseAuthProvider);
+              when(firebaseAuth.currentUser).thenReturn(mockUser);
+
+              final unit = FirebaseMultiFactorManagerAdapter(
+                firebaseAuth: firebaseAuth,
+              );
+
+              final session = await unit.enrollNewMultiFactor(
+                password: fakeTestPassword,
+              );
+
+              expect(session.email, fakeTestEmail);
+              expect(session.password, fakeTestPassword);
+              expect(session.id, sessionId);
+
+              final multiFactor = mockUser.multiFactor;
+              verify(multiFactor.getSession());
+            },
+          );
+
+          test(
+            'enrollNewMultiFactor: no user',
+            () async {
+              final firebaseAuth =
+                  globalProviderContainer.read(firebaseAuthProvider);
+              when(firebaseAuth.currentUser).thenReturn(null);
+
+              final unit = FirebaseMultiFactorManagerAdapter(
+                firebaseAuth: firebaseAuth,
+              );
+
+              expect(
+                () => unit.enrollNewMultiFactor(
+                  password: fakeTestPassword,
+                ),
+                throwsStateError,
+              );
+            },
+          );
+        },
+      );
+
+      test(
+        'getMultiFactorInfoForPendingSession',
+        () async {
+          final expectedInfo = MultiFactorInfo(
+            uid: 'uid',
+            displayName: 'displayName',
+            factorId: 'factorId',
+            enrollmentTimestamp: DateTime.now().millisecondsSinceEpoch,
+          );
+
+          final mock2FAException = _createMock2FAException();
+          final resolver = mock2FAException._resolver;
+          final session = MockMultiFactorSession();
+
+          final hints = [
+            PhoneMultiFactorInfo(
+              phoneNumber: 'phoneNumber',
+              displayName: 'displayName',
+              enrollmentTimestamp: expectedInfo.enrollmentTimestamp.toDouble(),
+              factorId: 'factorId',
+              uid: 'uid',
+            ),
+          ];
+          when(resolver.hints).thenReturn(hints);
+
+          final unit = FirebaseMultiFactorManagerAdapter(
+            firebaseAuth: globalProviderContainer.read(firebaseAuthProvider),
+          )..addPendingMultiFactorLogin(
+              session,
+              mock2FAException,
+            );
+
+          expect(unit.getMultiFactorInfoForPendingSession(), expectedInfo);
+        },
+      );
+
+      group(
+        'initiateMultifactorLogin',
+        () {
+          test(
+            'codeSent',
+            () async {
+              void Function(String, int?)? codeSent;
+
+              final session = MockMultiFactorSession();
+              when(session.id).thenReturn('dasda');
+
+              final firebaseAuth = globalProviderContainer
+                  .read(firebaseAuthProvider) as MockFirebaseAuth;
+              _mockFirebaseAuthVerifyPhoneNumber(
+                firebaseAuth,
+                session,
+                (i) async => codeSent = i.namedArguments[#codeSent],
+              );
+
+              final unit =
+                  FirebaseMultiFactorManagerAdapter(firebaseAuth: firebaseAuth);
+
+              expect(
+                unit.initiateMultifactorLogin(
+                  session,
+                  phoneNumber: 'phoneNumber',
+                ),
+                completion(('verificationId', 2352)),
+              );
+
+              codeSent!('verificationId', 2352);
+            },
+          );
+
+          test(
+            'codeAutoRetrievalTimeout',
+            () async {
+              void Function(String)? codeAutoRetrievalTimeout;
+
+              final session = MockMultiFactorSession();
+              when(session.id).thenReturn('dasda');
+
+              final firebaseAuth = globalProviderContainer
+                  .read(firebaseAuthProvider) as MockFirebaseAuth;
+              _mockFirebaseAuthVerifyPhoneNumber(
+                firebaseAuth,
+                session,
+                (i) async => codeAutoRetrievalTimeout =
+                    i.namedArguments[#codeAutoRetrievalTimeout],
+              );
+
+              final unit =
+                  FirebaseMultiFactorManagerAdapter(firebaseAuth: firebaseAuth);
+
+              expect(
+                unit.initiateMultifactorLogin(
+                  session,
+                  phoneNumber: 'phoneNumber',
+                ),
+                completion(('verificationId', null)),
+              );
+
+              codeAutoRetrievalTimeout!('verificationId');
+            },
+          );
+
+          test(
+            'verificationFailed',
+            () async {
+              void Function(FirebaseAuthException)? verificationFailed;
+
+              final session = MockMultiFactorSession();
+              when(session.id).thenReturn('dasda');
+
+              final firebaseAuth = globalProviderContainer
+                  .read(firebaseAuthProvider) as MockFirebaseAuth;
+              _mockFirebaseAuthVerifyPhoneNumber(
+                firebaseAuth,
+                session,
+                (i) async =>
+                    verificationFailed = i.namedArguments[#verificationFailed],
+              );
+
+              final unit =
+                  FirebaseMultiFactorManagerAdapter(firebaseAuth: firebaseAuth);
+
+              final expectedException = FirebaseAuthException(code: 'code');
+
+              expect(
+                unit.initiateMultifactorLogin(
+                  session,
+                  phoneNumber: 'phoneNumber',
+                ),
+                throwsA(expectedException),
+              );
+
+              verificationFailed!(expectedException);
+            },
+          );
+        },
+      );
+
+      test(
+        'finishMultiFactorSession: login',
+        () async {
+          final mockPhoneMultiFactorGeneratorPlatform =
+              _createMockPhoneMultiFactorGeneratorPlatform();
+          PhoneMultiFactorGeneratorPlatform.instance =
+              mockPhoneMultiFactorGeneratorPlatform;
+
+          final mock2FAException = _createMock2FAException();
+          final resolver = mock2FAException._resolver;
+          final session = MockMultiFactorSession();
+
+          final unit = FirebaseMultiFactorManagerAdapter(
+            firebaseAuth: globalProviderContainer.read(firebaseAuthProvider),
+          )..addPendingMultiFactorLogin(
+              session,
+              mock2FAException,
+            );
+
+          await unit.finishMultiFactorSession(
+            'verificationId',
+            'smsCode',
+          );
+
+          verifyInOrder([
+            mockPhoneMultiFactorGeneratorPlatform.getAssertion(
+              argThat(
+                predicate<PhoneAuthCredential>(
+                  (c) =>
+                      c.verificationId == 'verificationId' &&
+                      c.smsCode == 'smsCode',
+                ),
+              ),
+            ),
+            resolver.resolveSignIn(any)
+          ]);
+        },
+      );
+
+      test(
+        'finishMultiFactorSession: enrollment',
+        () async {
+          final mockPhoneMultiFactorGeneratorPlatform =
+              _createMockPhoneMultiFactorGeneratorPlatform();
+          PhoneMultiFactorGeneratorPlatform.instance =
+              mockPhoneMultiFactorGeneratorPlatform;
+
+          final firebaseAuth =
+              globalProviderContainer.read(firebaseAuthProvider);
+
+          final mockUser = _createMockUser();
+          when(firebaseAuth.currentUser).thenReturn(mockUser);
+
+          final unit = FirebaseMultiFactorManagerAdapter(
+            firebaseAuth: firebaseAuth,
+          );
+
+          await unit.finishMultiFactorSession(
+            'verificationId',
+            'smsCode',
+          );
+
+          final multiFactor = mockUser.multiFactor;
+          verifyInOrder([
+            mockPhoneMultiFactorGeneratorPlatform.getAssertion(
+              argThat(
+                predicate<PhoneAuthCredential>(
+                  (c) =>
+                      c.verificationId == 'verificationId' &&
+                      c.smsCode == 'smsCode',
+                ),
+              ),
+            ),
+            (multiFactor as MockMultiFactor).enroll(any)
+          ]);
+        },
+      );
+
+      test(
+        'clearPendingMultiFactorSession',
+        () {
+          final unit = FirebaseMultiFactorManagerAdapter(
+            firebaseAuth: globalProviderContainer.read(firebaseAuthProvider),
+          );
+
+          final mockMultiFactorSession = MockMultiFactorSession();
+
+          unit
+            ..addPendingMultiFactorLogin(
+              mockMultiFactorSession,
+              _createMock2FAException(),
+            )
+            ..clearPendingMultiFactorLogin();
+
+          expect(unit.hasPendingMultifactorLogin, isFalse);
+          expect(unit.pendingMultifactorLogin, isNull);
+        },
+      );
+    },
+  );
+}
+
+void _mockFirebaseAuthVerifyPhoneNumber(
+  MockFirebaseAuth firebaseAuth,
+  MockMultiFactorSession session,
+  Answering<Future<void>> answer,
+) {
+  when(
+    firebaseAuth.verifyPhoneNumber(
+      phoneNumber: 'phoneNumber',
+      multiFactorSession: argThat(
+        predicate<auth.MultiFactorSession>(
+          (a) => a.id == session.id,
+        ),
+        named: 'multiFactorSession',
+      ),
+      verificationCompleted: captureAnyNamed('verificationCompleted'),
+      verificationFailed: captureAnyNamed('verificationFailed'),
+      codeSent: captureAnyNamed('codeSent'),
+      codeAutoRetrievalTimeout: captureAnyNamed(
+        'codeAutoRetrievalTimeout',
+      ),
+    ),
+  ).thenAnswer(answer);
+}
+
+MockPhoneMultiFactorGeneratorPlatform
+    _createMockPhoneMultiFactorGeneratorPlatform() {
+  final mockPhoneMultiFactorGeneratorPlatform =
+      MockPhoneMultiFactorGeneratorPlatform();
+  when(mockPhoneMultiFactorGeneratorPlatform.getAssertion(any))
+      .thenReturn(MockMultiFactorAssertionPlatform());
+  return mockPhoneMultiFactorGeneratorPlatform;
+}
+
+MockAuthMultiFactorSession _createMockAuthSession(String sessionId) {
+  final mockAuthSession = MockAuthMultiFactorSession();
+  when(mockAuthSession.id).thenReturn(sessionId);
+  return mockAuthSession;
 }
 
 MockFirebaseAuthMultiFactorException _createMock2FAException() {
-  final mockMultiFactorSession = MockMultiFactorSession();
+  final mockMultiFactorSession = MockAuthMultiFactorSession();
   final mockMultiFactorResolver = MockMultiFactorResolver();
 
   when(mockMultiFactorSession.id).thenReturn('id');
@@ -399,7 +766,10 @@ String _createIdTokenWithExp(DateTime exp) {
       '.signature';
 }
 
-MockUser _createMockUser({IdTokenResult? idTokenResult$}) {
+MockUser _createMockUser({
+  IdTokenResult? idTokenResult$,
+  MockAuthMultiFactorSession? mockAuthSession,
+}) {
   final mockUser = MockUser();
   final mockMultiFactor = MockMultiFactor();
 
@@ -418,6 +788,11 @@ MockUser _createMockUser({IdTokenResult? idTokenResult$}) {
   when(mockUser.getIdTokenResult()).thenAnswer(
     (_) async => idTokenResult$ ?? idTokenResult,
   );
+
+  if (mockAuthSession != null) {
+    when(mockMultiFactor.getSession()).thenAnswer((_) async => mockAuthSession);
+  }
+
   when(mockUser.multiFactor).thenReturn(mockMultiFactor);
   when(mockUser.emailVerified).thenReturn(true);
   return mockUser;
@@ -516,3 +891,10 @@ class MockFirebaseAuthMultiFactorException
   @override
   String? get tenantId => 'tenantId';
 }
+
+class MockPhoneMultiFactorGeneratorPlatform
+    extends MockPhoneMultiFactorGeneratorPlatform_
+    with MockPlatformInterfaceMixin {}
+
+class MockMultiFactorAssertionPlatform extends MockMultiFactorAssertionPlatform_
+    with MockPlatformInterfaceMixin {}

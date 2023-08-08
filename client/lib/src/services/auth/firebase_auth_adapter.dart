@@ -71,7 +71,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
     if (authUser == null || idTokenResult == null) return Stream.value(null);
 
-    _multiFactorManagerAdapter.clearPendingMultiFactorSession();
+    _multiFactorManagerAdapter.clearPendingMultiFactorLogin();
 
     return _getUserStreamFromDB(
       idTokenResult.claims ?? {},
@@ -108,7 +108,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
         password: password,
       );
 
-      _multiFactorManagerAdapter.addPendingMultiFactorSession(
+      _multiFactorManagerAdapter.addPendingMultiFactorLogin(
         multiFactorSession,
         e,
       );
@@ -202,25 +202,25 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
     required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth;
 
-  MultiFactorSession? _pendingMultiFactorSession;
+  MultiFactorSession? _pendingMultiFactorLogin;
   FirebaseAuthMultiFactorException? _pendingMultiFactorException;
 
   @override
-  bool get hasPendingMultifactorSession => _pendingMultiFactorSession != null;
-  @override
-  MultiFactorSession? get pendingMultifactorSession =>
-      _pendingMultiFactorSession;
+  bool get hasPendingMultifactorLogin => _pendingMultiFactorLogin != null;
 
-  void addPendingMultiFactorSession(
+  @override
+  MultiFactorSession? get pendingMultifactorLogin => _pendingMultiFactorLogin;
+
+  void addPendingMultiFactorLogin(
     MultiFactorSession session,
     FirebaseAuthMultiFactorException exception,
   ) {
-    _pendingMultiFactorSession = session;
+    _pendingMultiFactorLogin = session;
     _pendingMultiFactorException = exception;
   }
 
   @override
-  Future<MultiFactorSession> startMultiFactorSession({
+  Future<MultiFactorSession> enrollNewMultiFactor({
     required String password,
   }) async {
     if (_firebaseAuth.currentUser == null) {
@@ -238,8 +238,8 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
   }
 
   @override
-  MultiFactorInfo getMultiFactorInfoFor(MultiFactorSession session) {
-    if (!hasPendingMultifactorSession) {
+  MultiFactorInfo getMultiFactorInfoForPendingSession() {
+    if (!hasPendingMultifactorLogin) {
       throw StateError('No pending multi factor session');
     }
 
@@ -261,24 +261,23 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
     String? phoneNumber,
     int? forceResendingToken,
   }) {
-    final completer = Completer<(String verificationId, int? resendToken)>();
+    final completer = Completer<(String, int?)>();
 
-    final e = _pendingMultiFactorException;
+    final multiFactorInfo = factor != null
+        ? _pendingMultiFactorException!.resolver.hints.firstWhere(
+            (f) => f.uid == factor.uid,
+          ) as PhoneMultiFactorInfo
+        : null;
 
     _firebaseAuth.verifyPhoneNumber(
       forceResendingToken: forceResendingToken,
       phoneNumber: phoneNumber,
       multiFactorSession: auth.MultiFactorSession(session.id),
-      multiFactorInfo: factor != null
-          ? e!.resolver.hints.firstWhere(
-              (f) => f.uid == factor.uid,
-            ) as PhoneMultiFactorInfo
-          : null,
+      multiFactorInfo: multiFactorInfo,
       verificationCompleted: (credential) {
-        finishMultiFactorLogin(
+        finishMultiFactorSession(
           credential.verificationId!,
           credential.smsCode!,
-          session,
         );
       },
       verificationFailed: completer.completeError,
@@ -298,10 +297,9 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
   }
 
   @override
-  Future<void> finishMultiFactorLogin(
+  Future<void> finishMultiFactorSession(
     String verificationId,
     String smsCode,
-    MultiFactorSession session,
   ) async {
     final assertion = PhoneMultiFactorGenerator.getAssertion(
       PhoneAuthProvider.credential(
@@ -310,16 +308,16 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
       ),
     );
 
-    if (!hasPendingMultifactorSession) {
-      await _firebaseAuth.currentUser!.multiFactor.enroll(assertion);
-    } else {
+    if (hasPendingMultifactorLogin) {
       await _pendingMultiFactorException!.resolver.resolveSignIn(assertion);
+    } else {
+      await _firebaseAuth.currentUser!.multiFactor.enroll(assertion);
     }
   }
 
   @override
-  Future<void> clearPendingMultiFactorSession() async {
-    _pendingMultiFactorSession = null;
+  void clearPendingMultiFactorLogin() {
+    _pendingMultiFactorLogin = null;
     _pendingMultiFactorException = null;
   }
 }

@@ -70,17 +70,17 @@ class _FakeValueStream_3<T> extends _i1.SmartFake
 class MockMultiFactorManagerAdapter extends _i1.Mock
     implements _i2.MultiFactorManagerAdapter {
   @override
-  bool get hasPendingMultifactorSession => (super.noSuchMethod(
-        Invocation.getter(#hasPendingMultifactorSession),
+  bool get hasPendingMultifactorLogin => (super.noSuchMethod(
+        Invocation.getter(#hasPendingMultifactorLogin),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i4.Future<_i2.MultiFactorSession> startMultiFactorSession(
+  _i4.Future<_i2.MultiFactorSession> enrollNewMultiFactor(
           {required String? password}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #startMultiFactorSession,
+          #enrollNewMultiFactor,
           [],
           {#password: password},
         ),
@@ -88,7 +88,7 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
             _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
           this,
           Invocation.method(
-            #startMultiFactorSession,
+            #enrollNewMultiFactor,
             [],
             {#password: password},
           ),
@@ -97,31 +97,31 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
             _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
           this,
           Invocation.method(
-            #startMultiFactorSession,
+            #enrollNewMultiFactor,
             [],
             {#password: password},
           ),
         )),
       ) as _i4.Future<_i2.MultiFactorSession>);
   @override
-  _i2.MultiFactorInfo getMultiFactorInfoFor(_i2.MultiFactorSession? session) =>
+  _i2.MultiFactorInfo getMultiFactorInfoForPendingSession() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getMultiFactorInfoFor,
-          [session],
+          #getMultiFactorInfoForPendingSession,
+          [],
         ),
         returnValue: _FakeMultiFactorInfo_1(
           this,
           Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
+            #getMultiFactorInfoForPendingSession,
+            [],
           ),
         ),
         returnValueForMissingStub: _FakeMultiFactorInfo_1(
           this,
           Invocation.method(
-            #getMultiFactorInfoFor,
-            [session],
+            #getMultiFactorInfoForPendingSession,
+            [],
           ),
         ),
       ) as _i2.MultiFactorInfo);
@@ -146,32 +146,29 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
         returnValueForMissingStub: _i4.Future<(String, int?)>.value(('', null)),
       ) as _i4.Future<(String, int?)>);
   @override
-  _i4.Future<void> finishMultiFactorLogin(
+  _i4.Future<void> finishMultiFactorSession(
     String? verificationId,
     String? smsCode,
-    _i2.MultiFactorSession? session,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #finishMultiFactorLogin,
+          #finishMultiFactorSession,
           [
             verificationId,
             smsCode,
-            session,
           ],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> clearPendingMultiFactorSession() => (super.noSuchMethod(
+  void clearPendingMultiFactorLogin() => super.noSuchMethod(
         Invocation.method(
-          #clearPendingMultiFactorSession,
+          #clearPendingMultiFactorLogin,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [MultiFactorSession].
@@ -221,6 +218,12 @@ class MockMultiFactorInfo extends _i1.Mock implements _i2.MultiFactorInfo {
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+        returnValueForMissingStub: <Object?>[],
+      ) as List<Object?>);
 }
 
 /// A class which mocks [AuthService].

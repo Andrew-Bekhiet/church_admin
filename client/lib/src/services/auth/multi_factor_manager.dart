@@ -14,22 +14,21 @@ class MultiFactorManager {
         _authService = authService,
         _storage = storage;
 
-  bool get hasPendingMultifactorSession =>
-      _adapter.hasPendingMultifactorSession;
+  bool get hasPendingMultifactorLogin => _adapter.hasPendingMultifactorLogin;
 
-  MultiFactorSession? get pendingMultifactorSession =>
-      _adapter.pendingMultifactorSession;
+  MultiFactorSession? get pendingMultifactorLogin =>
+      _adapter.pendingMultifactorLogin;
 
-  Future<MultiFactorSession> startMultiFactorSession({
+  Future<MultiFactorSession> enrollNewMultiFactor({
     required String password,
   }) {
     if (!_authService.isSignedIn) throw StateError('Must be signed in');
 
-    return _adapter.startMultiFactorSession(password: password);
+    return _adapter.enrollNewMultiFactor(password: password);
   }
 
-  MultiFactorInfo getMultiFactorInfoFor(MultiFactorSession session) =>
-      _adapter.getMultiFactorInfoFor(session);
+  MultiFactorInfo getMultiFactorInfoForPendingSession() =>
+      _adapter.getMultiFactorInfoForPendingSession();
 
   Future<(String verificationId, int? resendToken)> initiateMultifactorLogin(
     MultiFactorSession session, {
@@ -49,12 +48,12 @@ class MultiFactorManager {
     );
   }
 
-  Future<void> finishMultiFactorLogin(
+  Future<void> finishMultiFactorSession(
     String verificationId,
     String smsCode,
     MultiFactorSession session,
   ) async {
-    await _adapter.finishMultiFactorLogin(verificationId, smsCode, session);
+    await _adapter.finishMultiFactorSession(verificationId, smsCode);
     await _storage.saveUserPasswordHash(session.email, session.password);
   }
 }
