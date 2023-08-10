@@ -196,36 +196,6 @@ class MockMultiFactorSession extends _i1.Mock
       ) as String);
 }
 
-/// A class which mocks [MultiFactorInfo].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMultiFactorInfo extends _i1.Mock implements _i2.MultiFactorInfo {
-  @override
-  String get uid => (super.noSuchMethod(
-        Invocation.getter(#uid),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-  @override
-  String get factorId => (super.noSuchMethod(
-        Invocation.getter(#factorId),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-  @override
-  int get enrollmentTimestamp => (super.noSuchMethod(
-        Invocation.getter(#enrollmentTimestamp),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
-  @override
-  List<Object?> get props => (super.noSuchMethod(
-        Invocation.getter(#props),
-        returnValue: <Object?>[],
-        returnValueForMissingStub: <Object?>[],
-      ) as List<Object?>);
-}
-
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.

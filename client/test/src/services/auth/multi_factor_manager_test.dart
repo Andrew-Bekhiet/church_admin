@@ -8,7 +8,6 @@ import 'multi_factor_manager_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<MultiFactorManagerAdapter>(),
   MockSpec<MultiFactorSession>(),
-  MockSpec<MultiFactorInfo>(),
   MockSpec<AuthService>(),
   MockSpec<AuthStorage>(),
 ])
@@ -228,4 +227,28 @@ void main() {
       );
     },
   );
+}
+
+class MockMultiFactorInfo implements MultiFactorInfo {
+  @override
+  String? get displayName => 'displayName';
+
+  @override
+  int get enrollmentTimestamp => 0;
+
+  @override
+  String get factorId => 'factorId';
+
+  @override
+  List<Object?> get props => [
+        displayName,
+        enrollmentTimestamp,
+        factorId,
+      ];
+
+  @override
+  bool? get stringify => true;
+
+  @override
+  String get uid => 'uid';
 }
