@@ -9,12 +9,6 @@ environment:
   flutter: ">=3.10.0"
 
 dependency_overrides:
-  http: ^1.0.0
-  # firebase_core_desktop:
-  #   git:
-  #     url: https://github.com/NirmalAriyathilake/flutterfire_desktop
-  #     ref: main
-  #     path: packages/firebase_core/firebase_core_desktop
 
 dependencies:
   android_alarm_manager_plus: ^3.0.0
@@ -36,17 +30,7 @@ dependencies:
   fancy_password_field: ^2.0.0
   firebase_app_check: ^0.1.1+12
   firebase_auth: ^4.1.1
-  # firebase_auth_desktop:
-  #   git:
-  #     url: https://github.com/FerGoose-O/flutterfire_desktop
-  #     ref: main
-  #     path: packages/firebase_auth/firebase_auth_desktop
   firebase_core: ^2.1.0
-  # firebase_core_desktop:
-  #   git:
-  #     url: https://github.com/NirmalAriyathilake/flutterfire_desktop
-  #     ref: main
-  #     path: packages/firebase_core/firebase_core_desktop
   firebase_database: ^10.0.2
   firebase_dynamic_links: ^5.3.0
   firebase_messaging: ^14.0.2
@@ -115,7 +99,10 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.3.2
-  dart_code_metrics: ^5.7.0
+  dart_code_metrics:
+    git:
+      url: https://github.com/rei-codes/dart-code-metrics
+      ref: 39fef85e3a6be556d0daf2b0f09f1442aee3e200
   device_info_plus_platform_interface: ^7.0.0
   file: ^6.1.4
   firebase_app_check_platform_interface: ^0.0.9+1
