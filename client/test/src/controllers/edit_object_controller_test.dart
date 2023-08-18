@@ -307,7 +307,7 @@ void main() {
                 (tester) async {
                   initGlobalProviderContainer([
                     loggingServiceProvider
-                        .overrideWithValue(MockLoggingService())
+                        .overrideWithValue(MockLoggingService()),
                   ]);
 
                   final completer = Completer<Person?>();

@@ -21,7 +21,7 @@ import 'church_admin_app_test.mocks.dart';
   MockSpec<PersonsDAO>(),
   MockSpec<AreasDAO>(),
   MockSpec<ServicesDAO>(),
-  MockSpec<LocalAuthService>()
+  MockSpec<LocalAuthService>(),
 ])
 @GenerateNiceMocks([MockSpec<ConnectivityService>()])
 void main() {
@@ -269,7 +269,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       permissions: PermissionsSet.fromSet(
         {
           if (value != FirstScreenVariantEnum.unapprovedUser)
-            UserPermission.approved
+            UserPermission.approved,
         },
       ),
       isMultiFactorEnrolled: value != FirstScreenVariantEnum.multiFactor,

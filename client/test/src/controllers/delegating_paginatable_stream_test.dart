@@ -91,7 +91,7 @@ void main() {
         DelegatingStreamResult<Object>(
           result: [
             'something',
-            {2}
+            {2},
           ],
           canPaginateForward: true,
           canPaginateBackward: true,
@@ -142,7 +142,7 @@ void main() {
         DelegatingStreamResult<Object>(
           result: [
             'something',
-            {2}
+            {2},
           ],
           canPaginateForward: true,
           canPaginateBackward: true,
@@ -156,7 +156,7 @@ void main() {
           result: [
             'AAA0.5',
             {'': 'ss'},
-            []
+            [],
           ],
           canPaginateForward: false,
           canPaginateBackward: true,

@@ -55,7 +55,6 @@ class EditObjectController<T extends ViewableWithID> {
         _saveLock = true;
         formKey.currentState!.save();
 
-        final scaffoldMessenger = ScaffoldMessenger.of(context);
         final themeData = Theme.of(context);
         final navigator = Navigator.of(context);
 

@@ -38,7 +38,8 @@ void main() {
           globalProviderContainer
               .read(connectivityPluginProvider)
               .checkConnectivity(),
-          (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny)
+          (globalProviderContainer.read(dioProvider) as MockDio)
+              .get(captureAny),
         ],
       ).captured;
 
@@ -94,7 +95,7 @@ void main() {
         ConnectivityResult.none: false,
         ConnectivityResult.ethernet: false,
         ConnectivityResult.vpn: true,
-        ConnectivityResult.mobile: false
+        ConnectivityResult.mobile: false,
       };
 
       final unit = ConnectivityService.I;

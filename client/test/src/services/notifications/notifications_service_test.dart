@@ -446,7 +446,7 @@ void main() {
                 data: {
                   'senderUID': 'foobar',
                   'title': 'asasa',
-                  'body': 'asasas'
+                  'body': 'asasas',
                 },
               );
 

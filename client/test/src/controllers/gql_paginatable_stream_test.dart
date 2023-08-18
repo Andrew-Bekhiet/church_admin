@@ -68,7 +68,7 @@ void main() {
         emitsInOrder(
           [
             ...foldedExpected,
-            expected.first.where((e) => e.contains(searchString)).toList()
+            expected.first.where((e) => e.contains(searchString)).toList(),
           ],
         ),
       );

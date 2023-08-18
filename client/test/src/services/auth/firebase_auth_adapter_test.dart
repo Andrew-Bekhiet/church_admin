@@ -24,7 +24,7 @@ final idTokenResult = IdTokenResult(
   PigeonIdTokenResult(
     claims: {
       'x-hasura-user-id': 'x-hasura-user-id-asdasdas',
-      'password': 'vdvdvpassword'
+      'password': 'vdvdvpassword',
     },
     token: 'header.token.signature',
   ),
@@ -163,7 +163,7 @@ void main() {
             mockString(),
             mockString(),
             mockString(),
-            mockString()
+            mockString(),
           ];
           tokens
             ..insert(0, tokens.first)
@@ -637,7 +637,7 @@ void main() {
                 ),
               ),
             ),
-            resolver.resolveSignIn(any)
+            resolver.resolveSignIn(any),
           ]);
         },
       );
@@ -676,7 +676,7 @@ void main() {
                 ),
               ),
             ),
-            (multiFactor as MockMultiFactor).enroll(any)
+            (multiFactor as MockMultiFactor).enroll(any),
           ]);
         },
       );
@@ -780,7 +780,7 @@ MockUser _createMockUser({
         enrollmentTimestamp: 0,
         uid: 'uid',
         displayName: 'displayName',
-      )
+      ),
     ],
   );
 

@@ -238,7 +238,7 @@ void _setUp() {
   final overrides = [
     _setUpCacheManager(),
     _setUpImageUrlCacheService(),
-    _setUpViewableObjectService()
+    _setUpViewableObjectService(),
   ];
 
   initGlobalProviderContainer(overrides);

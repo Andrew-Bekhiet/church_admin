@@ -19,7 +19,7 @@ import 'login_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<UserSettingsService>(),
   MockSpec<HiveInterface>(),
-  MockSpec<NotificationsService>()
+  MockSpec<NotificationsService>(),
 ])
 void main() {
   tearDown(resetGlobalProviderContainer);

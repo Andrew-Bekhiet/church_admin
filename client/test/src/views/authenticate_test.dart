@@ -143,7 +143,7 @@ void main() {
             password: testPassword,
             storedPasswordHash: anyNamed('storedPasswordHash'),
           ),
-          LocalAuthService.I.resetAuthState()
+          LocalAuthService.I.resetAuthState(),
         ]);
         verifyNever(LocalAuthService.I.authenticate());
       } else {

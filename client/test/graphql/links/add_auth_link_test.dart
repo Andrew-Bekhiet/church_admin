@@ -228,7 +228,7 @@ MockOperation _createMockOperation(bool isSubscription) {
           selectionSet: const SelectionSetNode(),
           type:
               isSubscription ? OperationType.subscription : OperationType.query,
-        )
+        ),
       ],
     ),
   );

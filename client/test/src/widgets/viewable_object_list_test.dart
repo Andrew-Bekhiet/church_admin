@@ -334,7 +334,7 @@ MockPaginatableStreamBase<Person> _createMockPaginatableStream(
 void _setUp() {
   final overrides = [
     _setUpViewableObjectService(),
-    _setUpImageUrlCacheService()
+    _setUpImageUrlCacheService(),
   ];
 
   initGlobalProviderContainer(overrides);

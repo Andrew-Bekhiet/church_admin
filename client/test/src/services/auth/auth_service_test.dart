@@ -34,7 +34,7 @@ final initialUser = User(
   MockSpec<AuthAdapter>(),
   MockSpec<MultiFactorManagerAdapter>(),
   MockSpec<LocalAuthService>(),
-  MockSpec<ConnectivityService>()
+  MockSpec<ConnectivityService>(),
 ])
 void main() {
   group(
@@ -223,7 +223,7 @@ void main() {
 
           final captured = verifyInOrder([
             (AuthAdapter.I as MockAuthAdapter).isTokenUpToDate(captureAny),
-            unit.refreshToken()
+            unit.refreshToken(),
           ]).captured;
 
           expect(captured.first.first, initialUser);
