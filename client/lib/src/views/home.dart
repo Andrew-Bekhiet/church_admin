@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _search,
       _bottomNavBar,
       (s, t) => t == T ? s : null,
-    ).debounceTime(const Duration(seconds: 1)).shareValue();
+    ).debounceTime(const Duration(seconds: 1));
   }
 
   void _tabControllerListener() {
@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     GQLPaginatableStream<T> Function({Stream<String?>? searchQuery})
         paginatableStreamFactory,
   ) {
-    final searchStream = _getSearchStreamFor<T>();
+    final searchStream = _getSearchStreamFor<T>().asBroadcastStream();
     final paginatableStream =
         paginatableStreamFactory(searchQuery: searchStream);
     final filterStream = paginatableStream.onLoadingChanged.switchMap(
