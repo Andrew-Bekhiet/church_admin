@@ -9,78 +9,103 @@ import 'persons/__generated__/queries.gql.dart';
 import 'persons/__generated__/subscriptions.gql.dart';
 import 'persons/helpers.dart';
 
-class PersonsDAO extends DAOBase<Person> {
-  PersonsDAO({
-    required super.db,
-  });
+class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
+  PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
 
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
-  Future<Person> insertPerson({
-    required Person newPerson,
+  @override
+  late final StreamAllConfig<Person, Input_PersonsBoolExp> baseStreamAllConfig =
+      StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllPersons,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+  @override
+  final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
+      const StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchPerson,
+  );
+  @override
+  late final DeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeletePerson,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+  @override
+  late final UpdateObjectConfig<Person> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdatePerson,
+    varsConstructor: _updatePersonVarsConstructor,
+  );
+  @override
+  late final CreateObjectConfig<Person> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertPerson,
+    varsConstructor: _createPersonVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Person> event,
+    required List<Input_PersonsBoolExp> where,
   }) {
-    final insertHelper = PersonInsertHelper(newPerson: newPerson);
-
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertPerson,
-        operationName: 'insertPerson',
-        variables: insertHelper.variables.toJson(),
-        parserFn: db.parser.singleParser(Person.fromJson),
-      ),
-    );
-  }
-
-  Future<Person?> updatePerson({
-    required Person oldPerson,
-    required Person newPerson,
-  }) {
-    final updateHelper =
-        PersonUpdateHelper(newPerson: newPerson, oldPerson: oldPerson);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdatePerson,
-        operationName: 'updatePerson',
-        variables: updateHelper.variables.toJson(),
-        parserFn: (data) => data['updatePersonsByPk'] != null
-            ? Person.fromJson(data['updatePersonsByPk'])
-            : null,
-      ),
-    );
-  }
-
-  Future<Person?> deletePerson({
-    required String personId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeletePerson,
-      variables: Variables_Mutation_deletePerson(
-        personId: personId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Person.fromJson),
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllPersons.new,
+      Input_PersonsBoolExp.new,
     );
 
-    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+    ).toJson();
   }
 
+  Json _streamSingleByIdVarsConstructor({
+    required UuidValue id,
+    int? servicesLimit = 6,
+    int? classesLimit = 6,
+    int? groupsLimit = 6,
+  }) =>
+      Variables_Subscription_watchPerson(
+        id: id,
+        servicesLimit: servicesLimit,
+        classesLimit: classesLimit,
+        groupsLimit: groupsLimit,
+      ).toJson();
+
+  Json _createPersonVarsConstructor({required Person newObject}) =>
+      PersonInsertHelper(newPerson: newObject).variables.toJson();
+
+  Json _updatePersonVarsConstructor({
+    required Person newObject,
+    required Person oldObject,
+  }) =>
+      PersonUpdateHelper(
+        newPerson: newObject,
+        oldPerson: oldObject,
+      ).variables.toJson();
+
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deletePerson(personId: id).toJson();
+
+  @override
   Stream<Person?> streamSingleById({
     required String id,
     int? servicesLimit = 6,
     int? classesLimit = 6,
     int? groupsLimit = 6,
   }) {
-    return graphQLClient.subscribeAndReturnParsedNullable(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchPerson,
-        operationName: 'watchPerson',
-        variables: Variables_Subscription_watchPerson(
+    return streamingProxy.streamSingleById(
+      id: id,
+      streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
+        variables: _streamSingleByIdVarsConstructor(
           id: id.toUuid(),
           servicesLimit: servicesLimit,
           classesLimit: classesLimit,
           groupsLimit: groupsLimit,
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Person.fromJson),
+        ),
       ),
     );
   }
@@ -91,39 +116,20 @@ class PersonsDAO extends DAOBase<Person> {
     String? secondLineFieldName,
     List<Input_PersonsBoolExp>? where,
   }) {
-    return GQLPaginatableStream<Person>(
+    return streamingProxy.streamAll(
       searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllPersons.new,
-          Input_PersonsBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: secondLineFieldName == null
-                ? documentNodeSubscriptionwatchAllPersons
-                : documentNodeSubscriptionwatchAllPersons.addSelectionFields(
-                    {
-                      'persons': [
-                        FieldNode(name: NameNode(value: secondLineFieldName)),
-                      ],
-                    },
-                  ),
-            operationName: 'watchAllPersons',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Person.fromJson),
-          ),
-        );
-      },
+      where: where,
+      streamAllConfig: baseStreamAllConfig.copyWith(
+        document: secondLineFieldName == null
+            ? baseStreamAllConfig.document
+            : baseStreamAllConfig.document.addSelectionFields(
+                {
+                  'persons': [
+                    FieldNode(name: NameNode(value: secondLineFieldName)),
+                  ],
+                },
+              ),
+      ),
     );
   }
 

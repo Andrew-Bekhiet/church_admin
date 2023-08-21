@@ -36,13 +36,12 @@ class EditFamily extends StatefulWidget {
 class _EditFamilyState extends State<EditFamily> {
   late EditObjectController<Family> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.families.insertFamily(newFamily: object),
+        DatabaseService.I.families.createObject(newObject: object),
     onUpdate: (oldFamily, newFamily) => DatabaseService.I.families.updateFamily(
       oldFamily: oldFamily,
       newFamily: newFamily,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.families.deleteFamily(familyId: object.id),
+    onDelete: (object) => DatabaseService.I.families.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject: widget.family ??
         Family(

@@ -1,35 +1,27 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
 
 import 'person_types/__generated__/subscriptions.gql.dart';
 
-class PersonTypesDAO extends DAOBase<PersonType> {
-  const PersonTypesDAO({
+class PersonTypesDAO extends DAOBase<PersonType>
+    with StreamableDAO<PersonType, Input_PersonTypesBoolExp> {
+  PersonTypesDAO({
     required super.db,
-  });
+  }) : super(fromJson: PersonType.fromJson);
 
   @override
-  GQLPaginatableStream<PersonType> streamAll({
-    Stream<String?>? searchQuery,
-  }) {
-    return GQLPaginatableStream<PersonType>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
+  StreamAllConfig<PersonType, Input_PersonTypesBoolExp>
+      get baseStreamAllConfig => StreamAllConfig(
             document: documentNodeSubscriptionwatchAllPersonTypes,
-            operationName: 'watchAllPersonTypes',
-            variables: graphQLClient
+            varsConstructor: ({required event, required where}) => graphQLClient
                 .getDefaultSearchVars(
                   event,
                   Variables_Subscription_watchAllPersonTypes.new,
                   Input_PersonTypesBoolExp.new,
                 )
                 .toJson(),
-            parserFn: db.parser.singleListParser(PersonType.fromJson),
-          ),
-        );
-      },
-    );
-  }
+          );
+
+  @override
+  StreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
+      throw UnimplementedError();
 }

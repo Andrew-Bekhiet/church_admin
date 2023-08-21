@@ -1,133 +1,94 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
+import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
+import 'package:uuid/uuid.dart';
 
 import 'classes/__generated__/mutations.gql.dart';
 import 'classes/__generated__/subscriptions.gql.dart';
-import 'helpers.dart';
 
-class ClassesDAO extends DAOBase<Class> {
-  const ClassesDAO({
-    required super.db,
-  });
+class ClassesDAO extends FullCRUDDAO<Class, Input_ClassesBoolExp> {
+  ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
 
   @override
-  GQLPaginatableStream<Class> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_ClassesBoolExp>? where,
+  late final StreamAllConfig<Class, Input_ClassesBoolExp> baseStreamAllConfig =
+      StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllClasses,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+  @override
+  late final StreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
+      StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchClass,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
+  @override
+  late final DeleteSingleByIdConfig<Class> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeleteClass,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+  @override
+  late final UpdateObjectConfig<Class> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdateClass,
+    varsConstructor: _updateClassVarsConstructor,
+  );
+  @override
+  late final CreateObjectConfig<Class> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertClass,
+    varsConstructor: _createClassVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Class> event,
+    required List<Input_ClassesBoolExp> where,
   }) {
-    return GQLPaginatableStream<Class>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllClasses.new,
-          Input_ClassesBoolExp.new,
-        );
-
-        final variables = {
-          ...defaultSearchVars.copyWith(
-            where: [
-              if (where != null) ...where,
-              if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-            ],
-            orderBy: [
-              Input_ClassesOrderBy(
-                serviceStudyYear: Enum_OrderBy.ASC,
-              ),
-              Input_ClassesOrderBy(
-                serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
-              ),
-              Input_ClassesOrderBy(
-                name: Enum_OrderBy.ASC,
-              ),
-            ],
-          ).toJson(),
-        };
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllClasses,
-            operationName: 'watchAllClasses',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Class.fromJson),
-          ),
-        );
-      },
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllClasses.new,
+      Input_ClassesBoolExp.new,
     );
-  }
 
-  Stream<Class?> streamSingleById({
-    required String id,
-  }) {
-    return graphQLClient
-        .subscribe(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchClass,
-            operationName: 'watchClass',
-            variables:
-                Variables_Subscription_watchClass(id: id.toUuid()).toJson(),
-            parserFn: db.parser.singleOrNullParser(Class.fromJson),
+    return {
+      ...defaultSearchVars.copyWith(
+        where: [
+          ...where,
+          if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+        ],
+        orderBy: [
+          Input_ClassesOrderBy(
+            serviceStudyYear: Enum_OrderBy.ASC,
           ),
-        )
-        .map((p) => p.parsedData);
-  }
-
-  Future<Class?> deleteClass({
-    required String classId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeleteClass,
-      variables: Variables_Mutation_deleteClass(
-        classId: classId.toUuid(),
+          Input_ClassesOrderBy(
+            serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
+          ),
+          Input_ClassesOrderBy(
+            name: Enum_OrderBy.ASC,
+          ),
+        ],
       ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Class.fromJson),
-    );
-
-    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+    };
   }
 
-  Future<Class> insertClass({
-    required Class newClass,
-  }) {
-    final delta = computeObjectDelta(
-      newClass.toJson(),
-      Class(id: '', name: '').toJson(),
-    )
-      ..remove('id')
-      ..remove('service')
-      ..remove('studyYear');
+  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Subscription_watchClass(id: id).toJson();
 
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertClass,
-        operationName: 'insertClass',
-        variables: {'newClass': delta},
-        parserFn: db.parser.singleParser(Class.fromJson),
-      ),
-    );
-  }
+  Json _createClassVarsConstructor({required Class newObject}) =>
+      Variables_Mutation_insertClass(
+        newClass: Input_ClassesInsertInput.fromJson(newObject.toJson()),
+      ).toJson();
 
-  Future<Class?> updateClass({
-    required Class newClass,
-    required Class oldClass,
-  }) {
-    final delta = computeObjectDelta(
-      newClass.toJson(),
-      oldClass.toJson(),
-    );
+  Json _updateClassVarsConstructor({
+    required Class newObject,
+    required Class oldObject,
+  }) =>
+      Variables_Mutation_updateClass(
+        classId: newObject.id.toUuid(),
+        newClass: Input_ClassesSetInput.fromJson(
+          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
+        ),
+      ).toJson();
 
-    if (delta.isEmpty) return Future.value(newClass);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdateClass,
-        operationName: 'updateClass',
-        variables: Variables_Mutation_updateClass(
-          classId: newClass.id.toUuid(),
-          newClass: Input_ClassesSetInput.fromJson(delta),
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Class.fromJson),
-      ),
-    );
-  }
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deleteClass(classId: id).toJson();
 }

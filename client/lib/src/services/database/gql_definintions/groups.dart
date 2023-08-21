@@ -1,126 +1,89 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
+import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
+import 'package:uuid/uuid.dart';
 
 import 'groups/__generated__/mutations.gql.dart';
 import 'groups/__generated__/subscriptions.gql.dart';
-import 'helpers.dart';
 
-class GroupsDAO extends DAOBase<Group> {
-  const GroupsDAO({
-    required super.db,
-  });
+class GroupsDAO extends FullCRUDDAO<Group, Input_GroupsBoolExp> {
+  GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
 
   @override
-  GQLPaginatableStream<Group> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_GroupsBoolExp>? where,
+  late final StreamAllConfig<Group, Input_GroupsBoolExp> baseStreamAllConfig =
+      StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllGroups,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+  @override
+  late final StreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
+      StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchGroup,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
+  @override
+  late final DeleteSingleByIdConfig<Group> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeleteGroup,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+  @override
+  late final UpdateObjectConfig<Group> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdateGroup,
+    varsConstructor: _updateGroupVarsConstructor,
+  );
+  @override
+  late final CreateObjectConfig<Group> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertGroup,
+    varsConstructor: _createGroupVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Group> event,
+    required List<Input_GroupsBoolExp> where,
   }) {
-    return GQLPaginatableStream<Group>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllGroups.new,
-          Input_GroupsBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-          orderBy: [
-            Input_GroupsOrderBy(
-              validity: Enum_OrderBy.ASC,
-            ),
-            Input_GroupsOrderBy(
-              name: Enum_OrderBy.ASC,
-            ),
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllGroups,
-            operationName: 'watchAllGroups',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Group.fromJson),
-          ),
-        );
-      },
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllGroups.new,
+      Input_GroupsBoolExp.new,
     );
+
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+      orderBy: [
+        Input_GroupsOrderBy(
+          validity: Enum_OrderBy.ASC,
+        ),
+        Input_GroupsOrderBy(
+          name: Enum_OrderBy.ASC,
+        ),
+      ],
+    ).toJson();
   }
 
-  Stream<Group?> streamSingleById({
-    required String id,
-  }) {
-    return graphQLClient.subscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchGroup,
-        operationName: 'watchGroup',
-        variables: Variables_Subscription_watchGroup(
-          id: id.toUuid(),
-        ).toJson(),
-        parserFn: db.parser.singleParser(Group.fromJson),
-      ),
-    );
-  }
+  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Subscription_watchGroup(id: id).toJson();
 
-  Future<Group?> deleteGroup({
-    required String groupId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeleteGroup,
-      variables: Variables_Mutation_deleteGroup(
-        groupId: groupId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Group.fromJson),
-    );
+  Json _createGroupVarsConstructor({required Group newObject}) =>
+      Variables_Mutation_insertGroup(
+        newGroup: Input_GroupsInsertInput.fromJson(newObject.toJson()),
+      ).toJson();
 
-    return graphQLClient.mutateAndReturnParsed(mutationOptions);
-  }
+  Json _updateGroupVarsConstructor({
+    required Group newObject,
+    required Group oldObject,
+  }) =>
+      Variables_Mutation_updateGroup(
+        groupId: newObject.id.toUuid(),
+        newGroup: Input_GroupsSetInput.fromJson(
+          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
+        ),
+      ).toJson();
 
-  Future<Group> insertGroup({
-    required Group newGroup,
-  }) {
-    final delta = computeObjectDelta(
-      newGroup.toJson(),
-      Group(id: '', name: '').toJson(),
-    )
-      ..remove('id')
-      ..remove('service');
-
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertGroup,
-        operationName: 'insertGroup',
-        variables: {'newGroup': delta},
-        parserFn: db.parser.singleParser(Group.fromJson),
-      ),
-    );
-  }
-
-  Future<Group?> updateGroup({
-    required Group newGroup,
-    required Group oldGroup,
-  }) {
-    final delta = computeObjectDelta(
-      newGroup.toJson(),
-      oldGroup.toJson(),
-    );
-
-    if (delta.isEmpty) return Future.value(newGroup);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdateGroup,
-        operationName: 'updateGroup',
-        variables: Variables_Mutation_updateGroup(
-          groupId: newGroup.id.toUuid(),
-          newGroup: Input_GroupsSetInput.fromJson(delta),
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Group.fromJson),
-      ),
-    );
-  }
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deleteGroup(groupId: id).toJson();
 }

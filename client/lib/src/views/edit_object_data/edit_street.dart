@@ -27,13 +27,12 @@ class EditStreet extends StatefulWidget {
 class _EditStreetState extends State<EditStreet> {
   late final EditObjectController<Street> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.streets.insertStreet(newStreet: object),
-    onUpdate: (oldStreet, newStreet) => DatabaseService.I.streets.updateStreet(
-      oldStreet: oldStreet,
-      newStreet: newStreet,
+        DatabaseService.I.streets.createObject(newObject: object),
+    onUpdate: (oldStreet, newStreet) => DatabaseService.I.streets.updateObject(
+      oldObject: oldStreet,
+      newObject: newStreet,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.streets.deleteStreet(streetId: object.id),
+    onDelete: (object) => DatabaseService.I.streets.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject:
         widget.street ?? Street(id: const Uuid().v4(), name: 'شارع جديد'),

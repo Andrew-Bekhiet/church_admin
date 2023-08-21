@@ -1,5 +1,4 @@
 export 'bases/attendance_analyzable.dart';
-export 'bases/dao_base.dart';
 export 'bases/i_image.dart';
 export 'bases/id.dart';
 export 'bases/json_serializable.dart';

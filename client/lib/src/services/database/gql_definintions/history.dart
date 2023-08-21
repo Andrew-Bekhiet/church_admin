@@ -4,10 +4,12 @@ import 'package:graphql/client.dart';
 import 'history/__generated__/mutations.gql.dart';
 import 'history/__generated__/subscriptions.gql.dart';
 
-class HistoryDAO extends DAOBase<LastRecordedByInfo> {
-  const HistoryDAO({
-    required super.db,
-  });
+class HistoryDAO {
+  final DatabaseService db;
+
+  DBGraphQLClient get graphQLClient => db.graphQLClient;
+
+  HistoryDAO({required this.db});
 
   GQLPaginatableStream<LastRecordedByInfo>
       paginateEditHistory<T extends Viewable>({
@@ -264,11 +266,5 @@ class HistoryDAO extends DAOBase<LastRecordedByInfo> {
             .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
       ),
     );
-  }
-
-  @override
-  Stream<List<LastRecordedByInfo>> streamAll({Stream<String?>? searchQuery}) {
-    // TODO: split this class into 3 different classes
-    throw UnimplementedError();
   }
 }

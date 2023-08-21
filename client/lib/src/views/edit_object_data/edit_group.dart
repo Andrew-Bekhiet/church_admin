@@ -30,13 +30,12 @@ class EditGroup extends StatefulWidget {
 class _EditGroupState extends State<EditGroup> {
   late final EditObjectController<Group> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.groups.insertGroup(newGroup: object),
-    onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateGroup(
-      oldGroup: oldGroup,
-      newGroup: newGroup,
+        DatabaseService.I.groups.createObject(newObject: object),
+    onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(
+      oldObject: oldGroup,
+      newObject: newGroup,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.groups.deleteGroup(groupId: object.id),
+    onDelete: (object) => DatabaseService.I.groups.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject: widget.group ??
         Group(

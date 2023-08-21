@@ -1,13 +1,16 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:meta/meta.dart';
 
-abstract class DAOBase<T> {
+abstract class DAOBase<T extends ViewableWithID> {
   const DAOBase({
     required this.db,
+    required this.fromJson,
   });
 
   final DatabaseService db;
 
   DBGraphQLClient get graphQLClient => db.graphQLClient;
 
-  Stream<List<T>> streamAll({Stream<String?>? searchQuery});
+  @protected
+  final T Function(Json json) fromJson;
 }

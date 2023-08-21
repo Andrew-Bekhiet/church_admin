@@ -39,7 +39,7 @@ class _ViewUserState extends State<ViewUser> {
   final scrollController = ScrollController();
 
   late final stream = DatabaseService.I.users.streamSingleById(
-    uid: widget.userId,
+    id: widget.userId,
     fullData: true,
   );
 

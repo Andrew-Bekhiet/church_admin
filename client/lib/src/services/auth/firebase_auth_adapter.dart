@@ -86,7 +86,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   Stream<User?> _getUserStreamFromDB(Json jwtClaims) {
     return _databaseService.users
-        .streamSingleById(uid: _getHasuraUID(jwtClaims));
+        .streamSingleById(id: _getHasuraUID(jwtClaims));
   }
 
   @override

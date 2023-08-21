@@ -1,119 +1,85 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart' hide Store;
+import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
+import 'package:uuid/uuid.dart';
 
-import 'helpers.dart';
 import 'stores/__generated__/mutations.gql.dart';
 import 'stores/__generated__/subscriptions.gql.dart';
 
-class StoresDAO extends DAOBase<Store> {
-  const StoresDAO({
-    required super.db,
-  });
+class StoresDAO extends FullCRUDDAO<Store, Input_StoresBoolExp> {
+  StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
 
   @override
-  GQLPaginatableStream<Store> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_StoresBoolExp>? where,
+  late final StreamAllConfig<Store, Input_StoresBoolExp> baseStreamAllConfig =
+      StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllStores,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+
+  @override
+  late final StreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
+      StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchStore,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
+
+  @override
+  late final DeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeleteStore,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+
+  @override
+  late final UpdateObjectConfig<Store> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdateStore,
+    varsConstructor: _updateStoreVarsConstructor,
+  );
+
+  @override
+  late final CreateObjectConfig<Store> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertStore,
+    varsConstructor: _createStoreVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Store> event,
+    required List<Input_StoresBoolExp> where,
   }) {
-    return GQLPaginatableStream<Store>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllStores.new,
-          Input_StoresBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllStores,
-            operationName: 'watchAllStores',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Store.fromJson),
-          ),
-        );
-      },
-    );
-  }
-
-  Stream<Store?> streamSingleById({
-    required String id,
-  }) {
-    return graphQLClient
-        .subscribe(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchStore,
-            operationName: 'watchStore',
-            variables:
-                Variables_Subscription_watchStore(id: id.toUuid()).toJson(),
-            parserFn: db.parser.singleOrNullParser(Store.fromJson),
-          ),
-        )
-        .map((p) => p.parsedData);
-  }
-
-  Future<Store?> deleteStore({
-    required String storeId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeleteStore,
-      variables: Variables_Mutation_deleteStore(
-        storeId: storeId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Store.fromJson),
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllStores.new,
+      Input_StoresBoolExp.new,
     );
 
-    return graphQLClient.mutateAndReturnParsedNullable(mutationOptions);
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+    ).toJson();
   }
 
-  Future<Store> insertStore({
-    required Store newStore,
-  }) {
-    final delta = computeObjectDelta(
-      newStore.toJson(),
-      Store(id: '', name: '').toJson(),
-    )
-      ..remove('id')
-      ..remove('family');
+  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Subscription_watchStore(id: id).toJson();
 
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertStore,
-        operationName: 'insertStore',
-        variables: {'newStore': delta},
-        parserFn: db.parser.singleParser(Store.fromJson),
-      ),
-    );
-  }
+  Json _createStoreVarsConstructor({required Store newObject}) =>
+      Variables_Mutation_insertStore(
+        newStore: Input_StoresInsertInput.fromJson(newObject.toJson()),
+      ).toJson();
 
-  Future<Store?> updateStore({
-    required Store newStore,
-    required Store oldStore,
-  }) {
-    final delta = computeObjectDelta(
-      newStore.toJson(),
-      oldStore.toJson(),
-    );
+  Json _updateStoreVarsConstructor({
+    required Store newObject,
+    required Store oldObject,
+  }) =>
+      Variables_Mutation_updateStore(
+        storeId: newObject.id.toUuid(),
+        newStore: Input_StoresSetInput.fromJson(
+          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
+        ),
+      ).toJson();
 
-    if (delta.isEmpty) return Future.value(newStore);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdateStore,
-        operationName: 'updateStore',
-        variables: Variables_Mutation_updateStore(
-          storeId: newStore.id.toUuid(),
-          newStore: Input_StoresSetInput.fromJson(delta),
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Store.fromJson),
-      ),
-    );
-  }
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deleteStore(storeId: id).toJson();
 }

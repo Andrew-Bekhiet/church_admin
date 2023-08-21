@@ -1,117 +1,92 @@
+import 'dart:developer';
+
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
+import 'package:church_admin/src/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
+import 'package:uuid/uuid.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
-import 'areas/__generated__/subscriptions.gql.dart';
-import 'helpers.dart';
 
-class AreasDAO extends DAOBase<Area> {
-  const AreasDAO({
-    required super.db,
-  });
+class AreasDAO extends FullCRUDDAO<Area, Input_AreasBoolExp> {
+  AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
 
   @override
-  GQLPaginatableStream<Area> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_AreasBoolExp>? where,
+  late final StreamAllConfig<Area, Input_AreasBoolExp> baseStreamAllConfig =
+      StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllAreas,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+  @override
+  late final StreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
+      StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchArea,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
+  @override
+  late final DeleteSingleByIdConfig<Area> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeleteArea,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+  @override
+  late final UpdateObjectConfig<Area> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdateArea,
+    varsConstructor: _updateAreaVarsConstructor,
+  );
+  @override
+  late final CreateObjectConfig<Area> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertArea,
+    varsConstructor: _createAreaVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Area> event,
+    required List<Input_AreasBoolExp> where,
   }) {
-    return GQLPaginatableStream<Area>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllAreas.new,
-          Input_AreasBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllAreas,
-            operationName: 'watchAllAreas',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Area.fromJson),
-          ),
-        );
-      },
-    );
-  }
-
-  Stream<Area?> streamSingleById({
-    required String id,
-  }) {
-    return graphQLClient
-        .subscribe(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchArea,
-            operationName: 'watchArea',
-            variables:
-                Variables_Subscription_watchArea(id: id.toUuid()).toJson(),
-            parserFn: db.parser.singleOrNullParser(Area.fromJson),
-          ),
-        )
-        .map((p) => p.parsedData);
-  }
-
-  Future<Area?> deleteArea({
-    required String areaId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeleteArea,
-      variables: Variables_Mutation_deleteArea(
-        areaId: areaId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Area.fromJson),
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllAreas.new,
+      Input_AreasBoolExp.new,
     );
 
-    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+    ).toJson();
   }
 
-  Future<Area> insertArea({
-    required Area newArea,
-  }) {
-    final delta = computeObjectDelta(
-      newArea.toJson(),
-      Area(id: '', name: '').toJson(),
-    )..remove('id');
+  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Subscription_watchArea(id: id).toJson();
 
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertArea,
-        operationName: 'insertArea',
-        variables: {'newArea': delta},
-        parserFn: db.parser.singleParser(Area.fromJson),
+  Json _createAreaVarsConstructor({required Area newObject}) =>
+      Variables_Mutation_insertArea(
+        newArea: Input_AreasInsertInput.fromJson(newObject.toJson()),
+      ).toJson();
+
+  Json _updateAreaVarsConstructor({
+    required Area newObject,
+    required Area oldObject,
+  }) {
+    final stopWatch = Stopwatch()..start();
+
+    final rslt = Variables_Mutation_updateArea(
+      areaId: newObject.id.toUuid(),
+      newArea: Input_AreasSetInput.fromJson(
+        computeObjectDelta(newObject.toJson(), oldObject.toJson()),
       ),
-    );
+    ).toJson();
+
+    stopWatch.stop();
+    log('_updateAreaVarsConstructor: took ${stopWatch.elapsed}');
+    //TODO: benchmark and test to remove id
+
+    return rslt;
   }
 
-  Future<Area?> updateArea({
-    required Area newArea,
-    required Area oldArea,
-  }) {
-    final delta = computeObjectDelta(
-      newArea.toJson(),
-      oldArea.toJson(),
-    );
-
-    if (delta.isEmpty) return Future.value(newArea);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdateArea,
-        operationName: 'updateArea',
-        variables: Variables_Mutation_updateArea(
-          areaId: newArea.id.toUuid(),
-          newArea: Input_AreasSetInput.fromJson(delta),
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Area.fromJson),
-      ),
-    );
-  }
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deleteArea(areaId: id).toJson();
 }

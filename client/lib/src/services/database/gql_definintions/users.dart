@@ -1,70 +1,71 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
+import 'package:uuid/uuid.dart';
 
 import 'users/__generated__/queries.gql.dart';
 import 'users/__generated__/subscriptions.gql.dart';
 
-class UsersDAO extends DAOBase<User> {
-  const UsersDAO({
-    required super.db,
-  });
+class UsersDAO extends DAOBase<User>
+    with StreamableDAO<User, Input_AuthUsersDataBoolExp> {
+  UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 
   @override
-  GQLPaginatableStream<User> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_AuthUsersDataBoolExp>? where,
+  late final StreamAllConfig<User, Input_AuthUsersDataBoolExp>
+      baseStreamAllConfig = StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllUsers,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+  @override
+  late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
+      const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<User> event,
+    required List<Input_AuthUsersDataBoolExp> where,
   }) {
-    return GQLPaginatableStream<User>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllUsers.new,
-          Input_AuthUsersDataBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-          orderBy: [
-            ...defaultSearchVars.orderBy ?? [],
-            Input_AuthUsersDataOrderBy(
-              permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
-                count: Enum_OrderBy.DESC,
-              ),
-            ),
-            Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC),
-            Input_AuthUsersDataOrderBy(email: Enum_OrderBy.ASC),
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllUsers,
-            operationName: 'watchAllUsers',
-            variables: variables,
-            parserFn: db.parser.singleListParser(User.fromJson),
-          ),
-        );
-      },
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllUsers.new,
+      Input_AuthUsersDataBoolExp.new,
     );
+
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+      orderBy: [
+        ...defaultSearchVars.orderBy ?? [],
+        Input_AuthUsersDataOrderBy(
+          permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
+            count: Enum_OrderBy.DESC,
+          ),
+        ),
+        Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC),
+        Input_AuthUsersDataOrderBy(email: Enum_OrderBy.ASC),
+      ],
+    ).toJson();
   }
 
+  Json _streamSingleByIdVarsConstructor({
+    required UuidValue id,
+    bool fullData = false,
+  }) =>
+      Variables_Subscription_watchUser(uid: id, fullData: fullData).toJson();
+
+  @override
   Stream<User?> streamSingleById({
-    required String uid,
+    /// The uid of the user
+    required String id,
     bool fullData = false,
   }) {
-    return graphQLClient.subscribeAndReturnParsedNullable(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchUser,
-        operationName: 'watchUser',
-        variables: Variables_Subscription_watchUser(
-          uid: uid.toUuid(),
+    return streamingProxy.streamSingleById(
+      id: id,
+      streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
+        variables: _streamSingleByIdVarsConstructor(
+          id: id.toUuid(),
           fullData: fullData,
-        ).toJson(),
-        parserFn: db.parser.singleParser(User.fromJson),
+        ),
       ),
     );
   }

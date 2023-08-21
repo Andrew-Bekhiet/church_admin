@@ -1,92 +1,84 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/families/helpers.dart';
 import 'package:graphql/client.dart';
+import 'package:uuid/uuid.dart';
 
 import 'families/__generated__/mutations.gql.dart';
 import 'families/__generated__/queries.gql.dart';
 import 'families/__generated__/subscriptions.gql.dart';
 
-class FamiliesDAO extends DAOBase<Family> {
-  const FamiliesDAO({
-    required super.db,
-  });
+class FamiliesDAO extends FullCRUDDAO<Family, Input_FamiliesBoolExp> {
+  FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
 
   @override
-  GQLPaginatableStream<Family> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_FamiliesBoolExp>? where,
+  late final StreamAllConfig<Family, Input_FamiliesBoolExp>
+      baseStreamAllConfig = StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllFamilies,
+    varsConstructor: _streamAllVarsConstructor,
+  );
+
+  @override
+  late final StreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
+      StreamSingleByIdConfig(
+    document: documentNodeSubscriptionwatchFamily,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
+
+  @override
+  late final DeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
+      DeleteSingleByIdConfig(
+    document: documentNodeMutationdeleteFamily,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
+
+  @override
+  late final UpdateObjectConfig<Family> baseUpdateObjectConfig =
+      UpdateObjectConfig(
+    document: documentNodeMutationupdateFamily,
+    varsConstructor: _updateFamilyVarsConstructor,
+  );
+
+  @override
+  late final CreateObjectConfig<Family> baseCreateObjectConfig =
+      CreateObjectConfig(
+    document: documentNodeMutationinsertFamily,
+    varsConstructor: _createFamilyVarsConstructor,
+  );
+
+  Json _streamAllVarsConstructor({
+    required GQLPaginatableStreamEvent<Family> event,
+    required List<Input_FamiliesBoolExp> where,
   }) {
-    return GQLPaginatableStream<Family>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-          event,
-          Variables_Subscription_watchAllFamilies.new,
-          Input_FamiliesBoolExp.new,
-        );
-
-        final variables = defaultSearchVars.copyWith(
-          where: [
-            if (where != null) ...where,
-            if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-          ],
-        ).toJson();
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllFamilies,
-            operationName: 'watchAllFamilies',
-            variables: variables,
-            parserFn: db.parser.singleListParser(Family.fromJson),
-          ),
-        );
-      },
-    );
-  }
-
-  Stream<Family?> streamSingleById({
-    required String id,
-  }) {
-    return graphQLClient.subscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchFamily,
-        operationName: 'watchFamily',
-        variables: Variables_Subscription_watchFamily(
-          id: id.toUuid(),
-        ).toJson(),
-        parserFn: db.parser.singleParser(Family.fromJson),
-      ),
-    );
-  }
-
-  Future<Family?> deleteFamily({
-    required String familyId,
-  }) {
-    final mutationOptions = MutationOptions(
-      document: documentNodeMutationdeleteFamily,
-      variables: Variables_Mutation_deleteFamily(
-        familyId: familyId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Family.fromJson),
+    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+      event,
+      Variables_Subscription_watchAllFamilies.new,
+      Input_FamiliesBoolExp.new,
     );
 
-    return graphQLClient.mutateAndReturnParsed(mutationOptions);
+    return defaultSearchVars.copyWith(
+      where: [
+        ...where,
+        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
+      ],
+    ).toJson();
   }
 
-  Future<Family> insertFamily({
-    required Family newFamily,
-  }) {
-    final helper = FamilyInsertHelper(newFamily: newFamily);
+  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Subscription_watchFamily(id: id).toJson();
 
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertFamily,
-        operationName: 'insertFamily',
-        variables: helper.variables.toJson(),
-        parserFn: db.parser.singleParser(Family.fromJson),
-      ),
-    );
-  }
+  Json _createFamilyVarsConstructor({required Family newObject}) =>
+      FamilyInsertHelper(newFamily: newObject).variables.toJson();
+
+  Json _updateFamilyVarsConstructor({
+    required Family newObject,
+    required Family oldObject,
+  }) =>
+      FamilyUpdateHelper(newFamily: newObject, oldFamily: oldObject)
+          .variables
+          .toJson();
+
+  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
+      Variables_Mutation_deleteFamily(familyId: id).toJson();
 
   Future<Family?> updateFamily({
     required Family newFamily,

@@ -1,38 +1,31 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
+import 'package:church_admin/src/services/database/gql_definintions/metadata/study_years/__generated__/queries.gql.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-import 'study_years/__generated__/queries.gql.dart';
 import 'study_years/__generated__/subscriptions.gql.dart';
 
-class StudyYearsDAO extends DAOBase<StudyYear> {
-  const StudyYearsDAO({
+class StudyYearsDAO extends DAOBase<StudyYear>
+    with StreamableDAO<StudyYear, Input_StudyYearsBoolExp> {
+  StudyYearsDAO({
     required super.db,
-  });
+  }) : super(fromJson: StudyYear.fromJson);
 
   @override
-  GQLPaginatableStream<StudyYear> streamAll({
-    Stream<String?>? searchQuery,
-  }) {
-    return GQLPaginatableStream<StudyYear>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllStudyYears,
-            operationName: 'watchAllStudyYears',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables_Subscription_watchAllStudyYears.new,
-                  Input_StudyYearsBoolExp.new,
-                )
-                .toJson(),
-            parserFn: db.parser.singleListParser(StudyYear.fromJson),
-          ),
-        );
-      },
-    );
-  }
+  StreamAllConfig<StudyYear, Input_StudyYearsBoolExp> get baseStreamAllConfig =>
+      StreamAllConfig(
+        document: documentNodeSubscriptionwatchAllStudyYears,
+        varsConstructor: ({required event, required where}) => graphQLClient
+            .getDefaultSearchVars(
+              event,
+              Variables_Subscription_watchAllStudyYears.new,
+              Input_StudyYearsBoolExp.new,
+            )
+            .toJson(),
+      );
+
+  @override
+  StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
+      throw UnimplementedError();
 
   Future<StudyYear?> getStudyYearName(int order) {
     return graphQLClient.queryAndReturnParsedNullable(

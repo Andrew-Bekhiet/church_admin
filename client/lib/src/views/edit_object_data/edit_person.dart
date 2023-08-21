@@ -50,13 +50,12 @@ class EditPerson extends StatefulWidget {
 class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.persons.insertPerson(newPerson: object),
-    onUpdate: (oldPerson, newPerson) => DatabaseService.I.persons.updatePerson(
-      oldPerson: oldPerson,
-      newPerson: newPerson,
+        DatabaseService.I.persons.createObject(newObject: object),
+    onUpdate: (oldPerson, newPerson) => DatabaseService.I.persons.updateObject(
+      oldObject: oldPerson,
+      newObject: newPerson,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.persons.deletePerson(personId: object.id),
+    onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject: widget.person ??
         Person(

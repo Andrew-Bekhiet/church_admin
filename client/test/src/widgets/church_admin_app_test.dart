@@ -152,8 +152,7 @@ Override _setUpDatabaseRepo() {
 
 MockUsersDAO _setUpUsersDAO() {
   final usersDAO = MockUsersDAO();
-  when(usersDAO.streamSingleById(uid: anyNamed('uid')))
-      .thenAnswer((_) async* {});
+  when(usersDAO.streamSingleById(id: anyNamed('id'))).thenAnswer((_) async* {});
 
   return usersDAO;
 }

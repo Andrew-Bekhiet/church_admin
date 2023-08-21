@@ -1,35 +1,27 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:graphql/client.dart';
 
 import 'churches/__generated__/subscriptions.gql.dart';
 
-class ChurchesDAO extends DAOBase<Church> {
-  const ChurchesDAO({
+class ChurchesDAO extends DAOBase<Church>
+    with StreamableDAO<Church, Input_ChurchesBoolExp> {
+  ChurchesDAO({
     required super.db,
-  });
+  }) : super(fromJson: Church.fromJson);
 
   @override
-  GQLPaginatableStream<Church> streamAll({
-    Stream<String?>? searchQuery,
-  }) {
-    return GQLPaginatableStream<Church>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) {
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchAllChurches,
-            operationName: 'watchAllChurches',
-            variables: graphQLClient
-                .getDefaultSearchVars(
-                  event,
-                  Variables_Subscription_watchAllChurches.new,
-                  Input_ChurchesBoolExp.new,
-                )
-                .toJson(),
-            parserFn: db.parser.singleListParser(Church.fromJson),
-          ),
-        );
-      },
-    );
-  }
+  StreamAllConfig<Church, Input_ChurchesBoolExp> get baseStreamAllConfig =>
+      StreamAllConfig(
+        document: documentNodeSubscriptionwatchAllChurches,
+        varsConstructor: ({required event, required where}) => graphQLClient
+            .getDefaultSearchVars(
+              event,
+              Variables_Subscription_watchAllChurches.new,
+              Input_ChurchesBoolExp.new,
+            )
+            .toJson(),
+      );
+
+  @override
+  StreamSingleByIdConfig<Church> get baseStreamSingleByIdConfig =>
+      throw UnimplementedError();
 }

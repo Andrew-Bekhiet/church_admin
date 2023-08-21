@@ -4,7 +4,10 @@ import 'database/gql_definintions.dart';
 import 'database/gql_parser.dart';
 
 export '../../graphql/__generated__/schema.graphql.dart';
+export 'database/dao_base.dart';
+export 'database/dao_bases.dart';
 export 'database/db_gql_client.dart';
+export 'database/methods_templates.dart';
 export 'database/utils.dart';
 
 class DatabaseService {

@@ -27,14 +27,13 @@ class EditService extends StatefulWidget {
 class _EditServiceState extends State<EditService> {
   late final EditObjectController<Service> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.services.insertService(newService: object),
+        DatabaseService.I.services.createObject(newObject: object),
     onUpdate: (oldService, newService) =>
-        DatabaseService.I.services.updateService(
-      oldService: oldService,
-      newService: newService,
+        DatabaseService.I.services.updateObject(
+      oldObject: oldService,
+      newObject: newService,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.services.deleteService(serviceId: object.id),
+    onDelete: (object) => DatabaseService.I.services.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject: widget.service ??
         Service(

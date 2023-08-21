@@ -30,13 +30,12 @@ class EditStore extends StatefulWidget {
 class _EditStoreState extends State<EditStore> {
   late final EditObjectController<Store> _controller = EditObjectController(
     onCreate: (object) =>
-        DatabaseService.I.stores.insertStore(newStore: object),
-    onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateStore(
-      oldStore: oldStore,
-      newStore: newStore,
+        DatabaseService.I.stores.createObject(newObject: object),
+    onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateObject(
+      oldObject: oldStore,
+      newObject: newStore,
     ),
-    onDelete: (object) =>
-        DatabaseService.I.stores.deleteStore(storeId: object.id),
+    onDelete: (object) => DatabaseService.I.stores.deleteById(id: object.id),
     toJson: (object) => object.toJson(),
     newObject: widget.store ??
         Store(
