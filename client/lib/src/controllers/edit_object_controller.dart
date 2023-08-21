@@ -106,12 +106,14 @@ class EditObjectController<T extends ViewableWithID> {
 
       scaffoldMessenger.hideCurrentSnackBar();
 
-      await LoggingService.I.showErrorDialogAndReport(
-        context,
-        e,
-        stackTrace: stackTrace,
-        data: toJson(newObject),
-      );
+      if (context.mounted) {
+        await LoggingService.I.showErrorDialogAndReport(
+          context,
+          e,
+          stackTrace: stackTrace,
+          data: toJson(newObject),
+        );
+      }
     }
   }
 

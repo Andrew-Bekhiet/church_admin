@@ -228,13 +228,15 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
       );
     } on Exception catch (error, stackTrace) {
       _loading = false;
-      if (mounted) setState(() {});
+      if (mounted) {
+        setState(() {});
 
-      await LoggingService.I.showErrorDialogAndReport(
-        context,
-        error,
-        stackTrace: stackTrace,
-      );
+        await LoggingService.I.showErrorDialogAndReport(
+          context,
+          error,
+          stackTrace: stackTrace,
+        );
+      }
     }
   }
 
