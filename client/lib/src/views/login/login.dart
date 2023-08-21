@@ -238,6 +238,8 @@ class _SignUpViewState extends State<_SignUpView> {
             labelText: 'تأكيد كلمة المرور',
             autoFillHints: const [AutofillHints.newPassword],
             controller: _passwordConfirmationController,
+            textInputAction: TextInputAction.done,
+            onFieldSubmitted: _submit,
             validator: (password) {
               if (password != _passwordController.text) {
                 return 'كلمتا المرور غير متطابقتين';
@@ -246,22 +248,7 @@ class _SignUpViewState extends State<_SignUpView> {
             },
           ),
           FilledButton(
-            onPressed: _loading
-                ? null
-                : () async {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _loading = true;
-                      if (mounted) setState(() {});
-
-                      await widget.onSignUp(
-                        _emailController.text,
-                        _passwordController.text,
-                      );
-
-                      _loading = false;
-                      if (mounted) setState(() {});
-                    }
-                  },
+            onPressed: _loading ? null : _submit,
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
                 : const Text('إنشاء حساب جديد'),
@@ -310,6 +297,21 @@ class _SignUpViewState extends State<_SignUpView> {
       ),
     );
   }
+
+  Future<void> _submit([_]) async {
+    if (_formKey.currentState?.validate() ?? false) {
+      _loading = true;
+      if (mounted) setState(() {});
+
+      await widget.onSignUp(
+        _emailController.text,
+        _passwordController.text,
+      );
+
+      _loading = false;
+      if (mounted) setState(() {});
+    }
+  }
 }
 
 class _LoginView extends StatefulWidget {
@@ -357,7 +359,9 @@ class _LoginViewState extends State<_LoginView> {
             labelText: 'كلمة المرور',
             autoFillHints: const [AutofillHints.newPassword],
             autoValidateMode: AutovalidateMode.onUserInteraction,
+            textInputAction: TextInputAction.done,
             controller: _passwordController,
+            onFieldSubmitted: _submit,
             validator: (password) {
               if (password?.isEmpty ?? true) {
                 return 'كلمة المرور لا يمكن أن تكون فارغة';
@@ -366,22 +370,7 @@ class _LoginViewState extends State<_LoginView> {
             },
           ),
           FilledButton(
-            onPressed: _loading
-                ? null
-                : () async {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _loading = true;
-                      if (mounted) setState(() {});
-
-                      await widget.onLogin(
-                        _emailController.text,
-                        _passwordController.text,
-                      );
-
-                      _loading = false;
-                      if (mounted) setState(() {});
-                    }
-                  },
+            onPressed: _loading ? null : _submit,
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
                 : const Text('تسجيل الدخول'),
@@ -389,5 +378,20 @@ class _LoginViewState extends State<_LoginView> {
         ],
       ),
     );
+  }
+
+  Future<void> _submit([_]) async {
+    if (_formKey.currentState?.validate() ?? false) {
+      _loading = true;
+      if (mounted) setState(() {});
+
+      await widget.onLogin(
+        _emailController.text,
+        _passwordController.text,
+      );
+
+      _loading = false;
+      if (mounted) setState(() {});
+    }
   }
 }

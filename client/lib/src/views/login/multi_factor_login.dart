@@ -159,9 +159,13 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                 labelText: 'رقم الهاتف',
               ),
               validator: (value) {
-                if (value == null || value.completeNumber.isEmpty) {
-                  return 'من فضلك أدخل رقم الهاتف';
-                } else if (!value.isValidNumber()) {
+                try {
+                  if (value == null || value.completeNumber.isEmpty) {
+                    return 'من فضلك أدخل رقم الهاتف';
+                  } else if (!value.isValidNumber()) {
+                    return 'رقم هاتف غير صالح';
+                  }
+                } on Exception {
                   return 'رقم هاتف غير صالح';
                 }
                 return null;
@@ -284,6 +288,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
       future: initiateMultifactorLogin,
       builder: (context, snapshot) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'قم بإدخال رمز التحقق الذي تم إرساله إلى ' +
@@ -293,24 +298,25 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: TextFormField(
-                maxLength: 6,
-                controller: _code,
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                  labelText: 'رمز التحقق',
+            Padding(
+              padding: const EdgeInsets.only(top: 35, bottom: 15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: TextFormField(
+                  maxLength: 6,
+                  controller: _code,
+                  textAlign: TextAlign.center,
+                  decoration: const InputDecoration(
+                    labelText: 'رمز التحقق',
+                  ),
+                  keyboardType: TextInputType.number,
+                  autofillHints: const [AutofillHints.oneTimeCode],
+                  onFieldSubmitted: (_) {
+                    _finishSignIn(snapshot.requireData.$1);
+                  },
                 ),
-                keyboardType: TextInputType.number,
-                autofillHints: const [AutofillHints.oneTimeCode],
-                onFieldSubmitted: (_) {
-                  _finishSignIn(snapshot.requireData.$1);
-                },
               ),
             ),
-            const SizedBox(height: 5),
             FilledButton(
               onPressed: () {
                 _finishSignIn(snapshot.requireData.$1);
@@ -336,6 +342,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                         phoneNumber: widget.phoneNumber,
                         forceResendingToken: snapshot.requireData.$2,
                       );
+                      setState(() {});
                     },
                     child: const Text('إعادة إرسال الرمز'),
                   );
@@ -356,21 +363,24 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
   }
 
   Future<void> _finishSignIn(String verificationId) async {
-    await AuthService.I.multiFactorManager.finishMultiFactorSession(
-      verificationId,
-      _code.text,
-      widget.session,
-    );
-
-    await AuthService.I.userStream.nextNonNullStrict;
-
     try {
+      await AuthService.I.multiFactorManager.finishMultiFactorSession(
+        verificationId,
+        _code.text,
+        widget.session,
+      );
+
+      await AuthService.I.userStream.nextNonNullStrict;
+
       await UserSettingsService.I.setupDefaults();
 
       await NotificationsService.I.requestNotificationsPermission();
       await NotificationsService.I.scheduleDefaultNotifications();
     } catch (err, stack) {
-      await LoggingService.I.reportError(err, stackTrace: stack);
+      if (mounted) {
+        await LoggingService.I
+            .showErrorDialogAndReport(context, err, stackTrace: stack);
+      }
     }
   }
 }
