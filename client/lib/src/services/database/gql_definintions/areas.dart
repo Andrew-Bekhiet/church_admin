@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
@@ -70,22 +68,13 @@ class AreasDAO extends FullCRUDDAO<Area, Input_AreasBoolExp> {
   Json _updateAreaVarsConstructor({
     required Area newObject,
     required Area oldObject,
-  }) {
-    final stopWatch = Stopwatch()..start();
-
-    final rslt = Variables_Mutation_updateArea(
-      areaId: newObject.id.toUuid(),
-      newArea: Input_AreasSetInput.fromJson(
-        computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-      ),
-    ).toJson();
-
-    stopWatch.stop();
-    log('_updateAreaVarsConstructor: took ${stopWatch.elapsed}');
-    //TODO: benchmark and test to remove id
-
-    return rslt;
-  }
+  }) =>
+      Variables_Mutation_updateArea(
+        areaId: newObject.id.toUuid(),
+        newArea: Input_AreasSetInput.fromJson(
+          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
+        ),
+      ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteArea(areaId: id).toJson();
