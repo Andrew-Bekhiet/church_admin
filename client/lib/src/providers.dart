@@ -119,11 +119,7 @@ final secretsServiceProvider = Provider<SecretsService>(
 final authServiceProvider = Provider<AuthService>(
   (ref) => AuthService(
     storage: AuthStorage(secureStorage: ref.watch(secureStorageProvider)),
-    adapter: FirebaseAuthAdapter(
-      firebaseAuth: ref.watch(firebaseAuthProvider),
-      databaseService: ref.watch(databaseServiceProvider),
-    ),
-    multiFactorAdapter: ref.watch(multiFactorManagerAdapterProvider),
+    adapter: ref.watch(authAdapterProvider),
     connectivityService: ref.watch(connectivityServiceProvider),
   ),
 );
@@ -324,6 +320,8 @@ final authAdapterProvider = Provider<AuthAdapter>(
   (ref) => FirebaseAuthAdapter(
     firebaseAuth: ref.watch(firebaseAuthProvider),
     databaseService: ref.watch(databaseServiceProvider),
+    multiFactorManagerAdapter: ref.watch(multiFactorManagerAdapterProvider)
+        as FirebaseMultiFactorManagerAdapter,
   ),
 );
 

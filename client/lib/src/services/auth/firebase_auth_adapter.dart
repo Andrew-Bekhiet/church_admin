@@ -30,16 +30,15 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
   FirebaseAuthAdapter({
     required FirebaseAuth firebaseAuth,
+    required this.multiFactorManagerAdapter,
     DatabaseService? databaseService,
   })  : _firebaseAuth = firebaseAuth,
-        _databaseService = databaseService ?? DatabaseService.I,
-        _multiFactorManagerAdapter = FirebaseMultiFactorManagerAdapter(
-          firebaseAuth: firebaseAuth,
-        );
+        _databaseService = databaseService ?? DatabaseService.I;
 
   final FirebaseAuth _firebaseAuth;
   final DatabaseService _databaseService;
-  final FirebaseMultiFactorManagerAdapter _multiFactorManagerAdapter;
+  @override
+  final FirebaseMultiFactorManagerAdapter multiFactorManagerAdapter;
 
   @override
   late final Stream<User?> userStream = _firebaseAuth
@@ -71,7 +70,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
 
     if (authUser == null || idTokenResult == null) return Stream.value(null);
 
-    _multiFactorManagerAdapter.clearPendingMultiFactorLogin();
+    multiFactorManagerAdapter.clearPendingMultiFactorLogin();
 
     return _getUserStreamFromDB(
       idTokenResult.claims ?? {},
@@ -108,7 +107,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
         password: password,
       );
 
-      _multiFactorManagerAdapter.addPendingMultiFactorLogin(
+      multiFactorManagerAdapter.addPendingMultiFactorLogin(
         multiFactorSession,
         e,
       );

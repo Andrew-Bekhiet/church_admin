@@ -61,7 +61,13 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: AuthService.I.signOut,
+            onPressed: () {
+              if (AuthService.I.isSignedIn) {
+                AuthService.I.signOut();
+              } else {
+                context.go('/');
+              }
+            },
           ),
         ],
       ),
