@@ -374,8 +374,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
 
       await UserSettingsService.I.setupDefaults();
 
-      await NotificationsService.I.requestNotificationsPermission();
-      await NotificationsService.I.scheduleDefaultNotifications();
+      if (await NotificationsService.I.requestNotificationsPermission()) {
+        await NotificationsService.I.scheduleDefaultNotifications();
+      }
     } catch (err, stack) {
       if (mounted) {
         await LoggingService.I
