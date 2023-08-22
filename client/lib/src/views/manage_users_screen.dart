@@ -43,7 +43,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       appBar: AppBar(
         title: TitleSearchField(
           searchStream: _search,
-          title: const Text('إدارة المستخدمين'),
+          title: const Text('إدارة الخدام'),
         ),
       ),
       body: ViewableObjectList(

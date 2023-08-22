@@ -353,6 +353,10 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   when(mock.userStream).thenAnswer((_) => _controller.stream);
   when(mock.dispose()).thenAnswer((_) => _controller.close());
 
+  when(mock.multiFactorManagerAdapter).thenAnswer((_) =>
+      globalProviderContainer.read(multiFactorManagerAdapterProvider)
+          as FirebaseMultiFactorManagerAdapter);
+
   return authAdapterProvider.overrideWithValue(mock);
 }
 
@@ -361,16 +365,12 @@ AuthService _createAuthService({bool noCachedUser = false}) {
     return AuthService.noCachedUser(
       storage: globalProviderContainer.read(authStorageProvider),
       adapter: globalProviderContainer.read(authAdapterProvider),
-      multiFactorAdapter:
-          globalProviderContainer.read(multiFactorManagerAdapterProvider),
     );
   }
 
   return AuthService(
     storage: globalProviderContainer.read(authStorageProvider),
     adapter: globalProviderContainer.read(authAdapterProvider),
-    multiFactorAdapter:
-        globalProviderContainer.read(multiFactorManagerAdapterProvider),
   );
 }
 

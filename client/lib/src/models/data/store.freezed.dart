@@ -243,7 +243,8 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Store extends _Store {
   _$_Store(
       {required this.id,

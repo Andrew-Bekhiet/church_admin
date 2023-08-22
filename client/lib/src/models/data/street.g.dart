@@ -23,6 +23,16 @@ _$_Street _$$_StreetFromJson(Map json) => _$_Street(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
+const _$$_StreetFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'line': 'line',
+  'color': 'color',
+  'photoUpdatedAt': 'photoUpdatedAt',
+  'areas': 'areas',
+  'lastEdit': 'lastEdit',
+};
+
 Map<String, dynamic> _$$_StreetToJson(_$_Street instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

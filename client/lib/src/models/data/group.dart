@@ -12,6 +12,9 @@ part 'group.g.dart';
 class Group extends ViewableWithIDAndImage
     with _$Group
     implements ToJson, AttendanceAnalyzable {
+  static final fields = _$$_GroupFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Group({
     required String id,
     required String name,

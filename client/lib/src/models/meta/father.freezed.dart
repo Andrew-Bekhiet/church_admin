@@ -112,7 +112,8 @@ class __$$_FatherCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Father extends _Father {
   _$_Father({required this.id, required this.name, this.churchId}) : super._();
 

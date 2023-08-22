@@ -7,7 +7,10 @@ part 'job.freezed.dart';
 part 'job.g.dart';
 
 @freezed
-class Job extends ViewableWithID with _$Job {
+class Job extends ViewableWithID with _$Job implements ToJson {
+  static final fields = _$$_JobFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Job({
     required String id,
     required String name,

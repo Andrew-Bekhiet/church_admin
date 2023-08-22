@@ -189,7 +189,8 @@ class __$$_StreetCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Street extends _Street {
   _$_Street(
       {required this.id,

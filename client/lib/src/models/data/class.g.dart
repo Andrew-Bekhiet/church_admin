@@ -34,6 +34,22 @@ _$_Class _$$_ClassFromJson(Map json) => _$_Class(
           json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
     );
 
+const _$$_ClassFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'color': 'color',
+  'photoUpdatedAt': 'photoUpdatedAt',
+  'service': 'service',
+  'serviceId': 'serviceId',
+  'studyYear': 'studyYear',
+  'serviceStudyYear': 'serviceStudyYear',
+  'serviceGender': 'serviceGender',
+  'lastEdit': 'lastEdit',
+  'adminUsers': 'adminUsers',
+  'attendanceHistoryAggregate': 'attendanceHistoryAggregate',
+  'attendanceDaysConstraintsAggregate': 'attendanceDaysConstraintsAggregate',
+};
+
 Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

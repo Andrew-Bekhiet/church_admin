@@ -10,7 +10,10 @@ part 'hobby.freezed.dart';
 part 'hobby.g.dart';
 
 @freezed
-class Hobby extends ViewableWithID with _$Hobby {
+class Hobby extends ViewableWithID with _$Hobby implements ToJson {
+  static final fields = _$$_HobbyFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Hobby({
     required String id,
     required String name,

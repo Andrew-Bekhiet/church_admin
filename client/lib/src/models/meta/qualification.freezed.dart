@@ -106,7 +106,8 @@ class __$$_QualificationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Qualification extends _Qualification {
   _$_Qualification({required this.id, required this.name}) : super._();
 

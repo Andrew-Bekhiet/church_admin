@@ -113,7 +113,8 @@ class __$$_CollegeCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_College extends _College {
   _$_College({required this.id, required this.name, this.universityId})
       : super._();

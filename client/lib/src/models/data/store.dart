@@ -10,6 +10,9 @@ part 'store.g.dart';
 
 @freezed
 class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
+  static final fields = _$$_StoreFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Store({
     required String id,
     required String name,

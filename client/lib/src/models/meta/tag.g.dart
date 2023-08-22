@@ -12,6 +12,12 @@ _$_Tag _$$_TagFromJson(Map json) => _$_Tag(
       color: colorFromInt(json['color'] as int?),
     );
 
+const _$$_TagFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'color': 'color',
+};
+
 Map<String, dynamic> _$$_TagToJson(_$_Tag instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

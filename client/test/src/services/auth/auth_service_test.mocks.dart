@@ -22,8 +22,9 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_0(
+class _FakeFirebaseMultiFactorManagerAdapter_0 extends _i1.SmartFake
+    implements _i2.FirebaseMultiFactorManagerAdapter {
+  _FakeFirebaseMultiFactorManagerAdapter_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -32,9 +33,19 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
         );
 }
 
-class _FakeMultiFactorSession_1 extends _i1.SmartFake
+class _FakeDateTime_1 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMultiFactorSession_2 extends _i1.SmartFake
     implements _i2.MultiFactorSession {
-  _FakeMultiFactorSession_1(
+  _FakeMultiFactorSession_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -43,9 +54,9 @@ class _FakeMultiFactorSession_1 extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorInfo_2 extends _i1.SmartFake
+class _FakeMultiFactorInfo_3 extends _i1.SmartFake
     implements _i2.MultiFactorInfo {
-  _FakeMultiFactorInfo_2(
+  _FakeMultiFactorInfo_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -54,8 +65,8 @@ class _FakeMultiFactorInfo_2 extends _i1.SmartFake
         );
 }
 
-class _FakeDuration_3 extends _i1.SmartFake implements Duration {
-  _FakeDuration_3(
+class _FakeDuration_4 extends _i1.SmartFake implements Duration {
+  _FakeDuration_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -64,9 +75,9 @@ class _FakeDuration_3 extends _i1.SmartFake implements Duration {
         );
 }
 
-class _FakeValueStream_4<T> extends _i1.SmartFake
+class _FakeValueStream_5<T> extends _i1.SmartFake
     implements _i3.ValueStream<T> {
-  _FakeValueStream_4(
+  _FakeValueStream_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -137,6 +148,19 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
+  @override
+  _i2.FirebaseMultiFactorManagerAdapter get multiFactorManagerAdapter =>
+      (super.noSuchMethod(
+        Invocation.getter(#multiFactorManagerAdapter),
+        returnValue: _FakeFirebaseMultiFactorManagerAdapter_0(
+          this,
+          Invocation.getter(#multiFactorManagerAdapter),
+        ),
+        returnValueForMissingStub: _FakeFirebaseMultiFactorManagerAdapter_0(
+          this,
+          Invocation.getter(#multiFactorManagerAdapter),
+        ),
+      ) as _i2.FirebaseMultiFactorManagerAdapter);
   @override
   _i4.Stream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -242,14 +266,14 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           #tokenExpiry,
           [idToken],
         ),
-        returnValue: _FakeDateTime_0(
+        returnValue: _FakeDateTime_1(
           this,
           Invocation.method(
             #tokenExpiry,
             [idToken],
           ),
         ),
-        returnValueForMissingStub: _FakeDateTime_0(
+        returnValueForMissingStub: _FakeDateTime_1(
           this,
           Invocation.method(
             #tokenExpiry,
@@ -298,7 +322,7 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
           {#password: password},
         ),
         returnValue:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_1(
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_2(
           this,
           Invocation.method(
             #enrollNewMultiFactor,
@@ -307,7 +331,7 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_1(
+            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_2(
           this,
           Invocation.method(
             #enrollNewMultiFactor,
@@ -323,14 +347,14 @@ class MockMultiFactorManagerAdapter extends _i1.Mock
           #getMultiFactorInfoForPendingSession,
           [],
         ),
-        returnValue: _FakeMultiFactorInfo_2(
+        returnValue: _FakeMultiFactorInfo_3(
           this,
           Invocation.method(
             #getMultiFactorInfoForPendingSession,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeMultiFactorInfo_2(
+        returnValueForMissingStub: _FakeMultiFactorInfo_3(
           this,
           Invocation.method(
             #getMultiFactorInfoForPendingSession,
@@ -391,11 +415,11 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   @override
   Duration get timeToReauth => (super.noSuchMethod(
         Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_3(
+        returnValue: _FakeDuration_4(
           this,
           Invocation.getter(#timeToReauth),
         ),
-        returnValueForMissingStub: _FakeDuration_3(
+        returnValueForMissingStub: _FakeDuration_4(
           this,
           Invocation.getter(#timeToReauth),
         ),
@@ -606,11 +630,11 @@ class MockConnectivityService extends _i1.Mock
   @override
   _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
-        returnValue: _FakeValueStream_4<bool>(
+        returnValue: _FakeValueStream_5<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),
-        returnValueForMissingStub: _FakeValueStream_4<bool>(
+        returnValueForMissingStub: _FakeValueStream_5<bool>(
           this,
           Invocation.getter(#connectivityStream),
         ),

@@ -10,6 +10,9 @@ part 'street.g.dart';
 
 @freezed
 class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
+  static final fields = _$$_StreetFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Street({
     required String id,
     required String name,

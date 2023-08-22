@@ -12,6 +12,12 @@ _$_PersonState _$$_PersonStateFromJson(Map json) => _$_PersonState(
       color: colorFromInt(json['color'] as int?),
     );
 
+const _$$_PersonStateFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'color': 'color',
+};
+
 Map<String, dynamic> _$$_PersonStateToJson(_$_PersonState instance) =>
     <String, dynamic>{
       'id': instance.id,

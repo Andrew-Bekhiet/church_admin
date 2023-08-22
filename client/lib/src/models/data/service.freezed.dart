@@ -398,7 +398,8 @@ class __$$_ServiceCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Service extends _Service {
   _$_Service(
       {required this.id,

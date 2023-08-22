@@ -29,6 +29,20 @@ _$_Group _$$_GroupFromJson(Map json) => _$_Group(
           json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
     );
 
+const _$$_GroupFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'color': 'color',
+  'photoUpdatedAt': 'photoUpdatedAt',
+  'serviceId': 'serviceId',
+  'service': 'service',
+  'validity': 'validity',
+  'lastEdit': 'lastEdit',
+  'adminUsers': 'adminUsers',
+  'attendanceHistoryAggregate': 'attendanceHistoryAggregate',
+  'attendanceDaysConstraintsAggregate': 'attendanceDaysConstraintsAggregate',
+};
+
 Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

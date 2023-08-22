@@ -12,6 +12,12 @@ _$_ShammasLevel _$$_ShammasLevelFromJson(Map json) => _$_ShammasLevel(
       id: json['id'] as String,
     );
 
+const _$$_ShammasLevelFieldMap = <String, String>{
+  'order': 'order',
+  'name': 'name',
+  'id': 'id',
+};
+
 Map<String, dynamic> _$$_ShammasLevelToJson(_$_ShammasLevel instance) =>
     <String, dynamic>{
       'order': instance.order,

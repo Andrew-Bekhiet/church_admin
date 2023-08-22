@@ -99,7 +99,8 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Job extends _Job {
   _$_Job({required this.id, required this.name}) : super._();
 

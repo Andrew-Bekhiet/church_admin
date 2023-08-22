@@ -1,3 +1,4 @@
+export 'views/advanced_search.dart';
 export 'views/analysis.dart';
 export 'views/authenticate.dart';
 export 'views/edit_object_data.dart';

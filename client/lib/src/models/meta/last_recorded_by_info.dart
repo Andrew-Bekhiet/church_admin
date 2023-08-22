@@ -7,7 +7,9 @@ part 'last_recorded_by_info.freezed.dart';
 part 'last_recorded_by_info.g.dart';
 
 @freezed
-class LastRecordedByInfo extends ViewableWithID with _$LastRecordedByInfo {
+class LastRecordedByInfo extends ViewableWithID
+    with _$LastRecordedByInfo
+    implements ToJson {
   factory LastRecordedByInfo({
     required DateTime time,
     @JsonKey(readValue: readRecordedBy) String? recordedBy,

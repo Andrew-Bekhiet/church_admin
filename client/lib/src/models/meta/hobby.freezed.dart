@@ -118,7 +118,8 @@ class __$$_HobbyCopyWithImpl<$Res> extends _$HobbyCopyWithImpl<$Res, _$_Hobby>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Hobby extends _Hobby {
   _$_Hobby(
       {required this.id,

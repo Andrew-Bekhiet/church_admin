@@ -7,7 +7,12 @@ part 'shammas_level.freezed.dart';
 part 'shammas_level.g.dart';
 
 @freezed
-class ShammasLevel extends ViewableWithID with _$ShammasLevel {
+class ShammasLevel extends ViewableWithID
+    with _$ShammasLevel
+    implements ToJson {
+  static final fields = _$$_ShammasLevelFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory ShammasLevel({
     required int order,
     required String name,

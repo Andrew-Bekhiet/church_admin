@@ -6,7 +6,7 @@ enum UserPermission {
     icon: Icons.done,
   ),
   manageAllUsers(
-    humanReadableName: 'إدارة جميع المستخدمين',
+    humanReadableName: 'إدارة جميع الخدام',
     icon: Icons.manage_accounts,
   ),
   readAllData(

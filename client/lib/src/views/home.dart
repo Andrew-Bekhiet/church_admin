@@ -26,6 +26,7 @@ class HomeScreen extends StatefulWidget {
       ViewStreet.route,
       ViewStore.route,
       ManageUsersScreen.route,
+      AdvancedSearchScreen.route,
     ],
     redirect: (context, state) {
       return redirect(state);
@@ -99,94 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Builder(
-        builder: (context) {
-          return Drawer(
-            child: Column(
-              children: [
-                const DrawerHeader(
-                  decoration: BoxDecoration(
-                    image:
-                        DecorationImage(image: AssetImage('assets/Logo.png')),
-                  ),
-                  child: SizedBox.expand(),
-                ),
-                Expanded(
-                  child: NavigationDrawer(
-                    onDestinationSelected: (i) {
-                      Scaffold.of(context).openEndDrawer();
-                      switch (i) {
-                        case 0:
-                          break;
-                        case 1:
-                          context.push('/manage_users');
-                        case 2:
-                          break;
-                        case 3:
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                final gqlClient = graphQLClientProvider
-                                    .read(globalProviderContainer);
-                                return GraphqlCacheInspector(
-                                  title: 'GraphQL Cache',
-                                  data: (gqlClient.cache.store as HiveStore)
-                                      .box
-                                      .toMap(),
-                                  getCacheData:
-                                      (gqlClient.cache.store as HiveStore)
-                                          .box
-                                          .toMap,
-                                );
-                              },
-                            ),
-                          );
-                      }
-                    },
-                    children: const [
-                      NavigationDrawerDestination(
-                        icon: Icon(Icons.home),
-                        label: Text('الرئيسية'),
-                      ),
-                      NavigationDrawerDestination(
-                        icon: Icon(Icons.manage_accounts),
-                        label: Text('إدارة المستخدمين'),
-                      ),
-                      NavigationDrawerDestination(
-                        icon: Icon(Icons.settings),
-                        label: Text('الإعدادات'),
-                      ),
-                      if (kDebugMode)
-                        NavigationDrawerDestination(
-                          icon: Icon(Icons.developer_mode),
-                          label: Text('gql cache'),
-                        ),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.info_outline),
-                  title: const Text('حول'),
-                  onTap: () {
-                    Scaffold.of(context).openEndDrawer();
-                    AboutAppService.I.showAboutDialog(context);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('تسجيل الخروج'),
-                  onTap: () async {
-                    Scaffold.of(context).openEndDrawer();
-
-                    LocalAuthService.I.scheduleReauth();
-                    await AuthService.I.signOut();
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+      drawer: const _HomeDrawer(),
       appBar: AppBar(
         title: TitleSearchField(
           searchStream: _search,
@@ -301,6 +215,101 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     await _bottomNavBar.close();
 
     await Future.wait(_controllersToDispose.map((e) => e.dispose()));
+  }
+}
+
+class _HomeDrawer extends StatelessWidget {
+  const _HomeDrawer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage('assets/Logo.png')),
+            ),
+            child: SizedBox.expand(),
+          ),
+          Expanded(
+            child: NavigationDrawer(
+              onDestinationSelected: (i) {
+                Scaffold.of(context).openEndDrawer();
+                switch (i) {
+                  case 0:
+                    break;
+                  case 1:
+                    context.push('/manage_users');
+                  case 2:
+                    context.push('/advanced_search');
+                  case 3:
+                    break;
+                  case 4:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          final gqlClient = graphQLClientProvider
+                              .read(globalProviderContainer);
+                          return GraphqlCacheInspector(
+                            title: 'GraphQL Cache',
+                            data: (gqlClient.cache.store as HiveStore)
+                                .box
+                                .toMap(),
+                            getCacheData:
+                                (gqlClient.cache.store as HiveStore).box.toMap,
+                          );
+                        },
+                      ),
+                    );
+                }
+              },
+              children: const [
+                NavigationDrawerDestination(
+                  icon: Icon(Icons.home),
+                  label: Text('الرئيسية'),
+                ),
+                NavigationDrawerDestination(
+                  icon: Icon(Icons.manage_accounts),
+                  label: Text('إدارة الخدام'),
+                ),
+                NavigationDrawerDestination(
+                  icon: Icon(Icons.search),
+                  label: Text('البحث المتقدم'),
+                ),
+                NavigationDrawerDestination(
+                  icon: Icon(Icons.settings),
+                  label: Text('الإعدادات'),
+                ),
+                if (kDebugMode)
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.developer_mode),
+                    label: Text('gql cache'),
+                  ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('حول'),
+            onTap: () {
+              Scaffold.of(context).openEndDrawer();
+              AboutAppService.I.showAboutDialog(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('تسجيل الخروج'),
+            onTap: () async {
+              Scaffold.of(context).openEndDrawer();
+
+              LocalAuthService.I.scheduleReauth();
+              await AuthService.I.signOut();
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
 

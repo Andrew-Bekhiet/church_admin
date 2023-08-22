@@ -260,7 +260,8 @@ class __$$_FamilyCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(createFieldMap: true)
 class _$_Family extends _Family {
   _$_Family(
       {required this.id,

@@ -7,7 +7,10 @@ part 'father.freezed.dart';
 part 'father.g.dart';
 
 @freezed
-class Father extends ViewableWithID with _$Father {
+class Father extends ViewableWithID with _$Father implements ToJson {
+  static final fields = _$$_FatherFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Father({
     required String id,
     required String name,

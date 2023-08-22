@@ -8,6 +8,9 @@ part 'user.g.dart';
 
 @freezed
 class User extends ViewableWithIDAndImage with _$User implements ToJson {
+  static final fields = _$$_UserFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory User({
     required String uid,
     required String name,

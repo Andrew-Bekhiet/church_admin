@@ -45,6 +45,25 @@ _$_Service _$$_ServiceFromJson(Map json) => _$_Service(
           json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
     );
 
+const _$$_ServiceFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'studyYearFrom': 'studyYearFrom',
+  'studyYearTo': 'studyYearTo',
+  'studyYearFromId': 'studyYearFromId',
+  'studyYearToId': 'studyYearToId',
+  'nextService': 'nextService',
+  'nextServiceId': 'nextServiceId',
+  'color': 'color',
+  'photoUpdatedAt': 'photoUpdatedAt',
+  'classes': 'classes',
+  'groups': 'groups',
+  'lastEdit': 'lastEdit',
+  'adminUsers': 'adminUsers',
+  'attendanceHistoryAggregate': 'attendanceHistoryAggregate',
+  'attendanceDaysConstraintsAggregate': 'attendanceDaysConstraintsAggregate',
+};
+
 Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
     <String, dynamic>{
       'id': instance.id,

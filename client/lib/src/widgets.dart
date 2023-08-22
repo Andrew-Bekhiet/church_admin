@@ -4,6 +4,7 @@ export 'widgets/admin_on_service_widget.dart';
 export 'widgets/admin_users.dart';
 export 'widgets/animated_fab.dart';
 export 'widgets/church_admin_app.dart';
+export 'widgets/condition_builder.dart';
 export 'widgets/copiable_property_widget.dart';
 export 'widgets/data_geomap.dart';
 export 'widgets/error_dialog.dart';

@@ -10,6 +10,9 @@ part 'area.g.dart';
 
 @freezed
 class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
+  static final fields = _$$_AreaFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Area({
     required String id,
     required String name,

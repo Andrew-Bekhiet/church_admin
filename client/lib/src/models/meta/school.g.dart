@@ -11,6 +11,11 @@ _$_School _$$_SchoolFromJson(Map json) => _$_School(
       name: json['name'] as String,
     );
 
+const _$$_SchoolFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+};
+
 Map<String, dynamic> _$$_SchoolToJson(_$_School instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

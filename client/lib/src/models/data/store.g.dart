@@ -30,6 +30,19 @@ _$_Store _$$_StoreFromJson(Map json) => _$_Store(
           : DateTime.parse(json['photoUpdatedAt'] as String),
     );
 
+const _$$_StoreFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'family': 'family',
+  'familyId': 'adminFamily',
+  'geolocation': 'geolocation',
+  'color': 'color',
+  'areas': 'areas',
+  'streets': 'streets',
+  'lastEdit': 'lastEdit',
+  'photoUpdatedAt': 'photoUpdatedAt',
+};
+
 Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

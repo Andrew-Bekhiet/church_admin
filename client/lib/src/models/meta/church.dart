@@ -7,7 +7,10 @@ part 'church.freezed.dart';
 part 'church.g.dart';
 
 @freezed
-class Church extends ViewableWithID with _$Church {
+class Church extends ViewableWithID with _$Church implements ToJson {
+  static final fields = _$$_ChurchFieldMap.keys.toList();
+
+  @JsonSerializable(createFieldMap: true)
   factory Church({
     required String id,
     required String name,

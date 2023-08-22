@@ -12,6 +12,12 @@ _$_PersonType _$$_PersonTypeFromJson(Map json) => _$_PersonType(
       color: colorFromInt(json['color'] as int?),
     );
 
+const _$$_PersonTypeFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+  'color': 'color',
+};
+
 Map<String, dynamic> _$$_PersonTypeToJson(_$_PersonType instance) =>
     <String, dynamic>{
       'id': instance.id,

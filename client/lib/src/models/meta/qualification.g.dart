@@ -11,6 +11,11 @@ _$_Qualification _$$_QualificationFromJson(Map json) => _$_Qualification(
       name: json['name'] as String,
     );
 
+const _$$_QualificationFieldMap = <String, String>{
+  'id': 'id',
+  'name': 'name',
+};
+
 Map<String, dynamic> _$$_QualificationToJson(_$_Qualification instance) =>
     <String, dynamic>{
       'id': instance.id,
