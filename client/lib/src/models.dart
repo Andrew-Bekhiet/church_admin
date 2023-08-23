@@ -1,3 +1,4 @@
+export 'models/advanced_queries.dart';
 export 'models/analysis.dart';
 export 'models/bases.dart';
 export 'models/data.dart';

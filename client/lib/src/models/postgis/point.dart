@@ -5,7 +5,7 @@ class Point with EquatableMixin {
   final double latitude;
   final double longitude;
 
-  Point(this.latitude, this.longitude);
+  const Point(this.latitude, this.longitude);
   Point.fromJson(Json json)
       : this(json['coordinates'][1], json['coordinates'][0]);
 

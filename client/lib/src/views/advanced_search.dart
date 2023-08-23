@@ -29,110 +29,6 @@ class AdvancedSearchScreen extends StatefulWidget {
 }
 
 class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
-  static final Map<Type, (String, StreamableDAO, Object)> queryableTypes = {
-    Area: ('المناطق', DatabaseService.I.areas, Area(id: '', name: '')),
-    Street: ('الشوارع', DatabaseService.I.streets, Street(id: '', name: '')),
-    Family: ('العائلات', DatabaseService.I.families, Family(id: '', name: '')),
-    Store: ('المتاجر', DatabaseService.I.stores, Store(id: '', name: '')),
-    Service: ('الخدمات', DatabaseService.I.services, Service(id: '', name: '')),
-    Class: ('الفصول', DatabaseService.I.classes, Class(id: '', name: '')),
-    Group: ('المجموعات', DatabaseService.I.groups, Group(id: '', name: '')),
-    User: ('الخدام', DatabaseService.I.users, User(uid: '', name: '')),
-    Person: ('المخدومين', DatabaseService.I.persons, Person(id: '', name: '')),
-    Church: (
-      'churches',
-      DatabaseService.I.metadata.churches,
-      Church(id: '', name: '')
-    ),
-    College: (
-      'colleges',
-      DatabaseService.I.metadata.colleges,
-      College(id: '', name: '')
-    ),
-    Father: (
-      'fathers',
-      DatabaseService.I.metadata.fathers,
-      Father(id: '', name: '')
-    ),
-    Hobby: (
-      'hobbies',
-      DatabaseService.I.metadata.hobbies,
-      Hobby(id: '', name: '')
-    ),
-    Job: ('jobs', DatabaseService.I.metadata.jobs, Job(id: '', name: '')),
-    PersonState: (
-      'personStates',
-      DatabaseService.I.metadata.personStates,
-      PersonState(id: '', name: '')
-    ),
-    PersonType: (
-      'personTypes',
-      DatabaseService.I.metadata.personTypes,
-      PersonType(id: '', name: '')
-    ),
-    Qualification: (
-      'qualifications',
-      DatabaseService.I.metadata.qualifications,
-      Qualification(id: '', name: '')
-    ),
-    School: (
-      'schools',
-      DatabaseService.I.metadata.schools,
-      School(id: '', name: '')
-    ),
-    ShammasLevel: (
-      'shammasLevels',
-      DatabaseService.I.metadata.shammasLevels,
-      ShammasLevel(id: '', name: '', order: 0)
-    ),
-    StudyYear: (
-      'studyYears',
-      DatabaseService.I.metadata.studyYears,
-      StudyYear(name: '', order: 0)
-    ),
-    Tag: ('tags', DatabaseService.I.metadata.tags, Tag(id: '', name: '')),
-  };
-
-  static final properties = {
-    Area: Area.fields,
-    Street: Street.fields,
-    Family: Family.fields,
-    Store: Store.fields,
-    Service: Service.fields,
-    Class: Class.fields,
-    Group: Group.fields,
-    User: User.fields.where(
-      (name) => !{
-        'uid',
-        'email',
-        'authId',
-        'isMultiFactorEnrolled',
-        'idToken',
-        'emailVerified',
-      }.contains(name),
-    ),
-    Person: Person.fields.where((name) => name != 'otherPhones'),
-    Church: Church.fields,
-    College: College.fields,
-    Father: Father.fields,
-    Hobby: Hobby.fields,
-    Job: Job.fields,
-    PersonState: PersonState.fields,
-    PersonType: PersonType.fields,
-    Qualification: Qualification.fields,
-    School: School.fields,
-    ShammasLevel: ShammasLevel.fields,
-    StudyYear: StudyYear.fields,
-    Tag: Tag.fields,
-  }.map(
-    (key, value) => MapEntry(
-      key,
-      value.where(
-        (name) => !name.endsWith('Aggregate') && !name.endsWith('History'),
-      ),
-    ),
-  );
-
   Type get selectedType => controller.selectedType;
 
   final controller = AdvancedSearchController();
@@ -155,7 +51,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       isExpanded: true,
                       value: selectedType,
-                      items: queryableTypes.entries
+                      items: AdvancedQueriesMetadata.queryableTypes.entries
                           .map(
                             (e) => DropdownMenuItem(
                               alignment: Alignment.center,
@@ -169,7 +65,9 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                           ..changeSelectedType(v!)
                           ..changeConditions([
                             Condition(
-                              field: properties[controller.selectedType]!.first,
+                              type: v,
+                              field: AdvancedQueriesMetadata
+                                  .propertiesByType[v]!.first.$1,
                               operator: Operator.eq,
                             ),
                           ]);
@@ -186,7 +84,6 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                     type: selectedType,
                     conditions: snapshot.data ?? controller.conditions,
                     onChanged: controller.changeConditions,
-                    dummyInstance: queryableTypes[selectedType]!.$3,
                   );
                 },
               ),
@@ -208,13 +105,19 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                                   decoration: const InputDecoration(
                                     labelText: 'ترتيب حسب',
                                   ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
                                   isExpanded: true,
                                   value: orderBy.$1,
-                                  items: properties[controller.selectedType]!
+                                  items: AdvancedQueriesMetadata
+                                      .propertiesByType[
+                                          controller.selectedType]!
                                       .map(
                                         (p) => DropdownMenuItem(
-                                          value: p,
-                                          child: Text(p),
+                                          alignment: Alignment.center,
+                                          value: p.$1,
+                                          child: Text(p.$2),
                                         ),
                                       )
                                       .toList(),
@@ -229,14 +132,20 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: DropdownButtonFormField<Enum_OrderBy>(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
                                   isExpanded: true,
                                   value: orderBy.$2,
+                                  alignment: Alignment.center,
                                   items: const [
                                     DropdownMenuItem(
+                                      alignment: Alignment.center,
                                       value: Enum_OrderBy.ASC,
                                       child: Text('تصاعدي'),
                                     ),
                                     DropdownMenuItem(
+                                      alignment: Alignment.center,
                                       value: Enum_OrderBy.DESC,
                                       child: Text('تنازلي'),
                                     ),
@@ -266,7 +175,8 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                   [
                     ...controller.orderBy,
                     (
-                      properties[controller.selectedType]!.first,
+                      AdvancedQueriesMetadata
+                          .propertiesByType[controller.selectedType]!.first.$1,
                       Enum_OrderBy.ASC
                     ),
                   ],
@@ -314,11 +224,19 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     );
   }
 
-  void _execute() {
-    // TODO: implement _execute
-    final firstWhere = queryableTypes[selectedType]!;
-    final stream = firstWhere.$2.streamingProxy.streamAll(
-      streamAllConfig: firstWhere.$2.baseStreamAllConfig.copyWith(
+  Future<void> _execute() async {
+    final jsonConditions = controller.conditions.map((e) => e.toJson());
+    final jsonOrderBy =
+        controller.orderBy.map((e) => {e.$1: e.$2.name}).toList();
+
+    final searchQuery = BehaviorSubject<String?>.seeded(null);
+
+    final streamableDAO =
+        AdvancedQueriesMetadata.queryableTypes[selectedType]!.$2;
+
+    final paginatableStream = streamableDAO.streamingProxy.streamAll(
+      searchQuery: searchQuery,
+      streamAllConfig: streamableDAO.baseStreamAllConfig.copyWith(
         varsConstructor: ({required event, required where}) {
           final instance = event.instance;
           final offset = event.offset;
@@ -327,7 +245,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
           return {
             'where': [
-              ...controller.conditions.map((e) => e.toJson()),
+              ...jsonConditions,
               if (search != null && search.isNotEmpty)
                 {
                   'name': {'_ilike': '%$search%'},
@@ -343,34 +261,43 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 },
             ],
             'limit': controller.limit ?? instance.limit + 1,
-            'orderBy': controller.orderBy
-                .map(
-                  (e) => {e.$1: e.$2.name},
-                )
-                .toList(),
+            'orderBy': jsonOrderBy,
           };
         },
       ),
     );
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(),
-          body: ViewableObjectList(
-            objectsController: ViewableObjectListController(
-              objectsPaginatableStream: stream,
-            ),
-          ),
-        ),
+    final viewableObjectListController = ViewableObjectListController(
+      objectsPaginatableStream: paginatableStream,
+      filterStream: paginatableStream.onLoadingChanged.switchMap(
+        (isLoading) => isLoading ? searchQuery : Stream.value(null),
       ),
     );
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: TitleSearchField(
+                searchStream: searchQuery,
+                title: const Text('النتائج'),
+              ),
+            ),
+            body: ViewableObjectList(
+              objectsController: viewableObjectListController,
+            ),
+          );
+        },
+      ),
+    );
+
+    await viewableObjectListController.dispose();
+    await searchQuery.close();
   }
 }
 
 class AdvancedSearchController {
-  final BehaviorSubject<Type> _selectedType = BehaviorSubject.seeded(
-    AdvancedSearchScreenState.queryableTypes.keys.first,
-  );
+  final BehaviorSubject<Type> _selectedType = BehaviorSubject.seeded(Person);
   final BehaviorSubject<List<Condition>> _conditions =
       BehaviorSubject.seeded([]);
   final BehaviorSubject<int?> _limit = BehaviorSubject.seeded(null);
@@ -438,46 +365,3 @@ class AdvancedSearchController {
     await _selectedType.close();
   }
 }
-
-class Condition {
-  final String field;
-  final Operator? operator;
-  final dynamic value;
-  final dynamic serializedValue;
-
-  const Condition({
-    required this.field,
-    required this.operator,
-    this.value,
-    this.serializedValue,
-  });
-
-  Condition copyWith({
-    String? field,
-    Operator? operator,
-    dynamic value,
-    dynamic serializedValue,
-  }) {
-    return Condition(
-      field: field ?? this.field,
-      operator: operator ?? this.operator,
-      value: value ?? this.value,
-      serializedValue: serializedValue ?? this.serializedValue,
-    );
-  }
-
-  Json toJson() {
-    return {
-      field: operator == null
-          ? (serializedValue ?? value)
-          : {
-              if ((serializedValue ?? value) == null)
-                '_isNull': true
-              else
-                operator!.name: serializedValue ?? value,
-            },
-    };
-  }
-}
-
-bool isSubtype<Super, Subtype>() => <Subtype>[] is List<Super>;

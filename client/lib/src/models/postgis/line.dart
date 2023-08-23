@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class Line with EquatableMixin {
   final List<Point> coordinates;
 
-  Line(this.coordinates);
+  const Line(this.coordinates);
 
   Line.fromJson(Json json)
       : this(

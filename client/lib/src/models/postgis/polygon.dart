@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class Polygon with EquatableMixin {
   final List<Point> coordinates;
 
-  Polygon(this.coordinates);
+  const Polygon(this.coordinates);
 
   Polygon.fromJson(Json json)
       : this(
