@@ -40,7 +40,10 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       autovalidateMode: autovalidateMode,
       focusNode: focusNode,
       onSaved: onSaved,
-      validator: validator,
+      validator: validator ??
+          (nullable
+              ? (_) => null
+              : (v) => v == null ? 'برجاء اختيار $labelText' : null),
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
         final search = BehaviorSubject<String?>.seeded(null);
