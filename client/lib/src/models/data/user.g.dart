@@ -45,24 +45,6 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
           .toList(),
     );
 
-const _$$_UserFieldMap = <String, String>{
-  'uid': 'uid',
-  'name': 'name',
-  'email': 'email',
-  'photoUpdatedAt': 'photoUpdatedAt',
-  'adminOn': 'adminOn',
-  'permissions': 'permissions',
-  'authId': 'authId',
-  'isMultiFactorEnrolled': 'isMultiFactorEnrolled',
-  'idToken': 'idToken',
-  'emailVerified': 'emailVerified',
-  'lastEdit': 'lastEdit',
-  'person': 'person',
-  'servicesHistory': 'servicesHistory',
-  'classesHistory': 'classesHistory',
-  'groupsHistory': 'groupsHistory',
-};
-
 Map<String, dynamic> _$$_UserToJson(_$_User instance) {
   final val = <String, dynamic>{
     'uid': instance.uid,

@@ -8,9 +8,6 @@ part 'school.g.dart';
 
 @freezed
 class School extends ViewableWithID with _$School implements ToJson {
-  static final fields = _$$_SchoolFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory School({
     required String id,
     required String name,

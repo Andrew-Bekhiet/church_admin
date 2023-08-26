@@ -327,8 +327,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 }
 
 /// @nodoc
-
-@JsonSerializable(createFieldMap: true)
+@JsonSerializable()
 class _$_User extends _User {
   _$_User(
       {required this.uid,

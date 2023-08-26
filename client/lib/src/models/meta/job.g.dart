@@ -11,11 +11,6 @@ _$_Job _$$_JobFromJson(Map json) => _$_Job(
       name: json['name'] as String,
     );
 
-const _$$_JobFieldMap = <String, String>{
-  'id': 'id',
-  'name': 'name',
-};
-
 Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

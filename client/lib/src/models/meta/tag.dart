@@ -11,9 +11,6 @@ part 'tag.g.dart';
 
 @freezed
 class Tag extends ViewableWithID with _$Tag implements ToJson {
-  static final fields = _$$_TagFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory Tag({
     required String id,
     required String name,

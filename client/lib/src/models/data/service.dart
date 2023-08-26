@@ -12,9 +12,6 @@ part 'service.g.dart';
 class Service extends ViewableWithIDAndImage
     with _$Service
     implements ToJson, AttendanceAnalyzable {
-  static final fields = _$$_ServiceFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory Service({
     required String id,
     required String name,

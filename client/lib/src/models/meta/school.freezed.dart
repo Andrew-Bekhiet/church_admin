@@ -101,8 +101,7 @@ class __$$_SchoolCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(createFieldMap: true)
+@JsonSerializable()
 class _$_School extends _School {
   _$_School({required this.id, required this.name}) : super._();
 

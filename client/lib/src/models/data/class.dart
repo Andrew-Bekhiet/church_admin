@@ -12,9 +12,6 @@ part 'class.g.dart';
 class Class extends ViewableWithIDAndImage
     with _$Class
     implements ToJson, AttendanceAnalyzable {
-  static final fields = _$$_ClassFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory Class({
     required String id,
     required String name,

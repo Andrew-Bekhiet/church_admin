@@ -30,21 +30,6 @@ _$_Family _$$_FamilyFromJson(Map json) => _$_Family(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-const _$$_FamilyFieldMap = <String, String>{
-  'id': 'id',
-  'name': 'name',
-  'address': 'address',
-  'geolocation': 'geolocation',
-  'notes': 'notes',
-  'color': 'color',
-  'photoUpdatedAt': 'photoUpdatedAt',
-  'areas': 'areas',
-  'streets': 'streets',
-  'children': 'children',
-  'parents': 'parents',
-  'lastEdit': 'lastEdit',
-};
-
 Map<String, dynamic> _$$_FamilyToJson(_$_Family instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

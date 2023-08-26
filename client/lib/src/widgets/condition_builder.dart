@@ -2,6 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import 'data_geomap/edit_object_points_map.dart';
+
 class ConditionBuilder extends StatelessWidget {
   final Type type;
   final List<Condition> conditions;
@@ -64,13 +66,8 @@ class ConditionBuilder extends StatelessWidget {
                               )
                               .toList(),
                           onChanged: (field) {
-                            final newFieldMetadata =
-                                AdvancedQueriesMetadata.getFieldMetadata(
-                              field!,
-                              FieldMetadata(type: type),
-                            );
                             final firstValidOperator =
-                                validOperatorsForField(field).firstOrNull;
+                                validOperatorsForField(field!).firstOrNull;
 
                             conditions = conditions.mapIndexed(
                               (_i, e) {
@@ -79,7 +76,6 @@ class ConditionBuilder extends StatelessWidget {
                                         type: type,
                                         field: field,
                                         operator: firstValidOperator,
-                                        value: newFieldMetadata.dummyInstance,
                                       )
                                     : e;
                               },
@@ -189,6 +185,7 @@ class ConditionBuilder extends StatelessWidget {
 
   Iterable<Operator> validOperatorsForField(String field) {
     if (field == 'id') return [Operator.eq];
+    if (field == 'permissions') return [];
 
     final fieldType = AdvancedQueriesMetadata.getFieldMetadata(
       field,
@@ -223,6 +220,20 @@ class _SelectValueWidget<T> extends StatelessWidget {
       return TextFormField(
         initialValue: condition.value,
         onChanged: _onValueChanged,
+        decoration: InputDecoration(
+          labelText: 'قيمة البحث',
+          helperText: {
+            Operator.like,
+            Operator.ilike,
+            Operator.nilike,
+            Operator.nlike,
+          }.contains(condition.operator)
+              ? 'يمكنك استخدام الرموز التالية:\n'
+                  '% لاستبدال أي عدد من الأحرف\n'
+                  '_ لاستبدال حرف واحد'
+              : null,
+          helperMaxLines: 3,
+        ),
       );
     } else if (dummyInstance is bool && condition.field.endsWith('ender')) {
       return DropdownButtonFormField<bool?>(
@@ -250,9 +261,30 @@ class _SelectValueWidget<T> extends StatelessWidget {
     } else if (dummyInstance is bool) {
       return CheckboxListTile(
         title: const Text('قيمة البحث'),
-        subtitle: Text(condition.value == true ? 'نعم' : 'لا'),
+        subtitle: Text(
+          condition.value == true
+              ? 'نعم'
+              : condition.value == false
+                  ? 'لا'
+                  : 'غير محدد',
+        ),
         value: condition.value,
-        onChanged: _onValueChanged,
+        tristate: true,
+        onChanged: (value) {
+          if (value == null) {
+            onChanged([
+              Condition(
+                field: condition.field,
+                operator: condition.operator,
+                type: condition.type,
+              ),
+            ]);
+          } else {
+            onChanged([
+              condition.copyWith(value: value),
+            ]);
+          }
+        },
       );
     } else if (dummyInstance is Color) {
       return ColorField(
@@ -264,6 +296,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
         label: '',
         initialValue: condition.value as DateTime?,
         onChanged: _onValueChanged,
+        nullable: true,
       );
     } else if (dummyInstance is DateTimeRange) {
       return DateTimeRangeField(
@@ -272,10 +305,36 @@ class _SelectValueWidget<T> extends StatelessWidget {
         onChanged: _onValueChanged,
         nullable: true,
       );
-    } else if (dummyInstance is Point) {
-    } else if (dummyInstance is Polygon) {
-    } else if (dummyInstance is Line) {
+    } else if (dummyInstance is Polygon ||
+        dummyInstance is Line ||
+        dummyInstance is Point) {
+      return _SelectPolygon(
+        condition: condition,
+        onValueChanged: _onValueChanged,
+      );
+    } else if (dummyInstance is UserPermission) {
+      return DropdownButtonFormField(
+        isExpanded: true,
+        alignment: Alignment.center,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        value: condition.value,
+        items: [
+          const DropdownMenuItem(
+            alignment: Alignment.center,
+            child: Text('(فارغ)'),
+          ),
+          ...UserPermission.values.map(
+            (e) => DropdownMenuItem(
+              alignment: Alignment.center,
+              value: e,
+              child: Text(e.humanReadableName),
+            ),
+          ),
+        ],
+        onChanged: _onValueChanged,
+      );
     } else if (dummyInstance is AdminOnData) {
+      //TODO: implement EditAdminOnData
     } else if (dummyInstance is ViewableWithID && condition.field == 'id') {
       return ObjectSelectionField<ViewableWithID, ViewableWithID?>(
         listController: _listControllerForType,
@@ -297,7 +356,14 @@ class _SelectValueWidget<T> extends StatelessWidget {
         onChanged: onChanged,
       );
     }
-    return const SizedBox();
+    return ErrorWidget.builder(
+      FlutterErrorDetails(
+        exception: Exception(
+          'No widget for type $type and instance $dummyInstance '
+          'in condition builder, isList: $isList',
+        ),
+      ),
+    );
   }
 
   void _onValueChanged(dynamic value) {
@@ -326,8 +392,66 @@ class _SelectValueWidget<T> extends StatelessWidget {
 
   ViewableObjectListController<ViewableWithID> _listControllerForType(s) =>
       ViewableObjectListController(
-        objectsPaginatableStream: AdvancedQueriesMetadata
-            .queryableTypes[type]!.$2
+        objectsPaginatableStream: AdvancedQueriesMetadata.streamableDAOs[type]!
             .streamAll(searchQuery: s),
       );
+}
+
+class _SelectPolygon extends StatelessWidget {
+  const _SelectPolygon({
+    required this.condition,
+    required this.onValueChanged,
+  });
+
+  final Condition condition;
+  final void Function(dynamic) onValueChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return TappableFormField<Polygon?>(
+      onTap: (state) async {
+        final initialArea = Area(
+          id: '00000000-0000-0000-0000-000000000000',
+          name: '',
+          bounds: state.value,
+          color: Theme.of(state.context).colorScheme.primary,
+        );
+
+        final newArea = await Navigator.of(context).push<Area?>(
+          MaterialPageRoute(
+            builder: (context) {
+              return EditObjectPointsMap<Area>(
+                initialObject: initialArea,
+                getObjectPoints: (p0) => p0.bounds?.coordinates,
+                overrideResponseObjects: (response, areaStream) {
+                  return areaStream
+                      .map((value) => response!.copyWith(areas: {value}));
+                },
+                onModify: (newCoords, resultArea) =>
+                    resultArea.copyWith(bounds: Polygon(newCoords)),
+                onSaved: Navigator.of(context).pop,
+                closedShape: true,
+                geomapOptions: GeomapOptions(
+                  layers: const {GeoMapLayer.areas},
+                  selectedAreas: {initialArea},
+                ),
+              );
+            },
+          ),
+        );
+
+        if (newArea != null) {
+          state.didChange(newArea.bounds);
+          onValueChanged(newArea.bounds);
+        }
+      },
+      decoration: (context, state) => InputDecoration(
+        prefixIcon: Icon(ViewableObjectService.I.getDefaultIconFor<Area>()),
+      ),
+      initialValue: condition.value as Polygon?,
+      builder: (context, state) => state.value != null
+          ? const ListTile(title: Text('مساحة على الخريطة'))
+          : null,
+    );
+  }
 }

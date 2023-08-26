@@ -8,9 +8,6 @@ part 'study_year.g.dart';
 
 @freezed
 class StudyYear extends ViewableWithID with _$StudyYear implements ToJson {
-  static final fields = _$$_StudyYearFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory StudyYear({
     required int order,
     required String name,

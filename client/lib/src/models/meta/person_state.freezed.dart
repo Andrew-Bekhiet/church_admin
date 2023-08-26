@@ -124,8 +124,7 @@ class __$$_PersonStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(createFieldMap: true)
+@JsonSerializable()
 class _$_PersonState extends _PersonState {
   _$_PersonState(
       {required this.id,

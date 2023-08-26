@@ -21,16 +21,6 @@ _$_Area _$$_AreaFromJson(Map json) => _$_Area(
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
     );
 
-const _$$_AreaFieldMap = <String, String>{
-  'id': 'id',
-  'name': 'name',
-  'bounds': 'bounds',
-  'color': 'color',
-  'photoUpdatedAt': 'photoUpdatedAt',
-  'lastEdit': 'lastEdit',
-  'adminUsers': 'adminUsers',
-};
-
 Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

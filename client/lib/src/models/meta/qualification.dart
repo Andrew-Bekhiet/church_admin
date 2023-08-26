@@ -10,9 +10,6 @@ part 'qualification.g.dart';
 class Qualification extends ViewableWithID
     with _$Qualification
     implements ToJson {
-  static final fields = _$$_QualificationFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory Qualification({
     required String id,
     required String name,

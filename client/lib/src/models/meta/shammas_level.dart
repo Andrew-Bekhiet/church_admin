@@ -10,9 +10,6 @@ part 'shammas_level.g.dart';
 class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements ToJson {
-  static final fields = _$$_ShammasLevelFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory ShammasLevel({
     required int order,
     required String name,

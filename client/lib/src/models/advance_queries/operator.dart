@@ -18,7 +18,6 @@ enum Operator {
   isNull('_isNull', 'فارغ'),
   $in('_in', 'يساوي أي من'),
   nin('_nin', 'لا يساوي أي من'),
-  stDWithin('_stDWithin', 'بالقرب من .. بمسافة ..'),
   stIntersects('_stIntersects', 'يتقاطع مع');
 
   final String value;
@@ -61,7 +60,7 @@ enum Operator {
             Operator.regex:
         return object is String;
 
-      case Operator.stDWithin || Operator.stIntersects:
+      case Operator.stIntersects:
         return object is Point || object is Line || object is Polygon;
 
       default:

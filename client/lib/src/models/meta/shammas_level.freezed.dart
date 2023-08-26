@@ -117,8 +117,7 @@ class __$$_ShammasLevelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(createFieldMap: true)
+@JsonSerializable()
 class _$_ShammasLevel extends _ShammasLevel {
   _$_ShammasLevel({required this.order, required this.name, required this.id})
       : super._();

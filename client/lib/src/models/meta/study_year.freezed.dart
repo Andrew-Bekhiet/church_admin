@@ -104,8 +104,7 @@ class __$$_StudyYearCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(createFieldMap: true)
+@JsonSerializable()
 class _$_StudyYear extends _StudyYear {
   _$_StudyYear({required this.order, required this.name}) : super._();
 

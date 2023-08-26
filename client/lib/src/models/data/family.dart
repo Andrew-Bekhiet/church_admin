@@ -10,9 +10,6 @@ part 'family.g.dart';
 
 @freezed
 class Family extends ViewableWithIDAndImage with _$Family implements ToJson {
-  static final fields = _$$_FamilyFieldMap.keys.toList();
-
-  @JsonSerializable(createFieldMap: true)
   factory Family({
     required String id,
     required String name,

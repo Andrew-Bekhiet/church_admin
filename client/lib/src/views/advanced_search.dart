@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +24,35 @@ class AdvancedSearchScreen extends StatefulWidget {
     builder: (context, state) => const AdvancedSearchScreen(),
   );
 
-  const AdvancedSearchScreen({super.key});
+  final List<Condition>? initialQuery;
+  final bool autoExecuteInitialQuery;
+
+  const AdvancedSearchScreen({
+    super.key,
+    this.initialQuery,
+    this.autoExecuteInitialQuery = false,
+  });
 
   @override
-  State<AdvancedSearchScreen> createState() => AdvancedSearchScreenState();
+  State<AdvancedSearchScreen> createState() => _AdvancedSearchScreenState();
 }
 
-class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
+class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
+  final controller = AdvancedSearchController();
+
   Type get selectedType => controller.selectedType;
 
-  final controller = AdvancedSearchController();
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.initialQuery != null) {
+      controller.changeConditions(widget.initialQuery!);
+      if (widget.autoExecuteInitialQuery) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => _execute());
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +109,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 },
               ),
               const Divider(),
-              StreamBuilder<List<(String, Enum_OrderBy)>>(
+              StreamBuilder<List<OrderBy>>(
                 stream: controller.orderByStream,
                 builder: (context, orderByData) {
                   return Column(
@@ -109,7 +130,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                                     Radius.circular(20),
                                   ),
                                   isExpanded: true,
-                                  value: orderBy.$1,
+                                  value: orderBy.field,
                                   items: AdvancedQueriesMetadata
                                       .propertiesByType[
                                           controller.selectedType]!
@@ -124,7 +145,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                                   onChanged: (value) {
                                     controller.replaceOrderBy(
                                       i,
-                                      (value!, orderBy.$2),
+                                      orderBy.copyWith(field: value!),
                                     );
                                   },
                                 ),
@@ -136,7 +157,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                                     Radius.circular(20),
                                   ),
                                   isExpanded: true,
-                                  value: orderBy.$2,
+                                  value: orderBy.order,
                                   alignment: Alignment.center,
                                   items: const [
                                     DropdownMenuItem(
@@ -153,7 +174,7 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                                   onChanged: (value) {
                                     controller.replaceOrderBy(
                                       i,
-                                      (orderBy.$1, value!),
+                                      orderBy.copyWith(order: value!),
                                     );
                                   },
                                 ),
@@ -174,10 +195,9 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 onPressed: () => controller.changeOrderBy(
                   [
                     ...controller.orderBy,
-                    (
-                      AdvancedQueriesMetadata
+                    OrderBy(
+                      field: AdvancedQueriesMetadata
                           .propertiesByType[controller.selectedType]!.first.$1,
-                      Enum_OrderBy.ASC
                     ),
                   ],
                 ),
@@ -225,14 +245,13 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   }
 
   Future<void> _execute() async {
-    final jsonConditions = controller.conditions.map((e) => e.toJson());
+    final jsonConditions = controller.conditions.map((e) => e.toSearchJson());
     final jsonOrderBy =
-        controller.orderBy.map((e) => {e.$1: e.$2.name}).toList();
+        controller.orderBy.map((e) => e.toSearchJson()).toList();
 
     final searchQuery = BehaviorSubject<String?>.seeded(null);
 
-    final streamableDAO =
-        AdvancedQueriesMetadata.queryableTypes[selectedType]!.$2;
+    final streamableDAO = AdvancedQueriesMetadata.streamableDAOs[selectedType]!;
 
     final paginatableStream = streamableDAO.streamingProxy.streamAll(
       searchQuery: searchQuery,
@@ -282,6 +301,22 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 searchStream: searchQuery,
                 title: const Text('النتائج'),
               ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.share),
+                  onPressed: () {
+                    globalProviderContainer
+                        .read(shareServiceProvider)
+                        .shareText(
+                          base64Encode(
+                            utf8.encode(
+                              jsonEncode(controller.currentQuery.toJson()),
+                            ),
+                          ),
+                        );
+                  },
+                ),
+              ],
             ),
             body: ViewableObjectList(
               objectsController: viewableObjectListController,
@@ -297,23 +332,24 @@ class AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 }
 
 class AdvancedSearchController {
+  final BehaviorSubject<AdvancedQuery> _query =
+      BehaviorSubject.seeded(const AdvancedQuery(name: ''));
   final BehaviorSubject<Type> _selectedType = BehaviorSubject.seeded(Person);
-  final BehaviorSubject<List<Condition>> _conditions =
-      BehaviorSubject.seeded([]);
-  final BehaviorSubject<int?> _limit = BehaviorSubject.seeded(null);
-  final BehaviorSubject<List<(String, Enum_OrderBy)>> _orderBy =
-      BehaviorSubject.seeded([]);
 
-  ValueStream<Type> get selectedTypeStream => _selectedType.stream;
-  ValueStream<List<Condition>> get conditionsStream => _conditions.stream;
-  ValueStream<int?> get limitStream => _limit.stream;
-  ValueStream<List<(String, Enum_OrderBy)>> get orderByStream =>
-      _orderBy.stream;
+  Stream<AdvancedQuery> get queryStream => _query.stream;
+  Stream<Type> get selectedTypeStream => _selectedType.stream;
 
+  Stream<List<Condition>> get conditionsStream =>
+      _query.map((q) => q.conditions);
+  Stream<int?> get limitStream => _query.map((q) => q.limit);
+  Stream<List<OrderBy>> get orderByStream => _query.map((q) => q.orderBy);
+
+  AdvancedQuery get currentQuery => _query.value;
   Type get selectedType => _selectedType.value;
-  List<Condition> get conditions => _conditions.value;
-  int? get limit => _limit.valueOrNull;
-  List<(String, Enum_OrderBy)> get orderBy => _orderBy.value;
+
+  List<Condition> get conditions => _query.value.conditions;
+  int? get limit => _query.value.limit;
+  List<OrderBy> get orderBy => _query.value.orderBy;
 
   void changeSelectedType(Type type) {
     changeOrderBy([]);
@@ -322,11 +358,11 @@ class AdvancedSearchController {
   }
 
   void changeConditions(List<Condition> conditions) {
-    _conditions.add(conditions);
+    _query.add(currentQuery.copyWith(conditions: conditions));
   }
 
   void replaceCondition(int index, Condition newCondition) {
-    _conditions.add(
+    changeConditions(
       conditions
           .mapIndexed(
             (i, e) => i == index ? newCondition : e,
@@ -336,16 +372,17 @@ class AdvancedSearchController {
   }
 
   void removeCondition(int index) {
-    _conditions.add(conditions.whereIndexed((i, e) => i != index).toList());
+    changeConditions(conditions.whereIndexed((i, e) => i != index).toList());
   }
 
-  void changeLimit(int? limit) => _limit.add(limit);
+  void changeLimit(int? limit) =>
+      _query.add(currentQuery.copyWith(limit: limit));
 
-  void changeOrderBy(List<(String, Enum_OrderBy)> orderBy) =>
-      _orderBy.add(orderBy);
+  void changeOrderBy(List<OrderBy> orderBy) =>
+      _query.add(currentQuery.copyWith(orderBy: orderBy));
 
-  void replaceOrderBy(int index, (String, Enum_OrderBy) newOrderBy) {
-    _orderBy.add(
+  void replaceOrderBy(int index, OrderBy newOrderBy) {
+    changeOrderBy(
       orderBy
           .mapIndexed(
             (i, e) => i == index ? newOrderBy : e,
@@ -355,13 +392,11 @@ class AdvancedSearchController {
   }
 
   void removeOrderBy(int index) {
-    _orderBy.add(orderBy.whereIndexed((i, e) => i != index).toList());
+    changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
   }
 
   Future<void> dispose() async {
-    await _limit.close();
-    await _orderBy.close();
-    await _conditions.close();
+    await _query.close();
     await _selectedType.close();
   }
 }
