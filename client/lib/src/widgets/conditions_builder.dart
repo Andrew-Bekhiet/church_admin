@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'data_geomap/edit_object_points_map.dart';
 
-class ConditionBuilder extends StatelessWidget {
+class ConditionsBuilder extends StatelessWidget {
   final Type type;
   final List<Condition> conditions;
   final void Function(List<Condition>) onChanged;
 
-  const ConditionBuilder({
+  const ConditionsBuilder({
     required this.type,
     required this.conditions,
     required this.onChanged,
@@ -31,183 +31,254 @@ class ConditionBuilder extends StatelessWidget {
       children: [
         ...conditions.mapIndexed(
           (i, condition) {
-            final validOperators =
-                validOperatorsForField(condition.field).toList();
-
             final conditionFieldMetadata =
                 AdvancedQueriesMetadata.getFieldMetadata(
               condition.field,
               FieldMetadata(type: type),
             );
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          decoration: const InputDecoration(
-                            labelText: 'بشرط',
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                          isExpanded: true,
-                          value: condition.field,
-                          items: properties
-                              .map(
-                                (p) => DropdownMenuItem(
-                                  alignment: Alignment.center,
-                                  value: p.$1,
-                                  child: Text(p.$2),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (field) {
-                            final firstValidOperator =
-                                validOperatorsForField(field!).firstOrNull;
+            final validOperators = conditionFieldMetadata.operators;
 
-                            conditions = conditions.mapIndexed(
-                              (_i, e) {
-                                return i == _i
-                                    ? Condition(
-                                        type: type,
-                                        field: field,
-                                        operator: firstValidOperator,
-                                      )
-                                    : e;
-                              },
-                            ).toList();
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      if (validOperators.isNotEmpty &&
-                          !(validOperators.length == 1 &&
-                              validOperators.single == Operator.eq))
-                        Expanded(
-                          child: DropdownButtonFormField<Operator>(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            isExpanded: true,
-                            value: condition.operator,
-                            items: validOperators
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    alignment: Alignment.center,
-                                    value: e,
-                                    child: Text(e.label),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (operator) {
-                              conditions = conditions
-                                  .mapIndexed(
-                                    (_i, e) => i == _i
-                                        ? condition.copyWith(operator: operator)
-                                        : e,
-                                  )
-                                  .toList();
-                            },
-                          ),
-                        ),
-                      IconButton(
-                        onPressed: () {
-                          conditions = conditions
-                              .whereIndexed((_i, e) => i != _i)
-                              .toList();
-                        },
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: Theme.of(context)
-                                  .inputDecorationTheme
-                                  .border
-                                  ?.borderSide
-                                  .color ??
-                              Theme.of(context).colorScheme.primary,
-                          width: 1.2,
-                        ),
-                      ),
-                    ),
-                    child: _SelectValueWidget(
-                      type: conditionFieldMetadata.type,
-                      condition: condition,
-                      onChanged: (value) {
-                        final isNested = conditionFieldMetadata.dummyInstance
-                                is ViewableWithID &&
-                            condition.field != 'id';
-                        conditions = conditions
-                            .mapIndexed(
-                              (_i, e) => i == _i
-                                  ? isNested
-                                      ? condition.copyWith(value: value)
-                                      : value.single
-                                  : e,
-                            )
-                            .toList();
-                      },
-                      dummyInstance: conditionFieldMetadata.dummyInstance,
-                      isList: conditionFieldMetadata.isList,
-                    ),
-                  ),
-                ],
-              ),
+            return ConditionBuilder(
+              type: type,
+              condition: condition,
+              conditionFieldMetadata: conditionFieldMetadata,
+              operators: validOperators.toList(),
+              onFieldChanged: (field) {
+                final newCondition =
+                    _createConditionForField(field!, condition.operator);
+
+                conditions = conditions.mapIndexed(
+                  (_i, e) {
+                    return i == _i ? newCondition : e;
+                  },
+                ).toList();
+              },
+              onOperatorChanged: (operator) {
+                conditions = conditions
+                    .mapIndexed(
+                      (_i, e) =>
+                          i == _i ? condition.copyWith(operator: operator) : e,
+                    )
+                    .toList();
+              },
+              onConditionRemoved: () {
+                conditions =
+                    conditions.whereIndexed((_i, e) => i != _i).toList();
+              },
+              onValueChanged: (value, isNested) {
+                conditions = conditions
+                    .mapIndexed(
+                      (_i, e) => i == _i
+                          ? isNested
+                              ? condition.copyWith(value: value)
+                              : value.single
+                          : e,
+                    )
+                    .toList();
+              },
             );
           },
         ),
         ElevatedButton.icon(
           onPressed: () {
+            final property = properties.firstWhere((p) => p.$1 != 'id');
+            final fieldMetadata = AdvancedQueriesMetadata.getFieldMetadata(
+              property.$1,
+              FieldMetadata(type: type),
+            );
+
             conditions = [
               ...conditions,
               Condition(
                 type: type,
-                field: properties.first.$1,
-                operator:
-                    validOperatorsForField(properties.first.$1).firstOrNull,
+                field: property.$1,
+                operator: fieldMetadata.operators.firstOrNull,
               ),
             ];
           },
           icon: const Icon(Icons.filter_alt),
-          label: const Text('إضافة شرط'),
+          label: Text(
+            'إضافة شرط ل' +
+                AdvancedQueriesMetadata.queryableTypes[type]!.$1
+                    .replaceFirst(RegExp('^ال'), 'ل'),
+          ),
         ),
       ],
     );
   }
 
-  Iterable<Operator> validOperatorsForField(String field) {
-    if (field == 'id') return [Operator.eq];
-    if (field == 'permissions') return [];
+  Condition<dynamic> _createConditionForField(
+    String field, [
+    Operator? currentOperator,
+  ]) {
+    final newValidOperators = AdvancedQueriesMetadata.getFieldMetadata(
+      field,
+      FieldMetadata(type: type),
+    ).operators;
+
+    final selectedOrFirstValidOperator = currentOperator != null &&
+            newValidOperators.isNotEmpty &&
+            newValidOperators.contains(currentOperator)
+        ? currentOperator
+        : newValidOperators.firstOrNull;
+
+    final addNestedCondition =
+        newValidOperators.isEmpty && field != 'id' && field != 'permissions';
+
+    final nestedField = addNestedCondition
+        ? AdvancedQueriesMetadata.propertiesByType[type]
+                ?.firstWhereOrNull((p) => p.$1 != 'id')
+                ?.$1 ??
+            'id'
+        : null;
+
+    return Condition(
+      type: type,
+      field: field,
+      operator: selectedOrFirstValidOperator,
+      value:
+          nestedField != null ? [_createConditionForField(nestedField)] : null,
+    );
+  }
+
+  Set<Operator> validOperatorsForFields(String field) {
+    if (field == 'id') return {Operator.eq};
+    if (field == 'permissions') return {};
 
     final fieldType = AdvancedQueriesMetadata.getFieldMetadata(
       field,
       FieldMetadata(type: type),
     );
 
-    return Operator.values.where(
-      (o) => o.isValidType(fieldType.dummyInstance),
+    return fieldType.operators;
+  }
+}
+
+class ConditionBuilder extends StatelessWidget {
+  final Condition condition;
+  final Type type;
+
+  final void Function(String?) onFieldChanged;
+  final void Function(Operator?) onOperatorChanged;
+  final void Function() onConditionRemoved;
+  final void Function(List<Condition>, bool) onValueChanged;
+
+  final List<Operator> operators;
+  final FieldMetadata conditionFieldMetadata;
+
+  const ConditionBuilder({
+    required this.condition,
+    required this.type,
+    required this.onFieldChanged,
+    required this.operators,
+    required this.conditionFieldMetadata,
+    required this.onOperatorChanged,
+    required this.onConditionRemoved,
+    required this.onValueChanged,
+    super.key,
+  });
+
+  Iterable<(String, String)> get properties =>
+      AdvancedQueriesMetadata.propertiesByType[type] ?? [];
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(
+                    labelText: 'بشرط',
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  isExpanded: true,
+                  value: condition.field,
+                  items: properties
+                      .map(
+                        (p) => DropdownMenuItem(
+                          alignment: Alignment.center,
+                          value: p.$1,
+                          child: Text(p.$2),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: onFieldChanged,
+                ),
+              ),
+              const SizedBox(width: 8),
+              if (operators.isNotEmpty &&
+                  !(operators.length == 1 && operators.single == Operator.eq))
+                Expanded(
+                  child: DropdownButtonFormField<Operator>(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    isExpanded: true,
+                    value: condition.operator,
+                    items: operators
+                        .map(
+                          (e) => DropdownMenuItem(
+                            alignment: Alignment.center,
+                            value: e,
+                            child: Text(e.label),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: onOperatorChanged,
+                  ),
+                ),
+              IconButton(
+                onPressed: onConditionRemoved,
+                icon: const Icon(Icons.clear),
+              ),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                  color:
+                      themeData.inputDecorationTheme.border?.borderSide.color ??
+                          themeData.colorScheme.primary,
+                  width: 1.2,
+                ),
+              ),
+            ),
+            child: _SelectValueWidget(
+              type: conditionFieldMetadata.type,
+              condition: condition,
+              onChanged: (value) {
+                final isNested = conditionFieldMetadata.dummyInstance
+                        is ViewableWithID &&
+                    conditionFieldMetadata.dummyInstance is! UserPermission &&
+                    condition.field != 'id';
+
+                onValueChanged(value, isNested);
+              },
+              dummyInstance: conditionFieldMetadata.dummyInstance,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
 class _SelectValueWidget<T> extends StatelessWidget {
   final Type type;
-  final bool isList;
   final T dummyInstance;
   final Condition condition;
   final void Function(List<Condition>) onChanged;
 
   const _SelectValueWidget({
     required this.type,
-    required this.isList,
     required this.condition,
     required this.onChanged,
     required this.dummyInstance,
@@ -216,7 +287,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (dummyInstance is String) {
+    if (dummyInstance is String || dummyInstance is num) {
       return TextFormField(
         initialValue: condition.value,
         onChanged: _onValueChanged,
@@ -234,6 +305,12 @@ class _SelectValueWidget<T> extends StatelessWidget {
               : null,
           helperMaxLines: 3,
         ),
+        keyboardType: dummyInstance is num
+            ? TextInputType.numberWithOptions(
+                signed: true,
+                decimal: dummyInstance is double,
+              )
+            : TextInputType.text,
       );
     } else if (dummyInstance is bool && condition.field.endsWith('ender')) {
       return DropdownButtonFormField<bool?>(
@@ -262,28 +339,14 @@ class _SelectValueWidget<T> extends StatelessWidget {
       return CheckboxListTile(
         title: const Text('قيمة البحث'),
         subtitle: Text(
-          condition.value == true
-              ? 'نعم'
-              : condition.value == false
-                  ? 'لا'
-                  : 'غير محدد',
+          condition.value ?? false ? 'نعم' : 'لا',
         ),
-        value: condition.value,
+        value: condition.value ?? false,
         tristate: true,
         onChanged: (value) {
-          if (value == null) {
-            onChanged([
-              Condition(
-                field: condition.field,
-                operator: condition.operator,
-                type: condition.type,
-              ),
-            ]);
-          } else {
-            onChanged([
-              condition.copyWith(value: value),
-            ]);
-          }
+          onChanged([
+            condition.copyWith(value: value ?? false),
+          ]);
         },
       );
     } else if (dummyInstance is Color) {
@@ -350,7 +413,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
         ]),
       );
     } else if (dummyInstance is ViewableWithID) {
-      return ConditionBuilder(
+      return ConditionsBuilder(
         type: type,
         conditions: condition.value is List<Condition> ? condition.value : [],
         onChanged: onChanged,
@@ -360,7 +423,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
       FlutterErrorDetails(
         exception: Exception(
           'No widget for type $type and instance $dummyInstance '
-          'in condition builder, isList: $isList',
+          'in condition builder',
         ),
       ),
     );

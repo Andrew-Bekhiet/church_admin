@@ -1,3 +1,4 @@
+export 'controllers/advanced_search_controller.dart';
 export 'controllers/delegating_paginatable_stream.dart';
 export 'controllers/edit_object_controller.dart';
 export 'controllers/go_router_refresh_stream.dart';

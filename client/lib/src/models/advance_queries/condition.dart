@@ -52,8 +52,11 @@ class Condition<T> with EquatableMixin {
   Json toSearchJson() {
     final serializedValue = serializeFieldValue(type, field, value);
 
+    final effectiveFieldName =
+        field == 'id' && type == StudyYear ? 'order' : field;
+
     return {
-      field: operator == null
+      effectiveFieldName: operator == null
           ? serializedValue
           : {
               if ((serializedValue ?? value) == null)
@@ -93,108 +96,135 @@ final Map<String, Serializer> serializersByField = {
   'tags': _personsTagsSerializer,
   'adminUsers': _adminUsersSerializer,
   'permissions': _permissionsSerializer,
+  'persons': _personsSerializer,
 };
 
-dynamic _permissionsSerializer<T>(Type type, T? value) =>
-    type == User && value is UserPermission
-        ? {
-            'permission': {'_eq': value.name},
-          }
-        : _serializeByValueType(value);
+dynamic _permissionsSerializer<T>(Type type, T? value) {
+  if (type == User && value is UserPermission) {
+    return {
+      'permission': {'_eq': value.name},
+    };
+  }
+}
 
-dynamic _adminUsersSerializer<T>(Type type, T? value) =>
-    type == User && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'user': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _adminUsersSerializer<T>(Type type, T? value) {
+  if (type == User && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'user': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _personsTagsSerializer<T>(Type type, T? value) =>
-    type == Person && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'tag': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _personsTagsSerializer<T>(Type type, T? value) {
+  if (type == Person && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'tag': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _personsServicesSerializer<T>(Type type, T? value) =>
-    type == Person && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'service': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _personsServicesSerializer<T>(Type type, T? value) {
+  if (type == Person && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'service': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _personsHobbiesSerializer<T>(Type type, T? value) =>
-    type == Person && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'hobby': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _personsHobbiesSerializer<T>(Type type, T? value) {
+  if (type == Person && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'hobby': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _personsGroupsSerializer<T>(Type type, T? value) =>
-    type == Person && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'group': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _personsGroupsSerializer<T>(Type type, T? value) {
+  if (type == Person && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'group': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _familiesChildrenSerializer<T>(Type type, T? value) =>
-    type == Family && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'child': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _familiesChildrenSerializer<T>(Type type, T? value) {
+  if (type == Family && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'child': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _familiesParentsSerializer<T>(Type type, T? value) =>
-    type == Family && value is List<Condition>
-        ? {
-            ..._maybeAddAnd(
-              value
-                  .map(
-                    (e) => {'parent': e.toSearchJson()},
-                  )
-                  .toList(),
-            ),
-          }
-        : _serializeByValueType(value);
+dynamic _familiesParentsSerializer<T>(Type type, T? value) {
+  if (type == Family && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'parent': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+}
 
-dynamic _idSerializer<T>(Type _, T? value) =>
-    value is ViewableWithID ? value.id : _serializeByValueType(value);
+dynamic _personsSerializer<T>(Type type, T? value) {
+  if (value is List<Condition> &&
+      (type == Group || type == Hobby || type == Service || type == Tag)) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'person': e.toSearchJson()},
+            )
+            .toList(),
+      ),
+    };
+  }
+
+  return _serializeByValueType(value);
+}
+
+dynamic _idSerializer<T>(Type _, T? value) {
+  return value is ViewableWithID ? value.id : _serializeByValueType(value);
+}
 
 Json _maybeAddAnd(List<Json> list) {
   return list.length == 1 ? list.single : {'_and': list};
@@ -217,8 +247,8 @@ dynamic _serializeByValueType<T>(T? value) {
     case DateTime _:
       return dateToString(value);
 
-    case DateTimeRange _:
-      return dateRangeToString(value);
+    // case DateTimeRange _:
+    //   return dateRangeToString(value);
 
     case UserPermission _:
       return value.name;

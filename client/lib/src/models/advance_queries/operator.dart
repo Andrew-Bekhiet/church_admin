@@ -1,5 +1,3 @@
-import 'package:church_admin/church_admin.dart';
-
 enum Operator {
   eq('_eq', '='),
   gt('_gt', '>'),
@@ -20,51 +18,37 @@ enum Operator {
   nin('_nin', 'لا يساوي أي من'),
   stIntersects('_stIntersects', 'يتقاطع مع');
 
+  static const Set<Operator> textual = {
+    Operator.like,
+    Operator.ilike,
+    Operator.nlike,
+    Operator.nilike,
+    Operator.regex,
+    Operator.nregex,
+    Operator.iregex,
+    Operator.niregex,
+  };
+
+  static const Set<Operator> comparitive = {
+    Operator.eq,
+    Operator.gt,
+    Operator.gte,
+    Operator.lt,
+    Operator.lte,
+    Operator.neq,
+  };
+
+  static const Set<Operator> arrays = {
+    Operator.$in,
+    Operator.nin,
+  };
+
+  static const Set<Operator> spatial = {
+    Operator.stIntersects,
+  };
+
   final String value;
   final String label;
 
   const Operator(this.value, this.label);
-
-  bool isValidType<T>(T object) {
-    switch (this) {
-      case Operator.isNull:
-        return object is! ViewableWithID &&
-            object is! Point &&
-            object is! Line &&
-            object is! Polygon;
-
-      case Operator.eq ||
-            Operator.gt ||
-            Operator.gte ||
-            Operator.lt ||
-            Operator.lte ||
-            Operator.neq:
-        return object is! ViewableWithID &&
-            object is! Point &&
-            object is! Line &&
-            object is! Polygon;
-
-      case Operator.$in || Operator.nin:
-        return object is! ViewableWithID &&
-            object is! Point &&
-            object is! Line &&
-            object is! Polygon;
-
-      case Operator.ilike ||
-            Operator.iregex ||
-            Operator.like ||
-            Operator.nilike ||
-            Operator.niregex ||
-            Operator.nlike ||
-            Operator.nregex ||
-            Operator.regex:
-        return object is String;
-
-      case Operator.stIntersects:
-        return object is Point || object is Line || object is Polygon;
-
-      default:
-        return false;
-    }
-  }
 }

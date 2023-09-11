@@ -298,7 +298,7 @@ abstract final class AdvancedQueriesMetadata {
       ('persons', 'المخدومين'),
     },
     ShammasLevel: {
-      ('id', 'id'),
+      ('id', '='),
       ('order', 'الترتيب'),
       ('name', 'الاسم'),
       ('persons', 'المخدومين'),
@@ -317,41 +317,35 @@ abstract final class AdvancedQueriesMetadata {
     },
   };
 
-  static const _fieldsMetadataByName = {
-    'order': FieldMetadata(type: int),
-    'color': FieldMetadata(type: Color),
-    'geolocation': FieldMetadata(type: Polygon),
-    'bounds': FieldMetadata(type: Polygon),
-    'line': FieldMetadata(type: Polygon),
-    'validity': FieldMetadata(type: DateTimeRange),
-    'adminOn': FieldMetadata(type: AdminOnData),
-    'person': FieldMetadata(type: Person),
-    'user': FieldMetadata(type: User),
-    'nextService': FieldMetadata(type: Service),
-    'service': FieldMetadata(type: Service),
-    'shammasLevel': FieldMetadata(type: ShammasLevel),
-    'school': FieldMetadata(type: School),
-    'college': FieldMetadata(type: College),
-    'church': FieldMetadata(type: Church),
-    'father': FieldMetadata(type: Father),
-    'job': FieldMetadata(type: Job),
-    'qualification': FieldMetadata(type: Qualification),
-    'personType': FieldMetadata(type: PersonType),
-    'state': FieldMetadata(type: PersonState),
-    'adminUsers': FieldMetadata(type: User, isList: true),
-    'areas': FieldMetadata(type: Area, isList: true),
-    'streets': FieldMetadata(type: Street, isList: true),
-    'stores': FieldMetadata(type: Store, isList: true),
-    'families': FieldMetadata(type: Family, isList: true),
-    'children': FieldMetadata(type: Family, isList: true),
-    'parents': FieldMetadata(type: Family, isList: true),
-    'persons': FieldMetadata(type: Person, isList: true),
-    'services': FieldMetadata(type: Service, isList: true),
-    'classes': FieldMetadata(type: Class, isList: true),
-    'groups': FieldMetadata(type: Group, isList: true),
-    'permissions': FieldMetadata(type: UserPermission, isList: true),
-    'tags': FieldMetadata(type: Tag, isList: true),
-    'hobbies': FieldMetadata(type: Hobby, isList: true),
+  static final _fieldsMetadataByName = {
+    'order': const FieldMetadata(type: int, operators: Operator.comparitive),
+    'color': FieldMetadata(
+      type: Color,
+      operators: Operator.comparitive.union({Operator.isNull}),
+    ),
+    // 'validity': const FieldMetadata(type: DateTimeRange),
+    'adminOn': const FieldMetadata(type: AdminOnData),
+    'person': const FieldMetadata(type: Person),
+    'user': const FieldMetadata(type: User),
+    'shammasLevel': const FieldMetadata(type: ShammasLevel),
+    'school': const FieldMetadata(type: School),
+    'college': const FieldMetadata(type: College),
+    'church': const FieldMetadata(type: Church),
+    'father': const FieldMetadata(type: Father),
+    'job': const FieldMetadata(type: Job),
+    'qualification': const FieldMetadata(type: Qualification),
+    'personType': const FieldMetadata(type: PersonType),
+    'state': const FieldMetadata(type: PersonState),
+    'adminUsers': const FieldMetadata(type: User),
+    'areas': const FieldMetadata(type: Area),
+    'streets': const FieldMetadata(type: Street),
+    'stores': const FieldMetadata(type: Store),
+    'persons': const FieldMetadata(type: Person),
+    'classes': const FieldMetadata(type: Class),
+    'groups': const FieldMetadata(type: Group),
+    'permissions': const FieldMetadata(type: UserPermission),
+    'tags': const FieldMetadata(type: Tag),
+    'hobbies': const FieldMetadata(type: Hobby),
   };
 
   static FieldMetadata getFieldMetadata(
@@ -366,18 +360,35 @@ abstract final class AdvancedQueriesMetadata {
             'mainPhone' ||
             'birthday':
       case _ when name.endsWith('Id'):
-        return const FieldMetadata(type: String);
+        return FieldMetadata(
+          type: String,
+          operators: Operator.comparitive
+              .union(Operator.textual)
+              .union({Operator.isNull}),
+        );
 
       case 'serviceGender' || 'gender':
       case _ when name.startsWith('is'):
-        return const FieldMetadata(type: bool);
+        return FieldMetadata(
+          type: bool,
+          operators: Operator.comparitive.union({Operator.isNull}),
+        );
 
       case 'photoUpdatedAt' || 'birthdate':
       case _ when name.startsWith('last'):
-        return const FieldMetadata(type: DateTime);
+        return FieldMetadata(
+          type: DateTime,
+          operators: Operator.comparitive.union({Operator.isNull}),
+        );
 
-      case 'family' || 'adminFamily':
+      case 'family' || 'adminFamily' || 'families' || 'children' || 'parents':
         return const FieldMetadata(type: Family);
+
+      case 'nextService' || 'service' || 'services':
+        return const FieldMetadata(type: Service);
+
+      case 'geolocation' || 'bounds' || 'line':
+        return const FieldMetadata(type: Polygon, operators: Operator.spatial);
 
       case 'studyYearFrom' ||
             'studyYearTo' ||
