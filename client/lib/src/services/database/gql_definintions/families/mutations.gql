@@ -4,9 +4,7 @@ mutation deleteFamily($familyId: uuid!) {
   }
 }
 
-mutation insertFamily(
-  $newFamily: FamiliesInsertInput!
-) {
+mutation insertFamily($newFamily: FamiliesInsertInput!) {
   insertFamiliesOne(object: $newFamily) {
     ...Family
   }

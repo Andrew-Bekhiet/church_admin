@@ -2708,7 +2708,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
                     name: NameNode(
-                        value: 'confession_history_dayID_personID_key')),
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -2811,7 +2811,8 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodas_history_dayID_personID_key')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -5986,7 +5987,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
                     name: NameNode(
-                        value: 'confession_history_dayID_personID_key')),
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -6068,7 +6069,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodas_history_dayID_personID_key')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),

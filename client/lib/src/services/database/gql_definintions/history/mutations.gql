@@ -4,10 +4,10 @@ mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confession_history_dayID_personID_key }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) {
     person {
       ...Person
@@ -21,10 +21,10 @@ mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        onConflict: { constraint: attendance_days_pkey, update_columns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodas_history_dayID_personID_key }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) {
     person {
       ...Person

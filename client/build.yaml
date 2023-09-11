@@ -18,8 +18,6 @@ targets:
               fromJsonFunctionName: stringToUuid
               toJsonFunctionName: uuidToString
               import: package:church_admin/graphql/scalars.dart
-            bytea:
-              type: String
             citext:
               type: String
             name:
@@ -58,8 +56,6 @@ targets:
               fromJsonFunctionName: tstzFromString
               toJsonFunctionName: tstzToString
               import: package:church_admin/graphql/scalars.dart
-            _text:
-              type: List<String>
             json:
               type: Json
             jsonb:

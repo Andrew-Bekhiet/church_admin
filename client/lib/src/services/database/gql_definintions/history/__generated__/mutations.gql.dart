@@ -353,7 +353,7 @@ const documentNodeMutationinsertPersonLastConfession =
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),
@@ -369,7 +369,7 @@ const documentNodeMutationinsertPersonLastConfession =
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
                     name: NameNode(
-                        value: 'confession_history_dayID_personID_key')),
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -907,7 +907,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
                             name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
-                        name: NameNode(value: 'update_columns'),
+                        name: NameNode(value: 'updateColumns'),
                         value: EnumValueNode(name: NameNode(value: 'day')),
                       ),
                     ]),
@@ -922,7 +922,8 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodas_history_dayID_personID_key')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),

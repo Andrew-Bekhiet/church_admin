@@ -82,7 +82,7 @@ mutation updatePerson(
         onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confession_history_dayID_personID_key }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) @include(if: $insertHistoryConfessionHistoryOne) {
     person {
       id
@@ -98,7 +98,7 @@ mutation updatePerson(
         onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodas_history_dayID_personID_key }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) @include(if: $insertHistoryKodasHistoryOne) {
     person {
       id
@@ -143,7 +143,7 @@ mutation updatePersonSpiritData(
         onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confession_history_dayID_personID_key }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) {
     person {
       ...Person
@@ -157,7 +157,7 @@ mutation updatePersonSpiritData(
         onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodas_history_dayID_personID_key }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) {
     person {
       ...Person

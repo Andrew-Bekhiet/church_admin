@@ -438,7 +438,12 @@ class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
           lastKodas: lastKodas,
           lastConfession: lastConfession,
         ).toJson(),
-        parserFn: db.parser.lastOrNullParser(Person.fromJson),
+        parserFn: (data) {
+          final value = data.values.whereType<Map?>().lastOrNull?['person'];
+          if (value == null) return null;
+
+          return Person.fromJson(value.cast<String, Object?>());
+        },
       ),
     );
   }

@@ -15,6 +15,7 @@ dependencies:
   async: ^2.9.0
   cached_network_image: ^3.2.3
   clock: ^1.1.1
+  cloud_firestore: ^4.9.0
   cloud_functions: ^4.1.0
   collection: ^1.17.0
   connectivity_plus: ^4.0.0
