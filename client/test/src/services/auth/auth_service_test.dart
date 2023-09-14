@@ -32,7 +32,7 @@ final initialUser = User(
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
   MockSpec<AuthAdapter>(),
-  MockSpec<MultiFactorManagerAdapter>(),
+  MockSpec<FirebaseMultiFactorManagerAdapter>(),
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
 ])
@@ -353,9 +353,10 @@ Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
   when(mock.userStream).thenAnswer((_) => _controller.stream);
   when(mock.dispose()).thenAnswer((_) => _controller.close());
 
-  when(mock.multiFactorManagerAdapter).thenAnswer((_) =>
-      globalProviderContainer.read(multiFactorManagerAdapterProvider)
-          as FirebaseMultiFactorManagerAdapter);
+  when(mock.multiFactorManagerAdapter).thenAnswer(
+    (_) => globalProviderContainer.read(multiFactorManagerAdapterProvider)
+        as FirebaseMultiFactorManagerAdapter,
+  );
 
   return authAdapterProvider.overrideWithValue(mock);
 }
@@ -375,7 +376,7 @@ AuthService _createAuthService({bool noCachedUser = false}) {
 }
 
 Future<Override> _setUpMockMultiFactorManagerAdapter() async {
-  final mock = MockMultiFactorManagerAdapter();
+  final mock = MockFirebaseMultiFactorManagerAdapter();
 
   return multiFactorManagerAdapterProvider.overrideWithValue(mock);
 }

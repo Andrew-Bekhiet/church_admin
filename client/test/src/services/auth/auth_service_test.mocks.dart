@@ -4,12 +4,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:ui' as _i5;
+import 'dart:ui' as _i6;
 
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:flutter/material.dart' as _i6;
+import 'package:firebase_auth/firebase_auth.dart' as _i5;
+import 'package:flutter/material.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart/rxdart.dart' as _i3;
+import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -301,17 +302,32 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
       ) as _i4.Future<void>);
 }
 
-/// A class which mocks [MultiFactorManagerAdapter].
+/// A class which mocks [FirebaseMultiFactorManagerAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMultiFactorManagerAdapter extends _i1.Mock
-    implements _i2.MultiFactorManagerAdapter {
+class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
+    implements _i2.FirebaseMultiFactorManagerAdapter {
   @override
   bool get hasPendingMultifactorLogin => (super.noSuchMethod(
         Invocation.getter(#hasPendingMultifactorLogin),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+  @override
+  void addPendingMultiFactorLogin(
+    _i2.MultiFactorSession? session,
+    _i5.FirebaseAuthMultiFactorException? exception,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addPendingMultiFactorLogin,
+          [
+            session,
+            exception,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   _i4.Future<_i2.MultiFactorSession> enrollNewMultiFactor(
           {required String? password}) =>
@@ -455,7 +471,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  void didChangeAppLifecycleState(_i5.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -546,7 +562,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as _i4.Future<bool>);
   @override
   _i4.Future<bool> didPushRouteInformation(
-          _i6.RouteInformation? routeInformation) =>
+          _i7.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
@@ -580,7 +596,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  void didChangeLocales(List<_i5.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -588,16 +604,16 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<_i5.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+  _i4.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
           #didRequestAppExit,
           [],
         ),
         returnValue:
-            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
+            _i4.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
         returnValueForMissingStub:
-            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
-      ) as _i4.Future<_i5.AppExitResponse>);
+            _i4.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
+      ) as _i4.Future<_i6.AppExitResponse>);
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(
