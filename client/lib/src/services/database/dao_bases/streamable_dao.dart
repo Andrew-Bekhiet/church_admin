@@ -3,11 +3,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
 mixin StreamableDAO<T extends ViewableWithID, TBoolExp> on DAOBase<T> {
-  @protected
   late final StreamableDAOProxy<T, TBoolExp> streamingProxy =
       StreamableDAOProxy<T, TBoolExp>(db: db, fromJson: fromJson);
 
-  @protected
   StreamAllConfig<T, TBoolExp> get baseStreamAllConfig;
 
   @protected

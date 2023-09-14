@@ -201,6 +201,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
     final firstOrderByField = jsonOrderBy.firstOrNull?.keys.single ?? 'id';
 
+    //TODO: move to DaatabaseService DAOs
     final paginatableStream = streamableDAO.streamingProxy.streamAll(
       searchQuery: searchQuery,
       streamAllConfig: streamableDAO.baseStreamAllConfig.copyWith(
