@@ -103,7 +103,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 selectedType: selectedType,
                 orderByStream: controller.orderByStream,
                 replaceOrderBy: controller.replaceOrderBy,
-                removeOrderBy: controller.removeOrderBy,
+                removeOrderBy: controller.removeOrderByAt,
               ),
               ElevatedButton.icon(
                 onPressed: _onAddOrderByStatement,
@@ -129,28 +129,20 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   }
 
   void _onTypeChanged(Type newType) {
-    controller
-      ..changeSelectedType(newType)
-      ..changeConditions([
-        Condition(
-          type: newType,
-          field: AdvancedQueriesMetadata.propertiesByType[newType]!
-              .firstWhere((p) => p.$1 != 'id')
-              .$1,
-          operator: Operator.eq,
-        ),
-      ]);
+    controller.changeSelectedType(
+      newType,
+      AdvancedQueriesMetadata.propertiesByType[newType]!
+          .firstWhere((p) => p.$1 != 'id')
+          .$1,
+    );
   }
 
-  void _onAddOrderByStatement() => controller.changeOrderBy(
-        [
-          ...controller.orderBy,
-          OrderBy(
-            field: AdvancedQueriesMetadata.propertiesByType[selectedType]!
-                .firstWhere((p) => p.$1 != 'id')
-                .$1,
-          ),
-        ],
+  void _onAddOrderByStatement() => controller.addOrderBy(
+        OrderBy(
+          field: AdvancedQueriesMetadata.propertiesByType[selectedType]!
+              .firstWhere((p) => p.$1 != 'id')
+              .$1,
+        ),
       );
 
   void _onChangeLimit(int? newLimit) => controller.changeLimit(newLimit);
@@ -178,7 +170,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                         .shareText(
                           base64Encode(
                             utf8.encode(
-                              jsonEncode(controller.currentQuery.toJson()),
+                              jsonEncode(controller.query.toJson()),
                             ),
                           ),
                         );
@@ -329,7 +321,7 @@ class _OrderByWidget extends StatelessWidget {
                             Radius.circular(20),
                           ),
                           isExpanded: true,
-                          value: orderBy.order,
+                          value: orderBy.direction,
                           alignment: Alignment.center,
                           items: const [
                             DropdownMenuItem(
@@ -346,7 +338,7 @@ class _OrderByWidget extends StatelessWidget {
                           onChanged: (value) {
                             replaceOrderBy(
                               i,
-                              orderBy.copyWith(order: value!),
+                              orderBy.copyWith(direction: value!),
                             );
                           },
                         ),

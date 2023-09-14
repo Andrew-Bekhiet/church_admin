@@ -21,7 +21,7 @@ OrderBy _$OrderByFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderBy {
   String get field => throw _privateConstructorUsedError;
-  Enum_OrderBy get order => throw _privateConstructorUsedError;
+  Enum_OrderBy get direction => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ abstract class $OrderByCopyWith<$Res> {
   factory $OrderByCopyWith(OrderBy value, $Res Function(OrderBy) then) =
       _$OrderByCopyWithImpl<$Res, OrderBy>;
   @useResult
-  $Res call({String field, Enum_OrderBy order});
+  $Res call({String field, Enum_OrderBy direction});
 }
 
 /// @nodoc
@@ -50,16 +50,16 @@ class _$OrderByCopyWithImpl<$Res, $Val extends OrderBy>
   @override
   $Res call({
     Object? field = null,
-    Object? order = null,
+    Object? direction = null,
   }) {
     return _then(_value.copyWith(
       field: null == field
           ? _value.field
           : field // ignore: cast_nullable_to_non_nullable
               as String,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
               as Enum_OrderBy,
     ) as $Val);
   }
@@ -72,7 +72,7 @@ abstract class _$$_OrderByCopyWith<$Res> implements $OrderByCopyWith<$Res> {
       __$$_OrderByCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String field, Enum_OrderBy order});
+  $Res call({String field, Enum_OrderBy direction});
 }
 
 /// @nodoc
@@ -86,16 +86,16 @@ class __$$_OrderByCopyWithImpl<$Res>
   @override
   $Res call({
     Object? field = null,
-    Object? order = null,
+    Object? direction = null,
   }) {
     return _then(_$_OrderBy(
       field: null == field
           ? _value.field
           : field // ignore: cast_nullable_to_non_nullable
               as String,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
               as Enum_OrderBy,
     ));
   }
@@ -104,7 +104,7 @@ class __$$_OrderByCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_OrderBy extends _OrderBy {
-  const _$_OrderBy({required this.field, this.order = Enum_OrderBy.ASC})
+  const _$_OrderBy({required this.field, this.direction = Enum_OrderBy.ASC})
       : super._();
 
   factory _$_OrderBy.fromJson(Map<String, dynamic> json) =>
@@ -114,11 +114,11 @@ class _$_OrderBy extends _OrderBy {
   final String field;
   @override
   @JsonKey()
-  final Enum_OrderBy order;
+  final Enum_OrderBy direction;
 
   @override
   String toString() {
-    return 'OrderBy(field: $field, order: $order)';
+    return 'OrderBy(field: $field, direction: $direction)';
   }
 
   @override
@@ -127,12 +127,13 @@ class _$_OrderBy extends _OrderBy {
         (other.runtimeType == runtimeType &&
             other is _$_OrderBy &&
             (identical(other.field, field) || other.field == field) &&
-            (identical(other.order, order) || other.order == order));
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, field, order);
+  int get hashCode => Object.hash(runtimeType, field, direction);
 
   @JsonKey(ignore: true)
   @override
@@ -150,7 +151,7 @@ class _$_OrderBy extends _OrderBy {
 
 abstract class _OrderBy extends OrderBy {
   const factory _OrderBy(
-      {required final String field, final Enum_OrderBy order}) = _$_OrderBy;
+      {required final String field, final Enum_OrderBy direction}) = _$_OrderBy;
   const _OrderBy._() : super._();
 
   factory _OrderBy.fromJson(Map<String, dynamic> json) = _$_OrderBy.fromJson;
@@ -158,7 +159,7 @@ abstract class _OrderBy extends OrderBy {
   @override
   String get field;
   @override
-  Enum_OrderBy get order;
+  Enum_OrderBy get direction;
   @override
   @JsonKey(ignore: true)
   _$$_OrderByCopyWith<_$_OrderBy> get copyWith =>

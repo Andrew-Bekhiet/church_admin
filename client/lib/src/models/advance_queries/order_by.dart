@@ -8,12 +8,12 @@ part 'order_by.g.dart';
 class OrderBy with _$OrderBy {
   const factory OrderBy({
     required String field,
-    @Default(Enum_OrderBy.ASC) Enum_OrderBy order,
+    @Default(Enum_OrderBy.ASC) Enum_OrderBy direction,
   }) = _OrderBy;
   const OrderBy._() : super();
 
   factory OrderBy.fromJson(Map<String, Object?> json) =>
       _$OrderByFromJson(json);
 
-  Json toSearchJson() => {field: order.name};
+  Json toSearchJson() => {field: direction.name};
 }

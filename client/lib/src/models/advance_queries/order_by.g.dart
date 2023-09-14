@@ -8,14 +8,15 @@ part of 'order_by.dart';
 
 _$_OrderBy _$$_OrderByFromJson(Map json) => _$_OrderBy(
       field: json['field'] as String,
-      order: $enumDecodeNullable(_$Enum_OrderByEnumMap, json['order']) ??
-          Enum_OrderBy.ASC,
+      direction:
+          $enumDecodeNullable(_$Enum_OrderByEnumMap, json['direction']) ??
+              Enum_OrderBy.ASC,
     );
 
 Map<String, dynamic> _$$_OrderByToJson(_$_OrderBy instance) =>
     <String, dynamic>{
       'field': instance.field,
-      'order': _$Enum_OrderByEnumMap[instance.order]!,
+      'direction': _$Enum_OrderByEnumMap[instance.direction]!,
     };
 
 const _$Enum_OrderByEnumMap = {
