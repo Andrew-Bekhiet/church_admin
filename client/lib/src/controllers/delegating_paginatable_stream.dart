@@ -13,7 +13,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
     required this.streamDelegate,
     bool isLogging = kDebugMode,
     super.limit = 100,
-  }) : super.private() {
+  }) {
     _querySubscription = streamDelegate(
       this,
       isLogging

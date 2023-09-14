@@ -19,16 +19,8 @@ abstract class PaginatableStreamBase<T> with Stream<List<T>> {
   List<T> get currentValue;
   List<T>? get currentValueOrNull;
 
-  PaginatableStreamBase({
-    this.limit = 100,
-  });
-
   @protected
-  PaginatableStreamBase.private({
-    required this.limit,
-  });
-
-  PaginatableStreamBase.loadAll() : limit = 1;
+  PaginatableStreamBase({required this.limit});
 
   Future<void> loadPage(int offset);
 
