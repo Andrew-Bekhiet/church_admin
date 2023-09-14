@@ -8,7 +8,7 @@ void main() {
       test(
         'String',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: Area,
             field: 'name',
             operator: Operator.eq,
@@ -22,7 +22,7 @@ void main() {
       test(
         'int',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: StudyYear,
             field: 'order',
             operator: Operator.eq,
@@ -36,7 +36,7 @@ void main() {
       test(
         'id field',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: Area,
             field: 'id',
             operator: Operator.eq,
@@ -50,7 +50,7 @@ void main() {
       test(
         'isNull: true',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: Area,
             field: 'photoUpdatedAt',
             operator: Operator.isNull,
@@ -64,7 +64,7 @@ void main() {
       test(
         'isNull: false',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: Area,
             field: 'photoUpdatedAt',
             operator: Operator.isNull,
@@ -78,23 +78,23 @@ void main() {
       test(
         'Nested conditions',
         () {
-          final unit = Condition<dynamic>(
+          final unit = Condition(
             type: Area,
             field: 'persons',
             operator: null,
             value: [
-              Condition<dynamic>(
+              Condition(
                 type: Person,
                 field: 'services',
                 operator: null,
                 value: [
-                  Condition<dynamic>(
+                  Condition(
                     type: Service,
                     field: 'studyYearFrom',
                     operator: Operator.eq,
                     value: 1,
                   ),
-                  Condition<dynamic>(
+                  Condition(
                     type: Service,
                     field: 'studyYearTo',
                     operator: Operator.eq,
@@ -113,19 +113,22 @@ void main() {
         'Special cases serializers',
         () {
           for (final serializer in serializersByField.entries) {
-            if (serializer.key == 'id') continue;
+            if (serializer.key == 'id' || serializer.key == 'permissions') {
+              //skip these because they can't be nested
+              continue;
+            }
 
-            final unit = Condition<dynamic>(
+            final unit = Condition(
               type: Area,
               field: 'persons',
               operator: null,
               value: [
-                Condition<dynamic>(
+                Condition(
                   type: Person,
                   field: serializer.key,
                   operator: null,
                   value: [
-                    Condition<dynamic>(
+                    Condition(
                       type: AdvancedQueriesMetadata.getFieldMetadata(
                         serializer.key,
                         const FieldMetadata(type: Null),

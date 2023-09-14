@@ -3,11 +3,11 @@ import 'package:church_admin/graphql/scalars.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class Condition<T> with EquatableMixin {
+class Condition with EquatableMixin {
   final Type type;
   final String field;
   final Operator? operator;
-  late final T? value;
+  late final dynamic value;
 
   Condition({
     required this.type,
@@ -35,11 +35,11 @@ class Condition<T> with EquatableMixin {
   @override
   List<Object?> get props => [type, field, operator, value];
 
-  Condition<T> copyWith({
+  Condition copyWith({
     Type? type,
     String? field,
     Operator? operator,
-    T? value,
+    dynamic value,
   }) {
     return Condition(
       type: type ?? this.type,

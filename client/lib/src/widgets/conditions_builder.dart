@@ -108,7 +108,7 @@ class ConditionsBuilder extends StatelessWidget {
     );
   }
 
-  Condition<dynamic> _createConditionForField(
+  Condition _createConditionForField(
     String field, [
     Operator? currentOperator,
   ]) {
