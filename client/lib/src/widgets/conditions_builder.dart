@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import 'data_geomap/edit_object_points_map.dart';
 
@@ -474,7 +475,7 @@ class _SelectPolygon extends StatelessWidget {
     return TappableFormField<Polygon?>(
       onTap: (state) async {
         final initialArea = Area(
-          id: '00000000-0000-0000-0000-000000000000',
+          id: Uuid.NAMESPACE_NIL,
           name: '',
           bounds: state.value,
           color: Theme.of(state.context).colorScheme.primary,
