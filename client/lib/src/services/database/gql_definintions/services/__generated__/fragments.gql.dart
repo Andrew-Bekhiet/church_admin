@@ -8,6 +8,7 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     this.color,
     this.$__typename = 'Services',
     this.photoUpdatedAt,
+    this.blurhash,
   });
 
   factory Fragment_Service.fromJson(Map<String, dynamic> json) {
@@ -16,6 +17,7 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     return Fragment_Service(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -23,6 +25,7 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
     );
   }
 
@@ -35,6 +38,8 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -49,6 +54,8 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     return _resultData;
   }
 
@@ -59,12 +66,14 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
     ]);
   }
 
@@ -101,6 +110,11 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     return true;
   }
 }
@@ -128,6 +142,7 @@ abstract class CopyWith_Fragment_Service<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   });
 }
 
@@ -150,6 +165,7 @@ class _CopyWithImpl_Fragment_Service<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
   }) =>
       _then(Fragment_Service(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -163,6 +179,8 @@ class _CopyWithImpl_Fragment_Service<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
       ));
 }
 
@@ -178,6 +196,7 @@ class _CopyWithStubImpl_Fragment_Service<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   }) =>
       _res;
 }
@@ -197,6 +216,13 @@ const fragmentDefinitionService = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'photoUpdatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'blurhash'),
       alias: null,
       arguments: [],
       directives: [],
@@ -225,6 +251,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     this.studyYearFrom,
     this.studyYearTo,
     this.photoUpdatedAt,
+    this.blurhash,
   });
 
   factory Fragment_ServiceWithStudyYears.fromJson(Map<String, dynamic> json) {
@@ -235,6 +262,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     return Fragment_ServiceWithStudyYears(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -250,6 +278,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
               (l$studyYearTo as Map<String, dynamic>)),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
     );
   }
 
@@ -266,6 +295,8 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
   final Fragment_ServiceWithStudyYears_studyYearTo? studyYearTo;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -284,6 +315,8 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     return _resultData;
   }
 
@@ -296,6 +329,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     return Object.hashAll([
       l$id,
       l$name,
@@ -304,6 +338,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
       l$studyYearFrom,
       l$studyYearTo,
       l$photoUpdatedAt,
+      l$blurhash,
     ]);
   }
 
@@ -351,6 +386,11 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     return true;
   }
 }
@@ -381,6 +421,7 @@ abstract class CopyWith_Fragment_ServiceWithStudyYears<TRes> {
     Fragment_ServiceWithStudyYears_studyYearFrom? studyYearFrom,
     Fragment_ServiceWithStudyYears_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   });
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes> get studyYearFrom;
   CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> get studyYearTo;
@@ -407,6 +448,7 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
   }) =>
       _then(Fragment_ServiceWithStudyYears(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -426,6 +468,8 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
       ));
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
       get studyYearFrom {
@@ -461,6 +505,7 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears<TRes>
     Fragment_ServiceWithStudyYears_studyYearFrom? studyYearFrom,
     Fragment_ServiceWithStudyYears_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   }) =>
       _res;
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
@@ -543,6 +588,13 @@ const fragmentDefinitionServiceWithStudyYears = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'photoUpdatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'blurhash'),
       alias: null,
       arguments: [],
       directives: [],

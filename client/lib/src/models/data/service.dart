@@ -23,6 +23,7 @@ class Service extends ViewableWithIDAndImage
     String? nextServiceId,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Class>? classes,
     List<Group>? groups,
     LastRecordedByInfo? lastEdit,

@@ -1,6 +1,7 @@
 fragment Class on Classes {
   ...ClassNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment ClassNoPhoto on Classes {

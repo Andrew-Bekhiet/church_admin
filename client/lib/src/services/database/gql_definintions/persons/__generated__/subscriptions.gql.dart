@@ -1836,6 +1836,7 @@ class Subscription_watchPerson_personsByPk
     this.color,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
+    this.blurhash,
     this.address,
     this.birthdate,
     this.areas,
@@ -1881,6 +1882,7 @@ class Subscription_watchPerson_personsByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$address = json['address'];
     final l$birthdate = json['birthdate'];
     final l$areas = json['areas'];
@@ -1924,6 +1926,7 @@ class Subscription_watchPerson_personsByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       address: (l$address as String?),
       birthdate: l$birthdate == null ? null : dateFromString(l$birthdate),
       areas: (l$areas as List<dynamic>?)
@@ -2027,6 +2030,8 @@ class Subscription_watchPerson_personsByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final String? address;
 
   final DateTime? birthdate;
@@ -2112,6 +2117,8 @@ class Subscription_watchPerson_personsByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$address = address;
     _resultData['address'] = l$address;
     final l$birthdate = birthdate;
@@ -2195,6 +2202,7 @@ class Subscription_watchPerson_personsByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$address = address;
     final l$birthdate = birthdate;
     final l$areas = areas;
@@ -2237,6 +2245,7 @@ class Subscription_watchPerson_personsByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$address,
       l$birthdate,
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
@@ -2308,6 +2317,11 @@ class Subscription_watchPerson_personsByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$address = address;
@@ -2580,6 +2594,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     String? address,
     DateTime? birthdate,
     List<Fragment_Area>? areas,
@@ -2690,6 +2705,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? address = _undefined,
     Object? birthdate = _undefined,
     Object? areas = _undefined,
@@ -2739,6 +2755,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         address:
             address == _undefined ? _instance.address : (address as String?),
         birthdate: birthdate == _undefined
@@ -3043,6 +3061,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     String? address,
     DateTime? birthdate,
     List<Fragment_Area>? areas,
@@ -3126,6 +3145,7 @@ class Subscription_watchPerson_personsByPk_classes
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
   });
 
@@ -3136,6 +3156,7 @@ class Subscription_watchPerson_personsByPk_classes
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     return Subscription_watchPerson_personsByPk_classes(
       id: stringToUuid(l$id),
@@ -3144,6 +3165,7 @@ class Subscription_watchPerson_personsByPk_classes
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -3159,6 +3181,8 @@ class Subscription_watchPerson_personsByPk_classes
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
@@ -3176,6 +3200,8 @@ class Subscription_watchPerson_personsByPk_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -3189,6 +3215,7 @@ class Subscription_watchPerson_personsByPk_classes
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     return Object.hashAll([
       l$id,
@@ -3196,6 +3223,7 @@ class Subscription_watchPerson_personsByPk_classes
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
     ]);
   }
@@ -3234,6 +3262,11 @@ class Subscription_watchPerson_personsByPk_classes
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
@@ -3268,6 +3301,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
@@ -3294,6 +3328,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
       _then(Subscription_watchPerson_personsByPk_classes(
@@ -3308,6 +3343,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -3336,6 +3373,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
@@ -4592,6 +4630,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     this.color,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
   });
 
@@ -4602,6 +4641,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     return Subscription_watchPerson_personsByPk_groups_group(
       id: stringToUuid(l$id),
@@ -4610,6 +4650,7 @@ class Subscription_watchPerson_personsByPk_groups_group
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -4625,6 +4666,8 @@ class Subscription_watchPerson_personsByPk_groups_group
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
@@ -4642,6 +4685,8 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -4655,6 +4700,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     return Object.hashAll([
       l$id,
@@ -4662,6 +4708,7 @@ class Subscription_watchPerson_personsByPk_groups_group
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
     ]);
   }
@@ -4698,6 +4745,11 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -4737,6 +4789,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
@@ -4764,6 +4817,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
       _then(Subscription_watchPerson_personsByPk_groups_group(
@@ -4778,6 +4832,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -4808,6 +4864,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
@@ -6037,6 +6094,7 @@ class Subscription_watchPerson_personsByPk_services_service
     this.studyYearFrom,
     this.studyYearTo,
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
   });
 
@@ -6049,6 +6107,7 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     return Subscription_watchPerson_personsByPk_services_service(
       id: stringToUuid(l$id),
@@ -6065,6 +6124,7 @@ class Subscription_watchPerson_personsByPk_services_service
               .fromJson((l$studyYearTo as Map<String, dynamic>)),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -6087,6 +6147,8 @@ class Subscription_watchPerson_personsByPk_services_service
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -6107,6 +6169,8 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -6122,6 +6186,7 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     return Object.hashAll([
       l$id,
@@ -6131,6 +6196,7 @@ class Subscription_watchPerson_personsByPk_services_service
       l$studyYearFrom,
       l$studyYearTo,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
     ]);
   }
@@ -6179,6 +6245,11 @@ class Subscription_watchPerson_personsByPk_services_service
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
@@ -6220,6 +6291,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service<
     Subscription_watchPerson_personsByPk_services_service_studyYearTo?
         studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
@@ -6254,6 +6326,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
       _then(Subscription_watchPerson_personsByPk_services_service(
@@ -6276,6 +6349,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -6331,6 +6406,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service<
     Subscription_watchPerson_personsByPk_services_service_studyYearTo?
         studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>

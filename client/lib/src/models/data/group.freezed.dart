@@ -25,6 +25,7 @@ mixin _$Group {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   String? get serviceId => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
   @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
@@ -54,6 +55,7 @@ abstract class $GroupCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       String? serviceId,
       Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
@@ -89,6 +91,7 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? name = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? serviceId = freezed,
     Object? service = freezed,
     Object? validity = freezed,
@@ -114,6 +117,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       serviceId: freezed == serviceId
           ? _value.serviceId
           : serviceId // ignore: cast_nullable_to_non_nullable
@@ -210,6 +217,7 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       String? serviceId,
       Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
@@ -245,6 +253,7 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
     Object? name = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? serviceId = freezed,
     Object? service = freezed,
     Object? validity = freezed,
@@ -270,6 +279,10 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       serviceId: freezed == serviceId
           ? _value.serviceId
           : serviceId // ignore: cast_nullable_to_non_nullable
@@ -311,6 +324,7 @@ class _$_Group extends _Group {
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       this.serviceId,
       this.service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
@@ -337,6 +351,8 @@ class _$_Group extends _Group {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   @override
   final String? serviceId;
   @override
@@ -366,7 +382,7 @@ class _$_Group extends _Group {
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -379,6 +395,8 @@ class _$_Group extends _Group {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             (identical(other.serviceId, serviceId) ||
                 other.serviceId == serviceId) &&
             (identical(other.service, service) || other.service == service) &&
@@ -406,6 +424,7 @@ class _$_Group extends _Group {
       name,
       color,
       photoUpdatedAt,
+      blurhash,
       serviceId,
       service,
       validity,
@@ -434,6 +453,7 @@ abstract class _Group extends Group {
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final String? serviceId,
       final Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
@@ -459,6 +479,8 @@ abstract class _Group extends Group {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   String? get serviceId;
   @override

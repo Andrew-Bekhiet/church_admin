@@ -13,6 +13,7 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
     required String name,
     String? email,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<AdminOnData>? adminOn,
     @JsonKey(
       fromJson: permissionsSetFromJson,

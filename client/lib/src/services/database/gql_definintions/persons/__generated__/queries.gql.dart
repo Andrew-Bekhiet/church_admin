@@ -14686,6 +14686,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.service,
   });
 
@@ -14696,6 +14697,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$service = json['service'];
     return Query_personServicesClassesGroups_personsByPk_classes(
       id: stringToUuid(l$id),
@@ -14704,6 +14706,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       service: Fragment_ServiceWithStudyYears.fromJson(
           (l$service as Map<String, dynamic>)),
     );
@@ -14718,6 +14721,8 @@ class Query_personServicesClassesGroups_personsByPk_classes
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Fragment_ServiceWithStudyYears service;
 
@@ -14734,6 +14739,8 @@ class Query_personServicesClassesGroups_personsByPk_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$service = service;
     _resultData['service'] = l$service.toJson();
     return _resultData;
@@ -14746,6 +14753,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$service = service;
     return Object.hashAll([
       l$id,
@@ -14753,6 +14761,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$service,
     ]);
   }
@@ -14789,6 +14798,11 @@ class Query_personServicesClassesGroups_personsByPk_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$service = service;
@@ -14828,6 +14842,7 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
   });
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
@@ -14854,6 +14869,7 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? service = _undefined,
   }) =>
       _then(Query_personServicesClassesGroups_personsByPk_classes(
@@ -14868,6 +14884,8 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         service: service == _undefined || service == null
             ? _instance.service
             : (service as Fragment_ServiceWithStudyYears),
@@ -14894,6 +14912,7 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
   }) =>
       _res;
@@ -15059,6 +15078,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     this.color,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.service,
   });
 
@@ -15069,6 +15089,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$service = json['service'];
     return Query_personServicesClassesGroups_personsByPk_groups_group(
       id: stringToUuid(l$id),
@@ -15077,6 +15098,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       service: Fragment_ServiceWithStudyYears.fromJson(
           (l$service as Map<String, dynamic>)),
     );
@@ -15091,6 +15113,8 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Fragment_ServiceWithStudyYears service;
 
@@ -15107,6 +15131,8 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$service = service;
     _resultData['service'] = l$service.toJson();
     return _resultData;
@@ -15119,6 +15145,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$service = service;
     return Object.hashAll([
       l$id,
@@ -15126,6 +15153,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$service,
     ]);
   }
@@ -15163,6 +15191,11 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$service = service;
@@ -15203,6 +15236,7 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
   });
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
@@ -15231,6 +15265,7 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? service = _undefined,
   }) =>
       _then(Query_personServicesClassesGroups_personsByPk_groups_group(
@@ -15245,6 +15280,8 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         service: service == _undefined || service == null
             ? _instance.service
             : (service as Fragment_ServiceWithStudyYears),
@@ -15272,6 +15309,7 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_gro
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
   }) =>
       _res;

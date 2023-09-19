@@ -18,6 +18,7 @@ class Family extends ViewableWithIDAndImage with _$Family implements ToJson {
     String? notes,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Area>? areas,
     List<Street>? streets,
     @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)

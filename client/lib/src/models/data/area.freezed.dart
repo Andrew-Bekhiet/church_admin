@@ -27,6 +27,7 @@ mixin _$Area {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $AreaCopyWith<$Res> {
       Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers});
@@ -73,6 +75,7 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
@@ -97,6 +100,10 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -134,6 +141,7 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
       Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers});
@@ -156,6 +164,7 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
@@ -180,6 +189,10 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -201,6 +214,7 @@ class _$_Area extends _Area {
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) this.bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers})
@@ -222,6 +236,8 @@ class _$_Area extends _Area {
   @override
   final DateTime? photoUpdatedAt;
   @override
+  final String? blurhash;
+  @override
   final LastRecordedByInfo? lastEdit;
   final List<User>? _adminUsers;
   @override
@@ -236,7 +252,7 @@ class _$_Area extends _Area {
 
   @override
   String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, lastEdit: $lastEdit, adminUsers: $adminUsers)';
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastEdit: $lastEdit, adminUsers: $adminUsers)';
   }
 
   @override
@@ -250,6 +266,8 @@ class _$_Area extends _Area {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             const DeepCollectionEquality()
@@ -265,6 +283,7 @@ class _$_Area extends _Area {
       bounds,
       color,
       photoUpdatedAt,
+      blurhash,
       lastEdit,
       const DeepCollectionEquality().hash(_adminUsers));
 
@@ -290,6 +309,7 @@ abstract class _Area extends Area {
       final Polygon? bounds,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers}) = _$_Area;
@@ -309,6 +329,8 @@ abstract class _Area extends Area {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

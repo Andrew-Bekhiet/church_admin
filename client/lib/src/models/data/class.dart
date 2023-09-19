@@ -17,6 +17,7 @@ class Class extends ViewableWithIDAndImage
     required String name,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Service? service,
     String? serviceId,
     StudyYear? studyYear,

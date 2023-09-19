@@ -42,6 +42,7 @@ type Areas {
         "filter the rows returned"
         where: AuthUsersAdminOnBoolExp
     ): AuthUsersAdminOnAggregate!
+    blurhash: String
     bounds: geography
     color: bigint
     "A computed field, executes function \"area_families\""
@@ -57,7 +58,6 @@ type Areas {
         "filter the rows returned"
         where: FamiliesBoolExp
     ): [Families!]
-    firestoreId: String
     id: uuid!
     "A computed field, executes function \"user_allowed_to_read_area\""
     isUserAllowedToRead: Boolean
@@ -139,8 +139,8 @@ type AreasAvgFields {
 
 "aggregate max on columns"
 type AreasMaxFields {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -148,8 +148,8 @@ type AreasMaxFields {
 
 "aggregate min on columns"
 type AreasMinFields {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -369,6 +369,7 @@ type AuthUsersData {
         where: AuthUsersAdminOnBoolExp
     ): AuthUsersAdminOnAggregate!
     authId: String!
+    blurhash: String
     email: String!
     "A computed field, executes function \"user_allowed_to_change_user_data\""
     isUserAllowedToChange: Boolean
@@ -428,6 +429,7 @@ type AuthUsersDataAggregateFields {
 "aggregate max on columns"
 type AuthUsersDataMaxFields {
     authId: String
+    blurhash: String
     email: String
     name: String
     photoUpdatedAt: timestamptz
@@ -437,6 +439,7 @@ type AuthUsersDataMaxFields {
 "aggregate min on columns"
 type AuthUsersDataMinFields {
     authId: String
+    blurhash: String
     email: String
     name: String
     photoUpdatedAt: timestamptz
@@ -663,6 +666,7 @@ type Classes {
         "filter the rows returned"
         where: HistoryAttendanceHistoryBoolExp
     ): HistoryAttendanceHistoryAggregate!
+    blurhash: String
     color: bigint
     id: uuid!
     "A computed field, executes function \"user_allowed_to_read_class\""
@@ -714,6 +718,7 @@ type ClassesAvgFields {
 
 "aggregate max on columns"
 type ClassesMaxFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -724,6 +729,7 @@ type ClassesMaxFields {
 
 "aggregate min on columns"
 type ClassesMinFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -955,6 +961,7 @@ type Families {
         "filter the rows returned"
         where: AreasBoolExp
     ): [Areas!]
+    blurhash: String
     "An array relationship"
     children(
         "distinct select on columns"
@@ -1164,6 +1171,7 @@ type FamiliesFamiliesMutationResponse {
 "aggregate max on columns"
 type FamiliesMaxFields {
     address: String
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -1174,6 +1182,7 @@ type FamiliesMaxFields {
 "aggregate min on columns"
 type FamiliesMinFields {
     address: String
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -1374,6 +1383,7 @@ type Groups {
         "filter the rows returned"
         where: HistoryAttendanceHistoryBoolExp
     ): HistoryAttendanceHistoryAggregate!
+    blurhash: String
     color: bigint
     id: uuid!
     "A computed field, executes function \"user_allowed_to_read_group\""
@@ -1447,6 +1457,7 @@ type GroupsAvgFields {
 
 "aggregate max on columns"
 type GroupsMaxFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -1456,6 +1467,7 @@ type GroupsMaxFields {
 
 "aggregate min on columns"
 type GroupsMinFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -2602,6 +2614,7 @@ type Persons {
     birthdate: date
     "A computed field, executes function \"get_person_birthday\""
     birthday: String
+    blurhash: String
     "An array relationship"
     callHistory(
         "distinct select on columns"
@@ -2705,7 +2718,6 @@ type Persons {
     "An object relationship"
     father: Fathers
     fatherId: uuid
-    firestoreId: String
     gender: Boolean!
     geolocation: geography
     "An array relationship"
@@ -3078,12 +3090,12 @@ type PersonsMaxFields {
     birthdate: date
     "A computed field, executes function \"get_person_birthday\""
     birthday: String
+    blurhash: String
     churchId: uuid
     collegeId: uuid
     color: bigint
     familyId: uuid
     fatherId: uuid
-    firestoreId: String
     id: uuid
     jobDescription: String
     jobId: uuid
@@ -3107,12 +3119,12 @@ type PersonsMinFields {
     birthdate: date
     "A computed field, executes function \"get_person_birthday\""
     birthday: String
+    blurhash: String
     churchId: uuid
     collegeId: uuid
     color: bigint
     familyId: uuid
     fatherId: uuid
-    firestoreId: String
     id: uuid
     jobDescription: String
     jobId: uuid
@@ -3482,6 +3494,7 @@ type Services {
         "filter the rows returned"
         where: HistoryAttendanceHistoryBoolExp
     ): HistoryAttendanceHistoryAggregate!
+    blurhash: String
     "An array relationship"
     classes(
         "distinct select on columns"
@@ -3509,7 +3522,6 @@ type Services {
         where: ClassesBoolExp
     ): ClassesAggregate!
     color: bigint
-    firestoreId: String
     "An array relationship"
     groups(
         "distinct select on columns"
@@ -3615,8 +3627,8 @@ type ServicesAvgFields {
 
 "aggregate max on columns"
 type ServicesMaxFields {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     nextServiceId: uuid
@@ -3627,8 +3639,8 @@ type ServicesMaxFields {
 
 "aggregate min on columns"
 type ServicesMinFields {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     nextServiceId: uuid
@@ -3800,6 +3812,7 @@ type Stores {
         "filter the rows returned"
         where: AreasBoolExp
     ): [Areas!]
+    blurhash: String
     color: bigint
     "An object relationship"
     family: Families
@@ -3860,6 +3873,7 @@ type StoresAvgFields {
 "aggregate max on columns"
 type StoresMaxFields {
     adminFamily: uuid
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -3869,6 +3883,7 @@ type StoresMaxFields {
 "aggregate min on columns"
 type StoresMinFields {
     adminFamily: uuid
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -3933,6 +3948,7 @@ type Streets {
         "filter the rows returned"
         where: AreasBoolExp
     ): [Areas!]
+    blurhash: String
     color: bigint
     "A computed field, executes function \"street_families\""
     families(
@@ -4016,6 +4032,7 @@ type StreetsAvgFields {
 
 "aggregate max on columns"
 type StreetsMaxFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -4024,6 +4041,7 @@ type StreetsMaxFields {
 
 "aggregate min on columns"
 type StreetsMinFields {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -8478,8 +8496,6 @@ type subscription_root {
 
 "unique or primary key constraints on table \"areas\""
 enum AreasConstraint {
-    "unique or primary key constraint on columns \"firestore_id\""
-    areas_firestore_id_key
     "unique or primary key constraint on columns \"id\""
     areas_pkey
 }
@@ -8487,11 +8503,11 @@ enum AreasConstraint {
 "select columns of table \"areas\""
 enum AreasSelectColumn {
     "column name"
+    blurhash
+    "column name"
     bounds
     "column name"
     color
-    "column name"
-    firestoreId
     "column name"
     id
     "column name"
@@ -8503,11 +8519,11 @@ enum AreasSelectColumn {
 "update columns of table \"areas\""
 enum AreasUpdateColumn {
     "column name"
+    blurhash
+    "column name"
     bounds
     "column name"
     color
-    "column name"
-    firestoreId
     "column name"
     id
     "column name"
@@ -8641,6 +8657,8 @@ enum AuthUsersDataSelectColumn {
     "column name"
     authId
     "column name"
+    blurhash
+    "column name"
     email
     "column name"
     name
@@ -8654,6 +8672,8 @@ enum AuthUsersDataSelectColumn {
 enum AuthUsersDataUpdateColumn {
     "column name"
     authId
+    "column name"
+    blurhash
     "column name"
     email
     "column name"
@@ -8721,6 +8741,8 @@ enum ClassesConstraint {
 "select columns of table \"classes\""
 enum ClassesSelectColumn {
     "column name"
+    blurhash
+    "column name"
     color
     "column name"
     id
@@ -8750,6 +8772,8 @@ enum ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
 
 "update columns of table \"classes\""
 enum ClassesUpdateColumn {
+    "column name"
+    blurhash
     "column name"
     color
     "column name"
@@ -8865,6 +8889,8 @@ enum FamiliesSelectColumn {
     "column name"
     address
     "column name"
+    blurhash
+    "column name"
     color
     "column name"
     geolocation
@@ -8882,6 +8908,8 @@ enum FamiliesSelectColumn {
 enum FamiliesUpdateColumn {
     "column name"
     address
+    "column name"
+    blurhash
     "column name"
     color
     "column name"
@@ -8933,6 +8961,8 @@ enum GroupsConstraint {
 "select columns of table \"groups\""
 enum GroupsSelectColumn {
     "column name"
+    blurhash
+    "column name"
     color
     "column name"
     id
@@ -8948,6 +8978,8 @@ enum GroupsSelectColumn {
 
 "update columns of table \"groups\""
 enum GroupsUpdateColumn {
+    "column name"
+    blurhash
     "column name"
     color
     "column name"
@@ -9404,8 +9436,6 @@ enum PersonTypesUpdateColumn {
 
 "unique or primary key constraints on table \"persons\""
 enum PersonsConstraint {
-    "unique or primary key constraint on columns \"firestore_id\""
-    persons_firestore_id_key
     "unique or primary key constraint on columns \"birthdate\", \"main_phone\""
     persons_main_phone_birthdate_key
     "unique or primary key constraint on columns \"id\""
@@ -9475,6 +9505,8 @@ enum PersonsSelectColumn {
     "column name"
     birthdate
     "column name"
+    blurhash
+    "column name"
     churchId
     "column name"
     collegeId
@@ -9484,8 +9516,6 @@ enum PersonsSelectColumn {
     familyId
     "column name"
     fatherId
-    "column name"
-    firestoreId
     "column name"
     gender
     "column name"
@@ -9615,6 +9645,8 @@ enum PersonsUpdateColumn {
     "column name"
     birthdate
     "column name"
+    blurhash
+    "column name"
     churchId
     "column name"
     collegeId
@@ -9624,8 +9656,6 @@ enum PersonsUpdateColumn {
     familyId
     "column name"
     fatherId
-    "column name"
-    firestoreId
     "column name"
     gender
     "column name"
@@ -9720,8 +9750,6 @@ enum SchoolsUpdateColumn {
 
 "unique or primary key constraints on table \"services\""
 enum ServicesConstraint {
-    "unique or primary key constraint on columns \"firestore_id\""
-    services_firestore_id_key
     "unique or primary key constraint on columns \"name\""
     services_name_key
     "unique or primary key constraint on columns \"id\""
@@ -9731,9 +9759,9 @@ enum ServicesConstraint {
 "select columns of table \"services\""
 enum ServicesSelectColumn {
     "column name"
-    color
+    blurhash
     "column name"
-    firestoreId
+    color
     "column name"
     id
     "column name"
@@ -9751,9 +9779,9 @@ enum ServicesSelectColumn {
 "update columns of table \"services\""
 enum ServicesUpdateColumn {
     "column name"
-    color
+    blurhash
     "column name"
-    firestoreId
+    color
     "column name"
     id
     "column name"
@@ -9809,6 +9837,8 @@ enum StoresSelectColumn {
     "column name"
     adminFamily
     "column name"
+    blurhash
+    "column name"
     color
     "column name"
     geolocation
@@ -9824,6 +9854,8 @@ enum StoresSelectColumn {
 enum StoresUpdateColumn {
     "column name"
     adminFamily
+    "column name"
+    blurhash
     "column name"
     color
     "column name"
@@ -9845,6 +9877,8 @@ enum StreetsConstraint {
 "select columns of table \"streets\""
 enum StreetsSelectColumn {
     "column name"
+    blurhash
+    "column name"
     color
     "column name"
     id
@@ -9858,6 +9892,8 @@ enum StreetsSelectColumn {
 
 "update columns of table \"streets\""
 enum StreetsUpdateColumn {
+    "column name"
+    blurhash
     "column name"
     color
     "column name"
@@ -9999,10 +10035,10 @@ input AreasBoolExp {
     _or: [AreasBoolExp!]
     adminUsers: AuthUsersAdminOnBoolExp
     adminUsersAggregate: AuthUsersAdminOnAggregateBoolExp
+    blurhash: StringComparisonExp
     bounds: GeographyComparisonExp
     color: BigintComparisonExp
     families: FamiliesBoolExp
-    firestoreId: StringComparisonExp
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
     isUserAllowedToWrite: BooleanComparisonExp
@@ -10022,9 +10058,9 @@ input AreasIncInput {
 "input type for inserting data into table \"areas\""
 input AreasInsertInput {
     adminUsers: AuthUsersAdminOnArrRelInsertInput
+    blurhash: String
     bounds: geography
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -10032,8 +10068,8 @@ input AreasInsertInput {
 
 "order by max() on columns of table \"areas\""
 input AreasMaxOrderBy {
+    blurhash: OrderBy
     color: OrderBy
-    firestoreId: OrderBy
     id: OrderBy
     name: OrderBy
     photoUpdatedAt: OrderBy
@@ -10041,8 +10077,8 @@ input AreasMaxOrderBy {
 
 "order by min() on columns of table \"areas\""
 input AreasMinOrderBy {
+    blurhash: OrderBy
     color: OrderBy
-    firestoreId: OrderBy
     id: OrderBy
     name: OrderBy
     photoUpdatedAt: OrderBy
@@ -10065,10 +10101,10 @@ input AreasOnConflict {
 "Ordering options when selecting data from \"areas\"."
 input AreasOrderBy {
     adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
+    blurhash: OrderBy
     bounds: OrderBy
     color: OrderBy
     familiesAggregate: FamiliesAggregateOrderBy
-    firestoreId: OrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
     isUserAllowedToWrite: OrderBy
@@ -10087,9 +10123,9 @@ input AreasPkColumnsInput {
 
 "input type for updating data in table \"areas\""
 input AreasSetInput {
+    blurhash: String
     bounds: geography
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -10120,9 +10156,9 @@ input AreasStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input AreasStreamCursorValueInput {
+    blurhash: String
     bounds: geography
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     photoUpdatedAt: timestamptz
@@ -10394,6 +10430,7 @@ input AuthUsersDataBoolExp {
     adminOn: AuthUsersAdminOnBoolExp
     adminOnAggregate: AuthUsersAdminOnAggregateBoolExp
     authId: StringComparisonExp
+    blurhash: StringComparisonExp
     email: StringComparisonExp
     isUserAllowedToChange: BooleanComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
@@ -10410,6 +10447,7 @@ input AuthUsersDataBoolExp {
 input AuthUsersDataInsertInput {
     adminOn: AuthUsersAdminOnArrRelInsertInput
     authId: String
+    blurhash: String
     email: String
     name: String
     permissions: AuthUsersPermissionsArrRelInsertInput
@@ -10436,6 +10474,7 @@ input AuthUsersDataOnConflict {
 input AuthUsersDataOrderBy {
     adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
     authId: OrderBy
+    blurhash: OrderBy
     email: OrderBy
     isUserAllowedToChange: OrderBy
     isUserAllowedToRead: OrderBy
@@ -10455,6 +10494,7 @@ input AuthUsersDataPkColumnsInput {
 "input type for updating data in table \"auth.users_data\""
 input AuthUsersDataSetInput {
     authId: String
+    blurhash: String
     email: String
     name: String
     photoUpdatedAt: timestamptz
@@ -10472,6 +10512,7 @@ input AuthUsersDataStreamCursorInput {
 "Initial value of the column from where the streaming should start"
 input AuthUsersDataStreamCursorValueInput {
     authId: String
+    blurhash: String
     email: String
     name: String
     photoUpdatedAt: timestamptz
@@ -10725,6 +10766,7 @@ input ClassesBoolExp {
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+    blurhash: StringComparisonExp
     color: BigintComparisonExp
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
@@ -10750,6 +10792,7 @@ input ClassesInsertInput {
     adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -10763,6 +10806,7 @@ input ClassesInsertInput {
 
 "order by max() on columns of table \"classes\""
 input ClassesMaxOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -10773,6 +10817,7 @@ input ClassesMaxOrderBy {
 
 "order by min() on columns of table \"classes\""
 input ClassesMinOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -10800,6 +10845,7 @@ input ClassesOrderBy {
     adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
@@ -10821,6 +10867,7 @@ input ClassesPkColumnsInput {
 
 "input type for updating data in table \"classes\""
 input ClassesSetInput {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -10858,6 +10905,7 @@ input ClassesStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input ClassesStreamCursorValueInput {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -11131,6 +11179,7 @@ input FamiliesBoolExp {
     _or: [FamiliesBoolExp!]
     address: StringComparisonExp
     areas: AreasBoolExp
+    blurhash: StringComparisonExp
     children: FamiliesFamiliesBoolExp
     childrenAggregate: FamiliesFamiliesAggregateBoolExp
     color: BigintComparisonExp
@@ -11262,6 +11311,7 @@ input FamiliesIncInput {
 "input type for inserting data into table \"families\""
 input FamiliesInsertInput {
     address: String
+    blurhash: String
     children: FamiliesFamiliesArrRelInsertInput
     color: bigint
     geolocation: geography
@@ -11277,6 +11327,7 @@ input FamiliesInsertInput {
 "order by max() on columns of table \"families\""
 input FamiliesMaxOrderBy {
     address: OrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -11287,6 +11338,7 @@ input FamiliesMaxOrderBy {
 "order by min() on columns of table \"families\""
 input FamiliesMinOrderBy {
     address: OrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -11312,6 +11364,7 @@ input FamiliesOnConflict {
 input FamiliesOrderBy {
     address: OrderBy
     areasAggregate: AreasAggregateOrderBy
+    blurhash: OrderBy
     childrenAggregate: FamiliesFamiliesAggregateOrderBy
     color: OrderBy
     geolocation: OrderBy
@@ -11336,6 +11389,7 @@ input FamiliesPkColumnsInput {
 "input type for updating data in table \"families\""
 input FamiliesSetInput {
     address: String
+    blurhash: String
     color: bigint
     geolocation: geography
     id: uuid
@@ -11370,6 +11424,7 @@ input FamiliesStreamCursorInput {
 "Initial value of the column from where the streaming should start"
 input FamiliesStreamCursorValueInput {
     address: String
+    blurhash: String
     color: bigint
     geolocation: geography
     id: uuid
@@ -11620,6 +11675,7 @@ input GroupsBoolExp {
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+    blurhash: StringComparisonExp
     color: BigintComparisonExp
     id: UuidComparisonExp
     isUserAllowedToRead: BooleanComparisonExp
@@ -11644,6 +11700,7 @@ input GroupsInsertInput {
     adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -11656,6 +11713,7 @@ input GroupsInsertInput {
 
 "order by max() on columns of table \"groups\""
 input GroupsMaxOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -11665,6 +11723,7 @@ input GroupsMaxOrderBy {
 
 "order by min() on columns of table \"groups\""
 input GroupsMinOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -11691,6 +11750,7 @@ input GroupsOrderBy {
     adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
@@ -11711,6 +11771,7 @@ input GroupsPkColumnsInput {
 
 "input type for updating data in table \"groups\""
 input GroupsSetInput {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -11744,6 +11805,7 @@ input GroupsStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input GroupsStreamCursorValueInput {
+    blurhash: String
     color: bigint
     id: uuid
     name: String
@@ -13285,6 +13347,7 @@ input PersonsBoolExp {
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
     birthdate: DateComparisonExp
     birthday: StringComparisonExp
+    blurhash: StringComparisonExp
     callHistory: HistoryCallHistoryBoolExp
     callHistoryAggregate: HistoryCallHistoryAggregateBoolExp
     church: ChurchesBoolExp
@@ -13301,7 +13364,6 @@ input PersonsBoolExp {
     familyId: UuidComparisonExp
     father: FathersBoolExp
     fatherId: UuidComparisonExp
-    firestoreId: StringComparisonExp
     gender: BooleanComparisonExp
     geolocation: GeographyComparisonExp
     groups: PersonsGroupsBoolExp
@@ -13585,6 +13647,7 @@ input PersonsInsertInput {
     address: String
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
     birthdate: date
+    blurhash: String
     callHistory: HistoryCallHistoryArrRelInsertInput
     church: ChurchesObjRelInsertInput
     churchId: uuid
@@ -13597,7 +13660,6 @@ input PersonsInsertInput {
     familyId: uuid
     father: FathersObjRelInsertInput
     fatherId: uuid
-    firestoreId: String
     gender: Boolean
     geolocation: geography
     groups: PersonsGroupsArrRelInsertInput
@@ -13639,12 +13701,12 @@ input PersonsInsertInput {
 input PersonsMaxOrderBy {
     address: OrderBy
     birthdate: OrderBy
+    blurhash: OrderBy
     churchId: OrderBy
     collegeId: OrderBy
     color: OrderBy
     familyId: OrderBy
     fatherId: OrderBy
-    firestoreId: OrderBy
     id: OrderBy
     jobDescription: OrderBy
     jobId: OrderBy
@@ -13666,12 +13728,12 @@ input PersonsMaxOrderBy {
 input PersonsMinOrderBy {
     address: OrderBy
     birthdate: OrderBy
+    blurhash: OrderBy
     churchId: OrderBy
     collegeId: OrderBy
     color: OrderBy
     familyId: OrderBy
     fatherId: OrderBy
-    firestoreId: OrderBy
     id: OrderBy
     jobDescription: OrderBy
     jobId: OrderBy
@@ -13710,6 +13772,7 @@ input PersonsOrderBy {
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
     birthdate: OrderBy
     birthday: OrderBy
+    blurhash: OrderBy
     callHistoryAggregate: HistoryCallHistoryAggregateOrderBy
     church: ChurchesOrderBy
     churchId: OrderBy
@@ -13723,7 +13786,6 @@ input PersonsOrderBy {
     familyId: OrderBy
     father: FathersOrderBy
     fatherId: OrderBy
-    firestoreId: OrderBy
     gender: OrderBy
     geolocation: OrderBy
     groupsAggregate: PersonsGroupsAggregateOrderBy
@@ -13886,12 +13948,12 @@ input PersonsServicesUpdates {
 input PersonsSetInput {
     address: String
     birthdate: date
+    blurhash: String
     churchId: uuid
     collegeId: uuid
     color: bigint
     familyId: uuid
     fatherId: uuid
-    firestoreId: String
     gender: Boolean
     geolocation: geography
     id: uuid
@@ -13945,12 +14007,12 @@ input PersonsStreamCursorInput {
 input PersonsStreamCursorValueInput {
     address: String
     birthdate: date
+    blurhash: String
     churchId: uuid
     collegeId: uuid
     color: bigint
     familyId: uuid
     fatherId: uuid
-    firestoreId: String
     gender: Boolean
     geolocation: geography
     id: uuid
@@ -14273,10 +14335,10 @@ input ServicesBoolExp {
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
     attendanceHistory: HistoryAttendanceHistoryBoolExp
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+    blurhash: StringComparisonExp
     classes: ClassesBoolExp
     classesAggregate: ClassesAggregateBoolExp
     color: BigintComparisonExp
-    firestoreId: StringComparisonExp
     groups: GroupsBoolExp
     groupsAggregate: GroupsAggregateBoolExp
     id: UuidComparisonExp
@@ -14307,9 +14369,9 @@ input ServicesInsertInput {
     adminUsers: AuthUsersAdminOnArrRelInsertInput
     attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
     attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
+    blurhash: String
     classes: ClassesArrRelInsertInput
     color: bigint
-    firestoreId: String
     groups: GroupsArrRelInsertInput
     id: uuid
     name: String
@@ -14342,9 +14404,9 @@ input ServicesOrderBy {
     adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
     attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
     attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+    blurhash: OrderBy
     classesAggregate: ClassesAggregateOrderBy
     color: OrderBy
-    firestoreId: OrderBy
     groupsAggregate: GroupsAggregateOrderBy
     id: OrderBy
     isUserAllowedToRead: OrderBy
@@ -14368,8 +14430,8 @@ input ServicesPkColumnsInput {
 
 "input type for updating data in table \"services\""
 input ServicesSetInput {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     nextServiceId: uuid
@@ -14388,8 +14450,8 @@ input ServicesStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input ServicesStreamCursorValueInput {
+    blurhash: String
     color: bigint
-    firestoreId: String
     id: uuid
     name: String
     nextServiceId: uuid
@@ -14537,6 +14599,7 @@ input StoresBoolExp {
     _or: [StoresBoolExp!]
     adminFamily: UuidComparisonExp
     areas: AreasBoolExp
+    blurhash: StringComparisonExp
     color: BigintComparisonExp
     family: FamiliesBoolExp
     geolocation: GeographyComparisonExp
@@ -14557,6 +14620,7 @@ input StoresIncInput {
 "input type for inserting data into table \"stores\""
 input StoresInsertInput {
     adminFamily: uuid
+    blurhash: String
     color: bigint
     family: FamiliesObjRelInsertInput
     geolocation: geography
@@ -14568,6 +14632,7 @@ input StoresInsertInput {
 "order by max() on columns of table \"stores\""
 input StoresMaxOrderBy {
     adminFamily: OrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -14577,6 +14642,7 @@ input StoresMaxOrderBy {
 "order by min() on columns of table \"stores\""
 input StoresMinOrderBy {
     adminFamily: OrderBy
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -14594,6 +14660,7 @@ input StoresOnConflict {
 input StoresOrderBy {
     adminFamily: OrderBy
     areasAggregate: AreasAggregateOrderBy
+    blurhash: OrderBy
     color: OrderBy
     family: FamiliesOrderBy
     geolocation: OrderBy
@@ -14614,6 +14681,7 @@ input StoresPkColumnsInput {
 "input type for updating data in table \"stores\""
 input StoresSetInput {
     adminFamily: uuid
+    blurhash: String
     color: bigint
     geolocation: geography
     id: uuid
@@ -14647,6 +14715,7 @@ input StoresStreamCursorInput {
 "Initial value of the column from where the streaming should start"
 input StoresStreamCursorValueInput {
     adminFamily: uuid
+    blurhash: String
     color: bigint
     geolocation: geography
     id: uuid
@@ -14709,6 +14778,7 @@ input StreetsBoolExp {
     _not: StreetsBoolExp
     _or: [StreetsBoolExp!]
     areas: AreasBoolExp
+    blurhash: StringComparisonExp
     color: BigintComparisonExp
     families: FamiliesBoolExp
     id: UuidComparisonExp
@@ -14729,6 +14799,7 @@ input StreetsIncInput {
 
 "input type for inserting data into table \"streets\""
 input StreetsInsertInput {
+    blurhash: String
     color: bigint
     id: uuid
     line: geography
@@ -14738,6 +14809,7 @@ input StreetsInsertInput {
 
 "order by max() on columns of table \"streets\""
 input StreetsMaxOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -14746,6 +14818,7 @@ input StreetsMaxOrderBy {
 
 "order by min() on columns of table \"streets\""
 input StreetsMinOrderBy {
+    blurhash: OrderBy
     color: OrderBy
     id: OrderBy
     name: OrderBy
@@ -14762,6 +14835,7 @@ input StreetsOnConflict {
 "Ordering options when selecting data from \"streets\"."
 input StreetsOrderBy {
     areasAggregate: AreasAggregateOrderBy
+    blurhash: OrderBy
     color: OrderBy
     familiesAggregate: FamiliesAggregateOrderBy
     id: OrderBy
@@ -14782,6 +14856,7 @@ input StreetsPkColumnsInput {
 
 "input type for updating data in table \"streets\""
 input StreetsSetInput {
+    blurhash: String
     color: bigint
     id: uuid
     line: geography
@@ -14814,6 +14889,7 @@ input StreetsStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input StreetsStreamCursorValueInput {
+    blurhash: String
     color: bigint
     id: uuid
     line: geography

@@ -801,6 +801,7 @@ class Subscription_watchAllServices_services
     this.studyYearFrom,
     this.studyYearTo,
     this.photoUpdatedAt,
+    this.blurhash,
     required this.classes,
     required this.groups,
   });
@@ -814,6 +815,7 @@ class Subscription_watchAllServices_services
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$classes = json['classes'];
     final l$groups = json['groups'];
     return Subscription_watchAllServices_services(
@@ -831,6 +833,7 @@ class Subscription_watchAllServices_services
               (l$studyYearTo as Map<String, dynamic>)),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       classes: (l$classes as List<dynamic>)
           .map((e) => Subscription_watchAllServices_services_classes.fromJson(
               (e as Map<String, dynamic>)))
@@ -855,6 +858,8 @@ class Subscription_watchAllServices_services
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Subscription_watchAllServices_services_classes> classes;
 
   final List<Fragment_Group> groups;
@@ -876,6 +881,8 @@ class Subscription_watchAllServices_services
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$classes = classes;
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$groups = groups;
@@ -892,6 +899,7 @@ class Subscription_watchAllServices_services
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$classes = classes;
     final l$groups = groups;
     return Object.hashAll([
@@ -902,6 +910,7 @@ class Subscription_watchAllServices_services
       l$studyYearFrom,
       l$studyYearTo,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$classes.map((v) => v)),
       Object.hashAll(l$groups.map((v) => v)),
     ]);
@@ -949,6 +958,11 @@ class Subscription_watchAllServices_services
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$classes = classes;
@@ -1006,6 +1020,7 @@ abstract class CopyWith_Subscription_watchAllServices_services<TRes> {
     Subscription_watchAllServices_services_studyYearFrom? studyYearFrom,
     Subscription_watchAllServices_services_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Subscription_watchAllServices_services_classes>? classes,
     List<Fragment_Group>? groups,
   });
@@ -1046,6 +1061,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? classes = _undefined,
     Object? groups = _undefined,
   }) =>
@@ -1069,6 +1085,8 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         classes: classes == _undefined || classes == null
             ? _instance.classes
             : (classes as List<Subscription_watchAllServices_services_classes>),
@@ -1133,6 +1151,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services<TRes>
     Subscription_watchAllServices_services_studyYearFrom? studyYearFrom,
     Subscription_watchAllServices_services_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Subscription_watchAllServices_services_classes>? classes,
     List<Fragment_Group>? groups,
   }) =>
@@ -1467,6 +1486,7 @@ class Subscription_watchAllServices_services_classes
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.studyYear,
   });
 
@@ -1477,6 +1497,7 @@ class Subscription_watchAllServices_services_classes
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$studyYear = json['studyYear'];
     return Subscription_watchAllServices_services_classes(
       id: stringToUuid(l$id),
@@ -1485,6 +1506,7 @@ class Subscription_watchAllServices_services_classes
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       studyYear:
           Subscription_watchAllServices_services_classes_studyYear.fromJson(
               (l$studyYear as Map<String, dynamic>)),
@@ -1501,6 +1523,8 @@ class Subscription_watchAllServices_services_classes
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Subscription_watchAllServices_services_classes_studyYear studyYear;
 
   Map<String, dynamic> toJson() {
@@ -1516,6 +1540,8 @@ class Subscription_watchAllServices_services_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$studyYear = studyYear;
     _resultData['studyYear'] = l$studyYear.toJson();
     return _resultData;
@@ -1528,6 +1554,7 @@ class Subscription_watchAllServices_services_classes
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$studyYear = studyYear;
     return Object.hashAll([
       l$id,
@@ -1535,6 +1562,7 @@ class Subscription_watchAllServices_services_classes
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$studyYear,
     ]);
   }
@@ -1573,6 +1601,11 @@ class Subscription_watchAllServices_services_classes
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (l$studyYear != lOther$studyYear) {
@@ -1608,6 +1641,7 @@ abstract class CopyWith_Subscription_watchAllServices_services_classes<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchAllServices_services_classes_studyYear? studyYear,
   });
   CopyWith_Subscription_watchAllServices_services_classes_studyYear<TRes>
@@ -1633,6 +1667,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? studyYear = _undefined,
   }) =>
       _then(Subscription_watchAllServices_services_classes(
@@ -1647,6 +1682,8 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         studyYear: studyYear == _undefined || studyYear == null
             ? _instance.studyYear
             : (studyYear
@@ -1672,6 +1709,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Subscription_watchAllServices_services_classes_studyYear? studyYear,
   }) =>
       _res;
@@ -2167,6 +2205,7 @@ class Subscription_watchService_servicesByPk
     this.studyYearFrom,
     this.studyYearTo,
     this.photoUpdatedAt,
+    this.blurhash,
     this.lastEdit,
     required this.adminUsers,
     this.nextService,
@@ -2181,6 +2220,7 @@ class Subscription_watchService_servicesByPk
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
     final l$nextService = json['nextService'];
@@ -2199,6 +2239,7 @@ class Subscription_watchService_servicesByPk
               (l$studyYearTo as Map<String, dynamic>)),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       lastEdit: (l$lastEdit as Json?),
       adminUsers: (l$adminUsers as List<dynamic>)
           .map((e) =>
@@ -2225,6 +2266,8 @@ class Subscription_watchService_servicesByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Json? lastEdit;
 
   final List<Subscription_watchService_servicesByPk_adminUsers> adminUsers;
@@ -2248,6 +2291,8 @@ class Subscription_watchService_servicesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit;
     final l$adminUsers = adminUsers;
@@ -2266,6 +2311,7 @@ class Subscription_watchService_servicesByPk
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$lastEdit = lastEdit;
     final l$adminUsers = adminUsers;
     final l$nextService = nextService;
@@ -2277,6 +2323,7 @@ class Subscription_watchService_servicesByPk
       l$studyYearFrom,
       l$studyYearTo,
       l$photoUpdatedAt,
+      l$blurhash,
       l$lastEdit,
       Object.hashAll(l$adminUsers.map((v) => v)),
       l$nextService,
@@ -2325,6 +2372,11 @@ class Subscription_watchService_servicesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$lastEdit = lastEdit;
@@ -2380,6 +2432,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     Subscription_watchService_servicesByPk_studyYearFrom? studyYearFrom,
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
@@ -2418,6 +2471,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
     Object? nextService = _undefined,
@@ -2442,6 +2496,8 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
         adminUsers: adminUsers == _undefined || adminUsers == null
@@ -2507,6 +2563,7 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     Subscription_watchService_servicesByPk_studyYearFrom? studyYearFrom,
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,

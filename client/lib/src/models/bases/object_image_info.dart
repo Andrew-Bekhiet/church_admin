@@ -25,7 +25,11 @@ class FunctionsObjectImageInfo extends ObjectImageInfo {
   @override
   final DateTime? lastUpdatedTime;
 
-  const FunctionsObjectImageInfo(this._table, this._id, {this.lastUpdatedTime});
+  const FunctionsObjectImageInfo(
+    this._table,
+    this._id, {
+    this.lastUpdatedTime,
+  });
 
   @override
   String get cacheKey => '$_table/$_id';

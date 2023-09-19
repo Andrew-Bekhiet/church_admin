@@ -25,6 +25,7 @@ mixin _$Class {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   Service? get service => throw _privateConstructorUsedError;
   String? get serviceId => throw _privateConstructorUsedError;
   StudyYear? get studyYear => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $ClassCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       Service? service,
       String? serviceId,
       StudyYear? studyYear,
@@ -92,6 +94,7 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     Object? name = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? service = freezed,
     Object? serviceId = freezed,
     Object? studyYear = freezed,
@@ -119,6 +122,10 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       service: freezed == service
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
@@ -235,6 +242,7 @@ abstract class _$$_ClassCopyWith<$Res> implements $ClassCopyWith<$Res> {
       String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       Service? service,
       String? serviceId,
       StudyYear? studyYear,
@@ -273,6 +281,7 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res, _$_Class>
     Object? name = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? service = freezed,
     Object? serviceId = freezed,
     Object? studyYear = freezed,
@@ -300,6 +309,10 @@ class __$$_ClassCopyWithImpl<$Res> extends _$ClassCopyWithImpl<$Res, _$_Class>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       service: freezed == service
           ? _value.service
           : service // ignore: cast_nullable_to_non_nullable
@@ -349,6 +362,7 @@ class _$_Class extends _Class {
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       this.service,
       this.serviceId,
       this.studyYear,
@@ -376,6 +390,8 @@ class _$_Class extends _Class {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   @override
   final Service? service;
   @override
@@ -408,7 +424,7 @@ class _$_Class extends _Class {
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -421,6 +437,8 @@ class _$_Class extends _Class {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             (identical(other.service, service) || other.service == service) &&
             (identical(other.serviceId, serviceId) ||
                 other.serviceId == serviceId) &&
@@ -452,6 +470,7 @@ class _$_Class extends _Class {
       name,
       color,
       photoUpdatedAt,
+      blurhash,
       service,
       serviceId,
       studyYear,
@@ -482,6 +501,7 @@ abstract class _Class extends Class {
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final Service? service,
       final String? serviceId,
       final StudyYear? studyYear,
@@ -508,6 +528,8 @@ abstract class _Class extends Class {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   Service? get service;
   @override

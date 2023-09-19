@@ -1,6 +1,7 @@
 fragment Store on Stores {
   ...StoreNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment StoreNoPhoto on Stores {

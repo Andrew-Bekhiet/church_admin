@@ -49,6 +49,7 @@ class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
     int? studyYearId,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     LastRecordedByInfo? lastConfession,
     LastRecordedByInfo? lastKodas,
     LastRecordedByInfo? lastCall,

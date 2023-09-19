@@ -435,6 +435,7 @@ class Subscription_watchAllStreets_streets
     this.color,
     this.$__typename = 'Streets',
     this.photoUpdatedAt,
+    this.blurhash,
     this.line,
   });
 
@@ -445,6 +446,7 @@ class Subscription_watchAllStreets_streets
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$line = json['line'];
     return Subscription_watchAllStreets_streets(
       id: stringToUuid(l$id),
@@ -453,6 +455,7 @@ class Subscription_watchAllStreets_streets
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       line: (l$line as Map<String, dynamic>?),
     );
   }
@@ -466,6 +469,8 @@ class Subscription_watchAllStreets_streets
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Map<String, dynamic>? line;
 
@@ -482,6 +487,8 @@ class Subscription_watchAllStreets_streets
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$line = line;
     _resultData['line'] = l$line;
     return _resultData;
@@ -494,6 +501,7 @@ class Subscription_watchAllStreets_streets
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$line = line;
     return Object.hashAll([
       l$id,
@@ -501,6 +509,7 @@ class Subscription_watchAllStreets_streets
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$line,
     ]);
   }
@@ -539,6 +548,11 @@ class Subscription_watchAllStreets_streets
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$line = line;
     final lOther$line = other.line;
     if (l$line != lOther$line) {
@@ -573,6 +587,7 @@ abstract class CopyWith_Subscription_watchAllStreets_streets<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? line,
   });
 }
@@ -596,6 +611,7 @@ class _CopyWithImpl_Subscription_watchAllStreets_streets<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? line = _undefined,
   }) =>
       _then(Subscription_watchAllStreets_streets(
@@ -610,6 +626,8 @@ class _CopyWithImpl_Subscription_watchAllStreets_streets<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         line: line == _undefined
             ? _instance.line
             : (line as Map<String, dynamic>?),
@@ -628,6 +646,7 @@ class _CopyWithStubImpl_Subscription_watchAllStreets_streets<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? line,
   }) =>
       _res;
@@ -935,6 +954,7 @@ class Subscription_watchStreet_streetsByPk
     this.color,
     this.$__typename = 'Streets',
     this.photoUpdatedAt,
+    this.blurhash,
     this.areas,
     this.line,
     this.lastEdit,
@@ -947,6 +967,7 @@ class Subscription_watchStreet_streetsByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$areas = json['areas'];
     final l$line = json['line'];
     final l$lastEdit = json['lastEdit'];
@@ -957,6 +978,7 @@ class Subscription_watchStreet_streetsByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       areas: (l$areas as List<dynamic>?)
           ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -974,6 +996,8 @@ class Subscription_watchStreet_streetsByPk
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final List<Fragment_Area>? areas;
 
@@ -994,6 +1018,8 @@ class Subscription_watchStreet_streetsByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$areas = areas;
     _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
     final l$line = line;
@@ -1010,6 +1036,7 @@ class Subscription_watchStreet_streetsByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$areas = areas;
     final l$line = line;
     final l$lastEdit = lastEdit;
@@ -1019,6 +1046,7 @@ class Subscription_watchStreet_streetsByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
       l$line,
       l$lastEdit,
@@ -1057,6 +1085,11 @@ class Subscription_watchStreet_streetsByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$areas = areas;
@@ -1114,6 +1147,7 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_Area>? areas,
     Map<String, dynamic>? line,
     Json? lastEdit,
@@ -1143,6 +1177,7 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? areas = _undefined,
     Object? line = _undefined,
     Object? lastEdit = _undefined,
@@ -1159,6 +1194,8 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         areas: areas == _undefined
             ? _instance.areas
             : (areas as List<Fragment_Area>?),
@@ -1191,6 +1228,7 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_Area>? areas,
     Map<String, dynamic>? line,
     Json? lastEdit,

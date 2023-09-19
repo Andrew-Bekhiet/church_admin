@@ -620,10 +620,10 @@ class Input_AreasBoolExp {
     List<Input_AreasBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_AuthUsersAdminOnAggregateBoolExp? adminUsersAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_GeographyComparisonExp? bounds,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
-    Input_StringComparisonExp? firestoreId,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
@@ -641,10 +641,10 @@ class Input_AreasBoolExp {
         if (adminUsers != null) r'adminUsers': adminUsers,
         if (adminUsersAggregate != null)
           r'adminUsersAggregate': adminUsersAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (bounds != null) r'bounds': bounds,
         if (color != null) r'color': color,
         if (families != null) r'families': families,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
           r'isUserAllowedToRead': isUserAllowedToRead,
@@ -694,6 +694,13 @@ class Input_AreasBoolExp {
           : Input_AuthUsersAdminOnAggregateBoolExp.fromJson(
               (l$adminUsersAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
+    }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] = l$bounds == null
@@ -714,13 +721,6 @@ class Input_AreasBoolExp {
           ? null
           : Input_FamiliesBoolExp.fromJson(
               (l$families as Map<String, dynamic>));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$firestoreId as Map<String, dynamic>));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -796,14 +796,14 @@ class Input_AreasBoolExp {
   Input_AuthUsersAdminOnAggregateBoolExp? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_GeographyComparisonExp? get bounds =>
       (_$data['bounds'] as Input_GeographyComparisonExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_FamiliesBoolExp? get families =>
       (_$data['families'] as Input_FamiliesBoolExp?);
-  Input_StringComparisonExp? get firestoreId =>
-      (_$data['firestoreId'] as Input_StringComparisonExp?);
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
@@ -842,6 +842,10 @@ class Input_AreasBoolExp {
       final l$adminUsersAggregate = adminUsersAggregate;
       result$data['adminUsersAggregate'] = l$adminUsersAggregate?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
+    }
     if (_$data.containsKey('bounds')) {
       final l$bounds = bounds;
       result$data['bounds'] = l$bounds?.toJson();
@@ -853,10 +857,6 @@ class Input_AreasBoolExp {
     if (_$data.containsKey('families')) {
       final l$families = families;
       result$data['families'] = l$families?.toJson();
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId?.toJson();
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -974,6 +974,15 @@ class Input_AreasBoolExp {
     if (l$adminUsersAggregate != lOther$adminUsersAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
@@ -997,15 +1006,6 @@ class Input_AreasBoolExp {
       return false;
     }
     if (l$families != lOther$families) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -1094,10 +1094,10 @@ class Input_AreasBoolExp {
     final l$$_or = $_or;
     final l$adminUsers = adminUsers;
     final l$adminUsersAggregate = adminUsersAggregate;
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$color = color;
     final l$families = families;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
@@ -1123,10 +1123,10 @@ class Input_AreasBoolExp {
       _$data.containsKey('adminUsersAggregate')
           ? l$adminUsersAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('bounds') ? l$bounds : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('families') ? l$families : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
           ? l$isUserAllowedToRead
@@ -1159,10 +1159,10 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
     List<Input_AreasBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_AuthUsersAdminOnAggregateBoolExp? adminUsersAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_GeographyComparisonExp? bounds,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
-    Input_StringComparisonExp? firestoreId,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
@@ -1184,10 +1184,10 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
           _fn);
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes> get adminUsersAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_GeographyComparisonExp<TRes> get bounds;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_FamiliesBoolExp<TRes> get families;
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite;
@@ -1218,10 +1218,10 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
     Object? $_or = _undefined,
     Object? adminUsers = _undefined,
     Object? adminUsersAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? color = _undefined,
     Object? families = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
@@ -1242,13 +1242,13 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
         if (adminUsersAggregate != _undefined)
           'adminUsersAggregate':
               (adminUsersAggregate as Input_AuthUsersAdminOnAggregateBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (bounds != _undefined)
           'bounds': (bounds as Input_GeographyComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (families != _undefined)
           'families': (families as Input_FamiliesBoolExp?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Input_StringComparisonExp?),
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (isUserAllowedToRead != _undefined)
           'isUserAllowedToRead':
@@ -1309,6 +1309,14 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
             local$adminUsersAggregate, (e) => call(adminUsersAggregate: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
+  }
+
   CopyWith_Input_GeographyComparisonExp<TRes> get bounds {
     final local$bounds = _instance.bounds;
     return local$bounds == null
@@ -1331,14 +1339,6 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
         ? CopyWith_Input_FamiliesBoolExp.stub(_then(_instance))
         : CopyWith_Input_FamiliesBoolExp(
             local$families, (e) => call(families: e));
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId {
-    final local$firestoreId = _instance.firestoreId;
-    return local$firestoreId == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$firestoreId, (e) => call(firestoreId: e));
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get id {
@@ -1421,10 +1421,10 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
     List<Input_AreasBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_AuthUsersAdminOnAggregateBoolExp? adminUsersAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_GeographyComparisonExp? bounds,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
-    Input_StringComparisonExp? firestoreId,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
@@ -1445,14 +1445,14 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_GeographyComparisonExp<TRes> get bounds =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_FamiliesBoolExp<TRes> get families =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
@@ -1575,18 +1575,18 @@ class _CopyWithStubImpl_Input_AreasIncInput<TRes>
 class Input_AreasInsertInput {
   factory Input_AreasInsertInput({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
   }) =>
       Input_AreasInsertInput._({
         if (adminUsers != null) r'adminUsers': adminUsers,
+        if (blurhash != null) r'blurhash': blurhash,
         if (bounds != null) r'bounds': bounds,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -1603,6 +1603,10 @@ class Input_AreasInsertInput {
           : Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
               (l$adminUsers as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] = (l$bounds as Map<String, dynamic>?);
@@ -1610,10 +1614,6 @@ class Input_AreasInsertInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -1635,10 +1635,10 @@ class Input_AreasInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
@@ -1648,6 +1648,10 @@ class Input_AreasInsertInput {
       final l$adminUsers = adminUsers;
       result$data['adminUsers'] = l$adminUsers?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('bounds')) {
       final l$bounds = bounds;
       result$data['bounds'] = l$bounds;
@@ -1655,10 +1659,6 @@ class Input_AreasInsertInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1699,6 +1699,15 @@ class Input_AreasInsertInput {
     if (l$adminUsers != lOther$adminUsers) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
@@ -1713,15 +1722,6 @@ class Input_AreasInsertInput {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -1755,17 +1755,17 @@ class Input_AreasInsertInput {
   @override
   int get hashCode {
     final l$adminUsers = adminUsers;
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('bounds') ? l$bounds : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -1784,9 +1784,9 @@ abstract class CopyWith_Input_AreasInsertInput<TRes> {
 
   TRes call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -1809,9 +1809,9 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
 
   TRes call({
     Object? adminUsers = _undefined,
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -1821,9 +1821,9 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
         if (adminUsers != _undefined)
           'adminUsers':
               (adminUsers as Input_AuthUsersAdminOnArrRelInsertInput?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (bounds != _undefined) 'bounds': (bounds as Map<String, dynamic>?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
@@ -1847,9 +1847,9 @@ class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
 
   call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -1861,15 +1861,15 @@ class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
 
 class Input_AreasMaxOrderBy {
   factory Input_AreasMaxOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_AreasMaxOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -1879,16 +1879,16 @@ class Input_AreasMaxOrderBy {
 
   factory Input_AreasMaxOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -1911,23 +1911,23 @@ class Input_AreasMaxOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1959,21 +1959,21 @@ class Input_AreasMaxOrderBy {
     if (!(other is Input_AreasMaxOrderBy) || runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -2006,14 +2006,14 @@ class Input_AreasMaxOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -2031,8 +2031,8 @@ abstract class CopyWith_Input_AreasMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_AreasMaxOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -2053,17 +2053,16 @@ class _CopyWithImpl_Input_AreasMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
       _then(Input_AreasMaxOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (photoUpdatedAt != _undefined)
@@ -2078,8 +2077,8 @@ class _CopyWithStubImpl_Input_AreasMaxOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -2089,15 +2088,15 @@ class _CopyWithStubImpl_Input_AreasMaxOrderBy<TRes>
 
 class Input_AreasMinOrderBy {
   factory Input_AreasMinOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_AreasMinOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -2107,16 +2106,16 @@ class Input_AreasMinOrderBy {
 
   factory Input_AreasMinOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2139,23 +2138,23 @@ class Input_AreasMinOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2187,21 +2186,21 @@ class Input_AreasMinOrderBy {
     if (!(other is Input_AreasMinOrderBy) || runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -2234,14 +2233,14 @@ class Input_AreasMinOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -2259,8 +2258,8 @@ abstract class CopyWith_Input_AreasMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_AreasMinOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -2281,17 +2280,16 @@ class _CopyWithImpl_Input_AreasMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
       _then(Input_AreasMinOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (photoUpdatedAt != _undefined)
@@ -2306,8 +2304,8 @@ class _CopyWithStubImpl_Input_AreasMinOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -2667,10 +2665,10 @@ class _CopyWithStubImpl_Input_AreasOnConflict<TRes>
 class Input_AreasOrderBy {
   factory Input_AreasOrderBy({
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? bounds,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
@@ -2684,10 +2682,10 @@ class Input_AreasOrderBy {
       Input_AreasOrderBy._({
         if (adminUsersAggregate != null)
           r'adminUsersAggregate': adminUsersAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (bounds != null) r'bounds': bounds,
         if (color != null) r'color': color,
         if (familiesAggregate != null) r'familiesAggregate': familiesAggregate,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
           r'isUserAllowedToRead': isUserAllowedToRead,
@@ -2712,6 +2710,12 @@ class Input_AreasOrderBy {
           : Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
               (l$adminUsersAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] =
@@ -2728,12 +2732,6 @@ class Input_AreasOrderBy {
           ? null
           : Input_FamiliesAggregateOrderBy.fromJson(
               (l$familiesAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2798,11 +2796,11 @@ class Input_AreasOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get bounds => (_$data['bounds'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Input_FamiliesAggregateOrderBy? get familiesAggregate =>
       (_$data['familiesAggregate'] as Input_FamiliesAggregateOrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
@@ -2824,6 +2822,11 @@ class Input_AreasOrderBy {
       final l$adminUsersAggregate = adminUsersAggregate;
       result$data['adminUsersAggregate'] = l$adminUsersAggregate?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('bounds')) {
       final l$bounds = bounds;
       result$data['bounds'] =
@@ -2837,11 +2840,6 @@ class Input_AreasOrderBy {
     if (_$data.containsKey('familiesAggregate')) {
       final l$familiesAggregate = familiesAggregate;
       result$data['familiesAggregate'] = l$familiesAggregate?.toJson();
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2911,6 +2909,15 @@ class Input_AreasOrderBy {
     if (l$adminUsersAggregate != lOther$adminUsersAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
@@ -2934,15 +2941,6 @@ class Input_AreasOrderBy {
       return false;
     }
     if (l$familiesAggregate != lOther$familiesAggregate) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -3030,10 +3028,10 @@ class Input_AreasOrderBy {
   @override
   int get hashCode {
     final l$adminUsersAggregate = adminUsersAggregate;
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$color = color;
     final l$familiesAggregate = familiesAggregate;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
@@ -3047,10 +3045,10 @@ class Input_AreasOrderBy {
       _$data.containsKey('adminUsersAggregate')
           ? l$adminUsersAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('bounds') ? l$bounds : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familiesAggregate') ? l$familiesAggregate : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
           ? l$isUserAllowedToRead
@@ -3079,10 +3077,10 @@ abstract class CopyWith_Input_AreasOrderBy<TRes> {
 
   TRes call({
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? bounds,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
@@ -3115,10 +3113,10 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
 
   TRes call({
     Object? adminUsersAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? color = _undefined,
     Object? familiesAggregate = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
@@ -3134,13 +3132,12 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
         if (adminUsersAggregate != _undefined)
           'adminUsersAggregate':
               (adminUsersAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (bounds != _undefined) 'bounds': (bounds as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (familiesAggregate != _undefined)
           'familiesAggregate':
               (familiesAggregate as Input_FamiliesAggregateOrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (isUserAllowedToRead != _undefined)
           'isUserAllowedToRead': (isUserAllowedToRead as Enum_OrderBy?),
@@ -3209,10 +3206,10 @@ class _CopyWithStubImpl_Input_AreasOrderBy<TRes>
 
   call({
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? bounds,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
@@ -3333,17 +3330,17 @@ class _CopyWithStubImpl_Input_AreasPkColumnsInput<TRes>
 
 class Input_AreasSetInput {
   factory Input_AreasSetInput({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
   }) =>
       Input_AreasSetInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (bounds != null) r'bounds': bounds,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -3353,6 +3350,10 @@ class Input_AreasSetInput {
 
   factory Input_AreasSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] = (l$bounds as Map<String, dynamic>?);
@@ -3360,10 +3361,6 @@ class Input_AreasSetInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -3383,15 +3380,19 @@ class Input_AreasSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('bounds')) {
       final l$bounds = bounds;
       result$data['bounds'] = l$bounds;
@@ -3399,10 +3400,6 @@ class Input_AreasSetInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -3433,6 +3430,15 @@ class Input_AreasSetInput {
     if (!(other is Input_AreasSetInput) || runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
@@ -3447,15 +3453,6 @@ class Input_AreasSetInput {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -3488,16 +3485,16 @@ class Input_AreasSetInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('bounds') ? l$bounds : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -3515,9 +3512,9 @@ abstract class CopyWith_Input_AreasSetInput<TRes> {
       _CopyWithStubImpl_Input_AreasSetInput;
 
   TRes call({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -3538,18 +3535,18 @@ class _CopyWithImpl_Input_AreasSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
       _then(Input_AreasSetInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (bounds != _undefined) 'bounds': (bounds as Map<String, dynamic>?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
@@ -3564,9 +3561,9 @@ class _CopyWithStubImpl_Input_AreasSetInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -4035,17 +4032,17 @@ class _CopyWithStubImpl_Input_AreasStreamCursorInput<TRes>
 
 class Input_AreasStreamCursorValueInput {
   factory Input_AreasStreamCursorValueInput({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
   }) =>
       Input_AreasStreamCursorValueInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (bounds != null) r'bounds': bounds,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -4056,6 +4053,10 @@ class Input_AreasStreamCursorValueInput {
   factory Input_AreasStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] = (l$bounds as Map<String, dynamic>?);
@@ -4063,10 +4064,6 @@ class Input_AreasStreamCursorValueInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -4086,15 +4083,19 @@ class Input_AreasStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('bounds')) {
       final l$bounds = bounds;
       result$data['bounds'] = l$bounds;
@@ -4102,10 +4103,6 @@ class Input_AreasStreamCursorValueInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -4137,6 +4134,15 @@ class Input_AreasStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
@@ -4151,15 +4157,6 @@ class Input_AreasStreamCursorValueInput {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -4192,16 +4189,16 @@ class Input_AreasStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('bounds') ? l$bounds : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -4219,9 +4216,9 @@ abstract class CopyWith_Input_AreasStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_AreasStreamCursorValueInput;
 
   TRes call({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -4242,18 +4239,18 @@ class _CopyWithImpl_Input_AreasStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
       _then(Input_AreasStreamCursorValueInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (bounds != _undefined) 'bounds': (bounds as Map<String, dynamic>?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
@@ -4268,9 +4265,9 @@ class _CopyWithStubImpl_Input_AreasStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     Map<String, dynamic>? bounds,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -11426,6 +11423,7 @@ class Input_AuthUsersDataBoolExp {
     Input_AuthUsersAdminOnBoolExp? adminOn,
     Input_AuthUsersAdminOnAggregateBoolExp? adminOnAggregate,
     Input_StringComparisonExp? authId,
+    Input_StringComparisonExp? blurhash,
     Input_StringComparisonExp? email,
     Input_BooleanComparisonExp? isUserAllowedToChange,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -11444,6 +11442,7 @@ class Input_AuthUsersDataBoolExp {
         if (adminOn != null) r'adminOn': adminOn,
         if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
         if (authId != null) r'authId': authId,
+        if (blurhash != null) r'blurhash': blurhash,
         if (email != null) r'email': email,
         if (isUserAllowedToChange != null)
           r'isUserAllowedToChange': isUserAllowedToChange,
@@ -11504,6 +11503,13 @@ class Input_AuthUsersDataBoolExp {
           ? null
           : Input_StringComparisonExp.fromJson(
               (l$authId as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
@@ -11590,6 +11596,8 @@ class Input_AuthUsersDataBoolExp {
       (_$data['adminOnAggregate'] as Input_AuthUsersAdminOnAggregateBoolExp?);
   Input_StringComparisonExp? get authId =>
       (_$data['authId'] as Input_StringComparisonExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_StringComparisonExp? get email =>
       (_$data['email'] as Input_StringComparisonExp?);
   Input_BooleanComparisonExp? get isUserAllowedToChange =>
@@ -11636,6 +11644,10 @@ class Input_AuthUsersDataBoolExp {
     if (_$data.containsKey('authId')) {
       final l$authId = authId;
       result$data['authId'] = l$authId?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
@@ -11765,6 +11777,15 @@ class Input_AuthUsersDataBoolExp {
     if (l$authId != lOther$authId) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$email = email;
     final lOther$email = other.email;
     if (_$data.containsKey('email') != other._$data.containsKey('email')) {
@@ -11862,6 +11883,7 @@ class Input_AuthUsersDataBoolExp {
     final l$adminOn = adminOn;
     final l$adminOnAggregate = adminOnAggregate;
     final l$authId = authId;
+    final l$blurhash = blurhash;
     final l$email = email;
     final l$isUserAllowedToChange = isUserAllowedToChange;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -11887,6 +11909,7 @@ class Input_AuthUsersDataBoolExp {
       _$data.containsKey('adminOn') ? l$adminOn : const {},
       _$data.containsKey('adminOnAggregate') ? l$adminOnAggregate : const {},
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('isUserAllowedToChange')
           ? l$isUserAllowedToChange
@@ -11923,6 +11946,7 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
     Input_AuthUsersAdminOnBoolExp? adminOn,
     Input_AuthUsersAdminOnAggregateBoolExp? adminOnAggregate,
     Input_StringComparisonExp? authId,
+    Input_StringComparisonExp? blurhash,
     Input_StringComparisonExp? email,
     Input_BooleanComparisonExp? isUserAllowedToChange,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -11950,6 +11974,7 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminOn;
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes> get adminOnAggregate;
   CopyWith_Input_StringComparisonExp<TRes> get authId;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_StringComparisonExp<TRes> get email;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToChange;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
@@ -11983,6 +12008,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     Object? adminOn = _undefined,
     Object? adminOnAggregate = _undefined,
     Object? authId = _undefined,
+    Object? blurhash = _undefined,
     Object? email = _undefined,
     Object? isUserAllowedToChange = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -12008,6 +12034,8 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
               (adminOnAggregate as Input_AuthUsersAdminOnAggregateBoolExp?),
         if (authId != _undefined)
           'authId': (authId as Input_StringComparisonExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (email != _undefined) 'email': (email as Input_StringComparisonExp?),
         if (isUserAllowedToChange != _undefined)
           'isUserAllowedToChange':
@@ -12082,6 +12110,14 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
             local$authId, (e) => call(authId: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get email {
@@ -12177,6 +12213,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
     Input_AuthUsersAdminOnBoolExp? adminOn,
     Input_AuthUsersAdminOnAggregateBoolExp? adminOnAggregate,
     Input_StringComparisonExp? authId,
+    Input_StringComparisonExp? blurhash,
     Input_StringComparisonExp? email,
     Input_BooleanComparisonExp? isUserAllowedToChange,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -12198,6 +12235,8 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes> get adminOnAggregate =>
       CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
   CopyWith_Input_StringComparisonExp<TRes> get authId =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_StringComparisonExp<TRes> get email =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -12226,6 +12265,7 @@ class Input_AuthUsersDataInsertInput {
   factory Input_AuthUsersDataInsertInput({
     Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     Input_AuthUsersPermissionsArrRelInsertInput? permissions,
@@ -12236,6 +12276,7 @@ class Input_AuthUsersDataInsertInput {
       Input_AuthUsersDataInsertInput._({
         if (adminOn != null) r'adminOn': adminOn,
         if (authId != null) r'authId': authId,
+        if (blurhash != null) r'blurhash': blurhash,
         if (email != null) r'email': email,
         if (name != null) r'name': name,
         if (permissions != null) r'permissions': permissions,
@@ -12258,6 +12299,10 @@ class Input_AuthUsersDataInsertInput {
     if (data.containsKey('authId')) {
       final l$authId = data['authId'];
       result$data['authId'] = (l$authId as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
@@ -12298,6 +12343,7 @@ class Input_AuthUsersDataInsertInput {
   Input_AuthUsersAdminOnArrRelInsertInput? get adminOn =>
       (_$data['adminOn'] as Input_AuthUsersAdminOnArrRelInsertInput?);
   String? get authId => (_$data['authId'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   String? get email => (_$data['email'] as String?);
   String? get name => (_$data['name'] as String?);
   Input_AuthUsersPermissionsArrRelInsertInput? get permissions =>
@@ -12315,6 +12361,10 @@ class Input_AuthUsersDataInsertInput {
     if (_$data.containsKey('authId')) {
       final l$authId = authId;
       result$data['authId'] = l$authId;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
@@ -12374,6 +12424,15 @@ class Input_AuthUsersDataInsertInput {
     if (l$authId != lOther$authId) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$email = email;
     final lOther$email = other.email;
     if (_$data.containsKey('email') != other._$data.containsKey('email')) {
@@ -12431,6 +12490,7 @@ class Input_AuthUsersDataInsertInput {
   int get hashCode {
     final l$adminOn = adminOn;
     final l$authId = authId;
+    final l$blurhash = blurhash;
     final l$email = email;
     final l$name = name;
     final l$permissions = permissions;
@@ -12440,6 +12500,7 @@ class Input_AuthUsersDataInsertInput {
     return Object.hashAll([
       _$data.containsKey('adminOn') ? l$adminOn : const {},
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('permissions') ? l$permissions : const {},
@@ -12462,6 +12523,7 @@ abstract class CopyWith_Input_AuthUsersDataInsertInput<TRes> {
   TRes call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     Input_AuthUsersPermissionsArrRelInsertInput? permissions,
@@ -12490,6 +12552,7 @@ class _CopyWithImpl_Input_AuthUsersDataInsertInput<TRes>
   TRes call({
     Object? adminOn = _undefined,
     Object? authId = _undefined,
+    Object? blurhash = _undefined,
     Object? email = _undefined,
     Object? name = _undefined,
     Object? permissions = _undefined,
@@ -12502,6 +12565,7 @@ class _CopyWithImpl_Input_AuthUsersDataInsertInput<TRes>
         if (adminOn != _undefined)
           'adminOn': (adminOn as Input_AuthUsersAdminOnArrRelInsertInput?),
         if (authId != _undefined) 'authId': (authId as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (email != _undefined) 'email': (email as String?),
         if (name != _undefined) 'name': (name as String?),
         if (permissions != _undefined)
@@ -12549,6 +12613,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataInsertInput<TRes>
   call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     Input_AuthUsersPermissionsArrRelInsertInput? permissions,
@@ -12929,6 +12994,7 @@ class Input_AuthUsersDataOrderBy {
   factory Input_AuthUsersDataOrderBy({
     Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
     Enum_OrderBy? authId,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? email,
     Enum_OrderBy? isUserAllowedToChange,
     Enum_OrderBy? isUserAllowedToRead,
@@ -12942,6 +13008,7 @@ class Input_AuthUsersDataOrderBy {
       Input_AuthUsersDataOrderBy._({
         if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
         if (authId != null) r'authId': authId,
+        if (blurhash != null) r'blurhash': blurhash,
         if (email != null) r'email': email,
         if (isUserAllowedToChange != null)
           r'isUserAllowedToChange': isUserAllowedToChange,
@@ -12971,6 +13038,12 @@ class Input_AuthUsersDataOrderBy {
       final l$authId = data['authId'];
       result$data['authId'] =
           l$authId == null ? null : fromJson_Enum_OrderBy((l$authId as String));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
@@ -13032,6 +13105,7 @@ class Input_AuthUsersDataOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminOnAggregate =>
       (_$data['adminOnAggregate'] as Input_AuthUsersAdminOnAggregateOrderBy?);
   Enum_OrderBy? get authId => (_$data['authId'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get email => (_$data['email'] as Enum_OrderBy?);
   Enum_OrderBy? get isUserAllowedToChange =>
       (_$data['isUserAllowedToChange'] as Enum_OrderBy?);
@@ -13057,6 +13131,11 @@ class Input_AuthUsersDataOrderBy {
       final l$authId = authId;
       result$data['authId'] =
           l$authId == null ? null : toJson_Enum_OrderBy(l$authId);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
@@ -13134,6 +13213,15 @@ class Input_AuthUsersDataOrderBy {
       return false;
     }
     if (l$authId != lOther$authId) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$email = email;
@@ -13220,6 +13308,7 @@ class Input_AuthUsersDataOrderBy {
   int get hashCode {
     final l$adminOnAggregate = adminOnAggregate;
     final l$authId = authId;
+    final l$blurhash = blurhash;
     final l$email = email;
     final l$isUserAllowedToChange = isUserAllowedToChange;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -13232,6 +13321,7 @@ class Input_AuthUsersDataOrderBy {
     return Object.hashAll([
       _$data.containsKey('adminOnAggregate') ? l$adminOnAggregate : const {},
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('isUserAllowedToChange')
           ? l$isUserAllowedToChange
@@ -13263,6 +13353,7 @@ abstract class CopyWith_Input_AuthUsersDataOrderBy<TRes> {
   TRes call({
     Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
     Enum_OrderBy? authId,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? email,
     Enum_OrderBy? isUserAllowedToChange,
     Enum_OrderBy? isUserAllowedToRead,
@@ -13295,6 +13386,7 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
   TRes call({
     Object? adminOnAggregate = _undefined,
     Object? authId = _undefined,
+    Object? blurhash = _undefined,
     Object? email = _undefined,
     Object? isUserAllowedToChange = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -13311,6 +13403,7 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
           'adminOnAggregate':
               (adminOnAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
         if (authId != _undefined) 'authId': (authId as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (email != _undefined) 'email': (email as Enum_OrderBy?),
         if (isUserAllowedToChange != _undefined)
           'isUserAllowedToChange': (isUserAllowedToChange as Enum_OrderBy?),
@@ -13361,6 +13454,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
   call({
     Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
     Enum_OrderBy? authId,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? email,
     Enum_OrderBy? isUserAllowedToChange,
     Enum_OrderBy? isUserAllowedToRead,
@@ -13480,6 +13574,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataPkColumnsInput<TRes>
 class Input_AuthUsersDataSetInput {
   factory Input_AuthUsersDataSetInput({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -13487,6 +13582,7 @@ class Input_AuthUsersDataSetInput {
   }) =>
       Input_AuthUsersDataSetInput._({
         if (authId != null) r'authId': authId,
+        if (blurhash != null) r'blurhash': blurhash,
         if (email != null) r'email': email,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -13500,6 +13596,10 @@ class Input_AuthUsersDataSetInput {
     if (data.containsKey('authId')) {
       final l$authId = data['authId'];
       result$data['authId'] = (l$authId as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
@@ -13524,6 +13624,7 @@ class Input_AuthUsersDataSetInput {
   Map<String, dynamic> _$data;
 
   String? get authId => (_$data['authId'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   String? get email => (_$data['email'] as String?);
   String? get name => (_$data['name'] as String?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
@@ -13533,6 +13634,10 @@ class Input_AuthUsersDataSetInput {
     if (_$data.containsKey('authId')) {
       final l$authId = authId;
       result$data['authId'] = l$authId;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
@@ -13576,6 +13681,15 @@ class Input_AuthUsersDataSetInput {
     if (l$authId != lOther$authId) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$email = email;
     final lOther$email = other.email;
     if (_$data.containsKey('email') != other._$data.containsKey('email')) {
@@ -13615,12 +13729,14 @@ class Input_AuthUsersDataSetInput {
   @override
   int get hashCode {
     final l$authId = authId;
+    final l$blurhash = blurhash;
     final l$email = email;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$uid = uid;
     return Object.hashAll([
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -13640,6 +13756,7 @@ abstract class CopyWith_Input_AuthUsersDataSetInput<TRes> {
 
   TRes call({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -13662,6 +13779,7 @@ class _CopyWithImpl_Input_AuthUsersDataSetInput<TRes>
 
   TRes call({
     Object? authId = _undefined,
+    Object? blurhash = _undefined,
     Object? email = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -13670,6 +13788,7 @@ class _CopyWithImpl_Input_AuthUsersDataSetInput<TRes>
       _then(Input_AuthUsersDataSetInput._({
         ..._instance._$data,
         if (authId != _undefined) 'authId': (authId as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (email != _undefined) 'email': (email as String?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
@@ -13686,6 +13805,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataSetInput<TRes>
 
   call({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -13849,6 +13969,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput<TRes>
 class Input_AuthUsersDataStreamCursorValueInput {
   factory Input_AuthUsersDataStreamCursorValueInput({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -13856,6 +13977,7 @@ class Input_AuthUsersDataStreamCursorValueInput {
   }) =>
       Input_AuthUsersDataStreamCursorValueInput._({
         if (authId != null) r'authId': authId,
+        if (blurhash != null) r'blurhash': blurhash,
         if (email != null) r'email': email,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -13870,6 +13992,10 @@ class Input_AuthUsersDataStreamCursorValueInput {
     if (data.containsKey('authId')) {
       final l$authId = data['authId'];
       result$data['authId'] = (l$authId as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
@@ -13894,6 +14020,7 @@ class Input_AuthUsersDataStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get authId => (_$data['authId'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   String? get email => (_$data['email'] as String?);
   String? get name => (_$data['name'] as String?);
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
@@ -13903,6 +14030,10 @@ class Input_AuthUsersDataStreamCursorValueInput {
     if (_$data.containsKey('authId')) {
       final l$authId = authId;
       result$data['authId'] = l$authId;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
@@ -13947,6 +14078,15 @@ class Input_AuthUsersDataStreamCursorValueInput {
     if (l$authId != lOther$authId) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$email = email;
     final lOther$email = other.email;
     if (_$data.containsKey('email') != other._$data.containsKey('email')) {
@@ -13986,12 +14126,14 @@ class Input_AuthUsersDataStreamCursorValueInput {
   @override
   int get hashCode {
     final l$authId = authId;
+    final l$blurhash = blurhash;
     final l$email = email;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$uid = uid;
     return Object.hashAll([
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -14011,6 +14153,7 @@ abstract class CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> {
 
   TRes call({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -14033,6 +14176,7 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
 
   TRes call({
     Object? authId = _undefined,
+    Object? blurhash = _undefined,
     Object? email = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -14041,6 +14185,7 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
       _then(Input_AuthUsersDataStreamCursorValueInput._({
         ..._instance._$data,
         if (authId != _undefined) 'authId': (authId as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (email != _undefined) 'email': (email as String?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
@@ -14057,6 +14202,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
 
   call({
     String? authId,
+    String? blurhash,
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
@@ -20383,6 +20529,7 @@ class Input_ClassesBoolExp {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -20411,6 +20558,7 @@ class Input_ClassesBoolExp {
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -20497,6 +20645,13 @@ class Input_ClassesBoolExp {
               ? null
               : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -20607,6 +20762,8 @@ class Input_ClassesBoolExp {
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
@@ -20671,6 +20828,10 @@ class Input_ClassesBoolExp {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -20839,6 +21000,15 @@ class Input_ClassesBoolExp {
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -20958,6 +21128,7 @@ class Input_ClassesBoolExp {
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistory = attendanceHistory;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -20996,6 +21167,7 @@ class Input_ClassesBoolExp {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -21036,6 +21208,7 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -21067,6 +21240,7 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
@@ -21104,6 +21278,7 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -21140,6 +21315,8 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (isUserAllowedToRead != _undefined)
@@ -21249,6 +21426,14 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
             local$attendanceHistoryAggregate,
             (e) => call(attendanceHistoryAggregate: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -21363,6 +21548,7 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -21398,6 +21584,8 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
@@ -21569,6 +21757,7 @@ class Input_ClassesInsertInput {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -21584,6 +21773,7 @@ class Input_ClassesInsertInput {
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -21620,6 +21810,10 @@ class Input_ClassesInsertInput {
           ? null
           : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
               (l$attendanceHistory as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -21678,6 +21872,7 @@ class Input_ClassesInsertInput {
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -21703,6 +21898,10 @@ class Input_ClassesInsertInput {
     if (_$data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = attendanceHistory;
       result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -21784,6 +21983,15 @@ class Input_ClassesInsertInput {
       return false;
     }
     if (l$attendanceHistory != lOther$attendanceHistory) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -21871,6 +22079,7 @@ class Input_ClassesInsertInput {
     final l$adminUsers = adminUsers;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceHistory = attendanceHistory;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -21886,6 +22095,7 @@ class Input_ClassesInsertInput {
           ? l$attendanceDaysConstraints
           : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -21913,6 +22123,7 @@ abstract class CopyWith_Input_ClassesInsertInput<TRes> {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -21949,6 +22160,7 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
     Object? adminUsers = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceHistory = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -21970,6 +22182,7 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
         if (attendanceHistory != _undefined)
           'attendanceHistory': (attendanceHistory
               as Input_HistoryAttendanceHistoryArrRelInsertInput?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -22043,6 +22256,7 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -22071,6 +22285,7 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
 
 class Input_ClassesMaxOrderBy {
   factory Input_ClassesMaxOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22079,6 +22294,7 @@ class Input_ClassesMaxOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) =>
       Input_ClassesMaxOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -22091,6 +22307,12 @@ class Input_ClassesMaxOrderBy {
 
   factory Input_ClassesMaxOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -22129,6 +22351,7 @@ class Input_ClassesMaxOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -22139,6 +22362,11 @@ class Input_ClassesMaxOrderBy {
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -22186,6 +22414,15 @@ class Input_ClassesMaxOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -22242,6 +22479,7 @@ class Input_ClassesMaxOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -22249,6 +22487,7 @@ class Input_ClassesMaxOrderBy {
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -22269,6 +22508,7 @@ abstract class CopyWith_Input_ClassesMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_ClassesMaxOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22292,6 +22532,7 @@ class _CopyWithImpl_Input_ClassesMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -22301,6 +22542,7 @@ class _CopyWithImpl_Input_ClassesMaxOrderBy<TRes>
   }) =>
       _then(Input_ClassesMaxOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -22319,6 +22561,7 @@ class _CopyWithStubImpl_Input_ClassesMaxOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22331,6 +22574,7 @@ class _CopyWithStubImpl_Input_ClassesMaxOrderBy<TRes>
 
 class Input_ClassesMinOrderBy {
   factory Input_ClassesMinOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22339,6 +22583,7 @@ class Input_ClassesMinOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) =>
       Input_ClassesMinOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -22351,6 +22596,12 @@ class Input_ClassesMinOrderBy {
 
   factory Input_ClassesMinOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -22389,6 +22640,7 @@ class Input_ClassesMinOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -22399,6 +22651,11 @@ class Input_ClassesMinOrderBy {
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -22446,6 +22703,15 @@ class Input_ClassesMinOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -22502,6 +22768,7 @@ class Input_ClassesMinOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -22509,6 +22776,7 @@ class Input_ClassesMinOrderBy {
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -22529,6 +22797,7 @@ abstract class CopyWith_Input_ClassesMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_ClassesMinOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22552,6 +22821,7 @@ class _CopyWithImpl_Input_ClassesMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -22561,6 +22831,7 @@ class _CopyWithImpl_Input_ClassesMinOrderBy<TRes>
   }) =>
       _then(Input_ClassesMinOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -22579,6 +22850,7 @@ class _CopyWithStubImpl_Input_ClassesMinOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -22946,6 +23218,7 @@ class Input_ClassesOrderBy {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -22967,6 +23240,7 @@ class Input_ClassesOrderBy {
               attendanceDaysConstraintsAggregate,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -23011,6 +23285,12 @@ class Input_ClassesOrderBy {
               ? null
               : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -23097,6 +23377,7 @@ class Input_ClassesOrderBy {
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get isUserAllowedToRead =>
@@ -23131,6 +23412,11 @@ class Input_ClassesOrderBy {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -23236,6 +23522,15 @@ class Input_ClassesOrderBy {
       return false;
     }
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -23351,6 +23646,7 @@ class Input_ClassesOrderBy {
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -23373,6 +23669,7 @@ class Input_ClassesOrderBy {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -23407,6 +23704,7 @@ abstract class CopyWith_Input_ClassesOrderBy<TRes> {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -23446,6 +23744,7 @@ class _CopyWithImpl_Input_ClassesOrderBy<TRes>
     Object? adminUsersAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -23471,6 +23770,7 @@ class _CopyWithImpl_Input_ClassesOrderBy<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (isUserAllowedToRead != _undefined)
@@ -23552,6 +23852,7 @@ class _CopyWithStubImpl_Input_ClassesOrderBy<TRes>
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -23678,6 +23979,7 @@ class _CopyWithStubImpl_Input_ClassesPkColumnsInput<TRes>
 
 class Input_ClassesSetInput {
   factory Input_ClassesSetInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -23687,6 +23989,7 @@ class Input_ClassesSetInput {
     int? serviceStudyYear,
   }) =>
       Input_ClassesSetInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -23700,6 +24003,10 @@ class Input_ClassesSetInput {
 
   factory Input_ClassesSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -23735,6 +24042,7 @@ class Input_ClassesSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -23744,6 +24052,10 @@ class Input_ClassesSetInput {
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -23788,6 +24100,15 @@ class Input_ClassesSetInput {
       return true;
     }
     if (!(other is Input_ClassesSetInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -23855,6 +24176,7 @@ class Input_ClassesSetInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -23863,6 +24185,7 @@ class Input_ClassesSetInput {
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -23884,6 +24207,7 @@ abstract class CopyWith_Input_ClassesSetInput<TRes> {
       _CopyWithStubImpl_Input_ClassesSetInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -23908,6 +24232,7 @@ class _CopyWithImpl_Input_ClassesSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -23918,6 +24243,7 @@ class _CopyWithImpl_Input_ClassesSetInput<TRes>
   }) =>
       _then(Input_ClassesSetInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -23938,6 +24264,7 @@ class _CopyWithStubImpl_Input_ClassesSetInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -24540,6 +24867,7 @@ class _CopyWithStubImpl_Input_ClassesStreamCursorInput<TRes>
 
 class Input_ClassesStreamCursorValueInput {
   factory Input_ClassesStreamCursorValueInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -24549,6 +24877,7 @@ class Input_ClassesStreamCursorValueInput {
     int? serviceStudyYear,
   }) =>
       Input_ClassesStreamCursorValueInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -24563,6 +24892,10 @@ class Input_ClassesStreamCursorValueInput {
   factory Input_ClassesStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -24598,6 +24931,7 @@ class Input_ClassesStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -24607,6 +24941,10 @@ class Input_ClassesStreamCursorValueInput {
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -24653,6 +24991,15 @@ class Input_ClassesStreamCursorValueInput {
     }
     if (!(other is Input_ClassesStreamCursorValueInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -24720,6 +25067,7 @@ class Input_ClassesStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -24728,6 +25076,7 @@ class Input_ClassesStreamCursorValueInput {
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -24749,6 +25098,7 @@ abstract class CopyWith_Input_ClassesStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_ClassesStreamCursorValueInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -24773,6 +25123,7 @@ class _CopyWithImpl_Input_ClassesStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -24783,6 +25134,7 @@ class _CopyWithImpl_Input_ClassesStreamCursorValueInput<TRes>
   }) =>
       _then(Input_ClassesStreamCursorValueInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -24803,6 +25155,7 @@ class _CopyWithStubImpl_Input_ClassesStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -31510,6 +31863,7 @@ class Input_FamiliesBoolExp {
     List<Input_FamiliesBoolExp>? $_or,
     Input_StringComparisonExp? address,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_FamiliesFamiliesAggregateBoolExp? childrenAggregate,
     Input_BigintComparisonExp? color,
@@ -31535,6 +31889,7 @@ class Input_FamiliesBoolExp {
         if ($_or != null) r'_or': $_or,
         if (address != null) r'address': address,
         if (areas != null) r'areas': areas,
+        if (blurhash != null) r'blurhash': blurhash,
         if (children != null) r'children': children,
         if (childrenAggregate != null) r'childrenAggregate': childrenAggregate,
         if (color != null) r'color': color,
@@ -31593,6 +31948,13 @@ class Input_FamiliesBoolExp {
       result$data['areas'] = l$areas == null
           ? null
           : Input_AreasBoolExp.fromJson((l$areas as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('children')) {
       final l$children = data['children'];
@@ -31730,6 +32092,8 @@ class Input_FamiliesBoolExp {
   Input_StringComparisonExp? get address =>
       (_$data['address'] as Input_StringComparisonExp?);
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_FamiliesFamiliesBoolExp? get children =>
       (_$data['children'] as Input_FamiliesFamiliesBoolExp?);
   Input_FamiliesFamiliesAggregateBoolExp? get childrenAggregate =>
@@ -31785,6 +32149,10 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('areas')) {
       final l$areas = areas;
       result$data['areas'] = l$areas?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('children')) {
       final l$children = children;
@@ -31934,6 +32302,15 @@ class Input_FamiliesBoolExp {
       return false;
     }
     if (l$areas != lOther$areas) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$children = children;
@@ -32100,6 +32477,7 @@ class Input_FamiliesBoolExp {
     final l$$_or = $_or;
     final l$address = address;
     final l$areas = areas;
+    final l$blurhash = blurhash;
     final l$children = children;
     final l$childrenAggregate = childrenAggregate;
     final l$color = color;
@@ -32132,6 +32510,7 @@ class Input_FamiliesBoolExp {
           : const {},
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('areas') ? l$areas : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('children') ? l$children : const {},
       _$data.containsKey('childrenAggregate') ? l$childrenAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -32173,6 +32552,7 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     List<Input_FamiliesBoolExp>? $_or,
     Input_StringComparisonExp? address,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_FamiliesFamiliesAggregateBoolExp? childrenAggregate,
     Input_BigintComparisonExp? color,
@@ -32203,6 +32583,7 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
           _fn);
   CopyWith_Input_StringComparisonExp<TRes> get address;
   CopyWith_Input_AreasBoolExp<TRes> get areas;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children;
   CopyWith_Input_FamiliesFamiliesAggregateBoolExp<TRes> get childrenAggregate;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
@@ -32242,6 +32623,7 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? $_or = _undefined,
     Object? address = _undefined,
     Object? areas = _undefined,
+    Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? childrenAggregate = _undefined,
     Object? color = _undefined,
@@ -32270,6 +32652,8 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (address != _undefined)
           'address': (address as Input_StringComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input_AreasBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (children != _undefined)
           'children': (children as Input_FamiliesFamiliesBoolExp?),
         if (childrenAggregate != _undefined)
@@ -32347,6 +32731,14 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     return local$areas == null
         ? CopyWith_Input_AreasBoolExp.stub(_then(_instance))
         : CopyWith_Input_AreasBoolExp(local$areas, (e) => call(areas: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children {
@@ -32501,6 +32893,7 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     List<Input_FamiliesBoolExp>? $_or,
     Input_StringComparisonExp? address,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_FamiliesFamiliesAggregateBoolExp? childrenAggregate,
     Input_BigintComparisonExp? color,
@@ -32529,6 +32922,8 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
       CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
   CopyWith_Input_FamiliesFamiliesAggregateBoolExp<TRes> get childrenAggregate =>
@@ -35433,6 +35828,7 @@ class _CopyWithStubImpl_Input_FamiliesIncInput<TRes>
 class Input_FamiliesInsertInput {
   factory Input_FamiliesInsertInput({
     String? address,
+    String? blurhash,
     Input_FamiliesFamiliesArrRelInsertInput? children,
     int? color,
     Map<String, dynamic>? geolocation,
@@ -35446,6 +35842,7 @@ class Input_FamiliesInsertInput {
   }) =>
       Input_FamiliesInsertInput._({
         if (address != null) r'address': address,
+        if (blurhash != null) r'blurhash': blurhash,
         if (children != null) r'children': children,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
@@ -35465,6 +35862,10 @@ class Input_FamiliesInsertInput {
     if (data.containsKey('address')) {
       final l$address = data['address'];
       result$data['address'] = (l$address as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('children')) {
       final l$children = data['children'];
@@ -35525,6 +35926,7 @@ class Input_FamiliesInsertInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   Input_FamiliesFamiliesArrRelInsertInput? get children =>
       (_$data['children'] as Input_FamiliesFamiliesArrRelInsertInput?);
   int? get color => (_$data['color'] as int?);
@@ -35545,6 +35947,10 @@ class Input_FamiliesInsertInput {
     if (_$data.containsKey('address')) {
       final l$address = address;
       result$data['address'] = l$address;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('children')) {
       final l$children = children;
@@ -35610,6 +36016,15 @@ class Input_FamiliesInsertInput {
       return false;
     }
     if (l$address != lOther$address) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$children = children;
@@ -35701,6 +36116,7 @@ class Input_FamiliesInsertInput {
   @override
   int get hashCode {
     final l$address = address;
+    final l$blurhash = blurhash;
     final l$children = children;
     final l$color = color;
     final l$geolocation = geolocation;
@@ -35713,6 +36129,7 @@ class Input_FamiliesInsertInput {
     final l$stores = stores;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('children') ? l$children : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
@@ -35738,6 +36155,7 @@ abstract class CopyWith_Input_FamiliesInsertInput<TRes> {
 
   TRes call({
     String? address,
+    String? blurhash,
     Input_FamiliesFamiliesArrRelInsertInput? children,
     int? color,
     Map<String, dynamic>? geolocation,
@@ -35770,6 +36188,7 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
@@ -35784,6 +36203,7 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
       _then(Input_FamiliesInsertInput._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (children != _undefined)
           'children': (children as Input_FamiliesFamiliesArrRelInsertInput?),
         if (color != _undefined) 'color': (color as int?),
@@ -35844,6 +36264,7 @@ class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
 
   call({
     String? address,
+    String? blurhash,
     Input_FamiliesFamiliesArrRelInsertInput? children,
     int? color,
     Map<String, dynamic>? geolocation,
@@ -35869,6 +36290,7 @@ class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
 class Input_FamiliesMaxOrderBy {
   factory Input_FamiliesMaxOrderBy({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -35877,6 +36299,7 @@ class Input_FamiliesMaxOrderBy {
   }) =>
       Input_FamiliesMaxOrderBy._({
         if (address != null) r'address': address,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -35893,6 +36316,12 @@ class Input_FamiliesMaxOrderBy {
       result$data['address'] = l$address == null
           ? null
           : fromJson_Enum_OrderBy((l$address as String));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -35926,6 +36355,7 @@ class Input_FamiliesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -35938,6 +36368,11 @@ class Input_FamiliesMaxOrderBy {
       final l$address = address;
       result$data['address'] =
           l$address == null ? null : toJson_Enum_OrderBy(l$address);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -35988,6 +36423,15 @@ class Input_FamiliesMaxOrderBy {
     if (l$address != lOther$address) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -36035,6 +36479,7 @@ class Input_FamiliesMaxOrderBy {
   @override
   int get hashCode {
     final l$address = address;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -36042,6 +36487,7 @@ class Input_FamiliesMaxOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -36062,6 +36508,7 @@ abstract class CopyWith_Input_FamiliesMaxOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -36085,6 +36532,7 @@ class _CopyWithImpl_Input_FamiliesMaxOrderBy<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -36094,6 +36542,7 @@ class _CopyWithImpl_Input_FamiliesMaxOrderBy<TRes>
       _then(Input_FamiliesMaxOrderBy._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -36111,6 +36560,7 @@ class _CopyWithStubImpl_Input_FamiliesMaxOrderBy<TRes>
 
   call({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -36123,6 +36573,7 @@ class _CopyWithStubImpl_Input_FamiliesMaxOrderBy<TRes>
 class Input_FamiliesMinOrderBy {
   factory Input_FamiliesMinOrderBy({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -36131,6 +36582,7 @@ class Input_FamiliesMinOrderBy {
   }) =>
       Input_FamiliesMinOrderBy._({
         if (address != null) r'address': address,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -36147,6 +36599,12 @@ class Input_FamiliesMinOrderBy {
       result$data['address'] = l$address == null
           ? null
           : fromJson_Enum_OrderBy((l$address as String));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -36180,6 +36638,7 @@ class Input_FamiliesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -36192,6 +36651,11 @@ class Input_FamiliesMinOrderBy {
       final l$address = address;
       result$data['address'] =
           l$address == null ? null : toJson_Enum_OrderBy(l$address);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -36242,6 +36706,15 @@ class Input_FamiliesMinOrderBy {
     if (l$address != lOther$address) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -36289,6 +36762,7 @@ class Input_FamiliesMinOrderBy {
   @override
   int get hashCode {
     final l$address = address;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -36296,6 +36770,7 @@ class Input_FamiliesMinOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -36316,6 +36791,7 @@ abstract class CopyWith_Input_FamiliesMinOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -36339,6 +36815,7 @@ class _CopyWithImpl_Input_FamiliesMinOrderBy<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -36348,6 +36825,7 @@ class _CopyWithImpl_Input_FamiliesMinOrderBy<TRes>
       _then(Input_FamiliesMinOrderBy._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -36365,6 +36843,7 @@ class _CopyWithStubImpl_Input_FamiliesMinOrderBy<TRes>
 
   call({
     Enum_OrderBy? address,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -36730,6 +37209,7 @@ class Input_FamiliesOrderBy {
   factory Input_FamiliesOrderBy({
     Enum_OrderBy? address,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Input_FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? geolocation,
@@ -36748,6 +37228,7 @@ class Input_FamiliesOrderBy {
       Input_FamiliesOrderBy._({
         if (address != null) r'address': address,
         if (areasAggregate != null) r'areasAggregate': areasAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (childrenAggregate != null) r'childrenAggregate': childrenAggregate,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
@@ -36782,6 +37263,12 @@ class Input_FamiliesOrderBy {
           ? null
           : Input_AreasAggregateOrderBy.fromJson(
               (l$areasAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('childrenAggregate')) {
       final l$childrenAggregate = data['childrenAggregate'];
@@ -36876,6 +37363,7 @@ class Input_FamiliesOrderBy {
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Input_FamiliesFamiliesAggregateOrderBy? get childrenAggregate =>
       (_$data['childrenAggregate'] as Input_FamiliesFamiliesAggregateOrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
@@ -36908,6 +37396,11 @@ class Input_FamiliesOrderBy {
     if (_$data.containsKey('areasAggregate')) {
       final l$areasAggregate = areasAggregate;
       result$data['areasAggregate'] = l$areasAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('childrenAggregate')) {
       final l$childrenAggregate = childrenAggregate;
@@ -37006,6 +37499,15 @@ class Input_FamiliesOrderBy {
       return false;
     }
     if (l$areasAggregate != lOther$areasAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$childrenAggregate = childrenAggregate;
@@ -37137,6 +37639,7 @@ class Input_FamiliesOrderBy {
   int get hashCode {
     final l$address = address;
     final l$areasAggregate = areasAggregate;
+    final l$blurhash = blurhash;
     final l$childrenAggregate = childrenAggregate;
     final l$color = color;
     final l$geolocation = geolocation;
@@ -37154,6 +37657,7 @@ class Input_FamiliesOrderBy {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('areasAggregate') ? l$areasAggregate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('childrenAggregate') ? l$childrenAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
@@ -37188,6 +37692,7 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? address,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Input_FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? geolocation,
@@ -37227,6 +37732,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
   TRes call({
     Object? address = _undefined,
     Object? areasAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? childrenAggregate = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
@@ -37247,6 +37753,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (areasAggregate != _undefined)
           'areasAggregate': (areasAggregate as Input_AreasAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (childrenAggregate != _undefined)
           'childrenAggregate':
               (childrenAggregate as Input_FamiliesFamiliesAggregateOrderBy?),
@@ -37333,6 +37840,7 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
   call({
     Enum_OrderBy? address,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Input_FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum_OrderBy? color,
     Enum_OrderBy? geolocation,
@@ -37460,6 +37968,7 @@ class _CopyWithStubImpl_Input_FamiliesPkColumnsInput<TRes>
 class Input_FamiliesSetInput {
   factory Input_FamiliesSetInput({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -37469,6 +37978,7 @@ class Input_FamiliesSetInput {
   }) =>
       Input_FamiliesSetInput._({
         if (address != null) r'address': address,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -37484,6 +37994,10 @@ class Input_FamiliesSetInput {
     if (data.containsKey('address')) {
       final l$address = data['address'];
       result$data['address'] = (l$address as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -37516,6 +38030,7 @@ class Input_FamiliesSetInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -37528,6 +38043,10 @@ class Input_FamiliesSetInput {
     if (_$data.containsKey('address')) {
       final l$address = address;
       result$data['address'] = l$address;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -37577,6 +38096,15 @@ class Input_FamiliesSetInput {
       return false;
     }
     if (l$address != lOther$address) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -37635,6 +38163,7 @@ class Input_FamiliesSetInput {
   @override
   int get hashCode {
     final l$address = address;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -37643,6 +38172,7 @@ class Input_FamiliesSetInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -37664,6 +38194,7 @@ abstract class CopyWith_Input_FamiliesSetInput<TRes> {
 
   TRes call({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -37688,6 +38219,7 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -37698,6 +38230,7 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
       _then(Input_FamiliesSetInput._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -37717,6 +38250,7 @@ class _CopyWithStubImpl_Input_FamiliesSetInput<TRes>
 
   call({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -38191,6 +38725,7 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorInput<TRes>
 class Input_FamiliesStreamCursorValueInput {
   factory Input_FamiliesStreamCursorValueInput({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -38200,6 +38735,7 @@ class Input_FamiliesStreamCursorValueInput {
   }) =>
       Input_FamiliesStreamCursorValueInput._({
         if (address != null) r'address': address,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -38216,6 +38752,10 @@ class Input_FamiliesStreamCursorValueInput {
     if (data.containsKey('address')) {
       final l$address = data['address'];
       result$data['address'] = (l$address as String?);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -38248,6 +38788,7 @@ class Input_FamiliesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -38260,6 +38801,10 @@ class Input_FamiliesStreamCursorValueInput {
     if (_$data.containsKey('address')) {
       final l$address = address;
       result$data['address'] = l$address;
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -38310,6 +38855,15 @@ class Input_FamiliesStreamCursorValueInput {
       return false;
     }
     if (l$address != lOther$address) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -38368,6 +38922,7 @@ class Input_FamiliesStreamCursorValueInput {
   @override
   int get hashCode {
     final l$address = address;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -38376,6 +38931,7 @@ class Input_FamiliesStreamCursorValueInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -38397,6 +38953,7 @@ abstract class CopyWith_Input_FamiliesStreamCursorValueInput<TRes> {
 
   TRes call({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -38421,6 +38978,7 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
 
   TRes call({
     Object? address = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -38431,6 +38989,7 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
       _then(Input_FamiliesStreamCursorValueInput._({
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -38450,6 +39009,7 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorValueInput<TRes>
 
   call({
     String? address,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -44247,6 +44807,7 @@ class Input_GroupsBoolExp {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -44275,6 +44836,7 @@ class Input_GroupsBoolExp {
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -44361,6 +44923,13 @@ class Input_GroupsBoolExp {
               ? null
               : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -44471,6 +45040,8 @@ class Input_GroupsBoolExp {
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
@@ -44535,6 +45106,10 @@ class Input_GroupsBoolExp {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -44703,6 +45278,15 @@ class Input_GroupsBoolExp {
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -44821,6 +45405,7 @@ class Input_GroupsBoolExp {
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistory = attendanceHistory;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -44859,6 +45444,7 @@ class Input_GroupsBoolExp {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -44899,6 +45485,7 @@ abstract class CopyWith_Input_GroupsBoolExp<TRes> {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -44930,6 +45517,7 @@ abstract class CopyWith_Input_GroupsBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
@@ -44967,6 +45555,7 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -45003,6 +45592,8 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (isUserAllowedToRead != _undefined)
@@ -45111,6 +45702,14 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
         : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
             local$attendanceHistoryAggregate,
             (e) => call(attendanceHistoryAggregate: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -45225,6 +45824,7 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isUserAllowedToRead,
@@ -45260,6 +45860,8 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
@@ -45391,6 +45993,7 @@ class Input_GroupsInsertInput {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -45405,6 +46008,7 @@ class Input_GroupsInsertInput {
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -45440,6 +46044,10 @@ class Input_GroupsInsertInput {
           ? null
           : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
               (l$attendanceHistory as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -45495,6 +46103,7 @@ class Input_GroupsInsertInput {
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -45519,6 +46128,10 @@ class Input_GroupsInsertInput {
     if (_$data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = attendanceHistory;
       result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -45599,6 +46212,15 @@ class Input_GroupsInsertInput {
     if (l$attendanceHistory != lOther$attendanceHistory) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -45674,6 +46296,7 @@ class Input_GroupsInsertInput {
     final l$adminUsers = adminUsers;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceHistory = attendanceHistory;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -45688,6 +46311,7 @@ class Input_GroupsInsertInput {
           ? l$attendanceDaysConstraints
           : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -45714,6 +46338,7 @@ abstract class CopyWith_Input_GroupsInsertInput<TRes> {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -45749,6 +46374,7 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
     Object? adminUsers = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceHistory = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -45769,6 +46395,7 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
         if (attendanceHistory != _undefined)
           'attendanceHistory': (attendanceHistory
               as Input_HistoryAttendanceHistoryArrRelInsertInput?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -45839,6 +46466,7 @@ class _CopyWithStubImpl_Input_GroupsInsertInput<TRes>
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -45866,6 +46494,7 @@ class _CopyWithStubImpl_Input_GroupsInsertInput<TRes>
 
 class Input_GroupsMaxOrderBy {
   factory Input_GroupsMaxOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -45873,6 +46502,7 @@ class Input_GroupsMaxOrderBy {
     Enum_OrderBy? serviceId,
   }) =>
       Input_GroupsMaxOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -45884,6 +46514,12 @@ class Input_GroupsMaxOrderBy {
 
   factory Input_GroupsMaxOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -45916,6 +46552,7 @@ class Input_GroupsMaxOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -45924,6 +46561,11 @@ class Input_GroupsMaxOrderBy {
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -45965,6 +46607,15 @@ class Input_GroupsMaxOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -46012,12 +46663,14 @@ class Input_GroupsMaxOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -46037,6 +46690,7 @@ abstract class CopyWith_Input_GroupsMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_GroupsMaxOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -46059,6 +46713,7 @@ class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -46067,6 +46722,7 @@ class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
   }) =>
       _then(Input_GroupsMaxOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -46083,6 +46739,7 @@ class _CopyWithStubImpl_Input_GroupsMaxOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -46094,6 +46751,7 @@ class _CopyWithStubImpl_Input_GroupsMaxOrderBy<TRes>
 
 class Input_GroupsMinOrderBy {
   factory Input_GroupsMinOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -46101,6 +46759,7 @@ class Input_GroupsMinOrderBy {
     Enum_OrderBy? serviceId,
   }) =>
       Input_GroupsMinOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -46112,6 +46771,12 @@ class Input_GroupsMinOrderBy {
 
   factory Input_GroupsMinOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -46144,6 +46809,7 @@ class Input_GroupsMinOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -46152,6 +46818,11 @@ class Input_GroupsMinOrderBy {
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -46193,6 +46864,15 @@ class Input_GroupsMinOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -46240,12 +46920,14 @@ class Input_GroupsMinOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -46265,6 +46947,7 @@ abstract class CopyWith_Input_GroupsMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_GroupsMinOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -46287,6 +46970,7 @@ class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -46295,6 +46979,7 @@ class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
   }) =>
       _then(Input_GroupsMinOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -46311,6 +46996,7 @@ class _CopyWithStubImpl_Input_GroupsMinOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -46677,6 +47363,7 @@ class Input_GroupsOrderBy {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -46697,6 +47384,7 @@ class Input_GroupsOrderBy {
               attendanceDaysConstraintsAggregate,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -46740,6 +47428,12 @@ class Input_GroupsOrderBy {
               ? null
               : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -46820,6 +47514,7 @@ class Input_GroupsOrderBy {
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get isUserAllowedToRead =>
@@ -46852,6 +47547,11 @@ class Input_GroupsOrderBy {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -46951,6 +47651,15 @@ class Input_GroupsOrderBy {
       return false;
     }
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -47057,6 +47766,7 @@ class Input_GroupsOrderBy {
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -47078,6 +47788,7 @@ class Input_GroupsOrderBy {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -47111,6 +47822,7 @@ abstract class CopyWith_Input_GroupsOrderBy<TRes> {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -47149,6 +47861,7 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
     Object? adminUsersAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -47173,6 +47886,7 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (isUserAllowedToRead != _undefined)
@@ -47252,6 +47966,7 @@ class _CopyWithStubImpl_Input_GroupsOrderBy<TRes>
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -47377,6 +48092,7 @@ class _CopyWithStubImpl_Input_GroupsPkColumnsInput<TRes>
 
 class Input_GroupsSetInput {
   factory Input_GroupsSetInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -47385,6 +48101,7 @@ class Input_GroupsSetInput {
     DateTimeRange? validity,
   }) =>
       Input_GroupsSetInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -47397,6 +48114,10 @@ class Input_GroupsSetInput {
 
   factory Input_GroupsSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -47429,6 +48150,7 @@ class Input_GroupsSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -47437,6 +48159,10 @@ class Input_GroupsSetInput {
   DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -47478,6 +48204,15 @@ class Input_GroupsSetInput {
       return true;
     }
     if (!(other is Input_GroupsSetInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -47536,6 +48271,7 @@ class Input_GroupsSetInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -47543,6 +48279,7 @@ class Input_GroupsSetInput {
     final l$serviceId = serviceId;
     final l$validity = validity;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -47563,6 +48300,7 @@ abstract class CopyWith_Input_GroupsSetInput<TRes> {
       _CopyWithStubImpl_Input_GroupsSetInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -47586,6 +48324,7 @@ class _CopyWithImpl_Input_GroupsSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -47595,6 +48334,7 @@ class _CopyWithImpl_Input_GroupsSetInput<TRes>
   }) =>
       _then(Input_GroupsSetInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -47612,6 +48352,7 @@ class _CopyWithStubImpl_Input_GroupsSetInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -48083,6 +48824,7 @@ class _CopyWithStubImpl_Input_GroupsStreamCursorInput<TRes>
 
 class Input_GroupsStreamCursorValueInput {
   factory Input_GroupsStreamCursorValueInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -48091,6 +48833,7 @@ class Input_GroupsStreamCursorValueInput {
     DateTimeRange? validity,
   }) =>
       Input_GroupsStreamCursorValueInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -48104,6 +48847,10 @@ class Input_GroupsStreamCursorValueInput {
   factory Input_GroupsStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -48136,6 +48883,7 @@ class Input_GroupsStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
@@ -48144,6 +48892,10 @@ class Input_GroupsStreamCursorValueInput {
   DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -48187,6 +48939,15 @@ class Input_GroupsStreamCursorValueInput {
     }
     if (!(other is Input_GroupsStreamCursorValueInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -48245,6 +49006,7 @@ class Input_GroupsStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
@@ -48252,6 +49014,7 @@ class Input_GroupsStreamCursorValueInput {
     final l$serviceId = serviceId;
     final l$validity = validity;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -48272,6 +49035,7 @@ abstract class CopyWith_Input_GroupsStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_GroupsStreamCursorValueInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -48295,6 +49059,7 @@ class _CopyWithImpl_Input_GroupsStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -48304,6 +49069,7 @@ class _CopyWithImpl_Input_GroupsStreamCursorValueInput<TRes>
   }) =>
       _then(Input_GroupsStreamCursorValueInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
@@ -48321,6 +49087,7 @@ class _CopyWithStubImpl_Input_GroupsStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     String? name,
@@ -89674,6 +90441,7 @@ class Input_PersonsBoolExp {
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_DateComparisonExp? birthdate,
     Input_StringComparisonExp? birthday,
+    Input_StringComparisonExp? blurhash,
     Input_HistoryCallHistoryBoolExp? callHistory,
     Input_HistoryCallHistoryAggregateBoolExp? callHistoryAggregate,
     Input_ChurchesBoolExp? church,
@@ -89690,7 +90458,6 @@ class Input_PersonsBoolExp {
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
-    Input_StringComparisonExp? firestoreId,
     Input_BooleanComparisonExp? gender,
     Input_GeographyComparisonExp? geolocation,
     Input_PersonsGroupsBoolExp? groups,
@@ -89752,6 +90519,7 @@ class Input_PersonsBoolExp {
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
         if (birthdate != null) r'birthdate': birthdate,
         if (birthday != null) r'birthday': birthday,
+        if (blurhash != null) r'blurhash': blurhash,
         if (callHistory != null) r'callHistory': callHistory,
         if (callHistoryAggregate != null)
           r'callHistoryAggregate': callHistoryAggregate,
@@ -89771,7 +90539,6 @@ class Input_PersonsBoolExp {
         if (familyId != null) r'familyId': familyId,
         if (father != null) r'father': father,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (gender != null) r'gender': gender,
         if (geolocation != null) r'geolocation': geolocation,
         if (groups != null) r'groups': groups,
@@ -89893,6 +90660,13 @@ class Input_PersonsBoolExp {
           : Input_StringComparisonExp.fromJson(
               (l$birthday as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
+    }
     if (data.containsKey('callHistory')) {
       final l$callHistory = data['callHistory'];
       result$data['callHistory'] = l$callHistory == null
@@ -90000,13 +90774,6 @@ class Input_PersonsBoolExp {
           ? null
           : Input_UuidComparisonExp.fromJson(
               (l$fatherId as Map<String, dynamic>));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$firestoreId as Map<String, dynamic>));
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -90366,6 +91133,8 @@ class Input_PersonsBoolExp {
       (_$data['birthdate'] as Input_DateComparisonExp?);
   Input_StringComparisonExp? get birthday =>
       (_$data['birthday'] as Input_StringComparisonExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_HistoryCallHistoryBoolExp? get callHistory =>
       (_$data['callHistory'] as Input_HistoryCallHistoryBoolExp?);
   Input_HistoryCallHistoryAggregateBoolExp? get callHistoryAggregate =>
@@ -90401,8 +91170,6 @@ class Input_PersonsBoolExp {
       (_$data['father'] as Input_FathersBoolExp?);
   Input_UuidComparisonExp? get fatherId =>
       (_$data['fatherId'] as Input_UuidComparisonExp?);
-  Input_StringComparisonExp? get firestoreId =>
-      (_$data['firestoreId'] as Input_StringComparisonExp?);
   Input_BooleanComparisonExp? get gender =>
       (_$data['gender'] as Input_BooleanComparisonExp?);
   Input_GeographyComparisonExp? get geolocation =>
@@ -90540,6 +91307,10 @@ class Input_PersonsBoolExp {
       final l$birthday = birthday;
       result$data['birthday'] = l$birthday?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
+    }
     if (_$data.containsKey('callHistory')) {
       final l$callHistory = callHistory;
       result$data['callHistory'] = l$callHistory?.toJson();
@@ -90604,10 +91375,6 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('fatherId')) {
       final l$fatherId = fatherId;
       result$data['fatherId'] = l$fatherId?.toJson();
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId?.toJson();
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -90919,6 +91686,15 @@ class Input_PersonsBoolExp {
     if (l$birthday != lOther$birthday) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$callHistory = callHistory;
     final lOther$callHistory = other.callHistory;
     if (_$data.containsKey('callHistory') !=
@@ -91055,15 +91831,6 @@ class Input_PersonsBoolExp {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$gender = gender;
@@ -91505,6 +92272,7 @@ class Input_PersonsBoolExp {
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$birthdate = birthdate;
     final l$birthday = birthday;
+    final l$blurhash = blurhash;
     final l$callHistory = callHistory;
     final l$callHistoryAggregate = callHistoryAggregate;
     final l$church = church;
@@ -91521,7 +92289,6 @@ class Input_PersonsBoolExp {
     final l$familyId = familyId;
     final l$father = father;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$gender = gender;
     final l$geolocation = geolocation;
     final l$groups = groups;
@@ -91591,6 +92358,7 @@ class Input_PersonsBoolExp {
           : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
       _$data.containsKey('birthday') ? l$birthday : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('callHistory') ? l$callHistory : const {},
       _$data.containsKey('callHistoryAggregate')
           ? l$callHistoryAggregate
@@ -91613,7 +92381,6 @@ class Input_PersonsBoolExp {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('groups') ? l$groups : const {},
@@ -91694,6 +92461,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_DateComparisonExp? birthdate,
     Input_StringComparisonExp? birthday,
+    Input_StringComparisonExp? blurhash,
     Input_HistoryCallHistoryBoolExp? callHistory,
     Input_HistoryCallHistoryAggregateBoolExp? callHistoryAggregate,
     Input_ChurchesBoolExp? church,
@@ -91710,7 +92478,6 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
-    Input_StringComparisonExp? firestoreId,
     Input_BooleanComparisonExp? gender,
     Input_GeographyComparisonExp? geolocation,
     Input_PersonsGroupsBoolExp? groups,
@@ -91777,6 +92544,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
       get attendanceHistoryAggregate;
   CopyWith_Input_DateComparisonExp<TRes> get birthdate;
   CopyWith_Input_StringComparisonExp<TRes> get birthday;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get callHistory;
   CopyWith_Input_HistoryCallHistoryAggregateBoolExp<TRes>
       get callHistoryAggregate;
@@ -91796,7 +92564,6 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
   CopyWith_Input_FathersBoolExp<TRes> get father;
   CopyWith_Input_UuidComparisonExp<TRes> get fatherId;
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId;
   CopyWith_Input_BooleanComparisonExp<TRes> get gender;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get groups;
@@ -91873,6 +92640,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? birthdate = _undefined,
     Object? birthday = _undefined,
+    Object? blurhash = _undefined,
     Object? callHistory = _undefined,
     Object? callHistoryAggregate = _undefined,
     Object? church = _undefined,
@@ -91889,7 +92657,6 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? familyId = _undefined,
     Object? father = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? gender = _undefined,
     Object? geolocation = _undefined,
     Object? groups = _undefined,
@@ -91958,6 +92725,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
           'birthdate': (birthdate as Input_DateComparisonExp?),
         if (birthday != _undefined)
           'birthday': (birthday as Input_StringComparisonExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (callHistory != _undefined)
           'callHistory': (callHistory as Input_HistoryCallHistoryBoolExp?),
         if (callHistoryAggregate != _undefined)
@@ -91990,8 +92759,6 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         if (father != _undefined) 'father': (father as Input_FathersBoolExp?),
         if (fatherId != _undefined)
           'fatherId': (fatherId as Input_UuidComparisonExp?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Input_StringComparisonExp?),
         if (gender != _undefined)
           'gender': (gender as Input_BooleanComparisonExp?),
         if (geolocation != _undefined)
@@ -92167,6 +92934,14 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
             local$birthday, (e) => call(birthday: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
+  }
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get callHistory {
     final local$callHistory = _instance.callHistory;
     return local$callHistory == null
@@ -92297,14 +93072,6 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
             local$fatherId, (e) => call(fatherId: e));
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId {
-    final local$firestoreId = _instance.firestoreId;
-    return local$firestoreId == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$firestoreId, (e) => call(firestoreId: e));
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get gender {
@@ -92711,6 +93478,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_DateComparisonExp? birthdate,
     Input_StringComparisonExp? birthday,
+    Input_StringComparisonExp? blurhash,
     Input_HistoryCallHistoryBoolExp? callHistory,
     Input_HistoryCallHistoryAggregateBoolExp? callHistoryAggregate,
     Input_ChurchesBoolExp? church,
@@ -92727,7 +93495,6 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
-    Input_StringComparisonExp? firestoreId,
     Input_BooleanComparisonExp? gender,
     Input_GeographyComparisonExp? geolocation,
     Input_PersonsGroupsBoolExp? groups,
@@ -92796,6 +93563,8 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
       CopyWith_Input_DateComparisonExp.stub(_res);
   CopyWith_Input_StringComparisonExp<TRes> get birthday =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get callHistory =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
   CopyWith_Input_HistoryCallHistoryAggregateBoolExp<TRes>
@@ -92831,8 +93600,6 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
       CopyWith_Input_FathersBoolExp.stub(_res);
   CopyWith_Input_UuidComparisonExp<TRes> get fatherId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_BooleanComparisonExp<TRes> get gender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
@@ -98870,6 +99637,7 @@ class Input_PersonsInsertInput {
     String? address,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     DateTime? birthdate,
+    String? blurhash,
     Input_HistoryCallHistoryArrRelInsertInput? callHistory,
     Input_ChurchesObjRelInsertInput? church,
     UuidValue? churchId,
@@ -98882,7 +99650,6 @@ class Input_PersonsInsertInput {
     UuidValue? familyId,
     Input_FathersObjRelInsertInput? father,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     Input_PersonsGroupsArrRelInsertInput? groups,
@@ -98923,6 +99690,7 @@ class Input_PersonsInsertInput {
         if (address != null) r'address': address,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
         if (birthdate != null) r'birthdate': birthdate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (callHistory != null) r'callHistory': callHistory,
         if (church != null) r'church': church,
         if (churchId != null) r'churchId': churchId,
@@ -98935,7 +99703,6 @@ class Input_PersonsInsertInput {
         if (familyId != null) r'familyId': familyId,
         if (father != null) r'father': father,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (gender != null) r'gender': gender,
         if (geolocation != null) r'geolocation': geolocation,
         if (groups != null) r'groups': groups,
@@ -98992,6 +99759,10 @@ class Input_PersonsInsertInput {
       final l$birthdate = data['birthdate'];
       result$data['birthdate'] =
           l$birthdate == null ? null : dateFromString(l$birthdate);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('callHistory')) {
       final l$callHistory = data['callHistory'];
@@ -99065,10 +99836,6 @@ class Input_PersonsInsertInput {
       final l$fatherId = data['fatherId'];
       result$data['fatherId'] =
           l$fatherId == null ? null : stringToUuid(l$fatherId);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -99269,6 +100036,7 @@ class Input_PersonsInsertInput {
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   Input_HistoryCallHistoryArrRelInsertInput? get callHistory =>
       (_$data['callHistory'] as Input_HistoryCallHistoryArrRelInsertInput?);
   Input_ChurchesObjRelInsertInput? get church =>
@@ -99289,7 +100057,6 @@ class Input_PersonsInsertInput {
   Input_FathersObjRelInsertInput? get father =>
       (_$data['father'] as Input_FathersObjRelInsertInput?);
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   bool? get gender => (_$data['gender'] as bool?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -99355,6 +100122,10 @@ class Input_PersonsInsertInput {
       result$data['birthdate'] =
           l$birthdate == null ? null : dateToString(l$birthdate);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('callHistory')) {
       final l$callHistory = callHistory;
       result$data['callHistory'] = l$callHistory?.toJson();
@@ -99406,10 +100177,6 @@ class Input_PersonsInsertInput {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : uuidToString(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -99601,6 +100368,15 @@ class Input_PersonsInsertInput {
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$callHistory = callHistory;
     final lOther$callHistory = other.callHistory;
     if (_$data.containsKey('callHistory') !=
@@ -99702,15 +100478,6 @@ class Input_PersonsInsertInput {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$gender = gender;
@@ -100021,6 +100788,7 @@ class Input_PersonsInsertInput {
     final l$address = address;
     final l$attendanceHistory = attendanceHistory;
     final l$birthdate = birthdate;
+    final l$blurhash = blurhash;
     final l$callHistory = callHistory;
     final l$church = church;
     final l$churchId = churchId;
@@ -100033,7 +100801,6 @@ class Input_PersonsInsertInput {
     final l$familyId = familyId;
     final l$father = father;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$gender = gender;
     final l$geolocation = geolocation;
     final l$groups = groups;
@@ -100073,6 +100840,7 @@ class Input_PersonsInsertInput {
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('callHistory') ? l$callHistory : const {},
       _$data.containsKey('church') ? l$church : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
@@ -100085,7 +100853,6 @@ class Input_PersonsInsertInput {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('groups') ? l$groups : const {},
@@ -100138,6 +100905,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     String? address,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     DateTime? birthdate,
+    String? blurhash,
     Input_HistoryCallHistoryArrRelInsertInput? callHistory,
     Input_ChurchesObjRelInsertInput? church,
     UuidValue? churchId,
@@ -100150,7 +100918,6 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     UuidValue? familyId,
     Input_FathersObjRelInsertInput? father,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     Input_PersonsGroupsArrRelInsertInput? groups,
@@ -100230,6 +100997,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? address = _undefined,
     Object? attendanceHistory = _undefined,
     Object? birthdate = _undefined,
+    Object? blurhash = _undefined,
     Object? callHistory = _undefined,
     Object? church = _undefined,
     Object? churchId = _undefined,
@@ -100242,7 +101010,6 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? familyId = _undefined,
     Object? father = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? gender = _undefined,
     Object? geolocation = _undefined,
     Object? groups = _undefined,
@@ -100286,6 +101053,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
           'attendanceHistory': (attendanceHistory
               as Input_HistoryAttendanceHistoryArrRelInsertInput?),
         if (birthdate != _undefined) 'birthdate': (birthdate as DateTime?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (callHistory != _undefined)
           'callHistory':
               (callHistory as Input_HistoryCallHistoryArrRelInsertInput?),
@@ -100308,7 +101076,6 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
         if (father != _undefined)
           'father': (father as Input_FathersObjRelInsertInput?),
         if (fatherId != _undefined) 'fatherId': (fatherId as UuidValue?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (gender != _undefined) 'gender': (gender as bool?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -100562,6 +101329,7 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     String? address,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     DateTime? birthdate,
+    String? blurhash,
     Input_HistoryCallHistoryArrRelInsertInput? callHistory,
     Input_ChurchesObjRelInsertInput? church,
     UuidValue? churchId,
@@ -100574,7 +101342,6 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     UuidValue? familyId,
     Input_FathersObjRelInsertInput? father,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     Input_PersonsGroupsArrRelInsertInput? groups,
@@ -100664,12 +101431,12 @@ class Input_PersonsMaxOrderBy {
   factory Input_PersonsMaxOrderBy({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -100689,12 +101456,12 @@ class Input_PersonsMaxOrderBy {
       Input_PersonsMaxOrderBy._({
         if (address != null) r'address': address,
         if (birthdate != null) r'birthdate': birthdate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (churchId != null) r'churchId': churchId,
         if (collegeId != null) r'collegeId': collegeId,
         if (color != null) r'color': color,
         if (familyId != null) r'familyId': familyId,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
@@ -100728,6 +101495,12 @@ class Input_PersonsMaxOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$birthdate as String));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
       result$data['churchId'] = l$churchId == null
@@ -100756,12 +101529,6 @@ class Input_PersonsMaxOrderBy {
       result$data['fatherId'] = l$fatherId == null
           ? null
           : fromJson_Enum_OrderBy((l$fatherId as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -100855,12 +101622,12 @@ class Input_PersonsMaxOrderBy {
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
   Enum_OrderBy? get collegeId => (_$data['collegeId'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get jobDescription =>
       (_$data['jobDescription'] as Enum_OrderBy?);
@@ -100892,6 +101659,11 @@ class Input_PersonsMaxOrderBy {
       result$data['birthdate'] =
           l$birthdate == null ? null : toJson_Enum_OrderBy(l$birthdate);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
       result$data['churchId'] =
@@ -100916,11 +101688,6 @@ class Input_PersonsMaxOrderBy {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -101032,6 +101799,15 @@ class Input_PersonsMaxOrderBy {
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$churchId = churchId;
     final lOther$churchId = other.churchId;
     if (_$data.containsKey('churchId') !=
@@ -101074,15 +101850,6 @@ class Input_PersonsMaxOrderBy {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -101220,12 +101987,12 @@ class Input_PersonsMaxOrderBy {
   int get hashCode {
     final l$address = address;
     final l$birthdate = birthdate;
+    final l$blurhash = blurhash;
     final l$churchId = churchId;
     final l$collegeId = collegeId;
     final l$color = color;
     final l$familyId = familyId;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
@@ -101244,12 +102011,12 @@ class Input_PersonsMaxOrderBy {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('collegeId') ? l$collegeId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
@@ -101281,12 +102048,12 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -101321,12 +102088,12 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
   TRes call({
     Object? address = _undefined,
     Object? birthdate = _undefined,
+    Object? blurhash = _undefined,
     Object? churchId = _undefined,
     Object? collegeId = _undefined,
     Object? color = _undefined,
     Object? familyId = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? jobDescription = _undefined,
     Object? jobId = _undefined,
@@ -101347,13 +102114,12 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
         ..._instance._$data,
         if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
         if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
         if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (jobDescription != _undefined)
           'jobDescription': (jobDescription as Enum_OrderBy?),
@@ -101387,12 +102153,12 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
   call({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -101416,12 +102182,12 @@ class Input_PersonsMinOrderBy {
   factory Input_PersonsMinOrderBy({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -101441,12 +102207,12 @@ class Input_PersonsMinOrderBy {
       Input_PersonsMinOrderBy._({
         if (address != null) r'address': address,
         if (birthdate != null) r'birthdate': birthdate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (churchId != null) r'churchId': churchId,
         if (collegeId != null) r'collegeId': collegeId,
         if (color != null) r'color': color,
         if (familyId != null) r'familyId': familyId,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
@@ -101480,6 +102246,12 @@ class Input_PersonsMinOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$birthdate as String));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
       result$data['churchId'] = l$churchId == null
@@ -101508,12 +102280,6 @@ class Input_PersonsMinOrderBy {
       result$data['fatherId'] = l$fatherId == null
           ? null
           : fromJson_Enum_OrderBy((l$fatherId as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -101607,12 +102373,12 @@ class Input_PersonsMinOrderBy {
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
   Enum_OrderBy? get collegeId => (_$data['collegeId'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get jobDescription =>
       (_$data['jobDescription'] as Enum_OrderBy?);
@@ -101644,6 +102410,11 @@ class Input_PersonsMinOrderBy {
       result$data['birthdate'] =
           l$birthdate == null ? null : toJson_Enum_OrderBy(l$birthdate);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
       result$data['churchId'] =
@@ -101668,11 +102439,6 @@ class Input_PersonsMinOrderBy {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -101784,6 +102550,15 @@ class Input_PersonsMinOrderBy {
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$churchId = churchId;
     final lOther$churchId = other.churchId;
     if (_$data.containsKey('churchId') !=
@@ -101826,15 +102601,6 @@ class Input_PersonsMinOrderBy {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -101972,12 +102738,12 @@ class Input_PersonsMinOrderBy {
   int get hashCode {
     final l$address = address;
     final l$birthdate = birthdate;
+    final l$blurhash = blurhash;
     final l$churchId = churchId;
     final l$collegeId = collegeId;
     final l$color = color;
     final l$familyId = familyId;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
@@ -101996,12 +102762,12 @@ class Input_PersonsMinOrderBy {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('collegeId') ? l$collegeId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
@@ -102033,12 +102799,12 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -102073,12 +102839,12 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
   TRes call({
     Object? address = _undefined,
     Object? birthdate = _undefined,
+    Object? blurhash = _undefined,
     Object? churchId = _undefined,
     Object? collegeId = _undefined,
     Object? color = _undefined,
     Object? familyId = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? jobDescription = _undefined,
     Object? jobId = _undefined,
@@ -102099,13 +102865,12 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
         ..._instance._$data,
         if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
         if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
         if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (jobDescription != _undefined)
           'jobDescription': (jobDescription as Enum_OrderBy?),
@@ -102139,12 +102904,12 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
   call({
     Enum_OrderBy? address,
     Enum_OrderBy? birthdate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? churchId,
     Enum_OrderBy? collegeId,
     Enum_OrderBy? color,
     Enum_OrderBy? familyId,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? id,
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
@@ -102522,6 +103287,7 @@ class Input_PersonsOrderBy {
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? birthdate,
     Enum_OrderBy? birthday,
+    Enum_OrderBy? blurhash,
     Input_HistoryCallHistoryAggregateOrderBy? callHistoryAggregate,
     Input_ChurchesOrderBy? church,
     Enum_OrderBy? churchId,
@@ -102535,7 +103301,6 @@ class Input_PersonsOrderBy {
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? gender,
     Enum_OrderBy? geolocation,
     Input_PersonsGroupsAggregateOrderBy? groupsAggregate,
@@ -102587,6 +103352,7 @@ class Input_PersonsOrderBy {
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
         if (birthdate != null) r'birthdate': birthdate,
         if (birthday != null) r'birthday': birthday,
+        if (blurhash != null) r'blurhash': blurhash,
         if (callHistoryAggregate != null)
           r'callHistoryAggregate': callHistoryAggregate,
         if (church != null) r'church': church,
@@ -102603,7 +103369,6 @@ class Input_PersonsOrderBy {
         if (familyId != null) r'familyId': familyId,
         if (father != null) r'father': father,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (gender != null) r'gender': gender,
         if (geolocation != null) r'geolocation': geolocation,
         if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
@@ -102690,6 +103455,12 @@ class Input_PersonsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$birthday as String));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('callHistoryAggregate')) {
       final l$callHistoryAggregate = data['callHistoryAggregate'];
       result$data['callHistoryAggregate'] = l$callHistoryAggregate == null
@@ -102771,12 +103542,6 @@ class Input_PersonsOrderBy {
       result$data['fatherId'] = l$fatherId == null
           ? null
           : fromJson_Enum_OrderBy((l$fatherId as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -103056,6 +103821,7 @@ class Input_PersonsOrderBy {
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
   Enum_OrderBy? get birthday => (_$data['birthday'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Input_HistoryCallHistoryAggregateOrderBy? get callHistoryAggregate =>
       (_$data['callHistoryAggregate']
           as Input_HistoryCallHistoryAggregateOrderBy?);
@@ -103080,7 +103846,6 @@ class Input_PersonsOrderBy {
   Input_FathersOrderBy? get father =>
       (_$data['father'] as Input_FathersOrderBy?);
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Enum_OrderBy? get gender => (_$data['gender'] as Enum_OrderBy?);
   Enum_OrderBy? get geolocation => (_$data['geolocation'] as Enum_OrderBy?);
   Input_PersonsGroupsAggregateOrderBy? get groupsAggregate =>
@@ -103173,6 +103938,11 @@ class Input_PersonsOrderBy {
       result$data['birthday'] =
           l$birthday == null ? null : toJson_Enum_OrderBy(l$birthday);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('callHistoryAggregate')) {
       final l$callHistoryAggregate = callHistoryAggregate;
       result$data['callHistoryAggregate'] = l$callHistoryAggregate?.toJson();
@@ -103230,11 +104000,6 @@ class Input_PersonsOrderBy {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -103500,6 +104265,15 @@ class Input_PersonsOrderBy {
     if (l$birthday != lOther$birthday) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$callHistoryAggregate = callHistoryAggregate;
     final lOther$callHistoryAggregate = other.callHistoryAggregate;
     if (_$data.containsKey('callHistoryAggregate') !=
@@ -103610,15 +104384,6 @@ class Input_PersonsOrderBy {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$gender = gender;
@@ -104006,6 +104771,7 @@ class Input_PersonsOrderBy {
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$birthdate = birthdate;
     final l$birthday = birthday;
+    final l$blurhash = blurhash;
     final l$callHistoryAggregate = callHistoryAggregate;
     final l$church = church;
     final l$churchId = churchId;
@@ -104019,7 +104785,6 @@ class Input_PersonsOrderBy {
     final l$familyId = familyId;
     final l$father = father;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$gender = gender;
     final l$geolocation = geolocation;
     final l$groupsAggregate = groupsAggregate;
@@ -104071,6 +104836,7 @@ class Input_PersonsOrderBy {
           : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
       _$data.containsKey('birthday') ? l$birthday : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('callHistoryAggregate')
           ? l$callHistoryAggregate
           : const {},
@@ -104090,7 +104856,6 @@ class Input_PersonsOrderBy {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('groupsAggregate') ? l$groupsAggregate : const {},
@@ -104161,6 +104926,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? birthdate,
     Enum_OrderBy? birthday,
+    Enum_OrderBy? blurhash,
     Input_HistoryCallHistoryAggregateOrderBy? callHistoryAggregate,
     Input_ChurchesOrderBy? church,
     Enum_OrderBy? churchId,
@@ -104174,7 +104940,6 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? gender,
     Enum_OrderBy? geolocation,
     Input_PersonsGroupsAggregateOrderBy? groupsAggregate,
@@ -104271,6 +105036,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? birthdate = _undefined,
     Object? birthday = _undefined,
+    Object? blurhash = _undefined,
     Object? callHistoryAggregate = _undefined,
     Object? church = _undefined,
     Object? churchId = _undefined,
@@ -104284,7 +105050,6 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? familyId = _undefined,
     Object? father = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? gender = _undefined,
     Object? geolocation = _undefined,
     Object? groupsAggregate = _undefined,
@@ -104339,6 +105104,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
               as Input_HistoryAttendanceHistoryAggregateOrderBy?),
         if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
         if (birthday != _undefined) 'birthday': (birthday as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (callHistoryAggregate != _undefined)
           'callHistoryAggregate': (callHistoryAggregate
               as Input_HistoryCallHistoryAggregateOrderBy?),
@@ -104361,8 +105127,6 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
         if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
         if (father != _undefined) 'father': (father as Input_FathersOrderBy?),
         if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (gender != _undefined) 'gender': (gender as Enum_OrderBy?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Enum_OrderBy?),
@@ -104659,6 +105423,7 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? birthdate,
     Enum_OrderBy? birthday,
+    Enum_OrderBy? blurhash,
     Input_HistoryCallHistoryAggregateOrderBy? callHistoryAggregate,
     Input_ChurchesOrderBy? church,
     Enum_OrderBy? churchId,
@@ -104672,7 +105437,6 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
-    Enum_OrderBy? firestoreId,
     Enum_OrderBy? gender,
     Enum_OrderBy? geolocation,
     Input_PersonsGroupsAggregateOrderBy? groupsAggregate,
@@ -107723,12 +108487,12 @@ class Input_PersonsSetInput {
   factory Input_PersonsSetInput({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -107754,12 +108518,12 @@ class Input_PersonsSetInput {
       Input_PersonsSetInput._({
         if (address != null) r'address': address,
         if (birthdate != null) r'birthdate': birthdate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (churchId != null) r'churchId': churchId,
         if (collegeId != null) r'collegeId': collegeId,
         if (color != null) r'color': color,
         if (familyId != null) r'familyId': familyId,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (gender != null) r'gender': gender,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -107796,6 +108560,10 @@ class Input_PersonsSetInput {
       result$data['birthdate'] =
           l$birthdate == null ? null : dateFromString(l$birthdate);
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
       result$data['churchId'] =
@@ -107819,10 +108587,6 @@ class Input_PersonsSetInput {
       final l$fatherId = data['fatherId'];
       result$data['fatherId'] =
           l$fatherId == null ? null : stringToUuid(l$fatherId);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -107922,12 +108686,12 @@ class Input_PersonsSetInput {
 
   String? get address => (_$data['address'] as String?);
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
   UuidValue? get collegeId => (_$data['collegeId'] as UuidValue?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   bool? get gender => (_$data['gender'] as bool?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -107961,6 +108725,10 @@ class Input_PersonsSetInput {
       result$data['birthdate'] =
           l$birthdate == null ? null : dateToString(l$birthdate);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
       result$data['churchId'] =
@@ -107984,10 +108752,6 @@ class Input_PersonsSetInput {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : uuidToString(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -108113,6 +108877,15 @@ class Input_PersonsSetInput {
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$churchId = churchId;
     final lOther$churchId = other.churchId;
     if (_$data.containsKey('churchId') !=
@@ -108155,15 +108928,6 @@ class Input_PersonsSetInput {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$gender = gender;
@@ -108354,12 +109118,12 @@ class Input_PersonsSetInput {
   int get hashCode {
     final l$address = address;
     final l$birthdate = birthdate;
+    final l$blurhash = blurhash;
     final l$churchId = churchId;
     final l$collegeId = collegeId;
     final l$color = color;
     final l$familyId = familyId;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$gender = gender;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -108384,12 +109148,12 @@ class Input_PersonsSetInput {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('collegeId') ? l$collegeId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -108427,12 +109191,12 @@ abstract class CopyWith_Input_PersonsSetInput<TRes> {
   TRes call({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -108473,12 +109237,12 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
   TRes call({
     Object? address = _undefined,
     Object? birthdate = _undefined,
+    Object? blurhash = _undefined,
     Object? churchId = _undefined,
     Object? collegeId = _undefined,
     Object? color = _undefined,
     Object? familyId = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? gender = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -108505,12 +109269,12 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
         if (birthdate != _undefined) 'birthdate': (birthdate as DateTime?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
         if (collegeId != _undefined) 'collegeId': (collegeId as UuidValue?),
         if (color != _undefined) 'color': (color as int?),
         if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
         if (fatherId != _undefined) 'fatherId': (fatherId as UuidValue?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (gender != _undefined) 'gender': (gender as bool?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -108550,12 +109314,12 @@ class _CopyWithStubImpl_Input_PersonsSetInput<TRes>
   call({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -109168,12 +109932,12 @@ class Input_PersonsStreamCursorValueInput {
   factory Input_PersonsStreamCursorValueInput({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -109199,12 +109963,12 @@ class Input_PersonsStreamCursorValueInput {
       Input_PersonsStreamCursorValueInput._({
         if (address != null) r'address': address,
         if (birthdate != null) r'birthdate': birthdate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (churchId != null) r'churchId': churchId,
         if (collegeId != null) r'collegeId': collegeId,
         if (color != null) r'color': color,
         if (familyId != null) r'familyId': familyId,
         if (fatherId != null) r'fatherId': fatherId,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (gender != null) r'gender': gender,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -109242,6 +110006,10 @@ class Input_PersonsStreamCursorValueInput {
       result$data['birthdate'] =
           l$birthdate == null ? null : dateFromString(l$birthdate);
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
       result$data['churchId'] =
@@ -109265,10 +110033,6 @@ class Input_PersonsStreamCursorValueInput {
       final l$fatherId = data['fatherId'];
       result$data['fatherId'] =
           l$fatherId == null ? null : stringToUuid(l$fatherId);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -109368,12 +110132,12 @@ class Input_PersonsStreamCursorValueInput {
 
   String? get address => (_$data['address'] as String?);
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
   UuidValue? get collegeId => (_$data['collegeId'] as UuidValue?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   bool? get gender => (_$data['gender'] as bool?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -109407,6 +110171,10 @@ class Input_PersonsStreamCursorValueInput {
       result$data['birthdate'] =
           l$birthdate == null ? null : dateToString(l$birthdate);
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
       result$data['churchId'] =
@@ -109430,10 +110198,6 @@ class Input_PersonsStreamCursorValueInput {
       final l$fatherId = fatherId;
       result$data['fatherId'] =
           l$fatherId == null ? null : uuidToString(l$fatherId);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -109561,6 +110325,15 @@ class Input_PersonsStreamCursorValueInput {
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$churchId = churchId;
     final lOther$churchId = other.churchId;
     if (_$data.containsKey('churchId') !=
@@ -109603,15 +110376,6 @@ class Input_PersonsStreamCursorValueInput {
       return false;
     }
     if (l$fatherId != lOther$fatherId) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$gender = gender;
@@ -109802,12 +110566,12 @@ class Input_PersonsStreamCursorValueInput {
   int get hashCode {
     final l$address = address;
     final l$birthdate = birthdate;
+    final l$blurhash = blurhash;
     final l$churchId = churchId;
     final l$collegeId = collegeId;
     final l$color = color;
     final l$familyId = familyId;
     final l$fatherId = fatherId;
-    final l$firestoreId = firestoreId;
     final l$gender = gender;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -109832,12 +110596,12 @@ class Input_PersonsStreamCursorValueInput {
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('collegeId') ? l$collegeId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -109875,12 +110639,12 @@ abstract class CopyWith_Input_PersonsStreamCursorValueInput<TRes> {
   TRes call({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -109921,12 +110685,12 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
   TRes call({
     Object? address = _undefined,
     Object? birthdate = _undefined,
+    Object? blurhash = _undefined,
     Object? churchId = _undefined,
     Object? collegeId = _undefined,
     Object? color = _undefined,
     Object? familyId = _undefined,
     Object? fatherId = _undefined,
-    Object? firestoreId = _undefined,
     Object? gender = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -109953,12 +110717,12 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
         ..._instance._$data,
         if (address != _undefined) 'address': (address as String?),
         if (birthdate != _undefined) 'birthdate': (birthdate as DateTime?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
         if (collegeId != _undefined) 'collegeId': (collegeId as UuidValue?),
         if (color != _undefined) 'color': (color as int?),
         if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
         if (fatherId != _undefined) 'fatherId': (fatherId as UuidValue?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (gender != _undefined) 'gender': (gender as bool?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -109998,12 +110762,12 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorValueInput<TRes>
   call({
     String? address,
     DateTime? birthdate,
+    String? blurhash,
     UuidValue? churchId,
     UuidValue? collegeId,
     int? color,
     UuidValue? familyId,
     UuidValue? fatherId,
-    String? firestoreId,
     bool? gender,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -117322,10 +118086,10 @@ class Input_ServicesBoolExp {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
-    Input_StringComparisonExp? firestoreId,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -117358,10 +118122,10 @@ class Input_ServicesBoolExp {
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (classes != null) r'classes': classes,
         if (classesAggregate != null) r'classesAggregate': classesAggregate,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (groups != null) r'groups': groups,
         if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
         if (id != null) r'id': id,
@@ -117453,6 +118217,13 @@ class Input_ServicesBoolExp {
               : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
+    }
     if (data.containsKey('classes')) {
       final l$classes = data['classes'];
       result$data['classes'] = l$classes == null
@@ -117472,13 +118243,6 @@ class Input_ServicesBoolExp {
           ? null
           : Input_BigintComparisonExp.fromJson(
               (l$color as Map<String, dynamic>));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$firestoreId as Map<String, dynamic>));
     }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
@@ -117618,14 +118382,14 @@ class Input_ServicesBoolExp {
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
   Input_ClassesAggregateBoolExp? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
-  Input_StringComparisonExp? get firestoreId =>
-      (_$data['firestoreId'] as Input_StringComparisonExp?);
   Input_GroupsBoolExp? get groups => (_$data['groups'] as Input_GroupsBoolExp?);
   Input_GroupsAggregateBoolExp? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateBoolExp?);
@@ -117698,6 +118462,10 @@ class Input_ServicesBoolExp {
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
+    }
     if (_$data.containsKey('classes')) {
       final l$classes = classes;
       result$data['classes'] = l$classes?.toJson();
@@ -117709,10 +118477,6 @@ class Input_ServicesBoolExp {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color?.toJson();
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId?.toJson();
     }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
@@ -117897,6 +118661,15 @@ class Input_ServicesBoolExp {
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$classes = classes;
     final lOther$classes = other.classes;
     if (_$data.containsKey('classes') != other._$data.containsKey('classes')) {
@@ -117920,15 +118693,6 @@ class Input_ServicesBoolExp {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$groups = groups;
@@ -118086,10 +118850,10 @@ class Input_ServicesBoolExp {
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistory = attendanceHistory;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$classes = classes;
     final l$classesAggregate = classesAggregate;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$groups = groups;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
@@ -118132,10 +118896,10 @@ class Input_ServicesBoolExp {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('groupsAggregate') ? l$groupsAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -118180,10 +118944,10 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
-    Input_StringComparisonExp? firestoreId,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -118219,10 +118983,10 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_ClassesBoolExp<TRes> get classes;
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId;
   CopyWith_Input_GroupsBoolExp<TRes> get groups;
   CopyWith_Input_GroupsAggregateBoolExp<TRes> get groupsAggregate;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
@@ -118264,10 +119028,10 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? classes = _undefined,
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? groups = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
@@ -118309,14 +119073,14 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (classes != _undefined)
           'classes': (classes as Input_ClassesBoolExp?),
         if (classesAggregate != _undefined)
           'classesAggregate':
               (classesAggregate as Input_ClassesAggregateBoolExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Input_StringComparisonExp?),
         if (groups != _undefined) 'groups': (groups as Input_GroupsBoolExp?),
         if (groupsAggregate != _undefined)
           'groupsAggregate': (groupsAggregate as Input_GroupsAggregateBoolExp?),
@@ -118437,6 +119201,14 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
             (e) => call(attendanceHistoryAggregate: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
+  }
+
   CopyWith_Input_ClassesBoolExp<TRes> get classes {
     final local$classes = _instance.classes;
     return local$classes == null
@@ -118458,14 +119230,6 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BigintComparisonExp(
             local$color, (e) => call(color: e));
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId {
-    final local$firestoreId = _instance.firestoreId;
-    return local$firestoreId == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$firestoreId, (e) => call(firestoreId: e));
   }
 
   CopyWith_Input_GroupsBoolExp<TRes> get groups {
@@ -118611,10 +119375,10 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
-    Input_StringComparisonExp? firestoreId,
     Input_GroupsBoolExp? groups,
     Input_GroupsAggregateBoolExp? groupsAggregate,
     Input_UuidComparisonExp? id,
@@ -118654,14 +119418,14 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
-  CopyWith_Input_StringComparisonExp<TRes> get firestoreId =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_GroupsBoolExp<TRes> get groups =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
   CopyWith_Input_GroupsAggregateBoolExp<TRes> get groupsAggregate =>
@@ -118869,9 +119633,9 @@ class Input_ServicesInsertInput {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
-    String? firestoreId,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
@@ -118889,9 +119653,9 @@ class Input_ServicesInsertInput {
         if (attendanceDaysConstraints != null)
           r'attendanceDaysConstraints': attendanceDaysConstraints,
         if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+        if (blurhash != null) r'blurhash': blurhash,
         if (classes != null) r'classes': classes,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (groups != null) r'groups': groups,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -118931,6 +119695,10 @@ class Input_ServicesInsertInput {
           : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
               (l$attendanceHistory as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('classes')) {
       final l$classes = data['classes'];
       result$data['classes'] = l$classes == null
@@ -118941,10 +119709,6 @@ class Input_ServicesInsertInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
@@ -119020,10 +119784,10 @@ class Input_ServicesInsertInput {
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   Input_ClassesArrRelInsertInput? get classes =>
       (_$data['classes'] as Input_ClassesArrRelInsertInput?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   Input_GroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_GroupsArrRelInsertInput?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
@@ -119055,6 +119819,10 @@ class Input_ServicesInsertInput {
       final l$attendanceHistory = attendanceHistory;
       result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('classes')) {
       final l$classes = classes;
       result$data['classes'] = l$classes?.toJson();
@@ -119062,10 +119830,6 @@ class Input_ServicesInsertInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
@@ -119157,6 +119921,15 @@ class Input_ServicesInsertInput {
     if (l$attendanceHistory != lOther$attendanceHistory) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$classes = classes;
     final lOther$classes = other.classes;
     if (_$data.containsKey('classes') != other._$data.containsKey('classes')) {
@@ -119171,15 +119944,6 @@ class Input_ServicesInsertInput {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$groups = groups;
@@ -119285,9 +120049,9 @@ class Input_ServicesInsertInput {
     final l$adminUsers = adminUsers;
     final l$attendanceDaysConstraints = attendanceDaysConstraints;
     final l$attendanceHistory = attendanceHistory;
+    final l$blurhash = blurhash;
     final l$classes = classes;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$groups = groups;
     final l$id = id;
     final l$name = name;
@@ -119305,9 +120069,9 @@ class Input_ServicesInsertInput {
           ? l$attendanceDaysConstraints
           : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -119337,9 +120101,9 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
-    String? firestoreId,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
@@ -119382,9 +120146,9 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
     Object? adminUsers = _undefined,
     Object? attendanceDaysConstraints = _undefined,
     Object? attendanceHistory = _undefined,
+    Object? blurhash = _undefined,
     Object? classes = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? groups = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -119408,10 +120172,10 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
         if (attendanceHistory != _undefined)
           'attendanceHistory': (attendanceHistory
               as Input_HistoryAttendanceHistoryArrRelInsertInput?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (classes != _undefined)
           'classes': (classes as Input_ClassesArrRelInsertInput?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (groups != _undefined)
           'groups': (groups as Input_GroupsArrRelInsertInput?),
         if (id != _undefined) 'id': (id as UuidValue?),
@@ -119524,9 +120288,9 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
         attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    String? blurhash,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
-    String? firestoreId,
     Input_GroupsArrRelInsertInput? groups,
     UuidValue? id,
     String? name,
@@ -119921,9 +120685,9 @@ class Input_ServicesOrderBy {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -119947,9 +120711,9 @@ class Input_ServicesOrderBy {
               attendanceDaysConstraintsAggregate,
         if (attendanceHistoryAggregate != null)
           r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (classesAggregate != null) r'classesAggregate': classesAggregate,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
         if (id != null) r'id': id,
         if (isUserAllowedToRead != null)
@@ -119997,6 +120761,12 @@ class Input_ServicesOrderBy {
               : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
                   (l$attendanceHistoryAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('classesAggregate')) {
       final l$classesAggregate = data['classesAggregate'];
       result$data['classesAggregate'] = l$classesAggregate == null
@@ -120008,12 +120778,6 @@ class Input_ServicesOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = l$firestoreId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$firestoreId as String));
     }
     if (data.containsKey('groupsAggregate')) {
       final l$groupsAggregate = data['groupsAggregate'];
@@ -120117,10 +120881,10 @@ class Input_ServicesOrderBy {
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-  Enum_OrderBy? get firestoreId => (_$data['firestoreId'] as Enum_OrderBy?);
   Input_GroupsAggregateOrderBy? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateOrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
@@ -120161,6 +120925,11 @@ class Input_ServicesOrderBy {
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate?.toJson();
     }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('classesAggregate')) {
       final l$classesAggregate = classesAggregate;
       result$data['classesAggregate'] = l$classesAggregate?.toJson();
@@ -120169,11 +120938,6 @@ class Input_ServicesOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] =
-          l$firestoreId == null ? null : toJson_Enum_OrderBy(l$firestoreId);
     }
     if (_$data.containsKey('groupsAggregate')) {
       final l$groupsAggregate = groupsAggregate;
@@ -120288,6 +121052,15 @@ class Input_ServicesOrderBy {
     if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$classesAggregate = classesAggregate;
     final lOther$classesAggregate = other.classesAggregate;
     if (_$data.containsKey('classesAggregate') !=
@@ -120303,15 +121076,6 @@ class Input_ServicesOrderBy {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$groupsAggregate = groupsAggregate;
@@ -120447,9 +121211,9 @@ class Input_ServicesOrderBy {
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
     final l$classesAggregate = classesAggregate;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
     final l$isUserAllowedToRead = isUserAllowedToRead;
@@ -120474,9 +121238,9 @@ class Input_ServicesOrderBy {
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
           : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('groupsAggregate') ? l$groupsAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isUserAllowedToRead')
@@ -120513,9 +121277,9 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -120561,9 +121325,9 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
     Object? adminUsersAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
     Object? isUserAllowedToRead = _undefined,
@@ -120591,12 +121355,11 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         if (attendanceHistoryAggregate != _undefined)
           'attendanceHistoryAggregate': (attendanceHistoryAggregate
               as Input_HistoryAttendanceHistoryAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (classesAggregate != _undefined)
           'classesAggregate':
               (classesAggregate as Input_ClassesAggregateOrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (firestoreId != _undefined)
-          'firestoreId': (firestoreId as Enum_OrderBy?),
         if (groupsAggregate != _undefined)
           'groupsAggregate': (groupsAggregate as Input_GroupsAggregateOrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -120717,9 +121480,9 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
         attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
-    Enum_OrderBy? firestoreId,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
     Enum_OrderBy? isUserAllowedToRead,
@@ -120856,8 +121619,8 @@ class _CopyWithStubImpl_Input_ServicesPkColumnsInput<TRes>
 
 class Input_ServicesSetInput {
   factory Input_ServicesSetInput({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -120866,8 +121629,8 @@ class Input_ServicesSetInput {
     int? studyYearToId,
   }) =>
       Input_ServicesSetInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (nextServiceId != null) r'nextServiceId': nextServiceId,
@@ -120880,13 +121643,13 @@ class Input_ServicesSetInput {
 
   factory Input_ServicesSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -120919,8 +121682,8 @@ class Input_ServicesSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
@@ -120929,13 +121692,13 @@ class Input_ServicesSetInput {
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -120980,21 +121743,21 @@ class Input_ServicesSetInput {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -121054,8 +121817,8 @@ class Input_ServicesSetInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$nextServiceId = nextServiceId;
@@ -121063,8 +121826,8 @@ class Input_ServicesSetInput {
     final l$studyYearFromId = studyYearFromId;
     final l$studyYearToId = studyYearToId;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
@@ -121085,8 +121848,8 @@ abstract class CopyWith_Input_ServicesSetInput<TRes> {
       _CopyWithStubImpl_Input_ServicesSetInput;
 
   TRes call({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -121110,8 +121873,8 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? nextServiceId = _undefined,
@@ -121121,8 +121884,8 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
   }) =>
       _then(Input_ServicesSetInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (nextServiceId != _undefined)
@@ -121143,8 +121906,8 @@ class _CopyWithStubImpl_Input_ServicesSetInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -121306,8 +122069,8 @@ class _CopyWithStubImpl_Input_ServicesStreamCursorInput<TRes>
 
 class Input_ServicesStreamCursorValueInput {
   factory Input_ServicesStreamCursorValueInput({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -121316,8 +122079,8 @@ class Input_ServicesStreamCursorValueInput {
     int? studyYearToId,
   }) =>
       Input_ServicesStreamCursorValueInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
-        if (firestoreId != null) r'firestoreId': firestoreId,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (nextServiceId != null) r'nextServiceId': nextServiceId,
@@ -121331,13 +122094,13 @@ class Input_ServicesStreamCursorValueInput {
   factory Input_ServicesStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('firestoreId')) {
-      final l$firestoreId = data['firestoreId'];
-      result$data['firestoreId'] = (l$firestoreId as String?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -121370,8 +122133,8 @@ class Input_ServicesStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
-  String? get firestoreId => (_$data['firestoreId'] as String?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   String? get name => (_$data['name'] as String?);
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
@@ -121380,13 +122143,13 @@ class Input_ServicesStreamCursorValueInput {
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('firestoreId')) {
-      final l$firestoreId = firestoreId;
-      result$data['firestoreId'] = l$firestoreId;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -121432,21 +122195,21 @@ class Input_ServicesStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$firestoreId = firestoreId;
-    final lOther$firestoreId = other.firestoreId;
-    if (_$data.containsKey('firestoreId') !=
-        other._$data.containsKey('firestoreId')) {
-      return false;
-    }
-    if (l$firestoreId != lOther$firestoreId) {
       return false;
     }
     final l$id = id;
@@ -121506,8 +122269,8 @@ class Input_ServicesStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
-    final l$firestoreId = firestoreId;
     final l$id = id;
     final l$name = name;
     final l$nextServiceId = nextServiceId;
@@ -121515,8 +122278,8 @@ class Input_ServicesStreamCursorValueInput {
     final l$studyYearFromId = studyYearFromId;
     final l$studyYearToId = studyYearToId;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('firestoreId') ? l$firestoreId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
@@ -121537,8 +122300,8 @@ abstract class CopyWith_Input_ServicesStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_ServicesStreamCursorValueInput;
 
   TRes call({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -121562,8 +122325,8 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
-    Object? firestoreId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? nextServiceId = _undefined,
@@ -121573,8 +122336,8 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
   }) =>
       _then(Input_ServicesStreamCursorValueInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
-        if (firestoreId != _undefined) 'firestoreId': (firestoreId as String?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
         if (nextServiceId != _undefined)
@@ -121595,8 +122358,8 @@ class _CopyWithStubImpl_Input_ServicesStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
-    String? firestoreId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -124993,6 +125756,7 @@ class Input_StoresBoolExp {
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
@@ -125010,6 +125774,7 @@ class Input_StoresBoolExp {
         if ($_or != null) r'_or': $_or,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (areas != null) r'areas': areas,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
@@ -125060,6 +125825,13 @@ class Input_StoresBoolExp {
       result$data['areas'] = l$areas == null
           ? null
           : Input_AreasBoolExp.fromJson((l$areas as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -125141,6 +125913,8 @@ class Input_StoresBoolExp {
   Input_UuidComparisonExp? get adminFamily =>
       (_$data['adminFamily'] as Input_UuidComparisonExp?);
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_FamiliesBoolExp? get family =>
@@ -125181,6 +125955,10 @@ class Input_StoresBoolExp {
     if (_$data.containsKey('areas')) {
       final l$areas = areas;
       result$data['areas'] = l$areas?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -125301,6 +126079,15 @@ class Input_StoresBoolExp {
     if (l$areas != lOther$areas) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -125396,6 +126183,7 @@ class Input_StoresBoolExp {
     final l$$_or = $_or;
     final l$adminFamily = adminFamily;
     final l$areas = areas;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$family = family;
     final l$geolocation = geolocation;
@@ -125420,6 +126208,7 @@ class Input_StoresBoolExp {
           : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('areas') ? l$areas : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
@@ -125453,6 +126242,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
@@ -125475,6 +126265,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
           _fn);
   CopyWith_Input_UuidComparisonExp<TRes> get adminFamily;
   CopyWith_Input_AreasBoolExp<TRes> get areas;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
@@ -125506,6 +126297,7 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
     Object? $_or = _undefined,
     Object? adminFamily = _undefined,
     Object? areas = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? family = _undefined,
     Object? geolocation = _undefined,
@@ -125525,6 +126317,8 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Input_UuidComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input_AreasBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
         if (geolocation != _undefined)
@@ -125582,6 +126376,14 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
     return local$areas == null
         ? CopyWith_Input_AreasBoolExp.stub(_then(_instance))
         : CopyWith_Input_AreasBoolExp(local$areas, (e) => call(areas: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -125673,6 +126475,7 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
     List<Input_StoresBoolExp>? $_or,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? family,
     Input_GeographyComparisonExp? geolocation,
@@ -125693,6 +126496,8 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
       CopyWith_Input_UuidComparisonExp.stub(_res);
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_FamiliesBoolExp<TRes> get family =>
@@ -125817,6 +126622,7 @@ class _CopyWithStubImpl_Input_StoresIncInput<TRes>
 class Input_StoresInsertInput {
   factory Input_StoresInsertInput({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Input_FamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
@@ -125826,6 +126632,7 @@ class Input_StoresInsertInput {
   }) =>
       Input_StoresInsertInput._({
         if (adminFamily != null) r'adminFamily': adminFamily,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
@@ -125842,6 +126649,10 @@ class Input_StoresInsertInput {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
           l$adminFamily == null ? null : stringToUuid(l$adminFamily);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -125877,6 +126688,7 @@ class Input_StoresInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   Input_FamiliesObjRelInsertInput? get family =>
       (_$data['family'] as Input_FamiliesObjRelInsertInput?);
@@ -125891,6 +126703,10 @@ class Input_StoresInsertInput {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
           l$adminFamily == null ? null : uuidToString(l$adminFamily);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -125941,6 +126757,15 @@ class Input_StoresInsertInput {
       return false;
     }
     if (l$adminFamily != lOther$adminFamily) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -125999,6 +126824,7 @@ class Input_StoresInsertInput {
   @override
   int get hashCode {
     final l$adminFamily = adminFamily;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$family = family;
     final l$geolocation = geolocation;
@@ -126007,6 +126833,7 @@ class Input_StoresInsertInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
@@ -126028,6 +126855,7 @@ abstract class CopyWith_Input_StoresInsertInput<TRes> {
 
   TRes call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Input_FamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
@@ -126053,6 +126881,7 @@ class _CopyWithImpl_Input_StoresInsertInput<TRes>
 
   TRes call({
     Object? adminFamily = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? family = _undefined,
     Object? geolocation = _undefined,
@@ -126064,6 +126893,7 @@ class _CopyWithImpl_Input_StoresInsertInput<TRes>
         ..._instance._$data,
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (family != _undefined)
           'family': (family as Input_FamiliesObjRelInsertInput?),
@@ -126091,6 +126921,7 @@ class _CopyWithStubImpl_Input_StoresInsertInput<TRes>
 
   call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Input_FamiliesObjRelInsertInput? family,
     Map<String, dynamic>? geolocation,
@@ -126106,6 +126937,7 @@ class _CopyWithStubImpl_Input_StoresInsertInput<TRes>
 class Input_StoresMaxOrderBy {
   factory Input_StoresMaxOrderBy({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126113,6 +126945,7 @@ class Input_StoresMaxOrderBy {
   }) =>
       Input_StoresMaxOrderBy._({
         if (adminFamily != null) r'adminFamily': adminFamily,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -126128,6 +126961,12 @@ class Input_StoresMaxOrderBy {
       result$data['adminFamily'] = l$adminFamily == null
           ? null
           : fromJson_Enum_OrderBy((l$adminFamily as String));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -126156,6 +126995,7 @@ class Input_StoresMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -126167,6 +127007,11 @@ class Input_StoresMaxOrderBy {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
           l$adminFamily == null ? null : toJson_Enum_OrderBy(l$adminFamily);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -126213,6 +127058,15 @@ class Input_StoresMaxOrderBy {
     if (l$adminFamily != lOther$adminFamily) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -126252,12 +127106,14 @@ class Input_StoresMaxOrderBy {
   @override
   int get hashCode {
     final l$adminFamily = adminFamily;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -126277,6 +127133,7 @@ abstract class CopyWith_Input_StoresMaxOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126299,6 +127156,7 @@ class _CopyWithImpl_Input_StoresMaxOrderBy<TRes>
 
   TRes call({
     Object? adminFamily = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -126308,6 +127166,7 @@ class _CopyWithImpl_Input_StoresMaxOrderBy<TRes>
         ..._instance._$data,
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -126324,6 +127183,7 @@ class _CopyWithStubImpl_Input_StoresMaxOrderBy<TRes>
 
   call({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126335,6 +127195,7 @@ class _CopyWithStubImpl_Input_StoresMaxOrderBy<TRes>
 class Input_StoresMinOrderBy {
   factory Input_StoresMinOrderBy({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126342,6 +127203,7 @@ class Input_StoresMinOrderBy {
   }) =>
       Input_StoresMinOrderBy._({
         if (adminFamily != null) r'adminFamily': adminFamily,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -126357,6 +127219,12 @@ class Input_StoresMinOrderBy {
       result$data['adminFamily'] = l$adminFamily == null
           ? null
           : fromJson_Enum_OrderBy((l$adminFamily as String));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -126385,6 +127253,7 @@ class Input_StoresMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -126396,6 +127265,11 @@ class Input_StoresMinOrderBy {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
           l$adminFamily == null ? null : toJson_Enum_OrderBy(l$adminFamily);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -126442,6 +127316,15 @@ class Input_StoresMinOrderBy {
     if (l$adminFamily != lOther$adminFamily) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -126481,12 +127364,14 @@ class Input_StoresMinOrderBy {
   @override
   int get hashCode {
     final l$adminFamily = adminFamily;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -126506,6 +127391,7 @@ abstract class CopyWith_Input_StoresMinOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126528,6 +127414,7 @@ class _CopyWithImpl_Input_StoresMinOrderBy<TRes>
 
   TRes call({
     Object? adminFamily = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -126537,6 +127424,7 @@ class _CopyWithImpl_Input_StoresMinOrderBy<TRes>
         ..._instance._$data,
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Enum_OrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -126553,6 +127441,7 @@ class _CopyWithStubImpl_Input_StoresMinOrderBy<TRes>
 
   call({
     Enum_OrderBy? adminFamily,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -126758,6 +127647,7 @@ class Input_StoresOrderBy {
   factory Input_StoresOrderBy({
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? geolocation,
@@ -126772,6 +127662,7 @@ class Input_StoresOrderBy {
       Input_StoresOrderBy._({
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (areasAggregate != null) r'areasAggregate': areasAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (family != null) r'family': family,
         if (geolocation != null) r'geolocation': geolocation,
@@ -126802,6 +127693,12 @@ class Input_StoresOrderBy {
           ? null
           : Input_AreasAggregateOrderBy.fromJson(
               (l$areasAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -126869,6 +127766,7 @@ class Input_StoresOrderBy {
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Input_FamiliesOrderBy? get family =>
       (_$data['family'] as Input_FamiliesOrderBy?);
@@ -126894,6 +127792,11 @@ class Input_StoresOrderBy {
     if (_$data.containsKey('areasAggregate')) {
       final l$areasAggregate = areasAggregate;
       result$data['areasAggregate'] = l$areasAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -126976,6 +127879,15 @@ class Input_StoresOrderBy {
       return false;
     }
     if (l$areasAggregate != lOther$areasAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -127071,6 +127983,7 @@ class Input_StoresOrderBy {
   int get hashCode {
     final l$adminFamily = adminFamily;
     final l$areasAggregate = areasAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$family = family;
     final l$geolocation = geolocation;
@@ -127084,6 +127997,7 @@ class Input_StoresOrderBy {
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('areasAggregate') ? l$areasAggregate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
@@ -127114,6 +128028,7 @@ abstract class CopyWith_Input_StoresOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? geolocation,
@@ -127146,6 +128061,7 @@ class _CopyWithImpl_Input_StoresOrderBy<TRes>
   TRes call({
     Object? adminFamily = _undefined,
     Object? areasAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? family = _undefined,
     Object? geolocation = _undefined,
@@ -127163,6 +128079,7 @@ class _CopyWithImpl_Input_StoresOrderBy<TRes>
           'adminFamily': (adminFamily as Enum_OrderBy?),
         if (areasAggregate != _undefined)
           'areasAggregate': (areasAggregate as Input_AreasAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
         if (geolocation != _undefined)
@@ -127213,6 +128130,7 @@ class _CopyWithStubImpl_Input_StoresOrderBy<TRes>
   call({
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? geolocation,
@@ -127330,6 +128248,7 @@ class _CopyWithStubImpl_Input_StoresPkColumnsInput<TRes>
 class Input_StoresSetInput {
   factory Input_StoresSetInput({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -127338,6 +128257,7 @@ class Input_StoresSetInput {
   }) =>
       Input_StoresSetInput._({
         if (adminFamily != null) r'adminFamily': adminFamily,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -127353,6 +128273,10 @@ class Input_StoresSetInput {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
           l$adminFamily == null ? null : stringToUuid(l$adminFamily);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -127381,6 +128305,7 @@ class Input_StoresSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -127393,6 +128318,10 @@ class Input_StoresSetInput {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
           l$adminFamily == null ? null : uuidToString(l$adminFamily);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -127438,6 +128367,15 @@ class Input_StoresSetInput {
       return false;
     }
     if (l$adminFamily != lOther$adminFamily) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -127488,6 +128426,7 @@ class Input_StoresSetInput {
   @override
   int get hashCode {
     final l$adminFamily = adminFamily;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -127495,6 +128434,7 @@ class Input_StoresSetInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -127515,6 +128455,7 @@ abstract class CopyWith_Input_StoresSetInput<TRes> {
 
   TRes call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -127538,6 +128479,7 @@ class _CopyWithImpl_Input_StoresSetInput<TRes>
 
   TRes call({
     Object? adminFamily = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -127548,6 +128490,7 @@ class _CopyWithImpl_Input_StoresSetInput<TRes>
         ..._instance._$data,
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -127566,6 +128509,7 @@ class _CopyWithStubImpl_Input_StoresSetInput<TRes>
 
   call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -128037,6 +128981,7 @@ class _CopyWithStubImpl_Input_StoresStreamCursorInput<TRes>
 class Input_StoresStreamCursorValueInput {
   factory Input_StoresStreamCursorValueInput({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -128045,6 +128990,7 @@ class Input_StoresStreamCursorValueInput {
   }) =>
       Input_StoresStreamCursorValueInput._({
         if (adminFamily != null) r'adminFamily': adminFamily,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
@@ -128061,6 +129007,10 @@ class Input_StoresStreamCursorValueInput {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
           l$adminFamily == null ? null : stringToUuid(l$adminFamily);
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -128089,6 +129039,7 @@ class Input_StoresStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
@@ -128101,6 +129052,10 @@ class Input_StoresStreamCursorValueInput {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
           l$adminFamily == null ? null : uuidToString(l$adminFamily);
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -128148,6 +129103,15 @@ class Input_StoresStreamCursorValueInput {
       return false;
     }
     if (l$adminFamily != lOther$adminFamily) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -128198,6 +129162,7 @@ class Input_StoresStreamCursorValueInput {
   @override
   int get hashCode {
     final l$adminFamily = adminFamily;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$geolocation = geolocation;
     final l$id = id;
@@ -128205,6 +129170,7 @@ class Input_StoresStreamCursorValueInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -128225,6 +129191,7 @@ abstract class CopyWith_Input_StoresStreamCursorValueInput<TRes> {
 
   TRes call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -128248,6 +129215,7 @@ class _CopyWithImpl_Input_StoresStreamCursorValueInput<TRes>
 
   TRes call({
     Object? adminFamily = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
@@ -128258,6 +129226,7 @@ class _CopyWithImpl_Input_StoresStreamCursorValueInput<TRes>
         ..._instance._$data,
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
@@ -128276,6 +129245,7 @@ class _CopyWithStubImpl_Input_StoresStreamCursorValueInput<TRes>
 
   call({
     UuidValue? adminFamily,
+    String? blurhash,
     int? color,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
@@ -129511,6 +130481,7 @@ class Input_StreetsBoolExp {
     Input_StreetsBoolExp? $_not,
     List<Input_StreetsBoolExp>? $_or,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
     Input_UuidComparisonExp? id,
@@ -129528,6 +130499,7 @@ class Input_StreetsBoolExp {
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
         if (areas != null) r'areas': areas,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (families != null) r'families': families,
         if (id != null) r'id': id,
@@ -129572,6 +130544,13 @@ class Input_StreetsBoolExp {
       result$data['areas'] = l$areas == null
           ? null
           : Input_AreasBoolExp.fromJson((l$areas as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -129658,6 +130637,8 @@ class Input_StreetsBoolExp {
   List<Input_StreetsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_StreetsBoolExp>?);
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
   Input_FamiliesBoolExp? get families =>
@@ -129695,6 +130676,10 @@ class Input_StreetsBoolExp {
     if (_$data.containsKey('areas')) {
       final l$areas = areas;
       result$data['areas'] = l$areas?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -129810,6 +130795,15 @@ class Input_StreetsBoolExp {
     if (l$areas != lOther$areas) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -129912,6 +130906,7 @@ class Input_StreetsBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$areas = areas;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$families = families;
     final l$id = id;
@@ -129936,6 +130931,7 @@ class Input_StreetsBoolExp {
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('areas') ? l$areas : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('families') ? l$families : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -129969,6 +130965,7 @@ abstract class CopyWith_Input_StreetsBoolExp<TRes> {
     Input_StreetsBoolExp? $_not,
     List<Input_StreetsBoolExp>? $_or,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
     Input_UuidComparisonExp? id,
@@ -129991,6 +130988,7 @@ abstract class CopyWith_Input_StreetsBoolExp<TRes> {
               Iterable<CopyWith_Input_StreetsBoolExp<Input_StreetsBoolExp>>?)
           _fn);
   CopyWith_Input_AreasBoolExp<TRes> get areas;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_FamiliesBoolExp<TRes> get families;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
@@ -130022,6 +131020,7 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
     Object? $_not = _undefined,
     Object? $_or = _undefined,
     Object? areas = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? families = _undefined,
     Object? id = _undefined,
@@ -130040,6 +131039,8 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
         if ($_not != _undefined) '_not': ($_not as Input_StreetsBoolExp?),
         if ($_or != _undefined) '_or': ($_or as List<Input_StreetsBoolExp>?),
         if (areas != _undefined) 'areas': (areas as Input_AreasBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (families != _undefined)
           'families': (families as Input_FamiliesBoolExp?),
@@ -130092,6 +131093,14 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
     return local$areas == null
         ? CopyWith_Input_AreasBoolExp.stub(_then(_instance))
         : CopyWith_Input_AreasBoolExp(local$areas, (e) => call(areas: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -130190,6 +131199,7 @@ class _CopyWithStubImpl_Input_StreetsBoolExp<TRes>
     Input_StreetsBoolExp? $_not,
     List<Input_StreetsBoolExp>? $_or,
     Input_AreasBoolExp? areas,
+    Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_FamiliesBoolExp? families,
     Input_UuidComparisonExp? id,
@@ -130209,6 +131219,8 @@ class _CopyWithStubImpl_Input_StreetsBoolExp<TRes>
   $_or(_fn) => _res;
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
   CopyWith_Input_FamiliesBoolExp<TRes> get families =>
@@ -130334,6 +131346,7 @@ class _CopyWithStubImpl_Input_StreetsIncInput<TRes>
 
 class Input_StreetsInsertInput {
   factory Input_StreetsInsertInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -130341,6 +131354,7 @@ class Input_StreetsInsertInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StreetsInsertInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (line != null) r'line': line,
@@ -130352,6 +131366,10 @@ class Input_StreetsInsertInput {
 
   factory Input_StreetsInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -130378,6 +131396,7 @@ class Input_StreetsInsertInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
@@ -130385,6 +131404,10 @@ class Input_StreetsInsertInput {
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -130421,6 +131444,15 @@ class Input_StreetsInsertInput {
     }
     if (!(other is Input_StreetsInsertInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -130469,12 +131501,14 @@ class Input_StreetsInsertInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$line = line;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('line') ? l$line : const {},
@@ -130494,6 +131528,7 @@ abstract class CopyWith_Input_StreetsInsertInput<TRes> {
       _CopyWithStubImpl_Input_StreetsInsertInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -130516,6 +131551,7 @@ class _CopyWithImpl_Input_StreetsInsertInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? line = _undefined,
@@ -130524,6 +131560,7 @@ class _CopyWithImpl_Input_StreetsInsertInput<TRes>
   }) =>
       _then(Input_StreetsInsertInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (line != _undefined) 'line': (line as Map<String, dynamic>?),
@@ -130540,6 +131577,7 @@ class _CopyWithStubImpl_Input_StreetsInsertInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -130551,12 +131589,14 @@ class _CopyWithStubImpl_Input_StreetsInsertInput<TRes>
 
 class Input_StreetsMaxOrderBy {
   factory Input_StreetsMaxOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_StreetsMaxOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -130567,6 +131607,12 @@ class Input_StreetsMaxOrderBy {
 
   factory Input_StreetsMaxOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -130593,6 +131639,7 @@ class Input_StreetsMaxOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -130600,6 +131647,11 @@ class Input_StreetsMaxOrderBy {
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -130636,6 +131688,15 @@ class Input_StreetsMaxOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -130674,11 +131735,13 @@ class Input_StreetsMaxOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -130697,6 +131760,7 @@ abstract class CopyWith_Input_StreetsMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_StreetsMaxOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -130718,6 +131782,7 @@ class _CopyWithImpl_Input_StreetsMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -130725,6 +131790,7 @@ class _CopyWithImpl_Input_StreetsMaxOrderBy<TRes>
   }) =>
       _then(Input_StreetsMaxOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -130740,6 +131806,7 @@ class _CopyWithStubImpl_Input_StreetsMaxOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -130750,12 +131817,14 @@ class _CopyWithStubImpl_Input_StreetsMaxOrderBy<TRes>
 
 class Input_StreetsMinOrderBy {
   factory Input_StreetsMinOrderBy({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_StreetsMinOrderBy._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (name != null) r'name': name,
@@ -130766,6 +131835,12 @@ class Input_StreetsMinOrderBy {
 
   factory Input_StreetsMinOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] =
@@ -130792,6 +131867,7 @@ class Input_StreetsMinOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -130799,6 +131875,11 @@ class Input_StreetsMinOrderBy {
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] =
@@ -130835,6 +131916,15 @@ class Input_StreetsMinOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -130873,11 +131963,13 @@ class Input_StreetsMinOrderBy {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -130896,6 +131988,7 @@ abstract class CopyWith_Input_StreetsMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_StreetsMinOrderBy;
 
   TRes call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -130917,6 +132010,7 @@ class _CopyWithImpl_Input_StreetsMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -130924,6 +132018,7 @@ class _CopyWithImpl_Input_StreetsMinOrderBy<TRes>
   }) =>
       _then(Input_StreetsMinOrderBy._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -130939,6 +132034,7 @@ class _CopyWithStubImpl_Input_StreetsMinOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -131143,6 +132239,7 @@ class _CopyWithStubImpl_Input_StreetsOnConflict<TRes>
 class Input_StreetsOrderBy {
   factory Input_StreetsOrderBy({
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
     Enum_OrderBy? id,
@@ -131157,6 +132254,7 @@ class Input_StreetsOrderBy {
   }) =>
       Input_StreetsOrderBy._({
         if (areasAggregate != null) r'areasAggregate': areasAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (familiesAggregate != null) r'familiesAggregate': familiesAggregate,
         if (id != null) r'id': id,
@@ -131182,6 +132280,12 @@ class Input_StreetsOrderBy {
           ? null
           : Input_AreasAggregateOrderBy.fromJson(
               (l$areasAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -131255,6 +132359,7 @@ class Input_StreetsOrderBy {
 
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
   Input_FamiliesAggregateOrderBy? get familiesAggregate =>
       (_$data['familiesAggregate'] as Input_FamiliesAggregateOrderBy?);
@@ -131277,6 +132382,11 @@ class Input_StreetsOrderBy {
     if (_$data.containsKey('areasAggregate')) {
       final l$areasAggregate = areasAggregate;
       result$data['areasAggregate'] = l$areasAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] =
+          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -131353,6 +132463,15 @@ class Input_StreetsOrderBy {
       return false;
     }
     if (l$areasAggregate != lOther$areasAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -131456,6 +132575,7 @@ class Input_StreetsOrderBy {
   @override
   int get hashCode {
     final l$areasAggregate = areasAggregate;
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$familiesAggregate = familiesAggregate;
     final l$id = id;
@@ -131469,6 +132589,7 @@ class Input_StreetsOrderBy {
     final l$storesAggregate = storesAggregate;
     return Object.hashAll([
       _$data.containsKey('areasAggregate') ? l$areasAggregate : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('familiesAggregate') ? l$familiesAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -131499,6 +132620,7 @@ abstract class CopyWith_Input_StreetsOrderBy<TRes> {
 
   TRes call({
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
     Enum_OrderBy? id,
@@ -131532,6 +132654,7 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
 
   TRes call({
     Object? areasAggregate = _undefined,
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? familiesAggregate = _undefined,
     Object? id = _undefined,
@@ -131548,6 +132671,7 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
         ..._instance._$data,
         if (areasAggregate != _undefined)
           'areasAggregate': (areasAggregate as Input_AreasAggregateOrderBy?),
+        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
         if (familiesAggregate != _undefined)
           'familiesAggregate':
@@ -131609,6 +132733,7 @@ class _CopyWithStubImpl_Input_StreetsOrderBy<TRes>
 
   call({
     Input_AreasAggregateOrderBy? areasAggregate,
+    Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
     Input_FamiliesAggregateOrderBy? familiesAggregate,
     Enum_OrderBy? id,
@@ -131728,6 +132853,7 @@ class _CopyWithStubImpl_Input_StreetsPkColumnsInput<TRes>
 
 class Input_StreetsSetInput {
   factory Input_StreetsSetInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -131735,6 +132861,7 @@ class Input_StreetsSetInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StreetsSetInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (line != null) r'line': line,
@@ -131746,6 +132873,10 @@ class Input_StreetsSetInput {
 
   factory Input_StreetsSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -131772,6 +132903,7 @@ class Input_StreetsSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
@@ -131779,6 +132911,10 @@ class Input_StreetsSetInput {
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -131814,6 +132950,15 @@ class Input_StreetsSetInput {
       return true;
     }
     if (!(other is Input_StreetsSetInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -131862,12 +133007,14 @@ class Input_StreetsSetInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$line = line;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('line') ? l$line : const {},
@@ -131887,6 +133034,7 @@ abstract class CopyWith_Input_StreetsSetInput<TRes> {
       _CopyWithStubImpl_Input_StreetsSetInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -131909,6 +133057,7 @@ class _CopyWithImpl_Input_StreetsSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? line = _undefined,
@@ -131917,6 +133066,7 @@ class _CopyWithImpl_Input_StreetsSetInput<TRes>
   }) =>
       _then(Input_StreetsSetInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (line != _undefined) 'line': (line as Map<String, dynamic>?),
@@ -131933,6 +133083,7 @@ class _CopyWithStubImpl_Input_StreetsSetInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -132404,6 +133555,7 @@ class _CopyWithStubImpl_Input_StreetsStreamCursorInput<TRes>
 
 class Input_StreetsStreamCursorValueInput {
   factory Input_StreetsStreamCursorValueInput({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -132411,6 +133563,7 @@ class Input_StreetsStreamCursorValueInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StreetsStreamCursorValueInput._({
+        if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
         if (id != null) r'id': id,
         if (line != null) r'line': line,
@@ -132423,6 +133576,10 @@ class Input_StreetsStreamCursorValueInput {
   factory Input_StreetsStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = (l$blurhash as String?);
+    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -132449,6 +133606,7 @@ class Input_StreetsStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get blurhash => (_$data['blurhash'] as String?);
   int? get color => (_$data['color'] as int?);
   UuidValue? get id => (_$data['id'] as UuidValue?);
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
@@ -132456,6 +133614,10 @@ class Input_StreetsStreamCursorValueInput {
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash;
+    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -132493,6 +133655,15 @@ class Input_StreetsStreamCursorValueInput {
     }
     if (!(other is Input_StreetsStreamCursorValueInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$color = color;
@@ -132541,12 +133712,14 @@ class Input_StreetsStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$blurhash = blurhash;
     final l$color = color;
     final l$id = id;
     final l$line = line;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('line') ? l$line : const {},
@@ -132566,6 +133739,7 @@ abstract class CopyWith_Input_StreetsStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_StreetsStreamCursorValueInput;
 
   TRes call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -132588,6 +133762,7 @@ class _CopyWithImpl_Input_StreetsStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? id = _undefined,
     Object? line = _undefined,
@@ -132596,6 +133771,7 @@ class _CopyWithImpl_Input_StreetsStreamCursorValueInput<TRes>
   }) =>
       _then(Input_StreetsStreamCursorValueInput._({
         ..._instance._$data,
+        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
         if (id != _undefined) 'id': (id as UuidValue?),
         if (line != _undefined) 'line': (line as Map<String, dynamic>?),
@@ -132612,6 +133788,7 @@ class _CopyWithStubImpl_Input_StreetsStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? blurhash,
     int? color,
     UuidValue? id,
     Map<String, dynamic>? line,
@@ -148333,12 +149510,10 @@ class _CopyWithStubImpl_Input_storesAggregateBoolExpCount<TRes>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
 
-enum Enum_AreasConstraint { areas_firestore_id_key, areas_pkey, $unknown }
+enum Enum_AreasConstraint { areas_pkey, $unknown }
 
 String toJson_Enum_AreasConstraint(Enum_AreasConstraint e) {
   switch (e) {
-    case Enum_AreasConstraint.areas_firestore_id_key:
-      return r'areas_firestore_id_key';
     case Enum_AreasConstraint.areas_pkey:
       return r'areas_pkey';
     case Enum_AreasConstraint.$unknown:
@@ -148348,8 +149523,6 @@ String toJson_Enum_AreasConstraint(Enum_AreasConstraint e) {
 
 Enum_AreasConstraint fromJson_Enum_AreasConstraint(String value) {
   switch (value) {
-    case r'areas_firestore_id_key':
-      return Enum_AreasConstraint.areas_firestore_id_key;
     case r'areas_pkey':
       return Enum_AreasConstraint.areas_pkey;
     default:
@@ -148358,9 +149531,9 @@ Enum_AreasConstraint fromJson_Enum_AreasConstraint(String value) {
 }
 
 enum Enum_AreasSelectColumn {
+  blurhash,
   bounds,
   color,
-  firestoreId,
   id,
   name,
   photoUpdatedAt,
@@ -148369,12 +149542,12 @@ enum Enum_AreasSelectColumn {
 
 String toJson_Enum_AreasSelectColumn(Enum_AreasSelectColumn e) {
   switch (e) {
+    case Enum_AreasSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_AreasSelectColumn.bounds:
       return r'bounds';
     case Enum_AreasSelectColumn.color:
       return r'color';
-    case Enum_AreasSelectColumn.firestoreId:
-      return r'firestoreId';
     case Enum_AreasSelectColumn.id:
       return r'id';
     case Enum_AreasSelectColumn.name:
@@ -148388,12 +149561,12 @@ String toJson_Enum_AreasSelectColumn(Enum_AreasSelectColumn e) {
 
 Enum_AreasSelectColumn fromJson_Enum_AreasSelectColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_AreasSelectColumn.blurhash;
     case r'bounds':
       return Enum_AreasSelectColumn.bounds;
     case r'color':
       return Enum_AreasSelectColumn.color;
-    case r'firestoreId':
-      return Enum_AreasSelectColumn.firestoreId;
     case r'id':
       return Enum_AreasSelectColumn.id;
     case r'name':
@@ -148406,9 +149579,9 @@ Enum_AreasSelectColumn fromJson_Enum_AreasSelectColumn(String value) {
 }
 
 enum Enum_AreasUpdateColumn {
+  blurhash,
   bounds,
   color,
-  firestoreId,
   id,
   name,
   photoUpdatedAt,
@@ -148417,12 +149590,12 @@ enum Enum_AreasUpdateColumn {
 
 String toJson_Enum_AreasUpdateColumn(Enum_AreasUpdateColumn e) {
   switch (e) {
+    case Enum_AreasUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_AreasUpdateColumn.bounds:
       return r'bounds';
     case Enum_AreasUpdateColumn.color:
       return r'color';
-    case Enum_AreasUpdateColumn.firestoreId:
-      return r'firestoreId';
     case Enum_AreasUpdateColumn.id:
       return r'id';
     case Enum_AreasUpdateColumn.name:
@@ -148436,12 +149609,12 @@ String toJson_Enum_AreasUpdateColumn(Enum_AreasUpdateColumn e) {
 
 Enum_AreasUpdateColumn fromJson_Enum_AreasUpdateColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_AreasUpdateColumn.blurhash;
     case r'bounds':
       return Enum_AreasUpdateColumn.bounds;
     case r'color':
       return Enum_AreasUpdateColumn.color;
-    case r'firestoreId':
-      return Enum_AreasUpdateColumn.firestoreId;
     case r'id':
       return Enum_AreasUpdateColumn.id;
     case r'name':
@@ -148850,6 +150023,7 @@ Enum_AuthUsersDataConstraint fromJson_Enum_AuthUsersDataConstraint(
 
 enum Enum_AuthUsersDataSelectColumn {
   authId,
+  blurhash,
   email,
   name,
   photoUpdatedAt,
@@ -148861,6 +150035,8 @@ String toJson_Enum_AuthUsersDataSelectColumn(Enum_AuthUsersDataSelectColumn e) {
   switch (e) {
     case Enum_AuthUsersDataSelectColumn.authId:
       return r'authId';
+    case Enum_AuthUsersDataSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_AuthUsersDataSelectColumn.email:
       return r'email';
     case Enum_AuthUsersDataSelectColumn.name:
@@ -148879,6 +150055,8 @@ Enum_AuthUsersDataSelectColumn fromJson_Enum_AuthUsersDataSelectColumn(
   switch (value) {
     case r'authId':
       return Enum_AuthUsersDataSelectColumn.authId;
+    case r'blurhash':
+      return Enum_AuthUsersDataSelectColumn.blurhash;
     case r'email':
       return Enum_AuthUsersDataSelectColumn.email;
     case r'name':
@@ -148894,6 +150072,7 @@ Enum_AuthUsersDataSelectColumn fromJson_Enum_AuthUsersDataSelectColumn(
 
 enum Enum_AuthUsersDataUpdateColumn {
   authId,
+  blurhash,
   email,
   name,
   photoUpdatedAt,
@@ -148905,6 +150084,8 @@ String toJson_Enum_AuthUsersDataUpdateColumn(Enum_AuthUsersDataUpdateColumn e) {
   switch (e) {
     case Enum_AuthUsersDataUpdateColumn.authId:
       return r'authId';
+    case Enum_AuthUsersDataUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_AuthUsersDataUpdateColumn.email:
       return r'email';
     case Enum_AuthUsersDataUpdateColumn.name:
@@ -148923,6 +150104,8 @@ Enum_AuthUsersDataUpdateColumn fromJson_Enum_AuthUsersDataUpdateColumn(
   switch (value) {
     case r'authId':
       return Enum_AuthUsersDataUpdateColumn.authId;
+    case r'blurhash':
+      return Enum_AuthUsersDataUpdateColumn.blurhash;
     case r'email':
       return Enum_AuthUsersDataUpdateColumn.email;
     case r'name':
@@ -149113,6 +150296,7 @@ Enum_ClassesConstraint fromJson_Enum_ClassesConstraint(String value) {
 }
 
 enum Enum_ClassesSelectColumn {
+  blurhash,
   color,
   id,
   name,
@@ -149125,6 +150309,8 @@ enum Enum_ClassesSelectColumn {
 
 String toJson_Enum_ClassesSelectColumn(Enum_ClassesSelectColumn e) {
   switch (e) {
+    case Enum_ClassesSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_ClassesSelectColumn.color:
       return r'color';
     case Enum_ClassesSelectColumn.id:
@@ -149146,6 +150332,8 @@ String toJson_Enum_ClassesSelectColumn(Enum_ClassesSelectColumn e) {
 
 Enum_ClassesSelectColumn fromJson_Enum_ClassesSelectColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_ClassesSelectColumn.blurhash;
     case r'color':
       return Enum_ClassesSelectColumn.color;
     case r'id':
@@ -149230,6 +150418,7 @@ Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
 }
 
 enum Enum_ClassesUpdateColumn {
+  blurhash,
   color,
   id,
   name,
@@ -149242,6 +150431,8 @@ enum Enum_ClassesUpdateColumn {
 
 String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
   switch (e) {
+    case Enum_ClassesUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_ClassesUpdateColumn.color:
       return r'color';
     case Enum_ClassesUpdateColumn.id:
@@ -149263,6 +150454,8 @@ String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
 
 Enum_ClassesUpdateColumn fromJson_Enum_ClassesUpdateColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_ClassesUpdateColumn.blurhash;
     case r'color':
       return Enum_ClassesUpdateColumn.color;
     case r'id':
@@ -149591,6 +150784,7 @@ Enum_FamiliesFamiliesUpdateColumn fromJson_Enum_FamiliesFamiliesUpdateColumn(
 
 enum Enum_FamiliesSelectColumn {
   address,
+  blurhash,
   color,
   geolocation,
   id,
@@ -149604,6 +150798,8 @@ String toJson_Enum_FamiliesSelectColumn(Enum_FamiliesSelectColumn e) {
   switch (e) {
     case Enum_FamiliesSelectColumn.address:
       return r'address';
+    case Enum_FamiliesSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_FamiliesSelectColumn.color:
       return r'color';
     case Enum_FamiliesSelectColumn.geolocation:
@@ -149625,6 +150821,8 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
   switch (value) {
     case r'address':
       return Enum_FamiliesSelectColumn.address;
+    case r'blurhash':
+      return Enum_FamiliesSelectColumn.blurhash;
     case r'color':
       return Enum_FamiliesSelectColumn.color;
     case r'geolocation':
@@ -149644,6 +150842,7 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
 
 enum Enum_FamiliesUpdateColumn {
   address,
+  blurhash,
   color,
   geolocation,
   id,
@@ -149657,6 +150856,8 @@ String toJson_Enum_FamiliesUpdateColumn(Enum_FamiliesUpdateColumn e) {
   switch (e) {
     case Enum_FamiliesUpdateColumn.address:
       return r'address';
+    case Enum_FamiliesUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_FamiliesUpdateColumn.color:
       return r'color';
     case Enum_FamiliesUpdateColumn.geolocation:
@@ -149678,6 +150879,8 @@ Enum_FamiliesUpdateColumn fromJson_Enum_FamiliesUpdateColumn(String value) {
   switch (value) {
     case r'address':
       return Enum_FamiliesUpdateColumn.address;
+    case r'blurhash':
+      return Enum_FamiliesUpdateColumn.blurhash;
     case r'color':
       return Enum_FamiliesUpdateColumn.color;
     case r'geolocation':
@@ -149796,6 +150999,7 @@ Enum_GroupsConstraint fromJson_Enum_GroupsConstraint(String value) {
 }
 
 enum Enum_GroupsSelectColumn {
+  blurhash,
   color,
   id,
   name,
@@ -149807,6 +151011,8 @@ enum Enum_GroupsSelectColumn {
 
 String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
   switch (e) {
+    case Enum_GroupsSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_GroupsSelectColumn.color:
       return r'color';
     case Enum_GroupsSelectColumn.id:
@@ -149826,6 +151032,8 @@ String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
 
 Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_GroupsSelectColumn.blurhash;
     case r'color':
       return Enum_GroupsSelectColumn.color;
     case r'id':
@@ -149844,6 +151052,7 @@ Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
 }
 
 enum Enum_GroupsUpdateColumn {
+  blurhash,
   color,
   id,
   name,
@@ -149855,6 +151064,8 @@ enum Enum_GroupsUpdateColumn {
 
 String toJson_Enum_GroupsUpdateColumn(Enum_GroupsUpdateColumn e) {
   switch (e) {
+    case Enum_GroupsUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_GroupsUpdateColumn.color:
       return r'color';
     case Enum_GroupsUpdateColumn.id:
@@ -149874,6 +151085,8 @@ String toJson_Enum_GroupsUpdateColumn(Enum_GroupsUpdateColumn e) {
 
 Enum_GroupsUpdateColumn fromJson_Enum_GroupsUpdateColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_GroupsUpdateColumn.blurhash;
     case r'color':
       return Enum_GroupsUpdateColumn.color;
     case r'id':
@@ -151351,7 +152564,6 @@ Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
 }
 
 enum Enum_PersonsConstraint {
-  persons_firestore_id_key,
   persons_main_phone_birthdate_key,
   persons_pkey,
   persons_uid_key,
@@ -151360,8 +152572,6 @@ enum Enum_PersonsConstraint {
 
 String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
   switch (e) {
-    case Enum_PersonsConstraint.persons_firestore_id_key:
-      return r'persons_firestore_id_key';
     case Enum_PersonsConstraint.persons_main_phone_birthdate_key:
       return r'persons_main_phone_birthdate_key';
     case Enum_PersonsConstraint.persons_pkey:
@@ -151375,8 +152585,6 @@ String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
 
 Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
   switch (value) {
-    case r'persons_firestore_id_key':
-      return Enum_PersonsConstraint.persons_firestore_id_key;
     case r'persons_main_phone_birthdate_key':
       return Enum_PersonsConstraint.persons_main_phone_birthdate_key;
     case r'persons_pkey':
@@ -151559,12 +152767,12 @@ Enum_PersonsHobbiesUpdateColumn fromJson_Enum_PersonsHobbiesUpdateColumn(
 enum Enum_PersonsSelectColumn {
   address,
   birthdate,
+  blurhash,
   churchId,
   collegeId,
   color,
   familyId,
   fatherId,
-  firestoreId,
   gender,
   geolocation,
   id,
@@ -151595,6 +152803,8 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'address';
     case Enum_PersonsSelectColumn.birthdate:
       return r'birthdate';
+    case Enum_PersonsSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_PersonsSelectColumn.churchId:
       return r'churchId';
     case Enum_PersonsSelectColumn.collegeId:
@@ -151605,8 +152815,6 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'familyId';
     case Enum_PersonsSelectColumn.fatherId:
       return r'fatherId';
-    case Enum_PersonsSelectColumn.firestoreId:
-      return r'firestoreId';
     case Enum_PersonsSelectColumn.gender:
       return r'gender';
     case Enum_PersonsSelectColumn.geolocation:
@@ -151660,6 +152868,8 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.address;
     case r'birthdate':
       return Enum_PersonsSelectColumn.birthdate;
+    case r'blurhash':
+      return Enum_PersonsSelectColumn.blurhash;
     case r'churchId':
       return Enum_PersonsSelectColumn.churchId;
     case r'collegeId':
@@ -151670,8 +152880,6 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.familyId;
     case r'fatherId':
       return Enum_PersonsSelectColumn.fatherId;
-    case r'firestoreId':
-      return Enum_PersonsSelectColumn.firestoreId;
     case r'gender':
       return Enum_PersonsSelectColumn.gender;
     case r'geolocation':
@@ -151997,12 +153205,12 @@ Enum_PersonsTagsUpdateColumn fromJson_Enum_PersonsTagsUpdateColumn(
 enum Enum_PersonsUpdateColumn {
   address,
   birthdate,
+  blurhash,
   churchId,
   collegeId,
   color,
   familyId,
   fatherId,
-  firestoreId,
   gender,
   geolocation,
   id,
@@ -152033,6 +153241,8 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'address';
     case Enum_PersonsUpdateColumn.birthdate:
       return r'birthdate';
+    case Enum_PersonsUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_PersonsUpdateColumn.churchId:
       return r'churchId';
     case Enum_PersonsUpdateColumn.collegeId:
@@ -152043,8 +153253,6 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'familyId';
     case Enum_PersonsUpdateColumn.fatherId:
       return r'fatherId';
-    case Enum_PersonsUpdateColumn.firestoreId:
-      return r'firestoreId';
     case Enum_PersonsUpdateColumn.gender:
       return r'gender';
     case Enum_PersonsUpdateColumn.geolocation:
@@ -152098,6 +153306,8 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.address;
     case r'birthdate':
       return Enum_PersonsUpdateColumn.birthdate;
+    case r'blurhash':
+      return Enum_PersonsUpdateColumn.blurhash;
     case r'churchId':
       return Enum_PersonsUpdateColumn.churchId;
     case r'collegeId':
@@ -152108,8 +153318,6 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.familyId;
     case r'fatherId':
       return Enum_PersonsUpdateColumn.fatherId;
-    case r'firestoreId':
-      return Enum_PersonsUpdateColumn.firestoreId;
     case r'gender':
       return Enum_PersonsUpdateColumn.gender;
     case r'geolocation':
@@ -152310,17 +153518,10 @@ Enum_SchoolsUpdateColumn fromJson_Enum_SchoolsUpdateColumn(String value) {
   }
 }
 
-enum Enum_ServicesConstraint {
-  services_firestore_id_key,
-  services_name_key,
-  services_pkey,
-  $unknown
-}
+enum Enum_ServicesConstraint { services_name_key, services_pkey, $unknown }
 
 String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
   switch (e) {
-    case Enum_ServicesConstraint.services_firestore_id_key:
-      return r'services_firestore_id_key';
     case Enum_ServicesConstraint.services_name_key:
       return r'services_name_key';
     case Enum_ServicesConstraint.services_pkey:
@@ -152332,8 +153533,6 @@ String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
 
 Enum_ServicesConstraint fromJson_Enum_ServicesConstraint(String value) {
   switch (value) {
-    case r'services_firestore_id_key':
-      return Enum_ServicesConstraint.services_firestore_id_key;
     case r'services_name_key':
       return Enum_ServicesConstraint.services_name_key;
     case r'services_pkey':
@@ -152344,8 +153543,8 @@ Enum_ServicesConstraint fromJson_Enum_ServicesConstraint(String value) {
 }
 
 enum Enum_ServicesSelectColumn {
+  blurhash,
   color,
-  firestoreId,
   id,
   name,
   nextServiceId,
@@ -152357,10 +153556,10 @@ enum Enum_ServicesSelectColumn {
 
 String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
   switch (e) {
+    case Enum_ServicesSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_ServicesSelectColumn.color:
       return r'color';
-    case Enum_ServicesSelectColumn.firestoreId:
-      return r'firestoreId';
     case Enum_ServicesSelectColumn.id:
       return r'id';
     case Enum_ServicesSelectColumn.name:
@@ -152380,10 +153579,10 @@ String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
 
 Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_ServicesSelectColumn.blurhash;
     case r'color':
       return Enum_ServicesSelectColumn.color;
-    case r'firestoreId':
-      return Enum_ServicesSelectColumn.firestoreId;
     case r'id':
       return Enum_ServicesSelectColumn.id;
     case r'name':
@@ -152402,8 +153601,8 @@ Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
 }
 
 enum Enum_ServicesUpdateColumn {
+  blurhash,
   color,
-  firestoreId,
   id,
   name,
   nextServiceId,
@@ -152415,10 +153614,10 @@ enum Enum_ServicesUpdateColumn {
 
 String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
   switch (e) {
+    case Enum_ServicesUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_ServicesUpdateColumn.color:
       return r'color';
-    case Enum_ServicesUpdateColumn.firestoreId:
-      return r'firestoreId';
     case Enum_ServicesUpdateColumn.id:
       return r'id';
     case Enum_ServicesUpdateColumn.name:
@@ -152438,10 +153637,10 @@ String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
 
 Enum_ServicesUpdateColumn fromJson_Enum_ServicesUpdateColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_ServicesUpdateColumn.blurhash;
     case r'color':
       return Enum_ServicesUpdateColumn.color;
-    case r'firestoreId':
-      return Enum_ServicesUpdateColumn.firestoreId;
     case r'id':
       return Enum_ServicesUpdateColumn.id;
     case r'name':
@@ -152573,6 +153772,7 @@ Enum_StoresConstraint fromJson_Enum_StoresConstraint(String value) {
 
 enum Enum_StoresSelectColumn {
   adminFamily,
+  blurhash,
   color,
   geolocation,
   id,
@@ -152585,6 +153785,8 @@ String toJson_Enum_StoresSelectColumn(Enum_StoresSelectColumn e) {
   switch (e) {
     case Enum_StoresSelectColumn.adminFamily:
       return r'adminFamily';
+    case Enum_StoresSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_StoresSelectColumn.color:
       return r'color';
     case Enum_StoresSelectColumn.geolocation:
@@ -152604,6 +153806,8 @@ Enum_StoresSelectColumn fromJson_Enum_StoresSelectColumn(String value) {
   switch (value) {
     case r'adminFamily':
       return Enum_StoresSelectColumn.adminFamily;
+    case r'blurhash':
+      return Enum_StoresSelectColumn.blurhash;
     case r'color':
       return Enum_StoresSelectColumn.color;
     case r'geolocation':
@@ -152621,6 +153825,7 @@ Enum_StoresSelectColumn fromJson_Enum_StoresSelectColumn(String value) {
 
 enum Enum_StoresUpdateColumn {
   adminFamily,
+  blurhash,
   color,
   geolocation,
   id,
@@ -152633,6 +153838,8 @@ String toJson_Enum_StoresUpdateColumn(Enum_StoresUpdateColumn e) {
   switch (e) {
     case Enum_StoresUpdateColumn.adminFamily:
       return r'adminFamily';
+    case Enum_StoresUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_StoresUpdateColumn.color:
       return r'color';
     case Enum_StoresUpdateColumn.geolocation:
@@ -152652,6 +153859,8 @@ Enum_StoresUpdateColumn fromJson_Enum_StoresUpdateColumn(String value) {
   switch (value) {
     case r'adminFamily':
       return Enum_StoresUpdateColumn.adminFamily;
+    case r'blurhash':
+      return Enum_StoresUpdateColumn.blurhash;
     case r'color':
       return Enum_StoresUpdateColumn.color;
     case r'geolocation':
@@ -152688,6 +153897,7 @@ Enum_StreetsConstraint fromJson_Enum_StreetsConstraint(String value) {
 }
 
 enum Enum_StreetsSelectColumn {
+  blurhash,
   color,
   id,
   line,
@@ -152698,6 +153908,8 @@ enum Enum_StreetsSelectColumn {
 
 String toJson_Enum_StreetsSelectColumn(Enum_StreetsSelectColumn e) {
   switch (e) {
+    case Enum_StreetsSelectColumn.blurhash:
+      return r'blurhash';
     case Enum_StreetsSelectColumn.color:
       return r'color';
     case Enum_StreetsSelectColumn.id:
@@ -152715,6 +153927,8 @@ String toJson_Enum_StreetsSelectColumn(Enum_StreetsSelectColumn e) {
 
 Enum_StreetsSelectColumn fromJson_Enum_StreetsSelectColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_StreetsSelectColumn.blurhash;
     case r'color':
       return Enum_StreetsSelectColumn.color;
     case r'id':
@@ -152731,6 +153945,7 @@ Enum_StreetsSelectColumn fromJson_Enum_StreetsSelectColumn(String value) {
 }
 
 enum Enum_StreetsUpdateColumn {
+  blurhash,
   color,
   id,
   line,
@@ -152741,6 +153956,8 @@ enum Enum_StreetsUpdateColumn {
 
 String toJson_Enum_StreetsUpdateColumn(Enum_StreetsUpdateColumn e) {
   switch (e) {
+    case Enum_StreetsUpdateColumn.blurhash:
+      return r'blurhash';
     case Enum_StreetsUpdateColumn.color:
       return r'color';
     case Enum_StreetsUpdateColumn.id:
@@ -152758,6 +153975,8 @@ String toJson_Enum_StreetsUpdateColumn(Enum_StreetsUpdateColumn e) {
 
 Enum_StreetsUpdateColumn fromJson_Enum_StreetsUpdateColumn(String value) {
   switch (value) {
+    case r'blurhash':
+      return Enum_StreetsUpdateColumn.blurhash;
     case r'color':
       return Enum_StreetsUpdateColumn.color;
     case r'id':

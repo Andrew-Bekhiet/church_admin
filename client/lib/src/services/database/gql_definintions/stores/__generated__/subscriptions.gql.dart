@@ -765,6 +765,7 @@ class Subscription_watchStore_storesByPk
     this.color,
     this.$__typename = 'Stores',
     this.photoUpdatedAt,
+    this.blurhash,
     this.areas,
     this.streets,
     this.lastEdit,
@@ -779,6 +780,7 @@ class Subscription_watchStore_storesByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$areas = json['areas'];
     final l$streets = json['streets'];
     final l$lastEdit = json['lastEdit'];
@@ -791,6 +793,7 @@ class Subscription_watchStore_storesByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       areas: (l$areas as List<dynamic>?)
           ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -815,6 +818,8 @@ class Subscription_watchStore_storesByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Fragment_Area>? areas;
 
   final List<Fragment_Street>? streets;
@@ -838,6 +843,8 @@ class Subscription_watchStore_storesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$areas = areas;
     _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
     final l$streets = streets;
@@ -858,6 +865,7 @@ class Subscription_watchStore_storesByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$areas = areas;
     final l$streets = streets;
     final l$lastEdit = lastEdit;
@@ -869,6 +877,7 @@ class Subscription_watchStore_storesByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
       l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
       l$lastEdit,
@@ -909,6 +918,11 @@ class Subscription_watchStore_storesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$areas = areas;
@@ -987,6 +1001,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
     Json? lastEdit,
@@ -1023,6 +1038,7 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? areas = _undefined,
     Object? streets = _undefined,
     Object? lastEdit = _undefined,
@@ -1041,6 +1057,8 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         areas: areas == _undefined
             ? _instance.areas
             : (areas as List<Fragment_Area>?),
@@ -1094,6 +1112,7 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
     Json? lastEdit,

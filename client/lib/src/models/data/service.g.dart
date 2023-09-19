@@ -28,6 +28,7 @@ _$_Service _$$_ServiceFromJson(Map json) => _$_Service(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       classes: (json['classes'] as List<dynamic>?)
           ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
@@ -57,6 +58,7 @@ Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
       'nextServiceId': instance.nextServiceId,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
       'classes': instance.classes?.map((e) => e.toJson()).toList(),
       'groups': instance.groups?.map((e) => e.toJson()).toList(),
       'lastEdit': instance.lastEdit?.toJson(),

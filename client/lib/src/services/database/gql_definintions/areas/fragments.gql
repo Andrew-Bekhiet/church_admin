@@ -1,6 +1,7 @@
 fragment Area on Areas {
   ...AreaNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment AreaNoPhoto on Areas {

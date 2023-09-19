@@ -8,6 +8,7 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     this.color,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
+    this.blurhash,
   });
 
   factory Fragment_Group.fromJson(Map<String, dynamic> json) {
@@ -16,6 +17,7 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     return Fragment_Group(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -23,6 +25,7 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
     );
   }
 
@@ -35,6 +38,8 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -49,6 +54,8 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     return _resultData;
   }
 
@@ -59,12 +66,14 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
     ]);
   }
 
@@ -101,6 +110,11 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     return true;
   }
 }
@@ -128,6 +142,7 @@ abstract class CopyWith_Fragment_Group<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   });
 }
 
@@ -150,6 +165,7 @@ class _CopyWithImpl_Fragment_Group<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
   }) =>
       _then(Fragment_Group(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -163,6 +179,8 @@ class _CopyWithImpl_Fragment_Group<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
       ));
 }
 
@@ -178,6 +196,7 @@ class _CopyWithStubImpl_Fragment_Group<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   }) =>
       _res;
 }
@@ -197,6 +216,13 @@ const fragmentDefinitionGroup = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'photoUpdatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'blurhash'),
       alias: null,
       arguments: [],
       directives: [],

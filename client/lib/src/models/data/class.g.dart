@@ -13,6 +13,7 @@ _$_Class _$$_ClassFromJson(Map json) => _$_Class(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       service: json['service'] == null
           ? null
           : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
@@ -39,6 +40,7 @@ Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'name': instance.name,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
       'service': instance.service?.toJson(),
       'serviceId': instance.serviceId,
       'studyYear': instance.studyYear?.toJson(),

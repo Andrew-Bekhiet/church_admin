@@ -400,6 +400,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     this.color,
     this.$__typename = 'Families',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.children,
     required this.parents,
   });
@@ -411,6 +412,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$children = json['children'];
     final l$parents = json['parents'];
     return Query_getFamilyRelatedFamilies_familiesByPk(
@@ -420,6 +422,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       children: (l$children as List<dynamic>)
           .map((e) =>
               Query_getFamilyRelatedFamilies_familiesByPk_children.fromJson(
@@ -443,6 +446,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Query_getFamilyRelatedFamilies_familiesByPk_children> children;
 
   final List<Query_getFamilyRelatedFamilies_familiesByPk_parents> parents;
@@ -460,6 +465,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$children = children;
     _resultData['children'] = l$children.map((e) => e.toJson()).toList();
     final l$parents = parents;
@@ -474,6 +481,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$children = children;
     final l$parents = parents;
     return Object.hashAll([
@@ -482,6 +490,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$children.map((v) => v)),
       Object.hashAll(l$parents.map((v) => v)),
     ]);
@@ -519,6 +528,11 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$children = children;
@@ -574,6 +588,7 @@ abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Query_getFamilyRelatedFamilies_familiesByPk_children>? children,
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   });
@@ -610,6 +625,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? parents = _undefined,
   }) =>
@@ -625,6 +641,8 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         children: children == _undefined || children == null
             ? _instance.children
             : (children
@@ -672,6 +690,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Query_getFamilyRelatedFamilies_familiesByPk_children>? children,
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   }) =>

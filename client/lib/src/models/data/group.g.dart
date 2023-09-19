@@ -13,6 +13,7 @@ _$_Group _$$_GroupFromJson(Map json) => _$_Group(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       serviceId: json['serviceId'] as String?,
       service: json['service'] == null
           ? null
@@ -34,6 +35,7 @@ Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
       'name': instance.name,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
       'serviceId': instance.serviceId,
       'service': instance.service?.toJson(),
       'validity': dateRangeToString(instance.validity),

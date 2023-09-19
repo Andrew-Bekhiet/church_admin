@@ -1,6 +1,7 @@
 fragment Group on Groups {
   ...GroupNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment GroupNoPhoto on Groups {

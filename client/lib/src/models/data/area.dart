@@ -16,6 +16,7 @@ class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
     @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) Polygon? bounds,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
     List<User>? adminUsers,

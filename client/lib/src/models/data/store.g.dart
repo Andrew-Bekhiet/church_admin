@@ -28,6 +28,7 @@ _$_Store _$$_StoreFromJson(Map json) => _$_Store(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
     );
 
 Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
@@ -41,4 +42,5 @@ Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'lastEdit': instance.lastEdit?.toJson(),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
     };

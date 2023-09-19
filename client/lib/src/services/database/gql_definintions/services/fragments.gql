@@ -1,6 +1,7 @@
 fragment Service on Services {
   ...ServiceNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment ServiceWithStudyYears on Services {
@@ -14,6 +15,7 @@ fragment ServiceWithStudyYears on Services {
     name
   }
   photoUpdatedAt
+  blurhash
 }
 
 fragment ServiceNoPhoto on Services {

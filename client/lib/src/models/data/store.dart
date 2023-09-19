@@ -21,6 +21,7 @@ class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
     List<Street>? streets,
     LastRecordedByInfo? lastEdit,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   }) = _Store;
   Store._() : super();
 

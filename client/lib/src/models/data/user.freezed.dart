@@ -24,6 +24,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   List<AdminOnData>? get adminOn => throw _privateConstructorUsedError;
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
   PermissionsSet get permissions => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $UserCopyWith<$Res> {
       String name,
       String? email,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       PermissionsSet permissions,
@@ -93,6 +95,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? adminOn = freezed,
     Object? permissions = null,
     Object? authId = freezed,
@@ -123,6 +126,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       adminOn: freezed == adminOn
           ? _value.adminOn
           : adminOn // ignore: cast_nullable_to_non_nullable
@@ -210,6 +217,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String name,
       String? email,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       PermissionsSet permissions,
@@ -244,6 +252,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = null,
     Object? email = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? adminOn = freezed,
     Object? permissions = null,
     Object? authId = freezed,
@@ -274,6 +283,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       adminOn: freezed == adminOn
           ? _value._adminOn
           : adminOn // ignore: cast_nullable_to_non_nullable
@@ -334,6 +347,7 @@ class _$_User extends _User {
       required this.name,
       this.email,
       this.photoUpdatedAt,
+      this.blurhash,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       this.permissions = const PermissionsSet.empty(),
@@ -364,6 +378,8 @@ class _$_User extends _User {
   final String? email;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   final List<AdminOnData>? _adminOn;
   @override
   List<AdminOnData>? get adminOn {
@@ -427,7 +443,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, adminOn: $adminOn, permissions: $permissions, authId: $authId, isMultiFactorEnrolled: $isMultiFactorEnrolled, idToken: $idToken, emailVerified: $emailVerified, passwordKeyHash: $passwordKeyHash, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, isMultiFactorEnrolled: $isMultiFactorEnrolled, idToken: $idToken, emailVerified: $emailVerified, passwordKeyHash: $passwordKeyHash, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
   }
 
   @override
@@ -440,6 +456,8 @@ class _$_User extends _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other._adminOn, _adminOn) &&
             const DeepCollectionEquality()
                 .equals(other.permissions, permissions) &&
@@ -470,6 +488,7 @@ class _$_User extends _User {
       name,
       email,
       photoUpdatedAt,
+      blurhash,
       const DeepCollectionEquality().hash(_adminOn),
       const DeepCollectionEquality().hash(permissions),
       authId,
@@ -503,6 +522,7 @@ abstract class _User extends User {
       required final String name,
       final String? email,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       final PermissionsSet permissions,
@@ -529,6 +549,8 @@ abstract class _User extends User {
   String? get email;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   List<AdminOnData>? get adminOn;
   @override

@@ -16,6 +16,7 @@ class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
     @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Area>? areas,
     LastRecordedByInfo? lastEdit,
   }) = _Street;

@@ -1,6 +1,7 @@
 fragment Person on Persons {
   ...PersonNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment PersonNoPhoto on Persons {

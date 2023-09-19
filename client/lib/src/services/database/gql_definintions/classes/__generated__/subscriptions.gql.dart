@@ -775,6 +775,7 @@ class Subscription_watchClass_classesByPk
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.service,
     this.lastEdit,
     this.serviceGender,
@@ -789,6 +790,7 @@ class Subscription_watchClass_classesByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$service = json['service'];
     final l$lastEdit = json['lastEdit'];
     final l$serviceGender = json['serviceGender'];
@@ -801,6 +803,7 @@ class Subscription_watchClass_classesByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       service: Fragment_ServiceWithStudyYears.fromJson(
           (l$service as Map<String, dynamic>)),
       lastEdit: (l$lastEdit as Json?),
@@ -823,6 +826,8 @@ class Subscription_watchClass_classesByPk
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Fragment_ServiceWithStudyYears service;
 
@@ -847,6 +852,8 @@ class Subscription_watchClass_classesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$service = service;
     _resultData['service'] = l$service.toJson();
     final l$lastEdit = lastEdit;
@@ -867,6 +874,7 @@ class Subscription_watchClass_classesByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$service = service;
     final l$lastEdit = lastEdit;
     final l$serviceGender = serviceGender;
@@ -878,6 +886,7 @@ class Subscription_watchClass_classesByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$service,
       l$lastEdit,
       l$serviceGender,
@@ -918,6 +927,11 @@ class Subscription_watchClass_classesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$service = service;
@@ -981,6 +995,7 @@ abstract class CopyWith_Subscription_watchClass_classesByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     bool? serviceGender,
@@ -1016,6 +1031,7 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? service = _undefined,
     Object? lastEdit = _undefined,
     Object? serviceGender = _undefined,
@@ -1034,6 +1050,8 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         service: service == _undefined || service == null
             ? _instance.service
             : (service as Fragment_ServiceWithStudyYears),
@@ -1088,6 +1106,7 @@ class _CopyWithStubImpl_Subscription_watchClass_classesByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_ServiceWithStudyYears? service,
     Json? lastEdit,
     bool? serviceGender,

@@ -1,6 +1,7 @@
 fragment User on AuthUsersData {
   ...UserNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment UserNoPhoto on AuthUsersData {

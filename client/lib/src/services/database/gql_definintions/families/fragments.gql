@@ -1,6 +1,7 @@
 fragment Family on Families {
   ...FamilyNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment FamilyNoPhoto on Families {

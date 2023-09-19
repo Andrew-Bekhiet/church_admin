@@ -1,15 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageObjectWidget extends StatelessWidget {
+  static const defaultSize = 50.4;
+  static const clipBorderRadius = BorderRadius.all(Radius.circular(10));
+
   ImageObjectWidget(
     this.imageObject, {
     ImageUrlCacheService? imageUrlCacheService,
     ViewableObjectService? viewableObjectService,
     this.circleCrop = true,
     this.heroTag,
+    this.size = defaultSize,
     super.key,
   })  : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
         viewableObjectService =
@@ -21,27 +26,22 @@ class ImageObjectWidget extends StatelessWidget {
   final bool circleCrop;
   // ignore: no-object-declaration
   final Object? heroTag;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
+    final defaultIcon = viewableObjectService.getDefaultIconFor(imageObject);
+    final constraints = BoxConstraints.expand(width: size, height: size);
+
     return Hero(
       transitionOnUserGestures: true,
       tag: heroTag ?? imageObject,
-      child: LayoutBuilder(
-        builder: (context, parentConstraints) {
-          final constraints = BoxConstraints.expand(
-            width: parentConstraints.maxHeight * 0.9,
-            height: parentConstraints.maxHeight * 0.9,
-          );
-          final maxHeight = constraints.maxHeight;
-
-          final defaultIcon =
-              viewableObjectService.getDefaultIconFor(imageObject);
-
+      child: Builder(
+        builder: (context) {
           if (!imageObject.hasImage) {
             return Icon(
               defaultIcon,
-              size: maxHeight,
+              size: size,
             );
           }
 
@@ -52,77 +52,45 @@ class ImageObjectWidget extends StatelessWidget {
             constraints: constraints,
             child: FutureBuilder<String>(
               initialData: cachedImageUrl,
-              future: Future(
-                () => photoUrlCacheService.getImageUrl(imageObject),
-              ),
+              future: photoUrlCacheService.getImageUrl(imageObject),
               builder: (context, downloadUrlData) {
                 final downloadUrlOrCache =
                     downloadUrlData.data ?? cachedImageUrl;
 
-                if (downloadUrlData.hasError) {
-                  return Icon(
-                    defaultIcon,
-                    size: maxHeight,
-                  );
-                } else if (downloadUrlOrCache == null) {
-                  return const Center(child: CircularProgressIndicator());
+                final imagePlaceholder = _ImagePlaceholder(
+                  defaultIcon: defaultIcon,
+                  size: size,
+                  blurhash: imageObject.blurhash,
+                );
+
+                if (downloadUrlData.hasError || downloadUrlOrCache == null) {
+                  return clipImage(imagePlaceholder);
                 }
 
                 final imageFromUrlWidget = _ImageFromUrlWidget(
                   defaultIcon: defaultIcon,
                   imageUrl: downloadUrlOrCache,
                   constraints: constraints,
+                  imagePlaceholder: imagePlaceholder,
                 );
-
-                const borderRadius = BorderRadius.all(Radius.circular(10));
 
                 final inkWell = Material(
                   type: MaterialType.transparency,
                   shape: circleCrop ? const CircleBorder() : null,
-                  borderRadius: circleCrop ? null : borderRadius,
+                  borderRadius: circleCrop ? null : clipBorderRadius,
                   child: InkWell(
-                    onTap: () => Navigator.of(context).push(
-                      PageRouteBuilder(
-                        opaque: false,
-                        barrierDismissible: true,
-                        barrierColor: Colors.black45,
-                        pageBuilder: (context, _, __) => Dialog(
-                          backgroundColor: Colors.transparent,
-                          child: Hero(
-                            transitionOnUserGestures: true,
-                            tag: heroTag ?? imageObject,
-                            child: PhotoView.customChild(
-                              backgroundDecoration: const BoxDecoration(
-                                color: Colors.transparent,
-                              ),
-                              tightMode: true,
-                              childSize: constraints.smallest,
-                              wantKeepAlive: true,
-                              child: _ImageFromUrlWidget(
-                                defaultIcon: defaultIcon,
-                                imageUrl: downloadUrlOrCache,
-                                constraints: constraints,
-                                fullQuality: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                    onTap: _onImageTap(
+                      context,
+                      downloadUrlOrCache,
+                      constraints,
+                      defaultIcon,
+                      imagePlaceholder,
                     ),
                     child: imageFromUrlWidget,
                   ),
                 );
 
-                if (circleCrop) {
-                  return ClipOval(
-                    child: inkWell,
-                  );
-                }
-
-                return ClipRRect(
-                  borderRadius: borderRadius,
-                  child: inkWell,
-                );
+                return clipImage(inkWell);
               },
             ),
           );
@@ -130,47 +98,128 @@ class ImageObjectWidget extends StatelessWidget {
       ),
     );
   }
+
+  Widget clipImage(Widget image) {
+    if (circleCrop) {
+      return ClipOval(child: image);
+    }
+
+    return ClipRRect(
+      borderRadius: clipBorderRadius,
+      child: image,
+    );
+  }
+
+  void Function() _onImageTap(
+    BuildContext context,
+    String downloadUrlOrCache,
+    BoxConstraints constraints,
+    IconData defaultIcon,
+    Widget imagePlaceholder,
+  ) {
+    return () => Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            barrierDismissible: true,
+            barrierColor: Colors.black45,
+            pageBuilder: (context, _, __) => Dialog(
+              backgroundColor: Colors.transparent,
+              child: Hero(
+                transitionOnUserGestures: true,
+                tag: heroTag ?? imageObject,
+                child: PhotoView.customChild(
+                  backgroundDecoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  tightMode: true,
+                  childSize: constraints.smallest,
+                  wantKeepAlive: true,
+                  child: _ImageFromUrlWidget(
+                    defaultIcon: defaultIcon,
+                    imageUrl: downloadUrlOrCache,
+                    constraints: constraints,
+                    fullQuality: true,
+                    imagePlaceholder: imagePlaceholder,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+  }
 }
 
 class _ImageFromUrlWidget extends StatelessWidget {
-  static const animationsDuration = Duration.zero; //(milliseconds: 200);
+  static const animationsDuration = Duration.zero;
 
   const _ImageFromUrlWidget({
     required this.imageUrl,
     required this.defaultIcon,
     required this.constraints,
+    required this.imagePlaceholder,
     this.fullQuality = false,
   });
 
   final String imageUrl;
+  final Widget imagePlaceholder;
   final IconData defaultIcon;
   final BoxConstraints constraints;
   final bool fullQuality;
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      memCacheHeight: fullQuality
-          ? null
-          : (MediaQuery.of(context).devicePixelRatio * constraints.maxHeight)
-              .floor(),
-      cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
-      errorWidget: (context, url, error) => Icon(
-        defaultIcon,
-        size: constraints.maxHeight,
-      ),
-      fadeInDuration: animationsDuration,
-      placeholderFadeInDuration: animationsDuration,
-      fadeOutDuration: animationsDuration,
-      fadeInCurve: Curves.linear,
-      fadeOutCurve: Curves.linear,
-      progressIndicatorBuilder: (context, url, progress) => Center(
-        child: CircularProgressIndicator(
-          value: progress.progress,
+    return Stack(
+      alignment: Alignment.center,
+      fit: StackFit.expand,
+      children: [
+        imagePlaceholder,
+        CachedNetworkImage(
+          imageUrl: imageUrl,
+          memCacheHeight: fullQuality
+              ? null
+              : (MediaQuery.of(context).devicePixelRatio *
+                      constraints.maxHeight)
+                  .floor(),
+          cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
+          errorWidget: (context, url, error) => imagePlaceholder,
+          fadeInDuration: animationsDuration,
+          placeholderFadeInDuration: animationsDuration,
+          fadeOutDuration: animationsDuration,
+          useOldImageOnUrlChange: true,
         ),
-      ),
-      useOldImageOnUrlChange: true,
+      ],
+    );
+  }
+}
+
+class _ImagePlaceholder extends StatelessWidget {
+  final IconData defaultIcon;
+  final String? blurhash;
+  final double size;
+
+  const _ImagePlaceholder({
+    required this.defaultIcon,
+    required this.size,
+    this.blurhash,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (blurhash != null) {
+      return Image(
+        height: size,
+        width: size,
+        image: BlurHashImage(
+          blurhash!,
+          scale: 32 / size,
+        ),
+        gaplessPlayback: true,
+      );
+    }
+
+    return Icon(
+      defaultIcon,
+      size: size,
     );
   }
 }

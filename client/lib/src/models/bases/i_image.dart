@@ -4,4 +4,6 @@ abstract interface class IImage {
   ObjectImageInfo get imageInfo;
 
   bool get hasImage;
+
+  String? get blurhash;
 }

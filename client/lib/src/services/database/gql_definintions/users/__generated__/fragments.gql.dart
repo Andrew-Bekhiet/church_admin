@@ -13,6 +13,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     required this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
+    this.blurhash,
   });
 
   factory Fragment_User.fromJson(Map<String, dynamic> json) {
@@ -21,6 +22,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     return Fragment_User(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
@@ -28,6 +30,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
     );
   }
 
@@ -40,6 +43,8 @@ class Fragment_User implements Fragment_UserNoPhoto {
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -54,6 +59,8 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     return _resultData;
   }
 
@@ -64,12 +71,14 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$email = email;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     return Object.hashAll([
       l$uid,
       l$name,
       l$email,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
     ]);
   }
 
@@ -106,6 +115,11 @@ class Fragment_User implements Fragment_UserNoPhoto {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     return true;
   }
 }
@@ -132,6 +146,7 @@ abstract class CopyWith_Fragment_User<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   });
 }
 
@@ -154,6 +169,7 @@ class _CopyWithImpl_Fragment_User<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
   }) =>
       _then(Fragment_User(
         uid: uid == _undefined || uid == null
@@ -171,6 +187,8 @@ class _CopyWithImpl_Fragment_User<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
       ));
 }
 
@@ -186,6 +204,7 @@ class _CopyWithStubImpl_Fragment_User<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
   }) =>
       _res;
 }
@@ -205,6 +224,13 @@ const fragmentDefinitionUser = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'photoUpdatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'blurhash'),
       alias: null,
       arguments: [],
       directives: [],
@@ -438,6 +464,7 @@ class Fragment_UserOverview
     required this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.permissions,
     this.person,
   });
@@ -448,6 +475,7 @@ class Fragment_UserOverview
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     return Fragment_UserOverview(
@@ -457,6 +485,7 @@ class Fragment_UserOverview
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       permissions: (l$permissions as List<dynamic>)
           .map((e) => Fragment_UserOverview_permissions.fromJson(
               (e as Map<String, dynamic>)))
@@ -478,6 +507,8 @@ class Fragment_UserOverview
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Fragment_UserOverview_permissions> permissions;
 
   final Fragment_UserOverview_person? person;
@@ -495,6 +526,8 @@ class Fragment_UserOverview
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -509,6 +542,7 @@ class Fragment_UserOverview
     final l$email = email;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$permissions = permissions;
     final l$person = person;
     return Object.hashAll([
@@ -517,6 +551,7 @@ class Fragment_UserOverview
       l$email,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
     ]);
@@ -553,6 +588,11 @@ class Fragment_UserOverview
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$permissions = permissions;
@@ -599,6 +639,7 @@ abstract class CopyWith_Fragment_UserOverview<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_UserOverview_permissions>? permissions,
     Fragment_UserOverview_person? person,
   });
@@ -630,6 +671,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
   }) =>
@@ -649,6 +691,8 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
             : (permissions as List<Fragment_UserOverview_permissions>),
@@ -689,6 +733,7 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_UserOverview_permissions>? permissions,
     Fragment_UserOverview_person? person,
   }) =>
@@ -908,6 +953,7 @@ class Fragment_UserOverview_person
     this.color,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
+    this.blurhash,
     this.lastKodas,
     this.lastConfession,
   });
@@ -918,6 +964,7 @@ class Fragment_UserOverview_person
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
     return Fragment_UserOverview_person(
@@ -927,6 +974,7 @@ class Fragment_UserOverview_person
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       lastKodas: (l$lastKodas as Json?),
       lastConfession: (l$lastConfession as Json?),
     );
@@ -941,6 +989,8 @@ class Fragment_UserOverview_person
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Json? lastKodas;
 
@@ -959,6 +1009,8 @@ class Fragment_UserOverview_person
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$lastKodas = lastKodas;
     _resultData['lastKodas'] = l$lastKodas;
     final l$lastConfession = lastConfession;
@@ -973,6 +1025,7 @@ class Fragment_UserOverview_person
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$lastKodas = lastKodas;
     final l$lastConfession = lastConfession;
     return Object.hashAll([
@@ -981,6 +1034,7 @@ class Fragment_UserOverview_person
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$lastKodas,
       l$lastConfession,
     ]);
@@ -1018,6 +1072,11 @@ class Fragment_UserOverview_person
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$lastKodas = lastKodas;
@@ -1058,6 +1117,7 @@ abstract class CopyWith_Fragment_UserOverview_person<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   });
@@ -1082,6 +1142,7 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
@@ -1097,6 +1158,8 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         lastKodas: lastKodas == _undefined
             ? _instance.lastKodas
             : (lastKodas as Json?),
@@ -1118,6 +1181,7 @@ class _CopyWithStubImpl_Fragment_UserOverview_person<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   }) =>
@@ -1137,6 +1201,7 @@ class Fragment_UserDetails
     required this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.permissions,
     this.person,
     this.lastEdit,
@@ -1149,6 +1214,7 @@ class Fragment_UserDetails
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
@@ -1160,6 +1226,7 @@ class Fragment_UserDetails
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       permissions: (l$permissions as List<dynamic>)
           .map((e) => Fragment_UserDetails_permissions.fromJson(
               (e as Map<String, dynamic>)))
@@ -1186,6 +1253,8 @@ class Fragment_UserDetails
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Fragment_UserDetails_permissions> permissions;
 
   final Fragment_UserDetails_person? person;
@@ -1207,6 +1276,8 @@ class Fragment_UserDetails
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -1225,6 +1296,7 @@ class Fragment_UserDetails
     final l$email = email;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$permissions = permissions;
     final l$person = person;
     final l$lastEdit = lastEdit;
@@ -1235,6 +1307,7 @@ class Fragment_UserDetails
       l$email,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       l$lastEdit,
@@ -1273,6 +1346,11 @@ class Fragment_UserDetails
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$permissions = permissions;
@@ -1336,6 +1414,7 @@ abstract class CopyWith_Fragment_UserDetails<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_UserDetails_permissions>? permissions,
     Fragment_UserDetails_person? person,
     Json? lastEdit,
@@ -1375,6 +1454,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? lastEdit = _undefined,
@@ -1396,6 +1476,8 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
             : (permissions as List<Fragment_UserDetails_permissions>),
@@ -1454,6 +1536,7 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Fragment_UserDetails_permissions>? permissions,
     Fragment_UserDetails_person? person,
     Json? lastEdit,
@@ -1657,6 +1740,7 @@ class Fragment_UserDetails_person
     this.color,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
+    this.blurhash,
     this.lastKodas,
     this.lastConfession,
   });
@@ -1667,6 +1751,7 @@ class Fragment_UserDetails_person
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
     return Fragment_UserDetails_person(
@@ -1676,6 +1761,7 @@ class Fragment_UserDetails_person
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       lastKodas: (l$lastKodas as Json?),
       lastConfession: (l$lastConfession as Json?),
     );
@@ -1690,6 +1776,8 @@ class Fragment_UserDetails_person
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Json? lastKodas;
 
@@ -1708,6 +1796,8 @@ class Fragment_UserDetails_person
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$lastKodas = lastKodas;
     _resultData['lastKodas'] = l$lastKodas;
     final l$lastConfession = lastConfession;
@@ -1722,6 +1812,7 @@ class Fragment_UserDetails_person
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$lastKodas = lastKodas;
     final l$lastConfession = lastConfession;
     return Object.hashAll([
@@ -1730,6 +1821,7 @@ class Fragment_UserDetails_person
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$lastKodas,
       l$lastConfession,
     ]);
@@ -1767,6 +1859,11 @@ class Fragment_UserDetails_person
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$lastKodas = lastKodas;
@@ -1807,6 +1904,7 @@ abstract class CopyWith_Fragment_UserDetails_person<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   });
@@ -1831,6 +1929,7 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
@@ -1846,6 +1945,8 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         lastKodas: lastKodas == _undefined
             ? _instance.lastKodas
             : (lastKodas as Json?),
@@ -1867,6 +1968,7 @@ class _CopyWithStubImpl_Fragment_UserDetails_person<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   }) =>
@@ -5390,6 +5492,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     this.color,
     this.$__typename = 'Services',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -5401,6 +5504,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -5411,6 +5515,7 @@ class Fragment_AttendanceFields_servicesHistory_service
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -5431,6 +5536,8 @@ class Fragment_AttendanceFields_servicesHistory_service
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -5450,6 +5557,8 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -5467,6 +5576,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -5476,6 +5586,7 @@ class Fragment_AttendanceFields_servicesHistory_service
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -5513,6 +5624,11 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -5560,6 +5676,7 @@ abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service<
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
@@ -5591,6 +5708,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -5606,6 +5724,8 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -5651,6 +5771,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
@@ -7068,6 +7189,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -7079,6 +7201,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -7089,6 +7212,7 @@ class Fragment_AttendanceFields_classesHistory_classes
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -7109,6 +7233,8 @@ class Fragment_AttendanceFields_classesHistory_classes
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -7128,6 +7254,8 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -7145,6 +7273,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -7154,6 +7283,7 @@ class Fragment_AttendanceFields_classesHistory_classes
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -7191,6 +7321,11 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -7236,6 +7371,7 @@ abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
@@ -7266,6 +7402,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -7281,6 +7418,8 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -7324,6 +7463,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
@@ -8725,6 +8865,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     this.color,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -8736,6 +8877,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -8746,6 +8888,7 @@ class Fragment_AttendanceFields_groupsHistory_group
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -8766,6 +8909,8 @@ class Fragment_AttendanceFields_groupsHistory_group
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -8785,6 +8930,8 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -8802,6 +8949,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -8811,6 +8959,7 @@ class Fragment_AttendanceFields_groupsHistory_group
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -8848,6 +8997,11 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -8893,6 +9047,7 @@ abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?
@@ -8923,6 +9078,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -8938,6 +9094,8 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -8981,6 +9139,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?

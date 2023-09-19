@@ -79,6 +79,7 @@ _$_Person _$$_PersonFromJson(Map json) => _$_Person(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       lastConfession: json['lastConfession'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -166,6 +167,7 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'studyYearId': instance.studyYearId,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
       'lastConfession': instance.lastConfession?.toJson(),
       'lastKodas': instance.lastKodas?.toJson(),
       'lastCall': instance.lastCall?.toJson(),

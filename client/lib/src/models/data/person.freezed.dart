@@ -60,6 +60,7 @@ mixin _$Person {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastConfession => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastKodas => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastCall => throw _privateConstructorUsedError;
@@ -142,6 +143,7 @@ abstract class $PersonCopyWith<$Res> {
       int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       LastRecordedByInfo? lastConfession,
       LastRecordedByInfo? lastKodas,
       LastRecordedByInfo? lastCall,
@@ -245,6 +247,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? studyYearId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? lastConfession = freezed,
     Object? lastKodas = freezed,
     Object? lastCall = freezed,
@@ -417,6 +420,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastConfession: freezed == lastConfession
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
@@ -807,6 +814,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       LastRecordedByInfo? lastConfession,
       LastRecordedByInfo? lastKodas,
       LastRecordedByInfo? lastCall,
@@ -929,6 +937,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? studyYearId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? lastConfession = freezed,
     Object? lastKodas = freezed,
     Object? lastCall = freezed,
@@ -1101,6 +1110,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastConfession: freezed == lastConfession
           ? _value.lastConfession
           : lastConfession // ignore: cast_nullable_to_non_nullable
@@ -1219,6 +1232,7 @@ class _$_Person extends _Person {
       this.studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       this.lastConfession,
       this.lastKodas,
       this.lastCall,
@@ -1349,6 +1363,8 @@ class _$_Person extends _Person {
   @override
   final DateTime? photoUpdatedAt;
   @override
+  final String? blurhash;
+  @override
   final LastRecordedByInfo? lastConfession;
   @override
   final LastRecordedByInfo? lastKodas;
@@ -1452,7 +1468,7 @@ class _$_Person extends _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 
   @override
@@ -1520,6 +1536,8 @@ class _$_Person extends _Person {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             (identical(other.lastConfession, lastConfession) ||
                 other.lastConfession == lastConfession) &&
             (identical(other.lastKodas, lastKodas) ||
@@ -1594,6 +1612,7 @@ class _$_Person extends _Person {
         studyYearId,
         color,
         photoUpdatedAt,
+        blurhash,
         lastConfession,
         lastKodas,
         lastCall,
@@ -1669,6 +1688,7 @@ abstract class _Person extends Person {
       final int? studyYearId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final LastRecordedByInfo? lastConfession,
       final LastRecordedByInfo? lastKodas,
       final LastRecordedByInfo? lastCall,
@@ -1778,6 +1798,8 @@ abstract class _Person extends Person {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   LastRecordedByInfo? get lastConfession;
   @override

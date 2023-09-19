@@ -29,6 +29,7 @@ mixin _$Family {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
   List<Street>? get streets => throw _privateConstructorUsedError;
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -55,6 +56,7 @@ abstract class $FamilyCopyWith<$Res> {
       String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -86,6 +88,7 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? areas = freezed,
     Object? streets = freezed,
     Object? children = freezed,
@@ -121,6 +124,10 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       areas: freezed == areas
           ? _value.areas
           : areas // ignore: cast_nullable_to_non_nullable
@@ -171,6 +178,7 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
       String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Area>? areas,
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -200,6 +208,7 @@ class __$$_FamilyCopyWithImpl<$Res>
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? areas = freezed,
     Object? streets = freezed,
     Object? children = freezed,
@@ -235,6 +244,10 @@ class __$$_FamilyCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       areas: freezed == areas
           ? _value._areas
           : areas // ignore: cast_nullable_to_non_nullable
@@ -270,6 +283,7 @@ class _$_Family extends _Family {
       this.notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -302,6 +316,8 @@ class _$_Family extends _Family {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   final List<Area>? _areas;
   @override
   List<Area>? get areas {
@@ -349,7 +365,7 @@ class _$_Family extends _Family {
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, geolocation: $geolocation, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, areas: $areas, streets: $streets, children: $children, parents: $parents, lastEdit: $lastEdit)';
+    return 'Family(id: $id, name: $name, address: $address, geolocation: $geolocation, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, streets: $streets, children: $children, parents: $parents, lastEdit: $lastEdit)';
   }
 
   @override
@@ -366,6 +382,8 @@ class _$_Family extends _Family {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._children, _children) &&
@@ -385,6 +403,7 @@ class _$_Family extends _Family {
       notes,
       color,
       photoUpdatedAt,
+      blurhash,
       const DeepCollectionEquality().hash(_areas),
       const DeepCollectionEquality().hash(_streets),
       const DeepCollectionEquality().hash(_children),
@@ -415,6 +434,7 @@ abstract class _Family extends Family {
       final String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final List<Area>? areas,
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -442,6 +462,8 @@ abstract class _Family extends Family {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   List<Area>? get areas;
   @override

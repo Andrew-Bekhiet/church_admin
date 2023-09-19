@@ -33,6 +33,7 @@ mixin _$Store {
   List<Street>? get streets => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +55,8 @@ abstract class $StoreCopyWith<$Res> {
       List<Area>? areas,
       List<Street>? streets,
       LastRecordedByInfo? lastEdit,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      String? blurhash});
 
   $FamilyCopyWith<$Res>? get family;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
@@ -83,6 +85,7 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
     Object? streets = freezed,
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -125,6 +128,10 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -169,7 +176,8 @@ abstract class _$$_StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
       List<Area>? areas,
       List<Street>? streets,
       LastRecordedByInfo? lastEdit,
-      DateTime? photoUpdatedAt});
+      DateTime? photoUpdatedAt,
+      String? blurhash});
 
   @override
   $FamilyCopyWith<$Res>? get family;
@@ -196,6 +204,7 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
     Object? streets = freezed,
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
   }) {
     return _then(_$_Store(
       id: null == id
@@ -238,6 +247,10 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -255,7 +268,8 @@ class _$_Store extends _Store {
       final List<Area>? areas,
       final List<Street>? streets,
       this.lastEdit,
-      this.photoUpdatedAt})
+      this.photoUpdatedAt,
+      this.blurhash})
       : _areas = areas,
         _streets = streets,
         super._();
@@ -302,10 +316,12 @@ class _$_Store extends _Store {
   final LastRecordedByInfo? lastEdit;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, family: $family, familyId: $familyId, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt)';
+    return 'Store(id: $id, name: $name, family: $family, familyId: $familyId, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash)';
   }
 
   @override
@@ -326,7 +342,9 @@ class _$_Store extends _Store {
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt));
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash));
   }
 
   @JsonKey(ignore: true)
@@ -342,7 +360,8 @@ class _$_Store extends _Store {
       const DeepCollectionEquality().hash(_areas),
       const DeepCollectionEquality().hash(_streets),
       lastEdit,
-      photoUpdatedAt);
+      photoUpdatedAt,
+      blurhash);
 
   @JsonKey(ignore: true)
   @override
@@ -370,7 +389,8 @@ abstract class _Store extends Store {
       final List<Area>? areas,
       final List<Street>? streets,
       final LastRecordedByInfo? lastEdit,
-      final DateTime? photoUpdatedAt}) = _$_Store;
+      final DateTime? photoUpdatedAt,
+      final String? blurhash}) = _$_Store;
   _Store._() : super._();
 
   factory _Store.fromJson(Map<String, dynamic> json) = _$_Store.fromJson;
@@ -398,6 +418,8 @@ abstract class _Store extends Store {
   LastRecordedByInfo? get lastEdit;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   @JsonKey(ignore: true)
   _$$_StoreCopyWith<_$_Store> get copyWith =>

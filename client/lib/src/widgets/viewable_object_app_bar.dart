@@ -28,7 +28,7 @@ class ViewableObjectAppBar extends StatefulWidget {
 class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
   final _photoAlignTween = AlignmentTween(
     begin: Alignment.center,
-    end: Alignment.centerRight,
+    end: const Alignment(0.8, 0),
   );
 
   final _textAlignTween = TweenSequence(
@@ -208,10 +208,10 @@ class _AppBarPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    return Transform.scale(
-      scale: 0.8,
-      child: Align(
-        alignment: photoAlign,
+    return Align(
+      alignment: photoAlign,
+      child: Transform.scale(
+        scale: 0.8,
         child: ProgressIndicatorTheme(
           data: themeData.progressIndicatorTheme.copyWith(
             color: themeData.brightness == Brightness.light
@@ -228,7 +228,11 @@ class _AppBarPhoto extends StatelessWidget {
                     ? null
                     : const BorderRadius.all(Radius.circular(10)),
               ),
-              child: ImageObjectWidget(viewable, circleCrop: circleCrop),
+              child: ImageObjectWidget(
+                viewable,
+                circleCrop: circleCrop,
+                size: height,
+              ),
             ),
           ),
         ),

@@ -27,6 +27,7 @@ mixin _$Street {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $StreetCopyWith<$Res> {
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Area>? areas,
       LastRecordedByInfo? lastEdit});
 
@@ -70,6 +72,7 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? areas = freezed,
     Object? lastEdit = freezed,
   }) {
@@ -94,6 +97,10 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       areas: freezed == areas
           ? _value.areas
           : areas // ignore: cast_nullable_to_non_nullable
@@ -130,6 +137,7 @@ abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Area>? areas,
       LastRecordedByInfo? lastEdit});
 
@@ -152,6 +160,7 @@ class __$$_StreetCopyWithImpl<$Res>
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? areas = freezed,
     Object? lastEdit = freezed,
   }) {
@@ -176,6 +185,10 @@ class __$$_StreetCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       areas: freezed == areas
           ? _value._areas
           : areas // ignore: cast_nullable_to_non_nullable
@@ -197,6 +210,7 @@ class _$_Street extends _Street {
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) this.line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       final List<Area>? areas,
       this.lastEdit})
       : _areas = areas,
@@ -217,6 +231,8 @@ class _$_Street extends _Street {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   final List<Area>? _areas;
   @override
   List<Area>? get areas {
@@ -232,7 +248,7 @@ class _$_Street extends _Street {
 
   @override
   String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, areas: $areas, lastEdit: $lastEdit)';
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastEdit: $lastEdit)';
   }
 
   @override
@@ -246,6 +262,8 @@ class _$_Street extends _Street {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit));
@@ -253,8 +271,16 @@ class _$_Street extends _Street {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, line, color,
-      photoUpdatedAt, const DeepCollectionEquality().hash(_areas), lastEdit);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      line,
+      color,
+      photoUpdatedAt,
+      blurhash,
+      const DeepCollectionEquality().hash(_areas),
+      lastEdit);
 
   @JsonKey(ignore: true)
   @override
@@ -277,6 +303,7 @@ abstract class _Street extends Street {
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) final Line? line,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final List<Area>? areas,
       final LastRecordedByInfo? lastEdit}) = _$_Street;
   _Street._() : super._();
@@ -295,6 +322,8 @@ abstract class _Street extends Street {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   List<Area>? get areas;
   @override

@@ -585,6 +585,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     required this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.servicesHistory,
     required this.classesHistory,
     required this.groupsHistory,
@@ -597,6 +598,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$servicesHistory = json['servicesHistory'];
     final l$classesHistory = json['classesHistory'];
     final l$groupsHistory = json['groupsHistory'];
@@ -607,6 +609,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       servicesHistory: (l$servicesHistory as List<dynamic>)
           .map((e) =>
               Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory
@@ -635,6 +638,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory>
       servicesHistory;
 
@@ -657,6 +662,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$servicesHistory = servicesHistory;
     _resultData['servicesHistory'] =
         l$servicesHistory.map((e) => e.toJson()).toList();
@@ -676,6 +683,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     final l$email = email;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$servicesHistory = servicesHistory;
     final l$classesHistory = classesHistory;
     final l$groupsHistory = groupsHistory;
@@ -685,6 +693,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
       l$email,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$servicesHistory.map((v) => v)),
       Object.hashAll(l$classesHistory.map((v) => v)),
       Object.hashAll(l$groupsHistory.map((v) => v)),
@@ -723,6 +732,11 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$servicesHistory = servicesHistory;
@@ -791,6 +805,7 @@ abstract class CopyWith_Query_analyzeUserAttendance_authUsersDataByPk<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory>?
         servicesHistory,
     List<Query_analyzeUserAttendance_authUsersDataByPk_classesHistory>?
@@ -837,6 +852,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? servicesHistory = _undefined,
     Object? classesHistory = _undefined,
     Object? groupsHistory = _undefined,
@@ -857,6 +873,8 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         servicesHistory: servicesHistory == _undefined ||
                 servicesHistory == null
             ? _instance.servicesHistory
@@ -921,6 +939,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory>?
         servicesHistory,
     List<Query_analyzeUserAttendance_authUsersDataByPk_classesHistory>?
@@ -1129,6 +1148,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     this.color,
     this.$__typename = 'Services',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -1140,6 +1160,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -1150,6 +1171,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -1170,6 +1192,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -1189,6 +1213,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -1206,6 +1232,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -1215,6 +1242,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -1253,6 +1281,11 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -1303,6 +1336,7 @@ abstract class CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate?
@@ -1339,6 +1373,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -1355,6 +1390,8 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -1402,6 +1439,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate?
@@ -2855,6 +2893,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     this.color,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -2866,6 +2905,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -2876,6 +2916,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -2896,6 +2937,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -2915,6 +2958,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -2932,6 +2977,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -2941,6 +2987,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -2979,6 +3026,11 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -3029,6 +3081,7 @@ abstract class CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate?
@@ -3065,6 +3118,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -3081,6 +3135,8 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -3128,6 +3184,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate?
@@ -4567,6 +4624,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     this.color,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
   });
@@ -4578,6 +4636,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
@@ -4588,6 +4647,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
           Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
@@ -4608,6 +4668,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
@@ -4627,6 +4689,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     _resultData['attendanceHistoryAggregate'] =
         l$attendanceHistoryAggregate.toJson();
@@ -4644,6 +4708,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
@@ -4653,6 +4718,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
     ]);
@@ -4691,6 +4757,11 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -4740,6 +4811,7 @@ abstract class CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate?
@@ -4775,6 +4847,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
@@ -4790,6 +4863,8 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
@@ -4837,6 +4912,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
     Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate?

@@ -31,6 +31,7 @@ mixin _$Service {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   List<Class>? get classes => throw _privateConstructorUsedError;
   List<Group>? get groups => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
@@ -64,6 +65,7 @@ abstract class $ServiceCopyWith<$Res> {
       String? nextServiceId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Class>? classes,
       List<Group>? groups,
       LastRecordedByInfo? lastEdit,
@@ -105,6 +107,7 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     Object? nextServiceId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
     Object? lastEdit = freezed,
@@ -153,6 +156,10 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       classes: freezed == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
@@ -276,6 +283,7 @@ abstract class _$$_ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
       String? nextServiceId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
+      String? blurhash,
       List<Class>? classes,
       List<Group>? groups,
       LastRecordedByInfo? lastEdit,
@@ -320,6 +328,7 @@ class __$$_ServiceCopyWithImpl<$Res>
     Object? nextServiceId = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
     Object? lastEdit = freezed,
@@ -368,6 +377,10 @@ class __$$_ServiceCopyWithImpl<$Res>
           ? _value.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      blurhash: freezed == blurhash
+          ? _value.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
       classes: freezed == classes
           ? _value._classes
           : classes // ignore: cast_nullable_to_non_nullable
@@ -411,6 +424,7 @@ class _$_Service extends _Service {
       this.nextServiceId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
+      this.blurhash,
       final List<Class>? classes,
       final List<Group>? groups,
       this.lastEdit,
@@ -449,6 +463,8 @@ class _$_Service extends _Service {
   final Color? color;
   @override
   final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
   final List<Class>? _classes;
   @override
   List<Class>? get classes {
@@ -491,7 +507,7 @@ class _$_Service extends _Service {
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 
   @override
@@ -516,6 +532,8 @@ class _$_Service extends _Service {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
             (identical(other.lastEdit, lastEdit) ||
@@ -546,6 +564,7 @@ class _$_Service extends _Service {
       nextServiceId,
       color,
       photoUpdatedAt,
+      blurhash,
       const DeepCollectionEquality().hash(_classes),
       const DeepCollectionEquality().hash(_groups),
       lastEdit,
@@ -579,6 +598,7 @@ abstract class _Service extends Service {
       final String? nextServiceId,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
+      final String? blurhash,
       final List<Class>? classes,
       final List<Group>? groups,
       final LastRecordedByInfo? lastEdit,
@@ -614,6 +634,8 @@ abstract class _Service extends Service {
   Color? get color;
   @override
   DateTime? get photoUpdatedAt;
+  @override
+  String? get blurhash;
   @override
   List<Class>? get classes;
   @override

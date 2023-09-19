@@ -431,6 +431,7 @@ class Subscription_watchAllAreas_areas
     this.color,
     this.$__typename = 'Areas',
     this.photoUpdatedAt,
+    this.blurhash,
     this.bounds,
   });
 
@@ -440,6 +441,7 @@ class Subscription_watchAllAreas_areas
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$bounds = json['bounds'];
     return Subscription_watchAllAreas_areas(
       id: stringToUuid(l$id),
@@ -448,6 +450,7 @@ class Subscription_watchAllAreas_areas
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       bounds: (l$bounds as Map<String, dynamic>?),
     );
   }
@@ -461,6 +464,8 @@ class Subscription_watchAllAreas_areas
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Map<String, dynamic>? bounds;
 
@@ -477,6 +482,8 @@ class Subscription_watchAllAreas_areas
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$bounds = bounds;
     _resultData['bounds'] = l$bounds;
     return _resultData;
@@ -489,6 +496,7 @@ class Subscription_watchAllAreas_areas
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     return Object.hashAll([
       l$id,
@@ -496,6 +504,7 @@ class Subscription_watchAllAreas_areas
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$bounds,
     ]);
   }
@@ -534,6 +543,11 @@ class Subscription_watchAllAreas_areas
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (l$bounds != lOther$bounds) {
@@ -567,6 +581,7 @@ abstract class CopyWith_Subscription_watchAllAreas_areas<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? bounds,
   });
 }
@@ -590,6 +605,7 @@ class _CopyWithImpl_Subscription_watchAllAreas_areas<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
   }) =>
       _then(Subscription_watchAllAreas_areas(
@@ -604,6 +620,8 @@ class _CopyWithImpl_Subscription_watchAllAreas_areas<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         bounds: bounds == _undefined
             ? _instance.bounds
             : (bounds as Map<String, dynamic>?),
@@ -622,6 +640,7 @@ class _CopyWithStubImpl_Subscription_watchAllAreas_areas<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? bounds,
   }) =>
       _res;
@@ -935,6 +954,7 @@ class Subscription_watchArea_areasByPk
     this.color,
     this.$__typename = 'Areas',
     this.photoUpdatedAt,
+    this.blurhash,
     this.bounds,
     this.lastEdit,
     required this.adminUsers,
@@ -946,6 +966,7 @@ class Subscription_watchArea_areasByPk
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$bounds = json['bounds'];
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
@@ -956,6 +977,7 @@ class Subscription_watchArea_areasByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       bounds: (l$bounds as Map<String, dynamic>?),
       lastEdit: (l$lastEdit as Json?),
       adminUsers: (l$adminUsers as List<dynamic>)
@@ -974,6 +996,8 @@ class Subscription_watchArea_areasByPk
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Map<String, dynamic>? bounds;
 
@@ -994,6 +1018,8 @@ class Subscription_watchArea_areasByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$bounds = bounds;
     _resultData['bounds'] = l$bounds;
     final l$lastEdit = lastEdit;
@@ -1010,6 +1036,7 @@ class Subscription_watchArea_areasByPk
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$bounds = bounds;
     final l$lastEdit = lastEdit;
     final l$adminUsers = adminUsers;
@@ -1019,6 +1046,7 @@ class Subscription_watchArea_areasByPk
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$bounds,
       l$lastEdit,
       Object.hashAll(l$adminUsers.map((v) => v)),
@@ -1057,6 +1085,11 @@ class Subscription_watchArea_areasByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$bounds = bounds;
@@ -1109,6 +1142,7 @@ abstract class CopyWith_Subscription_watchArea_areasByPk<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? bounds,
     Json? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
@@ -1140,6 +1174,7 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? bounds = _undefined,
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
@@ -1156,6 +1191,8 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         bounds: bounds == _undefined
             ? _instance.bounds
             : (bounds as Map<String, dynamic>?),
@@ -1191,6 +1228,7 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Map<String, dynamic>? bounds,
     Json? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,

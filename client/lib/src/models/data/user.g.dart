@@ -13,6 +13,7 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       adminOn: (json['adminOn'] as List<dynamic>?)
           ?.map(
               (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
@@ -51,6 +52,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) {
     'name': instance.name,
     'email': instance.email,
     'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+    'blurhash': instance.blurhash,
     'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
     'permissions': permissionsSetToJson(instance.permissions),
     'authId': instance.authId,

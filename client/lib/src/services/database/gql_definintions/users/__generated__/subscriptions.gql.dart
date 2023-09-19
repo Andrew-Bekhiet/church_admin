@@ -356,6 +356,7 @@ class Subscription_watchUser_authUsersDataByPk
     required this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
+    this.blurhash,
     required this.permissions,
     this.person,
     this.lastEdit,
@@ -369,6 +370,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$email = json['email'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
@@ -380,6 +382,7 @@ class Subscription_watchUser_authUsersDataByPk
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       permissions: (l$permissions as List<dynamic>)
           .map((e) =>
               Subscription_watchUser_authUsersDataByPk_permissions.fromJson(
@@ -407,6 +410,8 @@ class Subscription_watchUser_authUsersDataByPk
 
   final DateTime? photoUpdatedAt;
 
+  final String? blurhash;
+
   final List<Subscription_watchUser_authUsersDataByPk_permissions> permissions;
 
   final Subscription_watchUser_authUsersDataByPk_person? person;
@@ -428,6 +433,8 @@ class Subscription_watchUser_authUsersDataByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -446,6 +453,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$email = email;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$permissions = permissions;
     final l$person = person;
     final l$lastEdit = lastEdit;
@@ -456,6 +464,7 @@ class Subscription_watchUser_authUsersDataByPk
       l$email,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       l$lastEdit,
@@ -495,6 +504,11 @@ class Subscription_watchUser_authUsersDataByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$permissions = permissions;
@@ -560,6 +574,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Json? lastEdit,
@@ -599,6 +614,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Object? email = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? lastEdit = _undefined,
@@ -620,6 +636,8 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         permissions: permissions == _undefined || permissions == null
             ? _instance.permissions
             : (permissions
@@ -681,6 +699,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     String? email,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Json? lastEdit,
@@ -844,6 +863,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     this.color,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
+    this.blurhash,
     this.lastKodas,
     this.lastConfession,
   });
@@ -855,6 +875,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
     return Subscription_watchUser_authUsersDataByPk_person(
@@ -864,6 +885,7 @@ class Subscription_watchUser_authUsersDataByPk_person
       $__typename: (l$$__typename as String),
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       lastKodas: (l$lastKodas as Json?),
       lastConfession: (l$lastConfession as Json?),
     );
@@ -878,6 +900,8 @@ class Subscription_watchUser_authUsersDataByPk_person
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final Json? lastKodas;
 
@@ -896,6 +920,8 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$photoUpdatedAt = photoUpdatedAt;
     _resultData['photoUpdatedAt'] =
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$lastKodas = lastKodas;
     _resultData['lastKodas'] = l$lastKodas;
     final l$lastConfession = lastConfession;
@@ -910,6 +936,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$color = color;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$lastKodas = lastKodas;
     final l$lastConfession = lastConfession;
     return Object.hashAll([
@@ -918,6 +945,7 @@ class Subscription_watchUser_authUsersDataByPk_person
       l$color,
       l$$__typename,
       l$photoUpdatedAt,
+      l$blurhash,
       l$lastKodas,
       l$lastConfession,
     ]);
@@ -955,6 +983,11 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
     final l$lastKodas = lastKodas;
@@ -997,6 +1030,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> {
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   });
@@ -1021,6 +1055,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
     Object? color = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) =>
@@ -1036,6 +1071,8 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
         photoUpdatedAt: photoUpdatedAt == _undefined
             ? _instance.photoUpdatedAt
             : (photoUpdatedAt as DateTime?),
+        blurhash:
+            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
         lastKodas: lastKodas == _undefined
             ? _instance.lastKodas
             : (lastKodas as Json?),
@@ -1057,6 +1094,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
     int? color,
     String? $__typename,
     DateTime? photoUpdatedAt,
+    String? blurhash,
     Json? lastKodas,
     Json? lastConfession,
   }) =>

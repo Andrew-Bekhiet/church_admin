@@ -1,6 +1,7 @@
 fragment Street on Streets {
   ...StreetNoPhoto
   photoUpdatedAt
+  blurhash
 }
 
 fragment StreetNoPhoto on Streets {

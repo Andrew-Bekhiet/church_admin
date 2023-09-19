@@ -16,6 +16,7 @@ _$_Family _$$_FamilyFromJson(Map json) => _$_Family(
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
+      blurhash: json['blurhash'] as String?,
       areas: (json['areas'] as List<dynamic>?)
           ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_FamilyToJson(_$_Family instance) => <String, dynamic>{
       'notes': instance.notes,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
       'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'children': familyChildrenToJson(instance.children),
