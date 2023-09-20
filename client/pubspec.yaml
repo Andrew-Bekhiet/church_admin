@@ -78,7 +78,7 @@ dependencies:
   omni_datetime_picker: ^1.0.7
   package_info_plus: ^4.0.0
   percent_indicator: ^4.2.2
-  permission_handler: ^10.2.0
+  permission_handler: ^11.0.0
   phone_numbers_parser: ^8.0.0
   photo_view: ^0.14.0
   pointycastle: ^3.6.2
