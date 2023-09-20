@@ -155,8 +155,9 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await UserSettingsService.I.setupDefaults();
 
-      await NotificationsService.I.requestNotificationsPermission();
-      await NotificationsService.I.scheduleDefaultNotifications();
+      if (await NotificationsService.I.requestNotificationsPermission()) {
+        await NotificationsService.I.scheduleDefaultNotifications();
+      }
     } catch (err, stack) {
       await LoggingService.I.reportError(err, stackTrace: stack);
     }
