@@ -4,6 +4,7 @@ query personsNames(
   $limit: Int = 25
 ) {
   persons(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    id
     name
   }
 }

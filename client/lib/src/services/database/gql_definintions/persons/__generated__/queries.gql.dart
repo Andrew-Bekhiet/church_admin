@@ -437,6 +437,13 @@ const documentNodeQuerypersonsNames = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'name'),
             alias: null,
             arguments: [],
@@ -465,18 +472,23 @@ const documentNodeQuerypersonsNames = DocumentNode(definitions: [
 
 class Query_personsNames_persons {
   Query_personsNames_persons({
+    required this.id,
     required this.name,
     this.$__typename = 'Persons',
   });
 
   factory Query_personsNames_persons.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
     return Query_personsNames_persons(
+      id: stringToUuid(l$id),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final String name;
 
@@ -484,6 +496,8 @@ class Query_personsNames_persons {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$name = name;
     _resultData['name'] = l$name;
     final l$$__typename = $__typename;
@@ -493,9 +507,11 @@ class Query_personsNames_persons {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$name,
       l$$__typename,
     ]);
@@ -508,6 +524,11 @@ class Query_personsNames_persons {
     }
     if (!(other is Query_personsNames_persons) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$name = name;
@@ -543,6 +564,7 @@ abstract class CopyWith_Query_personsNames_persons<TRes> {
       _CopyWithStubImpl_Query_personsNames_persons;
 
   TRes call({
+    UuidValue? id,
     String? name,
     String? $__typename,
   });
@@ -562,10 +584,12 @@ class _CopyWithImpl_Query_personsNames_persons<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query_personsNames_persons(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -582,6 +606,7 @@ class _CopyWithStubImpl_Query_personsNames_persons<TRes>
   TRes _res;
 
   call({
+    UuidValue? id,
     String? name,
     String? $__typename,
   }) =>
