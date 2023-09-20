@@ -29,7 +29,7 @@ void main() {
       tearDown(resetGlobalProviderContainer);
 
       testWidgets(
-        'defaultOnNotificationClicked: app is active',
+        'onDidReceiveNotificationResponse',
         (tester) async {
           final expectedNotification = Notification(
             id: 'id1234',
@@ -52,24 +52,19 @@ void main() {
 
           await tester.pumpAndSettle();
 
-          expect(
-            await NotificationsServiceCallbacks.defaultOnNotificationClicked(
-              'id1234',
+          await NotificationsServiceCallbacks.onDidReceiveNotificationResponse(
+            NotificationResponse(
+              notificationResponseType:
+                  NotificationResponseType.selectedNotification,
+              payload: expectedNotification.id,
             ),
-            expectedNotification,
           );
-        },
-      );
 
-      test(
-        'defaultOnNotificationClicked: app is inactive',
-        () async {
-          expect(
-            await NotificationsServiceCallbacks.defaultOnNotificationClicked(
-              'id1234',
-            ),
-            isNull,
-          );
+          verifyInOrder([
+            NotificationsStorage.I.readNotification(expectedNotification.id),
+            NotificationsService.I
+                .addForegroundNotification(expectedNotification),
+          ]);
         },
       );
 
@@ -98,7 +93,7 @@ void main() {
               await _testNotificationMethod(
                 channelName: 'إشعارات حضور الاجتماع',
                 channelDescription: 'إشعارات حضور الاجتماع',
-                title: 'انذار حضور الاجتماع',
+                title: 'إنذار حضور الاجتماع',
                 channelId: 'Meeting',
                 callback: NotificationsServiceCallbacks.showMeetingNotification,
                 type: LocalNotificationType.meeting,
@@ -114,7 +109,7 @@ void main() {
               await _testNotificationMethod(
                 channelName: 'إشعارات الافتقاد',
                 channelDescription: 'إشعارات الافتقاد',
-                title: 'انذار الافتقاد',
+                title: 'إنذار الافتقاد',
                 channelId: 'Visit',
                 callback: NotificationsServiceCallbacks.showVisitNotification,
                 type: LocalNotificationType.visit,
@@ -130,7 +125,7 @@ void main() {
               await _testNotificationMethod(
                 channelName: 'إشعارات الاعتراف',
                 channelDescription: 'إشعارات الاعتراف',
-                title: 'انذار الاعتراف',
+                title: 'إنذار الاعتراف',
                 channelId: 'Confession',
                 callback:
                     NotificationsServiceCallbacks.showConfessionNotification,
@@ -201,7 +196,7 @@ Future<void> _testNotificationMethod({
     (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
       argThat(matchExpectedNotification(expectedNotification)),
     ),
-    (NotificationsService.I as MockNotificationsService).show(
+    (NotificationsService.I as MockNotificationsService).notify(
       argThat(matchExpectedNotification(expectedNotification)),
       id: type.index,
       notificationDetails: argThat(
@@ -271,7 +266,7 @@ Override _setUpMockNotificationsService() {
   final mockNotificationsService = MockNotificationsService();
 
   when(
-    mockNotificationsService.show(
+    mockNotificationsService.notify(
       any,
       id: anyNamed('id'),
       notificationDetails: anyNamed('notificationDetails'),

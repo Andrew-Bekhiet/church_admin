@@ -132,7 +132,7 @@ void main() {
         },
       );
       test(
-        'show',
+        'notify',
         () async {
           final unit = _createNewUnit();
           addTearDown(unit.dispose);
@@ -149,7 +149,7 @@ void main() {
 
           const notificationDetails = NotificationDetails();
 
-          await unit.show(
+          await unit.notify(
             notification,
             notificationDetails: notificationDetails,
           );
@@ -164,7 +164,7 @@ void main() {
                 ),
           );
 
-          await unit.show(
+          await unit.notify(
             notification.copyWith(id: 'id2'),
             notificationDetails: notificationDetails,
             id: 1234,
@@ -188,7 +188,7 @@ void main() {
           final unit = _createNewUnit();
           addTearDown(unit.dispose);
 
-          expect(unit.isPaused, isFalse);
+          expect(unit.isPaused, isTrue);
 
           unit.pauseListeners();
           expect(unit.isPaused, isTrue);
@@ -317,6 +317,8 @@ void main() {
               addTearDown(unit.dispose);
               addTearDown(onMessageOpenedAppStream.close);
               addTearDown(onForegroundMessageStream.close);
+
+              unit.resumeListeners();
 
               final expectedNotifications = [
                 Notification(
@@ -460,7 +462,7 @@ void main() {
               verifyInOrder([
                 InitializationService.I.initialize(),
                 NotificationsStorage.I.writeNotification(expectedNotification),
-                NotificationsService.I.show(
+                NotificationsService.I.notify(
                   expectedNotification,
                   notificationDetails: const NotificationDetails(
                     android: AndroidNotificationDetails(
@@ -499,7 +501,7 @@ void main() {
                 NotificationsStorage.I.writeNotification(expectedNotification),
               ]);
               verifyNever(
-                (NotificationsService.I as MockNotificationsService).show(
+                (NotificationsService.I as MockNotificationsService).notify(
                   any,
                   notificationDetails: anyNamed('notificationDetails'),
                   id: anyNamed('id'),

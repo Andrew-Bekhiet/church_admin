@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/main.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
 
@@ -10,14 +10,24 @@ import 'notifications_storage.dart';
 
 class NotificationsServiceCallbacks {
   @pragma('vm:entry-point')
-  static Future<Notification?> defaultOnNotificationClicked(
-    String? notificationId,
+  static void onDidReceiveBackgroundNotificationResponse(_) {
+    main();
+  }
+
+  @pragma('vm:entry-point')
+  static Future<void> onDidReceiveNotificationResponse(
+    NotificationResponse response,
   ) async {
-    if (WidgetsBinding.instance.isRootWidgetAttached &&
-        notificationId != null) {
-      return NotificationsStorage.I.readNotification(notificationId);
-    }
-    return null;
+    final notificationId = response.payload;
+
+    if (notificationId == null) return;
+
+    final notification =
+        await NotificationsStorage.I.readNotification(notificationId);
+
+    if (notification == null) return;
+
+    NotificationsService.I.addForegroundNotification(notification);
   }
 
   @visibleForTesting
@@ -45,7 +55,7 @@ class NotificationsServiceCallbacks {
 
       await NotificationsStorage.I.writeNotification(notification);
 
-      await NotificationsService.I.show(
+      await NotificationsService.I.notify(
         notification,
         id: type.index,
         notificationDetails: NotificationDetails(
@@ -98,85 +108,154 @@ class NotificationsServiceCallbacks {
     );
   }
 
+  static AdvancedQuery _createAdvQueryWith({
+    required String name,
+    required String field,
+    required DateTime value,
+  }) {
+    return AdvancedQuery(
+      name: name,
+      conditions: [
+        Condition(
+          type: Person,
+          field: field,
+          operator: Operator.lt,
+          value: value,
+        ),
+      ],
+      orderBy: [
+        OrderBy(field: field),
+        const OrderBy(field: 'name'),
+      ],
+    );
+  }
+
   @pragma('vm:entry-point')
   static Future<void> showKodasNotification() {
+    final date = DateTime.now().subtract(const Duration(days: 7));
+
     return showNotification(
       channelId: 'Kodas',
       channelName: 'إشعارات القداس',
       channelDescription: 'إشعارات القداس',
       title: 'إشعارات القداس',
       type: LocalNotificationType.kodas,
-      additionalData: const {},
+      additionalData: {
+        'query': _createAdvQueryWith(
+          name: 'إشعارات القداس',
+          field: 'lastKodas',
+          value: date,
+        ).toJson(),
+      },
       getPersons: () =>
           DatabaseService.I.persons.notificationsQueries.getPersonsKodasWarning(
-        date: DateTime.now().subtract(const Duration(days: 7)),
+        date: date,
       ),
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showMeetingNotification() {
+    final date = DateTime.now().subtract(const Duration(days: 7));
+
     return showNotification(
       channelId: 'Meeting',
       channelName: 'إشعارات حضور الاجتماع',
       channelDescription: 'إشعارات حضور الاجتماع',
-      title: 'انذار حضور الاجتماع',
+      title: 'إنذار حضور الاجتماع',
       type: LocalNotificationType.meeting,
-      additionalData: const {},
+      additionalData: {
+        'query': _createAdvQueryWith(
+          name: 'إنذار حضور الاجتماع',
+          field: 'lastMeeting',
+          value: date,
+        ).toJson(),
+      },
       getPersons: () => DatabaseService.I.persons.notificationsQueries
           .getPersonsMeetingWarning(
-        date: DateTime.now().subtract(const Duration(days: 7)),
+        date: date,
       ),
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showVisitNotification() {
+    final date = DateTime.now().subtract(const Duration(days: 20));
+
     return showNotification(
       channelId: 'Visit',
       channelName: 'إشعارات الافتقاد',
       channelDescription: 'إشعارات الافتقاد',
-      title: 'انذار الافتقاد',
+      title: 'إنذار الافتقاد',
       type: LocalNotificationType.visit,
-      additionalData: const {},
-      getPersons: () =>
-          DatabaseService.I.persons.notificationsQueries.getPersonsVisitWarning(
-        date: DateTime.now().subtract(const Duration(days: 20)),
-      ),
+      additionalData: {
+        'query': _createAdvQueryWith(
+          name: 'إنذار الافتقاد',
+          field: 'lastVisit',
+          value: date,
+        ).toJson(),
+      },
+      getPersons: () => DatabaseService.I.persons.notificationsQueries
+          .getPersonsVisitWarning(date: date),
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showConfessionNotification() {
+    final date = DateTime.now().subtract(const Duration(days: 7));
+
     return showNotification(
       channelId: 'Confession',
       channelName: 'إشعارات الاعتراف',
       channelDescription: 'إشعارات الاعتراف',
-      title: 'انذار الاعتراف',
+      title: 'إنذار الاعتراف',
       type: LocalNotificationType.confession,
-      additionalData: const {},
+      additionalData: {
+        'query': _createAdvQueryWith(
+          name: 'إنذار الاعتراف',
+          field: 'lastConfession',
+          value: date,
+        ).toJson(),
+      },
       getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getPersonsConfessionWarning(
-        date: DateTime.now().subtract(const Duration(days: 7)),
-      ),
+          .getPersonsConfessionWarning(date: date),
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showBirthDayNotification() {
+    final now = DateTime.now();
+
     return showNotification(
       channelId: 'Birthday',
       channelName: 'إشعارات أعياد الميلاد',
       channelDescription: 'إشعارات أعياد الميلاد',
       title: 'أعياد الميلاد',
       type: LocalNotificationType.birthday,
-      additionalData: const {},
+      additionalData: {
+        'query': AdvancedQuery(
+          name: 'أعياد الميلاد',
+          conditions: [
+            Condition(
+              type: Person,
+              field: 'birthday',
+              operator: Operator.eq,
+              value: now.month.toString() + '-' + now.day.toString(),
+            ),
+          ],
+          orderBy: const [
+            OrderBy(field: 'birthdate'),
+            OrderBy(field: 'name'),
+          ],
+        ).toJson(),
+      },
       getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getBirthdayPersons(date: DateTime.now()),
+          .getBirthdayPersons(date: now),
     );
   }
 }
 
+@visibleForTesting
 enum LocalNotificationType {
   birthday,
   kodas,

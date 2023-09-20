@@ -544,18 +544,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
 class MockNotificationsService extends _i1.Mock
     implements _i2.NotificationsService {
   @override
-  _i3.ValueStream<_i2.Notification> get foregroundNotificationsStream =>
+  _i8.Stream<_i2.Notification> get foregroundNotificationsStream =>
       (super.noSuchMethod(
         Invocation.getter(#foregroundNotificationsStream),
-        returnValue: _FakeValueStream_1<_i2.Notification>(
-          this,
-          Invocation.getter(#foregroundNotificationsStream),
-        ),
-        returnValueForMissingStub: _FakeValueStream_1<_i2.Notification>(
-          this,
-          Invocation.getter(#foregroundNotificationsStream),
-        ),
-      ) as _i3.ValueStream<_i2.Notification>);
+        returnValue: _i8.Stream<_i2.Notification>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i2.Notification>.empty(),
+      ) as _i8.Stream<_i2.Notification>);
   @override
   bool get isPaused => (super.noSuchMethod(
         Invocation.getter(#isPaused),
@@ -665,14 +659,23 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i8.Future<bool>.value(false),
       ) as _i8.Future<bool>);
   @override
-  _i8.Future<void> show(
+  void addForegroundNotification(_i2.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addForegroundNotification,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i8.Future<void> notify(
     _i2.Notification? notification, {
     int? id,
     _i9.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #show,
+          #notify,
           [notification],
           {
             #id: id,

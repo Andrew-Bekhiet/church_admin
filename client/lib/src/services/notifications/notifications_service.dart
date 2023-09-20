@@ -19,14 +19,14 @@ class NotificationsService {
 
   @pragma('vm:entry-point')
   static Future<void> onBackgroundMessageReceived(RemoteMessage message) async {
-    final notification = Notification.fromRemoteMessage(message);
-
     await InitializationService.I.initialize();
+
+    final notification = Notification.fromRemoteMessage(message);
 
     await NotificationsStorage.I.writeNotification(notification);
 
     if (notification.type == NotificationType.manualPushRemote) {
-      await NotificationsService.I.show(
+      await NotificationsService.I.notify(
         notification,
         notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
@@ -56,11 +56,15 @@ class NotificationsService {
         _getAuthService = getAuthService ?? (() => AuthService.I),
         _userSettingsService = userSettingsService ?? UserSettingsService.I,
         _functionsService = functionsService ?? FunctionsService.I {
-    _onForegroundMessageSubscription =
-        onForegroundMessageStream.listen(_onForegroundMessage);
+    //
+    _onForegroundMessageSubscription = onForegroundMessageStream
+        .map(Notification.fromRemoteMessage)
+        .doOnData(_storage.writeNotification)
+        .listen(addForegroundNotification);
 
-    _onMessageOpenedAppSubscription =
-        onMessageOpenedAppStream.listen(_onMessageOpenedApp);
+    _onMessageOpenedAppSubscription = onMessageOpenedAppStream
+        .map(Notification.fromRemoteMessage)
+        .listen(addForegroundNotification);
   }
 
   final NotificationsSettingsStorage _settings;
@@ -72,34 +76,49 @@ class NotificationsService {
   final UserSettingsService _userSettingsService;
   final FunctionsService _functionsService;
 
-  final BehaviorSubject<Notification>
-      _foregroundNotificationsStreamNotificationsStreamController =
+  final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
+
+  final BehaviorSubject<Notification> _foregroundNotificationsStreamController =
       BehaviorSubject();
 
-  bool _isPaused = false;
-
-  late final StreamSubscription<RemoteMessage> _onMessageOpenedAppSubscription;
-  late final StreamSubscription<RemoteMessage> _onForegroundMessageSubscription;
-
+  late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
+  late final StreamSubscription<Notification> _onForegroundMessageSubscription;
   StreamSubscription<String?>? _onFCMTokenRefresh;
 
-  ValueStream<Notification> get foregroundNotificationsStream =>
-      _foregroundNotificationsStreamNotificationsStreamController.stream;
+  bool get isPaused => _isPausedSubject.value;
 
-  bool get isPaused => _isPaused;
+  Stream<Notification> get foregroundNotificationsStream =>
+      _foregroundNotificationsStreamController.stream.delayWhen(
+        (_) => _isPausedSubject.where((isPaused) => !isPaused),
+      );
 
-  void _onMessageOpenedApp(RemoteMessage message) {
-    _foregroundNotificationsStreamNotificationsStreamController
-        .add(Notification.fromRemoteMessage(message));
+  void addForegroundNotification(Notification notification) {
+    _foregroundNotificationsStreamController.add(notification);
   }
 
-  Future<void> _onForegroundMessage(RemoteMessage message) async {
-    final notification = Notification.fromRemoteMessage(message);
+  void pauseListeners() {
+    _isPausedSubject.add(true);
+  }
 
-    await _storage.writeNotification(notification);
+  void resumeListeners() {
+    _isPausedSubject.add(false);
+  }
 
-    _foregroundNotificationsStreamNotificationsStreamController
-        .add(notification);
+  Future<Notification?> getInitialNotification() async {
+    final remoteMessage = await _firebaseMessaging.getInitialMessage();
+
+    if (remoteMessage != null) {
+      return Notification.fromRemoteMessage(remoteMessage);
+    }
+
+    final localNotificationId =
+        (await _localNotificationsPlugin.getNotificationAppLaunchDetails())
+            ?.notificationResponse
+            ?.payload;
+
+    if (localNotificationId == null) return null;
+
+    return _storage.readNotification(localNotificationId);
   }
 
   Future<void> scheduleBirthDayNotification([
@@ -157,18 +176,24 @@ class NotificationsService {
     NotificationSetting notificationSetting =
         const NotificationSetting(11, 0, 7),
   }) async {
+    final permissionStatus = await Permission.scheduleExactAlarm.request();
+    final exactAlarmPermission = permissionStatus.isGranted;
+
     await settingsCallback(notificationSetting);
+
+    final startAt = DateTime.now().replaceTimeOfDay(
+      TimeOfDay(
+        hour: notificationSetting.hours,
+        minute: notificationSetting.minutes,
+      ),
+    );
+
     await AndroidAlarmManager.periodic(
       Duration(days: notificationSetting.intervalInDays),
       code,
       callback,
-      startAt: DateTime.now().replaceTimeOfDay(
-        TimeOfDay(
-          hour: notificationSetting.hours,
-          minute: notificationSetting.minutes,
-        ),
-      ),
-      exact: true,
+      startAt: startAt,
+      exact: exactAlarmPermission,
       allowWhileIdle: true,
       wakeup: true,
       rescheduleOnReboot: true,
@@ -182,22 +207,18 @@ class NotificationsService {
     await scheduleConfessionNotification();
   }
 
-  Future<Notification?> getInitialNotification() async {
-    final remoteMessage = await _firebaseMessaging.getInitialMessage();
-
-    if (remoteMessage != null) {
-      return Notification.fromRemoteMessage(remoteMessage);
-    } else {
-      final localNotificationId =
-          (await _localNotificationsPlugin.getNotificationAppLaunchDetails())
-              ?.notificationResponse
-              ?.payload;
-
-      if (localNotificationId != null) {
-        return _storage.readNotification(localNotificationId);
-      }
-    }
-    return null;
+  Future<void> notify(
+    Notification notification, {
+    int? id,
+    NotificationDetails? notificationDetails,
+  }) async {
+    await _localNotificationsPlugin.show(
+      id ?? notification.hashCode,
+      notification.title,
+      notification.body,
+      notificationDetails,
+      payload: notification.id,
+    );
   }
 
   Future<bool> registerFCMTokenAndListenForChanges({
@@ -215,9 +236,11 @@ class NotificationsService {
 
           await _userSettingsService.setRegisteredFCMToken(token);
 
-          _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh.listen(
-            (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
-          );
+          _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
+              .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
+              .listen(
+                (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
+              );
 
           return true;
         }
@@ -240,37 +263,8 @@ class NotificationsService {
     return false;
   }
 
-  Future<void> show(
-    Notification notification, {
-    int? id,
-    NotificationDetails? notificationDetails,
-  }) async {
-    await _localNotificationsPlugin.show(
-      id ?? notification.hashCode,
-      notification.title,
-      notification.body,
-      notificationDetails,
-      payload: notification.id,
-    );
-  }
-
-  void pauseListeners() {
-    _isPaused = true;
-
-    _onMessageOpenedAppSubscription.pause();
-    _onForegroundMessageSubscription.pause();
-    _onFCMTokenRefresh?.pause();
-  }
-
-  void resumeListeners() {
-    _isPaused = false;
-
-    _onMessageOpenedAppSubscription.resume();
-    _onForegroundMessageSubscription.resume();
-    _onFCMTokenRefresh?.resume();
-  }
-
   Future<void> dispose() async {
+    await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();
     await _onFCMTokenRefresh?.cancel();

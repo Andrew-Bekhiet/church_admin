@@ -5,14 +5,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:church_admin/church_admin.dart' as _i3;
+import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i5;
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart'
     as _i6;
 import 'package:local_auth_platform_interface/types/types.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:rxdart/rxdart.dart' as _i2;
+import 'package:rxdart/rxdart.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,9 +25,9 @@ import 'package:rxdart/rxdart.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueStream_0<T> extends _i1.SmartFake
-    implements _i2.ValueStream<T> {
-  _FakeValueStream_0(
+class _FakeMultiFactorManager_0 extends _i1.SmartFake
+    implements _i2.MultiFactorManager {
+  _FakeMultiFactorManager_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -36,9 +36,9 @@ class _FakeValueStream_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeMultiFactorManager_1 extends _i1.SmartFake
-    implements _i3.MultiFactorManager {
-  _FakeMultiFactorManager_1(
+class _FakeValueStream_1<T> extends _i1.SmartFake
+    implements _i3.ValueStream<T> {
+  _FakeValueStream_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -51,20 +51,17 @@ class _FakeMultiFactorManager_1 extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationsService extends _i1.Mock
-    implements _i3.NotificationsService {
+    implements _i2.NotificationsService {
   MockNotificationsService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.ValueStream<_i3.Notification> get foregroundNotificationsStream =>
+  _i4.Stream<_i2.Notification> get foregroundNotificationsStream =>
       (super.noSuchMethod(
         Invocation.getter(#foregroundNotificationsStream),
-        returnValue: _FakeValueStream_0<_i3.Notification>(
-          this,
-          Invocation.getter(#foregroundNotificationsStream),
-        ),
-      ) as _i2.ValueStream<_i3.Notification>);
+        returnValue: _i4.Stream<_i2.Notification>.empty(),
+      ) as _i4.Stream<_i2.Notification>);
   @override
   bool get isPaused => (super.noSuchMethod(
         Invocation.getter(#isPaused),
@@ -72,8 +69,8 @@ class MockNotificationsService extends _i1.Mock
       ) as bool);
   @override
   _i4.Future<void> scheduleBirthDayNotification(
-          [_i3.NotificationSetting? notificationSetting =
-              const _i3.NotificationSetting(
+          [_i2.NotificationSetting? notificationSetting =
+              const _i2.NotificationSetting(
             11,
             0,
             1,
@@ -88,8 +85,8 @@ class MockNotificationsService extends _i1.Mock
       ) as _i4.Future<void>);
   @override
   _i4.Future<void> scheduleMeetingNotification(
-          [_i3.NotificationSetting? notificationSetting =
-              const _i3.NotificationSetting(
+          [_i2.NotificationSetting? notificationSetting =
+              const _i2.NotificationSetting(
             11,
             0,
             7,
@@ -104,8 +101,8 @@ class MockNotificationsService extends _i1.Mock
       ) as _i4.Future<void>);
   @override
   _i4.Future<void> scheduleKodasNotification(
-          [_i3.NotificationSetting? notificationSetting =
-              const _i3.NotificationSetting(
+          [_i2.NotificationSetting? notificationSetting =
+              const _i2.NotificationSetting(
             11,
             0,
             7,
@@ -120,8 +117,8 @@ class MockNotificationsService extends _i1.Mock
       ) as _i4.Future<void>);
   @override
   _i4.Future<void> scheduleConfessionNotification(
-          [_i3.NotificationSetting? notificationSetting =
-              const _i3.NotificationSetting(
+          [_i2.NotificationSetting? notificationSetting =
+              const _i2.NotificationSetting(
             11,
             0,
             7,
@@ -144,13 +141,13 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i3.Notification?> getInitialNotification() => (super.noSuchMethod(
+  _i4.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
         Invocation.method(
           #getInitialNotification,
           [],
         ),
-        returnValue: _i4.Future<_i3.Notification?>.value(),
-      ) as _i4.Future<_i3.Notification?>);
+        returnValue: _i4.Future<_i2.Notification?>.value(),
+      ) as _i4.Future<_i2.Notification?>);
   @override
   _i4.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
       (super.noSuchMethod(
@@ -170,14 +167,23 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
   @override
-  _i4.Future<void> show(
-    _i3.Notification? notification, {
+  void addForegroundNotification(_i2.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addForegroundNotification,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<void> notify(
+    _i2.Notification? notification, {
     int? id,
     _i5.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #show,
+          #notify,
           [notification],
           {
             #id: id,
@@ -217,21 +223,21 @@ class MockNotificationsService extends _i1.Mock
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i3.AuthService {
+class MockAuthService extends _i1.Mock implements _i2.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
+  _i2.MultiFactorManager get multiFactorManager => (super.noSuchMethod(
         Invocation.getter(#multiFactorManager),
-        returnValue: _FakeMultiFactorManager_1(
+        returnValue: _FakeMultiFactorManager_0(
           this,
           Invocation.getter(#multiFactorManager),
         ),
-      ) as _i3.MultiFactorManager);
+      ) as _i2.MultiFactorManager);
   @override
-  set multiFactorManager(_i3.MultiFactorManager? _multiFactorManager) =>
+  set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
         Invocation.setter(
           #multiFactorManager,
@@ -245,21 +251,21 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         returnValue: false,
       ) as bool);
   @override
-  _i2.ValueStream<_i3.User?> get userStream => (super.noSuchMethod(
+  _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
-        returnValue: _FakeValueStream_0<_i3.User?>(
+        returnValue: _FakeValueStream_1<_i2.User?>(
           this,
           Invocation.getter(#userStream),
         ),
-      ) as _i2.ValueStream<_i3.User?>);
+      ) as _i3.ValueStream<_i2.User?>);
   @override
-  _i2.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
+  _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
-        returnValue: _FakeValueStream_0<String?>(
+        returnValue: _FakeValueStream_1<String?>(
           this,
           Invocation.getter(#idTokenStream),
         ),
-      ) as _i2.ValueStream<String?>);
+      ) as _i3.ValueStream<String?>);
   @override
   _i4.Future<bool> signInWithEmailPassword({
     required String? email,
