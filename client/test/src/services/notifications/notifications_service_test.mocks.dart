@@ -1312,6 +1312,12 @@ class MockNotificationsSettingsStorage extends _i1.Mock
 class MockNotificationsService extends _i1.Mock
     implements _i4.NotificationsService {
   @override
+  bool get isPaused => (super.noSuchMethod(
+        Invocation.getter(#isPaused),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
   _i10.Stream<_i4.Notification> get foregroundNotificationsStream =>
       (super.noSuchMethod(
         Invocation.getter(#foregroundNotificationsStream),
@@ -1319,11 +1325,40 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i10.Stream<_i4.Notification>.empty(),
       ) as _i10.Stream<_i4.Notification>);
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  void addForegroundNotification(_i4.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addForegroundNotification,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void pauseListeners() => super.noSuchMethod(
+        Invocation.method(
+          #pauseListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void resumeListeners() => super.noSuchMethod(
+        Invocation.method(
+          #resumeListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i10.Future<_i4.Notification?> getInitialNotification() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInitialNotification,
+          [],
+        ),
+        returnValue: _i10.Future<_i4.Notification?>.value(),
+        returnValueForMissingStub: _i10.Future<_i4.Notification?>.value(),
+      ) as _i10.Future<_i4.Notification?>);
   @override
   _i10.Future<void> scheduleBirthDayNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -1398,15 +1433,23 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
   @override
-  _i10.Future<_i4.Notification?> getInitialNotification() =>
+  _i10.Future<void> notify(
+    _i4.Notification? notification, {
+    int? id,
+    _i16.NotificationDetails? notificationDetails,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getInitialNotification,
-          [],
+          #notify,
+          [notification],
+          {
+            #id: id,
+            #notificationDetails: notificationDetails,
+          },
         ),
-        returnValue: _i10.Future<_i4.Notification?>.value(),
-        returnValueForMissingStub: _i10.Future<_i4.Notification?>.value(),
-      ) as _i10.Future<_i4.Notification?>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
   @override
   _i10.Future<bool> registerFCMTokenAndListenForChanges(
           {String? cachedToken}) =>
@@ -1428,49 +1471,6 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
-  @override
-  void addForegroundNotification(_i4.Notification? notification) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addForegroundNotification,
-          [notification],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i10.Future<void> notify(
-    _i4.Notification? notification, {
-    int? id,
-    _i16.NotificationDetails? notificationDetails,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #notify,
-          [notification],
-          {
-            #id: id,
-            #notificationDetails: notificationDetails,
-          },
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-  @override
-  void pauseListeners() => super.noSuchMethod(
-        Invocation.method(
-          #pauseListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void resumeListeners() => super.noSuchMethod(
-        Invocation.method(
-          #resumeListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

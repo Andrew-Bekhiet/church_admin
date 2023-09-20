@@ -57,16 +57,49 @@ class MockNotificationsService extends _i1.Mock
   }
 
   @override
+  bool get isPaused => (super.noSuchMethod(
+        Invocation.getter(#isPaused),
+        returnValue: false,
+      ) as bool);
+  @override
   _i4.Stream<_i2.Notification> get foregroundNotificationsStream =>
       (super.noSuchMethod(
         Invocation.getter(#foregroundNotificationsStream),
         returnValue: _i4.Stream<_i2.Notification>.empty(),
       ) as _i4.Stream<_i2.Notification>);
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-      ) as bool);
+  void addForegroundNotification(_i2.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addForegroundNotification,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void pauseListeners() => super.noSuchMethod(
+        Invocation.method(
+          #pauseListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void resumeListeners() => super.noSuchMethod(
+        Invocation.method(
+          #resumeListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
+        Invocation.method(
+          #getInitialNotification,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Notification?>.value(),
+      ) as _i4.Future<_i2.Notification?>);
   @override
   _i4.Future<void> scheduleBirthDayNotification(
           [_i2.NotificationSetting? notificationSetting =
@@ -141,41 +174,6 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
-        Invocation.method(
-          #getInitialNotification,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.Notification?>.value(),
-      ) as _i4.Future<_i2.Notification?>);
-  @override
-  _i4.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMTokenAndListenForChanges,
-          [],
-          {#cachedToken: cachedToken},
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-  @override
-  _i4.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
-        Invocation.method(
-          #requestNotificationsPermission,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-  @override
-  void addForegroundNotification(_i2.Notification? notification) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addForegroundNotification,
-          [notification],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   _i4.Future<void> notify(
     _i2.Notification? notification, {
     int? id,
@@ -194,21 +192,23 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  void pauseListeners() => super.noSuchMethod(
+  _i4.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #pauseListeners,
+          #registerFCMTokenAndListenForChanges,
           [],
+          {#cachedToken: cachedToken},
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  void resumeListeners() => super.noSuchMethod(
+  _i4.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
         Invocation.method(
-          #resumeListeners,
+          #requestNotificationsPermission,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
