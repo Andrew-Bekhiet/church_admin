@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         applicationId "com.AndroidQuartz.church_admin"
-        targetSdkVersion 31
+        targetSdkVersion 33
         minSdkVersion 21
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
