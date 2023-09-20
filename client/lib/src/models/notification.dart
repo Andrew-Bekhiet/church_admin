@@ -16,10 +16,11 @@ class Notification with _$Notification {
     @HiveField(2) required String body,
     @HiveField(3) required DateTime sentTime,
     @HiveField(4) required String senderUID,
-    @HiveField(5, defaultValue: NotificationType.remote)
+    @HiveField(5) String? photoURL,
+    @HiveField(6, defaultValue: NotificationType.remote)
     @Default(NotificationType.remote)
-        NotificationType type,
-    @HiveField(6) Json? additionalData,
+    NotificationType type,
+    @HiveField(7) Json? additionalData,
   }) = _Notification;
 
   factory Notification.fromJson(Map<String, Object?> json) =>
@@ -37,8 +38,17 @@ class Notification with _$Notification {
         title: message.notification?.title ?? message.data['title'],
         sentTime: message.sentTime ?? DateTime.now(),
         senderUID: message.data['senderUID']!,
+        photoURL: message.data['photoURL'],
         additionalData: message.data,
       );
 }
 
-enum NotificationType { local, remote, manualPushRemote }
+@HiveType(typeId: 1)
+enum NotificationType {
+  @HiveField(0)
+  local,
+  @HiveField(1, defaultValue: true)
+  remote,
+  @HiveField(2)
+  manualPushRemote
+}

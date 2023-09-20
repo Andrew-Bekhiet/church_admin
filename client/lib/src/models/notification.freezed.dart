@@ -30,9 +30,11 @@ mixin _$Notification {
   DateTime get sentTime => throw _privateConstructorUsedError;
   @HiveField(4)
   String get senderUID => throw _privateConstructorUsedError;
-  @HiveField(5, defaultValue: NotificationType.remote)
+  @HiveField(5)
+  String? get photoURL => throw _privateConstructorUsedError;
+  @HiveField(6, defaultValue: NotificationType.remote)
   NotificationType get type => throw _privateConstructorUsedError;
-  @HiveField(6)
+  @HiveField(7)
   Map<String, dynamic>? get additionalData =>
       throw _privateConstructorUsedError;
 
@@ -54,9 +56,10 @@ abstract class $NotificationCopyWith<$Res> {
       @HiveField(2) String body,
       @HiveField(3) DateTime sentTime,
       @HiveField(4) String senderUID,
-      @HiveField(5, defaultValue: NotificationType.remote)
+      @HiveField(5) String? photoURL,
+      @HiveField(6, defaultValue: NotificationType.remote)
       NotificationType type,
-      @HiveField(6) Map<String, dynamic>? additionalData});
+      @HiveField(7) Map<String, dynamic>? additionalData});
 }
 
 /// @nodoc
@@ -77,6 +80,7 @@ class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
     Object? body = null,
     Object? sentTime = null,
     Object? senderUID = null,
+    Object? photoURL = freezed,
     Object? type = null,
     Object? additionalData = freezed,
   }) {
@@ -101,6 +105,10 @@ class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
           ? _value.senderUID
           : senderUID // ignore: cast_nullable_to_non_nullable
               as String,
+      photoURL: freezed == photoURL
+          ? _value.photoURL
+          : photoURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -127,9 +135,10 @@ abstract class _$$_NotificationCopyWith<$Res>
       @HiveField(2) String body,
       @HiveField(3) DateTime sentTime,
       @HiveField(4) String senderUID,
-      @HiveField(5, defaultValue: NotificationType.remote)
+      @HiveField(5) String? photoURL,
+      @HiveField(6, defaultValue: NotificationType.remote)
       NotificationType type,
-      @HiveField(6) Map<String, dynamic>? additionalData});
+      @HiveField(7) Map<String, dynamic>? additionalData});
 }
 
 /// @nodoc
@@ -148,6 +157,7 @@ class __$$_NotificationCopyWithImpl<$Res>
     Object? body = null,
     Object? sentTime = null,
     Object? senderUID = null,
+    Object? photoURL = freezed,
     Object? type = null,
     Object? additionalData = freezed,
   }) {
@@ -172,6 +182,10 @@ class __$$_NotificationCopyWithImpl<$Res>
           ? _value.senderUID
           : senderUID // ignore: cast_nullable_to_non_nullable
               as String,
+      photoURL: freezed == photoURL
+          ? _value.photoURL
+          : photoURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -193,9 +207,10 @@ class _$_Notification implements _Notification {
       @HiveField(2) required this.body,
       @HiveField(3) required this.sentTime,
       @HiveField(4) required this.senderUID,
-      @HiveField(5, defaultValue: NotificationType.remote)
+      @HiveField(5) this.photoURL,
+      @HiveField(6, defaultValue: NotificationType.remote)
       this.type = NotificationType.remote,
-      @HiveField(6) final Map<String, dynamic>? additionalData})
+      @HiveField(7) final Map<String, dynamic>? additionalData})
       : _additionalData = additionalData;
 
   factory _$_Notification.fromJson(Map<String, dynamic> json) =>
@@ -217,12 +232,15 @@ class _$_Notification implements _Notification {
   @HiveField(4)
   final String senderUID;
   @override
+  @HiveField(5)
+  final String? photoURL;
+  @override
   @JsonKey()
-  @HiveField(5, defaultValue: NotificationType.remote)
+  @HiveField(6, defaultValue: NotificationType.remote)
   final NotificationType type;
   final Map<String, dynamic>? _additionalData;
   @override
-  @HiveField(6)
+  @HiveField(7)
   Map<String, dynamic>? get additionalData {
     final value = _additionalData;
     if (value == null) return null;
@@ -233,7 +251,7 @@ class _$_Notification implements _Notification {
 
   @override
   String toString() {
-    return 'Notification(id: $id, title: $title, body: $body, sentTime: $sentTime, senderUID: $senderUID, type: $type, additionalData: $additionalData)';
+    return 'Notification(id: $id, title: $title, body: $body, sentTime: $sentTime, senderUID: $senderUID, photoURL: $photoURL, type: $type, additionalData: $additionalData)';
   }
 
   @override
@@ -248,6 +266,8 @@ class _$_Notification implements _Notification {
                 other.sentTime == sentTime) &&
             (identical(other.senderUID, senderUID) ||
                 other.senderUID == senderUID) &&
+            (identical(other.photoURL, photoURL) ||
+                other.photoURL == photoURL) &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
                 .equals(other._additionalData, _additionalData));
@@ -255,8 +275,16 @@ class _$_Notification implements _Notification {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, body, sentTime,
-      senderUID, type, const DeepCollectionEquality().hash(_additionalData));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      body,
+      sentTime,
+      senderUID,
+      photoURL,
+      type,
+      const DeepCollectionEquality().hash(_additionalData));
 
   @JsonKey(ignore: true)
   @override
@@ -279,9 +307,10 @@ abstract class _Notification implements Notification {
           @HiveField(2) required final String body,
           @HiveField(3) required final DateTime sentTime,
           @HiveField(4) required final String senderUID,
-          @HiveField(5, defaultValue: NotificationType.remote)
+          @HiveField(5) final String? photoURL,
+          @HiveField(6, defaultValue: NotificationType.remote)
           final NotificationType type,
-          @HiveField(6) final Map<String, dynamic>? additionalData}) =
+          @HiveField(7) final Map<String, dynamic>? additionalData}) =
       _$_Notification;
 
   factory _Notification.fromJson(Map<String, dynamic> json) =
@@ -303,10 +332,13 @@ abstract class _Notification implements Notification {
   @HiveField(4)
   String get senderUID;
   @override
-  @HiveField(5, defaultValue: NotificationType.remote)
+  @HiveField(5)
+  String? get photoURL;
+  @override
+  @HiveField(6, defaultValue: NotificationType.remote)
   NotificationType get type;
   @override
-  @HiveField(6)
+  @HiveField(7)
   Map<String, dynamic>? get additionalData;
   @override
   @JsonKey(ignore: true)

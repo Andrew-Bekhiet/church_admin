@@ -22,17 +22,18 @@ class NotificationAdapter extends TypeAdapter<Notification> {
       body: fields[2] as String,
       sentTime: fields[3] as DateTime,
       senderUID: fields[4] as String,
-      type: fields[5] == null
+      photoURL: fields[5] as String?,
+      type: fields[6] == null
           ? NotificationType.remote
-          : fields[5] as NotificationType,
-      additionalData: (fields[6] as Map?)?.cast<String, dynamic>(),
+          : fields[6] as NotificationType,
+      additionalData: (fields[7] as Map?)?.cast<String, dynamic>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Notification obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,8 +45,10 @@ class NotificationAdapter extends TypeAdapter<Notification> {
       ..writeByte(4)
       ..write(obj.senderUID)
       ..writeByte(5)
-      ..write(obj.type)
+      ..write(obj.photoURL)
       ..writeByte(6)
+      ..write(obj.type)
+      ..writeByte(7)
       ..write(obj.additionalData);
   }
 
@@ -60,6 +63,50 @@ class NotificationAdapter extends TypeAdapter<Notification> {
           typeId == other.typeId;
 }
 
+class NotificationTypeAdapter extends TypeAdapter<NotificationType> {
+  @override
+  final int typeId = 1;
+
+  @override
+  NotificationType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return NotificationType.local;
+      case 1:
+        return NotificationType.remote;
+      case 2:
+        return NotificationType.manualPushRemote;
+      default:
+        return NotificationType.remote;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, NotificationType obj) {
+    switch (obj) {
+      case NotificationType.local:
+        writer.writeByte(0);
+        break;
+      case NotificationType.remote:
+        writer.writeByte(1);
+        break;
+      case NotificationType.manualPushRemote:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NotificationTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -70,6 +117,7 @@ _$_Notification _$$_NotificationFromJson(Map json) => _$_Notification(
       body: json['body'] as String,
       sentTime: DateTime.parse(json['sentTime'] as String),
       senderUID: json['senderUID'] as String,
+      photoURL: json['photoURL'] as String?,
       type: $enumDecodeNullable(_$NotificationTypeEnumMap, json['type']) ??
           NotificationType.remote,
       additionalData: (json['additionalData'] as Map?)?.map(
@@ -84,6 +132,7 @@ Map<String, dynamic> _$$_NotificationToJson(_$_Notification instance) =>
       'body': instance.body,
       'sentTime': instance.sentTime.toIso8601String(),
       'senderUID': instance.senderUID,
+      'photoURL': instance.photoURL,
       'type': _$NotificationTypeEnumMap[instance.type]!,
       'additionalData': instance.additionalData,
     };
