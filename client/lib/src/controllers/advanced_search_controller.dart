@@ -9,8 +9,8 @@ class AdvancedSearchController {
       conditions: [
         Condition(type: Person, field: 'name', operator: Operator.ilike),
       ],
-      orderBy: [
-        const OrderBy(field: 'name'),
+      orderBy: const [
+        OrderBy(field: 'name'),
       ],
     ),
   );
