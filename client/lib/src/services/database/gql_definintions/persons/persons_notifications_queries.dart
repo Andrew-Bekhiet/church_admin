@@ -139,7 +139,13 @@ class PersonsNotificationsQueries {
         Input_PersonsBoolExp(
           birthday: Input_StringComparisonExp(
             //2022-06-25T12:30:00.440Z => 06-25
-            $_eq: date.toIso8601String().split('-').sublist(1, 3).join('-'),
+            $_eq: date
+                .toIso8601String()
+                .split('-')
+                .sublist(1, 3)
+                .join('-')
+                .split('T')
+                .first,
           ),
         ),
       ],
