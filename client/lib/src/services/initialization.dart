@@ -1,5 +1,7 @@
+export 'initialization/android_alarm_manager_init.dart';
 export 'initialization/device_info_init.dart';
 export 'initialization/firebase_init.dart';
+export 'initialization/flutter_local_notifications_init.dart';
 export 'initialization/fmtc_init.dart';
 export 'initialization/hive_init.dart';
 export 'initialization/initialization_service.dart';

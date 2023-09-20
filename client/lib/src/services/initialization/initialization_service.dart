@@ -20,6 +20,8 @@ class InitializationService {
         FirebaseInit(),
         FMTCInit(),
         IntlLocaleMessagesInit(),
+        AndroidAlarmManagerPluginInit(),
+        FlutterLocalNotificationsPluginInit(),
       };
 
   InitializationService();

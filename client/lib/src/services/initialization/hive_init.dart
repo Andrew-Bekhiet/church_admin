@@ -23,7 +23,10 @@ class HiveInit implements Initializer {
 
   @visibleForTesting
   void registerAdapters(HiveInterface hiveInstance) {
-    hiveInstance.registerAdapter(NotificationSettingAdapter());
+    hiveInstance
+      ..registerAdapter(NotificationSettingAdapter())
+      ..registerAdapter(NotificationTypeAdapter())
+      ..registerAdapter(NotificationAdapter());
   }
 
   @visibleForTesting

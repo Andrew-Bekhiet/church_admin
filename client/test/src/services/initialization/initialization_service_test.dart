@@ -26,6 +26,8 @@ void main() {
             FirebaseInit,
             FMTCInit,
             IntlLocaleMessagesInit,
+            AndroidAlarmManagerPluginInit,
+            FlutterLocalNotificationsPluginInit,
           };
 
           expect(
