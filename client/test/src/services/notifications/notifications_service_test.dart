@@ -298,7 +298,7 @@ void main() {
           );
 
           test(
-            'foregroundNotificationsStream',
+            'onNotificationTapStream',
             () async {
               final onMessageOpenedAppStream =
                   StreamController<RemoteMessage>();
@@ -348,8 +348,8 @@ void main() {
               ];
 
               expect(
-                unit.foregroundNotificationsStream,
-                emitsInOrder(expectedNotifications),
+                unit.onNotificationTapStream,
+                emits(expectedNotifications[1]),
               );
 
               onForegroundMessageStream.add(
@@ -389,6 +389,34 @@ void main() {
                     title: 'title',
                   ),
                 ),
+              );
+
+              await Future.delayed(Duration.zero);
+
+              final localNotificationsPlugin = globalProviderContainer
+                  .read(localNotificationsPluginProvider);
+
+              verifyInOrder(
+                [
+                  localNotificationsPlugin.show(
+                    expectedNotifications[0].hashCode,
+                    expectedNotifications[0].title,
+                    expectedNotifications[0].body,
+                    await NotificationsService.notificationsDetailsFor(
+                      expectedNotifications[0],
+                    ),
+                    payload: expectedNotifications[0].id,
+                  ),
+                  localNotificationsPlugin.show(
+                    expectedNotifications[2].hashCode,
+                    expectedNotifications[2].title,
+                    expectedNotifications[2].body,
+                    await NotificationsService.notificationsDetailsFor(
+                      expectedNotifications[2],
+                    ),
+                    payload: expectedNotifications[2].id,
+                  ),
+                ],
               );
             },
           );
@@ -455,7 +483,7 @@ void main() {
               final expectedNotification =
                   Notification.fromRemoteMessage(remoteMessage);
 
-              await NotificationsService.onBackgroundMessageReceived(
+              await NotificationsServiceCallbacks.onBackgroundMessageReceived(
                 remoteMessage,
               );
 
@@ -464,12 +492,9 @@ void main() {
                 NotificationsStorage.I.writeNotification(expectedNotification),
                 NotificationsService.I.notify(
                   expectedNotification,
-                  notificationDetails: const NotificationDetails(
-                    android: AndroidNotificationDetails(
-                      'Others',
-                      'Others',
-                      category: AndroidNotificationCategory.social,
-                    ),
+                  notificationDetails:
+                      await NotificationsService.notificationsDetailsFor(
+                    expectedNotification,
                   ),
                 ),
               ]);
@@ -492,7 +517,7 @@ void main() {
               final expectedNotification =
                   Notification.fromRemoteMessage(remoteMessage);
 
-              await NotificationsService.onBackgroundMessageReceived(
+              await NotificationsServiceCallbacks.onBackgroundMessageReceived(
                 remoteMessage,
               );
 

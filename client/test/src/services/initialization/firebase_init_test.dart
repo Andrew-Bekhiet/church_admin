@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,11 +13,12 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'firebase_init_test.mocks.dart';
 
 @GenerateNiceMocks([
+  MockSpec<HiveInterface>(),
   MockSpec<Box>(),
   MockSpec<FirebasePlatform>(as: #FirebasePlatform_),
-  MockSpec<HiveInterface>(),
   MockSpec<FirebaseAppPlatform>(as: #MockFirebaseAppPlatform_),
   MockSpec<FirebaseAppCheckPlatform>(as: #FirebaseAppCheckPlatform_),
+  MockSpec<FirebaseMessagingPlatform>(as: #FirebaseMessagingPlatform_),
 ])
 void main() {
   setUp(_setUp);
@@ -39,6 +41,8 @@ void main() {
           androidProvider: AndroidProvider.playIntegrity,
           appleProvider: AppleProvider.deviceCheck,
         ),
+        FirebaseMessagingPlatform.onBackgroundMessage =
+            NotificationsServiceCallbacks.onBackgroundMessageReceived,
       ]);
     },
   );
@@ -47,6 +51,7 @@ void main() {
 void _setUp() {
   _setUpMockFirebaseCore();
   _setUpMockFirebaseAppCheck();
+  _setUpMockFirebaseMessaging();
 
   initGlobalProviderContainer([_setUpMockHive()]);
 }
@@ -81,6 +86,18 @@ void _setUpMockFirebaseAppCheck() {
   FirebaseAppCheckPlatform.instance = mock;
 }
 
+void _setUpMockFirebaseMessaging() {
+  final mock = MockFirebaseMessagingPlatform();
+  when(
+    mock.registerBackgroundMessageHandler(any),
+  ).thenAnswer((_) async {});
+
+  when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
+  when(mock.setInitialValues()).thenReturn(mock);
+
+  FirebaseMessagingPlatform.instance = mock;
+}
+
 Override _setUpMockHive() {
   final mockHiveInterface = MockHiveInterface();
 
@@ -102,4 +119,7 @@ class MockFirebaseAppPlatform extends MockFirebaseAppPlatform_
     with MockPlatformInterfaceMixin {}
 
 class MockFirebaseAppCheckPlatform extends FirebaseAppCheckPlatform_
+    with MockPlatformInterfaceMixin {}
+
+class MockFirebaseMessagingPlatform extends FirebaseMessagingPlatform_
     with MockPlatformInterfaceMixin {}

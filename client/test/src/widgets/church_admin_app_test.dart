@@ -22,8 +22,9 @@ import 'church_admin_app_test.mocks.dart';
   MockSpec<AreasDAO>(),
   MockSpec<ServicesDAO>(),
   MockSpec<LocalAuthService>(),
+  MockSpec<ConnectivityService>(),
+  MockSpec<NotificationsService>(),
 ])
-@GenerateNiceMocks([MockSpec<ConnectivityService>()])
 void main() {
   final FirstScreenVariant firstScreenVariant = FirstScreenVariant();
 
@@ -119,6 +120,7 @@ List<Override> _setUp() {
     _setUpThemingService(FakeUserSettings()),
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
+    _setUpNotificationsService(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -133,6 +135,14 @@ Override _setUpConnectivityService() {
       .thenAnswer((_) => BehaviorSubject.seeded(false));
 
   return connectivityServiceProvider.overrideWithValue(mock);
+}
+
+Override _setUpNotificationsService() {
+  final mock = MockNotificationsService();
+
+  when(mock.onNotificationTapStream).thenAnswer((_) => const Stream.empty());
+
+  return notificationsServiceProvider.overrideWithValue(mock);
 }
 
 Override _setUpDatabaseRepo() {

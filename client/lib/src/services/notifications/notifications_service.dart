@@ -17,26 +17,61 @@ class NotificationsService {
   static const String localNotificationSenderUID =
       'LOCAL_NOTIFICATION_SENDER_UID';
 
-  @pragma('vm:entry-point')
-  static Future<void> onBackgroundMessageReceived(RemoteMessage message) async {
-    await InitializationService.I.initialize();
+  static const NotificationDetails defaultRemoteNotificationsDetails =
+      NotificationDetails(
+    android: AndroidNotificationDetails(
+      'Others',
+      'أخرى',
+      importance: Importance.max,
+      priority: Priority.high,
+    ),
+    iOS: DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      presentList: true,
+      interruptionLevel: InterruptionLevel.active,
+    ),
+  );
 
-    final notification = Notification.fromRemoteMessage(message);
+  static Future<NotificationDetails> notificationsDetailsFor(
+    Notification notification,
+  ) async {
+    if (notification.photoURL != null) {
+      final photo = await globalProviderContainer
+          .read(baseCacheManagerProvider)
+          .getSingleFile(
+            notification.photoURL!,
+          );
 
-    await NotificationsStorage.I.writeNotification(notification);
+      final defaultAndroidNotificationDetails =
+          defaultRemoteNotificationsDetails.android!;
+      final defaultIOSNotificationDetails =
+          defaultRemoteNotificationsDetails.iOS!;
 
-    if (notification.type == NotificationType.manualPushRemote) {
-      await NotificationsService.I.notify(
-        notification,
-        notificationDetails: const NotificationDetails(
-          android: AndroidNotificationDetails(
-            'Others',
-            'Others',
-            category: AndroidNotificationCategory.social,
-          ),
+      return NotificationDetails(
+        android: AndroidNotificationDetails(
+          defaultAndroidNotificationDetails.channelId,
+          defaultAndroidNotificationDetails.channelName,
+          importance: defaultAndroidNotificationDetails.importance,
+          priority: defaultAndroidNotificationDetails.priority,
+          styleInformation:
+              BigPictureStyleInformation(FilePathAndroidBitmap(photo.path)),
+        ),
+        iOS: DarwinNotificationDetails(
+          presentAlert: defaultIOSNotificationDetails.presentAlert,
+          presentBadge: defaultIOSNotificationDetails.presentBadge,
+          presentSound: defaultIOSNotificationDetails.presentSound,
+          presentList: defaultIOSNotificationDetails.presentList,
+          interruptionLevel: defaultIOSNotificationDetails.interruptionLevel,
+          attachments: [
+            DarwinNotificationAttachment(photo.path),
+          ],
         ),
       );
     }
+
+    return defaultRemoteNotificationsDetails;
   }
 
   NotificationsService({
@@ -59,12 +94,18 @@ class NotificationsService {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
-        .doOnData(_storage.writeNotification)
-        .listen(addForegroundNotification);
+        .listen(_onForegroundMessage);
 
     _onMessageOpenedAppSubscription = onMessageOpenedAppStream
         .map(Notification.fromRemoteMessage)
-        .listen(addForegroundNotification);
+        .listen(addForegroundNotificationTap);
+  }
+
+  Future<void> _onForegroundMessage(Notification notification) async {
+    await notify(
+      notification,
+      notificationDetails: await notificationsDetailsFor(notification),
+    );
   }
 
   final NotificationsSettingsStorage _settings;
@@ -87,12 +128,12 @@ class NotificationsService {
 
   bool get isPaused => _isPausedSubject.value;
 
-  Stream<Notification> get foregroundNotificationsStream =>
+  Stream<Notification> get onNotificationTapStream =>
       _foregroundNotificationsStreamController.stream.delayWhen(
         (_) => _isPausedSubject.where((isPaused) => !isPaused),
       );
 
-  void addForegroundNotification(Notification notification) {
+  void addForegroundNotificationTap(Notification notification) {
     _foregroundNotificationsStreamController.add(notification);
   }
 

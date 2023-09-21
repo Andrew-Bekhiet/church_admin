@@ -550,17 +550,17 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i8.Stream<_i2.Notification> get foregroundNotificationsStream =>
+  _i8.Stream<_i2.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
-        Invocation.getter(#foregroundNotificationsStream),
+        Invocation.getter(#onNotificationTapStream),
         returnValue: _i8.Stream<_i2.Notification>.empty(),
         returnValueForMissingStub: _i8.Stream<_i2.Notification>.empty(),
       ) as _i8.Stream<_i2.Notification>);
   @override
-  void addForegroundNotification(_i2.Notification? notification) =>
+  void addForegroundNotificationTap(_i2.Notification? notification) =>
       super.noSuchMethod(
         Invocation.method(
-          #addForegroundNotification,
+          #addForegroundNotificationTap,
           [notification],
         ),
         returnValueForMissingStub: null,

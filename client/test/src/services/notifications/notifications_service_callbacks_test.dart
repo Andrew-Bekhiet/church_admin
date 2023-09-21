@@ -52,7 +52,7 @@ void main() {
 
           await tester.pumpAndSettle();
 
-          await NotificationsServiceCallbacks.onDidReceiveNotificationResponse(
+          await NotificationsServiceCallbacks.onForegroundNotificationTap(
             NotificationResponse(
               notificationResponseType:
                   NotificationResponseType.selectedNotification,
@@ -63,7 +63,7 @@ void main() {
           verifyInOrder([
             NotificationsStorage.I.readNotification(expectedNotification.id),
             NotificationsService.I
-                .addForegroundNotification(expectedNotification),
+                .addForegroundNotificationTap(expectedNotification),
           ]);
         },
       );

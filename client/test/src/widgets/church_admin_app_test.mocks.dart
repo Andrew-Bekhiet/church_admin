@@ -16,6 +16,8 @@ import 'package:church_admin/src/services/database/gql_definintions/persons/pers
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i6;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:flutter/material.dart' as _i2;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i5;
 import 'package:uuid/uuid.dart' as _i10;
@@ -2454,6 +2456,180 @@ class MockConnectivityService extends _i1.Mock
   _i9.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
           #isConnected,
+          [],
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
+  @override
+  _i9.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+}
+
+/// A class which mocks [NotificationsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNotificationsService extends _i1.Mock
+    implements _i4.NotificationsService {
+  @override
+  bool get isPaused => (super.noSuchMethod(
+        Invocation.getter(#isPaused),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i9.Stream<_i4.Notification> get onNotificationTapStream =>
+      (super.noSuchMethod(
+        Invocation.getter(#onNotificationTapStream),
+        returnValue: _i9.Stream<_i4.Notification>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.Notification>.empty(),
+      ) as _i9.Stream<_i4.Notification>);
+  @override
+  void addForegroundNotificationTap(_i4.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addForegroundNotificationTap,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void pauseListeners() => super.noSuchMethod(
+        Invocation.method(
+          #pauseListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void resumeListeners() => super.noSuchMethod(
+        Invocation.method(
+          #resumeListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i9.Future<_i4.Notification?> getInitialNotification() => (super.noSuchMethod(
+        Invocation.method(
+          #getInitialNotification,
+          [],
+        ),
+        returnValue: _i9.Future<_i4.Notification?>.value(),
+        returnValueForMissingStub: _i9.Future<_i4.Notification?>.value(),
+      ) as _i9.Future<_i4.Notification?>);
+  @override
+  _i9.Future<void> scheduleBirthDayNotification(
+          [_i4.NotificationSetting? notificationSetting =
+              const _i4.NotificationSetting(
+            11,
+            0,
+            1,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleBirthDayNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduleMeetingNotification(
+          [_i4.NotificationSetting? notificationSetting =
+              const _i4.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleMeetingNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduleKodasNotification(
+          [_i4.NotificationSetting? notificationSetting =
+              const _i4.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleKodasNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduleConfessionNotification(
+          [_i4.NotificationSetting? notificationSetting =
+              const _i4.NotificationSetting(
+            11,
+            0,
+            7,
+          )]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #scheduleConfessionNotification,
+          [notificationSetting],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
+        Invocation.method(
+          #scheduleDefaultNotifications,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> notify(
+    _i4.Notification? notification, {
+    int? id,
+    _i13.NotificationDetails? notificationDetails,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #notify,
+          [notification],
+          {
+            #id: id,
+            #notificationDetails: notificationDetails,
+          },
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerFCMTokenAndListenForChanges,
+          [],
+          {#cachedToken: cachedToken},
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+        returnValueForMissingStub: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
+  @override
+  _i9.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #requestNotificationsPermission,
           [],
         ),
         returnValue: _i9.Future<bool>.value(false),

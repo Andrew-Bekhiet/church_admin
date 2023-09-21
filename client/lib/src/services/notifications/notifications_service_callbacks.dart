@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/main.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
@@ -10,12 +11,29 @@ import 'notifications_storage.dart';
 
 class NotificationsServiceCallbacks {
   @pragma('vm:entry-point')
-  static void onDidReceiveBackgroundNotificationResponse(_) {
+  static Future<void> onBackgroundMessageReceived(RemoteMessage message) async {
+    await InitializationService.I.initialize();
+
+    final notification = Notification.fromRemoteMessage(message);
+
+    await NotificationsStorage.I.writeNotification(notification);
+
+    if (notification.type == NotificationType.manualPushRemote) {
+      await NotificationsService.I.notify(
+        notification,
+        notificationDetails:
+            await NotificationsService.notificationsDetailsFor(notification),
+      );
+    }
+  }
+
+  @pragma('vm:entry-point')
+  static void onBackgroundNotificationTap(_) {
     main();
   }
 
   @pragma('vm:entry-point')
-  static Future<void> onDidReceiveNotificationResponse(
+  static Future<void> onForegroundNotificationTap(
     NotificationResponse response,
   ) async {
     final notificationId = response.payload;
@@ -27,7 +45,7 @@ class NotificationsServiceCallbacks {
 
     if (notification == null) return;
 
-    NotificationsService.I.addForegroundNotification(notification);
+    NotificationsService.I.addForegroundNotificationTap(notification);
   }
 
   @visibleForTesting

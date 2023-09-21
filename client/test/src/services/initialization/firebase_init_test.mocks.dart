@@ -3,17 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:typed_data' as _i9;
+import 'dart:async' as _i7;
+import 'dart:typed_data' as _i10;
 
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart'
     as _i5;
 import 'package:firebase_core/firebase_core.dart' as _i4;
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart'
-    as _i2;
-import 'package:hive/hive.dart' as _i3;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i8;
-import 'package:hive/src/box/default_key_comparator.dart' as _i7;
+    as _i3;
+import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart'
+    as _i6;
+import 'package:hive/hive.dart' as _i2;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i9;
+import 'package:hive/src/box/default_key_comparator.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -27,9 +29,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeFirebaseAppPlatform_0 extends _i1.SmartFake
-    implements _i2.FirebaseAppPlatform {
-  _FakeFirebaseAppPlatform_0(
+class _FakeBox_0<E1> extends _i1.SmartFake implements _i2.Box<E1> {
+  _FakeBox_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -38,8 +39,8 @@ class _FakeFirebaseAppPlatform_0 extends _i1.SmartFake
         );
 }
 
-class _FakeBox_1<E1> extends _i1.SmartFake implements _i3.Box<E1> {
-  _FakeBox_1(
+class _FakeLazyBox_1<E1> extends _i1.SmartFake implements _i2.LazyBox<E1> {
+  _FakeLazyBox_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -48,8 +49,9 @@ class _FakeBox_1<E1> extends _i1.SmartFake implements _i3.Box<E1> {
         );
 }
 
-class _FakeLazyBox_2<E1> extends _i1.SmartFake implements _i3.LazyBox<E1> {
-  _FakeLazyBox_2(
+class _FakeFirebaseAppPlatform_2 extends _i1.SmartFake
+    implements _i3.FirebaseAppPlatform {
+  _FakeFirebaseAppPlatform_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -90,10 +92,321 @@ class _FakeFirebaseAppCheckPlatform_5 extends _i1.SmartFake
         );
 }
 
+class _FakeFirebaseMessagingPlatform_6 extends _i1.SmartFake
+    implements _i6.FirebaseMessagingPlatform {
+  _FakeFirebaseMessagingPlatform_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNotificationSettings_7 extends _i1.SmartFake
+    implements _i6.NotificationSettings {
+  _FakeNotificationSettings_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [HiveInterface].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
+  @override
+  void init(
+    String? path, {
+    _i2.HiveStorageBackendPreference? backendPreference =
+        _i2.HiveStorageBackendPreference.native,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [path],
+          {#backendPreference: backendPreference},
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i7.Future<_i2.Box<E>> openBox<E>(
+    String? name, {
+    _i2.HiveCipher? encryptionCipher,
+    _i2.KeyComparator? keyComparator = _i8.defaultKeyComparator,
+    _i2.CompactionStrategy? compactionStrategy = _i9.defaultCompactionStrategy,
+    bool? crashRecovery = true,
+    String? path,
+    _i10.Uint8List? bytes,
+    String? collection,
+    List<int>? encryptionKey,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openBox,
+          [name],
+          {
+            #encryptionCipher: encryptionCipher,
+            #keyComparator: keyComparator,
+            #compactionStrategy: compactionStrategy,
+            #crashRecovery: crashRecovery,
+            #path: path,
+            #bytes: bytes,
+            #collection: collection,
+            #encryptionKey: encryptionKey,
+          },
+        ),
+        returnValue: _i7.Future<_i2.Box<E>>.value(_FakeBox_0<E>(
+          this,
+          Invocation.method(
+            #openBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #bytes: bytes,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i2.Box<E>>.value(_FakeBox_0<E>(
+          this,
+          Invocation.method(
+            #openBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #bytes: bytes,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+      ) as _i7.Future<_i2.Box<E>>);
+  @override
+  _i7.Future<_i2.LazyBox<E>> openLazyBox<E>(
+    String? name, {
+    _i2.HiveCipher? encryptionCipher,
+    _i2.KeyComparator? keyComparator = _i8.defaultKeyComparator,
+    _i2.CompactionStrategy? compactionStrategy = _i9.defaultCompactionStrategy,
+    bool? crashRecovery = true,
+    String? path,
+    String? collection,
+    List<int>? encryptionKey,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openLazyBox,
+          [name],
+          {
+            #encryptionCipher: encryptionCipher,
+            #keyComparator: keyComparator,
+            #compactionStrategy: compactionStrategy,
+            #crashRecovery: crashRecovery,
+            #path: path,
+            #collection: collection,
+            #encryptionKey: encryptionKey,
+          },
+        ),
+        returnValue: _i7.Future<_i2.LazyBox<E>>.value(_FakeLazyBox_1<E>(
+          this,
+          Invocation.method(
+            #openLazyBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i2.LazyBox<E>>.value(_FakeLazyBox_1<E>(
+          this,
+          Invocation.method(
+            #openLazyBox,
+            [name],
+            {
+              #encryptionCipher: encryptionCipher,
+              #keyComparator: keyComparator,
+              #compactionStrategy: compactionStrategy,
+              #crashRecovery: crashRecovery,
+              #path: path,
+              #collection: collection,
+              #encryptionKey: encryptionKey,
+            },
+          ),
+        )),
+      ) as _i7.Future<_i2.LazyBox<E>>);
+  @override
+  _i2.Box<E> box<E>(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #box,
+          [name],
+        ),
+        returnValue: _FakeBox_0<E>(
+          this,
+          Invocation.method(
+            #box,
+            [name],
+          ),
+        ),
+        returnValueForMissingStub: _FakeBox_0<E>(
+          this,
+          Invocation.method(
+            #box,
+            [name],
+          ),
+        ),
+      ) as _i2.Box<E>);
+  @override
+  _i2.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #lazyBox,
+          [name],
+        ),
+        returnValue: _FakeLazyBox_1<E>(
+          this,
+          Invocation.method(
+            #lazyBox,
+            [name],
+          ),
+        ),
+        returnValueForMissingStub: _FakeLazyBox_1<E>(
+          this,
+          Invocation.method(
+            #lazyBox,
+            [name],
+          ),
+        ),
+      ) as _i2.LazyBox<E>);
+  @override
+  bool isBoxOpen(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #isBoxOpen,
+          [name],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i7.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> deleteBoxFromDisk(
+    String? name, {
+    String? path,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteBoxFromDisk,
+          [name],
+          {#path: path},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> deleteFromDisk() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteFromDisk,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  List<int> generateSecureKey() => (super.noSuchMethod(
+        Invocation.method(
+          #generateSecureKey,
+          [],
+        ),
+        returnValue: <int>[],
+        returnValueForMissingStub: <int>[],
+      ) as List<int>);
+  @override
+  _i7.Future<bool> boxExists(
+    String? name, {
+    String? path,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #boxExists,
+          [name],
+          {#path: path},
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+  @override
+  void resetAdapters() => super.noSuchMethod(
+        Invocation.method(
+          #resetAdapters,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void registerAdapter<T>(
+    _i2.TypeAdapter<T>? adapter, {
+    bool? internal = false,
+    bool? override = false,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerAdapter,
+          [adapter],
+          {
+            #internal: internal,
+            #override: override,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
+        Invocation.method(
+          #isAdapterRegistered,
+          [typeId],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
+        Invocation.method(
+          #ignoreTypeId,
+          [typeId],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
 /// A class which mocks [Box].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
+class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   @override
   Iterable<E> get values => (super.noSuchMethod(
         Invocation.getter(#values),
@@ -185,15 +498,15 @@ class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
         returnValueForMissingStub: null,
       );
   @override
-  _i6.Stream<_i3.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
+  _i7.Stream<_i2.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
         Invocation.method(
           #watch,
           [],
           {#key: key},
         ),
-        returnValue: _i6.Stream<_i3.BoxEvent>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i3.BoxEvent>.empty(),
-      ) as _i6.Stream<_i3.BoxEvent>);
+        returnValue: _i7.Stream<_i2.BoxEvent>.empty(),
+        returnValueForMissingStub: _i7.Stream<_i2.BoxEvent>.empty(),
+      ) as _i7.Stream<_i2.BoxEvent>);
   @override
   bool containsKey(dynamic key) => (super.noSuchMethod(
         Invocation.method(
@@ -204,7 +517,7 @@ class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i6.Future<void> put(
+  _i7.Future<void> put(
     dynamic key,
     E? value,
   ) =>
@@ -216,11 +529,11 @@ class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
             value,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> putAt(
+  _i7.Future<void> putAt(
     int? index,
     E? value,
   ) =>
@@ -232,122 +545,122 @@ class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
             value,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> putAll(Map<dynamic, E>? entries) => (super.noSuchMethod(
+  _i7.Future<void> putAll(Map<dynamic, E>? entries) => (super.noSuchMethod(
         Invocation.method(
           #putAll,
           [entries],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<int> add(E? value) => (super.noSuchMethod(
+  _i7.Future<int> add(E? value) => (super.noSuchMethod(
         Invocation.method(
           #add,
           [value],
         ),
-        returnValue: _i6.Future<int>.value(0),
-        returnValueForMissingStub: _i6.Future<int>.value(0),
-      ) as _i6.Future<int>);
+        returnValue: _i7.Future<int>.value(0),
+        returnValueForMissingStub: _i7.Future<int>.value(0),
+      ) as _i7.Future<int>);
   @override
-  _i6.Future<Iterable<int>> addAll(Iterable<E>? values) => (super.noSuchMethod(
+  _i7.Future<Iterable<int>> addAll(Iterable<E>? values) => (super.noSuchMethod(
         Invocation.method(
           #addAll,
           [values],
         ),
-        returnValue: _i6.Future<Iterable<int>>.value(<int>[]),
-        returnValueForMissingStub: _i6.Future<Iterable<int>>.value(<int>[]),
-      ) as _i6.Future<Iterable<int>>);
+        returnValue: _i7.Future<Iterable<int>>.value(<int>[]),
+        returnValueForMissingStub: _i7.Future<Iterable<int>>.value(<int>[]),
+      ) as _i7.Future<Iterable<int>>);
   @override
-  _i6.Future<void> delete(dynamic key) => (super.noSuchMethod(
+  _i7.Future<void> delete(dynamic key) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [key],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> deleteAt(int? index) => (super.noSuchMethod(
+  _i7.Future<void> deleteAt(int? index) => (super.noSuchMethod(
         Invocation.method(
           #deleteAt,
           [index],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> deleteAll(Iterable<dynamic>? keys) => (super.noSuchMethod(
+  _i7.Future<void> deleteAll(Iterable<dynamic>? keys) => (super.noSuchMethod(
         Invocation.method(
           #deleteAll,
           [keys],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> compact() => (super.noSuchMethod(
+  _i7.Future<void> compact() => (super.noSuchMethod(
         Invocation.method(
           #compact,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<int> clear() => (super.noSuchMethod(
+  _i7.Future<int> clear() => (super.noSuchMethod(
         Invocation.method(
           #clear,
           [],
         ),
-        returnValue: _i6.Future<int>.value(0),
-        returnValueForMissingStub: _i6.Future<int>.value(0),
-      ) as _i6.Future<int>);
+        returnValue: _i7.Future<int>.value(0),
+        returnValueForMissingStub: _i7.Future<int>.value(0),
+      ) as _i7.Future<int>);
   @override
-  _i6.Future<void> close() => (super.noSuchMethod(
+  _i7.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> deleteFromDisk() => (super.noSuchMethod(
+  _i7.Future<void> deleteFromDisk() => (super.noSuchMethod(
         Invocation.method(
           #deleteFromDisk,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> flush() => (super.noSuchMethod(
+  _i7.Future<void> flush() => (super.noSuchMethod(
         Invocation.method(
           #flush,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [FirebasePlatform].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
+class FirebasePlatform_ extends _i1.Mock implements _i3.FirebasePlatform {
   @override
-  List<_i2.FirebaseAppPlatform> get apps => (super.noSuchMethod(
+  List<_i3.FirebaseAppPlatform> get apps => (super.noSuchMethod(
         Invocation.getter(#apps),
-        returnValue: <_i2.FirebaseAppPlatform>[],
-        returnValueForMissingStub: <_i2.FirebaseAppPlatform>[],
-      ) as List<_i2.FirebaseAppPlatform>);
+        returnValue: <_i3.FirebaseAppPlatform>[],
+        returnValueForMissingStub: <_i3.FirebaseAppPlatform>[],
+      ) as List<_i3.FirebaseAppPlatform>);
   @override
-  _i6.Future<_i2.FirebaseAppPlatform> initializeApp({
+  _i7.Future<_i3.FirebaseAppPlatform> initializeApp({
     String? name,
     _i4.FirebaseOptions? options,
   }) =>
@@ -360,8 +673,8 @@ class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
             #options: options,
           },
         ),
-        returnValue: _i6.Future<_i2.FirebaseAppPlatform>.value(
-            _FakeFirebaseAppPlatform_0(
+        returnValue: _i7.Future<_i3.FirebaseAppPlatform>.value(
+            _FakeFirebaseAppPlatform_2(
           this,
           Invocation.method(
             #initializeApp,
@@ -372,8 +685,8 @@ class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
             },
           ),
         )),
-        returnValueForMissingStub: _i6.Future<_i2.FirebaseAppPlatform>.value(
-            _FakeFirebaseAppPlatform_0(
+        returnValueForMissingStub: _i7.Future<_i3.FirebaseAppPlatform>.value(
+            _FakeFirebaseAppPlatform_2(
           this,
           Invocation.method(
             #initializeApp,
@@ -384,325 +697,36 @@ class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
             },
           ),
         )),
-      ) as _i6.Future<_i2.FirebaseAppPlatform>);
+      ) as _i7.Future<_i3.FirebaseAppPlatform>);
   @override
-  _i2.FirebaseAppPlatform app([String? name = r'[DEFAULT]']) =>
+  _i3.FirebaseAppPlatform app([String? name = r'[DEFAULT]']) =>
       (super.noSuchMethod(
         Invocation.method(
           #app,
           [name],
         ),
-        returnValue: _FakeFirebaseAppPlatform_0(
+        returnValue: _FakeFirebaseAppPlatform_2(
           this,
           Invocation.method(
             #app,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeFirebaseAppPlatform_0(
+        returnValueForMissingStub: _FakeFirebaseAppPlatform_2(
           this,
           Invocation.method(
             #app,
             [name],
           ),
         ),
-      ) as _i2.FirebaseAppPlatform);
-}
-
-/// A class which mocks [HiveInterface].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
-  @override
-  void init(
-    String? path, {
-    _i3.HiveStorageBackendPreference? backendPreference =
-        _i3.HiveStorageBackendPreference.native,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [path],
-          {#backendPreference: backendPreference},
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i6.Future<_i3.Box<E>> openBox<E>(
-    String? name, {
-    _i3.HiveCipher? encryptionCipher,
-    _i3.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-    _i3.CompactionStrategy? compactionStrategy = _i8.defaultCompactionStrategy,
-    bool? crashRecovery = true,
-    String? path,
-    _i9.Uint8List? bytes,
-    String? collection,
-    List<int>? encryptionKey,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #openBox,
-          [name],
-          {
-            #encryptionCipher: encryptionCipher,
-            #keyComparator: keyComparator,
-            #compactionStrategy: compactionStrategy,
-            #crashRecovery: crashRecovery,
-            #path: path,
-            #bytes: bytes,
-            #collection: collection,
-            #encryptionKey: encryptionKey,
-          },
-        ),
-        returnValue: _i6.Future<_i3.Box<E>>.value(_FakeBox_1<E>(
-          this,
-          Invocation.method(
-            #openBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #bytes: bytes,
-              #collection: collection,
-              #encryptionKey: encryptionKey,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i6.Future<_i3.Box<E>>.value(_FakeBox_1<E>(
-          this,
-          Invocation.method(
-            #openBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #bytes: bytes,
-              #collection: collection,
-              #encryptionKey: encryptionKey,
-            },
-          ),
-        )),
-      ) as _i6.Future<_i3.Box<E>>);
-  @override
-  _i6.Future<_i3.LazyBox<E>> openLazyBox<E>(
-    String? name, {
-    _i3.HiveCipher? encryptionCipher,
-    _i3.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-    _i3.CompactionStrategy? compactionStrategy = _i8.defaultCompactionStrategy,
-    bool? crashRecovery = true,
-    String? path,
-    String? collection,
-    List<int>? encryptionKey,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #openLazyBox,
-          [name],
-          {
-            #encryptionCipher: encryptionCipher,
-            #keyComparator: keyComparator,
-            #compactionStrategy: compactionStrategy,
-            #crashRecovery: crashRecovery,
-            #path: path,
-            #collection: collection,
-            #encryptionKey: encryptionKey,
-          },
-        ),
-        returnValue: _i6.Future<_i3.LazyBox<E>>.value(_FakeLazyBox_2<E>(
-          this,
-          Invocation.method(
-            #openLazyBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #collection: collection,
-              #encryptionKey: encryptionKey,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i6.Future<_i3.LazyBox<E>>.value(_FakeLazyBox_2<E>(
-          this,
-          Invocation.method(
-            #openLazyBox,
-            [name],
-            {
-              #encryptionCipher: encryptionCipher,
-              #keyComparator: keyComparator,
-              #compactionStrategy: compactionStrategy,
-              #crashRecovery: crashRecovery,
-              #path: path,
-              #collection: collection,
-              #encryptionKey: encryptionKey,
-            },
-          ),
-        )),
-      ) as _i6.Future<_i3.LazyBox<E>>);
-  @override
-  _i3.Box<E> box<E>(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #box,
-          [name],
-        ),
-        returnValue: _FakeBox_1<E>(
-          this,
-          Invocation.method(
-            #box,
-            [name],
-          ),
-        ),
-        returnValueForMissingStub: _FakeBox_1<E>(
-          this,
-          Invocation.method(
-            #box,
-            [name],
-          ),
-        ),
-      ) as _i3.Box<E>);
-  @override
-  _i3.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #lazyBox,
-          [name],
-        ),
-        returnValue: _FakeLazyBox_2<E>(
-          this,
-          Invocation.method(
-            #lazyBox,
-            [name],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLazyBox_2<E>(
-          this,
-          Invocation.method(
-            #lazyBox,
-            [name],
-          ),
-        ),
-      ) as _i3.LazyBox<E>);
-  @override
-  bool isBoxOpen(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #isBoxOpen,
-          [name],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  _i6.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteBoxFromDisk(
-    String? name, {
-    String? path,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deleteBoxFromDisk,
-          [name],
-          {#path: path},
-        ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteFromDisk() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteFromDisk,
-          [],
-        ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
-  @override
-  List<int> generateSecureKey() => (super.noSuchMethod(
-        Invocation.method(
-          #generateSecureKey,
-          [],
-        ),
-        returnValue: <int>[],
-        returnValueForMissingStub: <int>[],
-      ) as List<int>);
-  @override
-  _i6.Future<bool> boxExists(
-    String? name, {
-    String? path,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #boxExists,
-          [name],
-          {#path: path},
-        ),
-        returnValue: _i6.Future<bool>.value(false),
-        returnValueForMissingStub: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
-  @override
-  void resetAdapters() => super.noSuchMethod(
-        Invocation.method(
-          #resetAdapters,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void registerAdapter<T>(
-    _i3.TypeAdapter<T>? adapter, {
-    bool? internal = false,
-    bool? override = false,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #registerAdapter,
-          [adapter],
-          {
-            #internal: internal,
-            #override: override,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
-        Invocation.method(
-          #isAdapterRegistered,
-          [typeId],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
-  void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
-        Invocation.method(
-          #ignoreTypeId,
-          [typeId],
-        ),
-        returnValueForMissingStub: null,
-      );
+      ) as _i3.FirebaseAppPlatform);
 }
 
 /// A class which mocks [FirebaseAppPlatform].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFirebaseAppPlatform_ extends _i1.Mock
-    implements _i2.FirebaseAppPlatform {
+    implements _i3.FirebaseAppPlatform {
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
@@ -728,34 +752,34 @@ class MockFirebaseAppPlatform_ extends _i1.Mock
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i6.Future<void> delete() => (super.noSuchMethod(
+  _i7.Future<void> delete() => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> setAutomaticDataCollectionEnabled(bool? enabled) =>
+  _i7.Future<void> setAutomaticDataCollectionEnabled(bool? enabled) =>
       (super.noSuchMethod(
         Invocation.method(
           #setAutomaticDataCollectionEnabled,
           [enabled],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> setAutomaticResourceManagementEnabled(bool? enabled) =>
+  _i7.Future<void> setAutomaticResourceManagementEnabled(bool? enabled) =>
       (super.noSuchMethod(
         Invocation.method(
           #setAutomaticResourceManagementEnabled,
           [enabled],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [FirebaseAppCheckPlatform].
@@ -776,13 +800,13 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
         ),
       ) as _i4.FirebaseApp);
   @override
-  _i6.Stream<String?> get onTokenChange => (super.noSuchMethod(
+  _i7.Stream<String?> get onTokenChange => (super.noSuchMethod(
         Invocation.getter(#onTokenChange),
-        returnValue: _i6.Stream<String?>.empty(),
-        returnValueForMissingStub: _i6.Stream<String?>.empty(),
-      ) as _i6.Stream<String?>);
+        returnValue: _i7.Stream<String?>.empty(),
+        returnValueForMissingStub: _i7.Stream<String?>.empty(),
+      ) as _i7.Stream<String?>);
   @override
-  _i6.Future<void> activate({
+  _i7.Future<void> activate({
     String? webRecaptchaSiteKey,
     _i5.AndroidProvider? androidProvider,
     _i5.AppleProvider? appleProvider,
@@ -797,38 +821,38 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
             #appleProvider: appleProvider,
           },
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<String?> getToken(bool? forceRefresh) => (super.noSuchMethod(
+  _i7.Future<String?> getToken(bool? forceRefresh) => (super.noSuchMethod(
         Invocation.method(
           #getToken,
           [forceRefresh],
         ),
-        returnValue: _i6.Future<String?>.value(),
-        returnValueForMissingStub: _i6.Future<String?>.value(),
-      ) as _i6.Future<String?>);
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
   @override
-  _i6.Future<void> setTokenAutoRefreshEnabled(
+  _i7.Future<void> setTokenAutoRefreshEnabled(
           bool? isTokenAutoRefreshEnabled) =>
       (super.noSuchMethod(
         Invocation.method(
           #setTokenAutoRefreshEnabled,
           [isTokenAutoRefreshEnabled],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<String> getLimitedUseToken() => (super.noSuchMethod(
+  _i7.Future<String> getLimitedUseToken() => (super.noSuchMethod(
         Invocation.method(
           #getLimitedUseToken,
           [],
         ),
-        returnValue: _i6.Future<String>.value(''),
-        returnValueForMissingStub: _i6.Future<String>.value(''),
-      ) as _i6.Future<String>);
+        returnValue: _i7.Future<String>.value(''),
+        returnValueForMissingStub: _i7.Future<String>.value(''),
+      ) as _i7.Future<String>);
   @override
   _i5.FirebaseAppCheckPlatform delegateFor({required _i4.FirebaseApp? app}) =>
       (super.noSuchMethod(
@@ -875,4 +899,305 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
           ),
         ),
       ) as _i5.FirebaseAppCheckPlatform);
+}
+
+/// A class which mocks [FirebaseMessagingPlatform].
+///
+/// See the documentation for Mockito's code generation for more information.
+class FirebaseMessagingPlatform_ extends _i1.Mock
+    implements _i6.FirebaseMessagingPlatform {
+  @override
+  _i4.FirebaseApp get app => (super.noSuchMethod(
+        Invocation.getter(#app),
+        returnValue: _FakeFirebaseApp_4(
+          this,
+          Invocation.getter(#app),
+        ),
+        returnValueForMissingStub: _FakeFirebaseApp_4(
+          this,
+          Invocation.getter(#app),
+        ),
+      ) as _i4.FirebaseApp);
+  @override
+  bool get isAutoInitEnabled => (super.noSuchMethod(
+        Invocation.getter(#isAutoInitEnabled),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i7.Stream<String> get onTokenRefresh => (super.noSuchMethod(
+        Invocation.getter(#onTokenRefresh),
+        returnValue: _i7.Stream<String>.empty(),
+        returnValueForMissingStub: _i7.Stream<String>.empty(),
+      ) as _i7.Stream<String>);
+  @override
+  _i6.FirebaseMessagingPlatform delegateFor({required _i4.FirebaseApp? app}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delegateFor,
+          [],
+          {#app: app},
+        ),
+        returnValue: _FakeFirebaseMessagingPlatform_6(
+          this,
+          Invocation.method(
+            #delegateFor,
+            [],
+            {#app: app},
+          ),
+        ),
+        returnValueForMissingStub: _FakeFirebaseMessagingPlatform_6(
+          this,
+          Invocation.method(
+            #delegateFor,
+            [],
+            {#app: app},
+          ),
+        ),
+      ) as _i6.FirebaseMessagingPlatform);
+  @override
+  _i6.FirebaseMessagingPlatform setInitialValues({bool? isAutoInitEnabled}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setInitialValues,
+          [],
+          {#isAutoInitEnabled: isAutoInitEnabled},
+        ),
+        returnValue: _FakeFirebaseMessagingPlatform_6(
+          this,
+          Invocation.method(
+            #setInitialValues,
+            [],
+            {#isAutoInitEnabled: isAutoInitEnabled},
+          ),
+        ),
+        returnValueForMissingStub: _FakeFirebaseMessagingPlatform_6(
+          this,
+          Invocation.method(
+            #setInitialValues,
+            [],
+            {#isAutoInitEnabled: isAutoInitEnabled},
+          ),
+        ),
+      ) as _i6.FirebaseMessagingPlatform);
+  @override
+  _i7.Future<_i6.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
+        Invocation.method(
+          #getInitialMessage,
+          [],
+        ),
+        returnValue: _i7.Future<_i6.RemoteMessage?>.value(),
+        returnValueForMissingStub: _i7.Future<_i6.RemoteMessage?>.value(),
+      ) as _i7.Future<_i6.RemoteMessage?>);
+  @override
+  void registerBackgroundMessageHandler(
+          _i6.BackgroundMessageHandler? handler) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerBackgroundMessageHandler,
+          [handler],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i7.Future<void> deleteToken() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteToken,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<String?> getAPNSToken() => (super.noSuchMethod(
+        Invocation.method(
+          #getAPNSToken,
+          [],
+        ),
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
+  @override
+  _i7.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
+        Invocation.method(
+          #getToken,
+          [],
+          {#vapidKey: vapidKey},
+        ),
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
+  @override
+  _i7.Future<_i6.NotificationSettings> getNotificationSettings() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNotificationSettings,
+          [],
+        ),
+        returnValue: _i7.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_7(
+          this,
+          Invocation.method(
+            #getNotificationSettings,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_7(
+          this,
+          Invocation.method(
+            #getNotificationSettings,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i6.NotificationSettings>);
+  @override
+  _i7.Future<bool> isSupported() => (super.noSuchMethod(
+        Invocation.method(
+          #isSupported,
+          [],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+  @override
+  _i7.Future<_i6.NotificationSettings> requestPermission({
+    bool? alert = true,
+    bool? announcement = false,
+    bool? badge = true,
+    bool? carPlay = false,
+    bool? criticalAlert = false,
+    bool? provisional = false,
+    bool? sound = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #requestPermission,
+          [],
+          {
+            #alert: alert,
+            #announcement: announcement,
+            #badge: badge,
+            #carPlay: carPlay,
+            #criticalAlert: criticalAlert,
+            #provisional: provisional,
+            #sound: sound,
+          },
+        ),
+        returnValue: _i7.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_7(
+          this,
+          Invocation.method(
+            #requestPermission,
+            [],
+            {
+              #alert: alert,
+              #announcement: announcement,
+              #badge: badge,
+              #carPlay: carPlay,
+              #criticalAlert: criticalAlert,
+              #provisional: provisional,
+              #sound: sound,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i6.NotificationSettings>.value(
+            _FakeNotificationSettings_7(
+          this,
+          Invocation.method(
+            #requestPermission,
+            [],
+            {
+              #alert: alert,
+              #announcement: announcement,
+              #badge: badge,
+              #carPlay: carPlay,
+              #criticalAlert: criticalAlert,
+              #provisional: provisional,
+              #sound: sound,
+            },
+          ),
+        )),
+      ) as _i7.Future<_i6.NotificationSettings>);
+  @override
+  _i7.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
+        Invocation.method(
+          #setAutoInitEnabled,
+          [enabled],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> setForegroundNotificationPresentationOptions({
+    required bool? alert,
+    required bool? badge,
+    required bool? sound,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setForegroundNotificationPresentationOptions,
+          [],
+          {
+            #alert: alert,
+            #badge: badge,
+            #sound: sound,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> sendMessage({
+    required String? to,
+    Map<String, String>? data,
+    String? collapseKey,
+    String? messageId,
+    String? messageType,
+    int? ttl,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendMessage,
+          [],
+          {
+            #to: to,
+            #data: data,
+            #collapseKey: collapseKey,
+            #messageId: messageId,
+            #messageType: messageType,
+            #ttl: ttl,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
+        Invocation.method(
+          #subscribeToTopic,
+          [topic],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
+        Invocation.method(
+          #unsubscribeFromTopic,
+          [topic],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setDeliveryMetricsExportToBigQuery,
+          [enabled],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

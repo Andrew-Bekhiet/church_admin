@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,6 +57,7 @@ class ChurchAdminApp extends StatefulWidget {
 
 class _ChurchAdminAppState extends State<ChurchAdminApp> {
   late final StreamSubscription<bool> _connectivityListener;
+  late final StreamSubscription<Notification> _notificationsListener;
 
   @override
   void initState() {
@@ -64,6 +65,9 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
         .distinct()
         .skip(1)
         .listen(_onConnectivityChanged);
+
+    _notificationsListener = NotificationsService.I.onNotificationTapStream
+        .listen(_onNotificationTapped);
 
     super.initState();
   }
@@ -138,10 +142,19 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     }
   }
 
+  void _onNotificationTapped(Notification notification) {
+    showDialog(
+      context: context,
+      builder: (context) =>
+          NotificationDetailsDialog(notification: notification),
+    );
+  }
+
   @override
   Future<void> dispose() async {
     super.dispose();
 
     await _connectivityListener.cancel();
+    await _notificationsListener.cancel();
   }
 }

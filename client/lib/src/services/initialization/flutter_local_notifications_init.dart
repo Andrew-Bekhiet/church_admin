@@ -17,10 +17,9 @@ class FlutterLocalNotificationsPluginInit implements Initializer {
             iOS: DarwinInitializationSettings(),
           ),
           onDidReceiveNotificationResponse:
-              NotificationsServiceCallbacks.onDidReceiveNotificationResponse,
+              NotificationsServiceCallbacks.onForegroundNotificationTap,
           onDidReceiveBackgroundNotificationResponse:
-              NotificationsServiceCallbacks
-                  .onDidReceiveBackgroundNotificationResponse,
+              NotificationsServiceCallbacks.onBackgroundNotificationTap,
         ) ??
         false;
 
