@@ -25,6 +25,7 @@ class AdvancedSearchScreen extends StatefulWidget {
     builder: (context, state) => AdvancedSearchScreen(
       key: PageStorageKey(state.location),
       initialQuery: state.extra as AdvancedQuery?,
+      autoExecuteInitialQuery: state.extra is AdvancedQuery,
     ),
   );
 

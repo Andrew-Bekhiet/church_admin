@@ -94,8 +94,7 @@ jobs:
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run: flutter test --coverage --machine > test-results.json --dart-define CI=true
 
-      - name: Upload test-results.json if failed
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' && failure() }}
+      - name: Upload test-results.json to artifacts
         uses: actions/upload-artifact@v2
         with:
           name: test-results
