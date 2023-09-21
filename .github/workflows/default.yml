@@ -55,10 +55,6 @@ jobs:
           flutter config --no-analytics
           flutter precache
 
-      - name: Install dependencies
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        run: flutter pub get
-
       - name: Get Cached .dart_tool
         uses: actions/cache@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
@@ -75,6 +71,10 @@ jobs:
           cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
           cp --force lib/src/services/encryption/encryption_service_ci_impl.dart lib/src/services/encryption/encryption_service_impl.dart
           cp --force lib/src/services/secrets/secrets_service_ci_impl.dart lib/src/services/secrets/secrets_service_impl.dart
+
+      - name: Install dependencies
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        run: flutter pub get
 
       - name: Run new builder
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
