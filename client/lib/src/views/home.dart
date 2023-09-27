@@ -46,7 +46,7 @@ class HomeScreen extends StatefulWidget {
     } else if (LocalAuthService.I.shouldAuthenticate) {
       return Uri(
         path: AuthenticateScreen.route.path,
-        queryParameters: {'next': state.location},
+        queryParameters: {'next': state.uri.toString()},
       ).toString();
     } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
       return Uri(

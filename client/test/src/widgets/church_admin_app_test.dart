@@ -48,8 +48,16 @@ void main() {
           .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
           .goRouter;
 
+      final lastMatch = goRouter
+          .routerDelegate
+          .currentConfiguration.last;
+
+      final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+          ? lastMatch.matches
+          : goRouter.routerDelegate.currentConfiguration;
+
       expect(
-        goRouter.location,
+        matchList.uri.toString(),
         firstScreenVariant.expectedLocation(),
       );
 

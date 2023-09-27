@@ -17,7 +17,7 @@ class UpdateUserSpiritData extends StatefulWidget {
       } else if (LocalAuthService.I.shouldAuthenticate) {
         return Uri(
           path: '/authenticate',
-          queryParameters: {'next': state.location},
+          queryParameters: {'next': state.uri.toString()},
         ).toString();
       }
       return null;

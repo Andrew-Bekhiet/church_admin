@@ -9,8 +9,8 @@ class AuthenticateScreen extends StatefulWidget {
     name: 'authenticate',
     path: '/authenticate',
     builder: (context, state) => AuthenticateScreen(
-      next: _hasRedirect(state.queryParameters)
-          ? state.queryParameters['next']
+      next: _hasRedirect(state.uri.queryParameters)
+          ? state.uri.queryParameters['next']
           : null,
     ),
     redirect: (context, state) {
@@ -25,12 +25,12 @@ class AuthenticateScreen extends StatefulWidget {
     } else if (!(AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
       return MultiFactorLogin.route.path;
     } else if (LocalAuthService.I.shouldAuthenticate ||
-        (_hasRedirect(state.queryParameters) &&
+        (_hasRedirect(state.uri.queryParameters) &&
             LocalAuthService.I
-                .shouldAuthenticateForPath(state.queryParameters['next']!))) {
+                .shouldAuthenticateForPath(state.uri.queryParameters['next']!))) {
       return null;
     } else {
-      return state.queryParameters['next'] ?? '/';
+      return state.uri.queryParameters['next'] ?? '/';
     }
   }
 

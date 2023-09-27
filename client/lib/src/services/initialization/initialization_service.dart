@@ -12,7 +12,7 @@ class InitializationService {
       globalProviderContainer.read(initializationServiceProvider);
 
   Set<Initializer> get steps => const {
-        UsePathUrlStrategyInit(),
+        WebNavigationInit(),
         SentryInit(),
         PackageInfoInit(),
         DeviceInfoInit(),

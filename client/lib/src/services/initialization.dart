@@ -9,4 +9,4 @@ export 'initialization/initializer.dart';
 export 'initialization/intl_locale_messages_init.dart';
 export 'initialization/package_info_init.dart';
 export 'initialization/sentry_init.dart';
-export 'initialization/use_path_url_strategy_init.dart';
+export 'initialization/web_navigation_init.dart';

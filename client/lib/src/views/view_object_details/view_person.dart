@@ -14,12 +14,12 @@ class ViewPerson extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewPerson',
     builder: (context, state) {
-      if (state.queryParameters['id'] == null) {
+      if (state.uri.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewPerson(
-        personId: state.queryParameters['id']!,
+        personId: state.uri.queryParameters['id']!,
         person: (state.extra as Map?)?['person'] as Person?,
       );
     },

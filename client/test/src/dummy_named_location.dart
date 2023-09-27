@@ -5,10 +5,12 @@ import 'package:meta/meta.dart';
 class DummyNamedLocation extends GoRouterState {
   const DummyNamedLocation(
     super.configuration, {
-    required super.location,
+    required super.uri,
     required super.matchedLocation,
     required super.name,
     required super.pageKey,
+    required super.fullPath,
+    required super.pathParameters,
   });
 
   @override

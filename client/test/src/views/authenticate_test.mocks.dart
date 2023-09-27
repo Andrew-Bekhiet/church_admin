@@ -9,7 +9,7 @@ import 'dart:ui' as _i6;
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter/material.dart' as _i7;
-import 'package:go_router/src/configuration.dart' as _i8;
+import 'package:go_router/src/state.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
 
@@ -56,8 +56,18 @@ class _FakeDuration_2 extends _i1.SmartFake implements Duration {
         );
 }
 
-class _FakeValueKey_3<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
-  _FakeValueKey_3(
+class _FakeUri_3 extends _i1.SmartFake implements Uri {
+  _FakeUri_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeValueKey_4<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
+  _FakeValueKey_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -442,11 +452,17 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
 // ignore: must_be_immutable
 class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
   @override
-  String get location => (super.noSuchMethod(
-        Invocation.getter(#location),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
+  Uri get uri => (super.noSuchMethod(
+        Invocation.getter(#uri),
+        returnValue: _FakeUri_3(
+          this,
+          Invocation.getter(#uri),
+        ),
+        returnValueForMissingStub: _FakeUri_3(
+          this,
+          Invocation.getter(#uri),
+        ),
+      ) as Uri);
   @override
   String get matchedLocation => (super.noSuchMethod(
         Invocation.getter(#matchedLocation),
@@ -460,25 +476,13 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
         returnValueForMissingStub: <String, String>{},
       ) as Map<String, String>);
   @override
-  Map<String, String> get queryParameters => (super.noSuchMethod(
-        Invocation.getter(#queryParameters),
-        returnValue: <String, String>{},
-        returnValueForMissingStub: <String, String>{},
-      ) as Map<String, String>);
-  @override
-  Map<String, List<String>> get queryParametersAll => (super.noSuchMethod(
-        Invocation.getter(#queryParametersAll),
-        returnValue: <String, List<String>>{},
-        returnValueForMissingStub: <String, List<String>>{},
-      ) as Map<String, List<String>>);
-  @override
   _i4.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_3<String>(
+        returnValue: _FakeValueKey_4<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-        returnValueForMissingStub: _FakeValueKey_3<String>(
+        returnValueForMissingStub: _FakeValueKey_4<String>(
           this,
           Invocation.getter(#pageKey),
         ),

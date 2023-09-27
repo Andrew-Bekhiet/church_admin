@@ -6,12 +6,12 @@ class ViewStreet extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewStreet',
     builder: (context, state) {
-      if (state.queryParameters['id'] == null) {
+      if (state.uri.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewStreet(
-        streetId: state.queryParameters['id']!,
+        streetId: state.uri.queryParameters['id']!,
         street: (state.extra as Map?)?['street'] as Street?,
       );
     },

@@ -25,7 +25,7 @@ class ChurchAdminApp extends StatefulWidget {
       if (kReleaseMode) {
         LoggingService.I.reportError(
           state.error,
-          extras: {'location': state.location},
+          extras: {'location': state.uri.toString()},
         );
       }
 

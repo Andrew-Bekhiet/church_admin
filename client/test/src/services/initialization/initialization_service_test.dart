@@ -18,7 +18,7 @@ void main() {
         'steps',
         () {
           final expectedTypes = {
-            UsePathUrlStrategyInit,
+            WebNavigationInit,
             SentryInit,
             PackageInfoInit,
             DeviceInfoInit,

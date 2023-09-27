@@ -6,12 +6,12 @@ class ViewService extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: 'viewService',
     builder: (context, state) {
-      if (state.queryParameters['id'] == null) {
+      if (state.uri.queryParameters['id'] == null) {
         throw ArgumentError.notNull('id');
       }
 
       return ViewService(
-        serviceId: state.queryParameters['id']!,
+        serviceId: state.uri.queryParameters['id']!,
         service: (state.extra as Map?)?['service'] as Service?,
       );
     },

@@ -237,8 +237,8 @@ void main() {
               ]);
 
               final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.queryParameters)
-                  .thenReturn({'next': '/next'});
+              when(mockGoRouterState.uri)
+                  .thenReturn(Uri(queryParameters: {'next': '/next'}));
 
               expect(
                 AuthenticateScreen.redirect(mockGoRouterState),
@@ -256,7 +256,7 @@ void main() {
               ]);
 
               final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.queryParameters).thenReturn({});
+              when(mockGoRouterState.uri).thenReturn(Uri());
 
               expect(
                 AuthenticateScreen.redirect(mockGoRouterState),
@@ -274,8 +274,8 @@ void main() {
               ]);
 
               final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.queryParameters)
-                  .thenReturn({'next': '/test'});
+              when(mockGoRouterState.uri)
+                  .thenReturn(Uri(queryParameters: {'next': '/test'}));
 
               expect(
                 AuthenticateScreen.redirect(mockGoRouterState),
@@ -283,8 +283,8 @@ void main() {
               );
 
               final mockGoRouterState2 = MockGoRouterState();
-              when(mockGoRouterState2.queryParameters)
-                  .thenReturn({'next': '/test'});
+              when(mockGoRouterState2.uri)
+                  .thenReturn(Uri(queryParameters: {'next': '/test'}));
               when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
                   .thenReturn(true);
 
