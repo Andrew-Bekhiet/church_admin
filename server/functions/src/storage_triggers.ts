@@ -11,7 +11,7 @@ import {
 } from "./hasura_interface";
 
 export const onPhotoUploaded = runWith({
-  memory: "512MB",
+  memory: "1GB",
   timeoutSeconds: 9 * 60,
 })
   .region("europe-west6")
@@ -33,6 +33,34 @@ export const onPhotoUploaded = runWith({
     }
   });
 
+/* export const updateAllBlurHashesFor = runWith({
+  memory: "1GB",
+  timeoutSeconds: 9 * 60,
+})
+  .region("europe-west6")
+  .https.onCall(async (data) => {
+    const filenames = data.filenames as string[];
+
+    try {
+      await Promise.all(
+        filenames.map(async (filename): Promise<void> => {
+          const blurhash = await _getImageBlurHash({
+            name: filename,
+          } as ObjectMetadata);
+
+          await updatePhotoBlurHash(
+            "persons",
+            filename.split("/").at(-1)!,
+            blurhash
+          );
+        })
+      );
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  });
+ */
 async function _getImageBlurHash(object: ObjectMetadata) {
   const downloadData = await storage()
     .bucket("church-data-admin.appspot.com")
