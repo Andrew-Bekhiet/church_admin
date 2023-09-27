@@ -27,6 +27,7 @@ class HomeScreen extends StatefulWidget {
       ViewStore.route,
       ManageUsersScreen.route,
       AdvancedSearchScreen.route,
+      SettingsScreen.route,
     ],
     redirect: (context, state) {
       return redirect(state);
@@ -246,7 +247,7 @@ class _HomeDrawer extends StatelessWidget {
                     context.push('/advanced_search');
                   case 2:
                   case 3 when AuthService.I.currentUser!.canManageSomeUsers:
-                    break;
+                    context.push('/settings');
                   case 3 when kDebugMode:
                   case 4
                       when kDebugMode &&

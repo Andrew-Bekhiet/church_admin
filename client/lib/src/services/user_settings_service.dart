@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserSettingsService {
@@ -14,12 +13,7 @@ class UserSettingsService {
     assert(box.isOpen);
   }
 
-  bool get darkTheme => box.get(
-        'darkTheme',
-        defaultValue:
-            WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                Brightness.dark,
-      )!;
+  bool? get darkTheme => box.get('darkTheme');
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
 
   String? get registeredFCMToken => box.get('registeredFCMToken');

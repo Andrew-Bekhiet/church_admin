@@ -8,5 +8,6 @@ export 'views/login/login.dart';
 export 'views/login/multi_factor_login.dart';
 export 'views/login/unapproved_user.dart';
 export 'views/manage_users_screen.dart';
+export 'views/settings_screen.dart';
 export 'views/update_user_spirit_data.dart';
 export 'views/view_object_details.dart';

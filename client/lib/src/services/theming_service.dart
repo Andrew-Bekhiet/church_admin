@@ -132,7 +132,9 @@ class ThemingService with WidgetsBindingObserver {
     late final _userSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark = darkTheme ?? _userSettingsService.darkTheme;
+    bool isDark = darkTheme ??
+        _userSettingsService.darkTheme ??
+        PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
@@ -239,7 +241,10 @@ class ThemingService with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    switchTheme(_userSettingsService.darkTheme);
+    switchTheme(
+      _userSettingsService.darkTheme ??
+          PlatformDispatcher.instance.platformBrightness == Brightness.dark,
+    );
   }
 
   void switchTheme(bool darkTheme) {
