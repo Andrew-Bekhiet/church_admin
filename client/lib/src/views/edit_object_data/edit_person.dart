@@ -151,6 +151,7 @@ class _EditPersonState extends State<EditPerson> {
           ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
           Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ...newPerson.otherPhones.entries.mapIndexed(
                 (i, phone) {
@@ -678,6 +679,7 @@ class _EditPersonState extends State<EditPerson> {
             onChanged: (s) =>
                 newPerson = newPerson.copyWith(hobbies: s?.toList()),
             initialValue: newPerson.hobbies?.toSet() ?? {},
+            nullable: false,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.metadata.hobbies.streamAll(searchQuery: s),
@@ -719,6 +721,7 @@ class _EditPersonState extends State<EditPerson> {
             ),
             onChanged: (s) => newPerson = newPerson.copyWith(tags: s?.toList()),
             initialValue: newPerson.tags?.toSet() ?? {},
+            nullable: false,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.metadata.tags.streamAll(searchQuery: s),
