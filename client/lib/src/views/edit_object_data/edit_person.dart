@@ -629,7 +629,6 @@ class _EditPersonState extends State<EditPerson> {
               },
             ),
           ),
-          const Divider(thickness: 1),
           ObjectSelectionField<PersonState, PersonState?>(
             initialValue: newPerson.state,
             listController: (s) => ViewableObjectListController(
@@ -670,6 +669,7 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
+          const Divider(thickness: 1),
           MultiObjectSelectionField<Hobby>(
             validator: _personGeneralCheckValidator,
             decoration: const InputDecoration(
