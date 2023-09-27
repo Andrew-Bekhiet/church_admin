@@ -21,32 +21,35 @@ class ColorField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormField<Color?>(
-      initialValue: initialValue,
-      autovalidateMode: autovalidateMode,
-      onSaved: onSaved,
-      validator: validator,
-      builder: (state) => InkWell(
-        onTap: () => _selectColor(context, state),
-        child: InputDecorator(
-          decoration: InputDecoration(
-            labelText: 'اللون',
-            suffixIcon: nullable
-                ? IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      state.didChange(null);
-                      onChanged?.call(null);
-                    },
-                  )
-                : null,
-          ),
-          child: ColorIndicator(
-            hasBorder: true,
-            width: 50,
-            height: 50,
-            borderRadius: 20,
-            color: state.value ?? Colors.transparent,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: FormField<Color?>(
+        initialValue: initialValue,
+        autovalidateMode: autovalidateMode,
+        onSaved: onSaved,
+        validator: validator,
+        builder: (state) => InkWell(
+          onTap: () => _selectColor(context, state),
+          child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: 'اللون',
+              suffixIcon: nullable
+                  ? IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        state.didChange(null);
+                        onChanged?.call(null);
+                      },
+                    )
+                  : null,
+            ),
+            child: ColorIndicator(
+              hasBorder: true,
+              width: 50,
+              height: 50,
+              borderRadius: 20,
+              color: state.value ?? Colors.transparent,
+            ),
           ),
         ),
       ),
