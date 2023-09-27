@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ColorField extends StatelessWidget {
   final Color? initialValue;
+  final bool nullable;
   final FormFieldSetter<Color?>? onSaved;
   final FormFieldValidator<Color?>? validator;
   final AutovalidateMode? autovalidateMode;
@@ -14,6 +15,7 @@ class ColorField extends StatelessWidget {
     this.validator,
     this.autovalidateMode,
     this.onChanged,
+    this.nullable = true,
     super.key,
   });
 
@@ -24,15 +26,28 @@ class ColorField extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       onSaved: onSaved,
       validator: validator,
-      builder: (state) => ListTile(
-        title: const Text('اللون'),
+      builder: (state) => InkWell(
         onTap: () => _selectColor(context, state),
-        trailing: ColorIndicator(
-          hasBorder: true,
-          width: 50,
-          height: 50,
-          borderRadius: 20,
-          color: state.value ?? Colors.transparent,
+        child: InputDecorator(
+          decoration: InputDecoration(
+            labelText: 'اللون',
+            suffixIcon: nullable
+                ? IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      state.didChange(null);
+                      onChanged?.call(null);
+                    },
+                  )
+                : null,
+          ),
+          child: ColorIndicator(
+            hasBorder: true,
+            width: 50,
+            height: 50,
+            borderRadius: 20,
+            color: state.value ?? Colors.transparent,
+          ),
         ),
       ),
     );
