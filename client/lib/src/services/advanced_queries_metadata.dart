@@ -36,6 +36,7 @@ abstract final class AdvancedQueriesMetadata {
     UserPermission: UserPermission.approved,
   };
 
+  //TODO: support aggregate queries for notifications
   static final Map<Type, (String, String)> queryableTypes = {
     Area: ('المناطق', 'Area'),
     Street: ('الشوارع', 'Street'),

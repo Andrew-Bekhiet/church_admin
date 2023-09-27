@@ -6,7 +6,9 @@ import 'package:mockito/mockito.dart';
 
 import 'notifications_storage_impl_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<LazyBox<Notification>>()])
+@GenerateNiceMocks(
+  [MockSpec<HiveInterface>(), MockSpec<LazyBox<Notification>>()],
+)
 void main() {
   group(
     'NotificationsStorageImpl =>',
@@ -23,28 +25,45 @@ void main() {
         'Read',
         () async {
           final mockLazyBox = MockLazyBox();
-          when(mockLazyBox.isOpen).thenReturn(true);
-
           when(mockLazyBox.get('1'))
               .thenAnswer((_) async => expectedNotification);
 
-          final unit = NotificationsStorageImpl(mockLazyBox);
+          final mockHive = MockHiveInterface();
+          when(mockHive.openLazyBox<Notification>('notifications'))
+              .thenAnswer((_) async => mockLazyBox);
+
+          final unit = NotificationsStorageImpl(mockHive, 'notifications');
 
           final actualNotification = await unit.readNotification('1');
 
           expect(actualNotification, expectedNotification);
+
+          verifyInOrder([
+            mockHive.openLazyBox<Notification>('notifications'),
+            mockLazyBox.get('1'),
+            mockLazyBox.close(),
+          ]);
         },
       );
 
       test('Write', () async {
         final mockLazyBox = MockLazyBox();
-        when(mockLazyBox.isOpen).thenReturn(true);
+        when(mockLazyBox.get('1'))
+            .thenAnswer((_) async => expectedNotification);
 
-        final unit = NotificationsStorageImpl(mockLazyBox);
+        final mockHive = MockHiveInterface();
+        when(mockHive.openLazyBox<Notification>('notifications'))
+            .thenAnswer((_) async => mockLazyBox);
+
+        final unit = NotificationsStorageImpl(mockHive, 'notifications');
 
         await unit.writeNotification(expectedNotification);
 
-        verify(mockLazyBox.put('1', expectedNotification)).called(1);
+        verifyInOrder([
+          mockHive.openLazyBox<Notification>('notifications'),
+          mockLazyBox.put('1', expectedNotification),
+          mockLazyBox.close(),
+        ]);
       });
     },
   );

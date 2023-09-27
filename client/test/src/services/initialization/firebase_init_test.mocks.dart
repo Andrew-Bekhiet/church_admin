@@ -807,7 +807,7 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
       ) as _i7.Stream<String?>);
   @override
   _i7.Future<void> activate({
-    String? webRecaptchaSiteKey,
+    _i5.WebProvider? webProvider,
     _i5.AndroidProvider? androidProvider,
     _i5.AppleProvider? appleProvider,
   }) =>
@@ -816,7 +816,7 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
           #activate,
           [],
           {
-            #webRecaptchaSiteKey: webRecaptchaSiteKey,
+            #webProvider: webProvider,
             #androidProvider: androidProvider,
             #appleProvider: appleProvider,
           },

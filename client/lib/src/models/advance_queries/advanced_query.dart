@@ -26,11 +26,11 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson {
 List<Json> conditionsToJson(List<Condition> data) =>
     data.map((c) => c.toJson()).toList();
 
-List<Condition> conditionsFromJson(List<Json> data) =>
-    data.map(Condition.fromJson).toList();
+List<Condition> conditionsFromJson(List data) =>
+    data.map((d)=>Condition.fromJson((d as Map).cast())).toList();
 
 List<Json> orderBysToJson(List<OrderBy> data) =>
     data.map((o) => o.toJson()).toList();
 
-List<OrderBy> orderBysFromJson(List<Json> data) =>
-    data.map(OrderBy.fromJson).toList();
+List<OrderBy> orderBysFromJson(List data) =>
+    data.map((d)=>OrderBy.fromJson((d as Map).cast())).toList();

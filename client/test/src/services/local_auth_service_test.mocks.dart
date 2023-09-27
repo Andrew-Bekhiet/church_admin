@@ -57,16 +57,16 @@ class MockNotificationsService extends _i1.Mock
   }
 
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-      ) as bool);
-  @override
   _i4.Stream<_i2.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
         Invocation.getter(#onNotificationTapStream),
         returnValue: _i4.Stream<_i2.Notification>.empty(),
       ) as _i4.Stream<_i2.Notification>);
+  @override
+  bool get isPaused => (super.noSuchMethod(
+        Invocation.getter(#isPaused),
+        returnValue: false,
+      ) as bool);
   @override
   void addForegroundNotificationTap(_i2.Notification? notification) =>
       super.noSuchMethod(

@@ -2478,18 +2478,18 @@ class MockConnectivityService extends _i1.Mock
 class MockNotificationsService extends _i1.Mock
     implements _i4.NotificationsService {
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-  @override
   _i9.Stream<_i4.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
         Invocation.getter(#onNotificationTapStream),
         returnValue: _i9.Stream<_i4.Notification>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.Notification>.empty(),
       ) as _i9.Stream<_i4.Notification>);
+  @override
+  bool get isPaused => (super.noSuchMethod(
+        Invocation.getter(#isPaused),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
   @override
   void addForegroundNotificationTap(_i4.Notification? notification) =>
       super.noSuchMethod(

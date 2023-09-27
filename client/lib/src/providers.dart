@@ -195,7 +195,8 @@ final notificationsServiceProvider = Provider<NotificationsService>(
 
 final notificationsStorageProvider = Provider<NotificationsStorage>(
   (ref) => NotificationsStorageImpl(
-    ref.watch(hiveProvider).lazyBox<Notification>('Notifications'),
+    ref.watch(hiveProvider),
+    'Notifications',
   ),
 );
 

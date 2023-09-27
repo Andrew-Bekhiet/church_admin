@@ -37,12 +37,10 @@ class NotificationsService {
   static Future<NotificationDetails> notificationsDetailsFor(
     Notification notification,
   ) async {
-    if (notification.photoURL != null) {
+    if (notification.imageURL != null) {
       final photo = await globalProviderContainer
           .read(baseCacheManagerProvider)
-          .getSingleFile(
-            notification.photoURL!,
-          );
+          .getSingleFile(notification.imageURL!);
 
       final defaultAndroidNotificationDetails =
           defaultRemoteNotificationsDetails.android!;
@@ -94,18 +92,12 @@ class NotificationsService {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
+        .doOnData(_storage.writeNotification)
         .listen(_onForegroundMessage);
 
     _onMessageOpenedAppSubscription = onMessageOpenedAppStream
         .map(Notification.fromRemoteMessage)
         .listen(addForegroundNotificationTap);
-  }
-
-  Future<void> _onForegroundMessage(Notification notification) async {
-    await notify(
-      notification,
-      notificationDetails: await notificationsDetailsFor(notification),
-    );
   }
 
   final NotificationsSettingsStorage _settings;
@@ -128,10 +120,27 @@ class NotificationsService {
 
   bool get isPaused => _isPausedSubject.value;
 
-  Stream<Notification> get onNotificationTapStream =>
-      _foregroundNotificationsStreamController.stream.delayWhen(
-        (_) => _isPausedSubject.where((isPaused) => !isPaused),
-      );
+  late final Stream<Notification> onNotificationTapStream =
+      getInitialNotification()
+          .asStream()
+          .switchMap(
+            (initial) async* {
+              if (initial != null) yield initial;
+
+              yield* _foregroundNotificationsStreamController.stream;
+            },
+          )
+          .delayWhen(
+            (_) => _isPausedSubject.where((isPaused) => !isPaused),
+          )
+          .asBroadcastStream();
+
+  Future<void> _onForegroundMessage(Notification notification) async {
+    await notify(
+      notification,
+      notificationDetails: await notificationsDetailsFor(notification),
+    );
+  }
 
   void addForegroundNotificationTap(Notification notification) {
     _foregroundNotificationsStreamController.add(notification);
@@ -152,10 +161,10 @@ class NotificationsService {
       return Notification.fromRemoteMessage(remoteMessage);
     }
 
-    final localNotificationId =
+    final notificationResponse =
         (await _localNotificationsPlugin.getNotificationAppLaunchDetails())
-            ?.notificationResponse
-            ?.payload;
+            ?.notificationResponse;
+    final localNotificationId = notificationResponse?.payload;
 
     if (localNotificationId == null) return null;
 

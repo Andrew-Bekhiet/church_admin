@@ -28,7 +28,13 @@ class FirebaseInit implements Initializer {
 
   Future<void> _initFirebaseAppCheck() async {
     await FirebaseAppCheck.instance.activate(
-      webRecaptchaSiteKey: SecretsService.I.webRecaptchaSiteKey,
+      androidProvider:
+          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+      appleProvider:
+          kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+      webProvider: kIsWeb
+          ? ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey!)
+          : null,
     );
 
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);

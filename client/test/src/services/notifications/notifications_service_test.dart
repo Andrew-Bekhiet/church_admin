@@ -318,7 +318,15 @@ void main() {
               addTearDown(onMessageOpenedAppStream.close);
               addTearDown(onForegroundMessageStream.close);
 
-              unit.resumeListeners();
+              final expectedInitialNotification = Notification(
+                id: 'smth',
+                body: 'body',
+                title: 'title',
+                sentTime: DateTime.now(),
+                senderUID: 'foobar',
+              );
+
+              _mockLocalInitialNotification(expectedInitialNotification);
 
               final expectedNotifications = [
                 Notification(
@@ -347,9 +355,19 @@ void main() {
                 ),
               ];
 
+              await expectLater(
+                unit.onNotificationTapStream
+                    .timeout(const Duration(seconds: 2)),
+                emitsError(isA<TimeoutException>()),
+              );
+
+              unit.resumeListeners();
+
               expect(
                 unit.onNotificationTapStream,
-                emits(expectedNotifications[1]),
+                emitsInOrder(
+                  [expectedInitialNotification, expectedNotifications[1]],
+                ),
               );
 
               onForegroundMessageStream.add(
@@ -398,6 +416,7 @@ void main() {
 
               verifyInOrder(
                 [
+                  localNotificationsPlugin.getNotificationAppLaunchDetails(),
                   localNotificationsPlugin.show(
                     expectedNotifications[0].hashCode,
                     expectedNotifications[0].title,
@@ -674,6 +693,28 @@ void main() {
       );
     },
   );
+}
+
+void _mockLocalInitialNotification(Notification expectedInitialNotification) {
+  when(
+    globalProviderContainer
+        .read(localNotificationsPluginProvider)
+        .getNotificationAppLaunchDetails(),
+  ).thenAnswer(
+    (_) async => NotificationAppLaunchDetails(
+      true,
+      notificationResponse: NotificationResponse(
+        notificationResponseType: NotificationResponseType.selectedNotification,
+        payload: expectedInitialNotification.id,
+      ),
+    ),
+  );
+
+  when(
+    globalProviderContainer
+        .read(notificationsStorageProvider)
+        .readNotification(expectedInitialNotification.id),
+  ).thenAnswer((_) async => expectedInitialNotification);
 }
 
 List<Object> _callArgumentsMatchFor({

@@ -45,7 +45,6 @@ class HiveInit implements Initializer {
             .read(encryptionServiceProvider)
             .getHiveCipher(boxName: 'ImageUrlsCache'),
       ),
-      hiveInstance.openLazyBox<Notification>('Notifications'),
       hiveInstance.openBox<NotificationSetting>('NotificationsSettings'),
     ]);
   }

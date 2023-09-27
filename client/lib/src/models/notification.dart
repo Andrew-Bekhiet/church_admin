@@ -16,7 +16,7 @@ class Notification with _$Notification {
     @HiveField(2) required String body,
     @HiveField(3) required DateTime sentTime,
     @HiveField(4) required String senderUID,
-    @HiveField(5) String? photoURL,
+    @HiveField(5) String? imageURL,
     @HiveField(6, defaultValue: NotificationType.remote)
     @Default(NotificationType.remote)
     NotificationType type,
@@ -38,9 +38,27 @@ class Notification with _$Notification {
         title: message.notification?.title ?? message.data['title'],
         sentTime: message.sentTime ?? DateTime.now(),
         senderUID: message.data['senderUID']!,
-        photoURL: message.data['photoURL'],
+        imageURL: _getImageURL(message),
         additionalData: message.data,
       );
+
+  static String? _getImageURL(RemoteMessage message) {
+    if (message.data['imageURL'] != null) return message.data['imageURL'];
+
+    switch (CurrentPlatformService.I.effectiveValue) {
+      case PlatformValue.android:
+        return message.notification?.android?.imageUrl;
+
+      case PlatformValue.ios:
+        return message.notification?.apple?.imageUrl;
+
+      case PlatformValue.web:
+        return message.notification?.web?.image;
+
+      default:
+        return null;
+    }
+  }
 }
 
 @HiveType(typeId: 1)

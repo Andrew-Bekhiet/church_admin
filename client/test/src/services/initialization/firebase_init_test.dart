@@ -37,9 +37,9 @@ void main() {
           options: DefaultFirebaseOptions.currentPlatform,
         ),
         FirebaseAppCheckPlatform.instance.activate(
-          webRecaptchaSiteKey: SecretsService.I.webRecaptchaSiteKey,
-          androidProvider: AndroidProvider.playIntegrity,
-          appleProvider: AppleProvider.deviceCheck,
+          webProvider: anyNamed('webProvider'),
+          androidProvider: anyNamed('androidProvider'),
+          appleProvider: anyNamed('appleProvider'),
         ),
         FirebaseMessagingPlatform.onBackgroundMessage =
             NotificationsServiceCallbacks.onBackgroundMessageReceived,
@@ -74,7 +74,7 @@ void _setUpMockFirebaseAppCheck() {
   final mock = MockFirebaseAppCheckPlatform();
   when(
     mock.activate(
-      webRecaptchaSiteKey: anyNamed('webRecaptchaSiteKey'),
+      webProvider: anyNamed('webProvider'),
       androidProvider: anyNamed('androidProvider'),
       appleProvider: anyNamed('appleProvider'),
     ),

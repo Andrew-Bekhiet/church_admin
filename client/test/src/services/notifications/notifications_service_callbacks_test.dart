@@ -144,6 +144,7 @@ void main() {
                 channelDescription: 'إشعارات أعياد الميلاد',
                 title: 'أعياد الميلاد',
                 channelId: 'Birthday',
+                icon: 'birthday',
                 callback:
                     NotificationsServiceCallbacks.showBirthDayNotification,
                 type: LocalNotificationType.birthday,
@@ -167,6 +168,7 @@ Future<void> _testNotificationMethod({
   required void Function(MockPersonsNotificationsQueries)
       expectedNotificationsQueriesCall,
   required Future<void> Function() callback,
+  String icon = 'warning_notification',
 }) async {
   final expectedNotification =
       NotificationsServiceCallbacks.makeNotificationWith(
@@ -181,6 +183,7 @@ Future<void> _testNotificationMethod({
       channelName,
       channelDescription: channelDescription,
       body: expectedPersons.map((e) => e.name).join(', '),
+      icon: icon,
     ),
   );
 

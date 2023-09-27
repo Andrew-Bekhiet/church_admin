@@ -10,11 +10,10 @@ _$_AdvancedQuery _$$_AdvancedQueryFromJson(Map json) => _$_AdvancedQuery(
       name: json['name'] as String,
       conditions: json['conditions'] == null
           ? const []
-          : conditionsFromJson(
-              json['conditions'] as List<Map<String, dynamic>>),
+          : conditionsFromJson(json['conditions'] as List),
       orderBy: json['orderBy'] == null
           ? const []
-          : orderBysFromJson(json['orderBy'] as List<Map<String, dynamic>>),
+          : orderBysFromJson(json['orderBy'] as List),
       limit: json['limit'] as int?,
     );
 

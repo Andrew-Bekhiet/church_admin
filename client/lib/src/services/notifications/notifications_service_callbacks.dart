@@ -28,8 +28,11 @@ class NotificationsServiceCallbacks {
   }
 
   @pragma('vm:entry-point')
-  static void onBackgroundNotificationTap(_) {
-    main();
+  static Future<void> onBackgroundNotificationTap(
+    NotificationResponse response,
+  ) async {
+    await main();
+    await onForegroundNotificationTap(response);
   }
 
   @pragma('vm:entry-point')
@@ -82,6 +85,9 @@ class NotificationsServiceCallbacks {
             channelName,
             channelDescription: channelDescription,
             body: notification.body,
+            icon: type == LocalNotificationType.birthday
+                ? 'birthday'
+                : 'warning_notification',
           ),
         ),
       );
@@ -111,7 +117,7 @@ class NotificationsServiceCallbacks {
     String channelName, {
     required String channelDescription,
     required String body,
-    String icon = 'warning',
+    String icon = 'warning_notification',
   }) {
     return AndroidNotificationDetails(
       channelId,
@@ -258,7 +264,9 @@ class NotificationsServiceCallbacks {
               type: Person,
               field: 'birthday',
               operator: Operator.eq,
-              value: now.month.toString() + '-' + now.day.toString(),
+              value: now.month.toString().padLeft(2, '0') +
+                  '-' +
+                  now.day.toString().padLeft(2, '0'),
             ),
           ],
           orderBy: const [

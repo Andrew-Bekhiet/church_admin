@@ -22,7 +22,7 @@ class NotificationAdapter extends TypeAdapter<Notification> {
       body: fields[2] as String,
       sentTime: fields[3] as DateTime,
       senderUID: fields[4] as String,
-      photoURL: fields[5] as String?,
+      imageURL: fields[5] as String?,
       type: fields[6] == null
           ? NotificationType.remote
           : fields[6] as NotificationType,
@@ -45,7 +45,7 @@ class NotificationAdapter extends TypeAdapter<Notification> {
       ..writeByte(4)
       ..write(obj.senderUID)
       ..writeByte(5)
-      ..write(obj.photoURL)
+      ..write(obj.imageURL)
       ..writeByte(6)
       ..write(obj.type)
       ..writeByte(7)
@@ -117,7 +117,7 @@ _$_Notification _$$_NotificationFromJson(Map json) => _$_Notification(
       body: json['body'] as String,
       sentTime: DateTime.parse(json['sentTime'] as String),
       senderUID: json['senderUID'] as String,
-      photoURL: json['photoURL'] as String?,
+      imageURL: json['imageURL'] as String?,
       type: $enumDecodeNullable(_$NotificationTypeEnumMap, json['type']) ??
           NotificationType.remote,
       additionalData: (json['additionalData'] as Map?)?.map(
@@ -132,7 +132,7 @@ Map<String, dynamic> _$$_NotificationToJson(_$_Notification instance) =>
       'body': instance.body,
       'sentTime': instance.sentTime.toIso8601String(),
       'senderUID': instance.senderUID,
-      'photoURL': instance.photoURL,
+      'imageURL': instance.imageURL,
       'type': _$NotificationTypeEnumMap[instance.type]!,
       'additionalData': instance.additionalData,
     };

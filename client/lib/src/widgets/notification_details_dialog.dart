@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
@@ -27,24 +29,27 @@ class NotificationDetailsDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(notification.body),
-                    if (notification.photoURL != null)
-                      _NotificationPhoto(notification: notification),
-                  ],
-                ),
+            SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(notification.body),
+                  if (notification.imageURL != null)
+                    _NotificationPhoto(notification: notification),
+                ],
               ),
             ),
+            const SizedBox(height: 20),
             if (notification.senderUID !=
                 NotificationsService.localNotificationSenderUID)
               _NotificationSender(senderDataFuture: senderDataFuture),
-            Text(
-              DateFormat('yyyy/M/d h:m a', 'ar-EG').format(
-                notification.sentTime,
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                DateFormat('yyyy/M/d h:m a', 'ar-EG').format(
+                  notification.sentTime,
+                ),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
           ],
@@ -53,8 +58,10 @@ class NotificationDetailsDialog extends StatelessWidget {
       actions: [
         if (notification.additionalData?['query'] != null)
           TextButton(
-            onPressed:
-                _onQueryTap(context, notification.additionalData!['query']!),
+            onPressed: _onQueryTap(
+              context,
+              notification.additionalData!['query'],
+            ),
             child: const Text('فتح نتائج البحث'),
           ),
         TextButton(
@@ -65,10 +72,16 @@ class NotificationDetailsDialog extends StatelessWidget {
     );
   }
 
-  void Function() _onQueryTap(BuildContext context, Json queryData) {
+  void Function() _onQueryTap(BuildContext context, dynamic queryData) {
+    if (queryData is String) {
+      queryData = json.decode(queryData);
+    } else if (queryData is Map) {
+      queryData = queryData.cast<String, dynamic>();
+    }
+
     final query = AdvancedQuery.fromJson(queryData);
 
-    return () => context.push(AdvancedSearchScreen.route.path, extra: query);
+    return () => context.push('/advanced_search', extra: query);
   }
 }
 
@@ -102,7 +115,7 @@ class _NotificationSender extends StatelessWidget {
 
         return ViewableObjectWidget(
           sender,
-          forceShowSecondLine: false,
+          subtitle: const SizedBox(),
           dense: true,
         );
       },
@@ -122,7 +135,7 @@ class _NotificationPhoto extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
 
     return CachedNetworkImage(
-      imageUrl: notification.photoURL!,
+      imageUrl: notification.imageURL!,
       useOldImageOnUrlChange: true,
       memCacheWidth:
           mediaQuery.devicePixelRatio * mediaQuery.size.width * 85 ~/ 100,

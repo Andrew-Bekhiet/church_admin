@@ -70,7 +70,6 @@ void main() {
               'ImageUrlsCache',
               encryptionCipher: anyNamed('encryptionCipher'),
             ),
-            mockHiveInterface.openLazyBox<Notification>('Notifications'),
             mockHiveInterface
                 .openBox<NotificationSetting>('NotificationsSettings'),
           ]);
