@@ -239,13 +239,18 @@ class _HomeDrawer extends StatelessWidget {
                 switch (i) {
                   case 0:
                     break;
-                  case 1:
+                  case 1 when AuthService.I.currentUser!.canManageSomeUsers:
                     context.push('/manage_users');
-                  case 2:
+                  case 1:
+                  case 2 when AuthService.I.currentUser!.canManageSomeUsers:
                     context.push('/advanced_search');
-                  case 3:
+                  case 2:
+                  case 3 when AuthService.I.currentUser!.canManageSomeUsers:
                     break;
-                  case 4:
+                  case 3 when kDebugMode:
+                  case 4
+                      when kDebugMode &&
+                          AuthService.I.currentUser!.canManageSomeUsers:
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
@@ -264,25 +269,26 @@ class _HomeDrawer extends StatelessWidget {
                     );
                 }
               },
-              children: const [
-                NavigationDrawerDestination(
+              children: [
+                const NavigationDrawerDestination(
                   icon: Icon(Icons.home),
                   label: Text('الرئيسية'),
                 ),
-                NavigationDrawerDestination(
-                  icon: Icon(Icons.manage_accounts),
-                  label: Text('إدارة الخدام'),
-                ),
-                NavigationDrawerDestination(
+                if (AuthService.I.currentUser!.canManageSomeUsers)
+                  const NavigationDrawerDestination(
+                    icon: Icon(Icons.manage_accounts),
+                    label: Text('إدارة الخدام'),
+                  ),
+                const NavigationDrawerDestination(
                   icon: Icon(Icons.search),
                   label: Text('البحث المتقدم'),
                 ),
-                NavigationDrawerDestination(
+                const NavigationDrawerDestination(
                   icon: Icon(Icons.settings),
                   label: Text('الإعدادات'),
                 ),
                 if (kDebugMode)
-                  NavigationDrawerDestination(
+                  const NavigationDrawerDestination(
                     icon: Icon(Icons.developer_mode),
                     label: Text('gql cache'),
                   ),

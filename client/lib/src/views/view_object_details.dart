@@ -103,7 +103,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else
+              else if (AuthService.I.currentUser!.canEditObject(objectData))
                 editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(
