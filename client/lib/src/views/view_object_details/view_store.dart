@@ -73,7 +73,7 @@ class _ViewStoreState extends State<ViewStore> {
                       MaterialPageRoute(
                         builder: (context) => ViewGeodataMap(
                           initialGeomapOptions: GeomapOptions(
-                            selectedFamilies: {store},
+                            selectedStores: {store},
                           ),
                         ),
                       ),
